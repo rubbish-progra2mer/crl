@@ -1,0 +1,217 @@
+{
+  "call_id": "b2fa94b1",
+  "call_name": "agent_response",
+  "timestamp": "2026-08-19T16:11:06.534454",
+  "request": {
+    "model": "ollama_chat/qwen3.5:9b",
+    "messages": [
+      {
+        "role": "system",
+        "content": [
+          "<instructions>",
+          "You are a customer service agent that helps the user according to the <policy> provided below.",
+          "In each turn you can either:",
+          "- Send a message to the user.",
+          "- Make a tool call.",
+          "You cannot do both at the same time.",
+          "",
+          "Try to be helpful and always follow the policy. Always make sure you generate valid JSON only.",
+          "</instructions>",
+          "<policy>",
+          "# Mock Domain Policy",
+          "",
+          "1. Each task must have a title",
+          "2. Task status can only be \"pending\" or \"completed\"",
+          "3. Only existing users can create tasks ",
+          "4. You are not allowed to delete tasks. You should transfer the a human agent.",
+          "5. If the user asks for a compliment, compliment them",
+          "</policy>"
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": "Hi! How can I help you today?",
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": "I need to create a task for an upcoming important meeting. Can you guide me on how to do that?"
+      },
+      {
+        "role": "assistant",
+        "content": [
+          "I'd be happy to help you create a task for your upcoming meeting! ",
+          "",
+          "To create a task, I'll need:",
+          "1. Your user ID (so I know which user the task belongs to)",
+          "2. A title for the task (e.g., \"Upcoming Important Meeting\")",
+          "3. An optional description if you'd like to add more details",
+          "",
+          "Could you please provide your user ID and the title you'd like for this task?"
+        ],
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": "Sure, I'd like to create a task titled 'Important Meeting'. My user ID is user_1."
+      },
+      {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "id": "call_sg6ow827",
+            "name": "create_task",
+            "function": {
+              "name": "create_task",
+              "arguments": "{\"user_id\": \"user_1\", \"title\": \"Important Meeting\"}"
+            },
+            "type": "function"
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "content": "{\"task_id\": \"task_2\", \"title\": \"Important Meeting\", \"description\": null, \"status\": \"pending\"}",
+        "tool_call_id": "call_sg6ow827"
+      },
+      {
+        "role": "assistant",
+        "content": [
+          "Great! I've successfully created your task with the following details:",
+          "- Task ID: task_2",
+          "- Title: Important Meeting",
+          "- Status: pending",
+          "",
+          "Your task has been added to the system. Is there anything else you'd like to do with this task or any other tasks you need help with?"
+        ],
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": "That's perfect! Thank you for creating the task titled 'Important Meeting' for me. At this moment, I don't have any other tasks to add. If I need to update this task later, can you guide me on how to do that?"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "create_task",
+          "description": "Create a new task for a user.",
+          "parameters": {
+            "properties": {
+              "user_id": {
+                "description": "The ID of the user creating the task",
+                "title": "User Id",
+                "type": "string"
+              },
+              "title": {
+                "description": "The title of the task",
+                "title": "Title",
+                "type": "string"
+              },
+              "description": {
+                "default": null,
+                "description": "Optional description of the task",
+                "title": "Description",
+                "type": "string"
+              }
+            },
+            "required": [
+              "user_id",
+              "title"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "get_users",
+          "description": "Get all users in the database.",
+          "parameters": {
+            "properties": {},
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "update_task_status",
+          "description": "Update the status of a task.",
+          "parameters": {
+            "properties": {
+              "task_id": {
+                "description": "The ID of the task to update",
+                "title": "Task Id",
+                "type": "string"
+              },
+              "status": {
+                "description": "The new status of the task",
+                "enum": [
+                  "pending",
+                  "completed"
+                ],
+                "title": "Status",
+                "type": "string"
+              }
+            },
+            "required": [
+              "task_id",
+              "status"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "transfer_to_human_agents",
+          "description": "Transfer the user to a human agent, with a summary of the user's issue.\n\nOnly transfer if\n -  the user explicitly asks for a human agent\n -  given the policy and the available tools, you cannot solve the user's issue.",
+          "parameters": {
+            "properties": {
+              "summary": {
+                "description": "A summary of the user's issue.",
+                "title": "Summary",
+                "type": "string"
+              }
+            },
+            "required": [
+              "summary"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      }
+    ],
+    "tool_choice": "auto",
+    "kwargs": {
+      "temperature": 0.0,
+      "num_retries": 1,
+      "api_base": "http://127.0.0.1:11434",
+      "max_tokens": 1024,
+      "timeout": 120.0,
+      "think": false,
+      "seed": 1971210871
+    },
+    "timestamp": "2026-08-19T16:11:04.379660"
+  },
+  "response": {
+    "timestamp": "2026-08-19T16:11:06.533927",
+    "content": "You're welcome! Yes, I can help you update your task later. \n\nTo update a task's status (either to \"pending\" or \"completed\"), I would need:\n1. The task ID (in this case, task_2)\n2. The new status you want to set\n\nIf you'd like to mark the task as completed once your meeting is over, just let me know and I can update it for you. \n\nIs there anything else I can assist you with today?",
+    "tool_calls": null,
+    "cost": 0.0,
+    "usage": {
+      "completion_tokens": 103,
+      "prompt_tokens": 1074
+    },
+    "generation_time_seconds": 2.154487700026948
+  }
+}

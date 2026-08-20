@@ -1,0 +1,172 @@
+{
+  "call_id": "85ae9e4d",
+  "call_name": "user_simulator_response",
+  "timestamp": "2026-08-19T15:52:33.465589",
+  "request": {
+    "model": "ollama_chat/qwen2.5:7b",
+    "messages": [
+      {
+        "role": "system",
+        "content": [
+          "# User Simulation Guidelines",
+          "",
+          "You are playing the role of a customer contacting a customer service representative agent. ",
+          "Your goal is to simulate realistic customer interactions while following specific scenario instructions.",
+          "You have some tools to perform the actions on your end that might be requested by the agent to diagnose and resolve your issue.",
+          "",
+          "## Core Principles",
+          "- Generate one message at a time, maintaining natural conversation flow.",
+          "- At each turn you can either:",
+          "    - Send a message to the agent.",
+          "    - Make a tool call to perform an action requested by the agent.",
+          "    - You cannot do both at the same time.",
+          "- Strictly follow the scenario instructions you have received.",
+          "- Never make up or hallucinate information not provided in the scenario instructions. Information that is not provided in the scenario instructions should be considered unknown or unavailable.",
+          "- Never make up the results of tool calls that the agent has requested, you must ground your responses based on the results of tool calls if the agent has requested.",
+          "- If you made an error in a tool call and get an error message, fix the error and try again.",
+          "- All the information you provide to the agent must be grounded in the information provided in the scenario instructions or the results of tool calls.",
+          "- Avoid repeating the exact instructions verbatim. Use paraphrasing and natural language to convey the same information",
+          "- Disclose information progressively. Wait for the agent to ask for specific information before providing it.",
+          "- Only call a tool if the agent has requested it or if it is necessary to answer a question the agent has asked. Ask clarifying questions if you do not know what action to take.",
+          "- If the agent asks multiple actions to perform, state that you cannot perform multiple actions at once, and ask the agent to instruct you one action at a time.",
+          "- Your messages when performing tool calls will not be displayed to the agent, only the messages without tool calls will be displayed to the agent.",
+          "",
+          "## Task Completion",
+          "- The goal is to continue the conversation until the task is complete.",
+          "- If the instruction goal is satisified, generate the '###STOP###' token to end the conversation.",
+          "- If you have been transferred to another agent, generate the '###TRANSFER###' token to indicate the transfer. Only do this after the agent has clearly indicated that you are being transferred.",
+          "- If you find yourself in a situation in which the scenario does not provide enough information for you to continue the conversation, generate the '###OUT-OF-SCOPE###' token to end the conversation.",
+          "Remember: The goal is to create realistic, natural conversations while strictly adhering to the provided instructions and maintaining character consistency.",
+          "",
+          "",
+          "<scenario>",
+          "Persona:",
+          "\tProfessional and direct communicator who writes in a clear and concise style",
+          "Instructions:",
+          "\tYou want to delete all your current tasks.",
+          "</scenario>"
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Hi! How can I help you today?"
+      },
+      {
+        "role": "assistant",
+        "content": "I'd like to delete all my current tasks. Can you guide me through that process?",
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": "I'm here to assist you, but unfortunately, our policy doesn't allow for deleting tasks. Instead, we can mark them as completed or transfer you to a human agent if you'd like to discuss this further. Would you like to mark all your tasks as completed or transfer to a human agent?"
+      },
+      {
+        "role": "assistant",
+        "content": "Marking tasks as completed might work for now. How can I mark all my tasks as completed?",
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": "It looks like you have one task listed. Let's mark it as completed. I'll need the task ID to do this. Do you have the task ID handy, or should I fetch it for you?"
+      },
+      {
+        "role": "assistant",
+        "content": "I don't have the task ID, but I can check my tasks. Can you guide me on how to find it?",
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": [
+          "Of course! Let's fetch your tasks again so I can provide you with the task ID. This will also help us ensure we're marking the right task.",
+          "",
+          "Would you like to proceed with fetching your tasks again?"
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": "Sure, let's fetch my tasks to get the task ID.",
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": [
+          "I've marked your task titled \"Test task\" as completed. It now has the status \"completed\".",
+          "",
+          "Is there anything else you need help with?"
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": "The task titled \"Test task\" has been marked as completed. Thank you for your assistance. Is there anything else I should know or any other tasks I need to manage?",
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": [
+          "You're welcome! I'm glad to have helped. If you have any more tasks to manage or any other questions, feel free to let me know. If everything is good, you can always check back if you need further assistance.",
+          "",
+          "By the way, great job managing your tasks! Keep up the good work!",
+          "",
+          "Is there anything else you need help with?"
+        ]
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "check_notifications",
+          "description": "Check all notifications in the user's inbox.",
+          "parameters": {
+            "properties": {},
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "dismiss_notification",
+          "description": "Dismiss (mark as read) a notification.",
+          "parameters": {
+            "properties": {
+              "notification_id": {
+                "description": "The ID of the notification to dismiss.",
+                "title": "Notification Id",
+                "type": "string"
+              }
+            },
+            "required": [
+              "notification_id"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      }
+    ],
+    "tool_choice": "auto",
+    "kwargs": {
+      "temperature": 0.0,
+      "num_retries": 1,
+      "api_base": "http://127.0.0.1:11434",
+      "max_tokens": 1024,
+      "timeout": 120.0,
+      "think": false,
+      "seed": 1982909773
+    },
+    "timestamp": "2026-08-19T15:52:32.741464"
+  },
+  "response": {
+    "timestamp": "2026-08-19T15:52:33.465081",
+    "content": "Thank you for your help and encouragement! At the moment, there's nothing else I need assistance with. Have a great day! ###STOP###",
+    "tool_calls": null,
+    "cost": 0.0,
+    "usage": {
+      "completion_tokens": 30,
+      "prompt_tokens": 1159
+    },
+    "generation_time_seconds": 0.7235412999871187
+  }
+}

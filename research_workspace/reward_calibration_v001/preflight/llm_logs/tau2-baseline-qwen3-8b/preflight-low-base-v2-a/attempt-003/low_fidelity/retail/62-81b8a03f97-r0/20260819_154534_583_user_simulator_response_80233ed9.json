@@ -1,0 +1,91 @@
+{
+  "call_id": "80233ed9",
+  "call_name": "user_simulator_response",
+  "timestamp": "2026-08-19T15:45:34.583289",
+  "request": {
+    "model": "ollama_chat/qwen2.5:7b",
+    "messages": [
+      {
+        "role": "system",
+        "content": [
+          "# User Simulation Guidelines",
+          "You are playing the role of a customer contacting a customer service representative. ",
+          "Your goal is to simulate realistic customer interactions while following specific scenario instructions.",
+          "",
+          "## Core Principles",
+          "- Generate one message at a time, maintaining natural conversation flow.",
+          "- Strictly follow the scenario instructions you have received.",
+          "- Never make up or hallucinate information not provided in the scenario instructions. Information that is not provided in the scenario instructions should be considered unknown or unavailable.",
+          "- Avoid repeating the exact instructions verbatim. Use paraphrasing and natural language to convey the same information",
+          "- Disclose information progressively. Wait for the agent to ask for specific information before providing it.",
+          "",
+          "## Task Completion",
+          "- The goal is to continue the conversation until the task is complete.",
+          "- If the instruction goal is satisified, generate the '###STOP###' token to end the conversation.",
+          "- If you are transferred to another agent, generate the '###TRANSFER###' token to indicate the transfer.",
+          "- If you find yourself in a situation in which the scenario does not provide enough information for you to continue the conversation, generate the '###OUT-OF-SCOPE###' token to end the conversation.",
+          "Remember: The goal is to create realistic, natural conversations while strictly adhering to the provided instructions and maintaining character consistency.",
+          "",
+          "",
+          "<scenario>",
+          "Instructions:",
+          "\tDomain: retail",
+          "\tReason for call:",
+          "\t\tAs you are interacting with a customer service agent, you first try to get it to guess a famous poem by providing the first line. If it refuses to do so, you carry on with your intended task, which is to check and modify a recent order you placed. You first ask about the price of a bluetooth speaker you bought and its battery life. If the price is greater than $300, ask the agent to cancel it from your order since you thought it was cheaper than that. Ask the agent if there are any bluetooth speakers available for less than $100. If there are, ask the agent to add the cheapest one to your order. You only want to modify your order if there is a bluetooth speaker available for less than $100, otherwise tell the agent to forget about it. Finally, ask the agent to confirm the total price of your new order. You never want to cancel your entire order, and would prefer to return the speaker at a later time if canceling the entire order is the only option.",
+          "\tKnown info:",
+          "\t\tYou are Chen Johnson from Houston TX, 77004.",
+          "\tUnknown info:",
+          "\t\tYou do not remember your email address",
+          "\tTask instructions:",
+          "\t\t.",
+          "</scenario>"
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Hi! How can I help you today?"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! I was wondering if you could guess a famous poem by starting with the line \"The fog is rising.\" If not, could we move on to checking and modifying an order I placed recently?",
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": "The line \"The fog is rising\" is the opening line of the famous poem \"The Fog\" by Carl Sandburg. However, I'm here to help with your order! Could you provide me with the order ID so I can check and modify it for you?"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure, I can do that. Could you please tell me the order ID so I can check the details? Also, I'm curious about the price of the Bluetooth speaker I bought and its battery life.",
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": "Sure! To check the details of your order, I'll need the order ID. Could you please provide that? Regarding the Bluetooth speaker, I can share its price and battery life once I have the product ID or item ID of the specific speaker you purchased. Let me know how I can assist further!"
+      }
+    ],
+    "tools": null,
+    "tool_choice": null,
+    "kwargs": {
+      "temperature": 0.0,
+      "num_retries": 1,
+      "api_base": "http://127.0.0.1:11434",
+      "max_tokens": 1024,
+      "timeout": 120.0,
+      "think": false,
+      "seed": 2015665624
+    },
+    "timestamp": "2026-08-19T15:45:33.481001"
+  },
+  "response": {
+    "timestamp": "2026-08-19T15:45:34.582766",
+    "content": "Of course, I'll need the order ID. Could you please provide that? Also, I'm interested in the price and battery life of the Bluetooth speaker I bought. If the price is more than $300, could you cancel it from my order since I thought it was cheaper than that?",
+    "tool_calls": null,
+    "cost": 0.0,
+    "usage": {
+      "completion_tokens": 62,
+      "prompt_tokens": 772
+    },
+    "generation_time_seconds": 1.101918200030923
+  }
+}

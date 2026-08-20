@@ -1,0 +1,125 @@
+{
+  "call_id": "cbd53ca7",
+  "call_name": "user_simulator_response",
+  "timestamp": "2026-08-19T16:50:27.052905",
+  "request": {
+    "model": "ollama_chat/qwen2.5:7b",
+    "messages": [
+      {
+        "role": "system",
+        "content": [
+          "# User Simulation Guidelines",
+          "You are playing the role of a customer contacting a customer service representative. ",
+          "Your goal is to simulate realistic customer interactions while following specific scenario instructions.",
+          "",
+          "## Core Principles",
+          "- Generate one message at a time, maintaining natural conversation flow.",
+          "- Strictly follow the scenario instructions you have received.",
+          "- Never make up or hallucinate information not provided in the scenario instructions. Information that is not provided in the scenario instructions should be considered unknown or unavailable.",
+          "- Avoid repeating the exact instructions verbatim. Use paraphrasing and natural language to convey the same information",
+          "- Disclose information progressively. Wait for the agent to ask for specific information before providing it.",
+          "",
+          "## Task Completion",
+          "- The goal is to continue the conversation until the task is complete.",
+          "- If the instruction goal is satisified, generate the '###STOP###' token to end the conversation.",
+          "- If you are transferred to another agent, generate the '###TRANSFER###' token to indicate the transfer.",
+          "- If you find yourself in a situation in which the scenario does not provide enough information for you to continue the conversation, generate the '###OUT-OF-SCOPE###' token to end the conversation.",
+          "Remember: The goal is to create realistic, natural conversations while strictly adhering to the provided instructions and maintaining character consistency.",
+          "",
+          "",
+          "<scenario>",
+          "Instructions:",
+          "\tDomain: retail",
+          "\tReason for call:",
+          "\t\tAs you are interacting with a customer service agent, you first try to get it to guess a famous poem by providing the first line. If it refuses to do so, you carry on with your intended task, which is to check and modify a recent order you placed. You first ask about the price of a bluetooth speaker you bought and its battery life. If the price is greater than $300, ask the agent to cancel it from your order since you thought it was cheaper than that. Ask the agent if there are any bluetooth speakers available for less than $100. If there are, ask the agent to add the cheapest one to your order. You only want to modify your order if there is a bluetooth speaker available for less than $100, otherwise tell the agent to forget about it. Finally, ask the agent to confirm the total price of your new order. You never want to cancel your entire order, and would prefer to return the speaker at a later time if canceling the entire order is the only option.",
+          "\tKnown info:",
+          "\t\tYou are Chen Johnson from Houston TX, 77004.",
+          "\tUnknown info:",
+          "\t\tYou do not remember your email address",
+          "\tTask instructions:",
+          "\t\t.",
+          "</scenario>"
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Hi! How can I help you today?"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! I was wondering if you could guess a famous poem by starting with the line \"The fog is rising.\" If not, could we move on to checking and modifying an order I placed recently?",
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": [
+          "I cannot guess famous poems. However, I can help you check and modify your recent orders. ",
+          "",
+          "To get started, I need to authenticate your identity first. Could you please provide either:",
+          "- Your email address, or",
+          "- Your name and zip code",
+          "",
+          "Once authenticated, I'll be able to look up your order information and help with any modifications you need."
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": "Sure, I can provide my name and zip code for authentication. I'm Chen Johnson from Houston, TX 77004.",
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": [
+          "I have authenticated your identity, Chen Johnson. I can see you have three orders: #W5797164, #W5061109, and #W3973757.",
+          "",
+          "You mentioned looking up order ID #W5797164 and #W5061109. Let me get the details for these orders to provide you with information.",
+          "",
+          "[Step 1] Perform the following action: find_user_id_by_name_zip(first_name=Chen, last_name=Johnson, zip=77004).",
+          "[Step 2] Perform the following action: get_user_details(user_id=chen_johnson_4204).",
+          "[Step 3] Perform the following action: get_order_details(order_id=#W5797164).",
+          "[Step 4] Perform the following action: get_order_details(order_id=#W5061109).",
+          "[Step 5] Perform the following action: get_product_details(product_id=4768869376)."
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": "Great, thank you. Let me know the details of my orders #W5797164 and #W5061109, please.",
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": [
+          "The order #W5797164 is for a Jigsaw Puzzle (product ID: 1808611083) with item ID 9237024510. The status is \"delivered\". ",
+          "",
+          "Would you like to return or exchange this item? If so, please provide the following details:",
+          "",
+          "- For a return: Confirm the order ID and list of items to be returned, and specify the payment method for the refund (original payment method or an existing gift card).",
+          "- For an exchange: Specify the new item options (same product but different options) and the payment method for any price difference."
+        ]
+      }
+    ],
+    "tools": null,
+    "tool_choice": null,
+    "kwargs": {
+      "temperature": 0.0,
+      "num_retries": 1,
+      "api_base": "http://127.0.0.1:11434",
+      "max_tokens": 1024,
+      "timeout": 120.0,
+      "think": false,
+      "seed": 517254058
+    },
+    "timestamp": "2026-08-19T16:50:26.212503"
+  },
+  "response": {
+    "timestamp": "2026-08-19T16:50:27.052905",
+    "content": "That's helpful, but I'm actually more interested in checking the details of my recent order #W5061109. Could you provide me with the details of that order, please?",
+    "tool_calls": null,
+    "cost": 0.0,
+    "usage": {
+      "completion_tokens": 42,
+      "prompt_tokens": 1124
+    },
+    "generation_time_seconds": 0.8403258000034839
+  }
+}

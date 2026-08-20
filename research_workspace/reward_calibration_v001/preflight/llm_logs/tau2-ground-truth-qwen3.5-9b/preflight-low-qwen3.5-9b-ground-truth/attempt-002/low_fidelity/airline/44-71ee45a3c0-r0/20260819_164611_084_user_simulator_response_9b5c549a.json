@@ -1,0 +1,100 @@
+{
+  "call_id": "9b5c549a",
+  "call_name": "user_simulator_response",
+  "timestamp": "2026-08-19T16:46:11.084628",
+  "request": {
+    "model": "ollama_chat/qwen2.5:7b",
+    "messages": [
+      {
+        "role": "system",
+        "content": [
+          "# User Simulation Guidelines",
+          "You are playing the role of a customer contacting a customer service representative. ",
+          "Your goal is to simulate realistic customer interactions while following specific scenario instructions.",
+          "",
+          "## Core Principles",
+          "- Generate one message at a time, maintaining natural conversation flow.",
+          "- Strictly follow the scenario instructions you have received.",
+          "- Never make up or hallucinate information not provided in the scenario instructions. Information that is not provided in the scenario instructions should be considered unknown or unavailable.",
+          "- Avoid repeating the exact instructions verbatim. Use paraphrasing and natural language to convey the same information",
+          "- Disclose information progressively. Wait for the agent to ask for specific information before providing it.",
+          "",
+          "## Task Completion",
+          "- The goal is to continue the conversation until the task is complete.",
+          "- If the instruction goal is satisified, generate the '###STOP###' token to end the conversation.",
+          "- If you are transferred to another agent, generate the '###TRANSFER###' token to indicate the transfer.",
+          "- If you find yourself in a situation in which the scenario does not provide enough information for you to continue the conversation, generate the '###OUT-OF-SCOPE###' token to end the conversation.",
+          "Remember: The goal is to create realistic, natural conversations while strictly adhering to the provided instructions and maintaining character consistency.",
+          "",
+          "",
+          "<scenario>",
+          "Instructions:",
+          "\tDomain: airline",
+          "\tReason for call:",
+          "\t\tYou want to cancel all your future reservations that contain any flights that are longer than 4 hours. ",
+          "",
+          "\t\tYou need the agent to tell you the flight durations to make the right decision. For the flights that are under or equal to 3 hours (including layovers), ask the agent to upgrade you to business wherever possible.",
+          "\tKnown info:",
+          "\t\tYou are Sophia Silva.",
+          "\t\tYour user id is sophia_silva_7557.",
+          "\tTask instructions:",
+          "\t\tYou are busy so for both the cancellation and upgrade you want to let the agent figure out which flights meet the duration conditions you have set.",
+          "",
+          "\t\tBefore they do the upgrade to business, ask the agent to tell you how much it will cost you in total.",
+          "",
+          "\t\tYou DO NOT want to upgrade to business and then cancel it. You do NOT have a health related issue, you are healthy now.",
+          "</scenario>"
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Hi! How can I help you today?"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello, I'm Sophia Silva with user ID sophia_silva_7557. I'm a bit busy today, so could you please check my future reservations and let me know which flights are longer than 4 hours? I want to cancel those reservations. Also, for flights that are 3 hours or less, could you see if there's a way to upgrade me to business class wherever possible? I'd like to know the total cost for those upgrades before making a decision. I'm healthy, no need to worry about that.",
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": [
+          "Hello Sophia! It sounds like you have a busy day ahead. Let me check your future reservations and provide you with the details you requested.",
+          "",
+          "First, let me retrieve your user details and reservation information:",
+          "",
+          "[Step 1] Perform the following action: get_user_details(user_id=sophia_silva_7557).",
+          "[Step 2] Perform the following action: get_reservation_details(reservation_id=NM1VX1).",
+          "[Step 3] Perform the following action: get_reservation_details(reservation_id=KC18K6).",
+          "[Step 4] Perform the following action: get_reservation_details(reservation_id=S61CZX).",
+          "[Step 5] Perform the following action: get_reservation_details(reservation_id=H8Q05L).",
+          "[Step 6] Perform the following action: get_reservation_details(reservation_id=WUNA5K).",
+          "",
+          "Once I have this information, I'll be able to tell you which flights are longer than 4 hours and which ones are 3 hours or less. For the shorter flights, I'll check if business class upgrades are available and provide you with the total cost for those upgrades."
+        ]
+      }
+    ],
+    "tools": null,
+    "tool_choice": null,
+    "kwargs": {
+      "temperature": 0.0,
+      "num_retries": 1,
+      "api_base": "http://127.0.0.1:11434",
+      "max_tokens": 1024,
+      "timeout": 120.0,
+      "think": false,
+      "seed": 1802854749
+    },
+    "timestamp": "2026-08-19T16:46:09.751839"
+  },
+  "response": {
+    "timestamp": "2026-08-19T16:46:11.084628",
+    "content": "Great, thank you for looking into this. Once you have the details, could you please let me know the flight durations for all my reservations? That way, I can decide which ones to cancel. For the flights that are 3 hours or less, could you also check if there's a way to upgrade me to business class and give me the total cost for those upgrades?",
+    "tool_calls": null,
+    "cost": 0.0,
+    "usage": {
+      "completion_tokens": 77,
+      "prompt_tokens": 844
+    },
+    "generation_time_seconds": 1.3331072000437416
+  }
+}

@@ -1,0 +1,228 @@
+{
+  "call_id": "ea72b756",
+  "call_name": "agent_response",
+  "timestamp": "2026-08-19T15:52:09.493620",
+  "request": {
+    "model": "ollama_chat/qwen2.5:7b",
+    "messages": [
+      {
+        "role": "system",
+        "content": [
+          "<instructions>",
+          "You are a customer service agent that helps the user according to the <policy> provided below.",
+          "In each turn you can either:",
+          "- Send a message to the user.",
+          "- Make a tool call.",
+          "You cannot do both at the same time.",
+          "",
+          "Try to be helpful and always follow the policy. Always make sure you generate valid JSON only.",
+          "</instructions>",
+          "<policy>",
+          "# Mock Domain Policy",
+          "",
+          "1. Each task must have a title",
+          "2. Task status can only be \"pending\" or \"completed\"",
+          "3. Only existing users can create tasks ",
+          "4. You are not allowed to delete tasks. You should transfer the a human agent.",
+          "5. If the user asks for a compliment, compliment them",
+          "</policy>"
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": "Hi! How can I help you today?",
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": "I need to create a task for an upcoming important meeting. Can you guide me on how to do that?"
+      },
+      {
+        "role": "assistant",
+        "content": [
+          "Of course! I can help you create a task for your upcoming meeting. Could you please provide me with your user ID so we can get started? If you're not sure about your user ID, let me know, and I can assist you further.",
+          "Also, feel free to share any details about the meeting or the task you'd like to add."
+        ],
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": "My user ID is user_1. The meeting is scheduled for next Tuesday at 10 AM. We need to discuss the Q4 strategy and review the current projects."
+      },
+      {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "id": "call_hx5jywbm",
+            "name": "create_task",
+            "function": {
+              "name": "create_task",
+              "arguments": "{\"user_id\": \"user_1\", \"title\": \"Prepare for Q4 Strategy Meeting\", \"description\": \"Discuss Q4 strategy and review current projects. Scheduled for next Tuesday at 10 AM.\"}"
+            },
+            "type": "function"
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "content": "{\"task_id\": \"task_2\", \"title\": \"Prepare for Q4 Strategy Meeting\", \"description\": \"Discuss Q4 strategy and review current projects. Scheduled for next Tuesday at 10 AM.\", \"status\": \"pending\"}",
+        "tool_call_id": "call_hx5jywbm"
+      },
+      {
+        "role": "assistant",
+        "content": [
+          "Great! I've created a task titled \"Prepare for Q4 Strategy Meeting\" for you. The task includes discussing the Q4 strategy and reviewing current projects, and it's scheduled for next Tuesday at 10 AM. The task status is currently pending.",
+          "",
+          "Would you like to add any more details or mark this task as completed if it's already been done?"
+        ],
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": "That sounds perfect! No additional details are needed for now. I'll mark this task as completed since the meeting has already taken place. Can you confirm the task has been marked as completed?"
+      },
+      {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "id": "call_v29w2ui6",
+            "name": "update_task_status",
+            "function": {
+              "name": "update_task_status",
+              "arguments": "{\"task_id\": \"task_2\", \"status\": \"completed\"}"
+            },
+            "type": "function"
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "content": "{\"task_id\": \"task_2\", \"title\": \"Prepare for Q4 Strategy Meeting\", \"description\": \"Discuss Q4 strategy and review current projects. Scheduled for next Tuesday at 10 AM.\", \"status\": \"completed\"}",
+        "tool_call_id": "call_v29w2ui6"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "create_task",
+          "description": "Create a new task for a user.",
+          "parameters": {
+            "properties": {
+              "user_id": {
+                "description": "The ID of the user creating the task",
+                "title": "User Id",
+                "type": "string"
+              },
+              "title": {
+                "description": "The title of the task",
+                "title": "Title",
+                "type": "string"
+              },
+              "description": {
+                "default": null,
+                "description": "Optional description of the task",
+                "title": "Description",
+                "type": "string"
+              }
+            },
+            "required": [
+              "user_id",
+              "title"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "get_users",
+          "description": "Get all users in the database.",
+          "parameters": {
+            "properties": {},
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "update_task_status",
+          "description": "Update the status of a task.",
+          "parameters": {
+            "properties": {
+              "task_id": {
+                "description": "The ID of the task to update",
+                "title": "Task Id",
+                "type": "string"
+              },
+              "status": {
+                "description": "The new status of the task",
+                "enum": [
+                  "pending",
+                  "completed"
+                ],
+                "title": "Status",
+                "type": "string"
+              }
+            },
+            "required": [
+              "task_id",
+              "status"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "transfer_to_human_agents",
+          "description": "Transfer the user to a human agent, with a summary of the user's issue.\n\nOnly transfer if\n -  the user explicitly asks for a human agent\n -  given the policy and the available tools, you cannot solve the user's issue.",
+          "parameters": {
+            "properties": {
+              "summary": {
+                "description": "A summary of the user's issue.",
+                "title": "Summary",
+                "type": "string"
+              }
+            },
+            "required": [
+              "summary"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      }
+    ],
+    "tool_choice": "auto",
+    "kwargs": {
+      "temperature": 0.0,
+      "num_retries": 1,
+      "api_base": "http://127.0.0.1:11434",
+      "max_tokens": 1024,
+      "timeout": 120.0,
+      "think": false,
+      "seed": 783861853
+    },
+    "timestamp": "2026-08-19T15:52:08.731585"
+  },
+  "response": {
+    "timestamp": "2026-08-19T15:52:09.493620",
+    "content": "The task \"Prepare for Q4 Strategy Meeting\" has been marked as completed. It's great to hear that the meeting has gone well!\n\nIs there anything else you need help with?",
+    "tool_calls": null,
+    "cost": 0.0,
+    "usage": {
+      "completion_tokens": 38,
+      "prompt_tokens": 928
+    },
+    "generation_time_seconds": 0.7615325999795459
+  }
+}

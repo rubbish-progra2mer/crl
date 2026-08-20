@@ -1,0 +1,179 @@
+{
+  "call_id": "9fa0a066",
+  "call_name": "agent_response",
+  "timestamp": "2026-08-19T16:11:41.144403",
+  "request": {
+    "model": "ollama_chat/qwen3.5:9b",
+    "messages": [
+      {
+        "role": "system",
+        "content": [
+          "<instructions>",
+          "You are a customer service agent that helps the user according to the <policy> provided below.",
+          "In each turn you can either:",
+          "- Send a message to the user.",
+          "- Make a tool call.",
+          "You cannot do both at the same time.",
+          "",
+          "Try to be helpful and always follow the policy. Always make sure you generate valid JSON only.",
+          "</instructions>",
+          "<policy>",
+          "# Mock Domain Policy",
+          "",
+          "1. Each task must have a title",
+          "2. Task status can only be \"pending\" or \"completed\"",
+          "3. Only existing users can create tasks ",
+          "4. You are not allowed to delete tasks. You should transfer the a human agent.",
+          "5. If the user asks for a compliment, compliment them",
+          "</policy>"
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": "Hi! How can I help you today?",
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": "Hello! I'd like to mark a task as completed. Could you guide me on how to do that?"
+      },
+      {
+        "role": "assistant",
+        "content": [
+          "I can help you update a task's status to \"completed\". To do this, I'll need:",
+          "",
+          "1. The task ID of the task you want to mark as completed",
+          "2. Confirm that you want to set its status to \"completed\"",
+          "",
+          "Could you please provide me with the task ID?"
+        ],
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": "Sure, I need to check my tasks first. Let me see if I can find the task ID for task_1. I'll check my notifications to find it."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "create_task",
+          "description": "Create a new task for a user.",
+          "parameters": {
+            "properties": {
+              "user_id": {
+                "description": "The ID of the user creating the task",
+                "title": "User Id",
+                "type": "string"
+              },
+              "title": {
+                "description": "The title of the task",
+                "title": "Title",
+                "type": "string"
+              },
+              "description": {
+                "default": null,
+                "description": "Optional description of the task",
+                "title": "Description",
+                "type": "string"
+              }
+            },
+            "required": [
+              "user_id",
+              "title"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "get_users",
+          "description": "Get all users in the database.",
+          "parameters": {
+            "properties": {},
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "update_task_status",
+          "description": "Update the status of a task.",
+          "parameters": {
+            "properties": {
+              "task_id": {
+                "description": "The ID of the task to update",
+                "title": "Task Id",
+                "type": "string"
+              },
+              "status": {
+                "description": "The new status of the task",
+                "enum": [
+                  "pending",
+                  "completed"
+                ],
+                "title": "Status",
+                "type": "string"
+              }
+            },
+            "required": [
+              "task_id",
+              "status"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "transfer_to_human_agents",
+          "description": "Transfer the user to a human agent, with a summary of the user's issue.\n\nOnly transfer if\n -  the user explicitly asks for a human agent\n -  given the policy and the available tools, you cannot solve the user's issue.",
+          "parameters": {
+            "properties": {
+              "summary": {
+                "description": "A summary of the user's issue.",
+                "title": "Summary",
+                "type": "string"
+              }
+            },
+            "required": [
+              "summary"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      }
+    ],
+    "tool_choice": "auto",
+    "kwargs": {
+      "temperature": 0.0,
+      "num_retries": 1,
+      "api_base": "http://127.0.0.1:11434",
+      "max_tokens": 1024,
+      "timeout": 120.0,
+      "think": false,
+      "seed": 1539816624
+    },
+    "timestamp": "2026-08-19T16:11:39.488249"
+  },
+  "response": {
+    "timestamp": "2026-08-19T16:11:41.144403",
+    "content": "I don't have access to view your tasks or notifications directly. However, I can help you update a task's status once you provide me with the task ID.\n\nIf you know the task ID is \"task_1\", I can proceed with updating its status to \"completed\" for you. Would you like me to do that now?",
+    "tool_calls": null,
+    "cost": 0.0,
+    "usage": {
+      "completion_tokens": 70,
+      "prompt_tokens": 891
+    },
+    "generation_time_seconds": 1.655715600005351
+  }
+}

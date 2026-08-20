@@ -1,0 +1,156 @@
+{
+  "call_id": "4dcd2be0",
+  "call_name": "user_simulator_response",
+  "timestamp": "2026-08-20T11:12:31.491629",
+  "request": {
+    "model": "ollama_chat/qwen2.5:7b",
+    "messages": [
+      {
+        "role": "system",
+        "content": [
+          "# User Simulation Guidelines",
+          "You are playing the role of a customer contacting a customer service representative. ",
+          "Your goal is to simulate realistic customer interactions while following specific scenario instructions.",
+          "",
+          "## Core Principles",
+          "- Generate one message at a time, maintaining natural conversation flow.",
+          "- Strictly follow the scenario instructions you have received.",
+          "- Never make up or hallucinate information not provided in the scenario instructions. Information that is not provided in the scenario instructions should be considered unknown or unavailable.",
+          "- Avoid repeating the exact instructions verbatim. Use paraphrasing and natural language to convey the same information",
+          "- Disclose information progressively. Wait for the agent to ask for specific information before providing it.",
+          "",
+          "## Task Completion",
+          "- The goal is to continue the conversation until the task is complete.",
+          "- If the instruction goal is satisified, generate the '###STOP###' token to end the conversation.",
+          "- If you are transferred to another agent, generate the '###TRANSFER###' token to indicate the transfer.",
+          "- If you find yourself in a situation in which the scenario does not provide enough information for you to continue the conversation, generate the '###OUT-OF-SCOPE###' token to end the conversation.",
+          "Remember: The goal is to create realistic, natural conversations while strictly adhering to the provided instructions and maintaining character consistency.",
+          "",
+          "",
+          "<scenario>",
+          "Instructions:",
+          "\tDomain: airline",
+          "\tReason for call:",
+          "\t\tYou want to fly from New York to Seattle on May 20 (one way).",
+          "\tKnown info:",
+          "\t\tYour name is Mia Li.",
+          "\t\tYour user id is mia_li_3668.",
+          "\tTask instructions:",
+          "\t\tYou do not want to fly before 11am est.",
+          "",
+          "\t\tYou want to fly in economy.",
+          "",
+          "\t\tYou prefer direct flights but one stopover also fine.",
+          "",
+          "\t\tIf there are multiple options, you prefer the one with the lowest price. ",
+          "",
+          "\t\tYou have 3 baggages.",
+          "",
+          "\t\tYou do not want insurance.",
+          "",
+          "\t\tYou want to use your two certificates to pay. ",
+          "",
+          "\t\tIf only one certificate can be used, you prefer using the larger one, and pay the rest with your 7447 card.",
+          "",
+          "\t\tYou are reactive to the agent and will not say anything that is not asked.",
+          "",
+          "\t\tYour birthday is in your user profile so you do not prefer to provide it.",
+          "</scenario>"
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Hi! How can I help you today?"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello, I'm looking to book a flight from New York to Seattle. Could you help me with that?",
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": "Sure, I can help you with that. Could you please provide your user ID so I can proceed with booking your flight?"
+      },
+      {
+        "role": "assistant",
+        "content": "Of course, my user ID is mia_li_3668.",
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": "Hello, Mia! How can I assist you today?"
+      },
+      {
+        "role": "assistant",
+        "content": "Hi, I'd like to book a one-way flight from New York to Seattle on May 20. Could you check the available options for me?",
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": [
+          "Here are the available flights from JFK to SEA:",
+          "",
+          "1. **Flight HAT069**:",
+          "   - **Status**: Available",
+          "   - **Scheduled Departure Time**: 06:00:00",
+          "   - **Scheduled Arrival Time**: 12:00:00",
+          "   - **Available Seats**:",
+          "     - Basic Economy: 17",
+          "     - Economy: 12",
+          "     - Business: 3",
+          "   - **Prices**:",
+          "     - Basic Economy: $51",
+          "     - Economy: $121",
+          "     - Business: $239",
+          "",
+          "2. **Flight HAT083**:",
+          "   - **Status**: Available",
+          "   - **Scheduled Departure Time**: 01:00:00",
+          "   - **Scheduled Arrival Time**: 07:00:00",
+          "   - **Available Seats**:",
+          "     - Basic Economy: 16",
+          "     - Economy: 7",
+          "     - Business: 3",
+          "   - **Prices**:",
+          "     - Basic Economy: $87",
+          "     - Economy: $100",
+          "     - Business: $276",
+          "",
+          "Let me know if you'd like to book a flight or need further assistance!"
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": "I would like to book a direct flight that departs after 11 AM EST. Could you check if there are any options available for that time?",
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": "I couldn't find any direct flights that depart after 11 AM EST. Would you like me to look for one-stop flights instead?"
+      }
+    ],
+    "tools": null,
+    "tool_choice": null,
+    "kwargs": {
+      "temperature": 0.0,
+      "num_retries": 1,
+      "api_base": "http://127.0.0.1:11434",
+      "max_tokens": 1024,
+      "timeout": 120.0,
+      "think": false,
+      "seed": 375806089
+    },
+    "timestamp": "2026-08-20T11:12:30.999958"
+  },
+  "response": {
+    "timestamp": "2026-08-20T11:12:31.490628",
+    "content": "Sure, please check for one-stop flights that depart after 11 AM EST.",
+    "tool_calls": null,
+    "cost": 0.0,
+    "usage": {
+      "completion_tokens": 18,
+      "prompt_tokens": 962
+    },
+    "generation_time_seconds": 0.49120250000032684
+  }
+}
