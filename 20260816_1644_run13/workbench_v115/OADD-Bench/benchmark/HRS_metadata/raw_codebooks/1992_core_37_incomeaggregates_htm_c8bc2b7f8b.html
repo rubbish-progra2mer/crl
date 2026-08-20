@@ -1,0 +1,487 @@
+<html><head><title>37_IncomeAggregates.htm</title></head>
+<body><a name="top"></a><table BORDER="0" CELLSPACING="0" CELLPADDING="6" WIDTH="600"><tr><td WIDTH="250"><img SRC="hrslogo1.gif" border=0></td><td WIDTH="350" valign="center"><h2>HRS 1992 (Wave 1) Documentation</h2></td></tr></table>
+<pre><hr align="left" width="70%"><b>[<a href=#end>End of this section</a>]</b> <b>[<A HREF="h92_00.html">Table of Contents</a>]</b> <b>[<a href=36_RangeCardInfo.htm>Previous Section</a>]</b> <b>[<a href=38_IncomeComponents.htm>Next Section</a>]</b><hr align="left" width="70%">
+<b>            HRS WAVE 1 HOUSEHOLD INCOME AGGREGATES</b>
+            -----------------------------------------------
+
+            VARIABLES IN PARENS ( ) WERE CREATED IN
+            THE PROCESS OF GENERATING THE INCOME AGGRE-
+            GATES BUT ARE NOT INCLUDED IN THE FILE.
+            THEY ARE DOCUMENTED HERE SO THE PROCESS OF
+            CREATING THE INCOME VARIABLES MAY BE
+            REPLICATED IF DESIRED.  THE CODE BELOW IS
+            SAS CODE WITHOUT THE SEMICOLONS.
+
+VARIABLE
+NAME        SOCIAL SECURITY VARIABLES FOR R1 AND R2
+--------    -----------------------------------------------
+
+            IF 1 CHECK WAS RECEIVED BY BOTH, V6003 (N41B)
+            IS INCLUDED WITH SOCIAL SECURITY PENSION INCOME
+            (SSPEN). SEE BELOW.
+
+
+            BOTH R1 AND R2 RECEIVED SOCIAL SECURITY CHECKS:
+            -----------------------------------------------
+
+            CREATING R1'S SOCIAL SECURITY VARIABLES (N42A,
+            N43A):
+
+(R1SSAMT)   SOCIAL SECURITY AMOUNT RECEIVED BY R1:
+            -----------------------------------------------
+
+            R1SSAMT = V6012 + V6030
+
+            CREATING 0/1 INDICATORS FOR WHICH TYPE(S) OF
+            SOCIAL SECURITY INCOME WAS RECEIVED BY R1:
+
+(R1SSPEN)   R1 RECEIVED A SOCIAL SECURITY PENSION
+            -----------------------------------------------
+
+            IF V6006=1 OR V6008=1 OR V6010=1 OR V6024=1 OR
+            V6026=1 OR V6028=1 THEN R1SSPEN=1 ELSE R1SSPEN=0
+
+(R1SSDIS)   R1 RECEIVED SOCIAL SECURITY DISABILITY
+            -----------------------------------------------
+
+            IF V6007=1 OR V6009=1 OR V6025=1 OR V6027=1 THEN
+            R1SSDIS=1 ELSE R1SSDIS=0
+
+(R1SSOTH)   R1 RECEIVED 'OTHER' SOCIAL SECURITY
+            -----------------------------------------------
+
+            IF V6011=1 OR V6029=1 OR V6006 IN(8,9) OR V6024
+            IN(8,9) THEN R1SSOTH=1 ELSE R1SSOTH=0
+
+(R1NUMTYP)  CREATING INDICATOR FOR THE NUMBER OF TYPES OF
+            SOCIAL SECURITY INCOME R1 HAD:
+            -----------------------------------------------
+
+            R1NUMTYP=R1SSPEN+R1SSDIS+R1SSOTH
+
+(R1SSPAMT)  DIVIDING THE AMOUNT RECEIVED BY TYPE INTO 3 AMOUNT
+(R1SSDAMT)  VARIABLES (R1SSPAMT FOR PENSION, R1SSDAMT FOR
+(R1SSOAMT)  DISABILITY, R1SSOAMT FOR 'OTHER'):
+
+            NOTE:  747 OUT OF 757, OR 98.7%,  RECEIVED ONLY 1 TYPE.
+                   THE REMAINING 10 CASES (1.3%) RECIEVED 2 TYPES.
+            -----------------------------------------------
+
+            R1SSPAMT=0
+            R1SSDAMT=0
+            R1SSOAMT=0
+
+            R1 RECEIVED 1 TYPE OF SS INCOME:
+
+            IF R1NUMTYP=1 THEN DO
+               IF R1SSPEN=1 THEN R1SSPAMT=R1SSAMT
+               ELSE IF R1SSDIS=1 THEN R1SSDAMT=R1SSAMT
+               ELSE IF R1SSOTH=1 THEN R1SSOAMT=R1SSAMT
+            END
+
+            R1 RECEIVED 2 TYPES OF SS INCOME:
+               IF R1NUMTYP=2 THEN DO
+
+               R1 RECEIVED PENSION AND DISABILITY:
+                  IF R1SSOTH=0 THEN DO
+                     R1SSPAMT=(R1SSAMT)/2
+                     R1SSDAMT=R1SSPAMT
+                  END
+
+               R1 RECEIVED DISABILITY AND 'OTHER':
+                  IF R1SSPEN=0 THEN DO
+                     R1SSOAMT=(R1SSAMT)/2
+                     R1SSDAMT=R1SSOAMT)
+                  END
+
+               R1 RECEIVED PENSION AND 'OTHER':
+                  IF R1SSDIS=0 THEN DO
+                     R1SSPAMT=(R1SSAMT)/2
+                     R1SSOAMT=R1SSPAMT
+                  END
+            END
+
+            CREATING R2 SOCIAL SECURITY VARIABLES(N42A,N44A)
+            ------------------------------------------------
+
+(R2SSAMT)   CREATING R2'S SOCIAL SECURITY AMOUNT:
+            ------------------------------------------------
+
+            R2SSAMT=V6021 + V6107
+
+            CREATING 0/1 INDICATORS FOR WHICH TYPE(S) OF
+            SOCIAL SECURITY INCOME WAS RECEIVED BY R2:
+
+(R2SSPEN)   R2 RECEIVED SOCIAL SECURITY PENSION:
+            -----------------------------------------------
+
+            IF V6015=1 OR V6017=1 OR V6019=1 OR V6101=1 OR
+            V6103=1 OR V6105=1 THEN R2SSPEN=1 ELSE R2SSPEN=0
+
+(R2SSDIS)   R2 RECEIVED SOCIAL SECURITY DISABILITY:
+            -----------------------------------------------
+
+            IF V6016=1 OR V6018=1 OR V6102=1 OR V6104=1 THEN
+            R2SSDIS=1 ELSE R2SSDIS=0
+
+(R2SSOTH)   R2 RECIEVED 'OTHER' SOCIAL SECURITY:
+            -----------------------------------------------
+
+            IF V6020=1 OR V6106=1 OR V6015 IN(8,9) OR V6101
+            IN(8,9) THEN R2SSOTH=1 ELSE R2SSOTH=0
+
+(R2NUMTYP)  CREATING INDICATOR FOR THE NUMBER OF TYPES OF
+            SOCIAL SECURITY INCOME R2 RECEIVED:
+            -----------------------------------------------
+
+            R2NUMTYP=R2SSPEN+R2SSDIS+R2SSOTH
+
+(R2SSPAMT)  DIVIDING THE AMOUNT RECEIVED BY TYPE INTO 3
+(R2SSDAMT)  AMOUNT VARIABLES (R2SSPAMT FOR PENSION, R2SSDAMT
+(R2SSOAMT)  FOR DISABILITY, R2SSOAMT FOR 'OTHER'):
+
+            NOTE:  476 OF 481 CASES (99%) RECEIVED ONLY 1 TYPE.
+                   THE REMAINING 5 CASES (1%) RECEIVED 2 TYPES.
+            -----------------------------------------------
+
+            R2SSPAMT=0
+            R2SSDAMT=0
+            R2SSOAMT=0
+
+            R2 RECEIVED 1 TYPE OF SS INCOME:
+            IF R2NUMTYP=1 THEN DO
+               IF R2SSPEN=1 THEN R2SSPAMT=R2SSAMT
+               ELSE IF R2SSDIS=1 THEN R2SSDAMT=R2SSAMT
+               ELSE IF R2SSOTH=1 THEN R2SSOAMT=R2SSAMT
+            END
+
+            R2 RECEIVED 2 TYPES OF SOCIAL SECURITY INCOME:
+            IF R2NUMTYP=2 THEN DO
+
+            R2 RECEIVED PENSION AND DISABILITY:
+               IF R2SSOTH=0 THEN DO
+                  R2SSPAMT=(R2SSAMT)/2
+                  R2SSDAMT=R2SSPAMT
+               END
+
+            R2 RECEIVED DISABILITY AND 'OTHER':
+               IF R2SSPEN=0 THEN DO
+                  R2SSOAMT=(R2SSAMT)/2
+                  R2SSDAMT=R2SSOAMT
+               END
+
+            R2 RECEIVED PENSION AND 'OTHER':
+               IF R2SSDIS=0 THEN DO
+                  R2SSPAMT=(R2SSAMT)/2
+                  R2SSOAMT=R2SSPAMT
+               END
+            END
+
+
+SSPEN       SUM OF R1 AND R2 SOCIAL SECURITY PENSIONS
+            AMOUNTS AT N41B, N42A, AND N43A.
+            -----------------------------------------
+
+            SSPEN=R1SSPAMT+R2SSPAMT+V6003
+
+
+(SSDIS)     SUM OF R1 AND R2 SOCIAL SECURITY DISABILITY
+            AMOUNTS AT N41B, N42A, AND N43A.
+            -----------------------------------------
+
+            SSDIS=R1SSDAMT+R2SSDAMT
+
+(SSOTH)     SUM OF R1 AND R2 SOCIAL SECURITY 'OTHER'
+            AMOUNTS AT N41B, N42A, AND N43A.
+            -----------------------------------------
+
+            SSOTH=R1SSOAMT+R2SSOAMT
+
+(R1_EARN)   JOB EARNINGS OF R1 REPORTED AT N3A-D OR
+            N5A-D.
+            -----------------------------------------
+
+            R1_EARN=V5403+V5407+V5411+V5415
+
+            ADDING JOB-RELATED EARNINGS REPORTED AT
+            N39G TO R1'S EARNINGS
+
+            IF V5925 IN(1,3,7,15,16)
+               THEN R1_EARN=R1_EARN+V5924
+            IF V5927 IN(1,3,7,15,16)
+               THEN R1_EARN=R1_EARN+V5926
+
+
+(R2_EARN)   JOB EARNINGS OF R2 REPORTED AT N7A-D.
+            -----------------------------------------
+
+            R2_EARN=V5405+V5409+V5413+V5417
+
+M_EARN      MALE JOB EARNINGS.
+F_EARN      FEMALE JOB EARNINGS.
+            ASSIGNS R1_EARN AND R2_EARN TO MALE/FEMALE
+            VARIABLES BASED UPON SEX OF THE R1.
+
+            NOTE: FOR MALE SAME-SEX COUPLES, THE M_EARN
+            VARIABLE CONTAINS THE R1'S EARNINGS AND F_EARN
+            IS THE R2'S EARNINGS; IN FEMALE SAME-SEX COUPLES,
+            THE M_EARN CONTAINS R2'S EARNINGS AND F_EARN IS
+            THE R1'S EARNINGS.
+            -----------------------------------------------
+
+            IF R1SEX = 1 THEN DO
+               M_EARN=R1_EARN
+               F_EARN=R2_EARN
+            END
+
+            IF R1SEX = 2 THEN DO
+               F_EARN=R1_EARN
+               M_EARN=R2_EARN
+            END
+
+
+UNEMP_WC    UNEMPLOYMENT (N9, N11) AND WORKERS COMPENSATION
+            (N14, N16) RECEIVED BY R1 & R2.
+            -----------------------------------------------
+            UNEMP_WC=V5503+V5523+V5603+V5623
+
+
+            VETERAN'S BENEFITS (N20, N23):
+
+(VA1)       R1'S VETERAN'S BENEFITS INCOME AMOUNT IN 1991.
+            -----------------------------------------------
+
+            IF V5705=4 THEN VA1=V5704*12 ELSE VA1=V5704
+
+(VA2)       R2'S VETERAN'S BENEFITS INCOME AMOUNT IN 1991.
+            -----------------------------------------------
+
+            IF V5710=4 THEN VA2=V5709*12 ELSE VA2=V5709
+
+
+            ASSIGNING VA INCOME TO PENSION, DISABILITY, AND
+            'OTHER'  CATEGORIES:
+
+(R1VAPEN)   VA PENSION INCOME RECEIVED BY R1.
+(R1VADIS)   VA DISABILITY INCOME RECEIVED BY R1.
+(R1VAOTH)   VA 'OTHER' INCOME RECEIVED BY R1.
+            -----------------------------------------------
+
+            R1VAPEN=0
+            R1VADIS=0
+            R1VAOTH=0
+
+            IF V5703 IN(1,2) THEN R1VAPEN=VA1
+              ELSE IF V5703=3 THEN R1VADIS=VA1
+              ELSE IF V5703 IN(0,4,5,6,7,8,9) THEN R1VAOTH=VA1
+
+(R2VAPEN)   VA PENSION INCOME RECEIVED BY R2.
+(R2VADIS)   VA DISABILITY INCOME RECEIVED BY R2.
+(R2VAOTH)   VA 'OTHER' INCOME RECEIVED BY R2.
+            -----------------------------------------------
+
+            R2VAPEN=0
+            R2VADIS=0
+            R2VAOTH=0
+
+            IF V5708 IN(1,2) THEN R2VAPEN=VA2
+               ELSE IF V5708=3 THEN R2VADIS=VA2
+               ELSE IF V5708 IN(0,4,5,6,7,8,9) THEN R2VAOTH=VA2
+
+VAPEN       R1 AND R2 COMBINED VA PENSION INCOME:
+            -----------------------------------------------
+
+            VAPEN=R1VAPEN+R2VAPEN
+
+(VADIS)     R1 AND R2 COMBINED VA DISABILITY INCOME:
+            -----------------------------------------------
+
+            VADIS=R1VADIS+R2VADIS
+
+(VAOTH)     R1 AND R2 COMBINED 'OTHER' VA INCOME:
+            -----------------------------------------------
+
+            VAOTH=R1VAOTH+R2VAOTH
+
+            CREATING PENSION INCOME FROM N26A AND N27A:
+            -----------------------------------------------
+
+            (NOTE:  THE NOT ASCERTAINED 'PER' CODES IN
+            PENSIONS AND ANNUITIES ARE TREATED THE SAME AS
+            YEARLY AMOUNTS.)
+
+(R1PEN)     R1'S PENSION INCOME (N26A).
+            -----------------------------------------------
+
+            IF V5717=4 THEN R1PEN=V5716*12 ELSE R1PEN=V5716
+
+(R2PEN)     R2'S PENSION INCOME (N27A).
+            -----------------------------------------------
+
+            IF V5726=4 THEN R2PEN=V5725*12 ELSE R2PEN=V5725
+
+OTHPEN      OTHER PENSION INCOME REPORTED AT N39G.
+            -----------------------------------------------
+
+            OTHPEN=0
+            IF V5925=2 THEN OTHPEN=OTHPEN+V5924
+            IF V5927=2 THEN OTHPEN=OTHPEN+V5926
+
+
+            CREATING ANNUITY INCOME FROM N26C AND N27C:
+            -----------------------------------------------
+
+(R1ANN)     R1'S ANNUITY INCOME (N26C).
+            -----------------------------------------------
+
+            IF V5721=4 THEN R1ANN=V5720*12 ELSE R1ANN=V5720
+
+(R2ANN)     R2'S ANNUITY INCOME (N27C).
+            -----------------------------------------------
+
+            IF V5730=4 THEN R2ANN=V5729*12 ELSE R2ANN=V5729
+
+
+PENSION     SUM OF R1'S PENSION AND R2'S PENSION FROM N26A
+            AND N27A AND 'OTHER':
+            -----------------------------------------------
+
+            PENSION=R1PEN+R2PEN+OTHPEN
+
+ANNUITY     SUM OF R1'S AND R2'S ANNUITY INCOME FROM N26A
+            AND N27A:
+            -----------------------------------------------
+
+            ANNUITY=R1ANN+R2ANN
+
+
+PENANTOT    SUM OF R1'S AND R2'S PENSION AND ANNUITY INCOME
+            FROM ALL SOURCES:
+            -----------------------------------------------
+
+            PENANTOT=VAPEN+PENSION+ANNUITY+SSPEN
+
+
+M_PEN       MALE PENSIONS AT N26A AND N27A.
+F_PEN       FEMALE PENSIONS AT N26A AND N27A.
+
+            NOTE: FOR MALE SAME-SEX COUPLES, THE M_PEN
+            VARIABLE CONTAINS THE R1'S PENSION AND F_PEN
+            IS THE R2'S PENSION; IN FEMALE SAME-SEX COUPLES,
+            M_PEN CONTAINS R2'S PENSION AND F_PEN IS THE
+            R1'S PENSION.
+            -----------------------------------------------
+
+            IF R1SEX = 1 THEN DO
+               M_PEN=R1PEN
+               F_PEN=R2PEN
+            END
+
+            IF R1SEX = 2 THEN DO
+               F_PEN=R1PEN
+               M_PEN=R2PEN
+            END
+
+
+            SSI INCOME RECEIVED BY R1 AND R2:
+            -----------------------------------------------
+
+            (LUMP SUM AMOUNTS ARE NOT INCLUDED):
+            IF V5804=8 THEN V5803=0
+
+(SSI1)      R1'S SSI INCOME (N29).
+            -----------------------------------------------
+
+            IF V5804=4 THEN SSI1=V5803*12 ELSE SSI1=V5803
+
+(SSI2)      R2'S SSI INCOME (N33).
+            -----------------------------------------------
+
+            IF V5824=4 THEN SSI2=V5823*12 ELSE SSI2=V5823
+
+
+SSI_WELF    COMBINING SSI INCOME WITH WELFARE INCOME AT
+            N37A-B-C:
+            -----------------------------------------------
+
+            SSI_WELF=SSI1+SSI2+V5903
+
+
+CAPINC     CAPITAL INCOME.  INCLUDES INCOME FROM A BUSINESS
+           (N39A), GROSS RENT (N39B+N40BB), INTEREST/DIVIDEND
+           INCOME (N39C), AND TRUST/ROYALTY INCOME (N39D):
+           -------------------------------------------------
+
+           CAPINC=V5905+V5907+V5909+V5911+V5913
+
+
+(OTHDIS)   DISABILITY INCOME REPORTED AT N39G:
+           -------------------------------------------------
+
+           OTHDIS=0
+           IF V5925 IN(4,11) THEN OTHDIS=OTHDIS+V5924
+           IF V5927=4 THEN OTHDIS=OTHDIS+V5926
+
+
+DISABIL    COMBINING DISABILITY INCOME FROM SOCIAL SECURITY
+           (SSDIS), VETERANS BENEFITS (VADIS), AND
+           'OTHER' DISABILITY (OTHDIS) OF BOTH R1 AND R2:
+           -------------------------------------------------
+
+           DISABIL=VADIS+SSDIS+OTHDIS
+
+
+(OTHOTH)   OTHER R1/R2 INCOME FROM N39G:
+           -------------------------------------------------
+
+           OTHOTH=0
+           IF V5925 IN(13,14) THEN OTHOTH=V5924
+           IF V5927 IN(13,14) THEN OTHOTH=OTHOTH+V5926
+
+           ADDING SOME OTHER INCOME CODED AS '97' FOR
+           SPECIFIC CASES:
+
+           IF V1=10445 THEN OTHOTH=OTHOTH+V5924
+           IF V1=10687 THEN OTHOTH=OTHOTH+V5924
+           IF V1=10858 THEN OTHOTH=OTHOTH+V5924
+           IF V1=11603 THEN OTHOTH=OTHOTH+V5924
+           IF V1=12616 THEN OTHOTH=OTHOTH+V5924*12
+           IF V1=13033 THEN OTHOTH=OTHOTH+V5924
+           IF V1=13189 THEN OTHOTH=OTHOTH+V5924
+           IF V1=14042 THEN OTHOTH=OTHOTH+V5924
+
+
+OTH_R      OTHER INCOME OF R1/R2. INCLUDES ALIMONY/CHILD
+           SUPPORT (N39E), INCOME FROM RELATIVES/FRIENDS
+           (N39F), 'OTHER' SOCIAL SECURITY INCOME,
+           'OTHER' VA INCOME, AND OTHER INCOME REPORTED
+           AT N39G:
+           --------------------------------------------
+           SUMMING COMPONENTS OF OTHER INCOME:
+
+           OTH_R=V5915+V5917+SSOTH+VAOTH+OTHOTH
+
+
+OTH_HH     INCOME OF OTHER HH MEMBERS. INCLUDES WAGE OR
+           SALARY INCOME AT N56 PLUS THEIR INCOME FROM
+           OTHER SOURCES AT N57:
+           --------------------------------------------
+           OTH_HH=V6308+V6313+V6318+V6323+V6328+V6329
+
+
+HH91INC    TOTAL HOUSEHOLD INCOME FOR 1991.  SUM OF
+           EARNINGS (M_EARN, F_EARN), UNEMPLOYMENT
+           AND WORKERS' COMPENSATION (UNEMP_WC), PENSIONS
+           AND ANNUITIES (PENANTOT), SSI AND WELFARE
+           (SSI_WELF), CAPITAL INCOME (CAPINC), DISABILITY
+           INCOME (DISABIL), OTHER INCOME RECEIVED BY R1
+           AND R2 (OTH_R), AND INCOME OF OTHER HOUSEHOLD
+           MEMBERS (OTH_HH).
+           --------------------------------------------
+
+           HH91INC=R1_EARN+R2_EARN+UNEMP_WC+PENANTOT+
+           SSI_WELF+CAPINC+DISABIL+OTH_R+OTH_HH
+
+<a name="end"></a>
+<b>[<a href=#top>Return to Beginning</a>]</b> <b>[<A HREF="h92_00.html">Table of Contents</a>]</b> <b>[<a href=36_RangeCardInfo.htm>Previous Section</a>]</b> <b>[<a href=38_IncomeComponents.htm>Next Section</a>]</b>
+</pre><hr align="left" width="70%"></body></html>

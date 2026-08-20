@@ -1,0 +1,2708 @@
+==========================================================================================
+HRS 2000 Exit Imputation File, Version 1
+ODBC Reference: [h00exitimp]
+Perl script: CodebkC1.pl v1.00 Tue Sep 10 13:09:05 2002
+
+Note to Users: This codebook describes the imputation data for the Health and 
+Retirement Study 2000 exit interview data. If you find any problems with the
+the data, please report to us at hrsquestions@umich.edu. 
+
+Printing recommendation: Set margins (left/right/top/bottom) to .5"; print in 
+portrait orientation using a mono-space 10-point font.
+
+The Definition of the 'S' -- Summary Bracket -- Variable: A summary bracket 
+variable summarizes the bracket information embedded in a set of individual 
+bracket variables. Each bracket question, if asked, yields a single-digit 
+response (1=more than, 5=less than, 8=do not know, 9=refused), which we name 
+v1 through v4 for four bracket questions, v1 - v5 for five brackets, etc. 
+Whatever the actual sequence of bracket questions, v1 refers to the lowest amount 
+and v4 (0r v5) refers to the largest. The summary bracket variable is calculated 
+simply as v1 + 10*v2 + 100*v3 + 1000*v4 +10000*v5... Missing values on any 
+individual bracket variables are converted to zero (0) before the operation. 
+In addition, there are three special codes reserved for an 'S' variable: '-2' 
+indicating that the missing value on the 'X' variable was legitimate (no imputation 
+was necessary)"; '-1' indicating that the original value of the 'X' variable was 
+not missing"; and '0' indicating that the 'X' variable was imputed without any 
+bracket information. For more information about the imputations, please check the 
+documation file, 'IMPUTE: A SAS Application System for Missing Value Imputations' 
+at http://hrsonline.isr.umich.edu/docs/userg/dr-007.pdf. 
+ 
+==========================================================================================
+
+SECTION A: Demographics (Respondent)
+
+==========================================================================================
+HHID      HOUSEHOLD IDENTIFIER
+          Section: A            Level: Respondent
+          Type: Character       Width: 6               Decimals: 0
+          ................................................................................
+           1348       010003-213471. Household Identifier
+
+==========================================================================================
+PN        PERSON NUMBER
+          Section: A            Level: Respondent
+          Type: Character       Width: 3               Decimals: 0
+          ................................................................................
+             929       010. Person Number
+              12       011. Person Number
+             320       020. Person Number
+               2       021. Person Number
+              36       030. Person Number
+               1       031. Person Number
+              47       040. Person Number
+               1       041. Person Number
+
+==========================================================================================
+RSUBHH    HRS 2000 SUB-HOUSEHOLD IDENTIFIER
+          Section: A            Level: Respondent
+          Type: Character       Width: 1               Decimals: 0
+          ................................................................................
+            1311         3. First Deceased Respondent from a Household
+              37         4. Second Deceased Respondent from a Household
+
+
+SECTION D: Family Structure (Respondent)
+
+==========================================================================================
+R1638X    D77A.R CARE HRS
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: Imputations for this variable were done jointly with those for
+          variable R1649X.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0        4000          47         294
+
+==========================================================================================
+R1638C    D77A.R CARE HRS:CONTROL VAR
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             127         1. Yes
+            1221     Blank. Legitimate Missing
+
+==========================================================================================
+R1638T    D77A.R CARE HRS:IMP TYPE
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1221         1. Legitimate Missing or Partial Interview
+              64         2. Valid Value
+              13         3. Closed Bracket
+              27         4. Bottom-Open Bracket
+              21         5. Top-Open Bracket
+               2         6. Imputation with No Bracket Information
+
+==========================================================================================
+R1638S    D77A.R CARE HRS:SUM BRACKET
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2          85          -1           8
+
+==========================================================================================
+R1638D    D77A.R CARE HRS:LOWER BOUND
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               98    1250           0        3600         385         553
+
+==========================================================================================
+R1638E    D77A.R CARE HRS:UPPER BOUND
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              104    1244           0        3600         322         538
+
+==========================================================================================
+R1649X    D77D.SPOUSE HRS
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: Imputations for this variable were done jointly with those for
+          variable R1638X.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0        4000          43         294
+
+==========================================================================================
+R1649C    D77D.SPOUSE HRS:CONTROL VAR
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             103         1. Yes
+            1245     Blank. Legitimate Missing
+
+==========================================================================================
+R1649T    D77D.SPOUSE HRS:IMP TYPE
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1245         1. Legitimate Missing or Partial Interview
+              56         2. Valid Value
+              15         3. Closed Bracket
+              15         4. Bottom-Open Bracket
+              16         5. Top-Open Bracket
+               1         6. Imputation with No Bracket Information
+
+==========================================================================================
+R1649S    D77D.SPOUSE HRS:SUM BRACKET
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2          85          -1           7
+
+==========================================================================================
+R1649D    D77D.SPOUSE HRS:LOWER BOUND
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               87    1261           0        4000         421         625
+
+==========================================================================================
+R1649E    D77D.SPOUSE HRS:UPPER BOUND
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               86    1262           0        4000         392         631
+
+==========================================================================================
+R1672_1X  D53.TRANSFER TO CHILD $ AMOUNT
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: Imputations for this variable were done jointly with those for
+          variables R1672_2X.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0       50000        1146        4592
+
+==========================================================================================
+R1672_1C  D53.TRANSFER TO CHILD $ AMOUNT:CONTROL V
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             238         1. Yes
+             899         5. No
+              17         8. Don't Know
+               7         9. Refused
+             187     Blank. Legitimate Missing
+
+==========================================================================================
+R1672_1T  D53.TRANSFER TO CHILD $ AMOUNT:IMP TYPE
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             187         1. Legitimate Missing or Partial Interview
+            1057         2. Valid Value
+              43         3. Closed Bracket
+               9         4. Bottom-Open Bracket
+               6         5. Top-Open Bracket
+              22         6. Imputation with No Bracket Information
+              24         7. Imputed Ownership and amount
+
+==========================================================================================
+R1672_1S  D53.TRANSFER TO CHILD $ AMOUNT:SUM BRACK
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2         850           5          45
+
+==========================================================================================
+R1672_1D  D53.TRANSFER TO CHILD $ AMOUNT:LOWER BOU
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1106     242           0       50000        1002        3900
+
+==========================================================================================
+R1672_1E  D53.TRANSFER TO CHILD $ AMOUNT:UPPER BOU
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1109     239           0       50000        1166        4195
+
+==========================================================================================
+R1672_2X  D53.TRANSFER TO CHILD $ AMOUNT
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: Imputations for this variable were done jointly with those for
+          variables R1672_1X.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0       29000         257        1819
+
+==========================================================================================
+R1672_2C  D53.TRANSFER TO CHILD $ AMOUNT:CONTROL V
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              63         1. Yes
+            1285     Blank. Legitimate Missing
+
+==========================================================================================
+R1672_2T  D53.TRANSFER TO CHILD $ AMOUNT:IMP TYPE
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1285         1. Legitimate Missing or Partial Interview
+              48         2. Valid Value
+               9         3. Closed Bracket
+               1         4. Bottom-Open Bracket
+               5         6. Imputation with No Bracket Information
+
+==========================================================================================
+R1672_2S  D53.TRANSFER TO CHILD $ AMOUNT:SUM BRACK
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2         150          -1          10
+
+==========================================================================================
+R1672_2D  D53.TRANSFER TO CHILD $ AMOUNT:LOWER BOU
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               57    1291         400       25000        4858        5952
+
+==========================================================================================
+R1672_2E  D53.TRANSFER TO CHILD $ AMOUNT:UPPER BOU
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               58    1290         400       25000        6033        6997
+
+==========================================================================================
+R1700_1X  D63.TRANSFER FROM CHILD $
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: Imputations for this variable were done jointly with those for
+          variable R1700_2X, and R1700_3X.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0       45000         509        3389
+
+==========================================================================================
+R1700_1C  D63.TRANSFER FROM CHILD $:CONTROL VAR
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             106         1. Yes
+            1036         5. No
+              13         8. Don't Know
+               6         9. Refused
+             187     Blank. Legitimate Missing
+
+==========================================================================================
+R1700_1T  D63.TRANSFER FROM CHILD $:IMP TYPE
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             187         1. Legitimate Missing or Partial Interview
+            1092         2. Valid Value
+              22         3. Closed Bracket
+               5         4. Bottom-Open Bracket
+               5         5. Top-Open Bracket
+              18         6. Imputation with No Bracket Information
+              19         7. Imputed Ownership and amount
+
+==========================================================================================
+R1700_1S  D63.TRANSFER FROM CHILD $:SUM BRACKET
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2         550           4          39
+
+==========================================================================================
+R1700_1D  D63.TRANSFER FROM CHILD $:LOWER BOUND
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1119     229           0       45000         309        2227
+
+==========================================================================================
+R1700_1E  D63.TRANSFER FROM CHILD $:UPPER BOUND
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1119     229           0       45000         323        2246
+
+==========================================================================================
+R1700_2X  D63.TRANSFER FROM CHILD $
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: Imputations for this variable were done jointly with those for
+          variable R1700_1X, and R1700_3X.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0       10000          34         379
+
+==========================================================================================
+R1700_2C  D63.TRANSFER FROM CHILD $:CONTROL VAR
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              22         1. Yes
+            1326     Blank. Legitimate Missing
+
+==========================================================================================
+R1700_2T  D63.TRANSFER FROM CHILD $:IMP TYPE
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1326         1. Legitimate Missing or Partial Interview
+              14         2. Valid Value
+               6         3. Closed Bracket
+               1         4. Bottom-Open Bracket
+               1         6. Imputation with No Bracket Information
+
+==========================================================================================
+R1700_2S  D63.TRANSFER FROM CHILD $:SUM BRACKET
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2         350          -1          11
+
+==========================================================================================
+R1700_2D  D63.TRANSFER FROM CHILD $:LOWER BOUND
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               20    1328         200       10000        2055        2243
+
+==========================================================================================
+R1700_2E  D63.TRANSFER FROM CHILD $:UPPER BOUND
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               21    1327         200       10000        2290        2246
+
+==========================================================================================
+R1700_3X  D63.TRANSFER FROM CHILD $
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: Imputations for this variable were done jointly with those for
+          variable R1700_1X, and R1700_2X.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0        2000           4          81
+
+==========================================================================================
+R1700_3C  D63.TRANSFER FROM CHILD $:CONTROL VAR
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+               5         1. Yes
+            1343     Blank. Legitimate Missing
+
+==========================================================================================
+R1700_3T  D63.TRANSFER FROM CHILD $:IMP TYPE
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 2               Decimals: 0
+          ................................................................................
+            1343         1. Legitimate Missing or Partial Interview
+               1         2. Valid Value
+               3         3. Closed Bracket
+               1         4. Bottom-Open Bracket
+
+==========================================================================================
+R1700_3S  D63.TRANSFER FROM CHILD $:SUM BRACKET
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2          30          -2           1
+
+==========================================================================================
+R1700_3D  D63.TRANSFER FROM CHILD $:LOWER BOUND
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+                4    1344         500        2000        1125         629
+
+==========================================================================================
+R1700_3E  D63.TRANSFER FROM CHILD $:UPPER BOUND
+          Section: D            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+                5    1343         500        2000        1500         707
+
+
+SECTION E: Health Care and Service Costs (Respondent)
+
+==========================================================================================
+R1760X    E10. NURHM OR HOSP R PAY $
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0      120000        4094       13725
+
+==========================================================================================
+R1760C    E10. NURHM OR HOSP R PAY $:CONTROL VAR
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             509         1. Yes
+             200         5. No
+               5         8. Don't Know
+             634     Blank. Legitimate Missing
+
+==========================================================================================
+R1760T    E10. NURHM OR HOSP R PAY $:IMP TYPE
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             634         1. Legitimate Missing or Partial Interview
+             474         2. Valid Value
+             108         3. Closed Bracket
+              26         4. Bottom-Open Bracket
+              13         5. Top-Open Bracket
+              88         6. Imputation with No Bracket Information
+               5         7. Imputed Ownership and amount
+
+==========================================================================================
+R1760S    E10. NURHM OR HOSP R PAY $:SUM BRACKET
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2       85500         717        5087
+
+==========================================================================================
+R1760D    E10. NURHM OR HOSP R PAY $:LOWER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              595     753           0      120000        6498       16469
+
+==========================================================================================
+R1760E    E10. NURHM OR HOSP R PAY $:UPPER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              608     740           0      120000        7161       16697
+
+==========================================================================================
+R1781X    EX10M. HOSPICE R PAY $
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0       10000          28         393
+
+==========================================================================================
+R1781C    EX10M. HOSPICE R PAY $:CONTROL VAR
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              19         1. Yes
+              58         5. No
+               5         8. Don't Know
+            1266     Blank. Legitimate Missing
+
+==========================================================================================
+R1781T    EX10M. HOSPICE R PAY $:IMP TYPE
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1266         1. Legitimate Missing or Partial Interview
+              73         2. Valid Value
+               1         3. Closed Bracket
+               1         4. Bottom-Open Bracket
+               1         5. Top-Open Bracket
+               2         6. Imputation with No Bracket Information
+               4         7. Imputed Ownership and amount
+
+==========================================================================================
+R1781S    EX10M. HOSPICE R PAY $:SUM BRACKET
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2         850           0          39
+
+==========================================================================================
+R1781D    EX10M. HOSPICE R PAY $:LOWER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               76    1272           0       10000         420        1479
+
+==========================================================================================
+R1781E    EX10M. HOSPICE R PAY $:UPPER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               76    1272           0       10000         420        1479
+
+==========================================================================================
+R1800X    E18A.DOCTOR R PAY $
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0       24000         457        1810
+
+==========================================================================================
+R1800C    E18A.DOCTOR R PAY $:CONTROL VAR
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             407         1. Yes
+             833         5. No
+             106         8. Don't Know
+               2     Blank. Legitimate Missing
+
+==========================================================================================
+R1800T    E18A.DOCTOR R PAY $:IMP TYPE
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+               2         1. Legitimate Missing or Partial Interview
+            1067         2. Valid Value
+             146         3. Closed Bracket
+              36         4. Bottom-Open Bracket
+               7         5. Top-Open Bracket
+              47         6. Imputation with No Bracket Information
+              43         7. Imputed Ownership and amount
+
+==========================================================================================
+R1800S    E18A.DOCTOR R PAY $:SUM BRACKET
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2       55500         583        3003
+
+==========================================================================================
+R1800D    E18A.DOCTOR R PAY $:LOWER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1220     128           0       20000         342        1462
+
+==========================================================================================
+R1800E    E18A.DOCTOR R PAY $:UPPER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1249      99           0       20000         593        2253
+
+==========================================================================================
+R1810X    E21A.PRESCR R PAY $
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0        2000          75         152
+
+==========================================================================================
+R1810C    E21A.PRESCR R PAY $:CONTROL VAR
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             801         1. Yes
+             535         5. No
+              10         8. Don't Know
+               2     Blank. Legitimate Missing
+
+==========================================================================================
+R1810T    E21A.PRESCR R PAY $:IMP TYPE
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+               2         1. Legitimate Missing or Partial Interview
+            1064         2. Valid Value
+             157         3. Closed Bracket
+               5         4. Bottom-Open Bracket
+              18         5. Top-Open Bracket
+              92         6. Imputation with No Bracket Information
+              10         7. Imputed Ownership and amount
+
+==========================================================================================
+R1810S    E21A.PRESCR R PAY $:SUM BRACKET
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2       85500        1341        6010
+
+==========================================================================================
+R1810D    E21A.PRESCR R PAY $:LOWER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1239     109           0        2000          63         133
+
+==========================================================================================
+R1810E    E21A.PRESCR R PAY $:UPPER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1226     122           0        2000          80         154
+
+==========================================================================================
+R1827X    E24A.SPECIAL R PAY $
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0      325000         451        9026
+
+==========================================================================================
+R1827C    E24A.SPECIAL R PAY $:CONTROL VAR
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             311         1. Yes
+             696         5. No
+              11         8. Don't Know
+             330     Blank. Legitimate Missing
+
+==========================================================================================
+R1827T    E24A.SPECIAL R PAY $:IMP TYPE
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             330         1. Legitimate Missing or Partial Interview
+             918         2. Valid Value
+              31         3. Closed Bracket
+              25         4. Bottom-Open Bracket
+              33         6. Imputation with No Bracket Information
+              11         7. Imputed Ownership and amount
+
+==========================================================================================
+R1827S    E24A.SPECIAL R PAY $:SUM BRACKET
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2        3500          32         197
+
+==========================================================================================
+R1827D    E24A.SPECIAL R PAY $:LOWER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              949     399           0      325000         596       10743
+
+==========================================================================================
+R1827E    E24A.SPECIAL R PAY $:UPPER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              974     374           0      325000         698       10632
+
+==========================================================================================
+R1835X    E25AX.OTHER MEDICAL PAY $
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0       24000         327        1734
+
+==========================================================================================
+R1835C    E25AX.OTHER MEDICAL PAY $ :CONTROL VAR
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             276         1. Yes
+            1046         5. No
+              24         8. Don't Know
+               2     Blank. Legitimate Missing
+
+==========================================================================================
+R1835T    E25AX.OTHER MEDICAL PAY $ :IMP TYPE
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+               2         1. Legitimate Missing or Partial Interview
+            1223         2. Valid Value
+              58         3. Closed Bracket
+              33         4. Bottom-Open Bracket
+               2         5. Top-Open Bracket
+               6         6. Imputation with No Bracket Information
+              24         7. Imputed Ownership and amount
+
+==========================================================================================
+R1835S    E25AX.OTHER MEDICAL PAY $ :SUM BRACKET
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2       55500          85        1644
+
+==========================================================================================
+R1835D    E25AX.OTHER MEDICAL PAY $ :LOWER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1283      65           0       20800         271        1460
+
+==========================================================================================
+R1835E    E25AX.OTHER MEDICAL PAY $ :UPPER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1314      34           0       20800         382        1657
+
+==========================================================================================
+R1864X    E26DAX.NON-MEDICAL R PAY $
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0      200000         751        8207
+
+==========================================================================================
+R1864C    E26DAX.NON-MEDICAL R PAY $:CONTROL VAR
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             185         1. Yes
+            1146         5. No
+              14         8. Don't Know
+               1         9. Refused
+               2     Blank. Legitimate Missing
+
+==========================================================================================
+R1864T    E26DAX.NON-MEDICAL R PAY $:IMP TYPE
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+               2         1. Legitimate Missing or Partial Interview
+            1265         2. Valid Value
+              39         3. Closed Bracket
+              12         4. Bottom-Open Bracket
+               3         5. Top-Open Bracket
+              12         6. Imputation with No Bracket Information
+              15         7. Imputed Ownership and amount
+
+==========================================================================================
+R1864S    E26DAX.NON-MEDICAL R PAY $:SUM BRACKET
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2       55500         155        2654
+
+==========================================================================================
+R1864D    E26DAX.NON-MEDICAL R PAY $:LOWER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1307      41           0      200000         583        6195
+
+==========================================================================================
+R1864E    E26DAX.NON-MEDICAL R PAY $:UPPER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1316      32           0      200000         625        6161
+
+==========================================================================================
+R2120_1X  E164.HELPER $ R PAY
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: This is a monthly value. Imputations for this variable were done
+          jointly with those for variables R2120_2X, R2120_3X, R2120_4X, R2120_5X,
+          R2120_6X, and R2120_7X.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0       15000         125         662
+
+==========================================================================================
+R2120_1C  E164.HELPER $ R PAY:CONTROL VAR
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             121         1. Yes
+             675         5. No
+               4         8. Don't Know
+               1         9. Refused
+             547     Blank. Legitimate Missing
+
+==========================================================================================
+R2120_1T  E164.HELPER $ R PAY:IMP TYPE
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             547         1. Legitimate Missing or Partial Interview
+             708         2. Valid Value
+              88         6. Imputation with No Bracket Information
+               5         7. Imputed Ownership and amount
+
+==========================================================================================
+R2120_1S  E164.HELPER $ R PAY:SUM BRACKET
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2           0          -1           1
+
+==========================================================================================
+R2120_1D  E164.HELPER $ R PAY:LOWER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              708     640           0       15000          87         716
+
+==========================================================================================
+R2120_1E  E164.HELPER $ R PAY:UPPER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              708     640           0       15000          87         716
+
+==========================================================================================
+R2120_2X  E164.HELPER $ R PAY
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: This is a monthly value. Imputations for this variable were done
+          jointly with those for variables R2120_1X, R2120_3X, R2120_4X, R2120_5X,
+          R2120_6X, and R2120_7X
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0        7200         129         579
+
+==========================================================================================
+R2120_2C  E164.HELPER $ R PAY:CONTROL VAR
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             123         1. Yes
+             272         5. No
+               2         8. Don't Know
+             951     Blank. Legitimate Missing
+
+==========================================================================================
+R2120_2T  E164.HELPER $ R PAY:IMP TYPE
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             951         1. Legitimate Missing or Partial Interview
+             303         2. Valid Value
+              92         6. Imputation with No Bracket Information
+               2         7. Imputed Ownership and amount
+
+==========================================================================================
+R2120_2S  E164.HELPER $ R PAY:SUM BRACKET
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2           0          -2           1
+
+==========================================================================================
+R2120_2D  E164.HELPER $ R PAY:LOWER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              303    1045           0        7200         197         777
+
+==========================================================================================
+R2120_2E  E164.HELPER $ R PAY:UPPER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              303    1045           0        7200         197         777
+
+==========================================================================================
+R2120_3X  E164.HELPER $ R PAY
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: This is a monthly value. Imputations for this variable were done
+          jointly with those for variables R2120_1X, R2120_2X, R2120_4X, R2120_5X,
+          R2120_6X, and R2120_7X
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0        6600          42         315
+
+==========================================================================================
+R2120_3C  E164.HELPER $ R PAY:CONTROL VAR
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              46         1. Yes
+             121         5. No
+               4         8. Don't Know
+            1177     Blank. Legitimate Missing
+
+==========================================================================================
+R2120_3T  E164.HELPER $ R PAY:IMP TYPE
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1177         1. Legitimate Missing or Partial Interview
+             135         2. Valid Value
+              32         6. Imputation with No Bracket Information
+               4         7. Imputed Ownership and amount
+
+==========================================================================================
+R2120_3S  E164.HELPER $ R PAY:SUM BRACKET
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2           0          -2           0
+
+==========================================================================================
+R2120_3D  E164.HELPER $ R PAY:LOWER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              135    1213           0        6600         163         682
+
+==========================================================================================
+R2120_3E  E164.HELPER $ R PAY:UPPER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              135    1213           0        6600         163         682
+
+==========================================================================================
+R2120_4X  E164.HELPER $ R PAY
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: This is a monthly value. Imputations for this variable were done
+          jointly with those for variables R2120_1X, R2120_2X, R2120_3X, R2120_5X,
+          R2120_6X, and R2120_7X
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0        3440          10         144
+
+==========================================================================================
+R2120_4C  E164.HELPER $ R PAY:CONTROL VAR
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              13         1. Yes
+              53         5. No
+            1282     Blank. Legitimate Missing
+
+==========================================================================================
+R2120_4T  E164.HELPER $ R PAY:IMP TYPE
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1282         1. Legitimate Missing or Partial Interview
+              58         2. Valid Value
+               8         6. Imputation with No Bracket Information
+
+==========================================================================================
+R2120_4S  E164.HELPER $ R PAY:SUM BRACKET
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2           0          -2           0
+
+==========================================================================================
+R2120_4D  E164.HELPER $ R PAY:LOWER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               58    1290           0        2000          50         272
+
+==========================================================================================
+R2120_4E  E164.HELPER $ R PAY:UPPER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               58    1290           0        2000          50         272
+
+==========================================================================================
+R2120_5X  E164.HELPER $ R PAY
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: This is a monthly value. Imputations for this variable were done
+          jointly with those for variables R2120_1X, R2120_2X, R2120_3X, R2120_4X,
+          R2120_6X, and R2120_7X
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0        7200          12         245
+
+==========================================================================================
+R2120_5C  E164.HELPER $ R PAY:CONTROL VAR
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+               6         1. Yes
+              27         5. No
+               1         9. Refused
+            1314     Blank. Legitimate Missing
+
+==========================================================================================
+R2120_5T  E164.HELPER $ R PAY:IMP TYPE
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1314         1. Legitimate Missing or Partial Interview
+              28         2. Valid Value
+               5         6. Imputation with No Bracket Information
+               1         7. Imputed Ownership and amount
+
+==========================================================================================
+R2120_5S  E164.HELPER $ R PAY:SUM BRACKET
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2           0          -2           0
+
+==========================================================================================
+R2120_5D  E164.HELPER $ R PAY:LOWER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               28    1320           0         400          14          76
+
+==========================================================================================
+R2120_5E  E164.HELPER $ R PAY:UPPER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               28    1320           0         400          14          76
+
+==========================================================================================
+R2120_6X  E164.HELPER $ R PAY
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: This is a monthly value. Imputations for this variable were done
+          jointly with those for variables R2120_1X, R2120_2X, R2120_3X, R2120_4X,
+          R2120_5X, and R2120_7X
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0        1960           2          54
+
+==========================================================================================
+R2120_6C  E164.HELPER $ R PAY:CONTROL VAR
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+               2         1. Yes
+              10         5. No
+            1336     Blank. Legitimate Missing
+
+==========================================================================================
+R2120_6T  E164.HELPER $ R PAY:IMP TYPE
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1336         1. Legitimate Missing or Partial Interview
+              10         2. Valid Value
+               2         6. Imputation with No Bracket Information
+
+==========================================================================================
+R2120_6S  E164.HELPER $ R PAY:SUM BRACKET
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2           0          -2           0
+
+==========================================================================================
+R2120_6D  E164.HELPER $ R PAY:LOWER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               10    1338           0           0           0           0
+
+==========================================================================================
+R2120_6E  E164.HELPER $ R PAY:UPPER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               10    1338           0           0           0           0
+
+==========================================================================================
+R2120_7X  E164.HELPER $ R PAY
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: This is a monthly value. Imputations for this variable were done
+          jointly with those for variables R2120_1X, R2120_2X, R2120_3X, R2120_4X,
+          R2120_5X, and R2120_6X
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0         874           1          24
+
+==========================================================================================
+R2120_7C  E164.HELPER $ R PAY:CONTROL VAR
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+               1         1. Yes
+               5         5. No
+            1342     Blank. Legitimate Missing
+
+==========================================================================================
+R2120_7T  E164.HELPER $ R PAY:IMP TYPE
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1342         1. Legitimate Missing or Partial Interview
+               5         2. Valid Value
+               1         6. Imputation with No Bracket Information
+
+==========================================================================================
+R2120_7S  E164.HELPER $ R PAY:SUM BRACKET
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2           0          -2           0
+
+==========================================================================================
+R2120_7D  E164.HELPER $ R PAY:LOWER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+                5    1343           0           0           0           0
+
+==========================================================================================
+R2120_7E  E164.HELPER $ R PAY:UPPER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+                5    1343           0           0           0           0
+
+==========================================================================================
+MDCOST_X  TOTAL MEDICAL COST:R1837-R1841 AND R122
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: This variable is missing for all respondents. We created this
+          variable based on the information on variables R1837-R1841 and R122, trying
+          to generate the summary bracket variable MDCOST_S, and the lower and upper
+          bound variables MDCOST_D, and MDCOST_E.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+                0    1348           0           0           0           0
+
+==========================================================================================
+MDCOST_C  MDCOST_X:CONTROL VAR
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1300         1. Yes
+              48     Blank. Legitimate Missing
+
+==========================================================================================
+MDCOST_T  MDCOST_X:IMP TYPE
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              48         1. Legitimate Missing or Partial Interview
+            1052         3. Closed Bracket
+              41         4. Bottom-Open Bracket
+             108         5. Top-Open Bracket
+              99         6. Imputation with No Bracket Information
+
+==========================================================================================
+MDCOST_S  MDCOST_X:SUM BRACKET
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2       85555        5006       12417
+
+==========================================================================================
+MDCOST_D  MDCOST_X:LOWER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1160     188        1000      500000       50908       93125
+
+==========================================================================================
+MDCOST_E  MDCOST_X:UPPER BOUND
+          Section: E            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1093     255        1000      500000      123220      161314
+
+
+SECTION N: Asset Change (Respondent)
+
+==========================================================================================
+R2335X    N2. SELLING PRICE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0      240000        1342       13871
+
+==========================================================================================
+R2335C    N2. SELLING PRICE:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              23         1. Yes
+             479         5. No
+               1         8. Don't Know
+             845     Blank. Legitimate Missing
+
+==========================================================================================
+R2335T    N2. SELLING PRICE:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             845         1. Legitimate Missing or Partial Interview
+             496         2. Valid Value
+               2         5. Top-Open Bracket
+               4         6. Imputation with No Bracket Information
+               1         7. Imputed Ownership and amount
+
+==========================================================================================
+R2335S    N2. SELLING PRICE:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2         850           0          28
+
+==========================================================================================
+R2335D    N2. SELLING PRICE:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              498     850           0      230000        2924       18512
+
+==========================================================================================
+R2335E    N2. SELLING PRICE:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              496     852           0      230000        2875       18533
+
+==========================================================================================
+R2347X    N4X.SELLING PRICE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0      850000        7048       42052
+
+==========================================================================================
+R2347C    N4X.SELLING PRICE:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              76         1. Yes
+             357         5. No
+               1         8. Don't Know
+               4         9. Refused
+             910     Blank. Legitimate Missing
+
+==========================================================================================
+R2347T    N4X.SELLING PRICE:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             910         1. Legitimate Missing or Partial Interview
+             412         2. Valid Value
+              10         3. Closed Bracket
+               1         4. Bottom-Open Bracket
+               1         5. Top-Open Bracket
+               9         6. Imputation with No Bracket Information
+               5         7. Imputed Ownership and amount
+
+==========================================================================================
+R2347S    N4X.SELLING PRICE:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2         550           0          21
+
+==========================================================================================
+R2347D    N4X.SELLING PRICE:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              423     925           0      850000       21176       69960
+
+==========================================================================================
+R2347E    N4X.SELLING PRICE:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              423     925           0      850000       27902       78670
+
+==========================================================================================
+R2409X    N62X.R EXPENSES
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0       99999       25458       38270
+
+==========================================================================================
+R2409C    N62X.R EXPENSES:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1348         1. Yes
+
+==========================================================================================
+R2409T    N62X.R EXPENSES:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1345         2. Valid Value
+               3         6. Imputation with No Bracket Information
+
+==========================================================================================
+R2409S    N62X.R EXPENSES:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -1           0          -1           0
+
+==========================================================================================
+R2409D    N62X.R EXPENSES:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1345       3           0       99999       15692       29228
+
+==========================================================================================
+R2409E    N62X.R EXPENSES:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1345       3           0       99999       16075       28051
+
+==========================================================================================
+R2434X    N74AAX.PERCENT TO SPOUSE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: The label for this variable in the HRS 2000 Exit Data was wrong..
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0         100          11          31
+
+==========================================================================================
+R2434C    N74AAX.PERCENT TO SPOUSE:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             240         1. Yes
+              26         5. No
+               4         8. Don't Know
+            1078     Blank. Legitimate Missing
+
+==========================================================================================
+R2434T    N74AAX.PERCENT TO SPOUSE:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1078         1. Legitimate Missing or Partial Interview
+             141         2. Valid Value
+              24         3. Closed Bracket
+              73         4. Bottom-Open Bracket
+               8         5. Top-Open Bracket
+              20         6. Imputation with No Bracket Information
+               4         7. Imputed Ownership and amount
+
+==========================================================================================
+R2434S    N74AAX.PERCENT TO SPOUSE:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2       81100         851        4316
+
+==========================================================================================
+R2434D    N74AAX.PERCENT TO SPOUSE:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              173    1175           0         100          75          37
+
+==========================================================================================
+R2434E    N74AAX.PERCENT TO SPOUSE:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              238    1110           0         100          65          35
+
+==========================================================================================
+R2445X    N75ABX.PERCENT TO CHILDREN
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1347       1           0          90           0           3
+
+==========================================================================================
+R2445C    N75AAX.PERCENT TO CHILDREN:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              16         1. Yes
+              57         5. No
+            1275     Blank. Legitimate Missing
+
+==========================================================================================
+R2445T    N75AAX.PERCENT TO CHILDREN:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1275         1. Legitimate Missing or Partial Interview
+              58         2. Valid Value
+               4         3. Closed Bracket
+               2         4. Bottom-Open Bracket
+               9         6. Imputation with No Bracket Information
+
+==========================================================================================
+R2445S    N75AAX.PERCENT TO CHILDREN:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2       15500          13         425
+
+==========================================================================================
+R2445D    N75AAX.PERCENT TO CHILDREN:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              111    1237           0          90          34          40
+
+==========================================================================================
+R2445E    N75AAX.PERCENT TO CHILDREN:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               90    1258           0          90          14          25
+
+==========================================================================================
+R2456_1X  N76AAX.PERCENT TO CHILD
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: Imputations for this variable were done jointly with those for
+          variables R2456_2X, R2456_3X, R2456_4X, R2456_5X, R2456_6X, R2456_7X,
+          R2456_8X, and R2456_9X.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0         108           1          11
+
+==========================================================================================
+R2456_1C  N76AAX.PERCENT TO CHILD:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              47         1. Yes
+            1301     Blank. Legitimate Missing
+
+==========================================================================================
+R2456_1T  N76AAX.PERCENT TO CHILD:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1301         1. Legitimate Missing or Partial Interview
+              13         2. Valid Value
+              11         3. Closed Bracket
+               8         4. Bottom-Open Bracket
+               2         5. Top-Open Bracket
+              13         6. Imputation with No Bracket Information
+
+==========================================================================================
+R2456_1S  N76AAX.PERCENT TO CHILD:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2       55500          56        1532
+
+==========================================================================================
+R2456_1D  N76AAX.PERCENT TO CHILD:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               26    1322           0         100          29          29
+
+==========================================================================================
+R2456_1E  N76AAX.PERCENT TO CHILD:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               32    1316           0         100          31          26
+
+==========================================================================================
+R2456_2X  N76AAX.PERCENT TO CHILD
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: Imputations for this variable were done jointly with those for
+          variables R2456_1X, R2456_3X, R2456_4X, R2456_5X, R2456_6X, R2456_7X,
+          R2456_8X, and R2456_9X.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0         108           1          10
+
+==========================================================================================
+R2456_2C  N76AAX.PERCENT TO CHILD:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              51         1. Yes
+            1297     Blank. Legitimate Missing
+
+==========================================================================================
+R2456_2T  N76AAX.PERCENT TO CHILD:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1297         1. Legitimate Missing or Partial Interview
+              17         2. Valid Value
+               8         3. Closed Bracket
+               9         4. Bottom-Open Bracket
+               1         5. Top-Open Bracket
+              16         6. Imputation with No Bracket Information
+
+==========================================================================================
+R2456_2S  N76AAX.PERCENT TO CHILD:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2       55500          52        1515
+
+==========================================================================================
+R2456_2D  N76AAX.PERCENT TO CHILD:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               26    1322           0         100          29          32
+
+==========================================================================================
+R2456_2E  N76AAX.PERCENT TO CHILD:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               34    1314           0         100          29          29
+
+==========================================================================================
+R2456_3X  N76AAX.PERCENT TO CHILD
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: Imputations for this variable were done jointly with those for
+          variables R2456_1X, R2456_2X, R2456_4X, R2456_5X, R2456_6X, R2456_7X,
+          R2456_8X, and R2456_9X.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0         100           1           8
+
+==========================================================================================
+R2456_3C  N76AAX.PERCENT TO CHILD:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              34         1. Yes
+            1314     Blank. Legitimate Missing
+
+==========================================================================================
+R2456_3T  N76AAX.PERCENT TO CHILD:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1314         1. Legitimate Missing or Partial Interview
+               9         2. Valid Value
+              10         3. Closed Bracket
+               6         4. Bottom-Open Bracket
+               9         6. Imputation with No Bracket Information
+
+==========================================================================================
+R2456_3S  N76AAX.PERCENT TO CHILD:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2       15500          28         600
+
+==========================================================================================
+R2456_3D  N76AAX.PERCENT TO CHILD:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               19    1329           0         100          25          30
+
+==========================================================================================
+R2456_3E  N76AAX.PERCENT TO CHILD:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               25    1323           0         100          31          29
+
+==========================================================================================
+R2456_4X  N76AAX.PERCENT TO CHILD
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: Imputations for this variable were done jointly with those for
+          variables R2456_1X, R2456_2X, R2456_3X, R2456_5X, R2456_6X, R2456_7X,
+          R2456_8X, and R2456_9X.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0         108           1           7
+
+==========================================================================================
+R2456_4C  N76AAX.PERCENT TO CHILD:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              25         1. Yes
+            1323     Blank. Legitimate Missing
+
+==========================================================================================
+R2456_4T  N76AAX.PERCENT TO CHILD:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1323         1. Legitimate Missing or Partial Interview
+               7         2. Valid Value
+               4         3. Closed Bracket
+               4         4. Bottom-Open Bracket
+               1         5. Top-Open Bracket
+               9         6. Imputation with No Bracket Information
+
+==========================================================================================
+R2456_4S  N76AAX.PERCENT TO CHILD:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2       55500          45        1513
+
+==========================================================================================
+R2456_4D  N76AAX.PERCENT TO CHILD:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               12    1336           0          90          14          26
+
+==========================================================================================
+R2456_4E  N76AAX.PERCENT TO CHILD:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               15    1333           0          40          12          13
+
+==========================================================================================
+R2456_5X  N76AAX.PERCENT TO CHILD
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: Imputations for this variable were done jointly with those for
+          variables R2456_1X, R2456_2X, R2456_3X, R2456_4X, R2456_6X, R2456_7X,
+          R2456_8X, and R2456_9X.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0         100           0           6
+
+==========================================================================================
+R2456_5C  N76AAX.PERCENT TO CHILD:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              19         1. Yes
+            1329     Blank. Legitimate Missing
+
+==========================================================================================
+R2456_5T  N76AAX.PERCENT TO CHILD:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1329         1. Legitimate Missing or Partial Interview
+               5         2. Valid Value
+               3         3. Closed Bracket
+               4         4. Bottom-Open Bracket
+               7         6. Imputation with No Bracket Information
+
+==========================================================================================
+R2456_5S  N76AAX.PERCENT TO CHILD:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2         800           3          58
+
+==========================================================================================
+R2456_5D  N76AAX.PERCENT TO CHILD:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+                8    1340           0          66          22          25
+
+==========================================================================================
+R2456_5E  N76AAX.PERCENT TO CHILD:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               12    1336           0          66          23          24
+
+==========================================================================================
+R2456_6X  N76AAX.PERCENT TO CHILD
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: Imputations for this variable were done jointly with those for
+          variables R2456_1X, R2456_2X, R2456_3X, R2456_4X, R2456_5X, R2456_7X,
+          R2456_8X, and R2456_9X.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0         100           0           5
+
+==========================================================================================
+R2456_6C  N76AAX.PERCENT TO CHILD:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              14         1. Yes
+            1334     Blank. Legitimate Missing
+
+==========================================================================================
+R2456_6T  N76AAX.PERCENT TO CHILD:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1334         1. Legitimate Missing or Partial Interview
+               4         2. Valid Value
+               3         3. Closed Bracket
+               1         4. Bottom-Open Bracket
+               6         6. Imputation with No Bracket Information
+
+==========================================================================================
+R2456_6S  N76AAX.PERCENT TO CHILD:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2         800           2          54
+
+==========================================================================================
+R2456_6D  N76AAX.PERCENT TO CHILD:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+                7    1341           0          33           9          12
+
+==========================================================================================
+R2456_6E  N76AAX.PERCENT TO CHILD:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+                8    1340           0          33          15          14
+
+==========================================================================================
+R2456_7X  N76AAX.PERCENT TO CHILD
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: Imputations for this variable were done jointly with those for
+          variables R2456_1X, R2456_2X, R2456_3X, R2456_4X, R2456_5X, R2456_6X,
+          R2456_8X, and R2456_9X.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0         100           0           4
+
+==========================================================================================
+R2456_7C  N76AAX.PERCENT TO CHILD:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              10         1. Yes
+            1338     Blank. Legitimate Missing
+
+==========================================================================================
+R2456_7T  N76AAX.PERCENT TO CHILD:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1338         1. Legitimate Missing or Partial Interview
+               3         2. Valid Value
+               2         3. Closed Bracket
+               1         4. Bottom-Open Bracket
+               4         6. Imputation with No Bracket Information
+
+==========================================================================================
+R2456_7S  N76AAX.PERCENT TO CHILD:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2         800           1          44
+
+==========================================================================================
+R2456_7D  N76AAX.PERCENT TO CHILD:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+                5    1343           0          10           4           5
+
+==========================================================================================
+R2456_7E  N76AAX.PERCENT TO CHILD:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+                6    1342           0          25          10          12
+
+==========================================================================================
+R2456_8X  N76AAX.PERCENT TO CHILD
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: Imputations for this variable were done jointly with those for
+          variables R2456_1X, R2456_2X, R2456_3X, R2456_4X, R2456_5X, R2456_6X,
+          R2456_7X, and R2456_9X.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0         100           0           5
+
+==========================================================================================
+R2456_8C  N76AAX.PERCENT TO CHILD:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+               8         1. Yes
+            1340     Blank. Legitimate Missing
+
+==========================================================================================
+R2456_8T  N76AAX.PERCENT TO CHILD:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1340         1. Legitimate Missing or Partial Interview
+               3         2. Valid Value
+               1         4. Bottom-Open Bracket
+               4         6. Imputation with No Bracket Information
+
+==========================================================================================
+R2456_8S  N76AAX.PERCENT TO CHILD:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2         800           0          44
+
+==========================================================================================
+R2456_8D  N76AAX.PERCENT TO CHILD:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+                3    1345           0         100          33          58
+
+==========================================================================================
+R2456_8E  N76AAX.PERCENT TO CHILD:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+                4    1344           0         100          28          49
+
+==========================================================================================
+R2456_9X  N76AAX.PERCENT TO CHILD
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: Imputations for this variable were done jointly with those for
+          variables R2456_1X, R2456_2X, R2456_3X, R2456_4X, R2456_5X, R2456_6X,
+          R2456_7X, and R2456_8X.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0          50           0           2
+
+==========================================================================================
+R2456_9C  N76AAX.PERCENT TO CHILD:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+               4         1. Yes
+            1344     Blank. Legitimate Missing
+
+==========================================================================================
+R2456_9T  N76AAX.PERCENT TO CHILD:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1344         1. Legitimate Missing or Partial Interview
+               1         2. Valid Value
+               1         4. Bottom-Open Bracket
+               2         6. Imputation with No Bracket Information
+
+==========================================================================================
+R2456_9S  N76AAX.PERCENT TO CHILD:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2         800          -1          31
+
+==========================================================================================
+R2456_9D  N76AAX.PERCENT TO CHILD:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+                1    1347           0           0           0           0
+
+==========================================================================================
+R2456_9E  N76AAX.PERCENT TO CHILD:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+                2    1346           0          10           5           7
+
+==========================================================================================
+R2467X    N77AAX.PERCENT TO CHARITY
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0         100           1           7
+
+==========================================================================================
+R2467C    N77AAX.PERCENT TO CHARITY :CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              30         1. Yes
+             693         5. No
+              20         8. Don't Know
+               2         9. Refused
+             603     Blank. Legitimate Missing
+
+==========================================================================================
+R2467T    N77AAX.PERCENT TO CHARITY :IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             603         1. Legitimate Missing or Partial Interview
+             701         2. Valid Value
+               8         3. Closed Bracket
+              12         4. Bottom-Open Bracket
+               2         6. Imputation with No Bracket Information
+              22         7. Imputed Ownership and amount
+
+==========================================================================================
+R2467S    N77AAX.PERCENT TO CHARITY :SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2       15500          24         598
+
+==========================================================================================
+R2467D    N77AAX.PERCENT TO CHARITY :LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              709     639           0         100           1           7
+
+==========================================================================================
+R2467E    N77AAX.PERCENT TO CHARITY :UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              721     627           0         100           1           8
+
+==========================================================================================
+R2477X    N78AAX.PERCENT TO SIBLINGS
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: The label for this variable in the HRS 2000 Exit Data was wrong..
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0         108           1           8
+
+==========================================================================================
+R2477C    N78AAX.PERCENT TO SILBINGS:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              21         1. Yes
+             731         5. No
+              11         8. Don't Know
+               1         9. Refused
+             584     Blank. Legitimate Missing
+
+==========================================================================================
+R2477T    N78AAX.PERCENT TO SIBLINGS:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             584         1. Legitimate Missing or Partial Interview
+             737         2. Valid Value
+               4         3. Closed Bracket
+               5         4. Bottom-Open Bracket
+               4         5. Top-Open Bracket
+               2         6. Imputation with No Bracket Information
+              12         7. Imputed Ownership and amount
+
+==========================================================================================
+R2477S    N78AAX.PERCENT TO SIBLINGS:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2       85500         188        3500
+
+==========================================================================================
+R2477D    N78AAX.PERCENT TO SIBLINGS:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              745     603           0         100           1           8
+
+==========================================================================================
+R2477E    N78AAX.PERCENT TO SIBLINGS:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              746     602           0         100           1           6
+
+==========================================================================================
+R2487X    N79AAX.PERCENT TO RELATIVES
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: The label for this variable in the HRS 2000 Exit Data was wrong..
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0         100           2          12
+
+==========================================================================================
+R2487C    N79AAX.PERCENT TO RELATIVES:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              36         1. Yes
+             708         5. No
+              11         8. Don't Know
+               1         9. Refused
+             592     Blank. Legitimate Missing
+
+==========================================================================================
+R2487T    N79AAX.PERCENT TO RELATIVES:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             592         1. Legitimate Missing or Partial Interview
+             727         2. Valid Value
+               2         3. Closed Bracket
+               1         4. Bottom-Open Bracket
+               9         5. Top-Open Bracket
+               5         6. Imputation with No Bracket Information
+              12         7. Imputed Ownership and amount
+
+==========================================================================================
+R2487S    N79AAX.PERCENT TO RELATIVES:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2         800           5          64
+
+==========================================================================================
+R2487D    N79AAX.PERCENT TO RELATIVES:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              738     610           0         100           2          12
+
+==========================================================================================
+R2487E    N79AAX.PERCENT TO RELATIVES:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              730     618           0         100           2          11
+
+==========================================================================================
+R2497X    N80AAX.PERCENT TO FRIENDS
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: The label for this variable in the HRS 2000 Exit Data was wrong..
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0          85           0           3
+
+==========================================================================================
+R2497C    N80AAX.PERCENT TO FRIENDS:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+               8         1. Yes
+             741         5. No
+              11         8. Don't Know
+               1         9. Refused
+             587     Blank. Legitimate Missing
+
+==========================================================================================
+R2497T    N80AAX.PERCENT TO FRIENDS:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             587         1. Legitimate Missing or Partial Interview
+             747         2. Valid Value
+               1         3. Closed Bracket
+               1         6. Imputation with No Bracket Information
+              12         7. Imputed Ownership and amount
+
+==========================================================================================
+R2497S    N80AAX.PERCENT TO FRIENDS:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2         900          -1          25
+
+==========================================================================================
+R2497D    N80AAX.PERCENT TO FRIENDS:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              748     600           0          85           0           4
+
+==========================================================================================
+R2497E    N80AAX.PERCENT TO FRIENDS:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              748     600           0          85           0           4
+
+==========================================================================================
+R2514X    N82X.$ VALUE ESTATE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0    10300000      271795     3992903
+
+==========================================================================================
+R2514C    N82X.$ VALUE ESTATE:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1235         1. Yes
+             113     Blank. Legitimate Missing
+
+==========================================================================================
+R2514T    N82X.$ VALUE ESTATE:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             113         1. Legitimate Missing or Partial Interview
+             838         2. Valid Value
+               2         4. Bottom-Open Bracket
+               2         5. Top-Open Bracket
+             393         6. Imputation with No Bracket Information
+
+==========================================================================================
+R2514S    N82X.$ VALUE ESTATE:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2       11080          23         467
+
+==========================================================================================
+R2514D    N82X.$ VALUE ESTATE:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              840     508           0    10300000      335530     5033782
+
+==========================================================================================
+R2514E    N82X.$ VALUE ESTATE:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              840     508           0    10300000      334965     5033791
+
+==========================================================================================
+R2528X    N84AAX.PERCENT TO CHILD
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0         108           9          28
+
+==========================================================================================
+R2528C    N84AAX.PERCENT TO CHILD:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             122         1. Yes
+            1226     Blank. Legitimate Missing
+
+==========================================================================================
+R2528T    N84AAX.PERCENT TO CHILD:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1226         1. Legitimate Missing or Partial Interview
+               8         2. Valid Value
+               1         3. Closed Bracket
+               1         4. Bottom-Open Bracket
+               1         5. Top-Open Bracket
+             111         6. Imputation with No Bracket Information
+
+==========================================================================================
+R2528S    N84AAX.PERCENT TO CHILD:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2       55500          44        1513
+
+==========================================================================================
+R2528D    N84AAX.PERCENT TO CHILD:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               10    1338          15         100          76          36
+
+==========================================================================================
+R2528E    N84AAX.PERCENT TO CHILD:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               10    1338          15         100          75          34
+
+==========================================================================================
+R2539_1X  N85AAX.PERCENT TO CHILD
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: Imputations for this variable were done jointly with those for
+          variables R2539_2X, R2539_3X, R2539_4X, R2539_5X.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0         100           3          16
+
+==========================================================================================
+R2539_1C  N85AAX.PERCENT TO CHILD:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              71         1. Yes
+            1277     Blank. Legitimate Missing
+
+==========================================================================================
+R2539_1T  N85AAX.PERCENT TO CHILD:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1277         1. Legitimate Missing or Partial Interview
+               7         2. Valid Value
+               5         3. Closed Bracket
+               2         4. Bottom-Open Bracket
+               2         5. Top-Open Bracket
+              55         6. Imputation with No Bracket Information
+
+==========================================================================================
+R2539_1S  N85AAX.PERCENT TO CHILD:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2       55500          86        2138
+
+==========================================================================================
+R2539_1D  N85AAX.PERCENT TO CHILD:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               14    1334           0         100          53          41
+
+==========================================================================================
+R2539_1E  N85AAX.PERCENT TO CHILD:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               14    1334           0         100          50          38
+
+==========================================================================================
+R2539_2X  N85AAX.PERCENT TO CHILD
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: Imputations for this variable were done jointly with those for
+          variables R2539_1X, R2539_3X, R2539_4X, R2539_5X.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0         100           2          14
+
+==========================================================================================
+R2539_2C  N85AAX.PERCENT TO CHILD:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              63         1. Yes
+            1285     Blank. Legitimate Missing
+
+==========================================================================================
+R2539_2T  N85AAX.PERCENT TO CHILD:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1285         1. Legitimate Missing or Partial Interview
+               6         2. Valid Value
+               1         3. Closed Bracket
+               4         4. Bottom-Open Bracket
+              52         6. Imputation with No Bracket Information
+
+==========================================================================================
+R2539_2S  N85AAX.PERCENT TO CHILD:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2        1500           5          76
+
+==========================================================================================
+R2539_2D  N85AAX.PERCENT TO CHILD:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+                7    1341           0         100          36          48
+
+==========================================================================================
+R2539_2E  N85AAX.PERCENT TO CHILD:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+               11    1337           0         100          37          40
+
+==========================================================================================
+R2539_3X  N85AAX.PERCENT TO CHILD
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: Imputations for this variable were done jointly with those for
+          variables R2539_1X, R2539_2X, R2539_4X, R2539_5X.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0         100           2          15
+
+==========================================================================================
+R2539_3C  N85AAX.PERCENT TO CHILD:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              63         1. Yes
+            1285     Blank. Legitimate Missing
+
+==========================================================================================
+R2539_3T  N85AAX.PERCENT TO CHILD:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1285         1. Legitimate Missing or Partial Interview
+               3         2. Valid Value
+               2         3. Closed Bracket
+              58         6. Imputation with No Bracket Information
+
+==========================================================================================
+R2539_3S  N85AAX.PERCENT TO CHILD:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2         900           3          59
+
+==========================================================================================
+R2539_3D  N85AAX.PERCENT TO CHILD:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+                5    1343           0         100          37          38
+
+==========================================================================================
+R2539_3E  N85AAX.PERCENT TO CHILD:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+                5    1343           0         100          47          36
+
+==========================================================================================
+R2539_4X  N85AAX.PERCENT TO CHILD
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: Imputations for this variable were done jointly with those for
+          variables R2539_1X, R2539_2X, R2539_3X, R2539_5X.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0         100           2          15
+
+==========================================================================================
+R2539_4C  N85AAX.PERCENT TO CHILD:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              63         1. Yes
+            1285     Blank. Legitimate Missing
+
+==========================================================================================
+R2539_4T  N85AAX.PERCENT TO CHILD:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1285         1. Legitimate Missing or Partial Interview
+               1         2. Valid Value
+              62         6. Imputation with No Bracket Information
+
+==========================================================================================
+R2539_4S  N85AAX.PERCENT TO CHILD:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2         800           0          44
+
+==========================================================================================
+R2539_4D  N85AAX.PERCENT TO CHILD:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+                1    1347          33          33          33           0
+
+==========================================================================================
+R2539_4E  N85AAX.PERCENT TO CHILD:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+                1    1347          33          33          33           0
+
+==========================================================================================
+R2539_5X  N85AAX.PERCENT TO CHILD
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+
+          User Note: Imputations for this variable were done jointly with those for
+          variables R2539_1X, R2539_2X, R2539_3X, R2539_4X.
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0         100           2          15
+
+==========================================================================================
+R2539_5C  N85AAX.PERCENT TO CHILD:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              63         1. Yes
+            1285     Blank. Legitimate Missing
+
+==========================================================================================
+R2539_5T  N85AAX.PERCENT TO CHILD:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1285         1. Legitimate Missing or Partial Interview
+               1         2. Valid Value
+              62         6. Imputation with No Bracket Information
+
+==========================================================================================
+R2539_5S  N85AAX.PERCENT TO CHILD:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2         800           0          38
+
+==========================================================================================
+R2539_5D  N85AAX.PERCENT TO CHILD:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+                1    1347         100         100         100           0
+
+==========================================================================================
+R2539_5E  N85AAX.PERCENT TO CHILD:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+                1    1347         100         100         100           0
+
+==========================================================================================
+R2556X    N86AX.$ VALUE ESTATE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0           0     2400000        7462       68479
+
+==========================================================================================
+R2556C    N86AX.$ VALUE ESTATE:CONTROL VAR
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+             500         1. Yes
+             775         5. No
+              50         8. Don't Know
+              20         9. Refused
+               3     Blank. Legitimate Missing
+
+==========================================================================================
+R2556T    N86AX.$ VALUE ESTATE:IMP TYPE
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+               3         1. Legitimate Missing or Partial Interview
+             962         2. Valid Value
+              19         3. Closed Bracket
+              26         4. Bottom-Open Bracket
+               1         5. Top-Open Bracket
+             267         6. Imputation with No Bracket Information
+              70         7. Imputed Ownership and amount
+
+==========================================================================================
+R2556S    N86AX.$ VALUE ESTATE:SUM BRACKET
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1348       0          -2       55500          86        1523
+
+==========================================================================================
+R2556D    N86AX.$ VALUE ESTATE:LOWER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+              982     366           0     2000000        4917       65334
+
+==========================================================================================
+R2556E    N86AX.$ VALUE ESTATE:UPPER BOUND
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 8               Decimals: 0
+          ................................................................................
+                N   NMiss         Min         Max        Mean          SD
+             1007     341           0      500000        5699       35279
+
+==========================================================================================
+RVERSION  HRS 2000 EXIT IMPUTATION DATA VERSION
+          Section: N            Level: Respondent
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+            1348         1. HRS 2000 Exit Imputation Data Version
+

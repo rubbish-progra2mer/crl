@@ -1,0 +1,1111 @@
+<html><head><title>AHEAD 1993 (Wave 1) Codebook - codb-f.txt </title></head>
+<body>
+<a name="top">
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="6" WIDTH="600">
+<TR>
+<TD WIDTH="250">
+<IMG SRC="hrslogo1.gif" border=0>
+</TD>
+<TD WIDTH="350" valign="center">
+<h1>AHEAD 1993 (Wave 1) Documentation</h1>
+</TD>
+</TR>
+</TABLE>
+<HR><pre><b>[<A HREF=#end>End of this section</a>][<A HREF="a93_00.html">Table of Contents</a>][<A HREF=codb-gtxt.htm>Next Section</a>][<A HREF=codb-etxt.htm>Previous Section</a></b>]
+<HR>
+                       SECTION F.  HOUSING
+              (Asked Only of Financial R or Only R)
+Note:  See Codebook Introduction page 12 for list of households in which no
+Financial Respondent was assigned. These households will be coded as inap.
+For respondents with two residences we cannot be sure which residence they are
+describing in Section F.  In most cases we think the primary residence is
+described.
+<A NAME="V1029">
+V1029               [HH]    F1. HOUSING: TYPE
+          F1.  Next, I have some questions about your housing.
+
+               (Do you live in a mobile home, a single family house, a two
+               family house (duplex),  an apartment or what?)
+ ----------------------------------------------------------------------------
+               4021      SINGLE HOUSE.......................  1
+                268      DUPLEX.............................  2
+                398      MOBILE HOME........................  3
+               1229      APARTMENT/CONDO....................  4
+                 61      TOWNHOUSE..........................  5
+                  4      OTHER SPECIFY......................  7
+                  0      DK................................. .D
+                  1      RF................................. .R
+                 65      INAP, NO FINANCIAL R/PARTIAL
+<A NAME="V1040">
+V1040               [HH]    F2. COMMUNITY FOR AGE 60+
+          F2.  Is it part of a (building or) community specially for people
+               over age 60?
+ -----------------------------------------------------------------------------
+                616      YES................................  1
+               5363      NO.................................  5
+                  3      DK................................. .D
+                  0      RF................................. .R
+                 65      INAP, NO FINANCIAL R/PARTIAL
+<A NAME="V1041">
+V1041               [HH]    F3. HOUSING: PART OF ASSOCIATION
+          F3.  Is it part of a condominium, cooperative, or other housing
+               association?
+ ----------------------------------------------------------------------------
+                504      YES................................  1 GO TO F5
+               5068      NO.................................  5
+                 18      DK................................. .D
+                  0      RF................................. .R
+                457      INAP,  LIVE IN MOBILE HOME [V1029=3],
+                         NO FINANCIAL R/PARTIAL
+<A NAME="V1043">
+V1043               [HH]    F4. HOUSING: REQUIRE LIMITED INCOME
+          F4.  Are you required to have a limited income to live here?
+ -----------------------------------------------------------------------------
+                309      YES................................  1 GO TO F7
+               4763      NO.................................  5
+                 13      DK................................. .D
+                  1      RF................................. .R
+                961      INAP, LIVE IN MOBILE HOME [V1029=3], PART OF A
+                         CONDOMINIUM, COOPERATIVE, OR OTHER HOUSING
+                         ASSOCIATION [V1041=1]
+<A NAME="V1045">
+V1045               [HH]    F5. HOUSING ASSN: LUMP SUM TO JOIN
+          F5.  Did you have to make a lump-sum payment to join the
+               community or association?
+ -----------------------------------------------------------------------------
+                113      YES................................  1
+                516      NO.................................  5
+                  4      DK................................. .D
+                  0      RF................................. .R
+               5414      INAP, NOT PART OF A CONDOMINIUM, COOPERATIVE,
+                         OTHER HOUSING ASSOCIATION [V1041 NE 1],
+                         LIMITED INCOME REQUIRED (DK/RF) [V1043=1]
+<A NAME="V1046">
+V1046               [HH]    F6. HOUSING: COMMUNITY/ASSOCIATION FEE
+          F6.  Aside from any rent or mortgage payments, do you pay a fee
+               for being part of the community or association?
+ -----------------------------------------------------------------------------
+
+                281      YES................................  1
+                348      NO.................................  5 GO TO F7
+                  4      DK................................. .D GO TO F7
+                  0      RF................................. .R GO TO F7
+               5414      INAP,  LIMITED INCOME REQUIRED [V1043=1]
+<A NAME="V1047">
+V1047               [HH]    F6a. HOUSING: COMMUNITY/ASSN FEE AMT
+          F6a. About how much is that?
+               PER NEXT SCREEN
+ -----------------------------------------------------------------------------
+                  N     Mean   Std Dev   Minimum   Maximum
+                274   295.58    471.36      1.00   3800.00
+
+                  0      ZERO $ AMOUNT......................  0
+                  5      DK................................. .D
+                  2      RF................................. .R
+               5766      INAP, NOT PAY FEE [V1046 NE 1], LIMITED INCOME
+                         REQUIRED [V1043=1]
+<A NAME="V1047F">
+V1047F              [HH] FLAG: F6a. HOUSING: COMMUNITY/ASSN FEE
+ -----------------------------------------------------------------------------
+                273      NOT IMPUTED.. .................  0
+                  8      IMPUTED........................  1
+               5766      INAP, NOT PAY FEE
+<A NAME="V1047X">
+V1047X              [HH] IMP: F6a. HOUSING: COMMUNITY/ASSN FEE
+          USE V1047X FOR R:F6a.    RETIREMENT HOME FEE (ANNUAL AMOUNT)
+ -----------------------------------------------------------------------------
+                  N     Mean   Std Dev   Minimum   Maximum
+                281  2692.39   4276.42      2.00  36660.00
+                 29      NO FINANCIAL R IN HH............ .F
+               5737      INAP, NOT PAY FEE [V1046 NE 1], LIMITED INCOME
+                         REQUIRED [V1043=1]
+<A NAME="V1048">
+V1048               [HH]    F6b. HOUSING: COMMUNITY/ASSN FEE PERIOD
+          F6b. $F6a  per
+ -----------------------------------------------------------------------------
+                  0      Week...............................  1
+                  0      2 X Month..........................  2
+                227      Month..............................  3
+                 18      Quarter............................  4
+                  0      6 Month............................  5
+                 28      Year...............................  6
+                  1      Other SPECIFY......................  7
+                  1      DK................................. .D
+                  0      RF................................. .R
+               5772      INAP, NOT PAY FEE [V1046 NE 1],  NO AMOUNT,
+                         DK/RF [V1047], LIMITED INCOME REQUIRED [V1043=1]
+<A NAME="V1053">
+V1053               [HH]    F7. HOUSING: OFFER GROUP MEALS
+          F7.  Does the place you live offer any of the following:
+               group meals?
+ -----------------------------------------------------------------------------
+                164      YES................................  1
+                452      NO.................................  5 GO TO F8
+                  0      DK................................. .D GO TO F8
+                  0      RF................................. .R GO TO F8
+               5431      INAP,  NOT PART OF COMMUNITY FOR PEOPLE OVER 60
+                         [V1040 NE 1]
+<A NAME="V1054">
+V1054               [HH]    F7a. MEALS COST EXTRA
+          F7a. Do you pay extra if you use this service?
+ -----------------------------------------------------------------------------
+                 94      YES................................  1
+                 66      NO.................................  5
+                  4      DK................................. .D
+                  0      RF................................. .R
+               5883      INAP, NOT PART OF COMMUNITY FOR PEOPLE OVER AGE
+                         60 [V1040 NE 1], NOT OFFERED GROUP MEALS (DK/RF)
+                         [V1053 NE 1]
+<A NAME="V1056">
+V1056               [HH]    F8. HOUSING: OFFER OTH HELP SERVICES
+          F8.  (Does the place you live offer) help with bathing, dressing
+               or eating?
+ -----------------------------------------------------------------------------
+                 80      YES................................  1
+                535      NO.................................  5 GO TO F9
+                  1      DK................................. .D GO TO F9
+                  0      RF................................. .R GO TO F9
+               5431      INAP,  NOT PART OF COMMUNITY FOR PEOPLE OVER 60
+                         [V1040 NE 1]
+<A NAME="V1057">
+V1057               [HH]    F8a. HOUSING: OTH HELP SVCS COST EXTRA
+          F8a. Do you pay extra if you use this service?
+ -----------------------------------------------------------------------------
+                 39      YES................................  1
+                 37      NO.................................  5
+                  4      DK................................. .D
+                  0      RF................................. .R
+               5967      INAP, NOT PART OF COMMUNITY FOR PEOPLE OVER AGE
+                         60 [V1040 NE 1], NOT OFFERED HELP (DK/RF)
+                         [V1056 NE 1]
+<A NAME="V1058">
+V1058               [HH]    F9. HOUSING: OFFER NURSING CARE SERVICE
+          F9.  (Does the place you live offer) nursing care or an on-site
+               nurse?
+ -----------------------------------------------------------------------------
+                 92      YES................................  1
+                522      NO.................................  5 GO TO F10
+                  2      DK................................. .D GO TO F10
+                  0      RF................................. .R GO TO F10
+               5431      INAP,  NOT PART OF COMMUNITY FOR PEOPLE OVER 60
+                         [V1040 NE 1]
+<A NAME="V1059">
+V1059               [HH]    F9a. HOUSING: OFFER NURSING CARE FACILTY
+          F9a. Is there a special resident facility for people who need
+               this help?
+ -----------------------------------------------------------------------------
+                 53      YES................................  1
+                 39      NO.................................  5
+                  0      DK................................. .D
+                  0      RF................................. .R
+               5955      INAP, NOT PART OF COMMUNITY FOR PEOPLE OVER AGE
+                         60 [V1040 NE 1], NOT OFFER NURSING CARE
+                         (DK/RF) [V1058 NE 1]
+<A NAME="V1060">
+V1060               [HH]    F9b. HOUSING: RN CARE SERVICE COST EXTRA
+          F9b. Do you pay extra for the nursing care service?
+ -----------------------------------------------------------------------------
+                 41      YES................................  1
+                 51      NO.................................  5
+                  0      DK................................. .D
+                  0      RF................................. .R
+               5955      INAP, NOT PART OF COMMUNITY FOR PEOPLE OVER AGE
+                         60 (DK/RF) [V1040 NE 1]
+<A NAME="V1067">
+V1067               [HH]    F10. MOBILE HOME & SITE: OWN/RENT
+          F10. Do you [or your (husband/wife/partner)] own both the mobile
+               home and site, rent them, or what?
+ -----------------------------------------------------------------------------
+                142      OWN BOTH HOME AND SITE.............  1
+                  2      OWN ONLY SITE......................  2
+                200      OWN ONLY HOME......................  3
+                 24      RENT BOTH HOME AND SITE............  4
+                 23      NEITHER OWNS NOR RENTS.............  7
+                  0      DK................................. .D
+                  1      RF................................. .R
+               5655      INAP, NOT LIVE IN MOBILE HOME [V1029 NE 3]
+<A NAME="V1068">
+V1068               [HH]    F11. MOBILE HOME: PARK ASSOCIATION
+          F11. Do you belong to a park association?
+ ----------------------------------------------------------------------------
+                103      YES...............................  1
+                289      NO................................  5 GO TO F16a
+                  0      DK................................ .D GO TO F16a
+                  0      RF................................ .R GO TO F16a
+               5655      INAP, NOT LIVE IN MOBILE HOME [V1029 NE 3]
+<A NAME="V1069">
+V1069               [HH]    F11a. MOBILE HOME: PARK ASSN FEE AMT
+          F11a.     What are the park association fees?
+               PER [NEXT SCREEN]
+ -----------------------------------------------------------------------------
+                  N     Mean   Std Dev   Minimum   Maximum
+                102    29.20     61.70      0.00    376.00
+                 20      NOT PAY............................  0
+                  1      DK................................. .D
+                  0      RF................................. .R
+               5944      INAP, NOT BELONG TO PARK ASSOCIATION
+                         [V1068 NE 1]
+<A NAME="V1069F">
+V1069F              [HH] FLAG: F11a. MOBILE HOME: PARK ASSN FEE
+ -----------------------------------------------------------------------------
+                100      NOT IMPUTED....................  0
+                  3      IMPUTED........................  1
+               5944      INAP, NOT BELONG TO PARK ASSOCIATION
+<A NAME="V1069X">
+V1069X              [HH] IMP: F11a. MOBILE HOME: PARK ASSN FEE
+          USE V1069X FOR R:F11b.   PARK ASSOCIATION ANNUAL FEE PAYMENT
+ -----------------------------------------------------------------------------
+                  N     Mean   Std Dev   Minimum   Maximum
+                103   241.35    590.52      0.00   4512.00
+                 20      ZERO $ AMOUNT...................  0
+                 29      NO FINANCIAL R IN HH............ .F
+               5944      INAP, NOT BELONG TO PARK ASSOCIATION
+                         [V1068 NE 1]
+<A NAME="V1070">
+V1070               [HH]    F11b. MOBILE HOME: PARK ASSN FEE PERIOD
+          F11b.     $F11a  PER
+ -----------------------------------------------------------------------------
+                 19      Week...............................  1
+                  0      2 X Month..........................  2
+                 35      Month..............................  3
+                  0      Quarter............................  4
+                  0      6 Months...........................  5
+                 46      Year...............................  6
+                  2      Other SPECIFY......................  7
+                  0      DK................................. .D
+                  0      RF................................. .R
+               5945      INAP, DO NOT BELONG TO PARK ASSOCIATION
+                         [V1068 NE 1]
+<A NAME="V1071">
+V1071               [HH]    F12. HOUSING: # STORIES
+          F12. (Is the building your home/apartment is in a single story,
+                two stories, or more than two stories?)
+ -----------------------------------------------------------------------------
+               3231      SINGLE............................  1 GO TO F16a
+               1612      TWO...............................  2
+                746      THREE OR MORE.....................  3
+                  0      DK................................ .D
+                  1      RF................................ .R
+                457      INAP, LIVE IN MOBILE HOME [V1029=3 or .]
+<A NAME="V1072">
+V1072               [HH]    F13. HOUSING: ELEVATOR?
+          F13. Does it have an elevator?
+ -----------------------------------------------------------------------------
+                505      YES................................  1
+               1854      NO.................................  5
+                  0      DK................................. .D
+                  0      RF................................. .R
+               3688      INAP, LIVE IN MOBILE HOME, OR SINGLE STORY
+                         [V1029=1,3]
+<A NAME="V1073">
+V1073               [HH]    F14. LIVING SPACE ALL ON ONE FLOOR?
+          F14. Is all your living space all on one floor?
+ -----------------------------------------------------------------------------
+               1405      YES...............................  1 GO TO F16a
+                954      NO................................  5
+                  0      DK................................ .D
+                  0      RF................................ .R
+               3688      INAP, LIVE IN MOBILE HOME, OR SINGLE STORY
+                         [V1029=1,3]
+<A NAME="V1074">
+V1074               [HH]    F15. BATHROOMS ON ALL FLOORS?
+          F15. Does your (home/apartment) have bathroom facilities on all
+               floors?
+ -----------------------------------------------------------------------------
+                532      YES................................  1
+                422      NO.................................  5
+                  0      DK................................. .D
+                  0      RF................................. .R
+               5093      INAP, LIVE IN MOBILE HOME, SINGLE STORY
+                         [V1029=1,3], OR LIVING SPACE ON ONE FLOOR
+                         [V1073=1]
+<A NAME="V1075">
+V1075               [HH]    F16a. RAMPS IN HOME/APT?
+          F16a.     Does your (home/apartment) have any of the following special
+                    features:   ramps at street level?
+ -----------------------------------------------------------------------------
+                503      YES................................  1
+               5474      NO.................................  5
+                  5      DK................................. .D
+                  0      RF................................. .R
+                 65      INAP
+<A NAME="V1076">
+V1076               [HH]    F16b. RAILINGS IN HOME?
+          F16b.     (Does your (home/apartment) have) special railings to help
+                    you get around?
+ -----------------------------------------------------------------------------
+                593      YES................................  1
+               5389      NO.................................  5
+                  0      DK................................. .D
+                  0      RF................................. .R
+                 65      INAP
+<A NAME="V1077">
+V1077               [HH]    F16c. WHEELCHAIR MODIFICATIONS IN HOME?
+          F16c.     (Does your (home/apartment) have) modifications to allow
+                    someone in a wheelchair to move around indoors?
+ -----------------------------------------------------------------------------
+                741      YES................................  1
+               5230      NO.................................  5
+                 10      DK................................. .D
+                  1      RF................................. .R
+                 65      INAP
+<A NAME="V1078">
+V1078               [HH]    F16d. BATHROOM BARS IN HOME?
+          F16d.     (Does your (home/apartment) have) modifications to the
+                    bathroom such as grab bars or a shower seat?
+ -----------------------------------------------------------------------------
+               1607      YES................................  1
+               4373      NO.................................  5
+                  1      DK................................. .D
+                  1      RF................................. .R
+                 65      INAP
+<A NAME="V1079">
+V1079               [HH]    F16e. CALL DEVICE IN HOME?
+          F16e.     (Does your (home/apartment) have) a special call device or
+                    system to get help when you need it?
+ -----------------------------------------------------------------------------
+                657      YES................................  1
+               5321      NO.................................  5
+                  3      DK................................. .D
+                  0      RF................................. .R
+                 66      INAP
+<A NAME="V1081">
+V1081               [HH]    F17. NUMBER OF ROOMS IN HOME
+          F17. How many rooms do you have, not counting bathrooms,
+               hallways, dining-Ls, or unfinished basements?
+ -----------------------------------------------------------------------------
+                  N     Mean   Std Dev   Minimum   Maximum
+               5973     5.19      1.77      1.00     15.00
+                  1      DK................................. .D
+                  6      RF................................. .R
+                 67      INAP
+<A NAME="V1082">
+V1082               [HH]    F18. OWN KITCHEN?
+          F18. Do you have your own kitchen?
+ -----------------------------------------------------------------------------
+               5881      YES................................  1
+                 98      NO.................................  5
+                  0      DK................................. .D
+                  1      RF................................. .R
+                 67      INAP
+
+<A NAME="V1083">
+V1083               [HH]    F19. RATE CONDITION OF HOME
+          F19. How would you rate the physical condition your home is in?
+               Would you say it is in excellent, very good, good, fair, or
+               poor condition?
+ -----------------------------------------------------------------------------
+               1359      EXCELLENT..........................  1
+               1953      VERY GOOD..........................  2
+               1765      GOOD...............................  3
+                718      FAIR...............................  4
+                178      POOR...............................  5
+                  3      DK................................. .D
+                  4      RF................................. .R
+                 67      INAP
+<A NAME="V1084">
+V1084               [HH]    F20. LIVED IN HOME >10 YEARS?
+          F20. Have you lived more than ten years in this
+               (house/apartment/mobile home/home)?
+ -----------------------------------------------------------------------------
+               4308      YES................................  1
+               1668      NO.................................  5
+                  3      DK................................. .D
+                  1      RF................................. .R
+                 67      INAP
+<A NAME="V1085">
+V1085               [HH]    F21. RATE NEIGHBORHOOD SAFETY
+          F21. How would you rate the safety of the neighborhood you live
+               in? Would you say the safety is excellent, very good, good,
+               fair or poor at the present time?
+ -----------------------------------------------------------------------------
+
+               1427      EXCELLENT..........................  1
+               1889      VERY GOOD..........................  2
+               1710      GOOD...............................  3
+                679      FAIR...............................  4
+                247      POOR...............................  5
+                 23      DK................................. .D
+                  5      RF................................. .R
+                 67      INAP
+<A NAME="V1086">
+V1086               [HH]    F22. LIVE ON FARM/RANCH?
+          F22. (Do you live on a farm or ranch?)
+ -----------------------------------------------------------------------------
+                287      YES................................  1
+               4766      NO.................................  5 GO TO F25
+                  0      DK................................. .D GO TO F25
+                  0      RF................................. .R GO TO F25
+                994      INAP, LIVE IN MOBILE HOME [V1029=3]
+                         LIVE IN COMMUNITY DWELLING [V1040=1, V1041=1]
+<A NAME="V1087">
+V1087               [HH]    F23. OWN OR RENT FARM/RANCH?
+          F23. Do you [or your (husband/wife/partner)] own this
+               (farm/ranch), do you own part of it, do you rent it, or
+               what?
+ -----------------------------------------------------------------------------
+                206      OWNS ALL...........................  1 GO TO F26
+                 17      OWNS PART..........................  2
+                  6      RENTS..............................  3 GO TO F38
+                 37      OTHER SPECIFY......................  7 GO TO F41
+                  0      DK................................. .D GO TO F41
+                  0      RF................................. .R GO TO F41
+               5781      INAP, DO NOT LIVE ON FARM OR RANCH (DK/RF)
+                         [V1086 NE 1]
+<A NAME="V1088">
+V1088               [HH]    F23a. OWN FARMHOUSE?
+          F23a.     Do you [or your (husband/wife/partner)] own this house and
+                    the land immediately surrounding it?
+ -----------------------------------------------------------------------------
+                 16      YES...............................  1 GO TO F25a
+                  1      NO................................  5
+                  0      DK................................ .D
+                  0      RF................................ .R
+               6030      INAP, NOT LIVE ON [V1086 NE 1] OR OWN PART OF
+                         FARM/RANCH [V1087 NE 2]
+<A NAME="V1089">
+V1089               [HH]    F24. RENT FARMHOUSE?
+          F24. Do you pay any rent on this house, or what?
+ -----------------------------------------------------------------------------
+                  0      YES, PAY RENT......................  1 GO TO F38
+                  1      NO, OTHER..........................  5 GO TO F41
+                  0      DK................................. .D GO TO F41
+                  0      RF................................. .R GO TO F41
+               6046      INAP, OWNS HOUSE AND SURROUNDING LAND [V1088=1],
+                         NOT LIVE ON FARM OR RANCH [V1086 NE 1]
+<A NAME="V1091">
+V1091               [HH]    F25. OWN OR RENT HOME/APT?
+          F25. Do you [and your (husband/wife/partner)] own your
+               (house/apartment/home), rent it, or what?
+ -----------------------------------------------------------------------------
+               3601      OWN (OR BUYING)....................  1
+               1232      RENT...............................  2 GO TO F38
+                482      OTHER SPECIFY......................  7 GO TO F41
+                  2      DK................................. .D GO TO F41
+                  5      RF................................. .R GO TO F41
+                725      INAP, LIVE ON FARM/RANCH [V1086=1], LIVE IN
+                         MOBILE HOME [V1029=3]
+<A NAME="V1092">
+V1092               [HH]    F25a. OWN BUILDING OR JUST UNIT?
+          F25a.     Do you own the entire building or just your unit?
+ -----------------------------------------------------------------------------
+                155      ENTIRE BUILDING....................  1
+                265      JUST R'S UNIT......................  2
+                  0      DK................................. .D
+                  0      RF................................. .R
+               5627      INAP, NOT OWN OR BUYING [V1091 NE 1], AND LAND
+                         IMMEDIATELY SURROUNDING IT [V1088 NE 1]
+<A NAME="OWN_RENT">
+OWN_RENT       [HH]    DERIVED OWN OR RENT
+               (Recoded variable merging answer about ownership of
+               {farm/mobile/apartment/house}
+ -----------------------------------------------------------------------------
+               4167      OWN FARM HOUSE/MOBILE HOME OR SITE/HOME.  1
+               1262      RENT FARM HOUSE/MOBILE HOME/HOME........  2
+                543      OTHER THAN RENT OR OWN HOME.............  7
+                  0      DK...................................... .D
+                 75      RF...................................... .R
+<A NAME="V1099">
+V1099               [HH]    F26. VALUE OF HOME AND LAND
+          F26. The following questions refer to your house and the land
+               immediately surrounding it.
+               The following questions refer to your mobile home only.
+               The following questions refer to your mobile home site only.
+               The following questions refer to your mobile home and site.
+               The following questions refer to your unit only.
+               The following questions refer to the entire property.
+
+               What is its present value?  I  mean, about what would it
+               bring  if it were sold today?
+               DO NOT PROBE DK/RF
+ -----------------------------------------------------------------------------
+                  N         Mean        Std Dev    Minimum       Maximum
+               3201     100039.65     145456.04       0.00    5000000.00
+                  1      NOT PAY............................  0
+                919      DK................................. .D
+                 47      RF................................. .R
+               1880      INAP, NOT OWN HOME [OWN_RENT NE 1]
+
+F26. VALUE OF HOME AND LAND - UNFOLDING SEQUENCE FOR DK, RF
+     F26 / V1099:  Open ended
+     F26a / V1100:  More than $100,000?
+     F26b / V1101:  $200,000 or more?
+     F26c / V1102:  $50,000 or more?
+If F26. = DK, RF go to F26a. Is it more than $100,000?
+               If YES go to F26b. Is it more than $200,000?
+                    If YES, NO, DK, RF go to F27. [END SEQUENCE]
+               If NO go to F26c. Is it more than $50,000?
+                    If YES, NO, DK, RF go to F27. [END SEQUENCE]
+               If DK, RF go to F27. [END SEQUENCE]
+
+ V1099C        [HH] CATEG: F26. VALUE OF HOME AND LAND
+ -----------------------------------------------------------------------------
+                          V1100     V1101       V1102     V1099C
+ 0 = GAVE $ IN V1099          .         .           .       3203
+ 1 = 0 - 49999                5         .           5        363
+ 2 = 50000 - 100000           5         .           1        285
+ 3 = 100001 - 199999          1         5           NA       121
+ 4 = 200000+                  1         1           .         56
+ 5 = 0 - 100000               5         .           DK/RF     45
+ 6 = 100001+                  1         DK/RF       .         10
+ .D= 0+                       DK        .           .         63
+ .R= 0+                       RF        .           .         20
+ . = INAP, NO HOME OWNED                                    1881
+<A NAME="V1099F">
+V1099F         [HH] FLAG: F26. VALUE OF HOME AND LAND
+          F26. FLAG V1099X HOME VALUE, IMPUTE
+ -----------------------------------------------------------------------------
+               3203      NO IMPUTATION..................  0
+                825      COMPLETED UNFOLDING............  1
+                 55      DK/RF IN LAST UNFOLDING........  2
+                 63      DK ............................  7
+                 20      RF ............................  8
+                  1      NOT ASCERTAINED................  9
+               1880      INAP, NOT OWN HOME [OWN_RENT NE 1]
+<A NAME="V1099X">
+V1099X              [HH]  IMP: F26. VALUE OF HOME AND LAND
+           USE V1099x FOR UNFOLDING IMPUTED HOUSE VALUES
+ -----------------------------------------------------------------------------
+                  N     Mean   Std Dev   Minimum   Maximum
+               4167   96750.67     140776.62     0.00    5000000.00
+                  4      ZERO $ AMOUNT.......................  0
+               1880      INAP, NOT OWN HOME [OWN_RENT NE 1]
+
+<A NAME="V1105">
+V1105               [HH]    F27. OTHER NAME ON DEED?
+               F27. Is anyone's name on the deed or title besides your own
+                    [or your (husband/wife/partner)]?
+ -----------------------------------------------------------------------------
+                713      YES................................  1
+               3420      NO.................................  5 GO TO F28
+                 19      DK................................. .D GO TO F28
+                 14      RF................................. .R GO TO F28
+               1881      INAP, NOT OWN HOME [V1091 NE 1]
+<A NAME="V1106">
+V1106               [HH]    F27a. OTHER ON DEED: RELATION TO R
+          F27a.     Is that a (child or other) relative of yours [and your
+                    (husband/wife/partner)] or is that someone else?
+ -----------------------------------------------------------------------------
+                504      CHILD/CHILD-IN-LAW/GRANDCHILD......  1
+                152      OTHER RELATIVE.....................  2 GO TO F28
+                 57      SOMEONE ELSE.......................  3 GO TO F28
+                  0      DK................................. .D GO TO F28
+                  0      RF................................. .R GO TO F28
+               5334      INAP, NO OTHER NAME ON DEED [V1105 NE 1]
+<A NAME="V1107A1-A9">
+V1107A1-A9          [HH]    F27b. CHILD ON DEED-X (X=1-9)
+          F27b.     Which child is that?
+          CHOOSE ALL THAT APPLY
+          IF GRANDCHILD: (Which of your children is the parent of that
+          grandchild?)
+ -----------------------------------------------------------------------------
+ V1107A1 A2    A3    A4    A5    A6    A7    A8   A9   PN
+   15     0     1     0     0     0     0     0    0  100   DECEASED CHILD
+
+  294     6     0     0     0     0     0     0    0  120   NON-RESIDENT CHILD
+   46   106     3     0     0     0     0     0    0  130    (OR FAMILY)
+   21     3    51     2     0     0     0     0    0  140
+   13     3     0    23     1     0     0     0    0  150
+    7     1     1     0    13     1     0     0    0  160
+    5     5     0     0     0     7     0     0    0  170
+    2     2     0     0     0     0     2     0    0  180
+    2     0     0     0     0     0     0     1    0  190
+    0     1     0     0     0     0     0     0    1  200
+   82     1     1     0     0     0     0     0    0  410  HOUSEHOLD MEMBER
+    6     2     0     0     0     0     0     0    0  420   CHILD (OR SPOUSE)
+    0     0     1     0     0     0     0     0    0  430
+    5     0     0     0     0     0     0     0    0  DK................. .D
+    6     0     0     0     0     0     0     0    0  RF................. .R
+ 5543  5917  5989  6022  6033  6039  6045  6046 6046   INAP, NOT CHILD/CHILD-
+                                                       IN LAW/GRANDCHILD [V1106
+                                                       NE 1], NO   FURTHER
+                                                       MENTION
+<A NAME="V1108">
+V1108               [HH]    F28. REAL ESTATE TAX: $ LAST YEAR
+          F28. What were the real estate taxes last year on this home?
+                    DO NOT PROBE DK/RF
+ -----------------------------------------------------------------------------
+               N        Mean   Std Dev  Minimum     Maximum
+             3335    1186.37   2122.11     0.00    72000.00
+                 89      INCLUDED IN MORTGAGE OR FEES....... .A
+                704      DK................................. .D
+                 39      RF................................. .R
+               1880      INAP, NOT OWN HOME [V1091 NE 1]
+F28 REAL ESTATE TAX $ LAST YEAR - UNFOLDING SEQUENCE FOR DK, RF
+     F28 / V1108:  Open ended
+     F28a / V1109:  More than $2000?
+     F28b / V1110:  More than $1000?
+     F28c / V1111:  More than $3000?
+If F28. = DK, RF go to F28a. Was it more than $2000?
+               If YES go to F28c. Was it more than $3000?
+                    If YES, NO, DK, RF go to F29. [END SEQUENCE]
+               If NO go to F28b. Was it more than $1000?
+                    If YES, NO, DK, RF go to F29. [END SEQUENCE]
+               If DK, RF go to F29. [END SEQUENCE]
+<A NAME="V1108C">
+V1108C         [HH]   CATEG: F28. REAL ESTATE TAX: $ LAST YEAR
+ -----------------------------------------------------------------------------
+                    V1109       V1110       V1111               V1108C
+ 0 = GAVE $ IN V1108                                              3335
+ 1 = 0 - 1000           5           5           .                  353
+ 2 = 1001 - 2000        5           1           .                  120
+ 3 = 2001 - 3000        1           .           5                   66
+ 4 = 3001+              1           .           1                   44
+ 5 = 0 - 2000           5           DK/RF       .                   25
+ 6 = 2001+              1           .           DK/RF                4
+ .D= 0+                 DK          .           .                  111
+ .R= 0+                 RF          .           .                   20
+ .A= INCLUDED IN MORTGAGE OR FEES                                   88
+ . = INAP, NO HOME OWNED OR NO REAL ESTATE TAXES PAID             1881
+<A NAME="V1108F">
+V1108F         [HH] FLAG: F28. REAL ESTATE TAX: $ LAST YEAR
+          F28. FLAG V1108X REAL ESTATE TAX IMPUTE
+ -----------------------------------------------------------------------------
+               3335      NO IMPUTATION..................  0
+                583      COMPLETED UNFOLDING............  1
+                 29      DK/RF IN LAST UNFOLDING........  2
+                111      DK ............................  7
+                 20      RF ............................  8
+               1969      INAP, NO ESTATE TAX
+<A NAME="V1108X">
+V1108X              [HH] IMP: F28. REAL ESTATE TAX: $ LAST YEAR
+          USE V1108x FOR UNFOLDING IMPUTED REAL ESTATE VALUES
+ -----------------------------------------------------------------------------
+                  N       Mean      Std Dev   Minimum   Maximum
+               4078    1230.08      2224.12      0.00  72000.00
+                234      ZERO $ AMOUNT...................... .0
+                 89      INCLUDED IN MORTGAGE OR FEES....... .A
+               1880      INAP, NOT OWN HOME [V1091 NE 1]
+<A NAME="V1115">
+V1115               [HH]    F29. HOME INS AMOUNT LAST YEAR
+          F29. How much were insurance payments on this property last year?
+               DO NOT PROBE DK/RF
+ -----------------------------------------------------------------------------
+                  N     Mean   Std Dev   Minimum   Maximum
+               2939   428.51    660.96      0.00  18000.00
+                 89      ZERO $ AMOUNT     .................  0
+                101      INCLUDED IN MORTGAGE OR FEES....... .A
+                140      NOTHING -- DIDN'T PAY FOR.......... .B
+                944      DK................................. .D
+                 43      RF................................. .R
+               1880      INAP, NOT OWN HOME [V1091 NE 1]
+F29. HOME INS AMOUNT LAST YEAR - UNFOLDING SEQUENCE FOR DK, RF
+     F29  / V1115:  Open ended
+     F29a / V1116:  More than $500?
+     F29b / V1117:  More than $200?
+     F29c / V1118:  More than $1000?
+If F29. = DK, RF,go to F29a. Was it more than $500?
+          If YES go to F29c. Was it more than $1000?
+               If NO, DK, RF go to F30. [END SEQUENCE]
+          If NO go to F29b. Was it more than $200?
+               If YES, NO, DK, RF go to F30. [END SEQUENCE]
+          If DK, RF go to F30. [END SEQUENCE]
+<A NAME="V1115C">
+V1115C         [HH]       CATEG: F29. HOME INS AMOUNT LAST YEAR
+ -----------------------------------------------------------------------------
+                    V1116       V1117       V1118         V1115C
+ 0 = GAVE $ IN V1115    .           .           .           2939
+ 1 = 0 - 200            5           5           .             90
+ 2 = 201 - 500          5           1           .            372
+ 3 = 501 - 1000         1           .           5            234
+ 4 = 1001+              1           .           1             77
+ 5 = 0 - 500            5           .           DK/RF         21
+ 6 = 501+               1           .           DK/RF         24
+ .A=INCLUDED IN MORTGAGE OR FEES                             100
+ .B=NOTHING -- DIDN'T PAY FOR                                140
+ .D= 0+                 DK          .           .            145
+ .R= 0+                 RF          .           .             24
+ . =   INAP, NO HOME OWNED OR NO HOME INSURANCE PAID        2290
+<A NAME="V1115F">
+V1115F         [HH] FLAG: F29. HOME INS AMOUNT LAST YEAR
+          F29. FLAG V1115X HOME INSURANCE IMPUTE
+ -----------------------------------------------------------------------------
+               2939      NO IMPUTATION..................  0
+                773      COMPLETED UNFOLDING............  1
+                 45      DK/RF IN LAST UNFOLDING........  2
+                145      DK ............................  7
+                 24      RF ............................  8
+               2121      INAP, NO HOME INSURANCE
+<A NAME="V1115X">
+V1115X              [HH] IMP: F29. HOME INS AMOUNT LAST YEAR
+          USE V1115x FOR UNFOLDING IMPUTED HOME INSURANCE PAYMENT VALUES
+ _____________________________________________________________________________
+                  N     Mean   Std Dev   Minimum   Maximum
+               3926   478.74   758.03       0.00  18000.00
+                 90      ZERO $ AMOUNT...................... .0
+                101      INCLUDED IN MORTGAGE OR FEES....... .A
+                140      NOTHING -- DIDN'T PAY FOR.......... .B
+               1880      INAP, NOT OWN HOME [V1091 NE 1]
+<A NAME="V1121">
+V1121               [HH]    F30. MORTGAGE ON HOME
+          F30. Are you paying anything on a mortgage or other loan on it?
+ -----------------------------------------------------------------------------
+                652      YES................................  1 GO TO F32
+                 13      [VOL] SOMEONE ELSE PAYS............  3 GO TO F35
+               3486      NO.................................  5
+                  8      DK................................. .D GO TO F35
+                  8      RF................................. .R GO TO F35
+               1880      INAP, NOT OWN HOME [V1091 NE 1]
+<A NAME="V1122">
+V1122               [HH]    F31. YEAR MORTGAGE PAID OFF
+          F31. In about what year was the mortgage paid off?
+ -----------------------------------------------------------------------------
+                  N     Mean   Std Dev   Minimum   Maximum
+               2100  1974.46     12.80   1900.00   1994.00
+                342      DK................................. .D
+                 16      RF................................. .R
+               1027      NO MORTGAGE........................ .A
+               2562      INAP, PAYING ON MORTGAGE/LOAN (DK/RF)
+                         [V1121 NE 5]
+<A NAME="V1123">
+V1123               [HH]    F32. AMOUNT MORTGAGE PAYMENT
+          F32. About how much are you paying?
+               PER NEXT SCREEN
+ -----------------------------------------------------------------------------
+                  N     Mean   Std Dev   Minimum   Maximum
+                627   536.40   1934.13     22.00  32000.00
+                 18      DK................................. .D
+                  7      RF................................. .R
+               5395      INAP, NOT PAYING ON MORTGAGE OR LOAN
+                         (DK/RF) [V1121 NE 1]
+<A NAME="V1123F">
+V1123F         [HH] FLAG: F32. AMOUNT MORTGAGE PAYMENT
+               FLAG:F32. 1ST MORT ANNUAL PAYMENT
+ -----------------------------------------------------------------------------
+                629      NOT IMPUTED....................  0
+                 25      IMPUTED........................  1
+               5393      INAP, NOT PAYING ON MORTGAGE OR LOAN
+                         (DK/RF) [V1121 NE 1]
+<A NAME="V1123X">
+V1123X              [HH] IMP: F32. AMOUNT MORTGAGE PAYMENT
+          USE V1123X FOR ANNUAL MORTGAGE PAYMENT
+ -----------------------------------------------------------------------------
+                  N     Mean   Std Dev   Minimum       Maximum
+                654  4960.61   6353.65      0.00     100000.00
+                  1      ZERO $ AMOUNT.................... 0
+                 29      NO FINANCIAL R IN HH............ .F
+               5364      INAP, NOT PAYING ON MORTGAGE OR LOAN
+                         (DK/RF) [V1121 NE 1]
+<A NAME="V1124">
+V1124               [HH]    F32a. MORTGAGE PYMT PERIOD
+          F32a.     $F32  PER
+ -----------------------------------------------------------------------------
+                  0      Week...............................  1
+                  1      2 X Month..........................  2
+                616      Month..............................  3
+                  1      Quarter............................  4
+                  0      6 Month............................  5
+                 10      Year...............................  6
+                  1      Other SPECIFY......................  7
+                  0      DK................................. .D
+                  0      RF................................. .R
+               5418      INAP, NOT PAYING ON MORTGAGE/LOAN (DK/RF)
+                         [V1121 NE 1]
+<A NAME="V1125">
+V1125               [HH]    F33. MORTGAGE PYMT INCLUDE TAX OR INS
+          F33. Do the payments include property taxes or insurance?
+               (Which?)
+ -----------------------------------------------------------------------------
+                 67      TAXES ONLY.........................  1
+                 25      INSURANCE ONLY.....................  2
+                229      YES, BOTH..........................  3
+                324      NEITHER............................  4
+                  7      DK................................. .D
+                  1      RF................................. .R
+               5394      INAP, NOT PAYING ON MORTGAGE/LOAN (DK/RF)
+                         [V1121 NE 1]
+<A NAME="V1126">
+V1126               [HH]    F34. AMOUNT STILL OWE ON MORTGAGE
+          F34. About how much do you still owe on this mortgage or loan?
+ -----------------------------------------------------------------------------
+                  N     Mean   Std Dev   Minimum       Maximum
+                558 29999.33  38859.41      0.00     300000.00
+                  3           NOT PAY............................  0
+                 84      DK................................. .D
+                 11      RF................................. .R
+               5394      INAP, NOT PAYING ON MORTGAGE OR LOAN (DK/RF)
+                         [V1121 NE 1]
+<A NAME="V1127">
+V1127               [HH]    F35. SECOND MORTGAGE?
+          F35. In addition to your mortgage or loan do you have a second
+               mortgage or a land contract on this property?
+ -----------------------------------------------------------------------------
+                 42      YES, 2ND MORTGAGE..................  1
+                  0      YES, LAND CONTRACT.................  2
+                627      NO.................................  5 GO TO F37
+                  7      DK................................. .D GO TO F37
+                  6      RF................................. .R GO TO F37
+               5365      INAP, NOT PAYING ON MORTGAGE OR LOAN (DK/RF)
+                         [V1121=5]
+<A NAME="V1128">
+V1128               [HH]    F35a. AMOUNT SECOND MORTGAGE PMT
+          F35a.     About how much are you paying on that?
+               PER NEXT SCREEN
+ -----------------------------------------------------------------------------
+                  N     Mean   Std Dev   Minimum   Maximum
+                 38   899.63   3118.34      0.00  18000.00
+                  2      NOT PAY............................  0
+                  3      DK................................. .D
+                  1      RF................................. .R
+               6005      INAP, NOT HAVE SECOND MORTGAGE OR LAND
+                         CONTRACT (DK/RF) [V1127 NE 1,2]
+<A NAME="V1128F">
+V1128F         [HH] FLAG: F35a. AMOUNT SECOND MORTGAGE PMT
+          FLAG:F33A. 2ND MORT ANNUAL PAYMENT
+ -----------------------------------------------------------------------------
+                 37      NOT IMPUTED....................  0
+                  5      IMPUTED........................  1
+               6005      INAP, NOT HAVE SECOND MORTGAGE OR LAND
+                         CONTRACT (DK/RF) [V1127 NE 1,2]
+<A NAME="V1128X">
+V1128X              [HH] IMP: F35a. AMOUNT SECOND MORTGAGE PMT
+          USE V1128X R:F35a.ANNUAL 2ND MORTGAGE PAYMENT
+ -----------------------------------------------------------------------------
+                  N     Mean   Std Dev   Minimum       Maximum
+                 42  8014.57  32969.62      0.00     216000.00
+                  2      ZERO $ AMOUNT...................  0
+                 29      NO FINANCIAL R IN HH............ .F
+               5976      INAP, NOT HAVE SECOND MORTGAGE OR LAND
+                         CONTRACT (DK/RF) [V1127 NE 1,2]
+<A NAME="V1130">
+V1130          [HH]    F35b. SECOND MORTGAGE PMT PERIOD
+          F35b.     $F35a PER
+ -----------------------------------------------------------------------------
+                  2      Week...............................  1
+                  0      2 X Month..........................  2
+                 34      Month..............................  3
+                  0      Quarter............................  4
+                  0      6 Month............................  5
+                  1      Year...............................  6
+                  1      Other SPECIFY......................  7
+                  0      DK................................. .D
+                  0      RF................................. .R
+               6009      INAP, DO NOT HAVE SECOND MORTGAGE OR LAND
+                         CONTRACT [V1127 NE 1,2], NOT GIVE
+                         AMOUNT [V1128=.D,.R]
+<A NAME="V1131">
+V1131               [HH]     F36. AMOUNT STILL OWE ON SECOND MORTGAGE
+          F36. About how much do you still owe on that loan?
+ -----------------------------------------------------------------------------
+                  N     Mean   Std Dev   Minimum   Maximum
+                 36 14265.28  12304.39      0.00  50000.00
+                  1      NOTHING............................  0
+                  5      DK................................. .D
+                  1      RF................................. .R
+               6005      INAP, NOT HAVE SECOND MORTGAGE OR LAND CONTRACT
+                         [V1127 NE 1,2]
+<A NAME="V1132">
+V1132               [HH]    F37. OTH LOANS W/ PROPERTY AS COLLATERAL
+          F37. Do you have any (other) loans that use this property as
+               collateral?
+ -----------------------------------------------------------------------------
+                 47      YES................................  1
+               4101      NO.................................  5 GO TO F38
+                  6      DK................................. .D GO TO F38
+                 13      RF................................. .R GO TO F38
+               1880      INAP, NOT OWN HOME [V1091 NE 1]
+<A NAME="V1133">
+V1133               [HH]    F37a. AMOUNT OTHER LOAN PMT
+          F37a.     About how much are you paying on that?
+               PER NEXT SCREEN
+ -----------------------------------------------------------------------------
+                  N     Mean   Std Dev   Minimum   Maximum
+                 44   574.82   1972.63     18.00  12000.00
+                  1      DK................................. .D
+                  2      RF................................. .R
+               6000      INAP, NO OTHER LOANS [V1132 NE 1]
+<A NAME="V1133F">
+V1133F         [HH] FLAG: F37a. AMOUNT OTHER LOAN PMT
+ -----------------------------------------------------------------------------
+                 47      NOT IMPUTED....................  0
+                  1      IMPUTED........................  1
+               5999      INAP, NO OTHER LOANS [V1132 NE 1]
+<A NAME="V1133X">
+V1133X              [HH] IMP: F37a. AMOUNT OTHER LOAN PMT
+          USE V1133X R:F37a. ANNUAL HOME LOAN PAYMENT
+ -----------------------------------------------------------------------------
+                  N     Mean   Std Dev   Minimum   Maximum
+                 48  3555.75  10298.07      0.00  72000.00
+                 29      NO FINANCIAL R IN HH............... .F
+                  3      RF.................................  0
+               5970      INAP, NO OTHER LOANS [V1132 NE 1]
+<A NAME="V1134">
+V1134               [HH]    F37b. OTHER LOAN PMT PERIOD
+          F37b.     $F37a PER
+ -----------------------------------------------------------------------------
+                  2      Week...............................  1
+                  0      2 X Month..........................  2
+                 42      Month..............................  3
+                  0      Quarter............................  4
+                  0      6 Month............................  5
+                  3      Year...............................  6
+                  0      Other SPECIFY......................  7
+                  0      DK................................. .D
+                  0      RF................................. .R
+               6000      INAP, NO OTHER LOANS (DK/RF) [V1132 NE 1]
+<A NAME="V1135">
+V1135               [HH]    F37c. AMOUNT STILL OWE OTHER LOAN
+          F37c.     About how much is still owed on this loan?
+ -----------------------------------------------------------------------------
+                   N     Mean   Std Dev   Minimum      Maximum
+                  40 15914.30  29544.22    300.00     150000.00
+                  6      DK................................. .D
+                  2      RF................................. .R
+               5999      INAP, NO OTHER LOANS [V1132 NE 1]
+<A NAME="V1144">
+V1144               [HH]    F38. RENT PMT PER MONTH
+          F38. (IF F2(YES) OR F3(YES) Aside from your fees as part of an
+               association,)
+               About how much rent do you pay each month?
+ -----------------------------------------------------------------------------
+                  N     Mean   Std Dev   Minimum   Maximum
+               1159   367.98    403.13      0.00   5000.00
+                  4      NOT PAY............................  0
+                 30      DK................................. .D
+                 74      RF................................. .R
+               4784      INAP, OWNS HOME [V1091=1]
+<A NAME="V1145">
+V1145               [HH]    F39. RENT FURNISHED/UNFURNISHED
+          F39. Do you rent it furnished or unfurnished?
+ -----------------------------------------------------------------------------
+                 67      FURNISHED..........................  1
+                 36      PARTIALLY FURNISHED [VOL]..........  3
+               1160      UNFURNISHED........................  5
+                  0      DK................................. .D
+                  0      RF................................. .R
+               4784      INAP, OWNS HOME [V1091=1]
+<A NAME="V1146">
+V1146               [HH]    F40. UTILITIES INCL IN RENT?
+          F40. Are heat and electricity included in your rent?
+          PROBE FOR WHICH
+ -----------------------------------------------------------------------------
+                419      YES, BOTH..........................  1
+                194      HEAT ONLY..........................  2
+                 21      ELECTRICITY ONLY...................  3
+                621      NO, NEITHER........................  5
+                  7      DK................................. .D
+                  1      RF................................. .R
+               4784      INAP, OWNS HOME [V1091=1]
+<A NAME="V1149">
+V1149               [HH]    F41. RENTAL OWNED BY RELATIVE?
+          F41. ASK IF NOT CLEAR
+               Is this (house/apartment/home) owned by a relative?
+ -----------------------------------------------------------------------------
+                577      YES................................  1
+               1228      NO.................................  5 GO TO F42
+                  4      DK................................. .D GO TO F42
+                  5      RF................................. .R GO TO F42
+               4233      INAP, OWNS HOME [V1091=1]
+<A NAME="V1150">
+V1150               [HH]    F41a. OWNERS RELATION TO R
+          F41a.     What is that person's relationship to you?
+ -----------------------------------------------------------------------------
+                459      CHILD/CHILD-IN-LAW, GRANDCHILD.....  1
+                117      OTHER RELATIVE.....................  2 GO TO F42
+                  0      DK................................. .D GO TO F42
+                  1      RF................................. .R GO TO F42
+               5470      INAP, HOME NOT OWNED BY RELATIVE (DK/RF)
+                         [V1149 NE 1]
+<A NAME="V1151A1-A8">
+V1151A1-A8          [HH]    F41b. WHICH CHILD OWNS HOME-X (X=1-8)
+          F41b.     (Which child is that?)
+          IF GRANDCHILD:  Which child of yours [or your
+          husband/wife/partner)] is the parent of that grandchild?
+               CHOOSE ALL THAT APPLY
+ -----------------------------------------------------------------------------
+  V1151A1   A2   A3   A4    A5   A6-8   PN OF CHILD
+      15     0    0    0     1     0    100  DECEASED CHILD FAMILY
+     109     3    0    0     0     0    120  NON-RESIDENT CHILD (OR FAMILY)
+      40    25    1    0     0     0    130
+      29     4   16    1     0     0    140
+      13     2    0    9     0     0    150
+       9     0    0    0     4     0    160
+       5     0    0    0     0     1    170
+       4     0    0    0     0     1    180
+       2     0    0    0     0     1    190
+       0     0    0    0     0     0    200
+       1     0    0    0     0     0    210
+     211     0    0    0     0     0    410  HOUSEHOLD MEMBER CHILD(OR SPOUSE)
+       5     2    0    0     0     0    420
+       1     0    0    0     0     0    430
+      13     0    0    0     0     0    DK.................... .D
+       3     0    0    0     0     0    RF.................... .R
+    5587  6011 6030 6037  6042  6044    INAP, NOT CHILD/CHILD-IN-LAW
+                                        /GRANDCHILD [V1150 NE 1], NOT
+                                        OWNED BY RELATIVE [V1149 NE 1],
+                                        NO FURTHER MENTION
+<A NAME="V1152">
+V1152               [HH]    F42. R EVER OWN THIS HOME?
+          F42. Did you ever own this home?
+ -----------------------------------------------------------------------------
+                152      YES................................  1
+               1654      NO.................................  5
+                  3      DK................................. .D
+                  4      RF................................. .R
+               4234      INAP, OWNS HOME [V1091=1]
+<A NAME="V1155">
+V1155               [HH]    F43. $ UTILITIES LAST MONTH
+          F43. About how much did (heat/and/electricity) cost you last
+               month?
+               DO NOT PROBE DK/RF
+ -----------------------------------------------------------------------------
+                  N     Mean   Std Dev   Minimum   Maximum
+               4851   118.25     84.48      0.00    900.00
+                 41      NOTHING LAST MONTH.................  0
+                233      DON'T PAY FOR UTILITIES............ .B
+                440      DK................................. .D
+                 32      RF................................. .R
+                491      INAP, HEAT AND ELECTRICITY INCLUDED IN RENT
+                         [V1146=1]
+F43. $ UTILITIES LAST MONTH - UNFOLDING SEQUENCE FOR DK, RF
+     F43 / V1155:  Open ended
+     F43a / V1157:  More than $200?
+     F43b / V1158:  $50 or more?
+     F43c / V1159:  $300 or more?
+If F43. = DK, RFgo to F43a. Was it more than $200?
+               If YES go to F43c. Was it more than $300?
+                    If NO, DK, RF go to G1. [END SEQUENCE]
+               If NO go to F43b. Was it more than $50?
+                    If YES, NO, DK, RF go to G1. [END SEQUENCE]
+               If DK, RF go to G1. [END SEQUENCE]
+<A NAME="V1155C">
+V1155C         [HH] CATEG: F43. $ UTILITIES LAST MONTH
+ -----------------------------------------------------------------------------
+                    V1157       V1158        V1159          V1155C
+ 0 = GAVE $ IN V1155    .           .           .             4851
+ 1 = 0 - 49             5           5           .               40
+ 2 = 50 - 200           5           1           .              242
+ 3 = 201 - 299          1           .           5               56
+ 4 = 300+               1           .           1               30
+ 5 = 0 - 200            5           DK/RF       .               13
+ 6 = 201+               1           .           DK/RF           10
+ .B=DON'T PAY FOR UTIL  .           .           .              233
+ .D= 0+                 DK          .           .               67
+ .R= 0+                 RF          .           .               13
+ . = INAP, NO UTILITIES PAID                                   492
+<A NAME="V1155F">
+V1155F         [HH]  FLAG: F43. $ UTILITIES LAST MONTH
+          F43. FLAG V1155X UTILITIES, IMPUTE
+ -----------------------------------------------------------------------------
+               4851      NO IMPUTATION..................  0
+                368      COMPLETED UNFOLDING............  1
+                 23      DK/RF IN LAST UNFOLDING........  2
+                 67      DK ............................  7
+                 13      RF.............................  8
+                725      INAP, HEAT AND ELECTRICITY INCLUDED IN RENT
+                         [V1146=1]
+<A NAME="V1155X">
+V1155X              [HH] IMP: F43. $ UTILITIES LAST MONTH
+     USE V1155x FOR UNFOLDING IMPUTED UTILITY BILL VALUES
+ -----------------------------------------------------------------------------
+                  N     Mean   Std Dev   Minimum   Maximum
+               5322   120.89     86.45      0.00    900.00
+                 41      ZERO $ AMOUNT     .................  0
+                233      DON'T PAY FOR UTILITIES............ .B
+                  1      RF................................. .R
+                491      INAP, HEAT AND ELECTRICITY INCLUDED IN RENT
+                         [V1146=1]
+<A NAME="end">
+<p>
+<b>[<A HREF=#top>Return to Beginning</a>][<A HREF="a93_00.html">Table of Contents</a>][<A HREF=codb-gtxt.htm>Next Section</a>][<A HREF=codb-etxt.htm>Previous Section</a></b>]
+</pre><hr><em>Wed Jun 16 15:41:17 1999</em></body></html>

@@ -1,0 +1,1335 @@
+<html><head><title>AHEAD 1993 (Wave 1) Codebook - codb-k.txt </title></head>
+<body>
+<a name="top">
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="6" WIDTH="600">
+<TR>
+<TD WIDTH="250">
+<IMG SRC="hrslogo1.gif" border=0>
+</TD>
+<TD WIDTH="350" valign="center">
+<h1>AHEAD 1993 (Wave 1) Documentation</h1>
+</TD>
+</TR>
+</TABLE>
+<HR><pre><b>[<A HREF=#end>End of this section</a>][<A HREF="a93_00.html">Table of Contents</a>][<A HREF=codb-rtxt.htm>Next Section</a>][<A HREF=codb-jtxt.htm>Previous Section</a></b>]
+<HR>
+                        SECTION K. ASSETS
+              (Asked Only of Financial R or Only R)
+Note:  See Codebook Introduction page 12 for list of households in which no
+Financial Respondent was assigned.  These households will be coded as inap.
+          K0.  Savings and investments are another important part of family
+               finances.  In these next questions, we are going to be
+               asking separately about a number of different kinds of
+               savings or investments you may have.
+<A NAME="V1720">
+V1720               [HH]    K2. REAL ESTATE: ANY
+          K2.  Do you [or your (husband/wife/partner)] have any real estate
+               (other than your main home), such as land, a second home,
+               rental real estate, a partnership, or money owed to you on a
+               land contract or mortgage?
+-----------------------------------------------------------------------------
+               1042      YES................................  1
+               4863      NO.................................  5 GO TO K4
+                  7      DK................................. .D GO TO K4
+                 61      RF................................. .R GO TO K4
+                 74      INAP, NO FINANCIAL R, PARTIAL IW
+<A NAME="V1720F">
+V1720F         [HH] FLAG: K2. REAL ESTATE: ANY
+          K2.  FLAG HOLDING ASSET REAL ESTATE
+ -----------------------------------------------------------------------------
+               5905      NOT IMPUTED....................  0
+                142      IMPUTED........................  1
+<A NAME="V1720H">
+V1720H         [HH]     HOLD: K2. REAL ESTATE: ANY
+              K2.   HOLDING ASSET REAL ESTATE
+ -----------------------------------------------------------------------------
+               1061      R HAS ASSET....................  1
+               4986      R DOES NOT HAVE ASSET..........  5
+<A NAME="V1721">
+V1721               [HH]    K3. REAL ESTATE: NET VALUE
+          K3.  If you sold all that and then paid off any debts on it,
+               about  how much would you get?
+               DO NOT PROBE DK/RF
+-----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum       Maximum
+                704     113868.23     298196.98          0.00    5000000.00
+                 15      NOTHING............................  0
+                280      DK................................. .D
+                 59      RF................................. .R
+               5004      INAP, NO REAL ESTATE OWNED [V1720 NE 1]
+K3. REAL ESTATE: NET VALUE $ - UNFOLDING SEQUENCE FOR DK,RF
+          K3 / V1721:  Open ended
+          K3a / V1722:  $50,000 or more?
+          K3b / V1723:  $150,000 or more?
+          K3c / V1724:  $5,000 or more?
+If K3. = DK,RF go to K3a. Would it amount to $50,000 or more?
+               If YES go to K3b. $150,000 or more?
+                         ALL go to K4. [END SEQUENCE]
+               If NO go to K3c. $5,000 or more?
+                         ALL go to K4. [END SEQUENCE]
+               If DK,RF go to K4. [END SEQUENCE]
+<A NAME="V1721C">
+V1721C         [HH]   CATEG: K3. REAL ESTATE: NET VALUE
+ -----------------------------------------------------------------------------
+                              V1722   V1723   V1724   V1721C
+  0 = GAVE $ IN V1721                                    704
+  1 = 0 - 4999                    5       .       5       20
+  2 = 5000 - 49999                5       .       1       98
+  3 = 50000 - 149999              1       5       .       81
+  4 = 150000+                     1       1       .       67
+  5 = 0 - 49999                   5       .       DK/RF    8
+  6 = 50000+                      1       DK/RF   .       17
+ .D = 0+                          DK      .       .       27
+ .R = 0+                          RF      .       .       21
+ .  = INAP,  NO REAL ESTATE [V1720 NE 1]                5004
+<A NAME="V1721F">
+V1721F         [HH] FLAG: K3. REAL ESTATE: NET VALUE
+          K3.  FLAG V1721X REAL ESTATE ASSET, IMPUTE
+ -----------------------------------------------------------------------------
+                704      NO IMPUTATION..................  0
+                266      COMPLETED UNFOLDING............  1
+                 25      DK/RF IN LAST UNFOLDING........  2
+                 27      DK ............................  7
+                 21      RF ............................  8
+                 18      NOT ASCERTAINED................  9
+               4986      INAP, NO REAL ESTATE [V1720 NE 1]
+<A NAME="V1721X">
+V1721X         [HH] IMP: K3. REAL ESTATE: NET VALUE
+          USE V1721X FOR UNFOLDING IMPUTED AND TOTAL VALUES FOR REAL ESTATE
+          ASSETS
+ -----------------------------------------------------------------------------
+             N       Mean       Std Dev       Minimum       Maximum
+          1061  116128.29     296055.71          0.00    5000000.00
+                 20      ZERO $ AMOUNT......................  0
+               4986      NA.................................  .
+                         INAP, NO REAL ESTATE OWNED [V1720 NE 1]
+<A NAME="V1725">
+V1725               [HH]    K4. TRANSPORTATION: NET VALUE
+          K4.  What about the value of what you [or your (husband/wife/
+               partner)] own for transportation, like cars, trucks, a
+               trailer, a motor home, a boat, or an airplane--what are they
+               worth altogether, minus anything you still owe on them?
+               DO NOT PROBE DK/RF            NONE = 0
+ -----------------------------------------------------------------------------
+            N          Mean       Std Dev      Minimum       Maximum
+         4947       6293.53      37343.19          0.00    2000000.00
+               1819      NOTHING............................  0
+                931      DK................................. .D
+                 96      RF................................. .R
+                 73      INAP, NO FINANCIAL R, PARTIAL IW
+          K4. TRANSPORTATION: NET VALUE $ - UNFOLDING SEQUENCE FOR DK,RF
+          K4 / V1725:  Open ended
+          K4a / V1726:  $10,000 or more?
+          K4b / V1727:  $25,000 or more?
+          K4c / V1728:  $2,000 or more?
+If K4. = DK,RF go to K4a. Would it amount to $10,000 or more?
+               If YES go to K4b. $25,000 or more?
+                         ALL go to K5. [END SEQUENCE]
+               If NO go to K4c. $2,000 or more?
+                         ALL go to K5. [END SEQUENCE]
+               If DK,RF go to K5. [END SEQUENCE]
+<A NAME="V1725C">
+V1725C         [HH] CATEG: K4. TRANSPORTATION: NET VALUE
+ -----------------------------------------------------------------------------
+                              V1726       V1727       V1728       V1725C
+ 0 = GAVE $ IN V1725                                                4947
+ 1 = 0 - 1999                     5           .           5          223
+ 2 = 2000 - 9999                  5           .           1          452
+ 3 = 10000 - 24999                1           5           .          183
+ 4 = 25000+                       1           1           .           25
+ 5 = 0 - 9999                     5           .           DK/RF       26
+ 6 = 10000+                       1           DK/RF       .            7
+ .D= 0+                           DK          .           .           55
+ .R= 0+                           RF          .           .           55
+INAP, NO FINANCIAL R, PARTIAL IW                                      74
+<A NAME="V1725F">
+V1725F         [HH] FLAG: K4. TRANSPORTATION: NET VALUE
+          K4.FLAG V1725X TRANSPORT ASSET, IMPUTE
+ -----------------------------------------------------------------------------
+               4947      NO IMPUTATION..................  0
+                883      COMPLETED UNFOLDING............  1
+                 33      DK/RF IN LAST UNFOLDING........  2
+                 55      DK ............................  7
+                 55      RF ............................  8
+                 74      NOT ASCERTAINED................  9
+<A NAME="V1725X">
+V1725X         [HH] IMP: K4. TRANSPORTATION: NET VALUE
+          USE V1725X FOR UNFOLDING IMPUTED AND TOTAL VALUES FOR
+          TRANSPORTATION ASSETS
+ -----------------------------------------------------------------------------
+                  N       Mean       Std Dev       Minimum       Maximum
+               6047    6510.97      38994.33          0.00    2000000.00
+               1878      ZERO $ AMOUNT......................  0
+               5809      INAP............................ .
+<A NAME="V1729">
+V1729               [HH]    K5. OWN BUSINESS: ANY
+          K5.  Do you [or your (husband/wife/partner)] own part or all of a
+               business?
+-----------------------------------------------------------------------------
+                229      YES................................  1
+                  3      YES, MORE THAN ONE.................  2
+               5721      NO.................................  5 GO TO K7
+                  5      DK................................. .D GO TO K7
+                 15      RF................................. .R GO TO K7
+                 74      INAP, NO FINANCIAL R, PARTIAL IW
+<A NAME="V1729F">
+V1729F         [HH] FLAG: K5. OWN BUSINESS: ANY
+                K5. FLAG HOLDING ASSET BUSINESS
+ -----------------------------------------------------------------------------
+               5952      NOT IMPUTED....................  0
+                 95      IMPUTED........................  1
+<A NAME="V1729H">
+V1729H         [HH] HOLD:K5. OWN BUSINESS: ANY
+                K5. HOLDING ASSET BUSINESS
+ -----------------------------------------------------------------------------
+                235      R HAS ASSET....................  1
+                  3      R HAS MORE THAN ONE ASSET......  2
+               5809      R DOES NOT HAVE ASSET..........  5
+<A NAME="V1730">
+V1730               [HH]    K6. OWN BUSINESS: NET VALUE
+          K6.  If you sold (all of) the (business/businesses) and then paid
+               off any debts on (it/them), about how much would you get?
+               DO NOT PROBE DK/RF
+-----------------------------------------------------------------------------
+               N          Mean       Std Dev      Minimum       Maximum
+             134      97926.49     170879.36          0.00     900000.00
+                 42      NOTHING............................  0
+                 81      DK................................. .D
+                 18      RF................................. .R
+               5814      INAP, NOT OWN BUSINESS [V1729 NE 1,2]
+K6. OWN BUSINESS: NET VALUE $ - UNFOLDING SEQUENCE FOR DK,RF
+          K6 / V1730:  Open ended
+          K6a / V1731:  $50,000 or more?
+          K6b / V1732:  $500,000 or more?
+          K6c / V1733:  $10,000 or more?
+If K6. = DK,RF go to K6a. Would it amount to $50,000 or more?
+               If YES go to K6b. $500,000 or more?
+                         ALL go to K7. [END SEQUENCE]
+               If NO go to K6c. $10,000 or more?
+                         ALL go to K7. [END SEQUENCE]
+               If DK,RF go to K7. [END SEQUENCE]
+<A NAME="V1730C">
+V1730C           [HH]     CATEG: K6. OWN BUSINESS: NET VALUE
+ -----------------------------------------------------------------------------
+                        V1731       V1732        V1733      V1730C
+  0 = GAVE $ IN V1730                                          134
+  1 = 0 - 9999              5           .           5           12
+  2 = 10000 - 49999         5           .           1           17
+  3 = 50000 - 499999        1           5           .           38
+  4 = 500000+               1           1           .           16
+  5 = 0 - 49999             5           .           DK/RF        0
+  6 = 50000+                1           DK/RF       .            3
+ .D = 0+                    DK          .           .            7
+ .R = 0+                    RF          .           .            6
+ .  = INAP,  NOT OWN BUSINESS [V1729 NE 1,2]                  5814
+<A NAME="V1730F">
+V1730F         [HH] FLAG: K6. OWN BUSINESS: NET VALUE
+          K6.       FLAG V1730X BUSINESS ASSET, IMPUTE
+ -----------------------------------------------------------------------------
+                134      NO IMPUTATION..................  0
+                 83      COMPLETED UNFOLDING............  1
+                  3      DK/RF IN LAST UNFOLDING........  2
+                  7      DK ............................  7
+                  6      RF ............................  8
+                  6      NOT ASCERTAINED................  9
+               5808      INAP, NOT OWN BUSINESS [V1829 NE 1,2]
+<A NAME="V1730X">
+V1730X         [HH] IMP: K6. OWN BUSINESS: NET VALUE
+          USE V1730X FOR UNFOLDING IMPUTED AND TOTAL VALUES FOR BUSINESS
+          ASSETS
+ -----------------------------------------------------------------------------
+            N          Mean       Std Dev       Minimum       Maximum
+          238     152735.92     221410.17          0.00     900000.00
+                 48      ZERO $ AMOUNT....................... 0
+                  1      DK................................. .D
+               5808      INAP, NOT OWN BUSINESS [V1829 NE 1,2]
+<A NAME="V1734">
+V1734               [HH]    K7. IRA: ANY
+          K7.  Do you [or your (husband/wife/partner)] have any Individual
+               Retirement Accounts, that is, IRA or Keogh accounts?
+-----------------------------------------------------------------------------
+                835      YES................................  1
+               5059      NO.................................  5 GO TO K10
+                 21      DK................................. .D GO TO K10
+                 59      RF................................. .R GO TO K10
+                 73      INAP, NO FINANCIAL R, PARTIAL IW
+<A NAME="V1734F">
+V1734F         [HH] FLAG: K7. IRA: ANY
+                K7. FLAG HOLDING ASSET IRA
+ -----------------------------------------------------------------------------
+               5893      NOT IMPUTED....................  0
+                154      IMPUTED........................  1
+<A NAME="V1734H">
+V1734H           [HH]    HOLD: K7. IRA: ANY
+                K7. HOLDING ASSET IRA
+ -----------------------------------------------------------------------------
+                860      R HAS ASSET....................  1
+               5187      R DOES NOT HAVE ASSET..........  5
+<A NAME="V1735">
+V1735               [HH]    K8. IRA: TOTAL VALUE
+          K8.  About how much in total is in all those accounts?
+               DO NOT PROBE DK/RF
+-----------------------------------------------------------------------------
+               N          Mean       Std Dev      Minimum       Maximum
+             617      49363.29      80576.82          0.00     800000.00
+                  1      NOTHING............................  0
+                119      DK................................. .D
+                 99      RF................................. .R
+               5212      INAP, NO INDIVIDUAL RETIREMENT ACCOUNTS
+                         [V1734 NE 1]
+K8. IRA: TOTAL VALUE $ - UNFOLDING SEQUENCE FOR DK,RF
+          K8 / V1735: Open ended
+          K8a / V1736: $25,000 or more?
+          K8b / V1737: $50,000 or more?
+          K8c / V1738: $100,000 or more?
+          K8d / V1739: $5,000 or more?
+If K8. = DK,RF go to K8a. Would it amount to $25,000 or more?
+               If YES go to K8b. $50,000 or more?
+                         If YES go to K8c. $100,000 or more?
+                                 ALL go to K9. [END SEQUENCE]
+                         If NO,DK,RF go to K9. [END SEQUENCE]
+               If NO go to K8d. $5,000 or more?
+                         ALL go to K9. [END SEQUENCE]
+               If DK,RF go to K9. [END SEQUENCE]
+<A NAME="V1735C">
+V1735C          [HH]    CATEG: K8. IRA: TOTAL VALUE
+-----------------------------------------------------------------------------
+                        V1736       V1737       V1738       V1739     V1735C
+  0 = GAVE $ IN V1735                                                    617
+  1 = 0 - 4999              5           .           .           5         18
+  2 = 5000 - 24999          5           .           .           1         59
+  3 = 25000 - 49999         1           5           .           .         34
+  4 = 50000 - 99999         1           1           5           .         20
+  5 = 100000+               1           1           1                     19
+  6 = 0 - 24999             5           .           .           DK/RF      2
+  7 = 25000+                1           DK/RF       .           .          9
+  8 = 50000+                1           1           DK/RF       .          2
+ .D = 0+                    DK          .           .            .         10
+ .R = 0+                    RF          .           .           .         45
+ .  = INAP,  NO IRA  [V1734 NE 1]                                       5212
+<A NAME="V1735F">
+V1735F         [HH] FLAG: K8. IRA: TOTAL VALUE
+          K8.  FLAG V1735X IRA ASSET, IMPUTE
+ -----------------------------------------------------------------------------
+                617      NO IMPUTATION..................  0
+                150      COMPLETED UNFOLDING............  1
+                  2      DK/RF IN LAST UNFOLDING........  2
+                 11      DK/RF IN NEXT-TO-LAST UNFOLD...  3
+                 10      DK ............................  7
+                 45      RF.............................  8
+                 25      NOT ASCERTAINED................  9
+               5187      INAP, NO IRA
+<A NAME="V1735X">
+V1735X         [HH] IMP: K8. IRA: TOTAL VALUE
+          USE V1735X FOR UNFOLDING IMPUTED AND TOTAL VALUES FOR RETIREMENT
+          ACCOUNTS
+-----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum       Maximum
+                860      51884.22      87284.01          0.00     800000.00
+                  1      ZERO $ AMOUNT........................  0
+               5187      INAP, NO INDIVIDUAL RETIREMENT ACCOUNTS
+                         [V1734 NE 1]
+<A NAME="V1740">
+V1740               [HH]    K9. IRA: PAYMENTS REG/WHEN NEED?
+          K9.  Do you get regular monthly payments from these accounts, do
+               you draw on them when you need money, or what?
+-----------------------------------------------------------------------------
+                217      REGULAR............................  1
+                142      DRAW AS NEEDED.....................  2 GO TO K10
+                  4      BOTH...............................  3
+                147      TAKE MINIMUM ALLOWED...............  4
+                215      GET NOTHING FROM THEM..............  5 GO TO K10
+                101      OTHER SPECIFY......................  7
+                  2      DK................................. .D GO TO K10
+                  7      RF................................. .R GO TO K10
+               5212      INAP, NO IRA [V1734 NE 1]
+<A NAME="V1741">
+V1741               [HH]    K9b. IRA: $ REFERRED TO EARLIER
+          K9b. Did you tell me about that income earlier in this interview?
+-----------------------------------------------------------------------------
+                361      YES................................  1 GO TO K10
+                108      NO.................................  5
+                  0      DK................................. .D
+                  0      RF................................. .R
+               5578      INAP, NO IRA [V1734 NE 1], PAYMENT RECEIVED AS
+                         NEEDED, NOTHING RECEIVED, DK/RF [V1740=2,5,D,R]
+<A NAME="V1742">
+V1742               [HH]    K9c. IRA: $ PER MONTH
+          K9c. How much do you receive from these accounts each month?
+-----------------------------------------------------------------------------
+                  N          Mean       Std Dev      Minimum       Maximum
+                 82        224.13        517.50          0.00       3000.00
+                 39      NONE...............................  0
+                 14      DK................................. .D
+                 13      RF................................. .R
+               5938      INAP, NO IRA [V1734 NE 1], PAYMENT RECEIVED AS
+                         NEEDED, NOTHING RECEIVED, DK/RF [V1740=2,5,D,R]
+<A NAME="V1743">
+V1743               [HH]  K10. STOCK/MUTUAL FUNDS: ANY
+          K10. (Aside from anything you have already told me about,)
+               Do you [or your (husband/wife/partner)] have any shares of
+               stock in publicly held corporations, or mutual funds?
+-----------------------------------------------------------------------------
+               1064      YES................................  1
+               4797      NO.................................  5 GO TO K12
+                 31      DK................................. .D GO TO K12
+                 81      RF................................. .R GO TO K12
+                 74      INAP, NO FINANCIAL R, PARTIAL IW
+<A NAME="V1743F">
+V1743F            [HH]   FLAG: K10. STOCK/MUTUAL FUNDS: ANY
+            K10.    FLAG HOLDING ASSET STOCK
+ -----------------------------------------------------------------------------
+               5860      NOT IMPUTED....................  0
+                187      IMPUTED........................  1
+<A NAME="V1743H">
+V1743H         [HH]    HOLD: K10. STOCK/MUTUAL FUNDS: ANY
+            K10.    HOLDING ASSET STOCK
+ -----------------------------------------------------------------------------
+               1108      R HAS ASSET....................  1
+               4939      R DOES NOT HAVE ASSET..........  5
+<A NAME="V1744">
+V1744               [HH]    K11. STOCK/MUTUAL FUNDS: NET VALUE
+          K11. If you sold all that and then paid off anything you owed on
+               it, how much would you have?
+               DO NOT PROBE DK/RF
+-----------------------------------------------------------------------------
+                  N          Mean       Std Dev      Minimum       Maximum
+                579     102868.96     272323.47          0.00    5000000.00
+
+                 12      NOTHING............................  0
+                368      DK................................. .D
+                117      RF................................. .R
+               4983      INAP, NOT HAVE SHARES OF STOCK OR MUTUAL
+                         FUNDS[V1743 NE 1]
+K11. STOCK/MUTUAL FUNDS: NET VALUE $ - UNFOLDING SEQUENCE FOR DK,RF
+          K11 / V1744: Open ended
+          K11a / V1745: $25,000 or more?
+          K11b / V1746: $100,000 or more?
+          K11c / V1747: $500,000 or more?
+          K11d / V1748: $5,000 or more?
+If K11. = DK,RF go to K11a. Would it amount to $25,000 or more?
+               If YES go to K11b. $100,000 or more?
+                         If YES go to K11c. $500,000 or more?
+                                 ALL go to K12. [END SEQUENCE]
+                         If NO,DK,RF go to K12. [END SEQUENCE]
+               If NO go to K11d. $5,000 or more?
+                         ALL go to K12. [END SEQUENCE]
+               If DK,RF go to K12. [END SEQUENCE]
+<A NAME="V1744C">
+V1744C         [HH]      CATEG: K11. STOCK/MUTUAL FUNDS
+ -----------------------------------------------------------------------------
+                              V1745   V1746   V1747   V1748    V1744C
+
+  0 = GAVE $ IN V1744                                             579
+  1 = 0 - 4999                    5       .       .      5         47
+  2 = 5000 - 24999                5       .       .      1         93
+  3 = 25000 - 99999               1       5       .      .        126
+  4 = 100000 - 499999             1       1       5      .         71
+  5 = 500000+                     1       1       1      .         22
+  6 = 0 - 24999                   5       .       .      DK/RF     10
+  7 = 25000+                      1       DK/RF   .      .         18
+  8 = 100000+                     1       1       DK/RF  .          8
+ .D = 0+                          DK      .       .      .         33
+ .R = 0+                          RF      .       .      .         57
+ .  = INAP,  NOT OWN STOCKS [V1743 NE 1]                         4983
+<A NAME="V1744F">
+V1744F         [HH] FLAG: K11. STOCK/MUTUAL FUNDS
+          K11. FLAG V1744X STOCK ASSET, IMPUTE
+ -----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum       Maximum
+               1108          1.39          2.57          0.00          9.00
+                579      NO IMPUTATION..................  0
+                359      COMPLETED UNFOLDING............  1
+                  8      DK/RF IN LAST UNFOLDING........  2
+                 28      DK/RF IN NEXT-TO-LAST UNFOLD...  3
+                 33      DK ............................  7
+                 57      RF.............................  8
+                 44      NOT ASCERTAINED................  9
+               4939      INAP, NO STOCKS
+<A NAME="V1744X">
+V1744X         [HH] IMP: K11. STOCK/MUTUAL FUNDS
+          USE V1744X FOR UNFOLDING IMPUTED AND TOTAL VALUES FOR STOCKS, ETC.
+          ASSETS
+ -----------------------------------------------------------------------------
+             N          Mean       Std Dev       Minimum       Maximum
+          1108     126411.31     406906.48          0.00    5000000.00
+                 19      ZERO $ AMOUNT........................  0
+               4939      INAP, NOT HAVE SHARES OF STOCK OR MUTUAL
+                         FUNDS[V1743 NE 1]
+<A NAME="V1749">
+V1749               [HH]    K12. BANK ACCT: ANY NOT MENTION BEFORE
+          K12. (Aside from anything you have already told me about,)
+               Do you [or your (husband/wife/partner)] have any money in
+               checking or savings accounts, or money market funds?
+-----------------------------------------------------------------------------
+               4273      YES................................  1
+               1568      NO.................................  5 GO TO K14
+                 29      DK................................. .D GO TO K14
+                103      RF................................. .R GO TO K14
+                 74      INAP, NO FINANCIAL R, PARTIAL INTERVIEW
+<A NAME="V1749F">
+V1749F         [HH] FLAG: K12. BANK ACCT: ANY OTHER
+                K12.     FLAG HOLDING ASSET CHECKING
+ -----------------------------------------------------------------------------
+               5841      NOT IMPUTED....................  0
+                206      IMPUTED........................  1
+<A NAME="V1749H">
+V1749H         [HH] HOLD: K12. BANK ACCT: ANY OTHER
+                K12.     HOLDING ASSET CHECKING
+ -----------------------------------------------------------------------------
+               4426      R HAS ASSET....................  1
+               1621      R DOES NOT HAVE ASSET..........  5
+<A NAME="V1750">
+V1750               [HH]    K13. BANK ACCT: TOTAL VALUE
+          K13. If you added up all such accounts, about how much would they
+               amount to right now?
+               DO NOT PROBE DK/RF
+-----------------------------------------------------------------------------
+                  N          Mean       Std Dev      Minimum       Maximum
+               2891      21074.11      45835.66          0.00     800000.00
+                 19      NOTHING............................  0
+                875      DK................................. .D
+                507      RF................................. .R
+               1774      INAP, DO NOT HAVE CHECKING/SAVINGS ACCOUNTS OR
+                         MONEY MARKET FUNDS [V1749 NE 1]
+K13. BANK ACCT: TOTAL VALUE $ - UNFOLDING SEQUENCE FOR DK,RF
+          K13 / V1750: Open ended
+          K13a / V1751: $5,000 or more?
+          K13b / V1752: $10,000 or more?
+          K13c / V1753: $50,000 or more?
+          K13d / V1754: $1,000 or more?
+If K13. = DK,RF go to K13a. Would it amount to $5,000 or more?
+               If YES go to K13b. $10,000 or more?
+                         If YES go to K13c. $50,000 or more?
+                                 ALL go to K14. [END SEQUENCE]
+                         If NO,DK,RF go to K14. [END SEQUENCE]
+               If NO go to K13d. $1,000 or more?
+                         ALL go to K14. [END SEQUENCE]
+               If DK,RF go to K14. [END SEQUENCE]
+<A NAME="V1750C">
+V1750C              [HH]   CATEG: K13. BANK ACCT: TOTAL VALUE
+-----------------------------------------------------------------------------
+                       V1751    V1752   V1753   V1754   V1750C
+  0 = GAVE $ IN V1750                                     2891
+  1 = 0 - 999              5        .       .       5      138
+  2 = 1000 - 4999          5        .       .       1      244
+  3 = 5000 - 9999          1        5       .       .      217
+  4 = 10000 - 49999        1        1       5       .      248
+  5 = 50000+               1        1       1       .      123
+  6 = 0 - 4999             5        .       .       DK/RF   16
+  7 = 5000+                1        DK/RF   .       .       61
+  8 = 10000+               1        1       DK/RF   .       30
+ .D = 0+                   DK       .       .       .       84
+ .R = 0+                   RF       .       .       .      222
+ .  = INAP, NO CHECKING ACCOUNT [V1749 NE 1]              1774
+<A NAME="V1750F">
+V1750F         [HH] FLAG: K13. BANK ACCT: TOTAL VALUE
+          K13. FLAG V1750X CHECKING ASSET, IMPUTE
+ -----------------------------------------------------------------------------
+               2891      NO IMPUTATION..................  0
+                970      COMPLETED UNFOLDING............  1
+                 30      DK/RF IN LAST UNFOLDING........  2
+                 77      DK/RF IN NEXT-TO-LAST UNFOLD...  3
+                 84      DK ............................  7
+                222      RF.............................  8
+                153      NOT ASCERTAINED................  9
+               1620      INAP, DO NOT HAVE CHECKING/SAVINGS ACCOUNTS OR
+                         MONEY MARKET FUNDS [V1749 NE 1]
+<A NAME="V1750X">
+V1750X         [HH]   IMP: K13. BANK ACCT: TOTAL VALUE
+          USE V1750X FOR UNFOLDING IMPUTED AND TOTAL VALUES FOR BANK ACCOUNT
+          ASSETS
+ -----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum       Maximum
+               4427      22797.50      50788.94          0.00     800000.00
+                 24      ZERO $ AMOUNT................  0
+               1620      INAP, DO NOT HAVE CHECKING/SAVINGS ACCOUNTS OR
+                         MONEY MARKET FUNDS [V1749 NE 1]
+<A NAME="V1755">
+V1755               [HH]    K14. CD/SAV BONDS: ANY
+          K14. (Aside from anything you have already told me about,)
+               Do you [or your (husband/wife/partner)] have any money in
+               certificates of deposit, government savings bonds, or
+               Treasury bills?
+-----------------------------------------------------------------------------
+               1190      YES................................  1
+               4624      NO.................................  5 GO TO K16
+                 35      DK................................. .D GO TO K16
+                124      RF................................. .R GO TO K16
+                 74      INAP, NO FINANCIAL R, PARTIAL IW
+<A NAME="V1755F">
+V1755F         [HH] FLAG: K14. CD/SAV BONDS: ANY
+                K14.     FLAG HOLDING ASSET CDs
+ -----------------------------------------------------------------------------
+               5813      NOT IMPUTED....................  0
+                234      IMPUTED........................  1
+<A NAME="V1755H">
+V1755H         [HH] HOLD: K14. CD/SAV BONDS: ANY
+                K14.     HOLDING ASSET CDs
+ -----------------------------------------------------------------------------
+               1236      R HAS ASSET....................  1
+               4811      R DOES NOT HAVE ASSET..........  5
+<A NAME="V1756">
+V1756               [HH]    K15. CD/SAV BONDS: TOTAL VALUE $
+          K15. If you added up all such accounts, about how much would they
+               amount to right now?
+               DO NOT PROBE DK/RF
+-----------------------------------------------------------------------------
+                  N          Mean       Std Dev      Minimum       Maximum
+                743      42518.44      69339.68          0.00     900000.00
+
+                  1      NOTHING............................  0
+                257      DK................................. .D
+                191      RF................................. .R
+               4856      INAP, DO NOT HAVE CDs [V1755 NE 1]
+K15. CD/SAV BONDS: TOTAL VALUE $ - UNFOLDING SEQUENCE FOR DK,RF
+          K15 / V1756: Open ended
+          K15a / V1757: $5,000 or more?
+          K15b / V1758: $10,000 or more?
+          K15c / V1759: $50,000 or more?
+          K15d / V1760: $1,000 or more?
+If K15. = DK,RF go to K15a. Would they amount to $5,000 or more?
+               If YES go to K15b. $10,000 or more?
+                         If YES go to K15c. $50,000 or more?
+                                 ALL go to K16. [END SEQUENCE]
+                         If NO,DK,RF go to K16. [END SEQUENCE]
+               If NO go to K15d. $1,000 or more?
+                         ALL go to K16. [END SEQUENCE]
+               If DK,RF go to K16. [END SEQUENCE]
+<A NAME="V1756C">
+V1756C         [HH] CATEG: K15. CD/SAV BONDS: TOTAL VALUE $
+-----------------------------------------------------------------------------
+                       V1757     V1758    V1759     V1760    V1756C
+  0 = GAVE $ IN V1756                                          743
+  1 = 0 - 999              5         .        .         5        9
+  2 = 1000 - 4999          5         .        .         1       50
+  3 = 5000 - 9999          1         5        .         .       61
+  4 = 10000 - 49999        1         1        5         .       94
+  5 = 50000+               1         1        1         .       68
+  6 = 0 - 4999             5         .        .         DK/RF    5
+  7 = 5000+                1         DK/RF    .         .       27
+  8 = 10000+               1         1        DK/RF     .       14
+ .D = 0+                   DK        .        .         .       31
+ .R = 0+                   RF        .        .         .       89
+ .  = INAP, NO CDS [V1755 NE 1]                               4856
+<A NAME="V1756F">
+V1756F          [HH]     FLAG: K15. CD/SAV BONDS: TOTAL VALUE $
+     K15.      FLAG V1756X CDs ASSET, IMPUTE
+ -----------------------------------------------------------------------------
+                743      NO IMPUTATION..................  0
+                282      COMPLETED UNFOLDING............  1
+                 14      DK/RF IN LAST UNFOLDING........  2
+                 32      DK/RF IN NEXT-TO-LAST UNFOLD...  3
+                 31      DK ............................  7
+                 89      RF.............................  8
+                 45      NOT ASCERTAINED................  9
+               4811      INAP, NO CDs
+<A NAME="V1756X">
+V1756X          [HH]     IMP: K15. CD/SAV BONDS: TOTAL VALUE $
+          USE V1756X FOR UNFOLDING IMPUTED AND TOTAL VALUES FOR CD, BOND
+          ASSETS
+ -----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum       Maximum
+               1236      42350.56      73601.36          0.00     900000.00
+                  1      ZERO $ AMOUNT.........................  0
+               4811      INAP, DO NOT HAVE CDs [V1755 NE 1]
+<A NAME="V1761">
+V1761               [HH]    K16. CORP/GOVT BONDS: ANY
+          K16. (Aside from anything you have already told me about,)
+               Do you [or your (husband/wife/partner)] have any corporate,
+               municipal, government, or foreign bonds, or any bond funds?
+-----------------------------------------------------------------------------
+                309       YES................................  1
+               5536       NO.................................  5 GO TO K18
+                 28       DK................................. .D GO TO K18
+                100       RF................................. .R GO TO K18
+                 74       INAP, NO FINANCIAL R, PARTIAL IW
+<A NAME="V1761F">
+V1761F         [HH] FLAG: K16. CORP/GOVT BONDS: ANY
+            K16.    FLAG HOLDING ASSET BOND
+ -----------------------------------------------------------------------------
+               5844      NOT IMPUTED....................  0
+                203      IMPUTED........................  1
+<A NAME="V1761H">
+V1761H         [HH] HOLD: K16. CORP/GOVT BONDS: ANY
+            K16.    HOLDING ASSET BOND
+ -----------------------------------------------------------------------------
+                321      R HAS ASSET....................  1
+               5726      R DOES NOT HAVE ASSET..........  5
+<A NAME="V1762">
+V1762               [HH]    K17. CORP/GOVT BONDS: NET VALUE
+          K17. If you sold all those bonds or bond funds and paid off
+               anything you owed on them, how much would you have?
+               DO NOT PROBE DK/RF
+ -----------------------------------------------------------------------------
+                  N          Mean       Std Dev      Minimum       Maximum
+                179      70105.44     119680.94          0.00     800000.00
+
+                  0      ZERO $ AMOUNT     .................  0
+                 87      DK................................. .D
+                 43      RF................................. .R
+               5738      INAP, NOT HAVE BONDS [V1761 NE 1]
+K17. CORP/GOVT BONDS: NET VALUE $ - UNFOLDING SEQUENCE FOR DK,RF
+          K17 / V1762: Open ended
+          K17a / V1763: $25,000 or more?
+          K17b / V1764: $100,000 or more?
+          K17c / V1765: $500,000 or more?
+          K17d / V1766: $5,000 or more?
+If K17. = DK,RF go to K17a. Would it amount to $25,000 or more?
+               If YES go to K17b. $100,000 or more?
+                    If YES go to K17c. $500,000 or more?
+                            ALL go to K18. [END SEQUENCE]
+                    If NO,DK,RF go to K18. [END SEQUENCE]
+               If NO go to K17d. $5,000 or more?
+                    ALL go to K18. [END SEQUENCE]
+               If DK,RF go to K18. [END SEQUENCE]
+<A NAME="V1762C">
+V1762C         [HH]   CATEG: K17. CORP/GOVT BONDS: NET VALUE
+ -----------------------------------------------------------------------------
+                       V1763    V1764   V1765   V1766   V1762C
+  0 = GAVE $ IN V1762                                      179
+  1 = 0 - 4999             5        .       .       5       13
+  2 = 5000 - 24999         5        .       .       1       25
+  3 = 25000 - 99999        1        5       .       .       26
+  4 = 100000 - 499999      1        1       5       .       18
+  5 = 500000+              1        1       1       .        4
+  6 = 0 - 24999            5        .       .       DK/RF    1
+  7 = 25000+               1        DK/RF   .       .        9
+  8 = 100000+              1        1       DK/RF   .        4
+ .D = 0+                   DK       .       .       .        9
+ .R = 0+                   RF       .       .       .       21
+ .  = INAP, NOT HAVE BONDS [V1756 NE 1]                   5738
+<A NAME="V1762F">
+V1762F         [HH] FLAG: K17. CORP/GOVT BONDS: NET VALUE
+          K17.      FLAG V1735X BOND ASSET, IMPUTE
+ -----------------------------------------------------------------------------
+                179      NO IMPUTATION..................  0
+                 86      COMPLETED UNFOLDING............  1
+                  4      DK/RF IN LAST UNFOLDING........  2
+                 10      DK/RF IN NEXT-TO-LAST UNFOLD...  3
+                  9      DK ............................  7
+                 21      RF.............................  8
+                 12      NOT ASCERTAINED................  9
+               5726      INAP, NO BONDS
+<A NAME="V1762X">
+V1762X         [HH]   IMP: K17. CORP/GOVT BONDS: NET VALUE
+
+          USE V1762X FOR UNFOLDING IMPUTED AND TOTAL VALUES FOR OTHER BOND
+          ASSETS
+ -----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum       Maximum
+                321      96102.72     177605.48          0.00     800000.00
+                  3      ZERO $ AMOUNT...................... 0
+               5726      INAP, NOT HAVE BONDS [V1761 NE 1]
+<A NAME="V1767">
+V1767               [HH]    K18. USE UP ANY ASSETS 1992/3
+          K18. Not counting any money or assets that you may have given to
+               children or others, did you [and your(husband/wife/partner)]
+               use up any of your investments or savings during (1992/1993)
+               to pay for expenses?
+-----------------------------------------------------------------------------
+               1289      YES...............................  1
+               4090      NO................................  5 GO TO K18e
+                511      DON'T HAVE ASSETS.................  6 GO TO K18e
+                  6      OTHER, SPECIFY....................  7 GO TO K18e
+                 28      DK................................ .D GO TO K18e
+                 49      RF................................ .R GO TO K18e
+                 74      INAP, NO FINANCIAL R, PARTIAL IW
+<A NAME="V1768">
+V1768               [HH]    K18a. USED ASSETS: TOTAL VALUE
+          K18a.     About how much did you use up?
+               PER [NEXT SCREEN]
+ -----------------------------------------------------------------------------
+             N          Mean       Std Dev      Minimum       Maximum
+          1060       6142.43      10464.51          0.00      90000.00
+                  0      ZERO $ AMOUNT......................  0
+                182      DK................................. .D
+                 47      RF................................. .R
+               4758      INAP, NOT USE ASSETS [V1767 NE 1]
+<A NAME="V1769">
+V1769               [HH]    K18b. USED ASSETS: $ PERIOD
+          K18b.     $K18a PER
+-----------------------------------------------------------------------------
+                  7      Week...............................  1
+                  0      2 X Month..........................  2
+                 17      Month..............................  3
+                  2      Quarter............................  4
+                  4      Month..............................  5
+               1011      Year...............................  6
+                 18      Other SPECIFY......................  7
+                  2      DK................................. .D
+                  0      RF................................. .R
+               4986      INAP, NOT USE ASSETS [V1767 NE 1], NOT GIVE
+                         AMOUNT [V1768=.D,.R]
+<A NAME="V1770">
+V1770               [HH]    K18c. USED ASSETS: FOR GEN LIVING OR OTH
+          K18c.     Was that for general living expenses or for some particular
+                    expenses?
+-----------------------------------------------------------------------------
+                588      GENERAL LIVING....................  1 GO TO K18e
+                699      PARTICULAR........................  2
+                  0      DK................................ .D GO TO K18e
+                  2      RF................................ .R GO TO K18e
+               4758      INAP, NOT USE ASSETS [V1767 NE 1]
+<A NAME="V1771">
+V1771               [HH]    K18d. USED ASSETS: SPECIFIC USE
+               K18d.     What was that?
+-----------------------------------------------------------------------------
+                140      MEDICAL EXPENSES...................  1
+                492      NON-MEDICAL........................  2
+                 41      BOTH...............................  3
+                  3      DK................................. .D
+                 16      RF................................. .R
+               5355      INAP, NOT USE ASSETS [V1767 NE 1], NOT
+                         PARTICULAR EXPENSES [V1770 NE 2]
+<A NAME="V1772">
+V1772               [HH]    K18e. ADD TO SAVINGS IN 1992/3
+               K18e.     Did you use some of your income to add to your savings
+                         or  investments in (1992/1993)?
+-----------------------------------------------------------------------------
+               1449      YES................................  1
+               4401      NO.................................  5 GO TO K19
+                 55      DK................................. .D GO TO K19
+                 68      RF................................. .R GO TO K19
+                 74      INAP, NO FINANCIAL R, PARTIAL IW
+<A NAME="V1773">
+V1773               [HH]     K18f. ADD TO SAV 1992/3: TOTAL $
+          K18f.     About how much was that?
+               PER [NEXT SCREEN]
+-----------------------------------------------------------------------------
+                   N          Mean       Std Dev      Minimum       Maximum
+                 982       7051.82      11419.50          0.00      90000.00
+                  7      NOTHING............................  0
+                321      DK................................. .D
+                146      RF................................. .R
+               4598      INAP, NOT ADD TO SAVINGS [V1772 NE 1]
+<A NAME="V1773F">
+V1773F         [HH]    FLAG: K18f. ADD TO SAV 1992/3: TOTAL $
+ -----------------------------------------------------------------------------
+                974      NOT IMPUTED....................  0
+                504      IMPUTED........................  1
+               4569      INAP, NOT ADD TO SAVINGS [V1772 NE 1]
+<A NAME="V1773X">
+V1773X         [HH]    IMP: K18f. ADD TO SAV 1992/3: TOTAL $
+ -----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum       Maximum
+               1454        892.79       4886.47          0.00     120000.00
+                 11      ZERO $ AMOUNT......................  0
+               4593      INAP, NOT ADD TO SAVINGS [V1772 NE 1]
+<A NAME="V1774">
+V1774               [HH]    K18g. ADD TO SAV 1992/3: $ PERIOD
+          K18g.     $K18f PER
+-----------------------------------------------------------------------------
+                  7      Week...............................  1
+                  3      2 X Month..........................  2
+                101      Month..............................  3
+                  7      Quarter............................  4
+                  4      6 Month............................  5
+                853      Year...............................  6
+                  7      Other SPECIFY......................  7
+                  1      DK................................. .D
+                  0      RF................................. .R
+               5064      INAP, NOT ADD TO SAVINGS [V1772 NE 1], NOT GIVE
+                         AMOUNT [V1773=.D,.R]
+<A NAME="V1775">
+V1775                 [HH]    K19. TRUST: ANY
+          K19. Have you [or your (husband/wife/partner)] put any of your
+               assets into a trust?
+-----------------------------------------------------------------------------
+                465      YES................................  1
+               5430      NO.................................  5 GO TO K21
+                 26      DK................................. .D GO TO K21
+                 52      RF................................. .R GO TO K21
+                 74      INAP, NO FINANCIAL R, PARTIAL IW
+<A NAME="V1775F">
+V1775F           [HH]    FLAG: K19. TRUST: ANY
+            K19.    FLAG HOLDING ASSET TRUSTS
+ -----------------------------------------------------------------------------
+               5894      NOT IMPUTED....................  0
+                153      IMPUTED........................  1
+<A NAME="V1775H">
+V1775H             [HH]  HOLD: K19. TRUST: ANY
+               K19. HOLDING ASSET TRUSTS
+ -----------------------------------------------------------------------------
+                481      R HAS ASSET....................  1
+               5566      R DOES NOT HAVE ASSET..........  5
+<A NAME="V1776A1-A3">
+V1776A1-A3          [HH]    K19a. TRUST: BENEFICIARIES-X (X=1-3)
+          K19a.     Who receives, or will receive the benefits of the assets
+                    you've put into trust, that is, what is their relationship
+                    to you?
+               CHOOSE ALL THAT APPLY
+-----------------------------------------------------------------------------
+  V1776A1   V1776A2   V1776A3
+      101         0         0      SPOUSE............................  1
+      304        68         0      CHILD/CHILD-IN-LAW/GRANDCHILD.....  2
+       46        11         1      OTHER RELATIVE....................  3
+        2         3         0      SOMEONE ELSE......................  4
+        7         8         9      INSTITUTION OR CHARITY............  5
+        2         0         0      DK................................ .D
+        3         0         0      RF................................ .R
+     5582      5957      6037      INAP, ASSETS NOT IN A TRUST [V1775 NE 1]
+                                   NO FURTHER MENTION
+<A NAME="V1777A1-A5">
+V1777 A1-A5         [HH]    K19b. TRUST: FOR WHICH CHILD?-X (X=1-5)
+          K19b.     (Which child is that?)
+               CHOOSE ALL THAT APPLY
+               IF GRANDCHILD:
+               Which child of yours [or your (husband/wife/partner)] is the
+               parent of that grandchild?
+-----------------------------------------------------------------------------
+  V1777A1   A2    A3    A4    A5    PERSON NUMBER OF CHILDREN
+      1      0     0     1     0   100  DECEASED CHILD
+    257      0     0     0     0   110  ALL CHILDREN
+     84      2     0     0     0   120  NON-RESIDENT CHILD (OR FAMILY)
+      7     13     0     0     0   130
+      5      5     5     0     0   140
+      1      3     5     1     0   150
+      4      0     0     3     1   160
+      0      2     1     1     1   170
+      2      0     3     0     0   180
+      0      2     0     1     0   190
+      0      0     0     0     1   200
+      1      0     0     0     0   210
+      0      0     0     0     0   220
+      8      0     0     0     0   410  HOUSEHOLD MEMBER CHILD (OR SPOUSE)
+      0      0     0     0     0   420
+      1      0     0     0     0   430
+      1      0     0     0     0   DK................. .D
+      1      0     0     0     0   RF................. .R
+   5674   6020  6033  6040  6044   INAP, ASSETS NOT IN A TRUST
+                                    [V1775 NE 1], NOT SPOUSE/CHILD/
+                                    CHILD-IN-LAW/GRANDCHILD [V1776
+                                    NE 2], NO FURTHER MENTION
+<A NAME="V1778">
+V1778               [HH]    K20. TRUST: TOTAL VALUE
+          K20. What about the value of the trusts?  If you sold all the
+               assets held in trust(s), about how much would you have?
+-----------------------------------------------------------------------------
+                  N          Mean       Std Dev      Minimum       Maximum
+                267     386738.78     516631.15          0.00    5000000.00
+                  3      NOTHING...........................  0
+                119      DK................................ .D
+                 79      RF................................ .R
+               5582      INAP, ASSETS NOT IN A TRUST [V1775 NE 1]
+<A NAME="V1778F">
+V1778F         [HH] FLAG: K20. TRUST: TOTAL VALUE
+ -----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum       Maximum
+                481          0.44          0.50          0.00          1.00
+                267      NOT IMPUTED....................  0
+                214      IMPUTED........................  1
+               5566      INAP, ASSETS NOT IN A TRUST [V1775 NE 1]
+<A NAME="V1778X">
+V1778X              [HH] IMP: K20. TRUST: TOTAL VALUE
+ -----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum       Maximum
+                481     391742.72     458611.65          0.00    5000000.00
+
+                  3      NOTHING...........................  0
+               5566      INAP, ASSETS NOT IN A TRUST [V1775 NE 1]
+<A NAME="V1779">
+V1779               [HH]    K20a. TRUST: ASSETS ALREADY MENTIONED
+          K20a.     Have you already told me about any or all of the assets that
+                    you have placed in this trust?
+-----------------------------------------------------------------------------
+                404      YES, ALL...........................  1 GO TO K21
+                 17      YES, PART..........................  2
+                 33      NO.................................  5 GO TO K21
+                  6      DK................................. .D GO TO K21
+                  5      RF................................. .R GO TO K21
+               5582      INAP, ASSETS NOT IN A TRUST [V1775 NE 1]
+<A NAME="V1779F">
+V1779F         [HH] FLAG: K20a. TRUST: ASSETS MENTIONED
+          K20a.     FLAG HOLDING TRUSTS ALREADY MENTIONED
+ -----------------------------------------------------------------------------
+                454      IMPUTED........................  0
+                 27      NOT IMPUTED....................  1
+               5566      INAP, ASSETS NOT IN A TRUST [V1775 NE 1]
+<A NAME="V1779H">
+V1779H         [HH] HOLD: K20a. TRUST: ASSETS MENTIONED
+          K20a.     HOLDING TRUSTS ALREADY MENTIONED
+ -----------------------------------------------------------------------------
+                431      R HAS TRUST....................  1
+                 17      R HAS TRUST, PARTLY TOLD.......  2
+                 33      R ALREADY TOLD ABOUT TRUST.....  5
+               5566      INAP, ASSETS NOT IN A TRUST [V1775 NE 1]
+<A NAME="V1780">
+V1780               [HH]    K20b. TRUST: TOT $, PART NOT MENTIONED
+          K20b.     Consider just the assets in the trust you did NOT tell me
+                    about earlier; if you sold just those assets, about how much
+                    would you have?
+-----------------------------------------------------------------------------
+                  N          Mean       Std Dev      Minimum       Maximum
+                  8     291625.00     488191.10       5000.00    1400000.00
+                  3      DK................................ .D
+                  6      RF................................ .R
+               6030      INAP, ASSETS NOT IN A TRUST [V1775 NE 1], NOT
+                         PART REPORTED [V1779 NE 2]
+<A NAME="V1780F">
+V1780F         [HH]    FLAG: K20b. TRUST: TOT $, NOT MENTIONED
+ -----------------------------------------------------------------------------
+               5572      NOT IMPUTED....................  0
+                  9      IMPUTED........................  1
+                466      INAP, ASSETS NOT IN A TRUST [V1775 NE 1],
+                         NOT PART REPORTED [V1779 NE 2]
+<A NAME="V1780X">
+V1780X         [HH]   IMP: K20b. TRUST: TOT $, NOT MENTIONED
+          USE V1780X FOR IMPUTED TOTAL VALUES FOR OTHER TRUST ASSETS
+-----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum       Maximum
+                 17     194176.47     361874.33       5000.00    1400000.00
+               6030      INAP, ASSETS NOT IN A TRUST [V1775 NE 1], NOT
+                         PART REPORTED [V1779 NE 2]
+<A NAME="V1782">
+V1782               [HH]    K21. OTHER ASSETS: ANY
+          K21. Do you [or your (husband/wife/partner)] have any other
+               savings or assets, such as jewelry, money owed to you by
+               others, a collection for investment purposes, or an annuity
+               that you haven't already told me about?
+               EXCLUDE THE CASH VALUE OF ANY LIFE INSURANCE POLICIES.
+ -----------------------------------------------------------------------------
+                551      YES................................  1
+               5320      NO.................................  5 GO TO K23
+                 23      DK................................. .D GO TO K23
+                 79      RF................................. .R GO TO K23
+                 74      INAP, NO FINANCIAL R, PARTIAL INTERVIEW
+<A NAME="V1782F">
+V1782F             [HH]  FLAG: K21. OTHER ASSETS: ANY
+          K21. FLAG HOLDING ASSET OTHER
+ -----------------------------------------------------------------------------
+               5868      NOT IMPUTED....................  0
+                177      IMPUTED........................  1
+                  2      INAP...........................  .
+<A NAME="V1782H">
+V1782H            [HH]   HOLD: K21. OTHER ASSETS: ANY
+          K21. HOLDING ASSET OTHER
+ -----------------------------------------------------------------------------
+                565      R HAS ASSET....................  1
+               5482      R DOES NOT HAVE ASSET..........  5
+<A NAME="V1783">
+V1783               [HH]    K22. OTH ASSETS: NET VALUE
+          K22. If you sold all that and then paid off any debts on it,
+               about how much would you have?
+               DO NOT PROBE DK/RF
+-----------------------------------------------------------------------------
+                  N          Mean       Std Dev      Minimum       Maximum
+                380      27783.05      46421.51          0.00     340000.00
+                  3      NOTHING...........................  0
+                143      DK................................ .D
+                 28      RF................................ .R
+               5496      INAP, NO OTHER ASSETS [V1782 NE 1]
+K22. OTH ASSETS: NET VALUE $ - UNFOLDING SEQUENCE FOR DK,RF
+          K22 / V1783:  Open ended
+          K22a / V1784:  $10,000 or more?
+          K22b / V1785:  $25,000 or more?
+          K22c / V1786:  $2,000 or more?
+If K22. = DK,RF go to K22a. Would it amount to $10,000 or more?
+               If YES go to K22b. $25,000 or more?
+                         ALL go to K23. [END SEQUENCE]
+               If NO go to K22c. $2,000 or more?
+                         ALL go to K23. [END SEQUENCE]
+               If DK,RF go to K23. [END SEQUENCE]
+<A NAME="V1783C">
+V1783C         [HH] CATEG: K22. OTH ASSETS: NET VALUE
+ -----------------------------------------------------------------------------
+                               V1784     V1785     V1786     V1783C
+  0 =  GAVE $ IN V1783                                         380
+  1 = 0 - 1999                    5         .         5         10
+  2 = 2000 - 9999                 5         .         1         59
+  3 = 10000 - 24999               1         5         .         36
+  4 = 25000+                      1         1         .         31
+  5 = 0 - 9999                    5         .         DK/RF      1
+  6 = 10000+                      1         DK/RF     .          6
+ .D = 0+                          DK        .         .         14
+ .R = 0+                          RF        .         .         14
+ .  = INAP, NO OTHER ASSETS [V1783]                           5496
+<A NAME="V1783F">
+V1783F         [HH] FLAG: K22. OTH ASSETS: NET VALUE
+          K22.      FLAG V1783X OTHER ASSETS, IMPUTE
+ -----------------------------------------------------------------------------
+                380      NO IMPUTATION..................  0
+                136      COMPLETED UNFOLDING............  1
+                  7      DK/RF IN LAST UNFOLDING........  2
+                 14      DK ............................  7
+                 14      RF.............................  8
+                 14      NOT ASCERTAINED................  9
+               5482      INAP, NO OTHER ASSETS
+<A NAME="V1783X">
+V1783X         [HH] IMP: K22. OTH ASSETS: NET VALUE
+          USE V1783X FOR UNFOLDING IMPUTED AND TOTAL VALUES FOR OTHER ASSETS
+ -----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum       Maximum
+                565      25669.53      43000.61          0.00     340000.00
+                  4      ZERO $ AMOUNT.......................  0
+               5482      INAP, NO OTHER ASSETS [V1783 NE 1]
+<A NAME="V1787">
+V1787               [HH]    K23. DEBTS: ANY
+          K23. And do you [or your (husband/wife/partner)] have any debts
+               that we haven't asked about, such as credit card balances,
+               medical debts, life insurance policy loans, loans from
+               relatives, and so forth?
+ -----------------------------------------------------------------------------
+                821      YES................................  1
+               5076      NO.................................  5 GO TO K36
+                 24      DK................................. .D GO TO K36
+                 52      RF................................. .R GO TO K36
+                 74      INAP, NO FINANCIAL R, PARTIAL INTERVIEW
+<A NAME="V1787F">
+V1787F            [HH]   FLAG: K23. DEBTS: ANY
+            K23.    FLAG HOLDING DEBTS
+ -----------------------------------------------------------------------------
+               5896      NOT IMPUTED....................  0
+                151      IMPUTED........................  1
+<A NAME="V1787H">
+V1787H             [HH]  HOLD: K23. DEBTS: ANY
+            K23.    HOLDING DEBTS
+ -----------------------------------------------------------------------------
+                841      R HAS DEBTS....................  1
+               5206      R DOES NOT HAVE DEBTS..........  5
+<A NAME="V1788">
+V1788               [HH]    K24. DEBTS: TOTAL $
+          K24. About how much would that amount to?
+                DO NOT PROBE DK/RF
+ -----------------------------------------------------------------------------
+                  N          Mean       Std Dev      Minimum       Maximum
+                702       5418.78      18049.97         10.00     285000.00
+                102      DK................................ .D
+                 17      RF................................ .R
+               5226      INAP, NOT HAVE  DEBTS [V1787 NE 1]
+-    K24 Total debts unfolding categories
+     K24 / V1788:  Open ended
+     K24a / V1789:  $10,000 or more?
+     K24b / V1790:  $25,000 or more?
+     K24c / V1791:  $2,000 or more?
+<A NAME="V1788C">
+V1788C         [HH] CATEG: K24. DEBTS: TOTAL $
+ -----------------------------------------------------------------------------
+
+                                   V1789     V1790     V1791     V1788C
+ 0 = GAVE $ FOR V1788                                               701
+ 1 = 0 - 1999                          5         .         5         46
+ 2 = 2000 - 9999                       5         .         1         40
+ 3 = 10000 - 24999                     1         5         .         12
+ 4 = 25000+                            1         1         .          5
+ 5 = 0 - 9999                          5         .         DK/RF      3
+ 6 = 10000+                            1         DK/RF     .          1
+ .D= 0+                                DK        .         .          9
+ .R= 0+                                RF        .         .          3
+ .   INAP, NOT HAVE  DEBTS [V1787 NE 1]                            5227
+<A NAME="V1788F">
+V1788F         [HH] FLAG: K24. DEBTS: TOTAL $
+          K24.      FLAG V1788X DEBTS, IMPUTE
+ -----------------------------------------------------------------------------
+                701      NO IMPUTATION..................  0
+                103      COMPLETED UNFOLDING............  1
+                  4      DK/RF IN LAST UNFOLDING........  2
+                  9      DK ............................  7
+                  3      RF.............................  8
+                 21      NOT ASCERTAINED................  9
+               5206      INAP, NOT HAVE  DEBTS [V1787 NE 1]
+<A NAME="V1788X">
+V1788X         [HH] IMP: K24. DEBTS: TOTAL $
+          USE V1788X FOR UNFOLDING IMPUTED AND TOTAL VALUES FOR OTHER DEBTS
+ -----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum       Maximum
+                841       6185.98      21162.46         10.00     285000.00
+               5206      INAP, NOT HAVE  DEBTS [V1787 NE 1]
+<A NAME="V1792">
+V1792               [HH]    K36. LUMP SUM $500\+: ANY, PAST 2YRS
+          K36. People sometimes receive property or lump sum payments of
+               money from  such things as pension settlements, insurance
+               settlements, inheritance, or as a gift.
+               In the past two years did you [or your
+               (husband/wife/partner)] receive a lump sum of money or
+               property worth $500 or more that you have not already told
+               me about?
+------------------------------------------------------------------------------
+                310      YES................................  1
+               5603      NO.................................  5 GO TO K42
+                 11      DK................................. .D GO TO K42
+                 49      RF................................. .R GO TO K42
+                 74      INAP, NO FINANCIAL R, PARTIAL IW
+<A NAME="V1792F">
+V1792F           [HH]    FLAG: K36. LUMP SUM $500\+
+          K36  FLAG HOLDING ASSET LUMP SUM
+ -----------------------------------------------------------------------------
+               5912      NOT IMPUTED....................  0
+                135      IMPUTED........................  1
+<A NAME="V1792H">
+V1792H           [HH]    HOLD: K36. LUMP SUM $500\+
+          K36  HOLDING ASSET LUMP SUM
+ -----------------------------------------------------------------------------
+                319      R HAS ASSET....................  1
+               5728      R DOES NOT HAVE ASSET..........  5
+<A NAME="V1793">
+V1793               [HH]    K37. LUMP SUM: TYPE-1
+<A NAME="V1799">
+V1799               [HH]    K37. LUMP SUM: TYPE-2
+<A NAME="V1805">
+V1805               [HH]    K37. LUMP SUM: TYPE-3
+          K37-X.    What was the (next) largest lump sum from--was it
+          X=1-3     insurance, a pension, an inheritance or something
+                    else?
+------------------------------------------------------------------------------
+    V1793    V1799    V1805
+      101        1        0   Insurance..........................  1
+       17        2        1   Pension............................  2
+       98        3        0   Inheritance........................  3
+        1                     (illegal code).....................  5
+      104        7        3   OTHER..............................  7
+        0        0        0   DK................................. .D
+        0        0        0   RF................................. .R
+     5730     6034     6043   INAP, NOT RECEIVE LUMP SUM [V1792 NE 1]
+<A NAME="V1794">
+V1794               [HH]      K38. LUMP SUM: PAYMENT MONTH-1
+<A NAME="V1795">
+V1795               [HH]      K38a. LUMP SUM: PAYMENT YEAR-1
+<A NAME="V1800">
+V1800               [HH]      K38. LUMP SUM: PAYMENT MONTH-2
+<A NAME="V1801">
+V1801               [HH]      K38a. LUMP SUM: PAYMENT YEAR-2
+<A NAME="V1806">
+V1806               [HH]      K38. LUMP SUM: PAYMENT MONTH-3
+<A NAME="V1807">
+V1807               [HH]      K38a. LUMP SUM: PAYMENT YEAR-3
+          K38./K38a.     About what month and year was that?
+-----------------------------------------------------------------------------
+MONTH:
+     V1794    V1800    V1806
+        38        1        1   DK................................ .D
+         1        0        0   RF................................ .R
+      5737     6034     6043   INAP, NOT RECEIVE LUMP SUM [V1792 NE 1]
+YEAR:
+     V1795    V1801    V1807
+        38        1        1   1991...............................  1
+        81        8        2   1992...............................  2
+       170        3        1   1993...............................  3
+        11        1        0   1994...............................  4
+         1                     (illegal code).....................  5
+         7        0        0   DK................................. .D
+         1        0        0   RF................................. .R
+     5738     6034     6043    INAP, NOT RECEIVE LUMP SUM [V1792 NE 1]
+<A NAME="V1796">
+V1796               [HH]    K39. LUMP SUM: $ RECEIVED-1
+<A NAME="V1802">
+V1802               [HH]    K39. LUMP SUM: $ RECEIVED-2
+<A NAME="V1808">
+V1808               [HH]    K39. LUMP SUM: $ RECEIVED-3
+          K39-X.    About how much was that from the (insurance/pension/
+          X=1-3          inheritance)?
+                    DO NOT PROBE DK/RF
+-----------------------------------------------------------------------------
+             N          Mean       Std Dev      Minimum       Maximum
+     V1796  266      17326.23      34153.10          0.00     300000.00
+     V1802   13      13133.15      26222.89        700.00      97531.00
+     V1808    3      25913.67      42605.91        149.00      75092.00
+      V1796  V1802  V1808
+          0      0      0    ZERO $ AMOUNT.....................  0
+         27      0      1    DK................................ .D
+         17      0      0    RF................................ .R
+       5737   6034   6043    INAP, NOT RECEIVE LUMP SUM [V1792 NE 1]
+          K39-X. LUMP SUM: $ RECEIVED-X - UNFOLDING SEQUENCE FOR DK,RF
+          X=1-3
+               K39-1 / V1796/V1802/V1808:  Open ended
+               K40-1 / V1797/V1803/V1809:  More than $30,000?
+          If K39-X. = DK,RF go to K40-X. Was it more than $30,000?
+                           ALL go to K41-X. [END SEQUENCE]
+<A NAME="V1796C">
+V1796C         [HH] CATEG: K39. LUMP SUM: $ RECEIVED-1
+<A NAME="V1802C">
+V1802C         [HH] CATEG: K39. LUMP SUM: $ RECEIVED-2
+<A NAME="V1808C">
+V1808C         [HH] CATEG: K39. LUMP SUM: $ RECEIVED-3
+ -----------------------------------------------------------------------------
+                                       V1796C       V1802C      V1808C
+  0 = GAVE $                              266           13           0
+  1 = 0 - 30000     5                       8            0           0
+  2 = 30001+        1                       0            0           0
+ .D = 0+           DK                       1            0           0
+ .R = 0+           RF                       8            0           0
+ .  = INAP, NO LUMP SUM [V1792 NE 1]     5764         6034        6047
+<A NAME="V1796F">
+V1796F         [HH] FLAG: K39. LUMP SUM: $ RECEIVED-1
+<A NAME="V1802F">
+V1802F         [HH] FLAG: K39. LUMP SUM: $ RECEIVED-2
+<A NAME="V1808F">
+V1808F         [HH] FLAG: K39. LUMP SUM: $ RECEIVED-3
+          K39-1          FLAG V1796X LUMP SUM-1, IMPUTE
+          K39-2          FLAG V1802X LUMP SUM-2, IMPUTE
+          K39-3          FLAG V1808X LUMP SUM-3, IMPUTE
+ -----------------------------------------------------------------------------
+V1796F  V1802F  V1808F
+ 266        13       0        NO IMPUTATION..................  0
+   8         0       0        COMPLETED UNFOLDING............  1
+   1         0       0        DK ............................  7
+   8         0       0        RF.............................  8
+  36         0       0        NOT ASCERTAINED................  9
+5728      6034    6047         INAP, NO LUMP SUM
+<A NAME="V1796X">
+V1796X         [HH] IMP: K39. LUMP SUM: $ RECEIVED-1
+<A NAME="V1802X">
+V1802X         [HH] IMP: K39. LUMP SUM: $ RECEIVED-2
+<A NAME="V1808X">
+V1808X         [HH] IMP: K39. LUMP SUM: $ RECEIVED-3
+          USE V1796X/V1802X/V1808X FOR UNFOLDING IMPUTED AND TOTAL VALUES
+          FROM LUMP SUMS IN LAST CALENDAR YEAR
+ -----------------------------------------------------------------------------
+            N          Mean       Std Dev       Minimum       Maximum
+V1796X    319      16735.08      33051.81          0.00     300000.00
+V1802X     13      13133.15      26222.89        700.00      97531.00
+V1808X      4      23185.25      35212.96        149.00      75092.00
+      V1796X  V1802X  V1808X
+          2       .       .   ZERO $ AMOUNT.......................... 0
+       5728    6034    6043   INAP, NOT RECEIVE LUMP SUM [V1792 NE 1]
+          K41-X.    Did you [or your (husband/wife/partner)] have any
+          X=1-2          other large lump sum payments in the last two years?
+<A NAME="V1798">
+V1798               [HH]    K41. LUMP SUM: OTHER IN LAST 2YRS-1
+<A NAME="V1804">
+V1804               [HH]    K41. LUMP SUM: OTHER IN LAST 2YRS-2
+------------------------------------------------------------------------------
+     V1798    V1804
+       13        4       YES................................  1
+      296        9       NO.................................  5 GO TO K42
+        0        0       DK................................. .D GO TO K42
+        1        0       RF................................. .R GO TO K42
+     5737     6034       INAP, NO LUMP SUMS
+<A NAME="V1798F">
+V1798F           [HH]    FLAG: K41. LUMP SUM: OTHER-1
+<A NAME="V1804F">
+V1804F           [HH]    FLAG: K41. LUMP SUM: OTHER-2
+          K41. FLAG HOLDING ASSET LUMP SUM-1
+          K41. FLAG HOLDING ASSET LUMP SUM-2
+ -----------------------------------------------------------------------------
+   V1798F    V1804F
+      309        13      NOT IMPUTED....................  0
+       10         0      IMPUTED........................  1
+     5728      6034      INAP, NO LUMP SUMS
+<A NAME="V1798H">
+V1798H          [HH]     HOLD: K41. LUMP SUM: OTHER-1
+<A NAME="V1804H">
+V1804H          [HH]     HOLD: K41. LUMP SUM: OTHER-2
+          K41. HOLDING ASSET LUMP SUM-1
+          K41. HOLDING ASSET LUMP SUM-2
+ -----------------------------------------------------------------------------
+    V1798H    V1804H
+       13         4       R HAS ASSET....................  1
+      306         9       R DOES NOT HAVE ASSET..........  5
+     5728      6034       INAP, NO LUMP SUMS
+<A NAME="V1813">
+V1813               [HH]    K42.FINANCIAL BETTER/SAME/WORSE IN 2YRS
+          K42. Looking ahead to two years from now, do you think you [or
+               your (husband/wife/partner)] will be financially better off,
+               about the same, or worse off?
+-----------------------------------------------------------------------------
+                533      BETTER.............................  1
+               4006      SAME...............................  3
+               1211      WORSE..............................  5
+                204      DK................................. .D
+                 19      RF................................. .R
+                 74      INAP, NO FINACIAL R, PARTIAL IW
+<A NAME="end">
+<p>
+<b>[<A HREF=#top>Return to Beginning</a>][<A HREF="a93_00.html">Table of Contents</a>][<A HREF=codb-rtxt.htm>Next Section</a>][<A HREF=codb-jtxt.htm>Previous Section</a></b>]
+</pre><hr><em>Wed Jun 16 15:41:20 1999</em></body></html>

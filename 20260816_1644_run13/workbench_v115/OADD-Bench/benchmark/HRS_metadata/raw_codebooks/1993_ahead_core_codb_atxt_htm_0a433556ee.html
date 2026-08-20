@@ -1,0 +1,645 @@
+<html><head><title>AHEAD 1993 (Wave 1) Codebook - codb-a.txt </title></head>
+<body>
+<a name="top">
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="6" WIDTH="600">
+<TR>
+<TD WIDTH="250">
+<IMG SRC="hrslogo1.gif" border=0>
+</TD>
+<TD WIDTH="350" valign="center">
+<h1>AHEAD 1993 (Wave 1) Documentation</h1>
+</TD>
+</TR>
+</TABLE>
+<HR><pre><b>[<A HREF=#end>End of this section</a>][<A HREF="a93_00.html">Table of Contents</a>][<A HREF=codb-btxt.htm>Next Section</a>][<A HREF=a93_00.html>Previous Section</a></b>]
+<HR>
+<!--                          AHEAD CODEBOOK
+               Second Public Release Datasets--3/98
+Data sets:      n       Contents
+ BHH21.SD2    6047  HH  - HOUSEHOLD LEVEL
+ BR21.SD2     8222  RESP- RESPONDENT LEVEL
+ BOP21.SD2   17424  PERSONS - OTHER PERSONS LEVEL (HH MEMBERS, NON-RESIDENT CHILDREN)
+                    INCLUDING MERGED HH, RESPONDENT, AND HELPER VARIABLES
+ BHP21.SD2    3160  HELP - HELPER LEVEL
+ -----------------------------------------------------------------------------
+ -->
+                 SECTION A. IDs AND DEMOGRAPHICS
+<A NAME="HHID">
+HHID      [HH, RESP, HELP, PERSONS]     HOUSEHOLD IDENTIFIER
+ -----------------------------------------------------------------------------
+     Permanent 6 - digit ID number.  Uniquely identifies each household.
+     Link variable for all files.
+          HH Level (HH)                      6047
+          RESPONDENT Level (RESP)            8222
+          OTHER PERSON Level (PERSONS)      17424
+          HELPER Level (HELP)                3160
+<A NAME="PN">
+PN        [RESP, HELP, PERSONS]    PERSON NUMBER
+ -----------------------------------------------------------------------------
+     Permanent 3 - digit ID number for each record in the data set.
+          RESPONDENT Level   [RESP]     8222
+          Identifies first and second respondent in the household.
+
+                    5931      FIRST RESPONDENT
+                              IN HOUSEHOLD...............010
+                    2291      SECOND RESPONDENT
+                              IN HOUSEHOLD...............020
+
+          OTHER PERSON Level [PERSONS] 17424
+          Identifies a) household members (including children or
+          grandchildren) and their spouses other than the respondent and the
+          respondent's spouse/partner within the household; and b) non-resident
+          children and their families.  One PN (from 410 to 600) is
+          assigned to each household member and his or her spouse/partner.
+          One PN (from 120 to 390) is assigned to each non-resident child
+          and his or her family.  (See Section D, page 14 for
+          distributions).
+
+          HELPER Level        [HELP]     3160
+
+<A NAME="HHIDPN">
+HHIDPN    [RESP, HELP, PERSONS]    HOUSEHOLD IDENTIFIER AND PERSON NUMBER
+ -----------------------------------------------------------------------------
+     Permanent 9 - digit ID number.  Uniquely identifies a person within a
+     household. Link variable for all files.
+
+          RESPONDENT Level (RESP)       8222
+          OTHER PERSON Level (PERSONS) 17424
+          HELPER Level (HELP)           3160
+<A NAME="HN">
+HN        [HELP]    HELPER NUMBER
+ -----------------------------------------------------------------------------
+          Permanent 3 - digit ID number.  Uniquely identifies a helper
+          within a household.
+
+          The helper number (HN) was created by combining the helper's
+          person number (PN) with their relationship to the respondent
+          (BRELATEP).  (See Appendix A for details.)
+
+<A NAME="BSUBHH">
+BSUBHH    [HH, RESP, HELP, PERSONS]     1993 SUBHOUSEHOLD IDENTIFIER
+ -----------------------------------------------------------------------------
+          1 - digit ID number.  When combined with HHID uniquely identifies
+          a household as of a particular collection year.  At Wave One all
+          households are coded 0 in BSUBHH.
+<A NAME="BSPN">
+BSPN      [RESP]    SPOUSE/PARTNER PERSON NUMBER
+ -----------------------------------------------------------------------------
+          PN of the Respondent's Spouse.
+               2175      SPOUSE/PARTNER OF SECOND
+                         RESPONDENT IN HOUSEHOLD...............010
+               2175      SPOUSE/PARTNER OF FIRST
+                         RESPONDENT IN HOUSEHOLD...............020
+               3872      INAP, NO SPOUSE/PARTNER INTERVIEWED
+<A NAME="BFAMRHH">
+BFAMRHH   [HH]      FAMILY R IN HOUSEHOLD
+ -----------------------------------------------------------------------------
+                 15      NO FAMILY R
+                         ASSIGNED TO HOUSEHOLD...........  0
+               6032      YES.............................  1
+<A NAME="BFINRHH">
+BFINRHH   [HH]      FINANCIAL R IN HOUSEHOLD
+ -----------------------------------------------------------------------------
+                 34      NO FAMILY R
+                         ASSIGNED TO HOUSEHOLD...........  0
+               6013      YES.............................  1
+                         INAP, NO FINANCIAL R ASSIGNED TO HOUSEHOLD
+<A NAME="AGE">
+AGE       [RESP]    AGE OF R AT INTERVIEW
+ -----------------------------------------------------------------------------
+          Date of IW (V359-V361) minus Date of Birth (V112-V114))
+                  779    [LESS THAN 70]  (17 born in 1923)
+                 2793    [70-74]         (13 born in 1924)
+                 2084    [75-79]
+                 1527    [80-84]
+                  736    [85-89]
+                  233    [90-94]
+                   70    [95-104]
+<A NAME="SEX">
+SEX       [RESP]    SEX OF R
+ -----------------------------------------------------------------------------
+
+               3015      MALE...............................  1
+               5207      FEMALE.............................  2
+
+-              DATE OF INTERVIEW
+ ----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum      Maximum
+<A NAME="V359">
+V359 [RESP]    INTERVIEW MONTH
+               8222          6.38          4.60          1.00        12.00
+<A NAME="V360">
+V360 [RESP]    INTERVIEW DAY
+               8222         15.03          8.74          1.00        31.00
+<A NAME="V361">
+V361 [RESP]    INTERVIEW YEAR
+               8222         93.54          0.50         93.00        94.00
+<A NAME="MODE">
+MODE      [RESP]    MODE OF INTERVIEW
+ -----------------------------------------------------------------------------
+               4986      TELEPHONE....................  1
+               3236      FACE-TO-FACE.................  2
+<A NAME="IWCOMP">
+IWCOMP    [RESP]    COMPLETE OR PARTIAL INTERVIEW
+ -----------------------------------------------------------------------------
+               8181      IW COMPLETE................  1
+                 41      IW PARTIAL.................  5
+<A NAME="IWN">
+IWN       [HH]    NUMBER OF INTERVIEWS IN HH W1
+ -----------------------------------------------------------------------------
+               3872      ONE INTERVIEW................  1
+               2175      TWO INTERVIEWS................ 2
+<A NAME="V100">
+V100      [RESP]    LANGUAGE OF INTERVIEW
+ -----------------------------------------------------------------------------
+               7938      ENGLISH....................  0
+                284      SPANISH....................  1
+<A NAME="V105">
+V105      [RESP]    LEAD R OR SECOND R
+ -----------------------------------------------------------------------------
+               2270      LEAD R.......................1
+               2190      SECOND R.....................2
+               3762      ONLY R.......................3
+<A NAME="TYPE">
+TYPE      [RESP]    TYPE OF R
+ -----------------------------------------------------------------------------
+               1115      LEAD R/NON-FINANCIAL R ..................    1
+               1088      2ND R/NON-FINANCIAL R ...................    2
+               4917      LEAD R/FINANCIAL R, ONLY R ..............    3
+               1102      2ND R/FINANCIAL R .......................    4
+<A NAME="PROXY">
+PROXY          [RESP]    SELF or PROXY INTERVIEW
+ -----------------------------------------------------------------------------
+               7382      SELF...............................  1
+                840      PROXY..............................  2
+<A NAME="PTYPE">
+PTYPE          [RESP]    REASON FOR PROXY
+ -----------------------------------------------------------------------------
+                601      ILL...........................1
+                187      REFUSED.......................2
+                 52      LANGUAGE......................3
+               7382      INAP
+<A NAME="V1934">
+V1934          [RESP]    PROXY RELATION TO R
+ -----------------------------------------------------------------------------
+                389      SPOUSE............................  1
+                234      DAUGHTER/STEPDAUGHTER.............  2
+                 85      SON/STEPSON.......................  3
+                 29      DAUGHTER-IN-LAW...................  4
+                  8      SON-IN-LAW........................  5
+                 18      GRANDDAUGHTER.....................  6
+                  9      GRANDSON..........................  7
+                 11      SISTER............................  8
+                  1      BROTHER...........................  9
+                 21      OTHER RELATIVE.................... 10
+                 18      FRIEND............................ 11
+                 11      PAID HELPER....................... 12
+                  6      PROFESSIONAL...................... 13
+               7382      INAP, NOT PROXY INTERVIEW
+<A NAME="V2265">
+V2265          [RESP]    TOTAL INTERVIEW TIME IN MINUTES
+ -----------------------------------------------------------------------------
+                  N       Mean       Std Dev       Minimum      Maximum
+               8179       61.23       23.32        2.55         352.63
+<A NAME="REGION">
+REGION         [RESP, HH]    CENSUS REGION/DIVISION
+ -----------------------------------------------------------------------------
+               RESP     HH
+          EAST
+                366     272      NEW ENGLAND................  1
+               1208     912      MID-ATLANTIC...............  2
+          CENTRAL
+               1515    1106      EAST NORTH CENTRAL.........  3
+                613     449      WEST NORTH CENTRAL.........  4
+          SOUTH
+               1966    1450      SOUTH ATLANTIC.............  5
+                316     240      EAST SOUTH CENTRAL.........  6
+                917     686      WEST SOUTH CENTRAL.........  7
+          WEST
+                300    207       MOUNTAIN...................  8
+               1021    723       PACIFIC....................  9
+     [SEE APPENDIX A FOR STATES ASSIGNED TO EACH DIVISION AND REGION]
+<A NAME="MSA">
+MSA       [HH, RESP]    RESIDENCE IN AN URBAN OR RURAL AREA
+ -----------------------------------------------------------------------------
+               RESP     HH
+               2000   1444    NOT IN MSA (RURAL).........  0
+               6222   4603    MSA (URBAN)................  1
+<A NAME="DOMAIN">
+DOMAIN         [RESP, HH]    CENSUS DOMAIN FOR OVERSAMPLING
+ -----------------------------------------------------------------------------
+               RESP     HH
+               4435   3204    CORE......................... 1
+               1893   1493    BLACK (HIGH DENSITY AREA).... 2
+                806    575    HISPANIC (HIGH DENSITY AREA). 3
+               1088    775    FLORIDA RESIDENTS............ 4
+<A NAME="HCFA">
+HCFA      [RESP, HH]    TYPE OF SAMPLE
+ -----------------------------------------------------------------------------
+               RESP     HH
+               6954   5058    HRS SCREEN SAMPLE..........  0
+               1268    989    HCFA SAMPLE................  1
+                   WEIGHTING AND SAMPLE DESIGN
+<A NAME="AH_SECU">
+AH_SECU        [HH, RESP]    SAMPLING ERROR COMPUTATION UNIT
+ -----------------------------------------------------------------------------
+          For use with AH_SESTR in design effect calculations.
+                   N          Mean       Std Dev       Minimum      Maximum
+           HH     6047          1.51          0.50          1.00         2.00
+          RESP    8222          1.50          0.50          1.00         2.00
+<A NAME="AH_SESTR">
+AH_SESTR       [HH, RESP]    SAMPLING ERROR STRATA (53)
+ -----------------------------------------------------------------------------
+          For use with AH_SECU in design effect calculations.
+                   N          Mean       Std Dev       Minimum      Maximum
+          HH    6047         29.24         14.46          1.00        53.00
+          RESP  8222         29.53         14.41          1.00        53.00
+<A NAME="WTHHPOP">
+WTHHPOP        [HH]    HOUSEHOLD POPULATION WEIGHT
+ -----------------------------------------------------------------------------
+          [See Codebook Introduction for details about weights]
+                   N          Mean       Std Dev       Minimum      Maximum
+                6047       2744.67       1361.66        504.61     11440.48
+<A NAME="WTHHNORM">
+WTHHNORM       [HH]    CENTERED HOUSEHOLD WEIGHT
+ -----------------------------------------------------------------------------
+          [See Codebook Introduction for details about weights]
+                   N          Mean       Std Dev       Minimum      Maximum
+                6047          1.00          0.50          0.18         4.17
+<A NAME="WTRPOP">
+WTRPOP         [RESP]    RESPONDENT POPULATION WEIGHT
+ -----------------------------------------------------------------------------
+          [See Codebook Introduction for details about weights]
+                  N          Mean       Std Dev       Minimum      Maximum
+               8222       2557.48       1299.42          0.00      8066.59
+                 775      Non-age eligible respondents..............  0
+                         (Spouse/partner of age-eligible R; born after
+                         1923)
+<A NAME="WTRNORM">
+WTRNORM        [RESP]    CENTERED RESPONDENT WEIGHT
+ -----------------------------------------------------------------------------
+          [See Codebook Introduction for details about weights]
+                   N          Mean       Std Dev       Minimum      Maximum
+               8222           .91          0.46          0.00         2.86
+                 775          Non-age eligible respondents.................  0
+                         (Spouse/partner of age-eligible R; born after
+                         1923)
+<HR><pre><b>[<A HREF=#end>End of this section</a>][<A HREF="a93_00.html">Table of Contents</a>][<A HREF=codb-btxt.htm>Next Section</a>][<A HREF=a93_00.html>Previous Section</a></b>]
+<HR>
+
+                     SECTION A.  DEMOGRAPHICS
+                        (All Respondents)
+          A1.  First, I have some questions about your background.
+               In what month, day, and year were you born?
+<A NAME="V112">
+V112      [REMOVED]
+               MONTH  (2 digit)
+<A NAME="V113">
+V113      [REMOVED]
+               DAY    (2 digit)
+<A NAME="V114">
+V114      [RESP]    A1. BIRTH YEAR
+               YEAR   (4 digit)
+ -----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum       Maximum
+               8222       1916.58          6.80       1890.00       1955.00
+<A NAME="V117">
+V117      [RESP]    A2. BORN US?
+          A2.  Were you born in the United States?
+ -----------------------------------------------------------------------------
+               7428      YES................................  1
+                794      NO.................................  5 GO TO A2b
+                  0      DK................................. .D GO TO A3
+                  0      RF................................. .R GO TO A3
+<A NAME="V118">
+V118      [REMOVED]
+          A2a. In what state were you born?
+                         DK................................. .D
+                         RF................................. .R
+                         INAP, NOT BORN IN US (DK/RF) [V117 NE 1]
+<A NAME="COUNTRY">
+COUNTRY        [REMOVED]
+          A2b. In what country were you born?
+                         DK................................. .D
+                         RF................................. .R
+                         INAP, BORN IN US (DK/RF) [V117 NE 5]
+          A2c. In about what year did you come to the United States?
+ -----------------------------------------------------------------------------
+<A NAME="V120">
+V120 [RESP]    A2c. ARRIVE US YEAR
+                  N          Mean       Std Dev       Minimum       Maximum
+                666       1947.51         22.36       1900.00       1993.00
+                  3      DK................................. .D
+                  0      RF................................. .R
+               7553      INAP, BORN IN US (DK/RF) [V117=1]
+<A NAME="V121">
+V121 [RESP]    A2d. ARRIVE US YEARS AGO
+                  N          Mean       Std Dev       Minimum       Maximum
+                 35         27.34         21.67          2.00         76.00
+                  0      DK................................. .D
+                  0      RF................................. .R
+               8187      INAP, BORN IN US (DK/RF) [V117=1],
+                         USED ARRIVE YEAR
+<A NAME="V122">
+V122 [RESP]    A2e. ARRIVE US AT AGE
+                  N          Mean       Std Dev       Minimum       Maximum
+                103         12.64         11.78          1.00         76.00
+                  0      DK................................. .D
+                  0      RF................................. .R
+               8118      INAP, BORN IN US (DK/RF) [V117=1], USED EITHER
+                         YEAR, YEARS AGO
+<A NAME="V125">
+V125      [RESP]    A3. R'S EDUCATION
+          A3.  What is the highest grade of school or year of college you
+               completed?
+ -----------------------------------------------------------------------------
+
+                154      0       NO FORMAL EDUCATION
+               3474      [1-11]  GRADES
+               2449      12      HIGH SCHOOL
+               1181      [13-15] SOME COLLEGE
+                512      16      COLLEGE GRADUATE
+                452      17      POST COLLEGE (17+ YEARS)
+                  0      97    OTHER, SPECIFY: ALL RECODED TO ABOVE
+                  0      .D   DK
+                  0      .R   REFUSED
+<A NAME="V126">
+V126      [RESP]    A3a. R FINISH HIGH SCHOOL
+          A3a. Did you get a high school diploma or pass a high school
+               equivalency test?
+ -----------------------------------------------------------------------------
+               2323      YES, DIPLOMA.......................  1
+                212      YES, EQUIVALENCY [GED].............  2
+               3542      NO.................................  5
+                 14      DK................................. .D
+                  0      RF................................. .R
+               2131      INAP, YEARS OF SCHOOL [V125] 13-17
+<A NAME="V128">
+V128      [RESP]    A3b. R FINISH COLLEGE
+          A3b. Did you get a college degree?
+ -----------------------------------------------------------------------------
+               1035      YES................................  1
+               1096      NO.................................  5 GO TO A4
+                  1      DK................................. .D GO TO A4
+                  0      RF................................. .R GO TO A4
+               6090      INAP, YEARS OF SCHOOL [V125] 0-12 OR (DK/RF)
+<A NAME="DEGREE">
+DEGREE         [RESP]    A3c. R'S HIGHEST DEGREE
+          A3c. What is the highest degree you have earned?
+ -----------------------------------------------------------------------------
+                140      LESS THAN BACHELOR'S...............  1
+                547      BACHELOR'S.........................  2
+                247      ADVANCED DEGREE/NON-PROFESSIONAL...  3
+                 98      ADVANCED DEGREE/PROFESSIONAL.......  4
+                  2      DK................................. .D
+                  0      RF................................. .R
+               7188      INAP, YEARS OF SCHOOL [V125] 0-12 (DK/RF) OR
+                         NO COLLEGE DEGREE (DK/RF) [V128 NE 1]
+<A NAME="V130">
+V130      [RESP]    A4. MOTHER IN SCHOOL 8/+ YEARS
+          A4.  Did your mother attend 8 years or more of school?
+ -----------------------------------------------------------------------------
+               3801      YES................................  1
+               3418      NO.................................  5
+               1000      DK................................. .D
+                  3      RF................................. .R
+<A NAME="V131">
+V131      [RESP]    A5. FATHER IN SCHOOL 8/+ YEARS
+          A5.  Did your father attend 8 years or more of school?
+ -----------------------------------------------------------------------------
+               3521      YES................................  1
+               3676      NO.................................  5
+               1025      DK................................. .D
+                  0      RF................................. .R
+<A NAME="V134">
+V134      [RESP]    A6. R'S RELIGION
+          A6.  What is your religious preference; Is it Protestant,
+               Catholic,  Jewish, some other religion, or do you have no
+               preference?
+ -----------------------------------------------------------------------------
+               5221      PROTESTANT.........................  1
+               2170      CATHOLIC...........................  2 GO TO A6b
+                333      JEWISH.............................  3 GO TO A6b
+                361      NO PREFERENCE......................  4 GO TO A6b
+                129      OTHER RELIGION.....................  7
+                  6      DK................................. .D GO TO A6b
+                  2      RF................................. .R GO TO A6b
+          [SEE DETAIL LIST OF RELIGIONS IN APPENDIX A]
+          A6a. What religion is that?
+               (RECODED TO    V134)
+<A NAME="V136">
+V136      [RESP]    A6b. IMPORTANCE OF RELIGION
+          A6b. How important would you say religion is in your life; is it
+               very important, somewhat important, or not too important?
+ -----------------------------------------------------------------------------
+               5512      VERY IMPORTANT.....................  1
+               1825      SOMEWHAT IMPORTANT.................  2
+                866      NOT TOO IMPORTANT..................  3
+
+                 17      DK................................. .D
+                  2      RF................................. .R
+<A NAME="V140">
+V140      [RESP]    A7. R HISPANIC/LATINO
+          A7.  Do you consider yourself Hispanic or Latino?
+ -----------------------------------------------------------------------------
+                487      YES................................  1
+               7735      NO.................................  5 GO TO A8
+                  0      DK................................. .D GO TO A8
+                  0      RF................................. .R GO TO A8
+<A NAME="V141">
+V141      [RESP]    A7a. R HISPANIC TYPE, BRACKETED
+          A7a. Would you say you are Mexican American, Puerto Rican, Cuban
+               American or something else?
+ -----------------------------------------------------------------------------
+                285      MEXICAN AMERICAN/CHICANO..........  1
+                 29      PUERTO RICAN......................  2
+                 86      CUBAN AMERICAN....................  3
+                 87      OTHER.............................  4
+                  0      DK................................ .D
+                  0      RF................................ .R
+               7735      INAP, NOT HISPANIC (DK/RF) [V140 NE 1]
+<A NAME="V143">
+V143      [RESP]    A8. R'S RACE
+          A8.  Do you consider yourself primarily white or Caucasian, Black
+               or African American, American Indian, or Asian, or something
+               else?
+ -----------------------------------------------------------------------------
+               6937      WHITE/CAUCASIAN....................  1
+               1114      BLACK/AFRICAN AMERICAN.............  2
+                170      OTHER (SPECIFY)....................  7
+                  1      DK................................. .D
+                  0      RF................................. .R
+<A NAME="V145">
+V145      [RESP]    A9. # CHILDREN EVER HAD
+          A9.  How many children have you ever had?  Please don't count
+               adopted or step-children for this question.
+ -----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum       Maximum
+               8222          2.76          2.40          0.00         30.00
+               1227      NONE..............................   0
+               6995      ANY...............................   1-30
+                  0      DK................................. .D
+                  0      RF................................. .R
+<A NAME="V146">
+V146      [RESP]    A10. MILITARY SERVICE
+          A10. Have you ever served in the active military of the United
+               States?
+ -----------------------------------------------------------------------------
+
+               1712      YES................................  1
+               6508      NO.................................  5 GO TO A11
+                  2      DK................................. .D GO TO A11
+                  0      RF................................. .R GO TO A11
+<A NAME="V147">
+V147      [RESP]    A10a. MILITARY SERVICE: START YEAR
+          A10a.     During what years were you in active service?
+ -----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum       Maximum
+               1709       1941.89          3.16       1917.00       1977.00
+                  1      DK................................. .D
+                  2      RF................................. .R
+               6510      INAP, NOT IN US MILITARY (DK/RF) [V146 NE 1]
+<A NAME="V148">
+V148      [RESP]    A10b. MILITARY SERVICE: YEAR END
+ -----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum       Maximum
+               1709       1946.04          5.16       1918.00       1993.00
+                  1      DK................................. .D
+                  2      RF................................. .R
+               6510      INAP, NOT IN US MILITARY (DK/RF) [V146 NE 1]
+<A NAME="V149">
+V149      [RESP]    A10c. MILITARY DISABILITY
+          A10c.     Do you have a disability connected with military service?
+ -----------------------------------------------------------------------------
+
+                301      YES................................  1
+               1409      NO.................................  5
+                  1      DK................................. .D
+                  1      RF................................. .R
+               6510      INAP, NOT IN US MILITARY (DK/RF) [V146 NE 1]
+<A NAME="V150">
+V150      [RESP]    A11. R'S MARITAL STATUS
+          A11. Please remind me, are you currently married, living with a
+               partner, divorced, widowed, or have you never been married?
+ -----------------------------------------------------------------------------
+               4389      MARRIED, SPOUSE PRESENT...........  1
+                105      MARRIED, SPOUSE ABSENT............  2
+                 55      LIVING WITH SOMEONE...............  3 GO TO A11b
+                402      DIVORCED/SEPARATED................  4 GO TO A11g
+               3035      WIDOWED...........................  5 GO TO A11g
+                236      NEVER MARRIED.....................  6 GO TO B1
+<A NAME="V156">
+V156      [RESP]    A11a. YEAR MARRIED
+          A11a.     In about what year were you married?
+ -----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum       Maximum
+               4465       1948.71         14.37       1917.00       1993.00
+                 27      DK................................. .D
+                  0      RF................................. .R
+               3730      INAP, NOT CURRENTLY MARRIED [V150 NE 1,2]
+<A NAME="V157">
+V157      [RESP]    A11b. LIVE TGHR: START YEAR
+          A11b.     In about what year did you begin living together?
+ -----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum       Maximum
+                 48       1980.29         14.80       1927.00       1993.00
+                  2      DK................................. .D
+                  0      RF................................. .R
+               8172      INAP, NOT "LIVING WITH" SOMEONE [V150 NE 3]
+<A NAME="V158">
+V158      [RESP]    A11c. LIVE TGHR: EVER MARRIED
+          A11c.     Have you ever been married?
+ -----------------------------------------------------------------------------
+                 40      YES................................  1
+                 10      NO.................................  5 GO TO B1
+                  0      DK................................. .D GO TO B1
+                  0      RF................................. .R GO TO B1
+               8172      INAP, NOT "LIVING WITH" SOMEONE [V150 NE 3]
+<A NAME="V159">
+V159      [RESP]    A11d. LIVE TGHR: YEAR MARRIAGE ENDED
+          A11d.     In about what year did that marriage end?
+ -----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum       Maximum
+                 39       1978.49         12.26       1947.00       1992.00
+                  1      DK................................. .D
+                  0      RF................................. .R
+               8182      INAP, NOT "LIVING WITH" SOMEONE [V150 NE 3],
+                         NEVER MARRIED (DK/RF) [V158 NE 1]
+<A NAME="V160">
+V160      [RESP]    A11e. LIVE TGHR: DIVORCED OR WIDOWED
+          A11e.     Did that marriage end in divorce or were you widowed?
+ -----------------------------------------------------------------------------
+                 13      DIVORCED...........................  4
+                 26      WIDOWED............................  5
+                  1      OTHER..............................  7
+
+                  0      DK................................. .D
+                  0      RF................................. .R
+               8182      INAP, NOT "LIVING WITH" SOMEONE [V150 NE 3],EVER
+                         MARRIED (DK/RF) [V158 NE 1]
+<A NAME="V161">
+V161      [RESP]    A11f. LIVE TGHR: YRS MARRIED MOST RECENT
+          A11f.     About how many years were you married (most recently)?
+ -----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum       Maximum
+                 39         29.46         16.50          2.00         57.00
+                  1      DK................................. .D
+                  0      RF................................. .R
+               8182      INAP, NOT "LIVING WITH" SOMEONE [V150 NE 3],
+                         NEVER MARRIED (DK/RF) [V158 NE 1]
+<A NAME="V162">
+V162      [RESP]    A11g. DIV/WID: YEAR DIV/WID MOST RECENT
+          A11g.     In about what year were you (divorced/widowed) (most
+                    recently)?
+ -----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum       Maximum
+               3367       1977.93         12.61       1916.00       1993.00
+                 76      DK................................. .D
+                  1      RF................................. .R
+               4778      INAP, NOT PRESENTLY DIVORCED/WIDOWED
+                         [V150 NE 4,5]
+<A NAME="V163">
+V163      [RESP]    A11h. DIV/WID: YEARS MARRIED MOST RECENT
+          A11h.     About how many years were you married (most recently)?
+ -----------------------------------------------------------------------------
+                  N          Mean       Std Dev       Minimum       Maximum
+               3378         35.42         16.46          1.00         88.00
+                 64      DK................................. .D
+                  2      RF................................. .R
+               4778      INAP, NOT PRESENTLY DIVORCED/WIDOWED
+                         [V150 NE 4,5]
+<A NAME="V165">
+V165      [RESP]    A12. DIV/WID: EX SP'S EDUCATION
+          A12. What is the highest grade of school or year of college your
+               (former/late) (husband/wife) completed?
+ -----------------------------------------------------------------------------
+
+                 86      0        NO FORMAL EDUCATION
+               1195      [1-11]   GRADES
+               1037      12       HIGH SCHOOL
+                307      [13-15]  SOME COLLEGE
+                256      16       COLLEGE GRADUATE
+                136      17       POST COLLEGE (17+ YEARS)
+                 22      OTHER.............................. 97
+                445      DK................................. .D
+                  0      RF................................. .R
+               4738      INAP, NOT CURRENT DIVORCED OR WIDOWED
+                         [V150 NE 4,5], OR LIVING WITH BUT NEVER
+                         MARRIED [V158 NE 1]
+<A NAME="V166">
+V166      [RESP]    A13. # OF MARRIAGES EVER
+          A13. Altogether, how many times have you been married (including
+               your current marriage)?
+ -----------------------------------------------------------------------------
+               6060      ONCE...............................  1
+               1549      TWICE..............................  2
+                292      THREE TIMES........................  3
+                 68      FOUR OR MORE.......................  4
+                  2      DK................................. .D
+                  5      RF................................. .R
+                246      INAP, NEVER BEEN MARRIED [V150=6],
+                         OR NEVER BEEN MARRIED [V158=5]
+<A NAME="end">
+<p>
+<b>[<A HREF=#top>Return to Beginning</a>][<A HREF="a93_00.html">Table of Contents</a>][<A HREF=codb-btxt.htm>Next Section</a>][<A HREF=a93_00.html>Previous Section</a></b>]
+</pre><hr><em>Wed Jun 16 15:41:13 1999</em></body></html>

@@ -1,0 +1,1783 @@
+<html><head><title>2000 HRS Exit (Final Release)
+</title>
+<!-- ODBC Reference: [HRS2000x] -->
+<!-- Perl script: CbkHtmD9.pl v5.123 Tue Mar  1 11:05:35 2005
+ -->
+</head><body>
+<A name="Top"></A>
+<pre>
+<A name="AHHIDR"></A>
+
+<B>HHID      HOUSEHOLD IDENTIFIER                      </B>
+          Section: A            Level: Respondent      CAI Reference: Q9001
+          Type: Character       Width: 6               Decimals: 0
+          ................................................................................
+           1348       010003-213471. Household ID
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="APNR"></A>
+
+<B>PN        PERSON NUMBER                             </B>
+          Section: A            Level: Respondent      CAI Reference: Q9002
+          Type: Character       Width: 3               Decimals: 0
+          ................................................................................
+            929       010. Person Number
+             12       011. Person Number
+            320       020. Person Number
+              2       021. Person Number
+             36       030. Person Number
+              1       031. Person Number
+             47       040. Person Number
+              1       041. Person Number
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="ARSUBHHR"></A>
+
+<B>RSUBHH    2000 SUB-HOUSEHOLD IDENTIFIER             </B>
+          Section: A            Level: Respondent      CAI Reference: Q9004
+          Type: Character       Width: 1               Decimals: 0
+          ................................................................................
+           1296         3. 1st deceased respondent from a household
+             52         4. 2nd deceased respondent from a household
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AFSUBHHR"></A>
+
+<B>FSUBHH    1998 SUB-HOUSEHOLD IDENTIFIER             </B>
+          Section: A            Level: Respondent      CAI Reference: Q9003
+          Type: Character       Width: 1               Decimals: 0
+          ................................................................................
+           1306         0. Original sample household - no split from divorce or separation
+                           of spouses or partners
+             14         1. Split household - one half of couple from SUBHH 0 and new
+                           spouse or partner, if any
+             13         2. Split household - other half of couple from SUBHH 0 and new
+                           spouse or partner, if any
+             15         3. 1st deceased respondent from a household
+                        5. Split household - one half of couple from SUBHH 1 or 2
+                        6. Split household - one half of couple from SUBHH 1 or 2
+                        7. Reunited household - respondents from split household reunite
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="ARPN_SPR"></A>
+
+<B>RPN_SP    2000 SPOUSE/PARTNER PERSON NUMBER         </B>
+          Section: A            Level: Respondent      CAI Reference: Q9005
+          Type: Character       Width: 3               Decimals: 0
+          ................................................................................
+            276       010. Spouse Person Number
+             14       011. Spouse Person Number
+            292       020. Spouse Person Number
+              4       021. Spouse Person Number
+             25       030. Spouse Person Number
+             34       040. Spouse Person Number
+            703     Blank. No Spouse at Death
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="ARQNRR"></A>
+
+<B>RQNR      SURVEYCRAFT CASE NUMBER                   </B>
+          Section: A            Level: Respondent      CAI Reference: Q9006
+          Type: Numeric         Width: 5               Decimals: 0
+          ................................................................................
+            999         80001-80999. AHEAD/CODA Surveycraft Case Number
+            349         90001-90349. HRS/WAR BABY Surveycraft Case Number
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1035R"></A>
+
+<B>R1035     A0.INTRODUCTION                           </B>
+          Section: A            Level: Respondent      CAI Reference: Q1035
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A0.INTRO
+              Now I have some questions about
+                  [Q754-CS22Y31.R FIRST NAME]'s background.
+          ................................................................................
+           1348     Blank. No Data Collected
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1036R"></A>
+
+<B>R1036     A1.BIRTHDATE MONTH                        </B>
+          Section: A            Level: Respondent      CAI Reference: Q1036
+          Type: Numeric         Width: 2               Decimals: 0
+
+          A1.
+                  In what month, day, and year was (he/she) born?
+
+                  MONTH:
+                  DAY:
+                  YEAR:
+          ................................................................................
+             10         1. JAN
+              2         2. FEB
+             10         3. MAR
+              2         4. APR
+             10         5. MAY
+              5         6. JUN
+              5         7. JUL
+             10         8. AUG
+             10         9. SEP
+              7        10. OCT
+              6        11. NOV
+              8        12. DEC
+              3        98. DK (Don't Know); NA (Not Ascertained)
+                       99. RF (Refused)
+           1260     Blank. INAP (Inapplicable): {When Q160 is (Q474), [Q170:PR170] IS (NE
+                           0) AND [Q171:PR171] IS (NE 0) AND [Q172:PR172] IS (NE 0)}
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1038R"></A>
+
+<B>R1038     A1b.BIRTHDATE YEAR                        </B>
+          Section: A            Level: Respondent      CAI Reference: Q1038
+          Type: Numeric         Width: 4               Decimals: 0
+          ................................................................................
+              2           1880-1899. Actual Value (verified)
+             85           1900-1970. Actual Value
+                          1971-1985. Actual Value (verified)
+              1                9998. DK (Don't Know); NA (Not Ascertained)
+                               9999. RF (Refused)
+           1260               Blank. INAP (Inapplicable): {When Q160 is (Q474),
+                                     [Q170:PR170] IS (NE 0) AND [Q171:PR171] IS (NE 0) AND
+                                     [Q172:PR172] IS (NE 0)}
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1040R"></A>
+          ASSIGNMENT STATEMENTS
+          *   if [Q1039:A1c] IS (A) then [R1040.A1d.R AGE IMPUTE FLAG] = 1
+          - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+<B>R1040     A1d.R AGE IMPUTE FLAG                     </B>
+          Section: A            Level: Respondent      CAI Reference: Q1040
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+                        1. YES-AGE IMPUTED
+           1348         5. NO-AGE NOT IMPUTED
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1045R"></A>
+
+<B>R1045     A2.BORN US?                               </B>
+          Section: A            Level: Respondent      CAI Reference: Q1045
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A2.
+                  Was (he/she) born in the United States?
+          ................................................................................
+              5         1. YES
+              1         5. NO
+                        8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1342     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND [Q219:PR219] IS
+                           (GE 1998); [Q753:CS22Y30] IS (1)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1046MR"></A>
+
+<B>R1046M    A2a.STATE BORN-MASKED                     </B>
+          Section: A            Level: Respondent      CAI Reference: Q1046
+          Type: Numeric         Width: 2               Decimals: 0
+
+          A2a.
+                  In what state was (he/she) born?
+
+                  STATE:
+          ................................................................................
+                        1. Northeast Region: New England Division (ME, NH, VT, MA, RI, CT)
+              1         2. Northeast Region: Middle Atlantic Division (NY, NJ, PA)
+                        3. Midwest Region: East North Central Division (OH, IN, IL, MI,
+                           WI)
+              1         4. Midwest Region: West North Central Division (MN, IA, MO, ND,
+                           SD, NE, KS)
+              2         5. South Region: South Atlantic Division (DE, MD, DC, VA, WV, NC,
+                           SC, GA, FL)
+              1         6. South Region: East South Central Division (KY, TN, AL, MS)
+                        7. South Region: West South Central Division (AR, LA, OK, TX)
+                        8. West Region: Mountain Division (MT, ID, WY, CO, NM, AZ, UT, NV)
+                        9. West Region: Pacific Division (WA, OR, CA, AK, HI)
+                       10. U.S., NA state
+                       11. Foreign Country: Not in a Census Division (includes
+                           U.S.territories)
+                       96. Same State (see questionnaire)
+                       98. DK (Don't Know); NA (Not Ascertained)
+                       99. RF (Refused)
+           1343     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND [Q219:PR219] IS
+                           (GE 1998); [Q753:CS22Y30] IS (1); [Q1045:A2] IS (5); [Q1045:A2]
+                           IS (DK OR RF); [Q807:CS33A] IS (95)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1048MR"></A>
+
+<B>R1048M    A2b. COUNTRY BORN- MASKED                 </B>
+          Section: A            Level: Respondent      CAI Reference: Q1048
+          Type: Numeric         Width: 2               Decimals: 0
+
+          A2b.
+                  In what country was (he/she) born?
+          ................................................................................
+              1        11. Foreign Country: Not in a Census Division (includes
+                           U.S.territories)
+           1347     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND [Q219:PR219] IS
+                           (GE 1998); [Q753:CS22Y30] IS (1); [Q1045:A2] IS (DK OR RF);
+                           [Q1045:A2] IS (1)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1049R"></A>
+
+<B>R1049     A2c.ARRIVE US-YR                          </B>
+          Section: A            Level: Respondent      CAI Reference: Q1049
+          Type: Numeric         Width: 4               Decimals: 0
+
+          A2c.
+          IF Q753 IS (1)
+                  Now a few questions about (his/her) background...
+          ELSE
+
+          END
+                  In about what year did (he/she) first come to live in the
+                  United States?
+
+                  IWER: USE 9996 IN 'YEAR' IF R SAYS HE/SHE WAS NOT
+                  BORN OUTSIDE OF THE U.S.
+
+                  YEAR:
+                      OR
+                  YEARS AGO:
+                      OR
+                  AT AGE:
+          ................................................................................
+              1           1880-2001. Actual Value
+                               9996. NOT BORN OUTSIDE US
+                               9998. DK (Don't Know); NA (Not Ascertained)
+                               9999. RF (Refused)
+           1347               Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND
+                                     [Q219:PR219] IS (GE 1998); [Q753:CS22Y30] IS (1);
+                                     [Q1045:A2] IS (DK OR RF); [Q1045:A2] IS (1)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1050R"></A>
+
+<B>R1050     A2d.ARRIVE US-YRS AGO                     </B>
+          Section: A            Level: Respondent      CAI Reference: Q1050
+          Type: Numeric         Width: 2               Decimals: 0
+          ................................................................................
+                               0-96. Actual Value
+           1348               Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND
+                                     [Q219:PR219] IS (GE 1998); [Q753:CS22Y30] IS (1);
+                                     [Q1045:A2] IS (DK OR RF); [Q1045:A2] IS (1);
+                                     [Q1049:A2c] IS (1880-2001 OR 9996 OR DK OR RF)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1051R"></A>
+
+<B>R1051     A2e.ARRIVE US-AT AGE                      </B>
+          Section: A            Level: Respondent      CAI Reference: Q1051
+          Type: Numeric         Width: 2               Decimals: 0
+          ................................................................................
+                               0-96. Actual Value
+           1348               Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND
+                                     [Q219:PR219] IS (GE 1998); [Q753:CS22Y30] IS (1);
+                                     [Q1045:A2] IS (DK OR RF); [Q1045:A2] IS (1);
+                                     [Q1049:A2c] IS (1880-2001 OR 9996 OR DK OR RF);
+                                     [Q1050:A2d] IS (NE "|")
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1053R"></A>
+
+<B>R1053     A2f.EVER LEAVE USA                        </B>
+          Section: A            Level: Respondent      CAI Reference: Q1053
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A2f.
+              Did (he/she) ever leave the U.S. after that for a period of
+              a year or more?
+
+
+              IWER:  IF R ASKS, EXCLUDE ANY TIME SPENT OUT OF THE
+                     COUNTRY FOR U.S. MILITARY SERVICE
+          ................................................................................
+                        1. YES
+              1         5. NO
+                        8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1347     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND [Q219:PR219] IS
+                           (GE 1998); [Q753:CS22Y30] IS (1); [Q1045:A2] IS (DK OR RF);
+                           [Q1045:A2] IS (1); [Q1049:A2c] IS (9996)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1054R"></A>
+
+<B>R1054     A2g.RETURN USA                            </B>
+          Section: A            Level: Respondent      CAI Reference: Q1054
+          Type: Numeric         Width: 4               Decimals: 0
+
+          A2g.
+              What is the most recent year (he/she) returned to live in
+              the U.S.?
+
+                  YEAR:
+               OR
+                  YEARS AGO:
+               OR
+                  AT AGE:
+          ................................................................................
+                          1880-2001. Actual Value
+                               9998. DK (Don't Know)
+                               9999. RF (Refused)
+           1348               Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND
+                                     [Q219:PR219] IS (GE 1998); [Q753:CS22Y30] IS (1);
+                                     [Q1045:A2] IS (DK OR RF); [Q1045:A2] IS (1);
+                                     [Q1049:A2c] IS (9996); [Q1053:A2f] IS (NE 1)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1055R"></A>
+
+<B>R1055     A2h.RETURN USA YR AGO                     </B>
+          Section: A            Level: Respondent      CAI Reference: Q1055
+          Type: Numeric         Width: 2               Decimals: 0
+          ................................................................................
+                               0-96. Actual Value
+           1348               Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND
+                                     [Q219:PR219] IS (GE 1998); [Q753:CS22Y30] IS (1);
+                                     [Q1045:A2] IS (DK OR RF); [Q1045:A2] IS (1);
+                                     [Q1049:A2c] IS (9996); [Q1053:A2f] IS (NE 1);
+                                     [Q1054:A2g] IS (1880-2001 OR DK OR RF)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1056R"></A>
+
+<B>R1056     A2j.RETURN USA AGE                        </B>
+          Section: A            Level: Respondent      CAI Reference: Q1056
+          Type: Numeric         Width: 2               Decimals: 0
+          ................................................................................
+                               0-96. Actual Value
+           1348               Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND
+                                     [Q219:PR219] IS (GE 1998); [Q753:CS22Y30] IS (1);
+                                     [Q1045:A2] IS (DK OR RF); [Q1045:A2] IS (1);
+                                     [Q1049:A2c] IS (9996); [Q1053:A2f] IS (NE 1);
+                                     [Q1054:A2g] IS (1880-2001 OR DK OR RF); [Q1055:A2h]
+                                     IS (1-96 OR DK OR RF)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1058R"></A>
+
+<B>R1058     A2k.YEARS OUTSIDE OF USA                  </B>
+          Section: A            Level: Respondent      CAI Reference: Q1058
+          Type: Numeric         Width: 2               Decimals: 0
+
+          A2k.
+              Altogether, for how many years after (he/she) first came to live
+              in the United States had (he/she) lived outside of this country?
+
+
+              # YEARS LIVED OUTSIDE US:
+          ................................................................................
+                               0-96. Actual Value
+           1348               Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND
+                                     [Q219:PR219] IS (GE 1998); [Q753:CS22Y30] IS (1);
+                                     [Q1045:A2] IS (DK OR RF); [Q1045:A2] IS (1);
+                                     [Q1049:A2c] IS (9996); [Q1053:A2f] IS (NE 1)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1059R"></A>
+
+<B>R1059     A3.R EDUCATION                            </B>
+          Section: A            Level: Respondent      CAI Reference: Q1059
+          Type: Numeric         Width: 2               Decimals: 0
+
+          A3.
+                  What is the highest grade of school or year of college (he/she)
+          completed?
+
+                  0     FOR NO FORMAL EDUCATION
+                  1-11  GRADES
+                  12    HIGH SCHOOL
+                  13-15 SOME COLLEGE
+                  16    COLLEGE GRAD
+                  17    POST COLLEGE (17+ YEARS)
+                  97    OTHER
+          ................................................................................
+              6                0-17. Years of Education
+                                 97. OTHER
+                                 98. DK (Don't Know); NA (Not Ascertained)
+                                 99. RF (Refused)
+           1342               Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND
+                                     [Q219:PR219] IS (GE 1998); [Q753:CS22Y30] IS (1)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1060R"></A>
+
+<B>R1060     A3a.R HIGH SCHOOL                         </B>
+          Section: A            Level: Respondent      CAI Reference: Q1060
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A3a.
+                  Did (he/she) get a high school diploma or pass a high school
+                  equivalency test?
+          ................................................................................
+              2         1. YES, DIPLOMA
+                        2. YES, EQUIVALENCY [GED]
+              2         5. NO
+              1         8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1343     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND [Q219:PR219] IS
+                           (GE 1998); [Q753:CS22Y30] IS (1); [Q1059:A3] IS (13-17)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1061R"></A>
+
+<B>R1061     A3b.R COLLEGE                             </B>
+          Section: A            Level: Respondent      CAI Reference: Q1061
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A3b.
+                  (Did (he/she) get a college degree?)
+          ................................................................................
+                        1. YES
+              1         5. NO
+                        8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1347     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND [Q219:PR219] IS
+                           (GE 1998); [Q753:CS22Y30] IS (1); [Q1059:A3] IS (0-12 OR DK OR
+                           RF)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1062MR"></A>
+
+<B>R1062M    A3c.R HIGH DEGREE-MASKED                  </B>
+          Section: A            Level: Respondent      CAI Reference: Q1062
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A3c.
+                  (What is the highest degree (he/she) earned?)
+          ................................................................................
+                        1. LESS THAN BACHELORS
+                        2. BACHELORS
+                        3. MASTERS\MBA
+                        4. LAW;PhD;MD
+                        7. OTHER
+                        8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1348     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND [Q219:PR219] IS
+                           (GE 1998); [Q753:CS22Y30] IS (1); [Q1059:A3] IS (0-12 OR DK OR
+                           RF); [Q1061:A3b] IS (NE 1)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1064R"></A>
+
+<B>R1064     A4a.(OLD A6a) RATE HEALTH AS CHILD        </B>
+          Section: A            Level: Respondent      CAI Reference: Q1064
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A4a.
+              Consider (his/her) health while (he/she) was growing up, from birth to
+              age 16.  Would (he/she) have said that (his/her) health during that time
+          was
+              excellent, very good, good, fair, or poor?
+          ................................................................................
+             54         1. EXCELLENT
+             27         2. VERY GOOD
+             20         3. GOOD
+              2         4. FAIR
+              3         5. POOR
+             13         8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1229     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND [Q219:PR219] IS
+                           (GE 1998)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1065R"></A>
+
+<B>R1065     A4b.(OLD A6e) RATE FAMILY SES             </B>
+          Section: A            Level: Respondent      CAI Reference: Q1065
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A4b.
+              Now think about (his/her) family when (he/she) was growing up, from
+              birth to age 16.  Would (he/she) have said (his/her) family during that
+          time
+              was pretty well off financially, about average, or poor?
+          ................................................................................
+              9         1. PRETTY WELL OFF FINANCIALLY
+             54         3. ABOUT AVERAGE
+             41         5. POOR
+                        6. IT VARIED (VOL)
+             15         8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1229     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND [Q219:PR219] IS
+                           (GE 1998)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1066R"></A>
+
+<B>R1066     A4c.(OLD A6g) FAMILY MOVE                 </B>
+          Section: A            Level: Respondent      CAI Reference: Q1066
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A4c.
+              While (he/she) was growing up, before age 16, did financial
+              difficulties ever cause (him/her) or (his/her) family to move to a
+              different place?
+          ................................................................................
+             19         1. YES
+             76         5. NO
+             24         8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1229     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND [Q219:PR219] IS
+                           (GE 1998)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1067R"></A>
+
+<B>R1067     A4d.(OLD A6h) FAMILY HELPED               </B>
+          Section: A            Level: Respondent      CAI Reference: Q1067
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A4d.
+              Before age 16, was there a time when (he/she) or (his/her) family
+              received help from relatives because of financial difficulties?
+          ................................................................................
+             10         1. YES
+             77         5. NO
+             32         8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1229     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND [Q219:PR219] IS
+                           (GE 1998)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1068R"></A>
+
+<B>R1068     A4e.(OLD A6f) FATHER LOSE JOB             </B>
+          Section: A            Level: Respondent      CAI Reference: Q1068
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A4e.
+              Before age 16, was there a time of several months or more
+              when (his/her) father had no job?
+
+              IWER:  IF R MENTIONS NEVER LIVING WITH FATHER WHEN
+              GROWING UP, CHOOSE CODE 7
+
+              IF R MENTIONS THAT FATHER NEVER WORKED OR WAS
+              ALWAYS DISABLED, CHOOSE CODE 6
+          ................................................................................
+             10         1. YES
+             72         5. NO
+                        6. FATHER NEVER WORKED/ALWAYS DISABLED (VOL)
+              8         7. NEVER LIVED WITH FATHER/FATHER WAS NOT ALIVE (VOL)
+             29         8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1229     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND [Q219:PR219] IS
+                           (GE 1998)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1069MR"></A>
+
+<B>R1069M    A4f.(OLD A6b) FATHERS USUAL OCC-MASKED    </B>
+          Section: A            Level: Respondent      CAI Reference: Q1069
+          Type: Numeric         Width: 2               Decimals: 0
+
+          A4f.
+              What was (his/her) father's occupation when
+                  [Q754-CS22Y31.R FIRST NAME]  was age 16?
+
+              IWER, PROBE:  What kind of work did he do?  What activities
+              did he do at work?
+          ................................................................................
+              8         1. Managerial specialty operation (003-037)
+             33         2. Professional specialty operation and technical support (043-
+                           235)
+              6         3. Sales (243-285)
+              1         4. Clerical, administrative support (303-389)
+                        5. Service: private household, cleaning and building services
+                           (403-407)
+              1         6. Service: protection (413-427)
+                        7. Service: food preparation (433-444)
+                        8. Health services (445-447)
+              1         9. Personal services (448-469)
+             24        10. Farming, forestry, fishing (473-499)
+              3        11. Mechanics and repair (503-549)
+              9        12. Construction trade and extractors (553-617)
+              2        13. Precision production (633-699)
+              8        14. Operators: machine (703-799)
+              3        15. Operators: transport, etc (803-859)
+             11        16. Operators: handlers, etc (863-889)
+              1        17. Member of Armed Forces (900)
+                       98. DK (don't know); NA (not ascertained)
+                       99. RF (Refused)
+           1237     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND [Q219:PR219] IS
+                           (GE 1998); [Q1068:A4e] IS (6 OR 7)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1070R"></A>
+
+<B>R1070     A4g.LIVE WITH GRANDPARENTS                </B>
+          Section: A            Level: Respondent      CAI Reference: Q1070
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A4g.
+                  Did (he/she) ever live in the same household with a
+                  grandparent for a year or more before age 17?
+
+
+                  INCLUDE R LIVING WITH A GRANDPARENT OR A GRANDPARENT
+                  LIVING WITH R
+          ................................................................................
+            222         1. YES
+           1001         5. NO
+            125         8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+                    Blank. INAP (Inapplicable)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1072R"></A>
+
+<B>R1072     A5.PA EDUC                                </B>
+          Section: A            Level: Respondent      CAI Reference: Q1072
+          Type: Numeric         Width: 2               Decimals: 0
+
+          A5.
+              What is the highest grade of school (his/her) father completed?
+
+                  0     FOR NO FORMAL EDUCATION
+                  1-11  GRADES
+                  12    HIGH SCHOOL
+                  13-15 SOME COLLEGE
+                  16    COLLEGE GRAD
+                  17    POST COLLEGE (17+ YEARS)
+                  97    OTHER
+          ................................................................................
+             48                0-17. Years of Education
+              2                  97. OTHER
+             60                  98. DK (Don't Know); NA (Not Ascertained)
+              1                  99. RF (Refused)
+           1237               Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND
+                                     [Q219:PR219] IS (GE 1998); [Q1068:A4e] IS (7)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1073R"></A>
+
+<B>R1073     A6.(OLD A4)MA EDUC                        </B>
+          Section: A            Level: Respondent      CAI Reference: Q1073
+          Type: Numeric         Width: 2               Decimals: 0
+
+          A6.
+              And what is the highest grade of school (his/her) mother completed?
+
+                  0     FOR NO FORMAL EDUCATION
+                  1-11  GRADES
+                  12    HIGH SCHOOL
+                  13-15 SOME COLLEGE
+                  16    COLLEGE GRAD
+                  17    POST COLLEGE (17+ YEARS)
+                  97    OTHER
+          ................................................................................
+             48                0-17. Years of Education
+              2                  97. OTHER
+             68                  98. DK (Don't Know); NA (Not Ascertained)
+              1                  99. RF (Refused)
+           1229               Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND
+                                     [Q219:PR219] IS (GE 1998)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1074R"></A>
+
+<B>R1074     A7.HISPANIC                               </B>
+          Section: A            Level: Respondent      CAI Reference: Q1074
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A7.
+                  Did (he/she) consider (him/her)self Hispanic or Latino?
+          ................................................................................
+              1         1. YES
+              5         5. NO
+                        8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1342     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND [Q219:PR219] IS
+                           (GE 1998); [Q753:CS22Y30] IS (1)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1075M1MR"></A>
+
+<B>R1075M1M  A7a.TYPE HISPANIC- MASKED-1               </B>
+          Section: A            Level: Respondent      CAI Reference: Q1075
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A7a.
+                  Would (he/she) have said (he/she) is Mexican American, Puerto Rican,
+          Cuban American
+                  or something else?
+
+                  CHOOSE ALL THAT APPLY
+          ................................................................................
+                        1. MEXICAN AMERICAN/CHICANO
+              1         7. OTHER (SPECIFY); masked version includes Puerto Rican, Cuban
+                           American
+                        8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1347     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND [Q219:PR219] IS
+                           (GE 1998); [Q753:CS22Y30] IS (1); [Q1074:A7] IS (5 OR DK OR RF)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1075M2MR"></A>
+
+<B>R1075M2M  A7a.TYPE HISPANIC- MASKED-2               </B>
+          Section: A            Level: Respondent      CAI Reference: Q1075
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A7a.
+                  Would (he/she) have said (he/she) is Mexican American, Puerto Rican,
+          Cuban American
+                  or something else?
+
+                  CHOOSE ALL THAT APPLY
+          ................................................................................
+                        1. MEXICAN AMERICAN/CHICANO
+                        7. OTHER (SPECIFY); masked version includes Puerto Rican, Cuban
+                           American
+                        8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1348     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND [Q219:PR219] IS
+                           (GE 1998); [Q753:CS22Y30] IS (1); [Q1074:A7] IS (5 OR DK OR RF)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1077MR"></A>
+
+<B>R1077M    A8.R RACE-MASKED                          </B>
+          Section: A            Level: Respondent      CAI Reference: Q1077
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A8.
+                  Did (he/she) consider (him/her)self primarily white or Caucasian,
+          Black or
+                  African American, American Indian, or Asian, or something else?
+          ................................................................................
+              4         1. WHITE/CAUCASIAN
+              2         2. BLACK/AFRICAN AMERICAN
+                        7. OTHER (SPECIFY); masked version includes American Indian,
+                           Alaskan Native, Asian, Pacific Islander
+                        8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1342     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND [Q219:PR219] IS
+                           (GE 1998); [Q753:CS22Y30] IS (1)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1078R"></A>
+
+<B>R1078     A9.# CHILDREN EVER                        </B>
+          Section: A            Level: Respondent      CAI Reference: Q1078
+          Type: Numeric         Width: 2               Decimals: 0
+
+          A9.
+          IF Q753 IS (1)
+                  I need to clarify some aspects of family history.
+          END
+                  How many children have ((he/she) fathered/(he/she) given birth to)?
+          Please don't
+                  count miscarriages or still-births, or adopted or
+                  step-children for this question.
+          ................................................................................
+              6                0-15. Actual Value
+                              16-94. Actual Value (verified)
+                                 98. DK (Don't Know); NA (Not Ascertained)
+                                 99. RF (Refused)
+           1342               Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND
+                                     [Q219:PR219] IS (GE 1998); [Q753:CS22Y30] IS (1)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1079R"></A>
+
+<B>R1079     A9a.FERTILITY LIVING                      </B>
+          Section: A            Level: Respondent      CAI Reference: Q1079
+          Type: Numeric         Width: 2               Decimals: 0
+
+          A9a.
+
+          IF Q1078 IS (1)
+                  Is that child alive today?
+
+                  IWER:  IF R RESPONDS YES TYPE 1 AND PRESS ENTER
+                         TYPE 0 IF R RESPONDS NO
+
+
+          ELSE
+                  How many of them are still living?
+          END
+
+                  NUMBER LIVING:
+          ................................................................................
+              5                0-15. Actual Value
+                              16-94. Actual Value (verified)
+                                 98. DK (Don't Know); NA (Not Ascertained)
+                                 99. RF (Refused)
+           1343               Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND
+                                     [Q219:PR219] IS (GE 1998); [Q753:CS22Y30] IS (1);
+                                     [Q1078:A9] IS (0 OR DK OR RF)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1080R"></A>
+
+<B>R1080     A10.MILITARY                              </B>
+          Section: A            Level: Respondent      CAI Reference: Q1080
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A10.
+                  Did (he/she) ever served in the active military of the United
+          States?
+          ................................................................................
+              2         1. YES
+              4         5. NO
+                        8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1342     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND [Q219:PR219] IS
+                           (GE 1998); [Q753:CS22Y30] IS (1)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1081R"></A>
+
+<B>R1081     A10a.YEARS MILITARY                       </B>
+          Section: A            Level: Respondent      CAI Reference: Q1081
+          Type: Numeric         Width: 4               Decimals: 0
+
+          A10a.
+                  During what years was (he/she) in active service?
+
+                  FROM:
+                  TO:
+          ................................................................................
+              1           1910-2001. Actual Value
+              1                9998. DK (Don't Know); NA (Not Ascertained)
+                               9999. RF (Refused)
+           1346               Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND
+                                     [Q219:PR219] IS (GE 1998); [Q753:CS22Y30] IS (1);
+                                     [Q1080:A10] IS (NE 1)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1082R"></A>
+
+<B>R1082     A10b.END MILITARY                         </B>
+          Section: A            Level: Respondent      CAI Reference: Q1082
+          Type: Numeric         Width: 4               Decimals: 0
+          ................................................................................
+              1           1910-2001. Actual Value
+              1                9998. DK (Don't Know); NA (Not Ascertained)
+                               9999. RF (Refused)
+           1346               Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND
+                                     [Q219:PR219] IS (GE 1998); [Q753:CS22Y30] IS (1);
+                                     [Q1080:A10] IS (NE 1)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1083R"></A>
+
+<B>R1083     A10c.MILITARY DISABILITY                  </B>
+          Section: A            Level: Respondent      CAI Reference: Q1083
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A10c.
+                  Did (he/she) have a disability connected with military service?
+          ................................................................................
+                        1. YES
+              2         5. NO
+                        8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1346     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND [Q219:PR219] IS
+                           (GE 1998); [Q753:CS22Y30] IS (1); [Q1080:A10] IS (NE 1)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1086R"></A>
+          ASSIGNMENT STATEMENTS
+          *   if [Q1038:A1b] IS (GT 0) AND [Q522:CS2ax3] IS (GE Q1038) AND [Q1036:A1] IS
+             (GT 0) AND [Q520:CS2ax] IS (GT Q1036) then [R1086.A21Y1.R`S CUR AGE] =
+             system calculation: 522-1038
+          *   if [Q1038:A1b] IS (GT 0) AND [Q522:CS2ax3] IS (GE Q1038) AND [Q1036:A1] IS
+             (GT 0) AND [Q520:CS2ax] IS (EQ1036) AND [Q1037:A1a] IS (GT 0) AND
+             [Q521:CS2ax2] IS (GE Q1037) then [R1086.A21Y1.R`S CUR AGE] = system
+             calculation: 522-1038
+          *   if [Q1038:A1b] IS (GT 0) AND [Q522:CS2ax3] IS (GE Q1038) AND [Q1036:A1] IS
+             (GT 0) AND [Q520:CS2ax] IS (EQ1036) AND [Q1037:A1a] IS (GT 0) AND
+             [Q521:CS2ax2] IS (LT Q1037) then [R1086.A21Y1.R`S CUR AGE] = calculation:
+             system calculation: 522-1038-1X
+          *   if [Q1038:A1b] IS (GT 0) AND [Q522:CS2ax3] IS (GE Q1038) AND [Q1036:A1] IS
+             (GT 0) AND [Q520:CS2ax] IS (EQ1036) AND [Q1037:A1a] IS (LE 0) AND
+             [Q521:CS2ax2] IS (GT 15) then [R1086.A21Y1.R`S CUR AGE] = system
+             calculation: 522-1038
+          *   if [Q1038:A1b] IS (GT 0) AND [Q522:CS2ax3] IS (GE Q1038) AND [Q1036:A1] IS
+             (GT 0) AND [Q520:CS2ax] IS (EQ1036) AND [Q1037:A1a] IS (LE 0) AND
+             [Q521:CS2ax2] IS (LE 15) then [R1086.A21Y1.R`S CUR AGE] = calculation:
+             system calculation: 522-1038-1X
+          *   if [Q1038:A1b] IS (GT 0) AND [Q522:CS2ax3] IS (GE Q1038) AND [Q1036:A1] IS
+             (GT 0) AND [Q520:CS2ax] IS (LT Q1036) then [R1086.A21Y1.R`S CUR AGE] =
+             calculation: system calculation: 522-1038-1X
+          *   if [Q1038:A1b] IS (GT 0) AND [Q522:CS2ax3] IS (GE Q1038) AND [Q1036:A1] IS
+             (LE 0) AND [Q520:CS2ax] IS (GT 6) then [R1086.A21Y1.R`S CUR AGE] = system
+             calculation: 522-1038
+          *   if [Q1038:A1b] IS (GT 0) AND [Q522:CS2ax3] IS (GE Q1038) AND [Q1036:A1] IS
+             (LE 0) AND [Q520:CS2ax] IS (LE 6) then [R1086.A21Y1.R`S CUR AGE] =
+             calculation: system calculation: 522-1038-1X
+          *   if [Q949:CS49Y50] IS (GT 0) AND [Q522:CS2ax3] IS (GE Q949) AND
+             [Q950:CS49Y51] IS (GT 0) AND [Q520:CS2ax] IS (GT Q950) then [R1086.A21Y1.R`S
+             CUR AGE] = system calculation: 522-949
+          *   if [Q949:CS49Y50] IS (GT 0) AND [Q522:CS2ax3] IS (GE Q949) AND
+             [Q950:CS49Y51] IS (GT 0) AND [Q520:CS2ax] IS (EQ950) AND [Q951:CS49Y52] IS
+             (GT 0) AND [Q521:CS2ax2] IS (GE Q951) then [R1086.A21Y1.R`S CUR AGE] =
+             system calculation: 522-949
+          *   if [Q949:CS49Y50] IS (GT 0) AND [Q522:CS2ax3] IS (GE Q949) AND
+             [Q950:CS49Y51] IS (GT 0) AND [Q520:CS2ax] IS (EQ950) AND [Q951:CS49Y52] IS
+             (GT 0) AND [Q521:CS2ax2] IS (LT Q951) then [R1086.A21Y1.R`S CUR AGE] =
+             calculation: system calculation: 522-949-1X
+          *   if [Q949:CS49Y50] IS (GT 0) AND [Q522:CS2ax3] IS (GE Q949) AND
+             [Q950:CS49Y51] IS (GT 0) AND [Q520:CS2ax] IS (EQ950) AND [Q951:CS49Y52] IS
+             (LE 0) AND [Q521:CS2ax2] IS (GT 15) then [R1086.A21Y1.R`S CUR AGE] = system
+             calculation: 522-949
+          *   if [Q949:CS49Y50] IS (GT 0) AND [Q522:CS2ax3] IS (GE Q949) AND
+             [Q950:CS49Y51] IS (GT 0) AND [Q520:CS2ax] IS (EQ950) AND [Q951:CS49Y52] IS
+             (LE 0) AND [Q521:CS2ax2] IS (LE 15) then [R1086.A21Y1.R`S CUR AGE] =
+             calculation: system calculation: 522-949-1X
+          *   if [Q949:CS49Y50] IS (GT 0) AND [Q522:CS2ax3] IS (GE Q949) AND
+             [Q950:CS49Y51] IS (GT 0) AND [Q520:CS2ax] IS (LT Q950) then [R1086.A21Y1.R`S
+             CUR AGE] = calculation: system calculation: 522-949-1X
+          *   if [Q949:CS49Y50] IS (GT 0) AND [Q522:CS2ax3] IS (GE Q949) AND
+             [Q950:CS49Y51] IS (LE 0) AND [Q520:CS2ax] IS (GT 6) then [R1086.A21Y1.R`S
+             CUR AGE] = system calculation: 522-949
+          *   if [Q949:CS49Y50] IS (GT 0) AND [Q522:CS2ax3] IS (GE Q949) AND
+             [Q950:CS49Y51] IS (LE 0) AND [Q520:CS2ax] IS (LE 6) then [R1086.A21Y1.R`S
+             CUR AGE] = calculation: system calculation: 522-949-1X
+          *   if [Q522:CS2ax3] IS (GT 0) AND [Q774:CS22Y49] IS (GE Q522) AND [Q520:CS2ax]
+             IS (GT 0) AND [Q775:CS22Y50] IS (GT Q520) then [R1086.A21Y1.R`S CUR AGE] =
+             system calculation: 774-522
+          *   if [Q522:CS2ax3] IS (GT 0) AND [Q774:CS22Y49] IS (GE Q522) AND [Q520:CS2ax]
+             IS (GT 0) AND [Q775:CS22Y50] IS (EQ520) AND [Q521:CS2ax2] IS (GT 0) AND
+             [Q521:CS2ax2] IS (GE Q521) then [R1086.A21Y1.R`S CUR AGE] = system
+             calculation: 774-522
+          *   if [Q522:CS2ax3] IS (GT 0) AND [Q774:CS22Y49] IS (GE Q522) AND [Q520:CS2ax]
+             IS (GT 0) AND [Q775:CS22Y50] IS (EQ520) AND [Q521:CS2ax2] IS (GT 0) AND
+             [Q521:CS2ax2] IS (LT Q521) then [R1086.A21Y1.R`S CUR AGE] = calculation:
+             system calculation: 774-522-1X
+          *   if [Q522:CS2ax3] IS (GT 0) AND [Q774:CS22Y49] IS (GE Q522) AND [Q520:CS2ax]
+             IS (GT 0) AND [Q775:CS22Y50] IS (EQ520) AND [Q521:CS2ax2] IS (LE 0) AND
+             [Q521:CS2ax2] IS (GT 15) then [R1086.A21Y1.R`S CUR AGE] = system
+             calculation: 774-522
+          *   if [Q522:CS2ax3] IS (GT 0) AND [Q774:CS22Y49] IS (GE Q522) AND [Q520:CS2ax]
+             IS (GT 0) AND [Q775:CS22Y50] IS (EQ520) AND [Q521:CS2ax2] IS (LE 0) AND
+             [Q521:CS2ax2] IS (LE 15) then [R1086.A21Y1.R`S CUR AGE] = calculation:
+             system calculation: 774-522-1X
+          *   if [Q522:CS2ax3] IS (GT 0) AND [Q774:CS22Y49] IS (GE Q522) AND [Q520:CS2ax]
+             IS (GT 0) AND [Q775:CS22Y50] IS (LT Q520) then [R1086.A21Y1.R`S CUR AGE] =
+             calculation: system calculation: 774-522-1X
+          *   if [Q522:CS2ax3] IS (GT 0) AND [Q774:CS22Y49] IS (GE Q522) AND [Q520:CS2ax]
+             IS (LE 0) AND [Q775:CS22Y50] IS (GT 6) then [R1086.A21Y1.R`S CUR AGE] =
+             system calculation: 774-522
+          *   if [Q522:CS2ax3] IS (GT 0) AND [Q774:CS22Y49] IS (GE Q522) AND [Q520:CS2ax]
+             IS (LE 0) AND [Q775:CS22Y50] IS (LE 6) then [R1086.A21Y1.R`S CUR AGE] =
+             calculation: system calculation: 774-522-1X
+          *   if [Q1:PR1] IS (GE 0 OR LE 0) AND [Q1039:A1c] IS (A AND 1 OR 4) then
+             [R1086.A21Y1.R`S CUR AGE] = 65
+          *   if [Q1:PR1] IS (GE 0 OR LE 0) AND [Q1039:A1c] IS (A AND 2 OR 5) then
+             [R1086.A21Y1.R`S CUR AGE] = 64
+          - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+<B>R1086     A21Y1.R`S CUR AGE                         </B>
+          Section: A            Level: Respondent      CAI Reference: Q1086
+          Type: Numeric         Width: 3               Decimals: 0
+          ................................................................................
+           1346              42-104. Actual Value
+              2               Blank. Missing Data
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1089R"></A>
+
+<B>R1089     A25.YEAR MOVED TO MAIN RESID              </B>
+          Section: A            Level: Respondent      CAI Reference: Q1089
+          Type: Numeric         Width: 4               Decimals: 0
+
+          A25.
+                  In what year did (he/she) move to (his/her) current home in
+
+                  [Q819-CS36a.(CS36) ASSIGN MAIN RESIDENCE] ?
+          ................................................................................
+            103           1880-2001. Actual Value
+              6                9998. DK (Don't Know); NA (Not Ascertained)
+                               9999. RF (Refused)
+           1239               Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (NE 1);
+                                     [Q558:CS11] IS (1) AND [Q794:CS26] IS (NE 1);
+                                     [Q821:CS36c] IS (5)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1090R"></A>
+
+<B>R1090     A25a.MONTH MOVED TO MAIN RESID            </B>
+          Section: A            Level: Respondent      CAI Reference: Q1090
+          Type: Numeric         Width: 2               Decimals: 0
+
+          A25a.
+                  In what month was that?
+
+                  MONTH:
+          ................................................................................
+              4         1. JAN
+              3         2. FEB
+              4         3. MAR
+              6         4. APR
+              1         5. MAY
+              2         6. JUN
+              8         7. JUL
+              9         8. AUG
+              3         9. SEP
+              4        10. OCT
+              3        11. NOV
+              4        12. DEC
+                       98. DK (Don't Know); NA (Not Ascertained)
+                       99. RF (Refused)
+           1297     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (NE 1); [Q558:CS11] IS
+                           (1) AND [Q794:CS26] IS (NE 1); [Q821:CS36c] IS (5); [Q1089:A25]
+                           IS (LT Q781 OR DK OR RF)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1101R"></A>
+
+<B>R1101     A26a.HAVE YOU ALWAYS LIVED AT RES         </B>
+          Section: A            Level: Respondent      CAI Reference: Q1101
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A26a.
+                  Did (he/she) always lived in or around
+                  [Q819-CS36a.(CS36) ASSIGN MAIN RESIDENCE] ?
+          ................................................................................
+              2         1. YES
+              1         5. NO
+                        8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1345     Blank. INAP (Inapplicable): [Q558:CS11] IS (1) AND [Q794:CS26] IS (NE
+                           1); [Q821:CS36c] IS (5); [Q818:CS36] IS (2 OR 4);
+                           [Q753:CS22Y30] IS (1) AND [Q815:CS35d] IS (1) AND [Q796:CS27]
+                           IS (NE 1) AND [Q797:CS28] IS (NE 1); [Q484:CS0Y10] IS (5) AND
+                           [Q807:CS33A] IS (95); [Q796:CS27] IS (5) AND [Q797:CS28] IS
+                           (1); [Q753:CS22Y30] IS (NE 1)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1102R"></A>
+
+<B>R1102     A26b. LIVE GEN AREA BEFORE                </B>
+          Section: A            Level: Respondent      CAI Reference: Q1102
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A26b.
+          IF Q1089 IS (GT0)
+                  Before (he/she) moved to
+                  [Q819-CS36a.(CS36) ASSIGN MAIN RESIDENCE]  in
+                  [Q1089-A25.YEAR MOVED TO MAIN RESID] ,
+          ELSE Q807 IS (GT0)
+                  Before (he/she) moved to
+                  [Q819-CS36a.(CS36) ASSIGN MAIN RESIDENCE]
+                  [Q807-CS33A.HOW LONG CURRENT ADDRESS]  years ago,
+          ELSE
+                  Before (he/she) moved to
+                  [Q819-CS36a.(CS36) ASSIGN MAIN RESIDENCE] ,
+          END
+                  did (he/she) ever live there before?
+          ................................................................................
+             13         1. YES
+             44         5. NO
+                        8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1291     Blank. INAP (Inapplicable): [Q558:CS11] IS (1) AND [Q794:CS26] IS (NE
+                           1); [Q821:CS36c] IS (5); [Q484:CS0Y10] IS (5) AND [Q807:CS33A]
+                           IS (95); [Q796:CS27] IS (5) AND [Q797:CS28] IS (1);
+                           [Q753:CS22Y30] IS (NE 1); [Q807:CS33A] IS (95); [Q1101:A26a] IS
+                           (1) AND [Q753:CS22Y30] IS (1); [Q818:CS36] IS (1 OR 3)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1103R"></A>
+
+<B>R1103     A26c.YEARS LIVED MAIN HU AREA             </B>
+          Section: A            Level: Respondent      CAI Reference: Q1103
+          Type: Numeric         Width: 2               Decimals: 0
+
+          A26c.
+          IF Q558 IS (1) AND Q796 IS (NE1)
+                  Altogether, about how many years did (he/she) live in or around
+                  (Q48-PR48.HH1 PREV WAVE 1ST ADDRESS CITY/Q101-PR101.HH2 PREV WAVE
+          1ST ADDRESS CITY)?
+          ELSE
+                  Altogether, about how many years (had (he/she) lived/
+                  did (he/she) live) in or around
+                  [Q819-CS36a.(CS36) ASSIGN MAIN RESIDENCE] ?
+          END
+
+                  96        ALWAYS LIVED AROUND HERE/THERE
+
+                  NUMBER YEARS:
+                    OR
+                  SINCE YEAR:
+          ................................................................................
+             15                0-95. Actual Value
+                                 96. ALWAYS LIVED AROUND HERE/THERE
+                                 98. DK (Don't Know); NA (Not Ascertained)
+                                 99. RF (Refused)
+           1333               Blank. INAP (Inapplicable): [Q558:CS11] IS (1) AND
+                                     [Q794:CS26] IS (NE 1); [Q821:CS36c] IS (5);
+                                     [Q484:CS0Y10] IS (5) AND [Q807:CS33A] IS (95);
+                                     [Q796:CS27] IS (5) AND [Q797:CS28] IS (1);
+                                     [Q807:CS33A] IS (95); [Q1101:A26a] IS (1) AND
+                                     [Q753:CS22Y30] IS (1); [Q818:CS36] IS (1 OR 3);
+                                     [Q484:CS0Y10] IS (5) AND [Q506:CS0Y20] IS (1) AND
+                                     [Q815:CS35d] IS (1); [Q1102:A26b] IS (5); [Q558:CS11]
+                                     IS (1) AND [Q506:CS0Y20] IS (2)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1104R"></A>
+
+<B>R1104     A26Y1c.(A26c) SINCE YEAR LIVE MAIN HU     </B>
+          Section: A            Level: Respondent      CAI Reference: Q1104
+          Type: Numeric         Width: 4               Decimals: 0
+          ................................................................................
+              4           1900-2001. Actual Value
+           1344               Blank. INAP (Inapplicable): [Q558:CS11] IS (1) AND
+                                     [Q794:CS26] IS (NE 1); [Q821:CS36c] IS (5);
+                                     [Q484:CS0Y10] IS (5) AND [Q807:CS33A] IS (95);
+                                     [Q796:CS27] IS (5) AND [Q797:CS28] IS (1);
+                                     [Q807:CS33A] IS (95); [Q1101:A26a] IS (1) AND
+                                     [Q753:CS22Y30] IS (1); [Q818:CS36] IS (1 OR 3);
+                                     [Q484:CS0Y10] IS (5) AND [Q506:CS0Y20] IS (1) AND
+                                     [Q815:CS35d] IS (1); [Q1102:A26b] IS (5); [Q558:CS11]
+                                     IS (1) AND [Q506:CS0Y20] IS (2); [Q1103:A26c] IS (1-
+                                     96 OR DK OR RF)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1107MR"></A>
+
+<B>R1107M    A27.WHERE LIVE WHEN IN SCH-MASKED         </B>
+          Section: A            Level: Respondent      CAI Reference: Q1107
+          Type: Numeric         Width: 2               Decimals: 0
+
+          A27.  In what state or country did (he/she) live most of the time
+                (he/she) was (in grade school/in high school/about age 10)?
+
+                  STATE:
+          ................................................................................
+                        1. Northeast Region: New England Division (ME, NH, VT, MA, RI, CT)
+              2         2. Northeast Region: Middle Atlantic Division (NY, NJ, PA)
+                        3. Midwest Region: East North Central Division (OH, IN, IL, MI,
+                           WI)
+              1         4. Midwest Region: West North Central Division (MN, IA, MO, ND,
+                           SD, NE, KS)
+              1         5. South Region: South Atlantic Division (DE, MD, DC, VA, WV, NC,
+                           SC, GA, FL)
+              1         6. South Region: East South Central Division (KY, TN, AL, MS)
+                        7. South Region: West South Central Division (AR, LA, OK, TX)
+                        8. West Region: Mountain Division (MT, ID, WY, CO, NM, AZ, UT, NV)
+                        9. West Region: Pacific Division (WA, OR, CA, AK, HI)
+                       10. U.S., NA state
+              1        11. Foreign Country: Not in a Census Division (includes
+                           U.S.territories)
+                       96. Same State (see questionnaire)
+                       98. DK (Don't Know); NA (Not Ascertained)
+                       99. RF (Refused)
+           1342     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1) AND [Q219:PR219] IS
+                           (GE 1998); [Q753:CS22Y30] IS (1); [Q1045:A2] IS (5); [Q1045:A2]
+                           IS (DK OR RF); [Q807:CS33A] IS (95)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1110R"></A>
+
+<B>R1110     A28.LIVE IN CITY/TOWN/RURAL               </B>
+          Section: A            Level: Respondent      CAI Reference: Q1110
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A28.
+                  Was (he/she) living in a rural area most of the time
+                  when (he/she) was (in grade school/in high school/about age 10)?
+          ................................................................................
+              4         1. YES
+              2         5. NO
+                        8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1342     Blank. INAP (Inapplicable): [Q558:CS11] IS (1) AND [Q794:CS26] IS (NE
+                           1); [Q821:CS36c] IS (5); [Q796:CS27] IS (5) AND [Q797:CS28] IS
+                           (1); [Q1101:A26a] IS (1) AND [Q753:CS22Y30] IS (1); [Q818:CS36]
+                           IS (1 OR 3); [Q753:CS22Y30] IS (1)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1115R"></A>
+
+<B>R1115     A36.R RELIGIOUS PREF                      </B>
+          Section: A            Level: Respondent      CAI Reference: Q1115
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A36.
+                  What was (his/her) religious preference; Was it Protestant,
+          Catholic,
+                  Jewish, some other religion, or did (he/she) have no preference?
+          ................................................................................
+              5         1. PROTESTANT
+              1         2. CATHOLIC
+                        3. JEWISH
+                        4. NO PREFERENCE
+                        7. OTHER (SPECIFY)
+                        8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1342     Blank. INAP (Inapplicable): [Q558:CS11] IS (1) AND [Q794:CS26] IS (NE
+                           1); [Q821:CS36c] IS (5); [Q796:CS27] IS (5) AND [Q797:CS28] IS
+                           (1); [Q1101:A26a] IS (1) AND [Q753:CS22Y30] IS (1); [Q818:CS36]
+                           IS (1 OR 3); [Q753:CS22Y30] IS (1)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1116MR"></A>
+
+<B>R1116M    A36a. DENOMINATION- MASKED                </B>
+          Section: A            Level: Respondent      CAI Reference: Q1116
+          Type: Numeric         Width: 2               Decimals: 0
+
+          A36a.
+              What denomination was that?
+          ................................................................................
+              1         1. PROTESTANT: REFORMATION ERA (Congregational; Episcopalian,
+                           Anglican, Church of England; Evangelical and Reformed;
+                           Lutheran; Presbyterian; Reformed, Dutch Reformed or Christian
+                           Reformed; United Church of Christ)
+              3        11. PROTESTANT: PIETISTIC (African Methodist Episcopal; AME Zion;
+                           Baptist--NA type; Disciples of Christ; Methodist; United
+                           Brethren or Evangelical Brethren; Mennonite, Amish; Church of
+                           the Brethren; 'Christian'
+                       21. PROTESTANT: FUNDAMENTALIST (Church of Christ; Church of God,
+                           'Holiness', Church of Living; God, Church of God in Prophecy;
+                           Church of God in Christ; Fundamentalist Baptist: include
+                           Primitive Baptist, Free Will Baptist, Missionary Baptist,
+                           Gospel Baptist; Nazarene or Free Methodist; Pentecostal or
+                           Assembly of God; Plymouth Brethren; Salvation Army; Sanctified;
+                           Seventh Day Adventist; Southern Baptist; United Missionary or
+                           Protestant Missionary; Christian and Missionary Alliance;
+                           Missouri Synod Lutheran; Other Fundamentalist;
+                           'Apostolic'--NFS; 'Charismatic' --NFS; Bible Church, Word of
+                           Faith, Foursquare
+                       41. PROTESTANT: GENERAL (Protestant, no denomination given; Non-
+                           denominational Protestant church; Community church--no
+                           denominational basis; 'Born again Christian'--NFS;
+                           'Evangelical'--NFS; Other Protestant--not listed above;
+                           Berean,AZUA, United Church of Canada
+                       51. CATHOLIC; EASTERN ORTHODOX (ROMAN CATHOLIC; 'Catholic'--NFS;
+                           Greek Rite Catholic; Orthodox; Eastern Orthodox; Greek/Russian;
+                           Orthodox; other Orthodox
+                       61. NON-TRADITIONAL CHRISTIAN (Christian Scientist; Jehovah's
+                           Witnesses Latter Day Saints, Mormons Quakers; Spiritualists;
+                           Unitarian or Universalist; Unity; Other non-traditional
+                           Christian
+                       71. JEWISH
+                       81. NON-JUDEO-CHRISTIAN (Nation of Islam; Islam; Muslim; Moslem;
+                           Mohammedan; World Community of Islam in the West; Buddhist;
+                           Hindu; Bahai; Other non-Judeo-Christian religion)
+                       91. NO RELIGION; NONE; NO PREFERENCE; Atheist; agnostic; OTHER
+                           (include Mason, New Age, RC and Jewish, RC in summer/Lutheran
+                           in winter, Mile-High Church of Rel. Science, Science of Mind,
+                           Yeshuan)
+              1        98. DK (Don't Know); NA (Not Ascertained)
+                       99. RF (Refused)
+           1343     Blank. INAP (Inapplicable): [Q558:CS11] IS (1) AND [Q794:CS26] IS (NE
+                           1); [Q821:CS36c] IS (5); [Q796:CS27] IS (5) AND [Q797:CS28] IS
+                           (1); [Q1101:A26a] IS (1) AND [Q753:CS22Y30] IS (1); [Q818:CS36]
+                           IS (1 OR 3); [Q753:CS22Y30] IS (1); [Q1115:A36] IS (NE 1)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1119R"></A>
+
+<B>R1119     A36c.ATTEND RELIGIOUS SERVICES            </B>
+          Section: A            Level: Respondent      CAI Reference: Q1119
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A36c.
+                  About how often did (he/she) attend religious services
+                  during the last year (he/she) was alive?
+
+                  PROBE IF NECESSARY: (Would you say more than once a week,
+                  once a week, two or three times a month, one or more
+                  times a year, or not at all?)
+          ................................................................................
+            105         1. MORE THAN ONCE A WEEK
+            314         2. ONCE A WEEK
+            143         3. TWO OR THREE TIMES A MONTH
+            181         4. ONE OR MORE TIMES A YEAR
+            586         5. NOT AT ALL
+             19         8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+                    Blank. INAP (Inapplicable)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1121R"></A>
+
+<B>R1121     A37.ENGLISH FIRST LANGUAGE                </B>
+          Section: A            Level: Respondent      CAI Reference: Q1121
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A37.
+                  Was English the language (he/she) usually spoke at home?
+          ................................................................................
+              6         1. YES
+                        5. NO
+                        8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1342     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1122R"></A>
+
+<B>R1122     A40.POST W1 MARRIAGE START                </B>
+          Section: A            Level: Respondent      CAI Reference: Q1122
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A40.
+                  Sometimes marital situations are not entirely clear from
+                  what we've asked so far.  Please bear with me for a few
+                  more questions on this.
+
+          IF Q218 IS (NE0) AND Q219 IS (NE0)
+                  Did (he/she) have a marriage start after
+                  [Q218-PR218.PREV WAVE IW MONTH]
+                  [Q219-PR219.PREV WAVE IW YEAR] ?
+          ELSE
+                  Did (he/she) have a marriage start in the last two years?
+          END
+          ................................................................................
+              1         1. YES
+            732         5. NO
+                        8. DK (Don't Know); NA (Not Ascertained)
+              1         9. RF (Refused)
+            614     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (NE 1); [Q480:CS0Y7] IS
+                           (1) AND {When Q19 is (Q474), [Q40:PR40] IS (1) AND [Q178:PR178]
+                           IS (1)}; [Q480:CS0Y7] IS (2) AND {When Q72 is (Q474),
+                           [Q93:PR93] IS (1) AND [Q178:PR178] IS (1)}; [Q480:CS0Y7] IS (1)
+                           AND {When Q19 is (Q474), [Q545:CS5x] IS (5) AND [Q548:CS7x] IS
+                           (5) AND [Q178:PR178] IS (1)}; [Q480:CS0Y7] IS (2) AND {When Q72
+                           is (Q474), [Q545:CS5x] IS (5) AND [Q548:CS7x] IS (5) AND
+                           [Q178:PR178] IS (1)}
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1124R"></A>
+
+<B>R1124     A40a.POST W1 MARRIAGE MO                  </B>
+          Section: A            Level: Respondent      CAI Reference: Q1124
+          Type: Numeric         Width: 2               Decimals: 0
+
+          A40a.
+                  In what month and year was (he/she) married?
+
+                  MONTH:
+                  YEAR:
+          ................................................................................
+                        1. JAN
+                        2. FEB
+                        3. MAR
+                        4. APR
+                        5. MAY
+                        6. JUN
+                        7. JUL
+                        8. AUG
+                        9. SEP
+              1        10. OCT
+                       11. NOV
+                       12. DEC
+                       98. DK (Don't Know); NA (Not Ascertained)
+                       99. RF (Refused)
+           1347     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (NE 1); [Q480:CS0Y7] IS
+                           (1) AND {When Q19 is (Q474), [Q40:PR40] IS (1) AND [Q178:PR178]
+                           IS (1)}; [Q480:CS0Y7] IS (2) AND {When Q72 is (Q474),
+                           [Q93:PR93] IS (1) AND [Q178:PR178] IS (1)}; [Q480:CS0Y7] IS (1)
+                           AND {When Q19 is (Q474), [Q545:CS5x] IS (5) AND [Q548:CS7x] IS
+                           (5) AND [Q178:PR178] IS (1)}; [Q480:CS0Y7] IS (2) AND {When Q72
+                           is (Q474), [Q545:CS5x] IS (5) AND [Q548:CS7x] IS (5) AND
+                           [Q178:PR178] IS (1)}; [Q1122:A40] IS (NE 1)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1125R"></A>
+
+<B>R1125     A40c.YEAR                                 </B>
+          Section: A            Level: Respondent      CAI Reference: Q1125
+          Type: Numeric         Width: 4               Decimals: 0
+          ................................................................................
+              1           1992-2001. Actual Value
+                               9998. DK (Don't Know)
+                               9999. RF (Refused)
+           1347               Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (NE 1);
+                                     [Q480:CS0Y7] IS (1) AND {When Q19 is (Q474),
+                                     [Q40:PR40] IS (1) AND [Q178:PR178] IS (1)};
+                                     [Q480:CS0Y7] IS (2) AND {When Q72 is (Q474),
+                                     [Q93:PR93] IS (1) AND [Q178:PR178] IS (1)};
+                                     [Q480:CS0Y7] IS (1) AND {When Q19 is (Q474),
+                                     [Q545:CS5x] IS (5) AND [Q548:CS7x] IS (5) AND
+                                     [Q178:PR178] IS (1)}; [Q480:CS0Y7] IS (2) AND {When
+                                     Q72 is (Q474), [Q545:CS5x] IS (5) AND [Q548:CS7x] IS
+                                     (5) AND [Q178:PR178] IS (1)}; [Q1122:A40] IS (NE 1)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1129R"></A>
+
+<B>R1129     A41.POST W1 DIV/WIDOWED                   </B>
+          Section: A            Level: Respondent      CAI Reference: Q1129
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A41.
+                  Did (he/she) divorce or become widowed since
+                  [Q218-PR218.PREV WAVE IW MONTH]
+                  [Q219-PR219.PREV WAVE IW YEAR] ?
+          ................................................................................
+              9         1. YES, DIVORCED/ANNULLED
+             22         2. YES, WIDOWED
+            702         5. NO
+                        8. DK (Don't Know); NA (Not Ascertained)
+              1         9. RF (Refused)
+            614     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (NE 1); [Q480:CS0Y7] IS
+                           (1) AND {When Q19 is (Q474), [Q40:PR40] IS (1) AND [Q178:PR178]
+                           IS (1)}; [Q480:CS0Y7] IS (2) AND {When Q72 is (Q474),
+                           [Q93:PR93] IS (1) AND [Q178:PR178] IS (1)}; [Q480:CS0Y7] IS (1)
+                           AND {When Q19 is (Q474), [Q545:CS5x] IS (5) AND [Q548:CS7x] IS
+                           (5) AND [Q178:PR178] IS (1)}; [Q480:CS0Y7] IS (2) AND {When Q72
+                           is (Q474), [Q545:CS5x] IS (5) AND [Q548:CS7x] IS (5) AND
+                           [Q178:PR178] IS (1)}
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1130R"></A>
+          ASSIGNMENT STATEMENTS
+          *   if [Q480:CS0Y7] IS (1) AND {When Q19 is (Q474), [Q545:CS5x] IS (5) AND
+             [Q548:CS7x] IS (5) AND [Q178:PR178] IS (1)} then [R1130.A41a.POST W1
+             DIV/WIDOW MOR] = value of [Q546:CS6x.MOYR PRELOAD SPOUSE/P SEPARATE/DIE]
+          *   if [Q480:CS0Y7] IS (2) AND {When Q72 is (Q474), [Q545:CS5x] IS (5) AND
+             [Q548:CS7x] IS (5) AND [Q178:PR178] IS (1)} then [R1130.A41a.POST W1
+             DIV/WIDOW MOR] = value of [Q546:CS6x.MOYR PRELOAD SPOUSE/P SEPARATE/DIE]
+          - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+<B>R1130     A41a.POST W1 DIV/WIDOW MOR                </B>
+          Section: A            Level: Respondent      CAI Reference: Q1130
+          Type: Numeric         Width: 2               Decimals: 0
+
+          A41a.
+                  In what month and year did (he/she) (divorce/become widowed)?
+
+                  MONTH:
+                  YEAR:
+          ................................................................................
+              6         1. JAN
+                        2. FEB
+              2         3. MAR
+                        4. APR
+              1         5. MAY
+              6         6. JUN
+              1         7. JUL
+              2         8. AUG
+              2         9. SEP
+              3        10. OCT
+              1        11. NOV
+              1        12. DEC
+              6        98. DK (Don't Know); NA (Not Ascertained)
+                       99. RF (Refused)
+           1317     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (NE 1); [Q480:CS0Y7] IS
+                           (1) AND {When Q19 is (Q474), [Q40:PR40] IS (1) AND [Q178:PR178]
+                           IS (1)}; [Q480:CS0Y7] IS (2) AND {When Q72 is (Q474),
+                           [Q93:PR93] IS (1) AND [Q178:PR178] IS (1)}; [Q480:CS0Y7] IS (1)
+                           AND {When Q19 is (Q474), [Q545:CS5x] IS (5) AND [Q548:CS7x] IS
+                           (5) AND [Q178:PR178] IS (1)}; [Q480:CS0Y7] IS (2) AND {When Q72
+                           is (Q474), [Q545:CS5x] IS (5) AND [Q548:CS7x] IS (5) AND
+                           [Q178:PR178] IS (1)}; [Q1129:A41] IS (5 OR DK OR RF)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1131R"></A>
+          ASSIGNMENT STATEMENTS
+          *  Jump from <A HREF=#AR1130R>R1130</A> [A41a.POST W1 DIV/WIDOW MOR] when
+             [Q480:CS0Y7] IS (1) AND {When Q19 is (Q474), [Q545:CS5x] IS (5) AND
+             [Q548:CS7x] IS (5) AND [Q178:PR178] IS (1)}
+          *  Jump from <A HREF=#AR1130R>R1130</A> [A41a.POST W1 DIV/WIDOW MOR] when
+             [Q480:CS0Y7] IS (2) AND {When Q72 is (Q474), [Q545:CS5x] IS (5) AND
+             [Q548:CS7x] IS (5) AND [Q178:PR178] IS (1)}
+
+          *   if [Q480:CS0Y7] IS (1) AND {When Q19 is (Q474), [Q545:CS5x] IS (5) AND
+             [Q548:CS7x] IS (5) AND [Q178:PR178] IS (1)} then [R1131.A41b.YEAR] = value
+             of [Q547:CS6ax.YEAR SEPARATEDIE]
+          *   if [Q480:CS0Y7] IS (2) AND {When Q72 is (Q474), [Q545:CS5x] IS (5) AND
+             [Q548:CS7x] IS (5) AND [Q178:PR178] IS (1)} then [R1131.A41b.YEAR] = value
+             of [Q547:CS6ax.YEAR SEPARATEDIE]
+          - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+<B>R1131     A41b.YEAR                                 </B>
+          Section: A            Level: Respondent      CAI Reference: Q1131
+          Type: Numeric         Width: 4               Decimals: 0
+          ................................................................................
+             21           1992-2001. Actual Value
+             10                9998. DK (Don't Know); NA (Not Ascertained)
+                               9999. RF (Refused)
+           1317               Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (NE 1);
+                                     [Q480:CS0Y7] IS (1) AND {When Q19 is (Q474),
+                                     [Q40:PR40] IS (1) AND [Q178:PR178] IS (1)};
+                                     [Q480:CS0Y7] IS (2) AND {When Q72 is (Q474),
+                                     [Q93:PR93] IS (1) AND [Q178:PR178] IS (1)};
+                                     [Q480:CS0Y7] IS (1) AND {When Q19 is (Q474),
+                                     [Q545:CS5x] IS (5) AND [Q548:CS7x] IS (5) AND
+                                     [Q178:PR178] IS (1)}; [Q480:CS0Y7] IS (2) AND {When
+                                     Q72 is (Q474), [Q545:CS5x] IS (5) AND [Q548:CS7x] IS
+                                     (5) AND [Q178:PR178] IS (1)}; [Q1129:A41] IS (5 OR DK
+                                     OR RF)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1133R"></A>
+
+<B>R1133     A43.MARITAL STATUS IF UNMARRIED           </B>
+          Section: A            Level: Respondent      CAI Reference: Q1133
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A43.
+                  Just to clarify, at the time of (his/her) death was
+                  (he/she) currently separated, divorced, widowed, or
+                  had (he/she) never been married?
+          ................................................................................
+             16         3. SEPARATED
+            102         4. DIVORCED
+            570         5. WIDOWED
+             50         6. NEVER MARRIED
+              5         7. OTHER (SPECIFY)
+              4         8. DK (Don't Know); NA (Not Ascertained)
+              1         9. RF (Refused)
+            600     Blank. INAP (Inapplicable): [Q480:CS0Y7] IS (1) AND {When Q19 is
+                           (Q474), [Q37:PR37] IS (1)}; [Q480:CS0Y7] IS (2) AND {When Q72
+                           is (Q474), [Q90:PR90] IS (1)}; [Q569:CS15A] IS (2)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1134R"></A>
+          ASSIGNMENT STATEMENTS
+          *   if [Q480:CS0Y7] IS (1) AND {When Q19 is (Q474), [Q37:PR37] IS (1)} then
+             [R1134.A43a.MARITAL STATUS ASSIGNED] = 1
+          *   if [Q480:CS0Y7] IS (2) AND {When Q72 is (Q474), [Q90:PR90] IS (1)} then
+             [R1134.A43a.MARITAL STATUS ASSIGNED] = 1
+          *   if [Q569:CS15A] IS (2) then [R1134.A43a.MARITAL STATUS ASSIGNED] = 3
+          *   if [Q480:CS0Y7] IS (1) AND {When Q19 is (Q474), [Q545:CS5x] IS (5) AND
+             [Q548:CS7x] IS (5) AND [Q178:PR178] IS (1)} then [R1134.A43a.MARITAL STATUS
+             ASSIGNED] = 5
+          *   if [Q480:CS0Y7] IS (2) AND {When Q72 is (Q474), [Q545:CS5x] IS (5) AND
+             [Q548:CS7x] IS (5) AND [Q178:PR178] IS (1)} then [R1134.A43a.MARITAL STATUS
+             ASSIGNED] = 5
+          *   if [Q1:PR1] IS (GE 0 OR LE 0) then [R1134.A43a.MARITAL STATUS ASSIGNED] =
+             system calculation: 1133
+          - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+<B>R1134     A43a.MARITAL STATUS ASSIGNED              </B>
+          Section: A            Level: Respondent      CAI Reference: Q1134
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+              5         0. INAP (Inapplicable)
+            592         1. MARRIED
+             24         3. SEPARATED
+            102         4. DIVORCED
+            570         5. WIDOWED
+             50         6. NEVER MARRIED
+              5         7. OTHER (SPECIFY)
+                        8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1135R"></A>
+          ASSIGNMENT STATEMENTS
+          *  Jump from <A HREF=#AR1134R>R1134</A> [A43a.MARITAL STATUS ASSIGNED] when
+             [Q480:CS0Y7] IS (2) AND {When Q72 is (Q474), [Q90:PR90] IS (1)}
+          *  Jump from <A HREF=#AR1134R>R1134</A> [A43a.MARITAL STATUS ASSIGNED] when
+             [Q480:CS0Y7] IS (1) AND {When Q19 is (Q474), [Q545:CS5x] IS (5) AND
+             [Q548:CS7x] IS (5) AND [Q178:PR178] IS (1)}
+          *  Jump from <A HREF=#AR1134R>R1134</A> [A43a.MARITAL STATUS ASSIGNED] when
+             [Q569:CS15A] IS (2)
+          *  Jump from <A HREF=#AR1134R>R1134</A> [A43a.MARITAL STATUS ASSIGNED] when
+             [Q480:CS0Y7] IS (2) AND {When Q72 is (Q474), [Q545:CS5x] IS (5) AND
+             [Q548:CS7x] IS (5) AND [Q178:PR178] IS (1)}
+          *  Jump from <A HREF=#AR1134R>R1134</A> [A43a.MARITAL STATUS ASSIGNED] when
+             [Q480:CS0Y7] IS (1) AND {When Q19 is (Q474), [Q37:PR37] IS (1)}
+          *  Jump from <A HREF=#AR1134R>R1134</A> [A43a.MARITAL STATUS ASSIGNED] when
+             [Q1:PR1] IS (GE 0 OR LE 0)
+          - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+<B>R1135     A44.# MARRIAGES                           </B>
+          Section: A            Level: Respondent      CAI Reference: Q1135
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A44.
+                  Altogether, how many times had (he/she) been
+                  married (including (his/her) current marriage/...)?
+          ................................................................................
+              6         1. ONCE
+                        2. TWICE
+                        3. THREE TIMES
+                        4. FOUR OR MORE
+                        8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1342     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1); [Q1134:A43a] IS (6)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1136R"></A>
+
+<B>R1136     A45.FIRST MAR-YR BEGIN                    </B>
+          Section: A            Level: Respondent      CAI Reference: Q1136
+          Type: Numeric         Width: 4               Decimals: 0
+
+          A45.
+                  In what year did (his/her) (first) marriage begin?
+          ................................................................................
+              5           1900-2001. Actual Value
+              1                9998. DK (Don't Know); NA (Not Ascertained)
+                               9999. RF (Refused)
+           1342               Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1);
+                                     [Q1134:A43a] IS (6)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1137R"></A>
+
+<B>R1137     A45a.FIRST MAR-MON BEGIN                  </B>
+          Section: A            Level: Respondent      CAI Reference: Q1137
+          Type: Numeric         Width: 2               Decimals: 0
+
+          A45a.
+                  In what month was that?
+          ................................................................................
+              2         1. JAN
+                        2. FEB
+                        3. MAR
+                        4. APR
+                        5. MAY
+                        6. JUN
+              2         7. JUL
+                        8. AUG
+                        9. SEP
+                       10. OCT
+              1        11. NOV
+                       12. DEC
+              1        98. DK (Don't Know); NA (Not Ascertained)
+                       99. RF (Refused)
+           1342     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1); [Q1134:A43a] IS
+                           (6); [Q1136:A45] IS (RF)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1138R"></A>
+
+<B>R1138     A45b.FIRST MAR-END DIV/WID                </B>
+          Section: A            Level: Respondent      CAI Reference: Q1138
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A45b.
+                  Did that marriage end in divorce or was (he/she) widowed?
+          ................................................................................
+                        4. DIVORCED
+                        5. WIDOWED
+                        7. OTHER
+                        8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1348     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1); [Q1134:A43a] IS
+                           (6); [Q1135:A44] IS (1) AND [Q1134:A43a] IS (1 OR 3);
+                           [Q1135:A44] IS (1) AND [Q1134:A43a] IS (4 OR 5)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1139R"></A>
+
+<B>R1139     A45c.FIRST MAR-YRS MARRIED                </B>
+          Section: A            Level: Respondent      CAI Reference: Q1139
+          Type: Numeric         Width: 2               Decimals: 0
+
+          A45c.
+                  About how many years did that marriage last?
+          ................................................................................
+                               0-96. Actual Value
+              2                  98. DK (Don't Know); NA (Not Ascertained)
+                                 99. RF (Refused)
+           1346               Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1);
+                                     [Q1134:A43a] IS (6); [Q1135:A44] IS (1) AND
+                                     [Q1134:A43a] IS (1 OR 3)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1148R"></A>
+
+<B>R1148     A48.RECENT MAR-YR BEGIN                   </B>
+          Section: A            Level: Respondent      CAI Reference: Q1148
+          Type: Numeric         Width: 4               Decimals: 0
+
+          A48.
+          IF Q37 IS (1)
+                  In what year did (his/her) current marriage begin?
+          ELSE
+                  In what year did (he/she) marry most recently?
+          END
+          ................................................................................
+                          1900-2001. Actual Value
+                               9998. DK (Don't Know); NA (Not Ascertained)
+                               9999. RF (Refused)
+           1348               Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1);
+                                     [Q1134:A43a] IS (6); [Q1135:A44] IS (1) AND
+                                     [Q1134:A43a] IS (1 OR 3); [Q1135:A44] IS (1)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1149R"></A>
+
+<B>R1149     A48a.RECENT MAR-YR MAR END                </B>
+          Section: A            Level: Respondent      CAI Reference: Q1149
+          Type: Numeric         Width: 2               Decimals: 0
+
+          A48a.
+                  In what month was that?
+
+                  MONTH:
+          ................................................................................
+                        1. JAN
+                        2. FEB
+                        3. MAR
+                        4. APR
+                        5. MAY
+                        6. JUN
+                        7. JUL
+                        8. AUG
+                        9. SEP
+                       10. OCT
+                       11. NOV
+                       12. DEC
+                       98. DK (Don't Know); NA (Not Ascertained)
+                       99. RF (Refused)
+           1348     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1); [Q1134:A43a] IS
+                           (6); [Q1135:A44] IS (1) AND [Q1134:A43a] IS (1 OR 3);
+                           [Q1135:A44] IS (1); [Q1148:A48] IS (RF)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1150R"></A>
+
+<B>R1150     A48b.RECENT MAR-END DIV/WID               </B>
+          Section: A            Level: Respondent      CAI Reference: Q1150
+          Type: Numeric         Width: 1               Decimals: 0
+
+          A48b.
+                  Did that marriage end in divorce or was (he/she) widowed?
+          ................................................................................
+                        4. DIVORCED
+                        5. WIDOWED
+                        7. OTHER
+                        8. DK (Don't Know); NA (Not Ascertained)
+                        9. RF (Refused)
+           1348     Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1); [Q1134:A43a] IS
+                           (6); [Q1135:A44] IS (1) AND [Q1134:A43a] IS (1 OR 3);
+                           [Q1135:A44] IS (1); [Q1134:A43a] IS (1 OR 3); [Q1134:A43a] IS
+                           (4 OR 5)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="AR1151R"></A>
+
+<B>R1151     A48c.RECENT MAR-YRS MARRIED               </B>
+          Section: A            Level: Respondent      CAI Reference: Q1151
+          Type: Numeric         Width: 2               Decimals: 0
+
+          A48c.
+                  About how many years did that marriage last?
+          ................................................................................
+                               0-96. Actual Value
+                                 98. DK (Don't Know); NA (Not Ascertained)
+                                 99. RF (Refused)
+           1348               Blank. INAP (Inapplicable): [Q753:CS22Y30] IS (1);
+                                     [Q1134:A43a] IS (6); [Q1135:A44] IS (1) AND
+                                     [Q1134:A43a] IS (1 OR 3); [Q1135:A44] IS (1);
+                                     [Q1134:A43a] IS (1 OR 3)
+
+<HR WIDTH=80% ALIGN="LEFT">
+<A name="ARVERSIONR"></A>
+
+<B>RVERSION  2000 EXIT FINAL RELEASE VERSION NUMBER    </B>
+          Section: A            Level: Respondent      CAI Reference: Q9007
+          Type: Numeric         Width: 1               Decimals: 0
+          ................................................................................
+           1348         1. First Data Release
+
+<HR WIDTH=80% ALIGN="LEFT">
+</pre>
+<A HREF="#Top"><b>Top of Page</b></a>
+</body></html>
