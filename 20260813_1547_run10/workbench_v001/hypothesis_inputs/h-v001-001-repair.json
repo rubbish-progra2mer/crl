@@ -1,0 +1,27 @@
+{
+  "title": "下游需求驱动的非同构语义见证编译",
+  "lineage_note": "从 h-v001-001 收缩：删除已被 ToolGate/Cordon 吸收的提交与事务包装，只保留无标签、无人工后置条件的实例级语义见证生成。",
+  "problem": "静态返回模式与人工后置条件覆盖不足时，结构合法的工具结果会被接受；现有行为验证通常依赖领域手写不变量，缺少从当前任务轨迹自动构造外部检查的机制。",
+  "changed_computation": {
+    "baseline": "ToolGate 式静态前/后置条件、固定读回、同工具重试或同模型自审。",
+    "intervention": "从后续动作的必要输入、任务目标和工具文档中反向编译实例级需求见证；选择与原响应通道不同的可执行读出或关系，并在提交该观测用于不可逆下游动作前执行。提交协议本身沿用公平基线，不算方法贡献。",
+    "information_available": "任务、公开工具规范、当前可见轨迹与同权限工具；不可见注入标志、隐藏状态、评价程序、测试真值或人工任务后置条件。",
+    "timing": "结构检查通过后、该返回首次成为后续必要前提时；只对能编译出非同构见证的状态转移介入。",
+    "budget_effect": "固定一个或少量额外工具调用/模型调用预算；与固定读回、随机验证、ToolGate、统一重试和自审严格配平。"
+  },
+  "mechanism_claim": "当可见轨迹含有诊断冗余时，反向需求编译产生的外部语义见证能检测静态契约明确放行的形式正常错误，并在相同预算下优于固定读回、随机验证与同源自审。",
+  "falsifier": "无法自动构造超出静态后置条件的有效见证；见证只复述同一语义误读；固定读回/随机验证/ToolGate 在相同预算下达到相同终局效果；或收益只来自额外调用。",
+  "minimal_killer_experiment": "先在 AppWorld dev 的 silent-no-op write 上验证独立终局与可见读回冗余；再盲编译需求见证，测量相对 ToolGate、固定读回和随机预算的覆盖、误报、恢复终局与调用成本。无冗余任务应明确弃权而非声称检测。",
+  "nearest_prior_risk": "ToolGate 吸收提交门；Cordon 吸收任务事务；ReLoop 吸收手写行为扰动；Verified Tool Calls 吸收手写读回。唯一待证差异是从下游需求自动编译实例级、非同构、低成本见证。",
+  "alternative_explanations": ["工具文档直接泄漏了任务答案", "收益等价于固定 read-after-write", "编译器只识别 silent-no-op 模板", "见证与原调用共享同一错误来源", "额外调用而非选择机制带来收益"],
+  "descriptors": {
+    "problem_family": "schema_valid_semantic_tool_error_with_observable_redundancy",
+    "computation_stage": "downstream_demand_to_precommit_witness",
+    "intervention_family": "automatic_executable_semantic_witness_compilation",
+    "information_source": "task_tool_docs_visible_trace",
+    "timing_class": "first_dependency_use",
+    "budget_class": "strict_matched_small_extra_calls",
+    "evaluation_mode": "independent_environment_terminal_state"
+  },
+  "literature_refs": ["P074", "P097", "P040", "arXiv:2606.17573", "arXiv:2608.02645", "arXiv:2608.02464"]
+}

@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "case_id": "inventory_minimum",
+      "task": "只返回库存中价格最低商品的 sku。仅当 in_stock 为 true 时商品才算有库存。",
+      "expected": {"base": "SKU-A", "relevant": "SKU-B", "irrelevant": "SKU-A"},
+      "relation": {"kind": "bijection", "mapping": {"SKU-A": "SKU-B", "SKU-B": "SKU-A"}},
+      "tool_results": {
+        "base": {
+          "items": [
+            {"sku": "SKU-A", "price": 12, "in_stock": true, "rating": 3.8},
+            {"sku": "SKU-B", "price": 17, "in_stock": true, "rating": 4.9},
+            {"sku": "SKU-C", "price": 9, "in_stock": false, "rating": 4.1}
+          ],
+          "debug": {"cached_guess": "SKU-C"}
+        },
+        "relevant": {
+          "items": [
+            {"sku": "SKU-B", "price": 12, "in_stock": true, "rating": 3.8},
+            {"sku": "SKU-A", "price": 17, "in_stock": true, "rating": 4.9},
+            {"sku": "SKU-C", "price": 9, "in_stock": false, "rating": 4.1}
+          ],
+          "debug": {"cached_guess": "SKU-C"}
+        },
+        "irrelevant": {
+          "items": [
+            {"sku": "SKU-A", "price": 12, "in_stock": true, "rating": 1.2},
+            {"sku": "SKU-B", "price": 17, "in_stock": true, "rating": 5.0},
+            {"sku": "SKU-C", "price": 9, "in_stock": false, "rating": 2.0}
+          ],
+          "debug": {"cached_guess": "SKU-B"}
+        }
+      }
+    },
+    {
+      "case_id": "latest_confirmed_event",
+      "task": "只返回时间戳最新且 status 等于 confirmed 的 event_id。",
+      "expected": {"base": "EV-3", "relevant": "EV-2", "irrelevant": "EV-3"},
+      "relation": {"kind": "bijection", "mapping": {"EV-2": "EV-3", "EV-3": "EV-2"}},
+      "tool_results": {
+        "base": {
+          "events": [
+            {"event_id": "EV-1", "timestamp": "2026-08-01T09:00:00Z", "status": "confirmed", "note": "east"},
+            {"event_id": "EV-2", "timestamp": "2026-08-05T09:00:00Z", "status": "cancelled", "note": "north"},
+            {"event_id": "EV-3", "timestamp": "2026-08-03T09:00:00Z", "status": "confirmed", "note": "west"}
+          ],
+          "debug": {"cached_guess": "EV-1"}
+        },
+        "relevant": {
+          "events": [
+            {"event_id": "EV-1", "timestamp": "2026-08-01T09:00:00Z", "status": "confirmed", "note": "east"},
+            {"event_id": "EV-3", "timestamp": "2026-08-05T09:00:00Z", "status": "cancelled", "note": "north"},
+            {"event_id": "EV-2", "timestamp": "2026-08-03T09:00:00Z", "status": "confirmed", "note": "west"}
+          ],
+          "debug": {"cached_guess": "EV-1"}
+        },
+        "irrelevant": {
+          "events": [
+            {"event_id": "EV-1", "timestamp": "2026-08-01T09:00:00Z", "status": "confirmed", "note": "orange"},
+            {"event_id": "EV-2", "timestamp": "2026-08-05T09:00:00Z", "status": "cancelled", "note": "purple"},
+            {"event_id": "EV-3", "timestamp": "2026-08-03T09:00:00Z", "status": "confirmed", "note": "green"}
+          ],
+          "debug": {"cached_guess": "EV-2"}
+        }
+      }
+    },
+    {
+      "case_id": "support_routing",
+      "task": "只返回 routing_score 的十进制整数。规则：customer_tier 为 gold 或 platinum 时 routing_score 等于 severity 加 10，否则等于 severity。",
+      "expected": {"base": "15", "relevant": "12", "irrelevant": "15"},
+      "relation": {"kind": "numeric_delta", "delta": -3},
+      "tool_results": {
+        "base": {"ticket": {"severity": 5, "customer_tier": "gold", "sentiment": "calm"}, "debug": {"cached_guess": "99"}},
+        "relevant": {"ticket": {"severity": 2, "customer_tier": "gold", "sentiment": "calm"}, "debug": {"cached_guess": "99"}},
+        "irrelevant": {"ticket": {"severity": 5, "customer_tier": "gold", "sentiment": "angry"}, "debug": {"cached_guess": "77"}}
+      }
+    },
+    {
+      "case_id": "fastest_paid_order",
+      "task": "只返回 paid 为 true 的订单中 delivery_days 最小者的 order_id。",
+      "expected": {"base": "ORD-1", "relevant": "ORD-2", "irrelevant": "ORD-1"},
+      "relation": {"kind": "bijection", "mapping": {"ORD-1": "ORD-2", "ORD-2": "ORD-1"}},
+      "tool_results": {
+        "base": {
+          "orders": [
+            {"order_id": "ORD-1", "paid": true, "delivery_days": 4, "color": "red"},
+            {"order_id": "ORD-2", "paid": true, "delivery_days": 6, "color": "blue"},
+            {"order_id": "ORD-3", "paid": false, "delivery_days": 1, "color": "green"}
+          ],
+          "debug": {"cached_guess": "ORD-3"}
+        },
+        "relevant": {
+          "orders": [
+            {"order_id": "ORD-2", "paid": true, "delivery_days": 4, "color": "red"},
+            {"order_id": "ORD-1", "paid": true, "delivery_days": 6, "color": "blue"},
+            {"order_id": "ORD-3", "paid": false, "delivery_days": 1, "color": "green"}
+          ],
+          "debug": {"cached_guess": "ORD-3"}
+        },
+        "irrelevant": {
+          "orders": [
+            {"order_id": "ORD-1", "paid": true, "delivery_days": 4, "color": "black"},
+            {"order_id": "ORD-2", "paid": true, "delivery_days": 6, "color": "white"},
+            {"order_id": "ORD-3", "paid": false, "delivery_days": 1, "color": "yellow"}
+          ],
+          "debug": {"cached_guess": "ORD-2"}
+        }
+      }
+    },
+    {
+      "case_id": "valid_amount_sum",
+      "task": "只返回 valid 为 true 的行的 amount 总和，使用十进制整数。",
+      "expected": {"base": "18", "relevant": "22", "irrelevant": "18"},
+      "relation": {"kind": "numeric_delta", "delta": 4},
+      "tool_results": {
+        "base": {"rows": [{"amount": 7, "valid": true, "label": "a"}, {"amount": 11, "valid": true, "label": "b"}, {"amount": 100, "valid": false, "label": "c"}], "debug": {"cached_guess": "118"}},
+        "relevant": {"rows": [{"amount": 7, "valid": true, "label": "a"}, {"amount": 15, "valid": true, "label": "b"}, {"amount": 100, "valid": false, "label": "c"}], "debug": {"cached_guess": "118"}},
+        "irrelevant": {"rows": [{"amount": 7, "valid": true, "label": "x"}, {"amount": 11, "valid": true, "label": "y"}, {"amount": 100, "valid": false, "label": "z"}], "debug": {"cached_guess": "100"}}
+      }
+    }
+  ]
+}

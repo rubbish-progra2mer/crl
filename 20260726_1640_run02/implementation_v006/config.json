@@ -1,0 +1,33 @@
+{
+  "encoder": "sentence-transformers/all-MiniLM-L6-v2",
+  "encoder_device": "cuda",
+  "k": 10,
+  "context_char_cap": 6000,
+  "unit_kinds": [
+    "turn",
+    "sentence"
+  ],
+  "turn_char_cap": 1000,
+  "sentence_min_chars": 15,
+  "sentence_char_cap": 300,
+  "ppr": {
+    "knn": 10,
+    "damping": 0.5,
+    "iterations": 30,
+    "softmax_temp": 0.1
+  },
+  "recency_half_life_fraction": 0.5,
+  "reader": {
+    "model": "deepseek-v4-flash",
+    "base_url": "https://api.deepseek.com/chat/completions",
+    "temperature": 0.0,
+    "max_tokens": 1000,
+    "arms": [
+      "turn_topk",
+      "sentence_topk",
+      "oracle_current"
+    ],
+    "prompt_template": "You are answering a question about a user's conversation history. Use ONLY the provided memory excerpts. If the excerpts contain updated/changed information, answer with the MOST RECENT state. Be concise.\n\nMemory excerpts:\n{context}\n\nQuestion ({question_date}): {question}\n\nAnswer:"
+  },
+  "seed": 20260726
+}

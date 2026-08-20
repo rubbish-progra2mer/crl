@@ -1,0 +1,119 @@
+{
+  "baseline_specs": [
+    "raw：只见语法成功与 items，可自行补查一次",
+    "prompt：见完整覆盖元数据并获明确负命题核验规则，可补查一次",
+    "gate：与 prompt 完全相同的信息和提示，但运行时拒绝无完整见证的 absent 并自动执行一次全作用域补查"
+  ],
+  "budget_ceiling": "{\"model_calls\": 144, \"tokens\": 120000, \"wall_time_seconds\": 1800, \"paid_cost\": 0}",
+  "claim_ids": [
+    "coverage-blindness-phenomenon-v001",
+    "coverage-gate-increment-v001"
+  ],
+  "confounders": [
+    "本地模型容量",
+    "合成实体命名与提示可读性",
+    "覆盖元数据格式显著性",
+    "单种随机种子",
+    "gate 自动补查在真实工具上可能不可用或有成本"
+  ],
+  "dataset": "实现中冻结生成的 4 域 x 6 故障/真值类型，共 24 个场景",
+  "declared_inputs": [
+    "implementation_v001/coverage_gate_experiment.py"
+  ],
+  "declared_outputs": [
+    "results.json",
+    "metrics-output.json",
+    "stdout.txt",
+    "stderr.txt"
+  ],
+  "evidence_fidelity": "SCREENING",
+  "expected_signatures": [
+    "raw 在隐藏目标故障上出现错误不存在结论，而完整结果上的正确否定被保留",
+    "若提示未完全服从覆盖规则，gate 通过一次定向补查将错误否定改为 present",
+    "若 prompt 已完全吸收覆盖元数据，gate 与 prompt 无差异并杀死方法增量"
+  ],
+  "experiment_id": "coverage-gate-screening-v001",
+  "falsification_rule": "现象主张要求 raw-prompt 错误否定率差至少 0.25。方法增量要求 gate 比 prompt 至少低 0.10，且正确否定保留 >=0.75、拒答增量 <=0.10、平均额外查询 <=1；任一失败即不支持方法增量。",
+  "hypothesis_id": "h-coverage-witness-001",
+  "independent_ground_truth": {
+    "description": "每个场景的完整实体集合、目标存在性、请求作用域和所需时间由场景生成器在模型调用前固定；模型输出不参与标签生成。",
+    "external_card_ids": [
+      "paper-p039",
+      "paper-p073"
+    ],
+    "external_evidence_ids": [
+      "ev-p039-aggregate-score-masking",
+      "ev-p073-internal-confidence-misalignment"
+    ],
+    "external_literature_refs": [
+      "arXiv:2603.10060",
+      "arXiv:2605.22219"
+    ],
+    "run_local_fact_refs": [
+      "problem_v001.md",
+      "candidate_v001.md",
+      "research_map_v001.md"
+    ]
+  },
+  "independent_implementation_count": 1,
+  "model": "qwen3:8b",
+  "parity_dimensions": {
+    "budget": {
+      "notes": "prompt 与 gate 的最大模型轮次和额外工具查询上限均一致。",
+      "status": "matched"
+    },
+    "information_access": {
+      "notes": "核心比较 prompt 与 gate 接收完全相同的工具值和覆盖元数据；raw 只用于现象对照。",
+      "status": "matched"
+    },
+    "model_provider_revision": {
+      "notes": "所有条件使用同一本机 qwen3:8b Ollama 模型。",
+      "status": "matched"
+    },
+    "sampling_protocol": {
+      "notes": "冻结场景顺序、零温、确定性种子规则和最大三次模型轮次一致。",
+      "status": "matched"
+    },
+    "tool_capability": {
+      "notes": "prompt 与 gate 都最多允许一次全作用域补查并得到同一完整响应。",
+      "status": "matched"
+    }
+  },
+  "primary_metric": "false_negative_rate_hidden",
+  "provider": "本机 Ollama",
+  "purpose": "independent_claim_validation",
+  "research_question": "覆盖盲区现象是否稳定，且确定性负命题准入门是否在同信息强提示基线上提供净增量？",
+  "revision": "Ollama local model identity 500a1f067a9f; temperature=0; num_ctx=4096",
+  "run_id": "20260818_2228_run16",
+  "sampling_unit": "一个模型在一个冻结场景和一个运行条件下的完整交互 episode",
+  "schema_version": 2,
+  "secondary_metrics": [
+    "hidden_recovery_success_rate",
+    "complete_absence_retention_rate",
+    "visible_positive_accuracy",
+    "overall_task_success_rate",
+    "abstention_rate",
+    "mean_extra_queries",
+    "mean_gate_interventions",
+    "parse_issue_rate"
+  ],
+  "seeds": [
+    16001
+  ],
+  "subject_scope": {
+    "datasets": [
+      "Run16 synthetic four-domain coverage-fault suite"
+    ],
+    "environment": "Windows 11; local Ollama; deterministic mock tool; no paid API",
+    "models": [
+      "qwen3:8b@Ollama"
+    ],
+    "seeds": [
+      "16001"
+    ],
+    "tasks": [
+      "existence queries over list/search tools"
+    ]
+  },
+  "version": "v001"
+}

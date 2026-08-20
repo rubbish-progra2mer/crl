@@ -1,0 +1,1259 @@
+{
+  "dataset_sha256": "b3a7200d6181a891c2bd7ab8045d8ef11e6ea837f736ceabff402520a690af34",
+  "errors": [],
+  "experiment_id": "sgr-coverage-smoke-v001",
+  "model": "qwen2.5:7b",
+  "records": [
+    {
+      "abstained": false,
+      "completion_tokens": 31,
+      "condition": "receipt",
+      "domain": "ARXIV",
+      "extra_queries": 0,
+      "false_negative": true,
+      "final_answer": "absent",
+      "gate_interventions": 0,
+      "ground_truth": "present",
+      "mode": "hidden",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 422,
+      "scenario_id": "arxiv_001-hidden",
+      "task_id": "arxiv_001",
+      "task_success": false,
+      "transcript": [
+        {
+          "tool_response": {
+            "items": [
+              "1910.02551",
+              "2011.00050",
+              "2107.13034"
+            ],
+            "receipt": {
+              "output_sha256": "0a665d04fe17b976223562d0427dc42c50d9ff49d182b21d4603b9c466b5a433",
+              "result_count": 3,
+              "signature_status": "valid"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"absent\",\"reason\":\"2110.04181 is not listed in the items.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "absent",
+            "reason": "2110.04181 is not listed in the items."
+          },
+          "usage": {
+            "completion": 31,
+            "prompt": 422
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 82,
+      "condition": "postcondition",
+      "domain": "ARXIV",
+      "extra_queries": 1,
+      "false_negative": false,
+      "final_answer": "present",
+      "gate_interventions": 0,
+      "ground_truth": "present",
+      "mode": "hidden",
+      "model_calls": 2,
+      "parse_issue": false,
+      "prompt_tokens": 1257,
+      "scenario_id": "arxiv_001-hidden",
+      "task_id": "arxiv_001",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope_id": "7e091e73f4159253",
+              "next_cursor": "next-page",
+              "requested_scope_id": "7e091e73f4159253",
+              "status": "partial"
+            },
+            "items": [
+              "1910.02551",
+              "2011.00050",
+              "2107.13034"
+            ],
+            "receipt": {
+              "output_sha256": "0a665d04fe17b976223562d0427dc42c50d9ff49d182b21d4603b9c466b5a433",
+              "result_count": 3,
+              "signature_status": "valid"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"query\",\"reason\":\"The coverage.status is partial, indicating that the query results do not fully meet the qualifying criteria.\"}",
+          "parsed_action": {
+            "action": "query",
+            "answer": "",
+            "reason": "The coverage.status is partial, indicating that the query results do not fully meet the qualifying criteria."
+          },
+          "usage": {
+            "completion": 28,
+            "prompt": 501
+          }
+        },
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope_id": "7e091e73f4159253",
+              "next_cursor": null,
+              "requested_scope_id": "7e091e73f4159253",
+              "status": "complete"
+            },
+            "items": [
+              "1910.02551",
+              "2011.00050",
+              "2107.13034",
+              "2110.04181"
+            ],
+            "receipt": {
+              "output_sha256": "ff9237a4993ebd72261594e9676149f7b5b8b27449af2dca27f081504c06cbaa",
+              "result_count": 4,
+              "signature_status": "valid"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"present\",\"reason\":\"The coverage.status is complete, applied_scope_id equals requested_scope_id, and next_cursor is null, indicating that the target 2110.04181 is within the qualifying set.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "present",
+            "reason": "The coverage.status is complete, applied_scope_id equals requested_scope_id, and next_cursor is null, indicating that the target 2110.04181 is within the qualifying set."
+          },
+          "usage": {
+            "completion": 54,
+            "prompt": 756
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 82,
+      "condition": "gate",
+      "domain": "ARXIV",
+      "extra_queries": 1,
+      "false_negative": false,
+      "final_answer": "present",
+      "gate_interventions": 0,
+      "ground_truth": "present",
+      "mode": "hidden",
+      "model_calls": 2,
+      "parse_issue": false,
+      "prompt_tokens": 1257,
+      "scenario_id": "arxiv_001-hidden",
+      "task_id": "arxiv_001",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope_id": "7e091e73f4159253",
+              "next_cursor": "next-page",
+              "requested_scope_id": "7e091e73f4159253",
+              "status": "partial"
+            },
+            "items": [
+              "1910.02551",
+              "2011.00050",
+              "2107.13034"
+            ],
+            "receipt": {
+              "output_sha256": "0a665d04fe17b976223562d0427dc42c50d9ff49d182b21d4603b9c466b5a433",
+              "result_count": 3,
+              "signature_status": "valid"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"query\",\"reason\":\"The coverage.status is partial, indicating that the query results do not fully meet the qualifying criteria.\"}",
+          "parsed_action": {
+            "action": "query",
+            "answer": "",
+            "reason": "The coverage.status is partial, indicating that the query results do not fully meet the qualifying criteria."
+          },
+          "usage": {
+            "completion": 28,
+            "prompt": 501
+          }
+        },
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope_id": "7e091e73f4159253",
+              "next_cursor": null,
+              "requested_scope_id": "7e091e73f4159253",
+              "status": "complete"
+            },
+            "items": [
+              "1910.02551",
+              "2011.00050",
+              "2107.13034",
+              "2110.04181"
+            ],
+            "receipt": {
+              "output_sha256": "ff9237a4993ebd72261594e9676149f7b5b8b27449af2dca27f081504c06cbaa",
+              "result_count": 4,
+              "signature_status": "valid"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"present\",\"reason\":\"The coverage.status is complete, applied_scope_id equals requested_scope_id, and next_cursor is null, indicating that the target 2110.04181 is within the qualifying set.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "present",
+            "reason": "The coverage.status is complete, applied_scope_id equals requested_scope_id, and next_cursor is null, indicating that the target 2110.04181 is within the qualifying set."
+          },
+          "usage": {
+            "completion": 54,
+            "prompt": 756
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 29,
+      "condition": "receipt",
+      "domain": "ARXIV",
+      "extra_queries": 0,
+      "false_negative": false,
+      "final_answer": "present",
+      "gate_interventions": 0,
+      "ground_truth": "present",
+      "mode": "visible",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 402,
+      "scenario_id": "arxiv_001-visible",
+      "task_id": "arxiv_001",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "items": [
+              "1910.02551",
+              "2011.00050"
+            ],
+            "receipt": {
+              "output_sha256": "caef2d2c4b8cca72a086a74831932af96e8b8af61359ad26008edaa95db9d6ca",
+              "result_count": 2,
+              "signature_status": "valid"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"present\",\"reason\":\"1910.02551 matches all the qualifying criteria.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "present",
+            "reason": "1910.02551 matches all the qualifying criteria."
+          },
+          "usage": {
+            "completion": 29,
+            "prompt": 402
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 68,
+      "condition": "postcondition",
+      "domain": "ARXIV",
+      "extra_queries": 0,
+      "false_negative": false,
+      "final_answer": "present",
+      "gate_interventions": 0,
+      "ground_truth": "present",
+      "mode": "visible",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 481,
+      "scenario_id": "arxiv_001-visible",
+      "task_id": "arxiv_001",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope_id": "7e091e73f4159253",
+              "next_cursor": "next-page",
+              "requested_scope_id": "7e091e73f4159253",
+              "status": "partial"
+            },
+            "items": [
+              "1910.02551",
+              "2011.00050"
+            ],
+            "receipt": {
+              "output_sha256": "caef2d2c4b8cca72a086a74831932af96e8b8af61359ad26008edaa95db9d6ca",
+              "result_count": 2,
+              "signature_status": "valid"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"present\",\"reason\":\"The receipt indicates that the query has matched the criteria for '1910.02551', even though coverage.status is partial, applied_scope_id equals requested_scope_id, and next_cursor is not null, which means there might be more results to consider.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "present",
+            "reason": "The receipt indicates that the query has matched the criteria for '1910.02551', even though coverage.status is partial, applied_scope_id equals requested_scope_id, and next_cursor is not null, which means there might be more results to consider."
+          },
+          "usage": {
+            "completion": 68,
+            "prompt": 481
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 57,
+      "condition": "gate",
+      "domain": "ARXIV",
+      "extra_queries": 0,
+      "false_negative": false,
+      "final_answer": "present",
+      "gate_interventions": 0,
+      "ground_truth": "present",
+      "mode": "visible",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 481,
+      "scenario_id": "arxiv_001-visible",
+      "task_id": "arxiv_001",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope_id": "7e091e73f4159253",
+              "next_cursor": "next-page",
+              "requested_scope_id": "7e091e73f4159253",
+              "status": "partial"
+            },
+            "items": [
+              "1910.02551",
+              "2011.00050"
+            ],
+            "receipt": {
+              "output_sha256": "caef2d2c4b8cca72a086a74831932af96e8b8af61359ad26008edaa95db9d6ca",
+              "result_count": 2,
+              "signature_status": "valid"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"present\",\"reason\":\"The receipt indicates that the query returned the target arXiv record 1910.02551, and the coverage status is partial, which means the answer is present based on the given criteria.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "present",
+            "reason": "The receipt indicates that the query returned the target arXiv record 1910.02551, and the coverage status is partial, which means the answer is present based on the given criteria."
+          },
+          "usage": {
+            "completion": 57,
+            "prompt": 481
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 15,
+      "condition": "receipt",
+      "domain": "ARXIV",
+      "extra_queries": 0,
+      "false_negative": false,
+      "final_answer": "absent",
+      "gate_interventions": 0,
+      "ground_truth": "absent",
+      "mode": "complete_absent",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 430,
+      "scenario_id": "arxiv_001-absent",
+      "task_id": "arxiv_001",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "items": [
+              "1910.02551",
+              "2011.00050",
+              "2107.13034",
+              "2110.04181"
+            ],
+            "receipt": {
+              "output_sha256": "ff9237a4993ebd72261594e9676149f7b5b8b27449af2dca27f081504c06cbaa",
+              "result_count": 4,
+              "signature_status": "valid"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"absent\",\"reason\":\"short\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "absent",
+            "reason": "short"
+          },
+          "usage": {
+            "completion": 15,
+            "prompt": 430
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 15,
+      "condition": "postcondition",
+      "domain": "ARXIV",
+      "extra_queries": 0,
+      "false_negative": false,
+      "final_answer": "absent",
+      "gate_interventions": 0,
+      "ground_truth": "absent",
+      "mode": "complete_absent",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 507,
+      "scenario_id": "arxiv_001-absent",
+      "task_id": "arxiv_001",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope_id": "7e091e73f4159253",
+              "next_cursor": null,
+              "requested_scope_id": "7e091e73f4159253",
+              "status": "complete"
+            },
+            "items": [
+              "1910.02551",
+              "2011.00050",
+              "2107.13034",
+              "2110.04181"
+            ],
+            "receipt": {
+              "output_sha256": "ff9237a4993ebd72261594e9676149f7b5b8b27449af2dca27f081504c06cbaa",
+              "result_count": 4,
+              "signature_status": "valid"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"absent\",\"reason\":\"short\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "absent",
+            "reason": "short"
+          },
+          "usage": {
+            "completion": 15,
+            "prompt": 507
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 15,
+      "condition": "gate",
+      "domain": "ARXIV",
+      "extra_queries": 0,
+      "false_negative": false,
+      "final_answer": "absent",
+      "gate_interventions": 0,
+      "ground_truth": "absent",
+      "mode": "complete_absent",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 507,
+      "scenario_id": "arxiv_001-absent",
+      "task_id": "arxiv_001",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope_id": "7e091e73f4159253",
+              "next_cursor": null,
+              "requested_scope_id": "7e091e73f4159253",
+              "status": "complete"
+            },
+            "items": [
+              "1910.02551",
+              "2011.00050",
+              "2107.13034",
+              "2110.04181"
+            ],
+            "receipt": {
+              "output_sha256": "ff9237a4993ebd72261594e9676149f7b5b8b27449af2dca27f081504c06cbaa",
+              "result_count": 4,
+              "signature_status": "valid"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"absent\",\"reason\":\"short\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "absent",
+            "reason": "short"
+          },
+          "usage": {
+            "completion": 15,
+            "prompt": 507
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 23,
+      "condition": "receipt",
+      "domain": "CENSUS_GOV",
+      "extra_queries": 0,
+      "false_negative": true,
+      "final_answer": "absent",
+      "gate_interventions": 0,
+      "ground_truth": "present",
+      "mode": "hidden",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 465,
+      "scenario_id": "census_001-hidden",
+      "task_id": "census_001",
+      "task_success": false,
+      "transcript": [
+        {
+          "tool_response": {
+            "items": [
+              "Beaufort County",
+              "Bladen County",
+              "Cleveland County",
+              "Columbus County",
+              "Duplin County",
+              "Edgecombe County",
+              "Halifax County",
+              "Lenoir County",
+              "Nash County",
+              "Richmond County",
+              "Robeson County",
+              "Rockingham County",
+              "Rutherford County",
+              "Sampson County",
+              "Scotland County",
+              "Surry County",
+              "Vance County",
+              "Wayne County",
+              "Wilkes County"
+            ],
+            "receipt": {
+              "output_sha256": "059bf4ce4121243280a9a5718328e2ee8c92155480b31f8f72ca02ea45932f36",
+              "result_count": 19,
+              "signature_status": "valid"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"absent\",\"reason\":\"Wilson County is not listed in the items.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "absent",
+            "reason": "Wilson County is not listed in the items."
+          },
+          "usage": {
+            "completion": 23,
+            "prompt": 465
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 34,
+      "condition": "postcondition",
+      "domain": "CENSUS_GOV",
+      "extra_queries": 0,
+      "false_negative": true,
+      "final_answer": "absent",
+      "gate_interventions": 0,
+      "ground_truth": "present",
+      "mode": "hidden",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 542,
+      "scenario_id": "census_001-hidden",
+      "task_id": "census_001",
+      "task_success": false,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope_id": "7f7b0ba7156367e6",
+              "next_cursor": "next-page",
+              "requested_scope_id": "7f7b0ba7156367e6",
+              "status": "partial"
+            },
+            "items": [
+              "Beaufort County",
+              "Bladen County",
+              "Cleveland County",
+              "Columbus County",
+              "Duplin County",
+              "Edgecombe County",
+              "Halifax County",
+              "Lenoir County",
+              "Nash County",
+              "Richmond County",
+              "Robeson County",
+              "Rockingham County",
+              "Rutherford County",
+              "Sampson County",
+              "Scotland County",
+              "Surry County",
+              "Vance County",
+              "Wayne County",
+              "Wilkes County"
+            ],
+            "receipt": {
+              "output_sha256": "059bf4ce4121243280a9a5718328e2ee8c92155480b31f8f72ca02ea45932f36",
+              "result_count": 19,
+              "signature_status": "valid"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"absent\",\"reason\":\"coverage.status is partial, applied_scope_id equals requested_scope_id, and next_cursor is not null.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "absent",
+            "reason": "coverage.status is partial, applied_scope_id equals requested_scope_id, and next_cursor is not null."
+          },
+          "usage": {
+            "completion": 34,
+            "prompt": 542
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 66,
+      "condition": "gate",
+      "domain": "CENSUS_GOV",
+      "extra_queries": 1,
+      "false_negative": false,
+      "final_answer": "present",
+      "gate_interventions": 1,
+      "ground_truth": "present",
+      "mode": "hidden",
+      "model_calls": 2,
+      "parse_issue": false,
+      "prompt_tokens": 1395,
+      "scenario_id": "census_001-hidden",
+      "task_id": "census_001",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope_id": "7f7b0ba7156367e6",
+              "next_cursor": "next-page",
+              "requested_scope_id": "7f7b0ba7156367e6",
+              "status": "partial"
+            },
+            "items": [
+              "Beaufort County",
+              "Bladen County",
+              "Cleveland County",
+              "Columbus County",
+              "Duplin County",
+              "Edgecombe County",
+              "Halifax County",
+              "Lenoir County",
+              "Nash County",
+              "Richmond County",
+              "Robeson County",
+              "Rockingham County",
+              "Rutherford County",
+              "Sampson County",
+              "Scotland County",
+              "Surry County",
+              "Vance County",
+              "Wayne County",
+              "Wilkes County"
+            ],
+            "receipt": {
+              "output_sha256": "059bf4ce4121243280a9a5718328e2ee8c92155480b31f8f72ca02ea45932f36",
+              "result_count": 19,
+              "signature_status": "valid"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"absent\",\"reason\":\"coverage.status is partial, applied_scope_id equals requested_scope_id, and next_cursor is not null.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "absent",
+            "reason": "coverage.status is partial, applied_scope_id equals requested_scope_id, and next_cursor is not null."
+          },
+          "usage": {
+            "completion": 34,
+            "prompt": 542
+          }
+        },
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope_id": "7f7b0ba7156367e6",
+              "next_cursor": null,
+              "requested_scope_id": "7f7b0ba7156367e6",
+              "status": "complete"
+            },
+            "items": [
+              "Beaufort County",
+              "Bladen County",
+              "Cleveland County",
+              "Columbus County",
+              "Duplin County",
+              "Edgecombe County",
+              "Halifax County",
+              "Lenoir County",
+              "Nash County",
+              "Richmond County",
+              "Robeson County",
+              "Rockingham County",
+              "Rutherford County",
+              "Sampson County",
+              "Scotland County",
+              "Surry County",
+              "Vance County",
+              "Wayne County",
+              "Wilkes County",
+              "Wilson County"
+            ],
+            "receipt": {
+              "output_sha256": "b2a994632a0cca9a6e13d32169d49c558a4c599dd372857eccbeb08984ee4545",
+              "result_count": 20,
+              "signature_status": "valid"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"present\",\"reason\":\"coverage.status is complete, applied_scope_id equals requested_scope_id, and next_cursor is null.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "present",
+            "reason": "coverage.status is complete, applied_scope_id equals requested_scope_id, and next_cursor is null."
+          },
+          "usage": {
+            "completion": 32,
+            "prompt": 853
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 23,
+      "condition": "receipt",
+      "domain": "CENSUS_GOV",
+      "extra_queries": 0,
+      "false_negative": false,
+      "final_answer": "present",
+      "gate_interventions": 0,
+      "ground_truth": "present",
+      "mode": "visible",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 422,
+      "scenario_id": "census_001-visible",
+      "task_id": "census_001",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "items": [
+              "Beaufort County",
+              "Bladen County",
+              "Cleveland County",
+              "Columbus County",
+              "Duplin County",
+              "Edgecombe County",
+              "Halifax County",
+              "Lenoir County",
+              "Nash County",
+              "Richmond County"
+            ],
+            "receipt": {
+              "output_sha256": "cbf87328c15114929fb60e462623041710e0b4d51ae58acc99b97629b896c63e",
+              "result_count": 10,
+              "signature_status": "valid"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"present\",\"reason\":\"Beaufort County is listed in the items.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "present",
+            "reason": "Beaufort County is listed in the items."
+          },
+          "usage": {
+            "completion": 23,
+            "prompt": 422
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 18,
+      "condition": "postcondition",
+      "domain": "CENSUS_GOV",
+      "extra_queries": 0,
+      "false_negative": true,
+      "final_answer": "absent",
+      "gate_interventions": 0,
+      "ground_truth": "present",
+      "mode": "visible",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 499,
+      "scenario_id": "census_001-visible",
+      "task_id": "census_001",
+      "task_success": false,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope_id": "7f7b0ba7156367e6",
+              "next_cursor": "next-page",
+              "requested_scope_id": "7f7b0ba7156367e6",
+              "status": "partial"
+            },
+            "items": [
+              "Beaufort County",
+              "Bladen County",
+              "Cleveland County",
+              "Columbus County",
+              "Duplin County",
+              "Edgecombe County",
+              "Halifax County",
+              "Lenoir County",
+              "Nash County",
+              "Richmond County"
+            ],
+            "receipt": {
+              "output_sha256": "cbf87328c15114929fb60e462623041710e0b4d51ae58acc99b97629b896c63e",
+              "result_count": 10,
+              "signature_status": "valid"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"absent\",\"reason\":\"coverage.status is partial\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "absent",
+            "reason": "coverage.status is partial"
+          },
+          "usage": {
+            "completion": 18,
+            "prompt": 499
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 49,
+      "condition": "gate",
+      "domain": "CENSUS_GOV",
+      "extra_queries": 1,
+      "false_negative": false,
+      "final_answer": "present",
+      "gate_interventions": 1,
+      "ground_truth": "present",
+      "mode": "visible",
+      "model_calls": 2,
+      "parse_issue": false,
+      "prompt_tokens": 1293,
+      "scenario_id": "census_001-visible",
+      "task_id": "census_001",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope_id": "7f7b0ba7156367e6",
+              "next_cursor": "next-page",
+              "requested_scope_id": "7f7b0ba7156367e6",
+              "status": "partial"
+            },
+            "items": [
+              "Beaufort County",
+              "Bladen County",
+              "Cleveland County",
+              "Columbus County",
+              "Duplin County",
+              "Edgecombe County",
+              "Halifax County",
+              "Lenoir County",
+              "Nash County",
+              "Richmond County"
+            ],
+            "receipt": {
+              "output_sha256": "cbf87328c15114929fb60e462623041710e0b4d51ae58acc99b97629b896c63e",
+              "result_count": 10,
+              "signature_status": "valid"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"absent\",\"reason\":\"coverage.status is partial\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "absent",
+            "reason": "coverage.status is partial"
+          },
+          "usage": {
+            "completion": 18,
+            "prompt": 499
+          }
+        },
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope_id": "7f7b0ba7156367e6",
+              "next_cursor": null,
+              "requested_scope_id": "7f7b0ba7156367e6",
+              "status": "complete"
+            },
+            "items": [
+              "Beaufort County",
+              "Bladen County",
+              "Cleveland County",
+              "Columbus County",
+              "Duplin County",
+              "Edgecombe County",
+              "Halifax County",
+              "Lenoir County",
+              "Nash County",
+              "Richmond County",
+              "Robeson County",
+              "Rockingham County",
+              "Rutherford County",
+              "Sampson County",
+              "Scotland County",
+              "Surry County",
+              "Vance County",
+              "Wayne County",
+              "Wilkes County",
+              "Wilson County"
+            ],
+            "receipt": {
+              "output_sha256": "b2a994632a0cca9a6e13d32169d49c558a4c599dd372857eccbeb08984ee4545",
+              "result_count": 20,
+              "signature_status": "valid"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"present\",\"reason\":\"coverage.status is complete, applied_scope_id equals requested_scope_id, and next_cursor is null\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "present",
+            "reason": "coverage.status is complete, applied_scope_id equals requested_scope_id, and next_cursor is null"
+          },
+          "usage": {
+            "completion": 31,
+            "prompt": 794
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 15,
+      "condition": "receipt",
+      "domain": "CENSUS_GOV",
+      "extra_queries": 0,
+      "false_negative": false,
+      "final_answer": "absent",
+      "gate_interventions": 0,
+      "ground_truth": "absent",
+      "mode": "complete_absent",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 473,
+      "scenario_id": "census_001-absent",
+      "task_id": "census_001",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "items": [
+              "Beaufort County",
+              "Bladen County",
+              "Cleveland County",
+              "Columbus County",
+              "Duplin County",
+              "Edgecombe County",
+              "Halifax County",
+              "Lenoir County",
+              "Nash County",
+              "Richmond County",
+              "Robeson County",
+              "Rockingham County",
+              "Rutherford County",
+              "Sampson County",
+              "Scotland County",
+              "Surry County",
+              "Vance County",
+              "Wayne County",
+              "Wilkes County",
+              "Wilson County"
+            ],
+            "receipt": {
+              "output_sha256": "b2a994632a0cca9a6e13d32169d49c558a4c599dd372857eccbeb08984ee4545",
+              "result_count": 20,
+              "signature_status": "valid"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"absent\",\"reason\":\"short\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "absent",
+            "reason": "short"
+          },
+          "usage": {
+            "completion": 15,
+            "prompt": 473
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 43,
+      "condition": "postcondition",
+      "domain": "CENSUS_GOV",
+      "extra_queries": 0,
+      "false_negative": false,
+      "final_answer": "absent",
+      "gate_interventions": 0,
+      "ground_truth": "absent",
+      "mode": "complete_absent",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 548,
+      "scenario_id": "census_001-absent",
+      "task_id": "census_001",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope_id": "7f7b0ba7156367e6",
+              "next_cursor": null,
+              "requested_scope_id": "7f7b0ba7156367e6",
+              "status": "complete"
+            },
+            "items": [
+              "Beaufort County",
+              "Bladen County",
+              "Cleveland County",
+              "Columbus County",
+              "Duplin County",
+              "Edgecombe County",
+              "Halifax County",
+              "Lenoir County",
+              "Nash County",
+              "Richmond County",
+              "Robeson County",
+              "Rockingham County",
+              "Rutherford County",
+              "Sampson County",
+              "Scotland County",
+              "Surry County",
+              "Vance County",
+              "Wayne County",
+              "Wilkes County",
+              "Wilson County"
+            ],
+            "receipt": {
+              "output_sha256": "b2a994632a0cca9a6e13d32169d49c558a4c599dd372857eccbeb08984ee4545",
+              "result_count": 20,
+              "signature_status": "valid"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"absent\",\"reason\":\"The coverage indicates that the provided data fully meets the specified criteria, and there are no counties that meet the stringent conditions set by the qualifying criteria.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "absent",
+            "reason": "The coverage indicates that the provided data fully meets the specified criteria, and there are no counties that meet the stringent conditions set by the qualifying criteria."
+          },
+          "usage": {
+            "completion": 43,
+            "prompt": 548
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 47,
+      "condition": "gate",
+      "domain": "CENSUS_GOV",
+      "extra_queries": 0,
+      "false_negative": false,
+      "final_answer": "absent",
+      "gate_interventions": 0,
+      "ground_truth": "absent",
+      "mode": "complete_absent",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 548,
+      "scenario_id": "census_001-absent",
+      "task_id": "census_001",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope_id": "7f7b0ba7156367e6",
+              "next_cursor": null,
+              "requested_scope_id": "7f7b0ba7156367e6",
+              "status": "complete"
+            },
+            "items": [
+              "Beaufort County",
+              "Bladen County",
+              "Cleveland County",
+              "Columbus County",
+              "Duplin County",
+              "Edgecombe County",
+              "Halifax County",
+              "Lenoir County",
+              "Nash County",
+              "Richmond County",
+              "Robeson County",
+              "Rockingham County",
+              "Rutherford County",
+              "Sampson County",
+              "Scotland County",
+              "Surry County",
+              "Vance County",
+              "Wayne County",
+              "Wilkes County",
+              "Wilson County"
+            ],
+            "receipt": {
+              "output_sha256": "b2a994632a0cca9a6e13d32169d49c558a4c599dd372857eccbeb08984ee4545",
+              "result_count": 20,
+              "signature_status": "valid"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"absent\",\"reason\":\"The coverage indicates that the provided query was fully applied and the next_cursor is null, but no data was found that meets the criteria, hence the answer is absent.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "absent",
+            "reason": "The coverage indicates that the provided query was fully applied and the next_cursor is null, but no data was found that meets the criteria, hence the answer is absent."
+          },
+          "usage": {
+            "completion": 47,
+            "prompt": 548
+          }
+        }
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "seed": 16002,
+  "summaries": {
+    "gate": {
+      "abstention_rate": 0.0,
+      "complete_absence_retention_rate": 1.0,
+      "episode_count": 6.0,
+      "false_negative_rate_hidden": 0.0,
+      "hidden_recovery_success_rate": 1.0,
+      "mean_extra_queries": 0.5,
+      "mean_gate_interventions": 0.3333333333333333,
+      "overall_task_success_rate": 1.0,
+      "parse_issue_rate": 0.0,
+      "visible_positive_accuracy": 1.0
+    },
+    "postcondition": {
+      "abstention_rate": 0.0,
+      "complete_absence_retention_rate": 1.0,
+      "episode_count": 6.0,
+      "false_negative_rate_hidden": 0.5,
+      "hidden_recovery_success_rate": 0.5,
+      "mean_extra_queries": 0.16666666666666666,
+      "mean_gate_interventions": 0.0,
+      "overall_task_success_rate": 0.6666666666666666,
+      "parse_issue_rate": 0.0,
+      "visible_positive_accuracy": 0.5
+    },
+    "receipt": {
+      "abstention_rate": 0.0,
+      "complete_absence_retention_rate": 1.0,
+      "episode_count": 6.0,
+      "false_negative_rate_hidden": 1.0,
+      "hidden_recovery_success_rate": 0.0,
+      "mean_extra_queries": 0.0,
+      "mean_gate_interventions": 0.0,
+      "overall_task_success_rate": 0.6666666666666666,
+      "parse_issue_rate": 0.0,
+      "visible_positive_accuracy": 1.0
+    }
+  },
+  "task_ids": [
+    "arxiv_001",
+    "census_001"
+  ],
+  "wall_time_seconds": 25.389999999955762
+}

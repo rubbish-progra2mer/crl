@@ -1,0 +1,50 @@
+{
+  "hypothesis_id": "h-v010-001",
+  "title": "反事实差分编译的工具语义足迹",
+  "parent_ids": [],
+  "lineage_note": "v009 信息型证据根路线因不可识别性死亡后正交转向多智能体共享外部状态；广义事务核被 CoAgent/Atomix 等占据，只保留无人工足迹声明时的黑盒语义足迹恢复问题。",
+  "problem": "近期并发智能体事务协议依赖工具读写作用域、资源键和逆操作声明；现实工具模式常只描述参数/返回值，不可靠声明读写资源。用语言模型直接猜足迹会漏掉跨字段、跨应用与响应句柄引入的依赖，使可串行化保证建立在未校准输入上。",
+  "target_failure": {
+    "summary": "两个并发智能体对同一语义资源的读—计划—写在工具名或表面参数上不同，运行时因未知真实足迹而漏检冲突，终局偏离任一串行执行。",
+    "card_ids": [],
+    "evidence_ids": []
+  },
+  "changed_computation": {
+    "baseline": "开发者手写工具足迹；从工具说明一次性让语言模型输出读写集；按工具名/参数同值匹配资源；或在冲突后整事务重试。",
+    "intervention": "在隔离状态快照中自动生成同一工具调用的参数、先验状态与顺序配对干预；联合前后数据库差分、响应句柄差分和后续只读探针差分，归纳带参数绑定的语义资源表达式及R/W/CREATE/DELETE/EMIT保守置信集合。在线只实例化已见证表达式，未覆盖或歧义依赖输出UNKNOWN并交给既有协议保守处理。",
+    "information_available": "工具JSON模式与自然语言说明、可隔离重置的开发环境、调用参数/响应、开发期状态快照差分与只读探针；在线不读取隐藏数据库日志、任务终局或人工真足迹。",
+    "timing": "开发/部署前编译工具级足迹模板，运行时在每次调用后实例化资源键与因果边。",
+    "budget_effect": "开发期增加配对工具执行；在线仅做模板匹配。并发协议、冲突检测与修复器作为固定下游，不计方法贡献。"
+  },
+  "mechanism_claim": "相较工具说明的单次语言模型猜测或表面资源键，反事实状态/响应差分能在未见调用实例上恢复更多真正语义冲突，同时以UNKNOWN保留未证足迹，因而给既有并发协议提供更可靠的可审计输入。",
+  "falsifier": "最近先行已对黑盒API编译等价读写足迹；简单代码/SQL日志插桩更完整且同样适用；在未见工具或未见应用上真正冲突召回低于0.90，或达到该召回时无害重叠误报高于0.20；UNKNOWN覆盖过低；或下游收益不超过工作流锁、CAS整事务重试和CoAgent式ToolSmith。",
+  "minimal_killer_experiment": "在AppWorld开发环境选择至少80个读/写API调用，以一次性SQL访问插桩只用于隐藏评价生成真足迹；方法只见模式、参数、响应与隔离差分。按未见工具及未见应用划分，比较名称规则、说明LLM、ToolSmith式代码生成、单次状态差分和反事实配对编译，测资源身份、R/W类型、冲突对召回、无害重叠误报、校准与UNKNOWN覆盖；不先实现事务运行时。",
+  "nearest_prior_risk": "RESTler/MASTOR/ARMeta、黑盒状态机/API依赖推断可能已占据配对探索与句柄依赖；CoAgent ToolSmith 已在线生长足迹声明工具；Cordon 已从调用/响应构造语义沿袭；数据库存储过程足迹预测与动态程序分析可能直接覆盖。",
+  "alternative_explanations": [
+    "AppWorld数据库表名和API字段直接泄漏资源标签",
+    "收益只来自可重置环境或SQL插桩，而现实远程工具没有",
+    "单次前后差分已足够，配对反事实没有增量",
+    "只识别写集而遗漏值不变的读依赖",
+    "UNKNOWN策略通过普遍串行化虚增安全性",
+    "下游改善来自既有事务协议而非足迹质量"
+  ],
+  "descriptors": {
+    "problem_family": "implicit_tool_semantic_footprints_for_concurrent_agents",
+    "computation_stage": "predeployment_footprint_compilation_and_runtime_instantiation",
+    "intervention_family": "counterfactual_state_response_differential_resource_expression_induction",
+    "information_source": "tool_schema_parameters_responses_isolated_state_and_read_probe_deltas",
+    "timing_class": "offline_compile_online_instantiate",
+    "budget_class": "offline_paired_executions_online_constant_template_match",
+    "evaluation_mode": "heldout_tool_and_application_hidden_instrumented_footprint"
+  },
+  "literature_refs": [
+    "CoAgent, arXiv:2606.15376",
+    "Atomix, arXiv:2602.14849",
+    "Verified Detection and Prevention of Concurrency Anomalies, arXiv:2606.17182",
+    "Cordon, arXiv:2606.17573",
+    "MemTX, arXiv:2607.23929",
+    "RESTler",
+    "MASTOR",
+    "ARMeta"
+  ]
+}

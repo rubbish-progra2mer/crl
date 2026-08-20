@@ -1,0 +1,34 @@
+{
+  "hypothesis_id": "h-v005-001",
+  "title": "带适用域的经验记忆检索门",
+  "parent_ids": [],
+  "lineage_note": "v004 的跨子任务约束保持被约束满足问题树分解直接覆盖后，正交转向成功经验在表面相似但关键前提不同的任务上产生负迁移。",
+  "problem": "智能体按查询或状态语义相似度复用成功轨迹、计划或技能时，可能忽略决定该经验是否可执行的关键前提，导致高置信错位回放。",
+  "target_failure": {
+    "summary": "表面相似命中复用了不适用于当前状态的正确历史经验，造成负迁移。",
+    "card_ids": ["failure-plan-cache-semantic-false-positives", "failure-retrieved-experience-propagates-stored-errors"],
+    "evidence_ids": ["ev-p071-cache-false-positive-boundary", "ev-p071-plan-template-reuse", "ev-p064-experience-following-error"]
+  },
+  "changed_computation": {
+    "baseline": "按任务或当前状态的向量相似度召回成功轨迹/计划模板，并直接注入模型上下文。",
+    "intervention": "为每条经验存储结构化适用条件；只有当前状态满足适用条件时才允许调用，否则回退到无记忆推理。",
+    "information_available": "历史成功/失败轨迹、当前任务和可见状态；不使用当前测试任务的隐藏终局答案。",
+    "timing": "经验写入或整理时归纳条件，目标任务执行前做门控。",
+    "budget_effect": "增加条件归纳与门控成本；推理时可减少错误经验注入，但必须报告弃权率与无记忆回退成本。"
+  },
+  "mechanism_claim": "显式经验适用域比相似度检索更能抑制正确但错位的经验回放。",
+  "falsifier": "已有程序性记忆方法已存储何时使用、前置条件或适用边界，并用成功/失败对比或价值门控更新；或适用域只由模型提示生成而无新计算。",
+  "minimal_killer_experiment": "先核验 ReMe、MACLA、MSCE 与最新因果记忆选择；若宽核已被占据，只保留具有不同证据生成方式的窄方法。",
+  "nearest_prior_risk": "ReMe 的经验元组含 when-to-use 并比较成功/失败轨迹；MACLA 的程序含前置/后置条件且用成功/失败对比收紧；MSCE 的策略和技能含 trigger、applicability boundary 与 value-calibrated filtering。",
+  "alternative_explanations": ["收益来自少注入上下文", "收益来自成功轨迹质量", "模型本身可从当前状态识别不适用", "门控只重述语义相似度"],
+  "descriptors": {
+    "problem_family": "misaligned_experience_replay",
+    "computation_stage": "memory_retrieval_and_skill_invocation",
+    "intervention_family": "experience_applicability_gate",
+    "information_source": "past_trajectories_and_current_state",
+    "timing_class": "memory_write_and_preexecution",
+    "budget_class": "one_guard_evaluation",
+    "evaluation_mode": "negative_transfer_and_terminal_success"
+  },
+  "literature_refs": ["ACL Findings 2026: ReMe", "arXiv:2512.18950", "arXiv:2607.16621", "arXiv:2605.17641"]
+}

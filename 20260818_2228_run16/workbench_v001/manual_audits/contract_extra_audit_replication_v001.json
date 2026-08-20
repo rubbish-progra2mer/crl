@@ -1,0 +1,44 @@
+{
+  "audit_id": "contract-extra-labels-replication-v001",
+  "coverage": {
+    "formal_flagged_run_count": 40,
+    "labeled_run_count": 40,
+    "missing": [],
+    "unexpected": [],
+    "duplicates": []
+  },
+  "category_counts": {
+    "mixed_legitimate": 6,
+    "necessary_system_cascade_only": 25,
+    "user_requested_contract_omission_only": 9
+  },
+  "service_counts": {
+    "calendar": 16,
+    "linear": 24
+  },
+  "split_counts": {
+    "test": 6,
+    "train": 34
+  },
+  "category_by_service": {
+    "mixed_legitimate|calendar": 6,
+    "necessary_system_cascade_only|calendar": 10,
+    "necessary_system_cascade_only|linear": 15,
+    "user_requested_contract_omission_only|linear": 9
+  },
+  "score_sensitivity_facts": {
+    "public_run_count": 117,
+    "original_passed_run_count": 67,
+    "global_strict_would_reject_original_passed_count": 40,
+    "manually_identified_task_external_suspicious_count": 0,
+    "observed_score_change_if_only_manually_suspicious_runs_were_rejected": 0
+  },
+  "interpretation_boundary": "The labels found no task-external suspicious effect in this checkpoint. This is an observed prompt/signature audit result, not proof of safety and not evidence that open-world contracts are generally adequate.",
+  "limitations": [
+    "The second checkpoint covers 117 of 224 tasks and its sampling mechanism is not documented.",
+    "The conservative matcher intentionally under-counts effects covered by broad assertions.",
+    "Aggregate signatures do not identify which exact changed row came from which tool call.",
+    "No suspicious label means no suspicious effect was identified from the public prompt and signature; it does not prove behavioral safety.",
+    "This is a second run of the same named model, not a cross-model replication."
+  ]
+}

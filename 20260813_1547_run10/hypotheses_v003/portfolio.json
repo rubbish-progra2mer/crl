@@ -1,0 +1,122 @@
+{
+  "created_at_utc": "2026-08-13T09:53:20.488204Z",
+  "hypotheses": [
+    {
+      "alternative_explanations": [
+        "收益来自多次采样",
+        "收益来自更短输出格式",
+        "变换泄漏正确动作",
+        "只改善字符串复制而非结果理解"
+      ],
+      "changed_computation": {
+        "baseline": "标准轨迹监督或终局奖励训练；推理时直接让大语言模型读取工具返回并生成下一调用。",
+        "budget_effect": "训练会增加反事实样本；推理版本会增加模型调用。必须与等调用数重采样、自洽聚合和独立重核比较。",
+        "information_available": "任务、公开工具模式、真实工具返回与后续模型动作；不使用隐藏数据库或测试终局来构造变换。",
+        "intervention": "对同一工具返回生成成对干预：任务相关值作类型保持替换时，下游动作参数必须按映射变化；任务无关元数据替换时动作必须保持。把违反等变关系的动作对用于训练约束或运行时选择。",
+        "timing": "训练时对工具观察与后继动作对施加成对约束，或推理时在执行副作用前比较少量反事实分支。"
+      },
+      "created_at_utc": "2026-08-13T09:53:20.585304Z",
+      "descriptors": {
+        "budget_class": "paired_counterfactual",
+        "computation_stage": "observation_to_action_policy",
+        "evaluation_mode": "paired_intervention_and_terminal_state",
+        "information_source": "paired_tool_outputs_and_actions",
+        "intervention_family": "result_action_equivariance",
+        "problem_family": "tool_result_not_used_in_downstream_action",
+        "timing_class": "training_or_preexecution"
+      },
+      "falsifier": "核心干预已被反事实工具响应回放、动作归因、主动信息探测或动作相关观测训练占据；或等变性只形成诊断指标而不能改变策略；或简单重采样/短引用达到同等收益。",
+      "hypothesis_id": "h-v003-001",
+      "lineage_note": "在 v002 否定观察语义被数据库完整性工作吸收后，正交转向智能体是否真正消费工具结果：任务相关字段变化应引起对应动作变化，无关元数据变化应保持动作不变。",
+      "literature_refs": [
+        "arXiv:2607.11098",
+        "arXiv:2603.10749",
+        "arXiv:2606.08275",
+        "arXiv:2606.16432",
+        "arXiv:2607.12463",
+        "arXiv:2605.25310"
+      ],
+      "mechanism_claim": "直接监督工具结果变化与动作变化之间的对应关系，比仅监督整条轨迹或终局奖励更能减少结果忽略和错误值传播。",
+      "minimal_killer_experiment": "先做最近先行组件审计；若仍存活，在固定工具结果中双射重命名实体标识符，比较后续动作的语义选择与精确参数是否按映射变化。",
+      "nearest_prior_risk": "AgentCheck、AttriGuard、Causal Agent Replay、ACCORD、动作监督观察压缩、Function-Aware FIM 与工具调用依赖图探针分别占据反事实回放、动作因果归因、主动补信息、返回消费训练与依赖结构。",
+      "parent_ids": [],
+      "problem": "工具智能体可以调用正确工具并看到正确返回，却忽略、误绑定或错误传播返回中的实体和值，最终产生语法合法但语义错误的后续调用。",
+      "revision": 2,
+      "status": "prior_collision",
+      "status_reason": "AgentCheck、AttriGuard、Causal Agent Replay、ACCORD、Function-Aware FIM 与工具依赖图探针已分别占据响应扰动、动作归因、主动信息整合、返回消费训练和依赖建模；宽等变约束只剩目标函数拼接。",
+      "target_failure": {
+        "card_ids": [
+          "failure-tool-use-metrics-collapse-distinct-errors",
+          "failure-raw-observation-overload-hides-action-relevant-ui"
+        ],
+        "evidence_ids": [
+          "ev-p039-failure-core",
+          "ev-p079-action-conditioned-contextualization"
+        ],
+        "summary": "工具结果没有以任务要求的方式控制后续动作参数，表现为结果忽略、错误实体绑定或跨步绑定漂移。"
+      },
+      "title": "工具结果到动作的任务相关等变性约束",
+      "updated_at_utc": "2026-08-13T09:53:20.681759Z"
+    },
+    {
+      "alternative_explanations": [
+        "提示措辞不同",
+        "短引用而非类型来源带来收益",
+        "小模型特有",
+        "人工候选表过于简单"
+      ],
+      "changed_computation": {
+        "baseline": "模型直接输出真实实体标识符；强基线是为每行分配短会话引用并由运行时反向映射。",
+        "budget_effect": "不增加模型或工具调用；增加少量运行时映射与类型检查。",
+        "information_available": "模型看任务和工具结果的语义字段及行序号，但不看真实标识符；运行时持有真实结果与选择器映射。",
+        "intervention": "模型输出 `(source_call, row, field)` 类型化选择器；运行时检查来源范围与字段类型后，从不可变工具结果中晚绑定真实标识符，再构造副作用调用。",
+        "timing": "模型提出最终动作后、真实副作用工具执行前解析选择器。"
+      },
+      "created_at_utc": "2026-08-13T09:53:20.775876Z",
+      "descriptors": {
+        "budget_class": "zero_additional_calls",
+        "computation_stage": "preexecution_argument_lowering",
+        "evaluation_mode": "paired_identifier_permutation",
+        "information_source": "immutable_tool_result_reference",
+        "intervention_family": "typed_late_binding",
+        "problem_family": "opaque_identifier_transport_error",
+        "timing_class": "after_policy_before_tool_execution"
+      },
+      "falsifier": "简单短引用与选择器同等或更好；错误主要来自语义选错而非标识符运输；现有确定性数据流控制或实体绑定门已吸收计算。",
+      "hypothesis_id": "h-v003-002",
+      "lineage_note": "将宽泛结果—动作等变性缩到可执行的值传播边界：模型只选择先前结果中的来源行/字段，运行时解析并注入真实标识符。",
+      "literature_refs": [
+        "arXiv:2606.30531",
+        "arXiv:2607.18316",
+        "arXiv:2605.25310",
+        "Deterministic Data Flow Control 2026"
+      ],
+      "mechanism_claim": "把语义选择与高熵标识符运输分离，能在不增加调用预算下提高参数精确性，并通过来源路径限制错误跨实体传播。",
+      "minimal_killer_experiment": "在八个双实体任务、两组标识符双射和三个本地模型上，对原始 UUID、短引用与类型化选择器作配对比较，分别测结构合法、语义选择、联合参数正确和重命名稳定性。",
+      "nearest_prior_risk": "短标识符映射已有工程实践；实体绑定工作已有解析、溯源和动作门；确定性数据流控制直接约束参数来源；显式工具 DAG/工作流系统长期使用运行时数据绑定。",
+      "parent_ids": [
+        "h-v003-001"
+      ],
+      "problem": "让模型把高熵实体标识符从工具返回重新生成到后续调用，会把语义选择和字符串运输混在一个生成步骤中。",
+      "revision": 2,
+      "status": "falsified",
+      "status_reason": "三个本地模型的配对微实验中，类型化选择器从未优于简单短引用：Qwen3-4B 更差，Qwen2.5-7B 与 Qwen3-8B 同分；144 次输出均可绑定，错误来自语义选错而非纯标识符字符运输。",
+      "target_failure": {
+        "card_ids": [
+          "failure-semantically-related-toolkit-expansion"
+        ],
+        "evidence_ids": [
+          "ev-p084-related-toolkit-error-types"
+        ],
+        "summary": "实体选择本可正确，但原始 UUID/账户号在工具调用参数中被混淆、篡改或错误归属。"
+      },
+      "title": "类型化结果选择器与运行时标识符晚绑定",
+      "updated_at_utc": "2026-08-13T09:53:20.872876Z"
+    }
+  ],
+  "revision": 4,
+  "run_id": "20260813_1547_run10",
+  "schema_version": 1,
+  "updated_at_utc": "2026-08-13T09:53:20.872876Z",
+  "version": "v003"
+}

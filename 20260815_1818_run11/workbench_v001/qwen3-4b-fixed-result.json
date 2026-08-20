@@ -1,0 +1,992 @@
+{
+  "schema_version": 1,
+  "experiment_id": "scratch-qwen3-4b-fixed",
+  "configuration": {
+    "backend": "ollama",
+    "policies": [],
+    "models": [
+      "qwen3:4b"
+    ],
+    "prompt_regimes": [
+      "weak",
+      "strict"
+    ],
+    "temperature": 0.0,
+    "seed": 123
+  },
+  "case_count": 5,
+  "rows": [
+    {
+      "case_id": "inventory_minimum",
+      "agent_id": "ollama::qwen3:4b::weak",
+      "backend": "ollama",
+      "answers": {
+        "base": "\"price\": 9,",
+        "relevant": "\"",
+        "irrelevant": "\"price\": 9,",
+        "repeat": "\"price\": 9,"
+      },
+      "expected_relation_anchors": {
+        "base": "SKU-A",
+        "relevant": "SKU-B",
+        "irrelevant": "SKU-A"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": false,
+        "relevant_changed": true,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": true,
+        "directional_relation": false,
+        "dual_relation": false
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 1.3195043000014266,
+            "prompt_eval_count": 173,
+            "eval_count": 96,
+            "total_duration_ns": 1312361800,
+            "load_duration_ns": 287922500
+          },
+          "raw_content": "{\n  \"items\": [\n    {\n      \"sku\": \"SKU-A\",\n      \"price\": 12,\n      \"in_stock\": true,\n      \"rating\": 3.8\n    },\n    {\n      \"sku\": \"SKU-B\",\n      \"price\": 17,\n      \"in_stock\": true,\n      \"rating\": 4.9\n    },\n    {\n      \"sku\": \"SKU-C\",\n      \"price\": 9,"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 1.0862424000006285,
+            "prompt_eval_count": 172,
+            "eval_count": 96,
+            "total_duration_ns": 1069288400,
+            "load_duration_ns": 258675300
+          },
+          "raw_content": "{\n  \"items\": [\n    {\n      \"sku\": \"SKU-A\",\n      \"price\": 12,\n      \"in_stock\": true,\n      \"rating\": 3.8\n    },\n    {\n      \"sku\": \"SKU-B\",\n      \"price\": 8,\n      \"in_stock\": true,\n      \"rating\": 4.9\n    },\n    {\n      \"sku\": \"SKU-C\",\n      \"price\": 9,\n      \""
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 1.0935408000004827,
+            "prompt_eval_count": 173,
+            "eval_count": 96,
+            "total_duration_ns": 1092291800,
+            "load_duration_ns": 280191500
+          },
+          "raw_content": "{\n  \"items\": [\n    {\n      \"sku\": \"SKU-A\",\n      \"price\": 12,\n      \"in_stock\": true,\n      \"rating\": 1.2\n    },\n    {\n      \"sku\": \"SKU-B\",\n      \"price\": 17,\n      \"in_stock\": true,\n      \"rating\": 5.0\n    },\n    {\n      \"sku\": \"SKU-C\",\n      \"price\": 9,"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 1.0982954000028258,
+            "prompt_eval_count": 173,
+            "eval_count": 96,
+            "total_duration_ns": 1097339900,
+            "load_duration_ns": 281523000
+          },
+          "raw_content": "{\n  \"items\": [\n    {\n      \"sku\": \"SKU-A\",\n      \"price\": 12,\n      \"in_stock\": true,\n      \"rating\": 3.8\n    },\n    {\n      \"sku\": \"SKU-B\",\n      \"price\": 17,\n      \"in_stock\": true,\n      \"rating\": 4.9\n    },\n    {\n      \"sku\": \"SKU-C\",\n      \"price\": 9,"
+        }
+      ],
+      "warnings": [
+        "base: response was not a JSON object with an answer key",
+        "relevant: response was not a JSON object with an answer key",
+        "irrelevant: response was not a JSON object with an answer key",
+        "repeat: response was not a JSON object with an answer key"
+      ],
+      "reference_exact_triple": false
+    },
+    {
+      "case_id": "latest_confirmed_event",
+      "agent_id": "ollama::qwen3:4b::weak",
+      "backend": "ollama",
+      "answers": {
+        "base": "\"timestamp\": \"2026-08-05T09:00:00",
+        "relevant": "\"timestamp\": \"2026-08-05T09:00:00",
+        "irrelevant": "\"timestamp\": \"2026-08-05T09:00:00",
+        "repeat": "\"timestamp\": \"2026-08-05T09:00:00"
+      },
+      "expected_relation_anchors": {
+        "base": "EV-3",
+        "relevant": "EV-2",
+        "irrelevant": "EV-3"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": false,
+        "relevant_changed": false,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": false,
+        "directional_relation": false,
+        "dual_relation": false
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 1.111344699998881,
+            "prompt_eval_count": 222,
+            "eval_count": 96,
+            "total_duration_ns": 1110162000,
+            "load_duration_ns": 301160100
+          },
+          "raw_content": "{\n  \"events\": [\n    {\n      \"event_id\": \"EV-1\",\n      \"timestamp\": \"2026-08-01T09:00:00Z\",\n      \"status\": \"confirmed\",\n      \"note\": \"east\"\n    },\n    {\n      \"event_id\": \"EV-2\",\n      \"timestamp\": \"2026-08-05T09:00:00"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 1.1185259000012593,
+            "prompt_eval_count": 222,
+            "eval_count": 96,
+            "total_duration_ns": 1117255500,
+            "load_duration_ns": 299184600
+          },
+          "raw_content": "{\n  \"events\": [\n    {\n      \"event_id\": \"EV-1\",\n      \"timestamp\": \"2026-08-01T09:00:00Z\",\n      \"status\": \"confirmed\",\n      \"note\": \"east\"\n    },\n    {\n      \"event_id\": \"EV-2\",\n      \"timestamp\": \"2026-08-05T09:00:00"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 1.1310828999994555,
+            "prompt_eval_count": 222,
+            "eval_count": 96,
+            "total_duration_ns": 1103166900,
+            "load_duration_ns": 281569700
+          },
+          "raw_content": "{\n  \"events\": [\n    {\n      \"event_id\": \"EV-1\",\n      \"timestamp\": \"2026-08-01T09:00:00Z\",\n      \"status\": \"confirmed\",\n      \"note\": \"orange\"\n    },\n    {\n      \"event_id\": \"EV-2\",\n      \"timestamp\": \"2026-08-05T09:00:00"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 1.1098859000012453,
+            "prompt_eval_count": 222,
+            "eval_count": 96,
+            "total_duration_ns": 1104823300,
+            "load_duration_ns": 288069700
+          },
+          "raw_content": "{\n  \"events\": [\n    {\n      \"event_id\": \"EV-1\",\n      \"timestamp\": \"2026-08-01T09:00:00Z\",\n      \"status\": \"confirmed\",\n      \"note\": \"east\"\n    },\n    {\n      \"event_id\": \"EV-2\",\n      \"timestamp\": \"2026-08-05T09:00:00"
+        }
+      ],
+      "warnings": [
+        "base: response was not a JSON object with an answer key",
+        "relevant: response was not a JSON object with an answer key",
+        "irrelevant: response was not a JSON object with an answer key",
+        "repeat: response was not a JSON object with an answer key"
+      ],
+      "reference_exact_triple": false
+    },
+    {
+      "case_id": "support_routing",
+      "agent_id": "ollama::qwen3:4b::weak",
+      "backend": "ollama",
+      "answers": {
+        "base": "}",
+        "relevant": "}",
+        "irrelevant": "}",
+        "repeat": "}"
+      },
+      "expected_relation_anchors": {
+        "base": "escalate",
+        "relevant": "queue",
+        "irrelevant": "escalate"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": false,
+        "relevant_changed": false,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": false,
+        "directional_relation": false,
+        "dual_relation": false
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 1.13577499999883,
+            "prompt_eval_count": 119,
+            "eval_count": 96,
+            "total_duration_ns": 1107173100,
+            "load_duration_ns": 303233100
+          },
+          "raw_content": "{\n  \"task\": \"只返回 routing\",\n  \"rules\": \"severity 大于等于 4 且 customer_tier 为 gold 或 platinum 时返回 escalate，否则返回 queue\",\n  \"tool_result\": {\n    \"ticket\": {\n      \"severity\": 5,\n      \"customer_tier\": \"gold\",\n      \"sentiment\": \"calm\"\n    },\n    \"debug\": {\n      \"cached_guess\": \"queue\"\n    }\n  }"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 1.1159485999996832,
+            "prompt_eval_count": 119,
+            "eval_count": 96,
+            "total_duration_ns": 1095595900,
+            "load_duration_ns": 295961500
+          },
+          "raw_content": "{\n  \"task\": \"只返回 routing\",\n  \"rules\": \"severity 大于等于 4 且 customer_tier 为 gold 或 platinum 时返回 escalate，否则返回 queue\",\n  \"tool_result\": {\n    \"ticket\": {\n      \"severity\": 2,\n      \"customer_tier\": \"gold\",\n      \"sentiment\": \"calm\"\n    },\n    \"debug\": {\n      \"cached_guess\": \"queue\"\n    }\n  }"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 1.064826499998162,
+            "prompt_eval_count": 120,
+            "eval_count": 96,
+            "total_duration_ns": 1063543700,
+            "load_duration_ns": 263538100
+          },
+          "raw_content": "{\n  \"task\": \"只返回 routing\",\n  \"rules\": \"severity 大于等于 4 且 customer_tier 为 gold 或 platinum 时返回 escalate，否则返回 queue\",\n  \"tool_result\": {\n    \"ticket\": {\n      \"severity\": 5,\n      \"customer_tier\": \"gold\",\n      \"sentiment\": \"angry\"\n    },\n    \"debug\": {\n      \"cached_guess\": \"manual-review\"\n    }"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 1.1028791000026104,
+            "prompt_eval_count": 119,
+            "eval_count": 96,
+            "total_duration_ns": 1089566300,
+            "load_duration_ns": 295188400
+          },
+          "raw_content": "{\n  \"task\": \"只返回 routing\",\n  \"rules\": \"severity 大于等于 4 且 customer_tier 为 gold 或 platinum 时返回 escalate，否则返回 queue\",\n  \"tool_result\": {\n    \"ticket\": {\n      \"severity\": 5,\n      \"customer_tier\": \"gold\",\n      \"sentiment\": \"calm\"\n    },\n    \"debug\": {\n      \"cached_guess\": \"queue\"\n    }\n  }"
+        }
+      ],
+      "warnings": [
+        "base: response was not a JSON object with an answer key",
+        "relevant: response was not a JSON object with an answer key",
+        "irrelevant: response was not a JSON object with an answer key",
+        "repeat: response was not a JSON object with an answer key"
+      ],
+      "reference_exact_triple": false
+    },
+    {
+      "case_id": "fastest_paid_order",
+      "agent_id": "ollama::qwen3:4b::weak",
+      "backend": "ollama",
+      "answers": {
+        "base": "\"",
+        "relevant": "\"",
+        "irrelevant": "\"delivery_days\": 1",
+        "repeat": "\""
+      },
+      "expected_relation_anchors": {
+        "base": "ORD-1",
+        "relevant": "ORD-2",
+        "irrelevant": "ORD-1"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": false,
+        "relevant_changed": false,
+        "irrelevant_invariant": false,
+        "repeat_stable": true,
+        "selective_change": false,
+        "directional_relation": false,
+        "dual_relation": false
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 1.1658328000012261,
+            "prompt_eval_count": 166,
+            "eval_count": 96,
+            "total_duration_ns": 1139915900,
+            "load_duration_ns": 294725400
+          },
+          "raw_content": "{\n  \"orders\": [\n    {\n      \"order_id\": \"ORD-1\",\n      \"paid\": true,\n      \"delivery_days\": 4,\n      \"color\": \"red\"\n    },\n    {\n      \"order_id\": \"ORD-2\",\n      \"paid\": true,\n      \"delivery_days\": 6,\n      \"color\": \"blue\"\n    },\n    {\n      \"order_id\": \"ORD-3\",\n      \"paid\": false,\n      \""
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 1.1506876000021293,
+            "prompt_eval_count": 166,
+            "eval_count": 96,
+            "total_duration_ns": 1137656300,
+            "load_duration_ns": 288563300
+          },
+          "raw_content": "{\n  \"orders\": [\n    {\n      \"order_id\": \"ORD-1\",\n      \"paid\": true,\n      \"delivery_days\": 4,\n      \"color\": \"red\"\n    },\n    {\n      \"order_id\": \"ORD-2\",\n      \"paid\": true,\n      \"delivery_days\": 2,\n      \"color\": \"blue\"\n    },\n    {\n      \"order_id\": \"ORD-3\",\n      \"paid\": false,\n      \""
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 1.2108417999988887,
+            "prompt_eval_count": 166,
+            "eval_count": 96,
+            "total_duration_ns": 1209914200,
+            "load_duration_ns": 330541800
+          },
+          "raw_content": "{\n  \"orders\": [\n    {\n      \"order_id\": \"ORD-1\",\n      \"paid\": true,\n      \"delivery_days\": 4,\n      \"color\": \"black\"\n    },\n    {\n      \"order_id\": \"ORD-2\",\n      \"paid\": true,\n      \"delivery_days\": 6,\n     \": \":\n    {\n      \"order_id\": \"ORD-3\",\n      \"paid\": false,\n      \"delivery_days\": 1"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 1.1731487000033667,
+            "prompt_eval_count": 166,
+            "eval_count": 96,
+            "total_duration_ns": 1171609800,
+            "load_duration_ns": 329511000
+          },
+          "raw_content": "{\n  \"orders\": [\n    {\n      \"order_id\": \"ORD-1\",\n      \"paid\": true,\n      \"delivery_days\": 4,\n      \"color\": \"red\"\n    },\n    {\n      \"order_id\": \"ORD-2\",\n      \"paid\": true,\n      \"delivery_days\": 6,\n      \"color\": \"blue\"\n    },\n    {\n      \"order_id\": \"ORD-3\",\n      \"paid\": false,\n      \""
+        }
+      ],
+      "warnings": [
+        "base: response was not a JSON object with an answer key",
+        "relevant: response was not a JSON object with an answer key",
+        "irrelevant: response was not a JSON object with an answer key",
+        "repeat: response was not a JSON object with an answer key"
+      ],
+      "reference_exact_triple": false
+    },
+    {
+      "case_id": "valid_amount_sum",
+      "agent_id": "ollama::qwen3:4b::weak",
+      "backend": "ollama",
+      "answers": {
+        "base": "\"cached_guess\": \"11",
+        "relevant": "\"cached_guess\": \"11",
+        "irrelevant": "\"cached_guess\": \"10",
+        "repeat": "\"cached_guess\": \"11"
+      },
+      "expected_relation_anchors": {
+        "base": "18",
+        "relevant": "22",
+        "irrelevant": "18"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": false,
+        "relevant_changed": false,
+        "irrelevant_invariant": false,
+        "repeat_stable": true,
+        "selective_change": false,
+        "directional_relation": false,
+        "dual_relation": false
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 1.0984078000001318,
+            "prompt_eval_count": 143,
+            "eval_count": 96,
+            "total_duration_ns": 1096648000,
+            "load_duration_ns": 292618300
+          },
+          "raw_content": "{\n  \"rows\": [\n    {\n      \"amount\": 7,\n      \"valid\": true,\n      \"label\": \"a\"\n    },\n    {\n      \"amount\": 11,\n      \"valid\": true,\n      \"label\": \"b\"\n    },\n    {\n      \"amount\": 100,\n      \"valid\": false,\n      \"label\": \"c\"\n    }\n  ],\n  \"debug\": {\n    \"cached_guess\": \"11"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 1.0733890999981668,
+            "prompt_eval_count": 143,
+            "eval_count": 96,
+            "total_duration_ns": 1053731500,
+            "load_duration_ns": 257325800
+          },
+          "raw_content": "{\n  \"rows\": [\n    {\n      \"amount\": 7,\n      \"valid\": true,\n      \"label\": \"a\"\n    },\n    {\n      \"amount\": 15,\n      \"valid\": true,\n      \"label\": \"b\"\n    },\n    {\n      \"amount\": 100,\n      \"valid\": false,\n      \"label\": \"c\"\n    }\n  ],\n  \"debug\": {\n    \"cached_guess\": \"11"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 1.0927431999989494,
+            "prompt_eval_count": 143,
+            "eval_count": 96,
+            "total_duration_ns": 1072328600,
+            "load_duration_ns": 269103500
+          },
+          "raw_content": "{\n  \"rows\": [\n    {\n      \"amount\": 7,\n      \"valid\": true,\n      \"label\": \"x\"\n    },\n    {\n      \"amount\": 11,\n      \"valid\": true,\n      \"label\": \"y\"\n    },\n    {\n      \"amount\": 100,\n      \"valid\": false,\n      \"label\": \"z\"\n    }\n  ],\n  \"debug\": {\n    \"cached_guess\": \"10"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 1.0943336000018462,
+            "prompt_eval_count": 143,
+            "eval_count": 96,
+            "total_duration_ns": 1075508200,
+            "load_duration_ns": 277622400
+          },
+          "raw_content": "{\n  \"rows\": [\n    {\n      \"amount\": 7,\n      \"valid\": true,\n      \"label\": \"a\"\n    },\n    {\n      \"amount\": 11,\n      \"valid\": true,\n      \"label\": \"b\"\n    },\n    {\n      \"amount\": 100,\n      \"valid\": false,\n      \"label\": \"c\"\n    }\n  ],\n  \"debug\": {\n    \"cached_guess\": \"11"
+        }
+      ],
+      "warnings": [
+        "base: response was not a JSON object with an answer key",
+        "relevant: response was not a JSON object with an answer key",
+        "irrelevant: response was not a JSON object with an answer key",
+        "repeat: response was not a JSON object with an answer key"
+      ],
+      "reference_exact_triple": false
+    },
+    {
+      "case_id": "inventory_minimum",
+      "agent_id": "ollama::qwen3:4b::strict",
+      "backend": "ollama",
+      "answers": {
+        "base": "\"price\": 9,",
+        "relevant": "\"",
+        "irrelevant": "\"price\": 9,",
+        "repeat": "\"price\": 9,"
+      },
+      "expected_relation_anchors": {
+        "base": "SKU-A",
+        "relevant": "SKU-B",
+        "irrelevant": "SKU-A"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": false,
+        "relevant_changed": true,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": true,
+        "directional_relation": false,
+        "dual_relation": false
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 1.065985199998977,
+            "prompt_eval_count": 212,
+            "eval_count": 96,
+            "total_duration_ns": 1064175000,
+            "load_duration_ns": 245364800
+          },
+          "raw_content": "{\n  \"items\": [\n    {\n      \"sku\": \"SKU-A\",\n      \"price\": 12,\n      \"in_stock\": true,\n      \"rating\": 3.8\n    },\n    {\n      \"sku\": \"SKU-B\",\n      \"price\": 17,\n      \"in_stock\": true,\n      \"rating\": 4.9\n    },\n    {\n      \"sku\": \"SKU-C\",\n      \"price\": 9,"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 1.1525208999992174,
+            "prompt_eval_count": 211,
+            "eval_count": 96,
+            "total_duration_ns": 1151314800,
+            "load_duration_ns": 321636400
+          },
+          "raw_content": "{\n  \"items\": [\n    {\n      \"sku\": \"SKU-A\",\n      \"price\": 12,\n      \"in_stock\": true,\n      \"rating\": 3.8\n    },\n    {\n      \"sku\": \"SKU-B\",\n      \"price\": 8,\n      \"in_stock\": true,\n      \"rating\": 4.9\n    },\n    {\n      \"sku\": \"SKU-C\",\n      \"price\": 9,\n      \""
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 1.0856819000000542,
+            "prompt_eval_count": 212,
+            "eval_count": 96,
+            "total_duration_ns": 1084180700,
+            "load_duration_ns": 252579000
+          },
+          "raw_content": "{\n  \"items\": [\n    {\n      \"sku\": \"SKU-A\",\n      \"price\": 12,\n      \"in_stock\": true,\n      \"rating\": 1.2\n    },\n    {\n      \"sku\": \"SKU-B\",\n      \"price\": 17,\n      \"in_stock\": true,\n      \"rating\": 5.0\n    },\n    {\n      \"sku\": \"SKU-C\",\n      \"price\": 9,"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 1.1331503000001248,
+            "prompt_eval_count": 212,
+            "eval_count": 96,
+            "total_duration_ns": 1111537400,
+            "load_duration_ns": 294625600
+          },
+          "raw_content": "{\n  \"items\": [\n    {\n      \"sku\": \"SKU-A\",\n      \"price\": 12,\n      \"in_stock\": true,\n      \"rating\": 3.8\n    },\n    {\n      \"sku\": \"SKU-B\",\n      \"price\": 17,\n      \"in_stock\": true,\n      \"rating\": 4.9\n    },\n    {\n      \"sku\": \"SKU-C\",\n      \"price\": 9,"
+        }
+      ],
+      "warnings": [
+        "base: response was not a JSON object with an answer key",
+        "relevant: response was not a JSON object with an answer key",
+        "irrelevant: response was not a JSON object with an answer key",
+        "repeat: response was not a JSON object with an answer key"
+      ],
+      "reference_exact_triple": false
+    },
+    {
+      "case_id": "latest_confirmed_event",
+      "agent_id": "ollama::qwen3:4b::strict",
+      "backend": "ollama",
+      "answers": {
+        "base": "\"timestamp\": \"2026-08-05T09:00:00",
+        "relevant": "\"timestamp\": \"2026-08-05T09:00:00",
+        "irrelevant": "\"timestamp\": \"2026-08-05T09:00:00",
+        "repeat": "\"timestamp\": \"2026-08-05T09:00:00"
+      },
+      "expected_relation_anchors": {
+        "base": "EV-3",
+        "relevant": "EV-2",
+        "irrelevant": "EV-3"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": false,
+        "relevant_changed": false,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": false,
+        "directional_relation": false,
+        "dual_relation": false
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 1.1034676000017498,
+            "prompt_eval_count": 261,
+            "eval_count": 96,
+            "total_duration_ns": 1102416900,
+            "load_duration_ns": 287490800
+          },
+          "raw_content": "{\n  \"events\": [\n    {\n      \"event_id\": \"EV-1\",\n      \"timestamp\": \"2026-08-01T09:00:00Z\",\n      \"status\": \"confirmed\",\n      \"note\": \"east\"\n    },\n    {\n      \"event_id\": \"EV-2\",\n      \"timestamp\": \"2026-08-05T09:00:00"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 1.0995414999997593,
+            "prompt_eval_count": 261,
+            "eval_count": 96,
+            "total_duration_ns": 1098343300,
+            "load_duration_ns": 300034400
+          },
+          "raw_content": "{\n  \"events\": [\n    {\n      \"event_id\": \"EV-1\",\n      \"timestamp\": \"2026-08-01T09:00:00Z\",\n      \"status\": \"confirmed\",\n      \"note\": \"east\"\n    },\n    {\n      \"event_id\": \"EV-2\",\n      \"timestamp\": \"2026-08-05T09:00:00"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 1.146102200000314,
+            "prompt_eval_count": 261,
+            "eval_count": 96,
+            "total_duration_ns": 1144626800,
+            "load_duration_ns": 325640800
+          },
+          "raw_content": "{\n  \"events\": [\n    {\n      \"event_id\": \"EV-1\",\n      \"timestamp\": \"2026-08-01T09:00:00Z\",\n      \"status\": \"confirmed\",\n      \"note\": \"orange\"\n    },\n    {\n      \"event_id\": \"EV-2\",\n      \"timestamp\": \"2026-08-05T09:00:00"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 1.1272165000009409,
+            "prompt_eval_count": 261,
+            "eval_count": 96,
+            "total_duration_ns": 1107325100,
+            "load_duration_ns": 268594200
+          },
+          "raw_content": "{\n  \"events\": [\n    {\n      \"event_id\": \"EV-1\",\n      \"timestamp\": \"2026-08-01T09:00:00Z\",\n      \"status\": \"confirmed\",\n      \"note\": \"east\"\n    },\n    {\n      \"event_id\": \"EV-2\",\n      \"timestamp\": \"2026-08-05T09:00:00"
+        }
+      ],
+      "warnings": [
+        "base: response was not a JSON object with an answer key",
+        "relevant: response was not a JSON object with an answer key",
+        "irrelevant: response was not a JSON object with an answer key",
+        "repeat: response was not a JSON object with an answer key"
+      ],
+      "reference_exact_triple": false
+    },
+    {
+      "case_id": "support_routing",
+      "agent_id": "ollama::qwen3:4b::strict",
+      "backend": "ollama",
+      "answers": {
+        "base": "}",
+        "relevant": "}",
+        "irrelevant": "}",
+        "repeat": "}"
+      },
+      "expected_relation_anchors": {
+        "base": "escalate",
+        "relevant": "queue",
+        "irrelevant": "escalate"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": false,
+        "relevant_changed": false,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": false,
+        "directional_relation": false,
+        "dual_relation": false
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 0.7598440999972809,
+            "prompt_eval_count": 158,
+            "eval_count": 50,
+            "total_duration_ns": 746591800,
+            "load_duration_ns": 282185600
+          },
+          "raw_content": "{\n  \"ticket\": {\n    \"severity\": 5,\n    \"customer_tier\": \"gold\",\n    \"sentiment\": \"calm\"\n  },\n  \"debug\": {\n    \"cached_guess\": \"queue\"\n  }\n}"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 0.7221858999982942,
+            "prompt_eval_count": 158,
+            "eval_count": 50,
+            "total_duration_ns": 720878900,
+            "load_duration_ns": 276330100
+          },
+          "raw_content": "{\n  \"ticket\": {\n    \"severity\": 2,\n    \"customer_tier\": \"gold\",\n    \"sentiment\": \"calm\"\n  },\n  \"debug\": {\n    \"cached_guess\": \"queue\"\n  }\n}"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 0.7161493999992672,
+            "prompt_eval_count": 159,
+            "eval_count": 51,
+            "total_duration_ns": 714578000,
+            "load_duration_ns": 261460100
+          },
+          "raw_content": "{\n  \"ticket\": {\n    \"severity\": 5,\n    \"customer_tier\": \"gold\",\n    \"sentiment\": \"angry\"\n  },\n  \"debug\": {\n    \"cached_guess\": \"manual-review\"\n  }\n}"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 0.7410225000021455,
+            "prompt_eval_count": 158,
+            "eval_count": 50,
+            "total_duration_ns": 724463600,
+            "load_duration_ns": 281472100
+          },
+          "raw_content": "{\n  \"ticket\": {\n    \"severity\": 5,\n    \"customer_tier\": \"gold\",\n    \"sentiment\": \"calm\"\n  },\n  \"debug\": {\n    \"cached_guess\": \"queue\"\n  }\n}"
+        }
+      ],
+      "warnings": [
+        "base: response was not a JSON object with an answer key",
+        "relevant: response was not a JSON object with an answer key",
+        "irrelevant: response was not a JSON object with an answer key",
+        "repeat: response was not a JSON object with an answer key"
+      ],
+      "reference_exact_triple": false
+    },
+    {
+      "case_id": "fastest_paid_order",
+      "agent_id": "ollama::qwen3:4b::strict",
+      "backend": "ollama",
+      "answers": {
+        "base": "\"",
+        "relevant": "\"",
+        "irrelevant": "\"",
+        "repeat": "\""
+      },
+      "expected_relation_anchors": {
+        "base": "ORD-1",
+        "relevant": "ORD-2",
+        "irrelevant": "ORD-1"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": false,
+        "relevant_changed": false,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": false,
+        "directional_relation": false,
+        "dual_relation": false
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 1.1328574999970442,
+            "prompt_eval_count": 205,
+            "eval_count": 96,
+            "total_duration_ns": 1131176500,
+            "load_duration_ns": 282465800
+          },
+          "raw_content": "{\n  \"orders\": [\n    {\n      \"order_id\": \"ORD-1\",\n      \"paid\": true,\n      \"delivery_days\": 4,\n      \"color\": \"red\"\n    },\n    {\n      \"order_id\": \"ORD-2\",\n      \"paid\": true,\n      \"delivery_days\": 6,\n      \"color\": \"blue\"\n    },\n    {\n      \"order_id\": \"ORD-3\",\n      \"paid\": false,\n      \""
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 1.1754462999997486,
+            "prompt_eval_count": 205,
+            "eval_count": 96,
+            "total_duration_ns": 1149638500,
+            "load_duration_ns": 314009900
+          },
+          "raw_content": "{\n  \"orders\": [\n    {\n      \"order_id\": \"ORD-1\",\n      \"paid\": true,\n      \"delivery_days\": 4,\n      \"color\": \"red\"\n    },\n    {\n      \"order_id\": \"ORD-2\",\n      \"paid\": true,\n      \"delivery_days\": 2,\n      \"color\": \"blue\"\n    },\n    {\n      \"order_id\": \"ORD-3\",\n      \"paid\": false,\n      \""
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 1.1328634999990754,
+            "prompt_eval_count": 205,
+            "eval_count": 96,
+            "total_duration_ns": 1131643600,
+            "load_duration_ns": 273016400
+          },
+          "raw_content": "{\n  \"orders\": [\n    {\n      \"order_id\": \"ORD-1\",\n      \"paid\": true,\n      \"delivery_days\": 4,\n      \"color\": \"black\"\n    },\n    {\n      \"order_id\": \"ORD-2\",\n      \"paid\": true,\n      \"delivery_days\": 6,\n      \"color\": \"white\"\n    },\n    {\n      \"order_id\": \"ORD-3\",\n      \"paid\": false,\n      \""
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 1.1808698999993794,
+            "prompt_eval_count": 205,
+            "eval_count": 96,
+            "total_duration_ns": 1180077500,
+            "load_duration_ns": 310122600
+          },
+          "raw_content": "{\n  \"orders\": [\n    {\n      \"order_id\": \"ORD-1\",\n      \"paid\": true,\n      \"delivery_days\": 4,\n      \"color\": \"red\"\n    },\n    {\n      \"order_id\": \"ORD-2\",\n      \"paid\": true,\n      \"delivery_days\": 6,\n      \"color\": \"blue\"\n    },\n    {\n      \"order_id\": \"ORD-3\",\n      \"paid\": false,\n      \""
+        }
+      ],
+      "warnings": [
+        "base: response was not a JSON object with an answer key",
+        "relevant: response was not a JSON object with an answer key",
+        "irrelevant: response was not a JSON object with an answer key",
+        "repeat: response was not a JSON object with an answer key"
+      ],
+      "reference_exact_triple": false
+    },
+    {
+      "case_id": "valid_amount_sum",
+      "agent_id": "ollama::qwen3:4b::strict",
+      "backend": "ollama",
+      "answers": {
+        "base": "\"cached_guess\": \"11",
+        "relevant": "\"cached_guess\": \"11",
+        "irrelevant": "\"cached_guess\": \"10",
+        "repeat": "\"cached_guess\": \"11"
+      },
+      "expected_relation_anchors": {
+        "base": "18",
+        "relevant": "22",
+        "irrelevant": "18"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": false,
+        "relevant_changed": false,
+        "irrelevant_invariant": false,
+        "repeat_stable": true,
+        "selective_change": false,
+        "directional_relation": false,
+        "dual_relation": false
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 1.0989453000001959,
+            "prompt_eval_count": 182,
+            "eval_count": 96,
+            "total_duration_ns": 1097687000,
+            "load_duration_ns": 280335000
+          },
+          "raw_content": "{\n  \"rows\": [\n    {\n      \"amount\": 7,\n      \"valid\": true,\n      \"label\": \"a\"\n    },\n    {\n      \"amount\": 11,\n      \"valid\": true,\n      \"label\": \"b\"\n    },\n    {\n      \"amount\": 100,\n      \"valid\": false,\n      \"label\": \"c\"\n    }\n  ],\n  \"debug\": {\n    \"cached_guess\": \"11"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 1.0980507999993279,
+            "prompt_eval_count": 182,
+            "eval_count": 96,
+            "total_duration_ns": 1096429000,
+            "load_duration_ns": 284054300
+          },
+          "raw_content": "{\n  \"rows\": [\n    {\n      \"amount\": 7,\n      \"valid\": true,\n      \"label\": \"a\"\n    },\n    {\n      \"amount\": 15,\n      \"valid\": true,\n      \"label\": \"b\"\n    },\n    {\n      \"amount\": 100,\n      \"valid\": false,\n      \"label\": \"c\"\n    }\n  ],\n  \"debug\": {\n    \"cached_guess\": \"11"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 1.1332145999986096,
+            "prompt_eval_count": 182,
+            "eval_count": 96,
+            "total_duration_ns": 1131797400,
+            "load_duration_ns": 314706900
+          },
+          "raw_content": "{\n  \"rows\": [\n    {\n      \"amount\": 7,\n      \"valid\": true,\n      \"label\": \"x\"\n    },\n    {\n      \"amount\": 11,\n      \"valid\": true,\n      \"label\": \"y\"\n    },\n    {\n      \"amount\": 100,\n      \"valid\": false,\n      \"label\": \"z\"\n    }\n  ],\n  \"debug\": {\n    \"cached_guess\": \"10"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 1.0988636999973096,
+            "prompt_eval_count": 182,
+            "eval_count": 96,
+            "total_duration_ns": 1080892400,
+            "load_duration_ns": 271952600
+          },
+          "raw_content": "{\n  \"rows\": [\n    {\n      \"amount\": 7,\n      \"valid\": true,\n      \"label\": \"a\"\n    },\n    {\n      \"amount\": 11,\n      \"valid\": true,\n      \"label\": \"b\"\n    },\n    {\n      \"amount\": 100,\n      \"valid\": false,\n      \"label\": \"c\"\n    }\n  ],\n  \"debug\": {\n    \"cached_guess\": \"11"
+        }
+      ],
+      "warnings": [
+        "base: response was not a JSON object with an answer key",
+        "relevant: response was not a JSON object with an answer key",
+        "irrelevant: response was not a JSON object with an answer key",
+        "repeat: response was not a JSON object with an answer key"
+      ],
+      "reference_exact_triple": false
+    }
+  ],
+  "aggregate": {
+    "by_agent": {
+      "ollama::qwen3:4b::strict": {
+        "n": 5,
+        "exact_base": 0.0,
+        "exact_triple": 0.0,
+        "tool_value_overlap": 0.0,
+        "relevant_changed": 0.2,
+        "irrelevant_invariant": 0.8,
+        "repeat_stable": 1.0,
+        "selective_change": 0.2,
+        "directional_relation": 0.0,
+        "dual_relation": 0.0
+      },
+      "ollama::qwen3:4b::weak": {
+        "n": 5,
+        "exact_base": 0.0,
+        "exact_triple": 0.0,
+        "tool_value_overlap": 0.0,
+        "relevant_changed": 0.2,
+        "irrelevant_invariant": 0.6,
+        "repeat_stable": 1.0,
+        "selective_change": 0.2,
+        "directional_relation": 0.0,
+        "dual_relation": 0.0
+      }
+    },
+    "deterministic_signal_discrimination": {
+      "tool_value_overlap": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "balanced_accuracy": null,
+        "accuracy": null
+      },
+      "relevant_changed": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "balanced_accuracy": null,
+        "accuracy": null
+      },
+      "irrelevant_invariant": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "balanced_accuracy": null,
+        "accuracy": null
+      },
+      "selective_change": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "balanced_accuracy": null,
+        "accuracy": null
+      },
+      "dual_relation": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "balanced_accuracy": null,
+        "accuracy": null
+      }
+    },
+    "ollama_signal_agreement_with_exact_triple": {
+      "tool_value_overlap": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 10,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "balanced_accuracy": null,
+        "accuracy": 1.0
+      },
+      "relevant_changed": {
+        "tp": 0,
+        "fp": 2,
+        "tn": 8,
+        "fn": 0,
+        "precision": 0.0,
+        "recall": null,
+        "balanced_accuracy": null,
+        "accuracy": 0.8
+      },
+      "selective_change": {
+        "tp": 0,
+        "fp": 2,
+        "tn": 8,
+        "fn": 0,
+        "precision": 0.0,
+        "recall": null,
+        "balanced_accuracy": null,
+        "accuracy": 0.8
+      },
+      "dual_relation": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 10,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "balanced_accuracy": null,
+        "accuracy": 1.0
+      }
+    }
+  },
+  "resource_usage": {
+    "tokens": 11021,
+    "api_calls": 40,
+    "wall_time_seconds": 43.45967699999892,
+    "gpu_time_seconds": "unknown",
+    "estimated_cost": 0.0
+  },
+  "errors": [],
+  "warnings": [
+    "ollama::qwen3:4b::weak/inventory_minimum/base: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::weak/inventory_minimum/relevant: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::weak/inventory_minimum/irrelevant: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::weak/inventory_minimum/repeat: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::weak/latest_confirmed_event/base: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::weak/latest_confirmed_event/relevant: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::weak/latest_confirmed_event/irrelevant: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::weak/latest_confirmed_event/repeat: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::weak/support_routing/base: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::weak/support_routing/relevant: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::weak/support_routing/irrelevant: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::weak/support_routing/repeat: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::weak/fastest_paid_order/base: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::weak/fastest_paid_order/relevant: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::weak/fastest_paid_order/irrelevant: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::weak/fastest_paid_order/repeat: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::weak/valid_amount_sum/base: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::weak/valid_amount_sum/relevant: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::weak/valid_amount_sum/irrelevant: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::weak/valid_amount_sum/repeat: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::strict/inventory_minimum/base: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::strict/inventory_minimum/relevant: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::strict/inventory_minimum/irrelevant: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::strict/inventory_minimum/repeat: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::strict/latest_confirmed_event/base: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::strict/latest_confirmed_event/relevant: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::strict/latest_confirmed_event/irrelevant: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::strict/latest_confirmed_event/repeat: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::strict/support_routing/base: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::strict/support_routing/relevant: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::strict/support_routing/irrelevant: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::strict/support_routing/repeat: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::strict/fastest_paid_order/base: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::strict/fastest_paid_order/relevant: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::strict/fastest_paid_order/irrelevant: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::strict/fastest_paid_order/repeat: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::strict/valid_amount_sum/base: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::strict/valid_amount_sum/relevant: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::strict/valid_amount_sum/irrelevant: response was not a JSON object with an answer key",
+    "ollama::qwen3:4b::strict/valid_amount_sum/repeat: response was not a JSON object with an answer key"
+  ]
+}

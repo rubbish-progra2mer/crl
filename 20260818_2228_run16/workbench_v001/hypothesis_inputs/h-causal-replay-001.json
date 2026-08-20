@@ -1,0 +1,34 @@
+{
+  "hypothesis_id": "h-causal-replay-001",
+  "title": "反事实轨迹重放定位首次不可恢复步骤",
+  "parent_ids": [],
+  "lineage_note": "初始 method-first 候选；在实现前被结构化最近工作直接占据",
+  "problem": "失败轨迹只给终局标签，无法确定真正导致失败的步骤。",
+  "target_failure": {
+    "summary": "步骤归因与终局奖励不一致。",
+    "card_ids": ["failure-uniform-terminal-return-erases-step-credit"],
+    "evidence_ids": ["ev-p019-step-level-calibration"]
+  },
+  "changed_computation": {
+    "baseline": "用终局标签或语言模型评判步骤错误。",
+    "intervention": "逐步替换动作并前向重放，定位首次不可恢复步骤。",
+    "information_available": "完整轨迹、工具环境与终局判定。",
+    "timing": "失败发生后的离线分析。",
+    "budget_effect": "需要多个后缀重放。"
+  },
+  "mechanism_claim": "干预后的成功概率变化可识别真正的因果错误步骤。",
+  "falsifier": "最近工作已经直接实现相同干预与归因计算。",
+  "minimal_killer_experiment": "不再执行；直接先行已经占据方法核心。",
+  "nearest_prior_risk": "CAR、CausalFlow、ELPO、AgentTracer 直接碰撞。",
+  "alternative_explanations": ["语言模型步骤评判的相关性可能已足够"],
+  "descriptors": {
+    "problem_family": "轨迹失败归因",
+    "computation_stage": "离线诊断",
+    "intervention_family": "反事实重放",
+    "information_source": "轨迹与环境",
+    "timing_class": "执行后",
+    "budget_class": "多次重放",
+    "evaluation_mode": "因果步骤定位"
+  },
+  "literature_refs": ["arXiv:2606.08275", "arXiv:2605.25338", "ELPO", "AgentTracer"]
+}

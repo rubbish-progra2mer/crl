@@ -1,0 +1,542 @@
+{
+  "conditions": [
+    "raw",
+    "prompt",
+    "gate"
+  ],
+  "errors": [],
+  "experiment_id": "coverage-gate-smoke3-v001",
+  "model": "qwen3:8b",
+  "records": [
+    {
+      "abstained": false,
+      "completion_tokens": 22,
+      "condition": "raw",
+      "domain": "employees",
+      "extra_queries": 0,
+      "false_negative": false,
+      "fault": "complete_present",
+      "final_answer": "present",
+      "gate_interventions": 0,
+      "ground_truth": "present",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 206,
+      "scenario_id": "employees-complete-present",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "items": [
+              "Ava Patel",
+              "Mira Chen",
+              "Noah Williams"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"present\",\"reason\":\"Mira Chen is listed in the items.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "present",
+            "reason": "Mira Chen is listed in the items."
+          },
+          "usage": {
+            "eval_count": 22,
+            "prompt_eval_count": 206,
+            "total_duration_ns": 703904800
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 23,
+      "condition": "prompt",
+      "domain": "employees",
+      "extra_queries": 0,
+      "false_negative": false,
+      "fault": "complete_present",
+      "final_answer": "present",
+      "gate_interventions": 0,
+      "ground_truth": "present",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 364,
+      "scenario_id": "employees-complete-present",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope": "all North Division employees",
+              "next_cursor": null,
+              "requested_scope": "all North Division employees",
+              "required_as_of": "2026-08-18",
+              "snapshot_as_of": "2026-08-18",
+              "status": "complete"
+            },
+            "items": [
+              "Ava Patel",
+              "Mira Chen",
+              "Noah Williams"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"present\",\"reason\":\"Mira Chen is explicitly listed in the items.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "present",
+            "reason": "Mira Chen is explicitly listed in the items."
+          },
+          "usage": {
+            "eval_count": 23,
+            "prompt_eval_count": 364,
+            "total_duration_ns": 722772200
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 23,
+      "condition": "gate",
+      "domain": "employees",
+      "extra_queries": 0,
+      "false_negative": false,
+      "fault": "complete_present",
+      "final_answer": "present",
+      "gate_interventions": 0,
+      "ground_truth": "present",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 364,
+      "scenario_id": "employees-complete-present",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope": "all North Division employees",
+              "next_cursor": null,
+              "requested_scope": "all North Division employees",
+              "required_as_of": "2026-08-18",
+              "snapshot_as_of": "2026-08-18",
+              "status": "complete"
+            },
+            "items": [
+              "Ava Patel",
+              "Mira Chen",
+              "Noah Williams"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"present\",\"reason\":\"Mira Chen is explicitly listed in the items.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "present",
+            "reason": "Mira Chen is explicitly listed in the items."
+          },
+          "usage": {
+            "eval_count": 23,
+            "prompt_eval_count": 364,
+            "total_duration_ns": 636680300
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 27,
+      "condition": "raw",
+      "domain": "employees",
+      "extra_queries": 0,
+      "false_negative": false,
+      "fault": "complete_absent",
+      "final_answer": "absent",
+      "gate_interventions": 0,
+      "ground_truth": "absent",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 206,
+      "scenario_id": "employees-complete-absent",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "items": [
+              "Ava Patel",
+              "Noah Williams",
+              "Liam Garcia"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"absent\",\"reason\":\"Mira Chen is not listed in the provided North Division employees.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "absent",
+            "reason": "Mira Chen is not listed in the provided North Division employees."
+          },
+          "usage": {
+            "eval_count": 27,
+            "prompt_eval_count": 206,
+            "total_duration_ns": 759234800
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 25,
+      "condition": "prompt",
+      "domain": "employees",
+      "extra_queries": 0,
+      "false_negative": false,
+      "fault": "complete_absent",
+      "final_answer": "absent",
+      "gate_interventions": 0,
+      "ground_truth": "absent",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 364,
+      "scenario_id": "employees-complete-absent",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope": "all North Division employees",
+              "next_cursor": null,
+              "requested_scope": "all North Division employees",
+              "required_as_of": "2026-08-18",
+              "snapshot_as_of": "2026-08-18",
+              "status": "complete"
+            },
+            "items": [
+              "Ava Patel",
+              "Noah Williams",
+              "Liam Garcia"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"absent\",\"reason\":\"Mira Chen is not present in the items list.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "absent",
+            "reason": "Mira Chen is not present in the items list."
+          },
+          "usage": {
+            "eval_count": 25,
+            "prompt_eval_count": 364,
+            "total_duration_ns": 738295100
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 25,
+      "condition": "gate",
+      "domain": "employees",
+      "extra_queries": 0,
+      "false_negative": false,
+      "fault": "complete_absent",
+      "final_answer": "absent",
+      "gate_interventions": 0,
+      "ground_truth": "absent",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 364,
+      "scenario_id": "employees-complete-absent",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope": "all North Division employees",
+              "next_cursor": null,
+              "requested_scope": "all North Division employees",
+              "required_as_of": "2026-08-18",
+              "snapshot_as_of": "2026-08-18",
+              "status": "complete"
+            },
+            "items": [
+              "Ava Patel",
+              "Noah Williams",
+              "Liam Garcia"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"absent\",\"reason\":\"Mira Chen is not present in the items list.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "absent",
+            "reason": "Mira Chen is not present in the items list."
+          },
+          "usage": {
+            "eval_count": 25,
+            "prompt_eval_count": 364,
+            "total_duration_ns": 683294700
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 39,
+      "condition": "raw",
+      "domain": "employees",
+      "extra_queries": 0,
+      "false_negative": true,
+      "fault": "truncated",
+      "final_answer": "absent",
+      "gate_interventions": 0,
+      "ground_truth": "present",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 201,
+      "scenario_id": "employees-truncated-hidden",
+      "task_success": false,
+      "transcript": [
+        {
+          "tool_response": {
+            "items": [
+              "Ava Patel",
+              "Noah Williams"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"absent\",\"reason\":\"Mira Chen is not listed in the North Division employees as of 2026-08-18.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "absent",
+            "reason": "Mira Chen is not listed in the North Division employees as of 2026-08-18."
+          },
+          "usage": {
+            "eval_count": 39,
+            "prompt_eval_count": 201,
+            "total_duration_ns": 955416800
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 66,
+      "condition": "prompt",
+      "domain": "employees",
+      "extra_queries": 1,
+      "false_negative": false,
+      "fault": "truncated",
+      "final_answer": "present",
+      "gate_interventions": 0,
+      "ground_truth": "present",
+      "model_calls": 2,
+      "parse_issue": false,
+      "prompt_tokens": 878,
+      "scenario_id": "employees-truncated-hidden",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope": "all North Division employees",
+              "next_cursor": "page-2",
+              "requested_scope": "all North Division employees",
+              "required_as_of": "2026-08-18",
+              "snapshot_as_of": "2026-08-18",
+              "status": "partial"
+            },
+            "items": [
+              "Ava Patel",
+              "Noah Williams"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"query\",\"scope\":\"requested\",\"reason\":\"Coverage status is partial, so a broader query is needed.\"}",
+          "parsed_action": {
+            "action": "query",
+            "answer": "",
+            "reason": "Coverage status is partial, so a broader query is needed."
+          },
+          "usage": {
+            "eval_count": 25,
+            "prompt_eval_count": 362,
+            "total_duration_ns": 747266900
+          }
+        },
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope": "all North Division employees",
+              "next_cursor": null,
+              "requested_scope": "all North Division employees",
+              "required_as_of": "2026-08-18",
+              "snapshot_as_of": "2026-08-18",
+              "status": "complete"
+            },
+            "items": [
+              "Ava Patel",
+              "Noah Williams",
+              "Mira Chen"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"present\",\"reason\":\"Mira Chen is present in the complete coverage of all North Division employees as of 2026-08-18.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "present",
+            "reason": "Mira Chen is present in the complete coverage of all North Division employees as of 2026-08-18."
+          },
+          "usage": {
+            "eval_count": 41,
+            "prompt_eval_count": 516,
+            "total_duration_ns": 1005602100
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 66,
+      "condition": "gate",
+      "domain": "employees",
+      "extra_queries": 1,
+      "false_negative": false,
+      "fault": "truncated",
+      "final_answer": "present",
+      "gate_interventions": 0,
+      "ground_truth": "present",
+      "model_calls": 2,
+      "parse_issue": false,
+      "prompt_tokens": 878,
+      "scenario_id": "employees-truncated-hidden",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope": "all North Division employees",
+              "next_cursor": "page-2",
+              "requested_scope": "all North Division employees",
+              "required_as_of": "2026-08-18",
+              "snapshot_as_of": "2026-08-18",
+              "status": "partial"
+            },
+            "items": [
+              "Ava Patel",
+              "Noah Williams"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"query\",\"scope\":\"requested\",\"reason\":\"Coverage status is partial, so a broader query is needed.\"}",
+          "parsed_action": {
+            "action": "query",
+            "answer": "",
+            "reason": "Coverage status is partial, so a broader query is needed."
+          },
+          "usage": {
+            "eval_count": 25,
+            "prompt_eval_count": 362,
+            "total_duration_ns": 665794000
+          }
+        },
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope": "all North Division employees",
+              "next_cursor": null,
+              "requested_scope": "all North Division employees",
+              "required_as_of": "2026-08-18",
+              "snapshot_as_of": "2026-08-18",
+              "status": "complete"
+            },
+            "items": [
+              "Ava Patel",
+              "Noah Williams",
+              "Mira Chen"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"present\",\"reason\":\"Mira Chen is present in the complete coverage of all North Division employees as of 2026-08-18.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "present",
+            "reason": "Mira Chen is present in the complete coverage of all North Division employees as of 2026-08-18."
+          },
+          "usage": {
+            "eval_count": 41,
+            "prompt_eval_count": 516,
+            "total_duration_ns": 1013100500
+          }
+        }
+      ]
+    }
+  ],
+  "scenario_count": 3,
+  "schema_version": 1,
+  "seed": 16001,
+  "summaries": {
+    "gate": {
+      "abstention_rate": 0.0,
+      "complete_absence_retention_rate": 1.0,
+      "episode_count": 3.0,
+      "false_negative_rate_hidden": 0.0,
+      "hidden_recovery_success_rate": 1.0,
+      "mean_extra_queries": 0.3333333333333333,
+      "mean_gate_interventions": 0.0,
+      "overall_task_success_rate": 1.0,
+      "parse_issue_rate": 0.0,
+      "safe_nonnegative_rate_hidden": 1.0,
+      "visible_positive_accuracy": 1.0
+    },
+    "prompt": {
+      "abstention_rate": 0.0,
+      "complete_absence_retention_rate": 1.0,
+      "episode_count": 3.0,
+      "false_negative_rate_hidden": 0.0,
+      "hidden_recovery_success_rate": 1.0,
+      "mean_extra_queries": 0.3333333333333333,
+      "mean_gate_interventions": 0.0,
+      "overall_task_success_rate": 1.0,
+      "parse_issue_rate": 0.0,
+      "safe_nonnegative_rate_hidden": 1.0,
+      "visible_positive_accuracy": 1.0
+    },
+    "raw": {
+      "abstention_rate": 0.0,
+      "complete_absence_retention_rate": 1.0,
+      "episode_count": 3.0,
+      "false_negative_rate_hidden": 1.0,
+      "hidden_recovery_success_rate": 0.0,
+      "mean_extra_queries": 0.0,
+      "mean_gate_interventions": 0.0,
+      "overall_task_success_rate": 0.6666666666666666,
+      "parse_issue_rate": 0.0,
+      "safe_nonnegative_rate_hidden": 0.0,
+      "visible_positive_accuracy": 1.0
+    }
+  },
+  "wall_time_seconds": 8.686999999976251
+}

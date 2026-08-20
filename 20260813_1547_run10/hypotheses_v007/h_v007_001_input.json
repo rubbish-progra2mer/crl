@@ -1,0 +1,43 @@
+{
+  "hypothesis_id": "h-v007-001",
+  "title": "观察非干扰认证的工具验证器",
+  "parent_ids": [],
+  "lineage_note": "v006 的非原子重试被 Verified Tool Calls 等工作占据后，审计其关键只读验证假设：验证查询本身可能改变被评价状态。",
+  "problem": "写后验证方法要求验证器只读且可重复；但工具文档、函数名和 HTTP GET 并不能保证实现无副作用，验证调用可能创建记录、下载文件、推进游标或改变计数。",
+  "target_failure": {
+    "summary": "所谓只读验证调用对环境产生观察干扰，使验证本身改变任务终局。",
+    "card_ids": ["failure-incomplete-tool-contracts-false-verified-state"],
+    "evidence_ids": []
+  },
+  "changed_computation": {
+    "baseline": "按函数名、文档或 HTTP 动词把查询工具视为只读，直接用于写后验证或轮询。",
+    "intervention": "在隔离检查点上以黑盒前后差分和重复调用确认工具的资源效果类型；只有对任务评价投影非干扰的查询才进入验证计划，否则切换影子执行或弃权。",
+    "information_available": "OpenAPI/工具文档、可回滚开发环境、公开工具调用与状态差分；运行时不使用隐藏终局答案。",
+    "timing": "验证器注册或技能固化时认证，写后验证前查效果类型。",
+    "budget_effect": "离线增加黑盒探测；运行时可能减少可用验证器并提高弃权。"
+  },
+  "mechanism_claim": "黑盒效果认证能发现被文档或 HTTP 动词误标为读取的工具，避免验证器自身改变终局。",
+  "falsifier": "黑盒 API 测试已能自动推断 CRUD/效果语义；真实工具夹具中候选查询不产生任务相关状态差分；或简单函数名/HTTP 动词与语言模型分类达到同等结果。",
+  "minimal_killer_experiment": "静态枚举 AppWorld GET 中的持久写信号，再在隔离 world 做 act-only 与 act-plus-verifier A/B；同时审计自动 CRUD/效果推断先行工作。",
+  "nearest_prior_risk": "CRUDinfer、REST API 行为测试、Verified Tool Calls 的只读验证器、Cordon 影子状态与通用效果系统可能吸收。",
+  "alternative_explanations": [
+    "静态扫描只命中局部字典赋值",
+    "初始化写入不影响任务评价投影",
+    "工具名已明确表明副作用",
+    "收益来自影子环境而非效果认证"
+  ],
+  "descriptors": {
+    "problem_family": "verifier_observer_effect",
+    "computation_stage": "verifier_registration_and_postaction_check",
+    "intervention_family": "black_box_effect_certification",
+    "information_source": "openapi_calls_and_checkpoint_state_diffs",
+    "timing_class": "offline_certification_then_runtime_gate",
+    "budget_class": "offline_probe_budget",
+    "evaluation_mode": "effect_classification_and_terminal_noninterference"
+  },
+  "literature_refs": [
+    "arXiv:2608.02645",
+    "CRUDinfer, ICSE 2026",
+    "Karlsson et al., Software Quality Journal 2024"
+  ]
+}

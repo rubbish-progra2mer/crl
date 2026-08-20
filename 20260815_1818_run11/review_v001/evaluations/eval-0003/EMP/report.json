@@ -1,0 +1,60 @@
+{
+  "evaluation_id": "eval-0003",
+  "evaluator_definition_sha256": "e0d35083b1427e9f8861ba576304b97657498fee46480d5e07e8e0b02cea6e5b",
+  "evaluator_version": "CRL-EVAL-1.0",
+  "events_sha256": "ad9f5323d88f29e16f2106e2b2b041aa159012ecc3d87e317cf5096b209698fc",
+  "invalid_reasons": [],
+  "measurement_key": "6d031a0d4b9c0615fe2a97b9c1488207283e2669e547e9e29f16ac90b11c8803",
+  "output": {
+    "confidence": "high",
+    "critical_risk": "potentially_fatal",
+    "diagnostics": {
+      "baseline_confound": "联合关系使用五次调用并合取四项精确字符串条件，而单次正确性只观察一次调用；更多失败机会和更严格的合取本身可制造相对单次基线的新增判别力，且未与同预算五调用基线正面对比。",
+      "biggest_empirical_threat": "各源变体除目标字段变化外还独立改变顶层记录顺序，破坏了受控单因素干预；因此大量“无关字段不变性失败”可能实际是记录顺序敏感，而不是采用了无关证据。",
+      "killer_experiment": "对每个案例采用同一随机记录排列生成全部五个变体，并另设仅改变记录顺序、字段完全不变的对照臂；在原三模型上重跑并按案例聚类分析。若83/187的脆弱性大幅消失或由顺序对照解释，字段级选择性证据采用主张即被推翻。",
+      "missing_validation": "最应补的是在独立标注字段相关性的真实多步工具任务上，以相同五调用预算同时比较联合关系、顺序控制、完整反事实正确性和通用变形基线，并检验其是否增量预测独立终态错误或修复收益。",
+      "strongest_empirical_evidence": "最可信的是修复后真实模型实验中83/187个基线精确正确行联合关系失败，且83行均无解析警告，三个种子分别为26/62、29/63、28/62，并覆盖16/18个模型—提示—种子分层。"
+    },
+    "evaluator_version": "CRL-EVAL-1.0",
+    "free_review": "实验对局部主张有真实支撑，尤其是修复重复稳定性和位置代理后仍观察到跨分层的单次成功脆弱性。但核心干预并非真正“只改字段”：各变体同时重排记录，使顺序敏感性成为未排除的直接替代解释。五调用合取与单次正确性的比较也不等预算，且精确字符串指标会混入格式差异。突变策略对已知漏洞的覆盖较好，却是围绕判据手工构造；真实模型结果又受同案例、同谱系和任务族集中影响。当前最多支持“该冻结套件在复合扰动下存在关系脆弱性”，尚不足以独立支持字段级证据采用机制或实际诊断增量。",
+    "model_identity": "gpt-5.6-sol",
+    "reasoning_effort": "xhigh",
+    "reasons": {
+      "baseline_fairness": "突变实验中的三个信号复用同一180行回答，信息、策略输入和计算预算匹配，这是公平之处。单次正确性与联合关系的对照却是一次调用对五次调用的合取，后者天然获得更多暴露失败的机会，缺少同为五调用的重复正确性、完整反事实正确性或强变形基线作为主比较。九种策略及正负标签又由同一实现团队围绕联合判据构造，1.0判别率不能视为对现实替代方法的独立优势。",
+      "experimental_validity": "两项正式实验直接对应冻结合成套件中的突变判别和单次成功脆弱性主张，且调用顺序随机、无调用错误、标签经独立求解器重算。可是四个源变体还分别独立打乱记录顺序，因此所谓“只改变相关或无关字段”的干预并未隔离字段效应，关系失败可由顺序敏感性解释。真实模型实验也仅覆盖短答案合成任务和相近本地模型谱系，尚无独立终态或下游效用验证。",
+      "measurement_reliability": "独立家族求解器20/20重算通过，原始回答、警告和逐行关系均被保留；83个核心失败也都没有解析警告。另一方面，指标以答案字符串精确相等衡量不变性，逐行材料显示大量解释性文本、空串和异常格式，因而会把表达或格式变化混入语义采用失败。Wilson区间按行计算但案例、种子和模型谱系强相关，未提供聚类不确定性；字段相关性和关系也仍由研究团队手工定义。",
+      "result_strength": "冻结套件内效应不小：187个单次正确行中83个失败，三个种子均非零且16/18分层非零；突变套件也达到预注册门槛。有效独立样本量远小于187，失败高度集中于任务族，valid_sum没有单次正确分母，三个模型还属于相近谱系。联合关系与完整四变体正确性几乎重合（107/360对104/360，平衡准确率0.994），且没有证明对真实错误、复核失败或修复收益具有增量预测力。",
+      "robustness_falsification": "突变套件覆盖方向错误、忽略、诱饵依赖、重复不稳定、固定第一/第三位置等负控，并加入三种子、两提示制度和随机调用顺序。错误但等变策略及真实“错但通过”行也有效限定了指标不是正确性验证器。然而最关键的记录顺序混杂没有通过顺序单独变化或共享排列的析因实验排除，也缺少语义评分敏感性、聚类分析、跨供应商和真实多步任务检验。"
+    },
+    "review_protocol": "CRL-IR-1.0",
+    "reviewer_role": "EMP",
+    "scores": {
+      "baseline_fairness": 2,
+      "experimental_validity": 2,
+      "measurement_reliability": 2,
+      "result_strength": 2,
+      "robustness_falsification": 2
+    }
+  },
+  "packet_key": "8c86ac43e5e8329c01b87286a9af621ee877b1ace09d5be625bd8e29a37b26a8",
+  "raw_output_sha256": "84813875b3e14e62c72febb34fc38cca645e11839c423d85035aee5edeb29548",
+  "request_sha256": "05409d44eba806b8ee8887e8049b290e1228a0b2fe4fc411333901548fbed1e8",
+  "reviewer_role": "EMP",
+  "runtime": {
+    "backend": "codex_exec_jsonl_v1",
+    "codex_version": "codex-cli 0.147.0",
+    "ephemeral": true,
+    "event_count": 4,
+    "executable": "D:\\Desktop\\crl\\runtimes\\codex-cli\\0.147.0\\codex.cmd",
+    "forbidden_events": [],
+    "network_requested": false,
+    "reasoning_effort": "xhigh",
+    "requested_model": "gpt-5.6-sol",
+    "returncode": 0,
+    "sandbox": "read-only",
+    "timed_out": false
+  },
+  "schema_version": 1,
+  "stderr_sha256": "046b37d5dd7b9ce2063da4a4e88445fcac3d44c7bf70d6344dfc961ef422f67b",
+  "valid": true
+}

@@ -1,0 +1,48 @@
+{
+  "hypothesis_id": "h-v008-001",
+  "title": "跨版本行为等价驱动的工具计划迁移",
+  "parent_ids": [],
+  "lineage_note": "v007 的验证器观察效应路线被黑盒 CRUD/REST 行为推断吸收后，转向工具接口自身演化时既有成功计划的失效与迁移。",
+  "problem": "工具或模型上下文协议服务器升级后，参数名、默认值、操作拆分合并、返回结构与行为可能变化；直接回放已成功的计划会失败或静默改变终局，完全重新规划又丢失已验证的过程结构。",
+  "target_failure": {
+    "summary": "旧版本成功工具计划在新接口上发生语法或语义漂移，静态模式匹配无法保证迁移后终局等价。",
+    "card_ids": ["failure-plan-cache-semantic-false-positives", "failure-repeat-run-reliability-collapse"],
+    "evidence_ids": []
+  },
+  "changed_computation": {
+    "baseline": "读取新接口文档后让语言模型重新规划，或用名称、签名和模式差异做一对一重写。",
+    "intervention": "把旧计划视为待迁移程序，通过旧版与新版接口的跨版本差分行为试验搜索一对多或多对多替换，并仅保留在可见终局投影上与旧计划行为等价的迁移。",
+    "information_available": "旧计划、两版公开接口规范、隔离沙箱中的黑盒调用和可见终局；不使用隐藏测试答案或服务源码。",
+    "timing": "接口版本变更后、缓存计划或技能再次进入运行前。",
+    "budget_effect": "离线增加跨版本探测与候选迁移搜索，运行时复用已迁移计划。"
+  },
+  "mechanism_claim": "行为等价而非表面模式相似度可以迁移复杂工具计划，并在操作拆分、合并或默认值变化时保留任务终局。",
+  "falsifier": "既有 API 迁移、程序合成或 REST 差分测试已经搜索复杂替换并验证行为等价；或新文档重新规划和静态迁移在同等测试预算下达到相同终局成功率。",
+  "minimal_killer_experiment": "先核对 EvoC2F、REST 跨版本差分测试、EVOL、APIMig、M3、Sprout 与多对多 API 转换的确切计算；只有未被占据才构造接口突变夹具。",
+  "nearest_prior_risk": "Sprout 已形式化并合成行为等价迁移，M3 以程序合成建模 API 语义，多对多 API 转换、EVOL、APIMig 与 REST 差分回归覆盖复杂映射、跨版本迁移及行为比较；EvoC2F 虽不专门迁移接口，但覆盖可验证技能演化。",
+  "alternative_explanations": [
+    "收益仅来自重新执行测试",
+    "候选突变只改变表面模式",
+    "计划迁移等同普通客户端代码迁移",
+    "终局等价只在有限夹具上成立"
+  ],
+  "descriptors": {
+    "problem_family": "tool_api_evolution_breaks_cached_plan",
+    "computation_stage": "offline_plan_migration_before_reuse",
+    "intervention_family": "cross_version_behavioral_equivalence_synthesis",
+    "information_source": "old_plan_two_api_versions_and_black_box_tests",
+    "timing_class": "post_upgrade_predeployment",
+    "budget_class": "offline_differential_probe_budget",
+    "evaluation_mode": "independent_terminal_equivalence_under_unseen_mutations"
+  },
+  "literature_refs": [
+    "EvoC2F, ICML 2026",
+    "Godefroid et al., Differential Regression Testing for REST APIs, ISSTA 2020",
+    "Schmiedmayer et al., EVOL Migrators, MOBILESoft 2023",
+    "Collie et al., M3 Semantic API Migrations, OOPSLA 2020",
+    "Kuang et al., APIMig, IJCAI 2025",
+    "Sprout, A Sound Static Analysis Approach to I/O API Migration, OOPSLA 2025",
+    "Transforming Programs between APIs with Many-to-Many Mappings, ECOOP 2016",
+    "MCPEvol-Bench, arXiv:2607.14642"
+  ]
+}

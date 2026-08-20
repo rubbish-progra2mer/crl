@@ -1,0 +1,179 @@
+{
+  "created_at_utc": "2026-08-13T07:56:36.187148Z",
+  "hypotheses": [
+    {
+      "alternative_explanations": [
+        "工具文档直接泄漏了任务答案",
+        "收益等价于固定 read-after-write",
+        "编译器只识别 silent-no-op 模板",
+        "见证与原调用共享同一错误来源",
+        "额外调用而非选择机制带来收益"
+      ],
+      "changed_computation": {
+        "baseline": "ToolGate 式静态前/后置条件、固定读回、同工具重试或同模型自审。",
+        "budget_effect": "固定一个或少量额外工具调用/模型调用预算；与固定读回、随机验证、ToolGate、统一重试和自审严格配平。",
+        "information_available": "任务、公开工具规范、当前可见轨迹与同权限工具；不可见注入标志、隐藏状态、评价程序、测试真值或人工任务后置条件。",
+        "intervention": "从后续动作的必要输入、任务目标和工具文档中反向编译实例级需求见证；选择与原响应通道不同的可执行读出或关系，并在提交该观测用于不可逆下游动作前执行。提交协议本身沿用公平基线，不算方法贡献。",
+        "timing": "结构检查通过后、该返回首次成为后续必要前提时；只对能编译出非同构见证的状态转移介入。"
+      },
+      "created_at_utc": "2026-08-13T07:56:38.480757Z",
+      "descriptors": {
+        "budget_class": "strict_matched_small_extra_calls",
+        "computation_stage": "downstream_demand_to_precommit_witness",
+        "evaluation_mode": "independent_environment_terminal_state",
+        "information_source": "task_tool_docs_visible_trace",
+        "intervention_family": "automatic_executable_semantic_witness_compilation",
+        "problem_family": "schema_valid_semantic_tool_error_with_observable_redundancy",
+        "timing_class": "first_dependency_use"
+      },
+      "falsifier": "无法自动构造超出静态后置条件的有效见证；见证只复述同一语义误读；固定读回/随机验证/ToolGate 在相同预算下达到相同终局效果；或收益只来自额外调用。",
+      "hypothesis_id": "h-v001-001",
+      "lineage_note": "从 h-v001-001 收缩：删除已被 ToolGate/Cordon 吸收的提交与事务包装，只保留无标签、无人工后置条件的实例级语义见证生成。",
+      "literature_refs": [
+        "P074",
+        "P097",
+        "P040",
+        "arXiv:2606.17573",
+        "arXiv:2608.02645",
+        "arXiv:2608.02464"
+      ],
+      "mechanism_claim": "当可见轨迹含有诊断冗余时，反向需求编译产生的外部语义见证能检测静态契约明确放行的形式正常错误，并在相同预算下优于固定读回、随机验证与同源自审。",
+      "minimal_killer_experiment": "先在 AppWorld dev 的 silent-no-op write 上验证独立终局与可见读回冗余；再盲编译需求见证，测量相对 ToolGate、固定读回和随机预算的覆盖、误报、恢复终局与调用成本。无冗余任务应明确弃权而非声称检测。",
+      "nearest_prior_risk": "ToolGate 吸收提交门；Cordon 吸收任务事务；ReLoop 吸收手写行为扰动；Verified Tool Calls 吸收手写读回。唯一待证差异是从下游需求自动编译实例级、非同构、低成本见证。",
+      "parent_ids": [],
+      "problem": "静态返回模式与人工后置条件覆盖不足时，结构合法的工具结果会被接受；现有行为验证通常依赖领域手写不变量，缺少从当前任务轨迹自动构造外部检查的机制。",
+      "revision": 4,
+      "status": "falsified",
+      "status_reason": "Scratch 配对实验中，7 个已编译的单次事后实体见证仅 1 个同时通过洁净成功并拒绝静默空操作；4 个只证明预先存在实体，2 个在洁净执行误报，3 个操作不可编译。方法核按预设安全性反证条件淘汰，Run 将 backtrack 到写前—写后效果差分的正交计算对象。",
+      "target_failure": {
+        "card_ids": [
+          "failure-incomplete-tool-contracts-false-verified-state",
+          "failure-generator-aligned-verification-passes-shared-misreads"
+        ],
+        "evidence_ids": [
+          "ev-p074-missing-schema-true-postcondition",
+          "ev-p096-shared-misinterpretation"
+        ],
+        "summary": "不完整契约让语义错误工具观测进入可信状态，并在多步轨迹中传播。"
+      },
+      "title": "下游需求驱动的非同构语义见证编译",
+      "updated_at_utc": "2026-08-13T09:09:09.219558Z"
+    },
+    {
+      "alternative_explanations": [
+        "依赖图直接编码了任务答案",
+        "收益来自手工故障位置偏置",
+        "计划不准导致传播估计无意义",
+        "不可逆性定义只适用于少数环境"
+      ],
+      "changed_computation": {
+        "baseline": "按模型不确定性、固定间隔或所有步骤均匀分配验证调用。",
+        "budget_effect": "总验证调用数与强基线严格一致，只改变预算落点。",
+        "information_available": "任务、计划、已执行动作、工具规范与可见返回；不使用真实错误标签或未来终局。",
+        "intervention": "从当前计划与工具动作构建在线依赖图，按状态转移的下游扇出、动作可逆性和重查成本估计验证价值，在相同总预算内优先验证高传播损失节点。",
+        "timing": "新工具观测产生时及不可逆动作执行前动态重算。"
+      },
+      "created_at_utc": "2026-08-13T07:56:40.844500Z",
+      "descriptors": {
+        "budget_class": "strict_equal_verification_count",
+        "computation_stage": "verification_scheduling",
+        "evaluation_mode": "fault_pair_terminal_state",
+        "information_source": "online_dependency_graph",
+        "intervention_family": "propagation_reversibility_value",
+        "problem_family": "budgeted_semantic_fault_recovery",
+        "timing_class": "pre_action_dynamic"
+      },
+      "falsifier": "匹配预算后不能优于随机、均匀、局部不确定性和扇出单因素调度，或在无故障任务上造成不可接受的延迟/误验证。",
+      "hypothesis_id": "h-v001-002",
+      "lineage_note": "v001 根假设；把验证对象从不确定性最高的步骤改为预期下游损失最高的状态转移。",
+      "literature_refs": [
+        "P073",
+        "P027",
+        "P025",
+        "P064",
+        "P040"
+      ],
+      "mechanism_claim": "在置信度失配条件下，传播损失代理比局部不确定性更接近验证的任务价值，因而相同预算能避免更多终局失败。",
+      "minimal_killer_experiment": "构造相同局部可疑度但不同依赖扇出与可逆性的故障对；固定验证次数，检查调度是否把预算稳定分给高真实损失节点并改善独立终局。",
+      "nearest_prior_risk": "不确定性校准、关键步骤优化、步骤信用分配和风险敏感规划可能分别吸收组件；若已有方法在线联合扇出与可逆性调度验证，此假设被吸收。",
+      "parent_ids": [],
+      "problem": "有限验证预算若按模型置信度、固定频率或统一重试分配，会错过置信但高扇出、不可逆的错误工具观测。",
+      "revision": 2,
+      "status": "prior_collision",
+      "status_reason": "Sherlock 已直接覆盖工作流图上的预算化验证放置与选择性回滚；其正文还反证 fan-out 与错误幅度相关，原核心代理缺乏安全性。",
+      "target_failure": {
+        "card_ids": [
+          "failure-internal-confidence-misalignment",
+          "failure-retrieved-experience-propagates-stored-errors"
+        ],
+        "evidence_ids": [
+          "ev-p073-internal-confidence-misalignment",
+          "ev-p064-experience-following-error"
+        ],
+        "summary": "内部置信度与执行正确性错位，早期错误经后续依赖放大。"
+      },
+      "title": "传播风险与可逆性联合的验证预算调度",
+      "updated_at_utc": "2026-08-13T08:14:48.511635Z"
+    },
+    {
+      "alternative_explanations": [
+        "收益来自显式依赖标注",
+        "分叉合成任务偏爱局部回滚",
+        "冲突信号等同泄漏真值",
+        "状态图构建成本超过节省"
+      ],
+      "changed_computation": {
+        "baseline": "线性文本轨迹；检测异常后整体反思、从头重试或仅覆盖最新文本。",
+        "budget_effect": "可能增加状态维护但不必增加工具权限；比较时匹配最大工具调用与模型令牌预算。",
+        "information_available": "可见轨迹、工具结果、动作间显式数据依赖与冲突信号；不使用隐藏真值。",
+        "intervention": "把工具返回表示为带来源与消费者边的状态声明；未充分验证的声明进入隔离层，冲突出现时仅失效其依赖后代，并从最近可信前沿重新规划。",
+        "timing": "状态写入时记录来源；新证据冲突或验证失败时执行局部回滚。"
+      },
+      "created_at_utc": "2026-08-13T07:56:43.139737Z",
+      "descriptors": {
+        "budget_class": "matched_tool_and_token_ceiling",
+        "computation_stage": "state_representation_and_recovery",
+        "evaluation_mode": "branched_dependency_terminal_state",
+        "information_source": "trace_data_dependencies",
+        "intervention_family": "provenance_quarantine_descendant_rollback",
+        "problem_family": "contaminated_agent_state",
+        "timing_class": "write_and_conflict_time"
+      },
+      "falsifier": "在可恢复的语义故障上，局部回滚不降低重复调用或不提高终局成功率，或依赖抽取错误导致比全轨重试更多的二次故障。",
+      "hypothesis_id": "h-v001-003",
+      "lineage_note": "v001 根假设；把错误恢复从整轨重启改为带来源的隔离状态与后代失效。",
+      "literature_refs": [
+        "P030",
+        "P064",
+        "P040",
+        "P074"
+      ],
+      "mechanism_claim": "来源化隔离与后代失效能阻止已识别的错误继续影响行为，并比全轨重启保留更多正确工作。",
+      "minimal_killer_experiment": "在具有分叉依赖的多步任务中向一个分支注入语义错误，随后提供矛盾证据；比较无回滚、全轨重启、最后一步重试与最小后代回滚的成功率和重做成本。",
+      "nearest_prior_risk": "CUPMEM 已覆盖写时状态裁决与授权读出；软件事务/溯源系统覆盖后代失效。若智能体文献已有等价来源图局部回滚，则方法贡献不足。",
+      "parent_ids": [],
+      "problem": "一旦可疑工具观测已被后续动作消费，现有反思或全轨重启要么继续沿用污染状态，要么浪费已验证的正确前缀。",
+      "revision": 2,
+      "status": "prior_collision",
+      "status_reason": "MemTX 与 Dependency-Guided Rollback Repair 已近乎逐项覆盖来源图、隔离、独立支持、后代失效和选择性重放；仅更换故障源不改变计算。",
+      "target_failure": {
+        "card_ids": [
+          "operator-write-side-state-adjudication",
+          "failure-retrieved-experience-propagates-stored-errors"
+        ],
+        "evidence_ids": [
+          "ev-p030-recognition-application-gap",
+          "ev-p064-experience-following-error"
+        ],
+        "summary": "识别过时/错误状态并不保证后续动作真正应用更新，污染状态可继续支配行为。"
+      },
+      "title": "证据隔离状态图与最小后代回滚",
+      "updated_at_utc": "2026-08-13T08:14:51.000789Z"
+    }
+  ],
+  "revision": 8,
+  "run_id": "20260813_1547_run10",
+  "schema_version": 1,
+  "updated_at_utc": "2026-08-13T09:09:09.219558Z",
+  "version": "v001"
+}

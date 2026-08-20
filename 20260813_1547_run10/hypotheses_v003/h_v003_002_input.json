@@ -1,0 +1,34 @@
+{
+  "hypothesis_id": "h-v003-002",
+  "title": "类型化结果选择器与运行时标识符晚绑定",
+  "parent_ids": ["h-v003-001"],
+  "lineage_note": "将宽泛结果—动作等变性缩到可执行的值传播边界：模型只选择先前结果中的来源行/字段，运行时解析并注入真实标识符。",
+  "problem": "让模型把高熵实体标识符从工具返回重新生成到后续调用，会把语义选择和字符串运输混在一个生成步骤中。",
+  "target_failure": {
+    "summary": "实体选择本可正确，但原始 UUID/账户号在工具调用参数中被混淆、篡改或错误归属。",
+    "card_ids": ["failure-semantically-related-toolkit-expansion"],
+    "evidence_ids": ["ev-p084-related-toolkit-error-types"]
+  },
+  "changed_computation": {
+    "baseline": "模型直接输出真实实体标识符；强基线是为每行分配短会话引用并由运行时反向映射。",
+    "intervention": "模型输出 `(source_call, row, field)` 类型化选择器；运行时检查来源范围与字段类型后，从不可变工具结果中晚绑定真实标识符，再构造副作用调用。",
+    "information_available": "模型看任务和工具结果的语义字段及行序号，但不看真实标识符；运行时持有真实结果与选择器映射。",
+    "timing": "模型提出最终动作后、真实副作用工具执行前解析选择器。",
+    "budget_effect": "不增加模型或工具调用；增加少量运行时映射与类型检查。"
+  },
+  "mechanism_claim": "把语义选择与高熵标识符运输分离，能在不增加调用预算下提高参数精确性，并通过来源路径限制错误跨实体传播。",
+  "falsifier": "简单短引用与选择器同等或更好；错误主要来自语义选错而非标识符运输；现有确定性数据流控制或实体绑定门已吸收计算。",
+  "minimal_killer_experiment": "在八个双实体任务、两组标识符双射和三个本地模型上，对原始 UUID、短引用与类型化选择器作配对比较，分别测结构合法、语义选择、联合参数正确和重命名稳定性。",
+  "nearest_prior_risk": "短标识符映射已有工程实践；实体绑定工作已有解析、溯源和动作门；确定性数据流控制直接约束参数来源；显式工具 DAG/工作流系统长期使用运行时数据绑定。",
+  "alternative_explanations": ["提示措辞不同", "短引用而非类型来源带来收益", "小模型特有", "人工候选表过于简单"],
+  "descriptors": {
+    "problem_family": "opaque_identifier_transport_error",
+    "computation_stage": "preexecution_argument_lowering",
+    "intervention_family": "typed_late_binding",
+    "information_source": "immutable_tool_result_reference",
+    "timing_class": "after_policy_before_tool_execution",
+    "budget_class": "zero_additional_calls",
+    "evaluation_mode": "paired_identifier_permutation"
+  },
+  "literature_refs": ["arXiv:2606.30531", "arXiv:2607.18316", "arXiv:2605.25310", "Deterministic Data Flow Control 2026"]
+}

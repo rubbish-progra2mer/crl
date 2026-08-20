@@ -1,0 +1,37 @@
+{
+  "claims": [
+    {
+      "alternative_explanations": [
+        "缓存适配提示的措辞本身诱导复制",
+        "任务模板过于合成且重复",
+        "精确序列评分拒绝语义等价计划",
+        "效应只由动作删除类别贡献",
+        "小模型的指令遵循不足而非缓存系统风险"
+      ],
+      "claim_id": "claim-cache-induced-structural-failure",
+      "claim_text": "在本地确定性成对任务中，最小动作图编辑会使同模型缓存模板适配产生可与普通从头规划失败机械分离的额外计划失败。",
+      "falsifier": "若总体缓存诱发失败率低于0.10，或只有一个编辑类别出现正差分，或任一模型的缓存诱发失败率为0，或同结构安全命中同样出现不低于反事实条件的退化，则该结构反事实评价主张不成立或必须降级。",
+      "killer_experiment_id": "cache-structural-counterfactual-001",
+      "minimum_effect_or_decision_rule": "存活要求：总体 cache_induced_failure_rate >= 0.10；两个模型分层值均 > 0；至少两个动作图编辑类别的分层值 > 0；且 safe_cache_adapt_accuracy 不低于 counterfactual cache_adapt_accuracy。",
+      "observable": "主指标 cache_induced_failure_rate；并观察两个模型的分层值、四类编辑分层值、从头/缓存计划正确率和同结构安全命中正确率。",
+      "scope": "仅限本实验的32个英语合成任务、qwen3:4b与qwen3:8b、温度0和同模型提示级缓存适配代理；不外推到APC完整实现或前沿闭源模型。",
+      "status": "falsified",
+      "status_reason": "Formal attempt formal-cache-003：总体 cache_induced_failure_rate=0.0417，低于0.10门槛；qwen3:8b分层为0；仅动作删除与顺序翻转两类各0.0833，且safe_same_graph缓存正确率0.875低于其从头规划1.0。预注册存活条件未满足。",
+      "supporting_experiment_ids": []
+    }
+  ],
+  "created_at": "2026-08-15T16:30:04.506360Z",
+  "global_confounders": [
+    "模型规模与模板锚定效应交互",
+    "动作标识的词义透明度",
+    "缓存条件拥有更长上下文",
+    "同一基础模型家族限制",
+    "合成域外部有效性"
+  ],
+  "hypothesis_id": "h-005",
+  "plan_id": "plan-cache-structural-counterfactual",
+  "run_id": "20260815_2342_run12",
+  "schema_version": 1,
+  "updated_at": "2026-08-15T16:37:58.095361Z",
+  "version": "v003"
+}

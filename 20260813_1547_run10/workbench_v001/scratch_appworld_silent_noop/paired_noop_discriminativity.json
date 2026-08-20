@@ -1,0 +1,881 @@
+{
+  "artifact_class": "scratch",
+  "claim_boundary": "Each no-op world starts from the same AppWorld dev task and follows the deterministic official solution prefix. The first target write returns the authentic response captured in the paired clean world but performs no state mutation. The compiler only receives public tool docs, instantiated arguments, and that response.",
+  "created_at_utc": "2026-08-13T09:00:38.589945+00:00",
+  "benchmark": {
+    "name": "AppWorld",
+    "git_commit": "a072b7a86e7c1d5b1d7175659d750ebb9b79f10a",
+    "dataset": "dev",
+    "fixture_count": 10,
+    "paired_clean_artifact": "unselected_clean_coverage.json"
+  },
+  "results": [
+    {
+      "task_id": "d4e9306_1",
+      "write_api": "spotify.follow_artist",
+      "target_call_count": 19,
+      "compiled": true,
+      "read_api": "show_artist",
+      "relation_count": 1,
+      "noop_witness_result": true,
+      "read_error": null,
+      "write_arguments": {
+        "raise_on_failure": false,
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzcG90aWZ5K2FhX2J1cnRAZ21haWwuY29tIiwiZXhwIjo0MTAyNDQ1Njk4fQ.e97v665EPZQp_zGYMt29tY8V3SQe5prdomfBgMq5yLY",
+        "artist_id": 4
+      },
+      "authentic_response": {
+        "message": "Artist followed."
+      },
+      "plan": {
+        "app_name": "spotify",
+        "write_api": "follow_artist",
+        "read_api": "show_artist",
+        "bindings": [
+          {
+            "parameter": "artist_id",
+            "source": "request",
+            "source_field": "artist_id",
+            "score": 2.15
+          }
+        ],
+        "relations": [
+          {
+            "source_field": "artist_id",
+            "response_path": [
+              "artist_id"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          }
+        ],
+        "score": 4.4,
+        "root_is_collection": false,
+        "provenance": "public_tool_docs+instantiated_write_call"
+      },
+      "read_arguments": {
+        "artist_id": 4
+      },
+      "read_response": {
+        "artist_id": 4,
+        "name": "Marigold Muse",
+        "genre": "R&B",
+        "follower_count": 17,
+        "created_at": "2020-05-10 15:19:59"
+      },
+      "terminal_success": false,
+      "terminal_test_count": 6,
+      "execution_message": "Execution successful."
+    },
+    {
+      "task_id": "3ab5b8b_1",
+      "write_api": "spotify.download_song",
+      "target_call_count": 22,
+      "compiled": true,
+      "read_api": "show_song",
+      "relation_count": 1,
+      "noop_witness_result": true,
+      "read_error": null,
+      "write_arguments": {
+        "raise_on_failure": false,
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzcG90aWZ5K25vcm1hbnNtaXRAZ21haWwuY29tIiwiZXhwIjo0MTAyNDQ1Njk4fQ.EW6g6QA2PqkIeaprvrFAiQ-PJ9bPceZWQDfGH3WYoB4",
+        "song_id": 2
+      },
+      "authentic_response": {
+        "message": "Song downloaded."
+      },
+      "plan": {
+        "app_name": "spotify",
+        "write_api": "download_song",
+        "read_api": "show_song",
+        "bindings": [
+          {
+            "parameter": "song_id",
+            "source": "request",
+            "source_field": "song_id",
+            "score": 2.15
+          }
+        ],
+        "relations": [
+          {
+            "source_field": "song_id",
+            "response_path": [
+              "song_id"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          }
+        ],
+        "score": 4.4,
+        "root_is_collection": false,
+        "provenance": "public_tool_docs+instantiated_write_call"
+      },
+      "read_arguments": {
+        "song_id": 2
+      },
+      "read_response": {
+        "song_id": 2,
+        "title": "Lost in the Mists of Time",
+        "album_id": 1,
+        "album_title": "Echo Chamber Chronicles",
+        "duration": 224,
+        "artists": [
+          {
+            "id": 3,
+            "name": "Jasper Skye",
+            "genre": "EDM",
+            "follower_count": 23
+          },
+          {
+            "id": 26,
+            "name": "Isabella Cruz",
+            "genre": "EDM",
+            "follower_count": 14
+          },
+          {
+            "id": 6,
+            "name": "Seraphina Dawn",
+            "genre": "EDM",
+            "follower_count": 15
+          }
+        ],
+        "release_date": "2022-10-29 01:54:53",
+        "genre": "EDM",
+        "play_count": 205,
+        "rating": 0.0,
+        "like_count": 12,
+        "review_count": 0,
+        "shareable_link": "https://spotify.com/songs/2"
+      },
+      "terminal_success": false,
+      "terminal_test_count": 6,
+      "execution_message": "Execution successful."
+    },
+    {
+      "task_id": "df61dc5_1",
+      "write_api": "venmo.like_transaction",
+      "target_call_count": 5,
+      "compiled": true,
+      "read_api": "show_transaction",
+      "relation_count": 1,
+      "noop_witness_result": true,
+      "read_error": null,
+      "write_arguments": {
+        "transaction_id": 6221,
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ2ZW5tbythbml0YS5idXJjaEBnbWFpbC5jb20iLCJleHAiOjQxMDI0NDYzNDF9.CtCV1oSRfrdIZbrQtqGsED_cDMv5JX20db86DgLgNQg"
+      },
+      "authentic_response": {
+        "message": "Liked transaction."
+      },
+      "plan": {
+        "app_name": "venmo",
+        "write_api": "like_transaction",
+        "read_api": "show_transaction",
+        "bindings": [
+          {
+            "parameter": "transaction_id",
+            "source": "request",
+            "source_field": "transaction_id",
+            "score": 2.15
+          },
+          {
+            "parameter": "access_token",
+            "source": "request",
+            "source_field": "access_token",
+            "score": 2.15
+          }
+        ],
+        "relations": [
+          {
+            "source_field": "transaction_id",
+            "response_path": [
+              "transaction_id"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          }
+        ],
+        "score": 4.4,
+        "root_is_collection": false,
+        "provenance": "public_tool_docs+instantiated_write_call"
+      },
+      "read_arguments": {
+        "transaction_id": 6221,
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ2ZW5tbythbml0YS5idXJjaEBnbWFpbC5jb20iLCJleHAiOjQxMDI0NDYzNDF9.CtCV1oSRfrdIZbrQtqGsED_cDMv5JX20db86DgLgNQg"
+      },
+      "read_response": {
+        "transaction_id": 6221,
+        "amount": 17.0,
+        "description": "🍇Smoothie Time",
+        "created_at": "2023-04-18 11:06:01",
+        "updated_at": "2023-04-18 11:06:01",
+        "private": false,
+        "like_count": 0,
+        "payment_card_digits": null,
+        "comment_count": 0,
+        "sender": {
+          "name": "Melissa Bailey",
+          "email": "mel.bailey@gmail.com"
+        },
+        "receiver": {
+          "name": "Anita Burch",
+          "email": "anita.burch@gmail.com"
+        },
+        "liked": false
+      },
+      "terminal_success": false,
+      "terminal_test_count": 7,
+      "execution_message": "Execution successful."
+    },
+    {
+      "task_id": "57c3486_1",
+      "write_api": "spotify.like_song",
+      "target_call_count": 90,
+      "compiled": true,
+      "read_api": "show_song",
+      "relation_count": 1,
+      "noop_witness_result": true,
+      "read_error": null,
+      "write_arguments": {
+        "raise_on_failure": false,
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzcG90aWZ5K2phc29uc2ltcEBnbWFpbC5jb20iLCJleHAiOjQxMDI0NDU2OTh9.5kyXIykhKPXJDaCBAEI5nq_QJzTGeRkEwZJT1S0qnCg",
+        "song_id": 163
+      },
+      "authentic_response": {
+        "message": "Song liked."
+      },
+      "plan": {
+        "app_name": "spotify",
+        "write_api": "like_song",
+        "read_api": "show_song",
+        "bindings": [
+          {
+            "parameter": "song_id",
+            "source": "request",
+            "source_field": "song_id",
+            "score": 2.15
+          }
+        ],
+        "relations": [
+          {
+            "source_field": "song_id",
+            "response_path": [
+              "song_id"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          }
+        ],
+        "score": 4.4,
+        "root_is_collection": false,
+        "provenance": "public_tool_docs+instantiated_write_call"
+      },
+      "read_arguments": {
+        "song_id": 163
+      },
+      "read_response": {
+        "song_id": 163,
+        "title": "Veiled Sorrow",
+        "album_id": null,
+        "album_title": null,
+        "duration": 225,
+        "artists": [
+          {
+            "id": 14,
+            "name": "Grace Harrison",
+            "genre": "classical",
+            "follower_count": 22
+          }
+        ],
+        "release_date": "2018-07-18 14:37:57",
+        "genre": "classical",
+        "play_count": 144,
+        "rating": 0.0,
+        "like_count": 9,
+        "review_count": 0,
+        "shareable_link": "https://spotify.com/songs/163"
+      },
+      "terminal_success": false,
+      "terminal_test_count": 5,
+      "execution_message": "Execution successful."
+    },
+    {
+      "task_id": "68ee2c9_1",
+      "write_api": "file_system.move_file",
+      "target_call_count": 100,
+      "compiled": false,
+      "read_api": null,
+      "relation_count": 0,
+      "noop_witness_result": null,
+      "read_error": null,
+      "write_arguments": {
+        "source_file_path": "/home/nancy/downloads/DIY_home_repair_guide.docx",
+        "destination_file_path": "~/trash/2022-12-04_DIY_home_repair_guide.docx",
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmaWxlX3N5c3RlbStuYW5fcml0dEBnbWFpbC5jb20iLCJleHAiOjQxMDI0NDU2OTh9.-nSUtkfYnC4PGGVgFilrngKCVgTV1p8DxUlcbiW075k"
+      },
+      "authentic_response": {
+        "message": "File moved.",
+        "destination_file_path": "/home/nancy/trash/2022-12-04_DIY_home_repair_guide.docx"
+      },
+      "plan": null,
+      "read_arguments": null,
+      "read_response": null,
+      "terminal_success": false,
+      "terminal_test_count": 5,
+      "execution_message": "Execution successful."
+    },
+    {
+      "task_id": "6171bbc_1",
+      "write_api": "spotify.create_playlist",
+      "target_call_count": 1,
+      "compiled": true,
+      "read_api": "search_playlists",
+      "relation_count": 1,
+      "noop_witness_result": false,
+      "read_error": null,
+      "write_arguments": {
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzcG90aWZ5K2RlX3JpdHRAZ21haWwuY29tIiwiZXhwIjo0MTAyNDQ1Njk4fQ.X-n7PQKAYgqzcWbY6fw1XFZWW6kx2e31o4_nyvEUHM0",
+        "title": "My Most Played Album Songs"
+      },
+      "authentic_response": {
+        "message": "Playlist created.",
+        "playlist_id": 654
+      },
+      "plan": {
+        "app_name": "spotify",
+        "write_api": "create_playlist",
+        "read_api": "search_playlists",
+        "bindings": [
+          {
+            "parameter": "access_token",
+            "source": "request",
+            "source_field": "access_token",
+            "score": 2.15
+          }
+        ],
+        "relations": [
+          {
+            "source_field": "title",
+            "response_path": [
+              "title"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          }
+        ],
+        "score": 4.25,
+        "root_is_collection": true,
+        "provenance": "public_tool_docs+instantiated_write_call"
+      },
+      "read_arguments": {
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzcG90aWZ5K2RlX3JpdHRAZ21haWwuY29tIiwiZXhwIjo0MTAyNDQ1Njk4fQ.X-n7PQKAYgqzcWbY6fw1XFZWW6kx2e31o4_nyvEUHM0"
+      },
+      "read_response": [
+        {
+          "playlist_id": 517,
+          "title": "The Rom-Com Mixtape",
+          "is_public": true,
+          "rating": 4.0,
+          "like_count": 5,
+          "review_count": 1,
+          "owner": {
+            "name": "Jack Maldonado",
+            "email": "jack-maldonado@gmail.com"
+          },
+          "created_at": "2023-04-08 20:31:06",
+          "song_ids": [
+            4,
+            7,
+            77,
+            196,
+            252,
+            317,
+            319
+          ]
+        },
+        {
+          "playlist_id": 1,
+          "title": "Desert Drift: Nomadic Tunes",
+          "is_public": true,
+          "rating": 2.0,
+          "like_count": 4,
+          "review_count": 1,
+          "owner": {
+            "name": "Stephen Mccoy",
+            "email": "stmcco@gmail.com"
+          },
+          "created_at": "2023-02-23 19:33:11",
+          "song_ids": [
+            6,
+            62,
+            76,
+            86,
+            91,
+            94,
+            121,
+            183
+          ]
+        },
+        {
+          "playlist_id": 24,
+          "title": "K-Pop Kingdom: Korean Hits",
+          "is_public": true,
+          "rating": 0.0,
+          "like_count": 4,
+          "review_count": 0,
+          "owner": {
+            "name": "Jonathan Ball",
+            "email": "jo.ball@gmail.com"
+          },
+          "created_at": "2022-12-05 23:41:20",
+          "song_ids": [
+            2,
+            71,
+            79,
+            92,
+            161,
+            246,
+            247,
+            268,
+            275,
+            285
+          ]
+        },
+        {
+          "playlist_id": 126,
+          "title": "Fireside Folk: Warm & Intimate",
+          "is_public": true,
+          "rating": 3.0,
+          "like_count": 4,
+          "review_count": 1,
+          "owner": {
+            "name": "Alexander Riddle",
+            "email": "alexander-ridd@gmail.com"
+          },
+          "created_at": "2022-09-23 04:19:14",
+          "song_ids": [
+            2,
+            26,
+            103,
+            119,
+            128,
+            148,
+            179,
+            260,
+            320
+          ]
+        },
+        {
+          "playlist_id": 336,
+          "title": "Heartbreak Hotel: Songs of Sorrow",
+          "is_public": true,
+          "rating": 5.0,
+          "like_count": 4,
+          "review_count": 1,
+          "owner": {
+            "name": "Hunter Weaver",
+            "email": "hun.weaver@gmail.com"
+          },
+          "created_at": "2023-05-11 22:24:49",
+          "song_ids": [
+            70,
+            83,
+            148,
+            191,
+            210,
+            238,
+            266,
+            291,
+            294,
+            312
+          ]
+        }
+      ],
+      "terminal_success": false,
+      "terminal_test_count": 7,
+      "execution_message": "Execution failed. Traceback:\n  File \"<python-input>\", line 1, in <module>\n    official_solution(main_user, apis, requester, public_data)\nAttributeError: 'dict' object has no attribute 'playlist_id'"
+    },
+    {
+      "task_id": "396c5a2_1",
+      "write_api": "spotify.add_to_queue",
+      "target_call_count": 1,
+      "compiled": true,
+      "read_api": "show_song_queue",
+      "relation_count": 1,
+      "noop_witness_result": false,
+      "read_error": null,
+      "write_arguments": {
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzcG90aWZ5K3N1c2FubWlsbGVyQGdtYWlsLmNvbSIsImV4cCI6NDEwMjQ0NTY5OH0.DSEOHZ5UrBUhAIXf4K-54xq3_ezjCRaNLClvcphOiOU",
+        "song_id": 311
+      },
+      "authentic_response": {
+        "message": "Song added to the queue."
+      },
+      "plan": {
+        "app_name": "spotify",
+        "write_api": "add_to_queue",
+        "read_api": "show_song_queue",
+        "bindings": [
+          {
+            "parameter": "access_token",
+            "source": "request",
+            "source_field": "access_token",
+            "score": 2.15
+          }
+        ],
+        "relations": [
+          {
+            "source_field": "song_id",
+            "response_path": [
+              "song_id"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          }
+        ],
+        "score": 4.25,
+        "root_is_collection": true,
+        "provenance": "public_tool_docs+instantiated_write_call"
+      },
+      "read_arguments": {
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzcG90aWZ5K3N1c2FubWlsbGVyQGdtYWlsLmNvbSIsImV4cCI6NDEwMjQ0NTY5OH0.DSEOHZ5UrBUhAIXf4K-54xq3_ezjCRaNLClvcphOiOU"
+      },
+      "read_response": [
+        {
+          "song_id": 102,
+          "title": "Autumn's Lament",
+          "album_id": null,
+          "album_title": null,
+          "duration": 292,
+          "artists": [
+            {
+              "id": 4,
+              "name": "Marigold Muse"
+            }
+          ],
+          "position": 0,
+          "is_playing": false,
+          "is_current": false
+        },
+        {
+          "song_id": 108,
+          "title": "Cold Embrace",
+          "album_id": null,
+          "album_title": null,
+          "duration": 262,
+          "artists": [
+            {
+              "id": 5,
+              "name": "Ava Morgan"
+            }
+          ],
+          "position": 1,
+          "is_playing": false,
+          "is_current": false
+        },
+        {
+          "song_id": 214,
+          "title": "The Sweet Pain of Reminiscence",
+          "album_id": null,
+          "album_title": null,
+          "duration": 253,
+          "artists": [
+            {
+              "id": 21,
+              "name": "Oceanic Odyssey"
+            }
+          ],
+          "position": 2,
+          "is_playing": false,
+          "is_current": false
+        },
+        {
+          "song_id": 202,
+          "title": "Summer's End",
+          "album_id": null,
+          "album_title": null,
+          "duration": 277,
+          "artists": [
+            {
+              "id": 19,
+              "name": "Ethan Wallace"
+            }
+          ],
+          "position": 3,
+          "is_playing": false,
+          "is_current": false
+        },
+        {
+          "song_id": 114,
+          "title": "When All Hope Seems Lost",
+          "album_id": null,
+          "album_title": null,
+          "duration": 253,
+          "artists": [
+            {
+              "id": 6,
+              "name": "Seraphina Dawn"
+            }
+          ],
+          "position": 4,
+          "is_playing": true,
+          "is_current": true
+        },
+        {
+          "song_id": 10,
+          "title": "The Curse of Loving You",
+          "album_id": 2,
+          "album_title": "Celestial Harmonies",
+          "duration": 211,
+          "artists": [
+            {
+              "id": 32,
+              "name": "Lucas Grey"
+            }
+          ],
+          "position": 5,
+          "is_playing": false,
+          "is_current": false
+        },
+        {
+          "song_id": 287,
+          "title": "Painted Skies",
+          "album_id": null,
+          "album_title": null,
+          "duration": 298,
+          "artists": [
+            {
+              "id": 31,
+              "name": "Hazel Winter"
+            }
+          ],
+          "position": 6,
+          "is_playing": false,
+          "is_current": false
+        },
+        {
+          "song_id": 285,
+          "title": "Wading Through the Ashes of Love",
+          "album_id": null,
+          "album_title": null,
+          "duration": 195,
+          "artists": [
+            {
+              "id": 30,
+              "name": "Marcus Lane"
+            }
+          ],
+          "position": 7,
+          "is_playing": false,
+          "is_current": false
+        },
+        {
+          "song_id": 38,
+          "title": "Destiny's Game",
+          "album_id": 8,
+          "album_title": "Velvet Underground",
+          "duration": 256,
+          "artists": [
+            {
+              "id": 8,
+              "name": "Aria Sterling"
+            }
+          ],
+          "position": 8,
+          "is_playing": false,
+          "is_current": false
+        }
+      ],
+      "terminal_success": false,
+      "terminal_test_count": 6,
+      "execution_message": "Execution successful."
+    },
+    {
+      "task_id": "4fab96f_1",
+      "write_api": "venmo.remind_payment_request",
+      "target_call_count": 7,
+      "compiled": true,
+      "read_api": "show_received_payment_requests",
+      "relation_count": 1,
+      "noop_witness_result": false,
+      "read_error": null,
+      "write_arguments": {
+        "payment_request_id": 3464,
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ2ZW5tbytsaW5kc2V5c2ltcHNvbkBnbWFpbC5jb20iLCJleHAiOjQxMDI0NDYzNDF9.w44vqT-l72oN0Fo88bLSp2YBUXcnHDxM9br5rnbWyKg"
+      },
+      "authentic_response": {
+        "message": "Payment request reminder sent."
+      },
+      "plan": {
+        "app_name": "venmo",
+        "write_api": "remind_payment_request",
+        "read_api": "show_received_payment_requests",
+        "bindings": [
+          {
+            "parameter": "access_token",
+            "source": "request",
+            "source_field": "access_token",
+            "score": 2.15
+          }
+        ],
+        "relations": [
+          {
+            "source_field": "payment_request_id",
+            "response_path": [
+              "payment_request_id"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          }
+        ],
+        "score": 2.75,
+        "root_is_collection": true,
+        "provenance": "public_tool_docs+instantiated_write_call"
+      },
+      "read_arguments": {
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ2ZW5tbytsaW5kc2V5c2ltcHNvbkBnbWFpbC5jb20iLCJleHAiOjQxMDI0NDYzNDF9.w44vqT-l72oN0Fo88bLSp2YBUXcnHDxM9br5rnbWyKg"
+      },
+      "read_response": [
+        {
+          "payment_request_id": 3806,
+          "amount": 170.0,
+          "description": "Ski Pass",
+          "created_at": "2023-05-12 07:50:02",
+          "updated_at": "2023-05-12 07:50:02",
+          "approved_at": null,
+          "denied_at": null,
+          "private": false,
+          "sender": {
+            "name": "Cody Smith",
+            "email": "cod.smith@gmail.com"
+          },
+          "receiver": {
+            "name": "Lindsey Simpson",
+            "email": "lindseysimpson@gmail.com"
+          }
+        },
+        {
+          "payment_request_id": 2797,
+          "amount": 15.0,
+          "description": "🌮 Spicy Mexican Food Night 🌶️",
+          "created_at": "2023-03-30 23:11:02",
+          "updated_at": "2023-03-30 23:11:02",
+          "approved_at": "2023-03-31 14:47:26",
+          "denied_at": null,
+          "private": true,
+          "sender": {
+            "name": "Brenda Smith",
+            "email": "brenda.webe@gmail.com"
+          },
+          "receiver": {
+            "name": "Lindsey Simpson",
+            "email": "lindseysimpson@gmail.com"
+          }
+        },
+        {
+          "payment_request_id": 3811,
+          "amount": 48.0,
+          "description": "Dog Grooming",
+          "created_at": "2023-03-26 13:52:34",
+          "updated_at": "2023-03-26 13:52:34",
+          "approved_at": null,
+          "denied_at": "2023-03-29 05:22:34",
+          "private": true,
+          "sender": {
+            "name": "Cody Smith",
+            "email": "cod.smith@gmail.com"
+          },
+          "receiver": {
+            "name": "Lindsey Simpson",
+            "email": "lindseysimpson@gmail.com"
+          }
+        },
+        {
+          "payment_request_id": 3814,
+          "amount": 215.0,
+          "description": "Utilities",
+          "created_at": "2023-03-17 05:07:01",
+          "updated_at": "2023-03-17 05:07:01",
+          "approved_at": "2023-03-17 18:16:30",
+          "denied_at": null,
+          "private": false,
+          "sender": {
+            "name": "Cody Smith",
+            "email": "cod.smith@gmail.com"
+          },
+          "receiver": {
+            "name": "Lindsey Simpson",
+            "email": "lindseysimpson@gmail.com"
+          }
+        },
+        {
+          "payment_request_id": 3812,
+          "amount": 70.0,
+          "description": "Couples Massage 💆💆",
+          "created_at": "2023-03-11 07:03:36",
+          "updated_at": "2023-03-11 07:03:36",
+          "approved_at": "2023-03-11 21:22:00",
+          "denied_at": null,
+          "private": true,
+          "sender": {
+            "name": "Cody Smith",
+            "email": "cod.smith@gmail.com"
+          },
+          "receiver": {
+            "name": "Lindsey Simpson",
+            "email": "lindseysimpson@gmail.com"
+          }
+        }
+      ],
+      "terminal_success": false,
+      "terminal_test_count": 8,
+      "execution_message": "Execution successful."
+    },
+    {
+      "task_id": "b119b1f_1",
+      "write_api": "spotify.previous_song",
+      "target_call_count": 999,
+      "compiled": false,
+      "read_api": null,
+      "relation_count": 0,
+      "noop_witness_result": null,
+      "read_error": null,
+      "write_arguments": {
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzcG90aWZ5K21pci1wb3dlQGdtYWlsLmNvbSIsImV4cCI6NDEwMjQ0NTY5OH0._5yedVe6dDcsvQ2YNKL4GWr4Mx8xKglHEWigcBCuIk8"
+      },
+      "authentic_response": {
+        "message": "Moved to the previous song in the queue.",
+        "song_id": 103
+      },
+      "plan": null,
+      "read_arguments": null,
+      "read_response": null,
+      "terminal_success": false,
+      "terminal_test_count": 6,
+      "execution_message": "Execution failed. Traceback:\n  File \"<python-input>\", line 1, in <module>\n    official_solution(main_user, apis, requester, public_data)\nException: Number of requests exceeded the limit of 1000. This potentially means that you have an infinite loop in your code."
+    },
+    {
+      "task_id": "b119b1f_2",
+      "write_api": "spotify.next_song",
+      "target_call_count": 999,
+      "compiled": false,
+      "read_api": null,
+      "relation_count": 0,
+      "noop_witness_result": null,
+      "read_error": null,
+      "write_arguments": {
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzcG90aWZ5K2FuLWhhcnJpc29uQGdtYWlsLmNvbSIsImV4cCI6NDEwMjQ0NTY5OH0.asDsToJ5ZT5Wn-HPfht8ga7_wdmFu4Xs03a7Gf-rtzc"
+      },
+      "authentic_response": {
+        "message": "Moved to the next song in the queue.",
+        "song_id": 56
+      },
+      "plan": null,
+      "read_arguments": null,
+      "read_response": null,
+      "terminal_success": false,
+      "terminal_test_count": 6,
+      "execution_message": "Execution failed. Traceback:\n  File \"<python-input>\", line 1, in <module>\n    official_solution(main_user, apis, requester, public_data)\nException: Number of requests exceeded the limit of 1000. This potentially means that you have an infinite loop in your code."
+    }
+  ]
+}

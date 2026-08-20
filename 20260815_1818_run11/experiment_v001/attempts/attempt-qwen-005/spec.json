@@ -1,0 +1,91 @@
+{
+  "baseline_specs": [
+    "同一 120 行上的单次基线精确正确率。",
+    "相关回答发生任意变化与选择性变化信号作为关系消融。"
+  ],
+  "budget_ceiling": "3 模型 × 2 提示制度 × 20 案例 × 5 调用 = 600 次本地调用；单调用超时 120 秒。",
+  "claim_ids": [
+    "claim-one-shot-brittleness"
+  ],
+  "confounders": [
+    "同一模型系列之间训练谱系相关。",
+    "合成任务短且字段显式，可能与真实多步轨迹不同。",
+    "固定单一种子不估计跨种子方差。"
+  ],
+  "dataset": "五个确定性结构化工具任务族、每族四例、共二十例。",
+  "declared_inputs": [
+    "implementation_v001/cases.json",
+    "implementation_v001/suite_spec.json",
+    "implementation_v001/independent_oracle.py"
+  ],
+  "declared_outputs": [
+    "experiment_v001/attempts/attempt-qwen-005/oracle.json",
+    "experiment_v001/attempts/attempt-qwen-005/result.json",
+    "experiment_v001/attempts/attempt-qwen-005/report.md",
+    "experiment_v001/attempts/attempt-qwen-005/metrics.json"
+  ],
+  "expected_signatures": [
+    "总体单次成功关系脆弱率至少 0.10。",
+    "解析警告行剔除后仍存在单次正确但关系失败。",
+    "至少三个模型-提示分层出现非零脆弱案例。"
+  ],
+  "experiment_id": "exp-qwen-v005",
+  "falsification_rule": "总体脆弱率低于 0.10，或失败全由解析警告解释，或只在一个分层出现，则本地现象主张不支持；不得外推到其他模型或真实部署。",
+  "hypothesis_id": "H001",
+  "independent_ground_truth": {
+    "description": "独立家族求解器从原始工具字段重算所有正确性标签和相关/无关变形语义，不导入主评估器；每次正式运行先执行该求解器，20 例未全部通过则终止。",
+    "external_card_ids": [],
+    "external_evidence_ids": [],
+    "external_literature_refs": [
+      "P039",
+      "P040",
+      "P097"
+    ],
+    "run_local_fact_refs": [
+      "implementation_v001/independent_oracle.py",
+      "implementation_v001/cases.json"
+    ]
+  },
+  "model": "qwen2.5:7b、qwen3:4b、qwen3:8b；严格与弱两种提示制度。",
+  "parity_dimensions": {
+    "budget": {
+      "notes": "每个模型-提示-案例固定五次调用。",
+      "status": "matched"
+    },
+    "information_access": {
+      "notes": "每个分层内五次调用仅工具返回变体不同；严格与弱提示作为预声明分层而非不受控差异。",
+      "status": "matched"
+    },
+    "model_provider_revision": {
+      "notes": "三种模型标签预声明为跨模型复现维度，模型身份在执行环境记录中绑定。",
+      "status": "different"
+    },
+    "sampling_protocol": {
+      "notes": "所有模型与提示制度使用同一二十案例、五变体、温度 0 和种子 123。",
+      "status": "matched"
+    },
+    "tool_capability": {
+      "notes": "所有模型接收相同结构化工具结果，无外部工具调用。",
+      "status": "matched"
+    }
+  },
+  "primary_metric": "one_shot_success_brittleness_rate",
+  "provider": "本机 Ollama 服务，模型修订由正式执行记录与本机清单绑定。",
+  "purpose": "independent_claim_validation",
+  "research_question": "在冻结本地模型套件中，单次精确正确案例有多少无法同时满足任务定向等变、两类无关不变和精确重放稳定？",
+  "revision": "implementation_v001 full-manifest binding, reviewer-fix joint relation includes exact-repeat stability, endpoint-fix, temperature 0, think false, JSON schema answer string",
+  "run_id": "20260815_1818_run11",
+  "sampling_unit": "模型 × 提示制度 × 冻结案例，共 120 行；每行五次调用。",
+  "schema_version": 1,
+  "secondary_metrics": [
+    "single_correct_relation_pass",
+    "single_correct_relation_fail",
+    "strata_with_nonzero_brittleness",
+    "parse_warning_count",
+    "repeat_instability_count"
+  ],
+  "seeds": [
+    123
+  ],
+  "version": "v001"
+}

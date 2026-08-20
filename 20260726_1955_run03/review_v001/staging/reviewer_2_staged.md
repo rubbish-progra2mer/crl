@@ -1,0 +1,165 @@
+# Reviewer 2 报告 — Scientific Skeptic（Review Packet v001）
+
+RUN_ID: 20260726_1955_run03；审查日期 2026-07-26。本人为本轮三审中的 Scientific Skeptic（Reviewer 2），依据冻结的 role snapshot（role_scientific_skeptic_snapshot.md，SHA-256 c9a401432a898f7a90ef282b60c5ef8ca3fedd16ac10c87a383f5656326dc9bd）与共同 protocol snapshot（SHA-256 ba46b084befba0175b1378dc6da363fe84357f0700842efa05e3b4dfdd447a2d）执行审查。全部读取、哈希计算、指标重算、探针重执行与本报告撰写均由本人亲自完成，未调用、创建或委派任何其他 Agent（REVIEWER_SUBAGENT_DELEGATION: FORBIDDEN 遵守）。未读取 nearest_prior_v001.md 正文、任何 peer report 或其他 staging 文件。核心问题按角色定义执行："为什么观察到的结果可能是假象"——下文每一项判断均以我亲手重算的数字或亲手读到的冻结 bytes 为据。
+
+---
+
+## 1. Packet 与全部 frozen artifacts 的逐项实际读取回报
+
+以下每一项的 SHA-256 均由本人用 python hashlib 独立计算（非抄录 manifest），byte size 用文件系统实测。全部 30 项（3 个 governing 文件 + 10 个 experiment artifacts + 17 个 supplemental）与 Packet manifest 记载完全一致，无任何 mismatch。
+
+Governing 文件：
+
+| 相对路径 | 实测 SHA-256 | 实际读取 |
+|---|---|---|
+| packet.md | 741ea35369def8513d7e6a3622c3498313012ff43f17d921f4eba7c26726362c | 是（全文 921 行，两次分页读完） |
+| protocol_snapshot.md | ba46b084befba0175b1378dc6da363fe84357f0700842efa05e3b4dfdd447a2d | 是（全文） |
+| role_scientific_skeptic_snapshot.md | c9a401432a898f7a90ef282b60c5ef8ca3fedd16ac10c87a383f5656326dc9bd | 是（全文） |
+
+Experiment v001 artifacts（review_v001/ 下相对路径）：
+
+| 相对路径 | 实测 SHA-256 | 实际读取 |
+|---|---|---|
+| artifacts/v001/execution.json | 5191ec68309e2a339be86d6ac0004a97ee941d9679cac56d020ae695754a59c2 | 是（全文；inputs/outputs 哈希用于链式核验） |
+| artifacts/v001/stdout.bin | 885eedf827aedf8ccc7172cc185b508ab15cd696d04fb40d2a58b59c941b0cc5 | 是（以 UTF-8 解码全文；28 实例单段、already_done=0） |
+| artifacts/v001/stderr.bin | e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | 是（0 字节，哈希 = 空串 SHA-256，一致） |
+| artifacts/v001/metric_audit_001_execution.json | 2141d28c92a2c5220c0a4cc39384a2c30386f8a44933b0896281b3f3b7b5413b | 是（全文） |
+| artifacts/v001/metric_audit_001_stdout.bin | 4d81df66c85413d1c6004a77080c38526d72625a0d11fbcd17f50dbf5a2f4e5e | 是（解码全文） |
+| artifacts/v001/metric_audit_001_stderr.bin | e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | 是（0 字节空文件） |
+| artifacts/v001/output_results.jsonl | c63d084b0ebe98227e5379e62dc4ab7f0a27c193386ca3eb87a40d7684df8f43 | 是（28 行全部解析；全部指标由本行独立重算） |
+| artifacts/v001/output_deepseek_raw.jsonl | aa6ebf9dd835ab0d2ea25eed13794e4c45b832900c16555beba1ff490a1d9d78 | 是（84 条记录全部解析；与 zip 逐条比对） |
+| artifacts/v001/output_analysis_out.json | 168235fc99645662cf34f25cf7634da7e8f84507e85e041f94d13a1341ab2514 | 是（全文；仅用于对照，不作为数字来源） |
+| artifacts/v001/output_instance_files.zip | 42d5b3430d0bf25ae5bff9aa01aa1baef91e7844b1554e30e2b015427daa13e7 | 是（python zipfile 打开；内部 INTERNAL_SHA256_MANIFEST.json 224 项逐项重算哈希，0 mismatch；idx120/idx132/idx134 全部 8 个成员文件完整读取，含生成代码、probe 结果、A3/F1/F2 原始响应与 instance.json；另完整读取 PASS 阴性 idx063、idx127 的代码与 probe 结果，并读取全部 28 行的状态/enforced/not_enforced 字段） |
+
+Supplemental：
+
+| 相对路径 | 实测 SHA-256 | 实际读取 |
+|---|---|---|
+| supplemental/research_map_v001.md | 5ba2f32e3a090393e6356cc6c30ccfa351c5be231dea8d45d203ef7f348b3940 | 是（全文） |
+| supplemental/selection_context_v001.md | d5e9963a7644f5c2f77dac2ce095af2e232ad02972ca9d1d002f98865c528fc9 | 是（全文） |
+| supplemental/data_split_commitment_v001/MANIFEST.json | dfeaf9fe4688f9388576c6fbd36960eb095d1262bd8e2cf7e4c078551776dc7e | 是（全文；分桶规则本人独立重算，见 §3） |
+| supplemental/data_split_commitment_v001/commit_split.py | 98a5f29d1fd07d9bb9a0641f07fe756a21b577124fed512ebdee53d51bcee94a | 是（全文） |
+| supplemental/workbench_v001/falsifier_report.md | 3efbcd37ba92adaf955b9a750fc5b47a6ae42ece2f793a2a26b6b9e52ce8c528 | 是（全文） |
+| supplemental/workbench_v001/wb_lib.py | a83774d5387e6e7bd0d57c7ebcac4a0524146d1cf793f98aa14e37cd1ddb9dae | 是（全文；并与场外 tp_lib.py 做 unified diff） |
+| supplemental/workbench_v001/wb_prompt.py | c54f11ced670bf667a992cb0ae0d36a90caf18f80184563b784b44e1933a7f11 | 是（全文） |
+| supplemental/workbench_v001/wb_formalize.py | 591bdfdc083fa8b040bd3ebb8c1691b7bc189c45625e98494d9797fb36bf2a58 | 是（全文） |
+| supplemental/workbench_v001/wb_solve_probe.py | b512e18b20bec8cdf5a668fa4d11120f7f63091e44d767dd7b964505fc9a3b8e | 是（全文） |
+| supplemental/workbench_v001/wb_run.py | 7d8228322840f83e2e2cbda05acb068aff3f6ce6a59ffde0ee8561742e832c1d | 是（全文） |
+| supplemental/workbench_v001/out/falsifier_summary.json | f2cc19ce4056300371c8f9f2c040d9a35c6f42e427ccdc8044fd04fb4dd7869e | 是（22 行全部解析并重聚合） |
+| supplemental/workbench_v001/out/falsifier_aggregate.json | d22ec719f6b89641ccd0efe2016ffe6aef6cba87f3c849b97ae49bd31a9d4987 | 是（全文；与本人重聚合一致） |
+| supplemental/workbench_v001/out/deepseek_raw.jsonl | f334ffd5c245bf177aebbf3c89cfc85c62e1a94c82086384576883127c7d5f03 | 是（24 条记录全部解析；发现并追查 request_id 重复，见 §5-3） |
+| supplemental/workbench_v001/wb_out_instances_snapshot.zip | 0ad5473353832e66927054733ce74d9c952b30f6dc3f8a54fd4aa7f2f3b79383 | 是（zipfile 打开；内部 manifest 110 项逐项重算哈希 0 mismatch；四个 masked 案例 idx064/idx078/idx124/idx135 的 instance.json 与 probe_result.json 完整读取） |
+| supplemental/experiment_v001/readiness/selftest_result.json | 830e7c9ae6c7dddc7acd5d6e819b6dd7e42b125d9bd86fe2defb8d4fff822047 | 是（全文；comparisons=600 的含义见 §5-2） |
+| supplemental/experiment_v001/readiness/smoke_w/results.jsonl | ff3761f1c970ecb830e19dfa6c468059916a91a3fc148ebac91b7848f6495387 | 是（全文，idx001） |
+| supplemental/RUN_CHARTER.md | eb8de1b7052ce0963acfcff7b930f0d6e49faf9246af75d9d20218d72f29646c | 是（全文） |
+
+Packet 外、经冻结哈希链核验后用于验证的场外文件（明确声明：这些不在 Packet manifest 内，我只在其实测 SHA-256 与冻结 capture/manifest 记载完全一致后才读取；见 §5-1）：experiment_v001/artifacts/ 下 config.json（71657f07…，与 execution.json 记载全哈希一致）、run_promotion.py（fdfbbc53…一致）、tp_solve_probe.py（1757291f…一致）、analysis.py（6ab2b874…一致，metric_audit capture 记载）、tp_lib.py / tp_prompt.py / tp_api.py（实测 74c21af7280c41de…/6e89a8ac82ea4195…/05388a7bbcf987d5…，与 plan.md 8-hex 前缀一致）；data_split_commitment_v001/ 下 bucket_D.csv、bucket_D_ref_info.jsonl、bucket_W*、bucket_C*、raw_validation.csv、raw_validation_ref_info.jsonl（全部与冻结 MANIFEST.json/execution.json 记载的完整 SHA 一致）；workbench_v001/reference_upstream/hard_constraint.py（实测 18ffc300e9b61b87bcaf27fd54c5aa09c1319a4f403f308b53df3b696e5185b5，与 tp_lib 头注释记载一致，全文读取）。
+
+---
+
+## 2. 材料完整性与未解决限制
+
+1. **manifest 内材料完整性：通过。** 30/30 项路径、byte size、SHA-256 全部相符；两个 zip 的内部 manifest（224+110 项）逐成员重算哈希 0 mismatch。无不可读或语义无法解释的材料。
+2. **Packet 级完整性缺口（重要，详见 §5-1）：** 促进实验的实现/配置/输入 11 项冻结工件（tp_lib.py、tp_prompt.py、tp_api.py、tp_solve_probe.py、run_promotion.py、analysis.py、config.json、config_readiness.json、bucket_D.csv、bucket_D_ref_info.jsonl、input_split_manifest.json）不在 Packet 的 frozen-artifact manifest 中，也不在 review_v001/ 冻结树内。Protocol §1 要求 manifest "至少逐文件列明……实现、配置、输入"。其中 4 项经冻结 capture 有完整 SHA 承诺、3 项（tp_lib/tp_prompt/tp_api——分别是检查器、提示词、API 层）在冻结 bytes 内只有 plan.md 的 8-hex（32 bit）前缀承诺。我通过场外哈希核验补齐了审查，未发现任何不一致，因此我把该缺口归为可修复异议而非致命异议，但它是本 Packet 对 protocol 的一处真实偏离。
+3. **无法独立验证的过程性声明（unresolved）：** (a) "承诺分桶发生在读取任何实例内容之前"（MANIFEST.json 自述 + RUN_LEDGER 引用）——无外部时间戳机制，我只能验证机械部分（见 §3-1 与 §6-C）；(b) 响应 model 字段 "deepseek-v4-flash" 的真实模型身份由 provider 报告，无法独立验证；(c) evidence packet 中论文引文与 PDF 原文的逐字对应——我验证了全部 7 个 PDF 的 fulltext SHA-256 与记载一致，但未做引文级重提取（该项属 Reviewer 1 职责域，此处标 unresolved）。
+4. dev_001 wall time：result.md 写 "≈11.5 分钟"，capture 实测 duration 577.1 s ≈ 9.6 分钟（差异微小，不影响任何结论，列于 §5-9）。
+
+---
+
+## 3. 最强支持（全部为本人亲手重算/重执行的结果）
+
+1. **commit-reveal 分桶规则独立重算完全吻合。** 我用承诺规则 `int(sha256("run03_tp_val_{i:03d}").hexdigest(),16) % 5` 对 i=0..179 全量重算：W=67、D=80、C=33，三个索引列表与冻结 MANIFEST.json 逐元素相等；idx120/132/134 确在 D 桶，Workbench 案例 idx064 确在 W 桶。bucket_D/W/C 六个文件与 raw validation 两个源文件的实测 SHA 均与承诺一致。分桶层面不存在 cherry-picking 空间。
+2. **全部头条指标从 raw 独立重算吻合。** 我不经 analysis.py、不信 analysis_out.json，直接从 output_results.jsonl 重算：F1 状态 23 ok / 1 formalization_error / 3 default_unsat / 1 default_unknown；认证 PASS 21/23；masked 实例恰 [120]；M2 = 1/21 = 4.76%，Wilson 95% CI [0.008456, 0.226694]（与报告 [0.85%, 22.7%] 一致）；证书故障 3 例 (120 cuisine masked / 132 house_rule caught / 134 house_rule caught)，witness 复核标志全部为 true；A3 对 3 例故障 0 覆盖 / 3 漏检；A4 3 覆盖 / 0 漏检、0/68 虚警；F2 26 ok / 26 PASS / 0 故障（另 2 例 default_unsat）；API 84 调用、78,282 prompt + 46,484 completion tokens、84/84 响应 model = deepseek-v4-flash。与 result.md 及 analysis_out.json 全部一致（A3 虚警口径差异见 §5-4）。
+3. **关键 masked 案例 idx120 被我用自写代码完整重执行并复现。** 我只用冻结 bytes（zip 内 instance.json + F1_code.py、supplemental 冻结 wb_lib.py 检查器）与 .venv_z3 的 z3，用自己写的编码与探针（非 harness 代码）重跑：默认解 SAT 且通过全部适用检查；per-cuisine 违反探针 Indian/Chinese/American = SAT（witness 经检查器复核确为违规，且 witness 在模型可行集内）、Mediterranean = UNSAT；house_rule/room_type 违反探针 UNSAT——与冻结 probe_result 逐项相同。luck 采样我用两种与 harness 不同的 blocking 策略重做：全变量 blocking 50/50（λ=1.0，与报告相同）、仅 meal 槽 blocking（刻意制造更分散的菜系剖面）46/50=0.92——SIG-2 primary 对采样器选择稳健。violating_option_density 三例重算（0.783784 / 0.25 / 0.4）与 analysis_out 一致，且我确认其定义（cuisine 取各所需菜系 lacking 比例的最小值；house_rule 取违规酒店占比）。
+4. **provenance 链闭合。** 84 条 raw API 记录与 zip 内全部 F1/F2/A3 响应文件逐条比对：除 Windows CRLF 换行转换外逐字节一致（84/84）；逐实例 F1→F2→A3 交错顺序、temperature 0、max_tokens 4000、单一 endpoint 全部吻合；raw 日志内 `sk-` 密钥模式 0 命中。stdout 显示单段执行、already_done=0，与 "无分段、无重试择优" 声明一致。
+5. **总体（denominator）不可挑选。** 我从哈希核验过的 bucket_D.csv + ref_info 出发，用冻结 wb_lib 的 normalize_sc3 独立重推 D 桶 SC3 总体：恰为 28 个实例，orig_index 集合与 results.jsonl 完全相等，easy 10 / medium 9 / hard 9、18 个含 local constraint，与 plan.md 的机械预期逐项吻合；idx120 的 instance.json 与我自己从承诺 bytes 规范化出的字典逐键相等（无 fixture 篡改空间）。
+6. **检查器语义对官方评测器的保真。** 上游 TravelPlanner hard_constraint.py（SHA 18ffc300…实测一致）与 tp_lib/wb_lib 的 cuisine（覆盖集合、子串匹配）、house_rule（"No {rule}" 子串）、room_type（同一映射表）、transportation、成本公式逐条对应；偏离（全槽位、nights=2、per-instance 查表）已在头注释披露。tp_lib 与冻结 wb_lib 的 diff 仅为 docstring 与新增 density/wilson 两个函数，检查器语义 bytes 级相同。
+7. **预注册纪律成立。** plan.md（SHA e53f6475…，绑定于 Packet）在 SIG-1/SIG-2、C-GATE-1/2、探针矩阵、全量 D 桶无抽样等关键自由度上先于 dev_001 冻结；execution.json 证实两个输出文件执行前不存在（before.exists=false）；84 调用恰为 28×3，无多余调用；密度方向预测失败被如实报告而未换指标——这是预注册被真实遵守的直接证据。
+8. **Workbench 复跑疑点被我实证排除。** 我在 wb raw 日志中发现 wb_idx060/wb_idx064 各有两条记录（20:35 的 2 实例试跑 + 20:38 起的全量跑，temperature 0 下响应仍不同；保留工件对应第二次响应）。我提取被丢弃的第一次 idx064 响应代码并亲自探针：默认解 PASS、American 零覆盖 SAT（witness 检查器复核违规）、Indian UNSAT——与保留版本同型同结论。即该未披露试跑不可能构成 "多次探针择优"（详见 §5-3）。
+9. **诚实性证据。** 失败与不利结果全部在册：formalization_error/default_unsat/default_unknown 逐实例可查；密度方向反预注册被明写；W→D 掩盖率衰减（29%→4.8%）被明写；A4 在本批 3/3 覆盖（对 delta 不利的事实）被明写；C-GATE-1 预计通过率仅 ~8% 被明写。
+
+---
+
+## 4. 致命异议
+
+**无未解决的致命异议。** 我逐项考虑过以下候选，均在证据面前不成立或降级：
+
+- *"masked 案例是 harness 编码 bug 制造的假象"* ——被 §3-3 的独立重执行排除：我自写探针得到相同 SAT/UNSAT 剖面，witness 由与官方语义比对过的 stdlib 检查器确认违规，且 witness 落在模型可行集内（这是构造性证书，不依赖统计）。idx132 的故障可直接读出根因（生成代码把 "允许吸烟" 编码为 house_rules 含 "smoking" 子串——恰好选中全部禁烟酒店的反向 bug），故障真实性无疑。
+- *"probe 编码与 checker 不一致导致误判"* ——selftest 覆盖不足是真实问题（§5-2），但方向上只可能漏报故障（UNSAT 误判为 enforced 会压低 M2），不可能制造 masked 假阳性：masked 判定要求 SAT witness + 检查器独立复核违规，两条证据链独立。
+- *"development/confirmation 混用或数据挑选"* ——分桶规则重算吻合、D 桶全量 28 实例无抽样、C 桶文件哈希未变、config 只引用 D、capture inputs 只含 D。
+- *"optional stopping / 隐藏尝试"* ——v001 是首版本；dev_001 单段、84 调用闭合；唯一未披露的执行是 Workbench 2 实例试跑（§5-3），我已实证其不影响结论，且 Workbench 本就不作晋级证据。
+- *"指标不可重算"* ——全部重算吻合（§3-2）。
+- *"Claim 超出证据"* ——Minimal Claim Contract 的禁止扩张清单覆盖了我能想到的全部危险外推（数值外推、跨模型、修复有效性、无检查器场景、scaffold 因果），且 result.md 的结论边界段与之一致。
+
+最接近致命的问题是 §5-1（Packet manifest 遗漏实现文件）：若我无法在场外完成哈希链核验，探针语义与提示词内容将不可审查，该项就会升级为 "报告不完整/材料缺失" 级别。基于全部哈希核验一致 + 语义审查未发现问题，我将其定为必须修复但不阻断科学结论的异议。
+
+---
+
+## 5. 可修复异议（按重要性排序）
+
+**5-1. Packet manifest 遗漏实现/配置/输入冻结工件（protocol §1 偏离）。** 11 项实现工件不在 manifest 也不在冻结树；其中检查器（tp_lib.py）、提示词（tp_prompt.py）、API 层（tp_api.py）在全部冻结 bytes 中只有 32-bit 前缀承诺——这三个文件恰是 "结果是否被 prompt/checker 选择制造" 类攻击的第一目标。本轮我经场外全哈希/前缀核验 + 全文审查后未发现问题，但审查的可重复性不应依赖场外文件恰好未被改动。修复：把 11 项实现工件（或至少其完整 SHA-256 清单）纳入重冻结的 Packet；后续版本 plan.md 停用截断哈希。
+
+**5-2. probe–checker 一致性 selftest 覆盖被夸大。** 冻结 selftest_result.json 为 200 assignments × 600 comparisons = 每赋值 3 个类别，即冒烟实例 idx001（无任何 local constraint）只覆盖 budget/distinct_restaurants/distinct_attractions 三类探针编码；plan.md 的 "200 随机赋值 × 全类别 0 不一致" 表述不成立——house_rule/room_type/cuisine/transportation 四类（恰是全部 3 例证书故障所在的类别）从未被 selftest 覆盖。补偿因素：所有 SAT witness 均有检查器复核（本批 all true），且我对 idx120 的四类探针做了独立重执行一致。但 UNSAT（enforced 证书）方向没有系统性一致性验证，91 个 "enforced" 判定的可靠性依赖探针编码正确这一未经 selftest 的假设。修复：在含全部四类 local constraint 的实例（如 idx120/132）上重跑 selftest 并冻结结果；修正 plan/readiness 表述。方向性说明:该缺口若真藏有 bug，效果是压低 M1/M2（对 SIG-1 保守），不构成对现有正结论的威胁，但影响 "enforced/虚警分母" 侧数字的证书力。
+
+**5-3. Workbench "一次通过、无多次探针择优" 表述不准确。** wb raw 日志显示 20:35:38–20:35:45 有一次 2 实例试跑（idx060/idx064），20:38:58 起全量重跑；temperature 0 下两次响应内容仍不同（provider 端非确定性），保留工件均为第二次响应；selection_context "Workbench 探针一次通过（无多次探针择优）" 与 falsifier_report 的 token 统计（"约 35.4k"，实测 24 调用合计 38,436）均未反映试跑。我对被丢弃的第一次 idx064 响应亲自探针，得到与保留版本同型的 masked cuisine 故障（American 零覆盖 SAT + 检查器复核 + 默认解 PASS），证明该试跑没有也不可能起到择优作用；且 Workbench 按流程只授权不举证。但该表述仍应更正，并把 temperature-0 非确定性作为已知混杂记录（它同样意味着 dev_001 的具体故障集合有 provider 端随机性成分——这正是 n_masked=1 需要 C 桶复验的又一理由）。修复：更正 selection_context 与 falsifier_report 的相应句子及 token 数。
+
+**5-4. A3 虚警口径未在输出中文档化。** analysis.py 只把 `stated=true ∧ enforced=false` 计为虚警（0/91）；若按字面 `enforced=false` 计则为 3/91（idx123/127/133 house_rule，A3 答 stated=false/enforced=false）。我核查了 idx127：生成代码明确未编码 house_rule（探针的 enforced 是预算约束的意外语义强制），A3 的 "未编码" 论断在语法层面是对的——故现行口径对 A3 是恰当且有利的，不夸大 delta。但该口径应写入 analysis 输出或 result.md，否则复算者会得到 3/91。修复：文档化口径即可，数字无需改。
+
+**5-5. SIG-1 的表述强度误导。** "M2 的 Wilson 95% CI 下界 > 0" 在数学上等价于 n_masked ≥ 1：任何单个 masked 实例都会使 Wilson 下界 > 0。作为预注册存在性断言它是被诚实执行的，但 "CI 下界" 措辞给人以统计强度错觉，实际闸门就是 "至少一例证书背书掩盖"。C-GATE-1（≥2 例 + CI>0）才是有实质内容的门。修复：DELIVERY 文本中明示 SIG-1 = 存在性证书门。
+
+**5-6. "enforced 证书" 的语义应在交付文本中限定为可行集级而非语法级。** idx127 是明证：代码明确放弃编码 house_rule，但三家违规酒店在 2 晚 × 预算 1400 下全部超预算，探针 UNSAT → "enforced"。即 91 个 enforced 判定包含 "偶然强制"（其他约束的语义后果），"UNSAT ⇒ 约束被编码" 不成立，只有 "UNSAT ⇒ 可行集内不可违反" 成立。candidate 的措辞（"以 harness 编码保真为条件"）大体守住了这一点，但 DELIVERY 应显式给出 idx127 型示例，防止消费者把 enforcement 剖面读成代码忠实度剖面。同类问题：probe 侧 "applicable=false"（域内无违规选项，如 idx061/idx068 的 room_type）意味着该约束在该实例上不可检验而被静默移出分母——应文档化。
+
+**5-7. masked "故障" 的一部分质量可能来自 NL 歧义而非清晰编码错误。** idx120 的查询原文是 "our group enjoys a variety of cuisines, including Indian, Chinese, Mediterranean, and American"——生成模型采用的成员归属读法（每家餐厅须属四菜系之一）是一个有辩护余地的自然语言读法；"故障" 是相对基准的 canonical 覆盖语义而言的。idx132 的反向子串 bug 则是无争议的客观错误。M2 的定义（对参考检查器的 enforcement）内部自洽，但交付文本应披露：掩盖质量中混有 "合理替代读法 vs 基准钦定语义" 的成分，消费者不应把 M2 读作 "客观编码 bug 率"。修复：一段披露即可。
+
+**5-8. 预注册 C-GATE-1 在观察到的效应量下功效很低——移交时应显式警告接收方。** C 桶预期 SC3 ≈12；若真实掩盖率即 D 桶点估计 4.8%，P(masked ≥2) 数量级在个位数百分比（result.md 自估 ~8%，与我的粗算同量级）。即：即使现象真实且量级不变，预注册 Confirmation 大概率负向关闭。这不是造假风险而是设计风险（门为 W 桶 29% 量级校准，D 桶已衰减到 4.8%），但它决定了这颗种子的确认路径预期收益，必须在 DELIVERY 中以显著位置警告，并禁止接收方在看到 C 结果后回改门槛。
+
+**5-9. 小误差更正。** result.md "dev_001 wall ≈ 11.5 分钟" vs capture 577.1 s（≈9.6 分钟）；falsifier_report token 数（见 5-3）。均不影响结论。
+
+---
+
+## 6. 当前证据最多支持的 Claim（含数据角色边界）
+
+**已被当前证据（W 桶 Workbench + D 桶 Promotion Development）支持：**
+
+1. 在 TP-SC3 载体（受控衍生变体）+ deepseek-chat（响应 model deepseek-v4-flash）+ 温度 0 自由形式单次形式化 + 本 harness 认证定义下，D 桶 28 个 fresh 实例中存在恰 1 个解级认证 PASS 实例（idx120）携带证书背书的未 enforce 适用约束（可行集内 SAT witness + 独立检查器复核违规）——掩盖格非空的存在性结论，证书是构造性的、我已独立重执行验证。点估计 M2 = 4.8%，Wilson 95% CI [0.85%, 22.7%]（n=21，实例级）。
+2. 该 masked 案例的 luck 指数 λ=1.0（对采样器选择稳健：我的两种独立采样器给出 1.0 与 0.92），两例 caught 案例 λ=0.0；即本批数据内 "masked 案例位于几乎所有可行解都碰巧合规的模型" 这一机制方向成立（n_masked=1，n_caught=2——只是方向证据，不是分布结论）。域级违规选项密度的方向预测失败（masked 0.78 > caught 0.33）是已确认的负向结果。
+3. 在同批 3 例证书故障上：类别清单辅助的同模型 self-check（A3，有利变体）覆盖 0/3 且对故障类别自信输出 enforced=true（0/91 虚警，口径见 §5-4）；行为测试（A4）覆盖 3/3、0/68 虚警；错误信号（A2）对 masked 格覆盖为 0 是构造性质非经验发现。探针对 A4 的差异化仅剩证书性论证，本批无经验分离——candidate 已如实预声明。
+4. F2 一行清单 scaffold 在本批 26 个 ok 实例上 0 证书故障、26/26 PASS（bundle 级观察；注意 F2 清单文本实际上把 cuisine 覆盖语义与 house_rule 的 "No X" 语义教给了被试——它同时是 scaffold 与语义消歧，见 §5-7 关联）。
+5. 同型量词误译（成员归属 vs 覆盖）在 W 桶（idx064/124/135）与 D 桶（idx120）跨桶重现——故障形态稳定性的初步证据。
+
+**尚未被任何 untouched 数据检验的结论（全部）：** 上述 1–5 的每一条都只在 W（已消费）与 D（Promotion Development）上成立。C 桶零 outcome 存在于 Packet；掩盖率非零性（C-GATE-1）、λ 机制方向（C-GATE-2）、A3 盲区、A4 等效性、F2 关闭效应——没有任何一条经过 untouched 数据。按 role snapshot 要求明确列出：**当前不存在任何经确认数据支持的结论**；本 Packet 的全部经验结论均为 Development 级。
+
+**保留 Confirmation 的未触碰证明是否成立：** 机械可验部分全部成立——分桶规则与三桶索引由我独立重算吻合；bucket_C.csv / bucket_C_ref_info.jsonl 实测哈希与承诺一致（文件未被改动）；冻结 config.json 只引用 bucket "D"；两个 capture 的 inputs 清单只含 D 桶文件；stdout 单段无额外实例。不可机械验证部分（承诺时点先于任何内容读取、C 文件从未被任何进程读过）属过程性声明，无法用哈希证明，标 unresolved——但我未发现任何与之矛盾的痕迹。综合判断：未触碰证明在本轮可达到的最强核验强度下成立。
+
+---
+
+## 7. 绝不能支持的 Claim
+
+1. 任何掩盖率数值的外推——包括 "≈4.8%"、"个位数百分比" 作为载体/模型/分布性质：W→D 已示范 29%→4.8% 的构成敏感性，且 n_masked=1 时点估计无稳定性可言。
+2. 跨模型（尤其更强模型）、跨载体、跨 scaffold 的任何泛化；对官方 TravelPlanner 排行榜数字或 P051/P055 已发表结果的任何重估（TP-SC3 是衍生受控载体，非官方复算）。
+3. "探针优于行为测试（A4）" 的经验性主张——本批 A4 覆盖 3/3、虚警 0，与探针无经验分离；只可主张证书性（可证明性）差异。
+4. "slack/密度机制" 任何形式的存活主张——密度方向已被否证；λ>0.5 只有 n=1 的方向证据，"λ 是机制变量" 在 C 桶检验前只是假说。
+5. 探针触发修复的有效性（K2，未测试）；无参考检查器场景的可用性；F2 清单的因果机制或普适性（bundle 级 + 语义泄漏成分）。
+6. "A3/同模型自查普遍不可靠" 的普遍化——本批 3 例、单模型、单载体。
+7. 任何把 Development 正向结果当作已确认现象的表述——C 桶未执行，且 §5-8 表明预注册确认门大概率不过。
+8. "掩盖故障 = 客观编码 bug" 的等同（§5-7）；"enforced 证书 = 约束被忠实编码" 的等同（§5-6）。
+
+---
+
+## 8. 建议处置及证据理由
+
+**建议：可修复异议全部落实后可进入 Delivery；不修复不应交付。**（无评分、无投票；最终裁决权在主 Codex。）
+
+理由：(a) 核心存在性主张由构造性证书支撑，且经我独立重执行验证，不依赖统计推断，n=1 的薄弱被 Claim Contract 与 result.md 如实圈定；(b) 预注册、commit-reveal 分桶、单段 capture、raw 可重算、负向结果在册——本轮我能实施的每一种 artifact 攻击（重算、重探针、重采样、provenance 逐条比对、总体重推、被弃响应重探针）都未击穿它；(c) 剩余问题（§5-1 manifest 缺口、§5-2 selftest 夸大、§5-3 表述不准、§5-5/6/7/8 交付文本限定）全部可在不重跑实验的前提下修复——但 §5-1 与 §5-2 触及审查可重复性与证书力表述，应作为交付前置条件而非事后勘误；(d) §5-8 的低功效警告必须随交付移交，否则接收方会把大概率发生的 C 门失败误读为现象否证（或更糟：被诱导回改门槛）。种子的真实价值在于：证书级测量分解 + 可复现 harness + 两个立即可用的负向/实践结论（同模型自查的证书级失败、一行清单关闭本批静默通道），而不在掩盖率数字本身——交付文本应按此定位。
+
+---
+
+## 9. 实际用于判断的公开来源、URL/version、SHA 与 locator
+
+- 本轮审查**未使用任何网络检索**；全部判断基于冻结 Packet bytes 与下列经哈希核验的本地文件。
+- 本地上游参考（Packet 外，哈希链核验后读取）：`D:\Desktop\crl\20260726_1955_run03\workbench_v001\reference_upstream\hard_constraint.py`，SHA-256 18ffc300e9b61b87bcaf27fd54c5aa09c1319a4f403f308b53df3b696e5185b5（osunlp/TravelPlanner 官方评测器源文件的本地快照；用于 §3-6 检查器语义保真核验；上游 URL/version 未独立取回，标 unresolved）。
+- 知识库论文 PDF（仅做 fulltext SHA-256 核验，未做引文级重提取，见 §2-3）：P051 ba9261d6…、P052 e59c5c55…、P054 f1e766c7…、P055 0d21a03d…、P004 a7c7edd6…、P050 81b1a375…、P046 0b299853…（路径见 evidence packet 记载，全部实测一致）。
+- 数据源头承诺：osunlp/TravelPlanner validation.csv SHA-256 0e54b26b13c0b6d50e8683765e930bffca949488c44634e530da899914d40e80、validation_ref_info.jsonl 0555348b457226a7cff866a7ec1962b60105fd90bb9e5c030b9e9ec3f2aff1d0（本地 raw 快照实测与承诺一致；HuggingFace revision 未在承诺中钉死具体 commit，属可改进项但源文件哈希已闭合）。
+- 工具：`D:\Desktop\crl\20260726_1955_run03\.venv_z3\python.exe`（python 3.11.15 + z3-solver 4.15.4），用于哈希计算、指标重算与探针重执行；我的全部验证脚本仅写入会话 scratchpad，未触碰工作区。
+
+（报告完。本报告同文已逐字写入 `D:\Desktop\crl\20260726_1955_run03\review_v001\staging\reviewer_2_staged.md`。）

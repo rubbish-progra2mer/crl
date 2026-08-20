@@ -1,0 +1,133 @@
+{
+  "canonical_evaluation_id": "eval-0006",
+  "evaluation_id": "eval-0006",
+  "evaluator_version": "CRL-EVAL-1.0",
+  "implementation_key": "8d4b260c29a16166f69a628cc457cd675d2815b6782a376f82dcd2f27f2fe60b",
+  "invalid_reasons": [],
+  "measurement_key": "4939f715fcb6bd1783c936fe91f7c1cb9e3d279fd41f6c34073f1710dff9d5c5",
+  "measurement_kind": "CANONICAL_IMPLEMENTATION_SCORE",
+  "overall_score_numerator": 642500,
+  "overall_score_percent": "64.2500",
+  "packet_key": "de18f9884da7d6132b2f518b2829274937a23f015a859274efd4e71209d06b97",
+  "request_sha256": "834076c9810e3d2c33a2e086f0ef72d7f9cfcc852841cbf5ab8ac8914fa6bfa2",
+  "role_results": {
+    "ADV": {
+      "output": {
+        "confidence": "high",
+        "critical_risk": "potentially_fatal",
+        "diagnostics": {
+          "best_stress_test": "在新案例上预注册三路配对：真实字段变形、等长度且等表面变化但保持任务语义的安慰剂变形、非工具结构化文本变形；每次调用使用独立采样 seed，并分别在禁用或重置缓存条件下跨供应商重复，以案例和模型为聚类单位比较超额。",
+          "boundary_warning": "40.43 个百分点只适用于当前二十例合成短答案、三个本地 Qwen 标签、温度 0.2 和十调用协议；不得外推到真实多步智能体、跨供应商模型、开放输出或部署失败率。",
+          "hidden_assumption": "最危险前提是“相同 API 调用数”等同于相同有效随机性、缓存机会和输入难度，尽管重放组反复提交同一提示与同一 seed，而六臂组提交四个新输入。",
+          "most_fatal_failure_mode": "同 seed 的完全相同重放因确定性采样、缓存或零输入新颖性被人为稳定，而六臂只是承受一般输入改写难度；若等表面变化的语义安慰剂产生同等超额，工具字段“干预特异性”即被推翻。",
+          "reproduction_breakpoint": "最可能在重建本地 Ollama 模型与服务状态时分叉：模型标签无权重摘要，subject dependencies 和部分环境未绑定，独立运行会得到不同的畸形输出、基线正确子集及 76/0 不一致计数。"
+        },
+        "evaluator_version": "CRL-EVAL-1.0",
+        "free_review": "新版确实修复了旧的一次对六次预算混杂，并把强机制主张降为局部现象；76/188 的配对差在当前套件内是真实且可追踪的描述。但六重放不是充分的主动基线：相同提示与相同 seed 可能近似确定性或享受缓存，而六臂必然改变输入、表面结构和难度。因而当前结果最多说明“这些变形比逐字重放更易失败”，尚不能把超额定位为工具字段特异现象。家族异质性明显，tier_score 超额为零；关系标签又与完整反事实正确性完全重合。若等表面变化的语义安慰剂获得相近超额，或缓存重置、独立 seed 后差异显著收缩，方法核应降为一般输入扰动稳健性。",
+        "model_identity": "gpt-5.6-sol",
+        "reasoning_effort": "xhigh",
+        "reasons": {
+          "adversarial_survivability": "新版通过同预算六重放、随机顺序、警告剔除和分层分析，存活了一个重要的多调用暴露反例。但尚未面对与六臂等长度、等表面变化、等输入新颖性的主动对照，也没有独立设计的留出案例或非共线变形。一个对完全相同提示稳定、却对任何输入改写普遍敏感的模型即可产生同样头条结果，而无需存在工具字段特异脆弱性。关系通过又与完整反事实精确正确在 188 个基线正确行上完全重合，当前协议尚未显示独立诊断价值。",
+          "boundary_generalization": "证据仅覆盖二十个手工合成短标量案例、五个任务族、三个本地 Qwen 标签、两种提示和三个 seed。没有真实工具执行、多步轨迹、开放式输出、跨供应商模型、长 horizon 或预算敏感性实验。tier_score 家族超额为零，valid_sum 的基线正确样本仅九行，说明套件内部也存在明显家族异质性。十八个分层均为正不能替代独立任务和模型谱系复制。",
+          "confound_leakage_control": "两个组调用数相同、共享 base 与 repeat_1、调用顺序随机交织，并有独立家族求解器和解析警告剔除分析，确实控制了旧预算、顺序和标签自洽问题。但每个完全相同重放请求使用相同 seed，而变形请求改变了输入；这使重放可能因确定性采样或缓存天然更稳定，packet 对缓存和服务状态为 packet insufficient。六臂还同时引入输入新颖性与任务难度，缺少表面变化量、长度和难度匹配的语义安慰剂或非工具结构化扰动对照。独立求解器只验证套件真值，不能排除这些运行与比较混杂。",
+          "evidence_auditability": "四个头条指标均映射到 metrics.json 的具体记录，执行、规格、代码、案例和结果文件均有哈希，紧凑审计还提供逐行答案、调用位置和布尔指标。由这些材料可以检查聚合表及配对计数的内部一致性。关键不足是完整 raw_content/result.json 未在 packet 中展开，大量畸形输出只能看到解析或规范化后的答案，无法独立复核解析器是否改变结论。部分分层、警告剔除和正文数字也未全部绑定为专门机器指标。",
+          "reproducibility_traceability": "packet 给出了完整 argv、工作目录、案例与代码哈希、温度、seed、调用预算、环境摘要及输出哈希，主要结果可追到 attempt-budget-control-008。代码、数据生成器、独立求解器和逐行解析答案也均被展示。缺口是 Ollama 模型只有可变标签而无权重摘要，subject dependencies、部分环境和 git 状态未绑定，完整 result.json 原始字节仅有路径与哈希。因此独立团队能重建协议，但不能保证复现相同的基线正确子集和精确比例。"
+        },
+        "review_protocol": "CRL-IR-1.0",
+        "reviewer_role": "ADV",
+        "scores": {
+          "adversarial_survivability": 2,
+          "boundary_generalization": 1,
+          "confound_leakage_control": 2,
+          "evidence_auditability": 3,
+          "reproducibility_traceability": 3
+        }
+      },
+      "report_sha256": "59dd858a972b80739f2a8dffa2242c387af95a68478110e976ebed5ec92cc108",
+      "role_score_basis_points": 5500
+    },
+    "EMP": {
+      "output": {
+        "confidence": "high",
+        "critical_risk": "serious",
+        "diagnostics": {
+          "baseline_confound": "最可能的混杂是内容多样性与难度不匹配：相同调用数下，六臂覆盖五种输入条件，六重放组只有一个输入条件，且未提供逐组token、编辑幅度和答案变化难度匹配。",
+          "biggest_empirical_threat": "六臂组测试多个异质且部分需要改变答案的新输入，而重放组只重复同一输入；因此40.43个百分点优势可能主要反映输入新颖性、任务难度或多种独特题目的合取暴露，而非所强调的字段/顺序干预特异性。",
+          "killer_experiment": "在独立冻结案例上做三组等预算行内实验：当前六臂、六次精确重放、以及在token长度、编辑幅度、输入新颖性和答案变化率上匹配但不承载目标字段关系的六臂sham变形；若当前六臂相对sham不再有超额，干预特异解释即被推翻。",
+          "missing_validation": "以案例和任务族为主要聚类单元进行层级模型或cluster bootstrap，并报告置信区间及leave-one-family-out结果，以检验76个不一致行是否依赖少数重复案例或家族。",
+          "strongest_empirical_evidence": "同一模型—提示—种子—案例内的等预算配对结果：188个基线正确行中仅六臂失败76行、仅重放失败0行；剔除解析警告后配对超额仍为0.4086。"
+        },
+        "evaluator_version": "CRL-EVAL-1.0",
+        "free_review": "当前实现已有效修复旧的一次对六次预算混杂，足以支持一个严格受限的事实：在这20个合成案例和三个Qwen模型上，六臂变形组比六次相同重放更易失败。最可信之处是行内配对、随机交织、76比0的不一致方向以及警告剔除稳定性。主要不足是对照只匹配调用数，没有匹配输入多样性与难度；联合失败也未按相关、无关诱饵和顺序臂分解。极小p值还忽略案例、模型和种子的聚类，不能视为总体精度。因而当前结果可作为局部稳健性种子，但“干预特异”仍需难度匹配sham对照，外部有效性则需要独立案例、跨谱系模型和真实多步任务。",
+        "model_identity": "gpt-5.6-sol",
+        "reasoning_effort": "xhigh",
+        "reasons": {
+          "baseline_fairness": "两组在同一模型、提示、种子和案例内各使用六次调用，共享base与repeat_1，并采用相同温度和随机交织顺序，调用预算公平性明显改善。模型能力、工具格式和调参机会没有显示出组间不对称。但完全重放组的内容高度重复，六臂组则包含四个异质变体，packet也未报告逐组输入/输出token和变形难度匹配，因此只能评为总体公平而非完全等价。",
+          "experimental_validity": "预注册的行内配对实验直接检验当前收窄后的主张：六臂变形是否比同预算完全重放产生更多失败。188个基线正确行中仅六臂失败76行、仅重放失败0行，且调用随机交织，足以支持冻结套件内的描述性差异。不过六臂包含多种新输入和不同答案要求，而重放组反复呈现同一输入，尚不能把差异进一步归因于特定字段关系而非一般输入新颖性或难度。",
+          "measurement_reliability": "独立家族求解器从原始字段重算20/20标签，原始回答、调用位置和规范化标记均被保留，剔除解析警告后超额仍为0.4086。另一方面，159次调用经过启发式规范化，62次解析警告集中于12行，且没有盲人工复标来估计未标警告输出的误判率。更重要的是McNemar检验把188行作为统计单元，却未处理20个案例、同谱系模型和重复种子造成的聚类相关，也未提供聚类稳健区间。",
+          "result_strength": "冻结套件内效应幅度很大：六臂与重放失败率分别为86/188和10/188，配对差为0.4043，且76个不一致行全部偏向六臂。警告剔除后效应不减，六个模型—提示合并层和三个种子均为正，增强了局部可信度。然而有效任务本体只有20个合成案例、模型均属Qwen谱系，家族差异显著且缺乏聚类不确定性分析，因此强度不能外推到一般工具任务或部署环境。",
+          "robustness_falsification": "同预算重放负对照、随机调用位置、解析警告剔除、三个种子、十八个分层及独立oracle构成了实质性的局部否证链。结果在三个种子和全部模型—提示—种子分层为正，说明旧的“更多调用机会”不能解释全部效应。但缺少逐臂消融、难度或表面变化匹配的sham变形、留出案例、独立复跑和跨谱系模型；tier_score家族超额为0也显示边界尚未稳定。"
+        },
+        "review_protocol": "CRL-IR-1.0",
+        "reviewer_role": "EMP",
+        "scores": {
+          "baseline_fairness": 3,
+          "experimental_validity": 3,
+          "measurement_reliability": 2,
+          "result_strength": 3,
+          "robustness_falsification": 2
+        }
+      },
+      "report_sha256": "ff1e03a769bea8ef51996d12dba0e58bb0e8c903f7441f0a8ba1cdf9385c46e7",
+      "role_score_basis_points": 6500
+    },
+    "SCI": {
+      "output": {
+        "confidence": "high",
+        "critical_risk": "serious",
+        "diagnostics": {
+          "biggest_scientific_risk": "40.43个百分点效应可能只是一般变形难度或表面结构敏感性；若不能在独立关系定义、非共线变形、真实多步任务和跨谱系模型上复现，贡献会退化为已有变形测试的一项局部实例。",
+          "mechanism_falsifier": "在语义难度匹配的非工具变形对照或独立非共线字段变形中，工具字段六臂的超额失败消失，且不读取任务相关字段的留出代理仍能复现当前关系模式。",
+          "most_dangerous_prior_collision": "LLMORPH与METAL：前者最可能吸收“大模型变形测试及局部违规现象”的贡献，后者最可能吸收输入扰动、输出关系和重复一致性的核心方法骨架。",
+          "strongest_scientific_contribution": "把原先受调用预算混杂的脆弱性观察改造成共享基线、随机交织、同预算六重放对照的行内配对现象，并在冻结套件中观察到76比0的不一致方向。"
+        },
+        "evaluator_version": "CRL-EVAL-1.0",
+        "free_review": "当前实现最可靠的成果不是新机制，而是一个控制明显改进的局部现象：同预算六臂字段/顺序变形相较六次完全重放多出40.43个百分点失败，且预注册门槛、警告剔除和种子分层均通过。协议具体、可审计，Claim也已正确退出“真实采用”解释。主要科学缺口仍是构念与先行分离：LLMORPH/METAL已占据变形测试骨架，现有效应又可能完全由变形难度或表面结构响应解释；关系标签与完整反事实正确性完全重合，也未展示额外评价价值。下一步的决定性证据应来自独立定义的非共线变形、留出代理、真实多步任务、跨谱系模型，以及控制完整正确性后的终态增量预测。",
+        "model_identity": "gpt-5.6-sol",
+        "reasoning_effort": "xhigh",
+        "reasons": {
+          "claim_calibration": "最终核心Claim严格限定为冻结合成套件中的同预算干预特异超额失败，没有继续声称真实证据采用、部署失败率或无真值增量价值。材料明确承认同谱系模型、短标量任务、家族不一致、解析问题和跨机器复现风险。结论“排除更多调用机会作为全部解释，但不排除变形难度”等措辞与现有对照证据相符。",
+          "mechanism_clarity": "被改变的计算对象、五类变形、两个共享六调用组、关系判据和配对风险差均定义清楚，并具有预注册否证阈值。等预算结果排除了“调用次数更多”作为全部解释，但不能区分工具证据脆弱性与变形任务更难、表面结构响应或错误等变代理。由于真实证据采用机制已被主动撤回，当前只建立操作性现象而没有得到独立支持的因果机制。",
+          "prior_separation": "结构化工具返回字段的析因六臂、同预算六重放行内对照及随机交织形成了可辨认的协议增量。可是LLMORPH和METAL已覆盖大模型黑盒变形测试、输入扰动及重复一致性，ReliabilityBench、CVT-RL等又覆盖智能体或工具输出扰动，当前贡献可能只是这些既有计算在工具字段场景中的细化组合。packet未提供与最近方法的直接同预算实证比较，先行审计也明确标记为ANALOGICAL_REDUCTION，故只能判为混合分离。",
+          "problem_value": "在同调用预算下区分工具字段变形脆弱性与一般重放不稳定，解决了原先一次对六次比较的实质混杂，具有真实评价价值。188个基线正确行中的40.43个百分点配对超额表明这不是纯粹的指标装饰。不过证据仅来自20个合成短答案案例和同一Qwen谱系，且尚未证明该信号能预测终态失败、复核错误或修复收益，因此价值仍属局部。",
+          "scientific_specificity": "模型、提示、种子、案例、调用顺序、字段干预、规范化、统计量和失败门槛均被具体预声明。正式实验包含360行、3600次调用、逐行审计、警告剔除分析和独立求解器20/20自洽检查，核心数字可追踪至绑定指标。材料还明确报告tier_score超额为0以及关系通过与完整反事实正确完全重合等负面结果，因此局部结论高度可检查。"
+        },
+        "review_protocol": "CRL-IR-1.0",
+        "reviewer_role": "SCI",
+        "scores": {
+          "claim_calibration": 4,
+          "mechanism_clarity": 2,
+          "prior_separation": 2,
+          "problem_value": 3,
+          "scientific_specificity": 4
+        }
+      },
+      "report_sha256": "71a70f727e67677acd47aff5baea05a1508250fecd89b2b5c01129720b080e11",
+      "role_score_basis_points": 7000
+    }
+  },
+  "schema_version": 1,
+  "score_is_gate": false,
+  "stability": {
+    "max_numerator": 642500,
+    "mean_numerator": "642500",
+    "min_numerator": 642500,
+    "overall_score_numerators": [
+      642500
+    ],
+    "population_variance_numerator_squared": "0",
+    "range_numerator": 0,
+    "valid_measurement_count": 1
+  },
+  "valid": true
+}

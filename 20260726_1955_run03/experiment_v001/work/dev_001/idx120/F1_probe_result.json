@@ -1,0 +1,190 @@
+{
+  "status": "ok",
+  "default": {
+    "assignment": {
+      "transport_out": 0,
+      "transport_back": 0,
+      "hotel": 14,
+      "meal_1_breakfast": 21,
+      "meal_1_lunch": 6,
+      "meal_1_dinner": 36,
+      "meal_2_breakfast": 23,
+      "meal_2_lunch": 35,
+      "meal_2_dinner": 0,
+      "meal_3_breakfast": 22,
+      "meal_3_lunch": 34,
+      "meal_3_dinner": 26,
+      "attr_1": 0,
+      "attr_2": 1,
+      "attr_3": 2
+    },
+    "verdicts": {
+      "budget": true,
+      "house_rule": true,
+      "room_type": true,
+      "cuisine": true,
+      "transportation": null,
+      "distinct_restaurants": true,
+      "distinct_attractions": true
+    },
+    "solution_level_pass": true,
+    "total_cost": 2274.0
+  },
+  "probes": {
+    "budget": {
+      "applicable": true,
+      "result": "unsat",
+      "enforced": true
+    },
+    "house_rule": {
+      "applicable": true,
+      "result": "unsat",
+      "enforced": true
+    },
+    "room_type": {
+      "applicable": true,
+      "result": "unsat",
+      "enforced": true
+    },
+    "cuisine": {
+      "applicable": true,
+      "enforced": false,
+      "per_cuisine": {
+        "Indian": {
+          "result": "sat",
+          "witness_violates_reference": true,
+          "witness": {
+            "transport_out": 0,
+            "transport_back": 0,
+            "hotel": 14,
+            "meal_1_breakfast": 29,
+            "meal_1_lunch": 21,
+            "meal_1_dinner": 30,
+            "meal_2_breakfast": 22,
+            "meal_2_lunch": 13,
+            "meal_2_dinner": 3,
+            "meal_3_breakfast": 8,
+            "meal_3_lunch": 34,
+            "meal_3_dinner": 6,
+            "attr_1": 2,
+            "attr_2": 1,
+            "attr_3": 0
+          }
+        },
+        "Chinese": {
+          "result": "sat",
+          "witness_violates_reference": true,
+          "witness": {
+            "transport_out": 0,
+            "transport_back": 0,
+            "hotel": 10,
+            "meal_1_breakfast": 19,
+            "meal_1_lunch": 8,
+            "meal_1_dinner": 21,
+            "meal_2_breakfast": 26,
+            "meal_2_lunch": 0,
+            "meal_2_dinner": 3,
+            "meal_3_breakfast": 5,
+            "meal_3_lunch": 13,
+            "meal_3_dinner": 29,
+            "attr_1": 0,
+            "attr_2": 1,
+            "attr_3": 2
+          }
+        },
+        "Mediterranean": {
+          "result": "unsat"
+        },
+        "American": {
+          "result": "sat",
+          "witness_violates_reference": true,
+          "witness": {
+            "transport_out": 0,
+            "transport_back": 0,
+            "hotel": 14,
+            "meal_1_breakfast": 21,
+            "meal_1_lunch": 30,
+            "meal_1_dinner": 3,
+            "meal_2_breakfast": 34,
+            "meal_2_lunch": 0,
+            "meal_2_dinner": 5,
+            "meal_3_breakfast": 23,
+            "meal_3_lunch": 29,
+            "meal_3_dinner": 13,
+            "attr_1": 0,
+            "attr_2": 2,
+            "attr_3": 1
+          }
+        }
+      }
+    },
+    "distinct_restaurants": {
+      "applicable": true,
+      "result": "unsat",
+      "enforced": true
+    },
+    "distinct_attractions": {
+      "applicable": true,
+      "result": "unsat",
+      "enforced": true
+    }
+  },
+  "luck_sampling": {
+    "n_samples": 50,
+    "cuisine": 1.0
+  },
+  "behavioral_tests": {
+    "budget": {
+      "status": "ok",
+      "result": "unsat",
+      "flag_unenforced": false
+    },
+    "house_rule": {
+      "status": "ok",
+      "result": "unsat",
+      "flag_unenforced": false,
+      "kept_options": 2
+    },
+    "room_type": {
+      "status": "ok",
+      "result": "unsat",
+      "flag_unenforced": false,
+      "kept_options": 8
+    },
+    "cuisine": {
+      "per_cuisine": {
+        "Indian": {
+          "status": "ok",
+          "result": "sat",
+          "flag_unenforced": true,
+          "kept_options": 33
+        },
+        "Chinese": {
+          "status": "ok",
+          "result": "sat",
+          "flag_unenforced": true,
+          "kept_options": 31
+        },
+        "Mediterranean": {
+          "status": "ok",
+          "result": "unsat",
+          "flag_unenforced": false,
+          "kept_options": 29
+        },
+        "American": {
+          "status": "ok",
+          "result": "sat",
+          "flag_unenforced": true,
+          "kept_options": 35
+        }
+      },
+      "flag_unenforced": true
+    },
+    "distinct_restaurants": {
+      "status": "ok",
+      "result": "unsat",
+      "flag_unenforced": false
+    }
+  },
+  "wall_seconds": 15.1
+}

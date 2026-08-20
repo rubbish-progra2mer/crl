@@ -1,0 +1,924 @@
+from __future__ import annotations
+
+import hashlib
+import json
+from dataclasses import asdict, dataclass, replace
+from functools import lru_cache
+from typing import Iterable, Literal, Sequence
+
+
+Quantifier = Literal["exists", "forall"]
+Decision = Literal["TRUE", "FALSE", "UNKNOWN"]
+Cursor = str | int
+
+
+def _canonical_digest(payload: object) -> str:
+    encoded = json.dumps(
+        payload,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def _cursor_sort_key(cursor: Cursor) -> tuple[str, str]:
+    return type(cursor).__name__, str(cursor)
+
+
+@dataclass(frozen=True, order=True)
+class ScopeCell:
+    """One indivisible cell in the joint entity x time x archive scope."""
+
+    entity: str
+    time_bucket: str
+    archive_state: str
+
+    @property
+    def key(self) -> str:
+        return f"{self.entity}|{self.time_bucket}|{self.archive_state}"
+
+
+@dataclass(frozen=True, order=True)
+class SourceIdentity:
+    """The semantic identity that every page in one proof chain must share."""
+
+    connector_id: str
+    query_signature: str
+    authentication_subject: str
+    scope_schema_version: str
+    adapter_version: str
+    request_serialization_version: str
+
+    def __post_init__(self) -> None:
+        if not all(
+            (
+                self.connector_id,
+                self.query_signature,
+                self.authentication_subject,
+                self.scope_schema_version,
+                self.adapter_version,
+                self.request_serialization_version,
+            )
+        ):
+            raise ValueError("source identity fields must all be non-empty")
+
+    @property
+    def digest(self) -> str:
+        return _canonical_digest(asdict(self))
+
+
+@dataclass(frozen=True, order=True)
+class RequestKey:
+    """The authoritative request identity parsed from one canonical payload."""
+
+    source: SourceIdentity
+    cell: ScopeCell
+    cursor: Cursor
+    snapshot_id: str
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.cursor, (str, int)) or isinstance(self.cursor, bool):
+            raise ValueError("request cursor must be a string or integer")
+        if not self.snapshot_id:
+            raise ValueError("request snapshot_id must not be empty")
+
+    @property
+    def digest(self) -> str:
+        return _canonical_digest(
+            {
+                "source": asdict(self.source),
+                "cell": self.cell.key,
+                "cursor": self.cursor,
+                "snapshot_id": self.snapshot_id,
+            }
+        )
+
+
+def canonical_request_payload(
+    source: SourceIdentity,
+    cell: ScopeCell,
+    cursor: Cursor,
+    snapshot_id: str,
+) -> str:
+    """Serialize the exact per-page request fields that bind a response to one cell."""
+
+    return json.dumps(
+        {
+            "adapter_version": source.adapter_version,
+            "authentication_subject": source.authentication_subject,
+            "connector_id": source.connector_id,
+            "cursor": cursor,
+            "filters": {
+                "archive_state": cell.archive_state,
+                "entity": cell.entity,
+                "time_bucket": cell.time_bucket,
+            },
+            "operation": source.query_signature,
+            "request_serialization_version": source.request_serialization_version,
+            "scope_schema_version": source.scope_schema_version,
+            "snapshot_id": snapshot_id,
+        },
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+
+
+@lru_cache(maxsize=4096)
+def parse_canonical_request_payload(payload: str) -> RequestKey:
+    """Strictly parse an exact canonical payload into its authoritative key."""
+
+    try:
+        value = json.loads(payload)
+    except (json.JSONDecodeError, TypeError) as error:
+        raise ValueError("request payload is not valid JSON") from error
+    if not isinstance(value, dict) or set(value) != {
+        "adapter_version",
+        "authentication_subject",
+        "connector_id",
+        "cursor",
+        "filters",
+        "operation",
+        "request_serialization_version",
+        "scope_schema_version",
+        "snapshot_id",
+    }:
+        raise ValueError("request payload has an unexpected top-level schema")
+    filters = value["filters"]
+    if not isinstance(filters, dict) or set(filters) != {
+        "archive_state",
+        "entity",
+        "time_bucket",
+    }:
+        raise ValueError("request payload has an unexpected filter schema")
+    scalar_names = (
+        "adapter_version",
+        "authentication_subject",
+        "connector_id",
+        "operation",
+        "request_serialization_version",
+        "scope_schema_version",
+        "snapshot_id",
+    )
+    if any(
+        not isinstance(value[name], str) or not value[name]
+        for name in scalar_names
+    ) or any(
+        not isinstance(filters[name], str) or not filters[name]
+        for name in ("archive_state", "entity", "time_bucket")
+    ):
+        raise ValueError("request payload string fields must all be non-empty")
+    cursor = value["cursor"]
+    if not isinstance(cursor, (str, int)) or isinstance(cursor, bool):
+        raise ValueError("request payload cursor must be a string or integer")
+    if json.dumps(
+        value,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ) != payload:
+        raise ValueError("request payload is not in the exact canonical form")
+    return RequestKey(
+        SourceIdentity(
+            value["connector_id"],
+            value["operation"],
+            value["authentication_subject"],
+            value["scope_schema_version"],
+            value["adapter_version"],
+            value["request_serialization_version"],
+        ),
+        ScopeCell(
+            filters["entity"],
+            filters["time_bucket"],
+            filters["archive_state"],
+        ),
+        cursor,
+        value["snapshot_id"],
+    )
+
+
+def request_payload_digest(payload: str) -> str:
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+@dataclass(frozen=True)
+class Record:
+    record_id: str
+    cell: ScopeCell
+    matches_target: bool
+    compliant: bool
+
+
+@dataclass(frozen=True)
+class Claim:
+    claim_id: str
+    quantifier: Quantifier
+    predicate: Literal["matches_target", "compliant"]
+    scope: tuple[ScopeCell, ...]
+    snapshot_id: str
+    source: SourceIdentity
+    text: str = ""
+    initial_cursor: Cursor = 0
+
+    def __post_init__(self) -> None:
+        if not self.scope:
+            raise ValueError("claim scope must not be empty")
+        if len(set(self.scope)) != len(self.scope):
+            raise ValueError("claim scope contains duplicate joint cells")
+        if not self.snapshot_id:
+            raise ValueError("claim snapshot_id must not be empty")
+        if not isinstance(self.initial_cursor, (str, int)) or isinstance(
+            self.initial_cursor, bool
+        ):
+            raise ValueError("claim initial_cursor must be a string or integer")
+
+    @property
+    def digest(self) -> str:
+        return _canonical_digest(
+            {
+                "claim_id": self.claim_id,
+                "quantifier": self.quantifier,
+                "predicate": self.predicate,
+                "scope": [cell.key for cell in sorted(self.scope)],
+                "snapshot_id": self.snapshot_id,
+                "source": asdict(self.source),
+                "text": self.text,
+                "initial_cursor": self.initial_cursor,
+            }
+        )
+
+    @property
+    def request_binding_digest(self) -> str:
+        return _canonical_digest(
+            {
+                "binding_rule": "payload-authoritative-cross-representation-v2",
+                "source": asdict(self.source),
+                "scope": [cell.key for cell in sorted(self.scope)],
+                "snapshot_id": self.snapshot_id,
+                "initial_cursor": self.initial_cursor,
+            }
+        )
+
+    def predicate_holds(self, record: Record) -> bool:
+        return bool(getattr(record, self.predicate))
+
+    def witness_for(self, record: Record) -> Decision | None:
+        holds = self.predicate_holds(record)
+        if self.quantifier == "exists" and holds:
+            return "TRUE"
+        if self.quantifier == "forall" and not holds:
+            return "FALSE"
+        return None
+
+    @property
+    def coverage_decision(self) -> Decision:
+        return "FALSE" if self.quantifier == "exists" else "TRUE"
+
+
+@dataclass(frozen=True)
+class Observation:
+    observation_id: str
+    connector_id: str
+    cell: ScopeCell
+    cursor: Cursor
+    next_cursor: Cursor | None
+    records: tuple[Record, ...]
+    snapshot_id: str
+    status: Literal["ok", "permission_denied", "error"] = "ok"
+    attested: bool = True
+    permission_complete: bool = True
+    silently_truncated: bool = False
+    query_signature: str = ""
+    authentication_subject: str = ""
+    scope_schema_version: str = ""
+    adapter_version: str = ""
+    request_serialization_version: str = ""
+    request_payload: str = ""
+
+    def __post_init__(self) -> None:
+        SourceIdentity(
+            self.connector_id,
+            self.query_signature,
+            self.authentication_subject,
+            self.scope_schema_version,
+            self.adapter_version,
+            self.request_serialization_version,
+        )
+        if not self.snapshot_id:
+            raise ValueError("observation snapshot_id must not be empty")
+        if not isinstance(self.cursor, (str, int)) or isinstance(self.cursor, bool):
+            raise ValueError("observation cursor must be a string or integer")
+        if self.next_cursor is not None and (
+            not isinstance(self.next_cursor, (str, int))
+            or isinstance(self.next_cursor, bool)
+        ):
+            raise ValueError("observation next_cursor must be a string or integer")
+
+    @property
+    def source(self) -> SourceIdentity:
+        return SourceIdentity(
+            self.connector_id,
+            self.query_signature,
+            self.authentication_subject,
+            self.scope_schema_version,
+            self.adapter_version,
+            self.request_serialization_version,
+        )
+
+    @property
+    def metadata_request_key(self) -> RequestKey:
+        return RequestKey(self.source, self.cell, self.cursor, self.snapshot_id)
+
+    @property
+    def payload_request_key(self) -> RequestKey:
+        return parse_canonical_request_payload(self.request_payload)
+
+    @property
+    def digest(self) -> str:
+        return _canonical_digest(
+            {
+                "observation_id": self.observation_id,
+                "source": asdict(self.source),
+                "request_payload": self.request_payload,
+                "request_payload_digest": request_payload_digest(self.request_payload),
+                "cell": self.cell.key,
+                "cursor": self.cursor,
+                "next_cursor": self.next_cursor,
+                "records": [
+                    {
+                        "record_id": record.record_id,
+                        "cell": record.cell.key,
+                        "matches_target": record.matches_target,
+                        "compliant": record.compliant,
+                    }
+                    for record in self.records
+                ],
+                "snapshot_id": self.snapshot_id,
+                "status": self.status,
+                "attested": self.attested,
+                "permission_complete": self.permission_complete,
+                "silently_truncated": self.silently_truncated,
+            }
+        )
+
+
+@dataclass(frozen=True)
+class RepairObligation:
+    missing_cells: tuple[ScopeCell, ...]
+    next_cursors: tuple[tuple[ScopeCell, Cursor], ...]
+    blocked_cells: tuple[ScopeCell, ...]
+    conflicted_cells: tuple[ScopeCell, ...]
+    reason: str
+
+
+@dataclass(frozen=True)
+class CoverageCertificate:
+    schema_version: int
+    claim_digest: str
+    source_identity_digest: str
+    request_binding_digest: str
+    decision: Decision
+    proof_type: Literal[
+        "positive_witness",
+        "counterexample_witness",
+        "joint_scope_coverage",
+        "insufficient_coverage",
+    ]
+    audit_observation_digests: tuple[str, ...]
+    observation_digests: tuple[str, ...]
+    covered_cells: tuple[ScopeCell, ...]
+    missing_cells: tuple[ScopeCell, ...]
+    witness_record_id: str | None
+    snapshot_id: str
+    reason: str
+
+    @property
+    def digest(self) -> str:
+        return _canonical_digest(
+            {
+                "schema_version": self.schema_version,
+                "claim_digest": self.claim_digest,
+                "source_identity_digest": self.source_identity_digest,
+                "request_binding_digest": self.request_binding_digest,
+                "decision": self.decision,
+                "proof_type": self.proof_type,
+                "audit_observation_digests": list(
+                    self.audit_observation_digests
+                ),
+                "observation_digests": list(self.observation_digests),
+                "covered_cells": [cell.key for cell in self.covered_cells],
+                "missing_cells": [cell.key for cell in self.missing_cells],
+                "witness_record_id": self.witness_record_id,
+                "snapshot_id": self.snapshot_id,
+                "reason": self.reason,
+            }
+        )
+
+
+@dataclass(frozen=True)
+class Evaluation:
+    decision: Decision
+    certificate: CoverageCertificate
+    obligation: RepairObligation | None
+
+
+@dataclass(frozen=True)
+class CellTrace:
+    cell: ScopeCell
+    complete: bool
+    witness_pages: tuple[Observation, ...]
+    next_cursor: Cursor
+    chain_digests: tuple[str, ...]
+    evidence_digests: tuple[str, ...]
+    blocked: bool
+    conflicted: bool
+    reason: str
+
+
+@dataclass(frozen=True)
+class ObservationPreflight:
+    relevant_observations: tuple[Observation, ...]
+    conflicting_observations: tuple[Observation, ...]
+
+    @property
+    def audit_digests(self) -> tuple[str, ...]:
+        return tuple(sorted(item.digest for item in self.relevant_observations))
+
+
+def _key_targets_claim(key: RequestKey, claim: Claim) -> bool:
+    return (
+        key.source == claim.source
+        and key.cell in claim.scope
+        and key.snapshot_id == claim.snapshot_id
+    )
+
+
+def _records_target_claim(
+    item: Observation,
+    key: RequestKey,
+    claim: Claim,
+) -> bool:
+    return (
+        key.source == claim.source
+        and key.snapshot_id == claim.snapshot_id
+        and any(record.cell in claim.scope for record in item.records)
+    )
+
+
+def _preflight_observations(
+    claim: Claim,
+    observations: Sequence[Observation],
+) -> ObservationPreflight:
+    """Validate cross-representation coherence before any routing or witness scan."""
+
+    relevant: list[Observation] = []
+    conflicts: list[Observation] = []
+    for item in observations:
+        if not item.attested:
+            continue
+        outer = item.metadata_request_key
+        try:
+            inner = item.payload_request_key
+        except ValueError:
+            if _key_targets_claim(outer, claim) or _records_target_claim(
+                item, outer, claim
+            ):
+                relevant.append(item)
+                conflicts.append(item)
+            continue
+        outer_relevant = _key_targets_claim(outer, claim) or _records_target_claim(
+            item, outer, claim
+        )
+        inner_relevant = _key_targets_claim(inner, claim) or _records_target_claim(
+            item, inner, claim
+        )
+        if not (outer_relevant or inner_relevant):
+            continue
+        relevant.append(item)
+        if outer != inner or any(record.cell != inner.cell for record in item.records):
+            conflicts.append(item)
+    return ObservationPreflight(tuple(relevant), tuple(conflicts))
+
+
+def _unknown_reason(
+    traces: dict[ScopeCell, CellTrace], missing: tuple[ScopeCell, ...]
+) -> str:
+    if any(traces[cell].conflicted for cell in missing):
+        return "evidence conflict prevents a source-bound page-chain proof"
+    if any(traces[cell].blocked for cell in missing):
+        return "some claim cells are permission-blocked"
+    return "fetch the missing source-bound page chains for the exact joint cells"
+
+
+def _request_matches_claim(item: Observation, cell: ScopeCell, claim: Claim) -> bool:
+    expected = RequestKey(claim.source, cell, item.cursor, claim.snapshot_id)
+    try:
+        return (
+            item.metadata_request_key == expected
+            and item.payload_request_key == expected
+        )
+    except ValueError:
+        return False
+
+
+def _trace_cell(
+    cell: ScopeCell,
+    observations: Sequence[Observation],
+    claim: Claim,
+) -> CellTrace:
+    preflight = _preflight_observations(claim, observations)
+    if preflight.conflicting_observations:
+        return CellTrace(
+            cell,
+            False,
+            (),
+            claim.initial_cursor,
+            (),
+            preflight.audit_digests,
+            False,
+            True,
+            "cross_representation_request_conflict",
+        )
+    candidates = [
+        item
+        for item in preflight.relevant_observations
+        if item.payload_request_key.cell == cell
+    ]
+    expected_source = candidates
+    blocked = any(
+        item.status == "permission_denied" or not item.permission_complete
+        for item in expected_source
+    )
+    invalid_request_pages = [
+        item
+        for item in expected_source
+        if item.status == "ok"
+        and item.attested
+        and item.permission_complete
+        and item.snapshot_id == claim.snapshot_id
+        and not _request_matches_claim(item, cell, claim)
+    ]
+    evidence_digests = tuple(sorted(item.digest for item in candidates))
+    if invalid_request_pages:
+        return CellTrace(
+            cell,
+            False,
+            (),
+            claim.initial_cursor,
+            (),
+            evidence_digests,
+            blocked,
+            True,
+            "request_binding_mismatch",
+        )
+    compatible = [
+        item
+        for item in expected_source
+        if item.status == "ok"
+        and item.attested
+        and item.permission_complete
+        and item.snapshot_id == claim.snapshot_id
+        and _request_matches_claim(item, cell, claim)
+    ]
+
+    if any(record.cell != item.cell for item in compatible for record in item.records):
+        return CellTrace(
+            cell,
+            False,
+            (),
+            claim.initial_cursor,
+            (),
+            evidence_digests,
+            blocked,
+            True,
+            "record_cell_mismatch",
+        )
+
+    grouped: dict[Cursor, list[Observation]] = {}
+    for item in compatible:
+        grouped.setdefault(item.cursor, []).append(item)
+    for cursor, group in grouped.items():
+        if len({item.digest for item in group}) > 1:
+            return CellTrace(
+                cell,
+                False,
+                (),
+                cursor,
+                (),
+                evidence_digests,
+                blocked,
+                True,
+                "conflicting_cursor_pages",
+            )
+
+    pages = {
+        cursor: sorted(group, key=lambda item: item.digest)[0]
+        for cursor, group in grouped.items()
+    }
+    cursor: Cursor = claim.initial_cursor
+    seen: set[Cursor] = set()
+    chain: list[Observation] = []
+    while True:
+        if cursor in seen:
+            return CellTrace(
+                cell,
+                False,
+                (),
+                cursor,
+                tuple(item.digest for item in chain),
+                evidence_digests,
+                blocked,
+                True,
+                "cursor_cycle",
+            )
+        page = pages.get(cursor)
+        if page is None:
+            if chain:
+                reason = "missing_page"
+            elif candidates and not expected_source:
+                reason = "source_identity_mismatch"
+            elif expected_source and not compatible:
+                reason = "no_compatible_attested_page"
+            else:
+                reason = "permission_gap" if blocked else "missing_page"
+            return CellTrace(
+                cell,
+                False,
+                tuple(chain),
+                cursor,
+                tuple(item.digest for item in chain),
+                evidence_digests,
+                blocked,
+                False,
+                reason,
+            )
+        seen.add(cursor)
+        chain.append(page)
+        if page.silently_truncated:
+            return CellTrace(
+                cell,
+                False,
+                tuple(chain),
+                cursor,
+                tuple(item.digest for item in chain),
+                evidence_digests,
+                blocked,
+                False,
+                "connector_declared_untrustworthy_truncation",
+            )
+        if page.next_cursor is None:
+            orphaned = set(pages) - seen
+            if orphaned:
+                return CellTrace(
+                    cell,
+                    False,
+                    (),
+                    sorted(orphaned, key=_cursor_sort_key)[0],
+                    tuple(item.digest for item in chain),
+                    evidence_digests,
+                    blocked,
+                    True,
+                    "orphan_page_conflict",
+                )
+            return CellTrace(
+                cell,
+                True,
+                tuple(chain),
+                cursor,
+                tuple(item.digest for item in chain),
+                evidence_digests,
+                blocked,
+                False,
+                "complete_source_bound_page_chain",
+            )
+        cursor = page.next_cursor
+
+
+def _certificate(
+    claim: Claim,
+    observations: Sequence[Observation],
+    *,
+    decision: Decision,
+    proof_type: Literal[
+        "positive_witness",
+        "counterexample_witness",
+        "joint_scope_coverage",
+        "insufficient_coverage",
+    ],
+    observation_digests: tuple[str, ...],
+    covered_cells: tuple[ScopeCell, ...],
+    missing_cells: tuple[ScopeCell, ...],
+    witness_record_id: str | None,
+    reason: str,
+) -> CoverageCertificate:
+    return CoverageCertificate(
+        schema_version=5,
+        claim_digest=claim.digest,
+        source_identity_digest=claim.source.digest,
+        request_binding_digest=claim.request_binding_digest,
+        decision=decision,
+        proof_type=proof_type,
+        audit_observation_digests=_preflight_observations(
+            claim, observations
+        ).audit_digests,
+        observation_digests=observation_digests,
+        covered_cells=covered_cells,
+        missing_cells=missing_cells,
+        witness_record_id=witness_record_id,
+        snapshot_id=claim.snapshot_id,
+        reason=reason,
+    )
+
+
+def evaluate_claim(claim: Claim, observations: Sequence[Observation]) -> Evaluation:
+    preflight = _preflight_observations(claim, observations)
+    if preflight.conflicting_observations:
+        missing = tuple(sorted(claim.scope))
+        reason = "evidence conflict prevents a source-bound page-chain proof"
+        obligation = RepairObligation(
+            missing_cells=missing,
+            next_cursors=(),
+            blocked_cells=(),
+            conflicted_cells=missing,
+            reason=reason,
+        )
+        certificate = _certificate(
+            claim,
+            observations,
+            decision="UNKNOWN",
+            proof_type="insufficient_coverage",
+            observation_digests=preflight.audit_digests,
+            covered_cells=(),
+            missing_cells=missing,
+            witness_record_id=None,
+            reason=reason,
+        )
+        return Evaluation("UNKNOWN", certificate, obligation)
+    traces = {
+        cell: _trace_cell(cell, observations, claim)
+        for cell in sorted(claim.scope)
+    }
+    covered = tuple(cell for cell, trace in traces.items() if trace.complete)
+    missing = tuple(cell for cell, trace in traces.items() if not trace.complete)
+
+    for cell in sorted(traces):
+        trace = traces[cell]
+        if trace.conflicted:
+            continue
+        pages = sorted(
+            trace.witness_pages,
+            key=lambda item: (_cursor_sort_key(item.cursor), item.digest),
+        )
+        for observation in pages:
+            for record in observation.records:
+                if record.cell != observation.cell or record.cell not in claim.scope:
+                    continue
+                decision = claim.witness_for(record)
+                if decision is None:
+                    continue
+                proof_type = (
+                    "positive_witness"
+                    if decision == "TRUE"
+                    else "counterexample_witness"
+                )
+                certificate = _certificate(
+                    claim,
+                    observations,
+                    decision=decision,
+                    proof_type=proof_type,
+                    observation_digests=(observation.digest,),
+                    covered_cells=covered,
+                    missing_cells=missing,
+                    witness_record_id=record.record_id,
+                    reason="a source-bound in-scope attested record decides the claim",
+                )
+                return Evaluation(decision, certificate, None)
+
+    if not missing:
+        decision = claim.coverage_decision
+        all_chain_digests = tuple(
+            digest
+            for cell in sorted(traces)
+            for digest in traces[cell].chain_digests
+        )
+        certificate = _certificate(
+            claim,
+            observations,
+            decision=decision,
+            proof_type="joint_scope_coverage",
+            observation_digests=all_chain_digests,
+            covered_cells=covered,
+            missing_cells=(),
+            witness_record_id=None,
+            reason="complete source-bound page chains cover the exact joint claim scope",
+        )
+        return Evaluation(decision, certificate, None)
+
+    blocked = tuple(cell for cell in missing if traces[cell].blocked)
+    conflicted = tuple(cell for cell in missing if traces[cell].conflicted)
+    next_cursors = tuple(
+        (cell, traces[cell].next_cursor)
+        for cell in missing
+        if not traces[cell].blocked and not traces[cell].conflicted
+    )
+    reason = _unknown_reason(traces, missing)
+    obligation = RepairObligation(
+        missing_cells=missing,
+        next_cursors=next_cursors,
+        blocked_cells=blocked,
+        conflicted_cells=conflicted,
+        reason=reason,
+    )
+    all_evidence_digests = tuple(
+        digest
+        for cell in sorted(traces)
+        for digest in traces[cell].evidence_digests
+    )
+    certificate = _certificate(
+        claim,
+        observations,
+        decision="UNKNOWN",
+        proof_type="insufficient_coverage",
+        observation_digests=all_evidence_digests,
+        covered_cells=covered,
+        missing_cells=missing,
+        witness_record_id=None,
+        reason=reason,
+    )
+    return Evaluation("UNKNOWN", certificate, obligation)
+
+
+def next_page_requests(
+    claim: Claim,
+    observations: Sequence[Observation],
+    cells: Iterable[ScopeCell] | None = None,
+) -> tuple[tuple[ScopeCell, Cursor], ...]:
+    """Return one source-bound continuation per incomplete, repairable cell."""
+
+    requested_cells = claim.scope if cells is None else tuple(cells)
+    trace_claim = claim
+    if not set(requested_cells) <= set(claim.scope):
+        trace_claim = replace(
+            claim,
+            scope=tuple(sorted(set(claim.scope) | set(requested_cells))),
+        )
+    requests: list[tuple[ScopeCell, Cursor]] = []
+    for cell in sorted(set(requested_cells)):
+        trace = _trace_cell(cell, observations, trace_claim)
+        if not trace.complete and not trace.blocked and not trace.conflicted:
+            requests.append((cell, trace.next_cursor))
+    return tuple(requests)
+
+
+def complete_joint_cells(
+    claim: Claim,
+    observations: Sequence[Observation],
+    cells: Iterable[ScopeCell] | None = None,
+) -> tuple[ScopeCell, ...]:
+    requested_cells = claim.scope if cells is None else tuple(cells)
+    trace_claim = claim
+    if not set(requested_cells) <= set(claim.scope):
+        trace_claim = replace(
+            claim,
+            scope=tuple(sorted(set(claim.scope) | set(requested_cells))),
+        )
+    return tuple(
+        cell
+        for cell in sorted(set(requested_cells))
+        if _trace_cell(cell, observations, trace_claim).complete
+    )
+
+
+def verify_certificate(
+    claim: Claim,
+    observations: Sequence[Observation],
+    certificate: CoverageCertificate,
+) -> bool:
+    """Verify against a separately implemented certificate specification."""
+
+    from independent_certificate_verifier import verify_certificate_independently
+
+    return verify_certificate_independently(claim, observations, certificate)
+
+
+def marginal_coverage_would_accept(
+    claim_scope: Iterable[ScopeCell],
+    observed_complete_cells: Iterable[ScopeCell],
+) -> bool:
+    """The deliberately unsound marginal checker retained only as a foil."""
+
+    claim_cells = tuple(claim_scope)
+    observed_cells = tuple(observed_complete_cells)
+    return (
+        {cell.entity for cell in claim_cells}
+        <= {cell.entity for cell in observed_cells}
+        and {cell.time_bucket for cell in claim_cells}
+        <= {cell.time_bucket for cell in observed_cells}
+        and {cell.archive_state for cell in claim_cells}
+        <= {cell.archive_state for cell in observed_cells}
+    )
+
+
+def cell_to_dict(cell: ScopeCell) -> dict[str, str]:
+    return asdict(cell)

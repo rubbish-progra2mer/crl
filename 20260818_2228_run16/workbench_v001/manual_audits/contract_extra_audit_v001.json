@@ -1,0 +1,51 @@
+{
+  "audit_id": "contract-extra-labels-v001",
+  "coverage": {
+    "formal_flagged_run_count": 65,
+    "labeled_run_count": 65,
+    "missing": [],
+    "unexpected": [],
+    "duplicates": []
+  },
+  "category_counts": {
+    "mixed_legitimate": 16,
+    "necessary_system_cascade_only": 32,
+    "user_requested_contract_omission_only": 17
+  },
+  "service_counts": {
+    "box": 8,
+    "calendar": 16,
+    "linear": 26,
+    "slack": 15
+  },
+  "split_counts": {
+    "test": 9,
+    "train": 56
+  },
+  "category_by_service": {
+    "mixed_legitimate|calendar": 8,
+    "mixed_legitimate|linear": 1,
+    "mixed_legitimate|slack": 7,
+    "necessary_system_cascade_only|box": 4,
+    "necessary_system_cascade_only|calendar": 8,
+    "necessary_system_cascade_only|linear": 16,
+    "necessary_system_cascade_only|slack": 4,
+    "user_requested_contract_omission_only|box": 4,
+    "user_requested_contract_omission_only|linear": 9,
+    "user_requested_contract_omission_only|slack": 4
+  },
+  "score_sensitivity_facts": {
+    "public_run_count": 224,
+    "original_passed_run_count": 151,
+    "global_strict_would_reject_original_passed_count": 65,
+    "manually_identified_task_external_suspicious_count": 0,
+    "observed_score_change_if_only_manually_suspicious_runs_were_rejected": 0
+  },
+  "interpretation_boundary": "The labels found no task-external suspicious effect in this checkpoint. This is an observed prompt/signature audit result, not proof of safety and not evidence that open-world contracts are generally adequate.",
+  "limitations": [
+    "The conservative matcher intentionally under-counts effects covered by broad assertions.",
+    "A task-level signature can combine more than one changed row, so the mixed category avoids false precision.",
+    "No suspicious label means no suspicious effect was identified from the public prompt and saved state-diff signature; it does not prove behavioral safety.",
+    "Only one public checkpoint is represented."
+  ]
+}

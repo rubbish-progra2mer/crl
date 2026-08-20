@@ -1,0 +1,238 @@
+{
+  "artifact_class": "scratch",
+  "claim_boundary": "The compiler sees only public tool docs and the instantiated write call. This one-task deterministic replay tests automatic plan construction and carrier feasibility, not generalization or method-paper sufficiency.",
+  "created_at_utc": "2026-08-13T08:45:14.693594+00:00",
+  "benchmark": {
+    "name": "AppWorld",
+    "git_commit": "a072b7a86e7c1d5b1d7175659d750ebb9b79f10a",
+    "dataset": "dev",
+    "task_id": "37a8675_1",
+    "official_terminal_tests": 6
+  },
+  "compiler_inputs": [
+    "public API name/method/path/description",
+    "public parameter and response schemas",
+    "instantiated write arguments",
+    "observed write response"
+  ],
+  "compiler_forbidden_inputs": [
+    "service source code",
+    "task ground truth",
+    "evaluation program",
+    "historical correct traces"
+  ],
+  "conditions": [
+    {
+      "condition": "clean",
+      "toolgate_accepts": true,
+      "injected": false,
+      "compiled_plan": null,
+      "witness_result": null,
+      "replayed": false,
+      "write_responses": [
+        {
+          "call_index": 1,
+          "response": {
+            "message": "Your payment card does not have $91.00 to make this transaction."
+          },
+          "executed": true
+        },
+        {
+          "call_index": 2,
+          "response": {
+            "message": "Your payment card does not have $91.00 to make this transaction."
+          },
+          "executed": true
+        },
+        {
+          "call_index": 3,
+          "response": {
+            "message": "Your payment card does not have $91.00 to make this transaction."
+          },
+          "executed": true
+        },
+        {
+          "call_index": 4,
+          "response": {
+            "message": "Sent money.",
+            "transaction_id": 8216
+          },
+          "executed": true
+        }
+      ],
+      "evaluation": {
+        "success": true,
+        "difficulty": 2,
+        "num_tests": 6
+      },
+      "failed_requirements": [],
+      "execute_message": "Execution successful."
+    },
+    {
+      "condition": "silent_noop",
+      "toolgate_accepts": true,
+      "injected": true,
+      "compiled_plan": null,
+      "witness_result": null,
+      "replayed": false,
+      "write_responses": [
+        {
+          "call_index": 1,
+          "response": {
+            "message": "Your payment card does not have $91.00 to make this transaction."
+          },
+          "executed": true
+        },
+        {
+          "call_index": 2,
+          "response": {
+            "message": "Your payment card does not have $91.00 to make this transaction."
+          },
+          "executed": true
+        },
+        {
+          "call_index": 3,
+          "response": {
+            "message": "Your payment card does not have $91.00 to make this transaction."
+          },
+          "executed": true
+        },
+        {
+          "call_index": 4,
+          "response": {
+            "message": "Sent money.",
+            "transaction_id": 8216
+          },
+          "executed": false
+        }
+      ],
+      "evaluation": {
+        "success": false,
+        "difficulty": 2,
+        "num_tests": 6
+      },
+      "failed_requirements": [
+        "assert model changes match venmo.Notification, venmo.Transaction ignoring venmo.User.",
+        "obtain added, updated, removed venmo.Transaction records using models.changed_records,\nand assert 1 is added, 0 is updated, and 0 is deleted.",
+        "assert the added transaction's receiver_id is private_data.person_venmo_user_id.",
+        "assert the added transaction has amount public_data.payment_amount.",
+        "assert the added transaction is private/public as per public_data.privacy."
+      ],
+      "execute_message": "Execution successful."
+    },
+    {
+      "condition": "silent_noop_with_compiled_witness",
+      "toolgate_accepts": true,
+      "injected": true,
+      "compiled_plan": {
+        "app_name": "venmo",
+        "write_api": "create_transaction",
+        "read_api": "show_transactions",
+        "bindings": [
+          {
+            "parameter": "access_token",
+            "source": "request",
+            "source_field": "access_token",
+            "score": 2.15
+          },
+          {
+            "parameter": "min_amount",
+            "source": "request",
+            "source_field": "amount",
+            "score": 0.85
+          },
+          {
+            "parameter": "max_amount",
+            "source": "request",
+            "source_field": "amount",
+            "score": 0.85
+          },
+          {
+            "parameter": "private",
+            "source": "request",
+            "source_field": "private",
+            "score": 2.15
+          }
+        ],
+        "relations": [
+          {
+            "source_field": "receiver_email",
+            "response_path": [
+              "receiver",
+              "email"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          },
+          {
+            "source_field": "amount",
+            "response_path": [
+              "amount"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          },
+          {
+            "source_field": "private",
+            "response_path": [
+              "private"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          },
+          {
+            "source_field": "description",
+            "response_path": [
+              "description"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          }
+        ],
+        "score": 10.7,
+        "root_is_collection": true,
+        "provenance": "public_tool_docs+instantiated_write_call"
+      },
+      "witness_result": false,
+      "replayed": true,
+      "write_responses": [
+        {
+          "call_index": 1,
+          "response": {
+            "message": "Your payment card does not have $91.00 to make this transaction."
+          },
+          "executed": true
+        },
+        {
+          "call_index": 2,
+          "response": {
+            "message": "Your payment card does not have $91.00 to make this transaction."
+          },
+          "executed": true
+        },
+        {
+          "call_index": 3,
+          "response": {
+            "message": "Your payment card does not have $91.00 to make this transaction."
+          },
+          "executed": true
+        },
+        {
+          "call_index": 4,
+          "response": {
+            "message": "Sent money.",
+            "transaction_id": 8216
+          },
+          "executed": false
+        }
+      ],
+      "evaluation": {
+        "success": true,
+        "difficulty": 2,
+        "num_tests": 6
+      },
+      "failed_requirements": [],
+      "execute_message": "Execution successful."
+    }
+  ]
+}

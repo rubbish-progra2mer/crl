@@ -1,0 +1,9 @@
+{
+  "budget": {"stated": true, "enforced": true},
+  "house_rule": {"stated": true, "enforced": true},
+  "room_type": {"stated": true, "enforced": true},
+  "cuisine": {"stated": false, "enforced": false},
+  "transportation": {"stated": true, "enforced": true},
+  "distinct_restaurants": {"stated": true, "enforced": true},
+  "distinct_attractions": {"stated": true, "enforced": true}
+}

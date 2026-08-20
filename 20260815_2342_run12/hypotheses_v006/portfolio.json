@@ -1,0 +1,73 @@
+{
+  "created_at_utc": "2026-08-16T06:33:42.682985Z",
+  "hypotheses": [
+    {
+      "alternative_explanations": [
+        "AMBIGUOUS 一词显式请求谨慎，测到的只是词义遵循而非可靠性缺陷",
+        "SUCCESS 与 AMBIGUOUS 回执长度或语气不匹配",
+        "模型把 read_state 当作任务要求，而非自主核验",
+        "commit_downstream 的危险性在提示中泄漏了正确策略",
+        "效果只存在于小型本地模型或单一写入域",
+        "无效果状态可以从后续提交返回中被动发现，使主动读回指标失真",
+        "2×2 评价是已有故障注入框架的平凡配置而非论文级基准贡献"
+      ],
+      "changed_computation": {
+        "baseline": "常见故障基准比较正常成功轨迹与故障轨迹，响应表面和外部效果随条件共同改变；评价只能测联合扰动后的恢复率。",
+        "budget_effect": "四格最大轮数与工具调用预算相同；主因果评价不强制增加调用。effect-witness 诊断基线至多增加一次机械读回，并与等调用预算的非绑定读回提示分开报告。",
+        "information_available": "代理在四格获得相同工具定义、任务要求和读状态能力；唯一表面差异是回执状态字段及其最短同模板释义，隐藏评分器掌握但不泄漏真实效果。",
+        "intervention": "建立响应标签（SUCCESS/AMBIGUOUS）×真实效果（applied/silent-no-op）的 2×2 随机干预；四格共享完全相同的任务、工具接口、写调用与后续动作空间，由隐藏状态评分器独立记录核验调用、危险提交和真实完成。可选诊断基线只在高影响 SUCCESS 写入后要求一次独立 effect witness，用于验证测得效应是否真由漏验路径中介，不把全量后置条件门宣称为新方法。",
+        "timing": "写工具完成后、任何依赖该写状态的提交动作或最终完成声明之前，记录代理是否主动调用独立读工具。"
+      },
+      "created_at_utc": "2026-08-16T06:33:58.047747Z",
+      "descriptors": {
+        "budget_class": "四格同预算；诊断见证单独计费",
+        "computation_stage": "写调用后的信念更新与依赖动作选择",
+        "evaluation_mode": "配对 2×2 随机干预与隐藏状态机械评分",
+        "information_source": "工具回执与可选独立状态读取",
+        "intervention_family": "响应标签×真实效果正交因果干预",
+        "problem_family": "工具回执与外部效果解耦下的选择性漏验",
+        "timing_class": "副作用回执后、依赖提交前"
+      },
+      "falsifier": "满足任一条件即淘汰：至少两个本地模型跨多个状态写入域都没有稳定的 SUCCESS 对比 AMBIGUOUS 核验率差或危险提交差；效应只由一条具体措辞、解析器、工具说明或模型规模解释；加入状态中性的标签模板后效应消失；最近先行已独立随机化响应标签与效果并报告同一策略指标；或效应虽存在但很小、不能在高影响下游动作上形成独立评价价值。",
+      "hypothesis_id": "h-008",
+      "lineage_note": "只继承 h-001 最近先行审计后明确保留的未测残差；h-001 关于一般 false-success 与后置条件验证的方法主张继续保持死亡。本候选不主张首次发现静默无效果、成功回执信任或一般状态读回，而只检验在外部效果固定时，肯定式 SUCCESS 标签是否独立改变核验与后续提交策略。",
+      "literature_refs": [
+        "P040",
+        "P074",
+        "arXiv:2608.02645",
+        "arXiv:2607.11098",
+        "arXiv:2607.10059",
+        "OpenReview:j7YsSnA64D"
+      ],
+      "mechanism_claim": "SUCCESS 不是被动描述，而可能充当终止证据并抑制代理的信息获取策略；只有把响应标签与真实效果独立随机化，才能从 silent-no-op 的一般困难中识别该政策效应。若存在，面向显式成功的效果见证应选择性消除无效果格中的危险提交，而不要求把所有模糊回执统一视为失败。",
+      "minimal_killer_experiment": "构造至少三个写入域和十二个任务模板。环境先执行同一写调用，再按随机格点独立设置 effect∈{applied,no-op} 与 response∈{SUCCESS,AMBIGUOUS}；代理随后可 read_state、commit_downstream 或结束。对 qwen3:4b 与 qwen3:8b 使用确定性采样和配对任务，机械计算读回率、无效果条件危险提交率、真实完成率、响应主效应及响应×效果交互，并保留逐轨迹日志。先以最小每格重复做杀手试验，效应不稳即停止。",
+      "nearest_prior_risk": "最高风险是 Failing Tools 已把 success-response trust 列为 FM1，并在 218 个有状态故障情景中要求确认调用；AgentAbstain 已用 263 个配对任务、42 个可执行环境和不可逆提交检查评价运行时工具失败下是否停止；AgentCheck 已能固定缓存响应后注入单点故障；False Success 已大规模刻画状态—完成声明不一致；ToolGate 与 Verified Tool Calls 已覆盖后置条件验证。必须确认这些工作没有把响应标签和效果作为两个独立因子随机化；即便评价差分存活，也不得把一般 success trust、false success、agent abstention 或 postcondition verification 写成新贡献。",
+      "parent_ids": [],
+      "problem": "现有静默工具故障评价通常把回执表面与真实效果一起改变：无效果条件伴随某种故障输出，正常效果条件伴随成功输出。因此，即使观察到智能体信任成功回执，也无法辨别原因究竟是 SUCCESS 标签对策略的因果锚定、无效果场景的其他文本线索，还是一般任务难度。近期的 Verified Tool Calls 虽形式化区分响应通道和效果通道，其算法却对显式 SUCCESS 直接接受，只在 AMBIGUOUS 时读取后置状态。",
+      "revision": 3,
+      "status": "prior_collision",
+      "status_reason": "双模型2×2试验确认SUCCESS驱动直接提交、AMBIGUOUS驱动盲重试，但四格独立读回均为0；该分叉被Failing Tools的FM1与Verified Tool Calls的问题/算法直接占据，剩余正交评价又可由AgentCheck单响应复放和AgentAbstain配对提交框架构造，论文级差分不足。",
+      "target_failure": {
+        "card_ids": [
+          "paper-p040",
+          "failure-confident-completion-without-state-success",
+          "paper-p074",
+          "failure-incomplete-tool-contracts-false-verified-state"
+        ],
+        "evidence_ids": [
+          "ev-p040-failure-core",
+          "ev-p074-missing-schema-true-postcondition",
+          "ev-p074-contract-state-commit"
+        ],
+        "summary": "固定任务、工具模式、前缀轨迹、调用参数、潜在效果和预算，仅把写工具回执从 AMBIGUOUS 改为 SUCCESS；当真实效果为 silent no-op 时，SUCCESS 条件的独立读回核验率显著下降、依赖该状态的危险后续提交率显著上升，并形成响应标签×真实效果交互。"
+      },
+      "title": "肯定式成功回执的因果漏验盲区与响应—效果正交评价",
+      "updated_at_utc": "2026-08-16T06:51:04.537008Z"
+    }
+  ],
+  "revision": 3,
+  "run_id": "20260815_2342_run12",
+  "schema_version": 1,
+  "updated_at_utc": "2026-08-16T06:51:04.537008Z",
+  "version": "v006"
+}

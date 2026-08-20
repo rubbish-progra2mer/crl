@@ -1,0 +1,47 @@
+{
+  "hypothesis_id": "h-v008-002",
+  "title": "目标条件化下游延续等价的局部工具适配器综合",
+  "parent_ids": ["h-v008-001"],
+  "lineage_note": "h-v008-001 的一般跨版本行为等价迁移被 API 迁移谱系吸收后，改变等价对象：不比较完整程序输出，而比较工具响应被下游语言模型智能体消费后产生的实体绑定、分支谓词和合法后续动作。",
+  "problem": "旧、新工具版本可能返回结构不同但对当前任务的后续决策等价，也可能表面字段可映射却改变默认值或实体语义，导致下游智能体走向不同分支；完整响应等价过严，单次终局通过又过松。",
+  "target_failure": {
+    "summary": "迁移验证没有刻画工具观测对后续智能体决策的任务条件化影响，因而误拒绝无害结构变化或误接收会改变后续分支的适配器。",
+    "card_ids": ["failure-plan-cache-semantic-false-positives", "failure-gold-context-does-not-solve-knowledge-use"],
+    "evidence_ids": []
+  },
+  "changed_computation": {
+    "baseline": "以旧新响应逐字段相等、最终任务测试、模式映射，或完整新文档重新规划判断迁移。",
+    "intervention": "从旧成功计划抽取响应到后续参数、实体绑定和分支的动态切片；在配对快照上以切片诱导的合法下一动作/分支签名定义目标条件化延续等价，并反例引导地综合最小返回适配器或新版调用子序列，无法辨识时拒绝。",
+    "information_available": "旧成功计划与其公开轨迹、两版公开工具、可复位开发快照、下游智能体的可见下一动作；不使用隐藏测试终局生成候选。",
+    "timing": "接口升级后的离线迁移阶段，迁移后计划进入真实运行之前。",
+    "budget_effect": "离线增加配对分叉执行与反例测试；运行时只执行迁移后的局部适配器。"
+  },
+  "mechanism_claim": "对任务相关下游延续进行切片和等价判定，能比全响应比较、模式映射和最终测试更准确地区分无害结构变化与会改变智能体分支的语义漂移。",
+  "falsifier": "该目标函数退化为经典程序切片/适配器综合的普通观察等价；公平的 GUPPY/SkillRevise 式执行修复或新文档重新规划达到相同结果；或下一动作签名不比独立终局测试更能预测 held-out 迁移正确性。",
+  "minimal_killer_experiment": "在固定旧计划和本地语言模型上构造参数重命名、返回嵌套、默认值变化与一对多操作拆分，比较全响应相等、模式映射、终局训练测试、文档重规划和延续等价综合在未见快照的独立终局准确率与拒绝率。",
+  "nearest_prior_risk": "程序切片、观察等价、反例引导函数适配器综合、Sprout、M3、GUPPY、SkillRevise、Causal Agent Replay 与动作条件上下文方法可能吸收各组件；必须证明等价对象改变了候选排序或接受集合。",
+  "alternative_explanations": [
+    "收益来自更多配对测试",
+    "下一动作只复现旧计划而不代表任务正确",
+    "动态切片泄漏了任务实现",
+    "候选空间被人工设计得偏向目标适配器",
+    "本地模型对模式名称的表面偏好制造差异"
+  ],
+  "descriptors": {
+    "problem_family": "tool_migration_misjudged_by_response_or_terminal_equivalence",
+    "computation_stage": "offline_local_adapter_synthesis_before_skill_reuse",
+    "intervention_family": "goal_conditioned_downstream_continuation_equivalence",
+    "information_source": "paired_snapshots_old_trace_and_visible_next_actions",
+    "timing_class": "post_upgrade_predeployment",
+    "budget_class": "matched_offline_probe_and_llm_budget",
+    "evaluation_mode": "heldout_independent_terminal_success_and_abstention"
+  },
+  "literature_refs": [
+    "Sprout, OOPSLA 2025",
+    "M3 Semantic API Migrations, ASE 2020",
+    "Counterexample-guided function adaptor synthesis",
+    "GUPPY, arXiv:2411.04387",
+    "SkillRevise, arXiv:2606.01139",
+    "Causal Agent Replay, 2026"
+  ]
+}

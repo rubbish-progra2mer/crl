@@ -1,0 +1,96 @@
+"""Implementation v001: DeepSeek API access (frozen evolution of
+workbench_v001/wb_formalize.py).
+
+Secrets: the API key is read ONLY from the process environment variable
+DEEPSEEK_API_KEY; it never appears in argv, files, or output. All exception
+text passes through `redact` before reaching stdout/stderr; captures are
+frozen into the Review Packet, so redaction here is mandatory.
+"""
+
+from __future__ import annotations
+
+import json
+import os
+import re
+import time
+
+import httpx
+
+API_URL = "https://api.deepseek.com/chat/completions"
+MODEL = "deepseek-chat"
+KEY_PATTERN = re.compile(r"sk-[A-Za-z0-9]{8,}")
+
+
+def redact(text: str) -> str:
+    return KEY_PATTERN.sub("[REDACTED_KEY]", text)
+
+
+def extract_code(content: str) -> str | None:
+    match = re.search(r"```(?:python)?\s*\n(.*?)```", content, re.DOTALL)
+    if match:
+        return match.group(1)
+    if "def add_constraints" in content:
+        lines = [
+            line for line in content.splitlines() if not line.strip().startswith("```")
+        ]
+        return "\n".join(lines)
+    return None
+
+
+def extract_json(content: str) -> dict | None:
+    match = re.search(r"```(?:json)?\s*\n(.*?)```", content, re.DOTALL)
+    text = match.group(1) if match else content
+    start, end = text.find("{"), text.rfind("}")
+    if start < 0 or end <= start:
+        return None
+    try:
+        parsed = json.loads(text[start : end + 1])
+    except json.JSONDecodeError:
+        return None
+    return parsed if isinstance(parsed, dict) else None
+
+
+def call_deepseek(messages: list[dict], *, raw_log, request_id: str,
+                  max_tokens: int = 4000, temperature: float = 0.0,
+                  retries: int = 4) -> dict:
+    api_key = os.environ.get("DEEPSEEK_API_KEY")
+    if not api_key:
+        raise RuntimeError("DEEPSEEK_API_KEY not present in process environment")
+    payload = {
+        "model": MODEL,
+        "messages": messages,
+        "temperature": temperature,
+        "max_tokens": max_tokens,
+        "stream": False,
+    }
+    last_error = "unknown"
+    for attempt in range(retries):
+        try:
+            response = httpx.post(
+                API_URL,
+                json=payload,
+                headers={"Authorization": f"Bearer {api_key}"},
+                timeout=300.0,
+            )
+            if response.status_code == 200:
+                body = response.json()
+                record = {
+                    "request_id": request_id,
+                    "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+                    "endpoint": API_URL,
+                    "requested_model": MODEL,
+                    "response_model": body.get("model"),
+                    "usage": body.get("usage"),
+                    "temperature": temperature,
+                    "max_tokens": max_tokens,
+                    "attempt": attempt,
+                    "body": body,
+                }
+                with open(raw_log, "a", encoding="utf-8") as f:
+                    f.write(json.dumps(record, ensure_ascii=False) + "\n")
+                return body
+            last_error = f"http {response.status_code}: {redact(response.text[:400])}"
+        except Exception as error:  # noqa: BLE001 - transport errors retried
+            last_error = redact(f"{type(error).__name__}: {error}")
+        time.sleep(2 ** attempt)
+    raise RuntimeError(f"deepseek call failed after {retries} attempts: {last_error}")

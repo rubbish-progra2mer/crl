@@ -1,0 +1,69 @@
+{
+  "experiment_id": "delta-contract-screening-v001",
+  "hypothesis_id": "h-delta-contract-001",
+  "claim_ids": ["delta-obligation-local-difference-v001"],
+  "purpose": "mechanism_consistency",
+  "research_question": "在旧成功调用、新接口和相同结构化差分均可见时，只迁移受影响片段并执行差分近邻回归，是否比完整差分提示和一次反思更稳定地恢复演化后的工作流？",
+  "independent_ground_truth": {
+    "description": "24 个任务的目标调用序列、参数值和终局约束在模型调用前由场景生成器冻结；评价器按新接口模式和精确任务语义执行，不使用模型自评。",
+    "external_evidence_ids": ["ev-p069-description-induced-preference", "ev-p040-failure-core"],
+    "external_card_ids": ["paper-p069", "paper-p040"],
+    "external_literature_refs": ["arXiv:2607.14642v1", "arXiv:2608.02650v1", "arXiv:2608.03468v1", "arXiv:2608.03071v1"],
+    "run_local_fact_refs": ["hypotheses_v001/priors/delta-contract-prior-v001/assessment.md", "selection_context_v001.md"]
+  },
+  "primary_metric": "task_success_rate_by_condition",
+  "secondary_metrics": [
+    "schema_valid_rate",
+    "first_attempt_success_rate",
+    "success_rate_by_mutation_family",
+    "near_miss_rejection_rate",
+    "mean_model_calls",
+    "mean_tokens"
+  ],
+  "sampling_unit": "一个冻结的旧成功计划、接口演化和新终局语义组成的配对工作流在一个条件下的一次完整迁移",
+  "dataset": "24 个预注册配对工作流；参数重命名、新必需参数、枚举语义、工具替换、新前置工具、描述语义变化各 4 个",
+  "model": "qwen2.5:7b",
+  "provider": "本机 Ollama",
+  "revision": "Ollama local model identity 845dbda0ea48; temperature=0; num_ctx=6144",
+  "baseline_specs": [
+    "latest：旧成功计划加完整新工具模式，不显式列差分，生成完整新计划",
+    "diff_prompt：与候选获得相同旧计划、新模式和结构化差分，直接生成完整新计划",
+    "reflection：同信息完整计划若失败，获得模式有效性和语义失败反馈后重试一次",
+    "obligation：同信息下只生成受影响旧步骤的替换序列，由确定性代码合并未受影响步骤并检查预注册近邻反例"
+  ],
+  "parity_dimensions": {
+    "information_access": {"status": "matched", "notes": "核心比较 diff_prompt、reflection 与 obligation 均获得任务、旧成功计划、新工具模式和完全相同的结构化差分。"},
+    "tool_capability": {"status": "matched", "notes": "所有条件只输出计划，不执行额外隐藏工具；同一确定性模式与语义评价器评分。"},
+    "model_provider_revision": {"status": "matched", "notes": "所有条件使用同一本机 qwen2.5:7b、零温和固定上下文。"},
+    "sampling_protocol": {"status": "matched", "notes": "各条件覆盖完全相同的 24 个场景，条件顺序固定，种子由场景与条件预先计算。"},
+    "budget": {"status": "different", "notes": "reflection 允许失败后第二次模型调用，obligation 和其他条件只有一次；这使 reflection 获得更强而非更弱预算。"}
+  },
+  "seeds": [16003],
+  "budget_ceiling": "{\"api_calls\": 120, \"tokens\": 180000, \"wall_time_seconds\": 1800}",
+  "expected_signatures": [
+    "latest 在描述语义和新前置工具上出现工作流漂移",
+    "diff_prompt 吸收容易的参数重命名与枚举映射，因此是主要强基线",
+    "若局部义务机制有效，其优势应出现在需要保留任务值并改变受影响片段的场景，且不是只提高模式合法率",
+    "预注册的类型合法旧语义近邻必须被确定性回归门全部拒绝"
+  ],
+  "falsification_rule": "obligation task success 必须至少 0.75，且相对 diff_prompt 至少提高 0.15，near-miss rejection 至少 0.95；任一不满足即本地机制筛选不存活。即使存活，也只表示值得进行公开任务和强先行基线扩大。",
+  "confounders": [
+    "场景为受控合成而非 MCPEvol-Bench 真实服务器",
+    "每种演化仅四个任务表述",
+    "精确计划匹配可能低估语义等价替代计划",
+    "结构化差分由场景给出而非从任意自然语言代码变更自动恢复",
+    "单一本地模型和单种子",
+    "近邻反例由场景生成器预注册，尚未测试自动生成质量"
+  ],
+  "declared_inputs": ["implementation_v001/delta_contract_experiment.py"],
+  "declared_outputs": ["results.json", "metrics-output.json", "stdout.txt", "stderr.txt"],
+  "evidence_fidelity": "SCREENING",
+  "subject_scope": {
+    "models": ["qwen2.5:7b@Ollama"],
+    "tasks": ["24 controlled paired workflow migrations across six interface evolution families"],
+    "datasets": ["Run16 preregistered synthetic delta-contract scenarios"],
+    "seeds": ["16003"],
+    "environment": "Windows 11; local Ollama; deterministic schema and exact semantic evaluator; no paid API"
+  },
+  "independent_implementation_count": 1
+}

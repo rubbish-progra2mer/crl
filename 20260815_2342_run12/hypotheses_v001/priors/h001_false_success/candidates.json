@@ -1,0 +1,725 @@
+{
+  "artifact_kind": "run_local_non_authoritative_prior_candidates",
+  "audit_id": "h001_false_success",
+  "candidates": [
+    {
+      "abstract": "LLM agents can fail silently by asserting task completion when the environment state shows otherwise. We study this failure mode, false success, across two agent benchmarks: 9,876 tau2-bench trajectories from 8 model families and 1,879 AppWorld trajectories from 4 model families with text-independent ground truth. False success is common but varies by setting: 45--48% of failures in single-control tau2-bench domains, 3% in dual-control telecom, and 75.8% among AppWorld self-assessing coding-agent trajectories with explicit status claims. LLM judges fail reliably: no configuration across 5 judges, 5 prompt strategies, and full task specifications exceeds AUROC 0.65 on tau2-bench, and the same judges reach only 0.54 AUROC on AppWorld API-call traces. Judges rely on surface completion proxies -- confident closing language in tau2-bench and coarse action-sequence volume in AppWorld -- rather than verified state changes. Lightweight TF-IDF detectors achieve task-disjoint AUROC 0.83 on tau2-bench and 0.95 on AppWorld, recovering 4--8x more false successes than the best judge at the same flag rate with 3,300x lower latency. These results suggest that production monitoring should use lightweight, domain-calibrated detectors as triage signals rather than relying on LLM judges as the primary monitor for false success.",
+      "authors": [
+        "Laksh Advani"
+      ],
+      "candidate_id": "prior-327b167d0b97e8b6",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2606.09863v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2606.09863v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+tool+agent+false+success+response+silent+execution+failure+postcondition+verification+state+consistency&start=0",
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.09863v1</ns0:id>\n    <ns0:title>From Confident Closing to Silent Failure: Characterizing False Success in LLM Agents</ns0:title>\n    <ns0:updated>2026-06-01T00:13:23Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.09863v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.09863v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>LLM agents can fail silently by asserting task completion when the environment state shows otherwise. We study this failure mode, false success, across two agent benchmarks: 9,876 tau2-bench trajectories from 8 model families and 1,879 AppWorld trajectories from 4 model families with text-independent ground truth. False success is common but varies by setting: 45--48% of failures in single-control tau2-bench domains, 3% in dual-control telecom, and 75.8% among AppWorld self-assessing coding-agent trajectories with explicit status claims. LLM judges fail reliably: no configuration across 5 judges, 5 prompt strategies, and full task specifications exceeds AUROC 0.65 on tau2-bench, and the same judges reach only 0.54 AUROC on AppWorld API-call traces. Judges rely on surface completion proxies -- confident closing language in tau2-bench and coarse action-sequence volume in AppWorld -- rather than verified state changes. Lightweight TF-IDF detectors achieve task-disjoint AUROC 0.83 on tau2-bench and 0.95 on AppWorld, recovering 4--8x more false successes than the best judge at the same flag rate with 3,300x lower latency. These results suggest that production monitoring should use lightweight, domain-calibrated detectors as triage signals rather than relying on LLM judges as the primary monitor for false success.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-01T00:13:23Z</ns0:published>\n    <ns1:comment>Accepted to FAGEN@ICML2026</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Laksh Advani</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "bbf7f6fb8e6e9fbd129e521189baa7520aece0ecc2ca64340966a0f771699847",
+          "source": "arXiv",
+          "source_id": "2606.09863v1",
+          "source_rank": 1
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2606.09863v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2606.09863"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "rank": 1,
+          "source": "arXiv"
+        }
+      ],
+      "title": "From Confident Closing to Silent Failure: Characterizing False Success in LLM Agents",
+      "urls": [
+        "https://arxiv.org/abs/2606.09863v1",
+        "https://arxiv.org/pdf/2606.09863v1"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "As LLM agents increasingly select tools autonomously, their choices among tools with different privileges become safety-relevant. However, prior tool-selection studies focus on safety-agnostic metadata preferences, leaving privilege-sensitive choices underexplored. To address this gap, we study over-privileged tool selection, in which an agent selects or escalates to a higher-privilege tool despite a sufficient lower-privilege alternative. We introduce ToolPrivBench to evaluate whether agents choose higher-privilege tools despite sufficient lower-privilege alternatives, measuring both initial selection and escalation after transient tool failures. Across eight domains and five recurring risk patterns, we find that over-privileged tool selection is common among mainstream LLM agents and is further amplified by transient failures. We further find that general safety alignment does not reliably transfer to least-privilege tool choice, while prompt-level controls provide only limited mitigation under transient failures. We therefore introduce a privilege-aware post-training defense that teaches agents to prefer sufficient lower-privilege tools and escalate only when necessary. Our mitigation experiments show that this defense substantially reduces unnecessary high-privilege tool use while preserving general capabilities.",
+      "authors": [
+        "Kaiyue Yang",
+        "Yuyan Bu",
+        "Jingwei Yi",
+        "Yuchi Wang",
+        "Biyu Zhou",
+        "Juntao Dai",
+        "Songlin Hu",
+        "Yaodong Yang"
+      ],
+      "candidate_id": "prior-9b57c5dc663d8bf3",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2606.20023v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2606.20023v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+tool+agent+false+success+response+silent+execution+failure+postcondition+verification+state+consistency&start=0",
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.20023v2</ns0:id>\n    <ns0:title>When Lower Privileges Suffice: Investigating Over-Privileged Tool Selection in LLM Agents</ns0:title>\n    <ns0:updated>2026-07-07T12:24:40Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.20023v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.20023v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>As LLM agents increasingly select tools autonomously, their choices among tools with different privileges become safety-relevant. However, prior tool-selection studies focus on safety-agnostic metadata preferences, leaving privilege-sensitive choices underexplored. To address this gap, we study over-privileged tool selection, in which an agent selects or escalates to a higher-privilege tool despite a sufficient lower-privilege alternative. We introduce ToolPrivBench to evaluate whether agents choose higher-privilege tools despite sufficient lower-privilege alternatives, measuring both initial selection and escalation after transient tool failures. Across eight domains and five recurring risk patterns, we find that over-privileged tool selection is common among mainstream LLM agents and is further amplified by transient failures. We further find that general safety alignment does not reliably transfer to least-privilege tool choice, while prompt-level controls provide only limited mitigation under transient failures. We therefore introduce a privilege-aware post-training defense that teaches agents to prefer sufficient lower-privilege tools and escalate only when necessary. Our mitigation experiments show that this defense substantially reduces unnecessary high-privilege tool use while preserving general capabilities.</ns0:summary>\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-18T09:54:48Z</ns0:published>\n    <ns1:comment>code: https://github.com/AISafetyHub/agent-tool-selection-bias</ns1:comment>\n    <ns1:primary_category term=\"cs.SE\" />\n    <ns0:author>\n      <ns0:name>Kaiyue Yang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yuyan Bu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jingwei Yi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yuchi Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Biyu Zhou</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Juntao Dai</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Songlin Hu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yaodong Yang</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "bbf7f6fb8e6e9fbd129e521189baa7520aece0ecc2ca64340966a0f771699847",
+          "source": "arXiv",
+          "source_id": "2606.20023v2",
+          "source_rank": 2
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2606.20023v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2606.20023"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "rank": 2,
+          "source": "arXiv"
+        }
+      ],
+      "title": "When Lower Privileges Suffice: Investigating Over-Privileged Tool Selection in LLM Agents",
+      "urls": [
+        "https://arxiv.org/abs/2606.20023v2",
+        "https://arxiv.org/pdf/2606.20023v2"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "Tool-using LLM agents can violate the very policies they are deployed to enforce while appearing to complete the task successfully. In policy-permissive environments, a tool may execute any well-formed call even when the corresponding state transition is forbidden by domain policy. The result is a silent wrong state (a booking cancelled, a passenger count changed, a claim acted on without verification) that neither the tool nor the agent's self-report exposes. We study this failure mode in the $τ^2$-bench airline domain. On a budget agent, 78% of observed failures are silent wrong-state failures with no tool error, and the aggregate failure rate is reproducible across disjoint seeds, not sampling noise. We then evaluate a lightweight intervention: deterministic, read-only pre-execution gates that inspect the proposed call and current state before allowing a write. A four-gate suite raises full-benchmark success from 29.6% to 42.0% on gpt-4o-mini (+12.4pp; paired task-level bootstrap P=0.0012), and the lift reproduces on a disjoint 15-seed set (+12.3pp; P=0.0008). The effect is concentrated where the gates fire: on the 26/50 firing tasks, success rises by +19.2pp, while movement on the 24 non-firing tasks does not exclude zero. Two negative controls (a self-enforcing retail domain and BFCL) bound the mechanism: gates help when tools are policy-permissive and add little where tools already self-enforce. As suggestive evidence, not a central claim, the same failure mode persists at the frontier: gpt-5.2 at default reasoning still attempts policy-violating writes, and the same suite improves success from 61.2% to 71.6% (+10.4pp; P=0.020; n=5, no replication). The contribution is a bounded evaluation and reliability result: deterministic gates do not guarantee task success, but they can deterministically prevent a known class of silent policy-violating writes at the action boundary.",
+      "authors": [
+        "Vikas Reddy",
+        "Sumanth Reddy Challaram",
+        "Abhishek Basu"
+      ],
+      "candidate_id": "prior-45e6a141af3ea19b",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2607.07405v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2607.07405v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+tool+agent+false+success+response+silent+execution+failure+postcondition+verification+state+consistency&start=0",
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2607.07405v2</ns0:id>\n    <ns0:title>Reason Less, Verify More: Deterministic Gates Recover a Silent Policy-Violation Failure Mode in Tool-Using LLM Agents</ns0:title>\n    <ns0:updated>2026-07-11T04:16:22Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2607.07405v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2607.07405v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Tool-using LLM agents can violate the very policies they are deployed to enforce while appearing to complete the task successfully. In policy-permissive environments, a tool may execute any well-formed call even when the corresponding state transition is forbidden by domain policy. The result is a silent wrong state (a booking cancelled, a passenger count changed, a claim acted on without verification) that neither the tool nor the agent's self-report exposes.\n  We study this failure mode in the $τ^2$-bench airline domain. On a budget agent, 78% of observed failures are silent wrong-state failures with no tool error, and the aggregate failure rate is reproducible across disjoint seeds, not sampling noise. We then evaluate a lightweight intervention: deterministic, read-only pre-execution gates that inspect the proposed call and current state before allowing a write. A four-gate suite raises full-benchmark success from 29.6% to 42.0% on gpt-4o-mini (+12.4pp; paired task-level bootstrap P=0.0012), and the lift reproduces on a disjoint 15-seed set (+12.3pp; P=0.0008).\n  The effect is concentrated where the gates fire: on the 26/50 firing tasks, success rises by +19.2pp, while movement on the 24 non-firing tasks does not exclude zero. Two negative controls (a self-enforcing retail domain and BFCL) bound the mechanism: gates help when tools are policy-permissive and add little where tools already self-enforce. As suggestive evidence, not a central claim, the same failure mode persists at the frontier: gpt-5.2 at default reasoning still attempts policy-violating writes, and the same suite improves success from 61.2% to 71.6% (+10.4pp; P=0.020; n=5, no replication). The contribution is a bounded evaluation and reliability result: deterministic gates do not guarantee task success, but they can deterministically prevent a known class of silent policy-violating writes at the action boundary.</ns0:summary>\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CR\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-07-08T13:38:54Z</ns0:published>\n    <ns1:primary_category term=\"cs.AI\" />\n    <ns0:author>\n      <ns0:name>Vikas Reddy</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sumanth Reddy Challaram</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Abhishek Basu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "bbf7f6fb8e6e9fbd129e521189baa7520aece0ecc2ca64340966a0f771699847",
+          "source": "arXiv",
+          "source_id": "2607.07405v2",
+          "source_rank": 3
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2607.07405v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2607.07405"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "rank": 3,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Reason Less, Verify More: Deterministic Gates Recover a Silent Policy-Violation Failure Mode in Tool-Using LLM Agents",
+      "urls": [
+        "https://arxiv.org/abs/2607.07405v2",
+        "https://arxiv.org/pdf/2607.07405v2"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "Large Language Model (LLM) agents rely on external tools to perform multistage tasks. Existing agent frameworks typically assume that tool calls are atomic and return binary success or failure signals. However, real-world systems exhibit non-atomic behaviors such as timeouts after dispatch, delayed visibility, and partial state updates. These mismatches lead to reliability issues including duplicate actions, task success, and unnecessary tool executions. A lightweight, verification-aware tool wrapper is introduced that augments tool calls with postcondition verification, verify-before-retry logic, and idempotency keys. The approach is evaluated in a controlled simulated environment with injected non-atomic failures across multiple task templates. The results demonstrate that the proposed method significantly reduces duplicate actions, while maintaining comparable task success rates. Overall, the findings suggest that strengthening tool interaction semantics is a promising direction for improving LLM agent reliability without requiring modifications to the underlying language model.",
+      "authors": [
+        "Isham Kalappurackal Mansoor",
+        "Abhishek Phadke",
+        "Pratip Rana"
+      ],
+      "candidate_id": "prior-dce3e31a9bb1049c",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2608.02645v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2608.02645v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+tool+agent+false+success+response+silent+execution+failure+postcondition+verification+state+consistency&start=0",
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2608.02645v1</ns0:id>\n    <ns0:title>Verified Tool Calls Improve LLM Agent Reliability Under Non-Atomic Failures</ns0:title>\n    <ns0:updated>2026-07-31T16:16:14Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2608.02645v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2608.02645v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Large Language Model (LLM) agents rely on external tools to perform multistage tasks. Existing agent frameworks typically assume that tool calls are atomic and return binary success or failure signals. However, real-world systems exhibit non-atomic behaviors such as timeouts after dispatch, delayed visibility, and partial state updates. These mismatches lead to reliability issues including duplicate actions, task success, and unnecessary tool executions. A lightweight, verification-aware tool wrapper is introduced that augments tool calls with postcondition verification, verify-before-retry logic, and idempotency keys. The approach is evaluated in a controlled simulated environment with injected non-atomic failures across multiple task templates. The results demonstrate that the proposed method significantly reduces duplicate actions, while maintaining comparable task success rates. Overall, the findings suggest that strengthening tool interaction semantics is a promising direction for improving LLM agent reliability without requiring modifications to the underlying language model.</ns0:summary>\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-07-31T16:16:14Z</ns0:published>\n    <ns1:primary_category term=\"cs.SE\" />\n    <ns0:author>\n      <ns0:name>Isham Kalappurackal Mansoor</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Abhishek Phadke</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Pratip Rana</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "bbf7f6fb8e6e9fbd129e521189baa7520aece0ecc2ca64340966a0f771699847",
+          "source": "arXiv",
+          "source_id": "2608.02645v1",
+          "source_rank": 4
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2608.02645v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2608.02645"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "rank": 4,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Verified Tool Calls Improve LLM Agent Reliability Under Non-Atomic Failures",
+      "urls": [
+        "https://arxiv.org/abs/2608.02645v1",
+        "https://arxiv.org/pdf/2608.02645v1"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "Large Language Model (LLM) agents significantly extend the capabilities of standalone LLMs, empowering them to interact with external tools (e.g., APIs, functions) and complete various tasks in a self-directed fashion. The challenge of tool use demands that LLMs not only understand user queries and generate answers accurately but also excel in task planning, tool invocation, and result summarization. While traditional works focus on training a single LLM with all these capabilities, performance limitations become apparent, particularly with smaller models. To overcome these challenges, we propose a novel approach that decomposes the aforementioned capabilities into a planner, caller, and summarizer. Each component is implemented by a single LLM that focuses on a specific capability and collaborates with others to accomplish the task. This modular framework facilitates individual updates and the potential use of smaller LLMs for building each capability. To effectively train this framework, we introduce a two-stage training paradigm. First, we fine-tune a backbone LLM on the entire dataset without discriminating sub-tasks, providing the model with a comprehensive understanding of the task. Second, the fine-tuned LLM is used to instantiate the planner, caller, and summarizer respectively, which are continually fine-tuned on respective sub-tasks. Evaluation across various tool-use benchmarks illustrates that our proposed multi-LLM framework surpasses the traditional single-LLM approach, highlighting its efficacy and advantages in tool learning.",
+      "authors": [
+        "Weizhou Shen",
+        "Chenliang Li",
+        "Hongzhan Chen",
+        "Ming Yan",
+        "Xiaojun Quan",
+        "Hehong Chen",
+        "Ji Zhang",
+        "Fei Huang"
+      ],
+      "candidate_id": "prior-4e8f534211cb513c",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2401.07324v3"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2401.07324v3"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+tool+agent+false+success+response+silent+execution+failure+postcondition+verification+state+consistency&start=0",
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2401.07324v3</ns0:id>\n    <ns0:title>Small LLMs Are Weak Tool Learners: A Multi-LLM Agent</ns0:title>\n    <ns0:updated>2024-02-16T12:42:25Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2401.07324v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2401.07324v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Large Language Model (LLM) agents significantly extend the capabilities of standalone LLMs, empowering them to interact with external tools (e.g., APIs, functions) and complete various tasks in a self-directed fashion. The challenge of tool use demands that LLMs not only understand user queries and generate answers accurately but also excel in task planning, tool invocation, and result summarization. While traditional works focus on training a single LLM with all these capabilities, performance limitations become apparent, particularly with smaller models. To overcome these challenges, we propose a novel approach that decomposes the aforementioned capabilities into a planner, caller, and summarizer. Each component is implemented by a single LLM that focuses on a specific capability and collaborates with others to accomplish the task. This modular framework facilitates individual updates and the potential use of smaller LLMs for building each capability. To effectively train this framework, we introduce a two-stage training paradigm. First, we fine-tune a backbone LLM on the entire dataset without discriminating sub-tasks, providing the model with a comprehensive understanding of the task. Second, the fine-tuned LLM is used to instantiate the planner, caller, and summarizer respectively, which are continually fine-tuned on respective sub-tasks. Evaluation across various tool-use benchmarks illustrates that our proposed multi-LLM framework surpasses the traditional single-LLM approach, highlighting its efficacy and advantages in tool learning.</ns0:summary>\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2024-01-14T16:17:07Z</ns0:published>\n    <ns1:comment>On progress, github repo: https://github.com/X-PLUG/Multi-LLM-Agent</ns1:comment>\n    <ns1:primary_category term=\"cs.AI\" />\n    <ns0:author>\n      <ns0:name>Weizhou Shen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chenliang Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hongzhan Chen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ming Yan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xiaojun Quan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hehong Chen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ji Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Fei Huang</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "bbf7f6fb8e6e9fbd129e521189baa7520aece0ecc2ca64340966a0f771699847",
+          "source": "arXiv",
+          "source_id": "2401.07324v3",
+          "source_rank": 5
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2401.07324v3"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2401.07324"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "rank": 5,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Small LLMs Are Weak Tool Learners: A Multi-LLM Agent",
+      "urls": [
+        "https://arxiv.org/abs/2401.07324v3",
+        "https://arxiv.org/pdf/2401.07324v3"
+      ],
+      "venue": null,
+      "year": 2024
+    },
+    {
+      "abstract": "Multi-agent large language model (LLM) systems often rely on verifier and critic agents to suppress hallucinations, but verification is delayed. During this delay, false claims can propagate through the agent network. We model this process as delayed consensus on a graph with grounded corrector nodes. Spectral decomposition by the grounded Laplacian yields a closed-form stability threshold for the verification dose: correction that is too strong or too delayed can turn consensus into oscillation. The most unstable regime occurs when the communication and verification delays coincide; for delay two, the threshold is the inverse golden ratio. The same framework gives a supermodular placement objective and a greedy (1-1/e)-approximation rule for assigning a limited corrector budget to influential nodes. Experiments across five open models confirm the predicted dose-delay oscillations. By contrast, grounded factual answering makes truth an absorbing boundary and eliminates the effect, suggesting that the instability is specific to signed-belief tasks while grounded verification remains stabilizing",
+      "authors": [
+        "Igor Itkin"
+      ],
+      "candidate_id": "prior-ebd8a2fa2867b60f",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2606.27409v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2606.27409v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+tool+agent+false+success+response+silent+execution+failure+postcondition+verification+state+consistency&start=0",
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.27409v1</ns0:id>\n    <ns0:title>Delayed Verification Destabilizes Multi-Agent LLM Belief: Instability Thresholds and Optimal Corrector Placement</ns0:title>\n    <ns0:updated>2026-06-25T10:52:54Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.27409v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.27409v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Multi-agent large language model (LLM) systems often rely on verifier and critic agents to suppress hallucinations, but verification is delayed. During this delay, false claims can propagate through the agent network. We model this process as delayed consensus on a graph with grounded corrector nodes. Spectral decomposition by the grounded Laplacian yields a closed-form stability threshold for the verification dose: correction that is too strong or too delayed can turn consensus into oscillation. The most unstable regime occurs when the communication and verification delays coincide; for delay two, the threshold is the inverse golden ratio. The same framework gives a supermodular placement objective and a greedy (1-1/e)-approximation rule for assigning a limited corrector budget to influential nodes. Experiments across five open models confirm the predicted dose-delay oscillations. By contrast, grounded factual answering makes truth an absorbing boundary and eliminates the effect, suggesting that the instability is specific to signed-belief tasks while grounded verification remains stabilizing</ns0:summary>\n    <ns0:category term=\"cs.MA\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"eess.SY\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-25T10:52:54Z</ns0:published>\n    <ns1:comment>20 pages, 5 figures, 1 table. Code and data: https://github.com/YehudaItkin/delayed-verification-llm</ns1:comment>\n    <ns1:primary_category term=\"cs.MA\" />\n    <ns0:author>\n      <ns0:name>Igor Itkin</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "bbf7f6fb8e6e9fbd129e521189baa7520aece0ecc2ca64340966a0f771699847",
+          "source": "arXiv",
+          "source_id": "2606.27409v1",
+          "source_rank": 6
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2606.27409v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2606.27409"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "rank": 6,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Delayed Verification Destabilizes Multi-Agent LLM Belief: Instability Thresholds and Optimal Corrector Placement",
+      "urls": [
+        "https://arxiv.org/abs/2606.27409v1",
+        "https://arxiv.org/pdf/2606.27409v1"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "Agent skills extend general-purpose agents, but their open format enables skill poisoning: a tampered skill can make an agent run an attacker's command while completing the user's legitimate task. Invocation alone is insufficient; the attack-specific action must complete while that task still passes its verifier. We therefore define Attack Success Rate (ASR) to require a postcondition-validated sandbox action and a passing task verifier in the same trial. Skill files expose a reliability-visibility trade-off between a preloaded but conspicuous YAML frontmatter block and a longer body, where arbitrary placement may be skipped or locally incongruent. We introduce Poise, a position-aware attack that uses context-aware generation to place exactly one benign-looking, command-bearing instruction at a structurally feasible body position. On the eligible Skill-Inject pool with codex+gpt-5.2, Poise achieves 89.3\\% ASR, 28.0 points above a context-free random-placement body baseline and comparable to the 86.7\\% ASR of a high-exposure YAML-only baseline. Under the SkillTester audit, four LLM judges falsely flag 74.6\\% of clean skills on average across both benchmarks, while only 5.6\\% of Poise variants gain a new high-risk alert over their clean counterparts. One locally plausible, command-bearing body instruction therefore matches YAML-level reliability, while the resulting poisoned skill seldom adds a new high-risk finding over its clean counterpart.",
+      "authors": [
+        "Haochang Hao",
+        "Dehai Min",
+        "Zhifang Zhang",
+        "Yunbei Zhang",
+        "Miao Xu",
+        "Yingqiang Ge",
+        "Lu Cheng"
+      ],
+      "candidate_id": "prior-1194b14f2c23ec8b",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2606.07943v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2606.07943v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+tool+agent+false+success+response+silent+execution+failure+postcondition+verification+state+consistency&start=0",
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.07943v2</ns0:id>\n    <ns0:title>Poise: Position-Aware One-Instruction Skill Injection for Silent Execution on LLM Agents</ns0:title>\n    <ns0:updated>2026-08-10T20:16:22Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.07943v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.07943v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Agent skills extend general-purpose agents, but their open format enables skill poisoning: a tampered skill can make an agent run an attacker's command while completing the user's legitimate task. Invocation alone is insufficient; the attack-specific action must complete while that task still passes its verifier. We therefore define Attack Success Rate (ASR) to require a postcondition-validated sandbox action and a passing task verifier in the same trial. Skill files expose a reliability-visibility trade-off between a preloaded but conspicuous YAML frontmatter block and a longer body, where arbitrary placement may be skipped or locally incongruent. We introduce Poise, a position-aware attack that uses context-aware generation to place exactly one benign-looking, command-bearing instruction at a structurally feasible body position. On the eligible Skill-Inject pool with codex+gpt-5.2, Poise achieves 89.3\\% ASR, 28.0 points above a context-free random-placement body baseline and comparable to the 86.7\\% ASR of a high-exposure YAML-only baseline. Under the SkillTester audit, four LLM judges falsely flag 74.6\\% of clean skills on average across both benchmarks, while only 5.6\\% of Poise variants gain a new high-risk alert over their clean counterparts. One locally plausible, command-bearing body instruction therefore matches YAML-level reliability, while the resulting poisoned skill seldom adds a new high-risk finding over its clean counterpart.</ns0:summary>\n    <ns0:category term=\"cs.CR\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-06T02:10:03Z</ns0:published>\n    <ns1:comment>Title changed from \"POISE: Position-Aware Undetectable Skill Injection on LLM Agents\" to \"Poise: Position-Aware One-Instruction Skill Injection for Silent Execution on LLM Agents\"; the manuscript, figures, appendices, and reproducibility details have been updated. 15 pages, 2 figures, 4 tables</ns1:comment>\n    <ns1:primary_category term=\"cs.CR\" />\n    <ns0:author>\n      <ns0:name>Haochang Hao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Dehai Min</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhifang Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yunbei Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Miao Xu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yingqiang Ge</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Lu Cheng</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "bbf7f6fb8e6e9fbd129e521189baa7520aece0ecc2ca64340966a0f771699847",
+          "source": "arXiv",
+          "source_id": "2606.07943v2",
+          "source_rank": 7
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2606.07943v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2606.07943"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "rank": 7,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Poise: Position-Aware One-Instruction Skill Injection for Silent Execution on LLM Agents",
+      "urls": [
+        "https://arxiv.org/abs/2606.07943v2",
+        "https://arxiv.org/pdf/2606.07943v2"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "Large Language Model (LLM) agent systems suffer from failures that occur without external triggers -- no injection, no adversarial input, no resource exhaustion. These silent failures -- unexpected deviations from intended behavior under normal conditions -- are routinely misattributed to bugs or configuration errors. Through systematic analysis of over 40,000 controlled trials and long-term production observations spanning 100,000+ agent interactions, we identify a common structural logic underlying these failures. Building on patterns observed in our experiments, we survey the global research literature on autonomous agent reliability and synthesize 22 intrinsic properties of LLM agent systems across six lifecycle layers: foundation semantics, inter-agent transmission, memory persistence, task execution, feedback correction, and systemic evolution. We demonstrate that whenever a sufficient subset of these properties co-exist, system entropy -- the measurable accumulation of disorder: loss of output consistency, task accuracy, and cross-session coherence -- increases monotonically with interaction rounds. We formalize this as the Entropy Principle: S(t) = S0 * e^(alpha * t), with alpha measured empirically across multiple architectures. We propose the PIG (Physical Integrity Gate) Engine with the ADE (Agent Delivery Engineering) protocol suite as an engineering countermeasure to entropy-driven disorder. Our findings establish silent failure not as a bug to be fixed but as a manifestation of Intelligence Entropy -- a physical constraint to be managed through deterministic governance. We argue that any engineering effort stabilizing the structure and order of agent systems participates in a unified mission: keeping intelligent systems reliable as they grow in scale and complexity.",
+      "authors": [
+        "Dexing Liu"
+      ],
+      "candidate_id": "prior-5bf7a48e930a19dd",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2606.08162v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2606.08162v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+tool+agent+false+success+response+silent+execution+failure+postcondition+verification+state+consistency&start=0",
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.08162v1</ns0:id>\n    <ns0:title>Silent Failure in LLM Agent Systems: The Entropy Principle and the Inevitable Disorder of Autonomous Agents</ns0:title>\n    <ns0:updated>2026-06-06T13:22:07Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.08162v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.08162v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Large Language Model (LLM) agent systems suffer from failures that occur without external triggers -- no injection, no adversarial input, no resource\n  exhaustion. These silent failures -- unexpected deviations from intended behavior under normal conditions -- are routinely misattributed to bugs or\n  configuration errors. Through systematic analysis of over 40,000 controlled trials and long-term production observations spanning 100,000+ agent\n  interactions, we identify a common structural logic underlying these failures. Building on patterns observed in our experiments, we survey the\n  global research literature on autonomous agent reliability and synthesize 22 intrinsic properties of LLM agent systems across six lifecycle layers:\n  foundation semantics, inter-agent transmission, memory persistence, task execution, feedback correction, and systemic evolution. We demonstrate that\n  whenever a sufficient subset of these properties co-exist, system entropy -- the measurable accumulation of disorder: loss of output consistency,\n  task accuracy, and cross-session coherence -- increases monotonically with interaction rounds. We formalize this as the Entropy Principle: S(t) = S0\n  * e^(alpha * t), with alpha measured empirically across multiple architectures. We propose the PIG (Physical Integrity Gate) Engine with the ADE\n  (Agent Delivery Engineering) protocol suite as an engineering countermeasure to entropy-driven disorder. Our findings establish silent failure not\n  as a bug to be fixed but as a manifestation of Intelligence Entropy -- a physical constraint to be managed through deterministic governance. We argue\n  that any engineering effort stabilizing the structure and order of agent systems participates in a unified mission: keeping intelligent systems\n  reliable as they grow in scale and complexity.</ns0:summary>\n    <ns0:category term=\"cs.MA\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-06T13:22:07Z</ns0:published>\n    <ns1:comment>10 pages, 7 figures</ns1:comment>\n    <ns1:primary_category term=\"cs.MA\" />\n    <ns0:author>\n      <ns0:name>Dexing Liu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "bbf7f6fb8e6e9fbd129e521189baa7520aece0ecc2ca64340966a0f771699847",
+          "source": "arXiv",
+          "source_id": "2606.08162v1",
+          "source_rank": 8
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2606.08162v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2606.08162"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "rank": 8,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Silent Failure in LLM Agent Systems: The Entropy Principle and the Inevitable Disorder of Autonomous Agents",
+      "urls": [
+        "https://arxiv.org/abs/2606.08162v1",
+        "https://arxiv.org/pdf/2606.08162v1"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "Complex physical models are the most advanced tools available for producing realistic simulations of the climate system. However, such levels of realism imply high computational cost and restrictions on their use for policymaking and risk assessment. Two central characteristics of climate change are uncertainty and that it is a dynamic problem in which international actions can significantly alter climate projections and information needs, including partial and full compliance of global climate goals. Here we present AIRCC-Clim, a simple climate model emulator that produces regional probabilistic climate change projections of monthly and annual temperature and precipitation, as well as risk measures, based both on standard and user-defined emissions scenarios for six greenhouse gases. AIRCC-Clim emulates 37 atmosphere-ocean coupled general circulation models with low computational and technical requirements for the user. This standalone, user-friendly software is designed for a variety of applications including impact assessments, climate policy evaluation and integrated assessment modelling.",
+      "authors": [
+        "Francisco Estrada",
+        "Oscar Calderón-Bustamante",
+        "Wouter Botzen",
+        "Julián A. Velasco",
+        "Richard S. J. Tol"
+      ],
+      "candidate_id": "prior-a6491b1ee9ffac8c",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2111.01762v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2111.01762v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+tool+agent+false+success+response+silent+execution+failure+postcondition+verification+state+consistency&start=0",
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2111.01762v1</ns0:id>\n    <ns0:title>AIRCC-Clim: a user-friendly tool for generating regional probabilistic climate change scenarios and risk measures</ns0:title>\n    <ns0:updated>2021-10-30T11:09:03Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2111.01762v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2111.01762v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Complex physical models are the most advanced tools available for producing realistic simulations of the climate system. However, such levels of realism imply high computational cost and restrictions on their use for policymaking and risk assessment. Two central characteristics of climate change are uncertainty and that it is a dynamic problem in which international actions can significantly alter climate projections and information needs, including partial and full compliance of global climate goals. Here we present AIRCC-Clim, a simple climate model emulator that produces regional probabilistic climate change projections of monthly and annual temperature and precipitation, as well as risk measures, based both on standard and user-defined emissions scenarios for six greenhouse gases. AIRCC-Clim emulates 37 atmosphere-ocean coupled general circulation models with low computational and technical requirements for the user. This standalone, user-friendly software is designed for a variety of applications including impact assessments, climate policy evaluation and integrated assessment modelling.</ns0:summary>\n    <ns0:category term=\"physics.ao-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"econ.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.AP\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2021-10-30T11:09:03Z</ns0:published>\n    <ns1:primary_category term=\"physics.ao-ph\" />\n    <ns0:author>\n      <ns0:name>Francisco Estrada</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Oscar Calderón-Bustamante</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wouter Botzen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Julián A. Velasco</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Richard S. J. Tol</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "bbf7f6fb8e6e9fbd129e521189baa7520aece0ecc2ca64340966a0f771699847",
+          "source": "arXiv",
+          "source_id": "2111.01762v1",
+          "source_rank": 9
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2111.01762v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2111.01762"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "rank": 9,
+          "source": "arXiv"
+        }
+      ],
+      "title": "AIRCC-Clim: a user-friendly tool for generating regional probabilistic climate change scenarios and risk measures",
+      "urls": [
+        "https://arxiv.org/abs/2111.01762v1",
+        "https://arxiv.org/pdf/2111.01762v1"
+      ],
+      "venue": null,
+      "year": 2021
+    },
+    {
+      "abstract": "LLM agents fail mid-episode -- they loop, cascade tool errors, drift off goal, fabricate results, or silently absorb corrupted content -- and the standard remedy, judging every step with a second LLM, costs more than the agent itself. We ask how much detection is achievable from observable step telemetry alone, using monitors costing microseconds per step and trained only on healthy runs. On 2,823 committed agent episodes across three frameworks, three local models (qwen2.5 7b/3b, llama3.1 8b) and a commercial API (gemini-2.5-flash), a one-class echo-state-network ensemble with CUSUM alarms detects 0.71 of failures at a 5% false-alarm budget (AUROC 0.872). Its advantage over a memoryless baseline is a monotone function of post-onset horizon (+0.09 at <=3 steps, +0.40 at >=9), predicting its own failure region out of sample on AFTraj-2K. Ranking transfers with no retraining to two corpora from other groups (AFTraj-2K 0.745, ATBench 0.779). Monitors carry two burdens: a per-deployment healthy null (they do not transfer -- AUROC 0.527 cold against 0.885 recalibrated) and a residual false-alarm rate. We add a layer carrying neither: deterministic verification, which recomputes a run's stated total from the tool results it actually received and confirms every required call was made. Head-to-head it catches 60% of failures (96% with the coverage check) at 0 of 63 false positives against the monitor's 54% at 17%, transfers unchanged to llama3.1:8b (110 of 110 at 0 of 10), and trips on 0 of 1825 healthy episodes. Detection is then closed into repair: each flagged run is rolled back and re-run live, recovering 45% of failures against a 16% resampling control (p=0.0005) and lifting task success from 52% to 73% for about one extra model call per run. The system runs at ~200 microseconds per step, three orders of magnitude below a judge call. Code, traces and results are released.",
+      "authors": [
+        "Sunny Dubey"
+      ],
+      "candidate_id": "prior-8bf08846cd612e04",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2608.02464v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2608.02464v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+tool+agent+false+success+response+silent+execution+failure+postcondition+verification+state+consistency&start=0",
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2608.02464v1</ns0:id>\n    <ns0:title>Real-Time Detection and Repair of LLM Agent Failures</ns0:title>\n    <ns0:updated>2026-08-03T16:34:46Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2608.02464v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2608.02464v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>LLM agents fail mid-episode -- they loop, cascade tool errors, drift off goal, fabricate results, or silently absorb corrupted content -- and the standard remedy, judging every step with a second LLM, costs more than the agent itself. We ask how much detection is achievable from observable step telemetry alone, using monitors costing microseconds per step and trained only on healthy runs.\n  On 2,823 committed agent episodes across three frameworks, three local models (qwen2.5 7b/3b, llama3.1 8b) and a commercial API (gemini-2.5-flash), a one-class echo-state-network ensemble with CUSUM alarms detects 0.71 of failures at a 5% false-alarm budget (AUROC 0.872). Its advantage over a memoryless baseline is a monotone function of post-onset horizon (+0.09 at &lt;=3 steps, +0.40 at &gt;=9), predicting its own failure region out of sample on AFTraj-2K. Ranking transfers with no retraining to two corpora from other groups (AFTraj-2K 0.745, ATBench 0.779).\n  Monitors carry two burdens: a per-deployment healthy null (they do not transfer -- AUROC 0.527 cold against 0.885 recalibrated) and a residual false-alarm rate. We add a layer carrying neither: deterministic verification, which recomputes a run's stated total from the tool results it actually received and confirms every required call was made. Head-to-head it catches 60% of failures (96% with the coverage check) at 0 of 63 false positives against the monitor's 54% at 17%, transfers unchanged to llama3.1:8b (110 of 110 at 0 of 10), and trips on 0 of 1825 healthy episodes.\n  Detection is then closed into repair: each flagged run is rolled back and re-run live, recovering 45% of failures against a 16% resampling control (p=0.0005) and lifting task success from 52% to 73% for about one extra model call per run. The system runs at ~200 microseconds per step, three orders of magnitude below a judge call. Code, traces and results are released.</ns0:summary>\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-08-03T16:34:46Z</ns0:published>\n    <ns1:comment>16 pages, 5 figures. Code, data and demo: github.com/sunnydubey1111/agent-trajectory-sentinel Walkthrough: youtu.be/a05n_000klE</ns1:comment>\n    <ns1:primary_category term=\"cs.AI\" />\n    <ns0:author>\n      <ns0:name>Sunny Dubey</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "bbf7f6fb8e6e9fbd129e521189baa7520aece0ecc2ca64340966a0f771699847",
+          "source": "arXiv",
+          "source_id": "2608.02464v1",
+          "source_rank": 10
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2608.02464v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2608.02464"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "rank": 10,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Real-Time Detection and Repair of LLM Agent Failures",
+      "urls": [
+        "https://arxiv.org/abs/2608.02464v1",
+        "https://arxiv.org/pdf/2608.02464v1"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "Integrating large language models (LLMs) into personal assistants, like Xiao Ai and Blue Heart V, effectively enhances their ability to interact with humans, solve complex tasks, and manage IoT devices. Such assistants are also termed LLM-driven agents. Upon receiving user requests, the LLM-driven agent generates plans using an LLM, executes these plans through various tools, and then returns the response to the user. During this process, the latency for generating a plan with an LLM can reach tens of seconds, significantly degrading user experience. Real-world dataset analysis shows that about 30% of the requests received by LLM-driven agents are identical or similar, which allows the reuse of previously generated plans to reduce latency. However, it is difficult to accurately define the similarity between the request texts received by the LLM-driven agent through directly evaluating the original request texts. Moreover, the diverse expressions of natural language and the unstructured format of plan texts make implementing plan reuse challenging. To address these issues, we present and implement a plan reuse mechanism for LLM-driven agents called AgentReuse. AgentReuse leverages the similarities and differences among requests' semantics and uses intent classification to evaluate the similarities between requests and enable the reuse of plans. Experimental results based on a real-world dataset demonstrate that AgentReuse achieves a 93% effective plan reuse rate, an F1 score of 0.9718, and an accuracy of 0.9459 in evaluating request similarities, reducing latency by 93.12% compared with baselines without using the reuse mechanism.",
+      "authors": [
+        "Guopeng Li",
+        "Ruiqi Wu",
+        "Haisheng Tan"
+      ],
+      "candidate_id": "prior-9b066603d819195d",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2512.21309v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2512.21309v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+tool+agent+false+success+response+silent+execution+failure+postcondition+verification+state+consistency&start=0",
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2512.21309v2</ns0:id>\n    <ns0:title>A Plan Reuse Mechanism for LLM-Driven Agent</ns0:title>\n    <ns0:updated>2025-12-25T05:19:04Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2512.21309v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2512.21309v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Integrating large language models (LLMs) into personal assistants, like Xiao Ai and Blue Heart V, effectively enhances their ability to interact with humans, solve complex tasks, and manage IoT devices. Such assistants are also termed LLM-driven agents. Upon receiving user requests, the LLM-driven agent generates plans using an LLM, executes these plans through various tools, and then returns the response to the user. During this process, the latency for generating a plan with an LLM can reach tens of seconds, significantly degrading user experience. Real-world dataset analysis shows that about 30% of the requests received by LLM-driven agents are identical or similar, which allows the reuse of previously generated plans to reduce latency. However, it is difficult to accurately define the similarity between the request texts received by the LLM-driven agent through directly evaluating the original request texts. Moreover, the diverse expressions of natural language and the unstructured format of plan texts make implementing plan reuse challenging. To address these issues, we present and implement a plan reuse mechanism for LLM-driven agents called AgentReuse. AgentReuse leverages the similarities and differences among requests' semantics and uses intent classification to evaluate the similarities between requests and enable the reuse of plans. Experimental results based on a real-world dataset demonstrate that AgentReuse achieves a 93% effective plan reuse rate, an F1 score of 0.9718, and an accuracy of 0.9459 in evaluating request similarities, reducing latency by 93.12% compared with baselines without using the reuse mechanism.</ns0:summary>\n    <ns0:category term=\"cs.MA\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-12-24T18:08:03Z</ns0:published>\n    <ns1:comment>This paper is an English version of A Plan Reuse Mechanism for LLM-Driven Agent published in 2024 in the Journal of Computer Research and Development</ns1:comment>\n    <ns1:primary_category term=\"cs.MA\" />\n    <ns0:author>\n      <ns0:name>Guopeng Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ruiqi Wu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Haisheng Tan</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "bbf7f6fb8e6e9fbd129e521189baa7520aece0ecc2ca64340966a0f771699847",
+          "source": "arXiv",
+          "source_id": "2512.21309v2",
+          "source_rank": 11
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2512.21309v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2512.21309"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "rank": 11,
+          "source": "arXiv"
+        }
+      ],
+      "title": "A Plan Reuse Mechanism for LLM-Driven Agent",
+      "urls": [
+        "https://arxiv.org/abs/2512.21309v2",
+        "https://arxiv.org/pdf/2512.21309v2"
+      ],
+      "venue": null,
+      "year": 2025
+    },
+    {
+      "abstract": "LLM agent systems increasingly run as long-lived autonomous runtimes: scheduling jobs, calling tools, maintaining memory, and pushing results to humans. We present a longitudinal study of silent failures in one such system: a personal-assistant agent runtime in continuous production since March 2026, with roughly 40 scheduled jobs, 8 LLM providers, a tool-governance proxy, and a knowledge-base memory plane, defended by 4,286 unit tests and 827 governance checks. Over eight weeks we documented 22 incidents with full root-cause postmortems, in which one meta-pattern -- a failure whose error signal never reaches a human in actionable form -- manifested at least 28 times. We derive a five-class, mechanism-oriented taxonomy: (A) environment and platform quirks, (B) design-assumption mismatches, (C) error swallowing and dilution, (D) chained hallucination and fabrication, (E) operational omission and forensic blind spots. Class D is unique to LLM systems and the most dangerous: the system does not merely fail to report an error -- the LLM transforms it into fluent, plausible narrative delivered to the user. We term this fail-plausible: gray failure's differential observability escalated -- the observer is not just blind, it is convincingly lied to by the failure itself. Three findings: about 70% of silent failures were caught by human user-view observation, not tests or audits; a retrospective audit of 15 incidents found 0% ex-ante prevention but 87% regression blocking -- audits are regression engines, not prediction engines; incident latency (13 hours to 60 days) tracks failure mechanism, not code complexity -- the longest-lived failures lived in the seams between components, where no test runs. We describe the resulting defense framework and distill design principles for agent systems whose failures are loud, attributable, and boring. All postmortems and artifacts are public.",
+      "authors": [
+        "Wei Wu"
+      ],
+      "candidate_id": "prior-170257a46489a2c7",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2606.14589v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2606.14589v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+tool+agent+false+success+response+silent+execution+failure+postcondition+verification+state+consistency&start=0",
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.14589v1</ns0:id>\n    <ns0:title>When Errors Become Narratives: A Longitudinal Taxonomy of Silent Failures in a Production LLM Agent Runtime</ns0:title>\n    <ns0:updated>2026-06-12T16:06:55Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.14589v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.14589v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>LLM agent systems increasingly run as long-lived autonomous runtimes: scheduling jobs, calling tools, maintaining memory, and pushing results to humans. We present a longitudinal study of silent failures in one such system: a personal-assistant agent runtime in continuous production since March 2026, with roughly 40 scheduled jobs, 8 LLM providers, a tool-governance proxy, and a knowledge-base memory plane, defended by 4,286 unit tests and 827 governance checks. Over eight weeks we documented 22 incidents with full root-cause postmortems, in which one meta-pattern -- a failure whose error signal never reaches a human in actionable form -- manifested at least 28 times. We derive a five-class, mechanism-oriented taxonomy: (A) environment and platform quirks, (B) design-assumption mismatches, (C) error swallowing and dilution, (D) chained hallucination and fabrication, (E) operational omission and forensic blind spots. Class D is unique to LLM systems and the most dangerous: the system does not merely fail to report an error -- the LLM transforms it into fluent, plausible narrative delivered to the user. We term this fail-plausible: gray failure's differential observability escalated -- the observer is not just blind, it is convincingly lied to by the failure itself. Three findings: about 70% of silent failures were caught by human user-view observation, not tests or audits; a retrospective audit of 15 incidents found 0% ex-ante prevention but 87% regression blocking -- audits are regression engines, not prediction engines; incident latency (13 hours to 60 days) tracks failure mechanism, not code complexity -- the longest-lived failures lived in the seams between components, where no test runs. We describe the resulting defense framework and distill design principles for agent systems whose failures are loud, attributable, and boring. All postmortems and artifacts are public.</ns0:summary>\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.DC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-12T16:06:55Z</ns0:published>\n    <ns1:comment>18 pages, 5 figures, 2 tables. 22 incident postmortems and all defense-framework artifacts publicly available at https://github.com/bisdom-cell/openclaw-model-bridge; governance engine on PyPI (openclaw-ontology-engine)</ns1:comment>\n    <ns1:primary_category term=\"cs.SE\" />\n    <ns0:author>\n      <ns0:name>Wei Wu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n"
+          },
+          "response_body_sha256": "bbf7f6fb8e6e9fbd129e521189baa7520aece0ecc2ca64340966a0f771699847",
+          "source": "arXiv",
+          "source_id": "2606.14589v1",
+          "source_rank": 12
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2606.14589v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2606.14589"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM tool agent false success response silent execution failure postcondition verification state consistency",
+          "rank": 12,
+          "source": "arXiv"
+        }
+      ],
+      "title": "When Errors Become Narratives: A Longitudinal Taxonomy of Silent Failures in a Production LLM Agent Runtime",
+      "urls": [
+        "https://arxiv.org/abs/2606.14589v1",
+        "https://arxiv.org/pdf/2606.14589v1"
+      ],
+      "venue": null,
+      "year": 2026
+    }
+  ],
+  "created_at_utc": "2026-08-15T15:46:05.093778Z",
+  "degraded": false,
+  "schema_version": 1,
+  "source_attempts": [
+    {
+      "query_index": 1,
+      "record_count": 0,
+      "source": "Semantic Scholar",
+      "status": "ok"
+    },
+    {
+      "query_index": 1,
+      "record_count": 12,
+      "source": "arXiv",
+      "status": "ok"
+    }
+  ]
+}

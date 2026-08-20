@@ -1,0 +1,123 @@
+{
+  "created_at_utc": "2026-08-13T10:55:25.541530Z",
+  "hypotheses": [
+    {
+      "alternative_explanations": [
+        "收益仅来自重新执行测试",
+        "候选突变只改变表面模式",
+        "计划迁移等同普通客户端代码迁移",
+        "终局等价只在有限夹具上成立"
+      ],
+      "changed_computation": {
+        "baseline": "读取新接口文档后让语言模型重新规划，或用名称、签名和模式差异做一对一重写。",
+        "budget_effect": "离线增加跨版本探测与候选迁移搜索，运行时复用已迁移计划。",
+        "information_available": "旧计划、两版公开接口规范、隔离沙箱中的黑盒调用和可见终局；不使用隐藏测试答案或服务源码。",
+        "intervention": "把旧计划视为待迁移程序，通过旧版与新版接口的跨版本差分行为试验搜索一对多或多对多替换，并仅保留在可见终局投影上与旧计划行为等价的迁移。",
+        "timing": "接口版本变更后、缓存计划或技能再次进入运行前。"
+      },
+      "created_at_utc": "2026-08-13T10:55:25.645244Z",
+      "descriptors": {
+        "budget_class": "offline_differential_probe_budget",
+        "computation_stage": "offline_plan_migration_before_reuse",
+        "evaluation_mode": "independent_terminal_equivalence_under_unseen_mutations",
+        "information_source": "old_plan_two_api_versions_and_black_box_tests",
+        "intervention_family": "cross_version_behavioral_equivalence_synthesis",
+        "problem_family": "tool_api_evolution_breaks_cached_plan",
+        "timing_class": "post_upgrade_predeployment"
+      },
+      "falsifier": "既有 API 迁移、程序合成或 REST 差分测试已经搜索复杂替换并验证行为等价；或新文档重新规划和静态迁移在同等测试预算下达到相同终局成功率。",
+      "hypothesis_id": "h-v008-001",
+      "lineage_note": "v007 的验证器观察效应路线被黑盒 CRUD/REST 行为推断吸收后，转向工具接口自身演化时既有成功计划的失效与迁移。",
+      "literature_refs": [
+        "EvoC2F, ICML 2026",
+        "Godefroid et al., Differential Regression Testing for REST APIs, ISSTA 2020",
+        "Schmiedmayer et al., EVOL Migrators, MOBILESoft 2023",
+        "Collie et al., M3 Semantic API Migrations, OOPSLA 2020",
+        "Kuang et al., APIMig, IJCAI 2025",
+        "Sprout, A Sound Static Analysis Approach to I/O API Migration, OOPSLA 2025",
+        "Transforming Programs between APIs with Many-to-Many Mappings, ECOOP 2016",
+        "MCPEvol-Bench, arXiv:2607.14642"
+      ],
+      "mechanism_claim": "行为等价而非表面模式相似度可以迁移复杂工具计划，并在操作拆分、合并或默认值变化时保留任务终局。",
+      "minimal_killer_experiment": "先核对 EvoC2F、REST 跨版本差分测试、EVOL、APIMig、M3、Sprout 与多对多 API 转换的确切计算；只有未被占据才构造接口突变夹具。",
+      "nearest_prior_risk": "Sprout 已形式化并合成行为等价迁移，M3 以程序合成建模 API 语义，多对多 API 转换、EVOL、APIMig 与 REST 差分回归覆盖复杂映射、跨版本迁移及行为比较；EvoC2F 虽不专门迁移接口，但覆盖可验证技能演化。",
+      "parent_ids": [],
+      "problem": "工具或模型上下文协议服务器升级后，参数名、默认值、操作拆分合并、返回结构与行为可能变化；直接回放已成功的计划会失败或静默改变终局，完全重新规划又丢失已验证的过程结构。",
+      "revision": 2,
+      "status": "prior_collision",
+      "status_reason": "跨版本差分、黑盒语义建模、复杂多对多API替换、迁移合成和行为等价已分别被REST差分回归、M3、ECOOP多对多转换、Sprout、EVOL与APIMig占据；工具计划仍是客户端程序，剩余仅Agent/MCP封装。",
+      "target_failure": {
+        "card_ids": [
+          "failure-plan-cache-semantic-false-positives",
+          "failure-repeat-run-reliability-collapse"
+        ],
+        "evidence_ids": [],
+        "summary": "旧版本成功工具计划在新接口上发生语法或语义漂移，静态模式匹配无法保证迁移后终局等价。"
+      },
+      "title": "跨版本行为等价驱动的工具计划迁移",
+      "updated_at_utc": "2026-08-13T10:55:25.761049Z"
+    },
+    {
+      "alternative_explanations": [
+        "收益来自更多配对测试",
+        "下一动作只复现旧计划而不代表任务正确",
+        "动态切片泄漏了任务实现",
+        "候选空间被人工设计得偏向目标适配器",
+        "本地模型对模式名称的表面偏好制造差异"
+      ],
+      "changed_computation": {
+        "baseline": "以旧新响应逐字段相等、最终任务测试、模式映射，或完整新文档重新规划判断迁移。",
+        "budget_effect": "离线增加配对分叉执行与反例测试；运行时只执行迁移后的局部适配器。",
+        "information_available": "旧成功计划与其公开轨迹、两版公开工具、可复位开发快照、下游智能体的可见下一动作；不使用隐藏测试终局生成候选。",
+        "intervention": "从旧成功计划抽取响应到后续参数、实体绑定和分支的动态切片；在配对快照上以切片诱导的合法下一动作/分支签名定义目标条件化延续等价，并反例引导地综合最小返回适配器或新版调用子序列，无法辨识时拒绝。",
+        "timing": "接口升级后的离线迁移阶段，迁移后计划进入真实运行之前。"
+      },
+      "created_at_utc": "2026-08-13T10:57:17.869995Z",
+      "descriptors": {
+        "budget_class": "matched_offline_probe_and_llm_budget",
+        "computation_stage": "offline_local_adapter_synthesis_before_skill_reuse",
+        "evaluation_mode": "heldout_independent_terminal_success_and_abstention",
+        "information_source": "paired_snapshots_old_trace_and_visible_next_actions",
+        "intervention_family": "goal_conditioned_downstream_continuation_equivalence",
+        "problem_family": "tool_migration_misjudged_by_response_or_terminal_equivalence",
+        "timing_class": "post_upgrade_predeployment"
+      },
+      "falsifier": "该目标函数退化为经典程序切片/适配器综合的普通观察等价；公平的 GUPPY/SkillRevise 式执行修复或新文档重新规划达到相同结果；或下一动作签名不比独立终局测试更能预测 held-out 迁移正确性。",
+      "hypothesis_id": "h-v008-002",
+      "lineage_note": "h-v008-001 的一般跨版本行为等价迁移被 API 迁移谱系吸收后，改变等价对象：不比较完整程序输出，而比较工具响应被下游语言模型智能体消费后产生的实体绑定、分支谓词和合法后续动作。",
+      "literature_refs": [
+        "Sprout, OOPSLA 2025",
+        "M3 Semantic API Migrations, ASE 2020",
+        "Counterexample-guided function adaptor synthesis",
+        "GUPPY, arXiv:2411.04387",
+        "SkillRevise, arXiv:2606.01139",
+        "Causal Agent Replay, 2026"
+      ],
+      "mechanism_claim": "对任务相关下游延续进行切片和等价判定，能比全响应比较、模式映射和最终测试更准确地区分无害结构变化与会改变智能体分支的语义漂移。",
+      "minimal_killer_experiment": "在固定旧计划和本地语言模型上构造参数重命名、返回嵌套、默认值变化与一对多操作拆分，比较全响应相等、模式映射、终局训练测试、文档重规划和延续等价综合在未见快照的独立终局准确率与拒绝率。",
+      "nearest_prior_risk": "程序切片、观察等价、反例引导函数适配器综合、Sprout、M3、GUPPY、SkillRevise、Causal Agent Replay 与动作条件上下文方法可能吸收各组件；必须证明等价对象改变了候选排序或接受集合。",
+      "parent_ids": [
+        "h-v008-001"
+      ],
+      "problem": "旧、新工具版本可能返回结构不同但对当前任务的后续决策等价，也可能表面字段可映射却改变默认值或实体语义，导致下游智能体走向不同分支；完整响应等价过严，单次终局通过又过松。",
+      "revision": 2,
+      "status": "prior_collision",
+      "status_reason": "下游延续等价可归约为以智能体轨迹字段为准则的动态切片/部分观察等价；反例参数与返回适配、复杂API子序列迁移、轨迹数据流定位和配对技能修订分别已有Sharma适配器综合、Sprout/M3、HarnessFix与SkillAudit，剩余只是已知模块拼接。",
+      "target_failure": {
+        "card_ids": [
+          "failure-plan-cache-semantic-false-positives",
+          "failure-gold-context-does-not-solve-knowledge-use"
+        ],
+        "evidence_ids": [],
+        "summary": "迁移验证没有刻画工具观测对后续智能体决策的任务条件化影响，因而误拒绝无害结构变化或误接收会改变后续分支的适配器。"
+      },
+      "title": "目标条件化下游延续等价的局部工具适配器综合",
+      "updated_at_utc": "2026-08-13T11:01:21.754646Z"
+    }
+  ],
+  "revision": 4,
+  "run_id": "20260813_1547_run10",
+  "schema_version": 1,
+  "updated_at_utc": "2026-08-13T11:01:21.754646Z",
+  "version": "v008"
+}

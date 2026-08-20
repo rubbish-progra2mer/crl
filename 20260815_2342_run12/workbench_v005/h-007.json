@@ -1,0 +1,41 @@
+{
+  "hypothesis_id": "h-007",
+  "title": "分页工具中的无证据否定闭合与查询完备性证书",
+  "parent_ids": [],
+  "lineage_note": "显式恢复后的正交扩张：离开旧版的工具回执可信性、来源相关、路由、计划缓存和不可逆动作调度，转向工具读取覆盖是否足以支持全局否定或聚合结论。",
+  "problem": "列表、搜索和审计工具经常分页返回结果。代理即使看到 has_more=true 与 next_cursor，也可能把当前页未找到目标误写成全量不存在，或基于未穷尽页面提交不完整列表和错误聚合；现有工具评价通常只看终态成功，未隔离分页边界对这种无证据闭合的因果影响。",
+  "target_failure": {
+    "summary": "固定逻辑数据集、查询、工具契约与调用预算，仅改变服务端分页边界，使目标从首屏可见变为后页可见时，代理在游标未穷尽前输出全局否定、不完整枚举或错误聚合。",
+    "card_ids": ["paper-p037", "failure-incomplete-tool-contracts-false-verified-state", "paper-p039"],
+    "evidence_ids": ["ev-p037-evaluation-core", "ev-p074-missing-schema-true-postcondition", "ev-p039-failure-core"]
+  },
+  "changed_computation": {
+    "baseline": "分页工具返回当前 rows、has_more 和 next_cursor，由语言模型自行判断是否继续及何时给出最终答案。",
+    "intervention": "工具运行时为同一查询维护 snapshot_id、已消费游标链和 terminal 标记；只有观察到可信 has_more=false 的终页后才签发 query_complete 证书，任何声称全局不存在、全部列举或全量聚合的提交工具都必须携带与查询及快照绑定的证书。",
+    "information_available": "公开分页契约、每页结果、游标、快照标识和服务端终页事实；不向代理泄漏目标位置或隐藏答案。",
+    "timing": "每次分页读取后更新覆盖状态，并在全局结论提交之前检查证书。",
+    "budget_effect": "候选与基线获得相同最大工具调用预算；证书检查不调用语言模型，但正确完成可能需要消费更多页面。"
+  },
+  "mechanism_claim": "全局否定与聚合需要可机检的查询覆盖，而不是由语言模型从局部页面自行推断；分页边界会系统性诱发无证据闭合，查询完备性证书能把覆盖义务变为执行时不变量。",
+  "falsifier": "若至少两个模型在显式 has_more/next_cursor 下跨存在性、全量枚举和聚合任务都稳定穷尽页面；若最近工作已做同数据集分页边界因果干预并强制完备性见证；或简单确定性分页循环在不改变代理计算的情况下完全吸收贡献且现象没有独立评价价值，则候选淘汰。",
+  "minimal_killer_experiment": "构造三个工具域、每域四个固定数据集；对每题生成首屏充分、后页目标和真正缺失三种条件，保持查询与预算不变。让 qwen3:4b 与 qwen3:8b 在可重复的工具循环中决策，比较普通分页契约、强化文字提醒和证书化提交门。主指标为游标未穷尽闭合率、后页召回率、全量结果准确率、真正缺失准确率及工具调用开销。",
+  "nearest_prior_risk": "ToolSandbox 与 ToolFailBench 覆盖一般有状态工具和失败分类；DADL 与工具设计指南规定分页字段；ComtradeBench 包含分页漂移、重复和预算的综合环境；FALAT 将截断/分页列为失败类型。必须核对是否已有同数据集分页边界成对评价或 query-complete 证书。",
+  "alternative_explanations": [
+    "失败只是模型不会复制 next_cursor",
+    "工具说明不清而非覆盖推理失败",
+    "最大轮数不足以遍历全部页面",
+    "目标后移改变了项目顺序或显著性而非仅分页充分性",
+    "证书门的收益只是把答案写成确定性分页程序",
+    "合成数据规模过小且不代表真实接口"
+  ],
+  "descriptors": {
+    "problem_family": "分页读取下的无证据闭合",
+    "computation_stage": "工具结果消费与最终结论提交",
+    "intervention_family": "查询覆盖见证与证书化提交门",
+    "information_source": "分页契约、游标链与终页事实",
+    "timing_class": "全局否定或聚合提交前",
+    "budget_class": "同最大工具调用预算",
+    "evaluation_mode": "固定数据集的分页边界成对干预"
+  },
+  "literature_refs": ["P037", "P039", "P074", "P005"]
+}

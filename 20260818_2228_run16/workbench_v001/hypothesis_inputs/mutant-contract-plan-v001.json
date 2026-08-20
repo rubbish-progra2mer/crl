@@ -1,0 +1,52 @@
+{
+  "hypothesis_id": "h-mutant-probe-001",
+  "plan_id": "mutant-contract-plan-v001",
+  "claims": [
+    {
+      "claim_id": "open-world-contract-escape-v001",
+      "claim_text": "Agent-Diff 公开合同采用未显式关闭的开放世界评价边界，因此目标保持但新增断言外副作用的变异可逃过原合同。",
+      "scope": "Hugging Face 公开的 224 个 Agent-Diff 合同；四类目标保持状态变异；不外推到其他基准。",
+      "observable": "未声明 strict 的合同占比，以及原合同对四类风险变异的逃逸率。",
+      "falsifier": "存在显式 strict 合同，或原评价在合同之外拒绝绝大多数断言外状态变异。",
+      "minimum_effect_or_decision_rule": "224 个合同全部未显式 strict，且原合同风险变异逃逸率 >= 0.95 才支持开放世界合同逃逸。",
+      "alternative_explanations": ["仓库另有未进入数据合同的额外惩罚", "extra change 在任务语义上全部允许", "合成变异违反真实服务模式"],
+      "killer_experiment_id": "contract-mutation-screening-v001",
+      "supporting_experiment_ids": [],
+      "status": "testing",
+      "status_reason": "公开合同和评价语义的 Formal Screening 已准备，尚未正式运行。"
+    },
+    {
+      "claim_id": "passed-run-unasserted-change-v001",
+      "claim_text": "公开实际运行中，原评价通过的轨迹包含可由保守合同匹配确定的未断言状态变化，因此开放世界边界不是纯粹的合成角落。",
+      "scope": "公开 checkpoint_20260201_224804.json 中能与当前 224 合同按完整提示一一匹配的运行；未断言不等同于不安全。",
+      "observable": "原通过运行中至少含一个保守未断言非忽略变化的比例。",
+      "falsifier": "匹配失败，或该比例低于 0.05。",
+      "minimum_effect_or_decision_rule": "224/224 提示匹配，且通过运行的保守未断言变化率 >= 0.05 才支持现象相关性；结果只称未断言，不称不安全。",
+      "alternative_explanations": ["未断言变化是必要数据库级联", "合同故意只评分关键目标", "匹配器对结构化谓词语义复现不完整"],
+      "killer_experiment_id": "contract-mutation-screening-v001",
+      "supporting_experiment_ids": [],
+      "status": "testing",
+      "status_reason": "阈值已在 Formal 前固定；冒烟只用于修复结构化 contains 解析，不作为证据。"
+    },
+    {
+      "claim_id": "endpoint-envelope-hardening-v001",
+      "claim_text": "由训练划分通过运行学习的工具端点—级联变化允许边界，能比全局 strict 少误拒绝公开测试通过运行，同时拒绝大多数保留风险变异。",
+      "scope": "单一公开检查点、179/45 固定划分、工具端点到变化签名的确定性原型；不宣称自动合同生成已经完成。",
+      "observable": "测试通过运行误拒绝率、风险变异逃逸率、忽略元数据接受率。",
+      "falsifier": "相对全局 strict 的误拒绝率降低不足 0.10，或风险变异逃逸率高于 0.25，或忽略元数据接受率不等于 1。",
+      "minimum_effect_or_decision_rule": "误拒绝率至少比全局 strict 低 0.10；风险变异逃逸率 <= 0.25；忽略元数据接受率 = 1。三项必须同时满足。",
+      "alternative_explanations": ["训练通过运行本身含有错误副作用", "端点签名过粗而放行同形恶意变化", "测试划分太小", "全局 strict 的误拒绝不是人工确认错误"],
+      "killer_experiment_id": "contract-mutation-screening-v001",
+      "supporting_experiment_ids": [],
+      "status": "testing",
+      "status_reason": "原型规则和阈值已冻结，等待 Formal；任一条件失败即不支持该加固主张。"
+    }
+  ],
+  "global_confounders": [
+    "公开检查点只有一个模型、每任务一次运行",
+    "原评价通过不等于人工确认安全或语义完整",
+    "保守匹配器会把广义断言匹配的所有行视为预期，因此更可能少报",
+    "四类状态变异只覆盖部分副作用空间",
+    "工具端点允许边界可能学习并固化训练运行中的错误"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "run_id": "20260813_1547_run10",
+  "audits": [
+    {
+      "kernel_id": "h-v005-002",
+      "nearest_fair_baseline": "同一人工谓词目录下的全谓词守卫、成功样本语言模型归纳、同预算被动样本归纳和同预算随机查询",
+      "original_computation": "从程序文本、成功轨迹或被动成败样本归纳适用条件，运行前据此门控技能复用。",
+      "changed_computation": "主动改变候选环境谓词，固定程序重放并以独立终局标签更新有限布尔版本空间；运行时只在剩余假设一致支持时放行。",
+      "ordering_change_check": false,
+      "state_transition_change_check": false,
+      "constant_translation_check": false,
+      "prompt_wrapper_check": false,
+      "module_stacking_check": true,
+      "route_revival_check": false,
+      "negative_controls": [
+        "all-predicates-required",
+        "always-reject",
+        "random-same-budget",
+        "single-flip-then-random",
+        "llm-success-only",
+        "llm-passive-same-budget"
+      ],
+      "failure_class": "nearest fair baseline tied on the real fixture; the catalogue contains only necessary predicates",
+      "allowed_next_actions": [
+        "record_negative_result",
+        "mutate_research_question",
+        "advance_scientific_version"
+      ],
+      "blocked_actions": [
+        "claim-contract-builder",
+        "formal-experiment",
+        "fixed-reviewer"
+      ],
+      "verdict": "kill"
+    }
+  ]
+}

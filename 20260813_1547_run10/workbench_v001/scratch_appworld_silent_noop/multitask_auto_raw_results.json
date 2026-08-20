@@ -1,0 +1,711 @@
+{
+  "artifact_class": "scratch",
+  "claim_boundary": "Deterministic dev-task replay tests whether one source-free compiler can construct and execute witnesses across four structures. Official solutions drive the task only as a controlled carrier; no agent-effect or held-out-generalization claim is made.",
+  "created_at_utc": "2026-08-13T08:49:07.779898+00:00",
+  "benchmark": {
+    "name": "AppWorld",
+    "git_commit": "a072b7a86e7c1d5b1d7175659d750ebb9b79f10a",
+    "dataset": "dev",
+    "fixture_count": 4
+  },
+  "compiler_forbidden_inputs": [
+    "service source code",
+    "task ground truth",
+    "evaluation program",
+    "historical correct traces"
+  ],
+  "conditions": [
+    {
+      "task_id": "37a8675_1",
+      "structure": "single_atomic_write",
+      "condition": "clean",
+      "injection_triggered": false,
+      "target_call_count": 4,
+      "selected_write_response": {
+        "message": "Sent money.",
+        "transaction_id": 8216
+      },
+      "compiled_plan": null,
+      "witness_result": null,
+      "replayed": false,
+      "evaluation": {
+        "success": true,
+        "difficulty": 2,
+        "num_tests": 6
+      },
+      "failed_requirement_count": 0,
+      "execute_message": "Execution successful."
+    },
+    {
+      "task_id": "37a8675_1",
+      "structure": "single_atomic_write",
+      "condition": "clean_with_compiled_witness",
+      "injection_triggered": false,
+      "target_call_count": 4,
+      "selected_write_response": {
+        "message": "Sent money.",
+        "transaction_id": 8216
+      },
+      "compiled_plan": {
+        "app_name": "venmo",
+        "write_api": "create_transaction",
+        "read_api": "show_transactions",
+        "bindings": [
+          {
+            "parameter": "access_token",
+            "source": "request",
+            "source_field": "access_token",
+            "score": 2.15
+          },
+          {
+            "parameter": "min_amount",
+            "source": "request",
+            "source_field": "amount",
+            "score": 0.85
+          },
+          {
+            "parameter": "max_amount",
+            "source": "request",
+            "source_field": "amount",
+            "score": 0.85
+          },
+          {
+            "parameter": "private",
+            "source": "request",
+            "source_field": "private",
+            "score": 2.15
+          }
+        ],
+        "relations": [
+          {
+            "source_field": "receiver_email",
+            "response_path": [
+              "receiver",
+              "email"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          },
+          {
+            "source_field": "amount",
+            "response_path": [
+              "amount"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          },
+          {
+            "source_field": "private",
+            "response_path": [
+              "private"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          },
+          {
+            "source_field": "description",
+            "response_path": [
+              "description"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          }
+        ],
+        "score": 10.7,
+        "root_is_collection": true,
+        "provenance": "public_tool_docs+instantiated_write_call"
+      },
+      "witness_result": true,
+      "replayed": false,
+      "evaluation": {
+        "success": true,
+        "difficulty": 2,
+        "num_tests": 6
+      },
+      "failed_requirement_count": 0,
+      "execute_message": "Execution successful."
+    },
+    {
+      "task_id": "37a8675_1",
+      "structure": "single_atomic_write",
+      "condition": "silent_noop",
+      "injection_triggered": true,
+      "target_call_count": 4,
+      "selected_write_response": {
+        "message": "Sent money.",
+        "transaction_id": 8216
+      },
+      "compiled_plan": null,
+      "witness_result": null,
+      "replayed": false,
+      "evaluation": {
+        "success": false,
+        "difficulty": 2,
+        "num_tests": 6
+      },
+      "failed_requirement_count": 5,
+      "execute_message": "Execution successful."
+    },
+    {
+      "task_id": "37a8675_1",
+      "structure": "single_atomic_write",
+      "condition": "silent_noop_with_compiled_witness",
+      "injection_triggered": true,
+      "target_call_count": 4,
+      "selected_write_response": {
+        "message": "Sent money.",
+        "transaction_id": 8216
+      },
+      "compiled_plan": {
+        "app_name": "venmo",
+        "write_api": "create_transaction",
+        "read_api": "show_transactions",
+        "bindings": [
+          {
+            "parameter": "access_token",
+            "source": "request",
+            "source_field": "access_token",
+            "score": 2.15
+          },
+          {
+            "parameter": "min_amount",
+            "source": "request",
+            "source_field": "amount",
+            "score": 0.85
+          },
+          {
+            "parameter": "max_amount",
+            "source": "request",
+            "source_field": "amount",
+            "score": 0.85
+          },
+          {
+            "parameter": "private",
+            "source": "request",
+            "source_field": "private",
+            "score": 2.15
+          }
+        ],
+        "relations": [
+          {
+            "source_field": "receiver_email",
+            "response_path": [
+              "receiver",
+              "email"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          },
+          {
+            "source_field": "amount",
+            "response_path": [
+              "amount"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          },
+          {
+            "source_field": "private",
+            "response_path": [
+              "private"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          },
+          {
+            "source_field": "description",
+            "response_path": [
+              "description"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          }
+        ],
+        "score": 10.7,
+        "root_is_collection": true,
+        "provenance": "public_tool_docs+instantiated_write_call"
+      },
+      "witness_result": false,
+      "replayed": true,
+      "evaluation": {
+        "success": true,
+        "difficulty": 2,
+        "num_tests": 6
+      },
+      "failed_requirement_count": 0,
+      "execute_message": "Execution successful."
+    },
+    {
+      "task_id": "530b157_1",
+      "structure": "cross_app_partial_success",
+      "condition": "clean",
+      "injection_triggered": false,
+      "target_call_count": 1,
+      "selected_write_response": {
+        "message": "Text message sent.",
+        "text_message_id": 16809
+      },
+      "compiled_plan": null,
+      "witness_result": null,
+      "replayed": false,
+      "evaluation": {
+        "success": true,
+        "difficulty": 3,
+        "num_tests": 10
+      },
+      "failed_requirement_count": 0,
+      "execute_message": "Execution successful."
+    },
+    {
+      "task_id": "530b157_1",
+      "structure": "cross_app_partial_success",
+      "condition": "clean_with_compiled_witness",
+      "injection_triggered": false,
+      "target_call_count": 1,
+      "selected_write_response": {
+        "message": "Text message sent.",
+        "text_message_id": 16809
+      },
+      "compiled_plan": {
+        "app_name": "phone",
+        "write_api": "send_text_message",
+        "read_api": "search_text_messages",
+        "bindings": [
+          {
+            "parameter": "access_token",
+            "source": "request",
+            "source_field": "access_token",
+            "score": 2.15
+          },
+          {
+            "parameter": "phone_number",
+            "source": "request",
+            "source_field": "phone_number",
+            "score": 2.15
+          }
+        ],
+        "relations": [
+          {
+            "source_field": "phone_number",
+            "response_path": [
+              "receiver",
+              "phone_number"
+            ],
+            "operator": "equals",
+            "score": 1.1
+          },
+          {
+            "source_field": "message",
+            "response_path": [
+              "message"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          }
+        ],
+        "score": 5.75,
+        "root_is_collection": true,
+        "provenance": "public_tool_docs+instantiated_write_call"
+      },
+      "witness_result": true,
+      "replayed": false,
+      "evaluation": {
+        "success": true,
+        "difficulty": 3,
+        "num_tests": 10
+      },
+      "failed_requirement_count": 0,
+      "execute_message": "Execution successful."
+    },
+    {
+      "task_id": "530b157_1",
+      "structure": "cross_app_partial_success",
+      "condition": "silent_noop",
+      "injection_triggered": true,
+      "target_call_count": 1,
+      "selected_write_response": {
+        "message": "Text message sent.",
+        "text_message_id": 16809
+      },
+      "compiled_plan": null,
+      "witness_result": null,
+      "replayed": false,
+      "evaluation": {
+        "success": false,
+        "difficulty": 3,
+        "num_tests": 10
+      },
+      "failed_requirement_count": 4,
+      "execute_message": "Execution successful."
+    },
+    {
+      "task_id": "530b157_1",
+      "structure": "cross_app_partial_success",
+      "condition": "silent_noop_with_compiled_witness",
+      "injection_triggered": true,
+      "target_call_count": 1,
+      "selected_write_response": {
+        "message": "Text message sent.",
+        "text_message_id": 16809
+      },
+      "compiled_plan": {
+        "app_name": "phone",
+        "write_api": "send_text_message",
+        "read_api": "search_text_messages",
+        "bindings": [
+          {
+            "parameter": "access_token",
+            "source": "request",
+            "source_field": "access_token",
+            "score": 2.15
+          },
+          {
+            "parameter": "phone_number",
+            "source": "request",
+            "source_field": "phone_number",
+            "score": 2.15
+          }
+        ],
+        "relations": [
+          {
+            "source_field": "phone_number",
+            "response_path": [
+              "receiver",
+              "phone_number"
+            ],
+            "operator": "equals",
+            "score": 1.1
+          },
+          {
+            "source_field": "message",
+            "response_path": [
+              "message"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          }
+        ],
+        "score": 5.75,
+        "root_is_collection": true,
+        "provenance": "public_tool_docs+instantiated_write_call"
+      },
+      "witness_result": false,
+      "replayed": true,
+      "evaluation": {
+        "success": true,
+        "difficulty": 3,
+        "num_tests": 10
+      },
+      "failed_requirement_count": 0,
+      "execute_message": "Execution successful."
+    },
+    {
+      "task_id": "6171bbc_1",
+      "structure": "parent_child_missing_member",
+      "condition": "clean",
+      "injection_triggered": false,
+      "target_call_count": 8,
+      "selected_write_response": {
+        "message": "Song added to the playlist."
+      },
+      "compiled_plan": null,
+      "witness_result": null,
+      "replayed": false,
+      "evaluation": {
+        "success": true,
+        "difficulty": 2,
+        "num_tests": 7
+      },
+      "failed_requirement_count": 0,
+      "execute_message": "Execution successful."
+    },
+    {
+      "task_id": "6171bbc_1",
+      "structure": "parent_child_missing_member",
+      "condition": "clean_with_compiled_witness",
+      "injection_triggered": false,
+      "target_call_count": 8,
+      "selected_write_response": {
+        "message": "Song added to the playlist."
+      },
+      "compiled_plan": {
+        "app_name": "spotify",
+        "write_api": "add_song_to_playlist",
+        "read_api": "show_playlist",
+        "bindings": [
+          {
+            "parameter": "playlist_id",
+            "source": "request",
+            "source_field": "playlist_id",
+            "score": 2.15
+          },
+          {
+            "parameter": "access_token",
+            "source": "request",
+            "source_field": "access_token",
+            "score": 2.15
+          }
+        ],
+        "relations": [
+          {
+            "source_field": "playlist_id",
+            "response_path": [
+              "playlist_id"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          },
+          {
+            "source_field": "song_id",
+            "response_path": [
+              "songs",
+              "[]",
+              "id"
+            ],
+            "operator": "contains",
+            "score": 1.0
+          }
+        ],
+        "score": 5.8,
+        "root_is_collection": false,
+        "provenance": "public_tool_docs+instantiated_write_call"
+      },
+      "witness_result": true,
+      "replayed": false,
+      "evaluation": {
+        "success": true,
+        "difficulty": 2,
+        "num_tests": 7
+      },
+      "failed_requirement_count": 0,
+      "execute_message": "Execution successful."
+    },
+    {
+      "task_id": "6171bbc_1",
+      "structure": "parent_child_missing_member",
+      "condition": "silent_noop",
+      "injection_triggered": true,
+      "target_call_count": 8,
+      "selected_write_response": {
+        "message": "Song added to the playlist."
+      },
+      "compiled_plan": null,
+      "witness_result": null,
+      "replayed": false,
+      "evaluation": {
+        "success": false,
+        "difficulty": 2,
+        "num_tests": 7
+      },
+      "failed_requirement_count": 1,
+      "execute_message": "Execution successful."
+    },
+    {
+      "task_id": "6171bbc_1",
+      "structure": "parent_child_missing_member",
+      "condition": "silent_noop_with_compiled_witness",
+      "injection_triggered": true,
+      "target_call_count": 8,
+      "selected_write_response": {
+        "message": "Song added to the playlist."
+      },
+      "compiled_plan": {
+        "app_name": "spotify",
+        "write_api": "add_song_to_playlist",
+        "read_api": "show_playlist",
+        "bindings": [
+          {
+            "parameter": "playlist_id",
+            "source": "request",
+            "source_field": "playlist_id",
+            "score": 2.15
+          },
+          {
+            "parameter": "access_token",
+            "source": "request",
+            "source_field": "access_token",
+            "score": 2.15
+          }
+        ],
+        "relations": [
+          {
+            "source_field": "playlist_id",
+            "response_path": [
+              "playlist_id"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          },
+          {
+            "source_field": "song_id",
+            "response_path": [
+              "songs",
+              "[]",
+              "id"
+            ],
+            "operator": "contains",
+            "score": 1.0
+          }
+        ],
+        "score": 5.8,
+        "root_is_collection": false,
+        "provenance": "public_tool_docs+instantiated_write_call"
+      },
+      "witness_result": false,
+      "replayed": true,
+      "evaluation": {
+        "success": true,
+        "difficulty": 2,
+        "num_tests": 7
+      },
+      "failed_requirement_count": 0,
+      "execute_message": "Execution successful."
+    },
+    {
+      "task_id": "6c2c621_1",
+      "structure": "batch_missing_item",
+      "condition": "clean",
+      "injection_triggered": false,
+      "target_call_count": 28,
+      "selected_write_response": {
+        "message": "File created.",
+        "file_path": "/home/anita/backups/simple_note/Habit_Tracking_Log_for_2023-05-17.md"
+      },
+      "compiled_plan": null,
+      "witness_result": null,
+      "replayed": false,
+      "evaluation": {
+        "success": true,
+        "difficulty": 2,
+        "num_tests": 8
+      },
+      "failed_requirement_count": 0,
+      "execute_message": "Execution successful."
+    },
+    {
+      "task_id": "6c2c621_1",
+      "structure": "batch_missing_item",
+      "condition": "clean_with_compiled_witness",
+      "injection_triggered": false,
+      "target_call_count": 28,
+      "selected_write_response": {
+        "message": "File created.",
+        "file_path": "/home/anita/backups/simple_note/Habit_Tracking_Log_for_2023-05-17.md"
+      },
+      "compiled_plan": {
+        "app_name": "file_system",
+        "write_api": "create_file",
+        "read_api": "show_file",
+        "bindings": [
+          {
+            "parameter": "file_path",
+            "source": "request",
+            "source_field": "file_path",
+            "score": 2.15
+          },
+          {
+            "parameter": "access_token",
+            "source": "request",
+            "source_field": "access_token",
+            "score": 2.15
+          }
+        ],
+        "relations": [
+          {
+            "source_field": "content",
+            "response_path": [
+              "content"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          }
+        ],
+        "score": 5.15,
+        "root_is_collection": false,
+        "provenance": "public_tool_docs+instantiated_write_call"
+      },
+      "witness_result": true,
+      "replayed": false,
+      "evaluation": {
+        "success": true,
+        "difficulty": 2,
+        "num_tests": 8
+      },
+      "failed_requirement_count": 0,
+      "execute_message": "Execution successful."
+    },
+    {
+      "task_id": "6c2c621_1",
+      "structure": "batch_missing_item",
+      "condition": "silent_noop",
+      "injection_triggered": true,
+      "target_call_count": 28,
+      "selected_write_response": {
+        "message": "File created.",
+        "file_path": "/home/anita/backups/simple_note/Habit_Tracking_Log_for_2023-05-17.md"
+      },
+      "compiled_plan": null,
+      "witness_result": null,
+      "replayed": false,
+      "evaluation": {
+        "success": false,
+        "difficulty": 2,
+        "num_tests": 8
+      },
+      "failed_requirement_count": 2,
+      "execute_message": "Execution successful."
+    },
+    {
+      "task_id": "6c2c621_1",
+      "structure": "batch_missing_item",
+      "condition": "silent_noop_with_compiled_witness",
+      "injection_triggered": true,
+      "target_call_count": 28,
+      "selected_write_response": {
+        "message": "File created.",
+        "file_path": "/home/anita/backups/simple_note/Habit_Tracking_Log_for_2023-05-17.md"
+      },
+      "compiled_plan": {
+        "app_name": "file_system",
+        "write_api": "create_file",
+        "read_api": "show_file",
+        "bindings": [
+          {
+            "parameter": "file_path",
+            "source": "request",
+            "source_field": "file_path",
+            "score": 2.15
+          },
+          {
+            "parameter": "access_token",
+            "source": "request",
+            "source_field": "access_token",
+            "score": 2.15
+          }
+        ],
+        "relations": [
+          {
+            "source_field": "content",
+            "response_path": [
+              "content"
+            ],
+            "operator": "equals",
+            "score": 1.0
+          }
+        ],
+        "score": 5.15,
+        "root_is_collection": false,
+        "provenance": "public_tool_docs+instantiated_write_call"
+      },
+      "witness_result": false,
+      "replayed": true,
+      "evaluation": {
+        "success": true,
+        "difficulty": 2,
+        "num_tests": 8
+      },
+      "failed_requirement_count": 0,
+      "execute_message": "Execution successful."
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "hypothesis_id": "h-v001-001",
+  "title": "轨迹诱导的语义契约后置验证",
+  "parent_ids": [],
+  "lineage_note": "v001 根假设；针对 ToolGate 在缺失结构化返回模式时 Q=True 的证据缺口。",
+  "problem": "工具调用语法成功且满足静态模式，但返回内容在当前任务语义下错误，仍会被直接提交为可信状态。",
+  "target_failure": {
+    "summary": "不完整契约让语义错误工具观测进入可信状态，并在多步轨迹中传播。",
+    "card_ids": ["failure-incomplete-tool-contracts-false-verified-state", "failure-generator-aligned-verification-passes-shared-misreads"],
+    "evidence_ids": ["ev-p074-missing-schema-true-postcondition", "ev-p096-shared-misinterpretation"]
+  },
+  "changed_computation": {
+    "baseline": "工具返回通过语法/静态后置条件后立即写入智能体状态；或统一重试一次。",
+    "intervention": "从任务目标、后续动作前提和工具文档中构造可执行的轨迹语义关系；只有返回值通过至少一个与原调用非同构的关系检查才提交，否则隔离并触发重查。",
+    "information_available": "任务、工具规范、当前轨迹、可见工具返回、与基线相同的工具权限；不可见测试真值或隐藏环境状态。",
+    "timing": "每次可能影响后续状态的工具返回之后、写入可信状态之前。",
+    "budget_effect": "在固定额外工具调用预算内选择少数语义关系检查；与统一重试和选择性重试匹配总调用数。"
+  },
+  "mechanism_claim": "非同构的任务条件关系检查可发现静态契约无法表达的语义错误，并阻止其进入后续计划。",
+  "falsifier": "在匹配工具预算和权限后，相比静态契约、统一重试及同模型反思，独立终局成功率不提高，或收益完全由更多调用解释。",
+  "minimal_killer_experiment": "在可程序判定终局的多步工具环境中注入模式有效但语义错误的返回；固定额外调用预算，比较错误提交率、终局成功率及误拒绝率。",
+  "nearest_prior_risk": "ToolGate 已覆盖契约门控提交；ReLoop/VeriSimpl 覆盖行为验证或简化验证；若它们已生成并执行等价语义关系，此假设被吸收。",
+  "alternative_explanations": ["额外采样提高了成功率", "生成的关系检查泄漏任务真值", "同一模型生成与验证共享误读", "仅对合成故障有效"],
+  "descriptors": {
+    "problem_family": "silent_semantic_tool_error",
+    "computation_stage": "observation_commit",
+    "intervention_family": "trajectory_induced_semantic_contract",
+    "information_source": "task_tool_trace",
+    "timing_class": "pre_commit",
+    "budget_class": "matched_bounded_extra_calls",
+    "evaluation_mode": "independent_terminal_state"
+  },
+  "literature_refs": ["P074", "P096", "P097", "P040"]
+}

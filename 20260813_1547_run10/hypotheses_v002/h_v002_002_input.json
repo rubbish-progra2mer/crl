@@ -1,0 +1,51 @@
+{
+  "hypothesis_id": "h-v002-002",
+  "title": "带观察覆盖证明的否定状态类型",
+  "parent_ids": [
+    "h-v002-001"
+  ],
+  "lineage_note": "保留 v002 前后态读取的测量载体，但把方法核从关系模板改为否定结论的证据充分性计算；只有带覆盖证明的读取才能把未见提升为不存在。",
+  "problem": "工具智能体常把空列表、首屏未命中、权限受限、陈旧结果或读取错误统一解释为目标不存在；一般信念状态又允许模型自行给不完整观察赋置信度，缺乏可审计的否定证据边界。",
+  "target_failure": {
+    "summary": "不完整读取被错误闭世界化，形成高置信度的不存在判断并驱动后续工具动作或错误终止。",
+    "card_ids": [
+      "failure-confident-completion-without-state-success",
+      "failure-raw-observation-overload-hides-action-relevant-ui"
+    ],
+    "evidence_ids": []
+  },
+  "changed_computation": {
+    "baseline": "原始工具输出直接进入大语言模型，或由模型产生带自报置信度的信念状态；组合强基线为 ARMeta/Karlsson 读计划加 Verified Tool Calls 三值控制。",
+    "intervention": "把每个读取编译成范围化观察，并生成覆盖义务：目标句柄绑定、筛选域、分页闭合、同一权限视图、读取成功、时间新鲜度与读纯度。正证据可直接产生 PRESENT；负证据只有在所有相关义务均有机器可检验证书时产生 ABSENT，否则按缺口类型产生 UNKNOWN，禁止下游把 UNKNOWN 当作 ABSENT。",
+    "information_available": "公开工具规范、实例化读取参数和原始输出、当前凭据身份标签与单次运行时序；不使用服务源码、隐藏数据库、评价程序、测试真值、人工任务后置条件或历史故障标签。",
+    "timing": "每次读取返回时生成范围与覆盖证书；在规划器消费任何不存在断言前执行类型检查。",
+    "budget_effect": "需要分页穷尽或补充只读调用时消耗额外读取预算；与同等最大读取数的固定穷尽、统一重查和模型自判基线比较，并允许 UNKNOWN 弃权。"
+  },
+  "mechanism_claim": "将否定状态从自由文本信念改为带范围证明的可消费类型，能在相同读取预算下减少由分页、权限、陈旧性和读取失败导致的错误不存在判断，同时比一律 UNKNOWN 或一律穷尽保留更多任务效用。",
+  "falsifier": "覆盖义务无法从公开接口与运行时元数据自动实例化；强组合基线加入简单分页穷尽/错误检查后等效；多数真实任务只能返回 UNKNOWN；或类型系统降低误判却不能改善独立终局。",
+  "minimal_killer_experiment": "在 AppWorld 开发集构造同一实体分别位于首屏、后续页、不可见权限域、读取错误与真实不存在的配对观察；盲于终局真值生成覆盖证书，测量 PRESENT/ABSENT/UNKNOWN 的安全性、覆盖率和读取成本，并把证书输出交给相同智能体完成下游决策。",
+  "nearest_prior_risk": "Agent-BRACE、BeliefMem 与 NeSyFS 已显式表示部分可观测信念；Verified Tool Calls 已有 TRUE/FALSE/UNKNOWN；数据库开放世界语义和 REST 元变分页测试提供成熟组件。必须证明新增计算是读取充分性与否定类型规则，而非符号化记账。",
+  "alternative_explanations": [
+    "收益只来自多翻页",
+    "UNKNOWN 标签本身通过提示改变模型行为",
+    "测试故障模板直接泄漏了覆盖条件",
+    "AppWorld 的同步、单用户环境过度简化权限与新鲜度",
+    "规则系统等价于人工完整性后置条件"
+  ],
+  "descriptors": {
+    "problem_family": "false_absence_from_incomplete_tool_observation",
+    "computation_stage": "observation_typing_before_belief_update",
+    "intervention_family": "proof_carrying_negative_observation",
+    "information_source": "public_schema_runtime_scope_metadata_raw_output",
+    "timing_class": "read_return_and_preconsume",
+    "budget_class": "matched_bounded_read_budget_with_abstention",
+    "evaluation_mode": "paired_observation_scope_and_terminal_state"
+  },
+  "literature_refs": [
+    "arXiv:2605.11436",
+    "arXiv:2605.05583",
+    "arXiv:2607.28942",
+    "arXiv:2608.02645",
+    "Karlsson et al., Software Quality Journal 2024"
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "created_at_utc": "2026-08-13T10:04:48.972155Z",
+  "hypotheses": [
+    {
+      "alternative_explanations": [
+        "收益来自少注入上下文",
+        "收益来自成功轨迹质量",
+        "模型本身可从当前状态识别不适用",
+        "门控只重述语义相似度"
+      ],
+      "changed_computation": {
+        "baseline": "按任务或当前状态的向量相似度召回成功轨迹/计划模板，并直接注入模型上下文。",
+        "budget_effect": "增加条件归纳与门控成本；推理时可减少错误经验注入，但必须报告弃权率与无记忆回退成本。",
+        "information_available": "历史成功/失败轨迹、当前任务和可见状态；不使用当前测试任务的隐藏终局答案。",
+        "intervention": "为每条经验存储结构化适用条件；只有当前状态满足适用条件时才允许调用，否则回退到无记忆推理。",
+        "timing": "经验写入或整理时归纳条件，目标任务执行前做门控。"
+      },
+      "created_at_utc": "2026-08-13T10:04:49.085317Z",
+      "descriptors": {
+        "budget_class": "one_guard_evaluation",
+        "computation_stage": "memory_retrieval_and_skill_invocation",
+        "evaluation_mode": "negative_transfer_and_terminal_success",
+        "information_source": "past_trajectories_and_current_state",
+        "intervention_family": "experience_applicability_gate",
+        "problem_family": "misaligned_experience_replay",
+        "timing_class": "memory_write_and_preexecution"
+      },
+      "falsifier": "已有程序性记忆方法已存储何时使用、前置条件或适用边界，并用成功/失败对比或价值门控更新；或适用域只由模型提示生成而无新计算。",
+      "hypothesis_id": "h-v005-001",
+      "lineage_note": "v004 的跨子任务约束保持被约束满足问题树分解直接覆盖后，正交转向成功经验在表面相似但关键前提不同的任务上产生负迁移。",
+      "literature_refs": [
+        "ACL Findings 2026: ReMe",
+        "arXiv:2512.18950",
+        "arXiv:2607.16621",
+        "arXiv:2605.17641"
+      ],
+      "mechanism_claim": "显式经验适用域比相似度检索更能抑制正确但错位的经验回放。",
+      "minimal_killer_experiment": "先核验 ReMe、MACLA、MSCE 与最新因果记忆选择；若宽核已被占据，只保留具有不同证据生成方式的窄方法。",
+      "nearest_prior_risk": "ReMe 的经验元组含 when-to-use 并比较成功/失败轨迹；MACLA 的程序含前置/后置条件且用成功/失败对比收紧；MSCE 的策略和技能含 trigger、applicability boundary 与 value-calibrated filtering。",
+      "parent_ids": [],
+      "problem": "智能体按查询或状态语义相似度复用成功轨迹、计划或技能时，可能忽略决定该经验是否可执行的关键前提，导致高置信错位回放。",
+      "revision": 2,
+      "status": "prior_collision",
+      "status_reason": "ReMe 已存 when-to-use 并比较成功/失败轨迹，MACLA 已学习前置/后置条件并对比收紧，MSCE 已存适用边界并做价值门控；宽泛适用域门没有独立计算。",
+      "target_failure": {
+        "card_ids": [
+          "failure-plan-cache-semantic-false-positives",
+          "failure-retrieved-experience-propagates-stored-errors"
+        ],
+        "evidence_ids": [
+          "ev-p071-cache-false-positive-boundary",
+          "ev-p071-plan-template-reuse",
+          "ev-p064-experience-following-error"
+        ],
+        "summary": "表面相似命中复用了不适用于当前状态的正确历史经验，造成负迁移。"
+      },
+      "title": "带适用域的经验记忆检索门",
+      "updated_at_utc": "2026-08-13T10:04:49.291933Z"
+    },
+    {
+      "alternative_explanations": [
+        "主动样本恰好覆盖测试分布",
+        "谓词枚举泄漏真实前置条件",
+        "机械守卫而非经验内容带来收益",
+        "合成器只适用于合取条件",
+        "环境重置成本不可接受"
+      ],
+      "changed_computation": {
+        "baseline": "从成功轨迹生成 when-to-use 文本，或从被动成功/失败执行中由模型收紧前置条件；强基线含同预算随机状态试验。",
+        "budget_effect": "构建期增加环境重放；运行时不增加模型或工具调用。必须与相同重放数的随机试验、被动对比和模型条件归纳比较样本效率。",
+        "information_available": "训练/构建期的可回滚检查点、公开状态谓词、固定程序和独立终局反馈；目标任务运行时只读当前可见状态与已合成守卫，不调用目标答案评分器。",
+        "intervention": "给定固定程序和可观察候选状态谓词，从成功检查点开始逐项或按反例选择改变谓词，重放完全相同的程序并由独立终局判定成功/失败；将区分成功与反例且覆盖最大的布尔条件合成为调用守卫，未覆盖状态拒绝复用。",
+        "timing": "经验固化为技能之前做少量主动重放；运行时在技能注入或执行前机械求值守卫。"
+      },
+      "created_at_utc": "2026-08-13T10:04:49.190670Z",
+      "descriptors": {
+        "budget_class": "bounded_environment_replay_zero_runtime_calls",
+        "computation_stage": "skill_crystallization_and_preexecution_gate",
+        "evaluation_mode": "unseen_state_false_admission_coverage_and_terminal_success",
+        "information_source": "rollback_state_interventions_and_terminal_feedback",
+        "intervention_family": "counterexample_guided_applicability_guard_synthesis",
+        "problem_family": "causally_invalid_skill_reuse",
+        "timing_class": "offline_or_online_skill_promotion_then_preexecution"
+      },
+      "falsifier": "MACLA/MSCE 或其他智能体记忆工作已用环境状态干预和固定技能重放合成前置条件；经典技能初始集合学习完全吸收且在大语言模型智能体上没有新的部分可观察/语言规约计算；同预算随机试验、模型归纳或简单分类器达到相同错误放行率和终局成功率；候选状态谓词无法从工具模式与观测稳定生成。",
+      "hypothesis_id": "h-v005-002",
+      "lineage_note": "宽泛适用域门控已被程序性记忆工作占据；收缩到适用条件的证据生成方式：不让大语言模型从被动轨迹猜测条件，而是在可回滚环境中主动干预候选状态谓词并重放同一程序。",
+      "literature_refs": [
+        "arXiv:2512.18950",
+        "arXiv:2607.16621",
+        "arXiv:2605.17641",
+        "arXiv:2012.01693",
+        "NeurIPS 2023 initiation-set learning"
+      ],
+      "mechanism_claim": "主动配对干预能把技能成败与状态谓词的因果依赖分开，合成的守卫应比相似度、模型 when-to-use 和同预算被动/随机观察具有更低的错误放行率。",
+      "minimal_killer_experiment": "在程序化可判定的工具环境中生成多组技能、布尔状态与未见组合；比较语义直用、模型 when-to-use、同预算随机试验/分类、被动成功失败对比和主动配对干预，测守卫错误放行、覆盖、重放数与独立终局成功。",
+      "nearest_prior_risk": "MACLA 已有显式前置条件和成功/失败对比收紧；MSCE 已有适用边界、正反证据和价值门控；CMI 已在记忆上下文上做有/无记忆干预；经典强化学习选项初始集合与机器人技能前置条件学习已长期研究可执行状态集合。差异必须落在文本/工具智能体中对固定语言程序做环境谓词干预、且运行时不使用目标答案。",
+      "parent_ids": [
+        "h-v005-001"
+      ],
+      "problem": "现有经验/技能适用条件多由模型总结、相似度或非因果价值信号生成，可能把共现条件误当必要条件，或漏掉只在反事实状态下暴露的失败边界。",
+      "revision": 3,
+      "status": "falsified",
+      "status_reason": "合成优势属于经典主动概念学习；AppWorld真实夹具的全谓词零学习基线及三个本地模型仅凭程序和一个成功状态即与主动配对守卫并列，当前核未改变候选排序或运行时状态转移。",
+      "target_failure": {
+        "card_ids": [
+          "failure-plan-cache-semantic-false-positives",
+          "failure-retrieved-experience-propagates-stored-errors"
+        ],
+        "evidence_ids": [
+          "ev-p071-cache-false-positive-boundary",
+          "ev-p064-experience-following-error",
+          "ev-p064-evaluator-reliability"
+        ],
+        "summary": "模型生成或被动统计的技能前置条件在未观察状态上误放行，导致程序性记忆负迁移。"
+      },
+      "title": "反例引导的程序性记忆适用守卫合成",
+      "updated_at_utc": "2026-08-13T10:28:44.817049Z"
+    }
+  ],
+  "revision": 5,
+  "run_id": "20260813_1547_run10",
+  "schema_version": 1,
+  "updated_at_utc": "2026-08-13T10:28:44.817049Z",
+  "version": "v005"
+}

@@ -1,0 +1,69 @@
+{
+  "claims": [
+    {
+      "alternative_explanations": [
+        "模型未读取列表项",
+        "提示长度而非覆盖语义",
+        "合成任务词汇异常"
+      ],
+      "claim_id": "coverage-blindness-phenomenon-v001",
+      "claim_text": "格式正常但覆盖不足的工具结果会使本地工具型智能体产生明显更多的错误不存在结论。",
+      "falsifier": "raw 的错误否定率不比 coverage-prompt 高至少 0.25。",
+      "killer_experiment_id": "coverage-gate-screening-v001",
+      "minimum_effect_or_decision_rule": "raw false_negative_rate_hidden - prompt false_negative_rate_hidden >= 0.25 才形成 Screening 现象支持。",
+      "observable": "raw 条件与同模型 coverage-prompt 条件的 hidden false_negative_rate。",
+      "scope": "Qwen3-8B、四个合成列表检索域、截断/作用域错配/陈旧/未知覆盖故障。",
+      "status": "supported_locally",
+      "status_reason": "Formal Screening coverage-gate-screening-v001：隐藏目标错误否定率 raw=1.000，coverage-prompt=0.6875，差值 0.3125，超过预注册 0.25；完整结果正确否定保留均为 1.000。",
+      "supporting_experiment_ids": []
+    },
+    {
+      "alternative_explanations": [
+        "强提示已经吸收全部收益",
+        "准入门只通过额外查询取胜",
+        "改进来自任务特定字符串规则"
+      ],
+      "claim_id": "coverage-gate-increment-v001",
+      "claim_text": "在相同覆盖信息和查询预算下，确定性负命题准入门比强验证提示进一步降低错误否定，且不靠普遍拒答。",
+      "falsifier": "gate 未严格降低 prompt 的错误否定率，或正确否定保留低于 0.75，或拒答率比 prompt 高超过 0.10。",
+      "killer_experiment_id": "coverage-gate-screening-v001",
+      "minimum_effect_or_decision_rule": "gate 的 hidden false_negative_rate 至少比 prompt 低 0.10；complete_absence_retention_rate >= 0.75；abstention_rate <= prompt + 0.10；mean_extra_queries <= 1。",
+      "observable": "hidden false_negative_rate、complete_absence_retention_rate、abstention_rate 与 mean_extra_queries。",
+      "scope": "Qwen3-8B、同一四域合成任务、prompt 与 gate 条件。",
+      "status": "supported_locally",
+      "status_reason": "Formal Screening coverage-gate-screening-v001：gate 隐藏目标错误否定率 0，相比 prompt 低 0.6875；正确否定保留 1.000、拒答率与 prompt 同为 0.0417、平均额外查询 0.625，满足全部预注册判据。",
+      "supporting_experiment_ids": []
+    },
+    {
+      "alternative_explanations": [
+        "oracle answer set 泄漏任务答案",
+        "分页适配器仍是模拟工具",
+        "第二模型的指令服从差异",
+        "gate 通过自动全量读取而非可推广见证取胜"
+      ],
+      "claim_id": "sgr-natural-answer-set-generalization-v001",
+      "claim_text": "在公开真实检索任务的自然 answer sets 上，覆盖门仍比同信息一般 postcondition 提示和 result-count 回执更少产生错误否定，且保留正确否定。",
+      "falsifier": "gate 相比 postcondition 的隐藏目标错误否定率降低不足 0.15，或 gate 错误否定率高于 0.10，或正确否定保留/可见存在准确率低于 0.80，或拒答率高于 0.10。",
+      "killer_experiment_id": "sgr-coverage-validation-v001",
+      "minimum_effect_or_decision_rule": "gate-postcondition 错误否定差 >=0.15；gate false_negative_rate_hidden <=0.10；complete_absence_retention_rate >=0.80；visible_positive_accuracy >=0.80；abstention_rate <=0.10。",
+      "observable": "receipt/postcondition/gate 的 hidden false-negative、recovery、complete-absence retention、visible-positive accuracy、abstention 与查询成本。",
+      "scope": "SGR-Bench 约束版中 12 个跨域任务的 oracle answer sets，经独立分页适配器形成 hidden/visible/complete-absent 场景；Qwen2.5-7B。",
+      "status": "supported_locally",
+      "status_reason": "Formal Screening sgr-coverage-validation-v001 实际纳入预注册固定候选中的 11/12 个任务；reptile_001 因确定性解析器无法恢复答案集而被跳过，这是预注册后偏差。其余 11 个任务共 33 个 episode 上，gate 隐藏目标错误否定率 0.0909，postcondition 为 0.4545，差值 0.3636；gate 正确否定保留与可见存在准确率均为 0.9091，拒答率 0.0303，满足全部数值判据。该支持仍仅为 Screening，不能视作完整 12 任务或真实在线 API 验证。",
+      "supporting_experiment_ids": []
+    }
+  ],
+  "created_at": "2026-08-18T14:41:34.795599Z",
+  "global_confounders": [
+    "单一开源模型不能代表更强闭源模型",
+    "合成列表任务低于真实 API 和网站检索复杂度",
+    "确定性零温仍可能受模型实现与硬件非确定性影响",
+    "覆盖元数据的显式格式可能本身充当额外提示"
+  ],
+  "hypothesis_id": "h-coverage-witness-001",
+  "plan_id": "coverage-witness-plan-v001",
+  "run_id": "20260818_2228_run16",
+  "schema_version": 2,
+  "updated_at": "2026-08-18T15:04:28.704874Z",
+  "version": "v001"
+}

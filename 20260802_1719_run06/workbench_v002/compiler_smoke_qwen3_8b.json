@@ -1,0 +1,79 @@
+{
+  "experiment": "claim_compiler_v002",
+  "model": "qwen3:8b",
+  "seed": 20260802,
+  "case_count": 2,
+  "elapsed_seconds": 9.012016534805298,
+  "dataset_kind": "researcher-authored bilingual audit set; not an external benchmark or human annotation study",
+  "summary": {
+    "cases": 2,
+    "parse_success_rate": 0.5,
+    "exact_match_rate": 0.5,
+    "raw_dangerous_underapproximation_rate": 0.0,
+    "guard_accept_rate": 0.5,
+    "guarded_exact_match_rate_over_all_cases": 0.5,
+    "guarded_dangerous_commit_rate_over_all_cases": 0.0,
+    "accepted_exact_match_rate": 1.0,
+    "prompt_tokens": 303,
+    "generated_tokens": 108
+  },
+  "rows": [
+    {
+      "case_id": "zh-01",
+      "text": "整个组织的全部历史（包括归档）中不存在编号 X-17 的记录。",
+      "label": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": false,
+        "entity_scope": "organization",
+        "time_scope": "all_history",
+        "archive_scope": "include_archived"
+      },
+      "prediction": null,
+      "raw_content": "{\n  \"quantifier\": \"exists\",\n  \"predicate\": \"matches_target\",\n  \"asserted_value\": \"false\",\n  \"entity_scope\": \"organization\",\n  \"time_scope\": \"all_history\",\n  \"archive_scope\": \"include_archived\"\n}",
+      "exact_match": false,
+      "dangerous_underapproximation": false,
+      "guard_accept": false,
+      "guard_reasons": [
+        "malformed_or_out_of_vocabulary"
+      ],
+      "usage": {
+        "prompt_eval_count": 152,
+        "eval_count": 55,
+        "total_duration": 7994408900,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-02",
+      "text": "当前团队最近 30 天的活动记录里存在编号 X-17。",
+      "label": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": true,
+        "entity_scope": "current_team",
+        "time_scope": "recent",
+        "archive_scope": "active_only"
+      },
+      "prediction": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": true,
+        "entity_scope": "current_team",
+        "time_scope": "recent",
+        "archive_scope": "active_only"
+      },
+      "raw_content": "{\n  \"quantifier\": \"exists\",\n  \"predicate\": \"matches_target\",\n  \"asserted_value\": true,\n  \"entity_scope\": \"current_team\",\n  \"time_scope\": \"recent\",\n  \"archive_scope\": \"active_only\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 151,
+        "eval_count": 53,
+        "total_duration": 1010280800,
+        "response_model": "qwen3:8b"
+      }
+    }
+  ]
+}

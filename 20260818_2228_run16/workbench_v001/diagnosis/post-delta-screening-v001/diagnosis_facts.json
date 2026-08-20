@@ -1,0 +1,1193 @@
+{
+  "authority": "ADVISORY_NON_AUTHORITATIVE_FACTS_ONLY",
+  "comparison_files": [],
+  "contract_version": "3",
+  "current_version": {
+    "comparison_files": [],
+    "experiments": {
+      "attempt_count": 4,
+      "attempts": [
+        {
+          "id": "coverage-gate-screening-v001",
+          "path": "experiment_v001/attempts/coverage-gate-screening-v001",
+          "read_error": null,
+          "record_sha256": "08b22b2469a220bd805da77307fcd66e3d10d6d1e9ddde0e12b1436a97f29f17",
+          "status": "SUCCESS",
+          "tier": "formal",
+          "valid_review_support": true,
+          "validation_errors": []
+        },
+        {
+          "id": "delta-contract-screening-v001",
+          "path": "experiment_v001/attempts/delta-contract-screening-v001",
+          "read_error": null,
+          "record_sha256": "7054dafea332d1258a26f27a8d4cfe6433269bcfb6cdc49414c09f3b6e1fe36c",
+          "status": "FAILED",
+          "tier": "formal",
+          "valid_review_support": false,
+          "validation_errors": [
+            "invalid supporting attempt delta-contract-screening-v001: execution runner_exit_code does not equal 0; execution metrics_contract_ok does not equal True; implementation file 0 size does not match; implementation file 0 SHA-256 does not match"
+          ]
+        },
+        {
+          "id": "delta-contract-screening-v001-r1",
+          "path": "experiment_v001/attempts/delta-contract-screening-v001-r1",
+          "read_error": null,
+          "record_sha256": "37205b648d42a01c0ae0a0846df3a165680bffa77c19c23f3b20d97bce1177be",
+          "status": "SUCCESS",
+          "tier": "formal",
+          "valid_review_support": true,
+          "validation_errors": []
+        },
+        {
+          "id": "sgr-coverage-validation-v001",
+          "path": "experiment_v001/attempts/sgr-coverage-validation-v001",
+          "read_error": null,
+          "record_sha256": "ea3677b551c0a1e61d044f273d43b042600fbd30bafeef4bce16230c8e08b2d5",
+          "status": "SUCCESS",
+          "tier": "formal",
+          "valid_review_support": true,
+          "validation_errors": []
+        }
+      ],
+      "status_counts": {
+        "FAILED": 1,
+        "SUCCESS": 3
+      },
+      "tier_counts": {
+        "formal": 4
+      },
+      "valid_formal_count": 3
+    },
+    "review_evaluation_files": [],
+    "search_snapshot_files": [
+      {
+        "path": "hypotheses_v001/searches/frontier-map-v001/report.md",
+        "sha256": "fd36b11a158e789bababe918e4defcf6a1e351aa2861ab319ac654e0014f7372",
+        "size_bytes": 8278
+      },
+      {
+        "path": "hypotheses_v001/searches/frontier-map-v001/request.json",
+        "sha256": "b631bff27c7a238c62de8814740e9e9fccb2524522b495596178d5ff21a08585",
+        "size_bytes": 5461
+      },
+      {
+        "path": "hypotheses_v001/searches/frontier-map-v001/result.json",
+        "sha256": "64cdffe4f67972682070e30b754de8208edf0b2157e5c80eddeea226fe481540",
+        "size_bytes": 1345851
+      },
+      {
+        "path": "hypotheses_v001/searches/orthogonal-frontier-v001/report.md",
+        "sha256": "a196f6cbe1137081d13b91b8f4d47dd5413e01ab947dbaa0c1c66144d5b5913f",
+        "size_bytes": 8309
+      },
+      {
+        "path": "hypotheses_v001/searches/orthogonal-frontier-v001/request.json",
+        "sha256": "794f07237486489e5790bf637bbb32155e4126700036ec9981b06947f8dd1dd1",
+        "size_bytes": 5586
+      },
+      {
+        "path": "hypotheses_v001/searches/orthogonal-frontier-v001/result.json",
+        "sha256": "f12d1ddbd3ed5e87a89b50bc6de4183851703a74ace121eec8f68ffdac300bd1",
+        "size_bytes": 3032185
+      }
+    ],
+    "selection_context": {
+      "duplicate_sections": [],
+      "missing_sections": [],
+      "path": "selection_context_v001.md",
+      "reason": null,
+      "sections": {
+        "best_candidate_set": {
+          "heading": "当前最佳候选集合",
+          "status": "PRESENT",
+          "text": "当前为空。`h-causal-replay-001` 被直接最近先行占据；`h-coverage-witness-001` 虽有两项成功 Screening，但 CROWN-QA 与 ToolGate 使其只剩已有组件组合；`h-delta-contract-001` 的当前局部义务实现被 Formal Screening 反证，较宽方法族只被纠正为 parked，因剩余数据流计算与 HyperAgent 高度重合而不进入最佳集合。"
+        },
+        "fatal_uncertainties": {
+          "heading": "剩余致命不确定性",
+          "status": "PRESENT",
+          "text": "尚无候选同时满足贡献差分和本地实验支持。接口演化方向的剩余修复需要端口级输入/输出数据流、前置条件缺口扩展和运行态绑定，而 HyperAgent 已直接实现这些计算；仅在其外再加版本差分和局部回归是否足以形成独立论文贡献，目前没有证据。更广泛的不确定性仍是：正式知识库和 2026 最近前沿中是否还存在一个未被模式图、合约门、反事实归因或通用验证占据的可执行计算核心。"
+        },
+        "killed_or_invalidated_scope": {
+          "heading": "已失效或被杀范围",
+          "status": "PRESENT",
+          "text": "反事实轨迹重放与首次不可恢复步骤定位的方法核被 CAR、CausalFlow、ELPO 和 AgentTracer 占据。完整性敏感负向推理的问题、形式化、评价和自然文档现象被 CROWN-QA 占据，一般合约门控被 ToolGate 占据。最新 Formal 只杀死 `h-delta-contract-001` 当前“局部迁移义务相对同信息差分提示有增量”的本地主张和实现；它没有证明全部接口演化方法核心死亡。最初写成 `METHOD_CORE` 的过宽范围已通过后续 `parked` 事件和机器复查 M013 明确纠正。"
+        },
+        "next_high_information_action": {
+          "heading": "下一项最高信息量动作",
+          "status": "PRESENT",
+          "text": "停止继续为接口演化候选叠加 HyperAgent 已有的数据流组件，执行第二次正交问题扩展。优先从“过程验证成本过高时，哪些步骤可由确定性不变量替代模型评判”与“表面成功但状态副作用错误的最小可执行验证”两个问题族寻找现象；先核验 2026 最近先行，再决定是否正式建候选。若仍只能得到已有验证、门控或模式图的组合，则转向改变贡献形态或诚实 No-Delivery 审计，而不是增加版本。"
+        },
+        "positive_evidence_delta": {
+          "heading": "新增正向证据",
+          "status": "PRESENT",
+          "text": "没有新增可投资候选的正向证据。新增科研信息增益来自 `experiment_v001/attempts/delta-contract-screening-v001-r1/`：24 个配对工作流、六类接口演化、100 次本地模型调用的 Formal 结果显示 latest、同信息 diff_prompt、额外预算 reflection 和 obligation 的成功率全部为 0.8333，模式合法率全部为 1.0。失败全部集中在新增前置工具的数据流绑定，说明缩小输出范围本身没有处理真正瓶颈。"
+        },
+        "strategy_change": {
+          "heading": "策略变化",
+          "status": "PRESENT",
+          "text": "从“接口演化方法实现”回溯到正交现象优先探索。明确停止三类重复动作：不把公开基准发现当方法贡献；不把 HyperAgent/ToolLIFT/Contract2Tool 的组件重新组合成新方法；不因单次 Screening 失败而夸大整个方法族死亡。失败 attempt `delta-contract-screening-v001` 仅是指标输出契约错误，已以同等设置重跑为 `-r1`，不作为科学反证。"
+        }
+      },
+      "status": "READY"
+    },
+    "version": "v001"
+  },
+  "diagnosis_id": "post-delta-screening-v001",
+  "experiments": {
+    "attempt_count": 4,
+    "attempts": [
+      {
+        "id": "coverage-gate-screening-v001",
+        "path": "experiment_v001/attempts/coverage-gate-screening-v001",
+        "read_error": null,
+        "record_sha256": "08b22b2469a220bd805da77307fcd66e3d10d6d1e9ddde0e12b1436a97f29f17",
+        "status": "SUCCESS",
+        "tier": "formal",
+        "valid_review_support": true,
+        "validation_errors": []
+      },
+      {
+        "id": "delta-contract-screening-v001",
+        "path": "experiment_v001/attempts/delta-contract-screening-v001",
+        "read_error": null,
+        "record_sha256": "7054dafea332d1258a26f27a8d4cfe6433269bcfb6cdc49414c09f3b6e1fe36c",
+        "status": "FAILED",
+        "tier": "formal",
+        "valid_review_support": false,
+        "validation_errors": [
+          "invalid supporting attempt delta-contract-screening-v001: execution runner_exit_code does not equal 0; execution metrics_contract_ok does not equal True; implementation file 0 size does not match; implementation file 0 SHA-256 does not match"
+        ]
+      },
+      {
+        "id": "delta-contract-screening-v001-r1",
+        "path": "experiment_v001/attempts/delta-contract-screening-v001-r1",
+        "read_error": null,
+        "record_sha256": "37205b648d42a01c0ae0a0846df3a165680bffa77c19c23f3b20d97bce1177be",
+        "status": "SUCCESS",
+        "tier": "formal",
+        "valid_review_support": true,
+        "validation_errors": []
+      },
+      {
+        "id": "sgr-coverage-validation-v001",
+        "path": "experiment_v001/attempts/sgr-coverage-validation-v001",
+        "read_error": null,
+        "record_sha256": "ea3677b551c0a1e61d044f273d43b042600fbd30bafeef4bce16230c8e08b2d5",
+        "status": "SUCCESS",
+        "tier": "formal",
+        "valid_review_support": true,
+        "validation_errors": []
+      }
+    ],
+    "status_counts": {
+      "FAILED": 1,
+      "SUCCESS": 3
+    },
+    "tier_counts": {
+      "formal": 4
+    },
+    "valid_formal_count": 3
+  },
+  "file_count": 97,
+  "file_type_counts": {
+    ".bin": 8,
+    ".json": 60,
+    ".jsonl": 1,
+    ".md": 21,
+    ".py": 3,
+    ".txt": 4
+  },
+  "generated_at_utc": "2026-08-18T15:38:15.808275Z",
+  "marker_occurrences": {
+    "assumption": 21,
+    "contradiction": 22,
+    "failed": 121,
+    "not provided": 1,
+    "todo": 1
+  },
+  "non_judgments": [
+    "no candidate is killed or selected by this package",
+    "no novelty, delivery, or next-action decision is computed",
+    "the main researcher interprets these traceable facts"
+  ],
+  "recall_resume": {
+    "authority": "ADVISORY_NON_AUTHORITATIVE",
+    "run_id": "20260818_2228_run16",
+    "sections": [
+      {
+        "hits": [
+          {
+            "fts_rank": 1,
+            "fused_score": 0.01639344262295082,
+            "line_end": 23,
+            "line_start": 1,
+            "path": "selection_context_v001.md",
+            "semantic_rank": null,
+            "source_sha256": "171a7a454d8f1037a9b4fa9821a3e62d818c57d1911bd04726f47a78cf91a4b1",
+            "text": "## 当前最佳候选集合\n\n当前为空。`h-causal-replay-001` 被直接最近先行占据；`h-coverage-witness-001` 虽有两项成功 Screening，但 CROWN-QA 与 ToolGate 使其只剩已有组件组合；`h-delta-contract-001` 的当前局部义务实现被 Formal Screening 反证，较宽方法族只被纠正为 parked，因剩余数据流计算与 HyperAgent 高度重合而不进入最佳集合。\n\n## 新增正向证据\n\n没有新增可投资候选的正向证据。新增科研信息增益来自 `experiment_v001/attempts/delta-contract-screening-v001-r1/`：24 个配对工作流、六类接口演化、100 次本地模型调用的 Formal 结果显示 latest、同信息 diff_prompt、额外预算 reflection 和 obligation 的成功率全部为 0.8333，模式合法率全部为 1.0。失败全部集中在新增前置工具的数据流绑定，说明缩小输出范围本身没有处理真正瓶颈。\n\n## 已失效或被杀范围\n\n反事实轨迹重放与首次不可恢复步骤定位的方法核被 CAR、CausalFlow、ELPO 和 AgentTracer 占据。完整性敏感负向推理的问题、形式化、评价和自然文档现象被 CROWN-QA 占据，一般合约门控被 ToolGate 占据。最新 Formal 只杀死 `h-delta-contract-001` 当前“局部迁移义务相对同信息差分提示有增量”的本地主张和实现；它没有证明全部接口演化方法核心死亡。最初写成 `METHOD_CORE` 的过宽范围已通过后续 `parked` 事件和机器复查 M013 明确纠正。\n\n## 剩余致命不确定性\n\n尚无候选同时满足贡献差分和本地实验支持。接口演化方向的剩余修复需要端口级输入/输出数据流、前置条件缺口扩展和运行态绑定，而 HyperAgent 已直接实现这些计算；仅在其外再加版本差分和局部回归是否足以形成独立论文贡献，目前没有证据。更广泛的不确定性仍是：正式知识库和 2026 最近前沿中是否还存在一个未被模式图、合约门、反事实归因或通用验证占据的可执行计算核心。\n\n## 下一项最高信息量动作\n\n停止继续为接口演化候选叠加 HyperAgent 已有的数据流组件，执行第二次正交问题扩展。优先从“过程验证成本过高时，哪些步骤可由确定性不变量替代模型评判”与“表面成功但状态副作用错误的最小可执行验证”两个问题族寻找现象；先核验 2026 最近先行，再决定是否正式建候选。若仍只能得到已有验证、门控或模式图的组合，则转向改变贡献形态或诚实 No-Delivery 审计，而不是增加版本。\n\n## 策略变化\n\n从“接口演化方法实现”回溯到正交现象优先探索。明确停止三类重复动作：不把公开基准发现当方法贡献；不把 HyperAgent/ToolLIFT/Contract2Tool 的组件重新组合成新方法；不因单次 Screening 失败而夸大整个方法族死亡。失败 attempt `delta-contract-screening-v001` 仅是指标输出契约错误，已以同等设置重跑为 `-r1`，不作为科学反证。"
+          },
+          {
+            "fts_rank": 2,
+            "fused_score": 0.016129032258064516,
+            "line_end": 27,
+            "line_start": 1,
+            "path": "hypotheses_v001/searches/orthogonal-frontier-v001/report.md",
+            "semantic_rank": null,
+            "source_sha256": "a196f6cbe1137081d13b91b8f4d47dd5413e01ab947dbaa0c1c66144d5b5913f",
+            "text": "<!-- CRL_RESEARCH_SEARCH_META {\"created_at_utc\":\"2026-08-18T15:11:48.981180Z\",\"request_fingerprint_sha256\":\"8ef955956ea63c42c2de1896112d70d9b1853644957415ead180ea9ad3d4d8e9\",\"result_json_sha256\":\"f12d1ddbd3ed5e87a89b50bc6de4183851703a74ace121eec8f68ffdac300bd1\",\"search_id\":\"orthogonal-frontier-v001\"} -->\n# 研究检索导航\n\n> 本报告仅展示查询路线、来源、命中定位与覆盖；所有科研判断由主研究者完成。\n\n- 搜索标识：`orthogonal-frontier-v001`\n- 生成时间（协调世界时）：`2026-08-18T15:11:48.981180Z`\n\n## 紧凑研究地图\n\n> 跨路线按 Paper 去重；每个查询路线至多选一个尚未出现的最高排名代表项。完整原始命中保留在 `result.json`。\n\n- Paper `P040` · From Confident Closing to Silent Failure: Characterizing False Success in LLM Agents；用途 `problem`；路线 `q001:paper_card_fts` #1；Card `paper-p040`（paper）；Evidence `ev-p040-failure-core`\n- Paper `P071` · Agentic Plan Caching: Test-Time Memory for Fast and Cost-Efficient LLM Agents；用途 `problem`；路线 `q001:failure_card_fts` #2；Card `failure-plan-cache-semantic-false-positives`（failure）；Evidence `ev-p071-cache-false-positive-boundary`, `ev-p071-plan-template-reuse`\n- Paper `P035` · Holistic Agent Leaderboard: The Missing Infrastructure for AI Agent Evaluation；用途 `problem`；路线 `q001:passage_hybrid` #2；Passage `P035:p0034:s0001`\n- Paper `P041` · LLM Agents Already Know When to Call Tools - Even Without Reasoning；用途 `problem`；路线 `q001:operator_card_fts` #1；Card `operator-hidden-state-tool-necessity-prefill`（operator）；Evidence `ev-p041-operator-core`, `ev-p041-probe-prefill-steering`\n- Paper `P091` · Temporal Validity in Retrieval Memory: Eliminating Stale-Fact Errors for AI Agents over Evolving Knowledge；用途 `failure`；路线 `q002:failure_card_fts` #1；Card `failure-cosine-cannot-separate-contradiction-from-duplicate`（failure）；Evidence `ev-p091-cosine-auroc`, `ev-p091-retain-fabrication`\n- Paper `P073` · Uncertainty Calibration for Tool-Using Language Agents；用途 `failure`；路线 `q002:passage_hybrid` #1；Passage `P073:p0002:s0001`\n- Paper `P030` · STALE: Can LLM Agents Know When Their Memories Are No Longer Valid?；用途 `failure`；路线 `q002:operator_card_fts` #1；Card `operator-write-side-state-adjudication`（operator）；Evidence `ev-p030-authorized-readout`, `ev-p030-failure-core`, `ev-p030-write-side-adjudication`\n- Paper `P019` · STeCa: Step-level Trajectory Calibration for LLM Agent Learning；用途 `failure`；路线 `q002:paper_card_fts` #3；Card `paper-p019`（paper）；Evidence `ev-p019-ground-truth-calibration-oracle`, `ev-p019-step-level-calibration`\n- Paper `P042` · LiveResearchBench: A Live Benchmark for User-Centric Deep Research in the Wild；用途 `operator`；路线 `q003:operator_card_fts` #2；Card `operator-decomposed-research-evidence-evaluation`（operator）；Evidence `ev-p042-evaluation-core`\n- Paper `P044` · DEER: A Benchmark for Evaluating Deep Research Agents on Expert Report Generation；用途 `operator`；路线 `q003:paper_card_fts` #1；Card `paper-p044`（paper）；Evidence `ev-p044-evaluation-core`\n- Paper `P068` · DeepFact: Co-Evolving Benchmarks and Agents for Deep Research Factuality；用途 `operator`；路线 `q003:passage_hybrid` #6；Passage `P068:p0001:s0001`\n- Paper `P033` · Self-Refine: Iterative Refinement with Self-Feedback；用途 `operator`；路线 `q003:failure_card_fts` #1；Card `failure-iterative-refinement-corrupts-correct-output`（failure）；Evidence `ev-p033-operator-core`\n- Paper `P072` · Structured Uncertainty guided Clarification for LLM Agents；用途 `prior`；路线 `q004:paper_card_fts` #1；Card `paper-p072`（paper）；Evidence `ev-p072-compute-boundary`, `ev-p072-structured-clarification-gate`, `ev-p072-unstructured-clarification-failure`\n- Paper `P099` · Verus-SpecGym: An Agentic Environment for Evaluating Specification Autoformalization；用途 `prior`；路线 `q004:operator_card_fts` #2；Card `operator-four-bucket-executable-spec-testing`（operator）；Evidence `ev-p099-judge-miss`, `ev-p099-soundness-necessity`, `ev-p099-two-stage-check`\n- Paper `P034` · RefineBench: Evaluating Refinement Capability of Language Models via Checklists；用途 `prior`；路线 `q004:failure_card_fts` #1；Card `failure-iterative-refinement-corrupts-correct-output`（failure）；Evidence `ev-p034-failure-core`"
+          },
+          {
+            "fts_rank": 3,
+            "fused_score": 0.015873015873015872,
+            "line_end": 34,
+            "line_start": 1,
+            "path": "workbench_v001/hypothesis_inputs/h-causal-replay-001.json",
+            "semantic_rank": null,
+            "source_sha256": "c0915ca6e6fdacb3cce02a20e95cb45428abe692fdf0c6dc7f4f081ebcebbede",
+            "text": "{\n  \"hypothesis_id\": \"h-causal-replay-001\",\n  \"title\": \"反事实轨迹重放定位首次不可恢复步骤\",\n  \"parent_ids\": [],\n  \"lineage_note\": \"初始 method-first 候选；在实现前被结构化最近工作直接占据\",\n  \"problem\": \"失败轨迹只给终局标签，无法确定真正导致失败的步骤。\",\n  \"target_failure\": {\n    \"summary\": \"步骤归因与终局奖励不一致。\",\n    \"card_ids\": [\"failure-uniform-terminal-return-erases-step-credit\"],\n    \"evidence_ids\": [\"ev-p019-step-level-calibration\"]\n  },\n  \"changed_computation\": {\n    \"baseline\": \"用终局标签或语言模型评判步骤错误。\",\n    \"intervention\": \"逐步替换动作并前向重放，定位首次不可恢复步骤。\",\n    \"information_available\": \"完整轨迹、工具环境与终局判定。\",\n    \"timing\": \"失败发生后的离线分析。\",\n    \"budget_effect\": \"需要多个后缀重放。\"\n  },\n  \"mechanism_claim\": \"干预后的成功概率变化可识别真正的因果错误步骤。\",\n  \"falsifier\": \"最近工作已经直接实现相同干预与归因计算。\",\n  \"minimal_killer_experiment\": \"不再执行；直接先行已经占据方法核心。\",\n  \"nearest_prior_risk\": \"CAR、CausalFlow、ELPO、AgentTracer 直接碰撞。\",\n  \"alternative_explanations\": [\"语言模型步骤评判的相关性可能已足够\"],\n  \"descriptors\": {\n    \"problem_family\": \"轨迹失败归因\",\n    \"computation_stage\": \"离线诊断\",\n    \"intervention_family\": \"反事实重放\",\n    \"information_source\": \"轨迹与环境\",\n    \"timing_class\": \"执行后\",\n    \"budget_class\": \"多次重放\",\n    \"evaluation_mode\": \"因果步骤定位\"\n  },\n  \"literature_refs\": [\"arXiv:2606.08275\", \"arXiv:2605.25338\", \"ELPO\", \"AgentTracer\"]\n}"
+          },
+          {
+            "fts_rank": 4,
+            "fused_score": 0.015625,
+            "line_end": 44,
+            "line_start": 1,
+            "path": "workbench_v001/hypothesis_inputs/h-delta-contract-001.json",
+            "semantic_rank": null,
+            "source_sha256": "73b0c7dd90934789009089739e6e209ef7b1868c8e46da8d0252c1c7fb00ec61",
+            "text": "{\n  \"hypothesis_id\": \"h-delta-contract-001\",\n  \"title\": \"接口差分约束的工具调用迁移与回归门\",\n  \"parent_ids\": [],\n  \"lineage_note\": \"从覆盖证明方向正交扩展到工具接口演化；先从已证实的行为漂移现象和可执行版本差分出发，而不是继续增加终局门控。\",\n  \"problem\": \"工具接口演化后，即使最新模式已完整呈现，智能体仍会沿用旧工作流或误解新约束；通用反思和记忆没有显式定位被接口差分改变的调用义务。\",\n  \"target_failure\": {\n    \"summary\": \"接口描述、参数或工具集合变化扰乱原本可行的工作流，产生规划、推理或语义参数错误。\",\n    \"card_ids\": [\"paper-p069\", \"paper-p040\"],\n    \"evidence_ids\": [\"ev-p069-description-induced-preference\", \"ev-p040-failure-core\"]\n  },\n  \"changed_computation\": {\n    \"baseline\": \"把最新工具模式或完整变更说明交给模型后重新规划，并可追加通用反思。\",\n    \"intervention\": \"对旧、新工具表面做结构化差分，把变更编译成只约束受影响调用的迁移义务；旧成功调用必须映射为满足新前置条件的调用，同时由类型合法但违反变更语义的近邻反例检验迁移器。未通过回归门时只重规划受影响片段。\",\n    \"information_available\": \"候选与强基线都获得旧模式、新模式、结构化差分、原任务和旧成功调用；候选不获得隐藏答案。\",\n    \"timing\": \"检测到工具版本变化后、受影响调用再次执行前。\",\n    \"budget_effect\": \"增加确定性差分、一次受约束迁移和局部反例检查；避免无条件重跑整条轨迹。\"\n  },\n  \"mechanism_claim\": \"把接口变化编译成调用级迁移义务，并用差分导出的近邻反例作局部回归，可比同信息提示、通用反思和整段重规划更稳定地恢复演化后的工作流。\",\n  \"falsifier\": \"在相同信息和调用预算下，显式差分提示或通用反思达到相同任务成功率；或者收益只来自 JSON 模式修复而不能改善描述变化、语义约束或多步工作流错误；或者迁移器必须读取答案才能生成有效回归。\",\n  \"minimal_killer_experiment\": \"在参数必需性/类型/枚举变化、工具替换、工具新增和描述语义变化的配对工作流上，使用本地 Qwen 比较最新模式、同信息差分提示、反思重试与差分义务迁移；同时统计任务成功、受影响调用正确率、未受影响调用保持率、额外模型调用和类型合法近邻反例拒绝率。\",\n  \"nearest_prior_risk\": \"MCPEvol-Bench 已占据动态工具演化现象、11 类变异和评价；现有软件工程的模式差分、契约回放与增量测试可能使方法退化为常规工程组合。若近期工作已给出面向智能体的差分约束调用迁移和局部回归，则方法核心死亡。\",\n  \"alternative_explanations\": [\n    \"只要把最新模式重新放进上下文即可恢复\",\n    \"显式列出差分就足以获得同样收益\",\n    \"观察到的收益只是语法校验而非工作流适配\",\n    \"完整重新规划比局部迁移更稳健且成本可接受\"\n  ],\n  \"descriptors\": {\n    \"problem_family\": \"工具接口演化与工作流行为漂移\",\n    \"computation_stage\": \"版本变化后的调用准备\",\n    \"intervention_family\": \"差分义务编译与局部回归\",\n    \"information_source\": \"旧新工具模式、旧成功调用与任务\",\n    \"timing_class\": \"执行前\",\n    \"budget_class\": \"一次受约束迁移和局部检查\",\n    \"evaluation_mode\": \"跨版本任务恢复与未受影响保持\"\n  },\n  \"literature_refs\": [\n    \"P040\",\n    \"P069\",\n    \"arXiv:2607.14642\",\n    \"arXiv:2604.09515\"\n  ]\n}"
+          },
+          {
+            "fts_rank": 5,
+            "fused_score": 0.015384615384615385,
+            "line_end": 34,
+            "line_start": 1,
+            "path": "workbench_v001/hypothesis_inputs/h-coverage-witness-001.json",
+            "semantic_rank": null,
+            "source_sha256": "f2aac7fe1d949e8d6b915abb7ab3be03cc7012fa48c262510b46efbec37e2446",
+            "text": "{\n  \"hypothesis_id\": \"h-coverage-witness-001\",\n  \"title\": \"作用域覆盖见证与负命题准入门\",\n  \"parent_ids\": [],\n  \"lineage_note\": \"从工具故障诊断正交扩展到否定性结论的证据不对称\",\n  \"problem\": \"格式正常但覆盖不足的工具结果会诱发错误的不存在结论。\",\n  \"target_failure\": {\n    \"summary\": \"智能体把有限作用域内未命中解释成全局不存在。\",\n    \"card_ids\": [\"paper-p039\", \"paper-p073\"],\n    \"evidence_ids\": [\"ev-p039-aggregate-score-masking\", \"ev-p073-internal-confidence-misalignment\"]\n  },\n  \"changed_computation\": {\n    \"baseline\": \"模型直接解释工具返回值，或按提示自行核验。\",\n    \"intervention\": \"工具产生作用域绑定的覆盖见证；确定性运行时只允许由完整见证支持的否定性命题。\",\n    \"information_available\": \"工具值、作用域、分页完成性、新鲜度和覆盖状态；强提示基线获得相同信息。\",\n    \"timing\": \"工具返回后、最终否定性结论提交前。\",\n    \"budget_effect\": \"不完整时可能增加一次定向补查或保留不确定性。\"\n  },\n  \"mechanism_claim\": \"负命题的非对称证据准入可减少覆盖盲区导致的错误否定，而不必普遍拒答。\",\n  \"falsifier\": \"同信息验证提示达到同等错误否定率与正确否定保留率，或准入门仅靠过度拒答获益。\",\n  \"minimal_killer_experiment\": \"本地 Qwen3-8B 在完整、截断、错误筛选、陈旧和未知覆盖任务上比较原始、同信息提示与确定性准入门。\",\n  \"nearest_prior_risk\": \"NabaOS 的错误不存在检测、SGR-Bench 的作用域漂移、Failing Tools 的后置条件层可能吸收贡献。\",\n  \"alternative_explanations\": [\"模型只需更明确的提示\", \"空结果而非覆盖语义本身导致失败\", \"准入门通过拒答而非恢复提高表面准确率\"],\n  \"descriptors\": {\n    \"problem_family\": \"工具结果覆盖盲区\",\n    \"computation_stage\": \"结论提交\",\n    \"intervention_family\": \"覆盖见证与命题准入\",\n    \"information_source\": \"工具范围和完成性元数据\",\n    \"timing_class\": \"执行时\",\n    \"budget_class\": \"零到一次补查\",\n    \"evaluation_mode\": \"错误否定与保留率\"\n  },\n  \"literature_refs\": [\"P039\", \"P040\", \"P073\", \"arXiv:2603.10060\", \"arXiv:2605.22219\"]\n}"
+          },
+          {
+            "fts_rank": 6,
+            "fused_score": 0.015151515151515152,
+            "line_end": 119,
+            "line_start": 1,
+            "path": "hypotheses_v001/portfolio.json",
+            "semantic_rank": null,
+            "source_sha256": "c00b71a54ce87f9edf45270b830ac1aa950475666948dbd131952d3845409698",
+            "text": "{\n  \"created_at_utc\": \"2026-08-18T14:31:37.024484Z\",\n  \"hypotheses\": [\n    {\n      \"alternative_explanations\": [\n        \"语言模型步骤评判的相关性可能已足够\"\n      ],\n      \"changed_computation\": {\n        \"baseline\": \"用终局标签或语言模型评判步骤错误。\",\n        \"budget_effect\": \"需要多个后缀重放。\",\n        \"information_available\": \"完整轨迹、工具环境与终局判定。\",\n        \"intervention\": \"逐步替换动作并前向重放，定位首次不可恢复步骤。\",\n        \"timing\": \"失败发生后的离线分析。\"\n      },\n      \"created_at_utc\": \"2026-08-18T14:33:40.339079Z\",\n      \"decision_history\": [\n        {\n          \"decided_at_utc\": \"2026-08-18T14:33:48.936817Z\",\n          \"evidence_fidelity\": \"SCREENING\",\n          \"from_status\": \"draft\",\n          \"independent_implementation_count\": 0,\n          \"kill_target\": \"METHOD_CORE\",\n          \"killed\": \"反事实重放作为新方法核心以及首次不可恢复步骤定位的新颖性主张。\",\n          \"reason\": \"最近先行直接占据反事实重放与首次不可恢复步骤定位的方法核心\",\n          \"structural_refutation\": true,\n          \"structural_refutation_reason\": \"CAR、CausalFlow、ELPO 与 AgentTracer 已直接实现逐步反事实干预、前向重放或首次不可恢复步骤定位。\",\n          \"subject_scope\": {\n            \"datasets\": [\n              \"recent-primary-papers\"\n            ],\n            \"environment\": \"Run16 structured recent-prior reading\",\n            \"models\": [\n              \"not-applicable-literature-structure\"\n            ],\n            \"seeds\": [],\n            \"tasks\": [\n              \"agent-failure-attribution\"\n            ]\n          },\n          \"survives\": \"工具观察覆盖语义、否定性结论准入与评价机会。\",\n          \"to_status\": \"prior_collision\",\n          \"why\": \"碰撞发生在问题、信息、干预时机、关键计算和输出主张层面，继续实现不能产生可投资的方法差分。\"\n        }\n      ],\n      \"descriptors\": {\n        \"budget_class\": \"多次重放\",\n        \"computation_stage\": \"离线诊断\",\n        \"evaluation_mode\": \"因果步骤定位\",\n        \"information_source\": \"轨迹与环境\",\n        \"intervention_family\": \"反事实重放\",\n        \"problem_family\": \"轨迹失败归因\",\n        \"timing_class\": \"执行后\"\n      },\n      \"falsifier\": \"最近工作已经直接实现相同干预与归因计算。\",\n      \"hypothesis_id\": \"h-causal-replay-001\",\n      \"lineage_note\": \"初始 method-first 候选；在实现前被结构化最近工作直接占据\",\n      \"literature_refs\": [\n        \"arXiv:2606.08275\",\n        \"arXiv:2605.25338\",\n        \"ELPO\",\n        \"AgentTracer\"\n      ],\n      \"mechanism_claim\": \"干预后的成功概率变化可识别真正的因果错误步骤。\",\n      \"minimal_killer_experiment\": \"不再执行；直接先行已经占据方法核心。\",\n      \"nearest_prior_risk\": \"CAR、CausalFlow、ELPO、AgentTracer 直接碰撞。\",\n      \"parent_ids\": [],\n      \"problem\": \"失败轨迹只给终局标签，无法确定真正导致失败的步骤。\",\n      \"revision\": 2,\n      \"status\": \"prior_collision\",\n      \"status_reason\": \"最近先行直接占据反事实重放与首次不可恢复步骤定位的方法核心\",\n      \"target_failure\": {\n        \"card_ids\": [\n          \"failure-uniform-terminal-return-erases-step-credit\"\n        ],\n        \"evidence_ids\": [\n          \"ev-p019-step-level-calibration\"\n        ],\n        \"summary\": \"步骤归因与终局奖励不一致。\"\n      },\n      \"title\": \"反事实轨迹重放定位首次不可恢复步骤\",\n      \"updated_at_utc\": \"2026-08-18T14:33:48.936817Z\"\n    },\n    {\n      \"alternative_explanations\": [\n        \"模型只需更明确的提示\",\n        \"空结果而非覆盖语义本身导致失败\",\n        \"准入门通过拒答而非恢复提高表面准确率\"\n      ],\n      \"changed_computation\": {\n        \"baseline\": \"模型直接解释工具返回值，或按提示自行核验。\",\n        \"budget_effect\": \"不完整时可能增加一次定向补查或保留不确定性。\",\n        \"information_available\": \"工具值、作用域、分页完成性、新鲜度和覆盖状态；强提示基线获得相同信息。\",\n        \"intervention\": \"工具产生作用域绑定的覆盖见证；确定性运行时只允许由完整见证支持的否定性命题。\",\n        \"timing\": \"工具返回后、最终否定性结论提交前。\"\n      },\n      \"created_at_utc\": \"2026-08-18T14:33:40.744596Z\",\n      \"decision_history\": [\n        {\n          \"decided_at_utc\": \"2026-08-18T14:33:49.368156Z\",\n          \"evidence_fidelity\": null,\n          \"from_status\": \"draft\",\n          \"independent_implementation_count\": 0,\n          \"kill_target\": null,\n          \"killed\": \"\",\n          \"reason\": \"主研究者选择执行同信息强基线杀手实验\",\n          \"structural_refutation\": false,\n          \"structural_refutation_reason\": \"\",\n          \"subject_scope\": {\n            \"datasets\": [],\n            \"environment\": \"\",\n            \"models\": [],\n            \"seeds\": [],\n            \"tasks\": []\n          },\n          \"survives\": \"\",\n          \"to_status\": \"active\",\n          \"why\": \"\"\n        },\n        {"
+          },
+          {
+            "fts_rank": 7,
+            "fused_score": 0.014925373134328358,
+            "line_end": 368,
+            "line_start": 182,
+            "path": "experiment_v001/attempts/delta-contract-screening-v001/results.json",
+            "semantic_rank": null,
+            "source_sha256": "749d407924e6481eea0b7bf24eec193af9e6319c5fefb18102fd05919e366c5d",
+            "text": "        }\n      }\n    ],\n    \"expected_plan\": [\n      {\n        \"tool\": \"sms_send\",\n        \"arguments\": {\n          \"destination\": \"+8613800000000\",\n          \"content\": \"code-731\"\n        }\n      }\n    ],\n    \"schema_valid\": true,\n    \"task_success\": true,\n    \"first_attempt_success\": true,\n    \"model_calls\": 1,\n    \"tokens\": {\n      \"prompt\": 223,\n      \"completion\": 36\n    },\n    \"near_miss_schema_valid\": true,\n    \"near_miss_rejected\": true,\n    \"elapsed_seconds\": 0.7323\n  },\n  {\n    \"scenario_id\": \"rename-sms\",\n    \"family\": \"parameter_rename\",\n    \"condition\": \"reflection\",\n    \"plan\": [\n      {\n        \"tool\": \"sms_send\",\n        \"arguments\": {\n          \"destination\": \"+8613800000000\",\n          \"content\": \"code-731\"\n        }\n      }\n    ],\n    \"expected_plan\": [\n      {\n        \"tool\": \"sms_send\",\n        \"arguments\": {\n          \"destination\": \"+8613800000000\",\n          \"content\": \"code-731\"\n        }\n      }\n    ],\n    \"schema_valid\": true,\n    \"task_success\": true,\n    \"first_attempt_success\": true,\n    \"model_calls\": 1,\n    \"tokens\": {\n      \"prompt\": 223,\n      \"completion\": 36\n    },\n    \"near_miss_schema_valid\": true,\n    \"near_miss_rejected\": true,\n    \"elapsed_seconds\": 0.701\n  },\n  {\n    \"scenario_id\": \"rename-sms\",\n    \"family\": \"parameter_rename\",\n    \"condition\": \"obligation\",\n    \"plan\": [\n      {\n        \"tool\": \"sms_send\",\n        \"arguments\": {\n          \"destination\": \"+8613800000000\",\n          \"content\": \"code-731\"\n        }\n      }\n    ],\n    \"expected_plan\": [\n      {\n        \"tool\": \"sms_send\",\n        \"arguments\": {\n          \"destination\": \"+8613800000000\",\n          \"content\": \"code-731\"\n        }\n      }\n    ],\n    \"schema_valid\": true,\n    \"task_success\": true,\n    \"first_attempt_success\": true,\n    \"model_calls\": 1,\n    \"tokens\": {\n      \"prompt\": 255,\n      \"completion\": 36\n    },\n    \"near_miss_schema_valid\": true,\n    \"near_miss_rejected\": true,\n    \"elapsed_seconds\": 0.7352\n  },\n  {\n    \"scenario_id\": \"rename-ticket\",\n    \"family\": \"parameter_rename\",\n    \"condition\": \"latest\",\n    \"plan\": [\n      {\n        \"tool\": \"ticket_send\",\n        \"arguments\": {\n          \"destination\": \"u-17\",\n          \"content\": \"login-failed\"\n        }\n      }\n    ],\n    \"expected_plan\": [\n      {\n        \"tool\": \"ticket_send\",\n        \"arguments\": {\n          \"destination\": \"u-17\",\n          \"content\": \"login-failed\"\n        }\n      }\n    ],\n    \"schema_valid\": true,\n    \"task_success\": true,\n    \"first_attempt_success\": true,\n    \"model_calls\": 1,\n    \"tokens\": {\n      \"prompt\": 186,\n      \"completion\": 25\n    },\n    \"near_miss_schema_valid\": true,\n    \"near_miss_rejected\": true,\n    \"elapsed_seconds\": 0.7106\n  },\n  {\n    \"scenario_id\": \"rename-ticket\",\n    \"family\": \"parameter_rename\",\n    \"condition\": \"diff_prompt\",\n    \"plan\": [\n      {\n        \"tool\": \"ticket_send\",\n        \"arguments\": {\n          \"destination\": \"u-17\",\n          \"content\": \"login-failed\"\n        }\n      }\n    ],\n    \"expected_plan\": [\n      {\n        \"tool\": \"ticket_send\",\n        \"arguments\": {\n          \"destination\": \"u-17\",\n          \"content\": \"login-failed\"\n        }\n      }\n    ],\n    \"schema_valid\": true,\n    \"task_success\": true,\n    \"first_attempt_success\": true,\n    \"model_calls\": 1,\n    \"tokens\": {\n      \"prompt\": 203,\n      \"completion\": 25\n    },\n    \"near_miss_schema_valid\": true,\n    \"near_miss_rejected\": true,\n    \"elapsed_seconds\": 0.6027\n  },\n  {\n    \"scenario_id\": \"rename-ticket\",\n    \"family\": \"parameter_rename\",\n    \"condition\": \"reflection\",\n    \"plan\": [\n      {\n        \"tool\": \"ticket_send\",\n        \"arguments\": {\n          \"destination\": \"u-17\",\n          \"content\": \"login-failed\"\n        }\n      }\n    ],\n    \"expected_plan\": [\n      {\n        \"tool\": \"ticket_send\",\n        \"arguments\": {\n          \"destination\": \"u-17\",\n          \"content\": \"login-failed\"\n        }\n      }\n    ],\n    \"schema_valid\": true,\n    \"task_success\": true,\n    \"first_attempt_success\": true,\n    \"model_calls\": 1,\n    \"tokens\": {"
+          },
+          {
+            "fts_rank": 8,
+            "fused_score": 0.014705882352941176,
+            "line_end": 368,
+            "line_start": 182,
+            "path": "experiment_v001/attempts/delta-contract-screening-v001-r1/results.json",
+            "semantic_rank": null,
+            "source_sha256": "c922547a483cf0f549c4048ae69940de079db27a939554b8d78a9dd8e6752b13",
+            "text": "        }\n      }\n    ],\n    \"expected_plan\": [\n      {\n        \"tool\": \"sms_send\",\n        \"arguments\": {\n          \"destination\": \"+8613800000000\",\n          \"content\": \"code-731\"\n        }\n      }\n    ],\n    \"schema_valid\": true,\n    \"task_success\": true,\n    \"first_attempt_success\": true,\n    \"model_calls\": 1,\n    \"tokens\": {\n      \"prompt\": 223,\n      \"completion\": 36\n    },\n    \"near_miss_schema_valid\": true,\n    \"near_miss_rejected\": true,\n    \"elapsed_seconds\": 0.6896\n  },\n  {\n    \"scenario_id\": \"rename-sms\",\n    \"family\": \"parameter_rename\",\n    \"condition\": \"reflection\",\n    \"plan\": [\n      {\n        \"tool\": \"sms_send\",\n        \"arguments\": {\n          \"destination\": \"+8613800000000\",\n          \"content\": \"code-731\"\n        }\n      }\n    ],\n    \"expected_plan\": [\n      {\n        \"tool\": \"sms_send\",\n        \"arguments\": {\n          \"destination\": \"+8613800000000\",\n          \"content\": \"code-731\"\n        }\n      }\n    ],\n    \"schema_valid\": true,\n    \"task_success\": true,\n    \"first_attempt_success\": true,\n    \"model_calls\": 1,\n    \"tokens\": {\n      \"prompt\": 223,\n      \"completion\": 36\n    },\n    \"near_miss_schema_valid\": true,\n    \"near_miss_rejected\": true,\n    \"elapsed_seconds\": 0.6816\n  },\n  {\n    \"scenario_id\": \"rename-sms\",\n    \"family\": \"parameter_rename\",\n    \"condition\": \"obligation\",\n    \"plan\": [\n      {\n        \"tool\": \"sms_send\",\n        \"arguments\": {\n          \"destination\": \"+8613800000000\",\n          \"content\": \"code-731\"\n        }\n      }\n    ],\n    \"expected_plan\": [\n      {\n        \"tool\": \"sms_send\",\n        \"arguments\": {\n          \"destination\": \"+8613800000000\",\n          \"content\": \"code-731\"\n        }\n      }\n    ],\n    \"schema_valid\": true,\n    \"task_success\": true,\n    \"first_attempt_success\": true,\n    \"model_calls\": 1,\n    \"tokens\": {\n      \"prompt\": 255,\n      \"completion\": 36\n    },\n    \"near_miss_schema_valid\": true,\n    \"near_miss_rejected\": true,\n    \"elapsed_seconds\": 0.6987\n  },\n  {\n    \"scenario_id\": \"rename-ticket\",\n    \"family\": \"parameter_rename\",\n    \"condition\": \"latest\",\n    \"plan\": [\n      {\n        \"tool\": \"ticket_send\",\n        \"arguments\": {\n          \"destination\": \"u-17\",\n          \"content\": \"login-failed\"\n        }\n      }\n    ],\n    \"expected_plan\": [\n      {\n        \"tool\": \"ticket_send\",\n        \"arguments\": {\n          \"destination\": \"u-17\",\n          \"content\": \"login-failed\"\n        }\n      }\n    ],\n    \"schema_valid\": true,\n    \"task_success\": true,\n    \"first_attempt_success\": true,\n    \"model_calls\": 1,\n    \"tokens\": {\n      \"prompt\": 186,\n      \"completion\": 25\n    },\n    \"near_miss_schema_valid\": true,\n    \"near_miss_rejected\": true,\n    \"elapsed_seconds\": 0.5625\n  },\n  {\n    \"scenario_id\": \"rename-ticket\",\n    \"family\": \"parameter_rename\",\n    \"condition\": \"diff_prompt\",\n    \"plan\": [\n      {\n        \"tool\": \"ticket_send\",\n        \"arguments\": {\n          \"destination\": \"u-17\",\n          \"content\": \"login-failed\"\n        }\n      }\n    ],\n    \"expected_plan\": [\n      {\n        \"tool\": \"ticket_send\",\n        \"arguments\": {\n          \"destination\": \"u-17\",\n          \"content\": \"login-failed\"\n        }\n      }\n    ],\n    \"schema_valid\": true,\n    \"task_success\": true,\n    \"first_attempt_success\": true,\n    \"model_calls\": 1,\n    \"tokens\": {\n      \"prompt\": 203,\n      \"completion\": 25\n    },\n    \"near_miss_schema_valid\": true,\n    \"near_miss_rejected\": true,\n    \"elapsed_seconds\": 0.557\n  },\n  {\n    \"scenario_id\": \"rename-ticket\",\n    \"family\": \"parameter_rename\",\n    \"condition\": \"reflection\",\n    \"plan\": [\n      {\n        \"tool\": \"ticket_send\",\n        \"arguments\": {\n          \"destination\": \"u-17\",\n          \"content\": \"login-failed\"\n        }\n      }\n    ],\n    \"expected_plan\": [\n      {\n        \"tool\": \"ticket_send\",\n        \"arguments\": {\n          \"destination\": \"u-17\",\n          \"content\": \"login-failed\"\n        }\n      }\n    ],\n    \"schema_valid\": true,\n    \"task_success\": true,\n    \"first_attempt_success\": true,\n    \"model_calls\": 1,\n    \"tokens\": {"
+          }
+        ],
+        "kind": "fixed_anchor",
+        "query": "failure failed contradiction falsifier 失败 反证 矛盾",
+        "semantic_reason": "semantic_index_missing",
+        "semantic_status": "DEGRADED"
+      },
+      {
+        "hits": [
+          {
+            "fts_rank": 1,
+            "fused_score": 0.01639344262295082,
+            "line_end": 33,
+            "line_start": 1,
+            "path": "workbench_v001/quality_reviews/coverage-maturity-001/packet_b.md",
+            "semantic_rank": null,
+            "source_sha256": "69178e06ed824f9cba6b93f7b377850c3fffb85a67ac263bbbcb1f59748a174a",
+            "text": "# 匿名候选包 B\n\n## 问题\n\n工具型智能体可能把格式正常但覆盖不足的未命中结果外推为全局不存在。截断、错误作用域、陈旧快照与未知覆盖可能支持这种错误否定。\n\n## 贡献差分\n\n设想工具响应携带与待判断命题绑定的作用域、分页完成性和时间覆盖见证，并在运行时限制没有完整见证的否定性结论。该设想是否超出一般工具故障验证仍不确定。\n\n## 实现\n\n尚无可运行研究实现；只有场景与计算草案。\n\n## 实验\n\n尚无模型或自然数据结果。计划比较无元数据、覆盖提示与确定性门控，并测量错误否定、正确否定保留、拒答和调用成本。\n\n## 强基线\n\n计划让提示基线获得相同覆盖元数据和查询预算；尚未执行，无法判断提示是否吸收全部收益。\n\n## 先行审计\n\n已知工具故障、虚假成功、工具回执、后置条件验证和检索作用域漂移形成高碰撞风险；尚未完成组件级差分。\n\n## 致命不确定性\n\n现象是否稳定、门控是否只靠拒答、同信息提示是否已经足够、以及是否只是已有回执/后置条件验证的重述都未处理。\n\n## 扩大路线\n\n先做本地合成杀手实验；若现象和方法差分都存活，再进入真实分页数据、第二模型和最近先行组件比较。"
+          },
+          {
+            "fts_rank": 2,
+            "fused_score": 0.016129032258064516,
+            "line_end": 33,
+            "line_start": 1,
+            "path": "workbench_v001/quality_reviews/coverage-maturity-001/packet_a.md",
+            "semantic_rank": null,
+            "source_sha256": "b1212223d3f2af5028145479773800b4d194cc73e23fb5ad447b526d3487b843",
+            "text": "# 匿名候选包 A\n\n## 问题\n\n工具型智能体会把格式正常但覆盖不足的未命中结果外推为全局不存在。截断、错误作用域、陈旧快照与未知覆盖都能支持这种错误否定。\n\n## 贡献差分\n\n工具响应携带与待判断命题绑定的作用域、分页完成性和时间覆盖见证；模型外运行时只允许由完整见证支持的否定性结论，否则执行一次定向补查或保留不确定性。对象是负命题的证据准入，不是一般调用真实性或写操作重试。\n\n## 实现\n\n已有可运行 Python 实现，冻结四个列表/检索域、六类真值/故障场景和 raw、同信息强提示、确定性 gate 三条件；逐 episode 保存对话、调用、token、门控和输出。\n\n## 实验\n\n一个真实本地 8B 工具型模型完成 24×3 条件实验。隐藏目标错误否定率 raw/强提示/gate 为 1.000/0.6875/0；gate 隐藏目标恢复率 0.9375、正确否定保留 1.000、总成功 0.9583、拒答 0.0417、平均额外查询 0.625。命令、证据、指标和输出契约均通过。\n\n## 强基线\n\n核心基线获得与 gate 完全相同的覆盖元数据、明确验证规则、模型、种子、采样协议、最大轮次和一次补查能力；差异仅为是否由模型外规则拒绝无完整见证的 absent。另有无元数据 raw 对照。\n\n## 先行审计\n\n最接近的工具回执工作把 `result_count=0` 当作 absence 可验证条件，未验证空集合的作用域/分页/时间完整性；最接近的 verify-before-retry 工作面向非原子写操作和任务特定后置条件，并把更丰富的语义完整性验证列为未来工作；检索基准已观察到高比例作用域漂移但未给出运行时准入。\n\n## 致命不确定性\n\n结果仍是单模型、单种子、合成 Screening。真实工具生成覆盖见证可能必须手工编码完整答案，使贡献被一般任务特定 postcondition verifier 吸收；第二模型和自然数据尚未验证。\n\n## 扩大路线\n\n接入第二个独立的真实分页/过滤数据适配器；加入 result-count 回执和一般 postcondition wrapper；使用第二本地模型。若差分存活，再扩大到真实 API、文件/代码搜索与多个模型家族。"
+          },
+          {
+            "fts_rank": 3,
+            "fused_score": 0.015873015873015872,
+            "line_end": 74,
+            "line_start": 1,
+            "path": "evidence_packet_v001.md",
+            "semantic_rank": null,
+            "source_sha256": "72104df3c331de54418010b1d9561f69a7067b842bb2df771020c07c07b3b55d",
+            "text": "# v001 证据包：作用域覆盖见证\n\n## 可运行研究实现\n\n- `implementation_v001/coverage_gate_experiment.py`\n- 实现冻结 24 个场景，四个列表/检索域，包含完整存在、完整不存在、截断、作用域错配、陈旧和未知覆盖。\n- 核心公平比较 `prompt` 与 `gate` 使用相同模型、相同覆盖元数据、相同最大补查次数、相同零温与种子规则；唯一差异是 gate 在无完整见证时拒绝提交 `absent` 并执行一次全作用域补查。\n\n## Formal Screening\n\n- Spec：`experiment_v001/specs/coverage-gate-screening-v001.json`\n- Attempt：`experiment_v001/attempts/coverage-gate-screening-v001/execution.json`\n- 原始逐 episode 结果：`experiment_v001/attempts/coverage-gate-screening-v001/results.json`\n- 指标：`experiment_v001/attempts/coverage-gate-screening-v001/metrics.json`\n- 机械事实：退出码 0；Evidence、metrics 与 output 契约为真；91 次本地模型调用；34,309 tokens；75.97 秒；零付费；无 parse issue。\n\n| 条件 | 隐藏目标错误否定率 | 隐藏目标恢复率 | 正确否定保留率 | 总任务成功率 | 拒答率 | 平均额外查询 |\n|---|---:|---:|---:|---:|---:|---:|\n| raw | 1.0000 | 0.0000 | 1.0000 | 0.3333 | 0.0000 | 0.0000 |\n| prompt | 0.6875 | 0.2500 | 1.0000 | 0.5000 | 0.0417 | 0.1667 |\n| gate | 0.0000 | 0.9375 | 1.0000 | 0.9583 | 0.0417 | 0.6250 |\n\n两个预注册主张均达到本地支持条件。gate 并未靠降低正确否定或增加拒答取得表面收益；它主要把 scope/stale/unknown 条件下的错误否定转成一次补查后的正确存在结论。\n\n## 独立公开数据 Screening\n\n- 数据：`workbench_v001/datasets/sgr_bench/constraint_hf.jsonl`；来源与固定哈希见同目录 `PROVENANCE.md`。\n- 独立实现：`implementation_v001/sgr_coverage_experiment.py`\n- Spec：`experiment_v001/specs/sgr-coverage-validation-v001.json`\n- Attempt：`experiment_v001/attempts/sgr-coverage-validation-v001/execution.json`\n- 原始逐 episode 结果：`experiment_v001/attempts/sgr-coverage-validation-v001/results.json`\n- 指标：`experiment_v001/attempts/sgr-coverage-validation-v001/metrics.json`\n- 机械事实：退出码 0；Evidence、metrics 与 output 契约为真；125 次本地模型调用；70,381 tokens；103.22 秒；零付费；无 parse issue。\n\n| 条件 | 隐藏目标错误否定率 | 隐藏目标恢复率 | 正确否定保留率 | 可见存在准确率 | 总任务成功率 | 拒答率 | 平均额外查询 |\n|---|---:|---:|---:|---:|---:|---:|---:|\n| result-count 回执 | 0.9091 | 0.0909 | 1.0000 | 1.0000 | 0.6970 | 0.0000 | 0.0606 |\n| 一般后置条件提示 | 0.4545 | 0.5455 | 0.9091 | 0.7273 | 0.7273 | 0.0303 | 0.2727 |\n| gate | 0.0909 | 0.9091 | 0.9091 | 0.9091 | 0.9091 | 0.0303 | 0.4545 |\n\n预注册数值判据全部通过，但必须保留一项偏差：计划固定的 12 个任务中，`reptile_001` 的答案集未被确定性解析器恢复，实际只有 11 个任务、每条件 33 个 episode。gate 仍有一个隐藏目标错误否定、一个完整不存在被误判为存在，以及一个可见存在被判为不确定。此结果使用自然答案集但仍是模拟分页，不是在线工具执行。\n\n## 最近先行差分\n\n- NabaOS 对 absence 的机械验证是 `result_count = 0`；其 false-absence 基准是工具非空而模型声称为空。它证明调用和输出，但未证明空集合覆盖了待否定命题所需的作用域、分页和时间。\n- Verified Tool Calls 对非原子写操作进行任务特定后置条件核验与 verify-before-retry；它已覆盖三值 verifier、陈旧与部分状态，是最近的计算级威胁，但把丰富语义完整性验证列为未来工作。\n- SGR-Bench 确认 retrieval-scope drift 是主要失败源并建议 source-slice anchored evaluation，但没有运行时覆盖见证/负命题准入。\n- CROWN-QA（arXiv:2608.04591）直接形式化“只有证据完整覆盖查询作用域时，未观察才许可负向结论”，提供合成配对与真实文档对照集，并测试结构化 scope/coverage certificate 加固定映射。它已经占据当前问题、形式化、评价和自然文档现象；剩余差分只能是工具原生元数据生成见证、运行时准入和补查系统。\n- ToolGate（arXiv:2601.04688）以 Hoare 风格前/后置条件和运行时验证决定工具结果能否提交到可信状态，进一步压缩一般“模型外门控”主张。\n\n## 证据保真与边界\n\n当前仍是 `SCREENING`，不是 `REPRESENTATIVE`：虽已有两个本地模型、两个独立实现和公开自然 answer sets，但分页仍由适配器模拟，第二项实际只有 11/12 个固定任务，且每项仅一个种子。覆盖见证仍由场景/适配器直接提供；尚未证明真实工具能低成本、无答案泄漏地生成见证。不能据此声称真实 API、广义检索可靠性或论文新颖性。\n\n## 当前最大杀手问题\n\n由于 CROWN-QA 已占据评价现象，候选不能再退守“只剩评价”。若真实 API 见证仍须手写完整答案，或者 CROWN-style certificate + 固定规则 / ToolGate-style postcondition 在匹配信息和补查预算后吸收 gate 收益，则当前论文方向应死亡。\n\n## 正交接口演化 Screening\n\n- 候选：`h-delta-contract-001`。\n- 结构化先行：`hypotheses_v001/priors/delta-contract-prior-v001/assessment.md`。\n- 实现：`implementation_v001/delta_contract_experiment.py`。\n- Spec：`experiment_v001/specs/delta-contract-screening-v001.json`。\n- 有效 Formal：`experiment_v001/attempts/delta-contract-screening-v001-r1/`。\n- 第一次 `delta-contract-screening-v001` 因实验实现输出非 Formal 指标模式而未成为 Recorded 证据；M012 修复后以同场景、模型、种子和判据完整重跑。\n\n| 条件 | 任务成功率 | 模式合法率 | 平均模型调用 | 平均 Token | 近邻反例拒绝率 |\n|---|---:|---:|---:|---:|---:|\n| latest | 0.8333 | 1.0000 | 1.0000 | 248.58 | 1.0000 |\n| diff_prompt | 0.8333 | 1.0000 | 1.0000 | 270.88 | 1.0000 |\n| reflection | 0.8333 | 1.0000 | 1.1667 | 347.54 | 1.0000 |\n| obligation | 0.8333 | 1.0000 | 1.0000 | 302.38 | 1.0000 |\n"
+          },
+          {
+            "fts_rank": 5,
+            "fused_score": 0.015384615384615385,
+            "line_end": 68,
+            "line_start": 1,
+            "path": "workbench_v001/hypothesis_inputs/coverage-gate-spec-v001.json",
+            "semantic_rank": null,
+            "source_sha256": "6eb602e5622a5676fe23836fdb0aa7848aa87d6a355b561d375bdadfe0036d2f",
+            "text": "{\n  \"experiment_id\": \"coverage-gate-screening-v001\",\n  \"hypothesis_id\": \"h-coverage-witness-001\",\n  \"claim_ids\": [\"coverage-blindness-phenomenon-v001\", \"coverage-gate-increment-v001\"],\n  \"purpose\": \"independent_claim_validation\",\n  \"research_question\": \"覆盖盲区现象是否稳定，且确定性负命题准入门是否在同信息强提示基线上提供净增量？\",\n  \"independent_ground_truth\": {\n    \"description\": \"每个场景的完整实体集合、目标存在性、请求作用域和所需时间由场景生成器在模型调用前固定；模型输出不参与标签生成。\",\n    \"external_evidence_ids\": [\"ev-p039-aggregate-score-masking\", \"ev-p073-internal-confidence-misalignment\"],\n    \"external_card_ids\": [\"paper-p039\", \"paper-p073\"],\n    \"external_literature_refs\": [\"arXiv:2603.10060\", \"arXiv:2605.22219\"],\n    \"run_local_fact_refs\": [\"problem_v001.md\", \"candidate_v001.md\", \"research_map_v001.md\"]\n  },\n  \"primary_metric\": \"false_negative_rate_hidden\",\n  \"secondary_metrics\": [\n    \"hidden_recovery_success_rate\",\n    \"complete_absence_retention_rate\",\n    \"visible_positive_accuracy\",\n    \"overall_task_success_rate\",\n    \"abstention_rate\",\n    \"mean_extra_queries\",\n    \"mean_gate_interventions\",\n    \"parse_issue_rate\"\n  ],\n  \"sampling_unit\": \"一个模型在一个冻结场景和一个运行条件下的完整交互 episode\",\n  \"dataset\": \"实现中冻结生成的 4 域 x 6 故障/真值类型，共 24 个场景\",\n  \"model\": \"qwen3:8b\",\n  \"provider\": \"本机 Ollama\",\n  \"revision\": \"Ollama local model identity 500a1f067a9f; temperature=0; num_ctx=4096\",\n  \"baseline_specs\": [\n    \"raw：只见语法成功与 items，可自行补查一次\",\n    \"prompt：见完整覆盖元数据并获明确负命题核验规则，可补查一次\",\n    \"gate：与 prompt 完全相同的信息和提示，但运行时拒绝无完整见证的 absent 并自动执行一次全作用域补查\"\n  ],\n  \"parity_dimensions\": {\n    \"information_access\": {\"status\": \"matched\", \"notes\": \"核心比较 prompt 与 gate 接收完全相同的工具值和覆盖元数据；raw 只用于现象对照。\"},\n    \"tool_capability\": {\"status\": \"matched\", \"notes\": \"prompt 与 gate 都最多允许一次全作用域补查并得到同一完整响应。\"},\n    \"model_provider_revision\": {\"status\": \"matched\", \"notes\": \"所有条件使用同一本机 qwen3:8b Ollama 模型。\"},\n    \"sampling_protocol\": {\"status\": \"matched\", \"notes\": \"冻结场景顺序、零温、确定性种子规则和最大三次模型轮次一致。\"},\n    \"budget\": {\"status\": \"matched\", \"notes\": \"prompt 与 gate 的最大模型轮次和额外工具查询上限均一致。\"}\n  },\n  \"seeds\": [16001],\n  \"budget_ceiling\": \"{\\\"model_calls\\\": 144, \\\"tokens\\\": 120000, \\\"wall_time_seconds\\\": 1800, \\\"paid_cost\\\": 0}\",\n  \"expected_signatures\": [\n    \"raw 在隐藏目标故障上出现错误不存在结论，而完整结果上的正确否定被保留\",\n    \"若提示未完全服从覆盖规则，gate 通过一次定向补查将错误否定改为 present\",\n    \"若 prompt 已完全吸收覆盖元数据，gate 与 prompt 无差异并杀死方法增量\"\n  ],\n  \"falsification_rule\": \"现象主张要求 raw-prompt 错误否定率差至少 0.25。方法增量要求 gate 比 prompt 至少低 0.10，且正确否定保留 >=0.75、拒答增量 <=0.10、平均额外查询 <=1；任一失败即不支持方法增量。\",\n  \"confounders\": [\n    \"本地模型容量\",\n    \"合成实体命名与提示可读性\",\n    \"覆盖元数据格式显著性\",\n    \"单种随机种子\",\n    \"gate 自动补查在真实工具上可能不可用或有成本\"\n  ],\n  \"declared_inputs\": [\"implementation_v001/coverage_gate_experiment.py\"],\n  \"declared_outputs\": [\"results.json\", \"metrics-output.json\", \"stdout.txt\", \"stderr.txt\"],\n  \"evidence_fidelity\": \"SCREENING\",\n  \"subject_scope\": {\n    \"models\": [\"qwen3:8b@Ollama\"],\n    \"tasks\": [\"existence queries over list/search tools\"],\n    \"datasets\": [\"Run16 synthetic four-domain coverage-fault suite\"],\n    \"seeds\": [\"16001\"],\n    \"environment\": \"Windows 11; local Ollama; deterministic mock tool; no paid API\"\n  },\n  \"independent_implementation_count\": 1\n}"
+          },
+          {
+            "fts_rank": 6,
+            "fused_score": 0.015151515151515152,
+            "line_end": 119,
+            "line_start": 1,
+            "path": "experiment_v001/attempts/coverage-gate-screening-v001/spec.json",
+            "semantic_rank": null,
+            "source_sha256": "e3e97082c2d6e49577d73c0e0542680e8c3d994d45b5758b6da896e9ca7d0b3f",
+            "text": "{\n  \"baseline_specs\": [\n    \"raw：只见语法成功与 items，可自行补查一次\",\n    \"prompt：见完整覆盖元数据并获明确负命题核验规则，可补查一次\",\n    \"gate：与 prompt 完全相同的信息和提示，但运行时拒绝无完整见证的 absent 并自动执行一次全作用域补查\"\n  ],\n  \"budget_ceiling\": \"{\\\"model_calls\\\": 144, \\\"tokens\\\": 120000, \\\"wall_time_seconds\\\": 1800, \\\"paid_cost\\\": 0}\",\n  \"claim_ids\": [\n    \"coverage-blindness-phenomenon-v001\",\n    \"coverage-gate-increment-v001\"\n  ],\n  \"confounders\": [\n    \"本地模型容量\",\n    \"合成实体命名与提示可读性\",\n    \"覆盖元数据格式显著性\",\n    \"单种随机种子\",\n    \"gate 自动补查在真实工具上可能不可用或有成本\"\n  ],\n  \"dataset\": \"实现中冻结生成的 4 域 x 6 故障/真值类型，共 24 个场景\",\n  \"declared_inputs\": [\n    \"implementation_v001/coverage_gate_experiment.py\"\n  ],\n  \"declared_outputs\": [\n    \"results.json\",\n    \"metrics-output.json\",\n    \"stdout.txt\",\n    \"stderr.txt\"\n  ],\n  \"evidence_fidelity\": \"SCREENING\",\n  \"expected_signatures\": [\n    \"raw 在隐藏目标故障上出现错误不存在结论，而完整结果上的正确否定被保留\",\n    \"若提示未完全服从覆盖规则，gate 通过一次定向补查将错误否定改为 present\",\n    \"若 prompt 已完全吸收覆盖元数据，gate 与 prompt 无差异并杀死方法增量\"\n  ],\n  \"experiment_id\": \"coverage-gate-screening-v001\",\n  \"falsification_rule\": \"现象主张要求 raw-prompt 错误否定率差至少 0.25。方法增量要求 gate 比 prompt 至少低 0.10，且正确否定保留 >=0.75、拒答增量 <=0.10、平均额外查询 <=1；任一失败即不支持方法增量。\",\n  \"hypothesis_id\": \"h-coverage-witness-001\",\n  \"independent_ground_truth\": {\n    \"description\": \"每个场景的完整实体集合、目标存在性、请求作用域和所需时间由场景生成器在模型调用前固定；模型输出不参与标签生成。\",\n    \"external_card_ids\": [\n      \"paper-p039\",\n      \"paper-p073\"\n    ],\n    \"external_evidence_ids\": [\n      \"ev-p039-aggregate-score-masking\",\n      \"ev-p073-internal-confidence-misalignment\"\n    ],\n    \"external_literature_refs\": [\n      \"arXiv:2603.10060\",\n      \"arXiv:2605.22219\"\n    ],\n    \"run_local_fact_refs\": [\n      \"problem_v001.md\",\n      \"candidate_v001.md\",\n      \"research_map_v001.md\"\n    ]\n  },\n  \"independent_implementation_count\": 1,\n  \"model\": \"qwen3:8b\",\n  \"parity_dimensions\": {\n    \"budget\": {\n      \"notes\": \"prompt 与 gate 的最大模型轮次和额外工具查询上限均一致。\",\n      \"status\": \"matched\"\n    },\n    \"information_access\": {\n      \"notes\": \"核心比较 prompt 与 gate 接收完全相同的工具值和覆盖元数据；raw 只用于现象对照。\",\n      \"status\": \"matched\"\n    },\n    \"model_provider_revision\": {\n      \"notes\": \"所有条件使用同一本机 qwen3:8b Ollama 模型。\",\n      \"status\": \"matched\"\n    },\n    \"sampling_protocol\": {\n      \"notes\": \"冻结场景顺序、零温、确定性种子规则和最大三次模型轮次一致。\",\n      \"status\": \"matched\"\n    },\n    \"tool_capability\": {\n      \"notes\": \"prompt 与 gate 都最多允许一次全作用域补查并得到同一完整响应。\",\n      \"status\": \"matched\"\n    }\n  },\n  \"primary_metric\": \"false_negative_rate_hidden\",\n  \"provider\": \"本机 Ollama\",\n  \"purpose\": \"independent_claim_validation\",\n  \"research_question\": \"覆盖盲区现象是否稳定，且确定性负命题准入门是否在同信息强提示基线上提供净增量？\",\n  \"revision\": \"Ollama local model identity 500a1f067a9f; temperature=0; num_ctx=4096\",\n  \"run_id\": \"20260818_2228_run16\",\n  \"sampling_unit\": \"一个模型在一个冻结场景和一个运行条件下的完整交互 episode\",\n  \"schema_version\": 2,\n  \"secondary_metrics\": [\n    \"hidden_recovery_success_rate\",\n    \"complete_absence_retention_rate\",\n    \"visible_positive_accuracy\",\n    \"overall_task_success_rate\",\n    \"abstention_rate\",\n    \"mean_extra_queries\",\n    \"mean_gate_interventions\",\n    \"parse_issue_rate\"\n  ],\n  \"seeds\": [\n    16001\n  ],\n  \"subject_scope\": {\n    \"datasets\": [\n      \"Run16 synthetic four-domain coverage-fault suite\"\n    ],\n    \"environment\": \"Windows 11; local Ollama; deterministic mock tool; no paid API\",\n    \"models\": [\n      \"qwen3:8b@Ollama\"\n    ],\n    \"seeds\": [\n      \"16001\"\n    ],\n    \"tasks\": [\n      \"existence queries over list/search tools\"\n    ]\n  },\n  \"version\": \"v001\"\n}"
+          },
+          {
+            "fts_rank": 7,
+            "fused_score": 0.014925373134328358,
+            "line_end": 119,
+            "line_start": 1,
+            "path": "experiment_v001/specs/coverage-gate-screening-v001.json",
+            "semantic_rank": null,
+            "source_sha256": "e3e97082c2d6e49577d73c0e0542680e8c3d994d45b5758b6da896e9ca7d0b3f",
+            "text": "{\n  \"baseline_specs\": [\n    \"raw：只见语法成功与 items，可自行补查一次\",\n    \"prompt：见完整覆盖元数据并获明确负命题核验规则，可补查一次\",\n    \"gate：与 prompt 完全相同的信息和提示，但运行时拒绝无完整见证的 absent 并自动执行一次全作用域补查\"\n  ],\n  \"budget_ceiling\": \"{\\\"model_calls\\\": 144, \\\"tokens\\\": 120000, \\\"wall_time_seconds\\\": 1800, \\\"paid_cost\\\": 0}\",\n  \"claim_ids\": [\n    \"coverage-blindness-phenomenon-v001\",\n    \"coverage-gate-increment-v001\"\n  ],\n  \"confounders\": [\n    \"本地模型容量\",\n    \"合成实体命名与提示可读性\",\n    \"覆盖元数据格式显著性\",\n    \"单种随机种子\",\n    \"gate 自动补查在真实工具上可能不可用或有成本\"\n  ],\n  \"dataset\": \"实现中冻结生成的 4 域 x 6 故障/真值类型，共 24 个场景\",\n  \"declared_inputs\": [\n    \"implementation_v001/coverage_gate_experiment.py\"\n  ],\n  \"declared_outputs\": [\n    \"results.json\",\n    \"metrics-output.json\",\n    \"stdout.txt\",\n    \"stderr.txt\"\n  ],\n  \"evidence_fidelity\": \"SCREENING\",\n  \"expected_signatures\": [\n    \"raw 在隐藏目标故障上出现错误不存在结论，而完整结果上的正确否定被保留\",\n    \"若提示未完全服从覆盖规则，gate 通过一次定向补查将错误否定改为 present\",\n    \"若 prompt 已完全吸收覆盖元数据，gate 与 prompt 无差异并杀死方法增量\"\n  ],\n  \"experiment_id\": \"coverage-gate-screening-v001\",\n  \"falsification_rule\": \"现象主张要求 raw-prompt 错误否定率差至少 0.25。方法增量要求 gate 比 prompt 至少低 0.10，且正确否定保留 >=0.75、拒答增量 <=0.10、平均额外查询 <=1；任一失败即不支持方法增量。\",\n  \"hypothesis_id\": \"h-coverage-witness-001\",\n  \"independent_ground_truth\": {\n    \"description\": \"每个场景的完整实体集合、目标存在性、请求作用域和所需时间由场景生成器在模型调用前固定；模型输出不参与标签生成。\",\n    \"external_card_ids\": [\n      \"paper-p039\",\n      \"paper-p073\"\n    ],\n    \"external_evidence_ids\": [\n      \"ev-p039-aggregate-score-masking\",\n      \"ev-p073-internal-confidence-misalignment\"\n    ],\n    \"external_literature_refs\": [\n      \"arXiv:2603.10060\",\n      \"arXiv:2605.22219\"\n    ],\n    \"run_local_fact_refs\": [\n      \"problem_v001.md\",\n      \"candidate_v001.md\",\n      \"research_map_v001.md\"\n    ]\n  },\n  \"independent_implementation_count\": 1,\n  \"model\": \"qwen3:8b\",\n  \"parity_dimensions\": {\n    \"budget\": {\n      \"notes\": \"prompt 与 gate 的最大模型轮次和额外工具查询上限均一致。\",\n      \"status\": \"matched\"\n    },\n    \"information_access\": {\n      \"notes\": \"核心比较 prompt 与 gate 接收完全相同的工具值和覆盖元数据；raw 只用于现象对照。\",\n      \"status\": \"matched\"\n    },\n    \"model_provider_revision\": {\n      \"notes\": \"所有条件使用同一本机 qwen3:8b Ollama 模型。\",\n      \"status\": \"matched\"\n    },\n    \"sampling_protocol\": {\n      \"notes\": \"冻结场景顺序、零温、确定性种子规则和最大三次模型轮次一致。\",\n      \"status\": \"matched\"\n    },\n    \"tool_capability\": {\n      \"notes\": \"prompt 与 gate 都最多允许一次全作用域补查并得到同一完整响应。\",\n      \"status\": \"matched\"\n    }\n  },\n  \"primary_metric\": \"false_negative_rate_hidden\",\n  \"provider\": \"本机 Ollama\",\n  \"purpose\": \"independent_claim_validation\",\n  \"research_question\": \"覆盖盲区现象是否稳定，且确定性负命题准入门是否在同信息强提示基线上提供净增量？\",\n  \"revision\": \"Ollama local model identity 500a1f067a9f; temperature=0; num_ctx=4096\",\n  \"run_id\": \"20260818_2228_run16\",\n  \"sampling_unit\": \"一个模型在一个冻结场景和一个运行条件下的完整交互 episode\",\n  \"schema_version\": 2,\n  \"secondary_metrics\": [\n    \"hidden_recovery_success_rate\",\n    \"complete_absence_retention_rate\",\n    \"visible_positive_accuracy\",\n    \"overall_task_success_rate\",\n    \"abstention_rate\",\n    \"mean_extra_queries\",\n    \"mean_gate_interventions\",\n    \"parse_issue_rate\"\n  ],\n  \"seeds\": [\n    16001\n  ],\n  \"subject_scope\": {\n    \"datasets\": [\n      \"Run16 synthetic four-domain coverage-fault suite\"\n    ],\n    \"environment\": \"Windows 11; local Ollama; deterministic mock tool; no paid API\",\n    \"models\": [\n      \"qwen3:8b@Ollama\"\n    ],\n    \"seeds\": [\n      \"16001\"\n    ],\n    \"tasks\": [\n      \"existence queries over list/search tools\"\n    ]\n  },\n  \"version\": \"v001\"\n}"
+          },
+          {
+            "fts_rank": 8,
+            "fused_score": 0.014705882352941176,
+            "line_end": 69,
+            "line_start": 1,
+            "path": "workbench_v001/hypothesis_inputs/delta-contract-spec-v001.json",
+            "semantic_rank": null,
+            "source_sha256": "fb80893c357ad4e64eaf2ab31c8f1bf15d4042cabaf55dcaa8d4db858c416004",
+            "text": "{\n  \"experiment_id\": \"delta-contract-screening-v001\",\n  \"hypothesis_id\": \"h-delta-contract-001\",\n  \"claim_ids\": [\"delta-obligation-local-difference-v001\"],\n  \"purpose\": \"mechanism_consistency\",\n  \"research_question\": \"在旧成功调用、新接口和相同结构化差分均可见时，只迁移受影响片段并执行差分近邻回归，是否比完整差分提示和一次反思更稳定地恢复演化后的工作流？\",\n  \"independent_ground_truth\": {\n    \"description\": \"24 个任务的目标调用序列、参数值和终局约束在模型调用前由场景生成器冻结；评价器按新接口模式和精确任务语义执行，不使用模型自评。\",\n    \"external_evidence_ids\": [\"ev-p069-description-induced-preference\", \"ev-p040-failure-core\"],\n    \"external_card_ids\": [\"paper-p069\", \"paper-p040\"],\n    \"external_literature_refs\": [\"arXiv:2607.14642v1\", \"arXiv:2608.02650v1\", \"arXiv:2608.03468v1\", \"arXiv:2608.03071v1\"],\n    \"run_local_fact_refs\": [\"hypotheses_v001/priors/delta-contract-prior-v001/assessment.md\", \"selection_context_v001.md\"]\n  },\n  \"primary_metric\": \"task_success_rate_by_condition\",\n  \"secondary_metrics\": [\n    \"schema_valid_rate\",\n    \"first_attempt_success_rate\",\n    \"success_rate_by_mutation_family\",\n    \"near_miss_rejection_rate\",\n    \"mean_model_calls\",\n    \"mean_tokens\"\n  ],\n  \"sampling_unit\": \"一个冻结的旧成功计划、接口演化和新终局语义组成的配对工作流在一个条件下的一次完整迁移\",\n  \"dataset\": \"24 个预注册配对工作流；参数重命名、新必需参数、枚举语义、工具替换、新前置工具、描述语义变化各 4 个\",\n  \"model\": \"qwen2.5:7b\",\n  \"provider\": \"本机 Ollama\",\n  \"revision\": \"Ollama local model identity 845dbda0ea48; temperature=0; num_ctx=6144\",\n  \"baseline_specs\": [\n    \"latest：旧成功计划加完整新工具模式，不显式列差分，生成完整新计划\",\n    \"diff_prompt：与候选获得相同旧计划、新模式和结构化差分，直接生成完整新计划\",\n    \"reflection：同信息完整计划若失败，获得模式有效性和语义失败反馈后重试一次\",\n    \"obligation：同信息下只生成受影响旧步骤的替换序列，由确定性代码合并未受影响步骤并检查预注册近邻反例\"\n  ],\n  \"parity_dimensions\": {\n    \"information_access\": {\"status\": \"matched\", \"notes\": \"核心比较 diff_prompt、reflection 与 obligation 均获得任务、旧成功计划、新工具模式和完全相同的结构化差分。\"},\n    \"tool_capability\": {\"status\": \"matched\", \"notes\": \"所有条件只输出计划，不执行额外隐藏工具；同一确定性模式与语义评价器评分。\"},\n    \"model_provider_revision\": {\"status\": \"matched\", \"notes\": \"所有条件使用同一本机 qwen2.5:7b、零温和固定上下文。\"},\n    \"sampling_protocol\": {\"status\": \"matched\", \"notes\": \"各条件覆盖完全相同的 24 个场景，条件顺序固定，种子由场景与条件预先计算。\"},\n    \"budget\": {\"status\": \"different\", \"notes\": \"reflection 允许失败后第二次模型调用，obligation 和其他条件只有一次；这使 reflection 获得更强而非更弱预算。\"}\n  },\n  \"seeds\": [16003],\n  \"budget_ceiling\": \"{\\\"api_calls\\\": 120, \\\"tokens\\\": 180000, \\\"wall_time_seconds\\\": 1800}\",\n  \"expected_signatures\": [\n    \"latest 在描述语义和新前置工具上出现工作流漂移\",\n    \"diff_prompt 吸收容易的参数重命名与枚举映射，因此是主要强基线\",\n    \"若局部义务机制有效，其优势应出现在需要保留任务值并改变受影响片段的场景，且不是只提高模式合法率\",\n    \"预注册的类型合法旧语义近邻必须被确定性回归门全部拒绝\"\n  ],\n  \"falsification_rule\": \"obligation task success 必须至少 0.75，且相对 diff_prompt 至少提高 0.15，near-miss rejection 至少 0.95；任一不满足即本地机制筛选不存活。即使存活，也只表示值得进行公开任务和强先行基线扩大。\",\n  \"confounders\": [\n    \"场景为受控合成而非 MCPEvol-Bench 真实服务器\",\n    \"每种演化仅四个任务表述\",\n    \"精确计划匹配可能低估语义等价替代计划\",\n    \"结构化差分由场景给出而非从任意自然语言代码变更自动恢复\",\n    \"单一本地模型和单种子\",\n    \"近邻反例由场景生成器预注册，尚未测试自动生成质量\"\n  ],\n  \"declared_inputs\": [\"implementation_v001/delta_contract_experiment.py\"],\n  \"declared_outputs\": [\"results.json\", \"metrics-output.json\", \"stdout.txt\", \"stderr.txt\"],\n  \"evidence_fidelity\": \"SCREENING\",\n  \"subject_scope\": {\n    \"models\": [\"qwen2.5:7b@Ollama\"],\n    \"tasks\": [\"24 controlled paired workflow migrations across six interface evolution families\"],\n    \"datasets\": [\"Run16 preregistered synthetic delta-contract scenarios\"],\n    \"seeds\": [\"16003\"],\n    \"environment\": \"Windows 11; local Ollama; deterministic schema and exact semantic evaluator; no paid API\"\n  },\n  \"independent_implementation_count\": 1\n}"
+          }
+        ],
+        "kind": "fixed_anchor",
+        "query": "implementation baseline experiment reviewer 实现 基线 实验 评审",
+        "semantic_reason": "semantic_index_missing",
+        "semantic_status": "DEGRADED"
+      },
+      {
+        "hits": [
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 6,
+            "fused_score": 0.015151515151515152,
+            "line_end": 117,
+            "line_start": 1,
+            "path": "experiment_v001/attempts/sgr-coverage-validation-v001/spec.json",
+            "semantic_rank": null,
+            "source_sha256": "898bc038126019d459d63ba7a10c956224c05fb39dee55228052dbb1f97e6e07",
+            "text": "{\n  \"baseline_specs\": [\n    \"receipt：NabaOS-style 有效输出哈希与 result_count，但没有作用域/分页覆盖证明\",\n    \"postcondition：与 gate 相同的 scope-id、complete/partial 和 next-cursor 元数据及明确三值规则，可主动补查一次\",\n    \"gate：与 postcondition 信息、提示、模型和预算相同，但运行时拒绝无完整见证的 absent 并执行一次全量补查\"\n  ],\n  \"budget_ceiling\": \"{\\\"api_calls\\\": 216, \\\"tokens\\\": 300000, \\\"wall_time_seconds\\\": 1800}\",\n  \"claim_ids\": [\n    \"sgr-natural-answer-set-generalization-v001\"\n  ],\n  \"confounders\": [\n    \"使用 oracle answer set 而非实时网站交互\",\n    \"答案行首字段作为 membership key 的归一化\",\n    \"每任务仅三种受控场景\",\n    \"单一第二模型和单种子\",\n    \"完整补查在真实网站可能昂贵或不可用\"\n  ],\n  \"dataset\": \"PKUAIWeb/SGR-BENCH constraint_hf.jsonl；固定 12 个跨域 task ids；每任务 hidden/visible/complete-absent 三场景\",\n  \"declared_inputs\": [\n    \"implementation_v001/sgr_coverage_experiment.py\",\n    \"workbench_v001/datasets/sgr_bench/constraint_hf.jsonl\"\n  ],\n  \"declared_outputs\": [\n    \"results.json\",\n    \"metrics-output.json\",\n    \"stdout.txt\",\n    \"stderr.txt\"\n  ],\n  \"evidence_fidelity\": \"SCREENING\",\n  \"expected_signatures\": [\n    \"receipt 无法从非零局部结果证明目标在完整集合中不存在\",\n    \"postcondition 提示可利用 partial/next-cursor，但仍可能错误提交 absent\",\n    \"gate 对 hidden 场景补查，对 complete-absent 不增加查询并保留 absent\"\n  ],\n  \"experiment_id\": \"sgr-coverage-validation-v001\",\n  \"falsification_rule\": \"gate-postcondition hidden false-negative 差至少 0.15；gate false-negative <=0.10、complete-absence retention >=0.80、visible-positive accuracy >=0.80、abstention <=0.10。任一失败即不支持自然 answer-set 泛化主张。\",\n  \"hypothesis_id\": \"h-coverage-witness-001\",\n  \"independent_ground_truth\": {\n    \"description\": \"目标 membership 标签来自下载前已公开冻结的 SGR-Bench oracle answer；分页适配器在模型调用前确定隐藏/可见/完整不存在场景，模型不参与标签生成。\",\n    \"external_card_ids\": [\n      \"paper-p039\"\n    ],\n    \"external_evidence_ids\": [\n      \"ev-p039-aggregate-score-masking\"\n    ],\n    \"external_literature_refs\": [\n      \"arXiv:2605.22219v1\",\n      \"arXiv:2603.10060v1\",\n      \"arXiv:2608.02645v1\"\n    ],\n    \"run_local_fact_refs\": [\n      \"workbench_v001/datasets/sgr_bench/PROVENANCE.md\",\n      \"evidence_packet_v001.md\"\n    ]\n  },\n  \"independent_implementation_count\": 2,\n  \"model\": \"qwen2.5:7b\",\n  \"parity_dimensions\": {\n    \"budget\": {\n      \"notes\": \"postcondition 与 gate 最大模型调用和工具补查相同。\",\n      \"status\": \"matched\"\n    },\n    \"information_access\": {\n      \"notes\": \"核心比较 postcondition 与 gate 接收完全相同的 task criteria、items、receipt 和 coverage。\",\n      \"status\": \"matched\"\n    },\n    \"model_provider_revision\": {\n      \"notes\": \"所有条件使用同一本机 qwen2.5:7b。\",\n      \"status\": \"matched\"\n    },\n    \"sampling_protocol\": {\n      \"notes\": \"固定 12 任务、场景顺序、零温、种子规则和最大轮次。\",\n      \"status\": \"matched\"\n    },\n    \"tool_capability\": {\n      \"notes\": \"两者最多一次完整 answer-set 补查。\",\n      \"status\": \"matched\"\n    }\n  },\n  \"primary_metric\": \"false_negative_rate_hidden\",\n  \"provider\": \"本机 Ollama\",\n  \"purpose\": \"independent_claim_validation\",\n  \"research_question\": \"覆盖门能否在 SGR-Bench 自然 answer sets、独立分页适配器和第二模型上保留对一般 postcondition 提示与 result-count 回执的差分？\",\n  \"revision\": \"Ollama local model identity 845dbda0ea48; temperature=0; num_ctx=6144\",\n  \"run_id\": \"20260818_2228_run16\",\n  \"sampling_unit\": \"一个冻结 SGR 任务 answer set、一个 membership 场景与一个运行条件的完整 episode\",\n  \"schema_version\": 2,\n  \"secondary_metrics\": [\n    \"hidden_recovery_success_rate\",\n    \"complete_absence_retention_rate\",\n    \"visible_positive_accuracy\",\n    \"overall_task_success_rate\",\n    \"abstention_rate\",\n    \"mean_extra_queries\",\n    \"mean_gate_interventions\",\n    \"parse_issue_rate\"\n  ],\n  \"seeds\": [\n    16002\n  ],\n  \"subject_scope\": {\n    \"datasets\": [\n      \"PKUAIWeb/SGR-BENCH constraint_hf.jsonl sha256:b3a7200d6181a891c2bd7ab8045d8ef11e6ea837f736ceabff402520a690af34\"\n    ],\n    \"environment\": \"Windows 11; local Ollama; independent SGR paging adapter; no paid API\",\n    \"models\": [\n      \"qwen2.5:7b@Ollama\"\n    ],\n    \"seeds\": [\n      \"16002\"\n    ],\n    \"tasks\": [\n      \"12 public SGR-Bench constraint tasks converted to answer-set membership episodes\"\n    ]\n  },\n  \"version\": \"v001\"\n}"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 7,
+            "fused_score": 0.014925373134328358,
+            "line_end": 117,
+            "line_start": 1,
+            "path": "experiment_v001/specs/sgr-coverage-validation-v001.json",
+            "semantic_rank": null,
+            "source_sha256": "898bc038126019d459d63ba7a10c956224c05fb39dee55228052dbb1f97e6e07",
+            "text": "{\n  \"baseline_specs\": [\n    \"receipt：NabaOS-style 有效输出哈希与 result_count，但没有作用域/分页覆盖证明\",\n    \"postcondition：与 gate 相同的 scope-id、complete/partial 和 next-cursor 元数据及明确三值规则，可主动补查一次\",\n    \"gate：与 postcondition 信息、提示、模型和预算相同，但运行时拒绝无完整见证的 absent 并执行一次全量补查\"\n  ],\n  \"budget_ceiling\": \"{\\\"api_calls\\\": 216, \\\"tokens\\\": 300000, \\\"wall_time_seconds\\\": 1800}\",\n  \"claim_ids\": [\n    \"sgr-natural-answer-set-generalization-v001\"\n  ],\n  \"confounders\": [\n    \"使用 oracle answer set 而非实时网站交互\",\n    \"答案行首字段作为 membership key 的归一化\",\n    \"每任务仅三种受控场景\",\n    \"单一第二模型和单种子\",\n    \"完整补查在真实网站可能昂贵或不可用\"\n  ],\n  \"dataset\": \"PKUAIWeb/SGR-BENCH constraint_hf.jsonl；固定 12 个跨域 task ids；每任务 hidden/visible/complete-absent 三场景\",\n  \"declared_inputs\": [\n    \"implementation_v001/sgr_coverage_experiment.py\",\n    \"workbench_v001/datasets/sgr_bench/constraint_hf.jsonl\"\n  ],\n  \"declared_outputs\": [\n    \"results.json\",\n    \"metrics-output.json\",\n    \"stdout.txt\",\n    \"stderr.txt\"\n  ],\n  \"evidence_fidelity\": \"SCREENING\",\n  \"expected_signatures\": [\n    \"receipt 无法从非零局部结果证明目标在完整集合中不存在\",\n    \"postcondition 提示可利用 partial/next-cursor，但仍可能错误提交 absent\",\n    \"gate 对 hidden 场景补查，对 complete-absent 不增加查询并保留 absent\"\n  ],\n  \"experiment_id\": \"sgr-coverage-validation-v001\",\n  \"falsification_rule\": \"gate-postcondition hidden false-negative 差至少 0.15；gate false-negative <=0.10、complete-absence retention >=0.80、visible-positive accuracy >=0.80、abstention <=0.10。任一失败即不支持自然 answer-set 泛化主张。\",\n  \"hypothesis_id\": \"h-coverage-witness-001\",\n  \"independent_ground_truth\": {\n    \"description\": \"目标 membership 标签来自下载前已公开冻结的 SGR-Bench oracle answer；分页适配器在模型调用前确定隐藏/可见/完整不存在场景，模型不参与标签生成。\",\n    \"external_card_ids\": [\n      \"paper-p039\"\n    ],\n    \"external_evidence_ids\": [\n      \"ev-p039-aggregate-score-masking\"\n    ],\n    \"external_literature_refs\": [\n      \"arXiv:2605.22219v1\",\n      \"arXiv:2603.10060v1\",\n      \"arXiv:2608.02645v1\"\n    ],\n    \"run_local_fact_refs\": [\n      \"workbench_v001/datasets/sgr_bench/PROVENANCE.md\",\n      \"evidence_packet_v001.md\"\n    ]\n  },\n  \"independent_implementation_count\": 2,\n  \"model\": \"qwen2.5:7b\",\n  \"parity_dimensions\": {\n    \"budget\": {\n      \"notes\": \"postcondition 与 gate 最大模型调用和工具补查相同。\",\n      \"status\": \"matched\"\n    },\n    \"information_access\": {\n      \"notes\": \"核心比较 postcondition 与 gate 接收完全相同的 task criteria、items、receipt 和 coverage。\",\n      \"status\": \"matched\"\n    },\n    \"model_provider_revision\": {\n      \"notes\": \"所有条件使用同一本机 qwen2.5:7b。\",\n      \"status\": \"matched\"\n    },\n    \"sampling_protocol\": {\n      \"notes\": \"固定 12 任务、场景顺序、零温、种子规则和最大轮次。\",\n      \"status\": \"matched\"\n    },\n    \"tool_capability\": {\n      \"notes\": \"两者最多一次完整 answer-set 补查。\",\n      \"status\": \"matched\"\n    }\n  },\n  \"primary_metric\": \"false_negative_rate_hidden\",\n  \"provider\": \"本机 Ollama\",\n  \"purpose\": \"independent_claim_validation\",\n  \"research_question\": \"覆盖门能否在 SGR-Bench 自然 answer sets、独立分页适配器和第二模型上保留对一般 postcondition 提示与 result-count 回执的差分？\",\n  \"revision\": \"Ollama local model identity 845dbda0ea48; temperature=0; num_ctx=6144\",\n  \"run_id\": \"20260818_2228_run16\",\n  \"sampling_unit\": \"一个冻结 SGR 任务 answer set、一个 membership 场景与一个运行条件的完整 episode\",\n  \"schema_version\": 2,\n  \"secondary_metrics\": [\n    \"hidden_recovery_success_rate\",\n    \"complete_absence_retention_rate\",\n    \"visible_positive_accuracy\",\n    \"overall_task_success_rate\",\n    \"abstention_rate\",\n    \"mean_extra_queries\",\n    \"mean_gate_interventions\",\n    \"parse_issue_rate\"\n  ],\n  \"seeds\": [\n    16002\n  ],\n  \"subject_scope\": {\n    \"datasets\": [\n      \"PKUAIWeb/SGR-BENCH constraint_hf.jsonl sha256:b3a7200d6181a891c2bd7ab8045d8ef11e6ea837f736ceabff402520a690af34\"\n    ],\n    \"environment\": \"Windows 11; local Ollama; independent SGR paging adapter; no paid API\",\n    \"models\": [\n      \"qwen2.5:7b@Ollama\"\n    ],\n    \"seeds\": [\n      \"16002\"\n    ],\n    \"tasks\": [\n      \"12 public SGR-Bench constraint tasks converted to answer-set membership episodes\"\n    ]\n  },\n  \"version\": \"v001\"\n}"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 8,
+            "fused_score": 0.014705882352941176,
+            "line_end": 120,
+            "line_start": 1,
+            "path": "experiment_v001/attempts/delta-contract-screening-v001/spec.json",
+            "semantic_rank": null,
+            "source_sha256": "aba686567f84fe557de3b798ac285c74e692d68c94d58359b42df2bdfb0fbc7b",
+            "text": "{\n  \"baseline_specs\": [\n    \"latest：旧成功计划加完整新工具模式，不显式列差分，生成完整新计划\",\n    \"diff_prompt：与候选获得相同旧计划、新模式和结构化差分，直接生成完整新计划\",\n    \"reflection：同信息完整计划若失败，获得模式有效性和语义失败反馈后重试一次\",\n    \"obligation：同信息下只生成受影响旧步骤的替换序列，由确定性代码合并未受影响步骤并检查预注册近邻反例\"\n  ],\n  \"budget_ceiling\": \"{\\\"api_calls\\\": 120, \\\"tokens\\\": 180000, \\\"wall_time_seconds\\\": 1800}\",\n  \"claim_ids\": [\n    \"delta-obligation-local-difference-v001\"\n  ],\n  \"confounders\": [\n    \"场景为受控合成而非 MCPEvol-Bench 真实服务器\",\n    \"每种演化仅四个任务表述\",\n    \"精确计划匹配可能低估语义等价替代计划\",\n    \"结构化差分由场景给出而非从任意自然语言代码变更自动恢复\",\n    \"单一本地模型和单种子\",\n    \"近邻反例由场景生成器预注册，尚未测试自动生成质量\"\n  ],\n  \"dataset\": \"24 个预注册配对工作流；参数重命名、新必需参数、枚举语义、工具替换、新前置工具、描述语义变化各 4 个\",\n  \"declared_inputs\": [\n    \"implementation_v001/delta_contract_experiment.py\"\n  ],\n  \"declared_outputs\": [\n    \"results.json\",\n    \"metrics-output.json\",\n    \"stdout.txt\",\n    \"stderr.txt\"\n  ],\n  \"evidence_fidelity\": \"SCREENING\",\n  \"expected_signatures\": [\n    \"latest 在描述语义和新前置工具上出现工作流漂移\",\n    \"diff_prompt 吸收容易的参数重命名与枚举映射，因此是主要强基线\",\n    \"若局部义务机制有效，其优势应出现在需要保留任务值并改变受影响片段的场景，且不是只提高模式合法率\",\n    \"预注册的类型合法旧语义近邻必须被确定性回归门全部拒绝\"\n  ],\n  \"experiment_id\": \"delta-contract-screening-v001\",\n  \"falsification_rule\": \"obligation task success 必须至少 0.75，且相对 diff_prompt 至少提高 0.15，near-miss rejection 至少 0.95；任一不满足即本地机制筛选不存活。即使存活，也只表示值得进行公开任务和强先行基线扩大。\",\n  \"hypothesis_id\": \"h-delta-contract-001\",\n  \"independent_ground_truth\": {\n    \"description\": \"24 个任务的目标调用序列、参数值和终局约束在模型调用前由场景生成器冻结；评价器按新接口模式和精确任务语义执行，不使用模型自评。\",\n    \"external_card_ids\": [\n      \"paper-p069\",\n      \"paper-p040\"\n    ],\n    \"external_evidence_ids\": [\n      \"ev-p069-description-induced-preference\",\n      \"ev-p040-failure-core\"\n    ],\n    \"external_literature_refs\": [\n      \"arXiv:2607.14642v1\",\n      \"arXiv:2608.02650v1\",\n      \"arXiv:2608.03468v1\",\n      \"arXiv:2608.03071v1\"\n    ],\n    \"run_local_fact_refs\": [\n      \"hypotheses_v001/priors/delta-contract-prior-v001/assessment.md\",\n      \"selection_context_v001.md\"\n    ]\n  },\n  \"independent_implementation_count\": 1,\n  \"model\": \"qwen2.5:7b\",\n  \"parity_dimensions\": {\n    \"budget\": {\n      \"notes\": \"reflection 允许失败后第二次模型调用，obligation 和其他条件只有一次；这使 reflection 获得更强而非更弱预算。\",\n      \"status\": \"different\"\n    },\n    \"information_access\": {\n      \"notes\": \"核心比较 diff_prompt、reflection 与 obligation 均获得任务、旧成功计划、新工具模式和完全相同的结构化差分。\",\n      \"status\": \"matched\"\n    },\n    \"model_provider_revision\": {\n      \"notes\": \"所有条件使用同一本机 qwen2.5:7b、零温和固定上下文。\",\n      \"status\": \"matched\"\n    },\n    \"sampling_protocol\": {\n      \"notes\": \"各条件覆盖完全相同的 24 个场景，条件顺序固定，种子由场景与条件预先计算。\",\n      \"status\": \"matched\"\n    },\n    \"tool_capability\": {\n      \"notes\": \"所有条件只输出计划，不执行额外隐藏工具；同一确定性模式与语义评价器评分。\",\n      \"status\": \"matched\"\n    }\n  },\n  \"primary_metric\": \"task_success_rate_by_condition\",\n  \"provider\": \"本机 Ollama\",\n  \"purpose\": \"mechanism_consistency\",\n  \"research_question\": \"在旧成功调用、新接口和相同结构化差分均可见时，只迁移受影响片段并执行差分近邻回归，是否比完整差分提示和一次反思更稳定地恢复演化后的工作流？\",\n  \"revision\": \"Ollama local model identity 845dbda0ea48; temperature=0; num_ctx=6144\",\n  \"run_id\": \"20260818_2228_run16\",\n  \"sampling_unit\": \"一个冻结的旧成功计划、接口演化和新终局语义组成的配对工作流在一个条件下的一次完整迁移\",\n  \"schema_version\": 2,\n  \"secondary_metrics\": [\n    \"schema_valid_rate\",\n    \"first_attempt_success_rate\",\n    \"success_rate_by_mutation_family\",\n    \"near_miss_rejection_rate\",\n    \"mean_model_calls\",\n    \"mean_tokens\"\n  ],\n  \"seeds\": [\n    16003\n  ],\n  \"subject_scope\": {\n    \"datasets\": [\n      \"Run16 preregistered synthetic delta-contract scenarios\"\n    ],\n    \"environment\": \"Windows 11; local Ollama; deterministic schema and exact semantic evaluator; no paid API\",\n    \"models\": [\n      \"qwen2.5:7b@Ollama\"\n    ],\n    \"seeds\": [\n      \"16003\"\n    ],\n    \"tasks\": [\n      \"24 controlled paired workflow migrations across six interface evolution families\"\n    ]\n  },\n  \"version\": \"v001\"\n}"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 9,
+            "fused_score": 0.014492753623188406,
+            "line_end": 120,
+            "line_start": 1,
+            "path": "experiment_v001/attempts/delta-contract-screening-v001-r1/spec.json",
+            "semantic_rank": null,
+            "source_sha256": "aba686567f84fe557de3b798ac285c74e692d68c94d58359b42df2bdfb0fbc7b",
+            "text": "{\n  \"baseline_specs\": [\n    \"latest：旧成功计划加完整新工具模式，不显式列差分，生成完整新计划\",\n    \"diff_prompt：与候选获得相同旧计划、新模式和结构化差分，直接生成完整新计划\",\n    \"reflection：同信息完整计划若失败，获得模式有效性和语义失败反馈后重试一次\",\n    \"obligation：同信息下只生成受影响旧步骤的替换序列，由确定性代码合并未受影响步骤并检查预注册近邻反例\"\n  ],\n  \"budget_ceiling\": \"{\\\"api_calls\\\": 120, \\\"tokens\\\": 180000, \\\"wall_time_seconds\\\": 1800}\",\n  \"claim_ids\": [\n    \"delta-obligation-local-difference-v001\"\n  ],\n  \"confounders\": [\n    \"场景为受控合成而非 MCPEvol-Bench 真实服务器\",\n    \"每种演化仅四个任务表述\",\n    \"精确计划匹配可能低估语义等价替代计划\",\n    \"结构化差分由场景给出而非从任意自然语言代码变更自动恢复\",\n    \"单一本地模型和单种子\",\n    \"近邻反例由场景生成器预注册，尚未测试自动生成质量\"\n  ],\n  \"dataset\": \"24 个预注册配对工作流；参数重命名、新必需参数、枚举语义、工具替换、新前置工具、描述语义变化各 4 个\",\n  \"declared_inputs\": [\n    \"implementation_v001/delta_contract_experiment.py\"\n  ],\n  \"declared_outputs\": [\n    \"results.json\",\n    \"metrics-output.json\",\n    \"stdout.txt\",\n    \"stderr.txt\"\n  ],\n  \"evidence_fidelity\": \"SCREENING\",\n  \"expected_signatures\": [\n    \"latest 在描述语义和新前置工具上出现工作流漂移\",\n    \"diff_prompt 吸收容易的参数重命名与枚举映射，因此是主要强基线\",\n    \"若局部义务机制有效，其优势应出现在需要保留任务值并改变受影响片段的场景，且不是只提高模式合法率\",\n    \"预注册的类型合法旧语义近邻必须被确定性回归门全部拒绝\"\n  ],\n  \"experiment_id\": \"delta-contract-screening-v001\",\n  \"falsification_rule\": \"obligation task success 必须至少 0.75，且相对 diff_prompt 至少提高 0.15，near-miss rejection 至少 0.95；任一不满足即本地机制筛选不存活。即使存活，也只表示值得进行公开任务和强先行基线扩大。\",\n  \"hypothesis_id\": \"h-delta-contract-001\",\n  \"independent_ground_truth\": {\n    \"description\": \"24 个任务的目标调用序列、参数值和终局约束在模型调用前由场景生成器冻结；评价器按新接口模式和精确任务语义执行，不使用模型自评。\",\n    \"external_card_ids\": [\n      \"paper-p069\",\n      \"paper-p040\"\n    ],\n    \"external_evidence_ids\": [\n      \"ev-p069-description-induced-preference\",\n      \"ev-p040-failure-core\"\n    ],\n    \"external_literature_refs\": [\n      \"arXiv:2607.14642v1\",\n      \"arXiv:2608.02650v1\",\n      \"arXiv:2608.03468v1\",\n      \"arXiv:2608.03071v1\"\n    ],\n    \"run_local_fact_refs\": [\n      \"hypotheses_v001/priors/delta-contract-prior-v001/assessment.md\",\n      \"selection_context_v001.md\"\n    ]\n  },\n  \"independent_implementation_count\": 1,\n  \"model\": \"qwen2.5:7b\",\n  \"parity_dimensions\": {\n    \"budget\": {\n      \"notes\": \"reflection 允许失败后第二次模型调用，obligation 和其他条件只有一次；这使 reflection 获得更强而非更弱预算。\",\n      \"status\": \"different\"\n    },\n    \"information_access\": {\n      \"notes\": \"核心比较 diff_prompt、reflection 与 obligation 均获得任务、旧成功计划、新工具模式和完全相同的结构化差分。\",\n      \"status\": \"matched\"\n    },\n    \"model_provider_revision\": {\n      \"notes\": \"所有条件使用同一本机 qwen2.5:7b、零温和固定上下文。\",\n      \"status\": \"matched\"\n    },\n    \"sampling_protocol\": {\n      \"notes\": \"各条件覆盖完全相同的 24 个场景，条件顺序固定，种子由场景与条件预先计算。\",\n      \"status\": \"matched\"\n    },\n    \"tool_capability\": {\n      \"notes\": \"所有条件只输出计划，不执行额外隐藏工具；同一确定性模式与语义评价器评分。\",\n      \"status\": \"matched\"\n    }\n  },\n  \"primary_metric\": \"task_success_rate_by_condition\",\n  \"provider\": \"本机 Ollama\",\n  \"purpose\": \"mechanism_consistency\",\n  \"research_question\": \"在旧成功调用、新接口和相同结构化差分均可见时，只迁移受影响片段并执行差分近邻回归，是否比完整差分提示和一次反思更稳定地恢复演化后的工作流？\",\n  \"revision\": \"Ollama local model identity 845dbda0ea48; temperature=0; num_ctx=6144\",\n  \"run_id\": \"20260818_2228_run16\",\n  \"sampling_unit\": \"一个冻结的旧成功计划、接口演化和新终局语义组成的配对工作流在一个条件下的一次完整迁移\",\n  \"schema_version\": 2,\n  \"secondary_metrics\": [\n    \"schema_valid_rate\",\n    \"first_attempt_success_rate\",\n    \"success_rate_by_mutation_family\",\n    \"near_miss_rejection_rate\",\n    \"mean_model_calls\",\n    \"mean_tokens\"\n  ],\n  \"seeds\": [\n    16003\n  ],\n  \"subject_scope\": {\n    \"datasets\": [\n      \"Run16 preregistered synthetic delta-contract scenarios\"\n    ],\n    \"environment\": \"Windows 11; local Ollama; deterministic schema and exact semantic evaluator; no paid API\",\n    \"models\": [\n      \"qwen2.5:7b@Ollama\"\n    ],\n    \"seeds\": [\n      \"16003\"\n    ],\n    \"tasks\": [\n      \"24 controlled paired workflow migrations across six interface evolution families\"\n    ]\n  },\n  \"version\": \"v001\"\n}"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 10,
+            "fused_score": 0.014285714285714285,
+            "line_end": 120,
+            "line_start": 1,
+            "path": "experiment_v001/specs/delta-contract-screening-v001.json",
+            "semantic_rank": null,
+            "source_sha256": "aba686567f84fe557de3b798ac285c74e692d68c94d58359b42df2bdfb0fbc7b",
+            "text": "{\n  \"baseline_specs\": [\n    \"latest：旧成功计划加完整新工具模式，不显式列差分，生成完整新计划\",\n    \"diff_prompt：与候选获得相同旧计划、新模式和结构化差分，直接生成完整新计划\",\n    \"reflection：同信息完整计划若失败，获得模式有效性和语义失败反馈后重试一次\",\n    \"obligation：同信息下只生成受影响旧步骤的替换序列，由确定性代码合并未受影响步骤并检查预注册近邻反例\"\n  ],\n  \"budget_ceiling\": \"{\\\"api_calls\\\": 120, \\\"tokens\\\": 180000, \\\"wall_time_seconds\\\": 1800}\",\n  \"claim_ids\": [\n    \"delta-obligation-local-difference-v001\"\n  ],\n  \"confounders\": [\n    \"场景为受控合成而非 MCPEvol-Bench 真实服务器\",\n    \"每种演化仅四个任务表述\",\n    \"精确计划匹配可能低估语义等价替代计划\",\n    \"结构化差分由场景给出而非从任意自然语言代码变更自动恢复\",\n    \"单一本地模型和单种子\",\n    \"近邻反例由场景生成器预注册，尚未测试自动生成质量\"\n  ],\n  \"dataset\": \"24 个预注册配对工作流；参数重命名、新必需参数、枚举语义、工具替换、新前置工具、描述语义变化各 4 个\",\n  \"declared_inputs\": [\n    \"implementation_v001/delta_contract_experiment.py\"\n  ],\n  \"declared_outputs\": [\n    \"results.json\",\n    \"metrics-output.json\",\n    \"stdout.txt\",\n    \"stderr.txt\"\n  ],\n  \"evidence_fidelity\": \"SCREENING\",\n  \"expected_signatures\": [\n    \"latest 在描述语义和新前置工具上出现工作流漂移\",\n    \"diff_prompt 吸收容易的参数重命名与枚举映射，因此是主要强基线\",\n    \"若局部义务机制有效，其优势应出现在需要保留任务值并改变受影响片段的场景，且不是只提高模式合法率\",\n    \"预注册的类型合法旧语义近邻必须被确定性回归门全部拒绝\"\n  ],\n  \"experiment_id\": \"delta-contract-screening-v001\",\n  \"falsification_rule\": \"obligation task success 必须至少 0.75，且相对 diff_prompt 至少提高 0.15，near-miss rejection 至少 0.95；任一不满足即本地机制筛选不存活。即使存活，也只表示值得进行公开任务和强先行基线扩大。\",\n  \"hypothesis_id\": \"h-delta-contract-001\",\n  \"independent_ground_truth\": {\n    \"description\": \"24 个任务的目标调用序列、参数值和终局约束在模型调用前由场景生成器冻结；评价器按新接口模式和精确任务语义执行，不使用模型自评。\",\n    \"external_card_ids\": [\n      \"paper-p069\",\n      \"paper-p040\"\n    ],\n    \"external_evidence_ids\": [\n      \"ev-p069-description-induced-preference\",\n      \"ev-p040-failure-core\"\n    ],\n    \"external_literature_refs\": [\n      \"arXiv:2607.14642v1\",\n      \"arXiv:2608.02650v1\",\n      \"arXiv:2608.03468v1\",\n      \"arXiv:2608.03071v1\"\n    ],\n    \"run_local_fact_refs\": [\n      \"hypotheses_v001/priors/delta-contract-prior-v001/assessment.md\",\n      \"selection_context_v001.md\"\n    ]\n  },\n  \"independent_implementation_count\": 1,\n  \"model\": \"qwen2.5:7b\",\n  \"parity_dimensions\": {\n    \"budget\": {\n      \"notes\": \"reflection 允许失败后第二次模型调用，obligation 和其他条件只有一次；这使 reflection 获得更强而非更弱预算。\",\n      \"status\": \"different\"\n    },\n    \"information_access\": {\n      \"notes\": \"核心比较 diff_prompt、reflection 与 obligation 均获得任务、旧成功计划、新工具模式和完全相同的结构化差分。\",\n      \"status\": \"matched\"\n    },\n    \"model_provider_revision\": {\n      \"notes\": \"所有条件使用同一本机 qwen2.5:7b、零温和固定上下文。\",\n      \"status\": \"matched\"\n    },\n    \"sampling_protocol\": {\n      \"notes\": \"各条件覆盖完全相同的 24 个场景，条件顺序固定，种子由场景与条件预先计算。\",\n      \"status\": \"matched\"\n    },\n    \"tool_capability\": {\n      \"notes\": \"所有条件只输出计划，不执行额外隐藏工具；同一确定性模式与语义评价器评分。\",\n      \"status\": \"matched\"\n    }\n  },\n  \"primary_metric\": \"task_success_rate_by_condition\",\n  \"provider\": \"本机 Ollama\",\n  \"purpose\": \"mechanism_consistency\",\n  \"research_question\": \"在旧成功调用、新接口和相同结构化差分均可见时，只迁移受影响片段并执行差分近邻回归，是否比完整差分提示和一次反思更稳定地恢复演化后的工作流？\",\n  \"revision\": \"Ollama local model identity 845dbda0ea48; temperature=0; num_ctx=6144\",\n  \"run_id\": \"20260818_2228_run16\",\n  \"sampling_unit\": \"一个冻结的旧成功计划、接口演化和新终局语义组成的配对工作流在一个条件下的一次完整迁移\",\n  \"schema_version\": 2,\n  \"secondary_metrics\": [\n    \"schema_valid_rate\",\n    \"first_attempt_success_rate\",\n    \"success_rate_by_mutation_family\",\n    \"near_miss_rejection_rate\",\n    \"mean_model_calls\",\n    \"mean_tokens\"\n  ],\n  \"seeds\": [\n    16003\n  ],\n  \"subject_scope\": {\n    \"datasets\": [\n      \"Run16 preregistered synthetic delta-contract scenarios\"\n    ],\n    \"environment\": \"Windows 11; local Ollama; deterministic schema and exact semantic evaluator; no paid API\",\n    \"models\": [\n      \"qwen2.5:7b@Ollama\"\n    ],\n    \"seeds\": [\n      \"16003\"\n    ],\n    \"tasks\": [\n      \"24 controlled paired workflow migrations across six interface evolution families\"\n    ]\n  },\n  \"version\": \"v001\"\n}"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 11,
+            "fused_score": 0.014084507042253521,
+            "line_end": 69,
+            "line_start": 1,
+            "path": "workbench_v001/hypothesis_inputs/delta-contract-spec-v001.json",
+            "semantic_rank": null,
+            "source_sha256": "fb80893c357ad4e64eaf2ab31c8f1bf15d4042cabaf55dcaa8d4db858c416004",
+            "text": "{\n  \"experiment_id\": \"delta-contract-screening-v001\",\n  \"hypothesis_id\": \"h-delta-contract-001\",\n  \"claim_ids\": [\"delta-obligation-local-difference-v001\"],\n  \"purpose\": \"mechanism_consistency\",\n  \"research_question\": \"在旧成功调用、新接口和相同结构化差分均可见时，只迁移受影响片段并执行差分近邻回归，是否比完整差分提示和一次反思更稳定地恢复演化后的工作流？\",\n  \"independent_ground_truth\": {\n    \"description\": \"24 个任务的目标调用序列、参数值和终局约束在模型调用前由场景生成器冻结；评价器按新接口模式和精确任务语义执行，不使用模型自评。\",\n    \"external_evidence_ids\": [\"ev-p069-description-induced-preference\", \"ev-p040-failure-core\"],\n    \"external_card_ids\": [\"paper-p069\", \"paper-p040\"],\n    \"external_literature_refs\": [\"arXiv:2607.14642v1\", \"arXiv:2608.02650v1\", \"arXiv:2608.03468v1\", \"arXiv:2608.03071v1\"],\n    \"run_local_fact_refs\": [\"hypotheses_v001/priors/delta-contract-prior-v001/assessment.md\", \"selection_context_v001.md\"]\n  },\n  \"primary_metric\": \"task_success_rate_by_condition\",\n  \"secondary_metrics\": [\n    \"schema_valid_rate\",\n    \"first_attempt_success_rate\",\n    \"success_rate_by_mutation_family\",\n    \"near_miss_rejection_rate\",\n    \"mean_model_calls\",\n    \"mean_tokens\"\n  ],\n  \"sampling_unit\": \"一个冻结的旧成功计划、接口演化和新终局语义组成的配对工作流在一个条件下的一次完整迁移\",\n  \"dataset\": \"24 个预注册配对工作流；参数重命名、新必需参数、枚举语义、工具替换、新前置工具、描述语义变化各 4 个\",\n  \"model\": \"qwen2.5:7b\",\n  \"provider\": \"本机 Ollama\",\n  \"revision\": \"Ollama local model identity 845dbda0ea48; temperature=0; num_ctx=6144\",\n  \"baseline_specs\": [\n    \"latest：旧成功计划加完整新工具模式，不显式列差分，生成完整新计划\",\n    \"diff_prompt：与候选获得相同旧计划、新模式和结构化差分，直接生成完整新计划\",\n    \"reflection：同信息完整计划若失败，获得模式有效性和语义失败反馈后重试一次\",\n    \"obligation：同信息下只生成受影响旧步骤的替换序列，由确定性代码合并未受影响步骤并检查预注册近邻反例\"\n  ],\n  \"parity_dimensions\": {\n    \"information_access\": {\"status\": \"matched\", \"notes\": \"核心比较 diff_prompt、reflection 与 obligation 均获得任务、旧成功计划、新工具模式和完全相同的结构化差分。\"},\n    \"tool_capability\": {\"status\": \"matched\", \"notes\": \"所有条件只输出计划，不执行额外隐藏工具；同一确定性模式与语义评价器评分。\"},\n    \"model_provider_revision\": {\"status\": \"matched\", \"notes\": \"所有条件使用同一本机 qwen2.5:7b、零温和固定上下文。\"},\n    \"sampling_protocol\": {\"status\": \"matched\", \"notes\": \"各条件覆盖完全相同的 24 个场景，条件顺序固定，种子由场景与条件预先计算。\"},\n    \"budget\": {\"status\": \"different\", \"notes\": \"reflection 允许失败后第二次模型调用，obligation 和其他条件只有一次；这使 reflection 获得更强而非更弱预算。\"}\n  },\n  \"seeds\": [16003],\n  \"budget_ceiling\": \"{\\\"api_calls\\\": 120, \\\"tokens\\\": 180000, \\\"wall_time_seconds\\\": 1800}\",\n  \"expected_signatures\": [\n    \"latest 在描述语义和新前置工具上出现工作流漂移\",\n    \"diff_prompt 吸收容易的参数重命名与枚举映射，因此是主要强基线\",\n    \"若局部义务机制有效，其优势应出现在需要保留任务值并改变受影响片段的场景，且不是只提高模式合法率\",\n    \"预注册的类型合法旧语义近邻必须被确定性回归门全部拒绝\"\n  ],\n  \"falsification_rule\": \"obligation task success 必须至少 0.75，且相对 diff_prompt 至少提高 0.15，near-miss rejection 至少 0.95；任一不满足即本地机制筛选不存活。即使存活，也只表示值得进行公开任务和强先行基线扩大。\",\n  \"confounders\": [\n    \"场景为受控合成而非 MCPEvol-Bench 真实服务器\",\n    \"每种演化仅四个任务表述\",\n    \"精确计划匹配可能低估语义等价替代计划\",\n    \"结构化差分由场景给出而非从任意自然语言代码变更自动恢复\",\n    \"单一本地模型和单种子\",\n    \"近邻反例由场景生成器预注册，尚未测试自动生成质量\"\n  ],\n  \"declared_inputs\": [\"implementation_v001/delta_contract_experiment.py\"],\n  \"declared_outputs\": [\"results.json\", \"metrics-output.json\", \"stdout.txt\", \"stderr.txt\"],\n  \"evidence_fidelity\": \"SCREENING\",\n  \"subject_scope\": {\n    \"models\": [\"qwen2.5:7b@Ollama\"],\n    \"tasks\": [\"24 controlled paired workflow migrations across six interface evolution families\"],\n    \"datasets\": [\"Run16 preregistered synthetic delta-contract scenarios\"],\n    \"seeds\": [\"16003\"],\n    \"environment\": \"Windows 11; local Ollama; deterministic schema and exact semantic evaluator; no paid API\"\n  },\n  \"independent_implementation_count\": 1\n}"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 12,
+            "fused_score": 0.013888888888888888,
+            "line_end": 119,
+            "line_start": 1,
+            "path": "experiment_v001/attempts/coverage-gate-screening-v001/spec.json",
+            "semantic_rank": null,
+            "source_sha256": "e3e97082c2d6e49577d73c0e0542680e8c3d994d45b5758b6da896e9ca7d0b3f",
+            "text": "{\n  \"baseline_specs\": [\n    \"raw：只见语法成功与 items，可自行补查一次\",\n    \"prompt：见完整覆盖元数据并获明确负命题核验规则，可补查一次\",\n    \"gate：与 prompt 完全相同的信息和提示，但运行时拒绝无完整见证的 absent 并自动执行一次全作用域补查\"\n  ],\n  \"budget_ceiling\": \"{\\\"model_calls\\\": 144, \\\"tokens\\\": 120000, \\\"wall_time_seconds\\\": 1800, \\\"paid_cost\\\": 0}\",\n  \"claim_ids\": [\n    \"coverage-blindness-phenomenon-v001\",\n    \"coverage-gate-increment-v001\"\n  ],\n  \"confounders\": [\n    \"本地模型容量\",\n    \"合成实体命名与提示可读性\",\n    \"覆盖元数据格式显著性\",\n    \"单种随机种子\",\n    \"gate 自动补查在真实工具上可能不可用或有成本\"\n  ],\n  \"dataset\": \"实现中冻结生成的 4 域 x 6 故障/真值类型，共 24 个场景\",\n  \"declared_inputs\": [\n    \"implementation_v001/coverage_gate_experiment.py\"\n  ],\n  \"declared_outputs\": [\n    \"results.json\",\n    \"metrics-output.json\",\n    \"stdout.txt\",\n    \"stderr.txt\"\n  ],\n  \"evidence_fidelity\": \"SCREENING\",\n  \"expected_signatures\": [\n    \"raw 在隐藏目标故障上出现错误不存在结论，而完整结果上的正确否定被保留\",\n    \"若提示未完全服从覆盖规则，gate 通过一次定向补查将错误否定改为 present\",\n    \"若 prompt 已完全吸收覆盖元数据，gate 与 prompt 无差异并杀死方法增量\"\n  ],\n  \"experiment_id\": \"coverage-gate-screening-v001\",\n  \"falsification_rule\": \"现象主张要求 raw-prompt 错误否定率差至少 0.25。方法增量要求 gate 比 prompt 至少低 0.10，且正确否定保留 >=0.75、拒答增量 <=0.10、平均额外查询 <=1；任一失败即不支持方法增量。\",\n  \"hypothesis_id\": \"h-coverage-witness-001\",\n  \"independent_ground_truth\": {\n    \"description\": \"每个场景的完整实体集合、目标存在性、请求作用域和所需时间由场景生成器在模型调用前固定；模型输出不参与标签生成。\",\n    \"external_card_ids\": [\n      \"paper-p039\",\n      \"paper-p073\"\n    ],\n    \"external_evidence_ids\": [\n      \"ev-p039-aggregate-score-masking\",\n      \"ev-p073-internal-confidence-misalignment\"\n    ],\n    \"external_literature_refs\": [\n      \"arXiv:2603.10060\",\n      \"arXiv:2605.22219\"\n    ],\n    \"run_local_fact_refs\": [\n      \"problem_v001.md\",\n      \"candidate_v001.md\",\n      \"research_map_v001.md\"\n    ]\n  },\n  \"independent_implementation_count\": 1,\n  \"model\": \"qwen3:8b\",\n  \"parity_dimensions\": {\n    \"budget\": {\n      \"notes\": \"prompt 与 gate 的最大模型轮次和额外工具查询上限均一致。\",\n      \"status\": \"matched\"\n    },\n    \"information_access\": {\n      \"notes\": \"核心比较 prompt 与 gate 接收完全相同的工具值和覆盖元数据；raw 只用于现象对照。\",\n      \"status\": \"matched\"\n    },\n    \"model_provider_revision\": {\n      \"notes\": \"所有条件使用同一本机 qwen3:8b Ollama 模型。\",\n      \"status\": \"matched\"\n    },\n    \"sampling_protocol\": {\n      \"notes\": \"冻结场景顺序、零温、确定性种子规则和最大三次模型轮次一致。\",\n      \"status\": \"matched\"\n    },\n    \"tool_capability\": {\n      \"notes\": \"prompt 与 gate 都最多允许一次全作用域补查并得到同一完整响应。\",\n      \"status\": \"matched\"\n    }\n  },\n  \"primary_metric\": \"false_negative_rate_hidden\",\n  \"provider\": \"本机 Ollama\",\n  \"purpose\": \"independent_claim_validation\",\n  \"research_question\": \"覆盖盲区现象是否稳定，且确定性负命题准入门是否在同信息强提示基线上提供净增量？\",\n  \"revision\": \"Ollama local model identity 500a1f067a9f; temperature=0; num_ctx=4096\",\n  \"run_id\": \"20260818_2228_run16\",\n  \"sampling_unit\": \"一个模型在一个冻结场景和一个运行条件下的完整交互 episode\",\n  \"schema_version\": 2,\n  \"secondary_metrics\": [\n    \"hidden_recovery_success_rate\",\n    \"complete_absence_retention_rate\",\n    \"visible_positive_accuracy\",\n    \"overall_task_success_rate\",\n    \"abstention_rate\",\n    \"mean_extra_queries\",\n    \"mean_gate_interventions\",\n    \"parse_issue_rate\"\n  ],\n  \"seeds\": [\n    16001\n  ],\n  \"subject_scope\": {\n    \"datasets\": [\n      \"Run16 synthetic four-domain coverage-fault suite\"\n    ],\n    \"environment\": \"Windows 11; local Ollama; deterministic mock tool; no paid API\",\n    \"models\": [\n      \"qwen3:8b@Ollama\"\n    ],\n    \"seeds\": [\n      \"16001\"\n    ],\n    \"tasks\": [\n      \"existence queries over list/search tools\"\n    ]\n  },\n  \"version\": \"v001\"\n}"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 13,
+            "fused_score": 0.0136986301369863,
+            "line_end": 119,
+            "line_start": 1,
+            "path": "experiment_v001/specs/coverage-gate-screening-v001.json",
+            "semantic_rank": null,
+            "source_sha256": "e3e97082c2d6e49577d73c0e0542680e8c3d994d45b5758b6da896e9ca7d0b3f",
+            "text": "{\n  \"baseline_specs\": [\n    \"raw：只见语法成功与 items，可自行补查一次\",\n    \"prompt：见完整覆盖元数据并获明确负命题核验规则，可补查一次\",\n    \"gate：与 prompt 完全相同的信息和提示，但运行时拒绝无完整见证的 absent 并自动执行一次全作用域补查\"\n  ],\n  \"budget_ceiling\": \"{\\\"model_calls\\\": 144, \\\"tokens\\\": 120000, \\\"wall_time_seconds\\\": 1800, \\\"paid_cost\\\": 0}\",\n  \"claim_ids\": [\n    \"coverage-blindness-phenomenon-v001\",\n    \"coverage-gate-increment-v001\"\n  ],\n  \"confounders\": [\n    \"本地模型容量\",\n    \"合成实体命名与提示可读性\",\n    \"覆盖元数据格式显著性\",\n    \"单种随机种子\",\n    \"gate 自动补查在真实工具上可能不可用或有成本\"\n  ],\n  \"dataset\": \"实现中冻结生成的 4 域 x 6 故障/真值类型，共 24 个场景\",\n  \"declared_inputs\": [\n    \"implementation_v001/coverage_gate_experiment.py\"\n  ],\n  \"declared_outputs\": [\n    \"results.json\",\n    \"metrics-output.json\",\n    \"stdout.txt\",\n    \"stderr.txt\"\n  ],\n  \"evidence_fidelity\": \"SCREENING\",\n  \"expected_signatures\": [\n    \"raw 在隐藏目标故障上出现错误不存在结论，而完整结果上的正确否定被保留\",\n    \"若提示未完全服从覆盖规则，gate 通过一次定向补查将错误否定改为 present\",\n    \"若 prompt 已完全吸收覆盖元数据，gate 与 prompt 无差异并杀死方法增量\"\n  ],\n  \"experiment_id\": \"coverage-gate-screening-v001\",\n  \"falsification_rule\": \"现象主张要求 raw-prompt 错误否定率差至少 0.25。方法增量要求 gate 比 prompt 至少低 0.10，且正确否定保留 >=0.75、拒答增量 <=0.10、平均额外查询 <=1；任一失败即不支持方法增量。\",\n  \"hypothesis_id\": \"h-coverage-witness-001\",\n  \"independent_ground_truth\": {\n    \"description\": \"每个场景的完整实体集合、目标存在性、请求作用域和所需时间由场景生成器在模型调用前固定；模型输出不参与标签生成。\",\n    \"external_card_ids\": [\n      \"paper-p039\",\n      \"paper-p073\"\n    ],\n    \"external_evidence_ids\": [\n      \"ev-p039-aggregate-score-masking\",\n      \"ev-p073-internal-confidence-misalignment\"\n    ],\n    \"external_literature_refs\": [\n      \"arXiv:2603.10060\",\n      \"arXiv:2605.22219\"\n    ],\n    \"run_local_fact_refs\": [\n      \"problem_v001.md\",\n      \"candidate_v001.md\",\n      \"research_map_v001.md\"\n    ]\n  },\n  \"independent_implementation_count\": 1,\n  \"model\": \"qwen3:8b\",\n  \"parity_dimensions\": {\n    \"budget\": {\n      \"notes\": \"prompt 与 gate 的最大模型轮次和额外工具查询上限均一致。\",\n      \"status\": \"matched\"\n    },\n    \"information_access\": {\n      \"notes\": \"核心比较 prompt 与 gate 接收完全相同的工具值和覆盖元数据；raw 只用于现象对照。\",\n      \"status\": \"matched\"\n    },\n    \"model_provider_revision\": {\n      \"notes\": \"所有条件使用同一本机 qwen3:8b Ollama 模型。\",\n      \"status\": \"matched\"\n    },\n    \"sampling_protocol\": {\n      \"notes\": \"冻结场景顺序、零温、确定性种子规则和最大三次模型轮次一致。\",\n      \"status\": \"matched\"\n    },\n    \"tool_capability\": {\n      \"notes\": \"prompt 与 gate 都最多允许一次全作用域补查并得到同一完整响应。\",\n      \"status\": \"matched\"\n    }\n  },\n  \"primary_metric\": \"false_negative_rate_hidden\",\n  \"provider\": \"本机 Ollama\",\n  \"purpose\": \"independent_claim_validation\",\n  \"research_question\": \"覆盖盲区现象是否稳定，且确定性负命题准入门是否在同信息强提示基线上提供净增量？\",\n  \"revision\": \"Ollama local model identity 500a1f067a9f; temperature=0; num_ctx=4096\",\n  \"run_id\": \"20260818_2228_run16\",\n  \"sampling_unit\": \"一个模型在一个冻结场景和一个运行条件下的完整交互 episode\",\n  \"schema_version\": 2,\n  \"secondary_metrics\": [\n    \"hidden_recovery_success_rate\",\n    \"complete_absence_retention_rate\",\n    \"visible_positive_accuracy\",\n    \"overall_task_success_rate\",\n    \"abstention_rate\",\n    \"mean_extra_queries\",\n    \"mean_gate_interventions\",\n    \"parse_issue_rate\"\n  ],\n  \"seeds\": [\n    16001\n  ],\n  \"subject_scope\": {\n    \"datasets\": [\n      \"Run16 synthetic four-domain coverage-fault suite\"\n    ],\n    \"environment\": \"Windows 11; local Ollama; deterministic mock tool; no paid API\",\n    \"models\": [\n      \"qwen3:8b@Ollama\"\n    ],\n    \"seeds\": [\n      \"16001\"\n    ],\n    \"tasks\": [\n      \"existence queries over list/search tools\"\n    ]\n  },\n  \"version\": \"v001\"\n}"
+          }
+        ],
+        "kind": "recent_context_recovery",
+        "query": "# v001 研究问题：工具结果的“缺失”何时足以支持不存在结论\n本版本研究一个可在本机直接反证的问题：如果工具响应显式携带与查询作用域绑定的覆盖见证，且运行时只允许在见证足以覆盖命题时提交否定性结论，是否能在不增加模型参数的情况下显著降低错误的不存在断言，同时不过度拒答或增加无效调用？\n候选贡献形态保持开放：优先评价/系统能力，其次才是方法。核心不是一般的“工具会失败”，而是负命题具有不对称的证据要求：一次命中即可支持存在，但有限、未知覆盖的未命中不能支持不存在。\n## 当前文献边界\n- 知识库 P039（ToolFailBench）表明总任务准确率会混淆跳过工具与忽略结果，且工具失败需要细分类；P040 说明环境状态可揭示智能体的虚假成功；P073 说明内部置信度可与执行正确性错位。\n- SGR-Bench 已把检索作用域漂移确定为专门检索任务的主要失败源之一。\n因此本版本的可存活差分必须同时满足：覆盖见证不是普通调用回执；负命题准入门不是泛化的故障提示；在相同覆盖信息下，它仍优于提示式验证强基线；并能在多种覆盖缺陷上保持低错误否定率，而不是只修复空列表这一种表面模式。\n## 方向状态更新\n该问题的本地现象得到两个 Screening 支持，但 CROWN-QA 与 ToolGate 已占据论文级问题/形式化/门控核心，因此它不再是当前候选。随后正交探索的接口演化局部迁移也未在同信息强基线后显示增量。Run16 当前保持 ACTIVE 且最佳集合为空，继续在同一科学版本做正交现象扩展；以上失败不代表文本与工具型智能体领域穷尽。\n# v001 前沿地图与转向记录\n## 初始地图\nRun 内知识库检索快照位于 `hypotheses_v001/searches/frontier-map-v001/`，覆盖 73 篇论文、108 张唯一卡片、138 条唯一 Evidence 和 88 个唯一 Passage。高风险邻域包括轨迹校准、虚假成功、工具失败诊断、记忆错误传播、步骤级奖励与反事实定位。\n## 已关闭的初始方法核\n“对失败轨迹逐步反事实重放，以定位首次不可恢复步骤并据此修复”的初始方法核被 2026 年最近工作直接占据：\n- Causal Agent Replay（arXiv:2606.08275）已经用结构因果模型、逐步 do 干预、随机前向重执行和蒙特卡洛 Shapley 做失败归因；\n实际死亡范围：反事实重放作为新的方法核心及“首次不可恢复步骤定位”主张死亡。仍存范围：工具观察的覆盖语义、否定性结论的证据准入和可执行评价协议，不依赖对轨迹归因方法改名。\n## 正交候选\n当前唯一活动候选是 `h-coverage-witness-001`：把工具结果从“有值/无值”扩展为作用域绑定的覆盖见证，并以负命题准入门执行非对称证据规则。其最近先行风险是 NabaOS 的错误不存在检测、SGR-Bench 的作用域漂移和 Failing Tools 的后置条件验证。\n## 最高信息量动作\n## 第一次正交扩展结果\nFormal `delta-contract-screening-v001-r1` 在 24 个配对工作流上得到：latest、同信息 diff_prompt、额外预算 reflection 与 obligation 均为 0.8333；唯一共同失败族是新增前置工具，局部义务没有相对强基线增量。当前局部主张被杀死；较宽方法族因单次 Screening 证据不足而 parked，不进入最佳集合。\n# v001 证据包：作用域覆盖见证\n## 可运行研究实现\n- `implementation_v001/coverage_gate_experiment.py`\n## Formal Screening\n- Spec：`experiment_v001/specs/coverage-gate-screening-v001.json`\n- Attempt：`experiment_v001/attempts/coverage-gate-screening-v001/execution.json`\n- 原始逐 episode 结果：`experiment_v001/attempts/coverage-gate-screening-v001/results.json`\n- 指标：`experiment_v001/attempts/coverage-gate-screening-v001/metrics.json`\n- 机械事实：退出码 0；Evidence、metrics 与 output 契约为真；91 次本地模型调用；34,309 tokens；75.97 秒；零付费；无 parse issue。\n两个预注册主张均达到本地支持条件。gate 并未靠降低正确否定或增加拒答取得表面收益；它主要把 scope/stale/unknown 条件下的错误否定转成一次补查后的正确存在结论。\n## 独立公开数据 Screening\n- 独立实现：`implementation_v001/sgr_coverage_experiment.py`\n# v001 当前候选状态：无可投资候选\n## 已关闭或停放的候选\n### `h-causal-replay-001`\n### `h-coverage-witness-001`\n作用域覆盖见证与负命题准入门。两个独立本地实现和两个模型均得到成功 Screening，但 CROWN-QA 已占据完整性敏感负向推理的问题、形式化、评价与自然文档现象，ToolGate 已占据一般运行时合约门。现有方向只剩手写适配器上的直接组件组合，状态为 `prior_collision`。\n### `h-delta",
+        "semantic_reason": "semantic_index_missing",
+        "semantic_status": "DEGRADED",
+        "source_files": [
+          {
+            "mtime_ns": 1787067459446351800,
+            "path": "problem_v001.md",
+            "source_sha256": "ac3389fc4e202ac547115b5dd3d218504ea7bf19833d16091952048191d62614"
+          },
+          {
+            "mtime_ns": 1787067459446351800,
+            "path": "research_map_v001.md",
+            "source_sha256": "f2e7ebab884571561fd949f22021475af8bb71036a6a6dd694c7af5ae9f19a6f"
+          },
+          {
+            "mtime_ns": 1787067459445350900,
+            "path": "evidence_packet_v001.md",
+            "source_sha256": "72104df3c331de54418010b1d9561f69a7067b842bb2df771020c07c07b3b55d"
+          },
+          {
+            "mtime_ns": 1787067429804089500,
+            "path": "candidate_v001.md",
+            "source_sha256": "183786dba673e8e3a92cb2b2284c06279f7883d4cebc1620c54735ad389342b7"
+          },
+          {
+            "mtime_ns": 1787067417150490600,
+            "path": "selection_context_v001.md",
+            "source_sha256": "171a7a454d8f1037a9b4fa9821a3e62d818c57d1911bd04726f47a78cf91a4b1"
+          },
+          {
+            "mtime_ns": 1787067322367381800,
+            "path": "hypotheses_v001/portfolio.json",
+            "source_sha256": "c00b71a54ce87f9edf45270b830ac1aa950475666948dbd131952d3845409698"
+          }
+        ]
+      }
+    ],
+    "semantic_reason": "semantic_index_missing",
+    "semantic_status": "DEGRADED",
+    "version": "v001"
+  },
+  "recall_status": {
+    "reason": null,
+    "semantic_reason": "semantic_index_missing",
+    "semantic_status": "DEGRADED",
+    "status": "READY"
+  },
+  "recent_files": [
+    {
+      "mtime_ns": 1787067472244314500,
+      "path": "hypotheses_v001/priors/delta-contract-prior-v001/assessment.md",
+      "sha256": "55a235f2667d7a9636158ff2d007e9dc778491c3ed19c798fb667597e95a7164",
+      "size_bytes": 5500
+    },
+    {
+      "mtime_ns": 1787067459446351800,
+      "path": "problem_v001.md",
+      "sha256": "ac3389fc4e202ac547115b5dd3d218504ea7bf19833d16091952048191d62614",
+      "size_bytes": 2541
+    },
+    {
+      "mtime_ns": 1787067459446351800,
+      "path": "research_map_v001.md",
+      "sha256": "f2e7ebab884571561fd949f22021475af8bb71036a6a6dd694c7af5ae9f19a6f",
+      "size_bytes": 3181
+    },
+    {
+      "mtime_ns": 1787067459445350900,
+      "path": "evidence_packet_v001.md",
+      "sha256": "72104df3c331de54418010b1d9561f69a7067b842bb2df771020c07c07b3b55d",
+      "size_bytes": 6943
+    },
+    {
+      "mtime_ns": 1787067429804089500,
+      "path": "candidate_v001.md",
+      "sha256": "183786dba673e8e3a92cb2b2284c06279f7883d4cebc1620c54735ad389342b7",
+      "size_bytes": 1506
+    },
+    {
+      "mtime_ns": 1787067417150490600,
+      "path": "selection_context_v001.md",
+      "sha256": "171a7a454d8f1037a9b4fa9821a3e62d818c57d1911bd04726f47a78cf91a4b1",
+      "size_bytes": 3056
+    },
+    {
+      "mtime_ns": 1787067322367381800,
+      "path": "hypotheses_v001/portfolio.json",
+      "sha256": "c00b71a54ce87f9edf45270b830ac1aa950475666948dbd131952d3845409698",
+      "size_bytes": 18568
+    },
+    {
+      "mtime_ns": 1787067231714205100,
+      "path": "hypotheses_v001/falsification/delta-contract-plan-v001.json",
+      "sha256": "ba1f00154767ce5e8e88a61e76493bf507840ca4c7f1358d31b6238787eb1ccb",
+      "size_bytes": 2007
+    },
+    {
+      "mtime_ns": 1787067221473841300,
+      "path": "workbench_v001/hypothesis_inputs/delta-contract-decision-v001.json",
+      "sha256": "6e8f98e13e3cee796229eaf53e15b8955d06d42b5931f85641c0cb074603d939",
+      "size_bytes": 1639
+    },
+    {
+      "mtime_ns": 1787067221469699100,
+      "path": "workbench_v001/hypothesis_inputs/delta-contract-claim-falsified-v001.json",
+      "sha256": "d479d491c84777826f05963b6571f7871d00386b51789aac0dcbd1b5714e3183",
+      "size_bytes": 292
+    },
+    {
+      "mtime_ns": 1787067153165474200,
+      "path": "experiment_v001/attempts/delta-contract-screening-v001-r1/execution.json",
+      "sha256": "37205b648d42a01c0ae0a0846df3a165680bffa77c19c23f3b20d97bce1177be",
+      "size_bytes": 7378
+    },
+    {
+      "mtime_ns": 1787067153106963800,
+      "path": "experiment_v001/attempts/delta-contract-screening-v001-r1/metrics.json",
+      "sha256": "35eb36a9d900cf9f7096f6ca18c7b47ba696785a706fbf8cacff0de33d4f3fa7",
+      "size_bytes": 9429
+    },
+    {
+      "mtime_ns": 1787067153099963500,
+      "path": "experiment_v001/attempts/delta-contract-screening-v001-r1/stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "mtime_ns": 1787067153096965800,
+      "path": "experiment_v001/attempts/delta-contract-screening-v001-r1/stdout.bin",
+      "sha256": "643de43a33c422fcefec1ebed65de3b7ec6d9c1e691dc26ddfd934b10f31f78f",
+      "size_bytes": 11326
+    },
+    {
+      "mtime_ns": 1787067153083624400,
+      "path": "experiment_v001/attempts/delta-contract-screening-v001-r1/metrics-output.json",
+      "sha256": "35eb36a9d900cf9f7096f6ca18c7b47ba696785a706fbf8cacff0de33d4f3fa7",
+      "size_bytes": 9429
+    },
+    {
+      "mtime_ns": 1787067153082879200,
+      "path": "experiment_v001/attempts/delta-contract-screening-v001-r1/results.json",
+      "sha256": "c922547a483cf0f549c4048ae69940de079db27a939554b8d78a9dd8e6752b13",
+      "size_bytes": 75689
+    },
+    {
+      "mtime_ns": 1787067088470524600,
+      "path": "experiment_v001/attempts/delta-contract-screening-v001-r1/dependencies.txt",
+      "sha256": "480ab3b94b0b3b95bb6ff16eb9c4e138b942a818e488d43f71f810c5fe2e143a",
+      "size_bytes": 769
+    },
+    {
+      "mtime_ns": 1787067088470524600,
+      "path": "experiment_v001/attempts/delta-contract-screening-v001-r1/spec.json",
+      "sha256": "aba686567f84fe557de3b798ac285c74e692d68c94d58359b42df2bdfb0fbc7b",
+      "size_bytes": 5353
+    },
+    {
+      "mtime_ns": 1787067067956864900,
+      "path": "implementation_v001/delta_contract_experiment.py",
+      "sha256": "dea976ce4a92fc0abadb2dfc6164180946e2b9cba6d91ea97ffb6f4181a1ba79",
+      "size_bytes": 21598
+    },
+    {
+      "mtime_ns": 1787066994108767200,
+      "path": "experiment_v001/attempts/delta-contract-screening-v001/execution.json",
+      "sha256": "7054dafea332d1258a26f27a8d4cfe6433269bcfb6cdc49414c09f3b6e1fe36c",
+      "size_bytes": 7216
+    },
+    {
+      "mtime_ns": 1787066994039092800,
+      "path": "experiment_v001/attempts/delta-contract-screening-v001/stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "mtime_ns": 1787066994036935200,
+      "path": "experiment_v001/attempts/delta-contract-screening-v001/stdout.bin",
+      "sha256": "fd8d062742d740b7bf1f7505fb86d9c9ab1b9da53794fe795b7f31fefe3e24ad",
+      "size_bytes": 11315
+    },
+    {
+      "mtime_ns": 1787066994024694300,
+      "path": "experiment_v001/attempts/delta-contract-screening-v001/metrics-output.json",
+      "sha256": "05497741d8dc269334503c36688045e1aa6cb85f9b68360dc4ebbf90cb88abf7",
+      "size_bytes": 3730
+    },
+    {
+      "mtime_ns": 1787066994024694300,
+      "path": "experiment_v001/attempts/delta-contract-screening-v001/results.json",
+      "sha256": "749d407924e6481eea0b7bf24eec193af9e6319c5fefb18102fd05919e366c5d",
+      "size_bytes": 75681
+    },
+    {
+      "mtime_ns": 1787066928283138000,
+      "path": "experiment_v001/attempts/delta-contract-screening-v001/dependencies.txt",
+      "sha256": "480ab3b94b0b3b95bb6ff16eb9c4e138b942a818e488d43f71f810c5fe2e143a",
+      "size_bytes": 769
+    },
+    {
+      "mtime_ns": 1787066928282138600,
+      "path": "experiment_v001/attempts/delta-contract-screening-v001/spec.json",
+      "sha256": "aba686567f84fe557de3b798ac285c74e692d68c94d58359b42df2bdfb0fbc7b",
+      "size_bytes": 5353
+    },
+    {
+      "mtime_ns": 1787066909139296600,
+      "path": "experiment_v001/specs/delta-contract-screening-v001.json",
+      "sha256": "aba686567f84fe557de3b798ac285c74e692d68c94d58359b42df2bdfb0fbc7b",
+      "size_bytes": 5353
+    },
+    {
+      "mtime_ns": 1787066897349267600,
+      "path": "workbench_v001/hypothesis_inputs/delta-contract-plan-v001.json",
+      "sha256": "a24dad3749d267aae0d5e44c20629305e664357f4aec64fdfb0b4f8f03e1cbb8",
+      "size_bytes": 1656
+    },
+    {
+      "mtime_ns": 1787066793896949600,
+      "path": "workbench_v001/hypothesis_inputs/delta-contract-spec-v001.json",
+      "sha256": "fb80893c357ad4e64eaf2ab31c8f1bf15d4042cabaf55dcaa8d4db858c416004",
+      "size_bytes": 5008
+    },
+    {
+      "mtime_ns": 1787066702325827300,
+      "path": "workbench_v001/scratch_outputs/delta-contract-smoke/metrics-output.json",
+      "sha256": "e0d39d97645ec91c125bae5f97332e45b3fb4a7c7ff652b406726b02bceb4e7f",
+      "size_bytes": 1672
+    }
+  ],
+  "review_evaluation_files": [],
+  "run_id": "20260818_2228_run16",
+  "run_wide": {
+    "experiments": {
+      "formal_review_support": {
+        "attempt_count": 4,
+        "attempts": [
+          {
+            "id": "coverage-gate-screening-v001",
+            "path": "experiment_v001/attempts/coverage-gate-screening-v001",
+            "status": null,
+            "valid_review_support": true,
+            "validation_errors": [],
+            "version": "v001"
+          },
+          {
+            "id": "delta-contract-screening-v001",
+            "path": "experiment_v001/attempts/delta-contract-screening-v001",
+            "status": null,
+            "valid_review_support": false,
+            "validation_errors": [
+              "invalid supporting attempt delta-contract-screening-v001: execution runner_exit_code does not equal 0; execution metrics_contract_ok does not equal True; implementation file 0 size does not match; implementation file 0 SHA-256 does not match"
+            ],
+            "version": "v001"
+          },
+          {
+            "id": "delta-contract-screening-v001-r1",
+            "path": "experiment_v001/attempts/delta-contract-screening-v001-r1",
+            "status": null,
+            "valid_review_support": true,
+            "validation_errors": [],
+            "version": "v001"
+          },
+          {
+            "id": "sgr-coverage-validation-v001",
+            "path": "experiment_v001/attempts/sgr-coverage-validation-v001",
+            "status": null,
+            "valid_review_support": true,
+            "validation_errors": [],
+            "version": "v001"
+          }
+        ],
+        "valid_attempt_count": 3
+      },
+      "recorded": {
+        "attempt_count": 0,
+        "attempts": []
+      },
+      "scratch": {
+        "report_count": 0,
+        "reports": [],
+        "version_count": 1,
+        "versions": [
+          "v001"
+        ]
+      }
+    },
+    "hypotheses": {
+      "decision_event_count": 6,
+      "experiment_binding_recovery": {
+        "binding_policy": "run_wide_explicit_hypothesis_id_or_parseable_experiment_spec_only_no_filename_guess",
+        "invalid_spec_count": 0,
+        "invalid_specs": [],
+        "status": "READY",
+        "unresolved_record_count": 0,
+        "unresolved_records": []
+      },
+      "experiment_spec_warning_count": 0,
+      "experiment_spec_warnings": [],
+      "hypothesis_count": 3,
+      "legacy_closed_without_decision_metadata": 0,
+      "observation_policy": "raw_duration_revision_and_activity_facts_are_not_quality_scores",
+      "ordered_decision_events": [
+        {
+          "decided_at_utc": "2026-08-18T14:33:48.936817Z",
+          "decision_index": 1,
+          "experiment_binding": {
+            "any_bound": false,
+            "has_experiment_spec": false,
+            "has_formal": false,
+            "has_recorded": false,
+            "paths": {
+              "formal": [],
+              "recorded": [],
+              "specs": []
+            }
+          },
+          "from_status": "draft",
+          "hypothesis_id": "h-causal-replay-001",
+          "pre_experiment_closure": true,
+          "to_status": "prior_collision",
+          "version": "v001"
+        },
+        {
+          "decided_at_utc": "2026-08-18T14:33:49.368156Z",
+          "decision_index": 1,
+          "experiment_binding": {
+            "any_bound": true,
+            "has_experiment_spec": true,
+            "has_formal": true,
+            "has_recorded": false,
+            "paths": {
+              "formal": [
+                "experiment_v001/attempts/coverage-gate-screening-v001",
+                "experiment_v001/attempts/sgr-coverage-validation-v001"
+              ],
+              "recorded": [],
+              "specs": [
+                "experiment_v001/specs/coverage-gate-screening-v001.json",
+                "experiment_v001/specs/sgr-coverage-validation-v001.json"
+              ]
+            }
+          },
+          "from_status": "draft",
+          "hypothesis_id": "h-coverage-witness-001",
+          "pre_experiment_closure": false,
+          "to_status": "active",
+          "version": "v001"
+        },
+        {
+          "decided_at_utc": "2026-08-18T15:10:06.366361Z",
+          "decision_index": 2,
+          "experiment_binding": {
+            "any_bound": true,
+            "has_experiment_spec": true,
+            "has_formal": true,
+            "has_recorded": false,
+            "paths": {
+              "formal": [
+                "experiment_v001/attempts/coverage-gate-screening-v001",
+                "experiment_v001/attempts/sgr-coverage-validation-v001"
+              ],
+              "recorded": [],
+              "specs": [
+                "experiment_v001/specs/coverage-gate-screening-v001.json",
+                "experiment_v001/specs/sgr-coverage-validation-v001.json"
+              ]
+            }
+          },
+          "from_status": "active",
+          "hypothesis_id": "h-coverage-witness-001",
+          "pre_experiment_closure": false,
+          "to_status": "prior_collision",
+          "version": "v001"
+        },
+        {
+          "decided_at_utc": "2026-08-18T15:22:28.114952Z",
+          "decision_index": 1,
+          "experiment_binding": {
+            "any_bound": true,
+            "has_experiment_spec": true,
+            "has_formal": true,
+            "has_recorded": false,
+            "paths": {
+              "formal": [
+                "experiment_v001/attempts/delta-contract-screening-v001",
+                "experiment_v001/attempts/delta-contract-screening-v001-r1"
+              ],
+              "recorded": [],
+              "specs": [
+                "experiment_v001/specs/delta-contract-screening-v001.json"
+              ]
+            }
+          },
+          "from_status": "draft",
+          "hypothesis_id": "h-delta-contract-001",
+          "pre_experiment_closure": false,
+          "to_status": "active",
+          "version": "v001"
+        },
+        {
+          "decided_at_utc": "2026-08-18T15:33:51.818718Z",
+          "decision_index": 2,
+          "experiment_binding": {
+            "any_bound": true,
+            "has_experiment_spec": true,
+            "has_formal": true,
+            "has_recorded": false,
+            "paths": {
+              "formal": [
+                "experiment_v001/attempts/delta-contract-screening-v001",
+                "experiment_v001/attempts/delta-contract-screening-v001-r1"
+              ],
+              "recorded": [],
+              "specs": [
+                "experiment_v001/specs/delta-contract-screening-v001.json"
+              ]
+            }
+          },
+          "from_status": "active",
+          "hypothesis_id": "h-delta-contract-001",
+          "pre_experiment_closure": false,
+          "to_status": "falsified",
+          "version": "v001"
+        },
+        {
+          "decided_at_utc": "2026-08-18T15:35:22.363381Z",
+          "decision_index": 3,
+          "experiment_binding": {
+            "any_bound": true,
+            "has_experiment_spec": true,
+            "has_formal": true,
+            "has_recorded": false,
+            "paths": {
+              "formal": [
+                "experiment_v001/attempts/delta-contract-screening-v001",
+                "experiment_v001/attempts/delta-contract-screening-v001-r1"
+              ],
+              "recorded": [],
+              "specs": [
+                "experiment_v001/specs/delta-contract-screening-v001.json"
+              ]
+            }
+          },
+          "from_status": "falsified",
+          "hypothesis_id": "h-delta-contract-001",
+          "pre_experiment_closure": false,
+          "to_status": "parked",
+          "version": "v001"
+        }
+      ],
+      "portfolio_schema_versions": [
+        2
+      ],
+      "pre_experiment_closure_history_status": "READY",
+      "pre_experiment_closure_significant_warning": false,
+      "pre_experiment_closure_streak": 0,
+      "pre_experiment_closure_unknown_reasons": [],
+      "pre_experiment_closure_warning_threshold": 5,
+      "prior_collision_pre_experiment_closure_streak": 0,
+      "raw_candidate_observations": [
+        {
+          "created_at_utc": "2026-08-18T14:33:40.339079Z",
+          "decision_count": 1,
+          "experiment_binding": {
+            "any_bound": false,
+            "has_experiment_spec": false,
+            "has_formal": false,
+            "has_recorded": false,
+            "paths": {
+              "formal": [],
+              "recorded": [],
+              "specs": []
+            }
+          },
+          "hypothesis_id": "h-causal-replay-001",
+          "revision": 2,
+          "status": "prior_collision",
+          "updated_at_utc": "2026-08-18T14:33:48.936817Z",
+          "version": "v001"
+        },
+        {
+          "created_at_utc": "2026-08-18T14:33:40.744596Z",
+          "decision_count": 2,
+          "experiment_binding": {
+            "any_bound": true,
+            "has_experiment_spec": true,
+            "has_formal": true,
+            "has_recorded": false,
+            "paths": {
+              "formal": [
+                "experiment_v001/attempts/coverage-gate-screening-v001",
+                "experiment_v001/attempts/sgr-coverage-validation-v001"
+              ],
+              "recorded": [],
+              "specs": [
+                "experiment_v001/specs/coverage-gate-screening-v001.json",
+                "experiment_v001/specs/sgr-coverage-validation-v001.json"
+              ]
+            }
+          },
+          "hypothesis_id": "h-coverage-witness-001",
+          "revision": 4,
+          "status": "prior_collision",
+          "updated_at_utc": "2026-08-18T15:10:06.366361Z",
+          "version": "v001"
+        },
+        {
+          "created_at_utc": "2026-08-18T15:20:38.212299Z",
+          "decision_count": 3,
+          "experiment_binding": {
+            "any_bound": true,
+            "has_experiment_spec": true,
+            "has_formal": true,
+            "has_recorded": false,
+            "paths": {
+              "formal": [
+                "experiment_v001/attempts/delta-contract-screening-v001",
+                "experiment_v001/attempts/delta-contract-screening-v001-r1"
+              ],
+              "recorded": [],
+              "specs": [
+                "experiment_v001/specs/delta-contract-screening-v001.json"
+              ]
+            }
+          },
+          "hypothesis_id": "h-delta-contract-001",
+          "revision": 4,
+          "status": "parked",
+          "updated_at_utc": "2026-08-18T15:35:22.363381Z",
+          "version": "v001"
+        }
+      ],
+      "semantic_overreach_warning_count": 1,
+      "semantic_overreach_warnings": [
+        {
+          "decision_index": 2,
+          "hypothesis_id": "h-delta-contract-001",
+          "to_status": "falsified",
+          "version": "v001",
+          "warning_codes": [
+            "screening_paper_level_kill_without_structural_refutation",
+            "single_implementation_paper_level_kill"
+          ]
+        }
+      ],
+      "status_distribution": {
+        "parked": 1,
+        "prior_collision": 2
+      },
+      "status_reason_distribution": {
+        "CROWN-QA 占据问题、形式化、评价与自然文档现象，ToolGate 占据一般合约门控，当前剩余只是无独立计算核心的直接系统组合": 1,
+        "最近先行直接占据反事实重放与首次不可恢复步骤定位的方法核心": 1,
+        "证据范围纠正：Formal Screening 只杀死当前局部义务实现及其本地增量主张，不足以杀死全部接口演化方法核心；但剩余数据流计算与 HyperAgent 高度重合，当前不进入最佳集合，等待真正正交差分后再考虑": 1
+      },
+      "unique_ordered_decision_event_count": 6,
+      "unparseable_portfolio_count": 0,
+      "versions_with_portfolios": [
+        "v001"
+      ]
+    },
+    "latest_structured_activity": {
+      "formal": {
+        "latest_version": "v001",
+        "versions_since": 0
+      },
+      "prior_audit": {
+        "latest_version": "v001",
+        "versions_since": 0
+      },
+      "quality_semantics": "raw_scientific_version_distances_only_not_research_quality_indicators",
+      "recorded": {
+        "latest_version": "UNAVAILABLE",
+        "versions_since": "UNAVAILABLE"
+      },
+      "structured_candidate": {
+        "latest_version": "v001",
+        "versions_since": 0
+      }
+    },
+    "prior_collisions": {
+      "assessment_warning_audit_count": 2,
+      "assessment_warning_count": 2,
+      "assessment_warnings": [
+        {
+          "audit_id": "coverage-witness-prior-v001",
+          "path": "hypotheses_v001/priors/coverage-witness-prior-v001/assessment.md",
+          "warnings": [
+            "assessment collision kind is unknown: PROBLEM_AND_EVALUATION_OCCUPIED_RUNTIME_METHOD_UNRESOLVED"
+          ]
+        },
+        {
+          "audit_id": "delta-contract-prior-v001",
+          "path": "hypotheses_v001/priors/delta-contract-prior-v001/assessment.md",
+          "warnings": [
+            "assessment collision kind is unknown: PARTIAL_COMPONENT_OVERLAP"
+          ]
+        }
+      ],
+      "collision_kind_distribution": {},
+      "prior_audit_count": 2,
+      "unclassified_audit_count": 0
+    },
+    "recall_composition": {
+      "contamination_present": false,
+      "diagnosis_indexed_bytes": 0,
+      "diagnosis_indexed_count": 0,
+      "excluded_entry_count": 4,
+      "external_or_vendor_indexed_count": 0,
+      "ground_truth_like_indexed_count": 0,
+      "indexed_bytes": 1434019,
+      "indexed_file_count": 87,
+      "manifest_schema_version": 2,
+      "nested_repository_indexed_bytes": 0,
+      "nested_repository_indexed_count": 0,
+      "raw_search_payload_indexed_count": 0,
+      "source_ownership": {
+        "derived_diagnosis_bytes": 0,
+        "nested_repository_bytes": 0,
+        "research_owned_bytes": 1434019
+      },
+      "stale_indexed_source_count": 0,
+      "status": "READY"
+    },
+    "scientific_versions": {
+      "current_version": "v001",
+      "current_version_artifact_count": 94,
+      "empty_current_version": false,
+      "version_count": 1,
+      "versions": [
+        {
+          "artifact_count": 94,
+          "artifact_span_seconds": 4109.9363151,
+          "first_artifact_mtime_ns": 1787063362307999400,
+          "last_artifact_mtime_ns": 1787067472244314500,
+          "version": "v001"
+        }
+      ]
+    },
+    "searches": {
+      "compact_report_bytes": 16587,
+      "network_response_count": 12,
+      "prior_audit_count": 2,
+      "provenance_scope": "structured_research_retrieval_and_prior_audit_artifacts_only",
+      "raw_result_bytes": 4378036,
+      "repeated_query_fingerprint_count": 0,
+      "search_count": 2,
+      "searches": [
+        {
+          "compact_report_bytes": 8278,
+          "deduplicated_paper_count": 73,
+          "path": "hypotheses_v001/searches/frontier-map-v001",
+          "query_count": 5,
+          "raw_result_bytes": 1345851
+        },
+        {
+          "compact_report_bytes": 8309,
+          "deduplicated_paper_count": 96,
+          "path": "hypotheses_v001/searches/orthogonal-frontier-v001",
+          "query_count": 5,
+          "raw_result_bytes": 3032185
+        }
+      ],
+      "structured_source_distribution": {
+        "prior_audit:Semantic Scholar": 2,
+        "prior_audit:arXiv": 2,
+        "research_retrieval_snapshot": 2
+      }
+    },
+    "subagents": {
+      "category_distribution": {},
+      "classification_basis": "filename_only_artifact_classification_no_native_delegation_verification",
+      "native_delegation_evidence": {
+        "reason": "no_stable_machine_verifiable_native_delegation_evidence_source",
+        "status": "UNAVAILABLE",
+        "summary_artifacts_verify_native_delegation": false,
+        "verified_delegation_count": null
+      },
+      "summary_artifact_count": 0,
+      "summary_artifacts": [],
+      "summary_count": 0,
+      "tasks": []
+    }
+  },
+  "schema_version": 1,
+  "search_snapshot_files": [
+    {
+      "path": "hypotheses_v001/searches/frontier-map-v001/report.md",
+      "sha256": "fd36b11a158e789bababe918e4defcf6a1e351aa2861ab319ac654e0014f7372",
+      "size_bytes": 8278
+    },
+    {
+      "path": "hypotheses_v001/searches/frontier-map-v001/request.json",
+      "sha256": "b631bff27c7a238c62de8814740e9e9fccb2524522b495596178d5ff21a08585",
+      "size_bytes": 5461
+    },
+    {
+      "path": "hypotheses_v001/searches/frontier-map-v001/result.json",
+      "sha256": "64cdffe4f67972682070e30b754de8208edf0b2157e5c80eddeea226fe481540",
+      "size_bytes": 1345851
+    },
+    {
+      "path": "hypotheses_v001/searches/orthogonal-frontier-v001/report.md",
+      "sha256": "a196f6cbe1137081d13b91b8f4d47dd5413e01ab947dbaa0c1c66144d5b5913f",
+      "size_bytes": 8309
+    },
+    {
+      "path": "hypotheses_v001/searches/orthogonal-frontier-v001/request.json",
+      "sha256": "794f07237486489e5790bf637bbb32155e4126700036ec9981b06947f8dd1dd1",
+      "size_bytes": 5586
+    },
+    {
+      "path": "hypotheses_v001/searches/orthogonal-frontier-v001/result.json",
+      "sha256": "f12d1ddbd3ed5e87a89b50bc6de4183851703a74ace121eec8f68ffdac300bd1",
+      "size_bytes": 3032185
+    }
+  ],
+  "version": "v001"
+}

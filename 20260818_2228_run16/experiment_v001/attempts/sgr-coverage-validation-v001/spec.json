@@ -1,0 +1,117 @@
+{
+  "baseline_specs": [
+    "receipt：NabaOS-style 有效输出哈希与 result_count，但没有作用域/分页覆盖证明",
+    "postcondition：与 gate 相同的 scope-id、complete/partial 和 next-cursor 元数据及明确三值规则，可主动补查一次",
+    "gate：与 postcondition 信息、提示、模型和预算相同，但运行时拒绝无完整见证的 absent 并执行一次全量补查"
+  ],
+  "budget_ceiling": "{\"api_calls\": 216, \"tokens\": 300000, \"wall_time_seconds\": 1800}",
+  "claim_ids": [
+    "sgr-natural-answer-set-generalization-v001"
+  ],
+  "confounders": [
+    "使用 oracle answer set 而非实时网站交互",
+    "答案行首字段作为 membership key 的归一化",
+    "每任务仅三种受控场景",
+    "单一第二模型和单种子",
+    "完整补查在真实网站可能昂贵或不可用"
+  ],
+  "dataset": "PKUAIWeb/SGR-BENCH constraint_hf.jsonl；固定 12 个跨域 task ids；每任务 hidden/visible/complete-absent 三场景",
+  "declared_inputs": [
+    "implementation_v001/sgr_coverage_experiment.py",
+    "workbench_v001/datasets/sgr_bench/constraint_hf.jsonl"
+  ],
+  "declared_outputs": [
+    "results.json",
+    "metrics-output.json",
+    "stdout.txt",
+    "stderr.txt"
+  ],
+  "evidence_fidelity": "SCREENING",
+  "expected_signatures": [
+    "receipt 无法从非零局部结果证明目标在完整集合中不存在",
+    "postcondition 提示可利用 partial/next-cursor，但仍可能错误提交 absent",
+    "gate 对 hidden 场景补查，对 complete-absent 不增加查询并保留 absent"
+  ],
+  "experiment_id": "sgr-coverage-validation-v001",
+  "falsification_rule": "gate-postcondition hidden false-negative 差至少 0.15；gate false-negative <=0.10、complete-absence retention >=0.80、visible-positive accuracy >=0.80、abstention <=0.10。任一失败即不支持自然 answer-set 泛化主张。",
+  "hypothesis_id": "h-coverage-witness-001",
+  "independent_ground_truth": {
+    "description": "目标 membership 标签来自下载前已公开冻结的 SGR-Bench oracle answer；分页适配器在模型调用前确定隐藏/可见/完整不存在场景，模型不参与标签生成。",
+    "external_card_ids": [
+      "paper-p039"
+    ],
+    "external_evidence_ids": [
+      "ev-p039-aggregate-score-masking"
+    ],
+    "external_literature_refs": [
+      "arXiv:2605.22219v1",
+      "arXiv:2603.10060v1",
+      "arXiv:2608.02645v1"
+    ],
+    "run_local_fact_refs": [
+      "workbench_v001/datasets/sgr_bench/PROVENANCE.md",
+      "evidence_packet_v001.md"
+    ]
+  },
+  "independent_implementation_count": 2,
+  "model": "qwen2.5:7b",
+  "parity_dimensions": {
+    "budget": {
+      "notes": "postcondition 与 gate 最大模型调用和工具补查相同。",
+      "status": "matched"
+    },
+    "information_access": {
+      "notes": "核心比较 postcondition 与 gate 接收完全相同的 task criteria、items、receipt 和 coverage。",
+      "status": "matched"
+    },
+    "model_provider_revision": {
+      "notes": "所有条件使用同一本机 qwen2.5:7b。",
+      "status": "matched"
+    },
+    "sampling_protocol": {
+      "notes": "固定 12 任务、场景顺序、零温、种子规则和最大轮次。",
+      "status": "matched"
+    },
+    "tool_capability": {
+      "notes": "两者最多一次完整 answer-set 补查。",
+      "status": "matched"
+    }
+  },
+  "primary_metric": "false_negative_rate_hidden",
+  "provider": "本机 Ollama",
+  "purpose": "independent_claim_validation",
+  "research_question": "覆盖门能否在 SGR-Bench 自然 answer sets、独立分页适配器和第二模型上保留对一般 postcondition 提示与 result-count 回执的差分？",
+  "revision": "Ollama local model identity 845dbda0ea48; temperature=0; num_ctx=6144",
+  "run_id": "20260818_2228_run16",
+  "sampling_unit": "一个冻结 SGR 任务 answer set、一个 membership 场景与一个运行条件的完整 episode",
+  "schema_version": 2,
+  "secondary_metrics": [
+    "hidden_recovery_success_rate",
+    "complete_absence_retention_rate",
+    "visible_positive_accuracy",
+    "overall_task_success_rate",
+    "abstention_rate",
+    "mean_extra_queries",
+    "mean_gate_interventions",
+    "parse_issue_rate"
+  ],
+  "seeds": [
+    16002
+  ],
+  "subject_scope": {
+    "datasets": [
+      "PKUAIWeb/SGR-BENCH constraint_hf.jsonl sha256:b3a7200d6181a891c2bd7ab8045d8ef11e6ea837f736ceabff402520a690af34"
+    ],
+    "environment": "Windows 11; local Ollama; independent SGR paging adapter; no paid API",
+    "models": [
+      "qwen2.5:7b@Ollama"
+    ],
+    "seeds": [
+      "16002"
+    ],
+    "tasks": [
+      "12 public SGR-Bench constraint tasks converted to answer-set membership episodes"
+    ]
+  },
+  "version": "v001"
+}

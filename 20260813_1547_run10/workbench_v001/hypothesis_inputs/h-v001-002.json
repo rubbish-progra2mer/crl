@@ -1,0 +1,34 @@
+{
+  "hypothesis_id": "h-v001-002",
+  "title": "传播风险与可逆性联合的验证预算调度",
+  "parent_ids": [],
+  "lineage_note": "v001 根假设；把验证对象从不确定性最高的步骤改为预期下游损失最高的状态转移。",
+  "problem": "有限验证预算若按模型置信度、固定频率或统一重试分配，会错过置信但高扇出、不可逆的错误工具观测。",
+  "target_failure": {
+    "summary": "内部置信度与执行正确性错位，早期错误经后续依赖放大。",
+    "card_ids": ["failure-internal-confidence-misalignment", "failure-retrieved-experience-propagates-stored-errors"],
+    "evidence_ids": ["ev-p073-internal-confidence-misalignment", "ev-p064-experience-following-error"]
+  },
+  "changed_computation": {
+    "baseline": "按模型不确定性、固定间隔或所有步骤均匀分配验证调用。",
+    "intervention": "从当前计划与工具动作构建在线依赖图，按状态转移的下游扇出、动作可逆性和重查成本估计验证价值，在相同总预算内优先验证高传播损失节点。",
+    "information_available": "任务、计划、已执行动作、工具规范与可见返回；不使用真实错误标签或未来终局。",
+    "timing": "新工具观测产生时及不可逆动作执行前动态重算。",
+    "budget_effect": "总验证调用数与强基线严格一致，只改变预算落点。"
+  },
+  "mechanism_claim": "在置信度失配条件下，传播损失代理比局部不确定性更接近验证的任务价值，因而相同预算能避免更多终局失败。",
+  "falsifier": "匹配预算后不能优于随机、均匀、局部不确定性和扇出单因素调度，或在无故障任务上造成不可接受的延迟/误验证。",
+  "minimal_killer_experiment": "构造相同局部可疑度但不同依赖扇出与可逆性的故障对；固定验证次数，检查调度是否把预算稳定分给高真实损失节点并改善独立终局。",
+  "nearest_prior_risk": "不确定性校准、关键步骤优化、步骤信用分配和风险敏感规划可能分别吸收组件；若已有方法在线联合扇出与可逆性调度验证，此假设被吸收。",
+  "alternative_explanations": ["依赖图直接编码了任务答案", "收益来自手工故障位置偏置", "计划不准导致传播估计无意义", "不可逆性定义只适用于少数环境"],
+  "descriptors": {
+    "problem_family": "budgeted_semantic_fault_recovery",
+    "computation_stage": "verification_scheduling",
+    "intervention_family": "propagation_reversibility_value",
+    "information_source": "online_dependency_graph",
+    "timing_class": "pre_action_dynamic",
+    "budget_class": "strict_equal_verification_count",
+    "evaluation_mode": "fault_pair_terminal_state"
+  },
+  "literature_refs": ["P073", "P027", "P025", "P064", "P040"]
+}

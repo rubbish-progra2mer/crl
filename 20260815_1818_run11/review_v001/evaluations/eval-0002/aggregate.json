@@ -1,0 +1,133 @@
+{
+  "canonical_evaluation_id": "eval-0002",
+  "evaluation_id": "eval-0002",
+  "evaluator_version": "CRL-EVAL-1.0",
+  "implementation_key": "5135bed01d0bef962cb6f8262375bb063c1561c8ad6e8be3dc346aa521bcc7b1",
+  "invalid_reasons": [],
+  "measurement_key": "9e34e792cdde7f6355fe4082790753680ecd51849dbc1c70ab1e904650d198ea",
+  "measurement_kind": "CANONICAL_IMPLEMENTATION_SCORE",
+  "overall_score_numerator": 588750,
+  "overall_score_percent": "58.8750",
+  "packet_key": "381b07bbe2fca475606bcefe6d03c6ae5ccc19a5657b21f8cd30f9f0fd7ee376",
+  "request_sha256": "b1333b6d8adb005ccce072639c37f25a8e47050c238682b3ced297429d4ea41b",
+  "role_results": {
+    "ADV": {
+      "output": {
+        "confidence": "high",
+        "critical_risk": "potentially_fatal",
+        "diagnostics": {
+          "best_stress_test": "在保持每例语义答案和变形关系不变的前提下，对每个变体独立随机打乱记录顺序与字段顺序，并加入“固定返回第一/第三位置 ID”的负标签突变；跨至少三个 seed 重跑真实模型，检验正确且关系通过是否仍成立。",
+          "boundary_warning": "33.96% 只能描述当前固定顺序、温度 0、单 seed、同谱系本地模型和二十个单轮合成短答案案例，不能外推到真实多步工具智能体、其他模型或部署失败率。",
+          "hidden_assumption": "唯一能稳定满足预声明关系的机制是采用任务相关语义字段，而不存在由固定记录位置、标识交换模板或其他代理变量产生的等价响应。",
+          "most_fatal_failure_mode": "固定模板允许任务无关的位置代理同时获得精确正确与联合关系通过，从而把未采用 score、eligible、status、timestamp 等任务证据的系统错误归入最佳四象限，直接破坏“选择性证据采用”解释。",
+          "reproduction_breakpoint": "独立团队最可能在复现 attempt-qwen-005 的 Ollama 调用时得到不同结论：完整模型制品、subject dependencies 和非敏感环境未绑定，而结果依赖固定本地运行时、调用顺序及单一 seed。"
+        },
+        "evaluator_version": "CRL-EVAL-1.0",
+        "free_review": "实现与证据链比一般 packet 完整，但核心诊断仍可被数据模板击穿。filtered_argmin 的正确项始终位于第一条，相关变形只交换前两条 ID；latest_confirmed 的正确项始终位于第三条，相关变形也只交换 ID。因此“返回固定位置的 ID”无需读取筛选、分数、状态或时间戳，却能同时通过单次正确性、任务关系、两类无关不变和重放稳定。独立求解器只能确认标签自洽，不能排除此代理；七策略 1.0 也是同实现文件内对预设故障的闭集结果。真实模型现象又集中于这两个族，且与完整四变体正确性恰好重合，尚未显示超出完整标签的增量价值。若顺序随机化后现象或判别力消失，方法核将退化为固定合成模板上的一般变形测试。",
+        "model_identity": "gpt-5.6-sol",
+        "reasoning_effort": "xhigh",
+        "reasons": {
+          "adversarial_survivability": "七个预声明突变能验证方向错误、诱饵依赖和重复不稳定等已知故障，说明实现修复后的合取逻辑有效。然而最小位置捷径即可同时通过正确性和联合关系：filtered_argmin 返回第一项 ID，latest_confirmed 返回第三项 ID，而无需执行任务规定的筛选或排序。突变集没有覆盖这种由生成模板诱发的关系兼容代理，因此 1.0 平衡准确率主要证明对已编码策略的闭集判别，尚不能抵抗直接针对方法核的合理反例。",
+          "boundary_generalization": "真实模型证据仅覆盖同一 Qwen 谱系的三个本地模型、两个提示制度、单一种子和二十个短合成案例。18 个失败中有 16 个集中在两个标识选择族，数值族的基线正确样本很少，说明现象对任务结构高度敏感。packet 没有真实工具轨迹、多步 horizon、跨供应商模型、开放式答案或跨种子方差证据。",
+          "confound_leakage_control": "独立求解器、解析警告剔除、两类无关扰动及重复调用提供了真实控制，模型提示中也未见 expected 标签直接泄漏。但生成器在两个核心标识任务族保留固定答案位置：filtered_argmin 始终返回第一项 ID、latest_confirmed 始终返回第三项 ID，即可在不检查 score、eligible、status 或 timestamp 的情况下同时精确正确并通过全部关系。策略与关系实现同处一个文件，变体顺序固定，且未报告缓存清理或顺序随机化，所以任务语义采用与位置、序列及运行状态混杂仍未排除。",
+          "evidence_auditability": "主要比例、混淆矩阵和逐层汇总均能回溯到完整行级答案、raw_content、指标代码及哈希绑定的正式尝试。packet 还明确列出三条解析警告、旧版本撤回原因和支持尝试选择，审计链总体清楚。但 Wilson 区间、若干分层数字和 seed 中多个数值没有显式指标映射或计算实现，审计文件也明确报告 seed_numeric_literals_unmapped；模型制品和依赖内容本身未随 packet 提供。",
+          "reproducibility_traceability": "packet 给出了案例、核心源码、调用命令、种子、提示构造、逐调用原始文本、输出哈希和主要环境事实，两项正式结果均可追到具体行级 artifact。旧实现缺陷及无效尝试也被保留并与当前支持链区分。缺口是 Ollama 模型仅有本地标签和缩略摘要，subject dependencies 与部分环境未绑定，依赖快照也只给出哈希而未给出内容，因此外部团队难以保证得到同字节模型与同响应。"
+        },
+        "review_protocol": "CRL-IR-1.0",
+        "reviewer_role": "ADV",
+        "scores": {
+          "adversarial_survivability": 1,
+          "boundary_generalization": 1,
+          "confound_leakage_control": 2,
+          "evidence_auditability": 3,
+          "reproducibility_traceability": 3
+        }
+      },
+      "report_sha256": "c395dc85ec1a14c9ca29c5f21155c95de8771906101e584d8a723734871a0d83",
+      "role_score_basis_points": 4875
+    },
+    "EMP": {
+      "output": {
+        "confidence": "high",
+        "critical_risk": "potentially_fatal",
+        "diagnostics": {
+          "baseline_confound": "候选相对单次正确率获得四次额外探针和手工任务关系 oracle，因而既拥有更多信息，也有更多发现失败的机会；弱基线则未获得同等语义关系，且没有同预算的完整反事实正确性或通用变形基线作为主比较。",
+          "biggest_empirical_threat": "核心构念可能塌缩为多次变体正确性：当基线答案正确时，任务关系与两类不变性基本强制其余变体也精确正确；真实样本中联合关系与完整四变体正确性又恰好35/120完全重合。因此当前实验不能独立区分“工具证据采用失败”与一般提示敏感性、格式行为或多次调用下的任务正确性失败。",
+          "killer_experiment": "冻结评估器后，在盲法保留的真实多步工具任务上由独立标注者定义字段相关性与关系，随机化五次调用顺序并运行多个种子；以相同五调用预算比较联合探针、完整变体正确性和通用变形基线对独立环境终态错误或人工审计证据误用的增量预测。若联合探针在控制完整正确性后无增量，核心经验与机制主张即被推翻。",
+          "missing_validation": "最应补的是跨供应商、跨种子且按案例和模型聚类估计不确定性的独立保留集验证，并由实现团队之外的标注者确认字段相关性和变形关系。",
+          "strongest_empirical_evidence": "在修复后的正式运行中，53个基线精确正确行有18个联合关系失败，18行均无解析警告，并分布于六个模型—提示分层中的五个；这是对冻结本地套件中“一次答对不保证变形稳定”的最可信证据。"
+        },
+        "evaluator_version": "CRL-EVAL-1.0",
+        "free_review": "当前证据足以确认一个很窄的事实：在这20个合成案例和三种同谱系本地模型上，一次精确答对后仍可在额外变体调用中失败。突变负控设计完整，重放项修复后也重新运行，审计性较好。但1.0突变判别主要是按定义构造出的结果；真实模型中的联合关系又与完整反事实正确性完全重合，未显示独立的“证据采用”测量价值。再加上Scratch后复用同一套件、单一种子、相关统计单元和任务族高度集中，现有结果不宜解释为一般机制或部署风险。决定性下一步应是盲法真实任务上的同预算增量预测验证。",
+        "model_identity": "gpt-5.6-sol",
+        "reasoning_effort": "xhigh",
+        "reasons": {
+          "baseline_fairness": "三个突变信号复用相同140行回答，调用预算、模型和采样条件匹配，这是公平之处。但候选信号使用手工提供的任务关系 oracle，而两个弱基线不使用同等语义信息；与单次正确率相比，候选还有五次调用带来的更多失败机会。未提供同预算的通用变形、重复采样或完整反事实正确性强基线，且联合关系与完整四变体正确性在真实模型样本中恰好同为35/120。",
+          "experimental_validity": "实验在修复重放稳定性遗漏后重新正式运行，对“冻结套件中存在关系失败”这一局部描述提供了直接证据。但突变策略、正负标签和关系判据由同一团队共同构造，1.0 更接近构造一致性测试而非独立验证。真实模型 Formal 还复用了此前 Scratch 塑形所用的同一套件和模型谱系，不是独立新样本。对基线正确行，联合关系又近似等价于额外变体的完整正确性，尚未证明失败特指工具证据采用。",
+          "measurement_reliability": "原始回答、资源计数、解析警告和逐例布尔关系均被保留，独立家族求解器也验证了20/20案例的标签自洽。该求解器仍属于同一研究实现，只验证合成语义，不独立验证“选择性采用”构念。Wilson区间把53个模型—提示—案例行当作统计单元，但这些行共享20个案例且模型同谱系，相关性未进入方差估计。固定单一种子、精确字符串判分及缺少独立人工复核进一步限制测量可靠性。",
+          "result_strength": "最强真实模型结果是53个单次正确行中18个联合失败，区间为22.69%–47.41%，且五个模型—提示分层非零、失败不由解析警告解释。但16/18失败集中于两个标识选择任务族，重放项在这些行中没有经验增量。突变实验的140行主要是七种确定性策略在20例上的重复，未给出以策略或任务族为独立单位的不确定性。结果只支持局部合成套件现象，尚不支持一般机制、部署率或超越完整反事实正确性的增量价值。",
+          "robustness_falsification": "七种策略覆盖忽略、诱饵依赖、方向错误、错误但等变和仅重放不稳定等针对性负控，并确实发现和修复过联合判据缺陷。解析警告剔除、模型—提示分层和任务族分层也提供了有用边界信息。不过这些突变是按判据各合取项专门编写的，同文件实现且无冻结后的未知突变或自适应策略测试。没有跨种子、调用顺序随机化、不同变形强度、跨供应商或真实多步轨迹实验，主要替代解释仍未被排除。"
+        },
+        "review_protocol": "CRL-IR-1.0",
+        "reviewer_role": "EMP",
+        "scores": {
+          "baseline_fairness": 2,
+          "experimental_validity": 2,
+          "measurement_reliability": 2,
+          "result_strength": 2,
+          "robustness_falsification": 2
+        }
+      },
+      "report_sha256": "dbeb8f2c9a210796bb9b0d65d10ceb06f68cfd5cd9758ebeb818ac6011b8ba9e",
+      "role_score_basis_points": 5000
+    },
+    "SCI": {
+      "output": {
+        "confidence": "high",
+        "critical_risk": "serious",
+        "diagnostics": {
+          "biggest_scientific_risk": "该方法可能只是 METAL 式通用变形测试的工具字段实例；当前真实模型中联合关系又与完整反事实正确性完全重合，尚无独立增量效用。",
+          "mechanism_falsifier": "在独立定义相关性的更广真实工具任务中，若已确认采用相关证据的系统经常因表面格式变化而失败，而忽略证据的系统仍能通过联合关系，或联合信号始终不优于同预算通用变形关系与完整反事实正确性，则“该关系诊断选择性证据采用”的机制解释被直接破坏。",
+          "most_dangerous_prior_collision": "METAL：其黑盒多次执行、输入扰动、变形关系与相同输入重复足以吸收方法骨架，当前差分主要依赖工具字段位置和关系组合。",
+          "strongest_scientific_contribution": "最强贡献是把工具证据采用操作化为“任务定向等变＋两类无关不变＋精确重放稳定”，并用错误但等变策略证明该信号与正确性不可同一化。"
+        },
+        "evaluator_version": "CRL-EVAL-1.0",
+        "free_review": "这是一个内部逻辑较完整、主张边界克制的研究种子。突变实验有效证明任务定向关系能排除“只变化但方向错误”的伪采用，重放专门反例也修复了联合定义缺口；真实模型实验则支持一个受限现象：单次答对不保证关系稳定。主要问题不是实现，而是科学增量与外部效度：方法骨架很可能被 METAL 式变形测试归约，18 个失败又高度集中于两个标识选择族，且联合关系在当前真实样本中没有超出完整反事实正确性的增量。下一步的决定性证据应是独立定义关系的真实多步任务、跨谱系与跨种子复现，以及同预算比较能否预测后续复核失败或修复收益。",
+        "model_identity": "gpt-5.6-sol",
+        "reasoning_effort": "xhigh",
+        "reasons": {
+          "claim_calibration": "Claim 1 被严格限定为七种预声明确定性策略和二十个案例上的判别结果，且明确允许错误但等变策略通过。Claim 2 仅描述三个本地同谱系模型、单一种子和冻结合成套件，并报告区间、解析警告、任务族集中性及重放项零经验增量。材料还主动指出联合关系与完整四变体正确性在当前样本中恰好重合，不外推部署失败率或正确性验证能力，校准充分。",
+          "mechanism_clarity": "五次调用、四类关系和联合通过条件定义明确，方向错误、错误但等变、诱饵依赖及重复不稳定策略提供了直接反例与否证路径。修复后联合判据确实合取任务关系、两类无关不变和重放稳定，计算—主张一致。限制在于“选择性证据采用”目前是行为关系的操作化定义，而非被独立识别的内部机制；提示遵循、答案解析或任务表面结构仍可产生相同观察。",
+          "prior_separation": "相对 METAL，干预已返回的结构化工具字段、采用任务定向等变、区分两类无关字段并加入精确重放，构成了可识别的局部计算差分。相对 CAIR、CVT-RL、ReliabilityBench 和 PriVE-Tools，诊断目标与输出约束也有边界差异。但核心仍可被解释为通用变形测试在工具场景中的实例化组合，且没有与 METAL 风格方法进行同预算直接比较；先行审计还明确降级，故 separation 仅属混合。",
+          "problem_value": "问题具有真实评价价值：单次正确或工具调用事实不能区分选择性采用、忽略结果与诱饵依赖，且该诊断在缺少完整环境后条件时有明确用途。18/53 的样本内关系失败说明它并非纯粹 cosmetic engineering。不过当前证据仅来自合成短答案套件，尚未证明五次调用的成本能换取对真实多步轨迹的可操作收益，因此未达到强支持。",
+          "scientific_specificity": "任务族、案例、关系类型、策略标签、冻结条件、模型与提示分层、阈值、错误处理及逐行输出均被具体规定。独立家族求解器从原始字段重算标签，且正式支持尝试、实现清单与指标均有明确绑定。消融还分别覆盖任意变化、无关不变、任务关系与重放项，证据具有较强可核查性。"
+        },
+        "review_protocol": "CRL-IR-1.0",
+        "reviewer_role": "SCI",
+        "scores": {
+          "claim_calibration": 4,
+          "mechanism_clarity": 3,
+          "prior_separation": 2,
+          "problem_value": 3,
+          "scientific_specificity": 4
+        }
+      },
+      "report_sha256": "ebed3e0f55638dabee564e1e4f7887a79951073d423232b4f22beab440ac869f",
+      "role_score_basis_points": 7625
+    }
+  },
+  "schema_version": 1,
+  "score_is_gate": false,
+  "stability": {
+    "max_numerator": 588750,
+    "mean_numerator": "588750",
+    "min_numerator": 588750,
+    "overall_score_numerators": [
+      588750
+    ],
+    "population_variance_numerator_squared": "0",
+    "range_numerator": 0,
+    "valid_measurement_count": 1
+  },
+  "valid": true
+}

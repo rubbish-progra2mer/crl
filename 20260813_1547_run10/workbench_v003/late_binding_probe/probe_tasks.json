@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "tasks": [
+    {
+      "task_id": "message_contact_document",
+      "instruction": "Send the latest launch memo to Maya Chen from Procurement in Madrid.",
+      "action": "send_document",
+      "target_label": "maya_procurement_madrid",
+      "resource_label": "launch_memo_inez_v7",
+      "target_type": "contact",
+      "resource_type": "document",
+      "targets": [
+        {"label": "maya_sales_madrid", "name": "Maya Chen", "team": "Sales", "city": "Madrid"},
+        {"label": "maya_procurement_madrid", "name": "Maya Chen", "team": "Procurement", "city": "Madrid"},
+        {"label": "maya_procurement_lisbon", "name": "Maya Chen", "team": "Procurement", "city": "Lisbon"},
+        {"label": "may_chen_procurement_madrid", "name": "May Chen", "team": "Procurement", "city": "Madrid"},
+        {"label": "maya_finance_madrid", "name": "Maya Chen", "team": "Finance", "city": "Madrid"}
+      ],
+      "resources": [
+        {"label": "launch_memo_inez_v6", "title": "Launch Memo", "owner": "Inez", "version": 6},
+        {"label": "launch_notes_inez_v7", "title": "Launch Notes", "owner": "Inez", "version": 7},
+        {"label": "launch_memo_inez_v7", "title": "Launch Memo", "owner": "Inez", "version": 7},
+        {"label": "launch_memo_ivan_v8", "title": "Launch Memo", "owner": "Ivan", "version": 8},
+        {"label": "launch_memo_inez_v5", "title": "Launch Memo", "owner": "Inez", "version": 5}
+      ]
+    },
+    {
+      "task_id": "refund_customer_order",
+      "instruction": "Refund Jon Bell's 84.50 EUR order placed on 2026-07-11; he is the Dublin silver account.",
+      "action": "refund_order",
+      "target_label": "jon_bell_dublin_silver",
+      "resource_label": "order_jb_20260711_8450",
+      "target_type": "customer",
+      "resource_type": "order",
+      "targets": [
+        {"label": "john_bell_dublin_silver", "name": "John Bell", "city": "Dublin", "tier": "silver"},
+        {"label": "jon_bell_dublin_gold", "name": "Jon Bell", "city": "Dublin", "tier": "gold"},
+        {"label": "jon_bell_dublin_silver", "name": "Jon Bell", "city": "Dublin", "tier": "silver"},
+        {"label": "jon_bell_cork_silver", "name": "Jon Bell", "city": "Cork", "tier": "silver"},
+        {"label": "joan_bell_dublin_silver", "name": "Joan Bell", "city": "Dublin", "tier": "silver"}
+      ],
+      "resources": [
+        {"label": "order_jb_20260711_8450", "date": "2026-07-11", "amount_eur": 84.5, "status": "paid"},
+        {"label": "order_jb_20260710_8450", "date": "2026-07-10", "amount_eur": 84.5, "status": "paid"},
+        {"label": "order_jb_20260711_8455", "date": "2026-07-11", "amount_eur": 84.55, "status": "paid"},
+        {"label": "order_jb_20260711_8450_refunded", "date": "2026-07-11", "amount_eur": 84.5, "status": "refunded"},
+        {"label": "order_jb_20260712_8450", "date": "2026-07-12", "amount_eur": 84.5, "status": "paid"}
+      ]
+    },
+    {
+      "task_id": "assign_ticket_article",
+      "instruction": "Assign the open mobile login ticket from Acme North to Priya Rao in Identity, and attach the current SSO reset article.",
+      "action": "assign_ticket_with_article",
+      "target_label": "ticket_acme_north_mobile_login_open",
+      "resource_label": "article_sso_reset_current",
+      "target_type": "ticket",
+      "resource_type": "article",
+      "targets": [
+        {"label": "ticket_acme_north_mobile_login_open", "account": "Acme North", "subject": "Mobile login", "status": "open", "assignee": null},
+        {"label": "ticket_acme_south_mobile_login_open", "account": "Acme South", "subject": "Mobile login", "status": "open", "assignee": null},
+        {"label": "ticket_acme_north_mobile_login_closed", "account": "Acme North", "subject": "Mobile login", "status": "closed", "assignee": "Priya Rao"},
+        {"label": "ticket_acme_north_web_login_open", "account": "Acme North", "subject": "Web login", "status": "open", "assignee": null},
+        {"label": "ticket_acme_north_mobile_sync_open", "account": "Acme North", "subject": "Mobile sync", "status": "open", "assignee": null}
+      ],
+      "resources": [
+        {"label": "article_sso_reset_old", "title": "SSO Reset", "state": "archived", "revision": 11},
+        {"label": "article_password_reset_current", "title": "Password Reset", "state": "current", "revision": 14},
+        {"label": "article_sso_reset_draft", "title": "SSO Reset", "state": "draft", "revision": 15},
+        {"label": "article_sso_reset_current", "title": "SSO Reset", "state": "current", "revision": 14},
+        {"label": "article_sso_enroll_current", "title": "SSO Enrollment", "state": "current", "revision": 9}
+      ]
+    },
+    {
+      "task_id": "calendar_room_deck",
+      "instruction": "Move the 14:00 quarterly review owned by Nia to the Berlin room with video, and use Nia's Q3 review deck revision 4.",
+      "action": "move_event_and_attach",
+      "target_label": "event_quarterly_nia_1400",
+      "resource_label": "deck_q3_nia_r4",
+      "target_type": "event",
+      "resource_type": "deck",
+      "targets": [
+        {"label": "event_quarterly_nia_1400", "title": "Quarterly Review", "owner": "Nia", "time": "14:00"},
+        {"label": "event_quarterly_nia_1430", "title": "Quarterly Review", "owner": "Nia", "time": "14:30"},
+        {"label": "event_quarterly_mia_1400", "title": "Quarterly Review", "owner": "Mia", "time": "14:00"},
+        {"label": "event_quarterly_nia_1400_cancelled", "title": "Quarterly Review", "owner": "Nia", "time": "14:00", "status": "cancelled"},
+        {"label": "event_monthly_nia_1400", "title": "Monthly Review", "owner": "Nia", "time": "14:00"}
+      ],
+      "resources": [
+        {"label": "deck_q3_nia_r3", "title": "Q3 Review", "owner": "Nia", "revision": 3},
+        {"label": "deck_q3_mia_r4", "title": "Q3 Review", "owner": "Mia", "revision": 4},
+        {"label": "deck_q2_nia_r4", "title": "Q2 Review", "owner": "Nia", "revision": 4},
+        {"label": "deck_q3_nia_r4", "title": "Q3 Review", "owner": "Nia", "revision": 4},
+        {"label": "deck_q3_nia_r5draft", "title": "Q3 Review", "owner": "Nia", "revision": 5, "state": "draft"}
+      ]
+    },
+    {
+      "task_id": "issue_milestone",
+      "instruction": "Put the open Windows export issue reported by Lina into the 2.4 security milestone.",
+      "action": "set_issue_milestone",
+      "target_label": "issue_windows_export_lina_open",
+      "resource_label": "milestone_24_security",
+      "target_type": "issue",
+      "resource_type": "milestone",
+      "targets": [
+        {"label": "issue_windows_export_lina_open", "platform": "Windows", "subject": "Export failure", "reporter": "Lina", "status": "open"},
+        {"label": "issue_linux_export_lina_open", "platform": "Linux", "subject": "Export failure", "reporter": "Lina", "status": "open"},
+        {"label": "issue_windows_import_lina_open", "platform": "Windows", "subject": "Import failure", "reporter": "Lina", "status": "open"},
+        {"label": "issue_windows_export_nina_open", "platform": "Windows", "subject": "Export failure", "reporter": "Nina", "status": "open"},
+        {"label": "issue_windows_export_lina_closed", "platform": "Windows", "subject": "Export failure", "reporter": "Lina", "status": "closed"}
+      ],
+      "resources": [
+        {"label": "milestone_24_security", "version": "2.4", "track": "security", "state": "active"},
+        {"label": "milestone_24_general", "version": "2.4", "track": "general", "state": "active"},
+        {"label": "milestone_23_security", "version": "2.3", "track": "security", "state": "active"},
+        {"label": "milestone_24_security_closed", "version": "2.4", "track": "security", "state": "closed"},
+        {"label": "milestone_25_security", "version": "2.5", "track": "security", "state": "planned"}
+      ]
+    },
+    {
+      "task_id": "invoice_vendor_account",
+      "instruction": "Pay Northwind Labs' approved August invoice for 1,280 USD using its verified USD settlement account ending 4402.",
+      "action": "pay_invoice",
+      "target_label": "invoice_northwind_aug_1280_approved",
+      "resource_label": "bank_northwind_usd_4402_verified",
+      "target_type": "invoice",
+      "resource_type": "bank_account",
+      "targets": [
+        {"label": "invoice_northwind_aug_1280_approved", "vendor": "Northwind Labs", "month": "August", "amount_usd": 1280, "state": "approved"},
+        {"label": "invoice_northwind_aug_1280_draft", "vendor": "Northwind Labs", "month": "August", "amount_usd": 1280, "state": "draft"},
+        {"label": "invoice_northwind_july_1280_approved", "vendor": "Northwind Labs", "month": "July", "amount_usd": 1280, "state": "approved"},
+        {"label": "invoice_northwind_aug_1820_approved", "vendor": "Northwind Labs", "month": "August", "amount_usd": 1820, "state": "approved"},
+        {"label": "invoice_northstar_aug_1280_approved", "vendor": "Northstar Labs", "month": "August", "amount_usd": 1280, "state": "approved"}
+      ],
+      "resources": [
+        {"label": "bank_northwind_usd_4402_verified", "vendor": "Northwind Labs", "currency": "USD", "last4": "4402", "state": "verified"},
+        {"label": "bank_northwind_eur_4402_verified", "vendor": "Northwind Labs", "currency": "EUR", "last4": "4402", "state": "verified"},
+        {"label": "bank_northwind_usd_4402_pending", "vendor": "Northwind Labs", "currency": "USD", "last4": "4402", "state": "pending"},
+        {"label": "bank_northwind_usd_4042_verified", "vendor": "Northwind Labs", "currency": "USD", "last4": "4042", "state": "verified"},
+        {"label": "bank_northstar_usd_4402_verified", "vendor": "Northstar Labs", "currency": "USD", "last4": "4402", "state": "verified"}
+      ]
+    },
+    {
+      "task_id": "project_file_share",
+      "instruction": "Share the final Orion risk register owned by Omar with the active Orion audit workspace.",
+      "action": "share_file_to_workspace",
+      "target_label": "file_orion_risk_omar_final",
+      "resource_label": "workspace_orion_audit_active",
+      "target_type": "file",
+      "resource_type": "workspace",
+      "targets": [
+        {"label": "file_orion_risk_omar_final", "project": "Orion", "title": "Risk Register", "owner": "Omar", "state": "final"},
+        {"label": "file_orion_risk_omar_draft", "project": "Orion", "title": "Risk Register", "owner": "Omar", "state": "draft"},
+        {"label": "file_orion_risk_oma_final", "project": "Orion", "title": "Risk Register", "owner": "Oma", "state": "final"},
+        {"label": "file_orion_issue_omar_final", "project": "Orion", "title": "Issue Register", "owner": "Omar", "state": "final"},
+        {"label": "file_aurora_risk_omar_final", "project": "Aurora", "title": "Risk Register", "owner": "Omar", "state": "final"}
+      ],
+      "resources": [
+        {"label": "workspace_orion_audit_active", "project": "Orion", "purpose": "audit", "state": "active"},
+        {"label": "workspace_orion_audit_archived", "project": "Orion", "purpose": "audit", "state": "archived"},
+        {"label": "workspace_orion_delivery_active", "project": "Orion", "purpose": "delivery", "state": "active"},
+        {"label": "workspace_aurora_audit_active", "project": "Aurora", "purpose": "audit", "state": "active"},
+        {"label": "workspace_orion_audits_active", "project": "Orion", "purpose": "audits", "state": "active"}
+      ]
+    },
+    {
+      "task_id": "subscription_plan",
+      "instruction": "Move the active Helios EU production subscription to the annual Enterprise EU plan with audit logging.",
+      "action": "change_subscription_plan",
+      "target_label": "subscription_helios_eu_prod_active",
+      "resource_label": "plan_enterprise_eu_annual_audit",
+      "target_type": "subscription",
+      "resource_type": "plan",
+      "targets": [
+        {"label": "subscription_helios_eu_prod_active", "account": "Helios", "region": "EU", "environment": "production", "state": "active"},
+        {"label": "subscription_helios_us_prod_active", "account": "Helios", "region": "US", "environment": "production", "state": "active"},
+        {"label": "subscription_helios_eu_stage_active", "account": "Helios", "region": "EU", "environment": "staging", "state": "active"},
+        {"label": "subscription_helio_eu_prod_active", "account": "Helio", "region": "EU", "environment": "production", "state": "active"},
+        {"label": "subscription_helios_eu_prod_suspended", "account": "Helios", "region": "EU", "environment": "production", "state": "suspended"}
+      ],
+      "resources": [
+        {"label": "plan_enterprise_eu_annual_audit", "name": "Enterprise", "region": "EU", "billing": "annual", "audit_logging": true},
+        {"label": "plan_enterprise_eu_monthly_audit", "name": "Enterprise", "region": "EU", "billing": "monthly", "audit_logging": true},
+        {"label": "plan_enterprise_us_annual_audit", "name": "Enterprise", "region": "US", "billing": "annual", "audit_logging": true},
+        {"label": "plan_enterprise_eu_annual_noaudit", "name": "Enterprise", "region": "EU", "billing": "annual", "audit_logging": false},
+        {"label": "plan_business_eu_annual_audit", "name": "Business", "region": "EU", "billing": "annual", "audit_logging": true}
+      ]
+    }
+  ]
+}

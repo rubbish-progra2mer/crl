@@ -1,0 +1,186 @@
+# Reviewer 1 报告 —— Prior and Lineage Attacker（review_v001）
+
+- RUN_ID: 20260726_1955_run03；审查版本 v001；报告日期 2026-07-26。
+- 角色来源：role_prior_reviewer_snapshot.md（SHA-256 6261eeab830bb827371bb45442a92ee8a2908a41e55cea66417fea029508e048，本人实测一致）。
+- 共同协议：protocol_snapshot.md（SHA-256 ba46b084befba0175b1378dc6da363fe84357f0700842efa05e3b4dfdd447a2d，本人实测一致）。
+- Packet：packet.md（SHA-256 741ea35369def8513d7e6a3622c3498313012ff43f17d921f4eba7c26726362c，80935 bytes，本人实测一致）。
+- 合规声明：本人未调用、未创建、未委派任何 subagent（REVIEWER_SUBAGENT_DELEGATION: FORBIDDEN 已遵守）；未读取 nearest_prior_v001.md 正文、任何 reviewer_*.md、或 staging 内非本人输出的文件；未修改任何工作区文件；唯一写入即本报告（staging/reviewer_1_staged.md）。全部哈希由本人以 python hashlib 独立计算。
+
+---
+
+## 1. Packet 与全部 frozen artifacts 的逐项实际读取回报（协议 §6 第 1 项）
+
+启动文件（3 项，全部实际读取全文）：
+
+| 路径 | bytes | 本人计算 SHA-256 | 与承诺一致 | 已读 |
+|---|---|---|---|---|
+| review_v001/packet.md | 80935 | 741ea35369def8513d7e6a3622c3498313012ff43f17d921f4eba7c26726362c | 是 | 是（全文 921 行，含 problem/candidate/evidence_packet/plan/result 冻结快照） |
+| review_v001/protocol_snapshot.md | 8337 | ba46b084befba0175b1378dc6da363fe84357f0700842efa05e3b4dfdd447a2d | 是 | 是 |
+| review_v001/role_prior_reviewer_snapshot.md | 1413 | 6261eeab830bb827371bb45442a92ee8a2908a41e55cea66417fea029508e048 | 是 | 是 |
+
+Manifest 实验产物（10 项，路径、byte size、SHA 三项全部核验一致；逐项实际读取）：
+
+| frozen relative path | bytes | 本人计算 SHA-256 | 已读 |
+|---|---|---|---|
+| review_v001/artifacts/v001/execution.json | 2966 | 5191ec68309e2a339be86d6ac0004a97ee941d9679cac56d020ae695754a59c2 | 是（全文） |
+| review_v001/artifacts/v001/stdout.bin | 1058 | 885eedf827aedf8ccc7172cc185b508ab15cd696d04fb40d2a58b59c941b0cc5 | 是（UTF-8 解码全文：28 实例逐行 done + complete） |
+| review_v001/artifacts/v001/stderr.bin | 0 | e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | 是（空文件，哈希=空串哈希） |
+| review_v001/artifacts/v001/metric_audit_001_execution.json | 2267 | 2141d28c92a2c5220c0a4cc39384a2c30386f8a44933b0896281b3f3b7b5413b | 是（全文） |
+| review_v001/artifacts/v001/metric_audit_001_stdout.bin | 286 | 4d81df66c85413d1c6004a77080c38526d72625a0d11fbcd17f50dbf5a2f4e5e | 是（解码全文：M2/SIG 重算行） |
+| review_v001/artifacts/v001/metric_audit_001_stderr.bin | 0 | e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | 是（空） |
+| review_v001/artifacts/v001/output_results.jsonl | 61964 | c63d084b0ebe98227e5379e62dc4ab7f0a27c193386ca3eb87a40d7684df8f43 | 是（28 行逐行解析 + 独立重算） |
+| review_v001/artifacts/v001/output_deepseek_raw.jsonl | 267271 | aa6ebf9dd835ab0d2ea25eed13794e4c45b832900c16555beba1ff490a1d9d78 | 是（84 行逐行解析：request_id/response_model/usage/body 抽样含 idx120 F1 全 body 头部） |
+| review_v001/artifacts/v001/output_analysis_out.json | 2425 | 168235fc99645662cf34f25cf7634da7e8f84507e85e041f94d13a1341ab2514 | 是（全文） |
+| review_v001/artifacts/v001/output_instance_files.zip | 243231 | 42d5b3430d0bf25ae5bff9aa01aa1baef91e7844b1554e30e2b015427daa13e7 | 是（zipfile 解包；内部 INTERNAL_SHA256_MANIFEST.json 224 项逐项重算 0 不符；实际读取成员：idx120 全套 instance.json/F1_code.py/F1_probe_result.json/F2_probe_result.json/A3_response.md、idx132 与 idx134 的 F1_probe_result.json 与 A3_response.md、阴性/异常实例 idx000/idx004/idx016/idx074 的 probe_result） |
+
+Manifest supplemental（17 项，路径、byte size、SHA 三项全部核验一致；逐项实际读取）：
+
+| frozen relative path | bytes | 本人计算 SHA-256 | 已读 |
+|---|---|---|---|
+| supplemental/research_map_v001.md | 24356 | 5ba2f32e3a090393e6356cc6c30ccfa351c5be231dea8d45d203ef7f348b3940 | 是（全文） |
+| supplemental/selection_context_v001.md | 3630 | d5e9963a7644f5c2f77dac2ce095af2e232ad02972ca9d1d002f98865c528fc9 | 是（全文） |
+| supplemental/data_split_commitment_v001/MANIFEST.json | 3495 | dfeaf9fe4688f9388576c6fbd36960eb095d1262bd8e2cf7e4c078551776dc7e | 是（全文，并对承诺规则做 180 行独立重算：W/D/C 分配与 bucket_indices 完全一致） |
+| supplemental/data_split_commitment_v001/commit_split.py | 5181 | 98a5f29d1fd07d9bb9a0641f07fe756a21b577124fed512ebdee53d51bcee94a | 是（全文） |
+| supplemental/workbench_v001/falsifier_report.md | 3226 | 3efbcd37ba92adaf955b9a750fc5b47a6ae42ece2f793a2a26b6b9e52ce8c528 | 是（全文） |
+| supplemental/workbench_v001/wb_lib.py | 8983 | a83774d5387e6e7bd0d57c7ebcac4a0524146d1cf793f98aa14e37cd1ddb9dae | 是（全文，检查器语义逐类别审读） |
+| supplemental/workbench_v001/wb_prompt.py | 3479 | c54f11ced670bf667a992cb0ae0d36a90caf18f80184563b784b44e1933a7f11 | 是（全文，自由形式模板审读） |
+| supplemental/workbench_v001/wb_formalize.py | 4001 | 591bdfdc083fa8b040bd3ebb8c1691b7bc189c45625e98494d9797fb36bf2a58 | 是（全文） |
+| supplemental/workbench_v001/wb_solve_probe.py | 9655 | b512e18b20bec8cdf5a668fa4d11120f7f63091e44d767dd7b964505fc9a3b8e | 是（全文，探针构造逐类别审读） |
+| supplemental/workbench_v001/wb_run.py | 5534 | 7d8228322840f83e2e2cbda05acb068aff3f6ce6a59ffde0ee8561742e832c1d | 是（全文，含 masked 聚合逻辑） |
+| supplemental/workbench_v001/out/falsifier_summary.json | 20082 | f2cc19ce4056300371c8f9f2c040d9a35c6f42e427ccdc8044fd04fb4dd7869e | 是（22 行逐行读取/摘要核对，前 120 行原文读取） |
+| supplemental/workbench_v001/out/falsifier_aggregate.json | 737 | d22ec719f6b89641ccd0efe2016ffe6aef6cba87f3c849b97ae49bd31a9d4987 | 是（全文） |
+| supplemental/workbench_v001/out/deepseek_raw.jsonl | 104454 | f334ffd5c245bf177aebbf3c89cfc85c62e1a94c82086384576883127c7d5f03 | 是（24 行逐行解析，response_model 全部 deepseek-v4-flash） |
+| supplemental/workbench_v001/wb_out_instances_snapshot.zip | 162663 | 0ad5473353832e66927054733ce74d9c952b30f6dc3f8a54fd4aa7f2f3b79383 | 是（zipfile 解包；实际读取全部 4 个 masked 案例 idx064/idx078/idx124/idx135 的 probe_result.json 与 idx064/generated_code.py） |
+| supplemental/experiment_v001/readiness/selftest_result.json | 111 | 830e7c9ae6c7dddc7acd5d6e819b6dd7e42b125d9bd86fe2defb8d4fff822047 | 是（200 赋值 ×600 比较 0 不符） |
+| supplemental/experiment_v001/readiness/smoke_w/results.jsonl | 2162 | ff3761f1c970ecb830e19dfa6c468059916a91a3fc148ebac91b7848f6495387 | 是（idx001 冒烟行） |
+| supplemental/RUN_CHARTER.md | 2117 | eb8de1b7052ce0963acfcff7b930f0d6e49faf9246af75d9d20218d72f29646c | 是（全文） |
+
+无任何 byte size/SHA 不符、不可读或语义无法解释的材料。目录树实查与 manifest 一致，无 manifest 外科学文件。
+
+交叉重算记录（供主 Codex 核验）：(a) 分桶规则 `int(sha256("run03_tp_val_{i:03d}"),16)%5` 对 180 行独立重算与 MANIFEST bucket_indices 逐桶一致（W 67 / D 80 / C 33）；(b) results.jsonl 独立重数：F1 状态 ok 23 / formalization_error 1 / default_unsat 3 / default_unknown 1，ok∧solution_level_pass = 21，masked 实例 = {120}（类别 cuisine），caught = {132, 134}（house_rule），F2 26 ok / 26 pass / 0 故障——与 output_analysis_out.json 与 result.md 完全一致；(c) raw 84 行 response_model 全部 deepseek-v4-flash，token 合计 78282 prompt / 46484 completion，与 analysis_out.api_usage 精确一致；(d) idx120 探针 witness（Indian/Chinese/American 三个 SAT witness）在产物中带 witness_violates_reference=true；A3 对 idx120 cuisine、idx132/idx134 house_rule 均自信输出 enforced=true（0/3 漏检坐实）；A4 对 idx120 cuisine flag_unenforced=true（3/3 覆盖坐实）；(e) workbench falsifier 22 行重数与报告表格一致（16 ran / 14 pass / masked 4 = idx064,078,124,135 / caught idx122,137 / default_unsat 5 / formalization_error 1）。
+
+## 2. 材料完整性与未解决限制（协议 §6 第 2 项）
+
+**完整性缺口（明确指出）**：Promotion 实际执行的冻结实现字节不在 Packet manifest 内——tp_lib.py、tp_prompt.py、tp_api.py、tp_solve_probe.py（17187 bytes）、run_promotion.py、analysis.py、config.json、config_readiness.json、input_bucket_D.csv、input_bucket_D_ref_info.jsonl、input_split_manifest.json 共 11 项只以 SHA 引用形式出现在 plan.md 与 execution.json 的 inputs 记录中（其中 execution.json 钉住了 config.json/run_promotion.py/tp_solve_probe.py/bucket_D 两文件的完整 SHA），实际字节位于 run 根 experiment_v001/artifacts/，未复制进 review_v001。协议 §1 要求共同 manifest "至少逐文件列明……实现、配置、输入"。后果：本人无法从 Packet 内直接审读 D 桶探针编码（tp_solve_probe.py）与 F1/F2/A3 提示模板（tp_prompt.py）的实际字节，只能经由 (i) workbench 前身 wb_solve_probe.py/wb_prompt.py（在 Packet 内，已全文审读），(ii) probe-checker 一致性 selftest（200×600 零不符），(iii) 全部 witness 的 stdlib 检查器复核（all_witnesses_checker_confirmed=true），(iv) zip 内逐实例产物形态，间接建立对 D 桶 harness 编码保真的信心。此缺口不推翻结果（间接证据链较强），但违反 manifest 逐文件纪律，且把"探针编码保真"这一 Claim 的显式前提条件（candidate.md："以 harness 编码保真为条件"）的可审计性降了一级。受影响判断：本报告关于 D 桶探针实现与 wb 版本无实质差异的判断为**推断而非字节级核验**。
+
+**unresolved 清单**：
+1. candidate.md 引用的 ReLoop 定性自认原句（"solver feedback catches syntax errors, not missing constraints"）与 Constraint Injection 将"更细粒度解耦约束违规剖面指标"列为 open problem 的原文——本人经 arXiv abs/摘录未能核验到这两处原句（全文 limitations 节未能取得）。标 `unresolved`：两个近邻"自证空缺"的引语级证据未经我方独立确认；但基于我对两文实际所做内容的核验（见 §3），空缺结论本身独立成立。
+2. problem.md 称 P051 "93.3% val pass"；公开页面（OpenReview/衍生综述）出现 93.9% 与 ~97% 等数字。差异未解析（可能是 val/test 或版本差异）。因 Claim 契约明文不重估 P051 发表数字，不构成实质问题，但交付文本引用数字应加来源限定。标 `unresolved`。
+3. 修复侧占用引文 2606.29700（planner-in-the-loop PDDL 反馈）本人未逐一取回核验（2606.00981 已在检索结果中出现并确认存在）。对本角色结论不载重。标 `unresolved`。
+4. 主 Codex 私有 nearest_prior_v001.md 按协议不可见；本报告的先行结论完全独立形成，与私有 prior 的一致性由主 Codex 在两份冻结后自行比较。
+
+## 3. 独立最近先行与谱系攻击（检索日 2026-07-26，开放网络）
+
+### 3.1 组件级（candidate 借用而非主张的计算——必须保持不主张）
+
+- **可行集内"违反条件"SAT 查询（M ∧ violate(c)）**：这在 SMT/CP 里就是标准的蕴含/冗余检查（constraint entailment / implied-constraint / redundancy detection）的直接应用，z3 一次 check 即可。candidate.md 已把它列为 borrowed（"z3 SAT 查询（标准）"），正确。任何把"探针算法"本身当新贡献的表述都必须被禁止。
+- **Vacuity / coverage 经典线**（模型检查的 sanity checks：对规格或系统做 mutation 后重验，检测"规格以非预期的平凡方式被满足"与"哪些部分真正参与了验证"）：Kupferman–Vardi《Vacuity detection in temporal model checking》、《Sanity Checks in Formal Verification》（CONCUR 2006）、《Coverage Metrics for Formal Verification》、mutation-of-checkers 线。与本 delta 的关系：同属"验证通过 ≠ 约束真被用到"的检测家族，但对象是人写规格/硬件设计，无 LLM 生成模型、无认证掩盖率测量。作为组件级祖先应在交付文本承认。
+- **Zhong–Yu–Klein 2020（EMNLP，Semantic Evaluation for Text-to-SQL with Distilled Test Suites，arXiv 2010.02840）**：经蒸馏对抗测试库计算语义准确率紧上界，量化了官方指标的假阴/假阳（Spider 平均 2.5% 假阴）。需 gold query、无逐约束剖面、无 slack/修复盲区——candidate.md 的表述与事实一致。
+- **软件测试的 coincidental correctness / fault masking 谱系（Packet 全部叙事未提及，本人新增）**："缺陷被执行但输出仍正确"（weak/strong coincidental correctness、failed error propagation、mutation testing 中 survived mutants）是成熟概念族，且已有对其普遍率的量化研究（如 Defects4J 上的 CC 流行度研究、arXiv 1808.09233）。candidate 的"masked 格"在概念结构上是该谱系向"约束模型 + 解级认证"载体的迁移；λ（luck 指数）对应 CC 文献中通过概率/传播失败率的思想。**这不构成碰撞**（该谱系无 LLM 形式化、无可行集探针、无认证时点分解），但属于必须在交付文本中承认的概念谱系——缺失会让"掩盖"概念显得比实际更原创。
+
+### 3.2 组合级（最近邻及剩余差异——本人逐一取回核验）
+
+| 近邻 | 版本/日期 | 实际所做（本人核验） | 与本 delta 的剩余真实差异 |
+|---|---|---|---|
+| **ReLoop**（arXiv 2602.15983，v1 2026-02-17 / v2 2026-04-29） | OR 载体（RetailOpt-190、MAMO-ComplexLP 等） | 量化 feasibility–correctness gap（91.1% solver-feasible vs 0.5% formulation-correct 量级）；行为验证 = solver 参数扰动响应检验；LLM 只抽取候选约束、检测走 solver；infeasible 走 IIS；面向修复 | 无逐约束参考条件证书（witness+检查器复核）；无"认证 PASS 实例中掩盖率"的三格分解；无 luck/slack 机制变量；无检测器家族对照矩阵；载体非 agent 规划基准 |
+| **Constraint Injection**（arXiv 2606.04816，v1 2026-06-03） | VRP 载体 | feasible probes + one-constraint-violating probes；**概念上已明确点出**"约束在被测实例上非 binding 时 objective-equivalence 测试探测不到遗漏"——即 slack 掩盖机制的概念级陈述；但探针用作训练信号（rejection-sampling 过滤 + GRPO per-rollout reward） | 探针语义最接近（单约束违反探针），但用途是训练而非认证测量；依赖可控生成的 ground-truth 实例；无对既有认证输出的掩盖率量化、无 λ 测量、无检测器比较；候选把它列为最近邻正确 |
+| **VeriSimpl**（arXiv 2607.20474，v1 2026-05-24）——**Packet 可见叙事未披露** | OR 载体（NL4Opt 269 / NLP4LP 67 / CompOR 17 / IndOR 100） | 逐约束 solver 生成三型变异赋值（strict/equality/violation）做诊断查询——**含违反型逐约束探针**；但裁决者是 LLM（"the LLM is asked to reason about the feasibility of the valuation"，Algorithm 2 line 8）；用于 best-of-n 候选选择；报告 precision/coverage | 无参考检查器 ⇒ 无证书性（soundness 依赖 LLM 判断）；对象是候选选择而非认证审计；无掩盖率/三格分解/λ；载体非 agent 规划。**但它是"可运行的、逐约束 solver 探针参与的 LLM 形式化验证组合"**，v1 早于本 Packet 冻结日约两个月 |
+| **OptArgus**（arXiv 2605.11738，2026-05） | OR 载体 | 多 agent LLM 审计员 + 细粒度幻觉 taxonomy（含 constraint 失败类）；明言"匹配参考目标值不是可靠正确性测试" | 裁决 LLM 化；无 solver 证书、无掩盖率分解；动机同族 |
+| **Verus-SpecGym**（arXiv 2605.26457） | Rust/Verus 规格，Codeforces 载体 | 可执行规格评测器机械判定生成规格的 accept/reject 正误；发现规格遗漏输入假设；**量化 LLM-as-judge 漏检 26%**（与本候选 A3 0/3 的发现同方向的外部证据） | 测试用例驱动（官方测试+人写 hack），非可行集对抗搜索；对象是规格质量而非"solver 返回解的认证掩盖"；无三格分解 |
+| **Alloy LLM test cases**（arXiv 2510.23350，v2 2026-02-18） | Alloy 规格 | LLM 生成测试用例验证人写形式规格（方向相反：测试是 LLM 生成的，规格是被验对象） | 无掩盖量化；引入 LLM 生成测试的保真风险；candidate 表述准确 |
+| **ConstraintBench**（arXiv 2602.22465，2026-02） | OR 直接求解 | 全规格约束问题的直接解生成基准，确定性 verifier 逐约束核对解 | 无形式化审计对象（无 NL→模型翻译环节的 enforcement 问题） |
+
+### 3.3 完整 pipeline 级与载体邻域
+
+- **P051**（arXiv 2404.11891，NAACL 2025，aclanthology 2025.naacl-long.176）：被审计范式本身；认证 = 解级检查 + unsat core 交互修复。经检索未发现任何对其成功率做 enforcement 审计的后续工作。
+- **P055 / CoPE**（arXiv 2510.05486）：Limitations 自认 plan correctness 假阳性通道、20 样本核查（Packet evidence 原文与公开 HTML 版一致）。截至检索日未发现补该通道的后续。
+- 修复侧家族（Robust Asynchronous Planning via Auto-Formalization arXiv 2606.00981 等）：全部错误信号触发,与掩盖格构造性互补——candidate 的 A2 分类学定性成立。
+- 载体邻域基准变体（Flex-TravelPlanner arXiv 2506.04649、GroupTravelBench 2605.25200、ATLAS 2509.25586、HiMAP-Travel 2603.04750、State-Centric Decision Process 2605.12755）：均为 agent/benchmark 能力方向,无认证侧 enforcement 审计。
+- 代码层：GitHub 检索未发现 TravelPlanner 形式化 enforcement 审计工具（官方 repo OSU-NLP-Group/TravelPlanner 只有解级评测器）。
+
+### 3.4 碰撞判定（本人独立结论）
+
+截至 2026-07-26,**未检得**对以下组合量的任何先行发表：认证时点、以逐约束参考条件在 LLM 生成模型可行集内做机械 SAT 探针、witness 经独立参考检查器复核构成证书、据此对"解级认证 PASS"实例计算掩盖率（M2）与三格分解、以可行集内 luck 采样（λ）为机制变量、并与错误信号/同模型自查/行为测试三个家族在同批冻结产物上比较——载体为带逐约束参考检查器的 agent 规划基准。此为 absence-of-evidence 级结论,不是新颖性证明。**但**：(a) 探针的组件计算是标准蕴含检查；(b) 单约束违反探针语义已被 Constraint Injection（训练用途）与 VeriSimpl（LLM 裁决、选择用途）分别实现于 OR 载体；(c) "非 binding 则探不到"的机制概念已见于 Constraint Injection 摘要;"缺陷被执行但通过"的概念谱系是软件测试老线。剩余差异是真实的,但比 candidate 可见叙事所暗示的更薄一层——薄在概念与组件,厚在测量分解与载体。
+
+## 4. 最强支持（协议 §6 第 3 项）
+
+1. **证书是硬的且我方可独立复核**：idx120 的三个 SAT witness 在冻结产物中完整给出,逐一带 witness_violates_reference=true;生成代码（idx120/F1_code.py 第 76–86 行）确实把"四菜系覆盖"编码为"每餐厅属于四菜系之一"的成员归属量词结构,而参考语义（wb_lib.check_category cuisine 分支）是覆盖语义——故障真实、非 harness 伪影;默认解通过全部检查（masked）,λ=1.0。同型故障（成员归属 vs 覆盖翻转）独立出现于 W 桶 idx064/124/135,跨桶复现。
+2. **全链路数字自洽**：本人对 results.jsonl/raw jsonl/analysis_out/result.md 的独立重算零差异（§1 交叉重算记录）;分桶承诺可独立重算且一致;单段 capture、exit 0、空 stderr、84 次调用逐行 provenance。
+3. **先行空缺被两面夹证**：占用者一侧,P055 作者自认假阳性通道且称无可行替代（20 样本核查,原文在 Packet evidence 与公开版一致）;近邻一侧,ReLoop/CI/VeriSimpl/OptArgus 全部停在 OR/程序验证载体,且无一计算"认证 PASS 中的掩盖率分解"。检测器比较里 A3 同模型自查 0/3 全漏检、0/91 虚警,与 Verus-SpecGym 独立量化的"LLM-as-judge 漏检 26%"方向一致,增强外部可信度。
+4. **Claim 契约纪律良好**：Minimal Claim Contract 的禁止扩张清单已预先覆盖跨模型/载体外推、修复有效性（K2）、无检查器场景、官方榜单重估;密度代理方向失败被如实报告而未改指标。
+
+## 5. 致命异议（协议 §6 第 4 项）
+
+**无**——在本角色管辖范围（最近先行、谱系、碰撞、Claim 超界）内,我未发现使本版本不可交付的碰撞或谱系造假。特别说明一条"若不修复将升级为致命"的边界情形,现列为可修复异议 6.1：candidate.md 与 plan.md 中"外部无可运行竞争分解（absence-of-evidence 级）"的表述,在 VeriSimpl（2026-05-24 公开,逐约束 solver 探针参与、可运行）存在的事实下,如按字面进入 DELIVERY 而不加限定,将构成对接收方的实质误导性新颖性陈述,彼时应视为致命。当前阶段因 (i) 该句自带 absence-of-evidence 限定、(ii) Claim 契约本身不含新颖性主张、(iii) VeriSimpl 确不计算掩盖分解,故定级为必须修复而非致命。
+
+## 6. 可修复异议（协议 §6 第 5 项）
+
+1. **补披露 VeriSimpl 并限定"无可运行竞争分解"**：closest-composition 清单须加入 VeriSimpl（arXiv 2607.20474）,写明其逐约束三型变异探针、LLM 裁决、best-of-n 选择用途、OR 载体,以及与本 delta 的差异（无参考检查器证书、无掩盖率/λ/三格分解、非认证审计）;"外部无可运行竞争分解"改写为"外部无对认证掩盖分解的可运行竞争实现;存在探针参与但裁决/用途/载体不同的组合（VeriSimpl、Constraint Injection）"。
+2. **补概念谱系承认**：交付文本应承认 (a) 软件测试 coincidental correctness / fault masking / survived mutants 谱系为"masked 格"的概念祖先;(b) 模型检查 vacuity/coverage 经典线为组件级祖先;(c) 探针组件 = 标准蕴含/冗余检查。三者均不削弱测量分解的空缺,但缺失会虚增原创感。
+3. **Packet manifest 补实现字节**（协议 §1 纪律）：把 plan.md 列名的 11 项冻结实现/配置/输入实际字节纳入 review packet manifest（或下一版本重冻结时纳入）,消除"探针编码保真"前提的间接审计状态。
+4. **两条近邻自认引语的核验或降级**：ReLoop 定性自认句与 CI open-problem 句要么给出可核验 locator（页/节）,要么在交付文本降级为"依据其公开方法描述推断"。
+5. **P051 数字口径**：93.3% 与公开页面 93.9%/97% 的口径差异需在交付文本注明来源与 split。
+6. **检测器家族覆盖面的措辞限定**：臂矩阵 A2/A3/A4 未含"结构化 LLM 裁决探针"家族（VeriSimpl/OptArgus 型）;M4 结论措辞应限定为"所比较的三个家族",并把该缺臂列入扩大路线图。
+
+## 7. 当前证据最多支持的 Claim（协议 §6 第 6 项）
+
+在 TP-SC3 载体（TravelPlanner 验证集派生的受控单城 3 日全槽位变体,偏离已披露）+ deepseek-chat（响应 model deepseek-v4-flash）温度 0 自由形式单次形式化、instance-disjoint 预承诺 D 桶（28 实例）条件下：
+1. 解级认证 PASS 的 21 实例中存在 1 例（4.8%,Wilson 95% CI [0.85%, 22.7%]）携带证书背书（可行集 SAT witness + 独立检查器复核）的未 enforce 适用约束;SIG-1（CI 下界>0）按预注册成立——即掩盖格在 fresh 数据上非空的**存在性**。
+2. 该 masked 案例 λ=1.0、caught 案例 λ=0.0,SIG-2 primary 与 luck 排序按预注册成立,但 n_masked=1,只支持"λ 与掩盖方向一致"的**初步机制信号**,不支持机制已确立;域级密度代理方向预测失败须并列报告。
+3. 在同批冻结产物上,所比较的三个检测家族中：同模型类别清单自查对 3 例证书背书故障 0/3 覆盖（0/91 虚警）,行为测试 3/3（0/68 虚警）,错误信号对 masked 格覆盖为 0 系构造性质;A4 与探针在本批覆盖等同,探针差异化仅在证书性——此限定必须随行。
+4. 一行类别清单 scaffold（F2）在本批 26/26 关闭静默通道（bundle 级观察）。
+以上全部为"值得扩大之种子"级证据,未经 C 桶检验。
+
+## 8. 绝不能支持的 Claim（协议 §6 第 7 项）
+
+1. 任何形式的"探针算法/可行集反例搜索本身是新方法"——组件是标准蕴含检查,近邻已在别载体使用同型探针。
+2. "首次发现/首次提出约束遗漏可被解级成功掩盖"——概念先见于 P055 自认、Constraint Injection 摘要（非 binding 掩盖）、软件测试 CC 谱系;可主张的只是该现象在 agent 规划形式化认证上的**证书级量化分解**未有先行。
+3. 掩盖率数值（4.8% 或 W 桶 29%）向任何其他模型/scaffold/载体/实例构成的外推——W→D 已实证 29%→4.8% 的构成敏感性。
+4. slack/luck 机制已确立（n_masked=1;密度代理方向反预注册）。
+5. A3/A4/F2 任何一臂结论作为独立方法学贡献;A4 覆盖 3/3 不得被叙述为"行为测试不如探针"。
+6. 探针触发修复的有效性（K2 未测试）;无参考检查器场景的可用性;对官方 TravelPlanner 榜单或 P051 发表数字的重估。
+7. "外部无可运行竞争分解"的不加限定表述（见 6.1）。
+8. 未经 C 桶执行前的任何确认级（confirmed）语言。
+
+## 9. 建议处置及证据理由（协议 §6 第 8 项）
+
+**建议：修订后交付（先行/谱系侧无阻断;修复 §6 六项后本版本可进入 Delivery 流程）。** 理由：(i) 碰撞攻击未命中——认证时点掩盖率测量分解在组件、组合、全管线三层均无先行发表,且占用者与近邻从两侧自证空缺;(ii) 核心证据（证书、witness 复核、跨桶同型故障、预注册签名）经本人独立重算与代码审读成立;(iii) 已发现的问题全部属披露与措辞层（VeriSimpl 补披露、概念谱系承认、manifest 实现字节、引语核验、数字口径、家族措辞限定）,无一触及数据或计算的有效性;(iv) 薄证据面（n_masked=1、宽 CI、严酷 C 门）已由主 Codex 自认并写入 Claim 边界,与"种子"定位相容。本建议不是投票,最终裁决权在主 Codex;若 6.1 未修复即交付,本人异议升级为致命。
+
+## 10. 实际用于判断的公开来源（协议 §6 第 9 项）
+
+检索执行者：本人（无委派）;工具：WebSearch/WebFetch;日期：2026-07-26。网页来源无法计算稳定字节 SHA,以 URL+版本/日期+locator 记录（标注 n/a）。
+
+**Exact queries（WebSearch,逐条原文）**：
+1. `LLM-generated constraint model missing constraint detection solver counterexample probe enforcement audit`
+2. `TravelPlanner SMT formalization constraint enforcement audit faithfulness solver success masks omitted constraint`
+3. `"masking rate" OR "masked" missing constraint LLM formalization solution passes checker by luck feasible set probe`
+4. `"distilled test suites" text-to-SQL semantic evaluation Zhong Yu Klein 2020`
+5. `"Planner and Formalizer under Constraints" CoPE follow-up plan correctness false positive analysis`
+6. `OptArgus multi-agent hallucination detection optimization modeling LLM solver`
+7. `"State-Centric Decision Process" travel planning SMT formal verification LLM`
+8. `Verus-SpecGym executable specification accept reject LLM verification benchmark`
+9. `vacuity detection model checking specification mutation analysis coverage formal verification classic`
+10. `coincidental correctness fault masking software testing weak mutation survived fault passes tests`
+11. `"not enforced" OR "unenforced" constraint witness certificate LLM formalization planning benchmark audit z3 2026`
+12. `github TravelPlanner z3 SMT formalization constraint enforcement probe audit tool repository`
+13. `TravelPlanner formalization audit 2026 constraint faithfulness enforcement "pass rate" overestimate silent`
+
+**逐项取回并阅读的来源（WebFetch）**：
+- ReLoop：https://arxiv.org/abs/2602.15983（v1 2026-02-17,v2 2026-04-29;locator：abstract 与版本历史;SHA n/a）
+- Constraint Injection：https://arxiv.org/abs/2606.04816（v1 2026-06-03;locator：abstract——probes 作 rejection-sampling filter 与 GRPO reward、VRP 载体、非 binding 掩盖表述;SHA n/a）
+- VeriSimpl：https://arxiv.org/abs/2607.20474 与 https://arxiv.org/html/2607.20474（v1 2026-05-24;locator：Algorithm 2 line 8（LLM 裁决）、三型变异探针、基准 NL4Opt/NLP4LP/CompOR/IndOR、best-of-n 选择;SHA n/a）
+- Alloy 测试用例：https://arxiv.org/abs/2510.23350（v1 2025-10-27,v2 2026-02-18;locator：abstract;SHA n/a）
+- ConstraintBench：https://arxiv.org/abs/2602.22465（2026-02-25/27;locator：abstract 与指标描述;SHA n/a）
+
+**经检索结果确认身份/日期的来源（未全文取回,结论只用于身份与定位）**：
+- P051：https://aclanthology.org/2025.naacl-long.176/ 与 https://arxiv.org/pdf/2404.11891（NAACL 2025）
+- P055/CoPE：https://arxiv.org/html/2510.05486v2（Limitations 假阳性自认与 Packet evidence 原文一致）
+- OptArgus：https://arxiv.org/abs/2605.11738（2026-05;多 agent LLM 审计员）
+- Verus-SpecGym：https://arxiv.org/abs/2605.26457（可执行规格评测器;LLM-as-judge 漏检 26%）
+- Zhong–Yu–Klein 2020：https://aclanthology.org/2020.emnlp-main.29/ 、https://arxiv.org/pdf/2010.02840 、https://github.com/ruiqi-zhong/TestSuiteEval
+- Vacuity/coverage 经典：Kupferman–Vardi《Vacuity detection in temporal model checking》、《Sanity Checks in Formal Verification》（https://www.cs.huji.ac.il/~ornak/publications/concur06b.pdf ）、《Coverage Metrics for Formal Verification》
+- Coincidental correctness：《Coincidental Correctness in the Defects4J Benchmark》（https://arxiv.org/pdf/1808.09233 ）及相关 CC/fault-masking 文献
+- 修复侧/载体邻域（身份确认）：Robust Asynchronous Planning via Auto-Formalization（https://arxiv.org/html/2606.00981 ）、Flex-TravelPlanner（arXiv 2506.04649）、GroupTravelBench（2605.25200）、ATLAS（2509.25586）、HiMAP-Travel（2603.04750）、State-Centric Decision Process（2605.12755）、TravelPlanner 官方 repo（https://github.com/OSU-NLP-Group/TravelPlanner ）
+- 其余检索命中但判定为不相关/未用于结论的条目不列入。
+
+（报告完。本文本与返回主线程的文本逐字一致。）

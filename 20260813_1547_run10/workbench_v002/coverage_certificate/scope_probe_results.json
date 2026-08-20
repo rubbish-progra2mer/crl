@@ -1,0 +1,231 @@
+{
+  "artifact_class": "scratch",
+  "created_at_utc": "2026-08-13T09:28:22.040353+00:00",
+  "claim_boundary": "The fixture constructor uses one AppWorld dev task and its synthetic supervisor credentials to instantiate public API calls. The classifier receives only public API documentation, concrete read arguments, raw responses/errors, and declared scope requirements. This probe measures observation typing, not agent terminal success.",
+  "benchmark": {
+    "name": "AppWorld",
+    "git_commit": "a072b7a86e7c1d5b1d7175659d750ebb9b79f10a",
+    "dataset": "dev",
+    "task_id": "6171bbc_1",
+    "case_count": 8
+  },
+  "cases": [
+    {
+      "case_id": "positive_head_page",
+      "expected_semantics": "PRESENT",
+      "naive_first_page": "PRESENT",
+      "certificate_verdict": "PRESENT",
+      "certificate_reason": "positive_witness",
+      "certificate": {
+        "verdict": "PRESENT",
+        "reason": "positive_witness",
+        "matched_page": 0,
+        "obligations": {
+          "successful_reads": true,
+          "read_only": true,
+          "same_scope": true,
+          "same_limit": true,
+          "contiguous_from_zero": true,
+          "credential_consistent": true,
+          "permission_sufficient": true,
+          "terminal_short_page": false,
+          "freshness_sufficient": true
+        },
+        "observed_pages": [
+          0
+        ],
+        "observed_item_count": 5
+      }
+    },
+    {
+      "case_id": "tail_hidden_by_first_page",
+      "expected_semantics": "PRESENT",
+      "naive_first_page": "ABSENT",
+      "certificate_verdict": "UNKNOWN",
+      "certificate_reason": "pagination_not_closed",
+      "certificate": {
+        "verdict": "UNKNOWN",
+        "reason": "pagination_not_closed",
+        "matched_page": null,
+        "obligations": {
+          "successful_reads": true,
+          "read_only": true,
+          "same_scope": true,
+          "same_limit": true,
+          "contiguous_from_zero": true,
+          "credential_consistent": true,
+          "permission_sufficient": true,
+          "terminal_short_page": false,
+          "freshness_sufficient": true
+        },
+        "observed_pages": [
+          0
+        ],
+        "observed_item_count": 5
+      }
+    },
+    {
+      "case_id": "tail_found_after_next_page",
+      "expected_semantics": "PRESENT",
+      "naive_first_page": "ABSENT",
+      "certificate_verdict": "PRESENT",
+      "certificate_reason": "positive_witness",
+      "certificate": {
+        "verdict": "PRESENT",
+        "reason": "positive_witness",
+        "matched_page": 1,
+        "obligations": {
+          "successful_reads": true,
+          "read_only": true,
+          "same_scope": true,
+          "same_limit": true,
+          "contiguous_from_zero": true,
+          "credential_consistent": true,
+          "permission_sufficient": true,
+          "terminal_short_page": false,
+          "freshness_sufficient": true
+        },
+        "observed_pages": [
+          0,
+          1
+        ],
+        "observed_item_count": 10
+      }
+    },
+    {
+      "case_id": "private_item_hidden_without_credential",
+      "expected_semantics": "PRESENT_IN_REQUIRED_AUTHENTICATED_VIEW",
+      "naive_first_page": "ABSENT",
+      "certificate_verdict": "UNKNOWN",
+      "certificate_reason": "permission_view_incomplete",
+      "certificate": {
+        "verdict": "UNKNOWN",
+        "reason": "permission_view_incomplete",
+        "matched_page": null,
+        "obligations": {
+          "successful_reads": true,
+          "read_only": true,
+          "same_scope": true,
+          "same_limit": true,
+          "contiguous_from_zero": true,
+          "credential_consistent": true,
+          "permission_sufficient": false,
+          "terminal_short_page": true,
+          "freshness_sufficient": true
+        },
+        "observed_pages": [
+          0
+        ],
+        "observed_item_count": 3
+      }
+    },
+    {
+      "case_id": "private_item_visible_with_credential",
+      "expected_semantics": "PRESENT",
+      "naive_first_page": "PRESENT",
+      "certificate_verdict": "PRESENT",
+      "certificate_reason": "positive_witness",
+      "certificate": {
+        "verdict": "PRESENT",
+        "reason": "positive_witness",
+        "matched_page": 0,
+        "obligations": {
+          "successful_reads": true,
+          "read_only": true,
+          "same_scope": true,
+          "same_limit": true,
+          "contiguous_from_zero": true,
+          "credential_consistent": true,
+          "permission_sufficient": true,
+          "terminal_short_page": true,
+          "freshness_sufficient": true
+        },
+        "observed_pages": [
+          0
+        ],
+        "observed_item_count": 5
+      }
+    },
+    {
+      "case_id": "closed_authenticated_scope_true_absence",
+      "expected_semantics": "ABSENT_WITHIN_AUTHENTICATED_OWNER_SCOPE",
+      "naive_first_page": "ABSENT",
+      "certificate_verdict": "ABSENT",
+      "certificate_reason": "closed_scope_negative_certificate",
+      "certificate": {
+        "verdict": "ABSENT",
+        "reason": "closed_scope_negative_certificate",
+        "matched_page": null,
+        "obligations": {
+          "successful_reads": true,
+          "read_only": true,
+          "same_scope": true,
+          "same_limit": true,
+          "contiguous_from_zero": true,
+          "credential_consistent": true,
+          "permission_sufficient": true,
+          "terminal_short_page": true,
+          "freshness_sufficient": true
+        },
+        "observed_pages": [
+          0
+        ],
+        "observed_item_count": 5
+      }
+    },
+    {
+      "case_id": "read_error",
+      "expected_semantics": "UNKNOWN",
+      "naive_first_page": "ABSENT_OR_ERROR_DEPENDING_ON_AGENT",
+      "certificate_verdict": "UNKNOWN",
+      "certificate_reason": "read_error_or_missing_response",
+      "certificate": {
+        "verdict": "UNKNOWN",
+        "reason": "read_error_or_missing_response",
+        "matched_page": null,
+        "obligations": {
+          "successful_reads": false,
+          "read_only": true,
+          "same_scope": true,
+          "same_limit": true,
+          "contiguous_from_zero": false,
+          "credential_consistent": true,
+          "permission_sufficient": true,
+          "terminal_short_page": false,
+          "freshness_sufficient": true
+        },
+        "observed_pages": [
+          -1
+        ],
+        "observed_item_count": 0
+      }
+    },
+    {
+      "case_id": "closed_scope_without_freshness_contract",
+      "expected_semantics": "UNKNOWN_FOR_POST_WRITE_ABSENCE",
+      "naive_first_page": "ABSENT",
+      "certificate_verdict": "UNKNOWN",
+      "certificate_reason": "freshness_not_established",
+      "certificate": {
+        "verdict": "UNKNOWN",
+        "reason": "freshness_not_established",
+        "matched_page": null,
+        "obligations": {
+          "successful_reads": true,
+          "read_only": true,
+          "same_scope": true,
+          "same_limit": true,
+          "contiguous_from_zero": true,
+          "credential_consistent": true,
+          "permission_sufficient": true,
+          "terminal_short_page": true,
+          "freshness_sufficient": false
+        },
+        "observed_pages": [
+          0
+        ],
+        "observed_item_count": 5
+      }
+    }
+  ]
+}

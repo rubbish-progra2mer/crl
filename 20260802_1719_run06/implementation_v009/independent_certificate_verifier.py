@@ -1,0 +1,746 @@
+from __future__ import annotations
+
+import hashlib
+import hmac
+import json
+from dataclasses import dataclass
+from functools import lru_cache
+from typing import Sequence
+
+from joint_coverage_kernel import (
+    Claim,
+    CoverageCertificate,
+    Cursor,
+    Observation,
+    ScopeCell,
+)
+
+
+_RSA_SHA256_DIGEST_INFO_PREFIX = bytes.fromhex(
+    "3031300d060960864801650304020105000420"
+)
+
+
+@dataclass(frozen=True)
+class _IndependentTrace:
+    complete: bool
+    witness_pages: tuple[Observation, ...]
+    chain_digests: tuple[str, ...]
+    evidence_digests: tuple[str, ...]
+    blocked: bool
+    conflicted: bool
+
+
+@dataclass(frozen=True)
+class _IndependentRequestKey:
+    source_fields: tuple[str, ...]
+    cell: ScopeCell
+    cursor: Cursor
+    snapshot_id: str
+
+
+@dataclass(frozen=True)
+class _IndependentPreflight:
+    audited: tuple[Observation, ...]
+    conflicts: tuple[Observation, ...]
+
+    @property
+    def audit_digests(self) -> tuple[str, ...]:
+        return tuple(sorted(item.digest for item in self.audited))
+
+
+def _response_commitment_from_spec(item: Observation) -> str:
+    encoded = json.dumps(
+        {
+            "schema_version": 1,
+            "request_payload_digest": hashlib.sha256(
+                item.request_payload.encode("utf-8")
+            ).hexdigest(),
+            "records": [
+                {
+                    "record_id": record.record_id,
+                    "cell": record.cell.key,
+                    "semantic_cell_id": record.cell.semantic_key,
+                    "matches_target": record.matches_target,
+                    "compliant": record.compliant,
+                }
+                for record in item.records
+            ],
+            "next_cursor": item.next_cursor,
+            "status": item.status,
+            "permission_complete": item.permission_complete,
+            "silently_truncated": item.silently_truncated,
+        },
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def _source_digest_from_spec(item: Observation) -> str:
+    source = item.source
+    encoded = json.dumps(
+        {
+            "connector_id": source.connector_id,
+            "query_signature": source.query_signature,
+            "authentication_subject": source.authentication_subject,
+            "scope_schema_version": source.scope_schema_version,
+            "adapter_version": source.adapter_version,
+            "semantic_normalization_version": source.semantic_normalization_version,
+            "request_serialization_version": source.request_serialization_version,
+            "attestation_scheme": source.attestation_scheme,
+            "attestation_key_id": source.attestation_key_id,
+            "attestation_public_key_n_hex": source.attestation_public_key_n_hex,
+            "attestation_public_key_e": source.attestation_public_key_e,
+            "decoder_digest": source.decoder_digest,
+        },
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def _attestation_payload_from_spec(item: Observation) -> str:
+    return json.dumps(
+        {
+            "schema_version": 1,
+            "attestation_scheme": item.source.attestation_scheme,
+            "attestation_key_id": item.source.attestation_key_id,
+            "source_identity_digest": _source_digest_from_spec(item),
+            "decoder_digest": item.source.decoder_digest,
+            "request_payload_digest": hashlib.sha256(
+                item.request_payload.encode("utf-8")
+            ).hexdigest(),
+            "raw_response_sha256": item.raw_response_sha256,
+            "response_commitment": item.response_commitment,
+            "session_id": item.attestation_session_id,
+            "sequence_index": item.attestation_sequence_index,
+            "previous_attestation_digest": item.previous_attestation_digest,
+            "cursor": item.cursor,
+            "next_cursor": item.next_cursor,
+            "status": item.status,
+            "permission_complete": item.permission_complete,
+            "silently_truncated": item.silently_truncated,
+            "attested": True,
+        },
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+
+
+def _verify_attestation_signature(item: Observation, claim: Claim) -> bool:
+    try:
+        modulus = int(claim.source.attestation_public_key_n_hex, 16)
+        signature = bytes.fromhex(item.attestation_signature_hex)
+    except ValueError:
+        return False
+    width = (modulus.bit_length() + 7) // 8
+    if len(signature) != width:
+        return False
+    digest_info = _RSA_SHA256_DIGEST_INFO_PREFIX + hashlib.sha256(
+        _attestation_payload_from_spec(item).encode("utf-8")
+    ).digest()
+    padding_length = width - len(digest_info) - 3
+    if padding_length < 8:
+        return False
+    expected = b"\x00\x01" + b"\xff" * padding_length + b"\x00" + digest_info
+    recovered = pow(
+        int.from_bytes(signature, "big"),
+        claim.source.attestation_public_key_e,
+        modulus,
+    ).to_bytes(width, "big")
+    return hmac.compare_digest(recovered, expected)
+
+
+def _cursor_key(cursor: Cursor) -> tuple[str, str]:
+    return type(cursor).__name__, str(cursor)
+
+
+@lru_cache(maxsize=65536)
+def _request_payload_from_spec(
+    claim: Claim,
+    cell: ScopeCell,
+    cursor: Cursor,
+) -> str:
+    source = claim.source
+    return json.dumps(
+        {
+            "adapter_version": source.adapter_version,
+            "attestation_key_id": source.attestation_key_id,
+            "attestation_public_key_e": source.attestation_public_key_e,
+            "attestation_public_key_n_hex": source.attestation_public_key_n_hex,
+            "attestation_scheme": source.attestation_scheme,
+            "authentication_subject": source.authentication_subject,
+            "connector_id": source.connector_id,
+            "cursor": cursor,
+            "decoder_digest": source.decoder_digest,
+            "filters": {
+                "archive_state": cell.archive_state,
+                "entity": cell.entity,
+                "semantic_cell_id": cell.semantic_key,
+                "time_bucket": cell.time_bucket,
+            },
+            "operation": source.query_signature,
+            "semantic_normalization_version": source.semantic_normalization_version,
+            "request_serialization_version": source.request_serialization_version,
+            "scope_schema_version": source.scope_schema_version,
+            "snapshot_id": claim.snapshot_id,
+        },
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+
+
+@lru_cache(maxsize=65536)
+def _source_fields_from_claim(claim: Claim) -> tuple[str, ...]:
+    source = claim.source
+    return (
+        source.connector_id,
+        source.query_signature,
+        source.authentication_subject,
+        source.scope_schema_version,
+        source.adapter_version,
+        source.semantic_normalization_version,
+        source.request_serialization_version,
+        source.attestation_scheme,
+        source.attestation_key_id,
+        source.attestation_public_key_n_hex,
+        str(source.attestation_public_key_e),
+        source.decoder_digest,
+    )
+
+
+@lru_cache(maxsize=65536)
+def _metadata_key(item: Observation) -> _IndependentRequestKey:
+    source = item.source
+    return _IndependentRequestKey(
+        (
+            source.connector_id,
+            source.query_signature,
+            source.authentication_subject,
+            source.scope_schema_version,
+            source.adapter_version,
+            source.semantic_normalization_version,
+            source.request_serialization_version,
+            source.attestation_scheme,
+            source.attestation_key_id,
+            source.attestation_public_key_n_hex,
+            str(source.attestation_public_key_e),
+            source.decoder_digest,
+        ),
+        item.cell,
+        item.cursor,
+        item.snapshot_id,
+    )
+
+
+@lru_cache(maxsize=65536)
+def _payload_key_from_spec(payload: str) -> _IndependentRequestKey:
+    try:
+        value = json.loads(payload)
+    except (json.JSONDecodeError, TypeError) as error:
+        raise ValueError("invalid request payload") from error
+    expected_top = {
+        "adapter_version",
+        "attestation_key_id",
+        "attestation_public_key_e",
+        "attestation_public_key_n_hex",
+        "attestation_scheme",
+        "authentication_subject",
+        "connector_id",
+        "cursor",
+        "decoder_digest",
+        "filters",
+        "operation",
+        "semantic_normalization_version",
+        "request_serialization_version",
+        "scope_schema_version",
+        "snapshot_id",
+    }
+    if not isinstance(value, dict) or set(value) != expected_top:
+        raise ValueError("invalid request payload schema")
+    filters = value["filters"]
+    if not isinstance(filters, dict) or set(filters) != {
+        "archive_state",
+        "entity",
+        "semantic_cell_id",
+        "time_bucket",
+    }:
+        raise ValueError("invalid request filter schema")
+    strings = (
+        "adapter_version",
+        "attestation_key_id",
+        "attestation_public_key_n_hex",
+        "attestation_scheme",
+        "authentication_subject",
+        "connector_id",
+        "decoder_digest",
+        "operation",
+        "semantic_normalization_version",
+        "request_serialization_version",
+        "scope_schema_version",
+        "snapshot_id",
+    )
+    if any(not isinstance(value[name], str) or not value[name] for name in strings):
+        raise ValueError("invalid request string field")
+    if any(
+        not isinstance(filters[name], str) or not filters[name]
+        for name in ("archive_state", "entity", "semantic_cell_id", "time_bucket")
+    ):
+        raise ValueError("invalid request filter field")
+    cursor = value["cursor"]
+    if not isinstance(cursor, (str, int)) or isinstance(cursor, bool):
+        raise ValueError("invalid request cursor")
+    exponent = value["attestation_public_key_e"]
+    if not isinstance(exponent, int) or isinstance(exponent, bool):
+        raise ValueError("invalid attestation public exponent")
+    if json.dumps(
+        value,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ) != payload:
+        raise ValueError("request payload is not canonical")
+    return _IndependentRequestKey(
+        (
+            value["connector_id"],
+            value["operation"],
+            value["authentication_subject"],
+            value["scope_schema_version"],
+            value["adapter_version"],
+            value["semantic_normalization_version"],
+            value["request_serialization_version"],
+            value["attestation_scheme"],
+            value["attestation_key_id"],
+            value["attestation_public_key_n_hex"],
+            str(exponent),
+            value["decoder_digest"],
+        ),
+        ScopeCell(
+            filters["entity"],
+            filters["time_bucket"],
+            filters["archive_state"],
+            filters["semantic_cell_id"],
+        ),
+        cursor,
+        value["snapshot_id"],
+    )
+
+
+def _semantic_source_matches(
+    left: tuple[str, ...], right: tuple[str, ...]
+) -> bool:
+    return left[:3] == right[:3]
+
+
+def _representation_matches(
+    left: tuple[str, ...], right: tuple[str, ...]
+) -> bool:
+    return left[3:] == right[3:]
+
+
+def _semantically_targets_claim(
+    key: _IndependentRequestKey, claim: Claim
+) -> bool:
+    claim_source = _source_fields_from_claim(claim)
+    return (
+        _semantic_source_matches(key.source_fields, claim_source)
+        and key.snapshot_id == claim.snapshot_id
+        and any(key.cell.semantic_key == cell.semantic_key for cell in claim.scope)
+    )
+
+
+def _request_keys_equivalent(
+    left: _IndependentRequestKey,
+    right: _IndependentRequestKey,
+) -> bool:
+    return (
+        left.source_fields == right.source_fields
+        and left.cell.key == right.cell.key
+        and left.cell.semantic_key == right.cell.semantic_key
+        and left.cursor == right.cursor
+        and left.snapshot_id == right.snapshot_id
+    )
+
+
+def _preflight_from_spec(
+    claim: Claim,
+    observations: Sequence[Observation],
+) -> _IndependentPreflight:
+    audited: list[Observation] = []
+    conflicts: list[Observation] = []
+    for item in observations:
+        audited.append(item)
+        if not item.attested:
+            conflicts.append(item)
+            continue
+        if (
+            not item.response_commitment
+            or item.response_commitment != _response_commitment_from_spec(item)
+        ):
+            conflicts.append(item)
+            continue
+        if (
+            not item.raw_response_sha256
+            or len(item.raw_response_sha256) != 64
+            or not item.attestation_session_id
+            or not item.attestation_signature_hex
+            or not _verify_attestation_signature(item, claim)
+        ):
+            conflicts.append(item)
+            continue
+        outer = _metadata_key(item)
+        try:
+            inner = _payload_key_from_spec(item.request_payload)
+        except ValueError:
+            conflicts.append(item)
+            continue
+        if not _request_keys_equivalent(outer, inner) or any(
+            record.cell.semantic_key != inner.cell.semantic_key
+            for record in item.records
+        ):
+            conflicts.append(item)
+            continue
+        if not _representation_matches(
+            inner.source_fields, _source_fields_from_claim(claim)
+        ):
+            conflicts.append(item)
+    return _IndependentPreflight(tuple(audited), tuple(conflicts))
+
+
+def _request_binding_digest_from_spec(claim: Claim) -> str:
+    encoded = json.dumps(
+        {
+            "binding_rule": "signed-session-manifest-chain-v6",
+            "source": {
+                "adapter_version": claim.source.adapter_version,
+                "authentication_subject": claim.source.authentication_subject,
+                "connector_id": claim.source.connector_id,
+                "query_signature": claim.source.query_signature,
+                "semantic_normalization_version": claim.source.semantic_normalization_version,
+                "request_serialization_version": claim.source.request_serialization_version,
+                "attestation_scheme": claim.source.attestation_scheme,
+                "attestation_key_id": claim.source.attestation_key_id,
+                "attestation_public_key_n_hex": claim.source.attestation_public_key_n_hex,
+                "attestation_public_key_e": claim.source.attestation_public_key_e,
+                "decoder_digest": claim.source.decoder_digest,
+                "scope_schema_version": claim.source.scope_schema_version,
+            },
+            "scope": [
+                {"raw": cell.key, "semantic": cell.semantic_key}
+                for cell in sorted(claim.scope)
+            ],
+            "snapshot_id": claim.snapshot_id,
+            "initial_cursor": claim.initial_cursor,
+        },
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def _request_semantically_matches_claim(
+    item: Observation,
+    cell: ScopeCell,
+    claim: Claim,
+) -> bool:
+    try:
+        outer = _metadata_key(item)
+        inner = _payload_key_from_spec(item.request_payload)
+    except ValueError:
+        return False
+    expected_source = _source_fields_from_claim(claim)
+    return (
+        outer.source_fields == expected_source
+        and inner.source_fields == expected_source
+        and outer.snapshot_id == claim.snapshot_id
+        and inner.snapshot_id == claim.snapshot_id
+        and outer.cursor == item.cursor
+        and inner.cursor == item.cursor
+        and outer.cell.semantic_key == cell.semantic_key
+        and inner.cell.semantic_key == cell.semantic_key
+    )
+
+
+def _trace_from_spec(
+    claim: Claim,
+    cell: ScopeCell,
+    observations: Sequence[Observation],
+    preflight: _IndependentPreflight,
+) -> _IndependentTrace:
+    if preflight.conflicts:
+        return _IndependentTrace(
+            False,
+            (),
+            (),
+            preflight.audit_digests,
+            False,
+            True,
+        )
+    candidates = [
+        item
+        for item in preflight.audited
+        if _semantic_source_matches(
+            _payload_key_from_spec(item.request_payload).source_fields,
+            _source_fields_from_claim(claim),
+        )
+        and _representation_matches(
+            _payload_key_from_spec(item.request_payload).source_fields,
+            _source_fields_from_claim(claim),
+        )
+        and _payload_key_from_spec(item.request_payload).snapshot_id
+        == claim.snapshot_id
+        and _payload_key_from_spec(item.request_payload).cell.semantic_key
+        == cell.semantic_key
+    ]
+    source_bound = candidates
+    blocked = any(
+        item.status == "permission_denied" or not item.permission_complete
+        for item in source_bound
+    )
+    invalid_requests = [
+        item
+        for item in source_bound
+        if item.status == "ok"
+        and item.attested
+        and item.permission_complete
+        and item.snapshot_id == claim.snapshot_id
+        and not _request_semantically_matches_claim(item, cell, claim)
+    ]
+    evidence_digests = tuple(sorted(item.digest for item in candidates))
+    if invalid_requests:
+        return _IndependentTrace(False, (), (), evidence_digests, blocked, True)
+    valid = [
+        item
+        for item in source_bound
+        if item.status == "ok"
+        and item.attested
+        and item.permission_complete
+        and item.snapshot_id == claim.snapshot_id
+        and _request_semantically_matches_claim(item, cell, claim)
+    ]
+    if any(
+        record.cell.semantic_key != item.cell.semantic_key
+        for item in valid
+        for record in item.records
+    ):
+        return _IndependentTrace(False, (), (), evidence_digests, blocked, True)
+
+    by_cursor: dict[Cursor, list[Observation]] = {}
+    for item in valid:
+        by_cursor.setdefault(item.cursor, []).append(item)
+    if any(len(group) > 1 for group in by_cursor.values()):
+        return _IndependentTrace(False, (), (), evidence_digests, blocked, True)
+    pages = {
+        cursor: sorted(group, key=lambda item: item.digest)[0]
+        for cursor, group in by_cursor.items()
+    }
+
+    cursor = claim.initial_cursor
+    seen: set[Cursor] = set()
+    chain: list[Observation] = []
+    session_id: str | None = None
+    while True:
+        if cursor in seen:
+            return _IndependentTrace(
+                False,
+                (),
+                tuple(item.digest for item in chain),
+                evidence_digests,
+                blocked,
+                True,
+            )
+        page = pages.get(cursor)
+        if page is None:
+            return _IndependentTrace(
+                False,
+                tuple(chain),
+                tuple(item.digest for item in chain),
+                evidence_digests,
+                blocked,
+                False,
+            )
+        seen.add(cursor)
+        expected_sequence = len(chain)
+        if chain:
+            previous = chain[-1]
+            encoded = json.dumps(
+                {
+                    "payload": _attestation_payload_from_spec(previous),
+                    "signature_hex": previous.attestation_signature_hex,
+                },
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode("utf-8")
+            expected_previous = hashlib.sha256(encoded).hexdigest()
+        else:
+            expected_previous = ""
+        if (
+            page.attestation_sequence_index != expected_sequence
+            or page.previous_attestation_digest != expected_previous
+            or (session_id is not None and page.attestation_session_id != session_id)
+        ):
+            return _IndependentTrace(False, (), (), evidence_digests, blocked, True)
+        if session_id is None:
+            session_id = page.attestation_session_id
+        chain.append(page)
+        if page.silently_truncated:
+            return _IndependentTrace(
+                False,
+                tuple(chain),
+                tuple(item.digest for item in chain),
+                evidence_digests,
+                blocked,
+                False,
+            )
+        if page.next_cursor is None:
+            if set(pages) - seen:
+                return _IndependentTrace(
+                    False,
+                    (),
+                    tuple(item.digest for item in chain),
+                    evidence_digests,
+                    blocked,
+                    True,
+                )
+            return _IndependentTrace(
+                True,
+                tuple(chain),
+                tuple(item.digest for item in chain),
+                evidence_digests,
+                blocked,
+                False,
+            )
+        cursor = page.next_cursor
+
+
+def _expected_reason(
+    traces: dict[ScopeCell, _IndependentTrace],
+    missing: tuple[ScopeCell, ...],
+) -> str:
+    if any(traces[cell].conflicted for cell in missing):
+        return "evidence conflict prevents a source-bound page-chain proof"
+    if any(traces[cell].blocked for cell in missing):
+        return "some claim cells are permission-blocked"
+    return "fetch the missing source-bound page chains for the exact joint cells"
+
+
+def _base_fields_valid(claim: Claim, certificate: CoverageCertificate) -> bool:
+    return (
+        certificate.schema_version == 9
+        and certificate.claim_digest == claim.digest
+        and certificate.source_identity_digest == claim.source.digest
+        and certificate.request_binding_digest
+        == _request_binding_digest_from_spec(claim)
+        and certificate.snapshot_id == claim.snapshot_id
+    )
+
+
+def verify_certificate_independently(
+    claim: Claim,
+    observations: Sequence[Observation],
+    certificate: CoverageCertificate,
+) -> bool:
+    """Check certificate soundness without calling the production evaluator or tracer."""
+
+    if not _base_fields_valid(claim, certificate):
+        return False
+    preflight = _preflight_from_spec(claim, observations)
+    if certificate.audit_observation_digests != preflight.audit_digests:
+        return False
+    if preflight.conflicts:
+        missing = tuple(sorted(claim.scope))
+        return (
+            certificate.decision == "UNKNOWN"
+            and certificate.proof_type == "insufficient_coverage"
+            and certificate.observation_digests == preflight.audit_digests
+            and certificate.covered_cells == ()
+            and certificate.missing_cells == missing
+            and certificate.witness_record_id is None
+            and certificate.reason
+            == "evidence conflict prevents a source-bound page-chain proof"
+        )
+    traces = {
+        cell: _trace_from_spec(claim, cell, observations, preflight)
+        for cell in sorted(claim.scope)
+    }
+    covered = tuple(cell for cell in sorted(traces) if traces[cell].complete)
+    missing = tuple(cell for cell in sorted(traces) if not traces[cell].complete)
+    if certificate.covered_cells != covered or certificate.missing_cells != missing:
+        return False
+
+    if certificate.proof_type in {"positive_witness", "counterexample_witness"}:
+        candidates: list[tuple[Observation, object, str]] = []
+        for cell in sorted(traces):
+            trace = traces[cell]
+            if trace.conflicted:
+                continue
+            for observation in sorted(
+                trace.witness_pages,
+                key=lambda item: (_cursor_key(item.cursor), item.digest),
+            ):
+                for record in observation.records:
+                    if (
+                        record.cell.semantic_key != observation.cell.semantic_key
+                        or not any(
+                            record.cell.semantic_key == cell.semantic_key
+                            for cell in claim.scope
+                        )
+                    ):
+                        continue
+                    decision = claim.witness_for(record)
+                    if decision is not None:
+                        candidates.append((observation, record, decision))
+        if not candidates:
+            return False
+        observation, record, decision = candidates[0]
+        expected_proof = (
+            "positive_witness" if decision == "TRUE" else "counterexample_witness"
+        )
+        return (
+            certificate.decision == decision
+            and certificate.proof_type == expected_proof
+            and certificate.observation_digests == (observation.digest,)
+            and certificate.witness_record_id == record.record_id
+            and certificate.reason
+            == "a source-bound in-scope attested record decides the claim"
+        )
+
+    if certificate.proof_type == "joint_scope_coverage":
+        if missing:
+            return False
+        chain_digests = tuple(
+            digest
+            for cell in sorted(traces)
+            for digest in traces[cell].chain_digests
+        )
+        return (
+            certificate.decision == claim.coverage_decision
+            and certificate.observation_digests == chain_digests
+            and certificate.witness_record_id is None
+            and certificate.reason
+            == "complete source-bound page chains cover the exact joint claim scope"
+        )
+
+    if certificate.proof_type == "insufficient_coverage":
+        if not missing:
+            return False
+        evidence_digests = tuple(
+            digest
+            for cell in sorted(traces)
+            for digest in traces[cell].evidence_digests
+        )
+        return (
+            certificate.decision == "UNKNOWN"
+            and certificate.observation_digests == evidence_digests
+            and certificate.witness_record_id is None
+            and certificate.reason == _expected_reason(traces, missing)
+        )
+
+    return False

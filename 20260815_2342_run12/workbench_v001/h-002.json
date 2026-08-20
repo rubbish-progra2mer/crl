@@ -1,0 +1,58 @@
+{
+  "hypothesis_id": "h-002",
+  "title": "语义保持的工具观测重编码会诱发智能体策略分叉",
+  "parent_ids": [
+    "h-001"
+  ],
+  "lineage_note": "h-001 被 false-success 与后置条件验证直接先行占据后，保留‘回执表面形式是否错误支配状态推理’这一未决因果问题，并转为成对变形评价候选。",
+  "problem": "工具智能体通常直接消费工具返回文本。即使两个返回经过公开契约归一化后表达完全相同的状态、值与可用动作，字段顺序、冗余自然语言、紧凑/展开序列化或等义状态词等表面重编码也可能改变智能体下一动作与最终任务结果；现有函数调用评价主要测调用构造或单一序列化下的轨迹正确性。",
+  "target_failure": {
+    "summary": "固定任务、工具契约、潜在状态、历史与采样设置，仅对工具观测施加可机械证明语义保持的重编码后，智能体产生不等价下一动作或任务结果，形成观测表示不稳定。",
+    "card_ids": [
+      "paper-p084",
+      "operator-milestone-dag-trajectory-evaluation",
+      "failure-repeat-run-reliability-collapse"
+    ],
+    "evidence_ids": [
+      "ev-p084-expanded-toolkit-controlled-setting",
+      "ev-p084-expanded-toolkit-table",
+      "ev-p037-evaluation-core",
+      "ev-p007-repeat-reliability-collapse"
+    ]
+  },
+  "changed_computation": {
+    "baseline": "用单一原始工具返回字符串直接驱动下一轮大语言模型策略，并只按最终任务成功或调用语法评分。",
+    "intervention": "评价 artifact 从一个规范事件生成一组契约等价观测并进行成对轨迹复放，计算动作/结果不变性；防御版本先把每个变体确定性解析回同一规范事件视图，再交给智能体。",
+    "information_available": "所有条件包含相同规范字段、值、错误类别、可重试性与工具契约；归一化器只使用公开契约，不读取隐藏任务真值。",
+    "timing": "在工具执行结果进入智能体上下文之前；成对复放共享直到该观测为止的完全相同前缀。",
+    "budget_effect": "每条轨迹的模型调用数、工具调用数、温度和最大令牌一致；规范化防御不增加模型或工具调用。"
+  },
+  "mechanism_claim": "工具智能体把观测的表面序列特征混入状态更新，导致对契约等价重编码缺乏策略不变性；契约驱动的规范事件视图能在不增加模型/工具预算的情况下显著降低成对策略分叉。",
+  "falsifier": "若跨任务族与至少两个模型的成对动作/结果分叉不显著高于同表示重复运行基线，或规范化相对最强等预算固定模板基线没有稳定降低分叉且不改善最差变体任务成功，则该现象或防御差分被否定。",
+  "minimal_killer_experiment": "构造 4 个有状态工具域、每域 12-20 个确定性任务；从同一规范事件生成 JSON 字段置换、紧凑/展开、结构化/等义自然语言、冗余确认语句四类变体。对 qwen3:4b、qwen2.5:7b 或 qwen3:8b 在温度 0 与固定前缀下成对复放，比较原始观测、统一文本模板、契约规范事件视图。核心指标为成对下一动作不一致率、最终结果不一致率、最差变体任务成功、平均任务成功及解析覆盖率。",
+  "nearest_prior_risk": "Agentic Function Calling Robustness 已测用户改写和工具集扩展；工具输出扰动、提示注入防御、上下文规范化、结构化输出与通用变形测试可能直接或组合吸收本候选。必须检索是否已有 executed tool-result formatting 的成对语义保持评价。",
+  "alternative_explanations": [
+    "所谓等价变体实际违反工具返回契约或改变语用含义",
+    "温度或非确定推理造成自然重复方差",
+    "规范化收益只是缩短上下文或固定提示模板",
+    "合成任务过于依赖字符串解析而非代理决策",
+    "动作不一致但所有动作都合法且最终结果等价"
+  ],
+  "descriptors": {
+    "problem_family": "工具观测表示稳健性",
+    "computation_stage": "执行结果进入策略前的状态更新",
+    "intervention_family": "契约驱动规范化与变形评价",
+    "information_source": "公开工具结果契约与规范事件",
+    "timing_class": "每次工具观测入上下文前",
+    "budget_class": "模型与工具调用预算不变",
+    "evaluation_mode": "共享前缀的语义保持成对复放"
+  },
+  "literature_refs": [
+    "P084",
+    "P037",
+    "P007",
+    "P038",
+    "P079",
+    "P097"
+  ]
+}

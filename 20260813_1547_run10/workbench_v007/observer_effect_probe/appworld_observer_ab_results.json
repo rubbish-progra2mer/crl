@@ -1,0 +1,87 @@
+{
+  "artifact_class": "scratch_dynamic_ab",
+  "created_at_utc": "2026-08-13T10:39:30.077540+00:00",
+  "benchmark": {
+    "name": "AppWorld",
+    "git_commit": "a072b7a86e7c1d5b1d7175659d750ebb9b79f10a",
+    "dataset": "dev",
+    "task_id": "37a8675_1",
+    "construction_did_not_call_official_solution": true
+  },
+  "comparison": "The action sequence is identical through official task completion. The treatment adds one documented GET-like spotify.show_volume observation that creates MusicPlayer state when absent.",
+  "shared_fixture_setup": "The sender Venmo balance is set to amount + 100 in both conditions; the evaluator ignores venmo.User changes.",
+  "records": [
+    {
+      "condition": "control",
+      "observer_error": null,
+      "music_player_count_before": 106,
+      "music_player_count_after": 106,
+      "official_terminal_success": true,
+      "official_passed": 6,
+      "official_total": 6,
+      "failed_requirements": [],
+      "trace": [
+        {
+          "fixture_setup": "sender_balance",
+          "sufficient": true
+        },
+        {
+          "api": "phone.search_contacts",
+          "match_count": 1
+        },
+        {
+          "api": "venmo.search_users",
+          "match_count": 1
+        },
+        {
+          "api": "venmo.create_transaction",
+          "message": "Sent money.",
+          "has_transaction_id": true
+        },
+        {
+          "api": "supervisor.complete_task",
+          "message": "Marked the active task complete."
+        }
+      ]
+    },
+    {
+      "condition": "spotify_show_volume",
+      "observer_error": null,
+      "music_player_count_before": 106,
+      "music_player_count_after": 106,
+      "official_terminal_success": true,
+      "official_passed": 6,
+      "official_total": 6,
+      "failed_requirements": [],
+      "trace": [
+        {
+          "fixture_setup": "sender_balance",
+          "sufficient": true
+        },
+        {
+          "api": "phone.search_contacts",
+          "match_count": 1
+        },
+        {
+          "api": "venmo.search_users",
+          "match_count": 1
+        },
+        {
+          "api": "venmo.create_transaction",
+          "message": "Sent money.",
+          "has_transaction_id": true
+        },
+        {
+          "api": "supervisor.complete_task",
+          "message": "Marked the active task complete."
+        },
+        {
+          "api": "spotify.show_volume",
+          "response": {
+            "volume": 5
+          }
+        }
+      ]
+    }
+  ]
+}

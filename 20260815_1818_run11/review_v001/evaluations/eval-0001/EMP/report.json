@@ -1,0 +1,60 @@
+{
+  "evaluation_id": "eval-0001",
+  "evaluator_definition_sha256": "e0d35083b1427e9f8861ba576304b97657498fee46480d5e07e8e0b02cea6e5b",
+  "evaluator_version": "CRL-EVAL-1.0",
+  "events_sha256": "dc689760fe403e150dd2b5642e1273a7fafffb031af14f511bf1e200b5fa1161",
+  "invalid_reasons": [],
+  "measurement_key": "c6ff34e6b74ae35ff6f7ec03bf7c998a22c163ef3a376b1398a0c8e438505127",
+  "output": {
+    "confidence": "high",
+    "critical_risk": "serious",
+    "diagnostics": {
+      "baseline_confound": "相对单次正确性，候选每例使用五次调用并获得四个额外反事实输出；相对两个突变基线，方向错误策略又被特意构造成通过弱基线但失败于候选关系，这两点都可解释当前优势。",
+      "biggest_empirical_threat": "任务关系、确定性策略及其采用标签均由研究者围绕候选指标共同设计，而真实模型上的联合关系又与完整四变体精确正确完全重合；因此结果可能只是构造对齐的合成变形正确性测试，而非独立测得的证据采用机制。",
+      "killer_experiment": "在由独立人员构建和盲标、具有可观测真实终态的未见多步工具任务上，以相同五调用预算比较本探针、通用变形关系和完整反事实正确性，并检验探针能否跨模型与多种子独立预测终态错误；若无增量预测力，当前经验与机制主张将被推翻。",
+      "missing_validation": "最缺少的是以独立设计的真实或半真实多步任务和外部终态为准绳，验证关系失败是否确实对应工具证据未采用，而不只是合成短答案的反事实错误。",
+      "strongest_empirical_evidence": "正式Ollama运行在冻结配置下完成600次调用且无调用错误；54个基线精确正确行中有18个联合关系失败，这18个均无解析警告，并分布于六个模型—提示分层中的五个。"
+    },
+    "evaluator_version": "CRL-EVAL-1.0",
+    "free_review": "证据工程较完整，正式运行、实现绑定、原始输出、独立求解器和预声明否证门槛都使局部数字可信。突变控制也明确证明探针不等同于正确性，并能排除方向错误的选择性变化。但最强的1.0结果来自按指标边界构造的策略，存在明显构造—评价同源性；真实模型实验则只有20个合成案例、单种子和近缘Qwen模型，且16/18失败集中于两个标识选择族。尤其联合关系与完整反事实精确正确在样本内完全重合，尚未证明它提供独立或可操作的信息。因此现有材料支持“冻结套件中存在关系失败”这一狭窄现象，不足以稳健支持一般证据采用诊断或真实智能体效用。",
+    "model_identity": "gpt-5.6-sol",
+    "reasoning_effort": "xhigh",
+    "reasons": {
+      "baseline_fairness": "两个突变基线与候选信号复用同一批输出，因此模型、样本和调用预算在这项内部比较中一致。可是方向错误策略被明确构造成通过“变化加无关不变”而失败于任务关系，比较结果与设计边界高度同源。没有与通用变形测试、完整反事实正确性或其他方法进行同预算比较，而相对单次正确性时候选使用五次调用、获得显著更多信息。",
+      "experimental_validity": "实验直接检验了两个局部主张：确定性策略判别和冻结模型套件中的单次正确关系脆弱性，且结论明确限制在本地合成数据。可是突变策略、正负标签和任务关系均由研究者围绕候选指标构造，1.0 判别力不能独立证明真实的“选择性证据采用”。真实模型实验只表明输出未满足预设关系，尚无外部终态或行为证据证明这对应所称机制。",
+      "measurement_reliability": "正式运行绑定了实现与模型修订，保留原始回答和警告，600 次调用无错误；独立求解器也从原始字段重算了20个案例的标签。18个核心失败均无解析警告，并报告了Wilson区间，这些提高了可核查性。但独立求解器只验证研究者设计套件的内部自洽，不能排除关系定义与评价器同源；此外仅一个种子，且Wilson区间把共享案例和近缘模型产生的行近似视为独立，方差可能被低估。",
+      "result_strength": "局部数值效应清楚：突变套件为1.0对0.875和0.75，真实模型中18/54单次正确行关系失败，且五个模型—提示分层非零。该现象不由四条解析警告解释，足以支持“此冻结套件存在反例”的狭窄结论。然而有效样本仅20个合成案例、三个近缘本地模型和一个种子，失败又高度集中于两个任务族；真实模型上联合关系还与完整四变体精确正确恰好重合，未显示独立诊断增益。",
+      "robustness_falsification": "六种确定性策略包含忽略、诱饵依赖、不稳定、错误但等变和方向错误等有价值的正负控制，两种提示制度和解析警告剔除也提供了一定稳健性检查。结果按模型、提示和任务族分层，并诚实揭示16/18失败集中于两个标识选择族。仍缺少跨种子、跨供应商、未见任务、独立关系标注和真实多步轨迹上的否证，因而主要替代解释尚未被排除。"
+    },
+    "review_protocol": "CRL-IR-1.0",
+    "reviewer_role": "EMP",
+    "scores": {
+      "baseline_fairness": 2,
+      "experimental_validity": 2,
+      "measurement_reliability": 2,
+      "result_strength": 2,
+      "robustness_falsification": 2
+    }
+  },
+  "packet_key": "3897f0d60e152329adb57b3c128a090335e58d8690aba61a3e26b73794215033",
+  "raw_output_sha256": "da2b5cde5df31362abd62a03f2797eda7a90aba01f99bd4bfbb41ccde3f1619c",
+  "request_sha256": "1752e65ef4c2b193e07fe64cd477984306d867dae1c5e68c581079d3ff7c8d96",
+  "reviewer_role": "EMP",
+  "runtime": {
+    "backend": "codex_exec_jsonl_v1",
+    "codex_version": "codex-cli 0.147.0",
+    "ephemeral": true,
+    "event_count": 4,
+    "executable": "D:\\Desktop\\crl\\runtimes\\codex-cli\\0.147.0\\codex.cmd",
+    "forbidden_events": [],
+    "network_requested": false,
+    "reasoning_effort": "xhigh",
+    "requested_model": "gpt-5.6-sol",
+    "returncode": 0,
+    "sandbox": "read-only",
+    "timed_out": false
+  },
+  "schema_version": 1,
+  "stderr_sha256": "f31d6e2d706b804a394f703de47dec449a3df0e72bc94632136be9b9857acdee",
+  "valid": true
+}

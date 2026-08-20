@@ -1,0 +1,1382 @@
+{
+  "artifact_kind": "run_local_non_authoritative_prior_candidates",
+  "audit_id": "delta-contract-prior-v001",
+  "candidates": [
+    {
+      "abstract": "We read twelve well-known LLM agent benchmark papers and recorded, dimension by dimension, what each paper actually says about how its evaluation was run. The motivation came from a familiar frustration: two papers will report results on the same benchmark with the same model name and disagree, and you cannot tell why -- the scaffold, the sampling settings, the subset, or the evaluator version. In many cases the published artifact does not let you answer. This paper is an implementation report on the attempt. We designed a small audit schema (five fields: benchmark identity, harness specification, inference settings, cost reporting, failure breakdown), wrote a scoring codebook with the boundary cases we hit during pilot scoring, applied it to twelve canonical papers (eight agent, four classical static), and recorded what we saw. We score the disclosure of an agent run, not its correctness, and make no claim that disclosure implies a trustworthy result. The mean audit score across the eight agent-benchmark papers is 0.38 (out of 1.0), and across the four classical static benchmarks 0.66; the largest gap is on cost (none of the eight agent benchmark papers disclose inference cost in any form) and on harness specification (none fully disclose a content-addressed container image of the evaluation environment). We release the schema as a JSON Schema file, the codebook as a Markdown document, and the raw scoring sheet as a CSV. The scoring was performed by a single auditor in one pass; a multi-rater audit is the natural next step, and we discuss what we think it would change.",
+      "authors": [
+        "Mahdi Naser Moghadasi",
+        "Faezeh Ghaderi"
+      ],
+      "candidate_id": "prior-8c5deb76e6cda9b1",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2605.21404v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2605.21404v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+interface+evolution+schema+diff+constrained+call+migration+local+regression&start=0",
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2605.21404v1</ns0:id>\n    <ns0:title>What Twelve LLM Agent Benchmark Papers Disclose About Themselves: A Pilot Audit and an Open Scoring Schema</ns0:title>\n    <ns0:updated>2026-05-20T17:02:36Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2605.21404v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2605.21404v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>We read twelve well-known LLM agent benchmark papers and recorded, dimension by dimension, what each paper actually says about how its evaluation was run. The motivation came from a familiar frustration: two papers will report results on the same benchmark with the same model name and disagree, and you cannot tell why -- the scaffold, the sampling settings, the subset, or the evaluator version. In many cases the published artifact does not let you answer. This paper is an implementation report on the attempt. We designed a small audit schema (five fields: benchmark identity, harness specification, inference settings, cost reporting, failure breakdown), wrote a scoring codebook with the boundary cases we hit during pilot scoring, applied it to twelve canonical papers (eight agent, four classical static), and recorded what we saw. We score the disclosure of an agent run, not its correctness, and make no claim that disclosure implies a trustworthy result. The mean audit score across the eight agent-benchmark papers is 0.38 (out of 1.0), and across the four classical static benchmarks 0.66; the largest gap is on cost (none of the eight agent benchmark papers disclose inference cost in any form) and on harness specification (none fully disclose a content-addressed container image of the evaluation environment). We release the schema as a JSON Schema file, the codebook as a Markdown document, and the raw scoring sheet as a CSV. The scoring was performed by a single auditor in one pass; a multi-rater audit is the natural next step, and we discuss what we think it would change.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-05-20T17:02:36Z</ns0:published>\n    <ns1:comment>Pilot audit of 12 LLM agent benchmark papers; schema, codebook, and per-paper scoring sheet released. Submission to IEEE Big Data 2026</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Mahdi Naser Moghadasi</ns0:name>\n      <ns1:affiliation>BrightMind AI, Texas Tech University</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Faezeh Ghaderi</ns0:name>\n      <ns1:affiliation>University of Texas at Arlington</ns1:affiliation>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "d71eb8366863c814dced72ef3162a50473b950c0ec9ad99ba76b830a28a252b8",
+          "source": "arXiv",
+          "source_id": "2605.21404v1",
+          "source_rank": 1
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2605.21404v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2605.21404"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "rank": 1,
+          "source": "arXiv"
+        }
+      ],
+      "title": "What Twelve LLM Agent Benchmark Papers Disclose About Themselves: A Pilot Audit and an Open Scoring Schema",
+      "urls": [
+        "https://arxiv.org/abs/2605.21404v1",
+        "https://arxiv.org/pdf/2605.21404v1"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "As LLM agents increasingly select tools autonomously, their choices among tools with different privileges become safety-relevant. However, prior tool-selection studies focus on safety-agnostic metadata preferences, leaving privilege-sensitive choices underexplored. To address this gap, we study over-privileged tool selection, in which an agent selects or escalates to a higher-privilege tool despite a sufficient lower-privilege alternative. We introduce ToolPrivBench to evaluate whether agents choose higher-privilege tools despite sufficient lower-privilege alternatives, measuring both initial selection and escalation after transient tool failures. Across eight domains and five recurring risk patterns, we find that over-privileged tool selection is common among mainstream LLM agents and is further amplified by transient failures. We further find that general safety alignment does not reliably transfer to least-privilege tool choice, while prompt-level controls provide only limited mitigation under transient failures. We therefore introduce a privilege-aware post-training defense that teaches agents to prefer sufficient lower-privilege tools and escalate only when necessary. Our mitigation experiments show that this defense substantially reduces unnecessary high-privilege tool use while preserving general capabilities.",
+      "authors": [
+        "Kaiyue Yang",
+        "Yuyan Bu",
+        "Jingwei Yi",
+        "Yuchi Wang",
+        "Biyu Zhou",
+        "Juntao Dai",
+        "Songlin Hu",
+        "Yaodong Yang"
+      ],
+      "candidate_id": "prior-9b57c5dc663d8bf3",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2606.20023v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2606.20023v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+interface+evolution+schema+diff+constrained+call+migration+local+regression&start=0",
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.20023v2</ns0:id>\n    <ns0:title>When Lower Privileges Suffice: Investigating Over-Privileged Tool Selection in LLM Agents</ns0:title>\n    <ns0:updated>2026-07-07T12:24:40Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.20023v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.20023v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>As LLM agents increasingly select tools autonomously, their choices among tools with different privileges become safety-relevant. However, prior tool-selection studies focus on safety-agnostic metadata preferences, leaving privilege-sensitive choices underexplored. To address this gap, we study over-privileged tool selection, in which an agent selects or escalates to a higher-privilege tool despite a sufficient lower-privilege alternative. We introduce ToolPrivBench to evaluate whether agents choose higher-privilege tools despite sufficient lower-privilege alternatives, measuring both initial selection and escalation after transient tool failures. Across eight domains and five recurring risk patterns, we find that over-privileged tool selection is common among mainstream LLM agents and is further amplified by transient failures. We further find that general safety alignment does not reliably transfer to least-privilege tool choice, while prompt-level controls provide only limited mitigation under transient failures. We therefore introduce a privilege-aware post-training defense that teaches agents to prefer sufficient lower-privilege tools and escalate only when necessary. Our mitigation experiments show that this defense substantially reduces unnecessary high-privilege tool use while preserving general capabilities.</ns0:summary>\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-18T09:54:48Z</ns0:published>\n    <ns1:comment>code: https://github.com/AISafetyHub/agent-tool-selection-bias</ns1:comment>\n    <ns1:primary_category term=\"cs.SE\" />\n    <ns0:author>\n      <ns0:name>Kaiyue Yang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yuyan Bu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jingwei Yi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yuchi Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Biyu Zhou</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Juntao Dai</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Songlin Hu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yaodong Yang</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "d71eb8366863c814dced72ef3162a50473b950c0ec9ad99ba76b830a28a252b8",
+          "source": "arXiv",
+          "source_id": "2606.20023v2",
+          "source_rank": 2
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2606.20023v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2606.20023"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "rank": 2,
+          "source": "arXiv"
+        }
+      ],
+      "title": "When Lower Privileges Suffice: Investigating Over-Privileged Tool Selection in LLM Agents",
+      "urls": [
+        "https://arxiv.org/abs/2606.20023v2",
+        "https://arxiv.org/pdf/2606.20023v2"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "After freezing the first phase of the fifth generation of wireless networks (5G) standardization, it finally goes live now and the rollout of the commercial launch (most in fixed 5G broadband services) and migration has been started. However, some challenges are arising in the deployment, integration of each technology, and the interoperability in the network of the communication service providers (CSPs). At the same time, the evolution of 5G is not clear and many questions arise such as whether 5G has long-term evolution or when 5G will change to a next-generation one. This paper provides long-term migration options and paths towards 5G considering many key factors such as the cost, local/national data traffic, marketing, and the standardization trends in the radio access network (RAN), the transport network (TN), the core network (CN), and E2E network. Moreover, we outline some 5G evolution road maps emphasizing on the technologies, standards, and service time lines. The proposed migration paths can be the answer to some CSPs concerns about how to do long-term migration to 5G and beyond.",
+      "authors": [
+        "Abulfazl Zakeri",
+        "Narges Gholipoor",
+        "Mohsen Tajallifar",
+        "Sina Ebrahimi",
+        "Mohammad Reza Javan",
+        "Nader Mokari",
+        "Ahmad Reza Sharafat"
+      ],
+      "candidate_id": "prior-5294e25dcf37a10b",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2002.08984v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2002.08984v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+interface+evolution+schema+diff+constrained+call+migration+local+regression&start=0",
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2002.08984v1</ns0:id>\n    <ns0:title>E2E Migration Strategies Towards 5G: Long-term Migration Plan and Evolution Roadmap</ns0:title>\n    <ns0:updated>2020-02-20T19:35:12Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2002.08984v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2002.08984v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>After freezing the first phase of the fifth generation of wireless networks (5G) standardization, it finally goes live now and the rollout of the commercial launch (most in fixed 5G broadband services) and migration has been started. However, some challenges are arising in the deployment, integration of each technology, and the interoperability in the network of the communication service providers (CSPs). At the same time, the evolution of 5G is not clear and many questions arise such as whether 5G has long-term evolution or when 5G will change to a next-generation one. This paper provides long-term migration options and paths towards 5G considering many key factors such as the cost, local/national data traffic, marketing, and the standardization trends in the radio access network (RAN), the transport network (TN), the core network (CN), and E2E network. Moreover, we outline some 5G evolution road maps emphasizing on the technologies, standards, and service time lines. The proposed migration paths can be the answer to some CSPs concerns about how to do long-term migration to 5G and beyond.</ns0:summary>\n    <ns0:category term=\"eess.SP\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.NI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2020-02-20T19:35:12Z</ns0:published>\n    <ns1:comment>Migration, 5G, evolution, roadmap, option, path, 3 Figure, 4Table</ns1:comment>\n    <ns1:primary_category term=\"eess.SP\" />\n    <ns0:author>\n      <ns0:name>Abulfazl Zakeri</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Narges Gholipoor</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mohsen Tajallifar</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sina Ebrahimi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mohammad Reza Javan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Nader Mokari</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ahmad Reza Sharafat</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "d71eb8366863c814dced72ef3162a50473b950c0ec9ad99ba76b830a28a252b8",
+          "source": "arXiv",
+          "source_id": "2002.08984v1",
+          "source_rank": 3
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2002.08984v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2002.08984"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "rank": 3,
+          "source": "arXiv"
+        }
+      ],
+      "title": "E2E Migration Strategies Towards 5G: Long-term Migration Plan and Evolution Roadmap",
+      "urls": [
+        "https://arxiv.org/abs/2002.08984v1",
+        "https://arxiv.org/pdf/2002.08984v1"
+      ],
+      "venue": null,
+      "year": 2020
+    },
+    {
+      "abstract": "Large Language Model (LLM) agents significantly extend the capabilities of standalone LLMs, empowering them to interact with external tools (e.g., APIs, functions) and complete various tasks in a self-directed fashion. The challenge of tool use demands that LLMs not only understand user queries and generate answers accurately but also excel in task planning, tool invocation, and result summarization. While traditional works focus on training a single LLM with all these capabilities, performance limitations become apparent, particularly with smaller models. To overcome these challenges, we propose a novel approach that decomposes the aforementioned capabilities into a planner, caller, and summarizer. Each component is implemented by a single LLM that focuses on a specific capability and collaborates with others to accomplish the task. This modular framework facilitates individual updates and the potential use of smaller LLMs for building each capability. To effectively train this framework, we introduce a two-stage training paradigm. First, we fine-tune a backbone LLM on the entire dataset without discriminating sub-tasks, providing the model with a comprehensive understanding of the task. Second, the fine-tuned LLM is used to instantiate the planner, caller, and summarizer respectively, which are continually fine-tuned on respective sub-tasks. Evaluation across various tool-use benchmarks illustrates that our proposed multi-LLM framework surpasses the traditional single-LLM approach, highlighting its efficacy and advantages in tool learning.",
+      "authors": [
+        "Weizhou Shen",
+        "Chenliang Li",
+        "Hongzhan Chen",
+        "Ming Yan",
+        "Xiaojun Quan",
+        "Hehong Chen",
+        "Ji Zhang",
+        "Fei Huang"
+      ],
+      "candidate_id": "prior-4e8f534211cb513c",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2401.07324v3"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2401.07324v3"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+interface+evolution+schema+diff+constrained+call+migration+local+regression&start=0",
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2401.07324v3</ns0:id>\n    <ns0:title>Small LLMs Are Weak Tool Learners: A Multi-LLM Agent</ns0:title>\n    <ns0:updated>2024-02-16T12:42:25Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2401.07324v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2401.07324v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Large Language Model (LLM) agents significantly extend the capabilities of standalone LLMs, empowering them to interact with external tools (e.g., APIs, functions) and complete various tasks in a self-directed fashion. The challenge of tool use demands that LLMs not only understand user queries and generate answers accurately but also excel in task planning, tool invocation, and result summarization. While traditional works focus on training a single LLM with all these capabilities, performance limitations become apparent, particularly with smaller models. To overcome these challenges, we propose a novel approach that decomposes the aforementioned capabilities into a planner, caller, and summarizer. Each component is implemented by a single LLM that focuses on a specific capability and collaborates with others to accomplish the task. This modular framework facilitates individual updates and the potential use of smaller LLMs for building each capability. To effectively train this framework, we introduce a two-stage training paradigm. First, we fine-tune a backbone LLM on the entire dataset without discriminating sub-tasks, providing the model with a comprehensive understanding of the task. Second, the fine-tuned LLM is used to instantiate the planner, caller, and summarizer respectively, which are continually fine-tuned on respective sub-tasks. Evaluation across various tool-use benchmarks illustrates that our proposed multi-LLM framework surpasses the traditional single-LLM approach, highlighting its efficacy and advantages in tool learning.</ns0:summary>\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2024-01-14T16:17:07Z</ns0:published>\n    <ns1:comment>On progress, github repo: https://github.com/X-PLUG/Multi-LLM-Agent</ns1:comment>\n    <ns1:primary_category term=\"cs.AI\" />\n    <ns0:author>\n      <ns0:name>Weizhou Shen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chenliang Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hongzhan Chen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ming Yan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xiaojun Quan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hehong Chen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ji Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Fei Huang</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "d71eb8366863c814dced72ef3162a50473b950c0ec9ad99ba76b830a28a252b8",
+          "source": "arXiv",
+          "source_id": "2401.07324v3",
+          "source_rank": 4
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2401.07324v3"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2401.07324"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "rank": 4,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Small LLMs Are Weak Tool Learners: A Multi-LLM Agent",
+      "urls": [
+        "https://arxiv.org/abs/2401.07324v3",
+        "https://arxiv.org/pdf/2401.07324v3"
+      ],
+      "venue": null,
+      "year": 2024
+    },
+    {
+      "abstract": "Complex physical models are the most advanced tools available for producing realistic simulations of the climate system. However, such levels of realism imply high computational cost and restrictions on their use for policymaking and risk assessment. Two central characteristics of climate change are uncertainty and that it is a dynamic problem in which international actions can significantly alter climate projections and information needs, including partial and full compliance of global climate goals. Here we present AIRCC-Clim, a simple climate model emulator that produces regional probabilistic climate change projections of monthly and annual temperature and precipitation, as well as risk measures, based both on standard and user-defined emissions scenarios for six greenhouse gases. AIRCC-Clim emulates 37 atmosphere-ocean coupled general circulation models with low computational and technical requirements for the user. This standalone, user-friendly software is designed for a variety of applications including impact assessments, climate policy evaluation and integrated assessment modelling.",
+      "authors": [
+        "Francisco Estrada",
+        "Oscar Calderón-Bustamante",
+        "Wouter Botzen",
+        "Julián A. Velasco",
+        "Richard S. J. Tol"
+      ],
+      "candidate_id": "prior-a6491b1ee9ffac8c",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2111.01762v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2111.01762v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+interface+evolution+schema+diff+constrained+call+migration+local+regression&start=0",
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2111.01762v1</ns0:id>\n    <ns0:title>AIRCC-Clim: a user-friendly tool for generating regional probabilistic climate change scenarios and risk measures</ns0:title>\n    <ns0:updated>2021-10-30T11:09:03Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2111.01762v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2111.01762v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Complex physical models are the most advanced tools available for producing realistic simulations of the climate system. However, such levels of realism imply high computational cost and restrictions on their use for policymaking and risk assessment. Two central characteristics of climate change are uncertainty and that it is a dynamic problem in which international actions can significantly alter climate projections and information needs, including partial and full compliance of global climate goals. Here we present AIRCC-Clim, a simple climate model emulator that produces regional probabilistic climate change projections of monthly and annual temperature and precipitation, as well as risk measures, based both on standard and user-defined emissions scenarios for six greenhouse gases. AIRCC-Clim emulates 37 atmosphere-ocean coupled general circulation models with low computational and technical requirements for the user. This standalone, user-friendly software is designed for a variety of applications including impact assessments, climate policy evaluation and integrated assessment modelling.</ns0:summary>\n    <ns0:category term=\"physics.ao-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"econ.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.AP\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2021-10-30T11:09:03Z</ns0:published>\n    <ns1:primary_category term=\"physics.ao-ph\" />\n    <ns0:author>\n      <ns0:name>Francisco Estrada</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Oscar Calderón-Bustamante</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wouter Botzen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Julián A. Velasco</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Richard S. J. Tol</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "d71eb8366863c814dced72ef3162a50473b950c0ec9ad99ba76b830a28a252b8",
+          "source": "arXiv",
+          "source_id": "2111.01762v1",
+          "source_rank": 5
+        },
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3AMCP+tool+schema+change+adaptation+workflow+repair+version+migration&start=0",
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2111.01762v1</ns0:id>\n    <ns0:title>AIRCC-Clim: a user-friendly tool for generating regional probabilistic climate change scenarios and risk measures</ns0:title>\n    <ns0:updated>2021-10-30T11:09:03Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2111.01762v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2111.01762v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Complex physical models are the most advanced tools available for producing realistic simulations of the climate system. However, such levels of realism imply high computational cost and restrictions on their use for policymaking and risk assessment. Two central characteristics of climate change are uncertainty and that it is a dynamic problem in which international actions can significantly alter climate projections and information needs, including partial and full compliance of global climate goals. Here we present AIRCC-Clim, a simple climate model emulator that produces regional probabilistic climate change projections of monthly and annual temperature and precipitation, as well as risk measures, based both on standard and user-defined emissions scenarios for six greenhouse gases. AIRCC-Clim emulates 37 atmosphere-ocean coupled general circulation models with low computational and technical requirements for the user. This standalone, user-friendly software is designed for a variety of applications including impact assessments, climate policy evaluation and integrated assessment modelling.</ns0:summary>\n    <ns0:category term=\"physics.ao-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"econ.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.AP\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2021-10-30T11:09:03Z</ns0:published>\n    <ns1:primary_category term=\"physics.ao-ph\" />\n    <ns0:author>\n      <ns0:name>Francisco Estrada</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Oscar Calderón-Bustamante</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wouter Botzen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Julián A. Velasco</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Richard S. J. Tol</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "1cd5d2e22584341b03c874e9098c15149f06744209e668950df50f52b960ae57",
+          "source": "arXiv",
+          "source_id": "2111.01762v1",
+          "source_rank": 2
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "source": "arXiv"
+        },
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2111.01762v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2111.01762"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "rank": 5,
+          "source": "arXiv"
+        },
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "rank": 2,
+          "source": "arXiv"
+        }
+      ],
+      "title": "AIRCC-Clim: a user-friendly tool for generating regional probabilistic climate change scenarios and risk measures",
+      "urls": [
+        "https://arxiv.org/abs/2111.01762v1",
+        "https://arxiv.org/pdf/2111.01762v1"
+      ],
+      "venue": null,
+      "year": 2021
+    },
+    {
+      "abstract": "Large Language Models (LLMs) are increasingly integrated into diverse applications. The rapid evolution of LLMs presents opportunities for developers to enhance applications continuously. However, this constant adaptation can also lead to performance regressions during model migrations. While several interactive tools have been proposed to streamline the complexity of prompt engineering, few address the specific requirements of regression testing for LLM Migrations. To bridge this gap, we introduce RETAIN (REgression Testing guided LLM migrAtIoN), a tool designed explicitly for regression testing in LLM Migrations. RETAIN comprises two key components: an interactive interface tailored to regression testing needs during LLM migrations, and an error discovery module that facilitates understanding of differences in model behaviors. The error discovery module generates textual descriptions of various errors or differences between model outputs, providing actionable insights for prompt refinement. Our automatic evaluation and empirical user studies demonstrate that RETAIN, when compared to manual evaluation, enabled participants to identify twice as many errors, facilitated experimentation with 75% more prompts, and achieves 12% higher metric scores in a given time frame.",
+      "authors": [
+        "Tanay Dixit",
+        "Daniel Lee",
+        "Sally Fang",
+        "Sai Sree Harsha",
+        "Anirudh Sureshan",
+        "Akash Maharaj",
+        "Yunyao Li"
+      ],
+      "candidate_id": "prior-f05fe94b615962fa",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2409.03928v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2409.03928v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+interface+evolution+schema+diff+constrained+call+migration+local+regression&start=0",
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2409.03928v1</ns0:id>\n    <ns0:title>RETAIN: Interactive Tool for Regression Testing Guided LLM Migration</ns0:title>\n    <ns0:updated>2024-09-05T22:22:57Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2409.03928v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2409.03928v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Large Language Models (LLMs) are increasingly integrated into diverse applications. The rapid evolution of LLMs presents opportunities for developers to enhance applications continuously. However, this constant adaptation can also lead to performance regressions during model migrations. While several interactive tools have been proposed to streamline the complexity of prompt engineering, few address the specific requirements of regression testing for LLM Migrations. To bridge this gap, we introduce RETAIN (REgression Testing guided LLM migrAtIoN), a tool designed explicitly for regression testing in LLM Migrations. RETAIN comprises two key components: an interactive interface tailored to regression testing needs during LLM migrations, and an error discovery module that facilitates understanding of differences in model behaviors. The error discovery module generates textual descriptions of various errors or differences between model outputs, providing actionable insights for prompt refinement. Our automatic evaluation and empirical user studies demonstrate that RETAIN, when compared to manual evaluation, enabled participants to identify twice as many errors, facilitated experimentation with 75% more prompts, and achieves 12% higher metric scores in a given time frame.</ns0:summary>\n    <ns0:category term=\"cs.IR\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2024-09-05T22:22:57Z</ns0:published>\n    <ns1:comment>Preprint</ns1:comment>\n    <ns1:primary_category term=\"cs.IR\" />\n    <ns0:author>\n      <ns0:name>Tanay Dixit</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Daniel Lee</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sally Fang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sai Sree Harsha</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Anirudh Sureshan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Akash Maharaj</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yunyao Li</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "d71eb8366863c814dced72ef3162a50473b950c0ec9ad99ba76b830a28a252b8",
+          "source": "arXiv",
+          "source_id": "2409.03928v1",
+          "source_rank": 6
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2409.03928v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2409.03928"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "rank": 6,
+          "source": "arXiv"
+        }
+      ],
+      "title": "RETAIN: Interactive Tool for Regression Testing Guided LLM Migration",
+      "urls": [
+        "https://arxiv.org/abs/2409.03928v1",
+        "https://arxiv.org/pdf/2409.03928v1"
+      ],
+      "venue": null,
+      "year": 2024
+    },
+    {
+      "abstract": "Tool use has become central to modern LLM agents, yet interface design is rarely isolated as an experimental variable. This paper studies whether schema based tool contracts and structured validation diagnostics improve reliability under strict interaction budgets. We evaluate three conditions that preserve identical tool semantics and information content: free form documentation, JSON Schema specifications, and JSON Schema with structured diagnostics. We implement a deterministic software engineering sandbox with logs, metrics, configurations, and repository tasks, and evaluate a fully crossed pilot with one open local model, three seeds, three interface conditions, and four budgets. We report end task success, interface misuse, execution failures, semantic misuse, recovery behavior, and overhead. In this pilot, success remains zero across conditions, while schema conditions reduce interface misuse but not semantic misuse. The evidence supports a precise interpretation that interface formalization improves contract adherence, but semantic action quality and timeout sensitive tasks remain dominant bottlenecks under constrained local inference.",
+      "authors": [
+        "Akshey Sigdel",
+        "Rista Baral"
+      ],
+      "candidate_id": "prior-490d49a4acc5d707",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2603.13404v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2603.13404v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+interface+evolution+schema+diff+constrained+call+migration+local+regression&start=0",
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2603.13404v1</ns0:id>\n    <ns0:title>Schema First Tool APIs for LLM Agents: A Controlled Study of Tool Misuse, Recovery, and Budgeted Performance</ns0:title>\n    <ns0:updated>2026-03-12T07:11:16Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2603.13404v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2603.13404v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Tool use has become central to modern LLM agents, yet interface design is rarely isolated as an experimental variable. This paper studies whether schema based tool contracts and structured validation diagnostics improve reliability under strict interaction budgets. We evaluate three conditions that preserve identical tool semantics and information content: free form documentation, JSON Schema specifications, and JSON Schema with structured diagnostics.\n  We implement a deterministic software engineering sandbox with logs, metrics, configurations, and repository tasks, and evaluate a fully crossed pilot with one open local model, three seeds, three interface conditions, and four budgets. We report end task success, interface misuse, execution failures, semantic misuse, recovery behavior, and overhead. In this pilot, success remains zero across conditions, while schema conditions reduce interface misuse but not semantic misuse. The evidence supports a precise interpretation that interface formalization improves contract adherence, but semantic action quality and timeout sensitive tasks remain dominant bottlenecks under constrained local inference.</ns0:summary>\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-03-12T07:11:16Z</ns0:published>\n    <ns1:primary_category term=\"cs.SE\" />\n    <ns0:author>\n      <ns0:name>Akshey Sigdel</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Rista Baral</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "d71eb8366863c814dced72ef3162a50473b950c0ec9ad99ba76b830a28a252b8",
+          "source": "arXiv",
+          "source_id": "2603.13404v1",
+          "source_rank": 7
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2603.13404v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2603.13404"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "rank": 7,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Schema First Tool APIs for LLM Agents: A Controlled Study of Tool Misuse, Recovery, and Budgeted Performance",
+      "urls": [
+        "https://arxiv.org/abs/2603.13404v1",
+        "https://arxiv.org/pdf/2603.13404v1"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "In the domain of Human-Computer Interaction, focus groups represent a widely utilised yet resource-intensive methodology, often demanding the expertise of skilled moderators and meticulous preparatory efforts. This study introduces the ``Focus Agent,'' a Large Language Model (LLM) powered framework that simulates both the focus group (for data collection) and acts as a moderator in a focus group setting with human participants. To assess the data quality derived from the Focus Agent, we ran five focus group sessions with a total of 23 human participants as well as deploying the Focus Agent to simulate these discussions with AI participants. Quantitative analysis indicates that Focus Agent can generate opinions similar to those of human participants. Furthermore, the research exposes some improvements associated with LLMs acting as moderators in focus group discussions that include human participants.",
+      "authors": [
+        "Taiyu Zhang",
+        "Xuesong Zhang",
+        "Robbe Cools",
+        "Adalberto L. Simeone"
+      ],
+      "candidate_id": "prior-093c27f936abed8f",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2409.01907v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2409.01907v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+interface+evolution+schema+diff+constrained+call+migration+local+regression&start=0",
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2409.01907v1</ns0:id>\n    <ns0:title>Focus Agent: LLM-Powered Virtual Focus Group</ns0:title>\n    <ns0:updated>2024-09-03T13:56:14Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2409.01907v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2409.01907v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>In the domain of Human-Computer Interaction, focus groups represent a widely utilised yet resource-intensive methodology, often demanding the expertise of skilled moderators and meticulous preparatory efforts. This study introduces the ``Focus Agent,'' a Large Language Model (LLM) powered framework that simulates both the focus group (for data collection) and acts as a moderator in a focus group setting with human participants. To assess the data quality derived from the Focus Agent, we ran five focus group sessions with a total of 23 human participants as well as deploying the Focus Agent to simulate these discussions with AI participants. Quantitative analysis indicates that Focus Agent can generate opinions similar to those of human participants. Furthermore, the research exposes some improvements associated with LLMs acting as moderators in focus group discussions that include human participants.</ns0:summary>\n    <ns0:category term=\"cs.HC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2024-09-03T13:56:14Z</ns0:published>\n    <ns1:comment>8 pages, the 24th Intelligent Virtual Agent Conference</ns1:comment>\n    <ns1:primary_category term=\"cs.HC\" />\n    <ns1:journal_ref>Taiyu Zhang, Xuesong Zhang, Robbe Cools, and Adalberto Simeone. 2024. Focus Agent: LLM-Powered Virtual Focus Group. In ACM International Conference on Intelligent Virtual Agents (IVA '24), September 16--19, 2024, GLASGOW, United Kingdom</ns1:journal_ref>\n    <ns0:author>\n      <ns0:name>Taiyu Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xuesong Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Robbe Cools</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Adalberto L. Simeone</ns0:name>\n    </ns0:author>\n    <ns1:doi>10.1145/3652988.3673918</ns1:doi>\n    <ns0:link rel=\"related\" href=\"https://doi.org/10.1145/3652988.3673918\" title=\"doi\" />\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "d71eb8366863c814dced72ef3162a50473b950c0ec9ad99ba76b830a28a252b8",
+          "source": "arXiv",
+          "source_id": "2409.01907v1",
+          "source_rank": 8
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2409.01907v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2409.01907"
+        },
+        {
+          "kind": "doi",
+          "value": "10.1145/3652988.3673918"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "rank": 8,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Focus Agent: LLM-Powered Virtual Focus Group",
+      "urls": [
+        "https://arxiv.org/abs/2409.01907v1",
+        "https://arxiv.org/pdf/2409.01907v1"
+      ],
+      "venue": "Taiyu Zhang, Xuesong Zhang, Robbe Cools, and Adalberto Simeone. 2024. Focus Agent: LLM-Powered Virtual Focus Group. In ACM International Conference on Intelligent Virtual Agents (IVA '24), September 16--19, 2024, GLASGOW, United Kingdom",
+      "year": 2024
+    },
+    {
+      "abstract": "Large language model (LLM) agents increasingly rely on external tools to complete complex real-world tasks. However, reliable tool-use planning remains challenging due to the limitations of implicit reasoning and the evolving nature of real-world execution environments. Existing tool-use agents typically rely on LLMs to infer tool compositions from textual descriptions, which can lead to inefficient exploration and unreliable execution in complex tasks. To address these challenges, we model tool relations at the schema level and construct a directed Tool--Schema Hypergraph, in which tools are represented as hyperedges from their required input-schema nodes to their output-schema nodes. Furthermore, we propose HyperAgent, a Tool--Schema Hypergraph-guided framework for dynamic planning and execution. Given a task, HyperAgent first extracts a task-relevant tool context graph and uses it to guide the construction of a schema-aware Task DAG. During execution, HyperAgent dynamically realizes each subtask by constructing a state-conditioned tool support graph through deficit-oriented expansion, which identifies unresolved requirements and retrieves supporting producer tools according to the current agent state. Experiments on AppWorld demonstrate that HyperAgent improves task completion performance while reducing redundant API calls, LLM interactions, and token consumption compared with existing agent baselines.",
+      "authors": [
+        "Zian Zhai",
+        "Xingyu Tan",
+        "Gaowang Zou",
+        "Xiaoyang Wang",
+        "Wenjie Zhang"
+      ],
+      "candidate_id": "prior-742f866174894457",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2608.02650v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2608.02650v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+interface+evolution+schema+diff+constrained+call+migration+local+regression&start=0",
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2608.02650v1</ns0:id>\n    <ns0:title>HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents</ns0:title>\n    <ns0:updated>2026-07-31T21:42:35Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2608.02650v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2608.02650v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Large language model (LLM) agents increasingly rely on external tools to complete complex real-world tasks. However, reliable tool-use planning remains challenging due to the limitations of implicit reasoning and the evolving nature of real-world execution environments. Existing tool-use agents typically rely on LLMs to infer tool compositions from textual descriptions, which can lead to inefficient exploration and unreliable execution in complex tasks. To address these challenges, we model tool relations at the schema level and construct a directed Tool--Schema Hypergraph, in which tools are represented as hyperedges from their required input-schema nodes to their output-schema nodes. Furthermore, we propose HyperAgent, a Tool--Schema Hypergraph-guided framework for dynamic planning and execution. Given a task, HyperAgent first extracts a task-relevant tool context graph and uses it to guide the construction of a schema-aware Task DAG. During execution, HyperAgent dynamically realizes each subtask by constructing a state-conditioned tool support graph through deficit-oriented expansion, which identifies unresolved requirements and retrieves supporting producer tools according to the current agent state. Experiments on AppWorld demonstrate that HyperAgent improves task completion performance while reducing redundant API calls, LLM interactions, and token consumption compared with existing agent baselines.</ns0:summary>\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-07-31T21:42:35Z</ns0:published>\n    <ns1:primary_category term=\"cs.AI\" />\n    <ns0:author>\n      <ns0:name>Zian Zhai</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xingyu Tan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Gaowang Zou</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xiaoyang Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wenjie Zhang</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "d71eb8366863c814dced72ef3162a50473b950c0ec9ad99ba76b830a28a252b8",
+          "source": "arXiv",
+          "source_id": "2608.02650v1",
+          "source_rank": 9
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2608.02650v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2608.02650"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "rank": 9,
+          "source": "arXiv"
+        }
+      ],
+      "title": "HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents",
+      "urls": [
+        "https://arxiv.org/abs/2608.02650v1",
+        "https://arxiv.org/pdf/2608.02650v1"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "Integrating large language models (LLMs) into personal assistants, like Xiao Ai and Blue Heart V, effectively enhances their ability to interact with humans, solve complex tasks, and manage IoT devices. Such assistants are also termed LLM-driven agents. Upon receiving user requests, the LLM-driven agent generates plans using an LLM, executes these plans through various tools, and then returns the response to the user. During this process, the latency for generating a plan with an LLM can reach tens of seconds, significantly degrading user experience. Real-world dataset analysis shows that about 30% of the requests received by LLM-driven agents are identical or similar, which allows the reuse of previously generated plans to reduce latency. However, it is difficult to accurately define the similarity between the request texts received by the LLM-driven agent through directly evaluating the original request texts. Moreover, the diverse expressions of natural language and the unstructured format of plan texts make implementing plan reuse challenging. To address these issues, we present and implement a plan reuse mechanism for LLM-driven agents called AgentReuse. AgentReuse leverages the similarities and differences among requests' semantics and uses intent classification to evaluate the similarities between requests and enable the reuse of plans. Experimental results based on a real-world dataset demonstrate that AgentReuse achieves a 93% effective plan reuse rate, an F1 score of 0.9718, and an accuracy of 0.9459 in evaluating request similarities, reducing latency by 93.12% compared with baselines without using the reuse mechanism.",
+      "authors": [
+        "Guopeng Li",
+        "Ruiqi Wu",
+        "Haisheng Tan"
+      ],
+      "candidate_id": "prior-9b066603d819195d",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2512.21309v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2512.21309v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+interface+evolution+schema+diff+constrained+call+migration+local+regression&start=0",
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2512.21309v2</ns0:id>\n    <ns0:title>A Plan Reuse Mechanism for LLM-Driven Agent</ns0:title>\n    <ns0:updated>2025-12-25T05:19:04Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2512.21309v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2512.21309v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Integrating large language models (LLMs) into personal assistants, like Xiao Ai and Blue Heart V, effectively enhances their ability to interact with humans, solve complex tasks, and manage IoT devices. Such assistants are also termed LLM-driven agents. Upon receiving user requests, the LLM-driven agent generates plans using an LLM, executes these plans through various tools, and then returns the response to the user. During this process, the latency for generating a plan with an LLM can reach tens of seconds, significantly degrading user experience. Real-world dataset analysis shows that about 30% of the requests received by LLM-driven agents are identical or similar, which allows the reuse of previously generated plans to reduce latency. However, it is difficult to accurately define the similarity between the request texts received by the LLM-driven agent through directly evaluating the original request texts. Moreover, the diverse expressions of natural language and the unstructured format of plan texts make implementing plan reuse challenging. To address these issues, we present and implement a plan reuse mechanism for LLM-driven agents called AgentReuse. AgentReuse leverages the similarities and differences among requests' semantics and uses intent classification to evaluate the similarities between requests and enable the reuse of plans. Experimental results based on a real-world dataset demonstrate that AgentReuse achieves a 93% effective plan reuse rate, an F1 score of 0.9718, and an accuracy of 0.9459 in evaluating request similarities, reducing latency by 93.12% compared with baselines without using the reuse mechanism.</ns0:summary>\n    <ns0:category term=\"cs.MA\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-12-24T18:08:03Z</ns0:published>\n    <ns1:comment>This paper is an English version of A Plan Reuse Mechanism for LLM-Driven Agent published in 2024 in the Journal of Computer Research and Development</ns1:comment>\n    <ns1:primary_category term=\"cs.MA\" />\n    <ns0:author>\n      <ns0:name>Guopeng Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ruiqi Wu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Haisheng Tan</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "d71eb8366863c814dced72ef3162a50473b950c0ec9ad99ba76b830a28a252b8",
+          "source": "arXiv",
+          "source_id": "2512.21309v2",
+          "source_rank": 10
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2512.21309v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2512.21309"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "rank": 10,
+          "source": "arXiv"
+        }
+      ],
+      "title": "A Plan Reuse Mechanism for LLM-Driven Agent",
+      "urls": [
+        "https://arxiv.org/abs/2512.21309v2",
+        "https://arxiv.org/pdf/2512.21309v2"
+      ],
+      "venue": null,
+      "year": 2025
+    },
+    {
+      "abstract": "This paper establishes a fundamental convergence: Schema-Guided Dialogue (SGD) and the Model Context Protocol (MCP) represent two manifestations of a unified paradigm for deterministic, auditable LLM-agent interaction. SGD, designed for dialogue-based API discovery (2019), and MCP, now the de facto standard for LLM-tool integration, share the same core insight -- that schemas can encode not just tool signatures but operational constraints and reasoning guidance. By analyzing this convergence, we extract five foundational principles for schema design: (1) Semantic Completeness over Syntactic Precision, (2) Explicit Action Boundaries, (3) Failure Mode Documentation, (4) Progressive Disclosure Compatibility, and (5) Inter-Tool Relationship Declaration. These principles reveal three novel insights: first, SGD's original design was fundamentally sound and should be inherited by MCP; second, both frameworks leave failure modes and inter-tool relationships unexploited -- gaps we identify and resolve; third, progressive disclosure emerges as a critical production-scaling insight under real-world token constraints. We provide concrete design patterns for each principle. These principles position schema-driven governance as a scalable mechanism for AI system oversight without requiring proprietary system inspection -- central to Software 3.0.",
+      "authors": [
+        "Andreas Schlapbach"
+      ],
+      "candidate_id": "prior-a639e604ecf60c33",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2602.18764v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2602.18764v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+interface+evolution+schema+diff+constrained+call+migration+local+regression&start=0",
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2602.18764v2</ns0:id>\n    <ns0:title>The Convergence of Schema-Guided Dialogue Systems and the Model Context Protocol</ns0:title>\n    <ns0:updated>2026-03-04T20:28:56Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2602.18764v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2602.18764v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>This paper establishes a fundamental convergence: Schema-Guided Dialogue (SGD) and the Model Context Protocol (MCP) represent two manifestations of a unified paradigm for deterministic, auditable LLM-agent interaction. SGD, designed for dialogue-based API discovery (2019), and MCP, now the de facto standard for LLM-tool integration, share the same core insight -- that schemas can encode not just tool signatures but operational constraints and reasoning guidance. By analyzing this convergence, we extract five foundational principles for schema design: (1) Semantic Completeness over Syntactic Precision, (2) Explicit Action Boundaries, (3) Failure Mode Documentation, (4) Progressive Disclosure Compatibility, and (5) Inter-Tool Relationship Declaration. These principles reveal three novel insights: first, SGD's original design was fundamentally sound and should be inherited by MCP; second, both frameworks leave failure modes and inter-tool relationships unexploited -- gaps we identify and resolve; third, progressive disclosure emerges as a critical production-scaling insight under real-world token constraints. We provide concrete design patterns for each principle. These principles position schema-driven governance as a scalable mechanism for AI system oversight without requiring proprietary system inspection -- central to Software 3.0.</ns0:summary>\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-02-21T09:02:35Z</ns0:published>\n    <ns1:comment>18 sections, 4 figures, 7 tables, 40 references. Original research presenting: (1) formal framework mapping Schema-Guided Dialogue principles to Model Context Protocol concepts, (2) five foundational design principles for LLM-native schema authoring, (3) architectural patterns for secure, scalable agent orchestration. Research supported by SBB (Swiss Federal Railways)</ns1:comment>\n    <ns1:primary_category term=\"cs.AI\" />\n    <ns0:author>\n      <ns0:name>Andreas Schlapbach</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "d71eb8366863c814dced72ef3162a50473b950c0ec9ad99ba76b830a28a252b8",
+          "source": "arXiv",
+          "source_id": "2602.18764v2",
+          "source_rank": 11
+        },
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3AMCP+tool+schema+change+adaptation+workflow+repair+version+migration&start=0",
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2602.18764v2</ns0:id>\n    <ns0:title>The Convergence of Schema-Guided Dialogue Systems and the Model Context Protocol</ns0:title>\n    <ns0:updated>2026-03-04T20:28:56Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2602.18764v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2602.18764v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>This paper establishes a fundamental convergence: Schema-Guided Dialogue (SGD) and the Model Context Protocol (MCP) represent two manifestations of a unified paradigm for deterministic, auditable LLM-agent interaction. SGD, designed for dialogue-based API discovery (2019), and MCP, now the de facto standard for LLM-tool integration, share the same core insight -- that schemas can encode not just tool signatures but operational constraints and reasoning guidance. By analyzing this convergence, we extract five foundational principles for schema design: (1) Semantic Completeness over Syntactic Precision, (2) Explicit Action Boundaries, (3) Failure Mode Documentation, (4) Progressive Disclosure Compatibility, and (5) Inter-Tool Relationship Declaration. These principles reveal three novel insights: first, SGD's original design was fundamentally sound and should be inherited by MCP; second, both frameworks leave failure modes and inter-tool relationships unexploited -- gaps we identify and resolve; third, progressive disclosure emerges as a critical production-scaling insight under real-world token constraints. We provide concrete design patterns for each principle. These principles position schema-driven governance as a scalable mechanism for AI system oversight without requiring proprietary system inspection -- central to Software 3.0.</ns0:summary>\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-02-21T09:02:35Z</ns0:published>\n    <ns1:comment>18 sections, 4 figures, 7 tables, 40 references. Original research presenting: (1) formal framework mapping Schema-Guided Dialogue principles to Model Context Protocol concepts, (2) five foundational design principles for LLM-native schema authoring, (3) architectural patterns for secure, scalable agent orchestration. Research supported by SBB (Swiss Federal Railways)</ns1:comment>\n    <ns1:primary_category term=\"cs.AI\" />\n    <ns0:author>\n      <ns0:name>Andreas Schlapbach</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n"
+          },
+          "response_body_sha256": "1cd5d2e22584341b03c874e9098c15149f06744209e668950df50f52b960ae57",
+          "source": "arXiv",
+          "source_id": "2602.18764v2",
+          "source_rank": 12
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "source": "arXiv"
+        },
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2602.18764v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2602.18764"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "rank": 11,
+          "source": "arXiv"
+        },
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "rank": 12,
+          "source": "arXiv"
+        }
+      ],
+      "title": "The Convergence of Schema-Guided Dialogue Systems and the Model Context Protocol",
+      "urls": [
+        "https://arxiv.org/abs/2602.18764v2",
+        "https://arxiv.org/pdf/2602.18764v2"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "The integration of tool use into large language models (LLMs) enables agentic systems with real-world impact. In the meantime, unlike standalone LLMs, compromised agents can execute malicious workflows with more consequential impact, signified by their tool-use capability. We propose AgentGuard, a framework to autonomously discover and validate unsafe tool-use workflows, followed by generating safety constraints to confine the behaviors of agents, achieving the baseline of safety guarantee at deployment. AgentGuard leverages the LLM orchestrator's innate capabilities - knowledge of tool functionalities, scalable and realistic workflow generation, and tool execution privileges - to act as its own safety evaluator. The framework operates through four phases: identifying unsafe workflows, validating them in real-world execution, generating safety constraints, and validating constraint efficacy. The output, an evaluation report with unsafe workflows, test cases, and validated constraints, enables multiple security applications. We empirically demonstrate AgentGuard's feasibility with experiments. With this exploratory work, we hope to inspire the establishment of standardized testing and hardening procedures for LLM agents to enhance their trustworthiness in real-world applications.",
+      "authors": [
+        "Jizhou Chen",
+        "Samuel Lee Cong"
+      ],
+      "candidate_id": "prior-54be9f2afc0764f3",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2502.09809v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2502.09809v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+interface+evolution+schema+diff+constrained+call+migration+local+regression&start=0",
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2502.09809v1</ns0:id>\n    <ns0:title>AgentGuard: Repurposing Agentic Orchestrator for Safety Evaluation of Tool Orchestration</ns0:title>\n    <ns0:updated>2025-02-13T23:00:33Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2502.09809v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2502.09809v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>The integration of tool use into large language models (LLMs) enables agentic systems with real-world impact. In the meantime, unlike standalone LLMs, compromised agents can execute malicious workflows with more consequential impact, signified by their tool-use capability. We propose AgentGuard, a framework to autonomously discover and validate unsafe tool-use workflows, followed by generating safety constraints to confine the behaviors of agents, achieving the baseline of safety guarantee at deployment. AgentGuard leverages the LLM orchestrator's innate capabilities - knowledge of tool functionalities, scalable and realistic workflow generation, and tool execution privileges - to act as its own safety evaluator. The framework operates through four phases: identifying unsafe workflows, validating them in real-world execution, generating safety constraints, and validating constraint efficacy. The output, an evaluation report with unsafe workflows, test cases, and validated constraints, enables multiple security applications. We empirically demonstrate AgentGuard's feasibility with experiments. With this exploratory work, we hope to inspire the establishment of standardized testing and hardening procedures for LLM agents to enhance their trustworthiness in real-world applications.</ns0:summary>\n    <ns0:category term=\"cs.CR\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-02-13T23:00:33Z</ns0:published>\n    <ns1:comment>Project report of AgentGuard in LLM Agent MOOC Hackathon hosted by UC Berkeley in 2024</ns1:comment>\n    <ns1:primary_category term=\"cs.CR\" />\n    <ns0:author>\n      <ns0:name>Jizhou Chen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Samuel Lee Cong</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n"
+          },
+          "response_body_sha256": "d71eb8366863c814dced72ef3162a50473b950c0ec9ad99ba76b830a28a252b8",
+          "source": "arXiv",
+          "source_id": "2502.09809v1",
+          "source_rank": 12
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2502.09809v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2502.09809"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool interface evolution schema diff constrained call migration local regression",
+          "rank": 12,
+          "source": "arXiv"
+        }
+      ],
+      "title": "AgentGuard: Repurposing Agentic Orchestrator for Safety Evaluation of Tool Orchestration",
+      "urls": [
+        "https://arxiv.org/abs/2502.09809v1",
+        "https://arxiv.org/pdf/2502.09809v1"
+      ],
+      "venue": null,
+      "year": 2025
+    },
+    {
+      "abstract": "Reference lists in scholarly manuscripts frequently contain errors, including incorrect identifiers, incomplete metadata, misattributed authors, and mismatches between preprint and published versions. These problems are tedious to repair manually and have become more visible in workflows that rely on large language models, which can fabricate or corrupt citations. We present citecheck, a TypeScript system and MCP server for automated bibliographic verification and repair in paper-like project folders. Given a manuscript file or workspace, citecheck selects the most likely paper artifact, extracts references from .bib, .tex, .md, .txt, or .docx, validates entries against PubMed, Crossref, arXiv, and Semantic Scholar, and returns structured correction proposals together with replacement-safety diagnostics. The current repository provides a working research prototype with multi-pass retrieval, manifestation-aware matching, policy-gated rewrite planning, and 47 passing tests covering repair behavior, malformed payload handling, transport failures, and MCP exposure. We position citecheck as infrastructure for agentic scholarly editing and as a practical guardrail against both traditional reference errors and LLM-induced citation hallucinations.",
+      "authors": [
+        "Junhyeok Lee"
+      ],
+      "candidate_id": "prior-dcf8f4128c3d7414",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2603.17339v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2603.17339v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3AMCP+tool+schema+change+adaptation+workflow+repair+version+migration&start=0",
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2603.17339v1</ns0:id>\n    <ns0:title>citecheck: An MCP Server for Automated Bibliographic Verification and Repair in Scholarly Manuscripts</ns0:title>\n    <ns0:updated>2026-03-18T04:10:31Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2603.17339v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2603.17339v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Reference lists in scholarly manuscripts frequently contain errors, including incorrect identifiers, incomplete metadata, misattributed authors, and mismatches between preprint and published versions. These problems are tedious to repair manually and have become more visible in workflows that rely on large language models, which can fabricate or corrupt citations. We present citecheck, a TypeScript system and MCP server for automated bibliographic verification and repair in paper-like project folders. Given a manuscript file or workspace, citecheck selects the most likely paper artifact, extracts references from .bib, .tex, .md, .txt, or .docx, validates entries against PubMed, Crossref, arXiv, and Semantic Scholar, and returns structured correction proposals together with replacement-safety diagnostics. The current repository provides a working research prototype with multi-pass retrieval, manifestation-aware matching, policy-gated rewrite planning, and 47 passing tests covering repair behavior, malformed payload handling, transport failures, and MCP exposure. We position citecheck as infrastructure for agentic scholarly editing and as a practical guardrail against both traditional reference errors and LLM-induced citation hallucinations.</ns0:summary>\n    <ns0:category term=\"cs.DL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-03-18T04:10:31Z</ns0:published>\n    <ns1:comment>6 pages, 1 figure. Software paper on bibliography verification and repair for scholarly manuscripts; includes MCP server implementation and evaluation on repository-backed tests</ns1:comment>\n    <ns1:primary_category term=\"cs.DL\" />\n    <ns0:author>\n      <ns0:name>Junhyeok Lee</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "1cd5d2e22584341b03c874e9098c15149f06744209e668950df50f52b960ae57",
+          "source": "arXiv",
+          "source_id": "2603.17339v1",
+          "source_rank": 1
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2603.17339v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2603.17339"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "rank": 1,
+          "source": "arXiv"
+        }
+      ],
+      "title": "citecheck: An MCP Server for Automated Bibliographic Verification and Repair in Scholarly Manuscripts",
+      "urls": [
+        "https://arxiv.org/abs/2603.17339v1",
+        "https://arxiv.org/pdf/2603.17339v1"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "The Model Context Protocol has emerged as a transformative standard for connecting large language models to external data sources and tools, rapidly gaining adoption across major AI providers and development platforms. However, existing benchmarks are overly simplistic and fail to capture real application challenges such as long-horizon reasoning and large, unfamiliar tool spaces. To address this critical gap, we introduce MCP-Universe, the first comprehensive benchmark specifically designed to evaluate LLMs in realistic and hard tasks through interaction with real-world MCP servers. Our benchmark encompasses 6 core domains spanning 11 different MCP servers: Location Navigation, Repository Management, Financial Analysis, 3D Design, Browser Automation, and Web Searching. To ensure rigorous evaluation, we implement execution-based evaluators, including format evaluators for agent format compliance, static evaluators for time-invariant content matching, and dynamic evaluators that automatically retrieve real-time ground truth for temporally sensitive tasks. Through extensive evaluation of leading LLMs, we find that even SOTA models such as GPT-5 (43.72%), Grok-4 (33.33%) and Claude-4.0-Sonnet (29.44%) exhibit significant performance limitations. In addition, our benchmark poses a significant long-context challenge for LLM agents, as the number of input tokens increases rapidly with the number of interaction steps. Moreover, it introduces an unknown-tools challenge, as LLM agents often lack familiarity with the precise usage of the MCP servers. Notably, enterprise-level agents like Cursor cannot achieve better performance than standard ReAct frameworks. Beyond evaluation, we open-source our extensible evaluation framework with UI support, enabling researchers and practitioners to seamlessly integrate new agents and MCP servers while fostering innovation in the rapidly evolving MCP ecosystem.",
+      "authors": [
+        "Ziyang Luo",
+        "Zhiqi Shen",
+        "Wenzhuo Yang",
+        "Zirui Zhao",
+        "Prathyusha Jwalapuram",
+        "Amrita Saha",
+        "Doyen Sahoo",
+        "Silvio Savarese",
+        "Caiming Xiong",
+        "Junnan Li"
+      ],
+      "candidate_id": "prior-0bf94a455c9360fc",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2508.14704v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2508.14704v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3AMCP+tool+schema+change+adaptation+workflow+repair+version+migration&start=0",
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2508.14704v1</ns0:id>\n    <ns0:title>MCP-Universe: Benchmarking Large Language Models with Real-World Model Context Protocol Servers</ns0:title>\n    <ns0:updated>2025-08-20T13:28:58Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2508.14704v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2508.14704v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>The Model Context Protocol has emerged as a transformative standard for connecting large language models to external data sources and tools, rapidly gaining adoption across major AI providers and development platforms. However, existing benchmarks are overly simplistic and fail to capture real application challenges such as long-horizon reasoning and large, unfamiliar tool spaces. To address this critical gap, we introduce MCP-Universe, the first comprehensive benchmark specifically designed to evaluate LLMs in realistic and hard tasks through interaction with real-world MCP servers. Our benchmark encompasses 6 core domains spanning 11 different MCP servers: Location Navigation, Repository Management, Financial Analysis, 3D Design, Browser Automation, and Web Searching. To ensure rigorous evaluation, we implement execution-based evaluators, including format evaluators for agent format compliance, static evaluators for time-invariant content matching, and dynamic evaluators that automatically retrieve real-time ground truth for temporally sensitive tasks. Through extensive evaluation of leading LLMs, we find that even SOTA models such as GPT-5 (43.72%), Grok-4 (33.33%) and Claude-4.0-Sonnet (29.44%) exhibit significant performance limitations. In addition, our benchmark poses a significant long-context challenge for LLM agents, as the number of input tokens increases rapidly with the number of interaction steps. Moreover, it introduces an unknown-tools challenge, as LLM agents often lack familiarity with the precise usage of the MCP servers. Notably, enterprise-level agents like Cursor cannot achieve better performance than standard ReAct frameworks. Beyond evaluation, we open-source our extensible evaluation framework with UI support, enabling researchers and practitioners to seamlessly integrate new agents and MCP servers while fostering innovation in the rapidly evolving MCP ecosystem.</ns0:summary>\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-08-20T13:28:58Z</ns0:published>\n    <ns1:comment>Website: https://mcp-universe.github.io</ns1:comment>\n    <ns1:primary_category term=\"cs.AI\" />\n    <ns0:author>\n      <ns0:name>Ziyang Luo</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhiqi Shen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wenzhuo Yang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zirui Zhao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Prathyusha Jwalapuram</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Amrita Saha</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Doyen Sahoo</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Silvio Savarese</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Caiming Xiong</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Junnan Li</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "1cd5d2e22584341b03c874e9098c15149f06744209e668950df50f52b960ae57",
+          "source": "arXiv",
+          "source_id": "2508.14704v1",
+          "source_rank": 3
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2508.14704v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2508.14704"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "rank": 3,
+          "source": "arXiv"
+        }
+      ],
+      "title": "MCP-Universe: Benchmarking Large Language Models with Real-World Model Context Protocol Servers",
+      "urls": [
+        "https://arxiv.org/abs/2508.14704v1",
+        "https://arxiv.org/pdf/2508.14704v1"
+      ],
+      "venue": null,
+      "year": 2025
+    },
+    {
+      "abstract": "The Model Context Protocol (MCP) has become a common interface for connecting large language model (LLM) agents to external tools, but its reliance on stateless, eager schema injection imposes a hidden per-turn overhead the MCP Tax or Tools Tax that practitioner reports place between roughly 10k and 60k tokens in typical multi-server deployments. This payload inflates the key-value cache, is associated with reasoning degradation as context utilization approaches published fracture points around 70%, and turns token budgets into a recurring operational cost. We introduce Tool Attention, a middleware-layer mechanism that generalizes the \"Attention Is All You Need\" paradigm from self-attention over tokens to gated attention over tools. Tool Attention combines (i) an Intent Schema Overlap (ISO) score from sentence embeddings, (ii) a state-aware gating function enforcing preconditions and access scopes, and (iii) a two-phase lazy schema loader that keeps a compact summary pool in context and promotes full JSON schemas only for top-k gated tools. We evaluate on a simulated 120-tool, six-server benchmark whose per-server token counts are calibrated to public audits of real MCP deployments. In this simulation, Tool Attention directly reduces measured per-turn tool tokens by 95.0% (47.3k -> 2.4k) and raises effective context utilization (a token-ratio quantity) from 24% to 91%. End-to-end figures for task success, latency, cost, and reasoning quality are reported as projections derived from the measured token counts combined with published deployment telemetry; they are not measured on live LLM agents, and we mark projected values explicitly throughout. Taken together, the results support a simple thesis: protocol-level efficiency, not raw context length, is a binding constraint on scalable gentic systems. The code for this work is accessible at https://github.com/asadani/tool-attention",
+      "authors": [
+        "Anuj Sadani",
+        "Deepak Kumar"
+      ],
+      "candidate_id": "prior-6159e7fc94feaf40",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2604.21816v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2604.21816v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3AMCP+tool+schema+change+adaptation+workflow+repair+version+migration&start=0",
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2604.21816v1</ns0:id>\n    <ns0:title>Tool Attention Is All You Need: Dynamic Tool Gating and Lazy Schema Loading for Eliminating the MCP/Tools Tax in Scalable Agentic Workflows</ns0:title>\n    <ns0:updated>2026-04-23T16:10:00Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2604.21816v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2604.21816v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>The Model Context Protocol (MCP) has become a common interface for connecting large language model (LLM) agents to external tools, but its reliance on stateless, eager schema injection imposes a hidden per-turn overhead the MCP Tax or Tools Tax that practitioner reports place between roughly 10k and 60k tokens in typical multi-server deployments. This payload inflates the key-value cache, is associated with reasoning degradation as context utilization approaches published fracture points around 70%, and turns token budgets into a recurring operational cost. We introduce Tool Attention, a middleware-layer mechanism that generalizes the \"Attention Is All You Need\" paradigm from self-attention over tokens to gated attention over tools. Tool Attention combines (i) an Intent Schema Overlap (ISO) score from sentence embeddings, (ii) a state-aware gating function enforcing preconditions and access scopes, and (iii) a two-phase lazy schema loader that keeps a compact summary pool in context and promotes full JSON schemas only for top-k gated tools. We evaluate on a simulated 120-tool, six-server benchmark whose per-server token counts are calibrated to public audits of real MCP deployments. In this simulation, Tool Attention directly reduces measured per-turn tool tokens by 95.0% (47.3k -&gt; 2.4k) and raises effective context utilization (a token-ratio quantity) from 24% to 91%. End-to-end figures for task success, latency, cost, and reasoning quality are reported as projections derived from the measured token counts combined with published deployment telemetry; they are not measured on live LLM agents, and we mark projected values explicitly throughout. Taken together, the results support a simple thesis: protocol-level efficiency, not raw context length, is a binding constraint on scalable gentic systems. The code for this work is accessible at https://github.com/asadani/tool-attention</ns0:summary>\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-04-23T16:10:00Z</ns0:published>\n    <ns1:comment>21 pages</ns1:comment>\n    <ns1:primary_category term=\"cs.AI\" />\n    <ns0:author>\n      <ns0:name>Anuj Sadani</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Deepak Kumar</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "1cd5d2e22584341b03c874e9098c15149f06744209e668950df50f52b960ae57",
+          "source": "arXiv",
+          "source_id": "2604.21816v1",
+          "source_rank": 4
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2604.21816v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2604.21816"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "rank": 4,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Tool Attention Is All You Need: Dynamic Tool Gating and Lazy Schema Loading for Eliminating the MCP/Tools Tax in Scalable Agentic Workflows",
+      "urls": [
+        "https://arxiv.org/abs/2604.21816v1",
+        "https://arxiv.org/pdf/2604.21816v1"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "The Model Context Protocol (MCP), introduced by Anthropic in November 2024, defines a standardized interface for connecting large language models (LLMs) to external tools, data sources, and services. Within months of release, hundreds of community-built MCP servers appeared on GitHub, but no software-maintenance literature has yet described how the ecosystem is being structured in production. This industry experience paper catalogues five recurring MCP server architectural patterns observed across an enumerated corpus of fifteen independently developed servers (five production servers from the ANSYR voice AI platform plus ten public servers from the official MCP registry): Resource Gateway, Tool Orchestrator, Stateful Session Server, Proxy Aggregator, and Domain-Specific Adapter. Each pattern is described in the structured form of Gamma et al.: context, problem, solution, and consequences. We also document four anti-patterns and a set of cross-cutting concerns around authentication, versioning, and observability. The quantitative evaluation contributes three measurements: inter-rater reliability of the taxonomy across two independent LLM raters on 54 held-out servers (Cohen's kappa = 0.76), which also localizes three pattern-boundary ambiguities; transport overhead measured end-to-end on loopback and modeled for cross-host paths; and a tool-count study showing tool-selection accuracy drops below 90% between 10 and 15 tools per context for Claude Haiku 4.5 and between 20 and 30 tools for Sonnet 4. Code, corpus, and prompts are released as a replication package.",
+      "authors": [
+        "Carson Rodrigues",
+        "Oysturn Vas"
+      ],
+      "candidate_id": "prior-4ebeb79c56370ffb",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2606.30317v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2606.30317v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3AMCP+tool+schema+change+adaptation+workflow+repair+version+migration&start=0",
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.30317v1</ns0:id>\n    <ns0:title>MCP Server Architecture Patterns for LLM-Integrated Applications</ns0:title>\n    <ns0:updated>2026-06-29T13:59:41Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.30317v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.30317v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>The Model Context Protocol (MCP), introduced by Anthropic in November 2024, defines a standardized interface for connecting large language models (LLMs) to external tools, data sources, and services. Within months of release, hundreds of community-built MCP servers appeared on GitHub, but no software-maintenance literature has yet described how the ecosystem is being structured in production. This industry experience paper catalogues five recurring MCP server architectural patterns observed across an enumerated corpus of fifteen independently developed servers (five production servers from the ANSYR voice AI platform plus ten public servers from the official MCP registry): Resource Gateway, Tool Orchestrator, Stateful Session Server, Proxy Aggregator, and Domain-Specific Adapter. Each pattern is described in the structured form of Gamma et al.: context, problem, solution, and consequences. We also document four anti-patterns and a set of cross-cutting concerns around authentication, versioning, and observability. The quantitative evaluation contributes three measurements: inter-rater reliability of the taxonomy across two independent LLM raters on 54 held-out servers (Cohen's kappa = 0.76), which also localizes three pattern-boundary ambiguities; transport overhead measured end-to-end on loopback and modeled for cross-host paths; and a tool-count study showing tool-selection accuracy drops below 90% between 10 and 15 tools per context for Claude Haiku 4.5 and between 20 and 30 tools for Sonnet 4. Code, corpus, and prompts are released as a replication package.</ns0:summary>\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-29T13:59:41Z</ns0:published>\n    <ns1:comment>9 pages, IEEEtran conference format, 2 figures. Extended version; a condensed version is under review at IEEE Software. Replication package: https://github.com/rodriguescarson/mcp-patterns-icsme2026</ns1:comment>\n    <ns1:primary_category term=\"cs.SE\" />\n    <ns0:author>\n      <ns0:name>Carson Rodrigues</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Oysturn Vas</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "1cd5d2e22584341b03c874e9098c15149f06744209e668950df50f52b960ae57",
+          "source": "arXiv",
+          "source_id": "2606.30317v1",
+          "source_rank": 5
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2606.30317v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2606.30317"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "rank": 5,
+          "source": "arXiv"
+        }
+      ],
+      "title": "MCP Server Architecture Patterns for LLM-Integrated Applications",
+      "urls": [
+        "https://arxiv.org/abs/2606.30317v1",
+        "https://arxiv.org/pdf/2606.30317v1"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "The increasing complexity of software has led to the steady growth of vulnerabilities. Vulnerability repair investigates how to fix software vulnerabilities. Manual vulnerability repair is labor-intensive and time-consuming because it relies on human experts, highlighting the importance of Automated Vulnerability Repair (AVR). In this SoK, we present the systematization of AVR methods through the three steps of AVR workflow: vulnerability analysis, patch generation, and patch validation. We assess AVR tools for C/C++ and Java programs as they have been widely studied by the community. Since existing AVR tools for C/C++ programs are evaluated with different datasets, which often consist of a few vulnerabilities, we construct the first C/C++ vulnerability repair benchmark dataset, dubbed Vul4C, which contains 144 vulnerabilities as well as their exploits and patches. We use Vul4C to evaluate seven AVR tools for C/C++ programs and use the third-party Vul4J dataset to evaluate two AVR tools for Java programs. We also discuss future research directions.",
+      "authors": [
+        "Yiwei Hu",
+        "Zhen Li",
+        "Kedie Shu",
+        "Shenghua Guan",
+        "Deqing Zou",
+        "Shouhuai Xu",
+        "Bin Yuan",
+        "Hai Jin"
+      ],
+      "candidate_id": "prior-f2b557d02f1b4a0c",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2506.11697v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2506.11697v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3AMCP+tool+schema+change+adaptation+workflow+repair+version+migration&start=0",
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2506.11697v1</ns0:id>\n    <ns0:title>SoK: Automated Vulnerability Repair: Methods, Tools, and Assessments</ns0:title>\n    <ns0:updated>2025-06-13T11:59:04Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2506.11697v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2506.11697v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>The increasing complexity of software has led to the steady growth of vulnerabilities. Vulnerability repair investigates how to fix software vulnerabilities. Manual vulnerability repair is labor-intensive and time-consuming because it relies on human experts, highlighting the importance of Automated Vulnerability Repair (AVR). In this SoK, we present the systematization of AVR methods through the three steps of AVR workflow: vulnerability analysis, patch generation, and patch validation. We assess AVR tools for C/C++ and Java programs as they have been widely studied by the community. Since existing AVR tools for C/C++ programs are evaluated with different datasets, which often consist of a few vulnerabilities, we construct the first C/C++ vulnerability repair benchmark dataset, dubbed Vul4C, which contains 144 vulnerabilities as well as their exploits and patches. We use Vul4C to evaluate seven AVR tools for C/C++ programs and use the third-party Vul4J dataset to evaluate two AVR tools for Java programs. We also discuss future research directions.</ns0:summary>\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-06-13T11:59:04Z</ns0:published>\n    <ns1:comment>The full version of \"SoK: Automated Vulnerability Repair: Methods, Tools, and Assessments\" accepted by the 34th USENIX Security Symposium (USENIX Security 2025)</ns1:comment>\n    <ns1:primary_category term=\"cs.SE\" />\n    <ns0:author>\n      <ns0:name>Yiwei Hu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhen Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kedie Shu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shenghua Guan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Deqing Zou</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shouhuai Xu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Bin Yuan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hai Jin</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "1cd5d2e22584341b03c874e9098c15149f06744209e668950df50f52b960ae57",
+          "source": "arXiv",
+          "source_id": "2506.11697v1",
+          "source_rank": 6
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2506.11697v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2506.11697"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "rank": 6,
+          "source": "arXiv"
+        }
+      ],
+      "title": "SoK: Automated Vulnerability Repair: Methods, Tools, and Assessments",
+      "urls": [
+        "https://arxiv.org/abs/2506.11697v1",
+        "https://arxiv.org/pdf/2506.11697v1"
+      ],
+      "venue": null,
+      "year": 2025
+    },
+    {
+      "abstract": "An emerging area of research is the study of macroscale migration patterns as a network of nodes that represent places (e.g., countries, cities, and rural areas) and edges that encode migration ties that connect those places. In this chapter, we first review advances in the study of migration networks and recent work that has employed network analysis to examine such networks at different geographical scales. In our discussion, we focus in particular on global scale migration networks. We then propose ways to leverage network analysis in concert with digital technologies and online geolocated data to examine the structure and dynamics of migration networks. The implementation of such approaches for studying migration networks faces many challenges, including ethical ones, methodological ones, socio-technological ones (e.g., data availability and reuse), and research reproducibility. We detail these challenges, and we then consider possible ways of linking digital geolocated data to administrative and survey data as a way of harnessing new technologies to construct increasingly realistic migration networks (e.g., using multiplex networks). We also briefly discuss new methods (e.g., multilayer network analysis) in network analysis and adjacent fields (e.g., machine learning) that can help advance understanding of macroscale patterns of migration.",
+      "authors": [
+        "Valentin Danchev",
+        "Mason A. Porter"
+      ],
+      "candidate_id": "prior-d00a18b8287d46c9",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2002.10992v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2002.10992v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3AMCP+tool+schema+change+adaptation+workflow+repair+version+migration&start=0",
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2002.10992v2</ns0:id>\n    <ns0:title>Migration Networks: Applications of Network Analysis to Macroscale Migration Patterns</ns0:title>\n    <ns0:updated>2020-05-26T22:51:51Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2002.10992v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2002.10992v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>An emerging area of research is the study of macroscale migration patterns as a network of nodes that represent places (e.g., countries, cities, and rural areas) and edges that encode migration ties that connect those places. In this chapter, we first review advances in the study of migration networks and recent work that has employed network analysis to examine such networks at different geographical scales. In our discussion, we focus in particular on global scale migration networks. We then propose ways to leverage network analysis in concert with digital technologies and online geolocated data to examine the structure and dynamics of migration networks. The implementation of such approaches for studying migration networks faces many challenges, including ethical ones, methodological ones, socio-technological ones (e.g., data availability and reuse), and research reproducibility. We detail these challenges, and we then consider possible ways of linking digital geolocated data to administrative and survey data as a way of harnessing new technologies to construct increasingly realistic migration networks (e.g., using multiplex networks). We also briefly discuss new methods (e.g., multilayer network analysis) in network analysis and adjacent fields (e.g., machine learning) that can help advance understanding of macroscale patterns of migration.</ns0:summary>\n    <ns0:category term=\"cs.SI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"nlin.AO\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"physics.soc-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2020-02-25T16:04:16Z</ns0:published>\n    <ns1:comment>key words: migration networks, social networks, spatial networks, network analysis, international migration, global migration</ns1:comment>\n    <ns1:primary_category term=\"cs.SI\" />\n    <ns0:author>\n      <ns0:name>Valentin Danchev</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mason A. Porter</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "1cd5d2e22584341b03c874e9098c15149f06744209e668950df50f52b960ae57",
+          "source": "arXiv",
+          "source_id": "2002.10992v2",
+          "source_rank": 7
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2002.10992v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2002.10992"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "rank": 7,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Migration Networks: Applications of Network Analysis to Macroscale Migration Patterns",
+      "urls": [
+        "https://arxiv.org/abs/2002.10992v2",
+        "https://arxiv.org/pdf/2002.10992v2"
+      ],
+      "venue": null,
+      "year": 2020
+    },
+    {
+      "abstract": "With the continuous development of NoSQL databases, more and more developers choose to use semi-structured data for development and data management, which puts forward requirements for schema management of semi-structured data stored in NoSQL databases. Schema extraction plays an important role in understanding schemas, optimizing queries, and validating data consistency. Therefore, in this survey we investigate structural methods based on tree and graph and statistical methods based on distributed architecture and machine learning to extract schemas. The schemas obtained by the structural methods are more interpretable, and the statistical methods have better applicability and generalization ability. Moreover, we also investigate tools and systems for schemas extraction. Schema extraction tools are mainly used for spark or NoSQL databases, and are suitable for small datasets or simple application environments. The system mainly focuses on the extraction and management of schemas in large data sets and complex application scenarios. Furthermore, we also compare these techniques to facilitate data managers' choice.",
+      "authors": [
+        "Panpan Li",
+        "Yikun Gong",
+        "Chen Wang"
+      ],
+      "candidate_id": "prior-cb6d15e8456f8a07",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2012.08105v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2012.08105v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3AMCP+tool+schema+change+adaptation+workflow+repair+version+migration&start=0",
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2012.08105v2</ns0:id>\n    <ns0:title>Schema Extraction on Semi-structured Data</ns0:title>\n    <ns0:updated>2021-10-18T06:06:15Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2012.08105v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2012.08105v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>With the continuous development of NoSQL databases, more and more developers choose to use semi-structured data for development and data management, which puts forward requirements for schema management of semi-structured data stored in NoSQL databases. Schema extraction plays an important role in understanding schemas, optimizing queries, and validating data consistency. Therefore, in this survey we investigate structural methods based on tree and graph and statistical methods based on distributed architecture and machine learning to extract schemas. The schemas obtained by the structural methods are more interpretable, and the statistical methods have better applicability and generalization ability. Moreover, we also investigate tools and systems for schemas extraction. Schema extraction tools are mainly used for spark or NoSQL databases, and are suitable for small datasets or simple application environments. The system mainly focuses on the extraction and management of schemas in large data sets and complex application scenarios. Furthermore, we also compare these techniques to facilitate data managers' choice.</ns0:summary>\n    <ns0:category term=\"cs.DB\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2020-12-15T05:57:41Z</ns0:published>\n    <ns1:comment>More schema extraction methods will be investigated to enrich the content of the paper, so the manuscript is temporarily retracted</ns1:comment>\n    <ns1:primary_category term=\"cs.DB\" />\n    <ns0:author>\n      <ns0:name>Panpan Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yikun Gong</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chen Wang</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "1cd5d2e22584341b03c874e9098c15149f06744209e668950df50f52b960ae57",
+          "source": "arXiv",
+          "source_id": "2012.08105v2",
+          "source_rank": 8
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2012.08105v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2012.08105"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "rank": 8,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Schema Extraction on Semi-structured Data",
+      "urls": [
+        "https://arxiv.org/abs/2012.08105v2",
+        "https://arxiv.org/pdf/2012.08105v2"
+      ],
+      "venue": null,
+      "year": 2020
+    },
+    {
+      "abstract": "We consider the following \\emph{model repair problem}: given a finite Kripke structure $M$ and a specification formula $η$ in some modal or temporal logic, determine if $M$ contains a substructure $M'$ (with the same initial state) that satisfies $η$. Thus, $M$ can be ``repaired'' to satisfy the specification $η$ by deleting some transitions. We map an instance $(M, η)$ of model repair to a boolean formula $\\repfor(M,η)$ such that $(M, η)$ has a solution iff $\\repfor(M,η)$ is satisfiable. Furthermore, a satisfying assignment determines which transitions must be removed from $M$ to generate a model $M'$ of $η$. Thus, we can use any SAT solver to repair Kripke structures. Furthermore, using a complete SAT solver yields a complete algorithm: it always finds a repair if one exists. We extend our method to repair finite-state shared memory concurrent programs, to solve the discrete event supervisory control problem \\cite{RW87,RW89}, to check for the existence of symmettric solutions \\cite{ES93}, and to accomodate any boolean constraint on the existence of states and transitions in the repaired model. Finally, we show that model repair is NP-complete for CTL, and logics with polynomial model checking algorithms to which CTL can be reduced in polynomial time. A notable example of such a logic is Alternating-Time Temporal Logic (ATL).",
+      "authors": [
+        "Paul C. Attie",
+        "Jad Saklawi"
+      ],
+      "candidate_id": "prior-597c74867d0f5852",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/0710.3332v4"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/0710.3332v4"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3AMCP+tool+schema+change+adaptation+workflow+repair+version+migration&start=0",
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/0710.3332v4</ns0:id>\n    <ns0:title>Model and Program Repair via SAT Solving</ns0:title>\n    <ns0:updated>2008-04-15T12:47:15Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/0710.3332v4\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/0710.3332v4\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>  We consider the following \\emph{model repair problem}: given a finite Kripke structure $M$ and a specification formula $η$ in some modal or temporal logic, determine if $M$ contains a substructure $M'$ (with the same initial state) that satisfies $η$. Thus, $M$ can be ``repaired'' to satisfy the specification $η$ by deleting some transitions.\n  We map an instance $(M, η)$ of model repair to a boolean formula $\\repfor(M,η)$ such that $(M, η)$ has a solution iff $\\repfor(M,η)$ is satisfiable. Furthermore, a satisfying assignment determines which transitions must be removed from $M$ to generate a model $M'$ of $η$. Thus, we can use any SAT solver to repair Kripke structures. Furthermore, using a complete SAT solver yields a complete algorithm: it always finds a repair if one exists.\n  We extend our method to repair finite-state shared memory concurrent programs, to solve the discrete event supervisory control problem \\cite{RW87,RW89}, to check for the existence of symmettric solutions \\cite{ES93}, and to accomodate any boolean constraint on the existence of states and transitions in the repaired model.\n  Finally, we show that model repair is NP-complete for CTL, and logics with polynomial model checking algorithms to which CTL can be reduced in polynomial time. A notable example of such a logic is Alternating-Time Temporal Logic (ATL).</ns0:summary>\n    <ns0:category term=\"cs.LO\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2007-10-17T16:56:56Z</ns0:published>\n    <ns1:comment>29 pages, new repair features</ns1:comment>\n    <ns1:primary_category term=\"cs.LO\" />\n    <ns0:author>\n      <ns0:name>Paul C. Attie</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jad Saklawi</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "1cd5d2e22584341b03c874e9098c15149f06744209e668950df50f52b960ae57",
+          "source": "arXiv",
+          "source_id": "0710.3332v4",
+          "source_rank": 9
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "0710.3332v4"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "0710.3332"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "rank": 9,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Model and Program Repair via SAT Solving",
+      "urls": [
+        "https://arxiv.org/abs/0710.3332v4",
+        "https://arxiv.org/pdf/0710.3332v4"
+      ],
+      "venue": null,
+      "year": 2007
+    },
+    {
+      "abstract": "Schema matching is a foundational task in enterprise data integration, aiming to align disparate data sources. While traditional methods handle simple one-to-one table mappings, they often struggle with complex multi-table schema matching in real-world applications. We present LLMatch, a unified and modular schema matching framework. LLMatch decomposes schema matching into three distinct stages: schema preparation, table-candidate selection, and column-level alignment, enabling component-level evaluation and future-proof compatibility. It includes a novel two-stage optimization strategy: a Rollup module that consolidates semantically related columns into higher-order concepts, followed by a Drilldown module that re-expands these concepts for fine-grained column mapping. To address the scarcity of complex semantic matching benchmarks, we introduce SchemaNet, a benchmark derived from real-world schema pairs across three enterprise domains, designed to capture the challenges of multi-table schema alignment in practical settings. Experiments demonstrate that LLMatch significantly improves matching accuracy in complex schema matching settings and substantially boosts engineer productivity in real-world data integration.",
+      "authors": [
+        "Sha Wang",
+        "Yuchen Li",
+        "Hanhua Xiao",
+        "Bing Tian Dai",
+        "Roy Ka-Wei Lee",
+        "Yanfei Dong",
+        "Lambert Deng"
+      ],
+      "candidate_id": "prior-7d8a8520083ce021",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2507.10897v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2507.10897v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3AMCP+tool+schema+change+adaptation+workflow+repair+version+migration&start=0",
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2507.10897v1</ns0:id>\n    <ns0:title>LLMATCH: A Unified Schema Matching Framework with Large Language Models</ns0:title>\n    <ns0:updated>2025-07-15T01:24:49Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2507.10897v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2507.10897v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Schema matching is a foundational task in enterprise data integration, aiming to align disparate data sources. While traditional methods handle simple one-to-one table mappings, they often struggle with complex multi-table schema matching in real-world applications. We present LLMatch, a unified and modular schema matching framework. LLMatch decomposes schema matching into three distinct stages: schema preparation, table-candidate selection, and column-level alignment, enabling component-level evaluation and future-proof compatibility. It includes a novel two-stage optimization strategy: a Rollup module that consolidates semantically related columns into higher-order concepts, followed by a Drilldown module that re-expands these concepts for fine-grained column mapping. To address the scarcity of complex semantic matching benchmarks, we introduce SchemaNet, a benchmark derived from real-world schema pairs across three enterprise domains, designed to capture the challenges of multi-table schema alignment in practical settings. Experiments demonstrate that LLMatch significantly improves matching accuracy in complex schema matching settings and substantially boosts engineer productivity in real-world data integration.</ns0:summary>\n    <ns0:category term=\"cs.DB\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-07-15T01:24:49Z</ns0:published>\n    <ns1:comment>Accepted at APWeb 2025, Schema Matching, LLM, Data Management</ns1:comment>\n    <ns1:primary_category term=\"cs.DB\" />\n    <ns0:author>\n      <ns0:name>Sha Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yuchen Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hanhua Xiao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Bing Tian Dai</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Roy Ka-Wei Lee</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yanfei Dong</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Lambert Deng</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "1cd5d2e22584341b03c874e9098c15149f06744209e668950df50f52b960ae57",
+          "source": "arXiv",
+          "source_id": "2507.10897v1",
+          "source_rank": 10
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2507.10897v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2507.10897"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "rank": 10,
+          "source": "arXiv"
+        }
+      ],
+      "title": "LLMATCH: A Unified Schema Matching Framework with Large Language Models",
+      "urls": [
+        "https://arxiv.org/abs/2507.10897v1",
+        "https://arxiv.org/pdf/2507.10897v1"
+      ],
+      "venue": null,
+      "year": 2025
+    },
+    {
+      "abstract": "Automated decision systems produce operational data across multiple infrastructure layers, yet no single logging format captures the complete governance-relevant record of how a decision was reached. Regulatory frameworks prescribe what must be recorded without specifying a data model for how to record it -- a gap this paper terms the Fragmented Trace Problem. Following a design science methodology, the paper presents the Decision Event Schema (DES), a JSON Schema specification that bridges four infrastructure layers -- ML inference, rule/policy evaluation, cross-system coupling, and governance metadata -- within a single per-decision event structure. The schema employs degradation-aware field design: each of six top-level field groups maps to a governance evidence property and the degradation type it must resist. DES defines ten required root-level fields and introduces a tiered evidence strategy (lightweight, sampled, full) that enables organizations to match evidence completeness to decision risk and throughput. A mechanism feasibility analysis demonstrates compatibility with the highest-throughput integrity mechanisms at production-scale decision rates. Evaluation against 25+ existing formats confirms that DES is the only specification covering all four layers simultaneously. The schema offers practitioners a reference adoptable directly or adaptable through namespace extensions, and regulators a mapping from requirements to minimum evidence tiers.",
+      "authors": [
+        "Oleg Solozobov"
+      ],
+      "candidate_id": "prior-d97b2e49d7f36107",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2604.09296v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2604.09296v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3AMCP+tool+schema+change+adaptation+workflow+repair+version+migration&start=0",
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2604.09296v1</ns0:id>\n    <ns0:title>Decision Trace Schema for Governance Evidence in Real-Time Risk Systems</ns0:title>\n    <ns0:updated>2026-04-10T13:06:38Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2604.09296v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2604.09296v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Automated decision systems produce operational data across multiple infrastructure layers, yet no single logging format captures the complete governance-relevant record of how a decision was reached. Regulatory frameworks prescribe what must be recorded without specifying a data model for how to record it -- a gap this paper terms the Fragmented Trace Problem. Following a design science methodology, the paper presents the Decision Event Schema (DES), a JSON Schema specification that bridges four infrastructure layers -- ML inference, rule/policy evaluation, cross-system coupling, and governance metadata -- within a single per-decision event structure. The schema employs degradation-aware field design: each of six top-level field groups maps to a governance evidence property and the degradation type it must resist. DES defines ten required root-level fields and introduces a tiered evidence strategy (lightweight, sampled, full) that enables organizations to match evidence completeness to decision risk and throughput. A mechanism feasibility analysis demonstrates compatibility with the highest-throughput integrity mechanisms at production-scale decision rates. Evaluation against 25+ existing formats confirms that DES is the only specification covering all four layers simultaneously. The schema offers practitioners a reference adoptable directly or adaptable through namespace extensions, and regulators a mapping from requirements to minimum evidence tiers.</ns0:summary>\n    <ns0:category term=\"cs.CY\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-04-10T13:06:38Z</ns0:published>\n    <ns1:comment>27 pages, 5 tables. Schema repository: https://github.com/governance-evidence/decision-event-schema</ns1:comment>\n    <ns1:primary_category term=\"cs.CY\" />\n    <ns0:author>\n      <ns0:name>Oleg Solozobov</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "1cd5d2e22584341b03c874e9098c15149f06744209e668950df50f52b960ae57",
+          "source": "arXiv",
+          "source_id": "2604.09296v1",
+          "source_rank": 11
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2604.09296v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2604.09296"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "MCP tool schema change adaptation workflow repair version migration",
+          "rank": 11,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Decision Trace Schema for Governance Evidence in Real-Time Risk Systems",
+      "urls": [
+        "https://arxiv.org/abs/2604.09296v1",
+        "https://arxiv.org/pdf/2604.09296v1"
+      ],
+      "venue": null,
+      "year": 2026
+    }
+  ],
+  "created_at_utc": "2026-08-18T15:20:38.354620Z",
+  "degraded": true,
+  "schema_version": 1,
+  "source_attempts": [
+    {
+      "query_index": 1,
+      "record_count": 0,
+      "source": "Semantic Scholar",
+      "status": "ok"
+    },
+    {
+      "query_index": 1,
+      "record_count": 12,
+      "source": "arXiv",
+      "status": "ok"
+    },
+    {
+      "error_type": "HTTPError",
+      "http_status": 429,
+      "query_index": 2,
+      "source": "Semantic Scholar",
+      "status": "error"
+    },
+    {
+      "query_index": 2,
+      "record_count": 12,
+      "source": "arXiv",
+      "status": "ok"
+    }
+  ]
+}

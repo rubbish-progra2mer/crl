@@ -1,0 +1,34 @@
+{
+  "hypothesis_id": "h-006",
+  "title": "不可逆动作的信息就绪性调度",
+  "parent_ids": [],
+  "lineage_note": "h-005 多结构Formal反证缓存特有锚定后，转向执行前动作偏序；不继承计划缓存评价。",
+  "problem": "代理可能在读取会决定参数、分支或是否执行的信息前，先释放不可逆或高补偿成本动作；所有工具均可局部成功，但后续正确信息已无法撤销终态损失。",
+  "target_failure": {
+    "summary": "同一工具集合与局部成功回执下，代理违反读取结果到不可逆提交之间的信息依赖边，形成提交前信息未就绪错误。",
+    "card_ids": ["operator-milestone-dag-trajectory-evaluation", "operator-bilevel-graph-toolchain-planning", "operator-smt-preexecution-policy-guard"],
+    "evidence_ids": []
+  },
+  "changed_computation": {
+    "baseline": "ReAct或计划器按语言模型产生的顺序执行，只在工具参数合法或写动作一般风险上门控。",
+    "intervention": "构造读取—决策谓词—动作的信息依赖图并标注可逆性；只有全部支配某不可逆动作的读取结果已取得并解析时才释放该动作。",
+    "information_available": "用户任务、公开工具前后条件、已获得的只读结果和动作可逆性标签；不读取隐藏终态。",
+    "timing": "每个不可逆动作执行之前。",
+    "budget_effect": "不增加语言模型调用；只改变动作偏序并可能增加等待时间。"
+  },
+  "mechanism_claim": "显式信息依赖而非一般动作风险决定不可逆提交何时安全；就绪性调度可在工具集合不变时避免提交早于证据的不可恢复错误。",
+  "falsifier": "若现有依赖图规划、工作流约束或变异动作门控已表达同一前置关系；若静态所有读先于所有写追平；或信息依赖只能由金标准人工标注，则候选淘汰。",
+  "minimal_killer_experiment": "构造读取结果支配不同写动作的成对任务，比较ReAct、静态先读后写、依赖图调度和一般变异动作门控，测不可逆遗憾率与无谓延迟。",
+  "nearest_prior_risk": "LLMCompiler/NaviAgent/IPIGuard的工具依赖图、ToolSandbox/TRAJECT-Bench/TPS-Bench的顺序依赖评价、SABER/Reason Less Verify More/ToolGate的写前门控共同形成直接构造性吸收。",
+  "alternative_explanations": ["只是经典数据流调度", "静态先读后写已足够", "依赖标签泄漏正确顺序", "优势来自禁止并行而非信息就绪", "现有工作流引擎已强制前置条件"],
+  "descriptors": {
+    "problem_family": "信息未就绪的不可逆提交",
+    "computation_stage": "执行前动作调度",
+    "intervention_family": "信息依赖图与不可逆动作释放门",
+    "information_source": "工具前后条件和只读结果",
+    "timing_class": "不可逆提交前",
+    "budget_class": "同调用预算但可能增加延迟",
+    "evaluation_mode": "动作顺序与终态遗憾"
+  },
+  "literature_refs": ["P037", "P048", "P046", "P074", "P006"]
+}

@@ -1,0 +1,117 @@
+{
+  "created_at_utc": "2026-08-13T09:22:10.298778Z",
+  "hypotheses": [
+    {
+      "alternative_explanations": [
+        "收益仅来自额外读取",
+        "在线位置改变不构成新计算",
+        "状态转移模板只是已有元变关系的扩表"
+      ],
+      "changed_computation": {
+        "baseline": "单响应契约检查、固定事后读回或手写后置条件。",
+        "budget_effect": "增加少量只读调用；与同调用数固定读回、随机读回和手写模板基线配平。",
+        "information_available": "任务、公开工具规范、真实请求与响应、同凭据可调用的只读工具；不使用服务源码、历史训练轨迹、隐藏状态、评价程序或人工后置条件。",
+        "intervention": "从公开接口描述及实例化请求/响应句柄自动选择写前与写后读取，并比较 create/delete/update/membership/move/cursor 状态转移。",
+        "timing": "在真实写调用前获取必要基线，调用后立刻读取外部可见状态。"
+      },
+      "created_at_utc": "2026-08-13T09:22:36.731249Z",
+      "descriptors": {
+        "budget_class": "matched_small_read_budget",
+        "computation_stage": "pre_post_external_state_verification",
+        "evaluation_mode": "paired_fault_terminal_state",
+        "information_source": "public_tool_docs_request_response_same_credential",
+        "intervention_family": "automatic_state_transition_compilation",
+        "problem_family": "silent_semantic_write_failure",
+        "timing_class": "around_effectful_call"
+      },
+      "falsifier": "核心计算已被现有黑盒 REST 行为探索或自动元变测试覆盖，或剩余差异只有在线封装与模板扩张。",
+      "hypothesis_id": "h-v002-001",
+      "lineage_note": "由 v001 的单次事后实体见证被实验淘汰后转向；把验证对象改为真实写调用前后的外部状态差分。",
+      "literature_refs": [
+        "Karlsson et al., Software Quality Journal 2024",
+        "arXiv:2605.28321",
+        "arXiv:2606.10465",
+        "arXiv:2608.02645"
+      ],
+      "mechanism_claim": "跨调用前后态差分能把身份存在性伪见证升级为真实效果见证，并在相同读预算下提高静默错误辨别率。",
+      "minimal_killer_experiment": "先做最近先行组件审计；若通用前后态差分与句柄绑定已存在，则不实施。",
+      "nearest_prior_risk": "Karlsson 等的黑盒 REST 行为探索、ARMeta、RESTler、MASTOR 与 Verified Tool Calls 可分别吸收前后差分、自动关系、句柄传播和在线三值包装。",
+      "parent_ids": [],
+      "problem": "单次事后读取常只能证明目标实体原本存在，无法证明当前写调用产生了预期效果。",
+      "revision": 2,
+      "status": "prior_collision",
+      "status_reason": "通用写前—写后外部状态差分、响应句柄传播、集合/分页关系和在线三值包装分别被 Karlsson 2024、ARMeta、RESTler/MASTOR、元变 REST 测试与 Verified Tool Calls 占据；剩余仅在线化和模板扩张，不能支撑方法贡献。",
+      "target_failure": {
+        "card_ids": [
+          "failure-confident-completion-without-state-success",
+          "failure-incomplete-tool-contracts-false-verified-state"
+        ],
+        "evidence_ids": [],
+        "summary": "结构合法的写调用响应掩盖静默空操作、部分写入或错误状态转移。"
+      },
+      "title": "公开接口驱动的写前—写后状态转移编译",
+      "updated_at_utc": "2026-08-13T09:22:36.942203Z"
+    },
+    {
+      "alternative_explanations": [
+        "收益只来自多翻页",
+        "UNKNOWN 标签本身通过提示改变模型行为",
+        "测试故障模板直接泄漏了覆盖条件",
+        "AppWorld 的同步、单用户环境过度简化权限与新鲜度",
+        "规则系统等价于人工完整性后置条件"
+      ],
+      "changed_computation": {
+        "baseline": "原始工具输出直接进入大语言模型，或由模型产生带自报置信度的信念状态；组合强基线为 ARMeta/Karlsson 读计划加 Verified Tool Calls 三值控制。",
+        "budget_effect": "需要分页穷尽或补充只读调用时消耗额外读取预算；与同等最大读取数的固定穷尽、统一重查和模型自判基线比较，并允许 UNKNOWN 弃权。",
+        "information_available": "公开工具规范、实例化读取参数和原始输出、当前凭据身份标签与单次运行时序；不使用服务源码、隐藏数据库、评价程序、测试真值、人工任务后置条件或历史故障标签。",
+        "intervention": "把每个读取编译成范围化观察，并生成覆盖义务：目标句柄绑定、筛选域、分页闭合、同一权限视图、读取成功、时间新鲜度与读纯度。正证据可直接产生 PRESENT；负证据只有在所有相关义务均有机器可检验证书时产生 ABSENT，否则按缺口类型产生 UNKNOWN，禁止下游把 UNKNOWN 当作 ABSENT。",
+        "timing": "每次读取返回时生成范围与覆盖证书；在规划器消费任何不存在断言前执行类型检查。"
+      },
+      "created_at_utc": "2026-08-13T09:22:36.837247Z",
+      "descriptors": {
+        "budget_class": "matched_bounded_read_budget_with_abstention",
+        "computation_stage": "observation_typing_before_belief_update",
+        "evaluation_mode": "paired_observation_scope_and_terminal_state",
+        "information_source": "public_schema_runtime_scope_metadata_raw_output",
+        "intervention_family": "proof_carrying_negative_observation",
+        "problem_family": "false_absence_from_incomplete_tool_observation",
+        "timing_class": "read_return_and_preconsume"
+      },
+      "falsifier": "覆盖义务无法从公开接口与运行时元数据自动实例化；强组合基线加入简单分页穷尽/错误检查后等效；多数真实任务只能返回 UNKNOWN；或类型系统降低误判却不能改善独立终局。",
+      "hypothesis_id": "h-v002-002",
+      "lineage_note": "保留 v002 前后态读取的测量载体，但把方法核从关系模板改为否定结论的证据充分性计算；只有带覆盖证明的读取才能把未见提升为不存在。",
+      "literature_refs": [
+        "arXiv:2605.11436",
+        "arXiv:2605.05583",
+        "arXiv:2607.28942",
+        "arXiv:2608.02645",
+        "Karlsson et al., Software Quality Journal 2024"
+      ],
+      "mechanism_claim": "将否定状态从自由文本信念改为带范围证明的可消费类型，能在相同读取预算下减少由分页、权限、陈旧性和读取失败导致的错误不存在判断，同时比一律 UNKNOWN 或一律穷尽保留更多任务效用。",
+      "minimal_killer_experiment": "在 AppWorld 开发集构造同一实体分别位于首屏、后续页、不可见权限域、读取错误与真实不存在的配对观察；盲于终局真值生成覆盖证书，测量 PRESENT/ABSENT/UNKNOWN 的安全性、覆盖率和读取成本，并把证书输出交给相同智能体完成下游决策。",
+      "nearest_prior_risk": "Agent-BRACE、BeliefMem 与 NeSyFS 已显式表示部分可观测信念；Verified Tool Calls 已有 TRUE/FALSE/UNKNOWN；数据库开放世界语义和 REST 元变分页测试提供成熟组件。必须证明新增计算是读取充分性与否定类型规则，而非符号化记账。",
+      "parent_ids": [
+        "h-v002-001"
+      ],
+      "problem": "工具智能体常把空列表、首屏未命中、权限受限、陈旧结果或读取错误统一解释为目标不存在；一般信念状态又允许模型自行给不完整观察赋置信度，缺乏可审计的否定证据边界。",
+      "revision": 3,
+      "status": "prior_collision",
+      "status_reason": "查询完整性与结果受限接口工作已占据缺失否定的充分性及计划合成，CROWN-QA 精确占据覆盖证书式可认证否定，Verified Tool Calls 占据在线三值控制；当前实现仍需人工覆盖标志，新增计算可被公平组合基线吸收。",
+      "target_failure": {
+        "card_ids": [
+          "failure-confident-completion-without-state-success",
+          "failure-raw-observation-overload-hides-action-relevant-ui"
+        ],
+        "evidence_ids": [],
+        "summary": "不完整读取被错误闭世界化，形成高置信度的不存在判断并驱动后续工具动作或错误终止。"
+      },
+      "title": "带观察覆盖证明的否定状态类型",
+      "updated_at_utc": "2026-08-13T09:33:36.194934Z"
+    }
+  ],
+  "revision": 5,
+  "run_id": "20260813_1547_run10",
+  "schema_version": 1,
+  "updated_at_utc": "2026-08-13T09:33:36.194934Z",
+  "version": "v002"
+}

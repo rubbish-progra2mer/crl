@@ -1,0 +1,60 @@
+{
+  "evaluation_id": "eval-0006",
+  "evaluator_definition_sha256": "e0d35083b1427e9f8861ba576304b97657498fee46480d5e07e8e0b02cea6e5b",
+  "evaluator_version": "CRL-EVAL-1.0",
+  "events_sha256": "d29ecf3cc30ec4f350ba37a938db015294605639155a04712fc232451e9cbf5a",
+  "invalid_reasons": [],
+  "measurement_key": "4939f715fcb6bd1783c936fe91f7c1cb9e3d279fd41f6c34073f1710dff9d5c5",
+  "output": {
+    "confidence": "high",
+    "critical_risk": "potentially_fatal",
+    "diagnostics": {
+      "best_stress_test": "在新案例上预注册三路配对：真实字段变形、等长度且等表面变化但保持任务语义的安慰剂变形、非工具结构化文本变形；每次调用使用独立采样 seed，并分别在禁用或重置缓存条件下跨供应商重复，以案例和模型为聚类单位比较超额。",
+      "boundary_warning": "40.43 个百分点只适用于当前二十例合成短答案、三个本地 Qwen 标签、温度 0.2 和十调用协议；不得外推到真实多步智能体、跨供应商模型、开放输出或部署失败率。",
+      "hidden_assumption": "最危险前提是“相同 API 调用数”等同于相同有效随机性、缓存机会和输入难度，尽管重放组反复提交同一提示与同一 seed，而六臂组提交四个新输入。",
+      "most_fatal_failure_mode": "同 seed 的完全相同重放因确定性采样、缓存或零输入新颖性被人为稳定，而六臂只是承受一般输入改写难度；若等表面变化的语义安慰剂产生同等超额，工具字段“干预特异性”即被推翻。",
+      "reproduction_breakpoint": "最可能在重建本地 Ollama 模型与服务状态时分叉：模型标签无权重摘要，subject dependencies 和部分环境未绑定，独立运行会得到不同的畸形输出、基线正确子集及 76/0 不一致计数。"
+    },
+    "evaluator_version": "CRL-EVAL-1.0",
+    "free_review": "新版确实修复了旧的一次对六次预算混杂，并把强机制主张降为局部现象；76/188 的配对差在当前套件内是真实且可追踪的描述。但六重放不是充分的主动基线：相同提示与相同 seed 可能近似确定性或享受缓存，而六臂必然改变输入、表面结构和难度。因而当前结果最多说明“这些变形比逐字重放更易失败”，尚不能把超额定位为工具字段特异现象。家族异质性明显，tier_score 超额为零；关系标签又与完整反事实正确性完全重合。若等表面变化的语义安慰剂获得相近超额，或缓存重置、独立 seed 后差异显著收缩，方法核应降为一般输入扰动稳健性。",
+    "model_identity": "gpt-5.6-sol",
+    "reasoning_effort": "xhigh",
+    "reasons": {
+      "adversarial_survivability": "新版通过同预算六重放、随机顺序、警告剔除和分层分析，存活了一个重要的多调用暴露反例。但尚未面对与六臂等长度、等表面变化、等输入新颖性的主动对照，也没有独立设计的留出案例或非共线变形。一个对完全相同提示稳定、却对任何输入改写普遍敏感的模型即可产生同样头条结果，而无需存在工具字段特异脆弱性。关系通过又与完整反事实精确正确在 188 个基线正确行上完全重合，当前协议尚未显示独立诊断价值。",
+      "boundary_generalization": "证据仅覆盖二十个手工合成短标量案例、五个任务族、三个本地 Qwen 标签、两种提示和三个 seed。没有真实工具执行、多步轨迹、开放式输出、跨供应商模型、长 horizon 或预算敏感性实验。tier_score 家族超额为零，valid_sum 的基线正确样本仅九行，说明套件内部也存在明显家族异质性。十八个分层均为正不能替代独立任务和模型谱系复制。",
+      "confound_leakage_control": "两个组调用数相同、共享 base 与 repeat_1、调用顺序随机交织，并有独立家族求解器和解析警告剔除分析，确实控制了旧预算、顺序和标签自洽问题。但每个完全相同重放请求使用相同 seed，而变形请求改变了输入；这使重放可能因确定性采样或缓存天然更稳定，packet 对缓存和服务状态为 packet insufficient。六臂还同时引入输入新颖性与任务难度，缺少表面变化量、长度和难度匹配的语义安慰剂或非工具结构化扰动对照。独立求解器只验证套件真值，不能排除这些运行与比较混杂。",
+      "evidence_auditability": "四个头条指标均映射到 metrics.json 的具体记录，执行、规格、代码、案例和结果文件均有哈希，紧凑审计还提供逐行答案、调用位置和布尔指标。由这些材料可以检查聚合表及配对计数的内部一致性。关键不足是完整 raw_content/result.json 未在 packet 中展开，大量畸形输出只能看到解析或规范化后的答案，无法独立复核解析器是否改变结论。部分分层、警告剔除和正文数字也未全部绑定为专门机器指标。",
+      "reproducibility_traceability": "packet 给出了完整 argv、工作目录、案例与代码哈希、温度、seed、调用预算、环境摘要及输出哈希，主要结果可追到 attempt-budget-control-008。代码、数据生成器、独立求解器和逐行解析答案也均被展示。缺口是 Ollama 模型只有可变标签而无权重摘要，subject dependencies、部分环境和 git 状态未绑定，完整 result.json 原始字节仅有路径与哈希。因此独立团队能重建协议，但不能保证复现相同的基线正确子集和精确比例。"
+    },
+    "review_protocol": "CRL-IR-1.0",
+    "reviewer_role": "ADV",
+    "scores": {
+      "adversarial_survivability": 2,
+      "boundary_generalization": 1,
+      "confound_leakage_control": 2,
+      "evidence_auditability": 3,
+      "reproducibility_traceability": 3
+    }
+  },
+  "packet_key": "de18f9884da7d6132b2f518b2829274937a23f015a859274efd4e71209d06b97",
+  "raw_output_sha256": "b8cfeb4a29774385411b4a49678ce25810c7508410b36d34fe9c29bffcb2e554",
+  "request_sha256": "834076c9810e3d2c33a2e086f0ef72d7f9cfcc852841cbf5ab8ac8914fa6bfa2",
+  "reviewer_role": "ADV",
+  "runtime": {
+    "backend": "codex_exec_jsonl_v1",
+    "codex_version": "codex-cli 0.147.0",
+    "ephemeral": true,
+    "event_count": 4,
+    "executable": "D:\\Desktop\\crl\\runtimes\\codex-cli\\0.147.0\\codex.cmd",
+    "forbidden_events": [],
+    "network_requested": false,
+    "reasoning_effort": "xhigh",
+    "requested_model": "gpt-5.6-sol",
+    "returncode": 0,
+    "sandbox": "read-only",
+    "timed_out": false
+  },
+  "schema_version": 1,
+  "stderr_sha256": "33aa732eb77d7660e2a1e20f7d1ba42f55b2e0ef8e439bc533571257adeb33b4",
+  "valid": true
+}

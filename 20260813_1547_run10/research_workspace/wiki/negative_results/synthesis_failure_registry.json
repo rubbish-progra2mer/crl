@@ -1,0 +1,235 @@
+{
+  "version": "v015",
+  "direction_scope_key": "text-and-tool-llm-agent",
+  "generated_from": [
+    "hypotheses_v009/portfolio.json",
+    "workbench_v009/v009_negative_decision.md",
+    "hypotheses_v010/portfolio.json",
+    "workbench_v010/action_model_collision.md",
+    "workbench_v011/v011_route_resolution.md",
+    "workbench_v012/v012_async_future_collision.md",
+    "workbench_v013/v013_evidence_response_training_collision.md",
+    "workbench_v014/v014_adaptive_verifier_feedback_collision.md",
+    "workbench_v015/v015_nonmonotone_progress_collision.md"
+  ],
+  "seed_operator_records": [
+    {
+      "record_id": "SOR-v009-001",
+      "run_id": "20260813_1547_run10",
+      "run_ref_type": "explicit_run_id",
+      "seed_id": "none-v009-root-resilience",
+      "operator_type": "mechanism-transfer-database-resilience",
+      "linked_candidate_id": "h-v009-001",
+      "linked_kernel_id": "source-collapsed-root-resilience",
+      "composition_mode": "database-resilience-plus-source-dependence-plus-evidence-graph",
+      "terminal_outcome": "killed",
+      "failure_stage": "input-identifiability-and-nearest-prior",
+      "blocking_priors_or_families": [
+        "query resilience",
+        "source dependence truth discovery",
+        "Argus/SURE-RAG/GAVEL"
+      ],
+      "supporting_artifacts": [
+        "workbench_v009/identifiability_probe_results.json",
+        "research_workspace/subagents/v009_evidence_decision_prior.md"
+      ],
+      "lesson": "结构同构不足以保证机制可迁移；目标图的关键潜变量必须由允许观测识别。",
+      "rerun_rule": "只有新增可审计独立生成凭据或明确概率识别假设时才重开。"
+    },
+    {
+      "record_id": "SOR-v010-001",
+      "run_id": "20260813_1547_run10",
+      "run_ref_type": "explicit_run_id",
+      "seed_id": "none-v010-semantic-footprint",
+      "operator_type": "cross-field-transfer-action-model-learning",
+      "linked_candidate_id": "h-v010-001",
+      "linked_kernel_id": "counterfactual-semantic-footprint-compiler",
+      "composition_mode": "action-model-learning-plus-agent-concurrency-runtime",
+      "terminal_outcome": "source_occupied",
+      "failure_stage": "nearest-prior-cross-field-collision",
+      "blocking_priors_or_families": [
+        "STRIPS+ SYNTH/SYNTH+",
+        "RESTler/Morest",
+        "CoAgent/Atomix"
+      ],
+      "supporting_artifacts": [
+        "workbench_v010/action_model_collision.md",
+        "research_workspace/subagents/v010_concurrency_scout.md"
+      ],
+      "lesson": "工具足迹模板是 lifted action precondition/effect model；改名后接事务协议不构成新核。",
+      "rerun_rule": "必须先提出 action-model representation 无法表达的新对象和独立算法。"
+    },
+    {
+      "record_id": "SOR-v011-001",
+      "run_id": "20260813_1547_run10",
+      "run_ref_type": "explicit_run_id",
+      "seed_id": "none-v011-entity-binding",
+      "operator_type": "provenance-constrained-entity-resolution",
+      "linked_candidate_id": null,
+      "linked_kernel_id": "root-collapsed-noncircular-identity-join",
+      "composition_mode": "entity-resolution-plus-value-provenance-plus-resource-gate",
+      "terminal_outcome": "source_occupied_and_anti_revival_blocked",
+      "failure_stage": "nearest-prior-and-identifiability",
+      "blocking_priors_or_families": ["EntityBindingFailures", "PACT", "IGAC", "v009 root identifiability"],
+      "supporting_artifacts": ["research_workspace/subagents/v011_identity_binding_scout.md", "workbench_v011/v011_route_resolution.md"],
+      "lesson": "来源根不可见时硬连接证明不可识别；可见时又成为经典带来源实体解析。",
+      "rerun_rule": "必须先给出新可观测对象并越过经典实体解析与 v009 反复活规则。"
+    },
+    {
+      "record_id": "SOR-v011-002",
+      "run_id": "20260813_1547_run10",
+      "run_ref_type": "explicit_run_id",
+      "seed_id": "none-v011-authority-flow",
+      "operator_type": "delegation-graph-refinement",
+      "linked_candidate_id": null,
+      "linked_kernel_id": "purpose-bound-delegation-slice-refinement",
+      "composition_mode": "task-slice-plus-capability-attenuation-plus-causal-enforcement",
+      "terminal_outcome": "source_occupied",
+      "failure_stage": "strong-composite-baseline",
+      "blocking_priors_or_families": ["PAuth", "Progent", "AIP", "FORGE/SEAgent"],
+      "supporting_artifacts": ["research_workspace/subagents/v011_authority_flow_scout.md", "workbench_v011/v011_route_resolution.md"],
+      "lesson": "跨跳证明若只组合任务切片、衰减令牌和值来源链，不产生新授权计算。",
+      "rerun_rule": "先展示 AIP+PAuth/Progent+FORGE 结构上无法表达的攻击族。"
+    },
+    {
+      "record_id": "SOR-v011-003",
+      "run_id": "20260813_1547_run10",
+      "run_ref_type": "explicit_run_id",
+      "seed_id": "none-v011-observability",
+      "operator_type": "decision-conditioned-active-testing",
+      "linked_candidate_id": null,
+      "linked_kernel_id": "minimal-distinguishing-read-query",
+      "composition_mode": "test-model-learning-plus-function-evaluation-decision-tree",
+      "terminal_outcome": "method_reduction_collision",
+      "failure_stage": "formal-one-line-reduction",
+      "blocking_priors_or_families": ["function evaluation", "EC2", "active diagnosis", "strong planning"],
+      "supporting_artifacts": ["research_workspace/subagents/v011_observability_scout.md", "workbench_v011/v011_route_resolution.md"],
+      "lesson": "把动作安全标签作为目标函数后，查询合成就是经典带成本测试选择。",
+      "rerun_rule": "目标对象或允许信息必须改变，不能只是换成 Agent 工具模式。"
+    },
+    {
+      "record_id": "SOR-v012-001",
+      "run_id": "20260813_1547_run10",
+      "run_ref_type": "explicit_run_id",
+      "seed_id": "none-v012-async-future",
+      "operator_type": "counterfactual-future-completion-replay",
+      "linked_candidate_id": null,
+      "linked_kernel_id": "paired-future-must-invariance-barrier",
+      "composition_mode": "AsyncFC-plus-AttriGuard-replay-plus-safe-speculation-commit",
+      "terminal_outcome": "method_prior_collision",
+      "failure_stage": "nearest-prior-and-input-identifiability",
+      "blocking_priors_or_families": ["AttriGuard", "PASTE", "Speculative Interaction Agents", "Speculative Actions", "control dependence"],
+      "supporting_artifacts": ["research_workspace/subagents/v012_async_future_scout.md", "workbench_v012/v012_async_future_collision.md"],
+      "lesson": "未来结果的隐式控制依赖是真问题，但更换反事实干预域再接安全提交语义不产生新计算；结果空间本身还需可识别。",
+      "rerun_rule": "仅在出现可审计结果商空间、未覆盖风险和相对同预算 AttriGuard-port 的改变计算时重开。"
+    },
+    {
+      "record_id": "SOR-v013-001",
+      "run_id": "20260813_1547_run10",
+      "run_ref_type": "explicit_run_id",
+      "seed_id": "none-v013-evidence-response",
+      "operator_type": "paired-scientific-result-response-training",
+      "linked_candidate_id": null,
+      "linked_kernel_id": "belief-update-next-experiment-lifecycle-policy",
+      "composition_mode": "counterfactual-replay-plus-bayesian-labels-plus-scientific-process-training",
+      "terminal_outcome": "composition_and_identifiability_kill",
+      "failure_stage": "changed-computation-and-input-identifiability",
+      "blocking_priors_or_families": ["v003", "Bayesian Teaching", "Fisher-R1", "HEP/EDIT", "AttriGuard/CAR", "POPPER/MDA"],
+      "supporting_artifacts": ["research_workspace/subagents/v013_evidence_response_training_scout.md", "workbench_v013/v013_evidence_response_training_collision.md"],
+      "lesson": "已知似然时训练只是蒸馏既有规范计算；未知似然时标签不由可见输入决定。",
+      "rerun_rule": "只有引入独立可验证覆盖或任意时有效的证据强度估计新算子时另立路线。"
+    },
+    {
+      "record_id": "SOR-v014-001",
+      "run_id": "20260813_1547_run10",
+      "run_ref_type": "explicit_run_id",
+      "seed_id": "none-v014-adaptive-feedback",
+      "operator_type": "sealed-budgeted-verifier-feedback",
+      "linked_candidate_id": null,
+      "linked_kernel_id": "public-gate-final-feedback-controller",
+      "composition_mode": "adaptive-holdout-plus-cegis-plus-seal",
+      "terminal_outcome": "classic_reduction_and_direct_prior_collision",
+      "failure_stage": "changed-computation-and-problem-semantics",
+      "blocking_priors_or_families": ["Thresholdout", "Ladder", "CEGIS", "SEAL"],
+      "supporting_artifacts": ["research_workspace/subagents/v014_adaptive_verifier_feedback_scout.md", "workbench_v014/v014_adaptive_verifier_feedback_collision.md"],
+      "lesson": "反馈治理必须先区分统计样本、完整规范和有限代理；三者不能用一个保护集外壳统一成新方法。",
+      "rerun_rule": "仅在出现经典机制与 SEAL 均无法表达的新 agent-side 状态、动作和优化目标时重开。"
+    },
+    {
+      "record_id": "SOR-v015-001",
+      "run_id": "20260813_1547_run10",
+      "run_ref_type": "explicit_run_id",
+      "seed_id": "none-v015-nonmonotone-progress",
+      "operator_type": "dependency-propagated-progress-invalidation",
+      "linked_candidate_id": null,
+      "linked_kernel_id": "fresh-progress-certificate-controller",
+      "composition_mode": "pushbench-plus-ekstazi-shake-plus-atomix-memtx",
+      "terminal_outcome": "exact_cross_field_method_collision",
+      "failure_stage": "changed-computation-audit",
+      "blocking_priors_or_families": ["self-adjusting computation", "incremental build", "safe regression test selection", "transaction version validation"],
+      "supporting_artifacts": ["research_workspace/subagents/v015_nonmonotone_progress_scout.md", "workbench_v015/v015_nonmonotone_progress_collision.md"],
+      "lesson": "验证进度是可失效缓存节点；改变应用名不改变依赖传播和选择性重算。",
+      "rerun_rule": "只有出现 DDG/测试影响分析无法表达的新进度语义和独立算法时重开。"
+    }
+  ],
+  "candidate_composition_records": [
+    {
+      "record_id": "CCR-v009-001",
+      "run_id": "20260813_1547_run10",
+      "run_ref_type": "explicit_run_id",
+      "candidate_id": "h-v009-001",
+      "composition_mode": "min-cut-plus-copy-clustering-plus-gap-retrieval",
+      "linked_seed_ids": [],
+      "terminal_outcome": "falsified",
+      "failure_stage": "scratch-identifiability",
+      "blocking_priors_or_families": [
+        "truth discovery",
+        "Argus",
+        "SURE-RAG",
+        "database resilience"
+      ],
+      "supporting_artifacts": [
+        "workbench_v009/identifiability_probe_report.md",
+        "workbench_v009/v009_negative_decision.md"
+      ],
+      "lesson": "点估计不再是硬证书，最坏可能世界又导致普遍弃答；合成实验不能修复不可识别性。",
+      "rerun_rule": "先通过观测等价潜在世界检查，再允许端到端实现。"
+    },
+    {
+      "record_id": "CCR-v010-001",
+      "run_id": "20260813_1547_run10",
+      "run_ref_type": "explicit_run_id",
+      "candidate_id": "h-v010-001",
+      "composition_mode": "counterfactual-differential-plus-existing-transaction-protocol",
+      "linked_seed_ids": [],
+      "terminal_outcome": "prior_collision",
+      "failure_stage": "changed-computation-audit",
+      "blocking_priors_or_families": [
+        "action model acquisition",
+        "black-box REST API dependency graphs",
+        "agent concurrency protocols"
+      ],
+      "supporting_artifacts": [
+        "workbench_v010/action_model_collision.md"
+      ],
+      "lesson": "前置条件、读依赖、效果和隐式资源参数已经有统一动作模型学习表述。",
+      "rerun_rule": "不得通过添加 AppWorld 数据集或事务下游掩盖核心算子碰撞。"
+    }
+  ],
+  "operator_summary": {
+    "killed": 1,
+    "source_occupied": 2,
+    "source_occupied_and_anti_revival_blocked": 1,
+    "method_reduction_collision": 1,
+    "method_prior_collision": 1,
+    "composition_and_identifiability_kill": 1,
+    "classic_reduction_and_direct_prior_collision": 1,
+    "exact_cross_field_method_collision": 1,
+    "lesson": "跨领域迁移先审计输入与算子同构；安全图/证书、主动测试、反事实重放与科学过程训练尤其容易被强组合基线或不可识别性精确吸收。"
+  },
+  "composition_summary": {
+    "falsified": 1,
+    "prior_collision": 1,
+    "lesson": "不得以强组件拼装替代新的改变计算，也不得用新基准包装已知核心算子。"
+  }
+}

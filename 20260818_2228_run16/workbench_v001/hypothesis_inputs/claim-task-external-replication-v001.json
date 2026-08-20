@@ -1,0 +1,18 @@
+{
+  "claim_id": "task-external-score-distortion-replication-v001",
+  "claim_text": "在同模型的独立公开运行检查点中，开放世界状态合同会把包含任务外可疑状态变化的运行判为通过，并达到足以影响评价结果的频率。",
+  "scope": "Agent-Diff checkpoint_20260201_233808.json 的 117 个独立 Gemini 3 Flash 公开运行；只按完整提示匹配当前公开合同；人工标签只使用提示与保守未断言变化签名。",
+  "observable": "第二检查点原通过运行中，人工核对为 task_external_suspicious 的运行数、比例及其在原评分中的通过状态。",
+  "falsifier": "117 个运行不能全部匹配，或原通过且有未断言变化的运行经完整人工核对后，任务外可疑运行少于 3 个或低于原通过运行的 0.05。",
+  "minimum_effect_or_decision_rule": "完整提示匹配率必须为 1.00；至少 3 个原通过运行含任务外可疑变化，且占第二检查点原通过运行的比例 >=0.05，才保留实际得分扭曲主张。",
+  "alternative_explanations": [
+    "未断言变化是必要数据库或接口级联",
+    "未断言变化是用户明确要求但正向合同漏写的动作",
+    "保守匹配器没有识别广义断言覆盖",
+    "人工只看到变化签名而没有完整行级因果"
+  ],
+  "killer_experiment_id": "contract-mutation-replication-v001",
+  "supporting_experiment_ids": [],
+  "status": "testing",
+  "status_reason": "第一个完整检查点的 65 个未断言通过运行已完成发现性人工核对，未发现任务外可疑变化；现用仓库中唯一另一个独立公开检查点执行预注册复现。"
+}

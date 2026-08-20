@@ -1,0 +1,34 @@
+{
+  "hypothesis_id": "h-v004-001",
+  "title": "跨子任务约束保持的重叠分解与确定性合成",
+  "parent_ids": [],
+  "lineage_note": "v003 的工具结果绑定路线被强基线和先行工作共同杀死后，正交转向多智能体任务分解：检查局部子任务均成功而全局约束仍被切断的失败。",
+  "problem": "复杂任务被拆成多个子任务后，约束涉及的变量可能分属不同子任务；各执行者局部成功并不保证聚合结果满足跨子任务约束。",
+  "target_failure": {
+    "summary": "分解边界切断全局约束，导致局部解在合并时不一致或无法满足整体要求。",
+    "card_ids": ["paper-p004", "failure-solver-guarantee-stops-at-formalization"],
+    "evidence_ids": ["ev-p004-failure-core", "ev-p051-formalization-pipeline", "ev-p052-implicit-constraint-failure"]
+  },
+  "changed_computation": {
+    "baseline": "由大语言模型或固定工作流生成子任务有向图，执行者独立求解，最后由聚合智能体自由合并。",
+    "intervention": "把任务约束表示为变量—约束图；生成重叠子任务，使每条约束完整落入至少一个子任务，并把交集变量作为显式边界接口；局部候选仅在交集赋值一致时确定性合成。",
+    "information_available": "自然语言任务、显式或模型抽取的约束、子任务变量与局部候选；不使用隐藏终局标签。",
+    "timing": "任务分解时构造重叠分块，子任务完成后按共享变量一致性合成。",
+    "budget_effect": "增加约束抽取、图分解和局部候选合成成本；可能减少单个执行者上下文，但必须与整体求解、普通有向图分解及同预算重规划比较。"
+  },
+  "mechanism_claim": "保持约束覆盖与分隔变量一致性的重叠分解，比互不重叠的启发式子任务更能避免局部成功、全局失败。",
+  "falsifier": "已有工作已将大语言模型任务规约为约束满足问题，并用树分解、共享变量一致性和全局约束合成实现相同计算；或约束抽取误差成为主要瓶颈。",
+  "minimal_killer_experiment": "先核验最近的约束感知多智能体规划与基于树宽的大语言模型任务分解；若核心计算未被占据，再在可判定约束实例上比较启发式分解、整体求解和重叠分解。",
+  "nearest_prior_risk": "PMC 已显式区分局部/全局约束并由监督者传播邻接结果、交付者满足全局约束；ACONIC 已把任务规约为约束满足问题，用树分解的重叠分块与共享变量一致性保证全局可合成。",
+  "alternative_explanations": ["收益来自给模型更多显式约束", "收益来自最终求解器而非分解", "只适用于已有形式规约的玩具问题", "约束抽取错误支配整体表现"],
+  "descriptors": {
+    "problem_family": "decomposition_breaks_cross_subtask_constraints",
+    "computation_stage": "task_decomposition_and_composition",
+    "intervention_family": "constraint_preserving_tree_decomposition",
+    "information_source": "task_constraints_and_subtask_variables",
+    "timing_class": "preexecution_and_postsubtask_composition",
+    "budget_class": "graph_decomposition_and_join",
+    "evaluation_mode": "global_constraint_satisfaction"
+  },
+  "literature_refs": ["COLING 2025: Planning with Multi-Constraints via Collaborative Language Agents", "arXiv:2510.07772"]
+}

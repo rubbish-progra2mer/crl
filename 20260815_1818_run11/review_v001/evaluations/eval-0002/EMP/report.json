@@ -1,0 +1,60 @@
+{
+  "evaluation_id": "eval-0002",
+  "evaluator_definition_sha256": "e0d35083b1427e9f8861ba576304b97657498fee46480d5e07e8e0b02cea6e5b",
+  "evaluator_version": "CRL-EVAL-1.0",
+  "events_sha256": "0f77ed65f1d691f8c20c8b3dd139c28f6acecf387db58986bf200142ea46b1d2",
+  "invalid_reasons": [],
+  "measurement_key": "9e34e792cdde7f6355fe4082790753680ecd51849dbc1c70ab1e904650d198ea",
+  "output": {
+    "confidence": "high",
+    "critical_risk": "potentially_fatal",
+    "diagnostics": {
+      "baseline_confound": "候选相对单次正确率获得四次额外探针和手工任务关系 oracle，因而既拥有更多信息，也有更多发现失败的机会；弱基线则未获得同等语义关系，且没有同预算的完整反事实正确性或通用变形基线作为主比较。",
+      "biggest_empirical_threat": "核心构念可能塌缩为多次变体正确性：当基线答案正确时，任务关系与两类不变性基本强制其余变体也精确正确；真实样本中联合关系与完整四变体正确性又恰好35/120完全重合。因此当前实验不能独立区分“工具证据采用失败”与一般提示敏感性、格式行为或多次调用下的任务正确性失败。",
+      "killer_experiment": "冻结评估器后，在盲法保留的真实多步工具任务上由独立标注者定义字段相关性与关系，随机化五次调用顺序并运行多个种子；以相同五调用预算比较联合探针、完整变体正确性和通用变形基线对独立环境终态错误或人工审计证据误用的增量预测。若联合探针在控制完整正确性后无增量，核心经验与机制主张即被推翻。",
+      "missing_validation": "最应补的是跨供应商、跨种子且按案例和模型聚类估计不确定性的独立保留集验证，并由实现团队之外的标注者确认字段相关性和变形关系。",
+      "strongest_empirical_evidence": "在修复后的正式运行中，53个基线精确正确行有18个联合关系失败，18行均无解析警告，并分布于六个模型—提示分层中的五个；这是对冻结本地套件中“一次答对不保证变形稳定”的最可信证据。"
+    },
+    "evaluator_version": "CRL-EVAL-1.0",
+    "free_review": "当前证据足以确认一个很窄的事实：在这20个合成案例和三种同谱系本地模型上，一次精确答对后仍可在额外变体调用中失败。突变负控设计完整，重放项修复后也重新运行，审计性较好。但1.0突变判别主要是按定义构造出的结果；真实模型中的联合关系又与完整反事实正确性完全重合，未显示独立的“证据采用”测量价值。再加上Scratch后复用同一套件、单一种子、相关统计单元和任务族高度集中，现有结果不宜解释为一般机制或部署风险。决定性下一步应是盲法真实任务上的同预算增量预测验证。",
+    "model_identity": "gpt-5.6-sol",
+    "reasoning_effort": "xhigh",
+    "reasons": {
+      "baseline_fairness": "三个突变信号复用相同140行回答，调用预算、模型和采样条件匹配，这是公平之处。但候选信号使用手工提供的任务关系 oracle，而两个弱基线不使用同等语义信息；与单次正确率相比，候选还有五次调用带来的更多失败机会。未提供同预算的通用变形、重复采样或完整反事实正确性强基线，且联合关系与完整四变体正确性在真实模型样本中恰好同为35/120。",
+      "experimental_validity": "实验在修复重放稳定性遗漏后重新正式运行，对“冻结套件中存在关系失败”这一局部描述提供了直接证据。但突变策略、正负标签和关系判据由同一团队共同构造，1.0 更接近构造一致性测试而非独立验证。真实模型 Formal 还复用了此前 Scratch 塑形所用的同一套件和模型谱系，不是独立新样本。对基线正确行，联合关系又近似等价于额外变体的完整正确性，尚未证明失败特指工具证据采用。",
+      "measurement_reliability": "原始回答、资源计数、解析警告和逐例布尔关系均被保留，独立家族求解器也验证了20/20案例的标签自洽。该求解器仍属于同一研究实现，只验证合成语义，不独立验证“选择性采用”构念。Wilson区间把53个模型—提示—案例行当作统计单元，但这些行共享20个案例且模型同谱系，相关性未进入方差估计。固定单一种子、精确字符串判分及缺少独立人工复核进一步限制测量可靠性。",
+      "result_strength": "最强真实模型结果是53个单次正确行中18个联合失败，区间为22.69%–47.41%，且五个模型—提示分层非零、失败不由解析警告解释。但16/18失败集中于两个标识选择任务族，重放项在这些行中没有经验增量。突变实验的140行主要是七种确定性策略在20例上的重复，未给出以策略或任务族为独立单位的不确定性。结果只支持局部合成套件现象，尚不支持一般机制、部署率或超越完整反事实正确性的增量价值。",
+      "robustness_falsification": "七种策略覆盖忽略、诱饵依赖、方向错误、错误但等变和仅重放不稳定等针对性负控，并确实发现和修复过联合判据缺陷。解析警告剔除、模型—提示分层和任务族分层也提供了有用边界信息。不过这些突变是按判据各合取项专门编写的，同文件实现且无冻结后的未知突变或自适应策略测试。没有跨种子、调用顺序随机化、不同变形强度、跨供应商或真实多步轨迹实验，主要替代解释仍未被排除。"
+    },
+    "review_protocol": "CRL-IR-1.0",
+    "reviewer_role": "EMP",
+    "scores": {
+      "baseline_fairness": 2,
+      "experimental_validity": 2,
+      "measurement_reliability": 2,
+      "result_strength": 2,
+      "robustness_falsification": 2
+    }
+  },
+  "packet_key": "381b07bbe2fca475606bcefe6d03c6ae5ccc19a5657b21f8cd30f9f0fd7ee376",
+  "raw_output_sha256": "50724a3b3a3eb812b2fb148b7f631bdd253a18e025e4343e44d29153fe59a6a8",
+  "request_sha256": "b1333b6d8adb005ccce072639c37f25a8e47050c238682b3ced297429d4ea41b",
+  "reviewer_role": "EMP",
+  "runtime": {
+    "backend": "codex_exec_jsonl_v1",
+    "codex_version": "codex-cli 0.147.0",
+    "ephemeral": true,
+    "event_count": 4,
+    "executable": "D:\\Desktop\\crl\\runtimes\\codex-cli\\0.147.0\\codex.cmd",
+    "forbidden_events": [],
+    "network_requested": false,
+    "reasoning_effort": "xhigh",
+    "requested_model": "gpt-5.6-sol",
+    "returncode": 0,
+    "sandbox": "read-only",
+    "timed_out": false
+  },
+  "schema_version": 1,
+  "stderr_sha256": "f903df5d134b7b7f8b70700473960247eb16542769ec21a93e98dca0f7e151f2",
+  "valid": true
+}

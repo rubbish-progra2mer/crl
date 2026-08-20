@@ -1,0 +1,58 @@
+{
+  "hypothesis_id": "h-001",
+  "title": "肯定式工具回执诱发的未检测假完成与后置条件选择性复核",
+  "parent_ids": [],
+  "lineage_note": "从工具智能体在有状态环境中的回执—真实状态脱钩问题出发的根候选。",
+  "problem": "有副作用的工具调用可能返回语言上肯定的成功回执，但目标外部状态因静默故障、部分提交或错误对象而没有满足；工具型大语言模型智能体可能把回执措辞当作状态证据并提前宣告完成。",
+  "target_failure": {
+    "summary": "智能体在 false-success 条件下未读取可访问的后置状态，产生未检测假完成；这种失败可能显著强于 explicit-error，并被只检查调用语法或调用前计划的评价遗漏。",
+    "card_ids": [
+      "operator-milestone-dag-trajectory-evaluation",
+      "failure-single-turn-tool-score-overstates-agent-competence",
+      "operator-execution-supervised-prompt-trace-calibration"
+    ],
+    "evidence_ids": [
+      "ev-p037-evaluation-core",
+      "ev-p066-single-to-stateful-gap",
+      "ev-p073-internal-confidence-misalignment",
+      "ev-p097-feasibility-gap"
+    ]
+  },
+  "changed_computation": {
+    "baseline": "执行写工具后直接根据自然语言回执继续推理，或用同一轨迹进行通用自反思。",
+    "intervention": "把任务要求的可观测效果编译为结构化后置条件；写调用后使用独立读工具取得规范化状态，并在谓词不满足时触发有界修复或拒绝宣告完成。",
+    "information_available": "仅使用基线也可获得的工具模式、任务文本、写调用参数和公开读工具结果，不接触隐藏真值或故障标签。",
+    "timing": "每个可能改变后续决策的副作用调用之后、依赖该状态的下一动作或最终答复之前。",
+    "budget_effect": "主要设置增加一次读工具调用；公平比较为自反思、盲重试和通用读回均匹配工具调用数与近似令牌预算。"
+  },
+  "mechanism_claim": "肯定式回执会把智能体的内部完成判断锚定在回执文本而非环境状态；将完成判定改为对任务特定后置条件的独立状态读取，可降低未检测假完成，并把剩余失败转化为可观察的不一致。",
+  "falsifier": "若在多种任务、回执措辞和至少两个模型上 false-success 相对 explicit-error 没有稳定的未检测失败增量，或同预算通用读回/自反思与结构化后置条件复核表现等价，则现象特异性或方法贡献差分被否定。",
+  "minimal_killer_experiment": "在具有确定隐藏状态的合成有状态工具环境中，按任务实例成对注入 true-success、false-success、explicit-error 与 ambiguous-success；比较裸 ReAct、同预算自反思、盲重试、通用读回和结构化后置条件复核。核心观察为未检测假完成率、真实任务成功率、故障检测率、额外工具调用及 true-success 干扰率。",
+  "nearest_prior_risk": "运行时断言、事务后置条件、ToolSandbox 状态里程碑、通用执行反馈、ReLoop 行为验证和 STALE 状态裁决可能构成可构造组合；必须证明回执措辞引起的非对称现象及任务特定谓词相对同预算通用读回的增量。",
+  "alternative_explanations": [
+    "收益仅来自多一次工具调用而非后置条件结构",
+    "false-success 提示词比 explicit-error 更难或更长",
+    "合成环境的读工具直接泄漏真值",
+    "解析器或预定义谓词隐含使用任务答案",
+    "个别小模型的指令遵循缺陷而非普遍代理现象"
+  ],
+  "descriptors": {
+    "problem_family": "有状态工具智能体的静默执行失败",
+    "computation_stage": "工具执行后的状态更新与完成判定",
+    "intervention_family": "任务特定后置条件验证",
+    "information_source": "公开读工具返回的外部状态",
+    "timing_class": "副作用调用后、依赖动作前",
+    "budget_class": "一次匹配预算的额外读调用",
+    "evaluation_mode": "成对故障注入与隐藏状态机械判定"
+  },
+  "literature_refs": [
+    "P037",
+    "P049",
+    "P066",
+    "P073",
+    "P084",
+    "P097",
+    "P030",
+    "P091"
+  ]
+}

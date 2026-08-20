@@ -1,0 +1,533 @@
+{
+  "experiment": "scope_closure_probe_v001",
+  "model": "qwen3:8b",
+  "seed": 20260802,
+  "task_count": 2,
+  "modes": [
+    "raw",
+    "reminder",
+    "gate",
+    "eager"
+  ],
+  "elapsed_seconds": 3.1005008220672607,
+  "summary": {
+    "eager": {
+      "episodes": 2,
+      "accuracy": 1.0,
+      "accessible_accuracy": 1.0,
+      "false_negatives": 0,
+      "unsafe_overclaims": 0,
+      "abstentions": 0,
+      "mean_tool_calls": 3.0,
+      "mean_model_calls": 1.0,
+      "prompt_tokens": 731,
+      "generated_tokens": 12
+    },
+    "gate": {
+      "episodes": 2,
+      "accuracy": 1.0,
+      "accessible_accuracy": 1.0,
+      "false_negatives": 0,
+      "unsafe_overclaims": 0,
+      "abstentions": 0,
+      "mean_tool_calls": 2.5,
+      "mean_model_calls": 1.0,
+      "prompt_tokens": 380,
+      "generated_tokens": 12
+    },
+    "raw": {
+      "episodes": 2,
+      "accuracy": 0.5,
+      "accessible_accuracy": 0.5,
+      "false_negatives": 1,
+      "unsafe_overclaims": 1,
+      "abstentions": 0,
+      "mean_tool_calls": 1.0,
+      "mean_model_calls": 1.0,
+      "prompt_tokens": 380,
+      "generated_tokens": 12
+    },
+    "reminder": {
+      "episodes": 2,
+      "accuracy": 0.5,
+      "accessible_accuracy": 0.5,
+      "false_negatives": 1,
+      "unsafe_overclaims": 1,
+      "abstentions": 0,
+      "mean_tool_calls": 1.0,
+      "mean_model_calls": 1.0,
+      "prompt_tokens": 442,
+      "generated_tokens": 12
+    }
+  },
+  "tasks": [
+    {
+      "task_id": "task-000",
+      "condition": "initial_witness",
+      "target_code": "target-000",
+      "label": "YES",
+      "global_access": true,
+      "records": [
+        {
+          "record_id": "r000-5",
+          "code": "other-000-5",
+          "day": 26,
+          "archived": false
+        },
+        {
+          "record_id": "r000-2",
+          "code": "other-000-2",
+          "day": 68,
+          "archived": false
+        },
+        {
+          "record_id": "r000-3",
+          "code": "other-000-3",
+          "day": 54,
+          "archived": false
+        },
+        {
+          "record_id": "r000-0",
+          "code": "target-000",
+          "day": 96,
+          "archived": false
+        },
+        {
+          "record_id": "r000-4",
+          "code": "other-000-4",
+          "day": 40,
+          "archived": true
+        },
+        {
+          "record_id": "r000-1",
+          "code": "other-000-1",
+          "day": 82,
+          "archived": false
+        }
+      ]
+    },
+    {
+      "task_id": "task-005",
+      "condition": "old_witness",
+      "target_code": "target-005",
+      "label": "YES",
+      "global_access": true,
+      "records": [
+        {
+          "record_id": "r005-3",
+          "code": "other-005-3",
+          "day": 54,
+          "archived": false
+        },
+        {
+          "record_id": "r005-4",
+          "code": "other-005-4",
+          "day": 40,
+          "archived": true
+        },
+        {
+          "record_id": "r005-0",
+          "code": "other-005-0",
+          "day": 96,
+          "archived": false
+        },
+        {
+          "record_id": "r005-2",
+          "code": "other-005-2",
+          "day": 68,
+          "archived": false
+        },
+        {
+          "record_id": "r005-1",
+          "code": "other-005-1",
+          "day": 82,
+          "archived": false
+        },
+        {
+          "record_id": "r005-5",
+          "code": "target-005",
+          "day": 6,
+          "archived": false
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "task_id": "task-000",
+      "condition": "initial_witness",
+      "label": "YES",
+      "mode": "raw",
+      "candidate_answer": "YES",
+      "answer": "YES",
+      "correct": true,
+      "accessible_correct": true,
+      "false_negative": false,
+      "unsafe_overclaim": false,
+      "abstained": false,
+      "positive_answer": true,
+      "tool_calls": 1,
+      "model_calls": 1,
+      "certificate": "initial_payload_only",
+      "initial_payload": {
+        "status": "ok",
+        "items": [
+          {
+            "record_id": "r000-0",
+            "code": "target-000",
+            "day": 96,
+            "archived": false
+          },
+          {
+            "record_id": "r000-1",
+            "code": "other-000-1",
+            "day": 82,
+            "archived": false
+          }
+        ]
+      },
+      "initial_capsule": {
+        "from_day": 30,
+        "include_archived": false,
+        "cursor": 0,
+        "next_cursor": 2,
+        "permission_scope": "organization",
+        "truncated": true
+      },
+      "usage": {
+        "prompt_eval_count": 189,
+        "eval_count": 6,
+        "total_duration": 403248100
+      }
+    },
+    {
+      "task_id": "task-005",
+      "condition": "old_witness",
+      "label": "YES",
+      "mode": "raw",
+      "candidate_answer": "NO",
+      "answer": "NO",
+      "correct": false,
+      "accessible_correct": false,
+      "false_negative": true,
+      "unsafe_overclaim": true,
+      "abstained": false,
+      "positive_answer": false,
+      "tool_calls": 1,
+      "model_calls": 1,
+      "certificate": "initial_payload_only",
+      "initial_payload": {
+        "status": "ok",
+        "items": [
+          {
+            "record_id": "r005-0",
+            "code": "other-005-0",
+            "day": 96,
+            "archived": false
+          },
+          {
+            "record_id": "r005-1",
+            "code": "other-005-1",
+            "day": 82,
+            "archived": false
+          }
+        ]
+      },
+      "initial_capsule": {
+        "from_day": 30,
+        "include_archived": false,
+        "cursor": 0,
+        "next_cursor": 2,
+        "permission_scope": "organization",
+        "truncated": true
+      },
+      "usage": {
+        "prompt_eval_count": 191,
+        "eval_count": 6,
+        "total_duration": 386170200
+      }
+    },
+    {
+      "task_id": "task-000",
+      "condition": "initial_witness",
+      "label": "YES",
+      "mode": "reminder",
+      "candidate_answer": "YES",
+      "answer": "YES",
+      "correct": true,
+      "accessible_correct": true,
+      "false_negative": false,
+      "unsafe_overclaim": false,
+      "abstained": false,
+      "positive_answer": true,
+      "tool_calls": 1,
+      "model_calls": 1,
+      "certificate": "initial_payload_only",
+      "initial_payload": {
+        "status": "ok",
+        "items": [
+          {
+            "record_id": "r000-0",
+            "code": "target-000",
+            "day": 96,
+            "archived": false
+          },
+          {
+            "record_id": "r000-1",
+            "code": "other-000-1",
+            "day": 82,
+            "archived": false
+          }
+        ]
+      },
+      "initial_capsule": {
+        "from_day": 30,
+        "include_archived": false,
+        "cursor": 0,
+        "next_cursor": 2,
+        "permission_scope": "organization",
+        "truncated": true
+      },
+      "usage": {
+        "prompt_eval_count": 220,
+        "eval_count": 6,
+        "total_duration": 397320800
+      }
+    },
+    {
+      "task_id": "task-005",
+      "condition": "old_witness",
+      "label": "YES",
+      "mode": "reminder",
+      "candidate_answer": "NO",
+      "answer": "NO",
+      "correct": false,
+      "accessible_correct": false,
+      "false_negative": true,
+      "unsafe_overclaim": true,
+      "abstained": false,
+      "positive_answer": false,
+      "tool_calls": 1,
+      "model_calls": 1,
+      "certificate": "initial_payload_only",
+      "initial_payload": {
+        "status": "ok",
+        "items": [
+          {
+            "record_id": "r005-0",
+            "code": "other-005-0",
+            "day": 96,
+            "archived": false
+          },
+          {
+            "record_id": "r005-1",
+            "code": "other-005-1",
+            "day": 82,
+            "archived": false
+          }
+        ]
+      },
+      "initial_capsule": {
+        "from_day": 30,
+        "include_archived": false,
+        "cursor": 0,
+        "next_cursor": 2,
+        "permission_scope": "organization",
+        "truncated": true
+      },
+      "usage": {
+        "prompt_eval_count": 222,
+        "eval_count": 6,
+        "total_duration": 371631400
+      }
+    },
+    {
+      "task_id": "task-000",
+      "condition": "initial_witness",
+      "label": "YES",
+      "mode": "gate",
+      "candidate_answer": "YES",
+      "answer": "YES",
+      "correct": true,
+      "accessible_correct": true,
+      "false_negative": false,
+      "unsafe_overclaim": false,
+      "abstained": false,
+      "positive_answer": true,
+      "tool_calls": 1,
+      "model_calls": 1,
+      "certificate": "positive_witness",
+      "initial_payload": {
+        "status": "ok",
+        "items": [
+          {
+            "record_id": "r000-0",
+            "code": "target-000",
+            "day": 96,
+            "archived": false
+          },
+          {
+            "record_id": "r000-1",
+            "code": "other-000-1",
+            "day": 82,
+            "archived": false
+          }
+        ]
+      },
+      "initial_capsule": {
+        "from_day": 30,
+        "include_archived": false,
+        "cursor": 0,
+        "next_cursor": 2,
+        "permission_scope": "organization",
+        "truncated": true
+      },
+      "usage": {
+        "prompt_eval_count": 189,
+        "eval_count": 6,
+        "total_duration": 347845600
+      }
+    },
+    {
+      "task_id": "task-005",
+      "condition": "old_witness",
+      "label": "YES",
+      "mode": "gate",
+      "candidate_answer": "NO",
+      "answer": "YES",
+      "correct": true,
+      "accessible_correct": true,
+      "false_negative": false,
+      "unsafe_overclaim": false,
+      "abstained": false,
+      "positive_answer": true,
+      "tool_calls": 4,
+      "model_calls": 1,
+      "certificate": "positive_witness_after_closure",
+      "initial_payload": {
+        "status": "ok",
+        "items": [
+          {
+            "record_id": "r005-0",
+            "code": "other-005-0",
+            "day": 96,
+            "archived": false
+          },
+          {
+            "record_id": "r005-1",
+            "code": "other-005-1",
+            "day": 82,
+            "archived": false
+          }
+        ]
+      },
+      "initial_capsule": {
+        "from_day": 30,
+        "include_archived": false,
+        "cursor": 0,
+        "next_cursor": 2,
+        "permission_scope": "organization",
+        "truncated": true
+      },
+      "usage": {
+        "prompt_eval_count": 191,
+        "eval_count": 6,
+        "total_duration": 347237100
+      }
+    },
+    {
+      "task_id": "task-000",
+      "condition": "initial_witness",
+      "label": "YES",
+      "mode": "eager",
+      "candidate_answer": "YES",
+      "answer": "YES",
+      "correct": true,
+      "accessible_correct": true,
+      "false_negative": false,
+      "unsafe_overclaim": false,
+      "abstained": false,
+      "positive_answer": true,
+      "tool_calls": 3,
+      "model_calls": 1,
+      "certificate": "complete",
+      "initial_payload": {
+        "status": "ok",
+        "items": [
+          {
+            "record_id": "r000-0",
+            "code": "target-000",
+            "day": 96,
+            "archived": false
+          },
+          {
+            "record_id": "r000-1",
+            "code": "other-000-1",
+            "day": 82,
+            "archived": false
+          }
+        ]
+      },
+      "initial_capsule": {
+        "from_day": 30,
+        "include_archived": false,
+        "cursor": 0,
+        "next_cursor": 2,
+        "permission_scope": "organization",
+        "truncated": true
+      },
+      "usage": {
+        "prompt_eval_count": 366,
+        "eval_count": 6,
+        "total_duration": 387140600
+      }
+    },
+    {
+      "task_id": "task-005",
+      "condition": "old_witness",
+      "label": "YES",
+      "mode": "eager",
+      "candidate_answer": "YES",
+      "answer": "YES",
+      "correct": true,
+      "accessible_correct": true,
+      "false_negative": false,
+      "unsafe_overclaim": false,
+      "abstained": false,
+      "positive_answer": true,
+      "tool_calls": 3,
+      "model_calls": 1,
+      "certificate": "complete",
+      "initial_payload": {
+        "status": "ok",
+        "items": [
+          {
+            "record_id": "r005-0",
+            "code": "other-005-0",
+            "day": 96,
+            "archived": false
+          },
+          {
+            "record_id": "r005-1",
+            "code": "other-005-1",
+            "day": 82,
+            "archived": false
+          }
+        ]
+      },
+      "initial_capsule": {
+        "from_day": 30,
+        "include_archived": false,
+        "cursor": 0,
+        "next_cursor": 2,
+        "permission_scope": "organization",
+        "truncated": true
+      },
+      "usage": {
+        "prompt_eval_count": 365,
+        "eval_count": 6,
+        "total_duration": 414371500
+      }
+    }
+  ]
+}

@@ -1,0 +1,795 @@
+{
+  "schema_version": 1,
+  "experiment_id": "scratch-deterministic-relational",
+  "configuration": {
+    "backend": "deterministic",
+    "policies": [
+      "faithful",
+      "ignore",
+      "distractor",
+      "unstable"
+    ],
+    "models": [],
+    "prompt_regimes": [],
+    "temperature": 0.0,
+    "seed": 123
+  },
+  "case_count": 5,
+  "rows": [
+    {
+      "case_id": "inventory_minimum",
+      "agent_id": "deterministic::faithful",
+      "backend": "deterministic",
+      "answers": {
+        "base": "SKU-A",
+        "relevant": "SKU-B",
+        "irrelevant": "SKU-A",
+        "repeat": "SKU-A"
+      },
+      "expected_relation_anchors": {
+        "base": "SKU-A",
+        "relevant": "SKU-B",
+        "irrelevant": "SKU-A"
+      },
+      "metrics": {
+        "exact_base": true,
+        "exact_triple": true,
+        "tool_value_overlap": true,
+        "relevant_changed": true,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": true,
+        "relevant_relation": true,
+        "bidirectional_relation": true
+      },
+      "calls": [],
+      "warnings": [],
+      "known_faithful_policy": true
+    },
+    {
+      "case_id": "latest_confirmed_event",
+      "agent_id": "deterministic::faithful",
+      "backend": "deterministic",
+      "answers": {
+        "base": "EV-3",
+        "relevant": "EV-2",
+        "irrelevant": "EV-3",
+        "repeat": "EV-3"
+      },
+      "expected_relation_anchors": {
+        "base": "EV-3",
+        "relevant": "EV-2",
+        "irrelevant": "EV-3"
+      },
+      "metrics": {
+        "exact_base": true,
+        "exact_triple": true,
+        "tool_value_overlap": true,
+        "relevant_changed": true,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": true,
+        "relevant_relation": true,
+        "bidirectional_relation": true
+      },
+      "calls": [],
+      "warnings": [],
+      "known_faithful_policy": true
+    },
+    {
+      "case_id": "support_routing",
+      "agent_id": "deterministic::faithful",
+      "backend": "deterministic",
+      "answers": {
+        "base": "15",
+        "relevant": "12",
+        "irrelevant": "15",
+        "repeat": "15"
+      },
+      "expected_relation_anchors": {
+        "base": "15",
+        "relevant": "12",
+        "irrelevant": "15"
+      },
+      "metrics": {
+        "exact_base": true,
+        "exact_triple": true,
+        "tool_value_overlap": false,
+        "relevant_changed": true,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": true,
+        "relevant_relation": true,
+        "bidirectional_relation": true
+      },
+      "calls": [],
+      "warnings": [],
+      "known_faithful_policy": true
+    },
+    {
+      "case_id": "fastest_paid_order",
+      "agent_id": "deterministic::faithful",
+      "backend": "deterministic",
+      "answers": {
+        "base": "ORD-1",
+        "relevant": "ORD-2",
+        "irrelevant": "ORD-1",
+        "repeat": "ORD-1"
+      },
+      "expected_relation_anchors": {
+        "base": "ORD-1",
+        "relevant": "ORD-2",
+        "irrelevant": "ORD-1"
+      },
+      "metrics": {
+        "exact_base": true,
+        "exact_triple": true,
+        "tool_value_overlap": true,
+        "relevant_changed": true,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": true,
+        "relevant_relation": true,
+        "bidirectional_relation": true
+      },
+      "calls": [],
+      "warnings": [],
+      "known_faithful_policy": true
+    },
+    {
+      "case_id": "valid_amount_sum",
+      "agent_id": "deterministic::faithful",
+      "backend": "deterministic",
+      "answers": {
+        "base": "18",
+        "relevant": "22",
+        "irrelevant": "18",
+        "repeat": "18"
+      },
+      "expected_relation_anchors": {
+        "base": "18",
+        "relevant": "22",
+        "irrelevant": "18"
+      },
+      "metrics": {
+        "exact_base": true,
+        "exact_triple": true,
+        "tool_value_overlap": false,
+        "relevant_changed": true,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": true,
+        "relevant_relation": true,
+        "bidirectional_relation": true
+      },
+      "calls": [],
+      "warnings": [],
+      "known_faithful_policy": true
+    },
+    {
+      "case_id": "inventory_minimum",
+      "agent_id": "deterministic::ignore",
+      "backend": "deterministic",
+      "answers": {
+        "base": "SKU-A",
+        "relevant": "SKU-A",
+        "irrelevant": "SKU-A",
+        "repeat": "SKU-A"
+      },
+      "expected_relation_anchors": {
+        "base": "SKU-A",
+        "relevant": "SKU-B",
+        "irrelevant": "SKU-A"
+      },
+      "metrics": {
+        "exact_base": true,
+        "exact_triple": false,
+        "tool_value_overlap": true,
+        "relevant_changed": false,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": false,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [],
+      "warnings": [],
+      "known_faithful_policy": false
+    },
+    {
+      "case_id": "latest_confirmed_event",
+      "agent_id": "deterministic::ignore",
+      "backend": "deterministic",
+      "answers": {
+        "base": "EV-3",
+        "relevant": "EV-3",
+        "irrelevant": "EV-3",
+        "repeat": "EV-3"
+      },
+      "expected_relation_anchors": {
+        "base": "EV-3",
+        "relevant": "EV-2",
+        "irrelevant": "EV-3"
+      },
+      "metrics": {
+        "exact_base": true,
+        "exact_triple": false,
+        "tool_value_overlap": true,
+        "relevant_changed": false,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": false,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [],
+      "warnings": [],
+      "known_faithful_policy": false
+    },
+    {
+      "case_id": "support_routing",
+      "agent_id": "deterministic::ignore",
+      "backend": "deterministic",
+      "answers": {
+        "base": "15",
+        "relevant": "15",
+        "irrelevant": "15",
+        "repeat": "15"
+      },
+      "expected_relation_anchors": {
+        "base": "15",
+        "relevant": "12",
+        "irrelevant": "15"
+      },
+      "metrics": {
+        "exact_base": true,
+        "exact_triple": false,
+        "tool_value_overlap": false,
+        "relevant_changed": false,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": false,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [],
+      "warnings": [],
+      "known_faithful_policy": false
+    },
+    {
+      "case_id": "fastest_paid_order",
+      "agent_id": "deterministic::ignore",
+      "backend": "deterministic",
+      "answers": {
+        "base": "ORD-1",
+        "relevant": "ORD-1",
+        "irrelevant": "ORD-1",
+        "repeat": "ORD-1"
+      },
+      "expected_relation_anchors": {
+        "base": "ORD-1",
+        "relevant": "ORD-2",
+        "irrelevant": "ORD-1"
+      },
+      "metrics": {
+        "exact_base": true,
+        "exact_triple": false,
+        "tool_value_overlap": true,
+        "relevant_changed": false,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": false,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [],
+      "warnings": [],
+      "known_faithful_policy": false
+    },
+    {
+      "case_id": "valid_amount_sum",
+      "agent_id": "deterministic::ignore",
+      "backend": "deterministic",
+      "answers": {
+        "base": "18",
+        "relevant": "18",
+        "irrelevant": "18",
+        "repeat": "18"
+      },
+      "expected_relation_anchors": {
+        "base": "18",
+        "relevant": "22",
+        "irrelevant": "18"
+      },
+      "metrics": {
+        "exact_base": true,
+        "exact_triple": false,
+        "tool_value_overlap": false,
+        "relevant_changed": false,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": false,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [],
+      "warnings": [],
+      "known_faithful_policy": false
+    },
+    {
+      "case_id": "inventory_minimum",
+      "agent_id": "deterministic::distractor",
+      "backend": "deterministic",
+      "answers": {
+        "base": "SKU-C",
+        "relevant": "SKU-C",
+        "irrelevant": "SKU-B",
+        "repeat": "SKU-C"
+      },
+      "expected_relation_anchors": {
+        "base": "SKU-A",
+        "relevant": "SKU-B",
+        "irrelevant": "SKU-A"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": true,
+        "relevant_changed": false,
+        "irrelevant_invariant": false,
+        "repeat_stable": true,
+        "selective_change": false,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [],
+      "warnings": [],
+      "known_faithful_policy": false
+    },
+    {
+      "case_id": "latest_confirmed_event",
+      "agent_id": "deterministic::distractor",
+      "backend": "deterministic",
+      "answers": {
+        "base": "EV-1",
+        "relevant": "EV-1",
+        "irrelevant": "EV-2",
+        "repeat": "EV-1"
+      },
+      "expected_relation_anchors": {
+        "base": "EV-3",
+        "relevant": "EV-2",
+        "irrelevant": "EV-3"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": true,
+        "relevant_changed": false,
+        "irrelevant_invariant": false,
+        "repeat_stable": true,
+        "selective_change": false,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [],
+      "warnings": [],
+      "known_faithful_policy": false
+    },
+    {
+      "case_id": "support_routing",
+      "agent_id": "deterministic::distractor",
+      "backend": "deterministic",
+      "answers": {
+        "base": "99",
+        "relevant": "99",
+        "irrelevant": "77",
+        "repeat": "99"
+      },
+      "expected_relation_anchors": {
+        "base": "15",
+        "relevant": "12",
+        "irrelevant": "15"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": true,
+        "relevant_changed": false,
+        "irrelevant_invariant": false,
+        "repeat_stable": true,
+        "selective_change": false,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [],
+      "warnings": [],
+      "known_faithful_policy": false
+    },
+    {
+      "case_id": "fastest_paid_order",
+      "agent_id": "deterministic::distractor",
+      "backend": "deterministic",
+      "answers": {
+        "base": "ORD-3",
+        "relevant": "ORD-3",
+        "irrelevant": "ORD-2",
+        "repeat": "ORD-3"
+      },
+      "expected_relation_anchors": {
+        "base": "ORD-1",
+        "relevant": "ORD-2",
+        "irrelevant": "ORD-1"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": true,
+        "relevant_changed": false,
+        "irrelevant_invariant": false,
+        "repeat_stable": true,
+        "selective_change": false,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [],
+      "warnings": [],
+      "known_faithful_policy": false
+    },
+    {
+      "case_id": "valid_amount_sum",
+      "agent_id": "deterministic::distractor",
+      "backend": "deterministic",
+      "answers": {
+        "base": "118",
+        "relevant": "118",
+        "irrelevant": "100",
+        "repeat": "118"
+      },
+      "expected_relation_anchors": {
+        "base": "18",
+        "relevant": "22",
+        "irrelevant": "18"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": true,
+        "relevant_changed": false,
+        "irrelevant_invariant": false,
+        "repeat_stable": true,
+        "selective_change": false,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [],
+      "warnings": [],
+      "known_faithful_policy": false
+    },
+    {
+      "case_id": "inventory_minimum",
+      "agent_id": "deterministic::unstable",
+      "backend": "deterministic",
+      "answers": {
+        "base": "unstable::inventory_minimum::base",
+        "relevant": "unstable::inventory_minimum::relevant",
+        "irrelevant": "unstable::inventory_minimum::irrelevant",
+        "repeat": "unstable::inventory_minimum::repeat"
+      },
+      "expected_relation_anchors": {
+        "base": "SKU-A",
+        "relevant": "SKU-B",
+        "irrelevant": "SKU-A"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": false,
+        "relevant_changed": true,
+        "irrelevant_invariant": false,
+        "repeat_stable": false,
+        "selective_change": false,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [],
+      "warnings": [],
+      "known_faithful_policy": false
+    },
+    {
+      "case_id": "latest_confirmed_event",
+      "agent_id": "deterministic::unstable",
+      "backend": "deterministic",
+      "answers": {
+        "base": "unstable::latest_confirmed_event::base",
+        "relevant": "unstable::latest_confirmed_event::relevant",
+        "irrelevant": "unstable::latest_confirmed_event::irrelevant",
+        "repeat": "unstable::latest_confirmed_event::repeat"
+      },
+      "expected_relation_anchors": {
+        "base": "EV-3",
+        "relevant": "EV-2",
+        "irrelevant": "EV-3"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": false,
+        "relevant_changed": true,
+        "irrelevant_invariant": false,
+        "repeat_stable": false,
+        "selective_change": false,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [],
+      "warnings": [],
+      "known_faithful_policy": false
+    },
+    {
+      "case_id": "support_routing",
+      "agent_id": "deterministic::unstable",
+      "backend": "deterministic",
+      "answers": {
+        "base": "unstable::support_routing::base",
+        "relevant": "unstable::support_routing::relevant",
+        "irrelevant": "unstable::support_routing::irrelevant",
+        "repeat": "unstable::support_routing::repeat"
+      },
+      "expected_relation_anchors": {
+        "base": "15",
+        "relevant": "12",
+        "irrelevant": "15"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": false,
+        "relevant_changed": true,
+        "irrelevant_invariant": false,
+        "repeat_stable": false,
+        "selective_change": false,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [],
+      "warnings": [],
+      "known_faithful_policy": false
+    },
+    {
+      "case_id": "fastest_paid_order",
+      "agent_id": "deterministic::unstable",
+      "backend": "deterministic",
+      "answers": {
+        "base": "unstable::fastest_paid_order::base",
+        "relevant": "unstable::fastest_paid_order::relevant",
+        "irrelevant": "unstable::fastest_paid_order::irrelevant",
+        "repeat": "unstable::fastest_paid_order::repeat"
+      },
+      "expected_relation_anchors": {
+        "base": "ORD-1",
+        "relevant": "ORD-2",
+        "irrelevant": "ORD-1"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": false,
+        "relevant_changed": true,
+        "irrelevant_invariant": false,
+        "repeat_stable": false,
+        "selective_change": false,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [],
+      "warnings": [],
+      "known_faithful_policy": false
+    },
+    {
+      "case_id": "valid_amount_sum",
+      "agent_id": "deterministic::unstable",
+      "backend": "deterministic",
+      "answers": {
+        "base": "unstable::valid_amount_sum::base",
+        "relevant": "unstable::valid_amount_sum::relevant",
+        "irrelevant": "unstable::valid_amount_sum::irrelevant",
+        "repeat": "unstable::valid_amount_sum::repeat"
+      },
+      "expected_relation_anchors": {
+        "base": "18",
+        "relevant": "22",
+        "irrelevant": "18"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": false,
+        "relevant_changed": true,
+        "irrelevant_invariant": false,
+        "repeat_stable": false,
+        "selective_change": false,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [],
+      "warnings": [],
+      "known_faithful_policy": false
+    }
+  ],
+  "aggregate": {
+    "by_agent": {
+      "deterministic::distractor": {
+        "n": 5,
+        "exact_base": 0.0,
+        "exact_triple": 0.0,
+        "tool_value_overlap": 1.0,
+        "relevant_changed": 0.0,
+        "irrelevant_invariant": 0.0,
+        "repeat_stable": 1.0,
+        "selective_change": 0.0,
+        "relevant_relation": 0.0,
+        "bidirectional_relation": 0.0
+      },
+      "deterministic::faithful": {
+        "n": 5,
+        "exact_base": 1.0,
+        "exact_triple": 1.0,
+        "tool_value_overlap": 0.6,
+        "relevant_changed": 1.0,
+        "irrelevant_invariant": 1.0,
+        "repeat_stable": 1.0,
+        "selective_change": 1.0,
+        "relevant_relation": 1.0,
+        "bidirectional_relation": 1.0
+      },
+      "deterministic::ignore": {
+        "n": 5,
+        "exact_base": 1.0,
+        "exact_triple": 0.0,
+        "tool_value_overlap": 0.6,
+        "relevant_changed": 0.0,
+        "irrelevant_invariant": 1.0,
+        "repeat_stable": 1.0,
+        "selective_change": 0.0,
+        "relevant_relation": 0.0,
+        "bidirectional_relation": 0.0
+      },
+      "deterministic::unstable": {
+        "n": 5,
+        "exact_base": 0.0,
+        "exact_triple": 0.0,
+        "tool_value_overlap": 0.0,
+        "relevant_changed": 1.0,
+        "irrelevant_invariant": 0.0,
+        "repeat_stable": 0.0,
+        "selective_change": 0.0,
+        "relevant_relation": 0.0,
+        "bidirectional_relation": 0.0
+      }
+    },
+    "deterministic_signal_discrimination": {
+      "tool_value_overlap": {
+        "tp": 3,
+        "fp": 8,
+        "tn": 7,
+        "fn": 2,
+        "precision": 0.2727272727272727,
+        "recall": 0.6,
+        "balanced_accuracy": 0.5333333333333333,
+        "accuracy": 0.5
+      },
+      "relevant_changed": {
+        "tp": 5,
+        "fp": 5,
+        "tn": 10,
+        "fn": 0,
+        "precision": 0.5,
+        "recall": 1.0,
+        "balanced_accuracy": 0.8333333333333333,
+        "accuracy": 0.75
+      },
+      "irrelevant_invariant": {
+        "tp": 5,
+        "fp": 5,
+        "tn": 10,
+        "fn": 0,
+        "precision": 0.5,
+        "recall": 1.0,
+        "balanced_accuracy": 0.8333333333333333,
+        "accuracy": 0.75
+      },
+      "selective_change": {
+        "tp": 5,
+        "fp": 0,
+        "tn": 15,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "balanced_accuracy": 1.0,
+        "accuracy": 1.0
+      },
+      "relevant_relation": {
+        "tp": 5,
+        "fp": 0,
+        "tn": 15,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "balanced_accuracy": 1.0,
+        "accuracy": 1.0
+      },
+      "bidirectional_relation": {
+        "tp": 5,
+        "fp": 0,
+        "tn": 15,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "balanced_accuracy": 1.0,
+        "accuracy": 1.0
+      }
+    },
+    "ollama_signal_agreement_with_exact_triple": {
+      "tool_value_overlap": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "balanced_accuracy": null,
+        "accuracy": null
+      },
+      "relevant_changed": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "balanced_accuracy": null,
+        "accuracy": null
+      },
+      "selective_change": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "balanced_accuracy": null,
+        "accuracy": null
+      },
+      "relevant_relation": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "balanced_accuracy": null,
+        "accuracy": null
+      },
+      "bidirectional_relation": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "balanced_accuracy": null,
+        "accuracy": null
+      }
+    }
+  },
+  "resource_usage": {
+    "tokens": 0,
+    "api_calls": 0,
+    "wall_time_seconds": 0.00024080000002868474,
+    "gpu_time_seconds": "unknown",
+    "estimated_cost": "unknown"
+  },
+  "errors": [],
+  "warnings": []
+}

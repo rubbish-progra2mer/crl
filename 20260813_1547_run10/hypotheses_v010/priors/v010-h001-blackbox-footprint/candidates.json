@@ -1,0 +1,1518 @@
+{
+  "artifact_kind": "run_local_non_authoritative_prior_candidates",
+  "audit_id": "v010-h001-blackbox-footprint",
+  "candidates": [
+    {
+      "abstract": "We provide the first convergence guarantee for full black-box variational inference (BBVI), also known as Monte Carlo variational inference. While preliminary investigations worked on simplified versions of BBVI (e.g., bounded domain, bounded support, only optimizing for the scale, and such), our setup does not need any such algorithmic modifications. Our results hold for log-smooth posterior densities with and without strong log-concavity and the location-scale variational family. Also, our analysis reveals that certain algorithm design choices commonly employed in practice, particularly, nonlinear parameterizations of the scale of the variational approximation, can result in suboptimal convergence rates. Fortunately, running BBVI with proximal stochastic gradient descent fixes these limitations, and thus achieves the strongest known convergence rate guarantees. We evaluate this theoretical insight by comparing proximal SGD against other standard implementations of BBVI on large-scale Bayesian inference problems.",
+      "authors": [
+        "Kyurae Kim",
+        "Jisu Oh",
+        "Kaiwen Wu",
+        "Yi-An Ma",
+        "Jacob R. Gardner"
+      ],
+      "candidate_id": "prior-92eab68890a34150",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2305.15349v4"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2305.15349v4"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2305.15349v4</ns0:id>\n    <ns0:title>On the Convergence of Black-Box Variational Inference</ns0:title>\n    <ns0:updated>2024-01-11T04:27:46Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2305.15349v4\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2305.15349v4\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>We provide the first convergence guarantee for full black-box variational inference (BBVI), also known as Monte Carlo variational inference. While preliminary investigations worked on simplified versions of BBVI (e.g., bounded domain, bounded support, only optimizing for the scale, and such), our setup does not need any such algorithmic modifications. Our results hold for log-smooth posterior densities with and without strong log-concavity and the location-scale variational family. Also, our analysis reveals that certain algorithm design choices commonly employed in practice, particularly, nonlinear parameterizations of the scale of the variational approximation, can result in suboptimal convergence rates. Fortunately, running BBVI with proximal stochastic gradient descent fixes these limitations, and thus achieves the strongest known convergence rate guarantees. We evaluate this theoretical insight by comparing proximal SGD against other standard implementations of BBVI on large-scale Bayesian inference problems.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"eess.SP\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"math.OC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.CO\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.ML\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2023-05-24T16:59:50Z</ns0:published>\n    <ns1:comment>Accepted to NeurIPS'23; previous title: \"Black-Box Variational Inference Converges\"</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Kyurae Kim</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jisu Oh</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kaiwen Wu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yi-An Ma</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jacob R. Gardner</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "2305.15349v4",
+          "source_rank": 1
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2305.15349v4"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2305.15349"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 1,
+          "source": "arXiv"
+        }
+      ],
+      "title": "On the Convergence of Black-Box Variational Inference",
+      "urls": [
+        "https://arxiv.org/abs/2305.15349v4",
+        "https://arxiv.org/pdf/2305.15349v4"
+      ],
+      "venue": null,
+      "year": 2023
+    },
+    {
+      "abstract": "This paper introduces GTX, a standalone main-memory write-optimized graph data system that specializes in structural and graph property updates while enabling concurrent reads and graph analytics through ACID transactions. Recent graph systems target concurrent read and write support while guaranteeing transaction semantics. However, their performance suffers from updates with real-world temporal locality over the same vertices and edges due to vertex-centric lock contentions. GTX has an adaptive delta-chain locking protocol on top of a carefully designed latch-free graph storage. It eliminates vertex-level locking contention, and adapts to real-life workloads while maintaining sequential access to the graph's adjacency lists storage. GTX's transactions further support cache-friendly block level concurrency control, and cooperative group commit and garbage collection. This combination of features ensures high update throughput and provides low-latency graph analytics. Based on experimental evaluation, in addition to not sacrificing the performance of read-heavy analytical workloads, and having competitive performance similar to state-of-the-art systems, GTX has high read-write transaction throughput. For write-heavy transactional workloads, GTX achieves up to 11x better transaction throughput than the best-performing state-of-the-art system.",
+      "authors": [
+        "Libin Zhou",
+        "Lu Xing",
+        "Yeasir Rayhan",
+        "Walid. G. Aref"
+      ],
+      "candidate_id": "prior-32c5bfd3f398e761",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2405.01418v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2405.01418v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2405.01418v2</ns0:id>\n    <ns0:title>GTX: A Write-Optimized Latch-free Graph Data System with Transactional Support -- Extended Version</ns0:title>\n    <ns0:updated>2025-02-24T18:51:48Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2405.01418v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2405.01418v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>This paper introduces GTX, a standalone main-memory write-optimized graph data system that specializes in structural and graph property updates while enabling concurrent reads and graph analytics through ACID transactions. Recent graph systems target concurrent read and write support while guaranteeing transaction semantics. However, their performance suffers from updates with real-world temporal locality over the same vertices and edges due to vertex-centric lock contentions. GTX has an adaptive delta-chain locking protocol on top of a carefully designed latch-free graph storage. It eliminates vertex-level locking contention, and adapts to real-life workloads while maintaining sequential access to the graph's adjacency lists storage. GTX's transactions further support cache-friendly block level concurrency control, and cooperative group commit and garbage collection. This combination of features ensures high update throughput and provides low-latency graph analytics. Based on experimental evaluation, in addition to not sacrificing the performance of read-heavy analytical workloads, and having competitive performance similar to state-of-the-art systems, GTX has high read-write transaction throughput. For write-heavy transactional workloads, GTX achieves up to 11x better transaction throughput than the best-performing state-of-the-art system.</ns0:summary>\n    <ns0:category term=\"cs.DB\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2024-05-02T16:08:03Z</ns0:published>\n    <ns1:comment>technical report for our main paper GTX: A Write-Optimized Latch-free Graph Data System with Transactional Support</ns1:comment>\n    <ns1:primary_category term=\"cs.DB\" />\n    <ns0:author>\n      <ns0:name>Libin Zhou</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Lu Xing</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yeasir Rayhan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Walid. G. Aref</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "2405.01418v2",
+          "source_rank": 2
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2405.01418v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2405.01418"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 2,
+          "source": "arXiv"
+        }
+      ],
+      "title": "GTX: A Write-Optimized Latch-free Graph Data System with Transactional Support -- Extended Version",
+      "urls": [
+        "https://arxiv.org/abs/2405.01418v2",
+        "https://arxiv.org/pdf/2405.01418v2"
+      ],
+      "venue": null,
+      "year": 2024
+    },
+    {
+      "abstract": "Black-box optimization is primarily important for many compute-intensive applications, including reinforcement learning (RL), robot control, etc. This paper presents a novel theoretical framework for black-box optimization, in which our method performs stochastic update with the implicit natural gradient of an exponential-family distribution. Theoretically, we prove the convergence rate of our framework with full matrix update for convex functions. Our theoretical results also hold for continuous non-differentiable black-box functions. Our methods are very simple and contain less hyper-parameters than CMA-ES \\cite{hansen2006cma}. Empirically, our method with full matrix update achieves competitive performance compared with one of the state-of-the-art method CMA-ES on benchmark test problems. Moreover, our methods can achieve high optimization precision on some challenging test functions (e.g., $l_1$-norm ellipsoid test problem and Levy test problem), while methods with explicit natural gradient, i.e., IGO \\cite{ollivier2017information} with full matrix update can not. This shows the efficiency of our methods.",
+      "authors": [
+        "Yueming Lyu",
+        "Ivor W. Tsang"
+      ],
+      "candidate_id": "prior-e3fd606d38e3ca8e",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/1910.04301v3"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/1910.04301v3"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/1910.04301v3</ns0:id>\n    <ns0:title>Black-box Optimizer with Implicit Natural Gradient</ns0:title>\n    <ns0:updated>2020-09-09T10:46:10Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/1910.04301v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/1910.04301v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Black-box optimization is primarily important for many compute-intensive applications, including reinforcement learning (RL), robot control, etc. This paper presents a novel theoretical framework for black-box optimization, in which our method performs stochastic update with the implicit natural gradient of an exponential-family distribution. Theoretically, we prove the convergence rate of our framework with full matrix update for convex functions. Our theoretical results also hold for continuous non-differentiable black-box functions. Our methods are very simple and contain less hyper-parameters than CMA-ES \\cite{hansen2006cma}. Empirically, our method with full matrix update achieves competitive performance compared with one of the state-of-the-art method CMA-ES on benchmark test problems. Moreover, our methods can achieve high optimization precision on some challenging test functions (e.g., $l_1$-norm ellipsoid test problem and Levy test problem), while methods with explicit natural gradient, i.e., IGO \\cite{ollivier2017information} with full matrix update can not. This shows the efficiency of our methods.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.ML\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2019-10-09T23:34:36Z</ns0:published>\n    <ns1:comment>Black-box Optimization</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Yueming Lyu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ivor W. Tsang</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "1910.04301v3",
+          "source_rank": 3
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "1910.04301v3"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "1910.04301"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 3,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Black-box Optimizer with Implicit Natural Gradient",
+      "urls": [
+        "https://arxiv.org/abs/1910.04301v3",
+        "https://arxiv.org/pdf/1910.04301v3"
+      ],
+      "venue": null,
+      "year": 2019
+    },
+    {
+      "abstract": "Models predicting the existence of extra spatial dimensions offer compelling and novel solutions to outstanding problems of the Standard Model. In such models, our universe exists on a 4 dimensional brane embedded in a larger dimensional space time. By allowing gravity to propagate in the bulk the gravitational coupling could be comparable with the other gauge interactions thus removing the hierarchy problem. The phenomenology of these models could have dramatic observable effects at the LHC includingthe production and decay of gravitons and mini black holes. In this note we summarize feasibility studies for the discovery of strong gravitational interactions at the LHC.",
+      "authors": [
+        "K. M. Black"
+      ],
+      "candidate_id": "prior-3cd5068e619a9916",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/0805.3007v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/0805.3007v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/0805.3007v2</ns0:id>\n    <ns0:title>Randall-Sundrum Gravitons and Black Holes at the LHC</ns0:title>\n    <ns0:updated>2008-05-24T01:29:21Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/0805.3007v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/0805.3007v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>  Models predicting the existence of extra spatial dimensions offer compelling and novel solutions to outstanding problems of the Standard Model. In such models, our universe exists on a 4 dimensional brane embedded in a larger dimensional space time. By allowing gravity to propagate in the bulk the gravitational coupling could be comparable with the other gauge interactions thus removing the hierarchy problem. The phenomenology of these models could have dramatic observable effects at the LHC includingthe production and decay of gravitons and mini black holes. In this note we summarize feasibility studies for the discovery of strong gravitational interactions at the LHC.</ns0:summary>\n    <ns0:category term=\"hep-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2008-05-20T05:48:17Z</ns0:published>\n    <ns1:comment>for Moriond QCD proceedings 2008, correcting refrences</ns1:comment>\n    <ns1:primary_category term=\"hep-ph\" />\n    <ns0:author>\n      <ns0:name>K. M. Black</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "0805.3007v2",
+          "source_rank": 4
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "0805.3007v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "0805.3007"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 4,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Randall-Sundrum Gravitons and Black Holes at the LHC",
+      "urls": [
+        "https://arxiv.org/abs/0805.3007v2",
+        "https://arxiv.org/pdf/0805.3007v2"
+      ],
+      "venue": null,
+      "year": 2008
+    },
+    {
+      "abstract": "Black-box alpha (BB-$α$) is a new approximate inference method based on the minimization of $α$-divergences. BB-$α$ scales to large datasets because it can be implemented using stochastic gradient descent. BB-$α$ can be applied to complex probabilistic models with little effort since it only requires as input the likelihood function and its gradients. These gradients can be easily obtained using automatic differentiation. By changing the divergence parameter $α$, the method is able to interpolate between variational Bayes (VB) ($α\\rightarrow 0$) and an algorithm similar to expectation propagation (EP) ($α= 1$). Experiments on probit regression and neural network regression and classification problems show that BB-$α$ with non-standard settings of $α$, such as $α= 0.5$, usually produces better predictions than with $α\\rightarrow 0$ (VB) or $α= 1$ (EP).",
+      "authors": [
+        "José Miguel Hernández-Lobato",
+        "Yingzhen Li",
+        "Mark Rowland",
+        "Daniel Hernández-Lobato",
+        "Thang Bui",
+        "Richard E. Turner"
+      ],
+      "candidate_id": "prior-4e8276b811af3d9b",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/1511.03243v3"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/1511.03243v3"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/1511.03243v3</ns0:id>\n    <ns0:title>Black-box $α$-divergence Minimization</ns0:title>\n    <ns0:updated>2016-06-01T19:05:03Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/1511.03243v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/1511.03243v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Black-box alpha (BB-$α$) is a new approximate inference method based on the minimization of $α$-divergences. BB-$α$ scales to large datasets because it can be implemented using stochastic gradient descent. BB-$α$ can be applied to complex probabilistic models with little effort since it only requires as input the likelihood function and its gradients. These gradients can be easily obtained using automatic differentiation. By changing the divergence parameter $α$, the method is able to interpolate between variational Bayes (VB) ($α\\rightarrow 0$) and an algorithm similar to expectation propagation (EP) ($α= 1$). Experiments on probit regression and neural network regression and classification problems show that BB-$α$ with non-standard settings of $α$, such as $α= 0.5$, usually produces better predictions than with $α\\rightarrow 0$ (VB) or $α= 1$ (EP).</ns0:summary>\n    <ns0:category term=\"stat.ML\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2015-11-10T20:02:48Z</ns0:published>\n    <ns1:comment>Accepted at ICML 2016. The first version (v1) was presented at NIPS workshops on Advances in Approximate Bayesian Inference and Black Box Learning and Inference</ns1:comment>\n    <ns1:primary_category term=\"stat.ML\" />\n    <ns0:author>\n      <ns0:name>José Miguel Hernández-Lobato</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yingzhen Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mark Rowland</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Daniel Hernández-Lobato</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Thang Bui</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Richard E. Turner</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "1511.03243v3",
+          "source_rank": 5
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "1511.03243v3"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "1511.03243"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 5,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Black-box $α$-divergence Minimization",
+      "urls": [
+        "https://arxiv.org/abs/1511.03243v3",
+        "https://arxiv.org/pdf/1511.03243v3"
+      ],
+      "venue": null,
+      "year": 2015
+    },
+    {
+      "abstract": "Note that this paper is superceded by \"Black-Box Adversarial Attacks with Limited Queries and Information.\" Current neural network-based image classifiers are susceptible to adversarial examples, even in the black-box setting, where the attacker is limited to query access without access to gradients. Previous methods --- substitute networks and coordinate-based finite-difference methods --- are either unreliable or query-inefficient, making these methods impractical for certain problems. We introduce a new method for reliably generating adversarial examples under more restricted, practical black-box threat models. First, we apply natural evolution strategies to perform black-box attacks using two to three orders of magnitude fewer queries than previous methods. Second, we introduce a new algorithm to perform targeted adversarial attacks in the partial-information setting, where the attacker only has access to a limited number of target classes. Using these techniques, we successfully perform the first targeted adversarial attack against a commercially deployed machine learning system, the Google Cloud Vision API, in the partial information setting.",
+      "authors": [
+        "Andrew Ilyas",
+        "Logan Engstrom",
+        "Anish Athalye",
+        "Jessy Lin"
+      ],
+      "candidate_id": "prior-1dcb67d6cbe5c483",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/1712.07113v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/1712.07113v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/1712.07113v2</ns0:id>\n    <ns0:title>Query-Efficient Black-box Adversarial Examples (superceded)</ns0:title>\n    <ns0:updated>2018-04-06T17:20:27Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/1712.07113v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/1712.07113v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Note that this paper is superceded by \"Black-Box Adversarial Attacks with Limited Queries and Information.\"\n  Current neural network-based image classifiers are susceptible to adversarial examples, even in the black-box setting, where the attacker is limited to query access without access to gradients. Previous methods --- substitute networks and coordinate-based finite-difference methods --- are either unreliable or query-inefficient, making these methods impractical for certain problems.\n  We introduce a new method for reliably generating adversarial examples under more restricted, practical black-box threat models. First, we apply natural evolution strategies to perform black-box attacks using two to three orders of magnitude fewer queries than previous methods. Second, we introduce a new algorithm to perform targeted adversarial attacks in the partial-information setting, where the attacker only has access to a limited number of target classes. Using these techniques, we successfully perform the first targeted adversarial attack against a commercially deployed machine learning system, the Google Cloud Vision API, in the partial information setting.</ns0:summary>\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.ML\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2017-12-19T18:58:10Z</ns0:published>\n    <ns1:comment>Superceded by \"Black-Box Adversarial Attacks with Limited Queries and Information.\"</ns1:comment>\n    <ns1:primary_category term=\"cs.CV\" />\n    <ns0:author>\n      <ns0:name>Andrew Ilyas</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Logan Engstrom</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Anish Athalye</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jessy Lin</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "1712.07113v2",
+          "source_rank": 6
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "1712.07113v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "1712.07113"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 6,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Query-Efficient Black-box Adversarial Examples (superceded)",
+      "urls": [
+        "https://arxiv.org/abs/1712.07113v2",
+        "https://arxiv.org/pdf/1712.07113v2"
+      ],
+      "venue": null,
+      "year": 2017
+    },
+    {
+      "abstract": "Writing is a vital component of a modern career in scientific research. But how to write correctly and effectively is often not included in the training that young astronomers receive from their supervisors and departments. We offer a step-by-step guide to tackle this deficiency, published as a set of two papers. In the first, we addressed how to plan and outline your paper and decide where to publish. In the current second paper, we describe the various sections that constitute a typical research paper in astronomy, sharing best practice for the most efficient use of each of them. We also discuss a selection of issues that often cause trouble to writers, from sentence to paragraph structure, the `writing mechanics' used to develop a manuscript. Our two-part guide is aimed primarily at master's and PhD level students who are presented with the daunting task of writing their first scientific paper, but more senior researchers or writing instructors may well find the ideas presented here useful.",
+      "authors": [
+        "Johan H. Knapen",
+        "Nushkia Chamba",
+        "Diane Black"
+      ],
+      "candidate_id": "prior-757cb0ba36a32e02",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2110.05503v5"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2110.05503v5"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2110.05503v5</ns0:id>\n    <ns0:title>How to write and develop your astronomy research paper</ns0:title>\n    <ns0:updated>2023-01-10T11:58:23Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2110.05503v5\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2110.05503v5\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Writing is a vital component of a modern career in scientific research. But how to write correctly and effectively is often not included in the training that young astronomers receive from their supervisors and departments. We offer a step-by-step guide to tackle this deficiency, published as a set of two papers. In the first, we addressed how to plan and outline your paper and decide where to publish. In the current second paper, we describe the various sections that constitute a typical research paper in astronomy, sharing best practice for the most efficient use of each of them. We also discuss a selection of issues that often cause trouble to writers, from sentence to paragraph structure, the `writing mechanics' used to develop a manuscript. Our two-part guide is aimed primarily at master's and PhD level students who are presented with the daunting task of writing their first scientific paper, but more senior researchers or writing instructors may well find the ideas presented here useful.</ns0:summary>\n    <ns0:category term=\"astro-ph.IM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"physics.ed-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2021-10-11T18:00:04Z</ns0:published>\n    <ns1:comment>Submitted to Nature Astronomy as Paper 2 in a two-part mini-series of 'Perspectives' articles. Paper 1 in the series is 'How to plan your astronomy research paper in ten steps' by Chamba, Knapen &amp; Black. Kindly cite and/or acknowledge this work and Paper 1 (arXiv:2207.12959) if you use them to plan and write your paper. The Version of Record is available online at https://rdcu.be/cVdtJ</ns1:comment>\n    <ns1:primary_category term=\"astro-ph.IM\" />\n    <ns0:author>\n      <ns0:name>Johan H. Knapen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Nushkia Chamba</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Diane Black</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "2110.05503v5",
+          "source_rank": 7
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2110.05503v5"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2110.05503"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 7,
+          "source": "arXiv"
+        }
+      ],
+      "title": "How to write and develop your astronomy research paper",
+      "urls": [
+        "https://arxiv.org/abs/2110.05503v5",
+        "https://arxiv.org/pdf/2110.05503v5"
+      ],
+      "venue": null,
+      "year": 2021
+    },
+    {
+      "abstract": "Current neural network-based classifiers are susceptible to adversarial examples even in the black-box setting, where the attacker only has query access to the model. In practice, the threat model for real-world systems is often more restrictive than the typical black-box model where the adversary can observe the full output of the network on arbitrarily many chosen inputs. We define three realistic threat models that more accurately characterize many real-world classifiers: the query-limited setting, the partial-information setting, and the label-only setting. We develop new attacks that fool classifiers under these more restrictive threat models, where previous methods would be impractical or ineffective. We demonstrate that our methods are effective against an ImageNet classifier under our proposed threat models. We also demonstrate a targeted black-box attack against a commercial classifier, overcoming the challenges of limited query access, partial information, and other practical issues to break the Google Cloud Vision API.",
+      "authors": [
+        "Andrew Ilyas",
+        "Logan Engstrom",
+        "Anish Athalye",
+        "Jessy Lin"
+      ],
+      "candidate_id": "prior-8cd33c76b365cfb0",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/1804.08598v3"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/1804.08598v3"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/1804.08598v3</ns0:id>\n    <ns0:title>Black-box Adversarial Attacks with Limited Queries and Information</ns0:title>\n    <ns0:updated>2018-07-11T13:51:00Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/1804.08598v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/1804.08598v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Current neural network-based classifiers are susceptible to adversarial examples even in the black-box setting, where the attacker only has query access to the model. In practice, the threat model for real-world systems is often more restrictive than the typical black-box model where the adversary can observe the full output of the network on arbitrarily many chosen inputs. We define three realistic threat models that more accurately characterize many real-world classifiers: the query-limited setting, the partial-information setting, and the label-only setting. We develop new attacks that fool classifiers under these more restrictive threat models, where previous methods would be impractical or ineffective. We demonstrate that our methods are effective against an ImageNet classifier under our proposed threat models. We also demonstrate a targeted black-box attack against a commercial classifier, overcoming the challenges of limited query access, partial information, and other practical issues to break the Google Cloud Vision API.</ns0:summary>\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CR\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.ML\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2018-04-23T17:46:34Z</ns0:published>\n    <ns1:comment>ICML 2018. This supercedes the previous paper \"Query-efficient Black-box adversarial examples.\"</ns1:comment>\n    <ns1:primary_category term=\"cs.CV\" />\n    <ns0:author>\n      <ns0:name>Andrew Ilyas</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Logan Engstrom</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Anish Athalye</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jessy Lin</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "1804.08598v3",
+          "source_rank": 8
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "1804.08598v3"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "1804.08598"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 8,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Black-box Adversarial Attacks with Limited Queries and Information",
+      "urls": [
+        "https://arxiv.org/abs/1804.08598v3",
+        "https://arxiv.org/pdf/1804.08598v3"
+      ],
+      "venue": null,
+      "year": 2018
+    },
+    {
+      "abstract": "The evolution of black holes in \"confining boxes\" is interesting for a number of reasons, particularly because it mimics the global structure of Anti-de Sitter geometries. These are non-globally hyperbolic space-times and the Cauchy problem may only be well defined if the initial data is supplemented by boundary conditions at the time-like conformal boundary. Here, we explore the active role that boundary conditions play in the evolution of a bulk black hole system, by imprisoning a black hole binary in a box with mirror-like boundary conditions. We are able to follow the post-merger dynamics for up to two reflections off the boundary of the gravitational radiation produced in the merger. We estimate that about 15% of the radiation energy is absorbed by the black hole per interaction, whereas transfer of angular momentum from the radiation to the black hole is only observed in the first interaction. We discuss the possible role of superradiant scattering for this result. Unlike the studies with outgoing boundary conditions, both the Newman-Penrose scalars Ψ_4 and Ψ_0 are non-trivial in our setup, and we show that the numerical data verifies the expected relations between them.",
+      "authors": [
+        "Helvi Witek",
+        "Vitor Cardoso",
+        "Carlos Herdeiro",
+        "Andrea Nerozzi",
+        "Ulrich Sperhake",
+        "Miguel Zilhao"
+      ],
+      "candidate_id": "prior-76e88318accb4729",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/1004.4633v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/1004.4633v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/1004.4633v2</ns0:id>\n    <ns0:title>Black holes in a box: towards the numerical evolution of black holes in AdS</ns0:title>\n    <ns0:updated>2010-11-20T12:16:34Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/1004.4633v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/1004.4633v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>The evolution of black holes in \"confining boxes\" is interesting for a number of reasons, particularly because it mimics the global structure of Anti-de Sitter geometries. These are non-globally hyperbolic space-times and the Cauchy problem may only be well defined if the initial data is supplemented by boundary conditions at the time-like conformal boundary. Here, we explore the active role that boundary conditions play in the evolution of a bulk black hole system, by imprisoning a black hole binary in a box with mirror-like boundary conditions. We are able to follow the post-merger dynamics for up to two reflections off the boundary of the gravitational radiation produced in the merger. We estimate that about 15% of the radiation energy is absorbed by the black hole per interaction, whereas transfer of angular momentum from the radiation to the black hole is only observed in the first interaction. We discuss the possible role of superradiant scattering for this result. Unlike the studies with outgoing boundary conditions, both the Newman-Penrose scalars Ψ_4 and Ψ_0 are non-trivial in our setup, and we show that the numerical data verifies the expected relations between them.</ns0:summary>\n    <ns0:category term=\"hep-th\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"gr-qc\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"hep-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2010-04-26T20:01:57Z</ns0:published>\n    <ns1:comment>REvTex4, 17 pages, 12 Figs. v2: Minor improvements. Published version. Animation of a black hole binary in a box can be found at http://blackholes.ist.utl.pt/</ns1:comment>\n    <ns1:primary_category term=\"hep-th\" />\n    <ns1:journal_ref>Phys.Rev.D82:104037,2010</ns1:journal_ref>\n    <ns0:author>\n      <ns0:name>Helvi Witek</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Vitor Cardoso</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Carlos Herdeiro</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Andrea Nerozzi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ulrich Sperhake</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Miguel Zilhao</ns0:name>\n    </ns0:author>\n    <ns1:doi>10.1103/PhysRevD.82.104037</ns1:doi>\n    <ns0:link rel=\"related\" href=\"https://doi.org/10.1103/PhysRevD.82.104037\" title=\"doi\" />\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "1004.4633v2",
+          "source_rank": 9
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "1004.4633v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "1004.4633"
+        },
+        {
+          "kind": "doi",
+          "value": "10.1103/physrevd.82.104037"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 9,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Black holes in a box: towards the numerical evolution of black holes in AdS",
+      "urls": [
+        "https://arxiv.org/abs/1004.4633v2",
+        "https://arxiv.org/pdf/1004.4633v2"
+      ],
+      "venue": "Phys.Rev.D82:104037,2010",
+      "year": 2010
+    },
+    {
+      "abstract": "Constant-memory algorithms, also loosely called Markov chains, power the vast majority of probabilistic inference and machine learning applications today. A lot of progress has been made in constructing user-friendly APIs around these algorithms. Such APIs, however, rarely make it easy to research new algorithms of this type. In this work we present FunMC, a minimal Python library for doing methodological research into algorithms based on Markov chains. FunMC is not targeted toward data scientists or others who wish to use MCMC or optimization as a black box, but rather towards researchers implementing new Markovian algorithms from scratch.",
+      "authors": [
+        "Pavel Sountsov",
+        "Alexey Radul",
+        "Srinivas Vasudevan"
+      ],
+      "candidate_id": "prior-1e860b6884aa687c",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2001.05035v3"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2001.05035v3"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2001.05035v3</ns0:id>\n    <ns0:title>FunMC: A functional API for building Markov Chains</ns0:title>\n    <ns0:updated>2021-05-26T17:52:16Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2001.05035v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2001.05035v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Constant-memory algorithms, also loosely called Markov chains, power the vast majority of probabilistic inference and machine learning applications today. A lot of progress has been made in constructing user-friendly APIs around these algorithms. Such APIs, however, rarely make it easy to research new algorithms of this type. In this work we present FunMC, a minimal Python library for doing methodological research into algorithms based on Markov chains. FunMC is not targeted toward data scientists or others who wish to use MCMC or optimization as a black box, but rather towards researchers implementing new Markovian algorithms from scratch.</ns0:summary>\n    <ns0:category term=\"stat.CO\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2020-01-14T20:20:06Z</ns0:published>\n    <ns1:comment>Updated source code to reflect API; updated link to point to new location</ns1:comment>\n    <ns1:primary_category term=\"stat.CO\" />\n    <ns0:author>\n      <ns0:name>Pavel Sountsov</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Alexey Radul</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Srinivas Vasudevan</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "2001.05035v3",
+          "source_rank": 10
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2001.05035v3"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2001.05035"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 10,
+          "source": "arXiv"
+        }
+      ],
+      "title": "FunMC: A functional API for building Markov Chains",
+      "urls": [
+        "https://arxiv.org/abs/2001.05035v3",
+        "https://arxiv.org/pdf/2001.05035v3"
+      ],
+      "venue": null,
+      "year": 2020
+    },
+    {
+      "abstract": "Concurrent stateful library APIs expose behavior through evolving resource ownership, lifecycle states, and competing interleavings. Large language models can synthesize executable Rust tests, but their outputs often violate API preconditions, remain shallow, or reduce concurrency to accidental sequential traces. Conversely, model-based and systematic testing techniques provide semantic control but commonly require substantial handwritten code to turn abstract scenarios into executable tests. This paper addresses the gap between formal scenario design and low-cost test concretization. We present a Petri-net-guided methodology for test generation over concurrent stateful Rust APIs. The method represents API resources, lifecycle conditions, and causal dependencies as colored tokens and transitions; derives legal deep-state, near-legal, and partial-order concurrent scenarios; and uses these scenarios as a constrained intermediate representation for LLM-based code synthesis. A local-faithfulness contract and structural repair loop preserve the modeled intent during concretization, while Petri-guided schedule shaping prioritizes high-conflict concurrency skeletons for systematic exploration. A layered semantic oracle then distinguishes synthesis failures from violations of the target API's expected behavior.",
+      "authors": [
+        "Kaiwen Zhang",
+        "Guanjun Liu"
+      ],
+      "candidate_id": "prior-6cf76b12c9d47752",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2607.21530v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2607.21530v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2607.21530v1</ns0:id>\n    <ns0:title>From Resource Flow to Executable Tests: Petri-Net-Guided LLM Test Generation for Concurrent Stateful Rust APIs</ns0:title>\n    <ns0:updated>2026-07-23T17:15:53Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2607.21530v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2607.21530v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Concurrent stateful library APIs expose behavior through evolving resource ownership, lifecycle states, and competing interleavings. Large language models can synthesize executable Rust tests, but their outputs often violate API preconditions, remain shallow, or reduce concurrency to accidental sequential traces. Conversely, model-based and systematic testing techniques provide semantic control but commonly require substantial handwritten code to turn abstract scenarios into executable tests. This paper addresses the gap between formal scenario design and low-cost test concretization. We present a Petri-net-guided methodology for test generation over concurrent stateful Rust APIs. The method represents API resources, lifecycle conditions, and causal dependencies as colored tokens and transitions; derives legal deep-state, near-legal, and partial-order concurrent scenarios; and uses these scenarios as a constrained intermediate representation for LLM-based code synthesis. A local-faithfulness contract and structural repair loop preserve the modeled intent during concretization, while Petri-guided schedule shaping prioritizes high-conflict concurrency skeletons for systematic exploration. A layered semantic oracle then distinguishes synthesis failures from violations of the target API's expected behavior.</ns0:summary>\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-07-23T17:15:53Z</ns0:published>\n    <ns1:primary_category term=\"cs.SE\" />\n    <ns0:author>\n      <ns0:name>Kaiwen Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Guanjun Liu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "2607.21530v1",
+          "source_rank": 11
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2607.21530v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2607.21530"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 11,
+          "source": "arXiv"
+        }
+      ],
+      "title": "From Resource Flow to Executable Tests: Petri-Net-Guided LLM Test Generation for Concurrent Stateful Rust APIs",
+      "urls": [
+        "https://arxiv.org/abs/2607.21530v1",
+        "https://arxiv.org/pdf/2607.21530v1"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "The crux of software transactional memory (STM) is to combine an easy-to-use programming interface with an efficient utilization of the concurrent-computing abilities provided by modern machines. But does this combination come with an inherent cost? We evaluate the cost of concurrency by measuring the amount of expensive synchronization that must be employed in an STM implementation that ensures positive concurrency, i.e., allows for concurrent transaction processing in some executions. We focus on two popular progress conditions that provide positive concurrency: progressiveness and permissiveness. We show that in permissive STMs, providing a very high degree of concurrency, a transaction performs a linear number of expensive synchronization patterns with respect to its read-set size. In contrast, progressive STMs provide a very small degree of concurrency but, as we demonstrate, can be implemented using at most one expensive synchronization pattern per transaction. However, we show that even in progressive STMs, a transaction has to \"protect\" (e.g., by using locks or strong synchronization primitives) a linear amount of data with respect to its write-set size. Our results suggest that looking for high degrees of concurrency in STM implementations may bring a considerable synchronization cost.",
+      "authors": [
+        "Petr Kuznetsov",
+        "Srivatsan Ravi"
+      ],
+      "candidate_id": "prior-c3bf3a562a50cc56",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/1103.1302v9"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/1103.1302v9"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/1103.1302v9</ns0:id>\n    <ns0:title>On the Cost of Concurrency in Transactional Memory</ns0:title>\n    <ns0:updated>2013-06-27T18:32:44Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/1103.1302v9\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/1103.1302v9\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>The crux of software transactional memory (STM) is to combine an easy-to-use programming interface with an efficient utilization of the concurrent-computing abilities provided by modern machines. But does this combination come with an inherent cost? We evaluate the cost of concurrency by measuring the amount of expensive synchronization that must be employed in an STM implementation that ensures positive concurrency, i.e., allows for concurrent transaction processing in some executions. We focus on two popular progress conditions that provide positive concurrency: progressiveness and permissiveness. We show that in permissive STMs, providing a very high degree of concurrency, a transaction performs a linear number of expensive synchronization patterns with respect to its read-set size. In contrast, progressive STMs provide a very small degree of concurrency but, as we demonstrate, can be implemented using at most one expensive synchronization pattern per transaction. However, we show that even in progressive STMs, a transaction has to \"protect\" (e.g., by using locks or strong synchronization primitives) a linear amount of data with respect to its write-set size. Our results suggest that looking for high degrees of concurrency in STM implementations may bring a considerable synchronization cost.</ns0:summary>\n    <ns0:category term=\"cs.DC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2011-03-07T15:37:44Z</ns0:published>\n    <ns1:primary_category term=\"cs.DC\" />\n    <ns0:author>\n      <ns0:name>Petr Kuznetsov</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Srivatsan Ravi</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "1103.1302v9",
+          "source_rank": 12
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "1103.1302v9"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "1103.1302"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 12,
+          "source": "arXiv"
+        }
+      ],
+      "title": "On the Cost of Concurrency in Transactional Memory",
+      "urls": [
+        "https://arxiv.org/abs/1103.1302v9",
+        "https://arxiv.org/pdf/1103.1302v9"
+      ],
+      "venue": null,
+      "year": 2011
+    },
+    {
+      "abstract": "Building footprint segmentations for high resolution images are increasingly demanded for many remote sensing applications. By the emerging deep learning approaches, segmentation networks have made significant advances in the semantic segmentation of objects. However, these advances and the increased access to satellite images require the generation of accurate object boundaries in satellite images. In the current paper, we propose a novel network-based on Pix2Pix methodology to solve the problem of inaccurate boundaries obtained by converting satellite images into maps using segmentation networks in order to segment building footprints. To define the new network named G2G, our framework includes two generators where the first generator extracts localization features in order to merge them with the boundary features extracted from the second generator to segment all detailed building edges. Moreover, different strategies are implemented to enhance the quality of the proposed networks' results, implying that the proposed network outperforms state-of-the-art networks in segmentation accuracy with a large margin for all evaluation metrics. The implementation is available at https://github.com/A2Amir/A-Novel-Adaptive-Deep-Network-for-Building-Footprint-Segmentation.",
+      "authors": [
+        "A. Ziaee",
+        "R. Dehbozorgi",
+        "M. Döller"
+      ],
+      "candidate_id": "prior-532bcfc3e5ebf311",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2103.00286v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2103.00286v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2103.00286v1</ns0:id>\n    <ns0:title>A Novel Adaptive Deep Network for Building Footprint Segmentation</ns0:title>\n    <ns0:updated>2021-02-27T18:13:48Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2103.00286v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2103.00286v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Building footprint segmentations for high resolution images are increasingly demanded for many remote sensing applications. By the emerging deep learning approaches, segmentation networks have made significant advances in the semantic segmentation of objects. However, these advances and the increased access to satellite images require the generation of accurate object boundaries in satellite images. In the current paper, we propose a novel network-based on Pix2Pix methodology to solve the problem of inaccurate boundaries obtained by converting satellite images into maps using segmentation networks in order to segment building footprints. To define the new network named G2G, our framework includes two generators where the first generator extracts localization features in order to merge them with the boundary features extracted from the second generator to segment all detailed building edges. Moreover, different strategies are implemented to enhance the quality of the proposed networks' results, implying that the proposed network outperforms state-of-the-art networks in segmentation accuracy with a large margin for all evaluation metrics. The implementation is available at https://github.com/A2Amir/A-Novel-Adaptive-Deep-Network-for-Building-Footprint-Segmentation.</ns0:summary>\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"eess.IV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"math.NA\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2021-02-27T18:13:48Z</ns0:published>\n    <ns1:comment>Deep Learning Semantic Segmentation, Building Footprint Segmentation, Conditional Generative Adversarial Networks(CGANs), Pix2Pix Network</ns1:comment>\n    <ns1:primary_category term=\"cs.CV\" />\n    <ns0:author>\n      <ns0:name>A. Ziaee</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>R. Dehbozorgi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>M. Döller</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "2103.00286v1",
+          "source_rank": 13
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2103.00286v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2103.00286"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 13,
+          "source": "arXiv"
+        }
+      ],
+      "title": "A Novel Adaptive Deep Network for Building Footprint Segmentation",
+      "urls": [
+        "https://arxiv.org/abs/2103.00286v1",
+        "https://arxiv.org/pdf/2103.00286v1"
+      ],
+      "venue": null,
+      "year": 2021
+    },
+    {
+      "abstract": "From self-driving vehicles and back-flipping robots to virtual assistants who book our next appointment at the hair salon or at that restaurant for dinner - machine learning systems are becoming increasingly ubiquitous. The main reason for this is that these methods boast remarkable predictive capabilities. However, most of these models remain black boxes, meaning that it is very challenging for humans to follow and understand their intricate inner workings. Consequently, interpretability has suffered under this ever-increasing complexity of machine learning models. Especially with regards to new regulations, such as the General Data Protection Regulation (GDPR), the necessity for plausibility and verifiability of predictions made by these black boxes is indispensable. Driven by the needs of industry and practice, the research community has recognised this interpretability problem and focussed on developing a growing number of so-called explanation methods over the past few years. These methods explain individual predictions made by black box machine learning models and help to recover some of the lost interpretability. With the proliferation of these explanation methods, it is, however, often unclear, which explanation method offers a higher explanation quality, or is generally better-suited for the situation at hand. In this thesis, we thus propose an axiomatic framework, which allows comparing the quality of different explanation methods amongst each other. Through experimental validation, we find that the developed framework is useful to assess the explanation quality of different explanation methods and reach conclusions that are consistent with independent research.",
+      "authors": [
+        "Milo Honegger"
+      ],
+      "candidate_id": "prior-9cda630f962f7a0d",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/1808.05054v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/1808.05054v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/1808.05054v1</ns0:id>\n    <ns0:title>Shedding Light on Black Box Machine Learning Algorithms: Development of an Axiomatic Framework to Assess the Quality of Methods that Explain Individual Predictions</ns0:title>\n    <ns0:updated>2018-08-15T12:25:02Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/1808.05054v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/1808.05054v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>From self-driving vehicles and back-flipping robots to virtual assistants who book our next appointment at the hair salon or at that restaurant for dinner - machine learning systems are becoming increasingly ubiquitous. The main reason for this is that these methods boast remarkable predictive capabilities. However, most of these models remain black boxes, meaning that it is very challenging for humans to follow and understand their intricate inner workings. Consequently, interpretability has suffered under this ever-increasing complexity of machine learning models. Especially with regards to new regulations, such as the General Data Protection Regulation (GDPR), the necessity for plausibility and verifiability of predictions made by these black boxes is indispensable. Driven by the needs of industry and practice, the research community has recognised this interpretability problem and focussed on developing a growing number of so-called explanation methods over the past few years. These methods explain individual predictions made by black box machine learning models and help to recover some of the lost interpretability. With the proliferation of these explanation methods, it is, however, often unclear, which explanation method offers a higher explanation quality, or is generally better-suited for the situation at hand. In this thesis, we thus propose an axiomatic framework, which allows comparing the quality of different explanation methods amongst each other. Through experimental validation, we find that the developed framework is useful to assess the explanation quality of different explanation methods and reach conclusions that are consistent with independent research.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.ML\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2018-08-15T12:25:02Z</ns0:published>\n    <ns1:comment>Keywords: black box, machine learning, interpretability, explanation methods, explanation quality, axiomatic explanation consistency</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Milo Honegger</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "1808.05054v1",
+          "source_rank": 14
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "1808.05054v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "1808.05054"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 14,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Shedding Light on Black Box Machine Learning Algorithms: Development of an Axiomatic Framework to Assess the Quality of Methods that Explain Individual Predictions",
+      "urls": [
+        "https://arxiv.org/abs/1808.05054v1",
+        "https://arxiv.org/pdf/1808.05054v1"
+      ],
+      "venue": null,
+      "year": 2018
+    },
+    {
+      "abstract": "We develop a denotational model for probabilistic and concurrent imperative programs, a class of programs with standard control flow via conditionals and while-loops, as well as probabilistic actions and parallel composition. Whereas semantics for concurrent or randomized programs in isolation is well studied, their combination has not been thoroughly explored and presents unique challenges. The crux of the problem is that interactions between control flow, probabilistic actions, and concurrent execution cannot be captured by straightforward generalizations of prior work on pomsets and convex languages, prominent models for those effects, individually. Our model has good domain theoretic properties, important for semantics of unbounded loops. We also prove two adequacy theorems, showing that the model subsumes typical powerdomain semantics for concurrency and convex powerdomain semantics for probabilistic nondeterminism.",
+      "authors": [
+        "Noam Zilberstein",
+        "Daniele Gorla",
+        "Alexandra Silva"
+      ],
+      "candidate_id": "prior-d387d82a58474d44",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2503.02768v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2503.02768v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2503.02768v2</ns0:id>\n    <ns0:title>Denotational Semantics for Probabilistic and Concurrent Programs</ns0:title>\n    <ns0:updated>2025-06-07T11:43:51Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2503.02768v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2503.02768v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>We develop a denotational model for probabilistic and concurrent imperative programs, a class of programs with standard control flow via conditionals and while-loops, as well as probabilistic actions and parallel composition. Whereas semantics for concurrent or randomized programs in isolation is well studied, their combination has not been thoroughly explored and presents unique challenges. The crux of the problem is that interactions between control flow, probabilistic actions, and concurrent execution cannot be captured by straightforward generalizations of prior work on pomsets and convex languages, prominent models for those effects, individually. Our model has good domain theoretic properties, important for semantics of unbounded loops. We also prove two adequacy theorems, showing that the model subsumes typical powerdomain semantics for concurrency and convex powerdomain semantics for probabilistic nondeterminism.</ns0:summary>\n    <ns0:category term=\"cs.PL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LO\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-03-04T16:33:59Z</ns0:published>\n    <ns1:primary_category term=\"cs.PL\" />\n    <ns1:journal_ref>36th International Conference on Concurrency Theory (CONCUR 2025)</ns1:journal_ref>\n    <ns0:author>\n      <ns0:name>Noam Zilberstein</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Daniele Gorla</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Alexandra Silva</ns0:name>\n    </ns0:author>\n    <ns1:doi>10.4230/LIPIcs.CONCUR.2025.4</ns1:doi>\n    <ns0:link rel=\"related\" href=\"https://doi.org/10.4230/LIPIcs.CONCUR.2025.4\" title=\"doi\" />\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "2503.02768v2",
+          "source_rank": 15
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2503.02768v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2503.02768"
+        },
+        {
+          "kind": "doi",
+          "value": "10.4230/lipics.concur.2025.4"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 15,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Denotational Semantics for Probabilistic and Concurrent Programs",
+      "urls": [
+        "https://arxiv.org/abs/2503.02768v2",
+        "https://arxiv.org/pdf/2503.02768v2"
+      ],
+      "venue": "36th International Conference on Concurrency Theory (CONCUR 2025)",
+      "year": 2025
+    },
+    {
+      "abstract": "Semantic communication transmits the extracted features of information rather than raw data, significantly reducing redundancy, which is crucial for addressing spectrum and energy challenges in 6G networks. In this paper, we introduce semantic communication into a cellular vehicle-to-everything (C-V2X)- based autonomous vehicle platoon system for the first time, aiming to achieve efficient management of communication resources in a dynamic environment. Firstly, we construct a mathematical model for semantic communication in platoon systems, in which the DeepSC model and MU-DeepSC model are used to semantically encode and decode unimodal and multi-modal data, respectively. Then, we propose the quality of experience (QoE) metric based on semantic similarity and semantic rate. Meanwhile, we consider the success rate of semantic information transmission (SRS) metric to ensure the fairness of channel resource allocation. Next, the optimization problem is posed with the aim of maximizing the QoE in vehicle-to-vehicle (V2V) links while improving SRS. To solve this mixed integer nonlinear programming problem (MINLP) and adapt to time-varying channel conditions, the paper proposes a distributed semantic-aware multi-modal resource allocation (SAMRA) algorithm based on multi-agent reinforcement learning (MARL), referred to as SAMRAMARL. The algorithm can dynamically allocate channels and power and determine semantic symbol length based on the contextual importance of the transmitted information, ensuring efficient resource utilization. Finally, extensive simulations have demonstrated that SAMRAMARL outperforms existing methods, achieving significant gains in QoE, SRS, and communication delay in C-V2X platooning scenarios.",
+      "authors": [
+        "Wenjun Zhang",
+        "Qiong Wu",
+        "Pingyi Fan",
+        "Kezhi Wang",
+        "Nan Cheng",
+        "Wen Chen",
+        "Khaled B. Letaief"
+      ],
+      "candidate_id": "prior-d3d877714632b35b",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2411.04672v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2411.04672v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2411.04672v2</ns0:id>\n    <ns0:title>Semantic-Aware Resource Management for C-V2X Platooning via Multi-Agent Reinforcement Learning</ns0:title>\n    <ns0:updated>2025-05-26T12:55:04Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2411.04672v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2411.04672v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Semantic communication transmits the extracted features of information rather than raw data, significantly reducing redundancy, which is crucial for addressing spectrum and energy challenges in 6G networks. In this paper, we introduce semantic communication into a cellular vehicle-to-everything (C-V2X)- based autonomous vehicle platoon system for the first time, aiming to achieve efficient management of communication resources in a dynamic environment. Firstly, we construct a mathematical model for semantic communication in platoon systems, in which the DeepSC model and MU-DeepSC model are used to semantically encode and decode unimodal and multi-modal data, respectively. Then, we propose the quality of experience (QoE) metric based on semantic similarity and semantic rate. Meanwhile, we consider the success rate of semantic information transmission (SRS) metric to ensure the fairness of channel resource allocation. Next, the optimization problem is posed with the aim of maximizing the QoE in vehicle-to-vehicle (V2V) links while improving SRS. To solve this mixed integer nonlinear programming problem (MINLP) and adapt to time-varying channel conditions, the paper proposes a distributed semantic-aware multi-modal resource allocation (SAMRA) algorithm based on multi-agent reinforcement learning (MARL), referred to as SAMRAMARL. The algorithm can dynamically allocate channels and power and determine semantic symbol length based on the contextual importance of the transmitted information, ensuring efficient resource utilization. Finally, extensive simulations have demonstrated that SAMRAMARL outperforms existing methods, achieving significant gains in QoE, SRS, and communication delay in C-V2X platooning scenarios.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.MA\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.NI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"eess.SP\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2024-11-07T12:55:35Z</ns0:published>\n    <ns1:comment>This paper has been submitted to IEEE Journal. The source code has been released at:https://github.com/qiongwu86/Semantic-Aware-Resource-Management-for-C-V2X-Platooning-via-Multi-Agent-Reinforcement-Learning</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Wenjun Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Qiong Wu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Pingyi Fan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kezhi Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Nan Cheng</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wen Chen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Khaled B. Letaief</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "2411.04672v2",
+          "source_rank": 16
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2411.04672v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2411.04672"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 16,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Semantic-Aware Resource Management for C-V2X Platooning via Multi-Agent Reinforcement Learning",
+      "urls": [
+        "https://arxiv.org/abs/2411.04672v2",
+        "https://arxiv.org/pdf/2411.04672v2"
+      ],
+      "venue": null,
+      "year": 2024
+    },
+    {
+      "abstract": "In 2024, NHGRI-funded genomic resource projects completed a Self-Assessment Tool (SAT) and interviews to evaluate their application of FAIR (Findable, Accessible, Interoperable, Reusable) principles and sustainability. Key challenges were identified in metadata tools, data curation, variant identifiers, and data processing. Addressing these needs, we engaged the community through webinars and discussions, leading to a two-day workshop in March 2025. The workshop developed targeted recommendations, including improving transparency, standardizing identifiers, enhancing usability, implementing APIs, leveraging AI/ML for curation, and evaluating impact. These outcomes provide a framework for advancing FAIR practices, fostering collaboration, and strengthening the sustainability of NHGRI resources.",
+      "authors": [
+        "Larry Babb",
+        "Carol Bult",
+        "Vincent J. Carey",
+        "Robert J. Carroll",
+        "Benjamin C. Hitz",
+        "Chris J. Mungall",
+        "Heidi L. Rehm",
+        "Michael C. Schatz",
+        "Alex Wagner",
+        "NHGRI Resource Workshop Community"
+      ],
+      "candidate_id": "prior-e40eaae3587b752e",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2508.13498v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2508.13498v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2508.13498v1</ns0:id>\n    <ns0:title>Improving the FAIRness and Sustainability of the NHGRI Resources Ecosystem</ns0:title>\n    <ns0:updated>2025-08-19T04:17:24Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2508.13498v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2508.13498v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>In 2024, NHGRI-funded genomic resource projects completed a Self-Assessment Tool (SAT) and interviews to evaluate their application of FAIR (Findable, Accessible, Interoperable, Reusable) principles and sustainability. Key challenges were identified in metadata tools, data curation, variant identifiers, and data processing. Addressing these needs, we engaged the community through webinars and discussions, leading to a two-day workshop in March 2025. The workshop developed targeted recommendations, including improving transparency, standardizing identifiers, enhancing usability, implementing APIs, leveraging AI/ML for curation, and evaluating impact. These outcomes provide a framework for advancing FAIR practices, fostering collaboration, and strengthening the sustainability of NHGRI resources.</ns0:summary>\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-08-19T04:17:24Z</ns0:published>\n    <ns1:comment>35 pages, 3 appendices</ns1:comment>\n    <ns1:primary_category term=\"q-bio.GN\" />\n    <ns0:author>\n      <ns0:name>Larry Babb</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Carol Bult</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Vincent J. Carey</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Robert J. Carroll</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Benjamin C. Hitz</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chris J. Mungall</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Heidi L. Rehm</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Michael C. Schatz</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Alex Wagner</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>NHGRI Resource Workshop Community</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "2508.13498v1",
+          "source_rank": 17
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2508.13498v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2508.13498"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 17,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Improving the FAIRness and Sustainability of the NHGRI Resources Ecosystem",
+      "urls": [
+        "https://arxiv.org/abs/2508.13498v1",
+        "https://arxiv.org/pdf/2508.13498v1"
+      ],
+      "venue": null,
+      "year": 2025
+    },
+    {
+      "abstract": "This letter proposes a semantic-aware resource allocation (SARA) framework with flexible duty cycle (DC) coexistence mechanism (SARADC) for 5G-V2X Heterogeneous Network (HetNets) based on deep reinforcement learning (DRL) proximal policy optimization (PPO). Specifically, we investigate V2X networks within a two-tiered HetNets structure. In response to the needs of high-speed vehicular networking in urban environments, we design a semantic communication system and introduce two resource allocation metrics: high-speed semantic transmission rate (HSR) and semantic spectrum efficiency (HSSE). Our main goal is to maximize HSSE. Additionally, we address the coexistence of vehicular users and WiFi users in 5G New Radio Unlicensed (NR-U) networks. To tackle this complex challenge, we propose a novel approach that jointly optimizes flexible DC coexistence mechanism and the allocation of resources and base stations (BSs). Unlike traditional bit transmission methods, our approach integrates the semantic communication paradigm into the communication system. Experimental results demonstrate that our proposed solution outperforms traditional bit transmission methods with traditional DC coexistence mechanism in terms of HSSE and semantic throughput (ST) for both vehicular and WiFi users.",
+      "authors": [
+        "Zhiyu Shao",
+        "Qiong Wu",
+        "Pingyi Fan",
+        "Nan Cheng",
+        "Qiang Fan",
+        "Jiangzhou Wang"
+      ],
+      "candidate_id": "prior-775cedf279247c99",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2406.07996v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2406.07996v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2406.07996v2</ns0:id>\n    <ns0:title>Semantic-Aware Resource Allocation Based on Deep Reinforcement Learning for 5G-V2X HetNets</ns0:title>\n    <ns0:updated>2025-06-19T07:00:19Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2406.07996v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2406.07996v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>This letter proposes a semantic-aware resource allocation (SARA) framework with flexible duty cycle (DC) coexistence mechanism (SARADC) for 5G-V2X Heterogeneous Network (HetNets) based on deep reinforcement learning (DRL) proximal policy optimization (PPO). Specifically, we investigate V2X networks within a two-tiered HetNets structure. In response to the needs of high-speed vehicular networking in urban environments, we design a semantic communication system and introduce two resource allocation metrics: high-speed semantic transmission rate (HSR) and semantic spectrum efficiency (HSSE). Our main goal is to maximize HSSE. Additionally, we address the coexistence of vehicular users and WiFi users in 5G New Radio Unlicensed (NR-U) networks. To tackle this complex challenge, we propose a novel approach that jointly optimizes flexible DC coexistence mechanism and the allocation of resources and base stations (BSs). Unlike traditional bit transmission methods, our approach integrates the semantic communication paradigm into the communication system. Experimental results demonstrate that our proposed solution outperforms traditional bit transmission methods with traditional DC coexistence mechanism in terms of HSSE and semantic throughput (ST) for both vehicular and WiFi users.</ns0:summary>\n    <ns0:category term=\"cs.NI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"eess.SP\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2024-06-12T08:42:23Z</ns0:published>\n    <ns1:comment>This paper has been accepted by IEEE communications Letters.The source code has been released at: https://github.com/qiongwu86/Semantic-Aware-Resource-Allocation-Based-on-Deep-Reinforcement-Learning-for-5G-V2X-HetNets</ns1:comment>\n    <ns1:primary_category term=\"cs.NI\" />\n    <ns0:author>\n      <ns0:name>Zhiyu Shao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Qiong Wu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Pingyi Fan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Nan Cheng</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Qiang Fan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jiangzhou Wang</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "2406.07996v2",
+          "source_rank": 18
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2406.07996v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2406.07996"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 18,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Semantic-Aware Resource Allocation Based on Deep Reinforcement Learning for 5G-V2X HetNets",
+      "urls": [
+        "https://arxiv.org/abs/2406.07996v2",
+        "https://arxiv.org/pdf/2406.07996v2"
+      ],
+      "venue": null,
+      "year": 2024
+    },
+    {
+      "abstract": "Fieldwire, a cloud-based construction management software, has become a pivotal tool in the construction industry. It offers a comprehensive suite of features encompassing project management, task tracking, document management, and collaboration. With the rise of Application Programming Interfaces (APIs) in the software industry, Fieldwire has harnessed this trend to further empower construction professionals. APIs act as bridges between different software systems, and in Fieldwire's context, they hold the potential to integrate with specialized construction tools, eliminating data silos, manual data entry, and real-time information-sharing issues. This integration promises a streamlined and efficient construction management process, saving both time and resources. The research outlined in these abstract focuses on understanding Fieldwire's API capabilities, exploring integration possibilities with various construction tools, evaluating the impact of integration on efficiency and error reduction, establishing best practices, and offering recommendations to construction professionals. Python programming scripts are employed to visualize the benefits of API integration. Empirical findings indicate that Fieldwire's API significantly improves data accuracy, reduces project completion times by an average of 20%, and garners high user satisfaction. Such results are paramount in an industry reliant on precise data and efficient communication. This research underscores the transformative potential of Fieldwire's API and its relevance in modern construction management. It encourages construction professionals to embrace API integration for enhanced project outcomes and serves as an inspiration for software developers to innovate further in construction technology. As the construction industry evolves, API integration remains crucial for staying competitive and efficient.",
+      "authors": [
+        "Nwosu Obinnaya Chikezie Victor"
+      ],
+      "candidate_id": "prior-9e45460341b80fe2",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2310.02990v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2310.02990v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2310.02990v1</ns0:id>\n    <ns0:title>Exploring API Capabilities with Fieldwire</ns0:title>\n    <ns0:updated>2023-10-04T17:26:44Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2310.02990v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2310.02990v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Fieldwire, a cloud-based construction management software, has become a pivotal tool in the construction industry. It offers a comprehensive suite of features encompassing project management, task tracking, document management, and collaboration. With the rise of Application Programming Interfaces (APIs) in the software industry, Fieldwire has harnessed this trend to further empower construction professionals. APIs act as bridges between different software systems, and in Fieldwire's context, they hold the potential to integrate with specialized construction tools, eliminating data silos, manual data entry, and real-time information-sharing issues. This integration promises a streamlined and efficient construction management process, saving both time and resources. The research outlined in these abstract focuses on understanding Fieldwire's API capabilities, exploring integration possibilities with various construction tools, evaluating the impact of integration on efficiency and error reduction, establishing best practices, and offering recommendations to construction professionals. Python programming scripts are employed to visualize the benefits of API integration. Empirical findings indicate that Fieldwire's API significantly improves data accuracy, reduces project completion times by an average of 20%, and garners high user satisfaction. Such results are paramount in an industry reliant on precise data and efficient communication. This research underscores the transformative potential of Fieldwire's API and its relevance in modern construction management. It encourages construction professionals to embrace API integration for enhanced project outcomes and serves as an inspiration for software developers to innovate further in construction technology. As the construction industry evolves, API integration remains crucial for staying competitive and efficient.</ns0:summary>\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"eess.SY\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2023-10-04T17:26:44Z</ns0:published>\n    <ns1:comment>12 pages, 9 Figures, 3 Tables, Table 3 KPI evaluation before and after API</ns1:comment>\n    <ns1:primary_category term=\"cs.SE\" />\n    <ns0:author>\n      <ns0:name>Nwosu Obinnaya Chikezie Victor</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "2310.02990v1",
+          "source_rank": 19
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2310.02990v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2310.02990"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 19,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Exploring API Capabilities with Fieldwire",
+      "urls": [
+        "https://arxiv.org/abs/2310.02990v1",
+        "https://arxiv.org/pdf/2310.02990v1"
+      ],
+      "venue": null,
+      "year": 2023
+    },
+    {
+      "abstract": "Understanding the vulnerabilities of Large Vision Language Models (LVLMs) to jailbreak attacks is essential for their responsible real-world deployment. Most previous work requires access to model gradients, or is based on human knowledge (prompt engineering) to complete jailbreak, and they hardly consider the interaction of images and text, resulting in inability to jailbreak in black box scenarios or poor performance. To overcome these limitations, we propose a Prior-Guided Bimodal Interactive Black-Box Jailbreak Attack for toxicity maximization, referred to as PBI-Attack. Our method begins by extracting malicious features from a harmful corpus using an alternative LVLM and embedding these features into a benign image as prior information. Subsequently, we enhance these features through bidirectional cross-modal interaction optimization, which iteratively optimizes the bimodal perturbations in an alternating manner through greedy search, aiming to maximize the toxicity of the generated response. The toxicity level is quantified using a well-trained evaluation model. Experiments demonstrate that PBI-Attack outperforms previous state-of-the-art jailbreak methods, achieving an average attack success rate of 92.5% across three open-source LVLMs and around 67.3% on three closed-source LVLMs. Disclaimer: This paper contains potentially disturbing and offensive content.",
+      "authors": [
+        "Ruoxi Cheng",
+        "Yizhong Ding",
+        "Shuirong Cao",
+        "Ranjie Duan",
+        "Xiaoshuang Jia",
+        "Shaowei Yuan",
+        "Simeng Qin",
+        "Zhiqiang Wang",
+        "Xiaojun Jia"
+      ],
+      "candidate_id": "prior-72d3646358244e95",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2412.05892v4"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2412.05892v4"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2412.05892v4</ns0:id>\n    <ns0:title>PBI-Attack: Prior-Guided Bimodal Interactive Black-Box Jailbreak Attack for Toxicity Maximization</ns0:title>\n    <ns0:updated>2025-08-30T13:03:53Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2412.05892v4\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2412.05892v4\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Understanding the vulnerabilities of Large Vision Language Models (LVLMs) to jailbreak attacks is essential for their responsible real-world deployment. Most previous work requires access to model gradients, or is based on human knowledge (prompt engineering) to complete jailbreak, and they hardly consider the interaction of images and text, resulting in inability to jailbreak in black box scenarios or poor performance. To overcome these limitations, we propose a Prior-Guided Bimodal Interactive Black-Box Jailbreak Attack for toxicity maximization, referred to as PBI-Attack. Our method begins by extracting malicious features from a harmful corpus using an alternative LVLM and embedding these features into a benign image as prior information. Subsequently, we enhance these features through bidirectional cross-modal interaction optimization, which iteratively optimizes the bimodal perturbations in an alternating manner through greedy search, aiming to maximize the toxicity of the generated response. The toxicity level is quantified using a well-trained evaluation model. Experiments demonstrate that PBI-Attack outperforms previous state-of-the-art jailbreak methods, achieving an average attack success rate of 92.5% across three open-source LVLMs and around 67.3% on three closed-source LVLMs. Disclaimer: This paper contains potentially disturbing and offensive content.</ns0:summary>\n    <ns0:category term=\"cs.CR\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2024-12-08T11:14:16Z</ns0:published>\n    <ns1:comment>Prior-Guided Bimodal Interactive Black-Box Jailbreak Attack for Toxicity Maximization</ns1:comment>\n    <ns1:primary_category term=\"cs.CR\" />\n    <ns0:author>\n      <ns0:name>Ruoxi Cheng</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yizhong Ding</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shuirong Cao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ranjie Duan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xiaoshuang Jia</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shaowei Yuan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Simeng Qin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhiqiang Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xiaojun Jia</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "2412.05892v4",
+          "source_rank": 20
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2412.05892v4"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2412.05892"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 20,
+          "source": "arXiv"
+        }
+      ],
+      "title": "PBI-Attack: Prior-Guided Bimodal Interactive Black-Box Jailbreak Attack for Toxicity Maximization",
+      "urls": [
+        "https://arxiv.org/abs/2412.05892v4",
+        "https://arxiv.org/pdf/2412.05892v4"
+      ],
+      "venue": null,
+      "year": 2024
+    },
+    {
+      "abstract": "Global warming imposes us to reflect on the way we carry research, embarking on the obligation to minimize the environmental impact of our research programs, with the reduction of our travel footprint being one of the easiest actions to implement, thanks to the advance of digital technology. The X-ray Integral Field Unit (X-IFU), the cryogenic spectrometer of the Athena space X-ray observatory of the European Space Agency will be developed by a large international consortium. The travel footprint associated with the development of the X-IFU is to be minimized. For that purpose, a travel footprint calculator has been developed and first released to the X-IFU consortium members. The calculator uses seven different emission factors and methods differing by up to a factor of ~5 for the same flying distance. The observed differences illustrate the lack of standards and regulations for computing the footprint of flight travels and are explained primarily, though partly, by different accountings of non-CO2 effects. The calculator enables us to compute the travel footprint of a large set of travels and can help identify a meeting place that minimizes the overall travel footprint for a large set of possible city hosts, e.g. cities with large airports. The calculator also includes the option for a minimum distance above which flying is considered the most suitable transport option ; below that chosen distance, the emission of train journeys are considered. To demonstrate its full capabilities, the calculator is first run on one of the largest scientific meetings; the fall meeting of the AGU and meetings of the IPCC for which it is used to compute the location that would minimize the travel footprint. Then the travel footprint of X-IFU is estimated to be ~500 tons of CO2-eq/yr. With this paper, the on-line travel footprint calculator is released to the science community (abridged).",
+      "authors": [
+        "Didier Barret"
+      ],
+      "candidate_id": "prior-7cc5d44cd9f2fa76",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2004.05603v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2004.05603v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2004.05603v2</ns0:id>\n    <ns0:title>Estimating, monitoring and minimizing the travel footprint associated with the development of the Athena X-ray Integral Field Unit -- An on-line travel footprint calculator released to the science community</ns0:title>\n    <ns0:updated>2021-02-22T14:45:59Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2004.05603v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2004.05603v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Global warming imposes us to reflect on the way we carry research, embarking on the obligation to minimize the environmental impact of our research programs, with the reduction of our travel footprint being one of the easiest actions to implement, thanks to the advance of digital technology. The X-ray Integral Field Unit (X-IFU), the cryogenic spectrometer of the Athena space X-ray observatory of the European Space Agency will be developed by a large international consortium. The travel footprint associated with the development of the X-IFU is to be minimized. For that purpose, a travel footprint calculator has been developed and first released to the X-IFU consortium members. The calculator uses seven different emission factors and methods differing by up to a factor of ~5 for the same flying distance. The observed differences illustrate the lack of standards and regulations for computing the footprint of flight travels and are explained primarily, though partly, by different accountings of non-CO2 effects. The calculator enables us to compute the travel footprint of a large set of travels and can help identify a meeting place that minimizes the overall travel footprint for a large set of possible city hosts, e.g. cities with large airports. The calculator also includes the option for a minimum distance above which flying is considered the most suitable transport option ; below that chosen distance, the emission of train journeys are considered. To demonstrate its full capabilities, the calculator is first run on one of the largest scientific meetings; the fall meeting of the AGU and meetings of the IPCC for which it is used to compute the location that would minimize the travel footprint. Then the travel footprint of X-IFU is estimated to be ~500 tons of CO2-eq/yr. With this paper, the on-line travel footprint calculator is released to the science community (abridged).</ns0:summary>\n    <ns0:category term=\"astro-ph.IM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"astro-ph.HE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"physics.soc-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2020-04-12T13:00:55Z</ns0:published>\n    <ns1:comment>31 pages, 14 figures, Fixed typo in the abstract. The URL of the travel footprint calculator is : https://travel-footprint-calculator.irap.omp.eu (with improved functionalities)</ns1:comment>\n    <ns1:primary_category term=\"astro-ph.IM\" />\n    <ns1:journal_ref>Experimental Astronomy, 2020, Volume 49, Issue 3, p.183-216</ns1:journal_ref>\n    <ns0:author>\n      <ns0:name>Didier Barret</ns0:name>\n      <ns1:affiliation>IRAP, Toulouse, France</ns1:affiliation>\n    </ns0:author>\n    <ns1:doi>10.1007/s10686-020-09659-8</ns1:doi>\n    <ns0:link rel=\"related\" href=\"https://doi.org/10.1007/s10686-020-09659-8\" title=\"doi\" />\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "2004.05603v2",
+          "source_rank": 21
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2004.05603v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2004.05603"
+        },
+        {
+          "kind": "doi",
+          "value": "10.1007/s10686-020-09659-8"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 21,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Estimating, monitoring and minimizing the travel footprint associated with the development of the Athena X-ray Integral Field Unit -- An on-line travel footprint calculator released to the science community",
+      "urls": [
+        "https://arxiv.org/abs/2004.05603v2",
+        "https://arxiv.org/pdf/2004.05603v2"
+      ],
+      "venue": "Experimental Astronomy, 2020, Volume 49, Issue 3, p.183-216",
+      "year": 2020
+    },
+    {
+      "abstract": "Existing disaggregated databases separate execution and storage layers, enabling independent and elastic scaling of resources. In most cases, this design makes transaction concurrency control (CC) a critical bottleneck, which demands significant computing resources for concurrent conflict management and struggles to scale due to the coordination overhead for concurrent conflict resolution. Coupling CC with execution or storage limits performance and elasticity, as CC's resource needs do not align with the free scaling of the transaction execution layer or the storage-bound data layer. This paper proposes Concurrency Control as a Service (CCaaS), which decouples CC from databases, building an execution-CC-storage three-layer decoupled database, allowing independent scaling and upgrades for improved elasticity, resource utilization, and development agility. However, adding a new layer increases latency due to the shift in communication from hardware to network. To address this, we propose a Sharded Multi-Write OCC (SM-OCC) algorithm with an asynchronous log push-down mechanism to minimize network communications overhead and transaction latency. Additionally, we implement a multi-write architecture with a deterministic conflict resolution method to reduce coordination overhead in the CC layer, thereby improving scalability. CCaaS is designed to be connected by a variety of execution and storage engines. Existing disaggregated databases can be revolutionized with CCaaS to achieve high elasticity, scalability, and high performance. Results show that CCaaS achieves 1.02-3.11X higher throughput and 1.11-2.75X lower latency than SoTA disaggregated databases.",
+      "authors": [
+        "Weixing Zhou",
+        "Yanfeng Zhang",
+        "Xinji Zhou",
+        "Zhiyou Wang",
+        "Zeshun Peng",
+        "Yang Ren",
+        "Sihao Li",
+        "Huanchen Zhang",
+        "Guoliang Li",
+        "Ge Yu"
+      ],
+      "candidate_id": "prior-a644d7707692b1a8",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2603.13897v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2603.13897v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2603.13897v1</ns0:id>\n    <ns0:title>Concurrency Control as a Service</ns0:title>\n    <ns0:updated>2026-03-14T11:14:15Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2603.13897v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2603.13897v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Existing disaggregated databases separate execution and storage layers, enabling independent and elastic scaling of resources. In most cases, this design makes transaction concurrency control (CC) a critical bottleneck, which demands significant computing resources for concurrent conflict management and struggles to scale due to the coordination overhead for concurrent conflict resolution. Coupling CC with execution or storage limits performance and elasticity, as CC's resource needs do not align with the free scaling of the transaction execution layer or the storage-bound data layer. This paper proposes Concurrency Control as a Service (CCaaS), which decouples CC from databases, building an execution-CC-storage three-layer decoupled database, allowing independent scaling and upgrades for improved elasticity, resource utilization, and development agility. However, adding a new layer increases latency due to the shift in communication from hardware to network. To address this, we propose a Sharded Multi-Write OCC (SM-OCC) algorithm with an asynchronous log push-down mechanism to minimize network communications overhead and transaction latency. Additionally, we implement a multi-write architecture with a deterministic conflict resolution method to reduce coordination overhead in the CC layer, thereby improving scalability. CCaaS is designed to be connected by a variety of execution and storage engines. Existing disaggregated databases can be revolutionized with CCaaS to achieve high elasticity, scalability, and high performance. Results show that CCaaS achieves 1.02-3.11X higher throughput and 1.11-2.75X lower latency than SoTA disaggregated databases.</ns0:summary>\n    <ns0:category term=\"cs.DB\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-03-14T11:14:15Z</ns0:published>\n    <ns1:primary_category term=\"cs.DB\" />\n    <ns1:journal_ref>Concurrency Control as a Service. Proc. VLDB Endow. 18, 9 (May 2025), 2761-2774 (2025)</ns1:journal_ref>\n    <ns0:author>\n      <ns0:name>Weixing Zhou</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yanfeng Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xinji Zhou</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhiyou Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zeshun Peng</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yang Ren</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sihao Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Huanchen Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Guoliang Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ge Yu</ns0:name>\n    </ns0:author>\n    <ns1:doi>10.14778/3746405.3746406</ns1:doi>\n    <ns0:link rel=\"related\" href=\"https://doi.org/10.14778/3746405.3746406\" title=\"doi\" />\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "2603.13897v1",
+          "source_rank": 22
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2603.13897v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2603.13897"
+        },
+        {
+          "kind": "doi",
+          "value": "10.14778/3746405.3746406"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 22,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Concurrency Control as a Service",
+      "urls": [
+        "https://arxiv.org/abs/2603.13897v1",
+        "https://arxiv.org/pdf/2603.13897v1"
+      ],
+      "venue": "Concurrency Control as a Service. Proc. VLDB Endow. 18, 9 (May 2025), 2761-2774 (2025)",
+      "year": 2026
+    },
+    {
+      "abstract": "The Graph Query Language (GraphQL) is a powerful language for APIs manipulation in web services. It has been recently introduced as an alternative solution for addressing the limitations of RESTful APIs. This paper introduces an automated solution for GraphQL APIs testing. We present a full framework for automated APIs testing, from the schema extraction to test case generation. In addition, we consider two kinds of testing: white-box and black-box testing. The white-box testing is performed when the source code of the GraphQL API is available. Our approach is based on evolutionary search. Test cases are evolved to intelligently explore the solution space while maximizing code coverage and fault-finding criteria. The black-box testing does not require access to the source code of the GraphQL API. It is therefore of more general applicability, albeit it has worse performance. In this context, we use a random search to generate GraphQL data. The proposed framework is implemented and integrated into the open-source EvoMaster tool. With enabled white-box heuristics, i.e., white-box mode, experiments on 7 open-source GraphQL APIs show statistically significant improvement of the evolutionary approach compared to the baseline random search. In addition, experiments on 31 online GraphQL APIs reveal the ability of the black-box mode to detect real faults.",
+      "authors": [
+        "Asma Belhadi",
+        "Man Zhang",
+        "Andrea Arcuri"
+      ],
+      "candidate_id": "prior-6d2458dbee7e3d60",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2209.05833v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2209.05833v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2209.05833v1</ns0:id>\n    <ns0:title>White-Box and Black-Box Fuzzing for GraphQL APIs</ns0:title>\n    <ns0:updated>2022-09-13T09:13:09Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2209.05833v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2209.05833v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>The Graph Query Language (GraphQL) is a powerful language for APIs manipulation in web services. It has been recently introduced as an alternative solution for addressing the limitations of RESTful APIs. This paper introduces an automated solution for GraphQL APIs testing. We present a full framework for automated APIs testing, from the schema extraction to test case generation. In addition, we consider two kinds of testing: white-box and black-box testing. The white-box testing is performed when the source code of the GraphQL API is available. Our approach is based on evolutionary search. Test cases are evolved to intelligently explore the solution space while maximizing code coverage and fault-finding criteria. The black-box testing does not require access to the source code of the GraphQL API. It is therefore of more general applicability, albeit it has worse performance. In this context, we use a random search to generate GraphQL data. The proposed framework is implemented and integrated into the open-source EvoMaster tool. With enabled white-box heuristics, i.e., white-box mode, experiments on 7 open-source GraphQL APIs show statistically significant improvement of the evolutionary approach compared to the baseline random search. In addition, experiments on 31 online GraphQL APIs reveal the ability of the black-box mode to detect real faults.</ns0:summary>\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2022-09-13T09:13:09Z</ns0:published>\n    <ns1:primary_category term=\"cs.SE\" />\n    <ns0:author>\n      <ns0:name>Asma Belhadi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Man Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Andrea Arcuri</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "2209.05833v1",
+          "source_rank": 23
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2209.05833v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2209.05833"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 23,
+          "source": "arXiv"
+        }
+      ],
+      "title": "White-Box and Black-Box Fuzzing for GraphQL APIs",
+      "urls": [
+        "https://arxiv.org/abs/2209.05833v1",
+        "https://arxiv.org/pdf/2209.05833v1"
+      ],
+      "venue": null,
+      "year": 2022
+    },
+    {
+      "abstract": "Hardware Transactional Memory (HTM) allows lock-free programming as easy as with traditional coarse-grain locks or similar, while benefiting from the performance advantages of fine-grained locking. Many HTM implementations have been proposed, but they have not received widespread adoption because of their high hardware complexity, their need for additions to the Instruction Set Architecture (ISA), and often for modifications to the cache coherence protocol. We show that HTM can be implemented without adding new instructions -- merely by extending the semantics of two existing, Load-Linked and Store-Conditional. Also, our proposed design does not modify or extend standard coherence protocols. We further propose to drastically simplify the implementation of HTM -- confined to modifications in the L1 Data Cache only -- by restricting it to applications where the write set plus the read set of each transaction do not exceed a small number of cache lines. We also propose two alternative mechanisms to guarantee forward progress, both based on detecting retrial attempts. We simulated our proposed design in Gem5, and we used it to implement several popular concurrent data structures, showing that a maximum of eight (8) words (cache lines) suffice for the write plus read sets. We provide a detailed explanation of selected implementations, clarifying the intended usage of our HTM from a programmer's perspective. We evaluated our HTM under varying contention levels to explore its scalability limits. The results indicate that our HTM provides good performance in concurrent data structures when contention is spread across multiple nodes: in such cases, the percentage of aborts relative to successful commits is very low. In the atomic fetch-and-increment benchmark for multiple shared counters, the results show that, under low-congestion, our HTM improves performance relative to the TTS lock.",
+      "authors": [
+        "Konstantinos Kafousis"
+      ],
+      "candidate_id": "prior-cae089ffb4520c89",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2510.15888v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2510.15888v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2510.15888v1</ns0:id>\n    <ns0:title>Limited Read-Write/Set Hardware Transactional Memory without modifying the ISA or the Coherence Protocol</ns0:title>\n    <ns0:updated>2025-09-04T20:04:10Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2510.15888v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2510.15888v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Hardware Transactional Memory (HTM) allows lock-free programming as easy as with traditional coarse-grain locks or similar, while benefiting from the performance advantages of fine-grained locking. Many HTM implementations have been proposed, but they have not received widespread adoption because of their high hardware complexity, their need for additions to the Instruction Set Architecture (ISA), and often for modifications to the cache coherence protocol.\n  We show that HTM can be implemented without adding new instructions -- merely by extending the semantics of two existing, Load-Linked and Store-Conditional. Also, our proposed design does not modify or extend standard coherence protocols. We further propose to drastically simplify the implementation of HTM -- confined to modifications in the L1 Data Cache only -- by restricting it to applications where the write set plus the read set of each transaction do not exceed a small number of cache lines. We also propose two alternative mechanisms to guarantee forward progress, both based on detecting retrial attempts.\n  We simulated our proposed design in Gem5, and we used it to implement several popular concurrent data structures, showing that a maximum of eight (8) words (cache lines) suffice for the write plus read sets. We provide a detailed explanation of selected implementations, clarifying the intended usage of our HTM from a programmer's perspective. We evaluated our HTM under varying contention levels to explore its scalability limits. The results indicate that our HTM provides good performance in concurrent data structures when contention is spread across multiple nodes: in such cases, the percentage of aborts relative to successful commits is very low. In the atomic fetch-and-increment benchmark for multiple shared counters, the results show that, under low-congestion, our HTM improves performance relative to the TTS lock.</ns0:summary>\n    <ns0:category term=\"cs.AR\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-09-04T20:04:10Z</ns0:published>\n    <ns1:primary_category term=\"cs.AR\" />\n    <ns0:author>\n      <ns0:name>Konstantinos Kafousis</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "2510.15888v1",
+          "source_rank": 24
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2510.15888v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2510.15888"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 24,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Limited Read-Write/Set Hardware Transactional Memory without modifying the ISA or the Coherence Protocol",
+      "urls": [
+        "https://arxiv.org/abs/2510.15888v1",
+        "https://arxiv.org/pdf/2510.15888v1"
+      ],
+      "venue": null,
+      "year": 2025
+    },
+    {
+      "abstract": "The concurrency control algorithms in transactional systems limits concurrency to provide strong semantics, which leads to poor performance under high contention. As a consequence, many transactional systems eschew strong semantics to achieve acceptable performance. We show that by leveraging semantic information associated with the transactional programs to increase concurrency, it is possible to significantly improve performance while maintaining linearizability. To this end, we introduce the lazy state determination API to easily expose the semantics of application transactions to the database, and propose new optimistic and pessimistic concurrency control algorithms that leverage this information to safely increase concurrency in the presence of contention. Our evaluation shows that our approach can achieve up to 5x more throughput with 1.5c less latency than standard techniques in the popular TPC-C benchmark.",
+      "authors": [
+        "Tiago M. Vale",
+        "João Leitão",
+        "Nuno Preguiça",
+        "Rodrigo Rodrigues",
+        "Ricardo J. Dias",
+        "João M. Lourenço"
+      ],
+      "candidate_id": "prior-567ac37da4b42a59",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2007.09733v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2007.09733v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=25&search_query=all%3Ablack+box+API+read+write+footprint+inference+semantic+resource+transaction+concurrency&start=0",
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2007.09733v1</ns0:id>\n    <ns0:title>Lazy State Determination: More concurrency for contending linearizable transactions</ns0:title>\n    <ns0:updated>2020-07-19T18:02:05Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2007.09733v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2007.09733v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>The concurrency control algorithms in transactional systems limits concurrency to provide strong semantics, which leads to poor performance under high contention. As a consequence, many transactional systems eschew strong semantics to achieve acceptable performance. We show that by leveraging semantic information associated with the transactional programs to increase concurrency, it is possible to significantly improve performance while maintaining linearizability. To this end, we introduce the lazy state determination API to easily expose the semantics of application transactions to the database, and propose new optimistic and pessimistic concurrency control algorithms that leverage this information to safely increase concurrency in the presence of contention. Our evaluation shows that our approach can achieve up to 5x more throughput with 1.5c less latency than standard techniques in the popular TPC-C benchmark.</ns0:summary>\n    <ns0:category term=\"cs.DC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.DB\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.PF\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2020-07-19T18:02:05Z</ns0:published>\n    <ns1:primary_category term=\"cs.DC\" />\n    <ns0:author>\n      <ns0:name>Tiago M. Vale</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>João Leitão</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Nuno Preguiça</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Rodrigo Rodrigues</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ricardo J. Dias</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>João M. Lourenço</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n"
+          },
+          "response_body_sha256": "57ede108c60161cf7282b7a769c5b93ed0779d946471e68cab7fedf2dbcabbf2",
+          "source": "arXiv",
+          "source_id": "2007.09733v1",
+          "source_rank": 25
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2007.09733v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2007.09733"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "black box API read write footprint inference semantic resource transaction concurrency",
+          "rank": 25,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Lazy State Determination: More concurrency for contending linearizable transactions",
+      "urls": [
+        "https://arxiv.org/abs/2007.09733v1",
+        "https://arxiv.org/pdf/2007.09733v1"
+      ],
+      "venue": null,
+      "year": 2020
+    }
+  ],
+  "created_at_utc": "2026-08-13T11:27:47.479516Z",
+  "degraded": true,
+  "schema_version": 1,
+  "source_attempts": [
+    {
+      "error_type": "HTTPError",
+      "http_status": 429,
+      "query_index": 1,
+      "source": "Semantic Scholar",
+      "status": "error"
+    },
+    {
+      "query_index": 1,
+      "record_count": 25,
+      "source": "arXiv",
+      "status": "ok"
+    }
+  ]
+}

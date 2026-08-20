@@ -1,0 +1,44 @@
+{
+  "hypothesis_id": "h-v006-001",
+  "title": "不确定提交下的语义幂等重试协议",
+  "parent_ids": [],
+  "lineage_note": "v005 的程序性记忆适用守卫被强基线吸收后，正交转向工具返回失败但环境可能已提交的双态不确定性。",
+  "problem": "工具调用在副作用已提交后发生超时或响应丢失时，智能体若按错误返回直接重试会重复付款、消息或删除；若永不重试又会漏掉真正未提交的动作。",
+  "target_failure": {
+    "summary": "非原子工具调用把真实提交状态隐藏在失败响应后，盲重试造成重复副作用。",
+    "card_ids": ["failure-incomplete-tool-contracts-false-verified-state"],
+    "evidence_ids": []
+  },
+  "changed_computation": {
+    "baseline": "工具调用失败或超时后由模型决定直接重试、放弃或重规划。",
+    "intervention": "把动作参数规范化为语义意图指纹；超时后先查询外部状态并匹配等价效果，只在可证未提交时重试，在已提交时消费现有效果，在不可判定时弃权。",
+    "information_available": "工具参数、错误类型、可用只读查询、当前凭据和独立终局；不使用隐藏答案。",
+    "timing": "副作用调用异常后、任何重试之前。",
+    "budget_effect": "每次不确定提交增加一次或多次协调读取；目标是减少重复效果并维持任务成功率。"
+  },
+  "mechanism_claim": "按语义效果对账再重试能在无原生幂等键的工具上区分已提交超时与未提交超时，降低重复副作用。",
+  "falsifier": "已有工具智能体方法已包含非原子失败、重试前验证、幂等键或任务级事务恢复；或语义效果查询退化为手写后置条件且不能超越不重试/原生幂等键。",
+  "minimal_killer_experiment": "先审计最新非原子工具调用与事务智能体工作；若核心已占据则不实施。否则在 AppWorld 注入提交后超时与提交前超时，比较盲重试、不重试、幂等键和对账后重试。",
+  "nearest_prior_risk": "Verified Tool Calls、Cordon、Atomix、CapLease 和传统分布式系统幂等/事务恢复可能逐项吸收。",
+  "alternative_explanations": [
+    "收益完全来自原生幂等键",
+    "查询端点本身已提供提交状态",
+    "环境故障注入不代表真实网络",
+    "对账规则是手写任务后置条件"
+  ],
+  "descriptors": {
+    "problem_family": "ambiguous_tool_commit",
+    "computation_stage": "post_error_pre_retry",
+    "intervention_family": "semantic_reconciliation_before_retry",
+    "information_source": "tool_error_arguments_and_external_state",
+    "timing_class": "after_ambiguous_failure_before_retry",
+    "budget_class": "extra_reconciliation_reads",
+    "evaluation_mode": "duplicate_effects_terminal_success_and_abstention"
+  },
+  "literature_refs": [
+    "arXiv:2608.02645",
+    "arXiv:2606.17573",
+    "arXiv:2608.01710",
+    "Atomix, ICLR 2026 AIWILD Workshop"
+  ]
+}

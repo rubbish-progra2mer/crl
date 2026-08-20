@@ -1,0 +1,30 @@
+{
+  "hypothesis_id": "h-delta-contract-001",
+  "plan_id": "delta-contract-plan-v001",
+  "claims": [
+    {
+      "claim_id": "delta-obligation-local-difference-v001",
+      "claim_text": "在相同旧计划、新接口和结构化差分下，调用级迁移义务与局部回归比完整差分提示更稳定地恢复演化后的工作流，且收益不只来自模式合法化。",
+      "scope": "Qwen2.5-7B、24 个受控配对工作流、六类接口演化、单种子 Screening。",
+      "observable": "各条件任务成功率、模式合法率、分演化族成功率、近邻反例拒绝率、模型调用和 Token。",
+      "falsifier": "obligation 成功率低于 0.75，或相对 diff_prompt 提升低于 0.15，或近邻反例拒绝率低于 0.95。",
+      "minimum_effect_or_decision_rule": "obligation task_success_rate >=0.75；obligation-diff_prompt >=0.15；near_miss_rejection_rate >=0.95。",
+      "killer_experiment_id": "delta-contract-screening-v001",
+      "supporting_experiment_ids": [],
+      "status": "testing",
+      "status_reason": "等待预注册 Formal Screening delta-contract-screening-v001。",
+      "alternative_explanations": [
+        "显式差分提示已经吸收全部收益",
+        "模式校验而非语义迁移产生收益",
+        "反思重试用更大预算即可追平",
+        "受控模板让局部替换获得不现实优势"
+      ]
+    }
+  ],
+  "global_confounders": [
+    "单一开源模型和单种子",
+    "合成配对工作流低于真实 MCP 服务器复杂度",
+    "结构化差分由场景提供而非从代码自动恢复",
+    "精确计划匹配可能低估等价计划"
+  ]
+}

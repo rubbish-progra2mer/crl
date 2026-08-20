@@ -1,0 +1,13 @@
+{
+  "claim_id": "sgr-natural-answer-set-generalization-v001",
+  "claim_text": "在公开真实检索任务的自然 answer sets 上，覆盖门仍比同信息一般 postcondition 提示和 result-count 回执更少产生错误否定，且保留正确否定。",
+  "scope": "SGR-Bench 约束版中 12 个跨域任务的 oracle answer sets，经独立分页适配器形成 hidden/visible/complete-absent 场景；Qwen2.5-7B。",
+  "observable": "receipt/postcondition/gate 的 hidden false-negative、recovery、complete-absence retention、visible-positive accuracy、abstention 与查询成本。",
+  "falsifier": "gate 相比 postcondition 的隐藏目标错误否定率降低不足 0.15，或 gate 错误否定率高于 0.10，或正确否定保留/可见存在准确率低于 0.80，或拒答率高于 0.10。",
+  "minimum_effect_or_decision_rule": "gate-postcondition 错误否定差 >=0.15；gate false_negative_rate_hidden <=0.10；complete_absence_retention_rate >=0.80；visible_positive_accuracy >=0.80；abstention_rate <=0.10。",
+  "alternative_explanations": ["oracle answer set 泄漏任务答案", "分页适配器仍是模拟工具", "第二模型的指令服从差异", "gate 通过自动全量读取而非可推广见证取胜"],
+  "killer_experiment_id": "sgr-coverage-validation-v001",
+  "supporting_experiment_ids": [],
+  "status": "testing",
+  "status_reason": "公开数据独立适配器和第二模型 Formal 已预注册，尚未运行。"
+}

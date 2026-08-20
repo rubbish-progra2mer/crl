@@ -1,0 +1,73 @@
+import z3
+import math
+
+def add_constraints(s, choices, data):
+    people = data["people"]
+    nights = data["nights"]
+    budget = data["budget"]
+    
+    # Helper to compute cost for a transport option
+    def transport_cost(choice_var, transport_list):
+        # Build list of costs per option
+        costs = []
+        for opt in transport_list:
+            kind = opt["kind"]
+            price = opt["price"]
+            if kind == "flight":
+                cost = price * people
+            elif kind == "taxi":
+                cost = price * math.ceil(people / 4)
+            elif kind == "self-driving":
+                cost = price * math.ceil(people / 5)
+            else:
+                cost = 0  # should not happen
+            costs.append(cost)
+        return pick(choice_var, costs)
+    
+    # Transport costs
+    cost_out = transport_cost(choices["transport_out"], data["transport_out"])
+    cost_back = transport_cost(choices["transport_back"], data["transport_back"])
+    
+    # Hotel cost: price * ceil(people / max_occupancy) * nights
+    hotel_costs = []
+    for h in data["hotels"]:
+        hotel_costs.append(h["price"] * math.ceil(people / h["max_occupancy"]) * nights)
+    cost_hotel = pick(choices["hotel"], hotel_costs)
+    
+    # Meal costs: each meal cost = restaurant avg_cost * people
+    meal_slots = ["meal_1_breakfast", "meal_1_lunch", "meal_1_dinner",
+                  "meal_2_breakfast", "meal_2_lunch", "meal_2_dinner",
+                  "meal_3_breakfast", "meal_3_lunch", "meal_3_dinner"]
+    meal_costs = []
+    for slot in meal_slots:
+        costs = [r["avg_cost"] * people for r in data["restaurants"]]
+        meal_costs.append(pick(choices[slot], costs))
+    
+    # Total cost constraint
+    total_cost = cost_out + cost_back + cost_hotel + sum(meal_costs)
+    s.add(total_cost <= budget)
+    
+    # All 9 meal choices must be pairwise distinct
+    meal_vars = [choices[slot] for slot in meal_slots]
+    s.add(z3.Distinct(meal_vars))
+    
+    # All 3 attraction choices must be pairwise distinct
+    attr_vars = [choices["attr_1"], choices["attr_2"], choices["attr_3"]]
+    s.add(z3.Distinct(attr_vars))
+    
+    # Required cuisines: Chinese and American must each appear in at least one chosen restaurant
+    required_cuisines = ["Chinese", "American"]
+    for cuisine in required_cuisines:
+        # For each meal slot, check if the chosen restaurant has this cuisine
+        cuisine_conditions = []
+        for slot in meal_slots:
+            # Build list of booleans: 1 if restaurant has cuisine, else 0
+            has_cuisine = []
+            for r in data["restaurants"]:
+                cuisines = [c.strip() for c in r["cuisines"].split(",")]
+                has_cuisine.append(1 if cuisine in cuisines else 0)
+            # pick returns 1 if chosen restaurant has cuisine, else 0
+            cuisine_conditions.append(pick(choices[slot], has_cuisine) == 1)
+        s.add(z3.Or(cuisine_conditions))
+    
+    # No transportation restrictions mentioned, so no additional constraints.

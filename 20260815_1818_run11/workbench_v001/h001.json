@@ -1,0 +1,54 @@
+{
+  "hypothesis_id": "H001",
+  "title": "双向反事实工具证据测试：用应变与不变关系测量工具结果的因果采用",
+  "parent_ids": [],
+  "lineage_note": "根候选；由虚假成功、结果忽略与行为扰动证据交叉导出，但尚未完成最近先行审计。",
+  "problem": "现有终局正确率可以把工具跳过、调用后忽略和真实采用混在一起；环境终态又只适用于可直接检查的任务。需要一种不依赖完整答案真值、但能测量最终回答是否真正受任务相关工具证据驱动的评价载体。",
+  "target_failure": {
+    "summary": "智能体调用了工具，却忽略任务相关结果，或反而依赖无关字段；单次自然轨迹和自我报告都可能看不见这种因果错位。",
+    "card_ids": [
+      "failure-confident-completion-without-state-success",
+      "failure-tool-use-metrics-collapse-distinct-errors",
+      "failure-generator-aligned-verification-passes-shared-misreads"
+    ],
+    "evidence_ids": [
+      "ev-p040-failure-core",
+      "ev-p039-aggregate-score-masking",
+      "ev-p039-failure-core",
+      "ev-p099-judge-miss"
+    ]
+  },
+  "changed_computation": {
+    "baseline": "在一个自然工具轨迹上按最终答案正确率、任务终态或语言模型裁判打分。",
+    "intervention": "固定任务、工具模式、提示和解码设置，对工具返回构造两类最小成对干预：仅改变任务相关字段的应变对，以及仅改变无关字段的应不变对；以回答间预先声明的关系而非完整标准答案判断因果采用。",
+    "information_available": "原始任务、工具返回结构、字段相关性声明、成对干预和两次回答；不使用完整标准答案，也不读取模型隐藏状态。",
+    "timing": "离线评价时对同一智能体进行成对影子重放；候选若扩展为在线门控，再在最终回答提交前选择性重放。",
+    "budget_effect": "每个被测实例从一次推理增加为原轨迹加一到两个成对重放；首轮杀手实验只比较固定小样本上的测量可辨识性。"
+  },
+  "mechanism_claim": "若智能体真实采用了任务相关工具证据，则在保持其他信息不变时，相关字段干预应引发方向一致的回答变化，而无关字段干预不应改变任务结论；两类关系联合比单向敏感度更能区分结果忽略、无关依赖与普遍不稳定。",
+  "falsifier": "在可机械判定的合成工具任务上，成对关系指标不能稳定区分已知的结果忽略、真实采用和无关字段依赖实现；或指标主要由采样噪声、提示复述、字段表面变化或答案解析器决定；或最近先行已直接占据同样的问题、信息、时机、计算与评价路径。",
+  "minimal_killer_experiment": "构造小型确定性工具返回集及三种可控代理策略，并用至少两个真实本地语言模型生成回答；比较相关应变、无关不变及两者联合关系对已知策略标签的区分能力，同时重复种子估计纯采样噪声。",
+  "nearest_prior_risk": "高风险先行包括 ToolFailBench 的结果忽略分类、False Success 的环境真值、ToolGate 的后条件、ReLoop 的行为扰动、Verus-SpecGym 的可执行双向测试，以及可能尚未入库的反事实工具调用或因果追踪评价。",
+  "alternative_explanations": [
+    "模型只是复制被改动的显著字符串，未进行任务推理。",
+    "答案差异来自随机采样或序列位置，而不是工具证据采用。",
+    "无关字段实际通过语义歧义影响任务，因此所谓不变关系不成立。",
+    "只要直接检查自然轨迹中的引用或引用覆盖率就能等价实现。"
+  ],
+  "descriptors": {
+    "problem_family": "工具型语言模型智能体评价与可靠性",
+    "computation_stage": "工具结果进入上下文之后、最终回答之前",
+    "intervention_family": "成对反事实与变形测试",
+    "information_source": "可见工具返回及字段级任务关系",
+    "timing_class": "离线成对影子重放",
+    "budget_class": "每实例增加一至两次模型调用",
+    "evaluation_mode": "不依赖完整答案真值的关系式机械评价"
+  },
+  "literature_refs": [
+    "P039",
+    "P040",
+    "P074",
+    "P097",
+    "P099"
+  ]
+}

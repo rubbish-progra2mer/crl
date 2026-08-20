@@ -1,0 +1,71 @@
+{
+  "experiment_id": "cache-structural-counterfactual-001",
+  "hypothesis_id": "h-005",
+  "claim_ids": ["claim-cache-induced-structural-failure"],
+  "purpose": "independent_claim_validation",
+  "research_question": "在同一目标任务与同一模型上，加入一个高层意图相似但动作图发生最小编辑的缓存计划模板，是否会产生从头规划没有的额外结构计划失败？",
+  "independent_ground_truth": {
+    "description": "案例生成器直接给出允许动作集合与唯一最小动作序列；评分器仅做动作标识词表与序列精确比较，不使用语言模型裁判，也不读取模型解释。",
+    "external_evidence_ids": [],
+    "external_card_ids": [],
+    "external_literature_refs": ["P071"],
+    "run_local_fact_refs": ["implementation_v003/cache_structural_counterfactual_benchmark.py"]
+  },
+  "primary_metric": "cache_induced_failure_rate",
+  "secondary_metrics": [
+    "full_replan_accuracy",
+    "cache_adapt_accuracy",
+    "safe_full_replan_accuracy",
+    "safe_cache_adapt_accuracy",
+    "cache_induced_failure_rate_by_edit"
+  ],
+  "sampling_unit": "模型配置与成对任务的组合；每一组合包含从头规划和缓存适配两个条件",
+  "dataset": "程序确定性生成的32个英语任务：四类动作图编辑各6例，外加8例同结构安全命中对照",
+  "model": "本机Ollama qwen3:4b 与 qwen3:8b",
+  "provider": "本地Ollama",
+  "revision": "formal-r1",
+  "baseline_specs": [
+    "full_replan：相同模型只看目标任务与相同动作清单，从头生成计划",
+    "cache_adapt：相同模型额外看到参考任务和缓存计划，并被要求按目标约束适配",
+    "safe_same_graph：参考与目标措辞变化但金标准动作图不变的缓存安全命中负控制"
+  ],
+  "parity_dimensions": {
+    "information_access": {
+      "status": "different",
+      "notes": "缓存条件按定义额外看到参考任务与缓存模板；目标任务、动作清单和独立金标准完全相同。"
+    },
+    "tool_capability": {
+      "status": "matched",
+      "notes": "两个条件看到完全相同的允许动作标识及描述。"
+    },
+    "model_provider_revision": {
+      "status": "matched",
+      "notes": "每个成对比较使用相同Ollama模型标识；结果同时在qwen3:4b与qwen3:8b分层报告。"
+    },
+    "sampling_protocol": {
+      "status": "matched",
+      "notes": "温度0、确定性种子生成、相同输出模式和同一案例集合；条件顺序固定并公开。"
+    },
+    "budget": {
+      "status": "different",
+      "notes": "缓存条件因包含模板而提示令牌更多；这是被测缓存信息处理的一部分。实验不声称等令牌方法优势，并报告总令牌与调用。"
+    }
+  },
+  "seeds": [20260816],
+  "budget_ceiling": "最多128次本地模型调用，统一温度0；运行器超时1800秒；不使用付费API。",
+  "expected_signatures": [
+    "32 cases = 24 graph-changed + 8 safe-same-graph",
+    "2 models x 32 cases x 2 paired modes = 128 model calls",
+    "mechanical exact-sequence scoring with no LLM judge"
+  ],
+  "falsification_rule": "主张仅在总体缓存诱发失败率至少0.10、两个模型均非零、至少两个编辑类别非零且安全命中缓存正确率不低于反事实缓存正确率时存活；任一条件失败即降级或淘汰，不以缩窄到单个漂亮案例保活。",
+  "confounders": [
+    "提示级适配代理不等于APC完整系统",
+    "英语合成模板可能夸大锚定",
+    "所有模型来自Qwen家族",
+    "精确动作序列只在唯一最小计划设定下合理",
+    "固定条件顺序可能有系统性运行时影响"
+  ],
+  "declared_inputs": ["implementation_v003/cache_structural_counterfactual_benchmark.py"],
+  "declared_outputs": []
+}

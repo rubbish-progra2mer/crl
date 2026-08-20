@@ -1,0 +1,75 @@
+{
+  "experiment_id": "contract-mutation-screening-v001",
+  "hypothesis_id": "h-mutant-probe-001",
+  "claim_ids": ["open-world-contract-escape-v001", "passed-run-unasserted-change-v001", "endpoint-envelope-hardening-v001"],
+  "purpose": "independent_claim_validation",
+  "research_question": "公开 Agent-Diff 状态合同是否接受目标保持的额外副作用，实际通过运行是否含未断言变化，以及训练运行学习的端点级允许边界能否改善全局 strict 的覆盖—误拒绝权衡？",
+  "independent_ground_truth": {
+    "description": "合同、179/45 划分和公开运行检查点均来自 Agent-Diff 官方公开材料；实验只按完整提示做一一匹配。风险变异和阴性元数据对照在读取测试结果前由实现中的冻结规则生成；实际运行的 passed 标签来自原评价器，不作为人工安全标签。",
+    "external_evidence_ids": ["ev-p040-failure-core", "ev-p101-neighbor-distillation", "ev-p101-esm-fn-rate"],
+    "external_card_ids": ["paper-p040", "paper-p101"],
+    "external_literature_refs": ["arXiv:2602.11224", "arXiv:2603.08806", "arXiv:2606.11686", "arXiv:2607.27294", "arXiv:2608.14131"],
+    "run_local_fact_refs": ["hypotheses_v001/priors/mutant-contract-prior-v001/assessment.md", "workbench_v001/datasets/agent_diff_bench/PROVENANCE.md", "workbench_v001/datasets/agent_diff_runs/PROVENANCE.md"]
+  },
+  "primary_metric": "passed_with_conservative_unasserted_change_rate",
+  "secondary_metrics": [
+    "contracts_without_explicit_strict_rate",
+    "checkpoint_prompt_match_rate",
+    "risk_mutant_escape_rate",
+    "false_reject_rate",
+    "benign_metadata_accept_rate",
+    "phenomenon_survives_screen",
+    "prototype_hardening_survives_screen"
+  ],
+  "sampling_unit": "一个公开任务合同及其完全相同提示对应的一次公开实际运行；合成部分的单位为一个合同上的一个冻结变异家族。",
+  "dataset": "Agent-Diff 官方 224 合同（train=179、test=45）和 checkpoint_20260201_224804.json 的 224 次公开运行",
+  "model": "google/gemini-3-flash-preview（仅作为公开检查点中既有运行身份；本实验不调用模型）",
+  "provider": "公开 Agent-Diff 检查点；本地确定性重分析",
+  "revision": "公开文件 SHA-256：train e86a2449...、test f3c4278b...、checkpoint cdb70cc8...；实现无模型调用",
+  "baseline_specs": [
+    "original：官方合同缺省 strict=false，只评价正向断言并忽略断言外变化",
+    "global_strict：保留原 ignore_fields，但拒绝任何非忽略的断言外变化",
+    "endpoint_envelope：从训练划分原通过运行学习 tools_required 到保守未断言变化签名的允许边界；测试时只放行被同一工具端点支持的签名",
+    "ignored_metadata_negative_control：只改变合同 ignore_fields 中字段，应被 strict 和 envelope 接受"
+  ],
+  "parity_dimensions": {
+    "information_access": {"status": "different", "notes": "endpoint_envelope 额外读取训练划分的公开通过运行；global_strict 不使用参考运行。这是方法输入差异，结果必须同时报告变异逃逸，不能只比较误拒绝。"},
+    "tool_capability": {"status": "matched", "notes": "所有条件只重放相同冻结状态变化签名，不调用外部工具或模型。"},
+    "model_provider_revision": {"status": "matched", "notes": "不执行新模型；实际部分全部来自同一公开检查点。"},
+    "sampling_protocol": {"status": "matched", "notes": "四种策略处理同一 45 个测试合同、同一风险变异和同一阴性元数据对照。"},
+    "budget": {"status": "different", "notes": "endpoint_envelope 有一次离线训练统计，在线评价仍是确定性签名判断；不声称其与零训练 strict 具有相同离线成本。"}
+  },
+  "seeds": [16004],
+  "budget_ceiling": "{\"api_calls\": 0, \"tokens\": 0, \"wall_time_seconds\": 120, \"paid_cost\": 0}",
+  "expected_signatures": [
+    "224 个公开合同均未显式 strict，原合同会接受构造的断言外风险变异",
+    "部分原通过运行含必要数据库级联或合同未覆盖的请求动作，因此 global_strict 会拒绝一部分原通过运行",
+    "端点允许边界应降低 global_strict 的拒绝率，但过粗签名可能同时放行同表风险变异",
+    "若端点允许边界风险逃逸超过 0.25，则加固原型不存活，即使开放世界现象存活"
+  ],
+  "falsification_rule": "现象要求 224/224 合同未显式 strict、原风险变异逃逸率 >=0.95、224/224 公开运行提示匹配且通过运行保守未断言变化率 >=0.05。原型要求测试误拒绝率比 global_strict 至少低 0.10、风险变异逃逸率 <=0.25、阴性元数据接受率=1；三项任一失败即原型不存活。",
+  "confounders": [
+    "只有一个公开模型检查点和每任务一次运行",
+    "passed 是原评价标签而非人工安全标签",
+    "保守匹配把广义断言覆盖的所有匹配行视为预期，倾向少报",
+    "contains 等结构化谓词由本地实现复现，仍可能有未覆盖的边缘语义",
+    "端点签名允许边界可能学习训练运行中的错误",
+    "合成变异不代表真实副作用频率"
+  ],
+  "declared_inputs": [
+    "implementation_v001/contract_mutation_experiment.py",
+    "workbench_v001/datasets/agent_diff_bench/train.jsonl",
+    "workbench_v001/datasets/agent_diff_bench/test.jsonl",
+    "workbench_v001/datasets/agent_diff_runs/checkpoint_20260201_224804.json"
+  ],
+  "declared_outputs": ["results.json", "metrics-output.json", "stdout.txt", "stderr.txt"],
+  "evidence_fidelity": "SCREENING",
+  "subject_scope": {
+    "models": ["google/gemini-3-flash-preview public checkpoint only"],
+    "tasks": ["224 Agent-Diff enterprise API contracts"],
+    "datasets": ["hubertmarek/agent-diff-bench train/test", "Agent-Diff public checkpoint_20260201_224804"],
+    "seeds": ["16004 deterministic analysis marker; no stochastic sampling"],
+    "environment": "Windows 11; Python standard library; no model, GPU, paid API or live service"
+  },
+  "independent_implementation_count": 1
+}

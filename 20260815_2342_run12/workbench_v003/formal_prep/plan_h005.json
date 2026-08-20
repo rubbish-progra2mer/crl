@@ -1,0 +1,32 @@
+{
+  "hypothesis_id": "h-005",
+  "plan_id": "plan-cache-structural-counterfactual",
+  "claims": [
+    {
+      "claim_id": "claim-cache-induced-structural-failure",
+      "claim_text": "在本地确定性成对任务中，最小动作图编辑会使同模型缓存模板适配产生可与普通从头规划失败机械分离的额外计划失败。",
+      "scope": "仅限本实验的32个英语合成任务、qwen3:4b与qwen3:8b、温度0和同模型提示级缓存适配代理；不外推到APC完整实现或前沿闭源模型。",
+      "observable": "主指标 cache_induced_failure_rate；并观察两个模型的分层值、四类编辑分层值、从头/缓存计划正确率和同结构安全命中正确率。",
+      "falsifier": "若总体缓存诱发失败率低于0.10，或只有一个编辑类别出现正差分，或任一模型的缓存诱发失败率为0，或同结构安全命中同样出现不低于反事实条件的退化，则该结构反事实评价主张不成立或必须降级。",
+      "minimum_effect_or_decision_rule": "存活要求：总体 cache_induced_failure_rate >= 0.10；两个模型分层值均 > 0；至少两个动作图编辑类别的分层值 > 0；且 safe_cache_adapt_accuracy 不低于 counterfactual cache_adapt_accuracy。",
+      "alternative_explanations": [
+        "缓存适配提示的措辞本身诱导复制",
+        "任务模板过于合成且重复",
+        "精确序列评分拒绝语义等价计划",
+        "效应只由动作删除类别贡献",
+        "小模型的指令遵循不足而非缓存系统风险"
+      ],
+      "killer_experiment_id": "cache-structural-counterfactual-001",
+      "supporting_experiment_ids": [],
+      "status": "testing",
+      "status_reason": "探索性三模型结果出现正差分，现以多结构和安全命中对照做独立Formal验证。"
+    }
+  ],
+  "global_confounders": [
+    "模型规模与模板锚定效应交互",
+    "动作标识的词义透明度",
+    "缓存条件拥有更长上下文",
+    "同一基础模型家族限制",
+    "合成域外部有效性"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "hypothesis_id": "h-v001-003",
+  "title": "证据隔离状态图与最小后代回滚",
+  "parent_ids": [],
+  "lineage_note": "v001 根假设；把错误恢复从整轨重启改为带来源的隔离状态与后代失效。",
+  "problem": "一旦可疑工具观测已被后续动作消费，现有反思或全轨重启要么继续沿用污染状态，要么浪费已验证的正确前缀。",
+  "target_failure": {
+    "summary": "识别过时/错误状态并不保证后续动作真正应用更新，污染状态可继续支配行为。",
+    "card_ids": ["operator-write-side-state-adjudication", "failure-retrieved-experience-propagates-stored-errors"],
+    "evidence_ids": ["ev-p030-recognition-application-gap", "ev-p064-experience-following-error"]
+  },
+  "changed_computation": {
+    "baseline": "线性文本轨迹；检测异常后整体反思、从头重试或仅覆盖最新文本。",
+    "intervention": "把工具返回表示为带来源与消费者边的状态声明；未充分验证的声明进入隔离层，冲突出现时仅失效其依赖后代，并从最近可信前沿重新规划。",
+    "information_available": "可见轨迹、工具结果、动作间显式数据依赖与冲突信号；不使用隐藏真值。",
+    "timing": "状态写入时记录来源；新证据冲突或验证失败时执行局部回滚。",
+    "budget_effect": "可能增加状态维护但不必增加工具权限；比较时匹配最大工具调用与模型令牌预算。"
+  },
+  "mechanism_claim": "来源化隔离与后代失效能阻止已识别的错误继续影响行为，并比全轨重启保留更多正确工作。",
+  "falsifier": "在可恢复的语义故障上，局部回滚不降低重复调用或不提高终局成功率，或依赖抽取错误导致比全轨重试更多的二次故障。",
+  "minimal_killer_experiment": "在具有分叉依赖的多步任务中向一个分支注入语义错误，随后提供矛盾证据；比较无回滚、全轨重启、最后一步重试与最小后代回滚的成功率和重做成本。",
+  "nearest_prior_risk": "CUPMEM 已覆盖写时状态裁决与授权读出；软件事务/溯源系统覆盖后代失效。若智能体文献已有等价来源图局部回滚，则方法贡献不足。",
+  "alternative_explanations": ["收益来自显式依赖标注", "分叉合成任务偏爱局部回滚", "冲突信号等同泄漏真值", "状态图构建成本超过节省"],
+  "descriptors": {
+    "problem_family": "contaminated_agent_state",
+    "computation_stage": "state_representation_and_recovery",
+    "intervention_family": "provenance_quarantine_descendant_rollback",
+    "information_source": "trace_data_dependencies",
+    "timing_class": "write_and_conflict_time",
+    "budget_class": "matched_tool_and_token_ceiling",
+    "evaluation_mode": "branched_dependency_terminal_state"
+  },
+  "literature_refs": ["P030", "P064", "P040", "P074"]
+}

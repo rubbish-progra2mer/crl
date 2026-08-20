@@ -1,0 +1,744 @@
+{
+  "artifact_class": "scratch_static_probe",
+  "scope": "AppWorld GET endpoints whose Python bodies contain persistent-mutation signals",
+  "appworld_root": "D:\\Desktop\\crl\\20260813_1547_run10\\external\\appworld",
+  "candidate_count": 32,
+  "candidates": [
+    {
+      "app": "amazon",
+      "function": "show_product_rating_distribution",
+      "endpoint": "/products/{product_id}/rating_distribution",
+      "description": "Show the rating distribution of a product.",
+      "line_start": 608,
+      "line_end": 653,
+      "mutation_signals": [
+        {
+          "kind": "assignment",
+          "target": "breakdown[review.rating]['count']",
+          "line": 640
+        },
+        {
+          "kind": "assignment",
+          "target": "breakdown[rating]['percentage']",
+          "line": 645
+        }
+      ]
+    },
+    {
+      "app": "amazon",
+      "function": "download_order_receipt",
+      "endpoint": "/order_receipt/{order_id}",
+      "description": "Download the receipt of a past order.",
+      "line_start": 1803,
+      "line_end": 1849,
+      "mutation_signals": [
+        {
+          "kind": "call",
+          "name": "create_file",
+          "line": 1838
+        },
+        {
+          "kind": "assignment",
+          "target": "order.receipt_download_count",
+          "line": 1844
+        },
+        {
+          "kind": "call",
+          "name": "save",
+          "line": 1845
+        }
+      ]
+    },
+    {
+      "app": "amazon",
+      "function": "download_prime_subscription_receipt",
+      "endpoint": "/prime/subscriptions/{prime_subscription_id}/receipt",
+      "description": "Download the receipt for a prime subscription.",
+      "line_start": 3021,
+      "line_end": 3069,
+      "mutation_signals": [
+        {
+          "kind": "call",
+          "name": "create_file",
+          "line": 3058
+        },
+        {
+          "kind": "assignment",
+          "target": "prime_subscription.receipt_download_count",
+          "line": 3064
+        },
+        {
+          "kind": "call",
+          "name": "save",
+          "line": 3065
+        }
+      ]
+    },
+    {
+      "app": "gmail",
+      "function": "download_attachment",
+      "endpoint": "/attachments/{attachment_id}",
+      "description": "Download a file attachment.",
+      "line_start": 2598,
+      "line_end": 2653,
+      "mutation_signals": [
+        {
+          "kind": "call",
+          "name": "create_file",
+          "line": 2640
+        },
+        {
+          "kind": "assignment",
+          "target": "attachment.download_count",
+          "line": 2647
+        },
+        {
+          "kind": "call",
+          "name": "save",
+          "line": 2648
+        }
+      ]
+    },
+    {
+      "app": "phone",
+      "function": "show_contact_relationships",
+      "endpoint": "/contact_relationships",
+      "description": "Get a list of all relationships available in your contact book.",
+      "line_start": 228,
+      "line_end": 246,
+      "mutation_signals": [
+        {
+          "kind": "call",
+          "name": "update",
+          "line": 245
+        }
+      ]
+    },
+    {
+      "app": "splitwise",
+      "function": "download_expense_receipt_file",
+      "endpoint": "/expenses/{expense_id}/file",
+      "description": "Download a receipt file attachment for an expense.",
+      "line_start": 1050,
+      "line_end": 1098,
+      "mutation_signals": [
+        {
+          "kind": "call",
+          "name": "create_file",
+          "line": 1087
+        },
+        {
+          "kind": "assignment",
+          "target": "expense.receipt_download_count",
+          "line": 1093
+        },
+        {
+          "kind": "call",
+          "name": "save",
+          "line": 1094
+        }
+      ]
+    },
+    {
+      "app": "splitwise",
+      "function": "download_payment_receipt_file",
+      "endpoint": "/payments/{payment_id}/file",
+      "description": "Download receipt file attachment for a payment.",
+      "line_start": 1897,
+      "line_end": 1945,
+      "mutation_signals": [
+        {
+          "kind": "call",
+          "name": "create_file",
+          "line": 1934
+        },
+        {
+          "kind": "assignment",
+          "target": "payment.receipt_download_count",
+          "line": 1940
+        },
+        {
+          "kind": "call",
+          "name": "save",
+          "line": 1941
+        }
+      ]
+    },
+    {
+      "app": "splitwise",
+      "function": "show_people_balance",
+      "endpoint": "/balance/people",
+      "description": "Show the aggregate amounts you owe to each person and they owe to you.",
+      "line_start": 2423,
+      "line_end": 2487,
+      "mutation_signals": [
+        {
+          "kind": "assignment",
+          "target": "you_owe_to_user_email[information['email']]",
+          "line": 2453
+        },
+        {
+          "kind": "assignment",
+          "target": "you_owe_to_user_email[information['email']]",
+          "line": 2455
+        },
+        {
+          "kind": "assignment",
+          "target": "you_owe_to_user_email[information['email']]",
+          "line": 2459
+        },
+        {
+          "kind": "assignment",
+          "target": "you_owe_to_user_email[information['email']]",
+          "line": 2461
+        }
+      ]
+    },
+    {
+      "app": "splitwise",
+      "function": "show_group_balance",
+      "endpoint": "/balance/group",
+      "description": "",
+      "line_start": 2491,
+      "line_end": 2638,
+      "mutation_signals": [
+        {
+          "kind": "assignment",
+          "target": "amount_a_should_pay_to_b[payer_id, debtor_id]",
+          "line": 2578
+        },
+        {
+          "kind": "assignment",
+          "target": "amount_a_should_pay_to_b[debtor_id, payer_id]",
+          "line": 2579
+        },
+        {
+          "kind": "assignment",
+          "target": "amount_a_should_pay_to_b[payer_id, receiver_id]",
+          "line": 2586
+        },
+        {
+          "kind": "assignment",
+          "target": "amount_a_should_pay_to_b[receiver_id, payer_id]",
+          "line": 2587
+        },
+        {
+          "kind": "assignment",
+          "target": "user_id_to_email[user_.id]",
+          "line": 2595
+        },
+        {
+          "kind": "assignment",
+          "target": "user_id_to_name[user_.id]",
+          "line": 2596
+        }
+      ]
+    },
+    {
+      "app": "splitwise",
+      "function": "show_notifications",
+      "endpoint": "/notifications",
+      "description": "Get a list of your notifications.",
+      "line_start": 2940,
+      "line_end": 2978,
+      "mutation_signals": [
+        {
+          "kind": "assignment",
+          "target": "find_kwargs['read']",
+          "line": 2972
+        }
+      ]
+    },
+    {
+      "app": "splitwise",
+      "function": "show_notifications_count",
+      "endpoint": "/notifications/count",
+      "description": "Get the count of your notifications.",
+      "line_start": 2982,
+      "line_end": 3002,
+      "mutation_signals": [
+        {
+          "kind": "assignment",
+          "target": "find_kwargs['read']",
+          "line": 3000
+        }
+      ]
+    },
+    {
+      "app": "spotify",
+      "function": "show_current_song",
+      "endpoint": "/music_player/current_song",
+      "description": "Show details of the current song on the queue.",
+      "line_start": 2922,
+      "line_end": 2960,
+      "mutation_signals": [
+        {
+          "kind": "call",
+          "name": "create",
+          "line": 2949
+        },
+        {
+          "kind": "call",
+          "name": "save",
+          "line": 2950
+        },
+        {
+          "kind": "assignment",
+          "target": "song_dict['played_seconds']",
+          "line": 2957
+        },
+        {
+          "kind": "assignment",
+          "target": "song_dict['is_playing']",
+          "line": 2958
+        },
+        {
+          "kind": "assignment",
+          "target": "song_dict['is_looping']",
+          "line": 2959
+        }
+      ]
+    },
+    {
+      "app": "spotify",
+      "function": "show_song_queue",
+      "endpoint": "/music_player/song_queue",
+      "description": "Get the music player song queue. Songs are played in the order of the queue in a cycle.",
+      "line_start": 3253,
+      "line_end": 3297,
+      "mutation_signals": [
+        {
+          "kind": "call",
+          "name": "create",
+          "line": 3284
+        },
+        {
+          "kind": "call",
+          "name": "save",
+          "line": 3285
+        },
+        {
+          "kind": "assignment",
+          "target": "song['position']",
+          "line": 3294
+        },
+        {
+          "kind": "assignment",
+          "target": "song['is_current']",
+          "line": 3295
+        },
+        {
+          "kind": "assignment",
+          "target": "song['is_playing']",
+          "line": 3296
+        }
+      ]
+    },
+    {
+      "app": "spotify",
+      "function": "show_volume",
+      "endpoint": "/music_player/volume",
+      "description": "Get the volume level of the music player.",
+      "line_start": 3409,
+      "line_end": 3423,
+      "mutation_signals": [
+        {
+          "kind": "call",
+          "name": "create",
+          "line": 3421
+        },
+        {
+          "kind": "call",
+          "name": "save",
+          "line": 3422
+        }
+      ]
+    },
+    {
+      "app": "spotify",
+      "function": "download_premium_subscription_receipt",
+      "endpoint": "/premium/subscriptions/{premium_subscription_id}/receipt",
+      "description": "Download the receipt for a premium subscription.",
+      "line_start": 3626,
+      "line_end": 3676,
+      "mutation_signals": [
+        {
+          "kind": "call",
+          "name": "create_file",
+          "line": 3665
+        },
+        {
+          "kind": "assignment",
+          "target": "premium_subscription.receipt_download_count",
+          "line": 3671
+        },
+        {
+          "kind": "call",
+          "name": "save",
+          "line": 3672
+        }
+      ]
+    },
+    {
+      "app": "todoist",
+      "function": "show_project",
+      "endpoint": "/projects/{project_id}",
+      "description": "Show project details based on its ID.",
+      "line_start": 427,
+      "line_end": 491,
+      "mutation_signals": [
+        {
+          "kind": "assignment",
+          "target": "project_dict['is_favorite']",
+          "line": 489
+        },
+        {
+          "kind": "assignment",
+          "target": "project_dict['is_archived']",
+          "line": 490
+        }
+      ]
+    },
+    {
+      "app": "todoist",
+      "function": "show_projects",
+      "endpoint": "/projects",
+      "description": "Show or search a list of your projects.",
+      "line_start": 495,
+      "line_end": 616,
+      "mutation_signals": [
+        {
+          "kind": "assignment",
+          "target": "kwargs['is_favorite']",
+          "line": 572
+        },
+        {
+          "kind": "assignment",
+          "target": "kwargs['is_archived']",
+          "line": 574
+        },
+        {
+          "kind": "assignment",
+          "target": "project_id_to_is_star[project_collaborator_link.project_id]",
+          "line": 581
+        },
+        {
+          "kind": "call",
+          "name": "update",
+          "line": 615
+        }
+      ]
+    },
+    {
+      "app": "todoist",
+      "function": "show_tasks",
+      "endpoint": "/projects/{project_id}/tasks",
+      "description": "Get a list of tasks within a project.",
+      "line_start": 1112,
+      "line_end": 1312,
+      "mutation_signals": [
+        {
+          "kind": "assignment",
+          "target": "section_id_to_order[task.section_id]",
+          "line": 1288
+        }
+      ]
+    },
+    {
+      "app": "todoist",
+      "function": "download_attachment",
+      "endpoint": "/task_comments/{task_comment_id}/attachments/{attachment_file_name}",
+      "description": "Download the attachment of a task comment.",
+      "line_start": 2156,
+      "line_end": 2218,
+      "mutation_signals": [
+        {
+          "kind": "call",
+          "name": "create_file",
+          "line": 2205
+        },
+        {
+          "kind": "assignment",
+          "target": "attachment.download_count",
+          "line": 2212
+        },
+        {
+          "kind": "call",
+          "name": "save",
+          "line": 2213
+        }
+      ]
+    },
+    {
+      "app": "todoist",
+      "function": "show_notifications",
+      "endpoint": "/notifications",
+      "description": "Get a list of your notifications.",
+      "line_start": 2265,
+      "line_end": 2303,
+      "mutation_signals": [
+        {
+          "kind": "assignment",
+          "target": "find_kwargs['read']",
+          "line": 2297
+        }
+      ]
+    },
+    {
+      "app": "todoist",
+      "function": "show_notifications_count",
+      "endpoint": "/notifications/count",
+      "description": "Get the count of your notifications.",
+      "line_start": 2307,
+      "line_end": 2327,
+      "mutation_signals": [
+        {
+          "kind": "assignment",
+          "target": "find_kwargs['read']",
+          "line": 2325
+        }
+      ]
+    },
+    {
+      "app": "venmo",
+      "function": "show_profile",
+      "endpoint": "/profile",
+      "description": "",
+      "line_start": 194,
+      "line_end": 225,
+      "mutation_signals": [
+        {
+          "kind": "assignment",
+          "target": "profile_dict['friends_since']",
+          "line": 221
+        },
+        {
+          "kind": "assignment",
+          "target": "profile_dict['friends_since']",
+          "line": 224
+        }
+      ]
+    },
+    {
+      "app": "venmo",
+      "function": "download_bank_transfer_receipt",
+      "endpoint": "/bank_transfers/{bank_transfer_id}/receipt",
+      "description": "Download the receipt of money transfer from Venmo to payment card or vice versa.",
+      "line_start": 622,
+      "line_end": 670,
+      "mutation_signals": [
+        {
+          "kind": "call",
+          "name": "create_file",
+          "line": 659
+        },
+        {
+          "kind": "assignment",
+          "target": "bank_transfer.receipt_download_count",
+          "line": 665
+        },
+        {
+          "kind": "call",
+          "name": "save",
+          "line": 666
+        }
+      ]
+    },
+    {
+      "app": "venmo",
+      "function": "show_transaction",
+      "endpoint": "/transactions/{transaction_id}",
+      "description": "Show transaction details.",
+      "line_start": 677,
+      "line_end": 718,
+      "mutation_signals": [
+        {
+          "kind": "assignment",
+          "target": "transaction_dict['payment_card_digits']",
+          "line": 715
+        },
+        {
+          "kind": "assignment",
+          "target": "transaction_dict['liked']",
+          "line": 717
+        }
+      ]
+    },
+    {
+      "app": "venmo",
+      "function": "show_transactions",
+      "endpoint": "/transactions",
+      "description": "Search or show a list of your transactions.",
+      "line_start": 812,
+      "line_end": 965,
+      "mutation_signals": [
+        {
+          "kind": "assignment",
+          "target": "fixed_fields['sender_id']",
+          "line": 904
+        },
+        {
+          "kind": "assignment",
+          "target": "fixed_fields['receiver_id']",
+          "line": 912
+        },
+        {
+          "kind": "assignment",
+          "target": "transaction_dict['payment_card_digits']",
+          "line": 960
+        },
+        {
+          "kind": "assignment",
+          "target": "transaction_dict['liked']",
+          "line": 964
+        }
+      ]
+    },
+    {
+      "app": "venmo",
+      "function": "download_transaction_receipt",
+      "endpoint": "/transactions/{transaction_id}/receipt",
+      "description": "Download the receipt of a transaction (money sent from one user to another).",
+      "line_start": 971,
+      "line_end": 1022,
+      "mutation_signals": [
+        {
+          "kind": "call",
+          "name": "create_file",
+          "line": 1011
+        },
+        {
+          "kind": "assignment",
+          "target": "transaction.receipt_download_count",
+          "line": 1017
+        },
+        {
+          "kind": "call",
+          "name": "save",
+          "line": 1018
+        }
+      ]
+    },
+    {
+      "app": "venmo",
+      "function": "show_transaction_comments",
+      "endpoint": "/transactions/{transaction_id}/comments",
+      "description": "Get a list of transaction comments.",
+      "line_start": 1080,
+      "line_end": 1125,
+      "mutation_signals": [
+        {
+          "kind": "assignment",
+          "target": "comment_dict['liked']",
+          "line": 1123
+        }
+      ]
+    },
+    {
+      "app": "venmo",
+      "function": "show_transaction_comment",
+      "endpoint": "/comments/{comment_id}",
+      "description": "Show detailed information about a transaction comment.",
+      "line_start": 1132,
+      "line_end": 1169,
+      "mutation_signals": [
+        {
+          "kind": "assignment",
+          "target": "comment_dict['liked']",
+          "line": 1168
+        }
+      ]
+    },
+    {
+      "app": "venmo",
+      "function": "show_received_payment_requests",
+      "endpoint": "/received_payment_requests",
+      "description": "Search or show a list of payment requests you have received from others.",
+      "line_start": 1454,
+      "line_end": 1515,
+      "mutation_signals": [
+        {
+          "kind": "assignment",
+          "target": "extra_kwargs['approved_at__is_not']",
+          "line": 1496
+        },
+        {
+          "kind": "assignment",
+          "target": "extra_kwargs['denied_at__is_not']",
+          "line": 1498
+        },
+        {
+          "kind": "assignment",
+          "target": "extra_kwargs['approved_at__is']",
+          "line": 1500
+        },
+        {
+          "kind": "assignment",
+          "target": "extra_kwargs['denied_at__is']",
+          "line": 1501
+        }
+      ]
+    },
+    {
+      "app": "venmo",
+      "function": "show_sent_payment_requests",
+      "endpoint": "/sent_payment_requests",
+      "description": "Search or show a list of payment requests you have sent to others.",
+      "line_start": 1522,
+      "line_end": 1583,
+      "mutation_signals": [
+        {
+          "kind": "assignment",
+          "target": "extra_kwargs['approved_at__is_not']",
+          "line": 1564
+        },
+        {
+          "kind": "assignment",
+          "target": "extra_kwargs['denied_at__is_not']",
+          "line": 1566
+        },
+        {
+          "kind": "assignment",
+          "target": "extra_kwargs['approved_at__is']",
+          "line": 1568
+        },
+        {
+          "kind": "assignment",
+          "target": "extra_kwargs['denied_at__is']",
+          "line": 1569
+        }
+      ]
+    },
+    {
+      "app": "venmo",
+      "function": "show_notifications",
+      "endpoint": "/notifications",
+      "description": "Get a list of your notifications.",
+      "line_start": 1848,
+      "line_end": 1886,
+      "mutation_signals": [
+        {
+          "kind": "assignment",
+          "target": "find_kwargs['read']",
+          "line": 1880
+        }
+      ]
+    },
+    {
+      "app": "venmo",
+      "function": "show_notifications_count",
+      "endpoint": "/notifications/count",
+      "description": "Get the count of your notifications.",
+      "line_start": 1890,
+      "line_end": 1910,
+      "mutation_signals": [
+        {
+          "kind": "assignment",
+          "target": "find_kwargs['read']",
+          "line": 1908
+        }
+      ]
+    }
+  ],
+  "limitations": "Static syntax only: create/save can initialize default state without user-visible harm, and mutation through helper calls can be missed. Dynamic isolated state diffs are required."
+}

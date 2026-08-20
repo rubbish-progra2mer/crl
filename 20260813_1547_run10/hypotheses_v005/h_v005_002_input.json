@@ -1,0 +1,34 @@
+{
+  "hypothesis_id": "h-v005-002",
+  "title": "反例引导的程序性记忆适用守卫合成",
+  "parent_ids": ["h-v005-001"],
+  "lineage_note": "宽泛适用域门控已被程序性记忆工作占据；收缩到适用条件的证据生成方式：不让大语言模型从被动轨迹猜测条件，而是在可回滚环境中主动干预候选状态谓词并重放同一程序。",
+  "problem": "现有经验/技能适用条件多由模型总结、相似度或非因果价值信号生成，可能把共现条件误当必要条件，或漏掉只在反事实状态下暴露的失败边界。",
+  "target_failure": {
+    "summary": "模型生成或被动统计的技能前置条件在未观察状态上误放行，导致程序性记忆负迁移。",
+    "card_ids": ["failure-plan-cache-semantic-false-positives", "failure-retrieved-experience-propagates-stored-errors"],
+    "evidence_ids": ["ev-p071-cache-false-positive-boundary", "ev-p064-experience-following-error", "ev-p064-evaluator-reliability"]
+  },
+  "changed_computation": {
+    "baseline": "从成功轨迹生成 when-to-use 文本，或从被动成功/失败执行中由模型收紧前置条件；强基线含同预算随机状态试验。",
+    "intervention": "给定固定程序和可观察候选状态谓词，从成功检查点开始逐项或按反例选择改变谓词，重放完全相同的程序并由独立终局判定成功/失败；将区分成功与反例且覆盖最大的布尔条件合成为调用守卫，未覆盖状态拒绝复用。",
+    "information_available": "训练/构建期的可回滚检查点、公开状态谓词、固定程序和独立终局反馈；目标任务运行时只读当前可见状态与已合成守卫，不调用目标答案评分器。",
+    "timing": "经验固化为技能之前做少量主动重放；运行时在技能注入或执行前机械求值守卫。",
+    "budget_effect": "构建期增加环境重放；运行时不增加模型或工具调用。必须与相同重放数的随机试验、被动对比和模型条件归纳比较样本效率。"
+  },
+  "mechanism_claim": "主动配对干预能把技能成败与状态谓词的因果依赖分开，合成的守卫应比相似度、模型 when-to-use 和同预算被动/随机观察具有更低的错误放行率。",
+  "falsifier": "MACLA/MSCE 或其他智能体记忆工作已用环境状态干预和固定技能重放合成前置条件；经典技能初始集合学习完全吸收且在大语言模型智能体上没有新的部分可观察/语言规约计算；同预算随机试验、模型归纳或简单分类器达到相同错误放行率和终局成功率；候选状态谓词无法从工具模式与观测稳定生成。",
+  "minimal_killer_experiment": "在程序化可判定的工具环境中生成多组技能、布尔状态与未见组合；比较语义直用、模型 when-to-use、同预算随机试验/分类、被动成功失败对比和主动配对干预，测守卫错误放行、覆盖、重放数与独立终局成功。",
+  "nearest_prior_risk": "MACLA 已有显式前置条件和成功/失败对比收紧；MSCE 已有适用边界、正反证据和价值门控；CMI 已在记忆上下文上做有/无记忆干预；经典强化学习选项初始集合与机器人技能前置条件学习已长期研究可执行状态集合。差异必须落在文本/工具智能体中对固定语言程序做环境谓词干预、且运行时不使用目标答案。",
+  "alternative_explanations": ["主动样本恰好覆盖测试分布", "谓词枚举泄漏真实前置条件", "机械守卫而非经验内容带来收益", "合成器只适用于合取条件", "环境重置成本不可接受"],
+  "descriptors": {
+    "problem_family": "causally_invalid_skill_reuse",
+    "computation_stage": "skill_crystallization_and_preexecution_gate",
+    "intervention_family": "counterexample_guided_applicability_guard_synthesis",
+    "information_source": "rollback_state_interventions_and_terminal_feedback",
+    "timing_class": "offline_or_online_skill_promotion_then_preexecution",
+    "budget_class": "bounded_environment_replay_zero_runtime_calls",
+    "evaluation_mode": "unseen_state_false_admission_coverage_and_terminal_success"
+  },
+  "literature_refs": ["arXiv:2512.18950", "arXiv:2607.16621", "arXiv:2605.17641", "arXiv:2012.01693", "NeurIPS 2023 initiation-set learning"]
+}

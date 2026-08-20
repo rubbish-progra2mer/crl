@@ -1,0 +1,20 @@
+{
+  "claim_id": "claim-one-shot-brittleness",
+  "claim_text": "在冻结的本地模型合成套件上，单次精确正确并不充分预测稳定、任务定向且抗无关诱饵的工具证据采用；可观察到非零且实质性的单次成功关系脆弱率。",
+  "scope": "qwen2.5:7b、qwen3:4b、qwen3:8b，严格与弱两种提示制度，五个任务族共二十例；仅描述该冻结本地合成套件。",
+  "observable": "单次基线精确正确的模型-提示-案例行中，未通过双向关系的比例，以及按模型和提示制度分层的计数。",
+  "falsifier": "正式运行中的总体单次成功关系脆弱率低于 0.10，或所有失败都能由解析警告解释，或现象只出现在一个模型-提示分层且其余五层均为零。",
+  "minimum_effect_or_decision_rule": "总体单次成功关系脆弱率至少 0.10，解析警告行剔除后仍非零，并至少出现在三个模型-提示分层。",
+  "alternative_explanations": [
+    "结构化输出解析错误制造关系失败。",
+    "弱提示没有说明字段语义，现象只是任务误解。",
+    "完全重放不稳定而非工具字段采用错位。",
+    "二十个合成案例的任务模板过于相似。"
+  ],
+  "killer_experiment_id": "exp-qwen-v001",
+  "supporting_experiment_ids": [
+    "exp-mutation-v001"
+  ],
+  "status": "proposed",
+  "status_reason": "Scratch 观察到现象后冻结阈值，等待独立正式重跑。"
+}

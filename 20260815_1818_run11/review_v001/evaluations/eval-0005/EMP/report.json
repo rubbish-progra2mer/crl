@@ -1,0 +1,60 @@
+{
+  "evaluation_id": "eval-0005",
+  "evaluator_definition_sha256": "e0d35083b1427e9f8861ba576304b97657498fee46480d5e07e8e0b02cea6e5b",
+  "evaluator_version": "CRL-EVAL-1.0",
+  "events_sha256": "60c62619cf08f813f81ae9789969337ad77dbb2e8005d350dea40a9b33e3b6df",
+  "invalid_reasons": [],
+  "measurement_key": "589d3853e7620d4e885370c03e50699d40225380aafb01ac1b7742781a3b6150",
+  "output": {
+    "confidence": "high",
+    "critical_risk": "potentially_fatal",
+    "diagnostics": {
+      "baseline_confound": "单次正确基线只有一次失败机会，候选联合判据合取六次调用；即使每次调用独立同分布且不存在字段采用问题，更多调用也会机械提高“至少一次失败”的概率。",
+      "biggest_empirical_threat": "联合关系通过与五个源变体全部精确正确在真实模型数据中完全重合为101/360，且没有“错但关系通过”行；因此当前数据未证明该指标测得的是独立的证据采用结构，而可能只是六次调用上的完整正确性合取。",
+      "killer_experiment": "对同一模型、案例、提示和种子随机执行两种等预算六调用协议：一组为当前六臂变形，另一组为六次完全相同的基线重放，并用独立预筛选调用确定基线正确性。若在分层模型中控制解析与单调用错误率后，变形组的额外失败率不高于六重放组，则当前选择性采用或机制解释应被推翻。",
+      "missing_validation": "在独立标注关系的真实多步工具任务上，以相同六调用预算比较联合关系、完整反事实正确性和通用变形基线，并检验其在控制完整正确性后能否增量预测独立终态错误、复核失败或修复收益。",
+      "strongest_empirical_evidence": "最可信的是剔除所有解析警告后仍有84/185个基线精确正确行未通过联合关系，并且失败覆盖三个种子、十八个模型—提示—种子分层及五个任务族；这直接支持冻结本地合成套件中的受限现象。"
+    },
+    "evaluator_version": "CRL-EVAL-1.0",
+    "free_review": "该实现对历次发现的重复、位置、顺序和字符串混杂做了认真析因，最终局部实验可核查，也足以证明冻结套件中存在“单次答对、后续条件失败”的现象。但经验链尚未证明这是专属于工具证据采用的信号：候选以六次合取对比一次正确，且在真实模型上与五变体全部精确正确完全一致。突变集又由同一实现团队围绕判据构造，1.0判别力缺少留出策略验证。当前证据适合支持受限诊断种子，不足以支持独立机制有效性、一般部署率或相对完整正确性标签的增量价值。",
+    "model_identity": "gpt-5.6-sol",
+    "reasoning_effort": "xhigh",
+    "reasons": {
+      "baseline_fairness": "突变实验的三个信号复用同一180行回答，信息和调用预算基本匹配，这是公平的一面。然而联合信号使用预声明任务关系及更多合取条件，比较对象只是较弱的内部消融，未包含同预算完整反事实正确性或通用变形基线。现象实验更以单次正确对比六次调用的联合通过，天然给予候选更多暴露失败的机会，缺少六次相同重放的预算匹配对照。",
+      "experimental_validity": "两项实验都直接对应狭义预声明目标，并冻结了案例、调用条件和否证阈值。突变实验能证明实现可识别作者预设的九类策略，本地模型实验也确实观察到单次正确后关系失败。但真实模型中联合关系通过与五个源变体全部精确正确恰好同为101/360，因而尚不能把失败独立解释为“选择性证据采用”而非多次调用中的一般错误或随机性。",
+      "measurement_reliability": "独立家族求解器20/20重算通过，原始文本、解析警告和逐调用记录均被保留，且剔除警告后仍有84/185失败。另一方面，整数与标识规范化仍是研究者编写的启发式规则，逐行材料包含大量畸形或非JSON输出，却没有盲人工标注来估计误判率。三个种子共享案例且模型谱系相关，行级Wilson区间未处理案例、模型和种子的聚类，因此不能作为可靠总体不确定性。",
+      "result_strength": "局部效应幅度明显：突变平衡准确率为1.0，对比0.8571和0.7607；本地套件中86/187个单次正确行失败，剔除解析警告后比例仍接近。失败出现在全部十八个分层和五个任务族，且15行仅由纯顺序臂揭示。不过有效任务本体仅20例、模型均属相近Qwen谱系，分层与种子并非独立复制；关系信号又未显示超出完整反事实正确性的增量价值，因此结果强度只能视为局部且混合。",
+      "robustness_falsification": "最终版本加入方向错误、重复不稳定、诱饵依赖、固定第一/第三位置、纯顺序臂等针对性反例，并随机化调用顺序，局部否证覆盖较丰富。解析警告剔除、五个任务族和十八个分层也提供了一定稳健性。但这些反例和评价器共同开发，未在独立留出策略或新案例上检验；更关键的六次相同输入负对照、跨供应商模型和真实多步任务均缺失，尚未排除调用次数与一般生成不稳定这一主要替代解释。"
+    },
+    "review_protocol": "CRL-IR-1.0",
+    "reviewer_role": "EMP",
+    "scores": {
+      "baseline_fairness": 2,
+      "experimental_validity": 2,
+      "measurement_reliability": 2,
+      "result_strength": 2,
+      "robustness_falsification": 2
+    }
+  },
+  "packet_key": "5f34886e0680fc9d032814f1c210997382f9895ee9cac262dea10bb6865d0d51",
+  "raw_output_sha256": "5ea0d5a81a36dc7f4f7dc2150bccd25c7239807d15e71db874928a026e552237",
+  "request_sha256": "3ca2dea59ab23d98cb0d7fae2a7d5388df116cc6ba76d9a8dc2bffed657786d6",
+  "reviewer_role": "EMP",
+  "runtime": {
+    "backend": "codex_exec_jsonl_v1",
+    "codex_version": "codex-cli 0.147.0",
+    "ephemeral": true,
+    "event_count": 4,
+    "executable": "D:\\Desktop\\crl\\runtimes\\codex-cli\\0.147.0\\codex.cmd",
+    "forbidden_events": [],
+    "network_requested": false,
+    "reasoning_effort": "xhigh",
+    "requested_model": "gpt-5.6-sol",
+    "returncode": 0,
+    "sandbox": "read-only",
+    "timed_out": false
+  },
+  "schema_version": 1,
+  "stderr_sha256": "626e4947fc6e8c0772849495bf7b4e75b7a326ec914ac994301c8c2f17cfc29c",
+  "valid": true
+}

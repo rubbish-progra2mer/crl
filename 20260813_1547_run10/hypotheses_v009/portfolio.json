@@ -1,0 +1,69 @@
+{
+  "created_at_utc": "2026-08-13T11:10:56.450908Z",
+  "hypotheses": [
+    {
+      "alternative_explanations": [
+        "收益只是强制更多搜索",
+        "收益只是两来源规则",
+        "支持图抽取器学会了基准中的记录/总结文体",
+        "来源折叠使用了人工或隐藏路线标签",
+        "真实答案恰好总有两条路线，形成基准模板泄漏",
+        "语言模型在第二次综合时自然纠错，与韧性无关"
+      ],
+      "changed_computation": {
+        "baseline": "由语言模型主观判断当前证据是否充分，或按引用数量、来源权威、支持/冲突分数和缺失项决定停止。",
+        "budget_effect": "增加支持图抽取、最小割计算和定向检索；与强基线匹配最大检索调用和模型调用预算。",
+        "information_available": "用户问题、已检索文档与显式来源/引用/文本相似关系、语言模型抽取的原子子主张和支持边；不使用隐藏 gold、人工 route 标签或错误总结身份。",
+        "intervention": "把问题原子、候选答案、证据根和支持推导编译为布尔 lineage/支持超图，折叠明确复制或共同上游后计算每个答案的独立根韧性，即删除最少多少个证据根会破坏其全部完整见证；韧性未越过声明风险预算时，选择能增加互不相交见证或区分竞争答案的检索查询，而非提交。",
+        "timing": "每次研究智能体准备停止并提交答案之前，以及证据脆弱时选择下一次检索动作之时。"
+      },
+      "created_at_utc": "2026-08-13T11:11:02.593930Z",
+      "descriptors": {
+        "budget_class": "matched_search_and_model_call_budget",
+        "computation_stage": "pre_submission_evidence_sufficiency_and_next_query_control",
+        "evaluation_mode": "paired_clean_noisy_independent_record_level_terminal",
+        "information_source": "retrieved_evidence_claim_graph_and_observable_source_lineage",
+        "intervention_family": "source_collapsed_provenance_resilience_min_cut",
+        "problem_family": "answer_shaped_misleading_evidence_causes_premature_research_stopping",
+        "timing_class": "online_before_stop"
+      },
+      "falsifier": "最小割只复现引用计数或已知充分性判断；来源折叠需要基准真值；Argus/S2G/SURE-RAG/CounterRefine 或两引用规则在同预算下得到相同接受集合；或单一真实权威来源使方法的正确覆盖率不可接受。",
+      "hypothesis_id": "h-v009-001",
+      "lineage_note": "v001-v008 的执行正确性/验证/恢复盆地连续被反证后，按 Active Diagnosis 转向信息与证据决策；由 DRNoise 的答案型错误总结诱发提前停止问题出发，引入查询 lineage 的独立根删除韧性。",
+      "literature_refs": [
+        "DRNoise, arXiv:2607.17291",
+        "Argus, arXiv:2605.16217",
+        "S2G-RAG, ACL 2026",
+        "CaRR, ACL 2026",
+        "GAVEL, Findings ACL 2026",
+        "SURE-RAG, arXiv:2605.03534",
+        "CounterRefine, arXiv:2603.16091",
+        "Freire et al., PVLDB 2015",
+        "Dong et al., PVLDB 2009"
+      ],
+      "mechanism_claim": "对答案支持的独立根删除韧性进行反事实计算，能在不识别特定攻击文档类别的条件下阻止单文档捷径，同时允许由多条互不相交记录链支持的答案停止。",
+      "minimal_killer_experiment": "在运行时不可见真值的静态搜索任务中同时放置直接错误总结、两条真实记录链、同源改写、单一真实权威和不可判定对照；比较普通ReAct、通用验证、两引用、S2G式gap judge、CounterRefine式反证检索、未折叠文档韧性与独立根韧性，报告配对干净/诱导准确率、条件服从率、覆盖/弃权和调用成本。",
+      "nearest_prior_risk": "数据库查询 resilience/causal responsibility 已占据最小删除计算；Argus、S2G-RAG、CaRR、GAVEL 与 SURE-RAG 已占据证据图、完整链、充分性、gap 检索和证据契约；truth discovery 已占据来源复制依赖。必须证明在线独立根割改变停止与查询动作，而非简单拼接。",
+      "parent_ids": [],
+      "problem": "深度研究智能体可能把一个直接给出答案的普通总结当成充分证据而提前停止，即使真实记录链已部分检索且可继续完成；普通引用、来源权威和通用验证提示不能稳定区分单点脆弱断言与多路径记录支持。",
+      "revision": 2,
+      "status": "falsified",
+      "status_reason": "观测等价潜在世界表明普通网页可见量不能识别独立记录根：同一观测可为同根转载或独立生成，硬rho阈值要求相反决定；点估计退化为经典来源依赖/聚类+Argus组合，最坏下界则普遍弃答。DRNOISE官方数据/代码/grader不可取得，合成实验不能修复该不可识别性。",
+      "target_failure": {
+        "card_ids": [
+          "failure-answer-accuracy-without-conflict-recognition",
+          "failure-gold-context-does-not-solve-knowledge-use"
+        ],
+        "evidence_ids": [],
+        "summary": "答案形态完整的单文档形成脆弱但高吸引力的支持捷径，改变停止策略并阻断真实多跳证据路线的完成。"
+      },
+      "title": "独立证据根韧性驱动的研究智能体停止与检索",
+      "updated_at_utc": "2026-08-13T11:25:13.936498Z"
+    }
+  ],
+  "revision": 2,
+  "run_id": "20260813_1547_run10",
+  "schema_version": 1,
+  "updated_at_utc": "2026-08-13T11:25:13.936498Z",
+  "version": "v009"
+}

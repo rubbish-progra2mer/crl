@@ -1,0 +1,60 @@
+{
+  "evaluation_id": "eval-0001",
+  "evaluator_definition_sha256": "e0d35083b1427e9f8861ba576304b97657498fee46480d5e07e8e0b02cea6e5b",
+  "evaluator_version": "CRL-EVAL-1.0",
+  "events_sha256": "3e0fce6577f884731eaacd0d04092cd895954674441fd083c999b802b79d5fd2",
+  "invalid_reasons": [],
+  "measurement_key": "c6ff34e6b74ae35ff6f7ec03bf7c998a22c163ef3a376b1398a0c8e438505127",
+  "output": {
+    "confidence": "high",
+    "critical_risk": "potentially_fatal",
+    "diagnostics": {
+      "best_stress_test": "加入 `repeat_only_unstable` 策略：base、relevant 及两类 irrelevant 均严格满足预声明关系，但 repeat 与 base 不同；要求主指标必须判失败，并用修正后的完整合取重新计算全部 120 行、18/54 四象限及分层结果。",
+      "boundary_warning": "33.33% 只能描述单一种子下三个本地 Qwen 模型在二十个合成短答案案例中的条件比例，尤其主要描述两个标识选择任务族；不得外推到其他模型、真实多步智能体或部署失败率。",
+      "hidden_assumption": "最危险的前提是研究者手工规定的字段相关性、诱饵与双射/平移关系足以识别因果证据采用，而不会只测到提示遵循、格式敏感或套件规律；当前同源套件和 oracle 未独立验证该前提。",
+      "most_fatal_failure_mode": "实现中的 `bidirectional_relation` 只合取相关等变与两类无关不变，遗漏 `repeat_stable`；因此一个仅在精确重放时改变答案的系统仍会被判为联合通过，直接否定“精确重放稳定”属于方法核和脆弱率定义的说法。",
+      "reproduction_breakpoint": "独立复现者最可能在重算联合通过与四象限时分叉：若按文字协议把 `repeat_stable` 纳入合取，结果会不同于当前代码；若照代码运行，则无法复现文字定义。缺失逐行结果又使差异无法在 packet 内定量定位。"
+    },
+    "evaluator_version": "CRL-EVAL-1.0",
+    "free_review": "packet 的追踪元数据较完整，也诚实限定了合成套件边界，但当前实现与核心协议存在直接冲突：文字要求相关等变、两类无关不变和精确重放稳定共同通过，代码的 `bidirectional_relation` 却完全未使用 `repeat_stable`。因此“仅重放不稳定”的最小反例会被主指标接受，当前 18/54 也不是按所述联合条件计算。突变实验的 1.0 又来自读取同一套件标签和关系的共设计策略，只能算机制单元测试。真实证据集中于两个标识选择族，且逐行结果与原始回答未提供，无法审计失败究竟代表证据未采用还是提示/格式敏感。修正联合指标并通过 replay-only 反例前，方法核存在潜在致命风险。",
+    "model_identity": "gpt-5.6-sol",
+    "reasoning_effort": "xhigh",
+    "reasons": {
+      "adversarial_survivability": "六种确定性策略覆盖忽略、诱饵、方向错误和一般不稳定，证明关系约束能击杀若干预设故障。可是没有测试“仅 repeat 改变、其余四次完全满足等变与不变”的最小策略；按当前代码，该策略会得到 `repeat_stable=false` 但 `bidirectional_relation=true`。这直接穿透所宣称的四项联合协议，且真实模型实验未提供更独立的对抗覆盖。",
+      "boundary_generalization": "证据仅来自五个手工任务族、二十个合成短答案案例、三个相近的本地 Qwen 模型、两种提示和一个种子。18 个失败中的 16 个集中于 `filtered_argmin` 与 `latest_confirmed`，而 `count_open` 为 0/16，显示明显任务结构依赖。packet 没有多步轨迹、开放式综合、跨供应商、跨种子或真实终态验证，宽泛外推依据很弱。",
+      "confound_leakage_control": "独立家族求解器、两类无关变形和解析警告排除提供了部分控制。可是案例、相关性定义、关系映射和正确答案均来自同一手工套件；确定性策略直接读取 `expected` 与 `relation`，评估器又按策略名称赋标签，因此 1.0 判别率主要是共设计机制自检。严格提示还显式列出应忽略的诱饵字段，真实实验仅覆盖同一 Qwen 谱系和单一种子。更严重的是主指标 `bidirectional_relation` 没有合取 `repeat_stable`，声称的重放控制实际上未进入通过条件。",
+      "evidence_auditability": "主要指标值、执行记录、代码哈希和派生报告均有明确标识，四个种子指标也映射到 metrics 记录。可是逐例输出、原始回答、完整案例和 metrics 文件正文没有纳入 packet，54/18、任务族分解及 Wilson 区间无法从底层行重新审计；closure 也明确报告多个正文数字未映射。代码与叙述对重放是否属于联合指标存在关键不一致，进一步削弱报告数字的可解释性。",
+      "reproducibility_traceability": "packet 提供了执行命令、文件哈希、种子、模型摘要、运行环境及核心评估器和 oracle 代码，形成了实质性追踪链。可是 `cases.json`、`generate_suite.py`、逐行 `result.json`、原始模型回答和实际依赖快照内容均未给出，主体依赖与非敏感环境也标为未绑定或部分绑定。独立团队因此无法仅凭 packet 重建精确数据或复核 18 个失败行。"
+    },
+    "review_protocol": "CRL-IR-1.0",
+    "reviewer_role": "ADV",
+    "scores": {
+      "adversarial_survivability": 1,
+      "boundary_generalization": 1,
+      "confound_leakage_control": 1,
+      "evidence_auditability": 2,
+      "reproducibility_traceability": 2
+    }
+  },
+  "packet_key": "3897f0d60e152329adb57b3c128a090335e58d8690aba61a3e26b73794215033",
+  "raw_output_sha256": "3600ea1ad5b3c855503d433b85a8c9547e59f5cda88f9b1e495b8e9dcdef7b23",
+  "request_sha256": "1752e65ef4c2b193e07fe64cd477984306d867dae1c5e68c581079d3ff7c8d96",
+  "reviewer_role": "ADV",
+  "runtime": {
+    "backend": "codex_exec_jsonl_v1",
+    "codex_version": "codex-cli 0.147.0",
+    "ephemeral": true,
+    "event_count": 4,
+    "executable": "D:\\Desktop\\crl\\runtimes\\codex-cli\\0.147.0\\codex.cmd",
+    "forbidden_events": [],
+    "network_requested": false,
+    "reasoning_effort": "xhigh",
+    "requested_model": "gpt-5.6-sol",
+    "returncode": 0,
+    "sandbox": "read-only",
+    "timed_out": false
+  },
+  "schema_version": 1,
+  "stderr_sha256": "dd76a2dd0e7236cd186f6b1b366d2015c6cfe77e85c7d812e5d26235777e3a43",
+  "valid": true
+}

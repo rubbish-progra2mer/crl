@@ -1,0 +1,86 @@
+{
+  "baseline_specs": [
+    "相关回答是否发生任意变化 relevant_changed。",
+    "相关变化且普通/对抗无关回答均不变 selective_change。"
+  ],
+  "budget_ceiling": "0 次外部模型调用，20 案例 × 6 策略 = 120 关系行。",
+  "claim_ids": [
+    "claim-mutation-discrimination"
+  ],
+  "confounders": [
+    "策略实现与关系实现同处一个评估文件；独立求解器只缓解标签共享错误，不能提供实现团队独立性。"
+  ],
+  "dataset": "suite_spec.json 生成并冻结的五任务族二十案例。",
+  "declared_inputs": [
+    "implementation_v001/cases.json",
+    "implementation_v001/suite_spec.json",
+    "implementation_v001/independent_oracle.py"
+  ],
+  "declared_outputs": [
+    "experiment_v001/attempts/attempt-mutation-003/oracle.json",
+    "experiment_v001/attempts/attempt-mutation-003/result.json",
+    "experiment_v001/attempts/attempt-mutation-003/report.md",
+    "experiment_v001/attempts/attempt-mutation-003/metrics.json"
+  ],
+  "expected_signatures": [
+    "双向关系平衡准确率至少 0.95。",
+    "双向关系比选择性变化至少高 0.05。",
+    "错误但等变策略通过、方向错误但选择性变化策略失败，显示信号是采用结构而非正确性。"
+  ],
+  "experiment_id": "exp-mutation-v003",
+  "falsification_rule": "任一主要判据失败即否证方法判别主张；不能用本地模型现象实验补救。",
+  "hypothesis_id": "H001",
+  "independent_ground_truth": {
+    "description": "独立家族求解器只从原始工具字段重算四个变体答案，不导入套件生成器或主评估器，也不把 declared expected 标签作为求解输入；策略正负标签在实验规格中预先声明。",
+    "external_card_ids": [],
+    "external_evidence_ids": [],
+    "external_literature_refs": [
+      "P039",
+      "P099"
+    ],
+    "run_local_fact_refs": [
+      "implementation_v001/independent_oracle.py",
+      "implementation_v001/cases.json"
+    ]
+  },
+  "model": "六种确定性策略：faithful、wrong_equivariant、misdirected_selective、ignore、distractor、unstable。",
+  "parity_dimensions": {
+    "budget": {
+      "notes": "三个信号复用同一回答，无额外模型调用。",
+      "status": "matched"
+    },
+    "information_access": {
+      "notes": "所有信号由同一组冻结回答计算。",
+      "status": "matched"
+    },
+    "model_provider_revision": {
+      "notes": "同一确定性实现与解释器。",
+      "status": "matched"
+    },
+    "sampling_protocol": {
+      "notes": "同一 120 行、同一种子与案例顺序。",
+      "status": "matched"
+    },
+    "tool_capability": {
+      "notes": "所有策略接收同一结构化工具结果变体。",
+      "status": "matched"
+    }
+  },
+  "primary_metric": "bidirectional_relation_balanced_accuracy",
+  "provider": "本地 Python 3 确定性策略后端。",
+  "purpose": "mechanism_consistency",
+  "research_question": "任务定向输出关系是否在相同回答集合上排除方向错误但选择性的伪采用，从而优于只看变化与变化加不变性？",
+  "revision": "implementation_v001 current wrapper endpoint revision; mutation computation unchanged",
+  "run_id": "20260815_1818_run11",
+  "sampling_unit": "冻结案例与可控策略的笛卡尔积，共 120 行。",
+  "schema_version": 1,
+  "secondary_metrics": [
+    "selective_change_balanced_accuracy",
+    "any_change_balanced_accuracy",
+    "misdirected_selective_pass_rate"
+  ],
+  "seeds": [
+    20260815
+  ],
+  "version": "v001"
+}

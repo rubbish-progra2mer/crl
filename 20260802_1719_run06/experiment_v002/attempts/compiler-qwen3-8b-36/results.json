@@ -1,0 +1,1142 @@
+{
+  "experiment": "claim_compiler_v002",
+  "model": "qwen3:8b",
+  "seed": 20260802,
+  "case_count": 36,
+  "elapsed_seconds": 36.93589186668396,
+  "dataset_kind": "researcher-authored bilingual audit set; not an external benchmark or human annotation study",
+  "summary": {
+    "cases": 36,
+    "parse_success_rate": 1.0,
+    "exact_match_rate": 0.75,
+    "raw_dangerous_underapproximation_rate": 0.25,
+    "guard_accept_rate": 0.9444444444444444,
+    "guarded_exact_match_rate_over_all_cases": 0.75,
+    "guarded_dangerous_commit_rate_over_all_cases": 0.19444444444444445,
+    "accepted_exact_match_rate": 0.7941176470588235,
+    "prompt_tokens": 5341,
+    "generated_tokens": 1937
+  },
+  "rows": [
+    {
+      "case_id": "zh-01",
+      "text": "整个组织的全部历史（包括归档）中不存在编号 X-17 的记录。",
+      "label": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": false,
+        "entity_scope": "organization",
+        "time_scope": "all_history",
+        "archive_scope": "include_archived"
+      },
+      "prediction": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": false,
+        "entity_scope": "organization",
+        "time_scope": "all_history",
+        "archive_scope": "include_archived"
+      },
+      "raw_content": "{\n  \"quantifier\": \"exists\",\n  \"predicate\": \"matches_target\",\n  \"asserted_value\": \"false\",\n  \"entity_scope\": \"organization\",\n  \"time_scope\": \"all_history\",\n  \"archive_scope\": \"include_archived\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 152,
+        "eval_count": 55,
+        "total_duration": 1077847100,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-02",
+      "text": "当前团队最近 30 天的活动记录里存在编号 X-17。",
+      "label": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": true,
+        "entity_scope": "current_team",
+        "time_scope": "recent",
+        "archive_scope": "active_only"
+      },
+      "prediction": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": true,
+        "entity_scope": "current_team",
+        "time_scope": "recent",
+        "archive_scope": "active_only"
+      },
+      "raw_content": "{\n  \"quantifier\": \"exists\",\n  \"predicate\": \"matches_target\",\n  \"asserted_value\": true,\n  \"entity_scope\": \"current_team\",\n  \"time_scope\": \"recent\",\n  \"archive_scope\": \"active_only\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 151,
+        "eval_count": 53,
+        "total_duration": 1013389800,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-03",
+      "text": "在我当前有权查看的全部历史记录中，没有编号 X-17。",
+      "label": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": false,
+        "entity_scope": "current_permission",
+        "time_scope": "all_history",
+        "archive_scope": "active_only"
+      },
+      "prediction": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": false,
+        "entity_scope": "current_permission",
+        "time_scope": "all_history",
+        "archive_scope": "include_archived"
+      },
+      "raw_content": "{\n  \"quantifier\": \"forall\",\n  \"predicate\": \"compliant\",\n  \"asserted_value\": false,\n  \"entity_scope\": \"current_permission\",\n  \"time_scope\": \"all_history\",\n  \"archive_scope\": \"include_archived\"\n}",
+      "exact_match": false,
+      "dangerous_underapproximation": true,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 149,
+        "eval_count": 55,
+        "total_duration": 1032765200,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-04",
+      "text": "全组织最近 30 天（含归档）存在编号 X-17。",
+      "label": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": true,
+        "entity_scope": "organization",
+        "time_scope": "recent",
+        "archive_scope": "include_archived"
+      },
+      "prediction": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": true,
+        "entity_scope": "organization",
+        "time_scope": "recent",
+        "archive_scope": "include_archived"
+      },
+      "raw_content": "{\n  \"quantifier\": \"exists\",\n  \"predicate\": \"matches_target\",\n  \"asserted_value\": true,\n  \"entity_scope\": \"organization\",\n  \"time_scope\": \"recent\",\n  \"archive_scope\": \"include_archived\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 152,
+        "eval_count": 53,
+        "total_duration": 1005329800,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-05",
+      "text": "当前团队的全部历史活动记录中没有 X-17。",
+      "label": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": false,
+        "entity_scope": "current_team",
+        "time_scope": "all_history",
+        "archive_scope": "active_only"
+      },
+      "prediction": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": false,
+        "entity_scope": "current_team",
+        "time_scope": "all_history",
+        "archive_scope": "include_archived"
+      },
+      "raw_content": "{\n  \"quantifier\": \"forall\",\n  \"predicate\": \"compliant\",\n  \"asserted_value\": false,\n  \"entity_scope\": \"current_team\",\n  \"time_scope\": \"all_history\",\n  \"archive_scope\": \"include_archived\"\n}",
+      "exact_match": false,
+      "dangerous_underapproximation": true,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 146,
+        "eval_count": 55,
+        "total_duration": 1056915700,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-06",
+      "text": "我可访问范围内最近 30 天（包括归档）找到了 X-17。",
+      "label": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": true,
+        "entity_scope": "current_permission",
+        "time_scope": "recent",
+        "archive_scope": "include_archived"
+      },
+      "prediction": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": true,
+        "entity_scope": "current_permission",
+        "time_scope": "recent",
+        "archive_scope": "include_archived"
+      },
+      "raw_content": "{\n  \"quantifier\": \"exists\",\n  \"predicate\": \"matches_target\",\n  \"asserted_value\": true,\n  \"entity_scope\": \"current_permission\",\n  \"time_scope\": \"recent\",\n  \"archive_scope\": \"include_archived\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 153,
+        "eval_count": 54,
+        "total_duration": 1019121000,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-07",
+      "text": "整个组织最近 30 天的活动记录里没有目标编号。",
+      "label": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": false,
+        "entity_scope": "organization",
+        "time_scope": "recent",
+        "archive_scope": "active_only"
+      },
+      "prediction": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": false,
+        "entity_scope": "organization",
+        "time_scope": "recent",
+        "archive_scope": "active_only"
+      },
+      "raw_content": "{\n  \"quantifier\": \"exists\",\n  \"predicate\": \"matches_target\",\n  \"asserted_value\": false,\n  \"entity_scope\": \"organization\",\n  \"time_scope\": \"recent\",\n  \"archive_scope\": \"active_only\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 148,
+        "eval_count": 52,
+        "total_duration": 984704900,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-08",
+      "text": "当前团队全部历史（含归档）至少有一条目标记录。",
+      "label": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": true,
+        "entity_scope": "current_team",
+        "time_scope": "all_history",
+        "archive_scope": "include_archived"
+      },
+      "prediction": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": true,
+        "entity_scope": "current_team",
+        "time_scope": "all_history",
+        "archive_scope": "include_archived"
+      },
+      "raw_content": "{\n  \"quantifier\": \"exists\",\n  \"predicate\": \"matches_target\",\n  \"asserted_value\": true,\n  \"entity_scope\": \"current_team\",\n  \"time_scope\": \"all_history\",\n  \"archive_scope\": \"include_archived\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 147,
+        "eval_count": 55,
+        "total_duration": 1039201300,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-09",
+      "text": "当前权限范围内最近 30 天的活动记录没有目标。",
+      "label": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": false,
+        "entity_scope": "current_permission",
+        "time_scope": "recent",
+        "archive_scope": "active_only"
+      },
+      "prediction": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": false,
+        "entity_scope": "current_permission",
+        "time_scope": "recent",
+        "archive_scope": "active_only"
+      },
+      "raw_content": "{\n  \"quantifier\": \"exists\",\n  \"predicate\": \"matches_target\",\n  \"asserted_value\": false,\n  \"entity_scope\": \"current_permission\",\n  \"time_scope\": \"recent\",\n  \"archive_scope\": \"active_only\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 147,
+        "eval_count": 53,
+        "total_duration": 1007774000,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-10",
+      "text": "全组织全部历史的活动记录中能找到目标编号。",
+      "label": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": true,
+        "entity_scope": "organization",
+        "time_scope": "all_history",
+        "archive_scope": "active_only"
+      },
+      "prediction": {
+        "quantifier": "forall",
+        "predicate": "matches_target",
+        "asserted_value": true,
+        "entity_scope": "organization",
+        "time_scope": "all_history",
+        "archive_scope": "include_archived"
+      },
+      "raw_content": "{\n  \"quantifier\": \"forall\",\n  \"predicate\": \"matches_target\",\n  \"asserted_value\": true,\n  \"entity_scope\": \"organization\",\n  \"time_scope\": \"all_history\",\n  \"archive_scope\": \"include_archived\"\n}",
+      "exact_match": false,
+      "dangerous_underapproximation": true,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 144,
+        "eval_count": 54,
+        "total_duration": 1032374400,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-11",
+      "text": "当前团队最近 30 天（包括归档）没有目标记录。",
+      "label": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": false,
+        "entity_scope": "current_team",
+        "time_scope": "recent",
+        "archive_scope": "include_archived"
+      },
+      "prediction": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": false,
+        "entity_scope": "current_team",
+        "time_scope": "recent",
+        "archive_scope": "include_archived"
+      },
+      "raw_content": "{\n  \"quantifier\": \"exists\",\n  \"predicate\": \"matches_target\",\n  \"asserted_value\": false,\n  \"entity_scope\": \"current_team\",\n  \"time_scope\": \"recent\",\n  \"archive_scope\": \"include_archived\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 149,
+        "eval_count": 54,
+        "total_duration": 1018448500,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-12",
+      "text": "我能访问的全部历史（含归档）中至少出现过一次目标编号。",
+      "label": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": true,
+        "entity_scope": "current_permission",
+        "time_scope": "all_history",
+        "archive_scope": "include_archived"
+      },
+      "prediction": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": true,
+        "entity_scope": "current_permission",
+        "time_scope": "all_history",
+        "archive_scope": "include_archived"
+      },
+      "raw_content": "{\n  \"quantifier\": \"exists\",\n  \"predicate\": \"matches_target\",\n  \"asserted_value\": true,\n  \"entity_scope\": \"current_permission\",\n  \"time_scope\": \"all_history\",\n  \"archive_scope\": \"include_archived\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 150,
+        "eval_count": 55,
+        "total_duration": 1039454900,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-13",
+      "text": "整个组织全部历史（包括归档）的记录都合规。",
+      "label": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": true,
+        "entity_scope": "organization",
+        "time_scope": "all_history",
+        "archive_scope": "include_archived"
+      },
+      "prediction": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": true,
+        "entity_scope": "organization",
+        "time_scope": "all_history",
+        "archive_scope": "include_archived"
+      },
+      "raw_content": "{\n  \"quantifier\": \"forall\",\n  \"predicate\": \"compliant\",\n  \"asserted_value\": true,\n  \"entity_scope\": \"organization\",\n  \"time_scope\": \"all_history\",\n  \"archive_scope\": \"include_archived\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 146,
+        "eval_count": 54,
+        "total_duration": 1017557900,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-14",
+      "text": "当前团队最近 30 天的活动记录并非全部合规。",
+      "label": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": false,
+        "entity_scope": "current_team",
+        "time_scope": "recent",
+        "archive_scope": "active_only"
+      },
+      "prediction": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": false,
+        "entity_scope": "current_team",
+        "time_scope": "recent",
+        "archive_scope": "active_only"
+      },
+      "raw_content": "{\n  \"quantifier\": \"forall\",\n  \"predicate\": \"compliant\",\n  \"asserted_value\": false,\n  \"entity_scope\": \"current_team\",\n  \"time_scope\": \"recent\",\n  \"archive_scope\": \"active_only\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 147,
+        "eval_count": 53,
+        "total_duration": 997564100,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-15",
+      "text": "我当前有权查看的全部历史记录都合规。",
+      "label": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": true,
+        "entity_scope": "current_permission",
+        "time_scope": "all_history",
+        "archive_scope": "active_only"
+      },
+      "prediction": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": true,
+        "entity_scope": "current_permission",
+        "time_scope": "all_history",
+        "archive_scope": "active_only"
+      },
+      "raw_content": "{\n  \"quantifier\": \"forall\",\n  \"predicate\": \"compliant\",\n  \"asserted_value\": true,\n  \"entity_scope\": \"current_permission\",\n  \"time_scope\": \"all_history\",\n  \"archive_scope\": \"active_only\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 143,
+        "eval_count": 54,
+        "total_duration": 1026620300,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-16",
+      "text": "全组织最近 30 天（含归档）至少有一条不合规记录。",
+      "label": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": false,
+        "entity_scope": "organization",
+        "time_scope": "recent",
+        "archive_scope": "include_archived"
+      },
+      "prediction": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": false,
+        "entity_scope": "organization",
+        "time_scope": "recent",
+        "archive_scope": "include_archived"
+      },
+      "raw_content": "{\n  \"quantifier\": \"forall\",\n  \"predicate\": \"compliant\",\n  \"asserted_value\": false,\n  \"entity_scope\": \"organization\",\n  \"time_scope\": \"recent\",\n  \"archive_scope\": \"include_archived\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 152,
+        "eval_count": 53,
+        "total_duration": 1004744300,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-17",
+      "text": "当前团队全部历史的活动记录每一条都合规。",
+      "label": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": true,
+        "entity_scope": "current_team",
+        "time_scope": "all_history",
+        "archive_scope": "active_only"
+      },
+      "prediction": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": true,
+        "entity_scope": "current_team",
+        "time_scope": "all_history",
+        "archive_scope": "active_only"
+      },
+      "raw_content": "{\n  \"quantifier\": \"forall\",\n  \"predicate\": \"compliant\",\n  \"asserted_value\": true,\n  \"entity_scope\": \"current_team\",\n  \"time_scope\": \"all_history\",\n  \"archive_scope\": \"active_only\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 144,
+        "eval_count": 54,
+        "total_duration": 1012012000,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-18",
+      "text": "在我可访问范围的最近 30 天记录中，不是所有归档和活动记录都合规。",
+      "label": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": false,
+        "entity_scope": "current_permission",
+        "time_scope": "recent",
+        "archive_scope": "include_archived"
+      },
+      "prediction": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": false,
+        "entity_scope": "current_permission",
+        "time_scope": "recent",
+        "archive_scope": "include_archived"
+      },
+      "raw_content": "{\n  \"quantifier\": \"forall\",\n  \"predicate\": \"compliant\",\n  \"asserted_value\": false,\n  \"entity_scope\": \"current_permission\",\n  \"time_scope\": \"recent\",\n  \"archive_scope\": \"include_archived\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 156,
+        "eval_count": 54,
+        "total_duration": 1011447300,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-19",
+      "text": "整个组织最近 30 天的活动记录全部合规。",
+      "label": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": true,
+        "entity_scope": "organization",
+        "time_scope": "recent",
+        "archive_scope": "active_only"
+      },
+      "prediction": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": true,
+        "entity_scope": "organization",
+        "time_scope": "recent",
+        "archive_scope": "active_only"
+      },
+      "raw_content": "{\n  \"quantifier\": \"forall\",\n  \"predicate\": \"compliant\",\n  \"asserted_value\": true,\n  \"entity_scope\": \"organization\",\n  \"time_scope\": \"recent\",\n  \"archive_scope\": \"active_only\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 146,
+        "eval_count": 52,
+        "total_duration": 987296800,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-20",
+      "text": "当前团队全部历史（含归档）存在不合规反例。",
+      "label": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": false,
+        "entity_scope": "current_team",
+        "time_scope": "all_history",
+        "archive_scope": "include_archived"
+      },
+      "prediction": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": false,
+        "entity_scope": "current_team",
+        "time_scope": "all_history",
+        "archive_scope": "include_archived"
+      },
+      "raw_content": "{\n  \"quantifier\": \"forall\",\n  \"predicate\": \"compliant\",\n  \"asserted_value\": false,\n  \"entity_scope\": \"current_team\",\n  \"time_scope\": \"all_history\",\n  \"archive_scope\": \"include_archived\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 147,
+        "eval_count": 55,
+        "total_duration": 1029885200,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-21",
+      "text": "当前权限范围内最近 30 天的活动记录均合规。",
+      "label": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": true,
+        "entity_scope": "current_permission",
+        "time_scope": "recent",
+        "archive_scope": "active_only"
+      },
+      "prediction": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": true,
+        "entity_scope": "current_permission",
+        "time_scope": "recent",
+        "archive_scope": "active_only"
+      },
+      "raw_content": "{\n  \"quantifier\": \"forall\",\n  \"predicate\": \"compliant\",\n  \"asserted_value\": true,\n  \"entity_scope\": \"current_permission\",\n  \"time_scope\": \"recent\",\n  \"archive_scope\": \"active_only\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 147,
+        "eval_count": 53,
+        "total_duration": 1006279800,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-22",
+      "text": "全组织全部历史的活动记录并非每条都合规。",
+      "label": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": false,
+        "entity_scope": "organization",
+        "time_scope": "all_history",
+        "archive_scope": "active_only"
+      },
+      "prediction": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": false,
+        "entity_scope": "organization",
+        "time_scope": "all_history",
+        "archive_scope": "active_only"
+      },
+      "raw_content": "{\n  \"quantifier\": \"forall\",\n  \"predicate\": \"compliant\",\n  \"asserted_value\": false,\n  \"entity_scope\": \"organization\",\n  \"time_scope\": \"all_history\",\n  \"archive_scope\": \"active_only\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 145,
+        "eval_count": 53,
+        "total_duration": 999362600,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-23",
+      "text": "当前团队最近 30 天（包括归档）的每条记录都合规。",
+      "label": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": true,
+        "entity_scope": "current_team",
+        "time_scope": "recent",
+        "archive_scope": "include_archived"
+      },
+      "prediction": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": true,
+        "entity_scope": "current_team",
+        "time_scope": "recent",
+        "archive_scope": "include_archived"
+      },
+      "raw_content": "{\n  \"quantifier\": \"forall\",\n  \"predicate\": \"compliant\",\n  \"asserted_value\": true,\n  \"entity_scope\": \"current_team\",\n  \"time_scope\": \"recent\",\n  \"archive_scope\": \"include_archived\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 152,
+        "eval_count": 54,
+        "total_duration": 1024748600,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "zh-24",
+      "text": "我可见的全部历史（含归档）中有不合规记录。",
+      "label": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": false,
+        "entity_scope": "current_permission",
+        "time_scope": "all_history",
+        "archive_scope": "include_archived"
+      },
+      "prediction": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": false,
+        "entity_scope": "current_team",
+        "time_scope": "all_history",
+        "archive_scope": "include_archived"
+      },
+      "raw_content": "{\n  \"quantifier\": \"forall\",\n  \"predicate\": \"compliant\",\n  \"asserted_value\": false,\n  \"entity_scope\": \"current_team\",\n  \"time_scope\": \"all_history\",\n  \"archive_scope\": \"include_archived\"\n}",
+      "exact_match": false,
+      "dangerous_underapproximation": true,
+      "guard_accept": false,
+      "guard_reasons": [
+        "explicit_permission_scope"
+      ],
+      "usage": {
+        "prompt_eval_count": 147,
+        "eval_count": 55,
+        "total_duration": 1036331800,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "en-01",
+      "text": "No record with code X-17 exists anywhere in the organization, across all history including archived records.",
+      "label": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": false,
+        "entity_scope": "organization",
+        "time_scope": "all_history",
+        "archive_scope": "include_archived"
+      },
+      "prediction": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": false,
+        "entity_scope": "organization",
+        "time_scope": "all_history",
+        "archive_scope": "include_archived"
+      },
+      "raw_content": "{\n  \"quantifier\": \"exists\",\n  \"predicate\": \"matches_target\",\n  \"asserted_value\": false,\n  \"entity_scope\": \"organization\",\n  \"time_scope\": \"all_history\",\n  \"archive_scope\": \"include_archived\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 153,
+        "eval_count": 54,
+        "total_duration": 1109896400,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "en-02",
+      "text": "The current team has a record with code X-17 in the recent active window.",
+      "label": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": true,
+        "entity_scope": "current_team",
+        "time_scope": "recent",
+        "archive_scope": "active_only"
+      },
+      "prediction": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": true,
+        "entity_scope": "current_team",
+        "time_scope": "recent",
+        "archive_scope": "active_only"
+      },
+      "raw_content": "{\n  \"quantifier\": \"exists\",\n  \"predicate\": \"matches_target\",\n  \"asserted_value\": true,\n  \"entity_scope\": \"current_team\",\n  \"time_scope\": \"recent\",\n  \"archive_scope\": \"active_only\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 150,
+        "eval_count": 53,
+        "total_duration": 1019129000,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "en-03",
+      "text": "Within everything I am currently permitted to see, X-17 never appears in the full active history.",
+      "label": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": false,
+        "entity_scope": "current_permission",
+        "time_scope": "all_history",
+        "archive_scope": "active_only"
+      },
+      "prediction": {
+        "quantifier": "exists",
+        "predicate": "compliant",
+        "asserted_value": false,
+        "entity_scope": "current_permission",
+        "time_scope": "all_history",
+        "archive_scope": "active_only"
+      },
+      "raw_content": "{\n  \"quantifier\": \"exists\",\n  \"predicate\": \"compliant\",\n  \"asserted_value\": false,\n  \"entity_scope\": \"current_permission\",\n  \"time_scope\": \"all_history\",\n  \"archive_scope\": \"active_only\"\n}",
+      "exact_match": false,
+      "dangerous_underapproximation": true,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 153,
+        "eval_count": 54,
+        "total_duration": 1013523700,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "en-04",
+      "text": "At least one X-17 record exists organization-wide in the recent window, archived records included.",
+      "label": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": true,
+        "entity_scope": "organization",
+        "time_scope": "recent",
+        "archive_scope": "include_archived"
+      },
+      "prediction": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": true,
+        "entity_scope": "organization",
+        "time_scope": "recent",
+        "archive_scope": "include_archived"
+      },
+      "raw_content": "{\n  \"quantifier\": \"exists\",\n  \"predicate\": \"matches_target\",\n  \"asserted_value\": true,\n  \"entity_scope\": \"organization\",\n  \"time_scope\": \"recent\",\n  \"archive_scope\": \"include_archived\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 152,
+        "eval_count": 53,
+        "total_duration": 1010550700,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "en-05",
+      "text": "Every record in the entire organization is compliant across all history, including the archive.",
+      "label": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": true,
+        "entity_scope": "organization",
+        "time_scope": "all_history",
+        "archive_scope": "include_archived"
+      },
+      "prediction": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": true,
+        "entity_scope": "organization",
+        "time_scope": "all_history",
+        "archive_scope": "include_archived"
+      },
+      "raw_content": "{\n  \"quantifier\": \"forall\",\n  \"predicate\": \"compliant\",\n  \"asserted_value\": true,\n  \"entity_scope\": \"organization\",\n  \"time_scope\": \"all_history\",\n  \"archive_scope\": \"include_archived\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 148,
+        "eval_count": 54,
+        "total_duration": 1068512100,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "en-06",
+      "text": "Not every recent active record for the current team is compliant.",
+      "label": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": false,
+        "entity_scope": "current_team",
+        "time_scope": "recent",
+        "archive_scope": "active_only"
+      },
+      "prediction": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": false,
+        "entity_scope": "current_team",
+        "time_scope": "recent",
+        "archive_scope": "active_only"
+      },
+      "raw_content": "{\n  \"quantifier\": \"forall\",\n  \"predicate\": \"compliant\",\n  \"asserted_value\": \"false\",\n  \"entity_scope\": \"current_team\",\n  \"time_scope\": \"recent\",\n  \"archive_scope\": \"active_only\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 144,
+        "eval_count": 54,
+        "total_duration": 1010228400,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "en-07",
+      "text": "All active records in my current permission scope are compliant over the full history.",
+      "label": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": true,
+        "entity_scope": "current_permission",
+        "time_scope": "all_history",
+        "archive_scope": "active_only"
+      },
+      "prediction": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": true,
+        "entity_scope": "current_permission",
+        "time_scope": "all_history",
+        "archive_scope": "active_only"
+      },
+      "raw_content": "{\n  \"quantifier\": \"forall\",\n  \"predicate\": \"compliant\",\n  \"asserted_value\": true,\n  \"entity_scope\": \"current_permission\",\n  \"time_scope\": \"all_history\",\n  \"archive_scope\": \"active_only\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 147,
+        "eval_count": 54,
+        "total_duration": 1026918900,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "en-08",
+      "text": "There is a non-compliant counterexample in the organization's recent active and archived records.",
+      "label": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": false,
+        "entity_scope": "organization",
+        "time_scope": "recent",
+        "archive_scope": "include_archived"
+      },
+      "prediction": {
+        "quantifier": "exists",
+        "predicate": "compliant",
+        "asserted_value": false,
+        "entity_scope": "organization",
+        "time_scope": "recent",
+        "archive_scope": "include_archived"
+      },
+      "raw_content": "{\n  \"quantifier\": \"exists\",\n  \"predicate\": \"compliant\",\n  \"asserted_value\": \"false\",\n  \"entity_scope\": \"organization\",\n  \"time_scope\": \"recent\",\n  \"archive_scope\": \"include_archived\"\n}",
+      "exact_match": false,
+      "dangerous_underapproximation": true,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 150,
+        "eval_count": 54,
+        "total_duration": 1016920500,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "en-09",
+      "text": "The current team's full active history contains no X-17 record.",
+      "label": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": false,
+        "entity_scope": "current_team",
+        "time_scope": "all_history",
+        "archive_scope": "active_only"
+      },
+      "prediction": {
+        "quantifier": "exists",
+        "predicate": "compliant",
+        "asserted_value": false,
+        "entity_scope": "current_team",
+        "time_scope": "all_history",
+        "archive_scope": "active_only"
+      },
+      "raw_content": "{\n  \"quantifier\": \"exists\",\n  \"predicate\": \"compliant\",\n  \"asserted_value\": false,\n  \"entity_scope\": \"current_team\",\n  \"time_scope\": \"all_history\",\n  \"archive_scope\": \"active_only\"\n}",
+      "exact_match": false,
+      "dangerous_underapproximation": true,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 147,
+        "eval_count": 54,
+        "total_duration": 1064510000,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "en-10",
+      "text": "X-17 appears somewhere in my visible recent records, including archived entries.",
+      "label": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": true,
+        "entity_scope": "current_permission",
+        "time_scope": "recent",
+        "archive_scope": "include_archived"
+      },
+      "prediction": {
+        "quantifier": "exists",
+        "predicate": "matches_target",
+        "asserted_value": true,
+        "entity_scope": "current_team",
+        "time_scope": "recent",
+        "archive_scope": "include_archived"
+      },
+      "raw_content": "{\n  \"quantifier\": \"exists\",\n  \"predicate\": \"matches_target\",\n  \"asserted_value\": true,\n  \"entity_scope\": \"current_team\",\n  \"time_scope\": \"recent\",\n  \"archive_scope\": \"include_archived\"\n}",
+      "exact_match": false,
+      "dangerous_underapproximation": true,
+      "guard_accept": false,
+      "guard_reasons": [
+        "explicit_permission_scope"
+      ],
+      "usage": {
+        "prompt_eval_count": 148,
+        "eval_count": 54,
+        "total_duration": 1036607800,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "en-11",
+      "text": "Every recent active record across the organization is compliant.",
+      "label": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": true,
+        "entity_scope": "organization",
+        "time_scope": "recent",
+        "archive_scope": "active_only"
+      },
+      "prediction": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": true,
+        "entity_scope": "organization",
+        "time_scope": "recent",
+        "archive_scope": "active_only"
+      },
+      "raw_content": "{\n  \"quantifier\": \"forall\",\n  \"predicate\": \"compliant\",\n  \"asserted_value\": true,\n  \"entity_scope\": \"organization\",\n  \"time_scope\": \"recent\",\n  \"archive_scope\": \"active_only\"\n}",
+      "exact_match": true,
+      "dangerous_underapproximation": false,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 142,
+        "eval_count": 52,
+        "total_duration": 981611600,
+        "response_model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "en-12",
+      "text": "The current team's complete history, archive included, contains a compliance violation.",
+      "label": {
+        "quantifier": "forall",
+        "predicate": "compliant",
+        "asserted_value": false,
+        "entity_scope": "current_team",
+        "time_scope": "all_history",
+        "archive_scope": "include_archived"
+      },
+      "prediction": {
+        "quantifier": "exists",
+        "predicate": "compliant",
+        "asserted_value": false,
+        "entity_scope": "current_team",
+        "time_scope": "all_history",
+        "archive_scope": "include_archived"
+      },
+      "raw_content": "{\n  \"quantifier\": \"exists\",\n  \"predicate\": \"compliant\",\n  \"asserted_value\": false,\n  \"entity_scope\": \"current_team\",\n  \"time_scope\": \"all_history\",\n  \"archive_scope\": \"include_archived\"\n}",
+      "exact_match": false,
+      "dangerous_underapproximation": true,
+      "guard_accept": true,
+      "guard_reasons": [],
+      "usage": {
+        "prompt_eval_count": 147,
+        "eval_count": 55,
+        "total_duration": 1036178500,
+        "response_model": "qwen3:8b"
+      }
+    }
+  ]
+}

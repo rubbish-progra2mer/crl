@@ -1,0 +1,588 @@
+{
+  "conditions": [
+    "raw",
+    "prompt",
+    "gate"
+  ],
+  "errors": [],
+  "experiment_id": "coverage-gate-smoke-v001",
+  "model": "qwen3:8b",
+  "records": [
+    {
+      "abstained": false,
+      "completion_tokens": 39,
+      "condition": "raw",
+      "domain": "employees",
+      "extra_queries": 0,
+      "false_negative": true,
+      "fault": "complete_present",
+      "final_answer": "absent",
+      "gate_interventions": 0,
+      "ground_truth": "present",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 163,
+      "scenario_id": "employees-complete-present",
+      "task_success": false,
+      "transcript": [
+        {
+          "tool_response": {
+            "items": [
+              "employees-alpha",
+              "Mira Chen",
+              "employees-beta"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"absent\",\"reason\":\"Mira Chen is not listed in the North Division employees as of 2026-08-18.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "absent",
+            "reason": "Mira Chen is not listed in the North Division employees as of 2026-08-18."
+          },
+          "usage": {
+            "eval_count": 39,
+            "prompt_eval_count": 163,
+            "total_duration_ns": 9000298500
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 31,
+      "condition": "prompt",
+      "domain": "employees",
+      "extra_queries": 0,
+      "false_negative": false,
+      "fault": "complete_present",
+      "final_answer": "present",
+      "gate_interventions": 0,
+      "ground_truth": "present",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 291,
+      "scenario_id": "employees-complete-present",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope": "all North Division employees",
+              "next_cursor": null,
+              "requested_scope": "all North Division employees",
+              "required_as_of": "2026-08-18",
+              "snapshot_as_of": "2026-08-18",
+              "status": "complete"
+            },
+            "items": [
+              "employees-alpha",
+              "Mira Chen",
+              "employees-beta"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"present\",\"reason\":\"Mira Chen is listed in the items and the coverage metadata confirms completeness and scope alignment.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "present",
+            "reason": "Mira Chen is listed in the items and the coverage metadata confirms completeness and scope alignment."
+          },
+          "usage": {
+            "eval_count": 31,
+            "prompt_eval_count": 291,
+            "total_duration_ns": 969769300
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 31,
+      "condition": "gate",
+      "domain": "employees",
+      "extra_queries": 0,
+      "false_negative": false,
+      "fault": "complete_present",
+      "final_answer": "present",
+      "gate_interventions": 0,
+      "ground_truth": "present",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 291,
+      "scenario_id": "employees-complete-present",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope": "all North Division employees",
+              "next_cursor": null,
+              "requested_scope": "all North Division employees",
+              "required_as_of": "2026-08-18",
+              "snapshot_as_of": "2026-08-18",
+              "status": "complete"
+            },
+            "items": [
+              "employees-alpha",
+              "Mira Chen",
+              "employees-beta"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"present\",\"reason\":\"Mira Chen is listed in the items and the coverage metadata confirms completeness and scope alignment.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "present",
+            "reason": "Mira Chen is listed in the items and the coverage metadata confirms completeness and scope alignment."
+          },
+          "usage": {
+            "eval_count": 31,
+            "prompt_eval_count": 291,
+            "total_duration_ns": 806442800
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 69,
+      "condition": "raw",
+      "domain": "employees",
+      "extra_queries": 1,
+      "false_negative": false,
+      "fault": "complete_absent",
+      "final_answer": "absent",
+      "gate_interventions": 0,
+      "ground_truth": "absent",
+      "model_calls": 2,
+      "parse_issue": false,
+      "prompt_tokens": 418,
+      "scenario_id": "employees-complete-absent",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "items": [
+              "employees-alpha",
+              "employees-beta",
+              "employees-gamma"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"query\",\"scope\":\"requested\",\"reason\":\"The tool response does not provide information about the presence of 'Mira Chen' in the North Division employees.\"}",
+          "parsed_action": {
+            "action": "query",
+            "answer": "",
+            "reason": "The tool response does not provide information about the presence of 'Mira Chen' in the North Division employees."
+          },
+          "usage": {
+            "eval_count": 35,
+            "prompt_eval_count": 163,
+            "total_duration_ns": 974909200
+          }
+        },
+        {
+          "tool_response": {
+            "items": [
+              "employees-alpha",
+              "employees-beta",
+              "employees-gamma"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"absent\",\"reason\":\"The tool response does not include any data about 'Mira Chen' in the North Division employees.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "absent",
+            "reason": "The tool response does not include any data about 'Mira Chen' in the North Division employees."
+          },
+          "usage": {
+            "eval_count": 34,
+            "prompt_eval_count": 255,
+            "total_duration_ns": 882167300
+          }
+        }
+      ]
+    },
+    {
+      "abstained": true,
+      "completion_tokens": 33,
+      "condition": "prompt",
+      "domain": "employees",
+      "extra_queries": 0,
+      "false_negative": false,
+      "fault": "complete_absent",
+      "final_answer": "uncertain",
+      "gate_interventions": 0,
+      "ground_truth": "absent",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 291,
+      "scenario_id": "employees-complete-absent",
+      "task_success": false,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope": "all North Division employees",
+              "next_cursor": null,
+              "requested_scope": "all North Division employees",
+              "required_as_of": "2026-08-18",
+              "snapshot_as_of": "2026-08-18",
+              "status": "complete"
+            },
+            "items": [
+              "employees-alpha",
+              "employees-beta",
+              "employees-gamma"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"uncertain\",\"reason\":\"The tool response does not indicate whether 'Mira Chen' is present in the listed items.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "uncertain",
+            "reason": "The tool response does not indicate whether 'Mira Chen' is present in the listed items."
+          },
+          "usage": {
+            "eval_count": 33,
+            "prompt_eval_count": 291,
+            "total_duration_ns": 912062800
+          }
+        }
+      ]
+    },
+    {
+      "abstained": true,
+      "completion_tokens": 32,
+      "condition": "gate",
+      "domain": "employees",
+      "extra_queries": 0,
+      "false_negative": false,
+      "fault": "complete_absent",
+      "final_answer": "uncertain",
+      "gate_interventions": 0,
+      "ground_truth": "absent",
+      "model_calls": 1,
+      "parse_issue": false,
+      "prompt_tokens": 291,
+      "scenario_id": "employees-complete-absent",
+      "task_success": false,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope": "all North Division employees",
+              "next_cursor": null,
+              "requested_scope": "all North Division employees",
+              "required_as_of": "2026-08-18",
+              "snapshot_as_of": "2026-08-18",
+              "status": "complete"
+            },
+            "items": [
+              "employees-alpha",
+              "employees-beta",
+              "employees-gamma"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"uncertain\",\"reason\":\"Coverage metadata indicates completeness, but no specific data on 'Mira Chen' is provided.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "uncertain",
+            "reason": "Coverage metadata indicates completeness, but no specific data on 'Mira Chen' is provided."
+          },
+          "usage": {
+            "eval_count": 32,
+            "prompt_eval_count": 291,
+            "total_duration_ns": 846228900
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 75,
+      "condition": "raw",
+      "domain": "employees",
+      "extra_queries": 1,
+      "false_negative": false,
+      "fault": "truncated",
+      "final_answer": "present",
+      "gate_interventions": 0,
+      "ground_truth": "present",
+      "model_calls": 2,
+      "parse_issue": false,
+      "prompt_tokens": 408,
+      "scenario_id": "employees-truncated-hidden",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "items": [
+              "employees-alpha",
+              "employees-beta"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"query\",\"scope\":\"requested\",\"reason\":\"Need to check if 'Mira Chen' is present in all North Division employees from the provided data sources.\"}",
+          "parsed_action": {
+            "action": "query",
+            "answer": "",
+            "reason": "Need to check if 'Mira Chen' is present in all North Division employees from the provided data sources."
+          },
+          "usage": {
+            "eval_count": 35,
+            "prompt_eval_count": 158,
+            "total_duration_ns": 4622292300
+          }
+        },
+        {
+          "tool_response": {
+            "items": [
+              "employees-alpha",
+              "employees-beta",
+              "Mira Chen"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"present\",\"reason\":\"'Mira Chen' is present in the North Division employees data as of 2026-08-18.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "present",
+            "reason": "'Mira Chen' is present in the North Division employees data as of 2026-08-18."
+          },
+          "usage": {
+            "eval_count": 40,
+            "prompt_eval_count": 250,
+            "total_duration_ns": 1036371100
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 66,
+      "condition": "prompt",
+      "domain": "employees",
+      "extra_queries": 1,
+      "false_negative": false,
+      "fault": "truncated",
+      "final_answer": "present",
+      "gate_interventions": 0,
+      "ground_truth": "present",
+      "model_calls": 2,
+      "parse_issue": false,
+      "prompt_tokens": 730,
+      "scenario_id": "employees-truncated-hidden",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope": "all North Division employees",
+              "next_cursor": "page-2",
+              "requested_scope": "all North Division employees",
+              "required_as_of": "2026-08-18",
+              "snapshot_as_of": "2026-08-18",
+              "status": "partial"
+            },
+            "items": [
+              "employees-alpha",
+              "employees-beta"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"query\",\"scope\":\"requested\",\"reason\":\"Coverage status is partial, so a broader query is needed.\"}",
+          "parsed_action": {
+            "action": "query",
+            "answer": "",
+            "reason": "Coverage status is partial, so a broader query is needed."
+          },
+          "usage": {
+            "eval_count": 25,
+            "prompt_eval_count": 289,
+            "total_duration_ns": 768127900
+          }
+        },
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope": "all North Division employees",
+              "next_cursor": null,
+              "requested_scope": "all North Division employees",
+              "required_as_of": "2026-08-18",
+              "snapshot_as_of": "2026-08-18",
+              "status": "complete"
+            },
+            "items": [
+              "employees-alpha",
+              "employees-beta",
+              "Mira Chen"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"present\",\"reason\":\"Mira Chen is present in the complete coverage of all North Division employees as of 2026-08-18.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "present",
+            "reason": "Mira Chen is present in the complete coverage of all North Division employees as of 2026-08-18."
+          },
+          "usage": {
+            "eval_count": 41,
+            "prompt_eval_count": 441,
+            "total_duration_ns": 1006619900
+          }
+        }
+      ]
+    },
+    {
+      "abstained": false,
+      "completion_tokens": 66,
+      "condition": "gate",
+      "domain": "employees",
+      "extra_queries": 1,
+      "false_negative": false,
+      "fault": "truncated",
+      "final_answer": "present",
+      "gate_interventions": 0,
+      "ground_truth": "present",
+      "model_calls": 2,
+      "parse_issue": false,
+      "prompt_tokens": 730,
+      "scenario_id": "employees-truncated-hidden",
+      "task_success": true,
+      "transcript": [
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope": "all North Division employees",
+              "next_cursor": "page-2",
+              "requested_scope": "all North Division employees",
+              "required_as_of": "2026-08-18",
+              "snapshot_as_of": "2026-08-18",
+              "status": "partial"
+            },
+            "items": [
+              "employees-alpha",
+              "employees-beta"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"query\",\"scope\":\"requested\",\"reason\":\"Coverage status is partial, so a broader query is needed.\"}",
+          "parsed_action": {
+            "action": "query",
+            "answer": "",
+            "reason": "Coverage status is partial, so a broader query is needed."
+          },
+          "usage": {
+            "eval_count": 25,
+            "prompt_eval_count": 289,
+            "total_duration_ns": 716852100
+          }
+        },
+        {
+          "tool_response": {
+            "coverage": {
+              "applied_scope": "all North Division employees",
+              "next_cursor": null,
+              "requested_scope": "all North Division employees",
+              "required_as_of": "2026-08-18",
+              "snapshot_as_of": "2026-08-18",
+              "status": "complete"
+            },
+            "items": [
+              "employees-alpha",
+              "employees-beta",
+              "Mira Chen"
+            ],
+            "status": "success"
+          }
+        },
+        {
+          "assistant_raw": "{\"action\":\"answer\",\"answer\":\"present\",\"reason\":\"Mira Chen is present in the complete coverage of all North Division employees as of 2026-08-18.\"}",
+          "parsed_action": {
+            "action": "answer",
+            "answer": "present",
+            "reason": "Mira Chen is present in the complete coverage of all North Division employees as of 2026-08-18."
+          },
+          "usage": {
+            "eval_count": 41,
+            "prompt_eval_count": 441,
+            "total_duration_ns": 1015232700
+          }
+        }
+      ]
+    }
+  ],
+  "scenario_count": 3,
+  "schema_version": 1,
+  "seed": 16001,
+  "summaries": {
+    "gate": {
+      "abstention_rate": 0.3333333333333333,
+      "complete_absence_retention_rate": 0.0,
+      "episode_count": 3.0,
+      "false_negative_rate_hidden": 0.0,
+      "hidden_recovery_success_rate": 1.0,
+      "mean_extra_queries": 0.3333333333333333,
+      "mean_gate_interventions": 0.0,
+      "overall_task_success_rate": 0.6666666666666666,
+      "parse_issue_rate": 0.0,
+      "safe_nonnegative_rate_hidden": 1.0,
+      "visible_positive_accuracy": 1.0
+    },
+    "prompt": {
+      "abstention_rate": 0.3333333333333333,
+      "complete_absence_retention_rate": 0.0,
+      "episode_count": 3.0,
+      "false_negative_rate_hidden": 0.0,
+      "hidden_recovery_success_rate": 1.0,
+      "mean_extra_queries": 0.3333333333333333,
+      "mean_gate_interventions": 0.0,
+      "overall_task_success_rate": 0.6666666666666666,
+      "parse_issue_rate": 0.0,
+      "safe_nonnegative_rate_hidden": 1.0,
+      "visible_positive_accuracy": 1.0
+    },
+    "raw": {
+      "abstention_rate": 0.0,
+      "complete_absence_retention_rate": 1.0,
+      "episode_count": 3.0,
+      "false_negative_rate_hidden": 0.0,
+      "hidden_recovery_success_rate": 1.0,
+      "mean_extra_queries": 0.6666666666666666,
+      "mean_gate_interventions": 0.0,
+      "overall_task_success_rate": 0.6666666666666666,
+      "parse_issue_rate": 0.0,
+      "safe_nonnegative_rate_hidden": 1.0,
+      "visible_positive_accuracy": 0.0
+    }
+  },
+  "wall_time_seconds": 23.57800000003772
+}

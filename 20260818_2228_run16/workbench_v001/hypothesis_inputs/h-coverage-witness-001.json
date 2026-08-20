@@ -1,0 +1,34 @@
+{
+  "hypothesis_id": "h-coverage-witness-001",
+  "title": "作用域覆盖见证与负命题准入门",
+  "parent_ids": [],
+  "lineage_note": "从工具故障诊断正交扩展到否定性结论的证据不对称",
+  "problem": "格式正常但覆盖不足的工具结果会诱发错误的不存在结论。",
+  "target_failure": {
+    "summary": "智能体把有限作用域内未命中解释成全局不存在。",
+    "card_ids": ["paper-p039", "paper-p073"],
+    "evidence_ids": ["ev-p039-aggregate-score-masking", "ev-p073-internal-confidence-misalignment"]
+  },
+  "changed_computation": {
+    "baseline": "模型直接解释工具返回值，或按提示自行核验。",
+    "intervention": "工具产生作用域绑定的覆盖见证；确定性运行时只允许由完整见证支持的否定性命题。",
+    "information_available": "工具值、作用域、分页完成性、新鲜度和覆盖状态；强提示基线获得相同信息。",
+    "timing": "工具返回后、最终否定性结论提交前。",
+    "budget_effect": "不完整时可能增加一次定向补查或保留不确定性。"
+  },
+  "mechanism_claim": "负命题的非对称证据准入可减少覆盖盲区导致的错误否定，而不必普遍拒答。",
+  "falsifier": "同信息验证提示达到同等错误否定率与正确否定保留率，或准入门仅靠过度拒答获益。",
+  "minimal_killer_experiment": "本地 Qwen3-8B 在完整、截断、错误筛选、陈旧和未知覆盖任务上比较原始、同信息提示与确定性准入门。",
+  "nearest_prior_risk": "NabaOS 的错误不存在检测、SGR-Bench 的作用域漂移、Failing Tools 的后置条件层可能吸收贡献。",
+  "alternative_explanations": ["模型只需更明确的提示", "空结果而非覆盖语义本身导致失败", "准入门通过拒答而非恢复提高表面准确率"],
+  "descriptors": {
+    "problem_family": "工具结果覆盖盲区",
+    "computation_stage": "结论提交",
+    "intervention_family": "覆盖见证与命题准入",
+    "information_source": "工具范围和完成性元数据",
+    "timing_class": "执行时",
+    "budget_class": "零到一次补查",
+    "evaluation_mode": "错误否定与保留率"
+  },
+  "literature_refs": ["P039", "P040", "P073", "arXiv:2603.10060", "arXiv:2605.22219"]
+}

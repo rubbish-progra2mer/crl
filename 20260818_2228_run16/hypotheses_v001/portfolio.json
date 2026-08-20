@@ -1,0 +1,465 @@
+{
+  "created_at_utc": "2026-08-18T14:31:37.024484Z",
+  "hypotheses": [
+    {
+      "alternative_explanations": [
+        "语言模型步骤评判的相关性可能已足够"
+      ],
+      "changed_computation": {
+        "baseline": "用终局标签或语言模型评判步骤错误。",
+        "budget_effect": "需要多个后缀重放。",
+        "information_available": "完整轨迹、工具环境与终局判定。",
+        "intervention": "逐步替换动作并前向重放，定位首次不可恢复步骤。",
+        "timing": "失败发生后的离线分析。"
+      },
+      "created_at_utc": "2026-08-18T14:33:40.339079Z",
+      "decision_history": [
+        {
+          "decided_at_utc": "2026-08-18T14:33:48.936817Z",
+          "evidence_fidelity": "SCREENING",
+          "from_status": "draft",
+          "independent_implementation_count": 0,
+          "kill_target": "METHOD_CORE",
+          "killed": "反事实重放作为新方法核心以及首次不可恢复步骤定位的新颖性主张。",
+          "reason": "最近先行直接占据反事实重放与首次不可恢复步骤定位的方法核心",
+          "structural_refutation": true,
+          "structural_refutation_reason": "CAR、CausalFlow、ELPO 与 AgentTracer 已直接实现逐步反事实干预、前向重放或首次不可恢复步骤定位。",
+          "subject_scope": {
+            "datasets": [
+              "recent-primary-papers"
+            ],
+            "environment": "Run16 structured recent-prior reading",
+            "models": [
+              "not-applicable-literature-structure"
+            ],
+            "seeds": [],
+            "tasks": [
+              "agent-failure-attribution"
+            ]
+          },
+          "survives": "工具观察覆盖语义、否定性结论准入与评价机会。",
+          "to_status": "prior_collision",
+          "why": "碰撞发生在问题、信息、干预时机、关键计算和输出主张层面，继续实现不能产生可投资的方法差分。"
+        }
+      ],
+      "descriptors": {
+        "budget_class": "多次重放",
+        "computation_stage": "离线诊断",
+        "evaluation_mode": "因果步骤定位",
+        "information_source": "轨迹与环境",
+        "intervention_family": "反事实重放",
+        "problem_family": "轨迹失败归因",
+        "timing_class": "执行后"
+      },
+      "falsifier": "最近工作已经直接实现相同干预与归因计算。",
+      "hypothesis_id": "h-causal-replay-001",
+      "lineage_note": "初始 method-first 候选；在实现前被结构化最近工作直接占据",
+      "literature_refs": [
+        "arXiv:2606.08275",
+        "arXiv:2605.25338",
+        "ELPO",
+        "AgentTracer"
+      ],
+      "mechanism_claim": "干预后的成功概率变化可识别真正的因果错误步骤。",
+      "minimal_killer_experiment": "不再执行；直接先行已经占据方法核心。",
+      "nearest_prior_risk": "CAR、CausalFlow、ELPO、AgentTracer 直接碰撞。",
+      "parent_ids": [],
+      "problem": "失败轨迹只给终局标签，无法确定真正导致失败的步骤。",
+      "revision": 2,
+      "status": "prior_collision",
+      "status_reason": "最近先行直接占据反事实重放与首次不可恢复步骤定位的方法核心",
+      "target_failure": {
+        "card_ids": [
+          "failure-uniform-terminal-return-erases-step-credit"
+        ],
+        "evidence_ids": [
+          "ev-p019-step-level-calibration"
+        ],
+        "summary": "步骤归因与终局奖励不一致。"
+      },
+      "title": "反事实轨迹重放定位首次不可恢复步骤",
+      "updated_at_utc": "2026-08-18T14:33:48.936817Z"
+    },
+    {
+      "alternative_explanations": [
+        "模型只需更明确的提示",
+        "空结果而非覆盖语义本身导致失败",
+        "准入门通过拒答而非恢复提高表面准确率"
+      ],
+      "changed_computation": {
+        "baseline": "模型直接解释工具返回值，或按提示自行核验。",
+        "budget_effect": "不完整时可能增加一次定向补查或保留不确定性。",
+        "information_available": "工具值、作用域、分页完成性、新鲜度和覆盖状态；强提示基线获得相同信息。",
+        "intervention": "工具产生作用域绑定的覆盖见证；确定性运行时只允许由完整见证支持的否定性命题。",
+        "timing": "工具返回后、最终否定性结论提交前。"
+      },
+      "created_at_utc": "2026-08-18T14:33:40.744596Z",
+      "decision_history": [
+        {
+          "decided_at_utc": "2026-08-18T14:33:49.368156Z",
+          "evidence_fidelity": null,
+          "from_status": "draft",
+          "independent_implementation_count": 0,
+          "kill_target": null,
+          "killed": "",
+          "reason": "主研究者选择执行同信息强基线杀手实验",
+          "structural_refutation": false,
+          "structural_refutation_reason": "",
+          "subject_scope": {
+            "datasets": [],
+            "environment": "",
+            "models": [],
+            "seeds": [],
+            "tasks": []
+          },
+          "survives": "",
+          "to_status": "active",
+          "why": ""
+        },
+        {
+          "decided_at_utc": "2026-08-18T15:10:06.366361Z",
+          "evidence_fidelity": "SCREENING",
+          "from_status": "active",
+          "independent_implementation_count": 2,
+          "kill_target": "PAPER_DIRECTION",
+          "killed": "把完整性敏感负向推理作为新问题、形式化、评价或现象的主张，以及把作用域覆盖见证加负命题准入门作为足以独立成论文的方法方向。",
+          "reason": "CROWN-QA 占据问题、形式化、评价与自然文档现象，ToolGate 占据一般合约门控，当前剩余只是无独立计算核心的直接系统组合",
+          "structural_refutation": true,
+          "structural_refutation_reason": "CROWN-QA 已实现查询相对覆盖的完整性敏感负向推理形式化、配对基准、真实文档对照、结构化 certificate 与固定映射；ToolGate 已实现合约式运行时结果提交门。当前 gate 是把前者语义放入后者机制的直接系统组合，尚无独立计算核心；现有实现又依赖手写场景/分页适配器，未证明工具原生见证自动生成。",
+          "subject_scope": {
+            "datasets": [
+              "24-synthetic-coverage-scenarios",
+              "SGR-Bench-constraint-11-parsed-tasks",
+              "recent-primary-papers"
+            ],
+            "environment": "Run16 两项成功 Formal Screening 与结构化最近先行全文审计",
+            "models": [
+              "Qwen3-8B",
+              "Qwen2.5-7B",
+              "not-applicable-literature-structure"
+            ],
+            "seeds": [
+              "16001",
+              "16002"
+            ],
+            "tasks": [
+              "coverage-sensitive-negative-tool-reasoning"
+            ]
+          },
+          "survives": "两项本地实验作为可复现工程现象和负结果仍有效：一般提示/后置条件在所测设置下未吸收确定性门控收益；它们可为未来完全不同的工具可靠性候选提供边界证据，但不再代表可投资候选。",
+          "to_status": "prior_collision",
+          "why": "新先行碰撞发生在问题、标签语义、配对干预、真实文档评价、结构化证书和模型外固定决策层；剩余仅是已有组件组合与手写适配，扩大同类实验不能恢复足够的贡献差分。"
+        }
+      ],
+      "descriptors": {
+        "budget_class": "零到一次补查",
+        "computation_stage": "结论提交",
+        "evaluation_mode": "错误否定与保留率",
+        "information_source": "工具范围和完成性元数据",
+        "intervention_family": "覆盖见证与命题准入",
+        "problem_family": "工具结果覆盖盲区",
+        "timing_class": "执行时"
+      },
+      "falsifier": "同信息验证提示达到同等错误否定率与正确否定保留率，或准入门仅靠过度拒答获益。",
+      "hypothesis_id": "h-coverage-witness-001",
+      "lineage_note": "从工具故障诊断正交扩展到否定性结论的证据不对称；CROWN-QA 发现后，问题/形式化/评价贡献已死亡，只保留待真实 API 检验的运行时系统差分",
+      "literature_refs": [
+        "P039",
+        "P040",
+        "P073",
+        "arXiv:2601.04688",
+        "arXiv:2603.10060",
+        "arXiv:2605.22219",
+        "arXiv:2608.04591"
+      ],
+      "mechanism_claim": "负命题的非对称证据准入可减少覆盖盲区导致的错误否定，而不必普遍拒答。",
+      "minimal_killer_experiment": "冻结至少两个真实分页 API 响应，只用原生分页/作用域/快照元数据生成见证；在相同信息和补查预算下比较 CROWN-style certificate + 固定规则、ToolGate-style 后置条件与 coverage gate。",
+      "nearest_prior_risk": "CROWN-QA 已直接占据问题、形式化、评价和自然文档现象；ToolGate 占据一般合约门控。若二者组合强基线追平，或真实 API 见证必须手写答案，当前方法核心死亡。",
+      "parent_ids": [],
+      "problem": "格式正常但覆盖不足的工具结果会诱发错误的不存在结论。",
+      "revision": 4,
+      "status": "prior_collision",
+      "status_reason": "CROWN-QA 占据问题、形式化、评价与自然文档现象，ToolGate 占据一般合约门控，当前剩余只是无独立计算核心的直接系统组合",
+      "target_failure": {
+        "card_ids": [
+          "paper-p039",
+          "paper-p073"
+        ],
+        "evidence_ids": [
+          "ev-p039-aggregate-score-masking",
+          "ev-p073-internal-confidence-misalignment"
+        ],
+        "summary": "智能体把有限作用域内未命中解释成全局不存在。"
+      },
+      "title": "作用域覆盖见证与负命题准入门",
+      "updated_at_utc": "2026-08-18T15:10:06.366361Z"
+    },
+    {
+      "alternative_explanations": [
+        "只要把最新模式重新放进上下文即可恢复",
+        "显式列出差分就足以获得同样收益",
+        "观察到的收益只是语法校验而非工作流适配",
+        "完整重新规划比局部迁移更稳健且成本可接受"
+      ],
+      "changed_computation": {
+        "baseline": "把最新工具模式或完整变更说明交给模型后重新规划，并可追加通用反思。",
+        "budget_effect": "增加确定性差分、一次受约束迁移和局部反例检查；避免无条件重跑整条轨迹。",
+        "information_available": "候选与强基线都获得旧模式、新模式、结构化差分、原任务和旧成功调用；候选不获得隐藏答案。",
+        "intervention": "对旧、新工具表面做结构化差分，把变更编译成只约束受影响调用的迁移义务；旧成功调用必须映射为满足新前置条件的调用，同时由类型合法但违反变更语义的近邻反例检验迁移器。未通过回归门时只重规划受影响片段。",
+        "timing": "检测到工具版本变化后、受影响调用再次执行前。"
+      },
+      "created_at_utc": "2026-08-18T15:20:38.212299Z",
+      "decision_history": [
+        {
+          "decided_at_utc": "2026-08-18T15:22:28.114952Z",
+          "evidence_fidelity": null,
+          "from_status": "draft",
+          "independent_implementation_count": 0,
+          "kill_target": null,
+          "killed": "",
+          "reason": "结构化最近先行只发现组件重合，仍保留接口差分义务编译与局部反例回归的可区分计算差分；进入同信息本地杀手实验",
+          "structural_refutation": false,
+          "structural_refutation_reason": "",
+          "subject_scope": {
+            "datasets": [],
+            "environment": "",
+            "models": [],
+            "seeds": [],
+            "tasks": []
+          },
+          "survives": "",
+          "to_status": "active",
+          "why": ""
+        },
+        {
+          "decided_at_utc": "2026-08-18T15:33:51.818718Z",
+          "evidence_fidelity": "SCREENING",
+          "from_status": "active",
+          "independent_implementation_count": 1,
+          "kill_target": "METHOD_CORE",
+          "killed": "把接口差分编译为受影响调用的局部迁移义务并配合预注册近邻回归，作为相对同信息完整差分提示具有独立成功率增量的方法核心。",
+          "reason": "预注册 Formal Screening 未显示相对同信息强基线的任何增量；共同失败点需要已被 HyperAgent 类模式数据流计算占据的追加组件",
+          "structural_refutation": false,
+          "structural_refutation_reason": "关闭依据是预注册实验未显示独立增量，并结合最近先行界定追加组件的归属；不是纯文献结构反证。",
+          "subject_scope": {
+            "datasets": [
+              "Run16 preregistered synthetic delta-contract scenarios"
+            ],
+            "environment": "Windows 11; local Ollama; Formal attempt delta-contract-screening-v001-r1; exact deterministic evaluator",
+            "models": [
+              "qwen2.5:7b@Ollama"
+            ],
+            "seeds": [
+              "16003"
+            ],
+            "tasks": [
+              "24 controlled paired workflow migrations across six interface evolution families"
+            ]
+          },
+          "survives": "MCPEvol-Bench 已证实的工具演化行为漂移现象继续成立；本地结果还表明新增前置工具的数据流绑定是四种提示/迁移条件共同失败点，但这不是当前方法成功证据。",
+          "to_status": "falsified",
+          "why": "预注册 Formal Screening 中 obligation、同信息 diff_prompt 和更高预算 reflection 全部为 20/24 成功，obligation 增量为 0。四组都只在 new_prerequisite 的 4 个任务失败，说明局部输出格式没有改变真正的数据流绑定瓶颈。加入确定性输入/输出模式缺口扩展可能修复该失败，但该计算直接接近 HyperAgent 已公开的模式超图与 deficit-oriented expansion，不能用被占据组件事后挽救当前独立方法差分。"
+        },
+        {
+          "decided_at_utc": "2026-08-18T15:35:22.363381Z",
+          "evidence_fidelity": null,
+          "from_status": "falsified",
+          "independent_implementation_count": 0,
+          "kill_target": null,
+          "killed": "",
+          "reason": "证据范围纠正：Formal Screening 只杀死当前局部义务实现及其本地增量主张，不足以杀死全部接口演化方法核心；但剩余数据流计算与 HyperAgent 高度重合，当前不进入最佳集合，等待真正正交差分后再考虑",
+          "structural_refutation": false,
+          "structural_refutation_reason": "",
+          "subject_scope": {
+            "datasets": [],
+            "environment": "",
+            "models": [],
+            "seeds": [],
+            "tasks": []
+          },
+          "survives": "",
+          "to_status": "parked",
+          "why": ""
+        }
+      ],
+      "descriptors": {
+        "budget_class": "一次受约束迁移和局部检查",
+        "computation_stage": "版本变化后的调用准备",
+        "evaluation_mode": "跨版本任务恢复与未受影响保持",
+        "information_source": "旧新工具模式、旧成功调用与任务",
+        "intervention_family": "差分义务编译与局部回归",
+        "problem_family": "工具接口演化与工作流行为漂移",
+        "timing_class": "执行前"
+      },
+      "falsifier": "在相同信息和调用预算下，显式差分提示或通用反思达到相同任务成功率；或者收益只来自 JSON 模式修复而不能改善描述变化、语义约束或多步工作流错误；或者迁移器必须读取答案才能生成有效回归。",
+      "hypothesis_id": "h-delta-contract-001",
+      "lineage_note": "从覆盖证明方向正交扩展到工具接口演化；先从已证实的行为漂移现象和可执行版本差分出发，而不是继续增加终局门控。",
+      "literature_refs": [
+        "P040",
+        "P069",
+        "arXiv:2607.14642",
+        "arXiv:2604.09515"
+      ],
+      "mechanism_claim": "把接口变化编译成调用级迁移义务，并用差分导出的近邻反例作局部回归，可比同信息提示、通用反思和整段重规划更稳定地恢复演化后的工作流。",
+      "minimal_killer_experiment": "在参数必需性/类型/枚举变化、工具替换、工具新增和描述语义变化的配对工作流上，使用本地 Qwen 比较最新模式、同信息差分提示、反思重试与差分义务迁移；同时统计任务成功、受影响调用正确率、未受影响调用保持率、额外模型调用和类型合法近邻反例拒绝率。",
+      "nearest_prior_risk": "MCPEvol-Bench 已占据动态工具演化现象、11 类变异和评价；现有软件工程的模式差分、契约回放与增量测试可能使方法退化为常规工程组合。若近期工作已给出面向智能体的差分约束调用迁移和局部回归，则方法核心死亡。",
+      "parent_ids": [],
+      "problem": "工具接口演化后，即使最新模式已完整呈现，智能体仍会沿用旧工作流或误解新约束；通用反思和记忆没有显式定位被接口差分改变的调用义务。",
+      "revision": 4,
+      "status": "parked",
+      "status_reason": "证据范围纠正：Formal Screening 只杀死当前局部义务实现及其本地增量主张，不足以杀死全部接口演化方法核心；但剩余数据流计算与 HyperAgent 高度重合，当前不进入最佳集合，等待真正正交差分后再考虑",
+      "target_failure": {
+        "card_ids": [
+          "paper-p069",
+          "paper-p040"
+        ],
+        "evidence_ids": [
+          "ev-p069-description-induced-preference",
+          "ev-p040-failure-core"
+        ],
+        "summary": "接口描述、参数或工具集合变化扰乱原本可行的工作流，产生规划、推理或语义参数错误。"
+      },
+      "title": "接口差分约束的工具调用迁移与回归门",
+      "updated_at_utc": "2026-08-18T15:35:22.363381Z"
+    },
+    {
+      "alternative_explanations": [
+        "Agent-Diff 评价器在数据合同之外还有隐式惩罚额外变化",
+        "基准有意采用开放世界语义，额外变化不能一概视为错误",
+        "简单设置 strict=true 已足够，不需要变异充分性",
+        "合成副作用没有真实智能体频率或风险代表性"
+      ],
+      "changed_computation": {
+        "baseline": "按声明式正向断言评价预期新增、修改或删除；未声明 strict 时忽略断言之外的状态变化。",
+        "budget_effect": "离线增加变异生成和评价回放；在线沿用确定性状态差分评价，不增加语言模型调用。",
+        "information_available": "原合同、加固方法和基线都获得同一任务、原始状态差分断言、工具表面、忽略字段及变异库；不读取模型身份或隐藏成功标签。",
+        "intervention": "从任务合同和工具可达副作用面生成目标保持的终态错误变异，执行原评价器得到变异逃逸矩阵；随后编译带显式允许边界的加固合同，使每个高风险变异要么被拒绝、要么以带理由的允许项记录。加固优先使用已有 ignore_fields 排除系统元数据，避免把任何额外变化一律当错误。",
+        "timing": "基准发布前或评价合同变更后离线审计；加固合同在每次运行后评分。"
+      },
+      "created_at_utc": "2026-08-18T15:45:06.348880Z",
+      "decision_history": [
+        {
+          "decided_at_utc": "2026-08-18T16:04:03.230121Z",
+          "evidence_fidelity": null,
+          "from_status": "draft",
+          "independent_implementation_count": 0,
+          "kill_target": null,
+          "killed": "",
+          "reason": "Formal Screening 支持开放世界合同逃逸与公开通过运行含保守未断言变化；当前粗粒度端点允许边界因风险变异逃逸 0.2722 超过 0.25 而失败。候选改为现象优先继续，下一步人工标注未断言变化并重算严格/加固评分影响，不把原型失败外推为现象死亡。",
+          "structural_refutation": false,
+          "structural_refutation_reason": "",
+          "subject_scope": {
+            "datasets": [],
+            "environment": "",
+            "models": [],
+            "seeds": [],
+            "tasks": []
+          },
+          "survives": "",
+          "to_status": "active",
+          "why": ""
+        },
+        {
+          "decided_at_utc": "2026-08-18T16:16:12.701843Z",
+          "evidence_fidelity": "SCREENING",
+          "from_status": "active",
+          "independent_implementation_count": 1,
+          "kill_target": "PAPER_DIRECTION",
+          "killed": "把开放世界状态合同的变异逃逸解释为公开 Agent-Diff 实际得分被任务外副作用系统性抬高，并以端点级允许边界形成可投资评价加固方法的当前论文方向。",
+          "reason": "两个公开检查点都未观察到任务外可疑通过运行，粗粒度加固未过预注册风险逃逸线，最近先行占据通用机制；关闭当前评价审计与加固论文方向。",
+          "structural_refutation": false,
+          "structural_refutation_reason": "关闭同时依赖两个公开运行检查点的 Formal 与人工语义核对，并非仅凭文献结构碰撞。",
+          "subject_scope": {
+            "datasets": [
+              "hubertmarek/agent-diff-bench train/test",
+              "checkpoint_20260201_224804",
+              "checkpoint_20260201_233808"
+            ],
+            "environment": "Windows 11；Python 标准库；两个 Formal 本地确定性重放；零模型调用、零付费",
+            "models": [
+              "google/gemini-3-flash-preview（两个独立公开检查点）"
+            ],
+            "seeds": [
+              "16004",
+              "16005"
+            ],
+            "tasks": [
+              "Agent-Diff 224 个公开合同；第二检查点覆盖其中 117 个"
+            ]
+          },
+          "survives": "224/224 公开合同未显式 strict，四类冻结风险变异在原合同下可逃逸；两个独立运行检查点都存在大量保守未断言变化。这只说明合同为开放世界且正向断言不完整，不说明观察到危险副作用或实际得分虚高，也不否定其他基准可能存在该问题。",
+          "to_status": "falsified",
+          "why": "第一次 Formal 的 151 个原通过运行中 65 个含未断言变化，第二次 Formal 的 67 个原通过运行中 40 个含未断言变化；两轮人工核对均完整覆盖且任务外可疑数都是 0，故预注册的实际得分扭曲主张被反证。与此同时，端点允许边界的风险变异逃逸率 0.2722，高于预注册 0.25，当前加固原型已失败；简单 strict、状态差分、语义变异测试与回归注入又分别被 Agent-Diff、TDAD 和 Layer-Isolated Evaluation 占据。剩余现象不足以支撑新的可投资实现核心。"
+        },
+        {
+          "decided_at_utc": "2026-08-18T16:16:49.696243Z",
+          "evidence_fidelity": null,
+          "from_status": "falsified",
+          "independent_implementation_count": 0,
+          "kill_target": null,
+          "killed": "",
+          "reason": "纠正上一条 SCREENING 对论文方向过宽的关闭：证据只足以杀死当前端点允许边界实现与实际得分扭曲主张；开放世界合同及未断言变化现象继续成立但不足以进入最佳候选，故停放并转向第三次正交扩展。",
+          "structural_refutation": false,
+          "structural_refutation_reason": "",
+          "subject_scope": {
+            "datasets": [],
+            "environment": "",
+            "models": [],
+            "seeds": [],
+            "tasks": []
+          },
+          "survives": "",
+          "to_status": "parked",
+          "why": ""
+        }
+      ],
+      "descriptors": {
+        "budget_class": "无额外模型调用的确定性变异回放",
+        "computation_stage": "基准合同审计与运行后评分",
+        "evaluation_mode": "公开合同与真实运行差分上的错误逃逸和分数变化",
+        "information_source": "任务合同、工具表面、状态差分与忽略字段",
+        "intervention_family": "状态副作用变异充分性与显式允许边界",
+        "problem_family": "工具智能体评价合同假阳性与隐藏副作用",
+        "timing_class": "离线加固与运行后评价"
+      },
+      "falsifier": "公开合同已通过其他机制惩罚断言外变化；目标保持的额外副作用不会被原评价接受；简单启用全局 strict 与 ignore_fields 已完整解决且不产生任何有效运行误杀，使变异分析没有新增能力；或生成的变异与真实智能体副作用没有对齐。",
+      "hypothesis_id": "h-mutant-probe-001",
+      "lineage_note": "第二次正交扩展先探索成本受限状态探针；最近先行与官方 DSL 核验后转为更直接的现象优先问题：公开 Agent-Diff 的 224 个合同全部未声明 strict，而官方语义默认允许额外变化。候选因此收缩为量化评价合同的可接受错误面，并用变异充分性加固合同。",
+      "literature_refs": [
+        "P040",
+        "P101",
+        "arXiv:2602.11224",
+        "arXiv:2603.08806",
+        "arXiv:2606.11686",
+        "arXiv:2607.07405"
+      ],
+      "mechanism_claim": "以目标保持的状态副作用变异衡量合同充分性，可以揭示正向断言成功分数掩盖的评价假阳性；把变异逃逸编译为显式允许边界后，可拒绝这些错误而保留合同声明的预期变化与已忽略系统字段。",
+      "minimal_killer_experiment": "对 Agent-Diff 公开 179/45 训练测试划分中的全部合同，复现官方 strict=false 默认语义，生成额外同实体字段修改、额外同实体记录、额外跨实体创建、额外删除及过宽批量修改等目标保持变异。比较原合同、全局 strict、只对工具触达实体严格和变异加固合同的按家族逃逸率；同时注入 ignore_fields 中的元数据噪声作为阴性对照。若原合同不接受额外变异或加固不能在不误杀阴性对照的条件下显著降低逃逸，局部主张死亡。阳性结果仍需在公开真实智能体运行差分上验证基准分数变化。",
+      "nearest_prior_risk": "Agent-Diff 已占据状态差分合同；TDAD 已把语义变异用于智能体规格测试；Layer-Isolated Evaluation 已用回归注入测测试充分性；传统变异测试和蒸馏测试套件提供机制祖先。候选只有在公开智能体评价合同上揭示可复现的目标保持副作用逃逸，并形成与真实运行差分对齐的加固流程，才超出常规测试工程。",
+      "parent_ids": [],
+      "problem": "工具智能体基准通常只声明应实现的目标变化。若评价合同采用开放世界语义，智能体可以在满足目标断言的同时产生额外删除、更新、创建或越权副作用而仍被计为成功；这会系统性高估投资候选和模型的可靠性。",
+      "revision": 5,
+      "status": "parked",
+      "status_reason": "纠正上一条 SCREENING 对论文方向过宽的关闭：证据只足以杀死当前端点允许边界实现与实际得分扭曲主张；开放世界合同及未断言变化现象继续成立但不足以进入最佳候选，故停放并转向第三次正交扩展。",
+      "target_failure": {
+        "card_ids": [
+          "failure-confident-completion-without-state-success",
+          "operator-neighbor-distilled-test-suites"
+        ],
+        "evidence_ids": [
+          "ev-p040-failure-core",
+          "ev-p101-neighbor-distillation",
+          "ev-p101-esm-fn-rate"
+        ],
+        "summary": "目标保持但含额外副作用的终态变异逃过非严格状态差分合同，形成评价假阳性。"
+      },
+      "title": "状态变异驱动的智能体评价合同充分性审计与加固",
+      "updated_at_utc": "2026-08-18T16:16:49.696243Z"
+    }
+  ],
+  "revision": 15,
+  "run_id": "20260818_2228_run16",
+  "schema_version": 2,
+  "updated_at_utc": "2026-08-18T16:16:49.696243Z",
+  "version": "v001"
+}

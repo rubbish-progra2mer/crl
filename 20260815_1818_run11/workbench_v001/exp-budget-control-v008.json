@@ -1,0 +1,99 @@
+{
+  "experiment_id": "exp-budget-control-v008",
+  "hypothesis_id": "H001",
+  "claim_ids": [
+    "claim-budget-matched-excess"
+  ],
+  "purpose": "independent_claim_validation",
+  "research_question": "在相同六调用预算下，六臂字段/顺序变形是否比六次完全相同重放产生显著且分层稳定的额外失败？",
+  "independent_ground_truth": {
+    "description": "独立家族求解器从原始工具字段重算基线及五个源变体的精确答案和关系语义，不导入本对照程序；正式运行前必须 20/20 通过。两组共享同一基线和一次重放，组内六调用预算严格相等。",
+    "external_card_ids": [],
+    "external_evidence_ids": [],
+    "external_literature_refs": [
+      "P039",
+      "P040",
+      "P097"
+    ],
+    "run_local_fact_refs": [
+      "implementation_v001/independent_oracle.py",
+      "implementation_v001/cases.json",
+      "review_v001/evaluations/eval-0005/EMP/report.json"
+    ]
+  },
+  "primary_metric": "budget_matched_excess_failure_rate",
+  "secondary_metrics": [
+    "transform_failure_rate",
+    "repeat_control_failure_rate",
+    "exact_mcnemar_pvalue",
+    "transform_only_fail",
+    "control_only_fail",
+    "parse_warning_excluded_excess_failure_rate",
+    "positive_seed_count",
+    "positive_stratum_count"
+  ],
+  "sampling_unit": "模型 × 提示制度 × 种子 × 冻结案例，共 360 行；每行十次随机交织调用，同时形成共享基线和 repeat_1 的两个六调用组。",
+  "dataset": "五个确定性结构化工具任务族、每族四例、共二十例；四个字段臂共享记录排列，纯顺序臂使用字段相同的无固定点循环排列。",
+  "model": "qwen2.5:7b、qwen3:4b、qwen3:8b；严格与弱两种提示制度。",
+  "provider": "本机 Ollama 服务；模型与服务身份由正式执行记录和本机清单绑定。",
+  "seeds": [
+    123,
+    456,
+    789
+  ],
+  "baseline_specs": [
+    "同一行内由 base、repeat_1、repeat_2、repeat_3、repeat_4、repeat_5 构成的六次完全相同重放组。",
+    "六臂组由 base、relevant、irrelevant_plain、irrelevant_adversarial、order_only、repeat_1 构成。",
+    "两组共享 base 与 repeat_1，均为六次调用；十个唯一调用随机交织，避免固定位置优势。"
+  ],
+  "expected_signatures": [
+    "基线正确行上的配对超额失败率至少 0.10。",
+    "仅六臂失败行严格多于仅重放失败行，精确 McNemar 双侧 p 值不高于 0.05。",
+    "剔除解析警告后配对超额失败率至少 0.05。",
+    "至少两个种子和至少六个模型—提示—种子分层呈正超额。"
+  ],
+  "falsification_rule": "任一预声明签名不满足，则‘干预特异的额外关系失败’主张不支持；不得用原 86/187 单次对六次结果绕过同预算对照，也不得据正结果声称真实采用机制或部署外推。",
+  "confounders": [
+    "三种模型同属 Qwen 谱系，不能代表跨供应商泛化。",
+    "合成任务输出短且字段显式，变形组可能因任务难度而非采用机制产生额外失败。",
+    "两组共享 base 与 repeat_1，形成高效配对但不是两套独立调用样本。",
+    "标量规范化是预声明启发式；必须保留原始内容和警告剔除分析。",
+    "行级统计共享案例与模型，精确 McNemar 只检验当前配对样本，不提供总体部署区间。"
+  ],
+  "budget_ceiling": "3 模型 × 2 提示制度 × 3 种子 × 20 案例 × 10 调用 = 3600 次本地调用；单调用超时 120 秒。",
+  "declared_inputs": [
+    "implementation_v001/cases.json",
+    "implementation_v001/causal_uptake_eval.py",
+    "implementation_v001/budget_matched_control.py",
+    "implementation_v001/independent_oracle.py"
+  ],
+  "declared_outputs": [
+    "experiment_v001/attempts/attempt-budget-control-008/oracle.json",
+    "experiment_v001/attempts/attempt-budget-control-008/result.json",
+    "experiment_v001/attempts/attempt-budget-control-008/report.md",
+    "experiment_v001/attempts/attempt-budget-control-008/metrics.json"
+  ],
+  "parity_dimensions": {
+    "information_access": {
+      "status": "matched",
+      "notes": "两组使用同一任务、提示、模型、种子和基线工具结果；只在六臂组的四个中间调用中施加预声明变形。"
+    },
+    "tool_capability": {
+      "status": "matched",
+      "notes": "所有调用接收相同格式的结构化工具结果，无外部工具执行。"
+    },
+    "model_provider_revision": {
+      "status": "different",
+      "notes": "三种模型标签是预声明复现分层，实际模型与服务身份由执行环境绑定。"
+    },
+    "sampling_protocol": {
+      "status": "matched",
+      "notes": "两组共享行、base 与 repeat_1；十个调用使用同一温度并按行内确定种子随机交织。"
+    },
+    "budget": {
+      "status": "matched",
+      "notes": "六臂组和完全重放组各恰好六次调用。"
+    }
+  },
+  "revision": "reviewer-killer-1 equal-budget paired ten-call protocol, full-manifest binding"
+}

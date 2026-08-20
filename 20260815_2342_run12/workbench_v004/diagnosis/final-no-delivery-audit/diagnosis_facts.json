@@ -1,0 +1,750 @@
+{
+  "authority": "ADVISORY_NON_AUTHORITATIVE_FACTS_ONLY",
+  "comparison_files": [],
+  "contract_version": "3",
+  "current_version": {
+    "comparison_files": [],
+    "experiments": {
+      "attempt_count": 0,
+      "attempts": [],
+      "status_counts": {},
+      "tier_counts": {}
+    },
+    "review_evaluation_files": [],
+    "search_snapshot_files": [
+      {
+        "path": "hypotheses_v004/searches/h006_information_readiness/report.md",
+        "sha256": "59fea71e51aa1ee0f65020ac77eb1b02c667b6d11638559e1546896d1e890c16",
+        "size_bytes": 8400
+      },
+      {
+        "path": "hypotheses_v004/searches/h006_information_readiness/request.json",
+        "sha256": "90e8ed4db5efa721d0e2fc6fc553235a5941bda354889b9b0a5b87f478753b25",
+        "size_bytes": 5827
+      },
+      {
+        "path": "hypotheses_v004/searches/h006_information_readiness/result.json",
+        "sha256": "03e45009b7aa1ff37cbcda7503db0f9477daadd82eaa83c9edca5ebded15a754",
+        "size_bytes": 1836982
+      }
+    ],
+    "version": "v004"
+  },
+  "diagnosis_id": "final-no-delivery-audit",
+  "experiments": {
+    "attempt_count": 0,
+    "attempts": [],
+    "status_counts": {},
+    "tier_counts": {}
+  },
+  "file_count": 91,
+  "file_type_counts": {
+    ".bin": 2,
+    ".json": 51,
+    ".jsonl": 9,
+    ".md": 25,
+    ".py": 3,
+    ".txt": 1
+  },
+  "generated_at_utc": "2026-08-15T16:40:57.291329Z",
+  "marker_occurrences": {
+    "assumption": 36,
+    "contradiction": 62,
+    "failed": 141,
+    "not provided": 6,
+    "todo": 2
+  },
+  "non_judgments": [
+    "no candidate is killed or selected by this package",
+    "no novelty, delivery, or next-action decision is computed",
+    "the main researcher interprets these traceable facts"
+  ],
+  "recall_resume": {
+    "authority": "ADVISORY_NON_AUTHORITATIVE",
+    "run_id": "20260815_2342_run12",
+    "sections": [
+      {
+        "hits": [
+          {
+            "fts_rank": 1,
+            "fused_score": 0.01639344262295082,
+            "line_end": 176,
+            "line_start": 159,
+            "path": "workbench_v003/diagnosis/preformal-cache-safety/diagnosis_facts.json",
+            "semantic_rank": null,
+            "source_sha256": "b73baf88f6270fc2895a12ec18d7c1b45fc0d1db8ad9906144aaecedc4de904f",
+            "text": "            \"text\": \"{\\n  \\\"hypothesis_id\\\": \\\"h-002\\\",\\n  \\\"title\\\": \\\"语义保持的工具观测重编码会诱发智能体策略分叉\\\",\\n  \\\"parent_ids\\\": [\\n    \\\"h-001\\\"\\n  ],\\n  \\\"lineage_note\\\": \\\"h-001 被 false-success 与后置条件验证直接先行占据后，保留‘回执表面形式是否错误支配状态推理’这一未决因果问题，并转为成对变形评价候选。\\\",\\n  \\\"problem\\\": \\\"工具智能体通常直接消费工具返回文本。即使两个返回经过公开契约归一化后表达完全相同的状态、值与可用动作，字段顺序、冗余自然语言、紧凑/展开序列化或等义状态词等表面重编码也可能改变智能体下一动作与最终任务结果；现有函数调用评价主要测调用构造或单一序列化下的轨迹正确性。\\\",\\n  \\\"target_failure\\\": {\\n    \\\"summary\\\": \\\"固定任务、工具契约、潜在状态、历史与采样设置，仅对工具观测施加可机械证明语义保持的重编码后，智能体产生不等价下一动作或任务结果，形成观测表示不稳定。\\\",\\n    \\\"card_ids\\\": [\\n      \\\"paper-p084\\\",\\n      \\\"operator-milestone-dag-trajectory-evaluation\\\",\\n      \\\"failure-repeat-run-reliability-collapse\\\"\\n    ],\\n    \\\"evidence_ids\\\": [\\n      \\\"ev-p084-expanded-toolkit-controlled-setting\\\",\\n      \\\"ev-p084-expanded-toolkit-table\\\",\\n      \\\"ev-p037-evaluation-core\\\",\\n      \\\"ev-p007-repeat-reliability-collapse\\\"\\n    ]\\n  },\\n  \\\"changed_computation\\\": {\\n    \\\"baseline\\\": \\\"用单一原始工具返回字符串直接驱动下一轮大语言模型策略，并只按最终任务成功或调用语法评分。\\\",\\n    \\\"intervention\\\": \\\"评价 artifact 从一个规范事件生成一组契约等价观测并进行成对轨迹复放，计算动作/结果不变性；防御版本先把每个变体确定性解析回同一规范事件视图，再交给智能体。\\\",\\n    \\\"information_available\\\": \\\"所有条件包含相同规范字段、值、错误类别、可重试性与工具契约；归一化器只使用公开契约，不读取隐藏任务真值。\\\",\\n    \\\"timing\\\": \\\"在工具执行结果进入智能体上下文之前；成对复放共享直到该观测为止的完全相同前缀。\\\",\\n    \\\"budget_effect\\\": \\\"每条轨迹的模型调用数、工具调用数、温度和最大令牌一致；规范化防御不增加模型或工具调用。\\\"\\n  },\\n  \\\"mechanism_claim\\\": \\\"工具智能体把观测的表面序列特征混入状态更新，导致对契约等价重编码缺乏策略不变性；契约驱动的规范事件视图能在不增加模型/工具预算的情况下显著降低成对策略分叉。\\\",\\n  \\\"falsifier\\\": \\\"若跨任务族与至少两个模型的成对动作/结果分叉不显著高于同表示重复运行基线，或规范化相对最强等预算固定模板基线没有稳定降低分叉且不改善最差变体任务成功，则该现象或防御差分被否定。\\\",\\n  \\\"minimal_killer_experiment\\\": \\\"构造 4 个有状态工具域、每域 12-20 个确定性任务；从同一规范事件生成 JSON 字段置换、紧凑/展开、结构化/等义自然语言、冗余确认语句四类变体。对 qwen3:4b、qwen2.5:7b 或 qwen3:8b 在温度 0 与固定前缀下成对复放，比较原始观测、统一文本模板、契约规范事件视图。核心指标为成对下一动作不一致率、最终结果不一致率、最差变体任务成功、平均任务成功及解析覆盖率。\\\",\\n  \\\"nearest_prior_risk\\\": \\\"Agentic Function Calling Robustness 已测用户改写和工具集扩展；工具输出扰动、提示注入防御、上下文规范化、结构化输出与通用变形测试可能直接或组合吸收本候选。必须检索是否已有 executed tool-result formatting 的成对语义保持评价。\\\",\\n  \\\"alternative_explanations\\\": [\\n    \\\"所谓等价变体实际违反工具返回契约或改变语用含义\\\",\\n    \\\"温度或非确定推理造成自然重复方差\\\",\\n    \\\"规范化收益只是缩短上下文或固定提示模板\\\",\\n    \\\"合成任务过于依赖字符串解析而非代理决策\\\",\\n    \\\"动作不一致但所有动作都合法且最终结果等价\\\"\\n  ],\\n  \\\"descriptors\\\": {\\n    \\\"problem_family\\\": \\\"工具观测表示稳健性\\\",\\n    \\\"computation_stage\\\": \\\"执行结果进入策略前的状态更新\\\",\\n    \\\"intervention_family\\\": \\\"契约驱动规范化与变形评价\\\",\\n    \\\"information_source\\\": \\\"公开工具结果契约与规范事件\\\",\\n    \\\"timing_class\\\": \\\"每次工具观测入上下文前\\\",\\n    \\\"budget_class\\\": \\\"模型与工具调用预算不变\\\",\\n    \\\"evaluation_mode\\\": \\\"共享前缀的语义保持成对复放\\\"\\n  },\\n  \\\"literature_refs\\\": [\\n    \\\"P084\\\",\\n    \\\"P037\\\",\\n    \\\"P007\\\",\\n    \\\"P038\\\",\\n    \\\"P079\\\",\\n    \\\"P097\\\"\\n  ]\\n}\"\n          }\n        ],\n        \"kind\": \"fixed_anchor\",\n        \"query\": \"failure failed contradiction falsifier 失败 反证 矛盾\",\n        \"semantic_reason\": \"semantic_index_missing\",\n        \"semantic_status\": \"DEGRADED\"\n      },\n      {\n        \"hits\": [\n          {\n            \"fts_rank\": 4,\n            \"fused_score\": 0.015625,\n            \"line_end\": 91,\n            \"line_start\": 1,\n            \"path\": \"hypotheses_v001/portfolio.json\",\n            \"semantic_rank\": null,\n            \"source_sha256\": \"198921c9b8773d9cf028f6a0423c3aac85cf8f658044144ada7f122c1e481f9c\","
+          },
+          {
+            "fts_rank": 2,
+            "fused_score": 0.016129032258064516,
+            "line_end": 88,
+            "line_start": 1,
+            "path": "workbench_v003/diagnosis/preformal-cache-safety/diagnosis_facts.json",
+            "semantic_rank": null,
+            "source_sha256": "b73baf88f6270fc2895a12ec18d7c1b45fc0d1db8ad9906144aaecedc4de904f",
+            "text": "{\n  \"authority\": \"ADVISORY_NON_AUTHORITATIVE_FACTS_ONLY\",\n  \"comparison_files\": [],\n  \"contract_version\": \"3\",\n  \"current_version\": {\n    \"comparison_files\": [],\n    \"experiments\": {\n      \"attempt_count\": 0,\n      \"attempts\": [],\n      \"status_counts\": {},\n      \"tier_counts\": {}\n    },\n    \"review_evaluation_files\": [],\n    \"search_snapshot_files\": [\n      {\n        \"path\": \"hypotheses_v003/searches/h004_behavioral_tool_fingerprint/report.md\",\n        \"sha256\": \"dbce9d1d8ceee0b9cc83a6a99843c1fd3b07bd993b8c1de1ba8588ad49970365\",\n        \"size_bytes\": 9010\n      },\n      {\n        \"path\": \"hypotheses_v003/searches/h004_behavioral_tool_fingerprint/request.json\",\n        \"sha256\": \"fc9435461cfd0feb6cccfd52c8ddc1f6d59eb97982dea67b4b0ca74935cdcdd8\",\n        \"size_bytes\": 5981\n      },\n      {\n        \"path\": \"hypotheses_v003/searches/h004_behavioral_tool_fingerprint/result.json\",\n        \"sha256\": \"3efb23810e34f1dc8e7e25ee66fe6a0e520bbeb9cafe9daae85d9eaa9bdfb878\",\n        \"size_bytes\": 1992023\n      },\n      {\n        \"path\": \"hypotheses_v003/searches/h005_plan_cache_counterfactual/report.md\",\n        \"sha256\": \"6894b475d203e09576d3bf6bf8a98d635a9bbfde999ea0ed9e1a5e2346f9280c\",\n        \"size_bytes\": 7383\n      },\n      {\n        \"path\": \"hypotheses_v003/searches/h005_plan_cache_counterfactual/request.json\",\n        \"sha256\": \"0e97e71f0b5aa98292c41826e232497d2f3d26cf4033791482fef9e24562e20f\",\n        \"size_bytes\": 5289\n      },\n      {\n        \"path\": \"hypotheses_v003/searches/h005_plan_cache_counterfactual/result.json\",\n        \"sha256\": \"2d84ba1dcdbac124e009695de16eef013df05cac098cc23025c171d6ccac8ae1\",\n        \"size_bytes\": 1557704\n      }\n    ],\n    \"version\": \"v003\"\n  },\n  \"diagnosis_id\": \"preformal-cache-safety\",\n  \"experiments\": {\n    \"attempt_count\": 0,\n    \"attempts\": [],\n    \"status_counts\": {},\n    \"tier_counts\": {}\n  },\n  \"file_count\": 63,\n  \"file_type_counts\": {\n    \".json\": 34,\n    \".jsonl\": 8,\n    \".md\": 19,\n    \".py\": 2\n  },\n  \"generated_at_utc\": \"2026-08-15T16:25:20.583063Z\",\n  \"marker_occurrences\": {\n    \"assumption\": 32,\n    \"contradiction\": 49,\n    \"failed\": 108,\n    \"not provided\": 3,\n    \"todo\": 1\n  },\n  \"non_judgments\": [\n    \"no candidate is killed or selected by this package\",\n    \"no novelty, delivery, or next-action decision is computed\",\n    \"the main researcher interprets these traceable facts\"\n  ],\n  \"recall_resume\": {\n    \"authority\": \"ADVISORY_NON_AUTHORITATIVE\",\n    \"run_id\": \"20260815_2342_run12\",\n    \"sections\": [\n      {\n        \"hits\": [\n          {\n            \"fts_rank\": 1,\n            \"fused_score\": 0.01639344262295082,\n            \"line_end\": 26,\n            \"line_start\": 1,\n            \"path\": \"hypotheses_v001/searches/broad_tool_robustness/report.md\",\n            \"semantic_rank\": null,\n            \"source_sha256\": \"858ee4b44974da7c7a1067a2a9a9c9a4af6a55e0ce946dc8899bd373db95ef54\","
+          },
+          {
+            "fts_rank": 3,
+            "fused_score": 0.015873015873015872,
+            "line_end": 393,
+            "line_start": 377,
+            "path": "hypotheses_v004/priors/h006_information_readiness/candidates.json",
+            "semantic_rank": null,
+            "source_sha256": "715af1792523d29da8a91f4f8e152c45b458986653668a83cae5f1ea5ad76c7f",
+            "text": "      \"abstract\": \"Can one graph represent every kind of LLM agent's run? A trace records what each step did, never what it relied on, the state it read, and the results it reused. GRADE recovers that missing layer: it models any run as one graph over its step nodes with two edge layers, execution edges (what ran in what order) read from the trace for free, and dependency edges (what each step relied on) rarely logged, so each is graded by how it is known, observed, declared, or inferred. One representation, and each layer earns its place. Across six corpora of LLM agents spanning tool use, coding, and the web, the dependency layer can predict failure where run size is weak and, under leave-one-corpus-out transfer, stays above chance on every held-out class while run size fails. Meanwhile, the execution layer localizes the faulting step in a failed multi-agent run. This work also provides a more in-depth analysis of why generic graph neural networks may misread the dependency layer, unlike our feature-based alternative. The same graph representation opens further uses, carrying from failure diagnosis in a single run to efficiency and robustness optimization at scale.\",\n      \"authors\": [\n        \"Yue Zhao\"\n      ],\n      \"candidate_id\": \"prior-d96d02d37f00b0f2\",\n      \"landing_page_urls\": [\n        \"https://arxiv.org/abs/2606.22741v1\"\n      ],\n      \"pdf_urls\": [\n        \"https://arxiv.org/pdf/2606.22741v1\"\n      ],\n      \"provenance\": [\n        {\n          \"normalized_url_identity\": \"https://export.arxiv.org/api/query?max_results=10&search_query=all%3ALLM+agent+irreversible+action+information+dependency+read+before+write+scheduling+mutation+gate+tool+dependency+graph&start=0\",\n          \"query\": \"LLM agent irreversible action information dependency read before write scheduling mutation gate tool dependency graph\",\n          \"raw_record\": {\n            \"entry_xml\": \"<ns0:entry xmlns:ns0=\\\"http://www.w3.org/2005/Atom\\\" xmlns:ns1=\\\"http://arxiv.org/schemas/atom\\\">\\n    <ns0:id>http://arxiv.org/abs/2606.22741v1</ns0:id>\\n    <ns0:title>GRADE: Graph Representation of LLM Agent Dependency and Execution</ns0:title>\\n    <ns0:updated>2026-06-22T01:03:21Z</ns0:updated>\\n    <ns0:link href=\\\"https://arxiv.org/abs/2606.22741v1\\\" rel=\\\"alternate\\\" type=\\\"text/html\\\" />\\n    <ns0:link href=\\\"https://arxiv.org/pdf/2606.22741v1\\\" rel=\\\"related\\\" type=\\\"application/pdf\\\" title=\\\"pdf\\\" />\\n    <ns0:summary>Can one graph represent every kind of LLM agent's run? A trace records what each step did, never what it relied on, the state it read, and the results it reused. GRADE recovers that missing layer: it models any run as one graph over its step nodes with two edge layers, execution edges (what ran in what order) read from the trace for free, and dependency edges (what each step relied on) rarely logged, so each is graded by how it is known, observed, declared, or inferred. One representation, and each layer earns its place. Across six corpora of LLM agents spanning tool use, coding, and the web, the dependency layer can predict failure where run size is weak and, under leave-one-corpus-out transfer, stays above chance on every held-out class while run size fails. Meanwhile, the execution layer localizes the faulting step in a failed multi-agent run. This work also provides a more in-depth analysis of why generic graph neural networks may misread the dependency layer, unlike our feature-based alternative. The same graph representation opens further uses, carrying from failure diagnosis in a single run to efficiency and robustness optimization at scale.</ns0:summary>\\n    <ns0:category term=\\\"cs.LG\\\" scheme=\\\"http://arxiv.org/schemas/atom\\\" />\\n    <ns0:published>2026-06-22T01:03:21Z</ns0:published>\\n    <ns1:comment>18 pages, 5 figures, 8 tables. Code: https://github.com/yzhao062/grade</ns1:comment>\\n    <ns1:primary_category term=\\\"cs.LG\\\" />\\n    <ns0:author>\\n      <ns0:name>Yue Zhao</ns0:name>\\n    </ns0:author>\\n  </ns0:entry>\\n  \""
+          },
+          {
+            "fts_rank": 4,
+            "fused_score": 0.015625,
+            "line_end": 39,
+            "line_start": 1,
+            "path": "experiment_v003/result.md",
+            "semantic_rank": null,
+            "source_sha256": "5fec44e1c1acef6d7f15f9353ec1063f2618323d9536b665bf6a05df444c6d77",
+            "text": "# v003 Formal 实验结果与裁决\n\n## Formal 身份\n\n- Attempt：`formal-cache-003`\n- 状态：运行器成功，128 次本地模型调用，指标与输出契约均有效，无超时，无实验错误。\n- 模型：`qwen3:4b`、`qwen3:8b`；每模型 32 个任务、从头规划与缓存适配两个条件。\n- 数据：动作新增、动作删除、顺序翻转、条件分支各 6 例，另有 8 例同结构安全命中对照。\n- 独立评价：程序生成的唯一最小动作序列，按允许动作词表和精确顺序机械评分，无语言模型裁判。\n\n## 预注册主张检查\n\n| 条件 | 预注册要求 | Formal 结果 | 判断 |\n|---|---:|---:|---|\n| 总体缓存诱发失败率 | ≥ 0.10 | 0.0417 | 不满足 |\n| qwen3:4b 分层 | > 0 | 0.0833 | 满足 |\n| qwen3:8b 分层 | > 0 | 0.0000 | 不满足 |\n| 正差分编辑类别 | 至少 2 类 | 2 类 | 满足下界，但效应均仅 0.0833 |\n| 安全命中缓存正确率不低于反事实缓存正确率 | ≥ | 0.875 对 0.9583 | 不满足 |\n\n主 Claim 被 Formal 反证，不能通过缩窄到动作删除或顺序翻转的个别失败继续保活。\n\n## 关键观察\n\n- 反事实任务上，从头规划正确率为 0.50，缓存适配正确率反而为 0.9583；缓存模板总体上提供了强规划支架，而非主要造成结构锚定伤害。\n- 缓存诱发失败只在动作删除与顺序翻转各出现 1/12；动作新增与条件分支均为 0。\n- 同结构对照中，从头规划为 1.0，缓存适配为 0.875，说明缓存上下文本身会偶发扰动，但该效应不是结构反事实特有。\n- 探索性“保留来源”单一模板曾得到较大差分；多结构 Formal 显示该结果不具备预注册的广泛性。\n\n## 失败归因边界\n\n这次失败同时削弱稳定现象与评价必要性主张：若缓存适配在大多数结构编辑上显著优于从头规划，当前构造就不能证明平均评价掩盖了系统性缓存特有风险。仍可能存在更强模型、真实 APC 实现或自然任务分布中的缓存安全问题，但这些属于扩大条件，不是当前结果的支持。\n\n## 可审计路径\n\n- `experiment_v003/attempts/formal-cache-003/execution.json`\n- `experiment_v003/attempts/formal-cache-003/metrics.json`\n- `experiment_v003/attempts/formal-cache-003/raw-results.jsonl`\n- `implementation_v003/cache_structural_counterfactual_benchmark.py`"
+          },
+          {
+            "fts_rank": 5,
+            "fused_score": 0.015384615384615385,
+            "line_end": 26,
+            "line_start": 1,
+            "path": "hypotheses_v001/searches/broad_tool_robustness/report.md",
+            "semantic_rank": null,
+            "source_sha256": "858ee4b44974da7c7a1067a2a9a9c9a4af6a55e0ce946dc8899bd373db95ef54",
+            "text": "<!-- CRL_RESEARCH_SEARCH_META {\"created_at_utc\":\"2026-08-15T15:43:30.511836Z\",\"request_fingerprint_sha256\":\"073ea07854a2921b53466cd6b648d7451e3abf93abf800a7d8a2541432ac05c8\",\"result_json_sha256\":\"aea40d742bc7605685fc6d0048c1469e00dd04a901db212e995c364db70ec9c3\",\"search_id\":\"broad_tool_robustness\"} -->\n# 研究检索导航\n\n> 本报告仅展示查询路线、来源、命中定位与覆盖；所有科研判断由主研究者完成。\n\n- 搜索标识：`broad_tool_robustness`\n- 生成时间（协调世界时）：`2026-08-15T15:43:30.511836Z`\n\n## 紧凑研究地图\n\n> 跨路线按 Paper 去重；每个查询路线至多选一个尚未出现的最高排名代表项。完整原始命中保留在 `result.json`。\n\n- Paper `P084` · On the Robustness of Agentic Function Calling；用途 `problem`；路线 `q001:paper_card_fts` #1；Card `paper-p084`（paper）；Evidence `ev-p084-expanded-toolkit-controlled-setting`, `ev-p084-expanded-toolkit-table`, `ev-p084-generated-tool-single-dataset-boundary`, `ev-p084-related-toolkit-error-types`\n- Paper `P065` · Group-in-Group Policy Optimization for LLM Agent Training；用途 `problem`；路线 `q001:failure_card_fts` #1；Card `failure-anchor-state-credit-needs-state-recurrence`（failure）；Evidence `ev-p065-anchor-state-credit`, `ev-p065-state-recurrence-boundary`\n- Paper `P049` · Reinforced Agent: Inference-Time Feedback for Tool-Calling Agents；用途 `problem`；路线 `q001:passage_hybrid` #1；Passage `P049:p0002:s0001`\n- Paper `P037` · ToolSandbox: A Stateful, Conversational, Interactive Evaluation Benchmark for LLM Tool Use Capabilities；用途 `problem`；路线 `q001:operator_card_fts` #1；Card `operator-milestone-dag-trajectory-evaluation`（operator）；Evidence `ev-p037-evaluation-core`, `ev-p037-minefield-violation`\n- Paper `P091` · Temporal Validity in Retrieval Memory: Eliminating Stale-Fact Errors for AI Agents over Evolving Knowledge；用途 `failure`；路线 `q002:failure_card_fts` #1；Card `failure-cosine-cannot-separate-contradiction-from-duplicate`（failure）；Evidence `ev-p091-cosine-auroc`, `ev-p091-retain-fabrication`\n- Paper `P083` · TAMAS: Benchmarking Adversarial Risks in Multi-Agent LLM Systems；用途 `failure`；路线 `q002:passage_hybrid` #1；Passage `P083:p0009:s0001`\n- Paper `P021` · In-the-Flow Agentic System Optimization for Effective Planning and Tool Use；用途 `failure`；路线 `q002:operator_card_fts` #1；Card `operator-outcome-trained-execution-state-planner`（operator）；Evidence `ev-p021-operator-core`\n- Paper `P030` · STALE: Can LLM Agents Know When Their Memories Are No Longer Valid?；用途 `failure`；路线 `q002:paper_card_fts` #2；Card `paper-p030`（paper）；Evidence `ev-p030-failure-core`\n- Paper `P073` · Uncertainty Calibration for Tool-Using Language Agents；用途 `operator`；路线 `q003:operator_card_fts` #1；Card `operator-execution-supervised-prompt-trace-calibration`（operator）；Evidence `ev-p073-execution-supervised-probe`, `ev-p073-internal-confidence-misalignment`\n- Paper `P072` · Structured Uncertainty guided Clarification for LLM Agents；用途 `operator`；路线 `q003:paper_card_fts` #2；Card `paper-p072`（paper）；Evidence `ev-p072-compute-boundary`, `ev-p072-structured-clarification-gate`, `ev-p072-unstructured-clarification-failure`\n- Paper `P032` · CRITIC: Large Language Models Can Self-Correct with Tool-Interactive Critiquing；用途 `operator`；路线 `q003:passage_hybrid` #8；Passage `P032:p0022:s0001`\n- Paper `P033` · Self-Refine: Iterative Refinement with Self-Feedback；用途 `operator`；路线 `q003:failure_card_fts` #3；Card `failure-iterative-refinement-corrupts-correct-output`（failure）；Evidence `ev-p033-operator-core`\n- Paper `P013` · Large Language Models Cannot Self-Correct Reasoning Yet；用途 `prior`；路线 `q004:paper_card_fts` #1；Card `paper-p013`（paper）；Evidence `ev-p013-intrinsic-self-correction-degrades`, `ev-p013-oracle-free-equal-budget-boundary`\n- Paper `P100` · How Many Tools Should an LLM Agent See? A Chance-Corrected Answer；用途 `prior`；路线 `q004:operator_card_fts` #1；Card `operator-chance-corrected-depth-reward`（operator）；Evidence `ev-p100-bor-self-pruning`, `ev-p100-fixed-depth-buckets`"
+          },
+          {
+            "fts_rank": 6,
+            "fused_score": 0.015151515151515152,
+            "line_end": 94,
+            "line_start": 89,
+            "path": "workbench_v003/diagnosis/preformal-cache-safety/diagnosis_facts.json",
+            "semantic_rank": null,
+            "source_sha256": "b73baf88f6270fc2895a12ec18d7c1b45fc0d1db8ad9906144aaecedc4de904f",
+            "text": "            \"text\": \"<!-- CRL_RESEARCH_SEARCH_META {\\\"created_at_utc\\\":\\\"2026-08-15T15:43:30.511836Z\\\",\\\"request_fingerprint_sha256\\\":\\\"073ea07854a2921b53466cd6b648d7451e3abf93abf800a7d8a2541432ac05c8\\\",\\\"result_json_sha256\\\":\\\"aea40d742bc7605685fc6d0048c1469e00dd04a901db212e995c364db70ec9c3\\\",\\\"search_id\\\":\\\"broad_tool_robustness\\\"} -->\\n# 研究检索导航\\n\\n> 本报告仅展示查询路线、来源、命中定位与覆盖；所有科研判断由主研究者完成。\\n\\n- 搜索标识：`broad_tool_robustness`\\n- 生成时间（协调世界时）：`2026-08-15T15:43:30.511836Z`\\n\\n## 紧凑研究地图\\n\\n> 跨路线按 Paper 去重；每个查询路线至多选一个尚未出现的最高排名代表项。完整原始命中保留在 `result.json`。\\n\\n- Paper `P084` · On the Robustness of Agentic Function Calling；用途 `problem`；路线 `q001:paper_card_fts` #1；Card `paper-p084`（paper）；Evidence `ev-p084-expanded-toolkit-controlled-setting`, `ev-p084-expanded-toolkit-table`, `ev-p084-generated-tool-single-dataset-boundary`, `ev-p084-related-toolkit-error-types`\\n- Paper `P065` · Group-in-Group Policy Optimization for LLM Agent Training；用途 `problem`；路线 `q001:failure_card_fts` #1；Card `failure-anchor-state-credit-needs-state-recurrence`（failure）；Evidence `ev-p065-anchor-state-credit`, `ev-p065-state-recurrence-boundary`\\n- Paper `P049` · Reinforced Agent: Inference-Time Feedback for Tool-Calling Agents；用途 `problem`；路线 `q001:passage_hybrid` #1；Passage `P049:p0002:s0001`\\n- Paper `P037` · ToolSandbox: A Stateful, Conversational, Interactive Evaluation Benchmark for LLM Tool Use Capabilities；用途 `problem`；路线 `q001:operator_card_fts` #1；Card `operator-milestone-dag-trajectory-evaluation`（operator）；Evidence `ev-p037-evaluation-core`, `ev-p037-minefield-violation`\\n- Paper `P091` · Temporal Validity in Retrieval Memory: Eliminating Stale-Fact Errors for AI Agents over Evolving Knowledge；用途 `failure`；路线 `q002:failure_card_fts` #1；Card `failure-cosine-cannot-separate-contradiction-from-duplicate`（failure）；Evidence `ev-p091-cosine-auroc`, `ev-p091-retain-fabrication`\\n- Paper `P083` · TAMAS: Benchmarking Adversarial Risks in Multi-Agent LLM Systems；用途 `failure`；路线 `q002:passage_hybrid` #1；Passage `P083:p0009:s0001`\\n- Paper `P021` · In-the-Flow Agentic System Optimization for Effective Planning and Tool Use；用途 `failure`；路线 `q002:operator_card_fts` #1；Card `operator-outcome-trained-execution-state-planner`（operator）；Evidence `ev-p021-operator-core`\\n- Paper `P030` · STALE: Can LLM Agents Know When Their Memories Are No Longer Valid?；用途 `failure`；路线 `q002:paper_card_fts` #2；Card `paper-p030`（paper）；Evidence `ev-p030-failure-core`\\n- Paper `P073` · Uncertainty Calibration for Tool-Using Language Agents；用途 `operator`；路线 `q003:operator_card_fts` #1；Card `operator-execution-supervised-prompt-trace-calibration`（operator）；Evidence `ev-p073-execution-supervised-probe`, `ev-p073-internal-confidence-misalignment`\\n- Paper `P072` · Structured Uncertainty guided Clarification for LLM Agents；用途 `operator`；路线 `q003:paper_card_fts` #2；Card `paper-p072`（paper）；Evidence `ev-p072-compute-boundary`, `ev-p072-structured-clarification-gate`, `ev-p072-unstructured-clarification-failure`\\n- Paper `P032` · CRITIC: Large Language Models Can Self-Correct with Tool-Interactive Critiquing；用途 `operator`；路线 `q003:passage_hybrid` #8；Passage `P032:p0022:s0001`\\n- Paper `P033` · Self-Refine: Iterative Refinement with Self-Feedback；用途 `operator`；路线 `q003:failure_card_fts` #3；Card `failure-iterative-refinement-corrupts-correct-output`（failure）；Evidence `ev-p033-operator-core`\\n- Paper `P013` · Large Language Models Cannot Self-Correct Reasoning Yet；用途 `prior`；路线 `q004:paper_card_fts` #1；Card `paper-p013`（paper）；Evidence `ev-p013-intrinsic-self-correction-degrades`, `ev-p013-oracle-free-equal-budget-boundary`\\n- Paper `P100` · How Many Tools Should an LLM Agent See? A Chance-Corrected Answer；用途 `prior`；路线 `q004:operator_card_fts` #1；Card `operator-chance-corrected-depth-reward`（operator）；Evidence `ev-p100-bor-self-pruning`, `ev-p100-fixed-depth-buckets`\"\n          },\n          {\n            \"fts_rank\": 2,\n            \"fused_score\": 0.016129032258064516,\n            \"line_end\": 34,"
+          },
+          {
+            "fts_rank": 7,
+            "fused_score": 0.014925373134328358,
+            "line_end": 32,
+            "line_start": 1,
+            "path": "workbench_v003/formal_prep/plan_h005.json",
+            "semantic_rank": null,
+            "source_sha256": "eabf75225fdd35de788932eb27e4e0053f30c9a6478b72157bf45ebce74c5461",
+            "text": "{\n  \"hypothesis_id\": \"h-005\",\n  \"plan_id\": \"plan-cache-structural-counterfactual\",\n  \"claims\": [\n    {\n      \"claim_id\": \"claim-cache-induced-structural-failure\",\n      \"claim_text\": \"在本地确定性成对任务中，最小动作图编辑会使同模型缓存模板适配产生可与普通从头规划失败机械分离的额外计划失败。\",\n      \"scope\": \"仅限本实验的32个英语合成任务、qwen3:4b与qwen3:8b、温度0和同模型提示级缓存适配代理；不外推到APC完整实现或前沿闭源模型。\",\n      \"observable\": \"主指标 cache_induced_failure_rate；并观察两个模型的分层值、四类编辑分层值、从头/缓存计划正确率和同结构安全命中正确率。\",\n      \"falsifier\": \"若总体缓存诱发失败率低于0.10，或只有一个编辑类别出现正差分，或任一模型的缓存诱发失败率为0，或同结构安全命中同样出现不低于反事实条件的退化，则该结构反事实评价主张不成立或必须降级。\",\n      \"minimum_effect_or_decision_rule\": \"存活要求：总体 cache_induced_failure_rate >= 0.10；两个模型分层值均 > 0；至少两个动作图编辑类别的分层值 > 0；且 safe_cache_adapt_accuracy 不低于 counterfactual cache_adapt_accuracy。\",\n      \"alternative_explanations\": [\n        \"缓存适配提示的措辞本身诱导复制\",\n        \"任务模板过于合成且重复\",\n        \"精确序列评分拒绝语义等价计划\",\n        \"效应只由动作删除类别贡献\",\n        \"小模型的指令遵循不足而非缓存系统风险\"\n      ],\n      \"killer_experiment_id\": \"cache-structural-counterfactual-001\",\n      \"supporting_experiment_ids\": [],\n      \"status\": \"testing\",\n      \"status_reason\": \"探索性三模型结果出现正差分，现以多结构和安全命中对照做独立Formal验证。\"\n    }\n  ],\n  \"global_confounders\": [\n    \"模型规模与模板锚定效应交互\",\n    \"动作标识的词义透明度\",\n    \"缓存条件拥有更长上下文\",\n    \"同一基础模型家族限制\",\n    \"合成域外部有效性\"\n  ]\n}"
+          },
+          {
+            "fts_rank": 8,
+            "fused_score": 0.014705882352941176,
+            "line_end": 374,
+            "line_start": 301,
+            "path": "implementation_v003/cache_structural_counterfactual_benchmark.py",
+            "semantic_rank": null,
+            "source_sha256": "1700c1a9b0f081ea74abfb719059d1f447526f7d027b1447bafc7df72fb277d7",
+            "text": "        value = sum(item[\"full_exact\"] and not item[\"cache_exact\"] for item in selected) / len(selected)\n        records.append(ratio_record(\"cache_induced_failure_rate\", value, f\"counterfactual_model={model}\", len(selected)))\n\n    for category in [\"action_remove\", \"action_add\", \"order_flip\", \"branch_flip\"]:\n        selected = [item for item in counterfactual_pairs if item[\"category\"] == category]\n        value = sum(item[\"full_exact\"] and not item[\"cache_exact\"] for item in selected) / len(selected)\n        records.append(ratio_record(\"cache_induced_failure_rate_by_edit\", value, f\"category={category}\", len(selected)))\n\n    api_calls = len(rows)\n    tokens = sum(row[\"meta\"][\"prompt_eval_count\"] + row[\"meta\"][\"eval_count\"] for row in rows)\n    return {\n        \"schema_version\": 1,\n        \"experiment_id\": experiment_id,\n        \"records\": records,\n        \"resource_usage\": {\n            \"tokens\": tokens,\n            \"api_calls\": api_calls,\n            \"wall_time_seconds\": wall_time,\n            \"gpu_time_seconds\": \"unknown\",\n            \"estimated_cost\": 0.0,\n        },\n        \"errors\": [],\n        \"warnings\": [\n            \"The cache condition is a same-model, prompt-level proxy for template adaptation, not a reproduction of APC's full system.\",\n            \"All tasks are synthetic and English; external validity is not measured in this attempt.\",\n        ],\n    }\n\n\ndef main() -> int:\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"--experiment-id\", default=\"cache-structural-counterfactual-001\")\n    parser.add_argument(\"--models\", nargs=\"+\", default=[\"qwen3:4b\", \"qwen3:8b\"])\n    parser.add_argument(\"--base-url\", default=\"http://127.0.0.1:11434\")\n    parser.add_argument(\"--timeout\", type=int, default=120)\n    parser.add_argument(\"--metrics-output\", type=Path, required=True)\n    parser.add_argument(\"--raw-output\", type=Path, required=True)\n    args = parser.parse_args()\n\n    started = time.time()\n    rows: list[dict[str, Any]] = []\n    all_cases = build_cases()\n    with args.raw_output.open(\"x\", encoding=\"utf-8\", newline=\"\\n\") as raw_handle:\n        for model_index, model in enumerate(args.models):\n            for case_index, case in enumerate(all_cases):\n                for mode_index, mode in enumerate([\"full_replan\", \"cache_adapt\"]):\n                    prompt = build_prompt(case, mode)\n                    seed = 20260816 + model_index * 1000 + case_index * 2 + mode_index\n                    try:\n                        response, meta = call_ollama(args.base_url, model, prompt, seed, args.timeout)\n                        exact, actions = exact_actions(response, case[\"expected_plan\"], set(case[\"tools\"]))\n                    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, ValueError) as exc:\n                        raise RuntimeError(f\"model call failed for {model} {case['case_id']} {mode}: {exc!r}\") from exc\n                    row = {\n                        \"model\": model,\n                        \"case_id\": case[\"case_id\"],\n                        \"category\": case[\"category\"],\n                        \"graph_changed\": case[\"graph_changed\"],\n                        \"mode\": mode,\n                        \"reference_task\": case[\"reference_task\"],\n                        \"target_task\": case[\"target_task\"],\n                        \"cached_plan\": case[\"cached_plan\"],\n                        \"expected_plan\": case[\"expected_plan\"],\n                        \"prompt\": prompt,\n                        \"response\": response,\n                        \"actions\": actions,\n                        \"exact\": exact,\n                        \"meta\": meta,\n                    }\n                    rows.append(row)\n                    raw_handle.write(json.dumps(row, ensure_ascii=False, separators=(\",\", \":\")) + \"\\n\")\n                    raw_handle.flush()\n                    print(json.dumps({\"model\": model, \"case\": case[\"case_id\"], \"mode\": mode, \"exact\": exact}, ensure_ascii=False), flush=True)\n"
+          }
+        ],
+        "kind": "fixed_anchor",
+        "query": "failure failed contradiction falsifier 失败 反证 矛盾",
+        "semantic_reason": "semantic_index_missing",
+        "semantic_status": "DEGRADED"
+      },
+      {
+        "hits": [
+          {
+            "fts_rank": 1,
+            "fused_score": 0.01639344262295082,
+            "line_end": 191,
+            "line_start": 178,
+            "path": "workbench_v003/diagnosis/preformal-cache-safety/diagnosis_facts.json",
+            "semantic_rank": null,
+            "source_sha256": "b73baf88f6270fc2895a12ec18d7c1b45fc0d1db8ad9906144aaecedc4de904f",
+            "text": "          },\n          {\n            \"fts_rank\": 8,\n            \"fused_score\": 0.014705882352941176,\n            \"line_end\": 70,\n            \"line_start\": 1,\n            \"path\": \"hypotheses_v002/portfolio.json\",\n            \"semantic_rank\": null,\n            \"source_sha256\": \"a44db033a6796f5819cdaf2f40d512e224511a5f55374ca8d37f227e6ffee94b\",\n            \"text\": \"{\\n  \\\"created_at_utc\\\": \\\"2026-08-15T15:55:34.521232Z\\\",\\n  \\\"hypotheses\\\": [\\n    {\\n      \\\"alternative_explanations\\\": [\\n        \\\"显式来源标识直接泄漏了哪一组会失败\\\",\\n        \\\"多个同源工具的描述更相似，模型只按文本相似度去重\\\",\\n        \\\"收益来自固定选择不同提供商的简单规则，而非依赖图\\\",\\n        \\\"合成相关故障率与现实工具生态不符\\\",\\n        \\\"最终答案正确率变化来自模型算术/投票错误而非证据独立性\\\"\\n      ],\\n      \\\"changed_computation\\\": {\\n        \\\"baseline\\\": \\\"按工具调用或返回条数进行多数表决、交叉确认或置信累加，把不同工具名称近似视为独立证据。\\\",\\n        \\\"budget_effect\\\": \\\"与随机多工具、工具名称去重和普通多数表决严格匹配工具调用数、模型调用数与最大令牌；方法只改变复核来源选择与证据聚合。\\\",\\n        \\\"information_available\\\": \\\"只使用工具注册表或运行时公开的来源谱系元数据、工具结果和调用成本；不读取隐藏任务真值、故障标签或未来结果。\\\",\\n        \\\"intervention\\\": \\\"为每个工具结果携带可审计的上游来源/故障域标识，构建结果—来源依赖图；复核时优先选择尚未覆盖的故障域，聚合时每个相关来源簇只贡献一次证据权重。\\\",\\n        \\\"timing\\\": \\\"在选择下一个复核工具时，以及把多个一致工具结果提交为可信事实或据此执行高影响动作之前。\\\"\\n      },\\n      \\\"created_at_utc\\\": \\\"2026-08-15T15:55:34.638162Z\\\",\\n      \\\"descriptors\\\": {\\n        \\\"budget_class\\\": \\\"固定多工具调用预算\\\",\\n        \\\"computation_stage\\\": \\\"复核工具选择与多结果可信提交\\\",\\n        \\\"evaluation_mode\\\": \\\"保持观测值的来源拓扑成对干预\\\",\\n        \\\"information_source\\\": \\\"公开工具来源谱系与结果\\\",\\n        \\\"intervention_family\\\": \\\"来源依赖图上的不相交复核与簇级聚合\\\",\\n        \\\"problem_family\\\": \\\"多工具复核中的相关证据膨胀\\\",\\n        \\\"timing_class\\\": \\\"高影响行动或最终提交之前\\\"\\n      },\\n      \\\"falsifier\\\": \\\"若在配平工具描述、顺序、调用数与观测值后，相关来源拓扑不改变智能体的置信/行动或错误提交；或简单随机选择、工具名去重、提供来源标签的提示基线与依赖域感知方法等价；或效应只存在于单模型/单任务模板，则现象或系统贡献被否定。\\\",\\n      \\\"hypothesis_id\\\": \\\"h-003\\\",\\n      \\\"lineage_note\\\": \\\"v001 的单回执可信度与表示稳健性候选被直接先行吸收后，转向多工具复核中尚未显式建模的来源依赖拓扑；与 v001 h-001/h-002 仅共享工具可靠性背景，不沿用其方法核。\\\",\\n      \\\"literature_refs\\\": [\\n        \\\"P096\\\",\\n        \\\"P081\\\",\\n        \\\"P069\\\",\\n        \\\"P073\\\",\\n        \\\"P044\\\",\\n        \\\"P068\\\"\\n      ],\\n      \\\"mechanism_claim\\\": \\\"工具智能体和常见多工具聚合把表面工具多样性误作错误独立性；当上游故障相关时，增加同源包装会产生虚假共识。来源依赖感知的复核选择与簇级聚合能在相同调用预算下降低相关故障下的错误提交，而不牺牲独立来源一致时的正常覆盖。\\\",\\n      \\\"minimal_killer_experiment\\\": \\\"建立 4 个确定性决策域，每个域含 6 个表面不同工具、3 个上游故障域。以相同正确/错误值构造成对的同源一致、跨源一致和跨源冲突条件，并在来源簇级注入相关错误。比较裸 ReAct、多数表决、随机不同工具、工具名去重、显式来源标签提示、来源簇去重及来源不相交选择器。核心指标为错误共识提交率、有效独立来源覆盖、最差相关故障成功率、正常成功率、调用成本和报告置信校准；先在 qwen3:4b 做杀手检查，存活后在 qwen2.5:7b 与 qwen3:8b 复验。\\\",\\n      \\\"nearest_prior_risk\\\": \\\"多源检索、来源可信度/多样性、HydraRAG 交叉来源验证、证据溯源、N-version programming 与相关集成误差可组合吸收；必须证明对象是工具选择与高影响行动前的来源依赖拓扑，而非一般 RAG 去重或引用多样性。\\\",\\n      \\\"parent_ids\\\": [],\\n      \\\"problem\\\": \\\"工具智能体常通过调用多个工具或提供商进行交叉确认，并把一致结果视为更强证据。但不同工具可能只是同一数据库、缓存、搜索索引、基础模型或上游服务的多个包装；当故障在上游相关传播时，工具数量会夸大有效独立证据数，使错误共识触发高置信答复或不可逆动作。\\\",\\n      \\\"revision\\\": 3,\\n      \\\"status\\\": \\\"falsified\\\",\\n      \\\"status_reason\\\": \\\"两模型各12个成对案例中，工具别名相对同一工具等次数重复的错误接受率差分均为0；未出现预注册的别名特有放大，且方法内核被来源依赖真值发现与GPE构造性吸收。\\\",\\n      \\\"target_failure\\\": {\\n        \\\"card_ids\\\": [\\n          \\\"failure-generator-aligned-verification-passes-shared-misreads\\\",\\n          \\\"operator-fixed-budget-independent-path-aggregation\\\",\\n          \\\"failure-tool-description-and-order-bias\\\"\\n        ],\\n        \\\"evidence_ids\\\": [\\n          \\\"ev-p096-shared-misinterpretation\\\",\\n          \\\"ev-p081-independent-path-majority-aggregation\\\",\\n          \\\"ev-p069-identical-tool-order-bias\\\"\\n        ],\\n        \\\"summary\\\": \\\"在任务、观察值、工具调用数和表面工具身份相同的条件下，仅改变工具的隐藏来源依赖拓扑；智能体对同一上游的多个一致包装与多个独立来源给予近似相同的置信或行动权重，导致相关故障下的错误共识放大。\\\"\\n      },\\n      \\\"title\\\": \\\"共享上游工具的一致回执会膨胀为虚假独立证据\\\",\\n      \\\"updated_at_utc\\\": \\\"2026-08-15T16:05:57.033845Z\\\"\\n    }\\n  ],\\n  \\\"revision\\\": 3,\\n  \\\"run_id\\\": \\\"20260815_2342_run12\\\",\\n  \\\"schema_version\\\": 1,\\n  \\\"updated_at_utc\\\": \\\"2026-08-15T16:05:57.033845Z\\\",\\n  \\\"version\\\": \\\"v002\\\"\\n}\"\n          }\n        ],\n        \"kind\": \"fixed_anchor\",\n        \"query\": \"implementation baseline experiment reviewer 实现 基线 实验 评审\","
+          },
+          {
+            "fts_rank": 2,
+            "fused_score": 0.016129032258064516,
+            "line_end": 71,
+            "line_start": 1,
+            "path": "workbench_v003/formal_prep/spec_h005.json",
+            "semantic_rank": null,
+            "source_sha256": "0249ebec5360835878f4c83df1a5c4fe66bc732787d979dd0bb17dc2085e18f1",
+            "text": "{\n  \"experiment_id\": \"cache-structural-counterfactual-001\",\n  \"hypothesis_id\": \"h-005\",\n  \"claim_ids\": [\"claim-cache-induced-structural-failure\"],\n  \"purpose\": \"independent_claim_validation\",\n  \"research_question\": \"在同一目标任务与同一模型上，加入一个高层意图相似但动作图发生最小编辑的缓存计划模板，是否会产生从头规划没有的额外结构计划失败？\",\n  \"independent_ground_truth\": {\n    \"description\": \"案例生成器直接给出允许动作集合与唯一最小动作序列；评分器仅做动作标识词表与序列精确比较，不使用语言模型裁判，也不读取模型解释。\",\n    \"external_evidence_ids\": [],\n    \"external_card_ids\": [],\n    \"external_literature_refs\": [\"P071\"],\n    \"run_local_fact_refs\": [\"implementation_v003/cache_structural_counterfactual_benchmark.py\"]\n  },\n  \"primary_metric\": \"cache_induced_failure_rate\",\n  \"secondary_metrics\": [\n    \"full_replan_accuracy\",\n    \"cache_adapt_accuracy\",\n    \"safe_full_replan_accuracy\",\n    \"safe_cache_adapt_accuracy\",\n    \"cache_induced_failure_rate_by_edit\"\n  ],\n  \"sampling_unit\": \"模型配置与成对任务的组合；每一组合包含从头规划和缓存适配两个条件\",\n  \"dataset\": \"程序确定性生成的32个英语任务：四类动作图编辑各6例，外加8例同结构安全命中对照\",\n  \"model\": \"本机Ollama qwen3:4b 与 qwen3:8b\",\n  \"provider\": \"本地Ollama\",\n  \"revision\": \"formal-r1\",\n  \"baseline_specs\": [\n    \"full_replan：相同模型只看目标任务与相同动作清单，从头生成计划\",\n    \"cache_adapt：相同模型额外看到参考任务和缓存计划，并被要求按目标约束适配\",\n    \"safe_same_graph：参考与目标措辞变化但金标准动作图不变的缓存安全命中负控制\"\n  ],\n  \"parity_dimensions\": {\n    \"information_access\": {\n      \"status\": \"different\",\n      \"notes\": \"缓存条件按定义额外看到参考任务与缓存模板；目标任务、动作清单和独立金标准完全相同。\"\n    },\n    \"tool_capability\": {\n      \"status\": \"matched\",\n      \"notes\": \"两个条件看到完全相同的允许动作标识及描述。\"\n    },\n    \"model_provider_revision\": {\n      \"status\": \"matched\",\n      \"notes\": \"每个成对比较使用相同Ollama模型标识；结果同时在qwen3:4b与qwen3:8b分层报告。\"\n    },\n    \"sampling_protocol\": {\n      \"status\": \"matched\",\n      \"notes\": \"温度0、确定性种子生成、相同输出模式和同一案例集合；条件顺序固定并公开。\"\n    },\n    \"budget\": {\n      \"status\": \"different\",\n      \"notes\": \"缓存条件因包含模板而提示令牌更多；这是被测缓存信息处理的一部分。实验不声称等令牌方法优势，并报告总令牌与调用。\"\n    }\n  },\n  \"seeds\": [20260816],\n  \"budget_ceiling\": \"最多128次本地模型调用，统一温度0；运行器超时1800秒；不使用付费API。\",\n  \"expected_signatures\": [\n    \"32 cases = 24 graph-changed + 8 safe-same-graph\",\n    \"2 models x 32 cases x 2 paired modes = 128 model calls\",\n    \"mechanical exact-sequence scoring with no LLM judge\"\n  ],\n  \"falsification_rule\": \"主张仅在总体缓存诱发失败率至少0.10、两个模型均非零、至少两个编辑类别非零且安全命中缓存正确率不低于反事实缓存正确率时存活；任一条件失败即降级或淘汰，不以缩窄到单个漂亮案例保活。\",\n  \"confounders\": [\n    \"提示级适配代理不等于APC完整系统\",\n    \"英语合成模板可能夸大锚定\",\n    \"所有模型来自Qwen家族\",\n    \"精确动作序列只在唯一最小计划设定下合理\",\n    \"固定条件顺序可能有系统性运行时影响\"\n  ],\n  \"declared_inputs\": [\"implementation_v003/cache_structural_counterfactual_benchmark.py\"],\n  \"declared_outputs\": []\n}"
+          },
+          {
+            "fts_rank": 3,
+            "fused_score": 0.015873015873015872,
+            "line_end": 84,
+            "line_start": 1,
+            "path": "experiment_v003/attempts/formal-cache-003/spec.json",
+            "semantic_rank": null,
+            "source_sha256": "4f42f5167eb2ea56973c12c1de0cf91378f09c7f473f4e655c890bb707b24a71",
+            "text": "{\n  \"baseline_specs\": [\n    \"full_replan：相同模型只看目标任务与相同动作清单，从头生成计划\",\n    \"cache_adapt：相同模型额外看到参考任务和缓存计划，并被要求按目标约束适配\",\n    \"safe_same_graph：参考与目标措辞变化但金标准动作图不变的缓存安全命中负控制\"\n  ],\n  \"budget_ceiling\": \"最多128次本地模型调用，统一温度0；运行器超时1800秒；不使用付费API。\",\n  \"claim_ids\": [\n    \"claim-cache-induced-structural-failure\"\n  ],\n  \"confounders\": [\n    \"提示级适配代理不等于APC完整系统\",\n    \"英语合成模板可能夸大锚定\",\n    \"所有模型来自Qwen家族\",\n    \"精确动作序列只在唯一最小计划设定下合理\",\n    \"固定条件顺序可能有系统性运行时影响\"\n  ],\n  \"dataset\": \"程序确定性生成的32个英语任务：四类动作图编辑各6例，外加8例同结构安全命中对照\",\n  \"declared_inputs\": [\n    \"implementation_v003/cache_structural_counterfactual_benchmark.py\"\n  ],\n  \"declared_outputs\": [],\n  \"expected_signatures\": [\n    \"32 cases = 24 graph-changed + 8 safe-same-graph\",\n    \"2 models x 32 cases x 2 paired modes = 128 model calls\",\n    \"mechanical exact-sequence scoring with no LLM judge\"\n  ],\n  \"experiment_id\": \"cache-structural-counterfactual-001\",\n  \"falsification_rule\": \"主张仅在总体缓存诱发失败率至少0.10、两个模型均非零、至少两个编辑类别非零且安全命中缓存正确率不低于反事实缓存正确率时存活；任一条件失败即降级或淘汰，不以缩窄到单个漂亮案例保活。\",\n  \"hypothesis_id\": \"h-005\",\n  \"independent_ground_truth\": {\n    \"description\": \"案例生成器直接给出允许动作集合与唯一最小动作序列；评分器仅做动作标识词表与序列精确比较，不使用语言模型裁判，也不读取模型解释。\",\n    \"external_card_ids\": [],\n    \"external_evidence_ids\": [],\n    \"external_literature_refs\": [\n      \"P071\"\n    ],\n    \"run_local_fact_refs\": [\n      \"implementation_v003/cache_structural_counterfactual_benchmark.py\"\n    ]\n  },\n  \"model\": \"本机Ollama qwen3:4b 与 qwen3:8b\",\n  \"parity_dimensions\": {\n    \"budget\": {\n      \"notes\": \"缓存条件因包含模板而提示令牌更多；这是被测缓存信息处理的一部分。实验不声称等令牌方法优势，并报告总令牌与调用。\",\n      \"status\": \"different\"\n    },\n    \"information_access\": {\n      \"notes\": \"缓存条件按定义额外看到参考任务与缓存模板；目标任务、动作清单和独立金标准完全相同。\",\n      \"status\": \"different\"\n    },\n    \"model_provider_revision\": {\n      \"notes\": \"每个成对比较使用相同Ollama模型标识；结果同时在qwen3:4b与qwen3:8b分层报告。\",\n      \"status\": \"matched\"\n    },\n    \"sampling_protocol\": {\n      \"notes\": \"温度0、确定性种子生成、相同输出模式和同一案例集合；条件顺序固定并公开。\",\n      \"status\": \"matched\"\n    },\n    \"tool_capability\": {\n      \"notes\": \"两个条件看到完全相同的允许动作标识及描述。\",\n      \"status\": \"matched\"\n    }\n  },\n  \"primary_metric\": \"cache_induced_failure_rate\",\n  \"provider\": \"本地Ollama\",\n  \"purpose\": \"independent_claim_validation\",\n  \"research_question\": \"在同一目标任务与同一模型上，加入一个高层意图相似但动作图发生最小编辑的缓存计划模板，是否会产生从头规划没有的额外结构计划失败？\",\n  \"revision\": \"formal-r1\",\n  \"run_id\": \"20260815_2342_run12\",\n  \"sampling_unit\": \"模型配置与成对任务的组合；每一组合包含从头规划和缓存适配两个条件\",\n  \"schema_version\": 1,\n  \"secondary_metrics\": [\n    \"full_replan_accuracy\",\n    \"cache_adapt_accuracy\",\n    \"safe_full_replan_accuracy\",\n    \"safe_cache_adapt_accuracy\",\n    \"cache_induced_failure_rate_by_edit\"\n  ],\n  \"seeds\": [\n    20260816\n  ],\n  \"version\": \"v003\"\n}"
+          },
+          {
+            "fts_rank": 4,
+            "fused_score": 0.015625,
+            "line_end": 84,
+            "line_start": 1,
+            "path": "experiment_v003/specs/cache-structural-counterfactual-001.json",
+            "semantic_rank": null,
+            "source_sha256": "4f42f5167eb2ea56973c12c1de0cf91378f09c7f473f4e655c890bb707b24a71",
+            "text": "{\n  \"baseline_specs\": [\n    \"full_replan：相同模型只看目标任务与相同动作清单，从头生成计划\",\n    \"cache_adapt：相同模型额外看到参考任务和缓存计划，并被要求按目标约束适配\",\n    \"safe_same_graph：参考与目标措辞变化但金标准动作图不变的缓存安全命中负控制\"\n  ],\n  \"budget_ceiling\": \"最多128次本地模型调用，统一温度0；运行器超时1800秒；不使用付费API。\",\n  \"claim_ids\": [\n    \"claim-cache-induced-structural-failure\"\n  ],\n  \"confounders\": [\n    \"提示级适配代理不等于APC完整系统\",\n    \"英语合成模板可能夸大锚定\",\n    \"所有模型来自Qwen家族\",\n    \"精确动作序列只在唯一最小计划设定下合理\",\n    \"固定条件顺序可能有系统性运行时影响\"\n  ],\n  \"dataset\": \"程序确定性生成的32个英语任务：四类动作图编辑各6例，外加8例同结构安全命中对照\",\n  \"declared_inputs\": [\n    \"implementation_v003/cache_structural_counterfactual_benchmark.py\"\n  ],\n  \"declared_outputs\": [],\n  \"expected_signatures\": [\n    \"32 cases = 24 graph-changed + 8 safe-same-graph\",\n    \"2 models x 32 cases x 2 paired modes = 128 model calls\",\n    \"mechanical exact-sequence scoring with no LLM judge\"\n  ],\n  \"experiment_id\": \"cache-structural-counterfactual-001\",\n  \"falsification_rule\": \"主张仅在总体缓存诱发失败率至少0.10、两个模型均非零、至少两个编辑类别非零且安全命中缓存正确率不低于反事实缓存正确率时存活；任一条件失败即降级或淘汰，不以缩窄到单个漂亮案例保活。\",\n  \"hypothesis_id\": \"h-005\",\n  \"independent_ground_truth\": {\n    \"description\": \"案例生成器直接给出允许动作集合与唯一最小动作序列；评分器仅做动作标识词表与序列精确比较，不使用语言模型裁判，也不读取模型解释。\",\n    \"external_card_ids\": [],\n    \"external_evidence_ids\": [],\n    \"external_literature_refs\": [\n      \"P071\"\n    ],\n    \"run_local_fact_refs\": [\n      \"implementation_v003/cache_structural_counterfactual_benchmark.py\"\n    ]\n  },\n  \"model\": \"本机Ollama qwen3:4b 与 qwen3:8b\",\n  \"parity_dimensions\": {\n    \"budget\": {\n      \"notes\": \"缓存条件因包含模板而提示令牌更多；这是被测缓存信息处理的一部分。实验不声称等令牌方法优势，并报告总令牌与调用。\",\n      \"status\": \"different\"\n    },\n    \"information_access\": {\n      \"notes\": \"缓存条件按定义额外看到参考任务与缓存模板；目标任务、动作清单和独立金标准完全相同。\",\n      \"status\": \"different\"\n    },\n    \"model_provider_revision\": {\n      \"notes\": \"每个成对比较使用相同Ollama模型标识；结果同时在qwen3:4b与qwen3:8b分层报告。\",\n      \"status\": \"matched\"\n    },\n    \"sampling_protocol\": {\n      \"notes\": \"温度0、确定性种子生成、相同输出模式和同一案例集合；条件顺序固定并公开。\",\n      \"status\": \"matched\"\n    },\n    \"tool_capability\": {\n      \"notes\": \"两个条件看到完全相同的允许动作标识及描述。\",\n      \"status\": \"matched\"\n    }\n  },\n  \"primary_metric\": \"cache_induced_failure_rate\",\n  \"provider\": \"本地Ollama\",\n  \"purpose\": \"independent_claim_validation\",\n  \"research_question\": \"在同一目标任务与同一模型上，加入一个高层意图相似但动作图发生最小编辑的缓存计划模板，是否会产生从头规划没有的额外结构计划失败？\",\n  \"revision\": \"formal-r1\",\n  \"run_id\": \"20260815_2342_run12\",\n  \"sampling_unit\": \"模型配置与成对任务的组合；每一组合包含从头规划和缓存适配两个条件\",\n  \"schema_version\": 1,\n  \"secondary_metrics\": [\n    \"full_replan_accuracy\",\n    \"cache_adapt_accuracy\",\n    \"safe_full_replan_accuracy\",\n    \"safe_cache_adapt_accuracy\",\n    \"cache_induced_failure_rate_by_edit\"\n  ],\n  \"seeds\": [\n    20260816\n  ],\n  \"version\": \"v003\"\n}"
+          },
+          {
+            "fts_rank": 5,
+            "fused_score": 0.015384615384615385,
+            "line_end": 210,
+            "line_start": 115,
+            "path": "experiment_v003/attempts/formal-cache-003/execution.json",
+            "semantic_rank": null,
+            "source_sha256": "1d23393d88cceaa2d959d5664f9fe9da70d1f3a7c423ad2ef4604386db8e164d",
+            "text": "          \"sha256\": \"8cacbfc82bc62362601264dd5cf0fde705c10faa754a10183d8ae37b67443b4f\",\n          \"size_bytes\": 45420\n        }\n      ]\n    },\n    \"sensitive_environment_passthrough\": [],\n    \"subject\": {\n      \"argv0\": \"D:\\\\Desktop\\\\crl\\\\env\\\\crl_agent_v3\\\\python.exe\",\n      \"dependencies\": {\n        \"reason\": \"subject dependencies are not automatically inspected or inferred from runner dependencies\",\n        \"status\": \"unbound\"\n      },\n      \"environment\": {\n        \"policy\": \"sanitized_parent_with_explicit_sensitive_passthrough\",\n        \"status\": \"partially_bound\",\n        \"unbound_reason\": \"non-sensitive subject environment names and values are not persisted\"\n      },\n      \"executable\": {\n        \"path\": \"D:\\\\Desktop\\\\crl\\\\env\\\\crl_agent_v3\\\\python.exe\",\n        \"resolution\": \"absolute_path\",\n        \"sha256\": \"0562f573871cb16a2fb8de16e3d486e3dfd74bb83c7e87db265561917d05ad1a\",\n        \"size_bytes\": 105288,\n        \"status\": \"bound\"\n      },\n      \"runner_relationship\": \"same_executable\",\n      \"runtime\": {\n        \"python\": \"3.11.15 | packaged by Anaconda, Inc. | (main, Jun 11 2026, 15:12:53) [MSC v.1942 64 bit (AMD64)]\",\n        \"status\": \"bound_to_runner_python\"\n      }\n    }\n  },\n  \"evidence_contract_ok\": true,\n  \"experiment_spec\": {\n    \"snapshot\": {\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260815_2342_run12\\\\experiment_v003\\\\attempts\\\\formal-cache-003\\\\spec.json\",\n      \"sha256\": \"4f42f5167eb2ea56973c12c1de0cf91378f09c7f473f4e655c890bb707b24a71\",\n      \"size_bytes\": 3936\n    },\n    \"source_path\": \"experiment_v003/specs/cache-structural-counterfactual-001.json\"\n  },\n  \"finished_at_utc\": \"2026-08-15T16:37:08.520430Z\",\n  \"implementation_files\": [\n    {\n      \"path\": \"implementation_v003/cache_structural_counterfactual_benchmark.py\",\n      \"sha256\": \"1700c1a9b0f081ea74abfb719059d1f447526f7d027b1447bafc7df72fb277d7\",\n      \"size_bytes\": 16194\n    }\n  ],\n  \"inputs\": [],\n  \"metrics\": {\n    \"contains_possible_credential\": false,\n    \"credential_detection\": [],\n    \"snapshot\": {\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260815_2342_run12\\\\experiment_v003\\\\attempts\\\\formal-cache-003\\\\metrics.json\",\n      \"sha256\": \"5fbdd95abd84fdb333400593e071c29bd7e980727a76bac655fe9ec4ffd13a0d\",\n      \"size_bytes\": 2686\n    },\n    \"source_path\": \"experiment_v003/attempts/formal-cache-003/metrics-output.json\",\n    \"source_sha256\": \"5fbdd95abd84fdb333400593e071c29bd7e980727a76bac655fe9ec4ffd13a0d\",\n    \"source_size_bytes\": 2686,\n    \"validation_errors\": []\n  },\n  \"metrics_contract_ok\": true,\n  \"output_contract_ok\": true,\n  \"outputs\": [\n    {\n      \"after\": {\n        \"artifact_retained\": true,\n        \"contains_possible_credential\": false,\n        \"credential_detection\": [],\n        \"exists\": true,\n        \"sha256\": \"f1304f9612cebe899a8bc0a0be608258352beb1113f2a4a621b5b1ebacba1e94\",\n        \"size_bytes\": 255519\n      },\n      \"before\": {\n        \"exists\": false\n      },\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260815_2342_run12\\\\experiment_v003\\\\attempts\\\\formal-cache-003\\\\raw-results.jsonl\"\n    }\n  ],\n  \"process_tree_cleanup_ok\": null,\n  \"run_root\": \"D:\\\\Desktop\\\\crl\\\\20260815_2342_run12\",\n  \"runner_exit_code\": 0,\n  \"schema_version\": 8,\n  \"seed\": {\n    \"status\": \"set\",\n    \"value\": \"20260816\"\n  },\n  \"started_at_utc\": \"2026-08-15T16:31:56.047197Z\",\n  \"stdout_as_evidence\": true,\n  \"termination_method\": null,\n  \"timed_out\": false,\n  \"timeout_seconds\": 1800.0,\n  \"version\": \"v003\",\n  \"warnings\": []\n}"
+          },
+          {
+            "fts_rank": 7,
+            "fused_score": 0.014925373134328358,
+            "line_end": 114,
+            "line_start": 1,
+            "path": "experiment_v003/attempts/formal-cache-003/execution.json",
+            "semantic_rank": null,
+            "source_sha256": "1d23393d88cceaa2d959d5664f9fe9da70d1f3a7c423ad2ef4604386db8e164d",
+            "text": "{\n  \"argv\": [\n    \"D:\\\\Desktop\\\\crl\\\\env\\\\crl_agent_v3\\\\python.exe\",\n    \"cache_structural_counterfactual_benchmark.py\",\n    \"--models\",\n    \"qwen3:4b\",\n    \"qwen3:8b\",\n    \"--timeout\",\n    \"120\",\n    \"--metrics-output\",\n    \"D:\\\\Desktop\\\\crl\\\\20260815_2342_run12\\\\experiment_v003\\\\attempts\\\\formal-cache-003\\\\metrics-output.json\",\n    \"--raw-output\",\n    \"D:\\\\Desktop\\\\crl\\\\20260815_2342_run12\\\\experiment_v003\\\\attempts\\\\formal-cache-003\\\\raw-results.jsonl\"\n  ],\n  \"attempt_id\": \"formal-cache-003\",\n  \"budget_facts\": {\n    \"actual\": {\n      \"api_calls\": 128,\n      \"duration_seconds\": 312.4735535,\n      \"gpu_time_seconds\": \"unknown\",\n      \"tokens\": 43959\n    },\n    \"comparison\": {\n      \"reason\": \"budget_ceiling is not a machine-readable JSON object\",\n      \"status\": \"unavailable\"\n    },\n    \"machine_readable_limits\": null,\n    \"spec_budget_ceiling\": \"最多128次本地模型调用，统一温度0；运行器超时1800秒；不使用付费API。\",\n    \"warnings\": []\n  },\n  \"capture\": {\n    \"stderr\": {\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260815_2342_run12\\\\experiment_v003\\\\attempts\\\\formal-cache-003\\\\stderr.bin\",\n      \"redaction_applied\": false,\n      \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n      \"size_bytes\": 0\n    },\n    \"stdout\": {\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260815_2342_run12\\\\experiment_v003\\\\attempts\\\\formal-cache-003\\\\stdout.bin\",\n      \"redaction_applied\": false,\n      \"sha256\": \"1c9d6f16a13ed58dfd69444995c78059b836955d4de2cd8d97f7aebb8c5919c1\",\n      \"size_bytes\": 12548\n    }\n  },\n  \"command_error\": null,\n  \"command_exit_code\": 0,\n  \"cwd\": \"D:\\\\Desktop\\\\crl\\\\20260815_2342_run12\\\\implementation_v003\",\n  \"duration_seconds\": 312.4735535,\n  \"environment_facts\": {\n    \"cpu_count\": 16,\n    \"declared_facts\": {\n      \"model\": \"qwen3:4b+qwen3:8b\",\n      \"prompt_revision\": \"formal-r1\",\n      \"provider\": \"local_ollama\"\n    },\n    \"git\": {\n      \"reason\": \"ValueError: command exited with code 128\",\n      \"status\": \"unavailable\"\n    },\n    \"nvidia\": {\n      \"cuda_version\": \"13.1\",\n      \"gpus\": [\n        {\n          \"driver_version\": \"591.86\",\n          \"index\": \"0\",\n          \"memory_total_mib\": \"16311\",\n          \"name\": \"NVIDIA GeForce RTX 5060 Ti\"\n        }\n      ],\n      \"status\": \"available\"\n    },\n    \"platform\": \"Windows-10-10.0.26100-SP0\",\n    \"runner\": {\n      \"dependencies\": {\n        \"scope\": \"formal_runner_machine_environment\",\n        \"snapshot\": {\n          \"path\": \"D:\\\\Desktop\\\\crl\\\\20260815_2342_run12\\\\experiment_v003\\\\attempts\\\\formal-cache-003\\\\dependencies.txt\",\n          \"sha256\": \"480ab3b94b0b3b95bb6ff16eb9c4e138b942a818e488d43f71f810c5fe2e143a\",\n          \"size_bytes\": 769\n        },\n        \"source_path\": \"D:\\\\Desktop\\\\crl\\\\crl_agent_v3\\\\CRL_ENVIRONMENT_LOCK.txt\",\n        \"source_type\": \"lock_file\",\n        \"subject_relationship\": \"unbound\"\n      },\n      \"executable\": {\n        \"path\": \"D:\\\\Desktop\\\\crl\\\\env\\\\crl_agent_v3\\\\python.exe\",\n        \"sha256\": \"0562f573871cb16a2fb8de16e3d486e3dfd74bb83c7e87db265561917d05ad1a\",\n        \"size_bytes\": 105288,\n        \"status\": \"bound\"\n      },\n      \"python\": \"3.11.15 | packaged by Anaconda, Inc. | (main, Jun 11 2026, 15:12:53) [MSC v.1942 64 bit (AMD64)]\",\n      \"runner_and_modules\": [\n        {\n          \"path\": \"tools/run_local_experiment.py\",\n          \"sha256\": \"1b88d8c58b14530f06e19ff3993a42cda2edac67b15dd229e9c567aba74434b7\",\n          \"size_bytes\": 37357\n        },\n        {\n          \"path\": \"crl_v3/experiment.py\",\n          \"sha256\": \"4c513a8b90978e02f332292d3760dcdcc6cb3825c81833812f8b9e2f3c319e4c\",\n          \"size_bytes\": 45593\n        },\n        {\n          \"path\": \"crl_v3/falsification.py\",\n          \"sha256\": \"5a852d0df4101c5b240363559d0cc05a2f64c725574d999b999e92deba97b9b8\",\n          \"size_bytes\": 40435\n        },\n        {\n          \"path\": \"crl_v3/workspace.py\",\n          \"sha256\": \"a78a8c043ce52bed6048d307e85a8544c40ffb3bb5b98e5864654a2e7c3c8b7d\",\n          \"size_bytes\": 28943\n        },\n        {\n          \"path\": \"crl_v3/decision.py\","
+          },
+          {
+            "fts_rank": 8,
+            "fused_score": 0.014705882352941176,
+            "line_end": 95,
+            "line_start": 1,
+            "path": "hypotheses_v003/portfolio.json",
+            "semantic_rank": null,
+            "source_sha256": "bf1b307d694329e8195ada5f3d3301106c7bb150cfbe98289704f478083475ec",
+            "text": "{\n  \"created_at_utc\": \"2026-08-15T16:07:58.678704Z\",\n  \"hypotheses\": [\n    {\n      \"alternative_explanations\": [\n        \"探针泄漏测试答案\",\n        \"收益来自手写工具契约\",\n        \"行为指纹只记住探针点\",\n        \"确定性解析器编码金标准能力类\"\n      ],\n      \"changed_computation\": {\n        \"baseline\": \"仅依赖名称、描述和模式的语义检索或合并。\",\n        \"budget_effect\": \"探针是可摊销的离线成本；运行时调用与语义检索基线匹配。\",\n        \"information_available\": \"公开工具接口、允许的探针输入与实际返回；不读取隐藏测试真值。\",\n        \"intervention\": \"对工具执行固定黑盒探针，形成输入—输出—副作用行为指纹；先选能力等价类，再按确定性政策选具体工具。\",\n        \"timing\": \"工具注册或更新后的离线探查阶段，以及运行时路由之前。\"\n      },\n      \"created_at_utc\": \"2026-08-15T16:08:03.824254Z\",\n      \"descriptors\": {\n        \"budget_class\": \"可摊销探针预算\",\n        \"computation_stage\": \"工具发现与路由\",\n        \"evaluation_mode\": \"描述扰动与保留输入泛化\",\n        \"information_source\": \"实际工具执行\",\n        \"intervention_family\": \"黑盒行为探针与能力等价类\",\n        \"problem_family\": \"工具描述偏置与相似工具误选\",\n        \"timing_class\": \"离线探查加运行时路由\"\n      },\n      \"falsifier\": \"若既有工作已通过试错实验学习工具差异并据此路由；或简单对称描述、语义合并与行为指纹追平；或指纹不能迁移到保留输入，则候选淘汰。\",\n      \"hypothesis_id\": \"h-004\",\n      \"lineage_note\": \"h-003 的工具别名效应被本地实验否定后，转向工具选择对描述偏置的正交干预；不继承来源依赖聚合方法。\",\n      \"literature_refs\": [\n        \"P069\",\n        \"P087\",\n        \"P089\",\n        \"P084\"\n      ],\n      \"mechanism_claim\": \"真实行为指纹比描述语义更稳定地表示工具能力，可降低描述与顺序扰动下的错误路由和错误合并。\",\n      \"minimal_killer_experiment\": \"构造真正等价、探针集上等价但保留输入不同、描述相似但行为不同的工具，交叉描述与排序，比较语义合并和行为指纹路由。\",\n      \"nearest_prior_risk\": \"ToolExpNet 的自适应模拟实验和经验网络可能直接占据通过真实试验学习细微工具差异的计算。\",\n      \"parent_ids\": [],\n      \"problem\": \"近似工具的名称和描述会造成选择偏置，语义相似也可能把行为不同的工具错误合并。\",\n      \"revision\": 3,\n      \"status\": \"prior_collision\",\n      \"status_reason\": \"ToolExpNet已通过自适应模拟试验探索相似工具差异并以经验网络指导选择，直接命中从真实行为探查到路由的changed computation；ToolScope与Canary Tools进一步占据问题和评价。\",\n      \"target_failure\": {\n        \"card_ids\": [\n          \"failure-identical-tool-description-order-bias\"\n        ],\n        \"evidence_ids\": [],\n        \"summary\": \"描述扰动改变工具选择，且仅按语义合并无法区分描述相似但真实行为不同的工具。\"\n      },\n      \"title\": \"以黑盒行为指纹替代描述文本进行工具路由\",\n      \"updated_at_utc\": \"2026-08-15T16:31:16.822690Z\"\n    },\n    {\n      \"alternative_explanations\": [\n        \"缓存适配提示本身诱导复制\",\n        \"反事实措辞不自然\",\n        \"小模型一般规划能力太弱\",\n        \"精确动作序列指标过严\",\n        \"任务对直接泄漏正确差异\"\n      ],\n      \"changed_computation\": {\n        \"baseline\": \"按高层关键词/语义命中结构化计划模板，并由轻量模型适配后执行；评价只报告平均任务表现、成本和延迟。\",\n        \"budget_effect\": \"在每一缓存策略内固定任务与工具环境，另报告模型调用、令牌和延迟，不把更高成本完整规划的优势隐藏。\",\n        \"information_available\": \"任务文本、公开工具清单、缓存模板、代理输出轨迹及确定性环境终态；不读取模型内部状态。\",\n        \"intervention\": \"生成最小约束反事实任务对并给出机械动作依赖图；强制缓存命中后，将失败分解为错误命中、适配未修复与普通完整规划失败。\",\n        \"timing\": \"离线评价缓存系统时。\"\n      },\n      \"created_at_utc\": \"2026-08-15T16:10:22.080452Z\",\n      \"descriptors\": {\n        \"budget_class\": \"报告质量成本前沿\",\n        \"computation_stage\": \"计划缓存命中与适配评价\",\n        \"evaluation_mode\": \"缓存特有失败因果分解\",\n        \"information_source\": \"任务、计划轨迹与确定性终态\",\n        \"intervention_family\": \"最小动作图反事实诊断\",\n        \"problem_family\": \"计划缓存结构失配\",\n        \"timing_class\": \"离线评价\"\n      },\n      \"falsifier\": \"若 APC 式轻量适配在结构反事实上几乎全部修复；或缓存条件失败不高于同模型不缓存完整规划；或 Temporal Semantic Caching 等先行已做同等动作图反事实与三路失败分解，则候选淘汰。\",\n      \"hypothesis_id\": \"h-005\",\n      \"lineage_note\": \"h-004 被 ToolExpNet 直接碰撞后，转向计划复用系统的评价缺口；贡献形态预设为稳定现象与诊断基准，而非新缓存方法。\",\n      \"literature_refs\": [\n        \"P071\",\n        \"P004\",\n        \"P054\",\n        \"P060\"\n      ],\n      \"mechanism_claim\": \"平均自然任务会掩盖缓存特有的结构失配；最小动作图反事实对能机械分离缓存命中是否安全、适配是否真正修复以及节省是否来自复用错误计算。\",\n      \"minimal_killer_experiment\": \"在两个确定性工具域构造16个任务对，每对只改变一个约束槽并翻转动作集合、顺序或条件边；比较从头规划、原样复用、APC式模板适配和依赖签名拒绝命中，测精确计划、终态成功、错误命中与适配恢复。\",\n      \"nearest_prior_risk\": \"Agentic Plan Caching、AgenticCache、Temporal Semantic Caching、Generative Caching 与 Structured Intent Canonicalization 已覆盖缓存命中、模板适配、验证和错误命中；必须证明动作图反事实及失败分解未被同等评价。\",\n      \"parent_ids\": [],\n      \"problem\": \"计划缓存以语义或高层意图命中相似任务，再让小模型适配模板；一个很小的约束变化却可能改变必要动作、依赖边或提交条件，使缓存命中看似合理而计算结构已经失效。\",\n      \"revision\": 5,\n      \"status\": \"falsified\","
+          }
+        ],
+        "kind": "fixed_anchor",
+        "query": "implementation baseline experiment reviewer 实现 基线 实验 评审",
+        "semantic_reason": "semantic_index_missing",
+        "semantic_status": "DEGRADED"
+      },
+      {
+        "hits": [
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 1,
+            "fused_score": 0.01639344262295082,
+            "line_end": 34,
+            "line_start": 1,
+            "path": "workbench_v004/h-006.json",
+            "semantic_rank": null,
+            "source_sha256": "3ba37611e8812be5fec04e85714797683c6bf5a88e210fc373e3becf961deaef",
+            "text": "{\n  \"hypothesis_id\": \"h-006\",\n  \"title\": \"不可逆动作的信息就绪性调度\",\n  \"parent_ids\": [],\n  \"lineage_note\": \"h-005 多结构Formal反证缓存特有锚定后，转向执行前动作偏序；不继承计划缓存评价。\",\n  \"problem\": \"代理可能在读取会决定参数、分支或是否执行的信息前，先释放不可逆或高补偿成本动作；所有工具均可局部成功，但后续正确信息已无法撤销终态损失。\",\n  \"target_failure\": {\n    \"summary\": \"同一工具集合与局部成功回执下，代理违反读取结果到不可逆提交之间的信息依赖边，形成提交前信息未就绪错误。\",\n    \"card_ids\": [\"operator-milestone-dag-trajectory-evaluation\", \"operator-bilevel-graph-toolchain-planning\", \"operator-smt-preexecution-policy-guard\"],\n    \"evidence_ids\": []\n  },\n  \"changed_computation\": {\n    \"baseline\": \"ReAct或计划器按语言模型产生的顺序执行，只在工具参数合法或写动作一般风险上门控。\",\n    \"intervention\": \"构造读取—决策谓词—动作的信息依赖图并标注可逆性；只有全部支配某不可逆动作的读取结果已取得并解析时才释放该动作。\",\n    \"information_available\": \"用户任务、公开工具前后条件、已获得的只读结果和动作可逆性标签；不读取隐藏终态。\",\n    \"timing\": \"每个不可逆动作执行之前。\",\n    \"budget_effect\": \"不增加语言模型调用；只改变动作偏序并可能增加等待时间。\"\n  },\n  \"mechanism_claim\": \"显式信息依赖而非一般动作风险决定不可逆提交何时安全；就绪性调度可在工具集合不变时避免提交早于证据的不可恢复错误。\",\n  \"falsifier\": \"若现有依赖图规划、工作流约束或变异动作门控已表达同一前置关系；若静态所有读先于所有写追平；或信息依赖只能由金标准人工标注，则候选淘汰。\",\n  \"minimal_killer_experiment\": \"构造读取结果支配不同写动作的成对任务，比较ReAct、静态先读后写、依赖图调度和一般变异动作门控，测不可逆遗憾率与无谓延迟。\",\n  \"nearest_prior_risk\": \"LLMCompiler/NaviAgent/IPIGuard的工具依赖图、ToolSandbox/TRAJECT-Bench/TPS-Bench的顺序依赖评价、SABER/Reason Less Verify More/ToolGate的写前门控共同形成直接构造性吸收。\",\n  \"alternative_explanations\": [\"只是经典数据流调度\", \"静态先读后写已足够\", \"依赖标签泄漏正确顺序\", \"优势来自禁止并行而非信息就绪\", \"现有工作流引擎已强制前置条件\"],\n  \"descriptors\": {\n    \"problem_family\": \"信息未就绪的不可逆提交\",\n    \"computation_stage\": \"执行前动作调度\",\n    \"intervention_family\": \"信息依赖图与不可逆动作释放门\",\n    \"information_source\": \"工具前后条件和只读结果\",\n    \"timing_class\": \"不可逆提交前\",\n    \"budget_class\": \"同调用预算但可能增加延迟\",\n    \"evaluation_mode\": \"动作顺序与终态遗憾\"\n  },\n  \"literature_refs\": [\"P037\", \"P048\", \"P046\", \"P074\", \"P006\"]\n}"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 3,
+            "fused_score": 0.015873015873015872,
+            "line_end": 95,
+            "line_start": 1,
+            "path": "hypotheses_v003/portfolio.json",
+            "semantic_rank": null,
+            "source_sha256": "bf1b307d694329e8195ada5f3d3301106c7bb150cfbe98289704f478083475ec",
+            "text": "{\n  \"created_at_utc\": \"2026-08-15T16:07:58.678704Z\",\n  \"hypotheses\": [\n    {\n      \"alternative_explanations\": [\n        \"探针泄漏测试答案\",\n        \"收益来自手写工具契约\",\n        \"行为指纹只记住探针点\",\n        \"确定性解析器编码金标准能力类\"\n      ],\n      \"changed_computation\": {\n        \"baseline\": \"仅依赖名称、描述和模式的语义检索或合并。\",\n        \"budget_effect\": \"探针是可摊销的离线成本；运行时调用与语义检索基线匹配。\",\n        \"information_available\": \"公开工具接口、允许的探针输入与实际返回；不读取隐藏测试真值。\",\n        \"intervention\": \"对工具执行固定黑盒探针，形成输入—输出—副作用行为指纹；先选能力等价类，再按确定性政策选具体工具。\",\n        \"timing\": \"工具注册或更新后的离线探查阶段，以及运行时路由之前。\"\n      },\n      \"created_at_utc\": \"2026-08-15T16:08:03.824254Z\",\n      \"descriptors\": {\n        \"budget_class\": \"可摊销探针预算\",\n        \"computation_stage\": \"工具发现与路由\",\n        \"evaluation_mode\": \"描述扰动与保留输入泛化\",\n        \"information_source\": \"实际工具执行\",\n        \"intervention_family\": \"黑盒行为探针与能力等价类\",\n        \"problem_family\": \"工具描述偏置与相似工具误选\",\n        \"timing_class\": \"离线探查加运行时路由\"\n      },\n      \"falsifier\": \"若既有工作已通过试错实验学习工具差异并据此路由；或简单对称描述、语义合并与行为指纹追平；或指纹不能迁移到保留输入，则候选淘汰。\",\n      \"hypothesis_id\": \"h-004\",\n      \"lineage_note\": \"h-003 的工具别名效应被本地实验否定后，转向工具选择对描述偏置的正交干预；不继承来源依赖聚合方法。\",\n      \"literature_refs\": [\n        \"P069\",\n        \"P087\",\n        \"P089\",\n        \"P084\"\n      ],\n      \"mechanism_claim\": \"真实行为指纹比描述语义更稳定地表示工具能力，可降低描述与顺序扰动下的错误路由和错误合并。\",\n      \"minimal_killer_experiment\": \"构造真正等价、探针集上等价但保留输入不同、描述相似但行为不同的工具，交叉描述与排序，比较语义合并和行为指纹路由。\",\n      \"nearest_prior_risk\": \"ToolExpNet 的自适应模拟实验和经验网络可能直接占据通过真实试验学习细微工具差异的计算。\",\n      \"parent_ids\": [],\n      \"problem\": \"近似工具的名称和描述会造成选择偏置，语义相似也可能把行为不同的工具错误合并。\",\n      \"revision\": 3,\n      \"status\": \"prior_collision\",\n      \"status_reason\": \"ToolExpNet已通过自适应模拟试验探索相似工具差异并以经验网络指导选择，直接命中从真实行为探查到路由的changed computation；ToolScope与Canary Tools进一步占据问题和评价。\",\n      \"target_failure\": {\n        \"card_ids\": [\n          \"failure-identical-tool-description-order-bias\"\n        ],\n        \"evidence_ids\": [],\n        \"summary\": \"描述扰动改变工具选择，且仅按语义合并无法区分描述相似但真实行为不同的工具。\"\n      },\n      \"title\": \"以黑盒行为指纹替代描述文本进行工具路由\",\n      \"updated_at_utc\": \"2026-08-15T16:31:16.822690Z\"\n    },\n    {\n      \"alternative_explanations\": [\n        \"缓存适配提示本身诱导复制\",\n        \"反事实措辞不自然\",\n        \"小模型一般规划能力太弱\",\n        \"精确动作序列指标过严\",\n        \"任务对直接泄漏正确差异\"\n      ],\n      \"changed_computation\": {\n        \"baseline\": \"按高层关键词/语义命中结构化计划模板，并由轻量模型适配后执行；评价只报告平均任务表现、成本和延迟。\",\n        \"budget_effect\": \"在每一缓存策略内固定任务与工具环境，另报告模型调用、令牌和延迟，不把更高成本完整规划的优势隐藏。\",\n        \"information_available\": \"任务文本、公开工具清单、缓存模板、代理输出轨迹及确定性环境终态；不读取模型内部状态。\",\n        \"intervention\": \"生成最小约束反事实任务对并给出机械动作依赖图；强制缓存命中后，将失败分解为错误命中、适配未修复与普通完整规划失败。\",\n        \"timing\": \"离线评价缓存系统时。\"\n      },\n      \"created_at_utc\": \"2026-08-15T16:10:22.080452Z\",\n      \"descriptors\": {\n        \"budget_class\": \"报告质量成本前沿\",\n        \"computation_stage\": \"计划缓存命中与适配评价\",\n        \"evaluation_mode\": \"缓存特有失败因果分解\",\n        \"information_source\": \"任务、计划轨迹与确定性终态\",\n        \"intervention_family\": \"最小动作图反事实诊断\",\n        \"problem_family\": \"计划缓存结构失配\",\n        \"timing_class\": \"离线评价\"\n      },\n      \"falsifier\": \"若 APC 式轻量适配在结构反事实上几乎全部修复；或缓存条件失败不高于同模型不缓存完整规划；或 Temporal Semantic Caching 等先行已做同等动作图反事实与三路失败分解，则候选淘汰。\",\n      \"hypothesis_id\": \"h-005\",\n      \"lineage_note\": \"h-004 被 ToolExpNet 直接碰撞后，转向计划复用系统的评价缺口；贡献形态预设为稳定现象与诊断基准，而非新缓存方法。\",\n      \"literature_refs\": [\n        \"P071\",\n        \"P004\",\n        \"P054\",\n        \"P060\"\n      ],\n      \"mechanism_claim\": \"平均自然任务会掩盖缓存特有的结构失配；最小动作图反事实对能机械分离缓存命中是否安全、适配是否真正修复以及节省是否来自复用错误计算。\",\n      \"minimal_killer_experiment\": \"在两个确定性工具域构造16个任务对，每对只改变一个约束槽并翻转动作集合、顺序或条件边；比较从头规划、原样复用、APC式模板适配和依赖签名拒绝命中，测精确计划、终态成功、错误命中与适配恢复。\",\n      \"nearest_prior_risk\": \"Agentic Plan Caching、AgenticCache、Temporal Semantic Caching、Generative Caching 与 Structured Intent Canonicalization 已覆盖缓存命中、模板适配、验证和错误命中；必须证明动作图反事实及失败分解未被同等评价。\",\n      \"parent_ids\": [],\n      \"problem\": \"计划缓存以语义或高层意图命中相似任务，再让小模型适配模板；一个很小的约束变化却可能改变必要动作、依赖边或提交条件，使缓存命中看似合理而计算结构已经失效。\",\n      \"revision\": 5,\n      \"status\": \"falsified\","
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 4,
+            "fused_score": 0.015625,
+            "line_end": 109,
+            "line_start": 109,
+            "path": "workbench_v003/diagnosis/preformal-cache-safety/diagnosis_facts.json",
+            "semantic_rank": null,
+            "source_sha256": "b73baf88f6270fc2895a12ec18d7c1b45fc0d1db8ad9906144aaecedc4de904f",
+            "text": "            \"text\": \"{\\n  \\\"created_at_utc\\\": \\\"2026-08-15T16:07:58.678704Z\\\",\\n  \\\"hypotheses\\\": [\\n    {\\n      \\\"alternative_explanations\\\": [\\n        \\\"探针泄漏测试答案\\\",\\n        \\\"收益来自手写工具契约\\\",\\n        \\\"行为指纹只记住探针点\\\",\\n        \\\"确定性解析器编码金标准能力类\\\"\\n      ],\\n      \\\"changed_computation\\\": {\\n        \\\"baseline\\\": \\\"仅依赖名称、描述和模式的语义检索或合并。\\\",\\n        \\\"budget_effect\\\": \\\"探针是可摊销的离线成本；运行时调用与语义检索基线匹配。\\\",\\n        \\\"information_available\\\": \\\"公开工具接口、允许的探针输入与实际返回；不读取隐藏测试真值。\\\",\\n        \\\"intervention\\\": \\\"对工具执行固定黑盒探针，形成输入—输出—副作用行为指纹；先选能力等价类，再按确定性政策选具体工具。\\\",\\n        \\\"timing\\\": \\\"工具注册或更新后的离线探查阶段，以及运行时路由之前。\\\"\\n      },\\n      \\\"created_at_utc\\\": \\\"2026-08-15T16:08:03.824254Z\\\",\\n      \\\"descriptors\\\": {\\n        \\\"budget_class\\\": \\\"可摊销探针预算\\\",\\n        \\\"computation_stage\\\": \\\"工具发现与路由\\\",\\n        \\\"evaluation_mode\\\": \\\"描述扰动与保留输入泛化\\\",\\n        \\\"information_source\\\": \\\"实际工具执行\\\",\\n        \\\"intervention_family\\\": \\\"黑盒行为探针与能力等价类\\\",\\n        \\\"problem_family\\\": \\\"工具描述偏置与相似工具误选\\\",\\n        \\\"timing_class\\\": \\\"离线探查加运行时路由\\\"\\n      },\\n      \\\"falsifier\\\": \\\"若既有工作已通过试错实验学习工具差异并据此路由；或简单对称描述、语义合并与行为指纹追平；或指纹不能迁移到保留输入，则候选淘汰。\\\",\\n      \\\"hypothesis_id\\\": \\\"h-004\\\",\\n      \\\"lineage_note\\\": \\\"h-003 的工具别名效应被本地实验否定后，转向工具选择对描述偏置的正交干预；不继承来源依赖聚合方法。\\\",\\n      \\\"literature_refs\\\": [\\n        \\\"P069\\\",\\n        \\\"P087\\\",\\n        \\\"P089\\\",\\n        \\\"P084\\\"\\n      ],\\n      \\\"mechanism_claim\\\": \\\"真实行为指纹比描述语义更稳定地表示工具能力，可降低描述与顺序扰动下的错误路由和错误合并。\\\",\\n      \\\"minimal_killer_experiment\\\": \\\"构造真正等价、探针集上等价但保留输入不同、描述相似但行为不同的工具，交叉描述与排序，比较语义合并和行为指纹路由。\\\",\\n      \\\"nearest_prior_risk\\\": \\\"ToolExpNet 的自适应模拟实验和经验网络可能直接占据通过真实试验学习细微工具差异的计算。\\\",\\n      \\\"parent_ids\\\": [],\\n      \\\"problem\\\": \\\"近似工具的名称和描述会造成选择偏置，语义相似也可能把行为不同的工具错误合并。\\\",\\n      \\\"revision\\\": 2,\\n      \\\"status\\\": \\\"prior_collision\\\",\\n      \\\"status_reason\\\": \\\"ToolExpNet已通过自适应模拟试验探索相似工具差异并以经验网络指导选择，直接命中从真实行为探查到路由的changed computation；ToolScope与Canary Tools进一步占据问题和评价。\\\",\\n      \\\"target_failure\\\": {\\n        \\\"card_ids\\\": [\\n          \\\"failure-identical-tool-description-order-bias\\\"\\n        ],\\n        \\\"evidence_ids\\\": [\\n          \\\"ev-p069-identical-tool-order-bias\\\"\\n        ],\\n        \\\"summary\\\": \\\"描述扰动改变工具选择，且仅按语义合并无法区分描述相似但真实行为不同的工具。\\\"\\n      },\\n      \\\"title\\\": \\\"以黑盒行为指纹替代描述文本进行工具路由\\\",\\n      \\\"updated_at_utc\\\": \\\"2026-08-15T16:08:48.504790Z\\\"\\n    },\\n    {\\n      \\\"alternative_explanations\\\": [\\n        \\\"缓存适配提示本身诱导复制\\\",\\n        \\\"反事实措辞不自然\\\",\\n        \\\"小模型一般规划能力太弱\\\",\\n        \\\"精确动作序列指标过严\\\",\\n        \\\"任务对直接泄漏正确差异\\\"\\n      ],\\n      \\\"changed_computation\\\": {\\n        \\\"baseline\\\": \\\"按高层关键词/语义命中结构化计划模板，并由轻量模型适配后执行；评价只报告平均任务表现、成本和延迟。\\\",\\n        \\\"budget_effect\\\": \\\"在每一缓存策略内固定任务与工具环境，另报告模型调用、令牌和延迟，不把更高成本完整规划的优势隐藏。\\\",\\n        \\\"information_available\\\": \\\"任务文本、公开工具清单、缓存模板、代理输出轨迹及确定性环境终态；不读取模型内部状态。\\\",\\n        \\\"intervention\\\": \\\"生成最小约束反事实任务对并给出机械动作依赖图；强制缓存命中后，将失败分解为错误命中、适配未修复与普通完整规划失败。\\\",\\n        \\\"timing\\\": \\\"离线评价缓存系统时。\\\"\\n      },\\n      \\\"created_at_utc\\\": \\\"2026-08-15T16:10:22.080452Z\\\",\\n      \\\"descriptors\\\": {\\n        \\\"budget_class\\\": \\\"报告质量成本前沿\\\",\\n        \\\"computation_stage\\\": \\\"计划缓存命中与适配评价\\\",\\n        \\\"evaluation_mode\\\": \\\"缓存特有失败因果分解\\\",\\n        \\\"information_source\\\": \\\"任务、计划轨迹与确定性终态\\\",\\n        \\\"intervention_family\\\": \\\"最小动作图反事实诊断\\\",\\n        \\\"problem_family\\\": \\\"计划缓存结构失配\\\",\\n        \\\"timing_class\\\": \\\"离线评价\\\"\\n      },\\n      \\\"falsifier\\\": \\\"若 APC 式轻量适配在结构反事实上几乎全部修复；或缓存条件失败不高于同模型不缓存完整规划；或 Temporal Semantic Caching 等先行已做同等动作图反事实与三路失败分解，则候选淘汰。\\\",\\n      \\\"hypothesis_id\\\": \\\"h-005\\\",\\n      \\\"lineage_note\\\": \\\"h-004 被 ToolExpNet 直接碰撞后，转向计划复用系统的评价缺口；贡献形态预设为稳定现象与诊断基准，而非新缓存方法。\\\",\\n      \\\"literature_refs\\\": [\\n        \\\"P071\\\",\\n        \\\"P004\\\",\\n        \\\"P054\\\",\\n        \\\"P060\\\"\\n      ],\\n      \\\"mechanism_claim\\\": \\\"平均自然任务会掩盖缓存特有的结构失配；最小动作图反事实对能机械分离缓存命中是否安全、适配是否真正修复以及节省是否来自复用错误计算。\\\",\\n      \\\"minimal_killer_experiment\\\": \\\"在两个确定性工具域构造16个任务对，每对只改变一个约束槽并翻转动作集合、顺序或条件边；比较从头规划、原样复用、APC式模板适配和依赖签名拒绝命中，测精确计划、终态成功、错误命中与适配恢复。\\\",\\n      \\\"nearest_prior_risk\\\": \\\"Agentic Plan Caching、AgenticCache、Temporal Semantic Caching、Generative Caching 与 Structured Intent Canonicalization 已覆盖缓存命中、模板适配、验证和错误命中；必须证明动作图反事实及失败分解未被同等评价。\\\",\\n      \\\"parent_ids\\\": [],\\n      \\\"problem\\\": \\\"计划缓存以语义或高层意图命中相似任务，再让小模型适配模板；一个很小的约束变化却可能改变必要动作、依赖边或提交条件，使缓存命中看似合理而计算结构已经失效。\\\",\\n      \\\"revision\\\": 2,\\n      \\\"status\\\": \\\"active\\\",\""
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 5,
+            "fused_score": 0.015384615384615385,
+            "line_end": 34,
+            "line_start": 1,
+            "path": "workbench_v003/h-004.json",
+            "semantic_rank": null,
+            "source_sha256": "9450785d6de34d9da35eeb9bbf5b37ae8a8d01313fb96220af661b7c4b500f38",
+            "text": "{\n  \"hypothesis_id\": \"h-004\",\n  \"title\": \"以黑盒行为指纹替代描述文本进行工具路由\",\n  \"parent_ids\": [],\n  \"lineage_note\": \"h-003 的工具别名效应被本地实验否定后，转向工具选择对描述偏置的正交干预；不继承来源依赖聚合方法。\",\n  \"problem\": \"近似工具的名称和描述会造成选择偏置，语义相似也可能把行为不同的工具错误合并。\",\n  \"target_failure\": {\n    \"summary\": \"描述扰动改变工具选择，且仅按语义合并无法区分描述相似但真实行为不同的工具。\",\n    \"card_ids\": [\"failure-identical-tool-description-order-bias\"],\n    \"evidence_ids\": [\"ev-p069-identical-tool-order-bias\"]\n  },\n  \"changed_computation\": {\n    \"baseline\": \"仅依赖名称、描述和模式的语义检索或合并。\",\n    \"intervention\": \"对工具执行固定黑盒探针，形成输入—输出—副作用行为指纹；先选能力等价类，再按确定性政策选具体工具。\",\n    \"information_available\": \"公开工具接口、允许的探针输入与实际返回；不读取隐藏测试真值。\",\n    \"timing\": \"工具注册或更新后的离线探查阶段，以及运行时路由之前。\",\n    \"budget_effect\": \"探针是可摊销的离线成本；运行时调用与语义检索基线匹配。\"\n  },\n  \"mechanism_claim\": \"真实行为指纹比描述语义更稳定地表示工具能力，可降低描述与顺序扰动下的错误路由和错误合并。\",\n  \"falsifier\": \"若既有工作已通过试错实验学习工具差异并据此路由；或简单对称描述、语义合并与行为指纹追平；或指纹不能迁移到保留输入，则候选淘汰。\",\n  \"minimal_killer_experiment\": \"构造真正等价、探针集上等价但保留输入不同、描述相似但行为不同的工具，交叉描述与排序，比较语义合并和行为指纹路由。\",\n  \"nearest_prior_risk\": \"ToolExpNet 的自适应模拟实验和经验网络可能直接占据通过真实试验学习细微工具差异的计算。\",\n  \"alternative_explanations\": [\"探针泄漏测试答案\", \"收益来自手写工具契约\", \"行为指纹只记住探针点\", \"确定性解析器编码金标准能力类\"],\n  \"descriptors\": {\n    \"problem_family\": \"工具描述偏置与相似工具误选\",\n    \"computation_stage\": \"工具发现与路由\",\n    \"intervention_family\": \"黑盒行为探针与能力等价类\",\n    \"information_source\": \"实际工具执行\",\n    \"timing_class\": \"离线探查加运行时路由\",\n    \"budget_class\": \"可摊销探针预算\",\n    \"evaluation_mode\": \"描述扰动与保留输入泛化\"\n  },\n  \"literature_refs\": [\"P069\", \"P087\", \"P089\", \"P084\"]\n}"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 6,
+            "fused_score": 0.015151515151515152,
+            "line_end": 108,
+            "line_start": 95,
+            "path": "workbench_v003/diagnosis/preformal-cache-safety/diagnosis_facts.json",
+            "semantic_rank": null,
+            "source_sha256": "b73baf88f6270fc2895a12ec18d7c1b45fc0d1db8ad9906144aaecedc4de904f",
+            "text": "            \"line_start\": 1,\n            \"path\": \"workbench_v003/h-004.json\",\n            \"semantic_rank\": null,\n            \"source_sha256\": \"9450785d6de34d9da35eeb9bbf5b37ae8a8d01313fb96220af661b7c4b500f38\",\n            \"text\": \"{\\n  \\\"hypothesis_id\\\": \\\"h-004\\\",\\n  \\\"title\\\": \\\"以黑盒行为指纹替代描述文本进行工具路由\\\",\\n  \\\"parent_ids\\\": [],\\n  \\\"lineage_note\\\": \\\"h-003 的工具别名效应被本地实验否定后，转向工具选择对描述偏置的正交干预；不继承来源依赖聚合方法。\\\",\\n  \\\"problem\\\": \\\"近似工具的名称和描述会造成选择偏置，语义相似也可能把行为不同的工具错误合并。\\\",\\n  \\\"target_failure\\\": {\\n    \\\"summary\\\": \\\"描述扰动改变工具选择，且仅按语义合并无法区分描述相似但真实行为不同的工具。\\\",\\n    \\\"card_ids\\\": [\\\"failure-identical-tool-description-order-bias\\\"],\\n    \\\"evidence_ids\\\": [\\\"ev-p069-identical-tool-order-bias\\\"]\\n  },\\n  \\\"changed_computation\\\": {\\n    \\\"baseline\\\": \\\"仅依赖名称、描述和模式的语义检索或合并。\\\",\\n    \\\"intervention\\\": \\\"对工具执行固定黑盒探针，形成输入—输出—副作用行为指纹；先选能力等价类，再按确定性政策选具体工具。\\\",\\n    \\\"information_available\\\": \\\"公开工具接口、允许的探针输入与实际返回；不读取隐藏测试真值。\\\",\\n    \\\"timing\\\": \\\"工具注册或更新后的离线探查阶段，以及运行时路由之前。\\\",\\n    \\\"budget_effect\\\": \\\"探针是可摊销的离线成本；运行时调用与语义检索基线匹配。\\\"\\n  },\\n  \\\"mechanism_claim\\\": \\\"真实行为指纹比描述语义更稳定地表示工具能力，可降低描述与顺序扰动下的错误路由和错误合并。\\\",\\n  \\\"falsifier\\\": \\\"若既有工作已通过试错实验学习工具差异并据此路由；或简单对称描述、语义合并与行为指纹追平；或指纹不能迁移到保留输入，则候选淘汰。\\\",\\n  \\\"minimal_killer_experiment\\\": \\\"构造真正等价、探针集上等价但保留输入不同、描述相似但行为不同的工具，交叉描述与排序，比较语义合并和行为指纹路由。\\\",\\n  \\\"nearest_prior_risk\\\": \\\"ToolExpNet 的自适应模拟实验和经验网络可能直接占据通过真实试验学习细微工具差异的计算。\\\",\\n  \\\"alternative_explanations\\\": [\\\"探针泄漏测试答案\\\", \\\"收益来自手写工具契约\\\", \\\"行为指纹只记住探针点\\\", \\\"确定性解析器编码金标准能力类\\\"],\\n  \\\"descriptors\\\": {\\n    \\\"problem_family\\\": \\\"工具描述偏置与相似工具误选\\\",\\n    \\\"computation_stage\\\": \\\"工具发现与路由\\\",\\n    \\\"intervention_family\\\": \\\"黑盒行为探针与能力等价类\\\",\\n    \\\"information_source\\\": \\\"实际工具执行\\\",\\n    \\\"timing_class\\\": \\\"离线探查加运行时路由\\\",\\n    \\\"budget_class\\\": \\\"可摊销探针预算\\\",\\n    \\\"evaluation_mode\\\": \\\"描述扰动与保留输入泛化\\\"\\n  },\\n  \\\"literature_refs\\\": [\\\"P069\\\", \\\"P087\\\", \\\"P089\\\", \\\"P084\\\"]\\n}\"\n          },\n          {\n            \"fts_rank\": 3,\n            \"fused_score\": 0.015873015873015872,\n            \"line_end\": 97,\n            \"line_start\": 1,\n            \"path\": \"hypotheses_v003/portfolio.json\",\n            \"semantic_rank\": null,\n            \"source_sha256\": \"3343da11958b9e291f40cefb70042cd78a9631fe96a0253b27bdacb03afc92db\","
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 7,
+            "fused_score": 0.014925373134328358,
+            "line_end": 316,
+            "line_start": 283,
+            "path": "workbench_v003/diagnosis/preformal-cache-safety/diagnosis_facts.json",
+            "semantic_rank": null,
+            "source_sha256": "b73baf88f6270fc2895a12ec18d7c1b45fc0d1db8ad9906144aaecedc4de904f",
+            "text": "            \"text\": \"      \\\"falsifier\\\": \\\"若跨任务族与至少两个模型的成对动作/结果分叉不显著高于同表示重复运行基线，或规范化相对最强等预算固定模板基线没有稳定降低分叉且不改善最差变体任务成功，则该现象或防御差分被否定。\\\",\\n      \\\"hypothesis_id\\\": \\\"h-002\\\",\\n      \\\"lineage_note\\\": \\\"h-001 被 false-success 与后置条件验证直接先行占据后，保留‘回执表面形式是否错误支配状态推理’这一未决因果问题，并转为成对变形评价候选。\\\",\\n      \\\"literature_refs\\\": [\\n        \\\"P084\\\",\\n        \\\"P037\\\",\\n        \\\"P007\\\",\\n        \\\"P038\\\",\\n        \\\"P079\\\",\\n        \\\"P097\\\"\\n      ],\\n      \\\"mechanism_claim\\\": \\\"工具智能体把观测的表面序列特征混入状态更新，导致对契约等价重编码缺乏策略不变性；契约驱动的规范事件视图能在不增加模型/工具预算的情况下显著降低成对策略分叉。\\\",\\n      \\\"minimal_killer_experiment\\\": \\\"构造 4 个有状态工具域、每域 12-20 个确定性任务；从同一规范事件生成 JSON 字段置换、紧凑/展开、结构化/等义自然语言、冗余确认语句四类变体。对 qwen3:4b、qwen2.5:7b 或 qwen3:8b 在温度 0 与固定前缀下成对复放，比较原始观测、统一文本模板、契约规范事件视图。核心指标为成对下一动作不一致率、最终结果不一致率、最差变体任务成功、平均任务成功及解析覆盖率。\\\",\\n      \\\"nearest_prior_risk\\\": \\\"Agentic Function Calling Robustness 已测用户改写和工具集扩展；工具输出扰动、提示注入防御、上下文规范化、结构化输出与通用变形测试可能直接或组合吸收本候选。必须检索是否已有 executed tool-result formatting 的成对语义保持评价。\\\",\\n      \\\"parent_ids\\\": [\\n        \\\"h-001\\\"\\n      ],\\n      \\\"problem\\\": \\\"工具智能体通常直接消费工具返回文本。即使两个返回经过公开契约归一化后表达完全相同的状态、值与可用动作，字段顺序、冗余自然语言、紧凑/展开序列化或等义状态词等表面重编码也可能改变智能体下一动作与最终任务结果；现有函数调用评价主要测调用构造或单一序列化下的轨迹正确性。\\\",\\n      \\\"revision\\\": 3,\\n      \\\"status\\\": \\\"prior_collision\\\",\\n      \\\"status_reason\\\": \\\"arXiv:2602.16666 已直接评价语义保持的工具响应键名、数据格式、包装与结构扰动；arXiv:2507.15296 与 AgentCheck 又占据工具返回扰动和固定响应复放。\\\",\\n      \\\"target_failure\\\": {\\n        \\\"card_ids\\\": [\\n          \\\"paper-p084\\\",\\n          \\\"operator-milestone-dag-trajectory-evaluation\\\",\\n          \\\"failure-repeat-run-reliability-collapse\\\"\\n        ],\\n        \\\"evidence_ids\\\": [\\n          \\\"ev-p084-expanded-toolkit-controlled-setting\\\",\\n          \\\"ev-p084-expanded-toolkit-table\\\",\\n          \\\"ev-p037-evaluation-core\\\",\\n          \\\"ev-p007-repeat-reliability-collapse\\\"\\n        ],\\n        \\\"summary\\\": \\\"固定任务、工具契约、潜在状态、历史与采样设置，仅对工具观测施加可机械证明语义保持的重编码后，智能体产生不等价下一动作或任务结果，形成观测表示不稳定。\\\"\\n      },\\n      \\\"title\\\": \\\"语义保持的工具观测重编码会诱发智能体策略分叉\\\",\\n      \\\"updated_at_utc\\\": \\\"2026-08-15T15:51:58.711314Z\\\"\\n    }\\n  ],\\n  \\\"revision\\\": 6,\\n  \\\"run_id\\\": \\\"20260815_2342_run12\\\",\\n  \\\"schema_version\\\": 1,\\n  \\\"updated_at_utc\\\": \\\"2026-08-15T15:51:58.711314Z\\\",\\n  \\\"version\\\": \\\"v001\\\"\\n}\"\n          }\n        ],\n        \"kind\": \"recent_context_recovery\",\n        \"query\": \"\\\"hypotheses\\\": [\\n\\\"baseline\\\": \\\"仅依赖名称、描述和模式的语义检索或合并。\\\",\\n\\\"budget_effect\\\": \\\"探针是可摊销的离线成本；运行时调用与语义检索基线匹配。\\\",\\n\\\"problem_family\\\": \\\"工具描述偏置与相似工具误选\\\",\\n\\\"falsifier\\\": \\\"若既有工作已通过试错实验学习工具差异并据此路由；或简单对称描述、语义合并与行为指纹追平；或指纹不能迁移到保留输入，则候选淘汰。\\\",\\n\\\"hypothesis_id\\\": \\\"h-004\\\",\\n\\\"lineage_note\\\": \\\"h-003 的工具别名效应被本地实验否定后，转向工具选择对描述偏置的正交干预；不继承来源依赖聚合方法。\\\",\\n\\\"mechanism_claim\\\": \\\"真实行为指纹比描述语义更稳定地表示工具能力，可降低描述与顺序扰动下的错误路由和错误合并。\\\",\\n\\\"minimal_killer_experiment\\\": \\\"构造真正等价、探针集上等价但保留输入不同、描述相似但行为不同的工具，交叉描述与排序，比较语义合并和行为指纹路由。\\\",\\n\\\"nearest_prior_risk\\\": \\\"ToolExpNet 的自适应模拟实验和经验网络可能直接占据通过真实试验学习细微工具差异的计算。\\\",\\n\\\"problem\\\": \\\"近似工具的名称和描述会造成选择偏置，语义相似也可能把行为不同的工具错误合并。\\\",\\n\\\"status_reason\\\": \\\"ToolExpNet已通过自适应模拟试验探索相似工具差异并以经验网络指导选择，直接命中从真实行为探查到路由的changed computation；ToolScope与Canary Tools进一步占据问题和评价。\\\",\",\n        \"semantic_reason\": \"semantic_index_missing\",\n        \"semantic_status\": \"DEGRADED\",\n        \"source_files\": [\n          {\n            \"mtime_ns\": 1786810228713177100,\n            \"path\": \"hypotheses_v003/portfolio.json\",\n            \"source_sha256\": \"3343da11958b9e291f40cefb70042cd78a9631fe96a0253b27bdacb03afc92db\"\n          }\n        ]\n      }\n    ],\n    \"semantic_reason\": \"semantic_index_missing\",\n    \"semantic_status\": \"DEGRADED\",\n    \"version\": \"v003\"\n  },\n  \"recall_status\": {\n    \"reason\": null,\n    \"semantic_reason\": \"semantic_index_missing\",\n    \"semantic_status\": \"DEGRADED\",\n    \"status\": \"READY\"\n  },\n  \"recent_files\": [\n    {\n      \"mtime_ns\": 1786811074023767200,\n      \"path\": \"workbench_v003/plan_cache_qwen3_8b.summary.json\",\n      \"sha256\": \"4051229fbb77ae87e74e8d20adbc8984caabb857849d75e1b51cb224cee6921d\",\n      \"size_bytes\": 378\n    },\n    {"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 8,
+            "fused_score": 0.014705882352941176,
+            "line_end": 34,
+            "line_start": 1,
+            "path": "workbench_v003/h-005.json",
+            "semantic_rank": null,
+            "source_sha256": "c5b6cf55cdbbdc71455be67d50a21cbed0ec4714122b29926d33a02c59cf96df",
+            "text": "{\n  \"hypothesis_id\": \"h-005\",\n  \"title\": \"计划缓存的结构反事实安全评价\",\n  \"parent_ids\": [],\n  \"lineage_note\": \"h-004 被 ToolExpNet 直接碰撞后，转向计划复用系统的评价缺口；贡献形态预设为稳定现象与诊断基准，而非新缓存方法。\",\n  \"problem\": \"计划缓存以语义或高层意图命中相似任务，再让小模型适配模板；一个很小的约束变化却可能改变必要动作、依赖边或提交条件，使缓存命中看似合理而计算结构已经失效。\",\n  \"target_failure\": {\n    \"summary\": \"高文本相似且共享高层关键词的任务对具有不同最小动作依赖图；缓存模板适配保留旧分支、旧动作或旧顺序，造成不缓存完整规划不会产生的执行失败。\",\n    \"card_ids\": [\"paper-p071\", \"failure-constrained-plan-surface-validity\"],\n    \"evidence_ids\": [\"ev-p071-cache-false-positive-boundary\", \"ev-p071-plan-template-reuse\", \"ev-p004-macro-constraint-failure\"]\n  },\n  \"changed_computation\": {\n    \"baseline\": \"按高层关键词/语义命中结构化计划模板，并由轻量模型适配后执行；评价只报告平均任务表现、成本和延迟。\",\n    \"intervention\": \"生成最小约束反事实任务对并给出机械动作依赖图；强制缓存命中后，将失败分解为错误命中、适配未修复与普通完整规划失败。\",\n    \"information_available\": \"任务文本、公开工具清单、缓存模板、代理输出轨迹及确定性环境终态；不读取模型内部状态。\",\n    \"timing\": \"离线评价缓存系统时。\",\n    \"budget_effect\": \"在每一缓存策略内固定任务与工具环境，另报告模型调用、令牌和延迟，不把更高成本完整规划的优势隐藏。\"\n  },\n  \"mechanism_claim\": \"平均自然任务会掩盖缓存特有的结构失配；最小动作图反事实对能机械分离缓存命中是否安全、适配是否真正修复以及节省是否来自复用错误计算。\",\n  \"falsifier\": \"若 APC 式轻量适配在结构反事实上几乎全部修复；或缓存条件失败不高于同模型不缓存完整规划；或 Temporal Semantic Caching 等先行已做同等动作图反事实与三路失败分解，则候选淘汰。\",\n  \"minimal_killer_experiment\": \"在两个确定性工具域构造16个任务对，每对只改变一个约束槽并翻转动作集合、顺序或条件边；比较从头规划、原样复用、APC式模板适配和依赖签名拒绝命中，测精确计划、终态成功、错误命中与适配恢复。\",\n  \"nearest_prior_risk\": \"Agentic Plan Caching、AgenticCache、Temporal Semantic Caching、Generative Caching 与 Structured Intent Canonicalization 已覆盖缓存命中、模板适配、验证和错误命中；必须证明动作图反事实及失败分解未被同等评价。\",\n  \"alternative_explanations\": [\"缓存适配提示本身诱导复制\", \"反事实措辞不自然\", \"小模型一般规划能力太弱\", \"精确动作序列指标过严\", \"任务对直接泄漏正确差异\"],\n  \"descriptors\": {\n    \"problem_family\": \"计划缓存结构失配\",\n    \"computation_stage\": \"计划缓存命中与适配评价\",\n    \"intervention_family\": \"最小动作图反事实诊断\",\n    \"information_source\": \"任务、计划轨迹与确定性终态\",\n    \"timing_class\": \"离线评价\",\n    \"budget_class\": \"报告质量成本前沿\",\n    \"evaluation_mode\": \"缓存特有失败因果分解\"\n  },\n  \"literature_refs\": [\"P071\", \"P004\", \"P054\", \"P060\"]\n}"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 9,
+            "fused_score": 0.014492753623188406,
+            "line_end": 227,
+            "line_start": 217,
+            "path": "workbench_v003/diagnosis/preformal-cache-safety/diagnosis_facts.json",
+            "semantic_rank": null,
+            "source_sha256": "b73baf88f6270fc2895a12ec18d7c1b45fc0d1db8ad9906144aaecedc4de904f",
+            "text": "            \"text\": \"{\\n  \\\"hypothesis_id\\\": \\\"h-005\\\",\\n  \\\"title\\\": \\\"计划缓存的结构反事实安全评价\\\",\\n  \\\"parent_ids\\\": [],\\n  \\\"lineage_note\\\": \\\"h-004 被 ToolExpNet 直接碰撞后，转向计划复用系统的评价缺口；贡献形态预设为稳定现象与诊断基准，而非新缓存方法。\\\",\\n  \\\"problem\\\": \\\"计划缓存以语义或高层意图命中相似任务，再让小模型适配模板；一个很小的约束变化却可能改变必要动作、依赖边或提交条件，使缓存命中看似合理而计算结构已经失效。\\\",\\n  \\\"target_failure\\\": {\\n    \\\"summary\\\": \\\"高文本相似且共享高层关键词的任务对具有不同最小动作依赖图；缓存模板适配保留旧分支、旧动作或旧顺序，造成不缓存完整规划不会产生的执行失败。\\\",\\n    \\\"card_ids\\\": [\\\"paper-p071\\\", \\\"failure-constrained-plan-surface-validity\\\"],\\n    \\\"evidence_ids\\\": [\\\"ev-p071-cache-false-positive-boundary\\\", \\\"ev-p071-plan-template-reuse\\\", \\\"ev-p004-macro-constraint-failure\\\"]\\n  },\\n  \\\"changed_computation\\\": {\\n    \\\"baseline\\\": \\\"按高层关键词/语义命中结构化计划模板，并由轻量模型适配后执行；评价只报告平均任务表现、成本和延迟。\\\",\\n    \\\"intervention\\\": \\\"生成最小约束反事实任务对并给出机械动作依赖图；强制缓存命中后，将失败分解为错误命中、适配未修复与普通完整规划失败。\\\",\\n    \\\"information_available\\\": \\\"任务文本、公开工具清单、缓存模板、代理输出轨迹及确定性环境终态；不读取模型内部状态。\\\",\\n    \\\"timing\\\": \\\"离线评价缓存系统时。\\\",\\n    \\\"budget_effect\\\": \\\"在每一缓存策略内固定任务与工具环境，另报告模型调用、令牌和延迟，不把更高成本完整规划的优势隐藏。\\\"\\n  },\\n  \\\"mechanism_claim\\\": \\\"平均自然任务会掩盖缓存特有的结构失配；最小动作图反事实对能机械分离缓存命中是否安全、适配是否真正修复以及节省是否来自复用错误计算。\\\",\\n  \\\"falsifier\\\": \\\"若 APC 式轻量适配在结构反事实上几乎全部修复；或缓存条件失败不高于同模型不缓存完整规划；或 Temporal Semantic Caching 等先行已做同等动作图反事实与三路失败分解，则候选淘汰。\\\",\\n  \\\"minimal_killer_experiment\\\": \\\"在两个确定性工具域构造16个任务对，每对只改变一个约束槽并翻转动作集合、顺序或条件边；比较从头规划、原样复用、APC式模板适配和依赖签名拒绝命中，测精确计划、终态成功、错误命中与适配恢复。\\\",\\n  \\\"nearest_prior_risk\\\": \\\"Agentic Plan Caching、AgenticCache、Temporal Semantic Caching、Generative Caching 与 Structured Intent Canonicalization 已覆盖缓存命中、模板适配、验证和错误命中；必须证明动作图反事实及失败分解未被同等评价。\\\",\\n  \\\"alternative_explanations\\\": [\\\"缓存适配提示本身诱导复制\\\", \\\"反事实措辞不自然\\\", \\\"小模型一般规划能力太弱\\\", \\\"精确动作序列指标过严\\\", \\\"任务对直接泄漏正确差异\\\"],\\n  \\\"descriptors\\\": {\\n    \\\"problem_family\\\": \\\"计划缓存结构失配\\\",\\n    \\\"computation_stage\\\": \\\"计划缓存命中与适配评价\\\",\\n    \\\"intervention_family\\\": \\\"最小动作图反事实诊断\\\",\\n    \\\"information_source\\\": \\\"任务、计划轨迹与确定性终态\\\",\\n    \\\"timing_class\\\": \\\"离线评价\\\",\\n    \\\"budget_class\\\": \\\"报告质量成本前沿\\\",\\n    \\\"evaluation_mode\\\": \\\"缓存特有失败因果分解\\\"\\n  },\\n  \\\"literature_refs\\\": [\\\"P071\\\", \\\"P004\\\", \\\"P054\\\", \\\"P060\\\"]\\n}\"\n          },\n          {\n            \"earlier_than_recent_context\": true,\n            \"fts_rank\": 4,\n            \"fused_score\": 0.015625,\n            \"line_end\": 70,\n            \"line_start\": 1,\n            \"path\": \"hypotheses_v002/portfolio.json\",\n            \"semantic_rank\": null,\n            \"source_sha256\": \"a44db033a6796f5819cdaf2f40d512e224511a5f55374ca8d37f227e6ffee94b\","
+          }
+        ],
+        "kind": "recent_context_recovery",
+        "query": "\"hypotheses\": [\n\"baseline\": \"ReAct或计划器按语言模型产生的顺序执行，只在工具参数合法或写动作一般风险上门控。\",\n\"problem_family\": \"信息未就绪的不可逆提交\",\n\"falsifier\": \"若现有依赖图规划、工作流约束或变异动作门控已表达同一前置关系；若静态所有读先于所有写追平；或信息依赖只能由金标准人工标注，则候选淘汰。\",\n\"hypothesis_id\": \"h-006\",\n\"mechanism_claim\": \"显式信息依赖而非一般动作风险决定不可逆提交何时安全；就绪性调度可在工具集合不变时避免提交早于证据的不可恢复错误。\",\n\"minimal_killer_experiment\": \"构造读取结果支配不同写动作的成对任务，比较ReAct、静态先读后写、依赖图调度和一般变异动作门控，测不可逆遗憾率与无谓延迟。\",\n\"problem\": \"代理可能在读取会决定参数、分支或是否执行的信息前，先释放不可逆或高补偿成本动作；所有工具均可局部成功，但后续正确信息已无法撤销终态损失。\",\n\"target_failure\": {\n\"evidence_ids\": [],",
+        "semantic_reason": "semantic_index_missing",
+        "semantic_status": "DEGRADED",
+        "source_files": [
+          {
+            "mtime_ns": 1786812040038392500,
+            "path": "hypotheses_v004/portfolio.json",
+            "source_sha256": "7f017ab01d8cae2893178dc92997e4e1325f2a55794522ba3ba91d72fcf7dd1e"
+          }
+        ]
+      }
+    ],
+    "semantic_reason": "semantic_index_missing",
+    "semantic_status": "DEGRADED",
+    "version": "v004"
+  },
+  "recall_status": {
+    "reason": null,
+    "semantic_reason": "semantic_index_missing",
+    "semantic_status": "DEGRADED",
+    "status": "READY"
+  },
+  "recent_files": [
+    {
+      "mtime_ns": 1786812040038392500,
+      "path": "hypotheses_v004/portfolio.json",
+      "sha256": "7f017ab01d8cae2893178dc92997e4e1325f2a55794522ba3ba91d72fcf7dd1e",
+      "size_bytes": 3975
+    },
+    {
+      "mtime_ns": 1786812032223185200,
+      "path": "hypotheses_v004/priors/h006_information_readiness/assessment.md",
+      "sha256": "ae7ea2e2906021b9a3982c684fd808eb5675eb6903681e80af8abc8a8608bbae",
+      "size_bytes": 2896
+    },
+    {
+      "mtime_ns": 1786812007140662500,
+      "path": "hypotheses_v004/priors/h006_information_readiness/report.md",
+      "sha256": "29e95dc7115997f08c5d85af48c2e9313d1a0d16eb554a19fda3da74269f942a",
+      "size_bytes": 460
+    },
+    {
+      "mtime_ns": 1786812007136574800,
+      "path": "hypotheses_v004/priors/h006_information_readiness/candidates.json",
+      "sha256": "715af1792523d29da8a91f4f8e152c45b458986653668a83cae5f1ea5ad76c7f",
+      "size_bytes": 62438
+    },
+    {
+      "mtime_ns": 1786812007132687900,
+      "path": "hypotheses_v004/priors/h006_information_readiness/request.json",
+      "sha256": "7bde80e074d7ab63517f66434a196a30450c1aa05a810ecadc6244bcb06f92a3",
+      "size_bytes": 3233
+    },
+    {
+      "mtime_ns": 1786811986827169200,
+      "path": "workbench_v004/h-006.json",
+      "sha256": "3ba37611e8812be5fec04e85714797683c6bf5a88e210fc373e3becf961deaef",
+      "size_bytes": 3061
+    },
+    {
+      "mtime_ns": 1786811953446620500,
+      "path": "hypotheses_v004/searches/h006_information_readiness/report.md",
+      "sha256": "59fea71e51aa1ee0f65020ac77eb1b02c667b6d11638559e1546896d1e890c16",
+      "size_bytes": 8400
+    },
+    {
+      "mtime_ns": 1786811953442385000,
+      "path": "hypotheses_v004/searches/h006_information_readiness/result.json",
+      "sha256": "03e45009b7aa1ff37cbcda7503db0f9477daadd82eaa83c9edca5ebded15a754",
+      "size_bytes": 1836982
+    },
+    {
+      "mtime_ns": 1786811953438816400,
+      "path": "hypotheses_v004/searches/h006_information_readiness/request.json",
+      "sha256": "90e8ed4db5efa721d0e2fc6fc553235a5941bda354889b9b0a5b87f478753b25",
+      "size_bytes": 5827
+    },
+    {
+      "mtime_ns": 1786811909602827000,
+      "path": "RUN_STATUS.md",
+      "sha256": "d8c44592f9c1b4066b5c40ed6a5fd3eb7a7e4f8411ca0f72f78f58a045e1de3b",
+      "size_bytes": 270
+    },
+    {
+      "mtime_ns": 1786811909596464000,
+      "path": "RUN_LEDGER.md",
+      "sha256": "f3b670fa685f2c47f548aa3909bbe1aeaff3646562c655687252e62d76cb21a6",
+      "size_bytes": 390
+    },
+    {
+      "mtime_ns": 1786811878623012000,
+      "path": "hypotheses_v003/portfolio.json",
+      "sha256": "bf1b307d694329e8195ada5f3d3301106c7bb150cfbe98289704f478083475ec",
+      "size_bytes": 7524
+    },
+    {
+      "mtime_ns": 1786811878103651100,
+      "path": "hypotheses_v003/falsification/plan-cache-structural-counterfactual.json",
+      "sha256": "103269943a53730fa6e251a93c7e08fb6a7d8707cb8a11d2a06e18e0851a2270",
+      "size_bytes": 2426
+    },
+    {
+      "mtime_ns": 1786811862487143500,
+      "path": "experiment_v003/result.md",
+      "sha256": "5fec44e1c1acef6d7f15f9353ec1063f2618323d9536b665bf6a05df444c6d77",
+      "size_bytes": 2389
+    },
+    {
+      "mtime_ns": 1786811862485635600,
+      "path": "workbench_v003/formal_prep/claim_h005_falsified_patch.json",
+      "sha256": "986c6c6a0ea699df893aef742b251919c565678144c9e83a3fdb71c4f3229e4a",
+      "size_bytes": 314
+    },
+    {
+      "mtime_ns": 1786811828663248000,
+      "path": "experiment_v003/attempts/formal-cache-003/execution.json",
+      "sha256": "1d23393d88cceaa2d959d5664f9fe9da70d1f3a7c423ad2ef4604386db8e164d",
+      "size_bytes": 7456
+    },
+    {
+      "mtime_ns": 1786811828527225300,
+      "path": "experiment_v003/attempts/formal-cache-003/metrics.json",
+      "sha256": "5fbdd95abd84fdb333400593e071c29bd7e980727a76bac655fe9ec4ffd13a0d",
+      "size_bytes": 2686
+    },
+    {
+      "mtime_ns": 1786811828516504100,
+      "path": "experiment_v003/attempts/formal-cache-003/stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "mtime_ns": 1786811828512994200,
+      "path": "experiment_v003/attempts/formal-cache-003/stdout.bin",
+      "sha256": "1c9d6f16a13ed58dfd69444995c78059b836955d4de2cd8d97f7aebb8c5919c1",
+      "size_bytes": 12548
+    },
+    {
+      "mtime_ns": 1786811828480241400,
+      "path": "experiment_v003/attempts/formal-cache-003/metrics-output.json",
+      "sha256": "5fbdd95abd84fdb333400593e071c29bd7e980727a76bac655fe9ec4ffd13a0d",
+      "size_bytes": 2686
+    },
+    {
+      "mtime_ns": 1786811828479059000,
+      "path": "experiment_v003/attempts/formal-cache-003/raw-results.jsonl",
+      "sha256": "f1304f9612cebe899a8bc0a0be608258352beb1113f2a4a621b5b1ebacba1e94",
+      "size_bytes": 255519
+    },
+    {
+      "mtime_ns": 1786811516046634200,
+      "path": "experiment_v003/attempts/formal-cache-003/dependencies.txt",
+      "sha256": "480ab3b94b0b3b95bb6ff16eb9c4e138b942a818e488d43f71f810c5fe2e143a",
+      "size_bytes": 769
+    },
+    {
+      "mtime_ns": 1786811516046120000,
+      "path": "experiment_v003/attempts/formal-cache-003/spec.json",
+      "sha256": "4f42f5167eb2ea56973c12c1de0cf91378f09c7f473f4e655c890bb707b24a71",
+      "size_bytes": 3936
+    },
+    {
+      "mtime_ns": 1786811462661435800,
+      "path": "workbench_v003/formal_prep/h005_runner_compat_patch.json",
+      "sha256": "e9937abaa3805b21a6e5786808551d1c5703fb9f19c772e3ba5f66f08e2fa715",
+      "size_bytes": 53
+    },
+    {
+      "mtime_ns": 1786811405025705900,
+      "path": "experiment_v003/specs/cache-structural-counterfactual-001.json",
+      "sha256": "4f42f5167eb2ea56973c12c1de0cf91378f09c7f473f4e655c890bb707b24a71",
+      "size_bytes": 3936
+    },
+    {
+      "mtime_ns": 1786811392326361000,
+      "path": "workbench_v003/formal_prep/spec_h005.json",
+      "sha256": "0249ebec5360835878f4c83df1a5c4fe66bc732787d979dd0bb17dc2085e18f1",
+      "size_bytes": 3809
+    },
+    {
+      "mtime_ns": 1786811392323852600,
+      "path": "workbench_v003/formal_prep/plan_h005.json",
+      "sha256": "eabf75225fdd35de788932eb27e4e0053f30c9a6478b72157bf45ebce74c5461",
+      "size_bytes": 2090
+    },
+    {
+      "mtime_ns": 1786811334106303900,
+      "path": "implementation_v003/cache_structural_counterfactual_benchmark.py",
+      "sha256": "1700c1a9b0f081ea74abfb719059d1f447526f7d027b1447bafc7df72fb277d7",
+      "size_bytes": 16194
+    },
+    {
+      "mtime_ns": 1786811165814972000,
+      "path": "workbench_v003/h005_pilot_assessment.md",
+      "sha256": "b72f59436747b897d9e7dd5e282cae8b3a8515025157a53707f1022b50981a4a",
+      "size_bytes": 1604
+    },
+    {
+      "mtime_ns": 1786811165814282000,
+      "path": "hypotheses_v003/priors/h005_cache_counterfactual/assessment.md",
+      "sha256": "b2032ee771b399f2846aa2dba80e05ec57e6a9bf21a3709b2d9bb550f5f60446",
+      "size_bytes": 3509
+    }
+  ],
+  "review_evaluation_files": [],
+  "run_id": "20260815_2342_run12",
+  "run_wide": {
+    "experiments": {
+      "formal_review_support": {
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "id": "formal-cache-003",
+            "path": "experiment_v003/attempts/formal-cache-003",
+            "status": null,
+            "version": "v003"
+          }
+        ]
+      },
+      "recorded": {
+        "attempt_count": 0,
+        "attempts": []
+      },
+      "scratch": {
+        "report_count": 0,
+        "reports": [],
+        "version_count": 4,
+        "versions": [
+          "v001",
+          "v002",
+          "v003",
+          "v004"
+        ]
+      }
+    },
+    "hypotheses": {
+      "hypothesis_count": 6,
+      "status_distribution": {
+        "falsified": 2,
+        "prior_collision": 4
+      },
+      "status_reason_distribution": {
+        "Formal attempt formal-cache-003 中总体缓存诱发失败率0.0417低于0.10门槛，qwen3:8b为0，且安全命中缓存正确率低于反事实缓存正确率；预注册存活条件失败。": 1,
+        "LLMCompiler/NaviAgent/IPIGuard已占据依赖满足调度，TRAJECT-Bench/TPS-Bench占据顺序评价，SABER与Reason Less Verify More占据变异写动作前置门；剩余信息边可还原为经典数据流前置依赖。": 1,
+        "ToolExpNet已通过自适应模拟试验探索相似工具差异并以经验网络指导选择，直接命中从真实行为探查到路由的changed computation；ToolScope与Canary Tools进一步占据问题和评价。": 1,
+        "arXiv:2602.16666 已直接评价语义保持的工具响应键名、数据格式、包装与结构扰动；arXiv:2507.15296 与 AgentCheck 又占据工具返回扰动和固定响应复放。": 1,
+        "arXiv:2606.09863 直接占据 false-success 现象，arXiv:2608.02645 直接占据后置条件验证方法；确定性验证与修复又形成组合吸收。": 1,
+        "两模型各12个成对案例中，工具别名相对同一工具等次数重复的错误接受率差分均为0；未出现预注册的别名特有放大，且方法内核被来源依赖真值发现与GPE构造性吸收。": 1
+      },
+      "versions_with_portfolios": [
+        "v001",
+        "v002",
+        "v003",
+        "v004"
+      ]
+    },
+    "prior_collisions": {
+      "assessment_warning_audit_count": 4,
+      "assessment_warning_count": 4,
+      "assessment_warnings": [
+        {
+          "audit_id": "h001_false_success",
+          "path": "hypotheses_v001/priors/h001_false_success/assessment.md",
+          "warnings": [
+            "assessment collision marker is missing"
+          ]
+        },
+        {
+          "audit_id": "h002_observation_invariance",
+          "path": "hypotheses_v001/priors/h002_observation_invariance/assessment.md",
+          "warnings": [
+            "assessment collision marker is missing"
+          ]
+        },
+        {
+          "audit_id": "h003_correlated_sources",
+          "path": "hypotheses_v002/priors/h003_correlated_sources/assessment.md",
+          "warnings": [
+            "assessment collision kind is unknown: CONSTRUCTIVE_COMPOSITE + ANALOGICAL_REDUCTION"
+          ]
+        },
+        {
+          "audit_id": "h004_behavior_probe",
+          "path": "hypotheses_v003/priors/h004_behavior_probe/assessment.md",
+          "warnings": [
+            "assessment collision kind is unknown: DIRECT_EXACT + EMPIRICAL_ABSORPTION"
+          ]
+        }
+      ],
+      "collision_kind_distribution": {
+        "CONSTRUCTIVE_COMPOSITE": 1,
+        "PROBLEM_OCCUPIED_METHOD_OPEN": 1
+      },
+      "prior_audit_count": 6,
+      "unclassified_audit_count": 0
+    },
+    "recall_composition": {
+      "contamination_present": false,
+      "excluded_entry_count": 8,
+      "external_or_vendor_indexed_count": 0,
+      "ground_truth_like_indexed_count": 0,
+      "indexed_bytes": 1408337,
+      "indexed_file_count": 83,
+      "manifest_schema_version": 2,
+      "raw_search_payload_indexed_count": 0,
+      "stale_indexed_source_count": 0,
+      "status": "READY"
+    },
+    "scientific_versions": {
+      "current_version": "v004",
+      "version_count": 4,
+      "versions": [
+        {
+          "artifact_count": 20,
+          "artifact_span_seconds": 612.8589566,
+          "first_artifact_mtime_ns": 1786808610569537100,
+          "last_artifact_mtime_ns": 1786809223428493700,
+          "version": "v001"
+        },
+        {
+          "artifact_count": 14,
+          "artifact_span_seconds": 635.7951865,
+          "first_artifact_mtime_ns": 1786809321242565200,
+          "last_artifact_mtime_ns": 1786809957037751700,
+          "version": "v002"
+        },
+        {
+          "artifact_count": 45,
+          "artifact_span_seconds": 1846.6274625,
+          "first_artifact_mtime_ns": 1786810031995549500,
+          "last_artifact_mtime_ns": 1786811878623012000,
+          "version": "v003"
+        },
+        {
+          "artifact_count": 9,
+          "artifact_span_seconds": 86.5995761,
+          "first_artifact_mtime_ns": 1786811953438816400,
+          "last_artifact_mtime_ns": 1786812040038392500,
+          "version": "v004"
+        }
+      ]
+    },
+    "searches": {
+      "compact_report_bytes": 50840,
+      "raw_result_bytes": 9470514,
+      "repeated_query_fingerprint_count": 0,
+      "search_count": 6,
+      "searches": [
+        {
+          "compact_report_bytes": 8641,
+          "deduplicated_paper_count": 70,
+          "path": "hypotheses_v001/searches/broad_tool_robustness",
+          "query_count": 0,
+          "raw_result_bytes": 1292683
+        },
+        {
+          "compact_report_bytes": 8657,
+          "deduplicated_paper_count": 71,
+          "path": "hypotheses_v001/searches/correlated_tool_evidence_map",
+          "query_count": 0,
+          "raw_result_bytes": 1479215
+        },
+        {
+          "compact_report_bytes": 8749,
+          "deduplicated_paper_count": 74,
+          "path": "hypotheses_v001/searches/observation_metamorphic_map",
+          "query_count": 0,
+          "raw_result_bytes": 1311907
+        },
+        {
+          "compact_report_bytes": 9010,
+          "deduplicated_paper_count": 90,
+          "path": "hypotheses_v003/searches/h004_behavioral_tool_fingerprint",
+          "query_count": 0,
+          "raw_result_bytes": 1992023
+        },
+        {
+          "compact_report_bytes": 7383,
+          "deduplicated_paper_count": 78,
+          "path": "hypotheses_v003/searches/h005_plan_cache_counterfactual",
+          "query_count": 0,
+          "raw_result_bytes": 1557704
+        },
+        {
+          "compact_report_bytes": 8400,
+          "deduplicated_paper_count": 90,
+          "path": "hypotheses_v004/searches/h006_information_readiness",
+          "query_count": 0,
+          "raw_result_bytes": 1836982
+        }
+      ]
+    },
+    "subagents": {
+      "category_distribution": {},
+      "classification_basis": "filename_only_artifact_classification_no_native_delegation_verification",
+      "native_delegation_evidence": {
+        "reason": "no_stable_machine_verifiable_native_delegation_evidence_source",
+        "status": "UNAVAILABLE",
+        "summary_artifacts_verify_native_delegation": false,
+        "verified_delegation_count": null
+      },
+      "summary_artifact_count": 0,
+      "summary_artifacts": [],
+      "summary_count": 0,
+      "tasks": []
+    }
+  },
+  "schema_version": 1,
+  "search_snapshot_files": [
+    {
+      "path": "hypotheses_v004/searches/h006_information_readiness/report.md",
+      "sha256": "59fea71e51aa1ee0f65020ac77eb1b02c667b6d11638559e1546896d1e890c16",
+      "size_bytes": 8400
+    },
+    {
+      "path": "hypotheses_v004/searches/h006_information_readiness/request.json",
+      "sha256": "90e8ed4db5efa721d0e2fc6fc553235a5941bda354889b9b0a5b87f478753b25",
+      "size_bytes": 5827
+    },
+    {
+      "path": "hypotheses_v004/searches/h006_information_readiness/result.json",
+      "sha256": "03e45009b7aa1ff37cbcda7503db0f9477daadd82eaa83c9edca5ebded15a754",
+      "size_bytes": 1836982
+    }
+  ],
+  "version": "v004"
+}

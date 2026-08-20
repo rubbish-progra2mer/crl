@@ -1,0 +1,732 @@
+{
+  "artifact_kind": "run_local_non_authoritative_prior_candidates",
+  "audit_id": "h008_positive_ack_factorial",
+  "candidates": [
+    {
+      "abstract": "When an LLM agent fails -- issues a refund it should not have, calls the wrong tool, leaks data -- existing tooling answers what happened (observability) or whether it passed (evaluation), but not which step caused the failure. The obvious heuristics are wrong: the step that executes the harmful action is usually not the step that decided on it, and LLM-judge attribution is correlational and unreliable (state-of-the-art step-level accuracy on the Who&When benchmark is about 14%). We present Causal Agent Replay (CAR), which answers the question by intervention: it models an agent run as a structural causal model, applies a do-operation to a step, and re-executes the trajectory forward under the same stochastic policy, measuring the shift in the outcome distribution. We define an intervention algebra over agent steps, a single-step contrastive estimator whose point-of-commitment rule resolves a confound specific to stochastic run-forward, and a budget-bounded Monte-Carlo Shapley estimator that splits credit across interacting steps. Every effect is reported with confidence intervals. We validate against synthetic structural causal models with planted ground truth: the contrastive estimator recovers the pivotal step, and Shapley recovers a two-step interaction (0.44, 0.45, ~0; efficiency sum 0.909 versus the analytic 0.91). CAR is open source and runs on hosted or free local models.",
+      "authors": [
+        "Jaineet Shah"
+      ],
+      "candidate_id": "prior-fab8e2affe9cfe97",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2606.08275v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2606.08275v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+SUCCESS+AMBIGUOUS+response+effect+channel+silent+no-op+postcondition+verification+factorial+causal+intervention&start=0",
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.08275v1</ns0:id>\n    <ns0:title>Causal Agent Replay: Counterfactual Attribution for LLM-Agent Failures</ns0:title>\n    <ns0:updated>2026-06-06T17:44:23Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.08275v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.08275v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>When an LLM agent fails -- issues a refund it should not have, calls the wrong tool, leaks data -- existing tooling answers what happened (observability) or whether it passed (evaluation), but not which step caused the failure. The obvious heuristics are wrong: the step that executes the harmful action is usually not the step that decided on it, and LLM-judge attribution is correlational and unreliable (state-of-the-art step-level accuracy on the Who&amp;When benchmark is about 14%). We present Causal Agent Replay (CAR), which answers the question by intervention: it models an agent run as a structural causal model, applies a do-operation to a step, and re-executes the trajectory forward under the same stochastic policy, measuring the shift in the outcome distribution. We define an intervention algebra over agent steps, a single-step contrastive estimator whose point-of-commitment rule resolves a confound specific to stochastic run-forward, and a budget-bounded Monte-Carlo Shapley estimator that splits credit across interacting steps. Every effect is reported with confidence intervals. We validate against synthetic structural causal models with planted ground truth: the contrastive estimator recovers the pivotal step, and Shapley recovers a two-step interaction (0.44, 0.45, ~0; efficiency sum 0.909 versus the analytic 0.91). CAR is open source and runs on hosted or free local models.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-06T17:44:23Z</ns0:published>\n    <ns1:comment>Open-source: https://github.com/jaineet17/causal-agent-replay</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Jaineet Shah</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "9df9208bfdb4bd561d4bf12f0a89bdc1a3e0f65ac34eab69e767567734980f46",
+          "source": "arXiv",
+          "source_id": "2606.08275v1",
+          "source_rank": 1
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2606.08275v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2606.08275"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "rank": 1,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Causal Agent Replay: Counterfactual Attribution for LLM-Agent Failures",
+      "urls": [
+        "https://arxiv.org/abs/2606.08275v1",
+        "https://arxiv.org/pdf/2606.08275v1"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "A valid tool call is not necessarily a valid intervention. Tool-using language agents are guarded by schema validators, policy filters, provenance checks, state predictors, and self-verification, yet such safeguards do not certify that a state-changing action has an identifiable causal effect. In confounded workflows, the action that looks optimal in observational logs can reduce utility when executed. We introduce CIVeX, a causal intervention verifier that maps proposed actions to structural causal queries over a committed action-state graph, checks identifiability, and returns one of four auditable verdicts: EXECUTE, REJECT, EXPERIMENT, or ABSTAIN. Execution requires an assumption-scoped causal certificate carrying graph commitments, an identification argument, a one-sided lower confidence bound (LCB), provenance, and risk limits. On Causal-ToolBench (1,890 instances, 7 seeds), CIVeX yields zero observed false executions across moderate and adversarial confounding. Under adversarial confounding it reaches 84.9% accuracy and 81.1% of oracle utility (+2.23 vs +2.76) and is the only non-oracle method whose constrained utility under a zero-false-execution constraint exceeds the AlwaysAbstain floor. On IHDP and ZOZO Open Bandit (real production logs with uniform-random ground truth), CIVeX matches Oracle correct-execution within 0.1pp and cuts per-execute false-execution by >=50x over naive baselines. A chain-of-thought LLM verifier (Claude Opus, Sonnet) cuts false-execution by an order of magnitude over a terse baseline, yet under adversarial confounding Opus's utility falls to 74% of CIVeX's. Intervention identifiability, not action validity, is the missing primitive for reliable tool use.",
+      "authors": [
+        "Fabio Rovai"
+      ],
+      "candidate_id": "prior-7cc5d9d346e5c968",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2605.09168v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2605.09168v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+SUCCESS+AMBIGUOUS+response+effect+channel+silent+no-op+postcondition+verification+factorial+causal+intervention&start=0",
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2605.09168v1</ns0:id>\n    <ns0:title>CIVeX: Causal Intervention Verification for Language Agents</ns0:title>\n    <ns0:updated>2026-05-09T21:06:15Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2605.09168v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2605.09168v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>A valid tool call is not necessarily a valid intervention. Tool-using language agents are guarded by schema validators, policy filters, provenance checks, state predictors, and self-verification, yet such safeguards do not certify that a state-changing action has an identifiable causal effect. In confounded workflows, the action that looks optimal in observational logs can reduce utility when executed.\n  We introduce CIVeX, a causal intervention verifier that maps proposed actions to structural causal queries over a committed action-state graph, checks identifiability, and returns one of four auditable verdicts: EXECUTE, REJECT, EXPERIMENT, or ABSTAIN. Execution requires an assumption-scoped causal certificate carrying graph commitments, an identification argument, a one-sided lower confidence bound (LCB), provenance, and risk limits.\n  On Causal-ToolBench (1,890 instances, 7 seeds), CIVeX yields zero observed false executions across moderate and adversarial confounding. Under adversarial confounding it reaches 84.9% accuracy and 81.1% of oracle utility (+2.23 vs +2.76) and is the only non-oracle method whose constrained utility under a zero-false-execution constraint exceeds the AlwaysAbstain floor. On IHDP and ZOZO Open Bandit (real production logs with uniform-random ground truth), CIVeX matches Oracle correct-execution within 0.1pp and cuts per-execute false-execution by &gt;=50x over naive baselines. A chain-of-thought LLM verifier (Claude Opus, Sonnet) cuts false-execution by an order of magnitude over a terse baseline, yet under adversarial confounding Opus's utility falls to 74% of CIVeX's. Intervention identifiability, not action validity, is the missing primitive for reliable tool use.</ns0:summary>\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-05-09T21:06:15Z</ns0:published>\n    <ns1:comment>16 pages, 3 figures. Includes Causal-ToolBench, IHDP, ZOZO Open Bandit, and LaLonde NSW evaluations</ns1:comment>\n    <ns1:primary_category term=\"cs.AI\" />\n    <ns0:author>\n      <ns0:name>Fabio Rovai</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "9df9208bfdb4bd561d4bf12f0a89bdc1a3e0f65ac34eab69e767567734980f46",
+          "source": "arXiv",
+          "source_id": "2605.09168v1",
+          "source_rank": 2
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2605.09168v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2605.09168"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "rank": 2,
+          "source": "arXiv"
+        }
+      ],
+      "title": "CIVeX: Causal Intervention Verification for Language Agents",
+      "urls": [
+        "https://arxiv.org/abs/2605.09168v1",
+        "https://arxiv.org/pdf/2605.09168v1"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "As LLM agents increasingly select tools autonomously, their choices among tools with different privileges become safety-relevant. However, prior tool-selection studies focus on safety-agnostic metadata preferences, leaving privilege-sensitive choices underexplored. To address this gap, we study over-privileged tool selection, in which an agent selects or escalates to a higher-privilege tool despite a sufficient lower-privilege alternative. We introduce ToolPrivBench to evaluate whether agents choose higher-privilege tools despite sufficient lower-privilege alternatives, measuring both initial selection and escalation after transient tool failures. Across eight domains and five recurring risk patterns, we find that over-privileged tool selection is common among mainstream LLM agents and is further amplified by transient failures. We further find that general safety alignment does not reliably transfer to least-privilege tool choice, while prompt-level controls provide only limited mitigation under transient failures. We therefore introduce a privilege-aware post-training defense that teaches agents to prefer sufficient lower-privilege tools and escalate only when necessary. Our mitigation experiments show that this defense substantially reduces unnecessary high-privilege tool use while preserving general capabilities.",
+      "authors": [
+        "Kaiyue Yang",
+        "Yuyan Bu",
+        "Jingwei Yi",
+        "Yuchi Wang",
+        "Biyu Zhou",
+        "Juntao Dai",
+        "Songlin Hu",
+        "Yaodong Yang"
+      ],
+      "candidate_id": "prior-9b57c5dc663d8bf3",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2606.20023v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2606.20023v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+SUCCESS+AMBIGUOUS+response+effect+channel+silent+no-op+postcondition+verification+factorial+causal+intervention&start=0",
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.20023v2</ns0:id>\n    <ns0:title>When Lower Privileges Suffice: Investigating Over-Privileged Tool Selection in LLM Agents</ns0:title>\n    <ns0:updated>2026-07-07T12:24:40Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.20023v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.20023v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>As LLM agents increasingly select tools autonomously, their choices among tools with different privileges become safety-relevant. However, prior tool-selection studies focus on safety-agnostic metadata preferences, leaving privilege-sensitive choices underexplored. To address this gap, we study over-privileged tool selection, in which an agent selects or escalates to a higher-privilege tool despite a sufficient lower-privilege alternative. We introduce ToolPrivBench to evaluate whether agents choose higher-privilege tools despite sufficient lower-privilege alternatives, measuring both initial selection and escalation after transient tool failures. Across eight domains and five recurring risk patterns, we find that over-privileged tool selection is common among mainstream LLM agents and is further amplified by transient failures. We further find that general safety alignment does not reliably transfer to least-privilege tool choice, while prompt-level controls provide only limited mitigation under transient failures. We therefore introduce a privilege-aware post-training defense that teaches agents to prefer sufficient lower-privilege tools and escalate only when necessary. Our mitigation experiments show that this defense substantially reduces unnecessary high-privilege tool use while preserving general capabilities.</ns0:summary>\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-18T09:54:48Z</ns0:published>\n    <ns1:comment>code: https://github.com/AISafetyHub/agent-tool-selection-bias</ns1:comment>\n    <ns1:primary_category term=\"cs.SE\" />\n    <ns0:author>\n      <ns0:name>Kaiyue Yang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yuyan Bu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jingwei Yi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yuchi Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Biyu Zhou</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Juntao Dai</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Songlin Hu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yaodong Yang</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "9df9208bfdb4bd561d4bf12f0a89bdc1a3e0f65ac34eab69e767567734980f46",
+          "source": "arXiv",
+          "source_id": "2606.20023v2",
+          "source_rank": 3
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2606.20023v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2606.20023"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "rank": 3,
+          "source": "arXiv"
+        }
+      ],
+      "title": "When Lower Privileges Suffice: Investigating Over-Privileged Tool Selection in LLM Agents",
+      "urls": [
+        "https://arxiv.org/abs/2606.20023v2",
+        "https://arxiv.org/pdf/2606.20023v2"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "Large Language Model (LLM) agents significantly extend the capabilities of standalone LLMs, empowering them to interact with external tools (e.g., APIs, functions) and complete various tasks in a self-directed fashion. The challenge of tool use demands that LLMs not only understand user queries and generate answers accurately but also excel in task planning, tool invocation, and result summarization. While traditional works focus on training a single LLM with all these capabilities, performance limitations become apparent, particularly with smaller models. To overcome these challenges, we propose a novel approach that decomposes the aforementioned capabilities into a planner, caller, and summarizer. Each component is implemented by a single LLM that focuses on a specific capability and collaborates with others to accomplish the task. This modular framework facilitates individual updates and the potential use of smaller LLMs for building each capability. To effectively train this framework, we introduce a two-stage training paradigm. First, we fine-tune a backbone LLM on the entire dataset without discriminating sub-tasks, providing the model with a comprehensive understanding of the task. Second, the fine-tuned LLM is used to instantiate the planner, caller, and summarizer respectively, which are continually fine-tuned on respective sub-tasks. Evaluation across various tool-use benchmarks illustrates that our proposed multi-LLM framework surpasses the traditional single-LLM approach, highlighting its efficacy and advantages in tool learning.",
+      "authors": [
+        "Weizhou Shen",
+        "Chenliang Li",
+        "Hongzhan Chen",
+        "Ming Yan",
+        "Xiaojun Quan",
+        "Hehong Chen",
+        "Ji Zhang",
+        "Fei Huang"
+      ],
+      "candidate_id": "prior-4e8f534211cb513c",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2401.07324v3"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2401.07324v3"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+SUCCESS+AMBIGUOUS+response+effect+channel+silent+no-op+postcondition+verification+factorial+causal+intervention&start=0",
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2401.07324v3</ns0:id>\n    <ns0:title>Small LLMs Are Weak Tool Learners: A Multi-LLM Agent</ns0:title>\n    <ns0:updated>2024-02-16T12:42:25Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2401.07324v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2401.07324v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Large Language Model (LLM) agents significantly extend the capabilities of standalone LLMs, empowering them to interact with external tools (e.g., APIs, functions) and complete various tasks in a self-directed fashion. The challenge of tool use demands that LLMs not only understand user queries and generate answers accurately but also excel in task planning, tool invocation, and result summarization. While traditional works focus on training a single LLM with all these capabilities, performance limitations become apparent, particularly with smaller models. To overcome these challenges, we propose a novel approach that decomposes the aforementioned capabilities into a planner, caller, and summarizer. Each component is implemented by a single LLM that focuses on a specific capability and collaborates with others to accomplish the task. This modular framework facilitates individual updates and the potential use of smaller LLMs for building each capability. To effectively train this framework, we introduce a two-stage training paradigm. First, we fine-tune a backbone LLM on the entire dataset without discriminating sub-tasks, providing the model with a comprehensive understanding of the task. Second, the fine-tuned LLM is used to instantiate the planner, caller, and summarizer respectively, which are continually fine-tuned on respective sub-tasks. Evaluation across various tool-use benchmarks illustrates that our proposed multi-LLM framework surpasses the traditional single-LLM approach, highlighting its efficacy and advantages in tool learning.</ns0:summary>\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2024-01-14T16:17:07Z</ns0:published>\n    <ns1:comment>On progress, github repo: https://github.com/X-PLUG/Multi-LLM-Agent</ns1:comment>\n    <ns1:primary_category term=\"cs.AI\" />\n    <ns0:author>\n      <ns0:name>Weizhou Shen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chenliang Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hongzhan Chen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ming Yan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xiaojun Quan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hehong Chen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ji Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Fei Huang</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "9df9208bfdb4bd561d4bf12f0a89bdc1a3e0f65ac34eab69e767567734980f46",
+          "source": "arXiv",
+          "source_id": "2401.07324v3",
+          "source_rank": 4
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2401.07324v3"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2401.07324"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "rank": 4,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Small LLMs Are Weak Tool Learners: A Multi-LLM Agent",
+      "urls": [
+        "https://arxiv.org/abs/2401.07324v3",
+        "https://arxiv.org/pdf/2401.07324v3"
+      ],
+      "venue": null,
+      "year": 2024
+    },
+    {
+      "abstract": "Interventions are central to causal learning and reasoning. Yet ultimately an intervention is an abstraction: an agent embedded in a physical environment (perhaps modeled as a Markov decision process) does not typically come equipped with the notion of an intervention -- its action space is typically ego-centric, without actions of the form `intervene on X'. Such a correspondence between ego-centric actions and interventions would be challenging to hard-code. It would instead be better if an agent learnt which sequence of actions allow it to make targeted manipulations of the environment, and learnt corresponding representations that permitted learning from observation. Here we show how a meta-learning approach can be used to perform causal learning in this challenging setting, where the action-space is not a set of interventions and the observation space is a high-dimensional space with a latent causal structure. A meta-reinforcement learning algorithm is used to learn relationships that transfer on observational causal learning tasks. This work shows how advances in deep reinforcement learning and meta-learning can provide intervention-centric causal learning in high-dimensional environments with a latent causal structure.",
+      "authors": [
+        "Benjamin Lansdell"
+      ],
+      "candidate_id": "prior-2132ebbe7b3029a3",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2005.12968v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2005.12968v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+SUCCESS+AMBIGUOUS+response+effect+channel+silent+no-op+postcondition+verification+factorial+causal+intervention&start=0",
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2005.12968v1</ns0:id>\n    <ns0:title>Towards intervention-centric causal reasoning in learning agents</ns0:title>\n    <ns0:updated>2020-05-26T18:53:04Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2005.12968v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2005.12968v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Interventions are central to causal learning and reasoning. Yet ultimately an intervention is an abstraction: an agent embedded in a physical environment (perhaps modeled as a Markov decision process) does not typically come equipped with the notion of an intervention -- its action space is typically ego-centric, without actions of the form `intervene on X'. Such a correspondence between ego-centric actions and interventions would be challenging to hard-code. It would instead be better if an agent learnt which sequence of actions allow it to make targeted manipulations of the environment, and learnt corresponding representations that permitted learning from observation. Here we show how a meta-learning approach can be used to perform causal learning in this challenging setting, where the action-space is not a set of interventions and the observation space is a high-dimensional space with a latent causal structure. A meta-reinforcement learning algorithm is used to learn relationships that transfer on observational causal learning tasks. This work shows how advances in deep reinforcement learning and meta-learning can provide intervention-centric causal learning in high-dimensional environments with a latent causal structure.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.ML\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2020-05-26T18:53:04Z</ns0:published>\n    <ns1:comment>11 page, 4 figures. Presented at ICLR 2020 workshop 'Causal learning for decision making'</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Benjamin Lansdell</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "9df9208bfdb4bd561d4bf12f0a89bdc1a3e0f65ac34eab69e767567734980f46",
+          "source": "arXiv",
+          "source_id": "2005.12968v1",
+          "source_rank": 5
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2005.12968v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2005.12968"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "rank": 5,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Towards intervention-centric causal reasoning in learning agents",
+      "urls": [
+        "https://arxiv.org/abs/2005.12968v1",
+        "https://arxiv.org/pdf/2005.12968v1"
+      ],
+      "venue": null,
+      "year": 2020
+    },
+    {
+      "abstract": "Multi-agent large language model (LLM) systems often rely on verifier and critic agents to suppress hallucinations, but verification is delayed. During this delay, false claims can propagate through the agent network. We model this process as delayed consensus on a graph with grounded corrector nodes. Spectral decomposition by the grounded Laplacian yields a closed-form stability threshold for the verification dose: correction that is too strong or too delayed can turn consensus into oscillation. The most unstable regime occurs when the communication and verification delays coincide; for delay two, the threshold is the inverse golden ratio. The same framework gives a supermodular placement objective and a greedy (1-1/e)-approximation rule for assigning a limited corrector budget to influential nodes. Experiments across five open models confirm the predicted dose-delay oscillations. By contrast, grounded factual answering makes truth an absorbing boundary and eliminates the effect, suggesting that the instability is specific to signed-belief tasks while grounded verification remains stabilizing",
+      "authors": [
+        "Igor Itkin"
+      ],
+      "candidate_id": "prior-ebd8a2fa2867b60f",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2606.27409v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2606.27409v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+SUCCESS+AMBIGUOUS+response+effect+channel+silent+no-op+postcondition+verification+factorial+causal+intervention&start=0",
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.27409v1</ns0:id>\n    <ns0:title>Delayed Verification Destabilizes Multi-Agent LLM Belief: Instability Thresholds and Optimal Corrector Placement</ns0:title>\n    <ns0:updated>2026-06-25T10:52:54Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.27409v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.27409v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Multi-agent large language model (LLM) systems often rely on verifier and critic agents to suppress hallucinations, but verification is delayed. During this delay, false claims can propagate through the agent network. We model this process as delayed consensus on a graph with grounded corrector nodes. Spectral decomposition by the grounded Laplacian yields a closed-form stability threshold for the verification dose: correction that is too strong or too delayed can turn consensus into oscillation. The most unstable regime occurs when the communication and verification delays coincide; for delay two, the threshold is the inverse golden ratio. The same framework gives a supermodular placement objective and a greedy (1-1/e)-approximation rule for assigning a limited corrector budget to influential nodes. Experiments across five open models confirm the predicted dose-delay oscillations. By contrast, grounded factual answering makes truth an absorbing boundary and eliminates the effect, suggesting that the instability is specific to signed-belief tasks while grounded verification remains stabilizing</ns0:summary>\n    <ns0:category term=\"cs.MA\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"eess.SY\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-25T10:52:54Z</ns0:published>\n    <ns1:comment>20 pages, 5 figures, 1 table. Code and data: https://github.com/YehudaItkin/delayed-verification-llm</ns1:comment>\n    <ns1:primary_category term=\"cs.MA\" />\n    <ns0:author>\n      <ns0:name>Igor Itkin</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "9df9208bfdb4bd561d4bf12f0a89bdc1a3e0f65ac34eab69e767567734980f46",
+          "source": "arXiv",
+          "source_id": "2606.27409v1",
+          "source_rank": 6
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2606.27409v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2606.27409"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "rank": 6,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Delayed Verification Destabilizes Multi-Agent LLM Belief: Instability Thresholds and Optimal Corrector Placement",
+      "urls": [
+        "https://arxiv.org/abs/2606.27409v1",
+        "https://arxiv.org/pdf/2606.27409v1"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "Complex physical models are the most advanced tools available for producing realistic simulations of the climate system. However, such levels of realism imply high computational cost and restrictions on their use for policymaking and risk assessment. Two central characteristics of climate change are uncertainty and that it is a dynamic problem in which international actions can significantly alter climate projections and information needs, including partial and full compliance of global climate goals. Here we present AIRCC-Clim, a simple climate model emulator that produces regional probabilistic climate change projections of monthly and annual temperature and precipitation, as well as risk measures, based both on standard and user-defined emissions scenarios for six greenhouse gases. AIRCC-Clim emulates 37 atmosphere-ocean coupled general circulation models with low computational and technical requirements for the user. This standalone, user-friendly software is designed for a variety of applications including impact assessments, climate policy evaluation and integrated assessment modelling.",
+      "authors": [
+        "Francisco Estrada",
+        "Oscar Calderón-Bustamante",
+        "Wouter Botzen",
+        "Julián A. Velasco",
+        "Richard S. J. Tol"
+      ],
+      "candidate_id": "prior-a6491b1ee9ffac8c",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2111.01762v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2111.01762v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+SUCCESS+AMBIGUOUS+response+effect+channel+silent+no-op+postcondition+verification+factorial+causal+intervention&start=0",
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2111.01762v1</ns0:id>\n    <ns0:title>AIRCC-Clim: a user-friendly tool for generating regional probabilistic climate change scenarios and risk measures</ns0:title>\n    <ns0:updated>2021-10-30T11:09:03Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2111.01762v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2111.01762v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Complex physical models are the most advanced tools available for producing realistic simulations of the climate system. However, such levels of realism imply high computational cost and restrictions on their use for policymaking and risk assessment. Two central characteristics of climate change are uncertainty and that it is a dynamic problem in which international actions can significantly alter climate projections and information needs, including partial and full compliance of global climate goals. Here we present AIRCC-Clim, a simple climate model emulator that produces regional probabilistic climate change projections of monthly and annual temperature and precipitation, as well as risk measures, based both on standard and user-defined emissions scenarios for six greenhouse gases. AIRCC-Clim emulates 37 atmosphere-ocean coupled general circulation models with low computational and technical requirements for the user. This standalone, user-friendly software is designed for a variety of applications including impact assessments, climate policy evaluation and integrated assessment modelling.</ns0:summary>\n    <ns0:category term=\"physics.ao-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"econ.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.AP\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2021-10-30T11:09:03Z</ns0:published>\n    <ns1:primary_category term=\"physics.ao-ph\" />\n    <ns0:author>\n      <ns0:name>Francisco Estrada</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Oscar Calderón-Bustamante</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wouter Botzen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Julián A. Velasco</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Richard S. J. Tol</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "9df9208bfdb4bd561d4bf12f0a89bdc1a3e0f65ac34eab69e767567734980f46",
+          "source": "arXiv",
+          "source_id": "2111.01762v1",
+          "source_rank": 7
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2111.01762v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2111.01762"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "rank": 7,
+          "source": "arXiv"
+        }
+      ],
+      "title": "AIRCC-Clim: a user-friendly tool for generating regional probabilistic climate change scenarios and risk measures",
+      "urls": [
+        "https://arxiv.org/abs/2111.01762v1",
+        "https://arxiv.org/pdf/2111.01762v1"
+      ],
+      "venue": null,
+      "year": 2021
+    },
+    {
+      "abstract": "Security critical software, e.g., OpenSSL, comes with numerous side-channel leakages left unpatched due to a lack of resources or experts. The situation will only worsen as the pace of code development accelerates, with developers relying on Large Language Models (LLMs) to automatically generate code. In this work, we explore the use of LLMs in generating patches for vulnerable code with microarchitectural side-channel leakages. For this, we investigate the generative abilities of powerful LLMs by carefully crafting prompts following a zero-shot learning approach. All generated code is dynamically analyzed by leakage detection tools, which are capable of pinpointing information leakage at the instruction level leaked either from secret dependent accesses or branches or vulnerable Spectre gadgets, respectively. Carefully crafted prompts are used to generate candidate replacements for vulnerable code, which are then analyzed for correctness and for leakage resilience. From a cost/performance perspective, the GPT4-based configuration costs in API calls a mere few cents per vulnerability fixed. Our results show that LLM-based patching is far more cost-effective and thus provides a scalable solution. Finally, the framework we propose will improve in time, especially as vulnerability detection tools and LLMs mature.",
+      "authors": [
+        "M. Caner Tol",
+        "Berk Sunar"
+      ],
+      "candidate_id": "prior-484ecbb1856b5a57",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2308.13062v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2308.13062v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+SUCCESS+AMBIGUOUS+response+effect+channel+silent+no-op+postcondition+verification+factorial+causal+intervention&start=0",
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2308.13062v1</ns0:id>\n    <ns0:title>ZeroLeak: Using LLMs for Scalable and Cost Effective Side-Channel Patching</ns0:title>\n    <ns0:updated>2023-08-24T20:04:36Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2308.13062v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2308.13062v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Security critical software, e.g., OpenSSL, comes with numerous side-channel leakages left unpatched due to a lack of resources or experts. The situation will only worsen as the pace of code development accelerates, with developers relying on Large Language Models (LLMs) to automatically generate code. In this work, we explore the use of LLMs in generating patches for vulnerable code with microarchitectural side-channel leakages. For this, we investigate the generative abilities of powerful LLMs by carefully crafting prompts following a zero-shot learning approach. All generated code is dynamically analyzed by leakage detection tools, which are capable of pinpointing information leakage at the instruction level leaked either from secret dependent accesses or branches or vulnerable Spectre gadgets, respectively. Carefully crafted prompts are used to generate candidate replacements for vulnerable code, which are then analyzed for correctness and for leakage resilience. From a cost/performance perspective, the GPT4-based configuration costs in API calls a mere few cents per vulnerability fixed. Our results show that LLM-based patching is far more cost-effective and thus provides a scalable solution. Finally, the framework we propose will improve in time, especially as vulnerability detection tools and LLMs mature.</ns0:summary>\n    <ns0:category term=\"cs.CR\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2023-08-24T20:04:36Z</ns0:published>\n    <ns1:primary_category term=\"cs.CR\" />\n    <ns0:author>\n      <ns0:name>M. Caner Tol</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Berk Sunar</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "9df9208bfdb4bd561d4bf12f0a89bdc1a3e0f65ac34eab69e767567734980f46",
+          "source": "arXiv",
+          "source_id": "2308.13062v1",
+          "source_rank": 8
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2308.13062v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2308.13062"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "rank": 8,
+          "source": "arXiv"
+        }
+      ],
+      "title": "ZeroLeak: Using LLMs for Scalable and Cost Effective Side-Channel Patching",
+      "urls": [
+        "https://arxiv.org/abs/2308.13062v1",
+        "https://arxiv.org/pdf/2308.13062v1"
+      ],
+      "venue": null,
+      "year": 2023
+    },
+    {
+      "abstract": "Integrating large language models (LLMs) into personal assistants, like Xiao Ai and Blue Heart V, effectively enhances their ability to interact with humans, solve complex tasks, and manage IoT devices. Such assistants are also termed LLM-driven agents. Upon receiving user requests, the LLM-driven agent generates plans using an LLM, executes these plans through various tools, and then returns the response to the user. During this process, the latency for generating a plan with an LLM can reach tens of seconds, significantly degrading user experience. Real-world dataset analysis shows that about 30% of the requests received by LLM-driven agents are identical or similar, which allows the reuse of previously generated plans to reduce latency. However, it is difficult to accurately define the similarity between the request texts received by the LLM-driven agent through directly evaluating the original request texts. Moreover, the diverse expressions of natural language and the unstructured format of plan texts make implementing plan reuse challenging. To address these issues, we present and implement a plan reuse mechanism for LLM-driven agents called AgentReuse. AgentReuse leverages the similarities and differences among requests' semantics and uses intent classification to evaluate the similarities between requests and enable the reuse of plans. Experimental results based on a real-world dataset demonstrate that AgentReuse achieves a 93% effective plan reuse rate, an F1 score of 0.9718, and an accuracy of 0.9459 in evaluating request similarities, reducing latency by 93.12% compared with baselines without using the reuse mechanism.",
+      "authors": [
+        "Guopeng Li",
+        "Ruiqi Wu",
+        "Haisheng Tan"
+      ],
+      "candidate_id": "prior-9b066603d819195d",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2512.21309v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2512.21309v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+SUCCESS+AMBIGUOUS+response+effect+channel+silent+no-op+postcondition+verification+factorial+causal+intervention&start=0",
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2512.21309v2</ns0:id>\n    <ns0:title>A Plan Reuse Mechanism for LLM-Driven Agent</ns0:title>\n    <ns0:updated>2025-12-25T05:19:04Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2512.21309v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2512.21309v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Integrating large language models (LLMs) into personal assistants, like Xiao Ai and Blue Heart V, effectively enhances their ability to interact with humans, solve complex tasks, and manage IoT devices. Such assistants are also termed LLM-driven agents. Upon receiving user requests, the LLM-driven agent generates plans using an LLM, executes these plans through various tools, and then returns the response to the user. During this process, the latency for generating a plan with an LLM can reach tens of seconds, significantly degrading user experience. Real-world dataset analysis shows that about 30% of the requests received by LLM-driven agents are identical or similar, which allows the reuse of previously generated plans to reduce latency. However, it is difficult to accurately define the similarity between the request texts received by the LLM-driven agent through directly evaluating the original request texts. Moreover, the diverse expressions of natural language and the unstructured format of plan texts make implementing plan reuse challenging. To address these issues, we present and implement a plan reuse mechanism for LLM-driven agents called AgentReuse. AgentReuse leverages the similarities and differences among requests' semantics and uses intent classification to evaluate the similarities between requests and enable the reuse of plans. Experimental results based on a real-world dataset demonstrate that AgentReuse achieves a 93% effective plan reuse rate, an F1 score of 0.9718, and an accuracy of 0.9459 in evaluating request similarities, reducing latency by 93.12% compared with baselines without using the reuse mechanism.</ns0:summary>\n    <ns0:category term=\"cs.MA\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-12-24T18:08:03Z</ns0:published>\n    <ns1:comment>This paper is an English version of A Plan Reuse Mechanism for LLM-Driven Agent published in 2024 in the Journal of Computer Research and Development</ns1:comment>\n    <ns1:primary_category term=\"cs.MA\" />\n    <ns0:author>\n      <ns0:name>Guopeng Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ruiqi Wu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Haisheng Tan</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "9df9208bfdb4bd561d4bf12f0a89bdc1a3e0f65ac34eab69e767567734980f46",
+          "source": "arXiv",
+          "source_id": "2512.21309v2",
+          "source_rank": 9
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2512.21309v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2512.21309"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "rank": 9,
+          "source": "arXiv"
+        }
+      ],
+      "title": "A Plan Reuse Mechanism for LLM-Driven Agent",
+      "urls": [
+        "https://arxiv.org/abs/2512.21309v2",
+        "https://arxiv.org/pdf/2512.21309v2"
+      ],
+      "venue": null,
+      "year": 2025
+    },
+    {
+      "abstract": "In the domain of Human-Computer Interaction, focus groups represent a widely utilised yet resource-intensive methodology, often demanding the expertise of skilled moderators and meticulous preparatory efforts. This study introduces the ``Focus Agent,'' a Large Language Model (LLM) powered framework that simulates both the focus group (for data collection) and acts as a moderator in a focus group setting with human participants. To assess the data quality derived from the Focus Agent, we ran five focus group sessions with a total of 23 human participants as well as deploying the Focus Agent to simulate these discussions with AI participants. Quantitative analysis indicates that Focus Agent can generate opinions similar to those of human participants. Furthermore, the research exposes some improvements associated with LLMs acting as moderators in focus group discussions that include human participants.",
+      "authors": [
+        "Taiyu Zhang",
+        "Xuesong Zhang",
+        "Robbe Cools",
+        "Adalberto L. Simeone"
+      ],
+      "candidate_id": "prior-093c27f936abed8f",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2409.01907v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2409.01907v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+SUCCESS+AMBIGUOUS+response+effect+channel+silent+no-op+postcondition+verification+factorial+causal+intervention&start=0",
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2409.01907v1</ns0:id>\n    <ns0:title>Focus Agent: LLM-Powered Virtual Focus Group</ns0:title>\n    <ns0:updated>2024-09-03T13:56:14Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2409.01907v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2409.01907v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>In the domain of Human-Computer Interaction, focus groups represent a widely utilised yet resource-intensive methodology, often demanding the expertise of skilled moderators and meticulous preparatory efforts. This study introduces the ``Focus Agent,'' a Large Language Model (LLM) powered framework that simulates both the focus group (for data collection) and acts as a moderator in a focus group setting with human participants. To assess the data quality derived from the Focus Agent, we ran five focus group sessions with a total of 23 human participants as well as deploying the Focus Agent to simulate these discussions with AI participants. Quantitative analysis indicates that Focus Agent can generate opinions similar to those of human participants. Furthermore, the research exposes some improvements associated with LLMs acting as moderators in focus group discussions that include human participants.</ns0:summary>\n    <ns0:category term=\"cs.HC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2024-09-03T13:56:14Z</ns0:published>\n    <ns1:comment>8 pages, the 24th Intelligent Virtual Agent Conference</ns1:comment>\n    <ns1:primary_category term=\"cs.HC\" />\n    <ns1:journal_ref>Taiyu Zhang, Xuesong Zhang, Robbe Cools, and Adalberto Simeone. 2024. Focus Agent: LLM-Powered Virtual Focus Group. In ACM International Conference on Intelligent Virtual Agents (IVA '24), September 16--19, 2024, GLASGOW, United Kingdom</ns1:journal_ref>\n    <ns0:author>\n      <ns0:name>Taiyu Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xuesong Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Robbe Cools</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Adalberto L. Simeone</ns0:name>\n    </ns0:author>\n    <ns1:doi>10.1145/3652988.3673918</ns1:doi>\n    <ns0:link rel=\"related\" href=\"https://doi.org/10.1145/3652988.3673918\" title=\"doi\" />\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "9df9208bfdb4bd561d4bf12f0a89bdc1a3e0f65ac34eab69e767567734980f46",
+          "source": "arXiv",
+          "source_id": "2409.01907v1",
+          "source_rank": 10
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2409.01907v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2409.01907"
+        },
+        {
+          "kind": "doi",
+          "value": "10.1145/3652988.3673918"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "rank": 10,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Focus Agent: LLM-Powered Virtual Focus Group",
+      "urls": [
+        "https://arxiv.org/abs/2409.01907v1",
+        "https://arxiv.org/pdf/2409.01907v1"
+      ],
+      "venue": "Taiyu Zhang, Xuesong Zhang, Robbe Cools, and Adalberto Simeone. 2024. Focus Agent: LLM-Powered Virtual Focus Group. In ACM International Conference on Intelligent Virtual Agents (IVA '24), September 16--19, 2024, GLASGOW, United Kingdom",
+      "year": 2024
+    },
+    {
+      "abstract": "Discovering and exploiting the causality in deep neural networks (DNNs) are crucial challenges for understanding and reasoning causal effects (CE) on an explainable visual model. \"Intervention\" has been widely used for recognizing a causal relation ontologically. In this paper, we propose a causal inference framework for visual reasoning via do-calculus. To study the intervention effects on pixel-level features for causal reasoning, we introduce pixel-wise masking and adversarial perturbation. In our framework, CE is calculated using features in a latent space and perturbed prediction from a DNN-based model. We further provide the first look into the characteristics of discovered CE of adversarially perturbed images generated by gradient-based methods \\footnote{~~https://github.com/jjaacckkyy63/Causal-Intervention-AE-wAdvImg}. Experimental results show that CE is a competitive and robust index for understanding DNNs when compared with conventional methods such as class-activation mappings (CAMs) on the Chest X-Ray-14 dataset for human-interpretable feature(s) (e.g., symptom) reasoning. Moreover, CE holds promises for detecting adversarial examples as it possesses distinct characteristics in the presence of adversarial perturbations.",
+      "authors": [
+        "Chao-Han Huck Yang",
+        "Yi-Chieh Liu",
+        "Pin-Yu Chen",
+        "Xiaoli Ma",
+        "Yi-Chang James Tsai"
+      ],
+      "candidate_id": "prior-cf6014111ccf5c20",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/1902.03380v3"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/1902.03380v3"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+SUCCESS+AMBIGUOUS+response+effect+channel+silent+no-op+postcondition+verification+factorial+causal+intervention&start=0",
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/1902.03380v3</ns0:id>\n    <ns0:title>When Causal Intervention Meets Adversarial Examples and Image Masking for Deep Neural Networks</ns0:title>\n    <ns0:updated>2019-06-25T15:07:42Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/1902.03380v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/1902.03380v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Discovering and exploiting the causality in deep neural networks (DNNs) are crucial challenges for understanding and reasoning causal effects (CE) on an explainable visual model. \"Intervention\" has been widely used for recognizing a causal relation ontologically. In this paper, we propose a causal inference framework for visual reasoning via do-calculus. To study the intervention effects on pixel-level features for causal reasoning, we introduce pixel-wise masking and adversarial perturbation. In our framework, CE is calculated using features in a latent space and perturbed prediction from a DNN-based model. We further provide the first look into the characteristics of discovered CE of adversarially perturbed images generated by gradient-based methods \\footnote{~~https://github.com/jjaacckkyy63/Causal-Intervention-AE-wAdvImg}. Experimental results show that CE is a competitive and robust index for understanding DNNs when compared with conventional methods such as class-activation mappings (CAMs) on the Chest X-Ray-14 dataset for human-interpretable feature(s) (e.g., symptom) reasoning. Moreover, CE holds promises for detecting adversarial examples as it possesses distinct characteristics in the presence of adversarial perturbations.</ns0:summary>\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.SC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2019-02-09T06:44:13Z</ns0:published>\n    <ns1:comment>Noted our camera-ready version has changed the title. \"When Causal Intervention Meets Adversarial Examples and Image Masking for Deep Neural Networks\" as the v3 official paper title in IEEE Proceeding. Please use it in your formal reference. Accepted at IEEE ICIP 2019. Pytorch code has released on https://github.com/jjaacckkyy63/Causal-Intervention-AE-wAdvImg</ns1:comment>\n    <ns1:primary_category term=\"cs.CV\" />\n    <ns1:journal_ref>2019 26th IEEE International Conference on Image Processing (ICIP). IEEE</ns1:journal_ref>\n    <ns0:author>\n      <ns0:name>Chao-Han Huck Yang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yi-Chieh Liu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Pin-Yu Chen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xiaoli Ma</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yi-Chang James Tsai</ns0:name>\n    </ns0:author>\n    <ns1:doi>10.1109/ICIP.2019.8803554</ns1:doi>\n    <ns0:link rel=\"related\" href=\"https://doi.org/10.1109/ICIP.2019.8803554\" title=\"doi\" />\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "9df9208bfdb4bd561d4bf12f0a89bdc1a3e0f65ac34eab69e767567734980f46",
+          "source": "arXiv",
+          "source_id": "1902.03380v3",
+          "source_rank": 11
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "1902.03380v3"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "1902.03380"
+        },
+        {
+          "kind": "doi",
+          "value": "10.1109/icip.2019.8803554"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "rank": 11,
+          "source": "arXiv"
+        }
+      ],
+      "title": "When Causal Intervention Meets Adversarial Examples and Image Masking for Deep Neural Networks",
+      "urls": [
+        "https://arxiv.org/abs/1902.03380v3",
+        "https://arxiv.org/pdf/1902.03380v3"
+      ],
+      "venue": "2019 26th IEEE International Conference on Image Processing (ICIP). IEEE",
+      "year": 2019
+    },
+    {
+      "abstract": "We report the discovery of channel fracture, a silent architectural failure in multi-agent systems where information routed across agent boundaries is silently blocked by invisible constraints. We present three instances in a production Hermes Agent deployment: (1) cron memory injection blocked by scheduler barriers; (2) cross-profile skill routing fractured by recursive directory traversal; (3) WebSocket delivery confirmation fallback fracture causing message duplication. We propose CADVP v1.1, a 13-dimension verification protocol with a veto-level confirmation check. Through 30,012 trials, zero failure rates under protocol versus 69 to 98 percent without. Real-world validation (10,008 trials) confirms quality elevation from 0.90 to 1.00. Three design principles: inverse verification, channel matching, and PIP protection.",
+      "authors": [
+        "Dexing Liu"
+      ],
+      "candidate_id": "prior-1c841e7efdbf234a",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2606.04896v3"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2606.04896v3"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=12&search_query=all%3ALLM+agent+tool+SUCCESS+AMBIGUOUS+response+effect+channel+silent+no-op+postcondition+verification+factorial+causal+intervention&start=0",
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.04896v3</ns0:id>\n    <ns0:title>Channel Fracture: Three Instances of Cross-Boundary Silent Delivery Reliability Failures in Multi-Agent Systems</ns0:title>\n    <ns0:updated>2026-06-06T04:42:57Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.04896v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.04896v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>We report the discovery of channel fracture, a silent architectural failure in multi-agent systems where information routed across agent boundaries is silently blocked by invisible constraints. We present three instances in a production Hermes Agent deployment: (1) cron memory injection blocked by scheduler barriers; (2) cross-profile skill routing fractured by recursive directory traversal; (3) WebSocket delivery confirmation fallback fracture causing message duplication. We propose CADVP v1.1, a 13-dimension verification protocol with a veto-level confirmation check. Through 30,012 trials, zero failure rates under protocol versus 69 to 98 percent without. Real-world validation (10,008 trials) confirms quality elevation from 0.90 to 1.00. Three design principles: inverse verification, channel matching, and PIP protection.</ns0:summary>\n    <ns0:category term=\"cs.MA\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-03T13:55:29Z</ns0:published>\n    <ns1:comment>39 pages, 6 figures, v3-pre expanded to three instances of cross-boundary channel fractures: cron memory injection (40,020 total trials), code-level rglob skill nesting, and WebSocket ACK delivery confirmation fallback fracture (DCFF). Includes PIP principal interest protection principles</ns1:comment>\n    <ns1:primary_category term=\"cs.MA\" />\n    <ns0:author>\n      <ns0:name>Dexing Liu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n"
+          },
+          "response_body_sha256": "9df9208bfdb4bd561d4bf12f0a89bdc1a3e0f65ac34eab69e767567734980f46",
+          "source": "arXiv",
+          "source_id": "2606.04896v3",
+          "source_rank": 12
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2606.04896v3"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2606.04896"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "LLM agent tool SUCCESS AMBIGUOUS response effect channel silent no-op postcondition verification factorial causal intervention",
+          "rank": 12,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Channel Fracture: Three Instances of Cross-Boundary Silent Delivery Reliability Failures in Multi-Agent Systems",
+      "urls": [
+        "https://arxiv.org/abs/2606.04896v3",
+        "https://arxiv.org/pdf/2606.04896v3"
+      ],
+      "venue": null,
+      "year": 2026
+    }
+  ],
+  "created_at_utc": "2026-08-16T06:34:11.040040Z",
+  "degraded": true,
+  "schema_version": 1,
+  "source_attempts": [
+    {
+      "error_type": "HTTPError",
+      "http_status": 429,
+      "query_index": 1,
+      "source": "Semantic Scholar",
+      "status": "error"
+    },
+    {
+      "query_index": 1,
+      "record_count": 12,
+      "source": "arXiv",
+      "status": "ok"
+    }
+  ]
+}

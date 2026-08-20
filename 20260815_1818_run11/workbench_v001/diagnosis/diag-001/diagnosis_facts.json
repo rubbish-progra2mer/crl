@@ -1,0 +1,665 @@
+{
+  "authority": "ADVISORY_NON_AUTHORITATIVE_FACTS_ONLY",
+  "comparison_files": [],
+  "contract_version": "3",
+  "current_version": {
+    "comparison_files": [],
+    "experiments": {
+      "attempt_count": 0,
+      "attempts": [],
+      "status_counts": {},
+      "tier_counts": {}
+    },
+    "review_evaluation_files": [],
+    "search_snapshot_files": [
+      {
+        "path": "hypotheses_v001/searches/map-001/report.md",
+        "sha256": "9478cae0de6cbd3df0851a75facf86680d8b346c2136c2d908134b14e9b382aa",
+        "size_bytes": 8654
+      },
+      {
+        "path": "hypotheses_v001/searches/map-001/request.json",
+        "sha256": "7f5b6ed8f6afad3e1af2f1da639d62785d866aaa80d76940de169cce1a0b9ef1",
+        "size_bytes": 5649
+      },
+      {
+        "path": "hypotheses_v001/searches/map-001/result.json",
+        "sha256": "b8dee043d95035205f60e820ed06df928541e8b04fb6044975d18ff28c546440",
+        "size_bytes": 844624
+      },
+      {
+        "path": "hypotheses_v001/searches/map-002/report.md",
+        "sha256": "6dbadf1113c2defcb620388c0ca685973473635f053dad00d3fcf549ffa0cc24",
+        "size_bytes": 8444
+      },
+      {
+        "path": "hypotheses_v001/searches/map-002/request.json",
+        "sha256": "2d0841c33bd46f19575d0f9fae67f640eccd1681416148055832e8f7e3762287",
+        "size_bytes": 5557
+      },
+      {
+        "path": "hypotheses_v001/searches/map-002/result.json",
+        "sha256": "cc415c94d5a3770446ac523e2607b826a0326ad51c2f93557f7df906bba4daef",
+        "size_bytes": 1052149
+      }
+    ],
+    "version": "v001"
+  },
+  "diagnosis_id": "diag-001",
+  "experiments": {
+    "attempt_count": 0,
+    "attempts": [],
+    "status_counts": {},
+    "tier_counts": {}
+  },
+  "file_count": 48,
+  "file_type_counts": {
+    ".json": 29,
+    ".md": 16,
+    ".py": 3
+  },
+  "generated_at_utc": "2026-08-15T10:48:24.560619Z",
+  "marker_occurrences": {
+    "assumption": 6,
+    "contradiction": 1,
+    "failed": 49,
+    "not provided": 3,
+    "todo": 0
+  },
+  "non_judgments": [
+    "no candidate is killed or selected by this package",
+    "no novelty, delivery, or next-action decision is computed",
+    "the main researcher interprets these traceable facts"
+  ],
+  "recall_resume": {
+    "authority": "ADVISORY_NON_AUTHORITATIVE",
+    "run_id": "20260815_1818_run11",
+    "sections": [
+      {
+        "hits": [
+          {
+            "fts_rank": 1,
+            "fused_score": 0.01639344262295082,
+            "line_end": 90,
+            "line_start": 29,
+            "path": "hypotheses_v001/searches/map-001/report.md",
+            "semantic_rank": null,
+            "source_sha256": "9478cae0de6cbd3df0851a75facf86680d8b346c2136c2d908134b14e9b382aa",
+            "text": "- Paper `P035` · Holistic Agent Leaderboard: The Missing Infrastructure for AI Agent Evaluation；用途 `measurement`；路线 `q005:paper_card_fts` #1；Card `paper-p035`（paper）；Evidence `ev-p035-evaluation-core`\n- Paper `P039` · ToolFailBench: Diagnosing Tool-Use Failures in LLM Agents；用途 `measurement`；路线 `q005:passage_hybrid` #2；Passage `P039:p0001:s0003`\n- Paper `P064` · How Memory Management Impacts LLM Agents: An Empirical Study of Experience-Following Behavior；用途 `measurement`；路线 `q005:failure_card_fts` #3；Card `failure-retrieved-experience-propagates-stored-errors`（failure）；Evidence `ev-p064-evaluator-reliability`, `ev-p064-experience-following-error`\n- Paper `P078` · CRAFT: Customizing LLMs by Creating and Retrieving from Specialized Toolsets；用途 `measurement`；路线 `q005:operator_card_fts` #5；Card `operator-validated-specialized-tool-creation-retrieval`（operator）；Evidence `ev-p078-baseline-fairness-boundary`, `ev-p078-generic-tool-and-baseline-boundary`, `ev-p078-multiview-tool-retrieval`, `ev-p078-toolset-construction-cost`, `ev-p078-validated-tool-creation-retrieval`\n\n- 代表项：20 / 去重 Paper：50\n\n## 查询与路线覆盖\n\n### q001 · problem\n\n- 原始查询：`tool-using LLM agents false task completion tool execution failures state inconsistency`\n- 规范化查询：`\"tool\" OR \"using\" OR \"LLM\" OR \"agents\" OR \"false\" OR \"task\" OR \"completion\" OR \"execution\" OR \"failures\" OR \"state\" OR \"inconsistency\"`\n- 路线 `paper_card_fts`：8 条；降级 false（无）\n- 路线 `failure_card_fts`：8 条；降级 false（无）\n- 路线 `passage_hybrid`：12 条；降级 true（vector_search_failed:RuntimeError:Cannot send a request, as the client has been closed.）\n- 路线 `operator_card_fts`：8 条；降级 false（无）\n\n### q002 · failure\n\n- 原始查询：`agent reports success after tool error silent failure missing postcondition verification`\n- 规范化查询：`\"agent\" OR \"reports\" OR \"success\" OR \"after\" OR \"tool\" OR \"error\" OR \"silent\" OR \"failure\" OR \"missing\" OR \"postcondition\" OR \"verification\"`\n- 路线 `failure_card_fts`：8 条；降级 false（无）\n- 路线 `passage_hybrid`：12 条；降级 true（vector_search_failed:RuntimeError:Cannot send a request, as the client has been closed.）\n- 路线 `operator_card_fts`：8 条；降级 false（无）\n- 路线 `paper_card_fts`：8 条；降级 false（无）\n\n### q003 · operator\n\n- 原始查询：`executable postconditions assertions state verification checkpoints tool trajectories`\n- 规范化查询：`\"executable\" OR \"postconditions\" OR \"assertions\" OR \"state\" OR \"verification\" OR \"checkpoints\" OR \"tool\" OR \"trajectories\"`\n- 路线 `operator_card_fts`：8 条；降级 false（无）\n- 路线 `paper_card_fts`：8 条；降级 false（无）\n- 路线 `passage_hybrid`：12 条；降级 true（vector_search_failed:RuntimeError:Cannot send a request, as the client has been closed.）\n- 路线 `failure_card_fts`：8 条；降级 false（无）\n\n### q004 · prior\n\n- 原始查询：`tool agent trajectory verifier process reward model outcome verification self correction`\n- 规范化查询：`\"tool\" OR \"agent\" OR \"trajectory\" OR \"verifier\" OR \"process\" OR \"reward\" OR \"model\" OR \"outcome\" OR \"verification\" OR \"self\" OR \"correction\"`\n- 路线 `paper_card_fts`：8 条；降级 false（无）\n- 路线 `operator_card_fts`：8 条；降级 false（无）\n- 路线 `failure_card_fts`：8 条；降级 false（无）\n- 路线 `passage_hybrid`：12 条；降级 false（无）\n\n### q005 · measurement\n\n- 原始查询：`tool use agent reliability benchmark execution trace perturbation tool errors`\n- 规范化查询：`\"tool\" OR \"use\" OR \"agent\" OR \"reliability\" OR \"benchmark\" OR \"execution\" OR \"trace\" OR \"perturbation\" OR \"errors\"`\n- 路线 `paper_card_fts`：8 条；降级 false（无）\n- 路线 `passage_hybrid`：12 条；降级 false（无）\n- 路线 `failure_card_fts`：8 条；降级 false（无）\n- 路线 `operator_card_fts`：8 条；降级 false（无）\n\n## 覆盖诊断\n\n- 去重 Card：77\n- 去重 Evidence：96\n- 去重 Passage：57\n- 命中 Paper：50\n- 原始观测：180\n- 带机械噪声标记的观测：36"
+          },
+          {
+            "fts_rank": 2,
+            "fused_score": 0.016129032258064516,
+            "line_end": 54,
+            "line_start": 1,
+            "path": "workbench_v001/h001.json",
+            "semantic_rank": null,
+            "source_sha256": "d9c09d27e71b39f86fa451bfa3b3c353377be0d1c3542bb6d8da7b6301d87176",
+            "text": "{\n  \"hypothesis_id\": \"H001\",\n  \"title\": \"双向反事实工具证据测试：用应变与不变关系测量工具结果的因果采用\",\n  \"parent_ids\": [],\n  \"lineage_note\": \"根候选；由虚假成功、结果忽略与行为扰动证据交叉导出，但尚未完成最近先行审计。\",\n  \"problem\": \"现有终局正确率可以把工具跳过、调用后忽略和真实采用混在一起；环境终态又只适用于可直接检查的任务。需要一种不依赖完整答案真值、但能测量最终回答是否真正受任务相关工具证据驱动的评价载体。\",\n  \"target_failure\": {\n    \"summary\": \"智能体调用了工具，却忽略任务相关结果，或反而依赖无关字段；单次自然轨迹和自我报告都可能看不见这种因果错位。\",\n    \"card_ids\": [\n      \"failure-confident-completion-without-state-success\",\n      \"failure-tool-use-metrics-collapse-distinct-errors\",\n      \"failure-generator-aligned-verification-passes-shared-misreads\"\n    ],\n    \"evidence_ids\": [\n      \"ev-p040-failure-core\",\n      \"ev-p039-aggregate-score-masking\",\n      \"ev-p039-failure-core\",\n      \"ev-p099-judge-miss\"\n    ]\n  },\n  \"changed_computation\": {\n    \"baseline\": \"在一个自然工具轨迹上按最终答案正确率、任务终态或语言模型裁判打分。\",\n    \"intervention\": \"固定任务、工具模式、提示和解码设置，对工具返回构造两类最小成对干预：仅改变任务相关字段的应变对，以及仅改变无关字段的应不变对；以回答间预先声明的关系而非完整标准答案判断因果采用。\",\n    \"information_available\": \"原始任务、工具返回结构、字段相关性声明、成对干预和两次回答；不使用完整标准答案，也不读取模型隐藏状态。\",\n    \"timing\": \"离线评价时对同一智能体进行成对影子重放；候选若扩展为在线门控，再在最终回答提交前选择性重放。\",\n    \"budget_effect\": \"每个被测实例从一次推理增加为原轨迹加一到两个成对重放；首轮杀手实验只比较固定小样本上的测量可辨识性。\"\n  },\n  \"mechanism_claim\": \"若智能体真实采用了任务相关工具证据，则在保持其他信息不变时，相关字段干预应引发方向一致的回答变化，而无关字段干预不应改变任务结论；两类关系联合比单向敏感度更能区分结果忽略、无关依赖与普遍不稳定。\",\n  \"falsifier\": \"在可机械判定的合成工具任务上，成对关系指标不能稳定区分已知的结果忽略、真实采用和无关字段依赖实现；或指标主要由采样噪声、提示复述、字段表面变化或答案解析器决定；或最近先行已直接占据同样的问题、信息、时机、计算与评价路径。\",\n  \"minimal_killer_experiment\": \"构造小型确定性工具返回集及三种可控代理策略，并用至少两个真实本地语言模型生成回答；比较相关应变、无关不变及两者联合关系对已知策略标签的区分能力，同时重复种子估计纯采样噪声。\",\n  \"nearest_prior_risk\": \"高风险先行包括 ToolFailBench 的结果忽略分类、False Success 的环境真值、ToolGate 的后条件、ReLoop 的行为扰动、Verus-SpecGym 的可执行双向测试，以及可能尚未入库的反事实工具调用或因果追踪评价。\",\n  \"alternative_explanations\": [\n    \"模型只是复制被改动的显著字符串，未进行任务推理。\",\n    \"答案差异来自随机采样或序列位置，而不是工具证据采用。\",\n    \"无关字段实际通过语义歧义影响任务，因此所谓不变关系不成立。\",\n    \"只要直接检查自然轨迹中的引用或引用覆盖率就能等价实现。\"\n  ],\n  \"descriptors\": {\n    \"problem_family\": \"工具型语言模型智能体评价与可靠性\",\n    \"computation_stage\": \"工具结果进入上下文之后、最终回答之前\",\n    \"intervention_family\": \"成对反事实与变形测试\",\n    \"information_source\": \"可见工具返回及字段级任务关系\",\n    \"timing_class\": \"离线成对影子重放\",\n    \"budget_class\": \"每实例增加一至两次模型调用\",\n    \"evaluation_mode\": \"不依赖完整答案真值的关系式机械评价\"\n  },\n  \"literature_refs\": [\n    \"P039\",\n    \"P040\",\n    \"P074\",\n    \"P097\",\n    \"P099\"\n  ]\n}"
+          },
+          {
+            "fts_rank": 3,
+            "fused_score": 0.015873015873015872,
+            "line_end": 69,
+            "line_start": 1,
+            "path": "hypotheses_v001/portfolio.json",
+            "semantic_rank": null,
+            "source_sha256": "3b7f30541a9b328a4b94bc5ebe651081e131421a252587592113c291c9903c02",
+            "text": "{\n  \"created_at_utc\": \"2026-08-15T10:23:26.080660Z\",\n  \"hypotheses\": [\n    {\n      \"alternative_explanations\": [\n        \"模型只是复制被改动的显著字符串，未进行任务推理。\",\n        \"答案差异来自随机采样或序列位置，而不是工具证据采用。\",\n        \"无关字段实际通过语义歧义影响任务，因此所谓不变关系不成立。\",\n        \"只要直接检查自然轨迹中的引用或引用覆盖率就能等价实现。\"\n      ],\n      \"changed_computation\": {\n        \"baseline\": \"在一个自然工具轨迹上按最终答案正确率、任务终态或语言模型裁判打分。\",\n        \"budget_effect\": \"每个被测实例从一次推理增加为原轨迹加一到两个成对重放；首轮杀手实验只比较固定小样本上的测量可辨识性。\",\n        \"information_available\": \"原始任务、工具返回结构、字段相关性声明、成对干预和两次回答；不使用完整标准答案，也不读取模型隐藏状态。\",\n        \"intervention\": \"固定任务、工具模式、提示和解码设置，对工具返回构造两类最小成对干预：仅改变任务相关字段的应变对，以及仅改变无关字段的应不变对；以回答间预先声明的关系而非完整标准答案判断因果采用。\",\n        \"timing\": \"离线评价时对同一智能体进行成对影子重放；候选若扩展为在线门控，再在最终回答提交前选择性重放。\"\n      },\n      \"created_at_utc\": \"2026-08-15T10:23:26.188613Z\",\n      \"descriptors\": {\n        \"budget_class\": \"每实例增加一至两次模型调用\",\n        \"computation_stage\": \"工具结果进入上下文之后、最终回答之前\",\n        \"evaluation_mode\": \"不依赖完整答案真值的关系式机械评价\",\n        \"information_source\": \"可见工具返回及字段级任务关系\",\n        \"intervention_family\": \"成对反事实与变形测试\",\n        \"problem_family\": \"工具型语言模型智能体评价与可靠性\",\n        \"timing_class\": \"离线成对影子重放\"\n      },\n      \"falsifier\": \"在可机械判定的合成工具任务上，成对关系指标不能稳定区分已知的结果忽略、真实采用和无关字段依赖实现；或指标主要由采样噪声、提示复述、字段表面变化或答案解析器决定；或最近先行已直接占据同样的问题、信息、时机、计算与评价路径。\",\n      \"hypothesis_id\": \"H001\",\n      \"lineage_note\": \"根候选；由虚假成功、结果忽略与行为扰动证据交叉导出，但尚未完成最近先行审计。\",\n      \"literature_refs\": [\n        \"P039\",\n        \"P040\",\n        \"P074\",\n        \"P097\",\n        \"P099\"\n      ],\n      \"mechanism_claim\": \"若智能体真实采用了任务相关工具证据，则在保持其他信息不变时，相关字段干预应引发方向一致的回答变化，而无关字段干预不应改变任务结论；两类关系联合比单向敏感度更能区分结果忽略、无关依赖与普遍不稳定。\",\n      \"minimal_killer_experiment\": \"构造小型确定性工具返回集及三种可控代理策略，并用至少两个真实本地语言模型生成回答；比较相关应变、无关不变及两者联合关系对已知策略标签的区分能力，同时重复种子估计纯采样噪声。\",\n      \"nearest_prior_risk\": \"高风险先行包括 ToolFailBench 的结果忽略分类、False Success 的环境真值、ToolGate 的后条件、ReLoop 的行为扰动、Verus-SpecGym 的可执行双向测试，以及可能尚未入库的反事实工具调用或因果追踪评价。\",\n      \"parent_ids\": [],\n      \"problem\": \"现有终局正确率可以把工具跳过、调用后忽略和真实采用混在一起；环境终态又只适用于可直接检查的任务。需要一种不依赖完整答案真值、但能测量最终回答是否真正受任务相关工具证据驱动的评价载体。\",\n      \"revision\": 2,\n      \"status\": \"active\",\n      \"status_reason\": \"主研究者采纳为最近先行与最小杀手实验的当前候选，尚未形成 Seed。\",\n      \"target_failure\": {\n        \"card_ids\": [\n          \"failure-confident-completion-without-state-success\",\n          \"failure-tool-use-metrics-collapse-distinct-errors\",\n          \"failure-generator-aligned-verification-passes-shared-misreads\"\n        ],\n        \"evidence_ids\": [\n          \"ev-p040-failure-core\",\n          \"ev-p039-aggregate-score-masking\",\n          \"ev-p039-failure-core\",\n          \"ev-p099-judge-miss\"\n        ],\n        \"summary\": \"智能体调用了工具，却忽略任务相关结果，或反而依赖无关字段；单次自然轨迹和自我报告都可能看不见这种因果错位。\"\n      },\n      \"title\": \"双向反事实工具证据测试：用应变与不变关系测量工具结果的因果采用\",\n      \"updated_at_utc\": \"2026-08-15T10:23:26.292439Z\"\n    }\n  ],\n  \"revision\": 2,\n  \"run_id\": \"20260815_1818_run11\",\n  \"schema_version\": 1,\n  \"updated_at_utc\": \"2026-08-15T10:23:26.292439Z\",\n  \"version\": \"v001\"\n}"
+          },
+          {
+            "fts_rank": 4,
+            "fused_score": 0.015625,
+            "line_end": 28,
+            "line_start": 1,
+            "path": "hypotheses_v001/searches/map-001/report.md",
+            "semantic_rank": null,
+            "source_sha256": "9478cae0de6cbd3df0851a75facf86680d8b346c2136c2d908134b14e9b382aa",
+            "text": "<!-- CRL_RESEARCH_SEARCH_META {\"created_at_utc\":\"2026-08-15T10:20:35.636248Z\",\"request_fingerprint_sha256\":\"fa2b87c831df2da3e986a531ef493c3f8d96c860b9d330ec0a3c2e6027cba21b\",\"result_json_sha256\":\"b8dee043d95035205f60e820ed06df928541e8b04fb6044975d18ff28c546440\",\"search_id\":\"map-001\"} -->\n# 研究检索导航\n\n> 本报告仅展示查询路线、来源、命中定位与覆盖；所有科研判断由主研究者完成。\n\n- 搜索标识：`map-001`\n- 生成时间（协调世界时）：`2026-08-15T10:20:35.636248Z`\n\n## 紧凑研究地图\n\n> 跨路线按 Paper 去重；每个查询路线至多选一个尚未出现的最高排名代表项。完整原始命中保留在 `result.json`。\n\n- Paper `P040` · From Confident Closing to Silent Failure: Characterizing False Success in LLM Agents；用途 `problem`；路线 `q001:paper_card_fts` #1；Card `paper-p040`（paper）；Evidence `ev-p040-failure-core`\n- Paper `P007` · tau-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains；用途 `problem`；路线 `q001:failure_card_fts` #2；Card `failure-repeat-run-reliability-collapse`（failure）；Evidence `ev-p007-repeat-reliability-collapse`\n- Paper `P016` · Why Do Multi-Agent LLM Systems Fail?；用途 `problem`；路线 `q001:passage_hybrid` #8；Passage `P016:p0007:s0002`\n- Paper `P046` · Solver-Aided Verification of Policy Compliance in Tool-Augmented LLM Agents；用途 `problem`；路线 `q001:operator_card_fts` #1；Card `operator-smt-preexecution-policy-guard`（operator）；Evidence `ev-p046-operator-core`\n- Paper `P097` · ReLoop: Structured Modeling and Behavioral Verification for Reliable LLM-Based Optimization；用途 `failure`；路线 `q002:failure_card_fts` #1；Card `failure-solver-feasibility-near-zero-information-proxy`（failure）；Evidence `ev-p097-behavioral-perturbation`, `ev-p097-feasibility-gap`\n- Paper `P074` · ToolGate: Contract-Grounded and Verified Tool Execution for LLMs；用途 `failure`；路线 `q002:passage_hybrid` #1；Passage `P074:p0024:s0001`\n- Paper `P073` · Uncertainty Calibration for Tool-Using Language Agents；用途 `failure`；路线 `q002:operator_card_fts` #2；Card `operator-execution-supervised-prompt-trace-calibration`（operator）；Evidence `ev-p073-execution-supervised-probe`, `ev-p073-internal-confidence-misalignment`\n- Paper `P044` · DEER: A Benchmark for Evaluating Deep Research Agents on Expert Report Generation；用途 `failure`；路线 `q002:paper_card_fts` #4；Card `paper-p044`（paper）；Evidence `ev-p044-evaluation-core`\n- Paper `P099` · Verus-SpecGym: An Agentic Environment for Evaluating Specification Autoformalization；用途 `operator`；路线 `q003:operator_card_fts` #1；Card `operator-four-bucket-executable-spec-testing`（operator）；Evidence `ev-p099-judge-miss`, `ev-p099-soundness-necessity`, `ev-p099-two-stage-check`\n- Paper `P058` · AFlow: Automating Agentic Workflow Generation；用途 `operator`；路线 `q003:paper_card_fts` #4；Card `paper-p058`（paper）；Evidence `ev-p058-mcts-workflow-search`, `ev-p058-validation-selection-loop`\n- Paper `P047` · tau2-Bench: Evaluating Conversational Agents in a Dual-Control Environment；用途 `operator`；路线 `q003:passage_hybrid` #1；Passage `P047:p0020:s0001`\n- Paper `P004` · TravelPlanner: A Benchmark for Real-World Planning with Language Agents；用途 `operator`；路线 `q003:failure_card_fts` #4；Card `failure-constrained-plan-surface-validity`（failure）；Evidence `ev-p004-failure-core`, `ev-p004-macro-constraint-failure`\n- Paper `P021` · In-the-Flow Agentic System Optimization for Effective Planning and Tool Use；用途 `prior`；路线 `q004:paper_card_fts` #1；Card `paper-p021`（paper）；Evidence `ev-p021-operator-core`\n- Paper `P027` · Verified Critical Step Optimization for LLM Agents；用途 `prior`；路线 `q004:operator_card_fts` #2；Card `operator-verified-single-branch-repair`（operator）；Evidence `ev-p027-operator-core`\n- Paper `P013` · Large Language Models Cannot Self-Correct Reasoning Yet；用途 `prior`；路线 `q004:failure_card_fts` #1；Card `failure-intrinsic-self-correction-degradation`（failure）；Evidence `ev-p013-intrinsic-self-correction-degrades`, `ev-p013-oracle-free-equal-budget-boundary`\n- Paper `P050` · Scaling Agentic Verifier for Competitive Coding；用途 `prior`；路线 `q004:passage_hybrid` #1；Passage `P050:p0005:s0003`"
+          },
+          {
+            "fts_rank": 5,
+            "fused_score": 0.015384615384615385,
+            "line_end": 26,
+            "line_start": 1,
+            "path": "hypotheses_v001/searches/map-002/report.md",
+            "semantic_rank": null,
+            "source_sha256": "6dbadf1113c2defcb620388c0ca685973473635f053dad00d3fcf549ffa0cc24",
+            "text": "<!-- CRL_RESEARCH_SEARCH_META {\"created_at_utc\":\"2026-08-15T10:22:01.289781Z\",\"request_fingerprint_sha256\":\"9103154d94f84348d32850fba62351dc481a2e1018a9c97d4b72725dc405f34d\",\"result_json_sha256\":\"cc415c94d5a3770446ac523e2607b826a0326ad51c2f93557f7df906bba4daef\",\"search_id\":\"map-002\"} -->\n# 研究检索导航\n\n> 本报告仅展示查询路线、来源、命中定位与覆盖；所有科研判断由主研究者完成。\n\n- 搜索标识：`map-002`\n- 生成时间（协调世界时）：`2026-08-15T10:22:01.289781Z`\n\n## 紧凑研究地图\n\n> 跨路线按 Paper 去重；每个查询路线至多选一个尚未出现的最高排名代表项。完整原始命中保留在 `result.json`。\n\n- Paper `P039` · ToolFailBench: Diagnosing Tool-Use Failures in LLM Agents；用途 `problem`；路线 `q001:paper_card_fts` #1；Card `paper-p039`（paper）；Evidence `ev-p039-failure-core`\n- Paper `P017` · Understanding the Information Propagation Effects of Communication Topologies in LLM-based Multi-Agent Systems；用途 `problem`；路线 `q001:failure_card_fts` #2；Card `failure-sparse-topology-suppresses-correct-insight`（failure）；Evidence `ev-p017-failure-core`\n- Paper `P025` · Unlocking the Power of Multi-Agent LLM for Reasoning: From Lazy Agents to Deliberation；用途 `problem`；路线 `q001:passage_hybrid` #2；Passage `P025:p0004:s0002`\n- Paper `P041` · LLM Agents Already Know When to Call Tools - Even Without Reasoning；用途 `problem`；路线 `q001:operator_card_fts` #1；Card `operator-hidden-state-tool-necessity-prefill`（operator）；Evidence `ev-p041-operator-core`, `ev-p041-probe-prefill-steering`\n- Paper `P098` · Beyond Objective Equivalence: Constraint Injection for LLM-Based Optimization Modeling on Vehicle Routing Problems；用途 `failure`；路线 `q002:failure_card_fts` #2；Card `failure-objective-equivalence-passes-nonbinding-errors`（failure）；Evidence `ev-p098-diff-leak-550`, `ev-p098-nonbinding-blindness`, `ev-p098-open-problem`\n- Paper `P089` · ToolDreamer: Instilling LLM Reasoning Into Tool Retrievers；用途 `failure`；路线 `q002:passage_hybrid` #2；Passage `P089:p0014:s0001`\n- Paper `P074` · ToolGate: Contract-Grounded and Verified Tool Execution for LLMs；用途 `failure`；路线 `q002:operator_card_fts` #1；Card `operator-contract-gated-tool-state-commit`（operator）；Evidence `ev-p074-contract-state-commit`, `ev-p074-missing-schema-true-postcondition`\n- Paper `P087` · Tools Are Under-Documented: Simple Document Expansion Boosts Tool Retrieval；用途 `failure`；路线 `q002:paper_card_fts` #2；Card `paper-p087`（paper）；Evidence `ev-p087-fields-not-universally-beneficial`, `ev-p087-merge-and-semantic-judge`, `ev-p087-structured-query-independent-expansion`\n- Paper `P097` · ReLoop: Structured Modeling and Behavioral Verification for Reliable LLM-Based Optimization；用途 `operator`；路线 `q003:operator_card_fts` #1；Card `operator-behavioral-perturbation-existence-test`（operator）；Evidence `ev-p097-behavioral-perturbation`, `ev-p097-feasibility-gap`\n- Paper `P016` · Why Do Multi-Agent LLM Systems Fail?；用途 `operator`；路线 `q003:paper_card_fts` #1；Card `paper-p016`（paper）；Evidence `ev-p016-intervention-residual-failures`, `ev-p016-mast-taxonomy`\n- Paper `P095` · Don't Ask the LLM to Track Freshness: A Deterministic Recipe for Memory Conflict Resolution；用途 `operator`；路线 `q003:passage_hybrid` #3；Passage `P095:p0011:s0001`\n- Paper `P062` · Agentic Memory: Learning Unified Long-Term and Short-Term Memory Management for Large Language Model Agents；用途 `operator`；路线 `q003:failure_card_fts` #1；Card `failure-unified-memory-policy-retains-terminal-credit-smearing`（failure）；Evidence `ev-p062-broadcast-advantage`, `ev-p062-unified-memory-action-policy`\n- Paper `P027` · Verified Critical Step Optimization for LLM Agents；用途 `prior`；路线 `q004:paper_card_fts` #1；Card `paper-p027`（paper）；Evidence `ev-p027-operator-core`\n- Paper `P092` · MemConflict: Evaluating Long-Term Memory Systems Under Memory Conflicts；用途 `prior`；路线 `q004:operator_card_fts` #2；Card `operator-support-evidence-whitebox-retrieval-metrics`（operator）；Evidence `ev-p092-crs-low`, `ev-p092-whitebox-metrics`"
+          },
+          {
+            "fts_rank": 6,
+            "fused_score": 0.015151515151515152,
+            "line_end": 90,
+            "line_start": 27,
+            "path": "hypotheses_v001/searches/map-002/report.md",
+            "semantic_rank": null,
+            "source_sha256": "6dbadf1113c2defcb620388c0ca685973473635f053dad00d3fcf549ffa0cc24",
+            "text": "- Paper `P060` · Unifying Inference-Time Planning Language Generation；用途 `prior`；路线 `q004:failure_card_fts` #4；Card `failure-natural-language-ir-hurts-formal-planning`（failure）；Evidence `ev-p060-formal-ir-solver`, `ev-p060-ir-result-and-nl-failure`\n- Paper `P086` · Meta-Tool: Unleash Open-World Function Calling Capabilities of General-Purpose Large Language Models；用途 `prior`；路线 `q004:passage_hybrid` #5；Passage `P086:p0006:s0001`\n- Paper `P040` · From Confident Closing to Silent Failure: Characterizing False Success in LLM Agents；用途 `measurement`；路线 `q005:paper_card_fts` #1；Card `paper-p040`（paper）；Evidence `ev-p040-failure-core`\n- Paper `P021` · In-the-Flow Agentic System Optimization for Effective Planning and Tool Use；用途 `measurement`；路线 `q005:passage_hybrid` #1；Passage `P021:p0032:s0001`\n- Paper `P019` · STeCa: Step-level Trajectory Calibration for LLM Agent Learning；用途 `measurement`；路线 `q005:failure_card_fts` #1；Card `failure-oracle-trajectory-calibration`（failure）；Evidence `ev-p019-ground-truth-calibration-oracle`\n- Paper `P007` · tau-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains；用途 `measurement`；路线 `q005:operator_card_fts` #2；Card `operator-terminal-state-reliability-evaluation`（operator）；Evidence `ev-p007-terminal-state-evaluation`\n\n- 代表项：20 / 去重 Paper：71\n\n## 查询与路线覆盖\n\n### q001 · problem\n\n- 原始查询：`causal attribution whether LLM agent actually uses tool result in final answer`\n- 规范化查询：`\"causal\" OR \"attribution\" OR \"whether\" OR \"LLM\" OR \"agent\" OR \"actually\" OR \"uses\" OR \"tool\" OR \"result\" OR \"in\" OR \"final\" OR \"answer\"`\n- 路线 `paper_card_fts`：10 条；降级 false（无）\n- 路线 `failure_card_fts`：10 条；降级 false（无）\n- 路线 `passage_hybrid`：14 条；降级 false（无）\n- 路线 `operator_card_fts`：10 条；降级 false（无）\n\n### q002 · failure\n\n- 原始查询：`tool result ignoring spurious dependence irrelevant tool output fields`\n- 规范化查询：`\"tool\" OR \"result\" OR \"ignoring\" OR \"spurious\" OR \"dependence\" OR \"irrelevant\" OR \"output\" OR \"fields\"`\n- 路线 `failure_card_fts`：10 条；降级 false（无）\n- 路线 `passage_hybrid`：14 条；降级 false（无）\n- 路线 `operator_card_fts`：10 条；降级 false（无）\n- 路线 `paper_card_fts`：10 条；降级 false（无）\n\n### q003 · operator\n\n- 原始查询：`counterfactual tool output perturbation metamorphic testing causal sensitivity paired interventions`\n- 规范化查询：`\"counterfactual\" OR \"tool\" OR \"output\" OR \"perturbation\" OR \"metamorphic\" OR \"testing\" OR \"causal\" OR \"sensitivity\" OR \"paired\" OR \"interventions\"`\n- 路线 `operator_card_fts`：10 条；降级 false（无）\n- 路线 `paper_card_fts`：10 条；降级 false（无）\n- 路线 `passage_hybrid`：14 条；降级 false（无）\n- 路线 `failure_card_fts`：10 条；降级 false（无）\n\n### q004 · prior\n\n- 原始查询：`counterfactual evaluation tool agents causal tracing tool result utilization`\n- 规范化查询：`\"counterfactual\" OR \"evaluation\" OR \"tool\" OR \"agents\" OR \"causal\" OR \"tracing\" OR \"result\" OR \"utilization\"`\n- 路线 `paper_card_fts`：10 条；降级 false（无）\n- 路线 `operator_card_fts`：10 条；降级 false（无）\n- 路线 `failure_card_fts`：10 条；降级 false（无）\n- 路线 `passage_hybrid`：14 条；降级 false（无）\n\n### q005 · measurement\n\n- 原始查询：`ground-truth-free evaluation causal tool uptake answer sensitivity`\n- 规范化查询：`\"ground\" OR \"truth\" OR \"free\" OR \"evaluation\" OR \"causal\" OR \"tool\" OR \"uptake\" OR \"answer\" OR \"sensitivity\"`\n- 路线 `paper_card_fts`：10 条；降级 false（无）\n- 路线 `passage_hybrid`：14 条；降级 false（无）\n- 路线 `failure_card_fts`：10 条；降级 false（无）\n- 路线 `operator_card_fts`：10 条；降级 false（无）\n\n## 覆盖诊断\n\n- 去重 Card：93\n- 去重 Evidence：125\n- 去重 Passage：59\n- 命中 Paper：71\n- 原始观测：220\n- 带机械噪声标记的观测：2"
+          },
+          {
+            "fts_rank": 7,
+            "fused_score": 0.014925373134328358,
+            "line_end": 136,
+            "line_start": 103,
+            "path": "hypotheses_v001/searches/map-001/request.json",
+            "semantic_rank": null,
+            "source_sha256": "7f5b6ed8f6afad3e1af2f1da639d62785d866aaa80d76940de169cce1a0b9ef1",
+            "text": "      \"normalized_query\": \"\\\"agent\\\" OR \\\"reports\\\" OR \\\"success\\\" OR \\\"after\\\" OR \\\"tool\\\" OR \\\"error\\\" OR \\\"silent\\\" OR \\\"failure\\\" OR \\\"missing\\\" OR \\\"postcondition\\\" OR \\\"verification\\\"\",\n      \"original_query\": \"agent reports success after tool error silent failure missing postcondition verification\",\n      \"purpose\": \"failure\",\n      \"query_id\": \"q002\",\n      \"source\": \"explicit_query\"\n    },\n    {\n      \"english_keyword_hint\": null,\n      \"normalized_query\": \"\\\"executable\\\" OR \\\"postconditions\\\" OR \\\"assertions\\\" OR \\\"state\\\" OR \\\"verification\\\" OR \\\"checkpoints\\\" OR \\\"tool\\\" OR \\\"trajectories\\\"\",\n      \"original_query\": \"executable postconditions assertions state verification checkpoints tool trajectories\",\n      \"purpose\": \"operator\",\n      \"query_id\": \"q003\",\n      \"source\": \"explicit_query\"\n    },\n    {\n      \"english_keyword_hint\": null,\n      \"normalized_query\": \"\\\"tool\\\" OR \\\"agent\\\" OR \\\"trajectory\\\" OR \\\"verifier\\\" OR \\\"process\\\" OR \\\"reward\\\" OR \\\"model\\\" OR \\\"outcome\\\" OR \\\"verification\\\" OR \\\"self\\\" OR \\\"correction\\\"\",\n      \"original_query\": \"tool agent trajectory verifier process reward model outcome verification self correction\",\n      \"purpose\": \"prior\",\n      \"query_id\": \"q004\",\n      \"source\": \"explicit_query\"\n    },\n    {\n      \"english_keyword_hint\": null,\n      \"normalized_query\": \"\\\"tool\\\" OR \\\"use\\\" OR \\\"agent\\\" OR \\\"reliability\\\" OR \\\"benchmark\\\" OR \\\"execution\\\" OR \\\"trace\\\" OR \\\"perturbation\\\" OR \\\"errors\\\"\",\n      \"original_query\": \"tool use agent reliability benchmark execution trace perturbation tool errors\",\n      \"purpose\": \"measurement\",\n      \"query_id\": \"q005\",\n      \"source\": \"explicit_query\"\n    }\n  ],\n  \"schema_version\": 1,\n  \"search_id\": \"map-001\"\n}"
+          },
+          {
+            "fts_rank": 8,
+            "fused_score": 0.014705882352941176,
+            "line_end": 317,
+            "line_start": 213,
+            "path": "implementation_v001/causal_uptake_eval.py",
+            "semantic_rank": null,
+            "source_sha256": "384b3d94233a4be3b423025b9a53dafbb9c0934c6eee91e4443b6c01ce33df46",
+            "text": "    }\n    request = urllib.request.Request(\n        url,\n        data=json.dumps(request_payload, ensure_ascii=False).encode(\"utf-8\"),\n        headers={\"Content-Type\": \"application/json\"},\n        method=\"POST\",\n    )\n    started = time.perf_counter()\n    try:\n        with urllib.request.urlopen(request, timeout=timeout_seconds) as response:\n            raw = response.read()\n    except (urllib.error.URLError, TimeoutError) as exc:\n        raise RuntimeError(f\"Ollama request failed for {model}: {exc}\") from exc\n    elapsed = time.perf_counter() - started\n    payload = json.loads(raw.decode(\"utf-8\"))\n    content = normalize_answer(payload.get(\"message\", {}).get(\"content\"))\n    answer, warning = parse_model_answer(content)\n    usage = {\n        \"elapsed_seconds\": elapsed,\n        \"prompt_eval_count\": payload.get(\"prompt_eval_count\"),\n        \"eval_count\": payload.get(\"eval_count\"),\n        \"total_duration_ns\": payload.get(\"total_duration\"),\n        \"load_duration_ns\": payload.get(\"load_duration\"),\n    }\n    return answer, usage, warning, content\n\n\ndef make_row(\n    *,\n    case: dict[str, Any],\n    agent_id: str,\n    backend: str,\n    answers: dict[str, str],\n    call_records: list[dict[str, Any]],\n    warnings: list[str],\n) -> dict[str, Any]:\n    expected = {key: normalize_answer(value) for key, value in case[\"expected\"].items()}\n    base_values = set(scalar_strings(case[\"tool_results\"][\"base\"]))\n    exact_base = answers[\"base\"] == expected[\"base\"]\n    exact_counterfactual_set = (\n        exact_base\n        and answers[\"relevant\"] == expected[\"relevant\"]\n        and answers[\"irrelevant_plain\"] == expected[\"irrelevant_plain\"]\n        and answers[\"irrelevant_adversarial\"]\n        == expected[\"irrelevant_adversarial\"]\n    )\n    relevant_changed = answers[\"base\"] != answers[\"relevant\"]\n    irrelevant_plain_invariant = answers[\"base\"] == answers[\"irrelevant_plain\"]\n    irrelevant_adversarial_invariant = (\n        answers[\"base\"] == answers[\"irrelevant_adversarial\"]\n    )\n    irrelevant_invariant = (\n        irrelevant_plain_invariant and irrelevant_adversarial_invariant\n    )\n    repeat_stable = answers[\"base\"] == answers[\"repeat\"]\n    relevant_relation = relevant_relation_holds(\n        case, answers[\"base\"], answers[\"relevant\"]\n    )\n    return {\n        \"case_id\": case[\"case_id\"],\n        \"agent_id\": agent_id,\n        \"backend\": backend,\n        \"answers\": answers,\n        \"expected_relation_anchors\": expected,\n        \"metrics\": {\n            \"exact_base\": exact_base,\n            \"exact_counterfactual_set\": exact_counterfactual_set,\n            \"tool_value_overlap\": answers[\"base\"] in base_values,\n            \"relevant_changed\": relevant_changed,\n            \"irrelevant_plain_invariant\": irrelevant_plain_invariant,\n            \"irrelevant_adversarial_invariant\": irrelevant_adversarial_invariant,\n            \"irrelevant_invariant\": irrelevant_invariant,\n            \"repeat_stable\": repeat_stable,\n            \"selective_change\": relevant_changed and irrelevant_invariant,\n            \"relevant_relation\": relevant_relation,\n            \"bidirectional_relation\": relevant_relation and irrelevant_invariant,\n        },\n        \"calls\": call_records,\n        \"warnings\": warnings,\n    }\n\n\ndef confusion(rows: list[dict[str, Any]], signal: str, label_key: str) -> dict[str, Any]:\n    tp = fp = tn = fn = 0\n    for row in rows:\n        label = bool(row[label_key])\n        prediction = bool(row[\"metrics\"][signal])\n        if prediction and label:\n            tp += 1\n        elif prediction and not label:\n            fp += 1\n        elif not prediction and label:\n            fn += 1\n        else:\n            tn += 1\n    tpr = tp / (tp + fn) if tp + fn else None\n    tnr = tn / (tn + fp) if tn + fp else None\n    precision = tp / (tp + fp) if tp + fp else None\n    return {\n        \"tp\": tp,\n        \"fp\": fp,\n        \"tn\": tn,\n        \"fn\": fn,\n        \"precision\": precision,\n        \"recall\": tpr,"
+          }
+        ],
+        "kind": "fixed_anchor",
+        "query": "failure failed contradiction falsifier 失败 反证 矛盾",
+        "semantic_reason": "semantic_index_missing",
+        "semantic_status": "DEGRADED"
+      },
+      {
+        "hits": [
+          {
+            "fts_rank": 4,
+            "fused_score": 0.015625,
+            "line_end": 690,
+            "line_start": 659,
+            "path": "hypotheses_v001/priors/prior-001/candidates.json",
+            "semantic_rank": null,
+            "source_sha256": "4eac5748532b28f6d3c9c93eea97a5b8f1d31eb8de3e994a8c9c224df65b242a",
+            "text": "        }\n      ],\n      \"title\": \"Small LLMs Are Weak Tool Learners: A Multi-LLM Agent\",\n      \"urls\": [\n        \"https://arxiv.org/abs/2401.07324v3\",\n        \"https://arxiv.org/pdf/2401.07324v3\"\n      ],\n      \"venue\": null,\n      \"year\": 2024\n    },\n    {\n      \"abstract\": \"In this paper, we present the Metamorphic Testing of an in-use deep learning based forecasting application. The application looks at the past data of system characteristics (e.g. `memory allocation') to predict outages in the future. We focus on two statistical / machine learning based components - a) detection of co-relation between system characteristics and b) estimating the future value of a system characteristic using an LSTM (a deep learning architecture). In total, 19 Metamorphic Relations have been developed and we provide proofs & algorithms where applicable. We evaluated our method through two settings. In the first, we executed the relations on the actual application and uncovered 8 issues not known before. Second, we generated hypothetical bugs, through Mutation Testing, on a reference implementation of the LSTM based forecaster and found that 65.9% of the bugs were caught through the relations.\",\n      \"authors\": [\n        \"Anurag Dwarakanath\",\n        \"Manish Ahuja\",\n        \"Sanjay Podder\",\n        \"Silja Vinu\",\n        \"Arijit Naskar\",\n        \"Koushik MV\"\n      ],\n      \"candidate_id\": \"prior-8480c3df0647f121\",\n      \"landing_page_urls\": [\n        \"https://arxiv.org/abs/1907.06632v1\"\n      ],\n      \"pdf_urls\": [\n        \"https://arxiv.org/pdf/1907.06632v1\"\n      ],\n      \"provenance\": [\n        {\n          \"normalized_url_identity\": \"https://export.arxiv.org/api/query?max_results=15&search_query=all%3Acounterfactual+tool+output+perturbation+LLM+agent+tool+result+utilization+causal+sensitivity+metamorphic+testing&start=0\",\n          \"query\": \"counterfactual tool output perturbation LLM agent tool result utilization causal sensitivity metamorphic testing\",\n          \"raw_record\": {"
+          },
+          {
+            "fts_rank": 5,
+            "fused_score": 0.015384615384615385,
+            "line_end": 147,
+            "line_start": 121,
+            "path": "hypotheses_v001/priors/prior-001/candidates.json",
+            "semantic_rank": null,
+            "source_sha256": "4eac5748532b28f6d3c9c93eea97a5b8f1d31eb8de3e994a8c9c224df65b242a",
+            "text": "      \"urls\": [\n        \"https://arxiv.org/abs/2606.20023v2\",\n        \"https://arxiv.org/pdf/2606.20023v2\"\n      ],\n      \"venue\": null,\n      \"year\": 2026\n    },\n    {\n      \"abstract\": \"This paper presents an automated tool called Morphy for datamorphic testing. It classifies software test artefacts into test entities and test morphisms, which are mappings on testing entities. In addition to datamorphisms, metamorphisms and seed test case makers, Morphy also employs a set of other test morphisms including test case metrics and filters, test set metrics and filters, test result analysers and test executers to realise test automation. In particular, basic testing activities can be automated by invoking test morphisms. Test strategies can be realised as complex combinations of test morphisms. Test processes can be automated by recording, editing and playing test scripts that invoke test morphisms and strategies. Three types of test strategies have been implemented in Morphy: datamorphism combination strategies, cluster border exploration strategies and strategies for test set optimisation via genetic algorithms. This paper focuses on the datamorphism combination strategies by giving their definitions and implementation algorithms. The paper also illustrates their uses for testing both traditional software and AI applications with three case studies.\",\n      \"authors\": [\n        \"Hong Zhu\",\n        \"Ian Bayley\",\n        \"Dongmei Liu\",\n        \"Xiaoyu Zheng\"\n      ],\n      \"candidate_id\": \"prior-82706b53230ed69d\",\n      \"landing_page_urls\": [\n        \"https://arxiv.org/abs/1912.09881v1\"\n      ],\n      \"pdf_urls\": [\n        \"https://arxiv.org/pdf/1912.09881v1\"\n      ],\n      \"provenance\": [\n        {\n          \"normalized_url_identity\": \"https://export.arxiv.org/api/query?max_results=15&search_query=all%3Acounterfactual+tool+output+perturbation+LLM+agent+tool+result+utilization+causal+sensitivity+metamorphic+testing&start=0\",\n          \"query\": \"counterfactual tool output perturbation LLM agent tool result utilization causal sensitivity metamorphic testing\",\n          \"raw_record\": {"
+          },
+          {
+            "fts_rank": 6,
+            "fused_score": 0.015151515151515152,
+            "line_end": 609,
+            "line_start": 526,
+            "path": "implementation_v001/causal_uptake_eval.py",
+            "semantic_rank": null,
+            "source_sha256": "384b3d94233a4be3b423025b9a53dafbb9c0934c6eee91e4443b6c01ce33df46",
+            "text": "                                url=args.ollama_url,\n                                model=model,\n                                messages=prompt_for(case, variant, regime),\n                                temperature=args.temperature,\n                                seed=args.seed,\n                                timeout_seconds=args.timeout_seconds,\n                            )\n                            answers[variant] = answer\n                            api_calls += 1\n                            prompt_count = usage.get(\"prompt_eval_count\")\n                            completion_count = usage.get(\"eval_count\")\n                            if isinstance(prompt_count, int):\n                                total_prompt_tokens += prompt_count\n                            if isinstance(completion_count, int):\n                                total_completion_tokens += completion_count\n                            call_records.append(\n                                {\n                                    \"variant\": variant,\n                                    \"usage\": usage,\n                                    \"raw_content\": raw_content,\n                                }\n                            )\n                            if parse_warning:\n                                warning = f\"{variant}: {parse_warning}\"\n                                row_warnings.append(warning)\n                                warnings.append(\n                                    f\"{agent_id}/{case['case_id']}/{warning}\"\n                                )\n                        except Exception as exc:  # preserve partial evidence for research diagnostics\n                            message = f\"{agent_id}/{case['case_id']}/{variant}: {type(exc).__name__}: {exc}\"\n                            errors.append(message)\n                            answers[variant] = \"\"\n                            call_records.append({\"variant\": variant, \"error\": message})\n                    rows.append(\n                        make_row(\n                            case=case,\n                            agent_id=agent_id,\n                            backend=\"ollama\",\n                            answers=answers,\n                            call_records=call_records,\n                            warnings=row_warnings,\n                        )\n                    )\n\n    wall_time = time.perf_counter() - started\n    result: dict[str, Any] = {\n        \"schema_version\": 1,\n        \"experiment_id\": args.experiment_id,\n        \"configuration\": {\n            \"backend\": args.backend,\n            \"policies\": args.policies if args.backend == \"deterministic\" else [],\n            \"models\": args.models if args.backend == \"ollama\" else [],\n            \"prompt_regimes\": args.prompt_regimes if args.backend == \"ollama\" else [],\n            \"temperature\": args.temperature,\n            \"seed\": args.seed,\n        },\n        \"case_count\": len(cases),\n        \"rows\": rows,\n        \"aggregate\": aggregate(rows),\n        \"resource_usage\": {\n            \"tokens\": total_prompt_tokens + total_completion_tokens,\n            \"api_calls\": api_calls,\n            \"wall_time_seconds\": wall_time,\n            \"gpu_time_seconds\": \"unknown\",\n            \"estimated_cost\": 0.0 if args.backend == \"ollama\" else \"unknown\",\n        },\n        \"errors\": errors,\n        \"warnings\": warnings,\n    }\n    atomic_write_text(args.output, json.dumps(result, ensure_ascii=False, indent=2) + \"\\n\")\n    if args.report_output:\n        atomic_write_text(args.report_output, render_report(result))\n    if args.metrics_output:\n        atomic_write_text(\n            args.metrics_output,\n            json.dumps(metrics_payload(result, args.experiment_id), ensure_ascii=False, indent=2) + \"\\n\",\n        )\n    print(json.dumps({\n        \"backend\": args.backend,\n        \"case_count\": len(cases),\n        \"row_count\": len(rows),\n        \"api_calls\": api_calls,\n        \"errors\": len(errors),\n        \"output\": str(args.output),"
+          },
+          {
+            "fts_rank": 7,
+            "fused_score": 0.014925373134328358,
+            "line_end": 809,
+            "line_start": 777,
+            "path": "hypotheses_v001/priors/prior-001/candidates.json",
+            "semantic_rank": null,
+            "source_sha256": "4eac5748532b28f6d3c9c93eea97a5b8f1d31eb8de3e994a8c9c224df65b242a",
+            "text": "          \"query\": \"counterfactual tool output perturbation LLM agent tool result utilization causal sensitivity metamorphic testing\",\n          \"rank\": 13,\n          \"source\": \"arXiv\"\n        }\n      ],\n      \"title\": \"Fairness Evaluation in Deepfake Detection Models using Metamorphic Testing\",\n      \"urls\": [\n        \"https://arxiv.org/abs/2203.06825v1\",\n        \"https://arxiv.org/pdf/2203.06825v1\"\n      ],\n      \"venue\": null,\n      \"year\": 2022\n    },\n    {\n      \"abstract\": \"Several techniques have been proposed to detect vulnerable Spectre gadgets in widely deployed commercial software. Unfortunately, detection techniques proposed so far rely on hand-written rules which fall short in covering subtle variations of known Spectre gadgets as well as demand a huge amount of time to analyze each conditional branch in software. Moreover, detection tool evaluations are based only on a handful of these gadgets, as it requires arduous effort to craft new gadgets manually. In this work, we employ both fuzzing and deep learning techniques to automate the generation and detection of Spectre gadgets. We first create a diverse set of Spectre-V1 gadgets by introducing perturbations to the known gadgets. Using mutational fuzzing, we produce a data set with more than 1 million Spectre-V1 gadgets which is the largest Spectre gadget data set built to date. Next, we conduct the first empirical usability study of Generative Adversarial Networks (GANs) in the context of assembly code generation without any human interaction. We introduce SpectreGAN which leverages masking implementation of GANs for both learning the gadget structures and generating new gadgets. This provides the first scalable solution to extend the variety of Spectre gadgets. Finally, we propose FastSpec which builds a classifier with the generated Spectre gadgets based on a novel high dimensional Neural Embeddings technique (BERT). For the case studies, we demonstrate that FastSpec discovers potential gadgets with a high success rate in OpenSSL libraries and Phoronix benchmarks. Further, FastSpec offers much greater flexibility and time-related performance gain compared to the existing tools and therefore can be used for gadget detection in large-scale software.\",\n      \"authors\": [\n        \"M. Caner Tol\",\n        \"Berk Gulmezoglu\",\n        \"Koray Yurtseven\",\n        \"Berk Sunar\"\n      ],\n      \"candidate_id\": \"prior-a40873a58796c4e2\",\n      \"landing_page_urls\": [\n        \"https://arxiv.org/abs/2006.14147v2\"\n      ],\n      \"pdf_urls\": [\n        \"https://arxiv.org/pdf/2006.14147v2\"\n      ],\n      \"provenance\": [\n        {\n          \"normalized_url_identity\": \"https://export.arxiv.org/api/query?max_results=15&search_query=all%3Acounterfactual+tool+output+perturbation+LLM+agent+tool+result+utilization+causal+sensitivity+metamorphic+testing&start=0\",\n          \"query\": \"counterfactual tool output perturbation LLM agent tool result utilization causal sensitivity metamorphic testing\",\n          \"raw_record\": {"
+          },
+          {
+            "fts_rank": 8,
+            "fused_score": 0.014705882352941176,
+            "line_end": 31,
+            "line_start": 1,
+            "path": "workbench_v001/qwen3-4b-metrics.json",
+            "semantic_rank": null,
+            "source_sha256": "a506f2353ccf1ffe4117ad22be4b105a95c548c3bfe441bb3c8b0cbf54108570",
+            "text": "{\n  \"schema_version\": 1,\n  \"experiment_id\": \"scratch-qwen3-4b\",\n  \"records\": [\n    {\n      \"name\": \"dual_relation_exact_agreement_balanced_accuracy\",\n      \"value\": 0.0,\n      \"unit\": \"ratio\",\n      \"split\": \"local_models\",\n      \"aggregation\": \"balanced_accuracy\",\n      \"n\": 10\n    },\n    {\n      \"name\": \"dual_relation_pass_rate\",\n      \"value\": 0.0,\n      \"unit\": \"ratio\",\n      \"split\": \"local_models\",\n      \"aggregation\": \"mean\",\n      \"n\": 10\n    }\n  ],\n  \"resource_usage\": {\n    \"tokens\": 11204,\n    \"api_calls\": 40,\n    \"wall_time_seconds\": 66.3999255000017,\n    \"gpu_time_seconds\": \"unknown\",\n    \"estimated_cost\": 0.0\n  },\n  \"errors\": [],\n  \"warnings\": []\n}"
+          }
+        ],
+        "kind": "fixed_anchor",
+        "query": "implementation baseline experiment reviewer 实现 基线 实验 评审",
+        "semantic_reason": "semantic_index_missing",
+        "semantic_status": "DEGRADED"
+      },
+      {
+        "hits": [
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 1,
+            "fused_score": 0.01639344262295082,
+            "line_end": 54,
+            "line_start": 1,
+            "path": "workbench_v001/h001.json",
+            "semantic_rank": null,
+            "source_sha256": "d9c09d27e71b39f86fa451bfa3b3c353377be0d1c3542bb6d8da7b6301d87176",
+            "text": "{\n  \"hypothesis_id\": \"H001\",\n  \"title\": \"双向反事实工具证据测试：用应变与不变关系测量工具结果的因果采用\",\n  \"parent_ids\": [],\n  \"lineage_note\": \"根候选；由虚假成功、结果忽略与行为扰动证据交叉导出，但尚未完成最近先行审计。\",\n  \"problem\": \"现有终局正确率可以把工具跳过、调用后忽略和真实采用混在一起；环境终态又只适用于可直接检查的任务。需要一种不依赖完整答案真值、但能测量最终回答是否真正受任务相关工具证据驱动的评价载体。\",\n  \"target_failure\": {\n    \"summary\": \"智能体调用了工具，却忽略任务相关结果，或反而依赖无关字段；单次自然轨迹和自我报告都可能看不见这种因果错位。\",\n    \"card_ids\": [\n      \"failure-confident-completion-without-state-success\",\n      \"failure-tool-use-metrics-collapse-distinct-errors\",\n      \"failure-generator-aligned-verification-passes-shared-misreads\"\n    ],\n    \"evidence_ids\": [\n      \"ev-p040-failure-core\",\n      \"ev-p039-aggregate-score-masking\",\n      \"ev-p039-failure-core\",\n      \"ev-p099-judge-miss\"\n    ]\n  },\n  \"changed_computation\": {\n    \"baseline\": \"在一个自然工具轨迹上按最终答案正确率、任务终态或语言模型裁判打分。\",\n    \"intervention\": \"固定任务、工具模式、提示和解码设置，对工具返回构造两类最小成对干预：仅改变任务相关字段的应变对，以及仅改变无关字段的应不变对；以回答间预先声明的关系而非完整标准答案判断因果采用。\",\n    \"information_available\": \"原始任务、工具返回结构、字段相关性声明、成对干预和两次回答；不使用完整标准答案，也不读取模型隐藏状态。\",\n    \"timing\": \"离线评价时对同一智能体进行成对影子重放；候选若扩展为在线门控，再在最终回答提交前选择性重放。\",\n    \"budget_effect\": \"每个被测实例从一次推理增加为原轨迹加一到两个成对重放；首轮杀手实验只比较固定小样本上的测量可辨识性。\"\n  },\n  \"mechanism_claim\": \"若智能体真实采用了任务相关工具证据，则在保持其他信息不变时，相关字段干预应引发方向一致的回答变化，而无关字段干预不应改变任务结论；两类关系联合比单向敏感度更能区分结果忽略、无关依赖与普遍不稳定。\",\n  \"falsifier\": \"在可机械判定的合成工具任务上，成对关系指标不能稳定区分已知的结果忽略、真实采用和无关字段依赖实现；或指标主要由采样噪声、提示复述、字段表面变化或答案解析器决定；或最近先行已直接占据同样的问题、信息、时机、计算与评价路径。\",\n  \"minimal_killer_experiment\": \"构造小型确定性工具返回集及三种可控代理策略，并用至少两个真实本地语言模型生成回答；比较相关应变、无关不变及两者联合关系对已知策略标签的区分能力，同时重复种子估计纯采样噪声。\",\n  \"nearest_prior_risk\": \"高风险先行包括 ToolFailBench 的结果忽略分类、False Success 的环境真值、ToolGate 的后条件、ReLoop 的行为扰动、Verus-SpecGym 的可执行双向测试，以及可能尚未入库的反事实工具调用或因果追踪评价。\",\n  \"alternative_explanations\": [\n    \"模型只是复制被改动的显著字符串，未进行任务推理。\",\n    \"答案差异来自随机采样或序列位置，而不是工具证据采用。\",\n    \"无关字段实际通过语义歧义影响任务，因此所谓不变关系不成立。\",\n    \"只要直接检查自然轨迹中的引用或引用覆盖率就能等价实现。\"\n  ],\n  \"descriptors\": {\n    \"problem_family\": \"工具型语言模型智能体评价与可靠性\",\n    \"computation_stage\": \"工具结果进入上下文之后、最终回答之前\",\n    \"intervention_family\": \"成对反事实与变形测试\",\n    \"information_source\": \"可见工具返回及字段级任务关系\",\n    \"timing_class\": \"离线成对影子重放\",\n    \"budget_class\": \"每实例增加一至两次模型调用\",\n    \"evaluation_mode\": \"不依赖完整答案真值的关系式机械评价\"\n  },\n  \"literature_refs\": [\n    \"P039\",\n    \"P040\",\n    \"P074\",\n    \"P097\",\n    \"P099\"\n  ]\n}"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 4,
+            "fused_score": 0.015625,
+            "line_end": 28,
+            "line_start": 1,
+            "path": "hypotheses_v001/searches/map-001/report.md",
+            "semantic_rank": null,
+            "source_sha256": "9478cae0de6cbd3df0851a75facf86680d8b346c2136c2d908134b14e9b382aa",
+            "text": "<!-- CRL_RESEARCH_SEARCH_META {\"created_at_utc\":\"2026-08-15T10:20:35.636248Z\",\"request_fingerprint_sha256\":\"fa2b87c831df2da3e986a531ef493c3f8d96c860b9d330ec0a3c2e6027cba21b\",\"result_json_sha256\":\"b8dee043d95035205f60e820ed06df928541e8b04fb6044975d18ff28c546440\",\"search_id\":\"map-001\"} -->\n# 研究检索导航\n\n> 本报告仅展示查询路线、来源、命中定位与覆盖；所有科研判断由主研究者完成。\n\n- 搜索标识：`map-001`\n- 生成时间（协调世界时）：`2026-08-15T10:20:35.636248Z`\n\n## 紧凑研究地图\n\n> 跨路线按 Paper 去重；每个查询路线至多选一个尚未出现的最高排名代表项。完整原始命中保留在 `result.json`。\n\n- Paper `P040` · From Confident Closing to Silent Failure: Characterizing False Success in LLM Agents；用途 `problem`；路线 `q001:paper_card_fts` #1；Card `paper-p040`（paper）；Evidence `ev-p040-failure-core`\n- Paper `P007` · tau-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains；用途 `problem`；路线 `q001:failure_card_fts` #2；Card `failure-repeat-run-reliability-collapse`（failure）；Evidence `ev-p007-repeat-reliability-collapse`\n- Paper `P016` · Why Do Multi-Agent LLM Systems Fail?；用途 `problem`；路线 `q001:passage_hybrid` #8；Passage `P016:p0007:s0002`\n- Paper `P046` · Solver-Aided Verification of Policy Compliance in Tool-Augmented LLM Agents；用途 `problem`；路线 `q001:operator_card_fts` #1；Card `operator-smt-preexecution-policy-guard`（operator）；Evidence `ev-p046-operator-core`\n- Paper `P097` · ReLoop: Structured Modeling and Behavioral Verification for Reliable LLM-Based Optimization；用途 `failure`；路线 `q002:failure_card_fts` #1；Card `failure-solver-feasibility-near-zero-information-proxy`（failure）；Evidence `ev-p097-behavioral-perturbation`, `ev-p097-feasibility-gap`\n- Paper `P074` · ToolGate: Contract-Grounded and Verified Tool Execution for LLMs；用途 `failure`；路线 `q002:passage_hybrid` #1；Passage `P074:p0024:s0001`\n- Paper `P073` · Uncertainty Calibration for Tool-Using Language Agents；用途 `failure`；路线 `q002:operator_card_fts` #2；Card `operator-execution-supervised-prompt-trace-calibration`（operator）；Evidence `ev-p073-execution-supervised-probe`, `ev-p073-internal-confidence-misalignment`\n- Paper `P044` · DEER: A Benchmark for Evaluating Deep Research Agents on Expert Report Generation；用途 `failure`；路线 `q002:paper_card_fts` #4；Card `paper-p044`（paper）；Evidence `ev-p044-evaluation-core`\n- Paper `P099` · Verus-SpecGym: An Agentic Environment for Evaluating Specification Autoformalization；用途 `operator`；路线 `q003:operator_card_fts` #1；Card `operator-four-bucket-executable-spec-testing`（operator）；Evidence `ev-p099-judge-miss`, `ev-p099-soundness-necessity`, `ev-p099-two-stage-check`\n- Paper `P058` · AFlow: Automating Agentic Workflow Generation；用途 `operator`；路线 `q003:paper_card_fts` #4；Card `paper-p058`（paper）；Evidence `ev-p058-mcts-workflow-search`, `ev-p058-validation-selection-loop`\n- Paper `P047` · tau2-Bench: Evaluating Conversational Agents in a Dual-Control Environment；用途 `operator`；路线 `q003:passage_hybrid` #1；Passage `P047:p0020:s0001`\n- Paper `P004` · TravelPlanner: A Benchmark for Real-World Planning with Language Agents；用途 `operator`；路线 `q003:failure_card_fts` #4；Card `failure-constrained-plan-surface-validity`（failure）；Evidence `ev-p004-failure-core`, `ev-p004-macro-constraint-failure`\n- Paper `P021` · In-the-Flow Agentic System Optimization for Effective Planning and Tool Use；用途 `prior`；路线 `q004:paper_card_fts` #1；Card `paper-p021`（paper）；Evidence `ev-p021-operator-core`\n- Paper `P027` · Verified Critical Step Optimization for LLM Agents；用途 `prior`；路线 `q004:operator_card_fts` #2；Card `operator-verified-single-branch-repair`（operator）；Evidence `ev-p027-operator-core`\n- Paper `P013` · Large Language Models Cannot Self-Correct Reasoning Yet；用途 `prior`；路线 `q004:failure_card_fts` #1；Card `failure-intrinsic-self-correction-degradation`（failure）；Evidence `ev-p013-intrinsic-self-correction-degrades`, `ev-p013-oracle-free-equal-budget-boundary`\n- Paper `P050` · Scaling Agentic Verifier for Competitive Coding；用途 `prior`；路线 `q004:passage_hybrid` #1；Passage `P050:p0005:s0003`"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 5,
+            "fused_score": 0.015384615384615385,
+            "line_end": 90,
+            "line_start": 29,
+            "path": "hypotheses_v001/searches/map-001/report.md",
+            "semantic_rank": null,
+            "source_sha256": "9478cae0de6cbd3df0851a75facf86680d8b346c2136c2d908134b14e9b382aa",
+            "text": "- Paper `P035` · Holistic Agent Leaderboard: The Missing Infrastructure for AI Agent Evaluation；用途 `measurement`；路线 `q005:paper_card_fts` #1；Card `paper-p035`（paper）；Evidence `ev-p035-evaluation-core`\n- Paper `P039` · ToolFailBench: Diagnosing Tool-Use Failures in LLM Agents；用途 `measurement`；路线 `q005:passage_hybrid` #2；Passage `P039:p0001:s0003`\n- Paper `P064` · How Memory Management Impacts LLM Agents: An Empirical Study of Experience-Following Behavior；用途 `measurement`；路线 `q005:failure_card_fts` #3；Card `failure-retrieved-experience-propagates-stored-errors`（failure）；Evidence `ev-p064-evaluator-reliability`, `ev-p064-experience-following-error`\n- Paper `P078` · CRAFT: Customizing LLMs by Creating and Retrieving from Specialized Toolsets；用途 `measurement`；路线 `q005:operator_card_fts` #5；Card `operator-validated-specialized-tool-creation-retrieval`（operator）；Evidence `ev-p078-baseline-fairness-boundary`, `ev-p078-generic-tool-and-baseline-boundary`, `ev-p078-multiview-tool-retrieval`, `ev-p078-toolset-construction-cost`, `ev-p078-validated-tool-creation-retrieval`\n\n- 代表项：20 / 去重 Paper：50\n\n## 查询与路线覆盖\n\n### q001 · problem\n\n- 原始查询：`tool-using LLM agents false task completion tool execution failures state inconsistency`\n- 规范化查询：`\"tool\" OR \"using\" OR \"LLM\" OR \"agents\" OR \"false\" OR \"task\" OR \"completion\" OR \"execution\" OR \"failures\" OR \"state\" OR \"inconsistency\"`\n- 路线 `paper_card_fts`：8 条；降级 false（无）\n- 路线 `failure_card_fts`：8 条；降级 false（无）\n- 路线 `passage_hybrid`：12 条；降级 true（vector_search_failed:RuntimeError:Cannot send a request, as the client has been closed.）\n- 路线 `operator_card_fts`：8 条；降级 false（无）\n\n### q002 · failure\n\n- 原始查询：`agent reports success after tool error silent failure missing postcondition verification`\n- 规范化查询：`\"agent\" OR \"reports\" OR \"success\" OR \"after\" OR \"tool\" OR \"error\" OR \"silent\" OR \"failure\" OR \"missing\" OR \"postcondition\" OR \"verification\"`\n- 路线 `failure_card_fts`：8 条；降级 false（无）\n- 路线 `passage_hybrid`：12 条；降级 true（vector_search_failed:RuntimeError:Cannot send a request, as the client has been closed.）\n- 路线 `operator_card_fts`：8 条；降级 false（无）\n- 路线 `paper_card_fts`：8 条；降级 false（无）\n\n### q003 · operator\n\n- 原始查询：`executable postconditions assertions state verification checkpoints tool trajectories`\n- 规范化查询：`\"executable\" OR \"postconditions\" OR \"assertions\" OR \"state\" OR \"verification\" OR \"checkpoints\" OR \"tool\" OR \"trajectories\"`\n- 路线 `operator_card_fts`：8 条；降级 false（无）\n- 路线 `paper_card_fts`：8 条；降级 false（无）\n- 路线 `passage_hybrid`：12 条；降级 true（vector_search_failed:RuntimeError:Cannot send a request, as the client has been closed.）\n- 路线 `failure_card_fts`：8 条；降级 false（无）\n\n### q004 · prior\n\n- 原始查询：`tool agent trajectory verifier process reward model outcome verification self correction`\n- 规范化查询：`\"tool\" OR \"agent\" OR \"trajectory\" OR \"verifier\" OR \"process\" OR \"reward\" OR \"model\" OR \"outcome\" OR \"verification\" OR \"self\" OR \"correction\"`\n- 路线 `paper_card_fts`：8 条；降级 false（无）\n- 路线 `operator_card_fts`：8 条；降级 false（无）\n- 路线 `failure_card_fts`：8 条；降级 false（无）\n- 路线 `passage_hybrid`：12 条；降级 false（无）\n\n### q005 · measurement\n\n- 原始查询：`tool use agent reliability benchmark execution trace perturbation tool errors`\n- 规范化查询：`\"tool\" OR \"use\" OR \"agent\" OR \"reliability\" OR \"benchmark\" OR \"execution\" OR \"trace\" OR \"perturbation\" OR \"errors\"`\n- 路线 `paper_card_fts`：8 条；降级 false（无）\n- 路线 `passage_hybrid`：12 条；降级 false（无）\n- 路线 `failure_card_fts`：8 条；降级 false（无）\n- 路线 `operator_card_fts`：8 条；降级 false（无）\n\n## 覆盖诊断\n\n- 去重 Card：77\n- 去重 Evidence：96\n- 去重 Passage：57\n- 命中 Paper：50\n- 原始观测：180\n- 带机械噪声标记的观测：36"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 6,
+            "fused_score": 0.015151515151515152,
+            "line_end": 26,
+            "line_start": 1,
+            "path": "hypotheses_v001/searches/map-002/report.md",
+            "semantic_rank": null,
+            "source_sha256": "6dbadf1113c2defcb620388c0ca685973473635f053dad00d3fcf549ffa0cc24",
+            "text": "<!-- CRL_RESEARCH_SEARCH_META {\"created_at_utc\":\"2026-08-15T10:22:01.289781Z\",\"request_fingerprint_sha256\":\"9103154d94f84348d32850fba62351dc481a2e1018a9c97d4b72725dc405f34d\",\"result_json_sha256\":\"cc415c94d5a3770446ac523e2607b826a0326ad51c2f93557f7df906bba4daef\",\"search_id\":\"map-002\"} -->\n# 研究检索导航\n\n> 本报告仅展示查询路线、来源、命中定位与覆盖；所有科研判断由主研究者完成。\n\n- 搜索标识：`map-002`\n- 生成时间（协调世界时）：`2026-08-15T10:22:01.289781Z`\n\n## 紧凑研究地图\n\n> 跨路线按 Paper 去重；每个查询路线至多选一个尚未出现的最高排名代表项。完整原始命中保留在 `result.json`。\n\n- Paper `P039` · ToolFailBench: Diagnosing Tool-Use Failures in LLM Agents；用途 `problem`；路线 `q001:paper_card_fts` #1；Card `paper-p039`（paper）；Evidence `ev-p039-failure-core`\n- Paper `P017` · Understanding the Information Propagation Effects of Communication Topologies in LLM-based Multi-Agent Systems；用途 `problem`；路线 `q001:failure_card_fts` #2；Card `failure-sparse-topology-suppresses-correct-insight`（failure）；Evidence `ev-p017-failure-core`\n- Paper `P025` · Unlocking the Power of Multi-Agent LLM for Reasoning: From Lazy Agents to Deliberation；用途 `problem`；路线 `q001:passage_hybrid` #2；Passage `P025:p0004:s0002`\n- Paper `P041` · LLM Agents Already Know When to Call Tools - Even Without Reasoning；用途 `problem`；路线 `q001:operator_card_fts` #1；Card `operator-hidden-state-tool-necessity-prefill`（operator）；Evidence `ev-p041-operator-core`, `ev-p041-probe-prefill-steering`\n- Paper `P098` · Beyond Objective Equivalence: Constraint Injection for LLM-Based Optimization Modeling on Vehicle Routing Problems；用途 `failure`；路线 `q002:failure_card_fts` #2；Card `failure-objective-equivalence-passes-nonbinding-errors`（failure）；Evidence `ev-p098-diff-leak-550`, `ev-p098-nonbinding-blindness`, `ev-p098-open-problem`\n- Paper `P089` · ToolDreamer: Instilling LLM Reasoning Into Tool Retrievers；用途 `failure`；路线 `q002:passage_hybrid` #2；Passage `P089:p0014:s0001`\n- Paper `P074` · ToolGate: Contract-Grounded and Verified Tool Execution for LLMs；用途 `failure`；路线 `q002:operator_card_fts` #1；Card `operator-contract-gated-tool-state-commit`（operator）；Evidence `ev-p074-contract-state-commit`, `ev-p074-missing-schema-true-postcondition`\n- Paper `P087` · Tools Are Under-Documented: Simple Document Expansion Boosts Tool Retrieval；用途 `failure`；路线 `q002:paper_card_fts` #2；Card `paper-p087`（paper）；Evidence `ev-p087-fields-not-universally-beneficial`, `ev-p087-merge-and-semantic-judge`, `ev-p087-structured-query-independent-expansion`\n- Paper `P097` · ReLoop: Structured Modeling and Behavioral Verification for Reliable LLM-Based Optimization；用途 `operator`；路线 `q003:operator_card_fts` #1；Card `operator-behavioral-perturbation-existence-test`（operator）；Evidence `ev-p097-behavioral-perturbation`, `ev-p097-feasibility-gap`\n- Paper `P016` · Why Do Multi-Agent LLM Systems Fail?；用途 `operator`；路线 `q003:paper_card_fts` #1；Card `paper-p016`（paper）；Evidence `ev-p016-intervention-residual-failures`, `ev-p016-mast-taxonomy`\n- Paper `P095` · Don't Ask the LLM to Track Freshness: A Deterministic Recipe for Memory Conflict Resolution；用途 `operator`；路线 `q003:passage_hybrid` #3；Passage `P095:p0011:s0001`\n- Paper `P062` · Agentic Memory: Learning Unified Long-Term and Short-Term Memory Management for Large Language Model Agents；用途 `operator`；路线 `q003:failure_card_fts` #1；Card `failure-unified-memory-policy-retains-terminal-credit-smearing`（failure）；Evidence `ev-p062-broadcast-advantage`, `ev-p062-unified-memory-action-policy`\n- Paper `P027` · Verified Critical Step Optimization for LLM Agents；用途 `prior`；路线 `q004:paper_card_fts` #1；Card `paper-p027`（paper）；Evidence `ev-p027-operator-core`\n- Paper `P092` · MemConflict: Evaluating Long-Term Memory Systems Under Memory Conflicts；用途 `prior`；路线 `q004:operator_card_fts` #2；Card `operator-support-evidence-whitebox-retrieval-metrics`（operator）；Evidence `ev-p092-crs-low`, `ev-p092-whitebox-metrics`"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 19,
+            "fused_score": 0.012658227848101266,
+            "line_end": 102,
+            "line_start": 1,
+            "path": "hypotheses_v001/searches/map-001/request.json",
+            "semantic_rank": null,
+            "source_sha256": "7f5b6ed8f6afad3e1af2f1da639d62785d866aaa80d76940de169cce1a0b9ef1",
+            "text": "{\n  \"artifact_hashes\": {\n    \"report_md_sha256\": \"9478cae0de6cbd3df0851a75facf86680d8b346c2136c2d908134b14e9b382aa\",\n    \"result_json_sha256\": \"b8dee043d95035205f60e820ed06df928541e8b04fb6044975d18ff28c546440\"\n  },\n  \"bundle_kind\": \"run_local_non_authoritative_research_retrieval\",\n  \"code_identity\": {\n    \"files\": [\n      {\n        \"path\": \"D:\\\\Desktop\\\\crl\\\\crl_agent_v3\\\\crl_v3\\\\cards.py\",\n        \"sha256\": \"749e8f13538ffb7318bf49cb1bf5f4633001063b2a88fce60b891d56d509b391\",\n        \"size_bytes\": 20764\n      },\n      {\n        \"path\": \"D:\\\\Desktop\\\\crl\\\\crl_agent_v3\\\\crl_v3\\\\knowledge.py\",\n        \"sha256\": \"dcdbafd9efb14bce0b7ddfc160f7ffd3d37d98675ae50276d561a7d22b63a4df\",\n        \"size_bytes\": 27237\n      },\n      {\n        \"path\": \"D:\\\\Desktop\\\\crl\\\\crl_agent_v3\\\\crl_v3\\\\research_retrieval.py\",\n        \"sha256\": \"8662e98cb009a7c9e796f024b6c2f254367deea81cfb7addeb1dae77cb3da21f\",\n        \"size_bytes\": 47063\n      },\n      {\n        \"path\": \"D:\\\\Desktop\\\\crl\\\\crl_agent_v3\\\\crl_v3\\\\retrieval.py\",\n        \"sha256\": \"13e73c964984f970458cb09de8754eb6ef9e90df2fa42920fea618eee06308e4\",\n        \"size_bytes\": 5224\n      },\n      {\n        \"path\": \"D:\\\\Desktop\\\\crl\\\\crl_agent_v3\\\\crl_v3\\\\vector.py\",\n        \"sha256\": \"c979f5f55f7fe96333b9976dea64a6e6bbf5843186b37b9d03afb5f2b1076939\",\n        \"size_bytes\": 17104\n      },\n      {\n        \"path\": \"D:\\\\Desktop\\\\crl\\\\crl_agent_v3\\\\tools\\\\query_research.py\",\n        \"sha256\": \"85aca7732ea2549a03514cde5345eca81e46b20154f3bbcf08405de63a872147\",\n        \"size_bytes\": 8694\n      }\n    ]\n  },\n  \"created_at_utc\": \"2026-08-15T10:20:35.636248Z\",\n  \"input_identity\": {\n    \"query_count\": 5,\n    \"run_id\": \"20260815_1818_run11\",\n    \"version\": \"v001\"\n  },\n  \"input_mode\": \"explicit\",\n  \"knowledge_identity\": {\n    \"cards_fts_sqlite\": {\n      \"card_source_signature\": \"a512499ae91e0b24c3aa13f9d2ae0a5a7bc3e790152bef5e80500573997c60f9\",\n      \"exists\": true,\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\knowledge_base\\\\cards_fts.sqlite\",\n      \"sha256\": \"52edfb9f2ba50afb65d49673cb902c6a0842d296df7f9651ad0563880de86ce6\",\n      \"size_bytes\": 1482752,\n      \"status\": {\n        \"cards\": 228,\n        \"index_path\": \"D:\\\\Desktop\\\\crl\\\\knowledge_base\\\\cards_fts.sqlite\",\n        \"ready\": true,\n        \"reason\": \"ready\"\n      }\n    },\n    \"knowledge_root\": \"D:\\\\Desktop\\\\crl\\\\knowledge_base\",\n    \"knowledge_sqlite\": {\n      \"exists\": true,\n      \"passage_generation_id\": \"17332e29f9644fedb1a30904bcd12035\",\n      \"passage_revision\": 99,\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\knowledge_base\\\\knowledge.sqlite\",\n      \"sha256\": \"7911d86e02ccd4df8fb18bb11fcdb160f0eea2a1e29eeec97f1f1fd8b9c15fcf\",\n      \"size_bytes\": 36438016\n    },\n    \"passages_npz\": {\n      \"exists\": true,\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\knowledge_base\\\\passages.npz\",\n      \"sha256\": \"fac941ed0825e1906d1724a4e0a6daefe2b1f98f19b1dd5dd523320c4b9ff1ad\",\n      \"size_bytes\": 19018540,\n      \"status\": {\n        \"dimensions\": 384,\n        \"encoder_id\": \"crl-encode-v1|model=sentence-transformers/all-MiniLM-L6-v2|revision=1110a243fdf4706b3f48f1d95db1a4f5529b4d41\",\n        \"index_path\": \"D:\\\\Desktop\\\\crl\\\\knowledge_base\\\\passages.npz\",\n        \"model_name\": \"sentence-transformers/all-MiniLM-L6-v2\",\n        \"model_revision\": \"1110a243fdf4706b3f48f1d95db1a4f5529b4d41\",\n        \"passages\": 3995,\n        \"ready\": true,\n        \"reason\": \"ready\"\n      }\n    }\n  },\n  \"limits\": {\n    \"card_per_route\": 8,\n    \"passage_hybrid\": 12\n  },\n  \"queries\": [\n    {\n      \"english_keyword_hint\": null,\n      \"normalized_query\": \"\\\"tool\\\" OR \\\"using\\\" OR \\\"LLM\\\" OR \\\"agents\\\" OR \\\"false\\\" OR \\\"task\\\" OR \\\"completion\\\" OR \\\"execution\\\" OR \\\"failures\\\" OR \\\"state\\\" OR \\\"inconsistency\\\"\",\n      \"original_query\": \"tool-using LLM agents false task completion tool execution failures state inconsistency\",\n      \"purpose\": \"problem\",\n      \"query_id\": \"q001\",\n      \"source\": \"explicit_query\"\n    },\n    {\n      \"english_keyword_hint\": null,"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 20,
+            "fused_score": 0.0125,
+            "line_end": 102,
+            "line_start": 1,
+            "path": "hypotheses_v001/searches/map-002/request.json",
+            "semantic_rank": null,
+            "source_sha256": "2d0841c33bd46f19575d0f9fae67f640eccd1681416148055832e8f7e3762287",
+            "text": "{\n  \"artifact_hashes\": {\n    \"report_md_sha256\": \"6dbadf1113c2defcb620388c0ca685973473635f053dad00d3fcf549ffa0cc24\",\n    \"result_json_sha256\": \"cc415c94d5a3770446ac523e2607b826a0326ad51c2f93557f7df906bba4daef\"\n  },\n  \"bundle_kind\": \"run_local_non_authoritative_research_retrieval\",\n  \"code_identity\": {\n    \"files\": [\n      {\n        \"path\": \"D:\\\\Desktop\\\\crl\\\\crl_agent_v3\\\\crl_v3\\\\cards.py\",\n        \"sha256\": \"749e8f13538ffb7318bf49cb1bf5f4633001063b2a88fce60b891d56d509b391\",\n        \"size_bytes\": 20764\n      },\n      {\n        \"path\": \"D:\\\\Desktop\\\\crl\\\\crl_agent_v3\\\\crl_v3\\\\knowledge.py\",\n        \"sha256\": \"dcdbafd9efb14bce0b7ddfc160f7ffd3d37d98675ae50276d561a7d22b63a4df\",\n        \"size_bytes\": 27237\n      },\n      {\n        \"path\": \"D:\\\\Desktop\\\\crl\\\\crl_agent_v3\\\\crl_v3\\\\research_retrieval.py\",\n        \"sha256\": \"8662e98cb009a7c9e796f024b6c2f254367deea81cfb7addeb1dae77cb3da21f\",\n        \"size_bytes\": 47063\n      },\n      {\n        \"path\": \"D:\\\\Desktop\\\\crl\\\\crl_agent_v3\\\\crl_v3\\\\retrieval.py\",\n        \"sha256\": \"13e73c964984f970458cb09de8754eb6ef9e90df2fa42920fea618eee06308e4\",\n        \"size_bytes\": 5224\n      },\n      {\n        \"path\": \"D:\\\\Desktop\\\\crl\\\\crl_agent_v3\\\\crl_v3\\\\vector.py\",\n        \"sha256\": \"c979f5f55f7fe96333b9976dea64a6e6bbf5843186b37b9d03afb5f2b1076939\",\n        \"size_bytes\": 17104\n      },\n      {\n        \"path\": \"D:\\\\Desktop\\\\crl\\\\crl_agent_v3\\\\tools\\\\query_research.py\",\n        \"sha256\": \"85aca7732ea2549a03514cde5345eca81e46b20154f3bbcf08405de63a872147\",\n        \"size_bytes\": 8694\n      }\n    ]\n  },\n  \"created_at_utc\": \"2026-08-15T10:22:01.289781Z\",\n  \"input_identity\": {\n    \"query_count\": 5,\n    \"run_id\": \"20260815_1818_run11\",\n    \"version\": \"v001\"\n  },\n  \"input_mode\": \"explicit\",\n  \"knowledge_identity\": {\n    \"cards_fts_sqlite\": {\n      \"card_source_signature\": \"a512499ae91e0b24c3aa13f9d2ae0a5a7bc3e790152bef5e80500573997c60f9\",\n      \"exists\": true,\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\knowledge_base\\\\cards_fts.sqlite\",\n      \"sha256\": \"52edfb9f2ba50afb65d49673cb902c6a0842d296df7f9651ad0563880de86ce6\",\n      \"size_bytes\": 1482752,\n      \"status\": {\n        \"cards\": 228,\n        \"index_path\": \"D:\\\\Desktop\\\\crl\\\\knowledge_base\\\\cards_fts.sqlite\",\n        \"ready\": true,\n        \"reason\": \"ready\"\n      }\n    },\n    \"knowledge_root\": \"D:\\\\Desktop\\\\crl\\\\knowledge_base\",\n    \"knowledge_sqlite\": {\n      \"exists\": true,\n      \"passage_generation_id\": \"17332e29f9644fedb1a30904bcd12035\",\n      \"passage_revision\": 99,\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\knowledge_base\\\\knowledge.sqlite\",\n      \"sha256\": \"7911d86e02ccd4df8fb18bb11fcdb160f0eea2a1e29eeec97f1f1fd8b9c15fcf\",\n      \"size_bytes\": 36438016\n    },\n    \"passages_npz\": {\n      \"exists\": true,\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\knowledge_base\\\\passages.npz\",\n      \"sha256\": \"fac941ed0825e1906d1724a4e0a6daefe2b1f98f19b1dd5dd523320c4b9ff1ad\",\n      \"size_bytes\": 19018540,\n      \"status\": {\n        \"dimensions\": 384,\n        \"encoder_id\": \"crl-encode-v1|model=sentence-transformers/all-MiniLM-L6-v2|revision=1110a243fdf4706b3f48f1d95db1a4f5529b4d41\",\n        \"index_path\": \"D:\\\\Desktop\\\\crl\\\\knowledge_base\\\\passages.npz\",\n        \"model_name\": \"sentence-transformers/all-MiniLM-L6-v2\",\n        \"model_revision\": \"1110a243fdf4706b3f48f1d95db1a4f5529b4d41\",\n        \"passages\": 3995,\n        \"ready\": true,\n        \"reason\": \"ready\"\n      }\n    }\n  },\n  \"limits\": {\n    \"card_per_route\": 10,\n    \"passage_hybrid\": 14\n  },\n  \"queries\": [\n    {\n      \"english_keyword_hint\": null,\n      \"normalized_query\": \"\\\"causal\\\" OR \\\"attribution\\\" OR \\\"whether\\\" OR \\\"LLM\\\" OR \\\"agent\\\" OR \\\"actually\\\" OR \\\"uses\\\" OR \\\"tool\\\" OR \\\"result\\\" OR \\\"in\\\" OR \\\"final\\\" OR \\\"answer\\\"\",\n      \"original_query\": \"causal attribution whether LLM agent actually uses tool result in final answer\",\n      \"purpose\": \"problem\",\n      \"query_id\": \"q001\",\n      \"source\": \"explicit_query\"\n    },\n    {\n      \"english_keyword_hint\": null,"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 28,
+            "fused_score": 0.011363636363636364,
+            "line_end": 90,
+            "line_start": 27,
+            "path": "hypotheses_v001/searches/map-002/report.md",
+            "semantic_rank": null,
+            "source_sha256": "6dbadf1113c2defcb620388c0ca685973473635f053dad00d3fcf549ffa0cc24",
+            "text": "- Paper `P060` · Unifying Inference-Time Planning Language Generation；用途 `prior`；路线 `q004:failure_card_fts` #4；Card `failure-natural-language-ir-hurts-formal-planning`（failure）；Evidence `ev-p060-formal-ir-solver`, `ev-p060-ir-result-and-nl-failure`\n- Paper `P086` · Meta-Tool: Unleash Open-World Function Calling Capabilities of General-Purpose Large Language Models；用途 `prior`；路线 `q004:passage_hybrid` #5；Passage `P086:p0006:s0001`\n- Paper `P040` · From Confident Closing to Silent Failure: Characterizing False Success in LLM Agents；用途 `measurement`；路线 `q005:paper_card_fts` #1；Card `paper-p040`（paper）；Evidence `ev-p040-failure-core`\n- Paper `P021` · In-the-Flow Agentic System Optimization for Effective Planning and Tool Use；用途 `measurement`；路线 `q005:passage_hybrid` #1；Passage `P021:p0032:s0001`\n- Paper `P019` · STeCa: Step-level Trajectory Calibration for LLM Agent Learning；用途 `measurement`；路线 `q005:failure_card_fts` #1；Card `failure-oracle-trajectory-calibration`（failure）；Evidence `ev-p019-ground-truth-calibration-oracle`\n- Paper `P007` · tau-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains；用途 `measurement`；路线 `q005:operator_card_fts` #2；Card `operator-terminal-state-reliability-evaluation`（operator）；Evidence `ev-p007-terminal-state-evaluation`\n\n- 代表项：20 / 去重 Paper：71\n\n## 查询与路线覆盖\n\n### q001 · problem\n\n- 原始查询：`causal attribution whether LLM agent actually uses tool result in final answer`\n- 规范化查询：`\"causal\" OR \"attribution\" OR \"whether\" OR \"LLM\" OR \"agent\" OR \"actually\" OR \"uses\" OR \"tool\" OR \"result\" OR \"in\" OR \"final\" OR \"answer\"`\n- 路线 `paper_card_fts`：10 条；降级 false（无）\n- 路线 `failure_card_fts`：10 条；降级 false（无）\n- 路线 `passage_hybrid`：14 条；降级 false（无）\n- 路线 `operator_card_fts`：10 条；降级 false（无）\n\n### q002 · failure\n\n- 原始查询：`tool result ignoring spurious dependence irrelevant tool output fields`\n- 规范化查询：`\"tool\" OR \"result\" OR \"ignoring\" OR \"spurious\" OR \"dependence\" OR \"irrelevant\" OR \"output\" OR \"fields\"`\n- 路线 `failure_card_fts`：10 条；降级 false（无）\n- 路线 `passage_hybrid`：14 条；降级 false（无）\n- 路线 `operator_card_fts`：10 条；降级 false（无）\n- 路线 `paper_card_fts`：10 条；降级 false（无）\n\n### q003 · operator\n\n- 原始查询：`counterfactual tool output perturbation metamorphic testing causal sensitivity paired interventions`\n- 规范化查询：`\"counterfactual\" OR \"tool\" OR \"output\" OR \"perturbation\" OR \"metamorphic\" OR \"testing\" OR \"causal\" OR \"sensitivity\" OR \"paired\" OR \"interventions\"`\n- 路线 `operator_card_fts`：10 条；降级 false（无）\n- 路线 `paper_card_fts`：10 条；降级 false（无）\n- 路线 `passage_hybrid`：14 条；降级 false（无）\n- 路线 `failure_card_fts`：10 条；降级 false（无）\n\n### q004 · prior\n\n- 原始查询：`counterfactual evaluation tool agents causal tracing tool result utilization`\n- 规范化查询：`\"counterfactual\" OR \"evaluation\" OR \"tool\" OR \"agents\" OR \"causal\" OR \"tracing\" OR \"result\" OR \"utilization\"`\n- 路线 `paper_card_fts`：10 条；降级 false（无）\n- 路线 `operator_card_fts`：10 条；降级 false（无）\n- 路线 `failure_card_fts`：10 条；降级 false（无）\n- 路线 `passage_hybrid`：14 条；降级 false（无）\n\n### q005 · measurement\n\n- 原始查询：`ground-truth-free evaluation causal tool uptake answer sensitivity`\n- 规范化查询：`\"ground\" OR \"truth\" OR \"free\" OR \"evaluation\" OR \"causal\" OR \"tool\" OR \"uptake\" OR \"answer\" OR \"sensitivity\"`\n- 路线 `paper_card_fts`：10 条；降级 false（无）\n- 路线 `passage_hybrid`：14 条；降级 false（无）\n- 路线 `failure_card_fts`：10 条；降级 false（无）\n- 路线 `operator_card_fts`：10 条；降级 false（无）\n\n## 覆盖诊断\n\n- 去重 Card：93\n- 去重 Evidence：125\n- 去重 Passage：59\n- 命中 Paper：71\n- 原始观测：220\n- 带机械噪声标记的观测：2"
+          },
+          {
+            "earlier_than_recent_context": false,
+            "fts_rank": 3,
+            "fused_score": 0.015873015873015872,
+            "line_end": 67,
+            "line_start": 1,
+            "path": "hypotheses_v001/priors/prior-001/request.json",
+            "semantic_rank": null,
+            "source_sha256": "3b6d94bd0d5e8f79324ff83c4c0c0a992f37a39f6c0a07e680e20d92d9a5b722",
+            "text": "{\n  \"artifact_hashes\": {\n    \"candidates_json_sha256\": \"4eac5748532b28f6d3c9c93eea97a5b8f1d31eb8de3e994a8c9c224df65b242a\",\n    \"report_md_sha256\": \"94078f3caa8b76d278e89a01e041e19c7fe71299eef9fde98dedcdb4e72025a3\"\n  },\n  \"artifact_kind\": \"run_local_non_authoritative_prior_audit\",\n  \"audit_id\": \"prior-001\",\n  \"created_at_utc\": \"2026-08-15T10:23:33.004960Z\",\n  \"degraded\": true,\n  \"hypothesis\": {\n    \"hypothesis_id\": \"H001\",\n    \"hypothesis_revision\": 2,\n    \"portfolio_path\": \"hypotheses_v001/portfolio.json\",\n    \"portfolio_sha256\": \"3b7f30541a9b328a4b94bc5ebe651081e131421a252587592113c291c9903c02\"\n  },\n  \"limits\": {\n    \"expansion_max_pages\": 2,\n    \"expansion_total_per_relation\": 20,\n    \"max_retries\": 2,\n    \"per_source_per_query\": 15,\n    \"timeout_seconds\": 25.0\n  },\n  \"network_responses\": [\n    {\n      \"body_sha256\": \"65ab993d12c5c2cc9b68e6da2bb79b326930283e520363ffcdc145f88cd5a148\",\n      \"http_status\": 429,\n      \"normalized_url_identity\": \"https://api.semanticscholar.org/graph/v1/paper/search?fields=paperId%2Ctitle%2Cauthors%2Cyear%2Cvenue%2CexternalIds%2Cabstract%2Curl%2CopenAccessPdf&limit=15&query=counterfactual+tool+output+perturbation+LLM+agent+tool+result+utilization+causal+sensitivity+metamorphic+testing\",\n      \"requested_at_utc\": \"2026-08-15T10:23:33.005499Z\",\n      \"source\": \"Semantic Scholar\"\n    },\n    {\n      \"body_sha256\": \"65ab993d12c5c2cc9b68e6da2bb79b326930283e520363ffcdc145f88cd5a148\",\n      \"http_status\": 429,\n      \"normalized_url_identity\": \"https://api.semanticscholar.org/graph/v1/paper/search?fields=paperId%2Ctitle%2Cauthors%2Cyear%2Cvenue%2CexternalIds%2Cabstract%2Curl%2CopenAccessPdf&limit=15&query=counterfactual+tool+output+perturbation+LLM+agent+tool+result+utilization+causal+sensitivity+metamorphic+testing\",\n      \"requested_at_utc\": \"2026-08-15T10:23:34.973984Z\",\n      \"source\": \"Semantic Scholar\"\n    },\n    {\n      \"body_sha256\": \"65ab993d12c5c2cc9b68e6da2bb79b326930283e520363ffcdc145f88cd5a148\",\n      \"http_status\": 429,\n      \"normalized_url_identity\": \"https://api.semanticscholar.org/graph/v1/paper/search?fields=paperId%2Ctitle%2Cauthors%2Cyear%2Cvenue%2CexternalIds%2Cabstract%2Curl%2CopenAccessPdf&limit=15&query=counterfactual+tool+output+perturbation+LLM+agent+tool+result+utilization+causal+sensitivity+metamorphic+testing\",\n      \"requested_at_utc\": \"2026-08-15T10:23:37.433712Z\",\n      \"source\": \"Semantic Scholar\"\n    },\n    {\n      \"body_sha256\": \"77bea280186eed9c833e5c88eeb57719902ac7a9ff081d7adb3dfb7e53cd64c5\",\n      \"http_status\": 200,\n      \"normalized_url_identity\": \"https://export.arxiv.org/api/query?max_results=15&search_query=all%3Acounterfactual+tool+output+perturbation+LLM+agent+tool+result+utilization+causal+sensitivity+metamorphic+testing&start=0\",\n      \"requested_at_utc\": \"2026-08-15T10:23:38.086491Z\",\n      \"source\": \"arXiv\"\n    }\n  ],\n  \"queries\": [\n    {\n      \"query_id\": \"q001\",\n      \"text\": \"counterfactual tool output perturbation LLM agent tool result utilization causal sensitivity metamorphic testing\"\n    }\n  ],\n  \"run_id\": \"20260815_1818_run11\",\n  \"schema_version\": 3,\n  \"seed_paper_id\": null,\n  \"sources\": [\n    \"Semantic Scholar\",\n    \"arXiv\"\n  ],\n  \"version\": \"v001\"\n}"
+          }
+        ],
+        "kind": "recent_context_recovery",
+        "query": "\"hypotheses\": [\n\"答案差异来自随机采样或序列位置，而不是工具证据采用。\",\n\"baseline\": \"在一个自然工具轨迹上按最终答案正确率、任务终态或语言模型裁判打分。\",\n\"budget_effect\": \"每个被测实例从一次推理增加为原轨迹加一到两个成对重放；首轮杀手实验只比较固定小样本上的测量可辨识性。\",\n\"timing\": \"离线评价时对同一智能体进行成对影子重放；候选若扩展为在线门控，再在最终回答提交前选择性重放。\"\n\"problem_family\": \"工具型语言模型智能体评价与可靠性\",\n\"falsifier\": \"在可机械判定的合成工具任务上，成对关系指标不能稳定区分已知的结果忽略、真实采用和无关字段依赖实现；或指标主要由采样噪声、提示复述、字段表面变化或答案解析器决定；或最近先行已直接占据同样的问题、信息、时机、计算与评价路径。\",\n\"hypothesis_id\": \"H001\",\n\"lineage_note\": \"根候选；由虚假成功、结果忽略与行为扰动证据交叉导出，但尚未完成最近先行审计。\",\n\"mechanism_claim\": \"若智能体真实采用了任务相关工具证据，则在保持其他信息不变时，相关字段干预应引发方向一致的回答变化，而无关字段干预不应改变任务结论；两类关系联合比单向敏感度更能区分结果忽略、无关依赖与普遍不稳定。\",\n\"minimal_killer_experiment\": \"构造小型确定性工具返回集及三种可控代理策略，并用至少两个真实本地语言模型生成回答；比较相关应变、无关不变及两者联合关系对已知策略标签的区分能力，同时重复种子估计纯采样噪声。\",\n\"problem\": \"现有终局正确率可以把工具跳过、调用后忽略和真实采用混在一起；环境终态又只适用于可直接检查的任务。需要一种不依赖完整答案真值、但能测量最终回答是否真正受任务相关工具证据驱动的评价载体。\",",
+        "semantic_reason": "semantic_index_missing",
+        "semantic_status": "DEGRADED",
+        "source_files": [
+          {
+            "mtime_ns": 1786789406295439900,
+            "path": "hypotheses_v001/portfolio.json",
+            "source_sha256": "3b7f30541a9b328a4b94bc5ebe651081e131421a252587592113c291c9903c02"
+          }
+        ]
+      }
+    ],
+    "semantic_reason": "semantic_index_missing",
+    "semantic_status": "DEGRADED",
+    "version": "v001"
+  },
+  "recall_status": {
+    "reason": null,
+    "semantic_reason": "semantic_index_missing",
+    "semantic_status": "DEGRADED",
+    "status": "READY"
+  },
+  "recent_files": [
+    {
+      "mtime_ns": 1786790861988054400,
+      "path": "workbench_v001/qwen-all-20-metrics.json",
+      "sha256": "8b9a45695a3b47e5a65bf1c9015a3f11e568907b519bfb86a322fa23cc41b1c3",
+      "size_bytes": 1047
+    },
+    {
+      "mtime_ns": 1786790861986056800,
+      "path": "workbench_v001/qwen-all-20-report.md",
+      "sha256": "2ba962b6828a01e60a63c58ed164f87a30d5a19772593fb4e615d4bd405ba650",
+      "size_bytes": 2627
+    },
+    {
+      "mtime_ns": 1786790861984054300,
+      "path": "workbench_v001/qwen-all-20-result.json",
+      "sha256": "0a415534179b7ac5b55b0707811822aa8a7937f9d954bd1f2b3c8c3b46b2b8a4",
+      "size_bytes": 344178
+    },
+    {
+      "mtime_ns": 1786790541537600800,
+      "path": "workbench_v001/deterministic-20-metrics.json",
+      "sha256": "8115f59700b4aaa950a8cb1a7a4e6ae6f1754ffe39074e05c5a05b35da2e87ee",
+      "size_bytes": 911
+    },
+    {
+      "mtime_ns": 1786790541537600800,
+      "path": "workbench_v001/deterministic-20-report.md",
+      "sha256": "4c73d31bca300ad147326e947f7e453a3aa0b26604e5da2c2dc54d29e1b91d75",
+      "size_bytes": 2412
+    },
+    {
+      "mtime_ns": 1786790541536601500,
+      "path": "workbench_v001/deterministic-20-result.json",
+      "sha256": "4c6ae371aad73db89415e0cbdfdc0ece8c676757d2a44850e28e03fafde09a85",
+      "size_bytes": 89038
+    },
+    {
+      "mtime_ns": 1786790530069458300,
+      "path": "implementation_v001/test_causal_uptake_eval.py",
+      "sha256": "7fe4edb7a7e22e45a0b8b7b7c527c3bbf4b17877c2a8d15fa17d42febb1580b3",
+      "size_bytes": 3294
+    },
+    {
+      "mtime_ns": 1786790519670537300,
+      "path": "implementation_v001/cases.json",
+      "sha256": "16405ec1aaf9b54c385a855371b2894f3716cd5c54929d780e1103ef10fca577",
+      "size_bytes": 62543
+    },
+    {
+      "mtime_ns": 1786790507716028800,
+      "path": "implementation_v001/generate_suite.py",
+      "sha256": "ec912dd620c69677a2ffd5a09a86d78f23c9cee337266c3d70c1f49d44be5d92",
+      "size_bytes": 10506
+    },
+    {
+      "mtime_ns": 1786790507711471000,
+      "path": "implementation_v001/suite_spec.json",
+      "sha256": "6b707be648e99c6c43aea2a0a5b28789dc03e8aaf7b0b54ae517550ebd0b2aa0",
+      "size_bytes": 185
+    },
+    {
+      "mtime_ns": 1786790414892408700,
+      "path": "implementation_v001/causal_uptake_eval.py",
+      "sha256": "384b3d94233a4be3b423025b9a53dafbb9c0934c6eee91e4443b6c01ce33df46",
+      "size_bytes": 24464
+    },
+    {
+      "mtime_ns": 1786790307002205400,
+      "path": "workbench_v001/qwen-7b8b-relational-metrics.json",
+      "sha256": "5e221d0268e6fff411a07dfd5e8e851e4a6d06833e896faef8f4fdd2688dcb64",
+      "size_bytes": 703
+    },
+    {
+      "mtime_ns": 1786790306996706100,
+      "path": "workbench_v001/qwen-7b8b-relational-report.md",
+      "sha256": "48733a3277382d214d899e172a9d2668810c0c25ccc0f0cb335b526da2a4f08b",
+      "size_bytes": 2079
+    },
+    {
+      "mtime_ns": 1786790306995317500,
+      "path": "workbench_v001/qwen-7b8b-relational-result.json",
+      "sha256": "c27ee6c1ce6d3d21f33516095bc2f7a80f424df5004f135206b1961c982910b2",
+      "size_bytes": 48009
+    },
+    {
+      "mtime_ns": 1786790239355157700,
+      "path": "workbench_v001/qwen3-4b-relational-metrics.json",
+      "sha256": "667064614f99746c0b57866674feaef02a86f0ba1f7d6dc1aad750aebffeb4ca",
+      "size_bytes": 700
+    },
+    {
+      "mtime_ns": 1786790239353923100,
+      "path": "workbench_v001/qwen3-4b-relational-report.md",
+      "sha256": "e3143e6674dfd42dbfcd9d44253aaf2c68dc0022580cc10e72e992473aa8adc5",
+      "size_bytes": 1826
+    },
+    {
+      "mtime_ns": 1786790239352602300,
+      "path": "workbench_v001/qwen3-4b-relational-result.json",
+      "sha256": "2bb47d098003948bf5cef678bb4fa1edf751d6b644681eb8122e2c27e8783499",
+      "size_bytes": 25777
+    },
+    {
+      "mtime_ns": 1786790208411888200,
+      "path": "workbench_v001/deterministic-relational-metrics.json",
+      "sha256": "1f1c39851535162d9cbe7c8a2b6563ead1b003a9f85e7f12e116506e15c7d6bf",
+      "size_bytes": 920
+    },
+    {
+      "mtime_ns": 1786790208411888200,
+      "path": "workbench_v001/deterministic-relational-report.md",
+      "sha256": "4a629f12551a174ad308569c190fcc2a52686564072f2f5e9bec16cbf67c7f5b",
+      "size_bytes": 2046
+    },
+    {
+      "mtime_ns": 1786790208410888400,
+      "path": "workbench_v001/deterministic-relational-result.json",
+      "sha256": "b0637808757b0a404d2c2cfe5034239d8c64e83bf68397c40669eede6ccd060d",
+      "size_bytes": 21365
+    },
+    {
+      "mtime_ns": 1786790194205254600,
+      "path": "workbench_v001/pilot_cases_before_split.json",
+      "sha256": "e7b05f0f065fad29dee0835c75c0539254414ce5aa23f80dc28fa2d969786054",
+      "size_bytes": 6228
+    },
+    {
+      "mtime_ns": 1786790088494942000,
+      "path": "workbench_v001/qwen3-4b-schema-metrics.json",
+      "sha256": "a64fa29a8ea9f93b03c1095566041378ee72f6bdabb1ba9eb58e94fc926561ff",
+      "size_bytes": 677
+    },
+    {
+      "mtime_ns": 1786790088494367800,
+      "path": "workbench_v001/qwen3-4b-schema-report.md",
+      "sha256": "578301b70d03aca1565c8aa442478a65d9eae37a24e07711d5ab485f5a6eeeaa",
+      "size_bytes": 1602
+    },
+    {
+      "mtime_ns": 1786790088493608100,
+      "path": "workbench_v001/qwen3-4b-schema-result.json",
+      "sha256": "91df656aa998b935fbf354017fc6a291b2b04db15a34eb3a748f9350bd832a50",
+      "size_bytes": 25339
+    },
+    {
+      "mtime_ns": 1786790024202569100,
+      "path": "workbench_v001/qwen3-4b-fixed-metrics.json",
+      "sha256": "f16b9a5172ff34acac2436badb75bc9d1a24086d55616737a361f6df59506c0d",
+      "size_bytes": 5023
+    },
+    {
+      "mtime_ns": 1786790024201130200,
+      "path": "workbench_v001/qwen3-4b-fixed-report.md",
+      "sha256": "872d694de00f4a4bbf097e5bdadcfd0421838bacf0c9d7e0d6d287d85eed0aca",
+      "size_bytes": 1599
+    },
+    {
+      "mtime_ns": 1786790024199129300,
+      "path": "workbench_v001/qwen3-4b-fixed-result.json",
+      "sha256": "e87c2f428480756ad316194a1f037000fd5493a61fb25037c717cc612db0f8ea",
+      "size_bytes": 43768
+    },
+    {
+      "mtime_ns": 1786789905409467300,
+      "path": "workbench_v001/qwen3-4b-metrics.json",
+      "sha256": "a506f2353ccf1ffe4117ad22be4b105a95c548c3bfe441bb3c8b0cbf54108570",
+      "size_bytes": 670
+    },
+    {
+      "mtime_ns": 1786789905408701700,
+      "path": "workbench_v001/qwen3-4b-report.md",
+      "sha256": "4d7cc65343a9320ff1c2135a6b77dafcb3c6517e732541ea2aa21cc009768279",
+      "size_bytes": 1603
+    },
+    {
+      "mtime_ns": 1786789905403193500,
+      "path": "workbench_v001/qwen3-4b-result.json",
+      "sha256": "e9a3cb2bf778557cea2eaecdc05e817f8416ad1a2f23452f6afafaa9167814ed",
+      "size_bytes": 25753
+    }
+  ],
+  "review_evaluation_files": [],
+  "run_id": "20260815_1818_run11",
+  "run_wide": {
+    "experiments": {
+      "formal_review_support": {
+        "attempt_count": 0,
+        "attempts": []
+      },
+      "recorded": {
+        "attempt_count": 0,
+        "attempts": []
+      },
+      "scratch": {
+        "report_count": 0,
+        "reports": [],
+        "version_count": 1,
+        "versions": [
+          "v001"
+        ]
+      }
+    },
+    "hypotheses": {
+      "hypothesis_count": 1,
+      "status_distribution": {
+        "active": 1
+      },
+      "status_reason_distribution": {
+        "主研究者采纳为最近先行与最小杀手实验的当前候选，尚未形成 Seed。": 1
+      },
+      "versions_with_portfolios": [
+        "v001"
+      ]
+    },
+    "prior_collisions": {
+      "assessment_warning_audit_count": 1,
+      "assessment_warning_count": 1,
+      "assessment_warnings": [
+        {
+          "audit_id": "prior-001",
+          "path": "hypotheses_v001/priors/prior-001/assessment.md",
+          "warnings": [
+            "assessment collision marker is missing"
+          ]
+        }
+      ],
+      "collision_kind_distribution": {},
+      "prior_audit_count": 1,
+      "unclassified_audit_count": 0
+    },
+    "recall_composition": {
+      "contamination_present": false,
+      "excluded_entry_count": 5,
+      "external_or_vendor_indexed_count": 0,
+      "ground_truth_like_indexed_count": 0,
+      "indexed_bytes": 920522,
+      "indexed_file_count": 46,
+      "manifest_schema_version": 2,
+      "raw_search_payload_indexed_count": 0,
+      "stale_indexed_source_count": 0,
+      "status": "READY"
+    },
+    "scientific_versions": {
+      "current_version": "v001",
+      "version_count": 1,
+      "versions": [
+        {
+          "artifact_count": 45,
+          "artifact_span_seconds": 1626.3038599,
+          "first_artifact_mtime_ns": 1786789235684194500,
+          "last_artifact_mtime_ns": 1786790861988054400,
+          "version": "v001"
+        }
+      ]
+    },
+    "searches": {
+      "compact_report_bytes": 17098,
+      "raw_result_bytes": 1896773,
+      "repeated_query_fingerprint_count": 0,
+      "search_count": 2,
+      "searches": [
+        {
+          "compact_report_bytes": 8654,
+          "deduplicated_paper_count": 50,
+          "path": "hypotheses_v001/searches/map-001",
+          "query_count": 0,
+          "raw_result_bytes": 844624
+        },
+        {
+          "compact_report_bytes": 8444,
+          "deduplicated_paper_count": 71,
+          "path": "hypotheses_v001/searches/map-002",
+          "query_count": 0,
+          "raw_result_bytes": 1052149
+        }
+      ]
+    },
+    "subagents": {
+      "category_distribution": {},
+      "classification_basis": "filename_only_artifact_classification_no_native_delegation_verification",
+      "native_delegation_evidence": {
+        "reason": "no_stable_machine_verifiable_native_delegation_evidence_source",
+        "status": "UNAVAILABLE",
+        "summary_artifacts_verify_native_delegation": false,
+        "verified_delegation_count": null
+      },
+      "summary_artifact_count": 0,
+      "summary_artifacts": [],
+      "summary_count": 0,
+      "tasks": []
+    }
+  },
+  "schema_version": 1,
+  "search_snapshot_files": [
+    {
+      "path": "hypotheses_v001/searches/map-001/report.md",
+      "sha256": "9478cae0de6cbd3df0851a75facf86680d8b346c2136c2d908134b14e9b382aa",
+      "size_bytes": 8654
+    },
+    {
+      "path": "hypotheses_v001/searches/map-001/request.json",
+      "sha256": "7f5b6ed8f6afad3e1af2f1da639d62785d866aaa80d76940de169cce1a0b9ef1",
+      "size_bytes": 5649
+    },
+    {
+      "path": "hypotheses_v001/searches/map-001/result.json",
+      "sha256": "b8dee043d95035205f60e820ed06df928541e8b04fb6044975d18ff28c546440",
+      "size_bytes": 844624
+    },
+    {
+      "path": "hypotheses_v001/searches/map-002/report.md",
+      "sha256": "6dbadf1113c2defcb620388c0ca685973473635f053dad00d3fcf549ffa0cc24",
+      "size_bytes": 8444
+    },
+    {
+      "path": "hypotheses_v001/searches/map-002/request.json",
+      "sha256": "2d0841c33bd46f19575d0f9fae67f640eccd1681416148055832e8f7e3762287",
+      "size_bytes": 5557
+    },
+    {
+      "path": "hypotheses_v001/searches/map-002/result.json",
+      "sha256": "cc415c94d5a3770446ac523e2607b826a0326ad51c2f93557f7df906bba4daef",
+      "size_bytes": 1052149
+    }
+  ],
+  "version": "v001"
+}

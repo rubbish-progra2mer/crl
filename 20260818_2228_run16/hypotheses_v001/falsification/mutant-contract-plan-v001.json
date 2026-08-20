@@ -1,0 +1,88 @@
+{
+  "claims": [
+    {
+      "alternative_explanations": [
+        "仓库另有未进入数据合同的额外惩罚",
+        "extra change 在任务语义上全部允许",
+        "合成变异违反真实服务模式"
+      ],
+      "claim_id": "open-world-contract-escape-v001",
+      "claim_text": "Agent-Diff 公开合同采用未显式关闭的开放世界评价边界，因此目标保持但新增断言外副作用的变异可逃过原合同。",
+      "falsifier": "存在显式 strict 合同，或原评价在合同之外拒绝绝大多数断言外状态变异。",
+      "killer_experiment_id": "contract-mutation-screening-v001",
+      "minimum_effect_or_decision_rule": "224 个合同全部未显式 strict，且原合同风险变异逃逸率 >= 0.95 才支持开放世界合同逃逸。",
+      "observable": "未声明 strict 的合同占比，以及原合同对四类风险变异的逃逸率。",
+      "scope": "Hugging Face 公开的 224 个 Agent-Diff 合同；四类目标保持状态变异；不外推到其他基准。",
+      "status": "supported_locally",
+      "status_reason": "Formal Screening contract-mutation-screening-v001：224/224 公开合同均未显式 strict；四类目标保持风险变异在原合同下逃逸率为 1.000，高于预注册 0.95。该结论只覆盖公开合同与冻结变异，不声称所有额外变化均不安全。",
+      "supporting_experiment_ids": []
+    },
+    {
+      "alternative_explanations": [
+        "未断言变化是必要数据库级联",
+        "合同故意只评分关键目标",
+        "匹配器对结构化谓词语义复现不完整"
+      ],
+      "claim_id": "passed-run-unasserted-change-v001",
+      "claim_text": "公开实际运行中，原评价通过的轨迹包含可由保守合同匹配确定的未断言状态变化，因此开放世界边界不是纯粹的合成角落。",
+      "falsifier": "匹配失败，或该比例低于 0.05。",
+      "killer_experiment_id": "contract-mutation-screening-v001",
+      "minimum_effect_or_decision_rule": "224/224 提示匹配，且通过运行的保守未断言变化率 >= 0.05 才支持现象相关性；结果只称未断言，不称不安全。",
+      "observable": "原通过运行中至少含一个保守未断言非忽略变化的比例。",
+      "scope": "公开 checkpoint_20260201_224804.json 中能与当前 224 合同按完整提示一一匹配的运行；未断言不等同于不安全。",
+      "status": "supported_locally",
+      "status_reason": "Formal Screening contract-mutation-screening-v001：224/224 公开运行按完整提示匹配；151 个原评价通过运行中，65 个含至少一个保守未断言非忽略状态变化，比例 0.4305，高于预注册 0.05。该标签是未断言变化，不是人工安全判定。",
+      "supporting_experiment_ids": []
+    },
+    {
+      "alternative_explanations": [
+        "训练通过运行本身含有错误副作用",
+        "端点签名过粗而放行同形恶意变化",
+        "测试划分太小",
+        "全局 strict 的误拒绝不是人工确认错误"
+      ],
+      "claim_id": "endpoint-envelope-hardening-v001",
+      "claim_text": "由训练划分通过运行学习的工具端点—级联变化允许边界，能比全局 strict 少误拒绝公开测试通过运行，同时拒绝大多数保留风险变异。",
+      "falsifier": "相对全局 strict 的误拒绝率降低不足 0.10，或风险变异逃逸率高于 0.25，或忽略元数据接受率不等于 1。",
+      "killer_experiment_id": "contract-mutation-screening-v001",
+      "minimum_effect_or_decision_rule": "误拒绝率至少比全局 strict 低 0.10；风险变异逃逸率 <= 0.25；忽略元数据接受率 = 1。三项必须同时满足。",
+      "observable": "测试通过运行误拒绝率、风险变异逃逸率、忽略元数据接受率。",
+      "scope": "单一公开检查点、179/45 固定划分、工具端点到变化签名的确定性原型；不宣称自动合同生成已经完成。",
+      "status": "falsified",
+      "status_reason": "Formal Screening contract-mutation-screening-v001：端点允许边界把测试通过运行的保守拒绝率从 global strict 的 0.3214 降至 0.0714，阴性元数据接受率为 1.000，但风险变异逃逸率 0.2722，高于预注册上限 0.25；故当前粗粒度加固原型未存活。",
+      "supporting_experiment_ids": []
+    },
+    {
+      "alternative_explanations": [
+        "未断言变化是必要数据库或接口级联",
+        "未断言变化是用户明确要求但正向合同漏写的动作",
+        "保守匹配器没有识别广义断言覆盖",
+        "人工只看到变化签名而没有完整行级因果"
+      ],
+      "claim_id": "task-external-score-distortion-replication-v001",
+      "claim_text": "在同模型的独立公开运行检查点中，开放世界状态合同会把包含任务外可疑状态变化的运行判为通过，并达到足以影响评价结果的频率。",
+      "falsifier": "117 个运行不能全部匹配，或原通过且有未断言变化的运行经完整人工核对后，任务外可疑运行少于 3 个或低于原通过运行的 0.05。",
+      "killer_experiment_id": "contract-mutation-replication-v001",
+      "minimum_effect_or_decision_rule": "完整提示匹配率必须为 1.00；至少 3 个原通过运行含任务外可疑变化，且占第二检查点原通过运行的比例 >=0.05，才保留实际得分扭曲主张。",
+      "observable": "第二检查点原通过运行中，人工核对为 task_external_suspicious 的运行数、比例及其在原评分中的通过状态。",
+      "scope": "Agent-Diff checkpoint_20260201_233808.json 的 117 个独立 Gemini 3 Flash 公开运行；只按完整提示匹配当前公开合同；人工标签只使用提示与保守未断言变化签名。",
+      "status": "falsified",
+      "status_reason": "Formal Screening contract-mutation-replication-v001 完成 117/117 完整提示匹配；67 个原通过运行中 40 个含保守未断言变化。预注册人工核对覆盖 40/40、无重复：25 个仅必要系统级联，9 个仅用户明确要求但合同漏写，6 个混合，task_external_suspicious 为 0；低于至少 3 个且占原通过运行 0.05 的保留线。第一完整检查点的 65 个样本同样为 0，因此当前公开资源不支持实际得分扭曲主张。",
+      "supporting_experiment_ids": []
+    }
+  ],
+  "created_at": "2026-08-18T16:00:42.525512Z",
+  "global_confounders": [
+    "公开检查点只有一个模型、每任务一次运行",
+    "原评价通过不等于人工确认安全或语义完整",
+    "保守匹配器会把广义断言匹配的所有行视为预期，因此更可能少报",
+    "四类状态变异只覆盖部分副作用空间",
+    "工具端点允许边界可能学习并固化训练运行中的错误"
+  ],
+  "hypothesis_id": "h-mutant-probe-001",
+  "plan_id": "mutant-contract-plan-v001",
+  "run_id": "20260818_2228_run16",
+  "schema_version": 2,
+  "updated_at": "2026-08-18T16:16:49.580814Z",
+  "version": "v001"
+}

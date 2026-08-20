@@ -1,0 +1,1696 @@
+{
+  "schema_version": 1,
+  "experiment_id": "scratch-qwen-7b8b-relational",
+  "configuration": {
+    "backend": "ollama",
+    "policies": [],
+    "models": [
+      "qwen2.5:7b",
+      "qwen3:8b"
+    ],
+    "prompt_regimes": [
+      "weak",
+      "strict"
+    ],
+    "temperature": 0.0,
+    "seed": 123
+  },
+  "case_count": 5,
+  "rows": [
+    {
+      "case_id": "inventory_minimum",
+      "agent_id": "ollama::qwen2.5:7b::weak",
+      "backend": "ollama",
+      "answers": {
+        "base": "SKU-C",
+        "relevant": "SKU-C",
+        "irrelevant": "SKU-C",
+        "repeat": "SKU-C"
+      },
+      "expected_relation_anchors": {
+        "base": "SKU-A",
+        "relevant": "SKU-B",
+        "irrelevant": "SKU-A"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": true,
+        "relevant_changed": false,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": false,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 5.916317799998069,
+            "prompt_eval_count": 171,
+            "eval_count": 8,
+            "total_duration_ns": 5912075800,
+            "load_duration_ns": 5703032800
+          },
+          "raw_content": "{\"answer\": \"SKU-C\"}"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 0.4472078999970108,
+            "prompt_eval_count": 171,
+            "eval_count": 8,
+            "total_duration_ns": 426010400,
+            "load_duration_ns": 295991600
+          },
+          "raw_content": "{\"answer\": \"SKU-C\"}"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 0.3917970000002242,
+            "prompt_eval_count": 171,
+            "eval_count": 8,
+            "total_duration_ns": 390654000,
+            "load_duration_ns": 258770900
+          },
+          "raw_content": "{\"answer\": \"SKU-C\"}"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 0.42202180000094813,
+            "prompt_eval_count": 171,
+            "eval_count": 8,
+            "total_duration_ns": 420380000,
+            "load_duration_ns": 299649600
+          },
+          "raw_content": "{\"answer\": \"SKU-C\"}"
+        }
+      ],
+      "warnings": [],
+      "reference_exact_triple": false
+    },
+    {
+      "case_id": "latest_confirmed_event",
+      "agent_id": "ollama::qwen2.5:7b::weak",
+      "backend": "ollama",
+      "answers": {
+        "base": "EV-3",
+        "relevant": "EV-3",
+        "irrelevant": "EV-3",
+        "repeat": "EV-3"
+      },
+      "expected_relation_anchors": {
+        "base": "EV-3",
+        "relevant": "EV-2",
+        "irrelevant": "EV-3"
+      },
+      "metrics": {
+        "exact_base": true,
+        "exact_triple": false,
+        "tool_value_overlap": true,
+        "relevant_changed": false,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": false,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 0.42541710000296007,
+            "prompt_eval_count": 220,
+            "eval_count": 9,
+            "total_duration_ns": 424096300,
+            "load_duration_ns": 260163800
+          },
+          "raw_content": "{\"answer\": \"EV-3\"}"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 0.44873329999973066,
+            "prompt_eval_count": 220,
+            "eval_count": 9,
+            "total_duration_ns": 447698200,
+            "load_duration_ns": 299319400
+          },
+          "raw_content": "{\"answer\": \"EV-3\"}"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 0.4362467999999353,
+            "prompt_eval_count": 220,
+            "eval_count": 9,
+            "total_duration_ns": 434303900,
+            "load_duration_ns": 290133100
+          },
+          "raw_content": "{\"answer\": \"EV-3\"}"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 0.4504419999975653,
+            "prompt_eval_count": 220,
+            "eval_count": 9,
+            "total_duration_ns": 449177800,
+            "load_duration_ns": 301427700
+          },
+          "raw_content": "{\"answer\": \"EV-3\"}"
+        }
+      ],
+      "warnings": [],
+      "reference_exact_triple": false
+    },
+    {
+      "case_id": "support_routing",
+      "agent_id": "ollama::qwen2.5:7b::weak",
+      "backend": "ollama",
+      "answers": {
+        "base": "use",
+        "relevant": "log(12)",
+        "irrelevant": "",
+        "repeat": "use"
+      },
+      "expected_relation_anchors": {
+        "base": "15",
+        "relevant": "12",
+        "irrelevant": "15"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": false,
+        "relevant_changed": true,
+        "irrelevant_invariant": false,
+        "repeat_stable": true,
+        "selective_change": false,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 0.41938759999902686,
+            "prompt_eval_count": 125,
+            "eval_count": 7,
+            "total_duration_ns": 417910300,
+            "load_duration_ns": 282310900
+          },
+          "raw_content": "{\"answer\": \"use\"}"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 0.4238158000007388,
+            "prompt_eval_count": 125,
+            "eval_count": 11,
+            "total_duration_ns": 418425900,
+            "load_duration_ns": 251081600
+          },
+          "raw_content": "{\"answer\": \"log(12)\"}"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 0.3749424000016006,
+            "prompt_eval_count": 125,
+            "eval_count": 7,
+            "total_duration_ns": 373741800,
+            "load_duration_ns": 256211000
+          },
+          "raw_content": "{\"answer\": \"\"}"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 0.38229999999748543,
+            "prompt_eval_count": 125,
+            "eval_count": 7,
+            "total_duration_ns": 381054100,
+            "load_duration_ns": 263071900
+          },
+          "raw_content": "{\"answer\": \"use\"}"
+        }
+      ],
+      "warnings": [],
+      "reference_exact_triple": false
+    },
+    {
+      "case_id": "fastest_paid_order",
+      "agent_id": "ollama::qwen2.5:7b::weak",
+      "backend": "ollama",
+      "answers": {
+        "base": "ORD-1",
+        "relevant": "ORD-2",
+        "irrelevant": "ORD-1",
+        "repeat": "ORD-1"
+      },
+      "expected_relation_anchors": {
+        "base": "ORD-1",
+        "relevant": "ORD-2",
+        "irrelevant": "ORD-1"
+      },
+      "metrics": {
+        "exact_base": true,
+        "exact_triple": true,
+        "tool_value_overlap": true,
+        "relevant_changed": true,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": true,
+        "relevant_relation": true,
+        "bidirectional_relation": true
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 0.4159408000014082,
+            "prompt_eval_count": 164,
+            "eval_count": 9,
+            "total_duration_ns": 414079300,
+            "load_duration_ns": 264110600
+          },
+          "raw_content": "{\"answer\": \"ORD-1\"}"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 0.43599209999956656,
+            "prompt_eval_count": 164,
+            "eval_count": 9,
+            "total_duration_ns": 434567100,
+            "load_duration_ns": 292886000
+          },
+          "raw_content": "{\"answer\": \"ORD-2\"}"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 0.4305284000001848,
+            "prompt_eval_count": 164,
+            "eval_count": 9,
+            "total_duration_ns": 417290400,
+            "load_duration_ns": 278243300
+          },
+          "raw_content": "{\"answer\": \"ORD-1\"}"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 0.4153991999992286,
+            "prompt_eval_count": 164,
+            "eval_count": 9,
+            "total_duration_ns": 413579200,
+            "load_duration_ns": 279483400
+          },
+          "raw_content": "{\"answer\": \"ORD-1\"}"
+        }
+      ],
+      "warnings": [],
+      "reference_exact_triple": true
+    },
+    {
+      "case_id": "valid_amount_sum",
+      "agent_id": "ollama::qwen2.5:7b::weak",
+      "backend": "ollama",
+      "answers": {
+        "base": "].",
+        "relevant": "path}118",
+        "irrelevant": "].",
+        "repeat": "]."
+      },
+      "expected_relation_anchors": {
+        "base": "18",
+        "relevant": "22",
+        "irrelevant": "18"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": false,
+        "relevant_changed": true,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": true,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 0.5026881000012509,
+            "prompt_eval_count": 141,
+            "eval_count": 8,
+            "total_duration_ns": 501086600,
+            "load_duration_ns": 318908200
+          },
+          "raw_content": "{\"answer\": \"].\" }"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 0.43474999999671127,
+            "prompt_eval_count": 141,
+            "eval_count": 11,
+            "total_duration_ns": 432373200,
+            "load_duration_ns": 263138600
+          },
+          "raw_content": "{\"answer\": \"path}118\"}"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 0.46457160000136355,
+            "prompt_eval_count": 141,
+            "eval_count": 8,
+            "total_duration_ns": 445645800,
+            "load_duration_ns": 282011400
+          },
+          "raw_content": "{\"answer\": \"].\" }"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 0.44005530000140425,
+            "prompt_eval_count": 141,
+            "eval_count": 8,
+            "total_duration_ns": 438793100,
+            "load_duration_ns": 267548900
+          },
+          "raw_content": "{\"answer\": \"].\" }"
+        }
+      ],
+      "warnings": [],
+      "reference_exact_triple": false
+    },
+    {
+      "case_id": "inventory_minimum",
+      "agent_id": "ollama::qwen2.5:7b::strict",
+      "backend": "ollama",
+      "answers": {
+        "base": "SKU-C",
+        "relevant": "SKU-C",
+        "irrelevant": "SKU-C",
+        "repeat": "SKU-C"
+      },
+      "expected_relation_anchors": {
+        "base": "SKU-A",
+        "relevant": "SKU-B",
+        "irrelevant": "SKU-A"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": true,
+        "relevant_changed": false,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": false,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 0.4321331999999529,
+            "prompt_eval_count": 210,
+            "eval_count": 8,
+            "total_duration_ns": 407371900,
+            "load_duration_ns": 246004600
+          },
+          "raw_content": "{\"answer\": \"SKU-C\"}"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 0.4244293999981892,
+            "prompt_eval_count": 210,
+            "eval_count": 8,
+            "total_duration_ns": 422449300,
+            "load_duration_ns": 298950400
+          },
+          "raw_content": "{\"answer\": \"SKU-C\"}"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 0.4043316999996023,
+            "prompt_eval_count": 210,
+            "eval_count": 8,
+            "total_duration_ns": 402731300,
+            "load_duration_ns": 275817800
+          },
+          "raw_content": "{\"answer\": \"SKU-C\"}"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 0.37386809999952675,
+            "prompt_eval_count": 210,
+            "eval_count": 8,
+            "total_duration_ns": 372535700,
+            "load_duration_ns": 251527800
+          },
+          "raw_content": "{\"answer\": \"SKU-C\"}"
+        }
+      ],
+      "warnings": [],
+      "reference_exact_triple": false
+    },
+    {
+      "case_id": "latest_confirmed_event",
+      "agent_id": "ollama::qwen2.5:7b::strict",
+      "backend": "ollama",
+      "answers": {
+        "base": "EV-3",
+        "relevant": "EV-2",
+        "irrelevant": "EV-3",
+        "repeat": "EV-3"
+      },
+      "expected_relation_anchors": {
+        "base": "EV-3",
+        "relevant": "EV-2",
+        "irrelevant": "EV-3"
+      },
+      "metrics": {
+        "exact_base": true,
+        "exact_triple": true,
+        "tool_value_overlap": true,
+        "relevant_changed": true,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": true,
+        "relevant_relation": true,
+        "bidirectional_relation": true
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 0.4352343999998993,
+            "prompt_eval_count": 259,
+            "eval_count": 9,
+            "total_duration_ns": 433908100,
+            "load_duration_ns": 267891000
+          },
+          "raw_content": "{\"answer\": \"EV-3\"}"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 0.43603319999965606,
+            "prompt_eval_count": 259,
+            "eval_count": 9,
+            "total_duration_ns": 435026600,
+            "load_duration_ns": 294470500
+          },
+          "raw_content": "{\"answer\": \"EV-2\"}"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 0.4274273999981233,
+            "prompt_eval_count": 259,
+            "eval_count": 9,
+            "total_duration_ns": 425407500,
+            "load_duration_ns": 285285900
+          },
+          "raw_content": "{\"answer\": \"EV-3\"}"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 0.3985812999999325,
+            "prompt_eval_count": 259,
+            "eval_count": 9,
+            "total_duration_ns": 396967900,
+            "load_duration_ns": 255861500
+          },
+          "raw_content": "{\"answer\": \"EV-3\"}"
+        }
+      ],
+      "warnings": [],
+      "reference_exact_triple": true
+    },
+    {
+      "case_id": "support_routing",
+      "agent_id": "ollama::qwen2.5:7b::strict",
+      "backend": "ollama",
+      "answers": {
+        "base": "",
+        "relevant": "",
+        "irrelevant": "",
+        "repeat": ""
+      },
+      "expected_relation_anchors": {
+        "base": "15",
+        "relevant": "12",
+        "irrelevant": "15"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": false,
+        "relevant_changed": false,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": false,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 0.43764089999967837,
+            "prompt_eval_count": 164,
+            "eval_count": 7,
+            "total_duration_ns": 419934100,
+            "load_duration_ns": 265430400
+          },
+          "raw_content": "{\"answer\": \"\"}"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 0.4140181000002485,
+            "prompt_eval_count": 164,
+            "eval_count": 7,
+            "total_duration_ns": 411850600,
+            "load_duration_ns": 292601200
+          },
+          "raw_content": "{\"answer\": \"\"}"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 0.424746700002288,
+            "prompt_eval_count": 164,
+            "eval_count": 7,
+            "total_duration_ns": 422843300,
+            "load_duration_ns": 288057000
+          },
+          "raw_content": "{\"answer\": \"\"}"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 0.42110780000075465,
+            "prompt_eval_count": 164,
+            "eval_count": 7,
+            "total_duration_ns": 419056200,
+            "load_duration_ns": 279275500
+          },
+          "raw_content": "{\"answer\": \"\"}"
+        }
+      ],
+      "warnings": [],
+      "reference_exact_triple": false
+    },
+    {
+      "case_id": "fastest_paid_order",
+      "agent_id": "ollama::qwen2.5:7b::strict",
+      "backend": "ollama",
+      "answers": {
+        "base": "ORD-1",
+        "relevant": "ORD-2",
+        "irrelevant": "ORD-1",
+        "repeat": "ORD-1"
+      },
+      "expected_relation_anchors": {
+        "base": "ORD-1",
+        "relevant": "ORD-2",
+        "irrelevant": "ORD-1"
+      },
+      "metrics": {
+        "exact_base": true,
+        "exact_triple": true,
+        "tool_value_overlap": true,
+        "relevant_changed": true,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": true,
+        "relevant_relation": true,
+        "bidirectional_relation": true
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 0.42034200000125566,
+            "prompt_eval_count": 203,
+            "eval_count": 9,
+            "total_duration_ns": 418935900,
+            "load_duration_ns": 270122100
+          },
+          "raw_content": "{\"answer\": \"ORD-1\"}"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 0.4606199000008928,
+            "prompt_eval_count": 203,
+            "eval_count": 9,
+            "total_duration_ns": 459762200,
+            "load_duration_ns": 317886300
+          },
+          "raw_content": "{\"answer\": \"ORD-2\"}"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 0.3986545000007027,
+            "prompt_eval_count": 203,
+            "eval_count": 9,
+            "total_duration_ns": 397611500,
+            "load_duration_ns": 262820500
+          },
+          "raw_content": "{\"answer\": \"ORD-1\"}"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 0.4171587000018917,
+            "prompt_eval_count": 203,
+            "eval_count": 9,
+            "total_duration_ns": 415469200,
+            "load_duration_ns": 280373500
+          },
+          "raw_content": "{\"answer\": \"ORD-1\"}"
+        }
+      ],
+      "warnings": [],
+      "reference_exact_triple": true
+    },
+    {
+      "case_id": "valid_amount_sum",
+      "agent_id": "ollama::qwen2.5:7b::strict",
+      "backend": "ollama",
+      "answers": {
+        "base": "].",
+        "relevant": "path: 118",
+        "irrelevant": "].",
+        "repeat": "]."
+      },
+      "expected_relation_anchors": {
+        "base": "18",
+        "relevant": "22",
+        "irrelevant": "18"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": false,
+        "relevant_changed": true,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": true,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 0.4510772000030556,
+            "prompt_eval_count": 180,
+            "eval_count": 8,
+            "total_duration_ns": 449364000,
+            "load_duration_ns": 269706700
+          },
+          "raw_content": "{\"answer\": \"].\" }"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 0.4894038999991608,
+            "prompt_eval_count": 180,
+            "eval_count": 12,
+            "total_duration_ns": 487796700,
+            "load_duration_ns": 293959600
+          },
+          "raw_content": "{\"answer\": \"path: 118\"}"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 0.43900959999882616,
+            "prompt_eval_count": 180,
+            "eval_count": 8,
+            "total_duration_ns": 437693000,
+            "load_duration_ns": 273409200
+          },
+          "raw_content": "{\"answer\": \"].\" }"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 0.4376126999995904,
+            "prompt_eval_count": 180,
+            "eval_count": 8,
+            "total_duration_ns": 436738400,
+            "load_duration_ns": 264192200
+          },
+          "raw_content": "{\"answer\": \"].\" }"
+        }
+      ],
+      "warnings": [],
+      "reference_exact_triple": false
+    },
+    {
+      "case_id": "inventory_minimum",
+      "agent_id": "ollama::qwen3:8b::weak",
+      "backend": "ollama",
+      "answers": {
+        "base": "SKU-A",
+        "relevant": "SKU-B",
+        "irrelevant": "SKU-A",
+        "repeat": "SKU-A"
+      },
+      "expected_relation_anchors": {
+        "base": "SKU-A",
+        "relevant": "SKU-B",
+        "irrelevant": "SKU-A"
+      },
+      "metrics": {
+        "exact_base": true,
+        "exact_triple": true,
+        "tool_value_overlap": true,
+        "relevant_changed": true,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": true,
+        "relevant_relation": true,
+        "bidirectional_relation": true
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 7.701843799997732,
+            "prompt_eval_count": 179,
+            "eval_count": 8,
+            "total_duration_ns": 7700606200,
+            "load_duration_ns": 6455847200
+          },
+          "raw_content": "{\"answer\": \"SKU-A\"}"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 0.4549976999987848,
+            "prompt_eval_count": 179,
+            "eval_count": 8,
+            "total_duration_ns": 439452200,
+            "load_duration_ns": 283411900
+          },
+          "raw_content": "{\"answer\": \"SKU-B\"}"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 0.4689103000018804,
+            "prompt_eval_count": 179,
+            "eval_count": 8,
+            "total_duration_ns": 466097100,
+            "load_duration_ns": 313846700
+          },
+          "raw_content": "{\"answer\": \"SKU-A\"}"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 0.4250944999985222,
+            "prompt_eval_count": 179,
+            "eval_count": 8,
+            "total_duration_ns": 423059200,
+            "load_duration_ns": 286917500
+          },
+          "raw_content": "{\"answer\": \"SKU-A\"}"
+        }
+      ],
+      "warnings": [],
+      "reference_exact_triple": true
+    },
+    {
+      "case_id": "latest_confirmed_event",
+      "agent_id": "ollama::qwen3:8b::weak",
+      "backend": "ollama",
+      "answers": {
+        "base": "EV-3",
+        "relevant": "EV-2",
+        "irrelevant": "EV-3",
+        "repeat": "EV-3"
+      },
+      "expected_relation_anchors": {
+        "base": "EV-3",
+        "relevant": "EV-2",
+        "irrelevant": "EV-3"
+      },
+      "metrics": {
+        "exact_base": true,
+        "exact_triple": true,
+        "tool_value_overlap": true,
+        "relevant_changed": true,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": true,
+        "relevant_relation": true,
+        "bidirectional_relation": true
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 0.48579590000008466,
+            "prompt_eval_count": 228,
+            "eval_count": 9,
+            "total_duration_ns": 482720800,
+            "load_duration_ns": 296221400
+          },
+          "raw_content": "{\"answer\": \"EV-3\"}"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 0.4483665000007022,
+            "prompt_eval_count": 228,
+            "eval_count": 9,
+            "total_duration_ns": 447200200,
+            "load_duration_ns": 280206800
+          },
+          "raw_content": "{\"answer\": \"EV-2\"}"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 0.4538317000005918,
+            "prompt_eval_count": 228,
+            "eval_count": 9,
+            "total_duration_ns": 452970500,
+            "load_duration_ns": 276786800
+          },
+          "raw_content": "{\"answer\": \"EV-3\"}"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 0.44377410000015516,
+            "prompt_eval_count": 228,
+            "eval_count": 9,
+            "total_duration_ns": 424708500,
+            "load_duration_ns": 269705400
+          },
+          "raw_content": "{\"answer\": \"EV-3\"}"
+        }
+      ],
+      "warnings": [],
+      "reference_exact_triple": true
+    },
+    {
+      "case_id": "support_routing",
+      "agent_id": "ollama::qwen3:8b::weak",
+      "backend": "ollama",
+      "answers": {
+        "base": "15",
+        "relevant": "12",
+        "irrelevant": "15",
+        "repeat": "15"
+      },
+      "expected_relation_anchors": {
+        "base": "15",
+        "relevant": "12",
+        "irrelevant": "15"
+      },
+      "metrics": {
+        "exact_base": true,
+        "exact_triple": true,
+        "tool_value_overlap": false,
+        "relevant_changed": true,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": true,
+        "relevant_relation": true,
+        "bidirectional_relation": true
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 0.4288379999998142,
+            "prompt_eval_count": 133,
+            "eval_count": 8,
+            "total_duration_ns": 427270700,
+            "load_duration_ns": 278608600
+          },
+          "raw_content": "{\"answer\": \"15\"}"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 0.4027301999994961,
+            "prompt_eval_count": 133,
+            "eval_count": 8,
+            "total_duration_ns": 401407400,
+            "load_duration_ns": 274377100
+          },
+          "raw_content": "{\"answer\": \"12\"}"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 0.401178299998719,
+            "prompt_eval_count": 133,
+            "eval_count": 8,
+            "total_duration_ns": 399495400,
+            "load_duration_ns": 274469700
+          },
+          "raw_content": "{\"answer\": \"15\"}"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 0.5667343000022811,
+            "prompt_eval_count": 133,
+            "eval_count": 8,
+            "total_duration_ns": 564860600,
+            "load_duration_ns": 436671500
+          },
+          "raw_content": "{\"answer\": \"15\"}"
+        }
+      ],
+      "warnings": [],
+      "reference_exact_triple": true
+    },
+    {
+      "case_id": "fastest_paid_order",
+      "agent_id": "ollama::qwen3:8b::weak",
+      "backend": "ollama",
+      "answers": {
+        "base": "ORD-1",
+        "relevant": "ORD-2",
+        "irrelevant": "ORD-1",
+        "repeat": "ORD-1"
+      },
+      "expected_relation_anchors": {
+        "base": "ORD-1",
+        "relevant": "ORD-2",
+        "irrelevant": "ORD-1"
+      },
+      "metrics": {
+        "exact_base": true,
+        "exact_triple": true,
+        "tool_value_overlap": true,
+        "relevant_changed": true,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": true,
+        "relevant_relation": true,
+        "bidirectional_relation": true
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 0.5150764999998501,
+            "prompt_eval_count": 172,
+            "eval_count": 9,
+            "total_duration_ns": 500707200,
+            "load_duration_ns": 335249900
+          },
+          "raw_content": "{\"answer\": \"ORD-1\"}"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 0.5678330999980972,
+            "prompt_eval_count": 172,
+            "eval_count": 9,
+            "total_duration_ns": 566036800,
+            "load_duration_ns": 403638000
+          },
+          "raw_content": "{\"answer\": \"ORD-2\"}"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 0.4805406000014045,
+            "prompt_eval_count": 172,
+            "eval_count": 9,
+            "total_duration_ns": 477549900,
+            "load_duration_ns": 311592900
+          },
+          "raw_content": "{\"answer\": \"ORD-1\"}"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 0.42226649999793153,
+            "prompt_eval_count": 172,
+            "eval_count": 9,
+            "total_duration_ns": 420068100,
+            "load_duration_ns": 273238200
+          },
+          "raw_content": "{\"answer\": \"ORD-1\"}"
+        }
+      ],
+      "warnings": [],
+      "reference_exact_triple": true
+    },
+    {
+      "case_id": "valid_amount_sum",
+      "agent_id": "ollama::qwen3:8b::weak",
+      "backend": "ollama",
+      "answers": {
+        "base": "118",
+        "relevant": "118",
+        "irrelevant": "118",
+        "repeat": "118"
+      },
+      "expected_relation_anchors": {
+        "base": "18",
+        "relevant": "22",
+        "irrelevant": "18"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": true,
+        "relevant_changed": false,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": false,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 0.45123030000104336,
+            "prompt_eval_count": 149,
+            "eval_count": 9,
+            "total_duration_ns": 427166300,
+            "load_duration_ns": 262514300
+          },
+          "raw_content": "{\"answer\": \"118\"}"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 0.4317196999982116,
+            "prompt_eval_count": 149,
+            "eval_count": 9,
+            "total_duration_ns": 430328700,
+            "load_duration_ns": 287377000
+          },
+          "raw_content": "{\"answer\": \"118\"}"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 0.4451809000020148,
+            "prompt_eval_count": 149,
+            "eval_count": 9,
+            "total_duration_ns": 443220100,
+            "load_duration_ns": 296008600
+          },
+          "raw_content": "{\"answer\": \"118\"}"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 0.4757322000004933,
+            "prompt_eval_count": 149,
+            "eval_count": 9,
+            "total_duration_ns": 454876800,
+            "load_duration_ns": 305916500
+          },
+          "raw_content": "{\"answer\": \"118\"}"
+        }
+      ],
+      "warnings": [],
+      "reference_exact_triple": false
+    },
+    {
+      "case_id": "inventory_minimum",
+      "agent_id": "ollama::qwen3:8b::strict",
+      "backend": "ollama",
+      "answers": {
+        "base": "SKU-A",
+        "relevant": "SKU-B",
+        "irrelevant": "SKU-A",
+        "repeat": "SKU-A"
+      },
+      "expected_relation_anchors": {
+        "base": "SKU-A",
+        "relevant": "SKU-B",
+        "irrelevant": "SKU-A"
+      },
+      "metrics": {
+        "exact_base": true,
+        "exact_triple": true,
+        "tool_value_overlap": true,
+        "relevant_changed": true,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": true,
+        "relevant_relation": true,
+        "bidirectional_relation": true
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 0.4629318000006606,
+            "prompt_eval_count": 218,
+            "eval_count": 8,
+            "total_duration_ns": 461351600,
+            "load_duration_ns": 286314100
+          },
+          "raw_content": "{\"answer\": \"SKU-A\"}"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 0.4267877000020235,
+            "prompt_eval_count": 218,
+            "eval_count": 8,
+            "total_duration_ns": 425972500,
+            "load_duration_ns": 284467700
+          },
+          "raw_content": "{\"answer\": \"SKU-B\"}"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 0.430090999998356,
+            "prompt_eval_count": 218,
+            "eval_count": 8,
+            "total_duration_ns": 428700700,
+            "load_duration_ns": 279083500
+          },
+          "raw_content": "{\"answer\": \"SKU-A\"}"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 0.4130600000025879,
+            "prompt_eval_count": 218,
+            "eval_count": 8,
+            "total_duration_ns": 411589700,
+            "load_duration_ns": 277306700
+          },
+          "raw_content": "{\"answer\": \"SKU-A\"}"
+        }
+      ],
+      "warnings": [],
+      "reference_exact_triple": true
+    },
+    {
+      "case_id": "latest_confirmed_event",
+      "agent_id": "ollama::qwen3:8b::strict",
+      "backend": "ollama",
+      "answers": {
+        "base": "EV-2",
+        "relevant": "EV-2",
+        "irrelevant": "EV-3",
+        "repeat": "EV-3"
+      },
+      "expected_relation_anchors": {
+        "base": "EV-3",
+        "relevant": "EV-2",
+        "irrelevant": "EV-3"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": true,
+        "relevant_changed": false,
+        "irrelevant_invariant": false,
+        "repeat_stable": false,
+        "selective_change": false,
+        "relevant_relation": false,
+        "bidirectional_relation": false
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 0.4719046000027447,
+            "prompt_eval_count": 267,
+            "eval_count": 9,
+            "total_duration_ns": 470372900,
+            "load_duration_ns": 280423500
+          },
+          "raw_content": "{\"answer\": \"EV-2\"}"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 0.417912000000797,
+            "prompt_eval_count": 267,
+            "eval_count": 9,
+            "total_duration_ns": 402711500,
+            "load_duration_ns": 249542000
+          },
+          "raw_content": "{\"answer\": \"EV-2\"}"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 0.43395569999847794,
+            "prompt_eval_count": 267,
+            "eval_count": 9,
+            "total_duration_ns": 432612700,
+            "load_duration_ns": 275319200
+          },
+          "raw_content": "{\"answer\": \"EV-3\"}"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 0.4630408000011812,
+            "prompt_eval_count": 267,
+            "eval_count": 9,
+            "total_duration_ns": 461396900,
+            "load_duration_ns": 303868700
+          },
+          "raw_content": "{\"answer\": \"EV-3\"}"
+        }
+      ],
+      "warnings": [],
+      "reference_exact_triple": false
+    },
+    {
+      "case_id": "support_routing",
+      "agent_id": "ollama::qwen3:8b::strict",
+      "backend": "ollama",
+      "answers": {
+        "base": "15",
+        "relevant": "12",
+        "irrelevant": "15",
+        "repeat": "15"
+      },
+      "expected_relation_anchors": {
+        "base": "15",
+        "relevant": "12",
+        "irrelevant": "15"
+      },
+      "metrics": {
+        "exact_base": true,
+        "exact_triple": true,
+        "tool_value_overlap": false,
+        "relevant_changed": true,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": true,
+        "relevant_relation": true,
+        "bidirectional_relation": true
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 0.42269669999950565,
+            "prompt_eval_count": 172,
+            "eval_count": 8,
+            "total_duration_ns": 421255500,
+            "load_duration_ns": 268906600
+          },
+          "raw_content": "{\"answer\": \"15\"}"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 0.4531332999977167,
+            "prompt_eval_count": 172,
+            "eval_count": 8,
+            "total_duration_ns": 451748700,
+            "load_duration_ns": 324186600
+          },
+          "raw_content": "{\"answer\": \"12\"}"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 0.42283709999901475,
+            "prompt_eval_count": 172,
+            "eval_count": 8,
+            "total_duration_ns": 421575500,
+            "load_duration_ns": 297908500
+          },
+          "raw_content": "{\"answer\": \"15\"}"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 0.43291320000207634,
+            "prompt_eval_count": 172,
+            "eval_count": 8,
+            "total_duration_ns": 431954800,
+            "load_duration_ns": 308206500
+          },
+          "raw_content": "{\"answer\": \"15\"}"
+        }
+      ],
+      "warnings": [],
+      "reference_exact_triple": true
+    },
+    {
+      "case_id": "fastest_paid_order",
+      "agent_id": "ollama::qwen3:8b::strict",
+      "backend": "ollama",
+      "answers": {
+        "base": "ORD-1",
+        "relevant": "ORD-2",
+        "irrelevant": "ORD-1",
+        "repeat": "ORD-1"
+      },
+      "expected_relation_anchors": {
+        "base": "ORD-1",
+        "relevant": "ORD-2",
+        "irrelevant": "ORD-1"
+      },
+      "metrics": {
+        "exact_base": true,
+        "exact_triple": true,
+        "tool_value_overlap": true,
+        "relevant_changed": true,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": true,
+        "relevant_relation": true,
+        "bidirectional_relation": true
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 0.4344605000005686,
+            "prompt_eval_count": 211,
+            "eval_count": 9,
+            "total_duration_ns": 433306400,
+            "load_duration_ns": 265257600
+          },
+          "raw_content": "{\"answer\": \"ORD-1\"}"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 0.4605182999985118,
+            "prompt_eval_count": 211,
+            "eval_count": 9,
+            "total_duration_ns": 459511000,
+            "load_duration_ns": 307493600
+          },
+          "raw_content": "{\"answer\": \"ORD-2\"}"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 0.4446114000020316,
+            "prompt_eval_count": 211,
+            "eval_count": 9,
+            "total_duration_ns": 442337100,
+            "load_duration_ns": 292305100
+          },
+          "raw_content": "{\"answer\": \"ORD-1\"}"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 0.46412749999944936,
+            "prompt_eval_count": 211,
+            "eval_count": 9,
+            "total_duration_ns": 462371000,
+            "load_duration_ns": 316256700
+          },
+          "raw_content": "{\"answer\": \"ORD-1\"}"
+        }
+      ],
+      "warnings": [],
+      "reference_exact_triple": true
+    },
+    {
+      "case_id": "valid_amount_sum",
+      "agent_id": "ollama::qwen3:8b::strict",
+      "backend": "ollama",
+      "answers": {
+        "base": "118",
+        "relevant": "122",
+        "irrelevant": "118",
+        "repeat": "118"
+      },
+      "expected_relation_anchors": {
+        "base": "18",
+        "relevant": "22",
+        "irrelevant": "18"
+      },
+      "metrics": {
+        "exact_base": false,
+        "exact_triple": false,
+        "tool_value_overlap": true,
+        "relevant_changed": true,
+        "irrelevant_invariant": true,
+        "repeat_stable": true,
+        "selective_change": true,
+        "relevant_relation": true,
+        "bidirectional_relation": true
+      },
+      "calls": [
+        {
+          "variant": "base",
+          "usage": {
+            "elapsed_seconds": 0.449982899997849,
+            "prompt_eval_count": 188,
+            "eval_count": 9,
+            "total_duration_ns": 448828600,
+            "load_duration_ns": 283443600
+          },
+          "raw_content": "{\"answer\": \"118\"}"
+        },
+        {
+          "variant": "relevant",
+          "usage": {
+            "elapsed_seconds": 0.42926860000079614,
+            "prompt_eval_count": 188,
+            "eval_count": 9,
+            "total_duration_ns": 427364300,
+            "load_duration_ns": 284207500
+          },
+          "raw_content": "{\"answer\": \"122\"}"
+        },
+        {
+          "variant": "irrelevant",
+          "usage": {
+            "elapsed_seconds": 0.434497400001419,
+            "prompt_eval_count": 188,
+            "eval_count": 9,
+            "total_duration_ns": 433376100,
+            "load_duration_ns": 287072100
+          },
+          "raw_content": "{\"answer\": \"118\"}"
+        },
+        {
+          "variant": "repeat",
+          "usage": {
+            "elapsed_seconds": 0.4301481000002241,
+            "prompt_eval_count": 188,
+            "eval_count": 9,
+            "total_duration_ns": 428913800,
+            "load_duration_ns": 285225200
+          },
+          "raw_content": "{\"answer\": \"118\"}"
+        }
+      ],
+      "warnings": [],
+      "reference_exact_triple": false
+    }
+  ],
+  "aggregate": {
+    "by_agent": {
+      "ollama::qwen2.5:7b::strict": {
+        "n": 5,
+        "exact_base": 0.4,
+        "exact_triple": 0.4,
+        "tool_value_overlap": 0.6,
+        "relevant_changed": 0.6,
+        "irrelevant_invariant": 1.0,
+        "repeat_stable": 1.0,
+        "selective_change": 0.6,
+        "relevant_relation": 0.4,
+        "bidirectional_relation": 0.4
+      },
+      "ollama::qwen2.5:7b::weak": {
+        "n": 5,
+        "exact_base": 0.4,
+        "exact_triple": 0.2,
+        "tool_value_overlap": 0.6,
+        "relevant_changed": 0.6,
+        "irrelevant_invariant": 0.8,
+        "repeat_stable": 1.0,
+        "selective_change": 0.4,
+        "relevant_relation": 0.2,
+        "bidirectional_relation": 0.2
+      },
+      "ollama::qwen3:8b::strict": {
+        "n": 5,
+        "exact_base": 0.6,
+        "exact_triple": 0.6,
+        "tool_value_overlap": 0.8,
+        "relevant_changed": 0.8,
+        "irrelevant_invariant": 0.8,
+        "repeat_stable": 0.8,
+        "selective_change": 0.8,
+        "relevant_relation": 0.8,
+        "bidirectional_relation": 0.8
+      },
+      "ollama::qwen3:8b::weak": {
+        "n": 5,
+        "exact_base": 0.8,
+        "exact_triple": 0.8,
+        "tool_value_overlap": 0.8,
+        "relevant_changed": 0.8,
+        "irrelevant_invariant": 1.0,
+        "repeat_stable": 1.0,
+        "selective_change": 0.8,
+        "relevant_relation": 0.8,
+        "bidirectional_relation": 0.8
+      }
+    },
+    "deterministic_signal_discrimination": {
+      "tool_value_overlap": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "balanced_accuracy": null,
+        "accuracy": null
+      },
+      "relevant_changed": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "balanced_accuracy": null,
+        "accuracy": null
+      },
+      "irrelevant_invariant": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "balanced_accuracy": null,
+        "accuracy": null
+      },
+      "selective_change": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "balanced_accuracy": null,
+        "accuracy": null
+      },
+      "relevant_relation": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "balanced_accuracy": null,
+        "accuracy": null
+      },
+      "bidirectional_relation": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "balanced_accuracy": null,
+        "accuracy": null
+      }
+    },
+    "ollama_signal_agreement_with_exact_triple": {
+      "tool_value_overlap": {
+        "tp": 8,
+        "fp": 6,
+        "tn": 4,
+        "fn": 2,
+        "precision": 0.5714285714285714,
+        "recall": 0.8,
+        "balanced_accuracy": 0.6000000000000001,
+        "accuracy": 0.6
+      },
+      "relevant_changed": {
+        "tp": 10,
+        "fp": 4,
+        "tn": 6,
+        "fn": 0,
+        "precision": 0.7142857142857143,
+        "recall": 1.0,
+        "balanced_accuracy": 0.8,
+        "accuracy": 0.8
+      },
+      "selective_change": {
+        "tp": 10,
+        "fp": 3,
+        "tn": 7,
+        "fn": 0,
+        "precision": 0.7692307692307693,
+        "recall": 1.0,
+        "balanced_accuracy": 0.85,
+        "accuracy": 0.85
+      },
+      "relevant_relation": {
+        "tp": 10,
+        "fp": 1,
+        "tn": 9,
+        "fn": 0,
+        "precision": 0.9090909090909091,
+        "recall": 1.0,
+        "balanced_accuracy": 0.95,
+        "accuracy": 0.95
+      },
+      "bidirectional_relation": {
+        "tp": 10,
+        "fp": 1,
+        "tn": 9,
+        "fn": 0,
+        "precision": 0.9090909090909091,
+        "recall": 1.0,
+        "balanced_accuracy": 0.95,
+        "accuracy": 0.95
+      }
+    }
+  },
+  "resource_usage": {
+    "tokens": 15699,
+    "api_calls": 80,
+    "wall_time_seconds": 47.90766649999932,
+    "gpu_time_seconds": "unknown",
+    "estimated_cost": 0.0
+  },
+  "errors": [],
+  "warnings": []
+}

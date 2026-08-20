@@ -1,0 +1,46 @@
+{
+  "hypothesis_id": "h-v002-001",
+  "title": "公开接口驱动的写前—写后状态转移编译",
+  "parent_ids": [],
+  "lineage_note": "由 v001 的单次事后实体见证被实验淘汰后转向；把验证对象改为真实写调用前后的外部状态差分。",
+  "problem": "单次事后读取常只能证明目标实体原本存在，无法证明当前写调用产生了预期效果。",
+  "target_failure": {
+    "summary": "结构合法的写调用响应掩盖静默空操作、部分写入或错误状态转移。",
+    "card_ids": [
+      "failure-confident-completion-without-state-success",
+      "failure-incomplete-tool-contracts-false-verified-state"
+    ],
+    "evidence_ids": []
+  },
+  "changed_computation": {
+    "baseline": "单响应契约检查、固定事后读回或手写后置条件。",
+    "intervention": "从公开接口描述及实例化请求/响应句柄自动选择写前与写后读取，并比较 create/delete/update/membership/move/cursor 状态转移。",
+    "information_available": "任务、公开工具规范、真实请求与响应、同凭据可调用的只读工具；不使用服务源码、历史训练轨迹、隐藏状态、评价程序或人工后置条件。",
+    "timing": "在真实写调用前获取必要基线，调用后立刻读取外部可见状态。",
+    "budget_effect": "增加少量只读调用；与同调用数固定读回、随机读回和手写模板基线配平。"
+  },
+  "mechanism_claim": "跨调用前后态差分能把身份存在性伪见证升级为真实效果见证，并在相同读预算下提高静默错误辨别率。",
+  "falsifier": "核心计算已被现有黑盒 REST 行为探索或自动元变测试覆盖，或剩余差异只有在线封装与模板扩张。",
+  "minimal_killer_experiment": "先做最近先行组件审计；若通用前后态差分与句柄绑定已存在，则不实施。",
+  "nearest_prior_risk": "Karlsson 等的黑盒 REST 行为探索、ARMeta、RESTler、MASTOR 与 Verified Tool Calls 可分别吸收前后差分、自动关系、句柄传播和在线三值包装。",
+  "alternative_explanations": [
+    "收益仅来自额外读取",
+    "在线位置改变不构成新计算",
+    "状态转移模板只是已有元变关系的扩表"
+  ],
+  "descriptors": {
+    "problem_family": "silent_semantic_write_failure",
+    "computation_stage": "pre_post_external_state_verification",
+    "intervention_family": "automatic_state_transition_compilation",
+    "information_source": "public_tool_docs_request_response_same_credential",
+    "timing_class": "around_effectful_call",
+    "budget_class": "matched_small_read_budget",
+    "evaluation_mode": "paired_fault_terminal_state"
+  },
+  "literature_refs": [
+    "Karlsson et al., Software Quality Journal 2024",
+    "arXiv:2605.28321",
+    "arXiv:2606.10465",
+    "arXiv:2608.02645"
+  ]
+}

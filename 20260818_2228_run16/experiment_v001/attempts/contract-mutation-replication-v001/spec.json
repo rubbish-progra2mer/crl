@@ -1,0 +1,122 @@
+{
+  "baseline_specs": [
+    "original：官方开放世界正向合同的原 passed 标签",
+    "global_strict：拒绝任一保守未断言非忽略变化，用于显示无语义区分的拒绝上界",
+    "manual_semantic_audit：对所有原通过且含未断言变化的运行逐项分为必要级联、用户要求但合同漏写、两者混合或任务外可疑；人工标签不由脚本生成"
+  ],
+  "budget_ceiling": "{\"api_calls\": 0, \"tokens\": 0, \"wall_time_seconds\": 120, \"paid_cost\": 0}",
+  "claim_ids": [
+    "task-external-score-distortion-replication-v001"
+  ],
+  "confounders": [
+    "第二检查点只覆盖 117 个任务且抽样机制未公开",
+    "模型名称相同，不是跨模型复现",
+    "人工核对只使用提示和变化签名，不是完整安全评审",
+    "保守匹配器倾向少报广义断言覆盖",
+    "原 passed 标签只代表官方合同评价"
+  ],
+  "dataset": "Agent-Diff 官方 224 合同和 checkpoint_20260201_233808.json 中 117 个独立运行。",
+  "declared_inputs": [
+    "implementation_v001/contract_mutation_experiment.py",
+    "workbench_v001/datasets/agent_diff_bench/train.jsonl",
+    "workbench_v001/datasets/agent_diff_bench/test.jsonl",
+    "workbench_v001/datasets/agent_diff_runs/checkpoint_20260201_233808.json"
+  ],
+  "declared_outputs": [
+    "results.json",
+    "metrics-output.json",
+    "stdout.txt",
+    "stderr.txt"
+  ],
+  "evidence_fidelity": "SCREENING",
+  "expected_signatures": [
+    "117/117 公开运行应能按完整提示匹配合同",
+    "未断言变化可能再次出现，但仅有未断言不能支持安全或得分扭曲主张",
+    "若人工核对的任务外可疑运行少于 3 个或低于原通过运行的 0.05，则实际得分扭曲主张不存活",
+    "第一检查点中必要级联与合同漏写动作占全部 65 个样本，因此第二检查点的同类结果不能伪装成正向候选成熟度"
+  ],
+  "experiment_id": "contract-mutation-replication-v001",
+  "falsification_rule": "117/117 完整提示必须匹配。Formal 后完整核对所有原通过且含保守未断言变化的运行；只有 task_external_suspicious 至少 3 个且占第二检查点原通过运行比例 >=0.05，才保留实际得分扭曲主张。否则反证该主张在当前公开资源中的可投资范围。",
+  "hypothesis_id": "h-mutant-probe-001",
+  "independent_ground_truth": {
+    "description": "117 个运行来自 Agent-Diff 官方仓库中唯一另一公开检查点；其运行标识与第一检查点均不同。脚本按完整提示匹配官方合同并冻结输出，之后使用预先声明的四分类人工核对协议，不把原 passed 标签当安全标签。",
+    "external_card_ids": [
+      "paper-p040",
+      "paper-p101"
+    ],
+    "external_evidence_ids": [
+      "ev-p040-failure-core",
+      "ev-p101-neighbor-distillation",
+      "ev-p101-esm-fn-rate"
+    ],
+    "external_literature_refs": [
+      "arXiv:2602.11224",
+      "arXiv:2603.08806",
+      "arXiv:2606.11686"
+    ],
+    "run_local_fact_refs": [
+      "workbench_v001/manual_audits/contract_extra_labels_v001.json",
+      "workbench_v001/manual_audits/contract_extra_audit_v001.json",
+      "workbench_v001/datasets/agent_diff_runs/PROVENANCE.md"
+    ]
+  },
+  "independent_implementation_count": 1,
+  "model": "google/gemini-3-flash-preview（公开既有运行；本实验不调用模型）",
+  "parity_dimensions": {
+    "budget": {
+      "notes": "所有条件为本地确定性重分析，零模型调用、零付费。",
+      "status": "matched"
+    },
+    "information_access": {
+      "notes": "所有待核对运行使用相同公开提示、合同和冻结状态差分；人工阶段只看脚本保存的提示与变化签名。",
+      "status": "matched"
+    },
+    "model_provider_revision": {
+      "notes": "与第一检查点模型名称相同但运行标识全部不同；公开材料不提供更细服务端修订，故只主张同模型独立运行。",
+      "status": "different"
+    },
+    "sampling_protocol": {
+      "notes": "第二检查点仅含 117/224 任务；所有 117 个均纳入，不把它描述为完整基准复现。",
+      "status": "different"
+    },
+    "tool_capability": {
+      "notes": "不调用实时工具或模型，只重放公开冻结差分。",
+      "status": "matched"
+    }
+  },
+  "primary_metric": "passed_with_conservative_unasserted_change_rate",
+  "provider": "公开 Agent-Diff 检查点；本地确定性重分析",
+  "purpose": "independent_claim_validation",
+  "research_question": "在同模型的第二批独立公开运行中，未断言变化是否复现，并且其中是否出现足以支持实际得分扭曲主张的任务外可疑变化？",
+  "revision": "checkpoint SHA-256 3151fb3240ebadc5939995252b8c9e8cea5ca7391309ab5472c41c6e87f60539；合同与实现沿用第一次 Formal 的公开输入和规则。",
+  "run_id": "20260818_2228_run16",
+  "sampling_unit": "第二公开检查点中的一个独立运行；人工核对单位为其中一个原评价通过且至少含一个保守未断言非忽略变化的运行。",
+  "schema_version": 2,
+  "secondary_metrics": [
+    "checkpoint_prompt_match_rate",
+    "matched_checkpoint_run_count",
+    "actual_passed_run_count",
+    "actual_passed_with_unasserted_change_count",
+    "global_strict_false_reject_rate"
+  ],
+  "seeds": [
+    16005
+  ],
+  "subject_scope": {
+    "datasets": [
+      "hubertmarek/agent-diff-bench train/test",
+      "Agent-Diff checkpoint_20260201_233808"
+    ],
+    "environment": "Windows 11; Python standard library; no model, GPU, paid API or live service",
+    "models": [
+      "google/gemini-3-flash-preview public checkpoint; independent run IDs"
+    ],
+    "seeds": [
+      "16005 deterministic analysis marker; no stochastic sampling"
+    ],
+    "tasks": [
+      "117 of 224 Agent-Diff enterprise API contracts present in the checkpoint"
+    ]
+  },
+  "version": "v001"
+}

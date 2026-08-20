@@ -1,0 +1,237 @@
+{
+  "artifact_class": "scratch_identifiability_killer_probe",
+  "created_at_utc": "2026-08-13T11:15:38.890157+00:00",
+  "hypothesis_id": "h-v009-001",
+  "pre_registered_decision_rule": "A hard two-root stopping certificate is sound only when every provenance partition consistent with visible constraints contains at least two roots.",
+  "observable_payload": {
+    "claim": "Company N won the 2025 contract.",
+    "documents": [
+      {
+        "url": "https://source-a.example/report",
+        "published": "2025-04-03",
+        "text": "Company N won the 2025 contract."
+      },
+      {
+        "url": "https://source-b.example/story",
+        "published": "2025-04-04",
+        "text": "The 2025 contract was awarded to Company N."
+      }
+    ],
+    "explicit_citation_edges": []
+  },
+  "observationally_indistinguishable_worlds": [
+    {
+      "world_id": "hidden-copy-world",
+      "observable_payload_sharessame": true,
+      "latent_root_partition": [
+        0,
+        0
+      ],
+      "true_root_resilience": 1,
+      "stop_if_resilience_gt_1": false
+    },
+    {
+      "world_id": "hidden-independent-world",
+      "observable_payload_sharessame": true,
+      "latent_root_partition": [
+        0,
+        1
+      ],
+      "true_root_resilience": 2,
+      "stop_if_resilience_gt_1": true
+    }
+  ],
+  "constraint_cases": [
+    {
+      "case_id": "two-docs-no-provenance",
+      "document_count": 2,
+      "must_link": [],
+      "must_separate": [],
+      "feasible_root_counts": [
+        1,
+        2
+      ],
+      "lower_root_bound": 1,
+      "upper_root_bound": 2,
+      "safe_to_claim_two_independent_roots": false
+    },
+    {
+      "case_id": "eight-docs-no-provenance",
+      "document_count": 8,
+      "must_link": [],
+      "must_separate": [],
+      "feasible_root_counts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "lower_root_bound": 1,
+      "upper_root_bound": 8,
+      "safe_to_claim_two_independent_roots": false
+    },
+    {
+      "case_id": "eight-docs-explicit-same-root",
+      "document_count": 8,
+      "must_link": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          7
+        ]
+      ],
+      "must_separate": [],
+      "feasible_root_counts": [
+        1
+      ],
+      "lower_root_bound": 1,
+      "upper_root_bound": 1,
+      "safe_to_claim_two_independent_roots": false
+    },
+    {
+      "case_id": "eight-docs-one-proven-independent-pair",
+      "document_count": 8,
+      "must_link": [],
+      "must_separate": [
+        [
+          0,
+          1
+        ]
+      ],
+      "feasible_root_counts": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "lower_root_bound": 2,
+      "upper_root_bound": 8,
+      "safe_to_claim_two_independent_roots": true
+    },
+    {
+      "case_id": "eight-docs-independent-chain-only",
+      "document_count": 8,
+      "must_link": [],
+      "must_separate": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          7
+        ]
+      ],
+      "feasible_root_counts": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "lower_root_bound": 2,
+      "upper_root_bound": 8,
+      "safe_to_claim_two_independent_roots": true
+    },
+    {
+      "case_id": "eight-docs-four-way-independent-clique",
+      "document_count": 8,
+      "must_link": [],
+      "must_separate": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "feasible_root_counts": [
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "lower_root_bound": 4,
+      "upper_root_bound": 8,
+      "safe_to_claim_two_independent_roots": true
+    }
+  ],
+  "derived_findings": {
+    "non_identifiability_witness": "The same observable payload admits a one-root copy world and a two-root independent world, but rho>1 differs between them.",
+    "no_constraint_lower_bound": 1,
+    "chain_is_not_four_independent_roots": 2,
+    "four_way_clique_lower_bound": 4
+  },
+  "interpretation_boundary": "This probe is combinatorial, not an end-to-end LLM result. It falsifies a distribution-free hard certificate from ordinary visible documents. It does not rule out probabilistic source-dependence estimation under explicit assumptions."
+}

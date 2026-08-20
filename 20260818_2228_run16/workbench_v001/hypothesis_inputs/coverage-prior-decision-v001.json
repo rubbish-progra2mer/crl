@@ -1,0 +1,30 @@
+{
+  "evidence_fidelity": "SCREENING",
+  "kill_target": "PAPER_DIRECTION",
+  "subject_scope": {
+    "models": [
+      "Qwen3-8B",
+      "Qwen2.5-7B",
+      "not-applicable-literature-structure"
+    ],
+    "tasks": [
+      "coverage-sensitive-negative-tool-reasoning"
+    ],
+    "datasets": [
+      "24-synthetic-coverage-scenarios",
+      "SGR-Bench-constraint-11-parsed-tasks",
+      "recent-primary-papers"
+    ],
+    "seeds": [
+      "16001",
+      "16002"
+    ],
+    "environment": "Run16 两项成功 Formal Screening 与结构化最近先行全文审计"
+  },
+  "independent_implementation_count": 2,
+  "structural_refutation": true,
+  "structural_refutation_reason": "CROWN-QA 已实现查询相对覆盖的完整性敏感负向推理形式化、配对基准、真实文档对照、结构化 certificate 与固定映射；ToolGate 已实现合约式运行时结果提交门。当前 gate 是把前者语义放入后者机制的直接系统组合，尚无独立计算核心；现有实现又依赖手写场景/分页适配器，未证明工具原生见证自动生成。",
+  "killed": "把完整性敏感负向推理作为新问题、形式化、评价或现象的主张，以及把作用域覆盖见证加负命题准入门作为足以独立成论文的方法方向。",
+  "survives": "两项本地实验作为可复现工程现象和负结果仍有效：一般提示/后置条件在所测设置下未吸收确定性门控收益；它们可为未来完全不同的工具可靠性候选提供边界证据，但不再代表可投资候选。",
+  "why": "新先行碰撞发生在问题、标签语义、配对干预、真实文档评价、结构化证书和模型外固定决策层；剩余仅是已有组件组合与手写适配，扩大同类实验不能恢复足够的贡献差分。"
+}

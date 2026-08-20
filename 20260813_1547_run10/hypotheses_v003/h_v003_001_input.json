@@ -1,0 +1,34 @@
+{
+  "hypothesis_id": "h-v003-001",
+  "title": "工具结果到动作的任务相关等变性约束",
+  "parent_ids": [],
+  "lineage_note": "在 v002 否定观察语义被数据库完整性工作吸收后，正交转向智能体是否真正消费工具结果：任务相关字段变化应引起对应动作变化，无关元数据变化应保持动作不变。",
+  "problem": "工具智能体可以调用正确工具并看到正确返回，却忽略、误绑定或错误传播返回中的实体和值，最终产生语法合法但语义错误的后续调用。",
+  "target_failure": {
+    "summary": "工具结果没有以任务要求的方式控制后续动作参数，表现为结果忽略、错误实体绑定或跨步绑定漂移。",
+    "card_ids": ["failure-tool-use-metrics-collapse-distinct-errors", "failure-raw-observation-overload-hides-action-relevant-ui"],
+    "evidence_ids": ["ev-p039-failure-core", "ev-p079-action-conditioned-contextualization"]
+  },
+  "changed_computation": {
+    "baseline": "标准轨迹监督或终局奖励训练；推理时直接让大语言模型读取工具返回并生成下一调用。",
+    "intervention": "对同一工具返回生成成对干预：任务相关值作类型保持替换时，下游动作参数必须按映射变化；任务无关元数据替换时动作必须保持。把违反等变关系的动作对用于训练约束或运行时选择。",
+    "information_available": "任务、公开工具模式、真实工具返回与后续模型动作；不使用隐藏数据库或测试终局来构造变换。",
+    "timing": "训练时对工具观察与后继动作对施加成对约束，或推理时在执行副作用前比较少量反事实分支。",
+    "budget_effect": "训练会增加反事实样本；推理版本会增加模型调用。必须与等调用数重采样、自洽聚合和独立重核比较。"
+  },
+  "mechanism_claim": "直接监督工具结果变化与动作变化之间的对应关系，比仅监督整条轨迹或终局奖励更能减少结果忽略和错误值传播。",
+  "falsifier": "核心干预已被反事实工具响应回放、动作归因、主动信息探测或动作相关观测训练占据；或等变性只形成诊断指标而不能改变策略；或简单重采样/短引用达到同等收益。",
+  "minimal_killer_experiment": "先做最近先行组件审计；若仍存活，在固定工具结果中双射重命名实体标识符，比较后续动作的语义选择与精确参数是否按映射变化。",
+  "nearest_prior_risk": "AgentCheck、AttriGuard、Causal Agent Replay、ACCORD、动作监督观察压缩、Function-Aware FIM 与工具调用依赖图探针分别占据反事实回放、动作因果归因、主动补信息、返回消费训练与依赖结构。",
+  "alternative_explanations": ["收益来自多次采样", "收益来自更短输出格式", "变换泄漏正确动作", "只改善字符串复制而非结果理解"],
+  "descriptors": {
+    "problem_family": "tool_result_not_used_in_downstream_action",
+    "computation_stage": "observation_to_action_policy",
+    "intervention_family": "result_action_equivariance",
+    "information_source": "paired_tool_outputs_and_actions",
+    "timing_class": "training_or_preexecution",
+    "budget_class": "paired_counterfactual",
+    "evaluation_mode": "paired_intervention_and_terminal_state"
+  },
+  "literature_refs": ["arXiv:2607.11098", "arXiv:2603.10749", "arXiv:2606.08275", "arXiv:2606.16432", "arXiv:2607.12463", "arXiv:2605.25310"]
+}
