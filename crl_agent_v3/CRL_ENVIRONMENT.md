@@ -46,7 +46,7 @@ Codex App 的 Goal runtime 是本次长时实现宿主；Reviewer 使用的 `cod
 
 ## 5. 本地模型与通用工具
 
-当前可用资源包括 Ollama 模型 `bge-m3:latest`、`qwen3:4b`、`qwen2.5:7b`、`qwen3:8b`，GGUF `Qwen3-8B-Q4_K_M.gguf`，llama.cpp CUDA 运行时、Git、GPU、CPU 和开放网络。它们可按 Claim 需要自主使用，不因存在而必须调用。
+当前可用资源包括 Ollama 模型 `bge-m3:latest`、`qwen3:4b`、`qwen2.5:7b`、`qwen3:8b`、`qwen3.5:9b`、`qwen3:14b`，GGUF `Qwen3-8B-Q4_K_M.gguf`，llama.cpp CUDA 运行时、Git、GPU、CPU 和开放网络。它们可按 Claim 需要自主使用，不因存在而必须调用。
 
 网络、登录状态和速率限制以使用时事实为准。Reviewer 是明确例外：协议禁止网络和所有工具，后端以行为边界和事件审计实施该要求。
 

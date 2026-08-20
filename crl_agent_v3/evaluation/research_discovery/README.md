@@ -53,15 +53,28 @@ python tools/evaluate_research_discovery.py `
 阶段命令为：
 
 ```powershell
-python tools/run_scientific_search_calibration.py preflight --tau2-root <隔离的tau2-v1.0.1路径>
-python tools/run_tau2_calibration_block.py --tau2-root <隔离路径> --phase preflight --fidelity smoke --block-id <块> --attempt-id <尝试> --scaffold <声明式scaffold.json>
-python tools/run_scientific_search_calibration.py preflight-results --selection <显式尝试选择.json>
-python tools/run_scientific_search_calibration.py pilot
-python tools/run_scientific_search_calibration.py confirm
-python tools/run_scientific_search_calibration.py temporal --packet <时间洁净材料包.json>
-python tools/run_scientific_search_calibration.py report
+& 'D:\Desktop\crl\env\crl_agent_v3\python.exe' tools/run_scientific_search_calibration.py preflight --tau2-root <隔离的tau2-v1.0.1路径>
+& 'D:\Desktop\crl\env\crl_agent_v3\python.exe' tools/run_scientific_search_calibration.py preflight-lock --selection <执行前角色选择.json>
+& '<隔离的tau2-v1.0.1路径>\.venv\Scripts\python.exe' tools/run_tau2_calibration_block.py --tau2-root <隔离路径> --phase preflight --fidelity smoke --block-id <块> --attempt-id <尝试> --scaffold <声明式scaffold.json>
+& 'D:\Desktop\crl\env\crl_agent_v3\python.exe' tools/run_scientific_search_calibration.py preflight-results --selection <同一角色选择.json>
+& 'D:\Desktop\crl\env\crl_agent_v3\python.exe' tools/run_scientific_search_calibration.py temporal --packet <时间洁净材料包.json>
+& 'D:\Desktop\crl\env\crl_agent_v3\python.exe' tools/run_scientific_search_calibration.py report
 ```
 
 默认产物位于产品根的 `research_workspace/reward_calibration_v001/`，不进入任何 Run，
 也不写共享知识库。预检汇总不会猜测“最新”尝试；调用者必须显式绑定 smoke、两次基线
-和 ground-truth 的块与尝试标识。ground-truth 只调度 τ² 官方声明支持的任务子集。
+和 ground-truth 的候选、块、尝试、保真度、scaffold 路径与基础种子。四个角色对象都必须
+包含 `candidate_id`、`block_id`、`attempt_id`、`fidelity`、`scaffold_path` 和
+`base_seed`；两次基线的基础种子必须不同。锁定时还会自动冻结当前模型内容摘要、完整任务
+集合、预算、静态预检与评价器锁。四个角色的候选—块—尝试三元组必须互不相同，smoke
+与两次基线必须使用字节完全相同的 scaffold。ground-truth 只调度 τ² 官方声明支持的任务子集。
+Windows 上应通过上述 τ² 启动器运行；它会强制 Python UTF-8 模式，核心执行函数会拒绝
+非 UTF-8、允许写字节码、错误解释器、工作区外 τ² 根或带环境凭据的直接调用，避免第三方基准按 CP936
+误读 UTF-8 资源或把凭据带入日志。每个 attempt 的不可变清单会阻止模型、scaffold、
+任务、种子或预算混跑；outcome 与 block audit 使用精确字段模式和事件自哈希，原始结果与
+日志必须绑定任务单元的规范路径。恢复与汇总都会从原始 JSON 复核任务、种子、奖励、终止
+原因、执行类别、成功标记及潜在凭据，硬崩溃遗留的暂存
+目录会在下次启动时删除并留下无科研解释的清理记录。
+
+当前 `pilot` 与 `confirm` 命令有意关闭：现有派生事件格式尚不能证明统计量全部来自不可变
+τ² outcome。预检通过也不会自动开放它们；完成原始证据推导器及其回归前，不生成阶段授权。

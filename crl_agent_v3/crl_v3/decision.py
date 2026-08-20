@@ -94,7 +94,13 @@ _HIGH_CONFIDENCE_SECRET_NAME = re.compile(
     r"session[_-]?cache|id_rsa|id_ed25519|\.pfx$|\.p12$)"
 )
 _ENVIRONMENT_VARIABLE_NAME = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
-_SENSITIVE_ENVIRONMENT_NAME_TOKENS = ("API_KEY", "TOKEN", "SECRET", "PASSWORD")
+_SENSITIVE_ENVIRONMENT_NAME_TOKENS = (
+    "API_KEY",
+    "TOKEN",
+    "SECRET",
+    "PASSWORD",
+    "CREDENTIAL",
+)
 _THIRD_PARTY_PATH_PARTS = {
     "external",
     "vendor",

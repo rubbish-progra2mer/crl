@@ -164,18 +164,25 @@ def paired_effect_posterior(
     draws: int = 20_000,
     seed: int = 0,
     meaningful_delta: float = 0.05,
+    minimum_independent_tasks: int = 12,
 ) -> dict[str, Any]:
-    """在共同任务—种子单元上计算贝叶斯自助法配对效应。"""
+    """先按领域—任务跨块聚类，再在共同单元上计算贝叶斯自助法效应。"""
 
     if draws < 100:
         raise ValueError("Bayesian-bootstrap draws must be at least 100")
     if not 0 < meaningful_delta < 1:
         raise ValueError("meaningful_delta must be between 0 and 1")
+    if minimum_independent_tasks < 2:
+        raise ValueError("minimum_independent_tasks must be at least 2")
     paired = paired_outcome_differences(candidate_outcomes, baseline_outcomes)
-    differences = np.asarray(paired["differences"], dtype=float)
+    differences = np.asarray(paired["cluster_means"], dtype=float)
     if differences.size == 0:
         return {
-            **{key: value for key, value in paired.items() if key != "differences"},
+            **{
+                key: value
+                for key, value in paired.items()
+                if key not in {"differences", "cluster_means"}
+            },
             "posterior_mean": None,
             "p0": None,
             "p5": None,
@@ -184,17 +191,38 @@ def paired_effect_posterior(
             "draws": 0,
             "status": "UNAVAILABLE",
         }
+    if differences.size < minimum_independent_tasks:
+        return {
+            **{
+                key: value
+                for key, value in paired.items()
+                if key not in {"differences", "cluster_means"}
+            },
+            "posterior_mean": float(differences.mean()),
+            "p0": None,
+            "p5": None,
+            "lcb10": None,
+            "meaningful_delta": meaningful_delta,
+            "minimum_independent_tasks": minimum_independent_tasks,
+            "draws": 0,
+            "status": "INSUFFICIENT_INDEPENDENT_TASKS",
+        }
     generator = np.random.default_rng(seed)
     weights = generator.dirichlet(np.ones(differences.size), size=draws)
     samples = weights @ differences
     return {
-        **{key: value for key, value in paired.items() if key != "differences"},
+        **{
+            key: value
+            for key, value in paired.items()
+            if key not in {"differences", "cluster_means"}
+        },
         "posterior_mean": float(samples.mean()),
         "p0": float(np.mean(samples > 0.0)),
         "p5": float(np.mean(samples > meaningful_delta)),
         "lcb10": float(np.quantile(samples, 0.10)),
         "meaningful_delta": meaningful_delta,
         "draws": draws,
+        "minimum_independent_tasks": minimum_independent_tasks,
         "status": "READY",
     }
 
@@ -209,6 +237,7 @@ def paired_outcome_differences(
     baseline = _index_outcomes(baseline_outcomes, "baseline")
     shared = sorted(set(candidate) & set(baseline))
     differences: list[int] = []
+    clustered: dict[tuple[str, str], list[int]] = defaultdict(list)
     excluded_mechanical = 0
     excluded_invalid = 0
     for key in shared:
@@ -222,16 +251,22 @@ def paired_outcome_differences(
         if left_status != COMPLETED_STATUS or right_status != COMPLETED_STATUS:
             excluded_invalid += 1
             continue
-        differences.append(int(_binary_success(left, key)) - int(_binary_success(right, key)))
+        difference = int(_binary_success(left, key)) - int(_binary_success(right, key))
+        differences.append(difference)
+        clustered[(key[1], key[2])].append(difference)
     return {
         "differences": differences,
+        "cluster_means": [
+            float(np.mean(clustered[key])) for key in sorted(clustered)
+        ],
         "paired_scientific_unit_count": len(differences),
+        "paired_independent_task_count": len(clustered),
         "shared_unit_count": len(shared),
         "candidate_only_unit_count": len(set(candidate) - set(baseline)),
         "baseline_only_unit_count": len(set(baseline) - set(candidate)),
         "excluded_mechanical_pair_count": excluded_mechanical,
         "excluded_invalid_pair_count": excluded_invalid,
-        "sampling_unit": "paired_task_seed_outcome",
+        "sampling_unit": "domain_task_cluster_across_blocks_and_repetitions",
     }
 
 
@@ -433,6 +468,7 @@ def block_heldout_bridge_validation(
     predictions: list[float] = []
     base_predictions: list[float] = []
     observed: list[int] = []
+    folds: list[dict[str, Any]] = []
     for block in blocks:
         train = [item for item in records if item.get("block_id") != block]
         test = [item for item in records if item.get("block_id") == block]
@@ -441,6 +477,16 @@ def block_heldout_bridge_validation(
             raise ValueError("each held-out fold needs non-empty train and test data")
         base_rate = float(np.clip(y_train.mean(), 1e-6, 1 - 1e-6))
         model = fit_logistic_bridge(train)
+        folds.append(
+            {
+                "heldout_block_id": block,
+                "train_observation_count": len(train),
+                "test_observation_count": len(test),
+                "train_success_count": int(y_train.sum()),
+                "fit_converged": model["converged"],
+                "fit_reason": model["reason"],
+            }
+        )
         for item in test:
             p0 = _probability(item.get("p0"), "p0")
             prediction = float(
@@ -474,6 +520,11 @@ def block_heldout_bridge_validation(
         "beta0": final_model["beta0"],
         "beta1": final_model["beta1"],
         "fit_converged": final_model["converged"],
+        "all_fold_models_converged": all(item["fit_converged"] for item in folds),
+        "minimum_heldout_block_observation_count": min(
+            item["test_observation_count"] for item in folds
+        ),
+        "folds": folds,
         "top_quartile_success_rate": float(
             np.mean([int(item["high_success"]) for item in top])
         ),
@@ -492,6 +543,18 @@ def evaluate_pilot_gate(summary: Mapping[str, Any]) -> dict[str, Any]:
         "contains_high_fidelity_pass": int(summary.get("high_fidelity_pass_count", 0)) > 0,
         "contains_high_fidelity_failure": int(summary.get("high_fidelity_failure_count", 0))
         > 0,
+        "at_least_36_bridge_observations": int(summary.get("observation_count", 0)) >= 36,
+        "at_least_two_heldout_blocks": int(summary.get("block_count", 0)) >= 2,
+        "bridge_fit_converged": summary.get("fit_converged") is True,
+        "all_fold_models_converged": summary.get("all_fold_models_converged") is True,
+        "at_least_12_observations_per_heldout_block": int(
+            summary.get("minimum_heldout_block_observation_count", 0)
+        )
+        >= 12,
+        "no_mechanical_bridge_observations": int(
+            summary.get("mechanical_observation_count", -1)
+        )
+        == 0,
         "bridge_brier_improves_at_least_10pct": float(
             summary.get("relative_brier_improvement", -math.inf)
         )
@@ -518,6 +581,9 @@ def evaluate_confirmation_gate(summary: Mapping[str, Any]) -> dict[str, Any]:
     """核验冻结确认标准；结果只回答搜索策略是否值得采用。"""
 
     block_advantages = [float(value) for value in summary.get("block_advantages", [])]
+    block_ids = summary.get("block_ids", [])
+    if not isinstance(block_ids, Sequence) or isinstance(block_ids, (str, bytes)):
+        raise ValueError("block_ids must be a sequence")
     candidate_posteriors = summary.get("candidate_posteriors", [])
     if not isinstance(candidate_posteriors, Sequence) or isinstance(
         candidate_posteriors, (str, bytes)
@@ -525,12 +591,18 @@ def evaluate_confirmation_gate(summary: Mapping[str, Any]) -> dict[str, Any]:
         raise ValueError("candidate_posteriors must be a sequence")
     meaningful_candidate = any(
         isinstance(item, Mapping)
+        and int(item.get("paired_independent_task_count", 0)) >= 12
+        and int(item.get("paired_scientific_unit_count", 0)) >= 24
+        and item.get("pre_registered_candidate") is True
+        and item.get("selection_adjustment_valid") is True
         and float(item.get("p5", -math.inf)) >= 0.95
         and float(item.get("lcb10", -math.inf)) > 0
         for item in candidate_posteriors
     )
     checks = {
-        "eight_new_blocks": len(block_advantages) == 8,
+        "eight_new_blocks": len(block_advantages) == 8
+        and len(block_ids) == 8
+        and len({str(value) for value in block_ids}) == 8,
         "wins_at_least_seven_blocks": sum(value > 0 for value in block_advantages) >= 7,
         "median_advantage_at_least_5pp": bool(block_advantages)
         and float(np.median(block_advantages)) >= 0.05,

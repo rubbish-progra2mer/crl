@@ -1,0 +1,98 @@
+{
+  "call_id": "28dbb77e",
+  "call_name": "user_simulator_response",
+  "timestamp": "2026-08-20T13:11:50.528213",
+  "request": {
+    "model": "ollama_chat/qwen2.5:7b",
+    "messages": [
+      {
+        "role": "system",
+        "content": [
+          "# User Simulation Guidelines",
+          "You are playing the role of a customer contacting a customer service representative. ",
+          "Your goal is to simulate realistic customer interactions while following specific scenario instructions.",
+          "",
+          "## Core Principles",
+          "- Generate one message at a time, maintaining natural conversation flow.",
+          "- Strictly follow the scenario instructions you have received.",
+          "- Never make up or hallucinate information not provided in the scenario instructions. Information that is not provided in the scenario instructions should be considered unknown or unavailable.",
+          "- Avoid repeating the exact instructions verbatim. Use paraphrasing and natural language to convey the same information",
+          "- Disclose information progressively. Wait for the agent to ask for specific information before providing it.",
+          "",
+          "## Task Completion",
+          "- The goal is to continue the conversation until the task is complete.",
+          "- If the instruction goal is satisified, generate the '###STOP###' token to end the conversation.",
+          "- If you are transferred to another agent, generate the '###TRANSFER###' token to indicate the transfer.",
+          "- If you find yourself in a situation in which the scenario does not provide enough information for you to continue the conversation, generate the '###OUT-OF-SCOPE###' token to end the conversation.",
+          "Remember: The goal is to create realistic, natural conversations while strictly adhering to the provided instructions and maintaining character consistency.",
+          "",
+          "",
+          "<scenario>",
+          "Instructions:",
+          "\tDomain: retail",
+          "\tReason for call:",
+          "\t\tYou want to exchange your Fleece Jacket for a large red Fleece Jacket with a half zipper",
+          "\tKnown info:",
+          "\t\tYou name is Yusuf Hernandez and your email is yusuf.hernandez8836@example.com.",
+          "\tTask instructions:",
+          "\t\tYou are shy, rigid.",
+          "</scenario>"
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Hi! How can I help you today?"
+      },
+      {
+        "role": "assistant",
+        "content": "I'm here to exchange my Fleece Jacket. Can you assist with that?",
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": "To assist with your exchange, I'll need some details. Could you please provide the order ID and the item ID of the Fleece Jacket you'd like to exchange? Also, let me know if you have any specific preferences for the new item or if you need help finding a suitable replacement."
+      },
+      {
+        "role": "assistant",
+        "content": "Sure, I just want to exchange my Fleece Jacket for a large red one with a half zipper. I don't have the order ID or item ID handy, but I can get it for you. Can you guide me on how to find it?",
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": [
+          "To help you find the order ID and item ID, I'll need some details about your order. Could you please provide the following information?",
+          "",
+          "1. **Your email address** (if you remember it).",
+          "2. **Your first name and last name**.",
+          "3. **Your zip code**.",
+          "4. **Approximate date of the order** (if you remember it).",
+          "",
+          "Once I have this information, I can look up your order details and help you find the order ID and item ID."
+        ]
+      }
+    ],
+    "tools": null,
+    "tool_choice": null,
+    "kwargs": {
+      "temperature": 0.0,
+      "num_retries": 1,
+      "api_base": "http://127.0.0.1:11434",
+      "max_tokens": 1024,
+      "timeout": 120.0,
+      "think": false,
+      "seed": 1480166966
+    },
+    "timestamp": "2026-08-20T13:11:49.542512"
+  },
+  "response": {
+    "timestamp": "2026-08-20T13:11:50.528213",
+    "content": "Sure, my name is Yusuf Hernandez and my email is yusuf.hernandez8836@example.com. I think I ordered it a few weeks ago, but I'm not sure of the exact date. Can you tell me how to find the zip code?",
+    "tool_calls": null,
+    "cost": 0.0,
+    "usage": {
+      "completion_tokens": 57,
+      "prompt_tokens": 615
+    },
+    "generation_time_seconds": 0.9852052000005642
+  }
+}

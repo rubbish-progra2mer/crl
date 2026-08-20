@@ -10,14 +10,16 @@ from pathlib import Path
 
 MACHINE_ROOT = Path(__file__).resolve().parents[1]
 PRODUCT_ROOT = MACHINE_ROOT.parent
+BYTECODE_READ_PREFIX = (
+    PRODUCT_ROOT
+    / "research_workspace"
+    / "reward_calibration_v001"
+    / "preflight"
+    / "runtime"
+    / f"unused-pycache-{os.getpid()}"
+)
 if str(MACHINE_ROOT) not in sys.path:
     sys.path.insert(0, str(MACHINE_ROOT))
-
-from evaluation.research_discovery.calibration_runner import CalibrationWorkspace  # noqa: E402
-from evaluation.research_discovery.calibration_tau2 import (  # noqa: E402
-    run_tau2_block,
-    windows_utf8_subprocess_environment,
-)
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -50,20 +52,69 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--seed", type=int, default=20260819)
     parser.add_argument("--ollama-url", default="http://127.0.0.1:11434")
     parser.add_argument("--max-steps", type=int, default=30)
-    parser.add_argument("--timeout-seconds", type=float, default=300.0)
+    parser.add_argument("--timeout-seconds", type=float, default=120.0)
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
+    child_arguments = sys.argv[1:] if argv is None else argv
+    if (
+        sys.flags.utf8_mode == 0
+        or not sys.dont_write_bytecode
+        or sys.pycache_prefix is None
+    ):
+        bootstrap_environment = dict(os.environ)
+        for name in list(bootstrap_environment):
+            upper = name.upper()
+            if any(
+                marker in upper
+                for marker in ("API_KEY", "TOKEN", "SECRET", "PASSWORD", "CREDENTIAL")
+            ):
+                bootstrap_environment.pop(name, None)
+        bootstrap_environment["PYTHONUTF8"] = "1"
+        bootstrap_environment["PYTHONDONTWRITEBYTECODE"] = "1"
+        return subprocess.call(
+            [
+                sys.executable,
+                "-B",
+                "-X",
+                "utf8",
+                "-X",
+                f"pycache_prefix={BYTECODE_READ_PREFIX}",
+                str(Path(__file__).resolve()),
+                *child_arguments,
+            ],
+            env=bootstrap_environment,
+        )
+
+    from crl_v3.decision import child_process_environment
+    from evaluation.research_discovery.calibration_runner import CalibrationWorkspace
+    from evaluation.research_discovery.calibration_tau2 import (
+        run_tau2_block,
+        windows_utf8_subprocess_environment,
+    )
+
+    safe_environment, _ = child_process_environment()
     child_environment = windows_utf8_subprocess_environment(
-        os.environ,
+        safe_environment,
         os_name=os.name,
         utf8_mode=sys.flags.utf8_mode,
     )
-    if child_environment is not None:
-        child_arguments = sys.argv[1:] if argv is None else argv
+    environment_was_sanitized = safe_environment != dict(os.environ)
+    if child_environment is not None or environment_was_sanitized:
+        if child_environment is None:
+            child_environment = safe_environment
         return subprocess.call(
-            [sys.executable, str(Path(__file__).resolve()), *child_arguments],
+            [
+                sys.executable,
+                "-B",
+                "-X",
+                "utf8",
+                "-X",
+                f"pycache_prefix={BYTECODE_READ_PREFIX}",
+                str(Path(__file__).resolve()),
+                *child_arguments,
+            ],
             env=child_environment,
         )
     if hasattr(sys.stdout, "reconfigure"):

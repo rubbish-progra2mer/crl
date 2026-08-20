@@ -14,6 +14,8 @@ if str(MACHINE_ROOT) not in sys.path:
 from evaluation.research_discovery.calibration_runner import (  # noqa: E402
     CalibrationWorkspace,
     build_calibration_report,
+    lock_tau2_preflight_selection,
+    repair_evaluator_lock,
     repair_frozen_task_split,
     run_preflight,
     run_temporal_validation,
@@ -43,11 +45,17 @@ def _parser() -> argparse.ArgumentParser:
     preflight.add_argument("--tau2-root", type=Path, required=True)
     preflight.add_argument("--agent-model", default="qwen3:8b")
     preflight.add_argument("--user-model", default="qwen2.5:7b")
-    preflight.add_argument("--reserve-model", default="qwen3.5:9b")
+    preflight.add_argument("--reserve-model", default="qwen3:14b")
     preflight.add_argument("--evaluator-model", default="qwen2.5:7b")
     preflight.add_argument("--split-seed", type=int, default=20260819)
     preflight.add_argument("--ollama-url", default="http://127.0.0.1:11434")
     preflight.add_argument("--repair-task-split", action="store_true")
+    preflight.add_argument("--repair-evaluator-lock", action="store_true")
+
+    preflight_lock = subparsers.add_parser(
+        "preflight-lock", help="在执行前不可变地锁定四个预检角色"
+    )
+    preflight_lock.add_argument("--selection", type=Path, required=True)
 
     preflight_results = subparsers.add_parser(
         "preflight-results", help="按显式尝试选择汇总 τ² 预检门槛"
@@ -79,6 +87,8 @@ def main(argv: list[str] | None = None) -> int:
             repair_frozen_task_split(
                 workspace, tau2_root=args.tau2_root, split_seed=args.split_seed
             )
+        if args.repair_evaluator_lock:
+            repair_evaluator_lock(workspace, tau2_root=args.tau2_root)
         result = run_preflight(
             workspace,
             tau2_root=args.tau2_root,
@@ -89,7 +99,7 @@ def main(argv: list[str] | None = None) -> int:
             split_seed=args.split_seed,
             ollama_url=args.ollama_url,
         )
-    elif args.phase == "preflight-results":
+    elif args.phase in {"preflight-lock", "preflight-results"}:
         workspace.prepare()
         selection_path = workspace.bind_read_file(args.selection)
         selection_data = selection_path.read_bytes()
@@ -100,14 +110,23 @@ def main(argv: list[str] | None = None) -> int:
         selection = json.loads(selection_data.decode("utf-8", errors="strict"))
         if not isinstance(selection, dict):
             raise ValueError("preflight selection JSON root must be an object")
-        result = summarize_tau2_preflight(workspace, selection)
+        if args.phase == "preflight-lock":
+            result = lock_tau2_preflight_selection(workspace, selection)
+        else:
+            result = summarize_tau2_preflight(workspace, selection)
     elif args.phase == "pilot":
         workspace.prepare()
-        _ingest_events(workspace, "pilot", args.event_json)
+        if args.event_json:
+            raise RuntimeError(
+                "pilot event import is disabled until events are derived from immutable tau2 manifests"
+            )
         result = summarize_pilot(workspace)
     elif args.phase == "confirm":
         workspace.prepare()
-        _ingest_events(workspace, "confirm", args.event_json)
+        if args.event_json:
+            raise RuntimeError(
+                "confirmation event import is disabled until events are derived from immutable tau2 manifests"
+            )
         result = summarize_confirmation(workspace)
     elif args.phase == "temporal":
         workspace.prepare()

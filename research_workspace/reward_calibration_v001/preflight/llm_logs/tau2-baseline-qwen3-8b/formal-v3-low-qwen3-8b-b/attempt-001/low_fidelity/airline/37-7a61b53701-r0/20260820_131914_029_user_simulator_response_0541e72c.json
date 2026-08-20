@@ -1,0 +1,91 @@
+{
+  "call_id": "0541e72c",
+  "call_name": "user_simulator_response",
+  "timestamp": "2026-08-20T13:19:14.029650",
+  "request": {
+    "model": "ollama_chat/qwen2.5:7b",
+    "messages": [
+      {
+        "role": "system",
+        "content": [
+          "# User Simulation Guidelines",
+          "You are playing the role of a customer contacting a customer service representative. ",
+          "Your goal is to simulate realistic customer interactions while following specific scenario instructions.",
+          "",
+          "## Core Principles",
+          "- Generate one message at a time, maintaining natural conversation flow.",
+          "- Strictly follow the scenario instructions you have received.",
+          "- Never make up or hallucinate information not provided in the scenario instructions. Information that is not provided in the scenario instructions should be considered unknown or unavailable.",
+          "- Avoid repeating the exact instructions verbatim. Use paraphrasing and natural language to convey the same information",
+          "- Disclose information progressively. Wait for the agent to ask for specific information before providing it.",
+          "",
+          "## Task Completion",
+          "- The goal is to continue the conversation until the task is complete.",
+          "- If the instruction goal is satisified, generate the '###STOP###' token to end the conversation.",
+          "- If you are transferred to another agent, generate the '###TRANSFER###' token to indicate the transfer.",
+          "- If you find yourself in a situation in which the scenario does not provide enough information for you to continue the conversation, generate the '###OUT-OF-SCOPE###' token to end the conversation.",
+          "Remember: The goal is to create realistic, natural conversations while strictly adhering to the provided instructions and maintaining character consistency.",
+          "",
+          "",
+          "<scenario>",
+          "Instructions:",
+          "\tDomain: airline",
+          "\tReason for call:",
+          "\t\tYou want to cancel two of your upcoming reservations (IFOYYZ and NQNU5R) and upgrade a third (M20IZO) to business class.",
+          "\tKnown info:",
+          "\t\tYou are Aarav Ahmed.",
+          "\t\tYour user id is aarav_ahmed_6699.",
+          "\tTask instructions:",
+          "\t\tYou want to use your credit card ending in 7334 to pay for all charges and are willing to comply with airline policies for the changes.",
+          "</scenario>"
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Hi! How can I help you today?"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello, I'd like to cancel two of my upcoming reservations and upgrade another one to business class. Could you assist me with that?",
+        "tool_calls": null
+      },
+      {
+        "role": "user",
+        "content": [
+          "To assist you, I'll need the following details:",
+          "",
+          "1. Your user ID.",
+          "2. The reservation IDs for the two reservations you'd like to cancel.",
+          "3. The reservation ID for the one you'd like to upgrade to business class.",
+          "4. The reason for cancellation (if applicable).",
+          "5. Any additional details you'd like to provide.",
+          "",
+          "Please provide this information so I can proceed with the cancellation and upgrade."
+        ]
+      }
+    ],
+    "tools": null,
+    "tool_choice": null,
+    "kwargs": {
+      "temperature": 0.0,
+      "num_retries": 1,
+      "api_base": "http://127.0.0.1:11434",
+      "max_tokens": 1024,
+      "timeout": 120.0,
+      "think": false,
+      "seed": 507619656
+    },
+    "timestamp": "2026-08-20T13:19:12.494889"
+  },
+  "response": {
+    "timestamp": "2026-08-20T13:19:14.028650",
+    "content": "Sure, my user ID is aarav_ahmed_6699. The reservation IDs I want to cancel are IFOYYZ and NQNU5R. The one I want to upgrade to business class is M20IZO. There's no specific reason for cancellation, just that I need to make some changes to my travel plans.",
+    "tool_calls": null,
+    "cost": 0.0,
+    "usage": {
+      "completion_tokens": 75,
+      "prompt_tokens": 527
+    },
+    "generation_time_seconds": 1.5339275000005728
+  }
+}
