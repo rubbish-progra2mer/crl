@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "task_id": "synthetic-agent-discovery-001",
+  "agent_subfield": "合成的文本工具智能体规划",
+  "research_question": "怎样在完全合成的任务中记录可证伪研究假设？",
+  "temporal_visibility": {
+    "cutoff": {
+      "precision": "year",
+      "value": 2020
+    },
+    "visible_paper_ids": [
+      "syn-visible-2020"
+    ],
+    "visible_artifact_ids": [
+      "synthetic-card-1",
+      "synthetic-passage-1",
+      "synthetic-portfolio-v001",
+      "synthetic-question-only",
+      "synthetic-search-snapshot"
+    ]
+  },
+  "heldout_paper_ids": [
+    "syn-heldout-2020"
+  ],
+  "paper_timeline": [
+    {
+      "paper_id": "syn-visible-2019",
+      "publication_date": "2019-06-01",
+      "publication_year": 2019
+    },
+    {
+      "paper_id": "syn-visible-2020",
+      "publication_date": null,
+      "publication_year": 2020
+    },
+    {
+      "paper_id": "syn-ambiguous-2020",
+      "publication_date": null,
+      "publication_year": 2020
+    },
+    {
+      "paper_id": "syn-heldout-2020",
+      "publication_date": null,
+      "publication_year": 2020
+    }
+  ],
+  "resource_budget": {
+    "tokens": 1000,
+    "api_calls": 10,
+    "wall_time_seconds": 60,
+    "gpu_time_seconds": 0,
+    "estimated_cost_usd": 1
+  },
+  "known_strong_baselines": [
+    {
+      "baseline_id": "synthetic-strong",
+      "description": "完全合成且信息与预算匹配的强基线。"
+    }
+  ],
+  "blinding": {
+    "system_identity_hidden_from_experts": true,
+    "candidate_order_randomized": true,
+    "heldout_not_in_system_input": true
+  },
+  "human_annotation_instructions": "在不知道系统身份的前提下，分别标注新颖性、意义、技术正确性和留出机制是否被再发现。",
+  "system_profiles": [
+    {
+      "system_id": "syn-bare",
+      "system_type": "bare_llm",
+      "configuration_sha256": "d255c5d0d9d0840cce35c8dc0a7b21acd7579381786da27bba602fc1949ae477"
+    },
+    {
+      "system_id": "syn-passage",
+      "system_type": "passage_rag",
+      "configuration_sha256": "3c4a45c43cc691a2900c207da8f2ccba633ecf302486fea75681982fc5999df8"
+    },
+    {
+      "system_id": "syn-card",
+      "system_type": "card_only",
+      "configuration_sha256": "c47931bd80789b7abb21ec4067680434823d33225273a3acdbc05440ca8e1929"
+    },
+    {
+      "system_id": "syn-current",
+      "system_type": "current_crl",
+      "configuration_sha256": "a6f267d8380aeade265ecb8f049c28256322a5114cce2a2a337fb076d9a72465"
+    },
+    {
+      "system_id": "syn-search",
+      "system_type": "crl_scientific_search",
+      "configuration_sha256": "066aac273a79c23188516624bee8f54129a68429cab5173dda1a447baffae5e3"
+    }
+  ],
+  "synthetic_fixture": true,
+  "synthetic_notice": "完全合成夹具，仅验证评测框架；不代表真实科研能力。"
+}

@@ -1,0 +1,24 @@
+[project]
+name = "crl-agent-v3"
+version = "3.0.0-dev0"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "numpy>=1.26,<3",
+    "PyMuPDF>=1.24,<2",
+    "sentence-transformers>=3,<6",
+]
+
+[project.scripts]
+crl = "crl_v3.cli:main"
+
+[tool.setuptools]
+packages = ["crl_v3"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+markers = [
+    "windows: requires Windows-specific path, Junction, or PowerShell behavior",
+    "real_kb: reads the external production knowledge-base assets",
+    "real_pdf: reads external real-paper PDF assets from the product knowledge base",
+]

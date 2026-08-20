@@ -1,0 +1,34 @@
+{
+  "task_id": "synthetic-agent-discovery-001",
+  "system_id": "syn-search",
+  "system_configuration": {"scientific_search_layer": "synthetic", "workflow": "crl_contract_v2"},
+  "random_seed": 15,
+  "task_packet_sha256": "910d0510b2169aeccbe157c477f6bacc7b0b26e031bfbd90c6dd674a2bba3592",
+  "scientific_search": {"visible_paper_ids": ["syn-visible-2019", "syn-visible-2020"], "artifact_ids": ["synthetic-search-snapshot"]},
+  "provenance": {"generated_at_utc": "2026-01-01T00:00:00Z", "model": "synthetic-model", "provider": "offline-fixture", "prompt_revision": "synthetic-r1"},
+  "cost": {"tokens": 700, "api_calls": 3, "wall_time_seconds": 7, "gpu_time_seconds": 0, "estimated_cost_usd": 0.07},
+  "portfolio": {
+    "hypotheses": [
+      {
+        "hypothesis_id": "search-idea-1",
+        "title": "搜索层合成候选",
+        "problem": "合成问题",
+        "mechanism_claim": "搜索层暴露结构不同的检查点。",
+        "changed_computation": {"baseline": "直接规划", "intervention": "搜索后检查", "information_available": "相同可见论文", "timing": "规划前", "budget_effect": "三次搜索"},
+        "falsifier": "匹配预算后不改善。",
+        "minimal_killer_experiment": "合成强基线比较。",
+        "descriptors": {"problem_family": "planning", "computation_stage": "planning", "intervention_family": "search-check", "information_source": "visible-search", "timing_class": "pre-action", "budget_class": "medium", "evaluation_mode": "independent-synthetic"}
+      }
+    ]
+  },
+  "candidate_facts": {
+    "search-idea-1": {
+      "falsifier": {"statement": "匹配预算后不改善", "observable": "failure_rate", "decision_rule": "候选失败率必须更低"},
+      "killer_experiment": {"experiment_id": "search-killer", "research_question": "搜索检查是否有效？", "independent_ground_truth": "合成外部终局", "primary_metric": "failure_rate", "sampling_unit": "task", "baseline_ids": ["synthetic-strong"]},
+      "visible_prior_audit": {"performed": true, "audited_visible_paper_ids": ["syn-visible-2019", "syn-visible-2020"], "collision_visible_paper_ids": []},
+      "implementation": {"status": "implemented", "artifact_sha256s": ["2222222222222222222222222222222222222222222222222222222222222222"]},
+      "outcome": {"status": "unresolved", "decision_stage": "none", "decision_reason": "预算不匹配，未形成实证结论。"},
+      "empirical_evaluations": [{"comparison_id": "search-comparison", "baseline_id": "synthetic-strong", "parity_status": "mismatched", "survived": true, "decision_rule": "failure_rate 更低", "metric_name": "failure_rate", "sampling_unit": "task"}]
+    }
+  }
+}

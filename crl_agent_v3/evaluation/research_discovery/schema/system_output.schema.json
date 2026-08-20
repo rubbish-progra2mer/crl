@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crl.local/evaluation/research_discovery/system_output.schema.json",
+  "title": "CRL Research Discovery SystemOutput schema 1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "task_id", "system_id", "system_type",
+    "system_configuration", "configuration_sha256", "random_seed",
+    "input_trace", "provenance", "cost", "candidates", "candidate_payload_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "task_id": {"$ref": "#/$defs/id"},
+    "system_id": {"$ref": "#/$defs/id"},
+    "system_type": {"enum": ["bare_llm", "passage_rag", "card_only", "current_crl", "crl_scientific_search"]},
+    "system_configuration": {"type": "object"},
+    "configuration_sha256": {"$ref": "#/$defs/sha256"},
+    "random_seed": {"type": "integer"},
+    "input_trace": {
+      "type": "object", "additionalProperties": false,
+      "required": ["paper_ids", "artifact_ids", "task_packet_sha256"],
+      "properties": {
+        "paper_ids": {"$ref": "#/$defs/ids"},
+        "artifact_ids": {"type": "array", "items": {"type": "string"}},
+        "task_packet_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "provenance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source_format", "generated_at_utc", "model", "provider", "prompt_revision", "imported_from_sha256"],
+      "properties": {
+        "source_format": {"type": "string", "minLength": 1},
+        "generated_at_utc": {"type": "string", "minLength": 1},
+        "model": {"type": "string", "minLength": 1},
+        "provider": {"type": "string", "minLength": 1},
+        "prompt_revision": {"type": "string", "minLength": 1},
+        "imported_from_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "cost": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/resources"}]},
+    "candidates": {"type": "array", "items": {"$ref": "#/$defs/candidate"}},
+    "candidate_payload_sha256": {"$ref": "#/$defs/sha256"}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+    "ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "resources": {
+      "type": "object", "additionalProperties": false,
+      "required": ["tokens", "api_calls", "wall_time_seconds", "gpu_time_seconds", "estimated_cost_usd"],
+      "properties": {
+        "tokens": {"type": ["number", "null"], "minimum": 0},
+        "api_calls": {"type": ["number", "null"], "minimum": 0},
+        "wall_time_seconds": {"type": ["number", "null"], "minimum": 0},
+        "gpu_time_seconds": {"type": ["number", "null"], "minimum": 0},
+        "estimated_cost_usd": {"type": ["number", "null"], "minimum": 0}
+      }
+    },
+    "descriptors": {
+      "type": "object", "additionalProperties": false,
+      "required": ["problem_family", "computation_stage", "intervention_family", "information_source", "timing_class", "budget_class", "evaluation_mode"],
+      "properties": {
+        "problem_family": {"type": "string"}, "computation_stage": {"type": "string"},
+        "intervention_family": {"type": "string"}, "information_source": {"type": "string"},
+        "timing_class": {"type": "string"}, "budget_class": {"type": "string"},
+        "evaluation_mode": {"type": "string"}
+      }
+    },
+    "changed_computation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["baseline", "intervention", "information_available", "timing", "budget_effect"],
+      "properties": {
+        "baseline": {"type": "string"}, "intervention": {"type": "string"},
+        "information_available": {"type": "string"}, "timing": {"type": "string"},
+        "budget_effect": {"type": "string"}
+      }
+    },
+    "candidate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["candidate_id", "title", "problem", "mechanism_claim", "descriptors", "changed_computation", "falsifier", "killer_experiment", "visible_prior_audit", "implementation", "outcome", "empirical_evaluations"],
+      "properties": {
+        "candidate_id": {"$ref": "#/$defs/id"}, "title": {"type": "string"},
+        "problem": {"type": "string"}, "mechanism_claim": {"type": "string"},
+        "descriptors": {"$ref": "#/$defs/descriptors"},
+        "changed_computation": {"$ref": "#/$defs/changed_computation"},
+        "falsifier": {
+          "type": "object", "additionalProperties": false,
+          "required": ["statement", "observable", "decision_rule"],
+          "properties": {"statement": {"type": "string"}, "observable": {"type": "string"}, "decision_rule": {"type": "string"}}
+        },
+        "killer_experiment": {
+          "type": "object", "additionalProperties": false,
+          "required": ["experiment_id", "research_question", "independent_ground_truth", "primary_metric", "sampling_unit", "baseline_ids"],
+          "properties": {
+            "experiment_id": {"type": "string"}, "research_question": {"type": "string"},
+            "independent_ground_truth": {"type": "string"}, "primary_metric": {"type": "string"},
+            "sampling_unit": {"type": "string"}, "baseline_ids": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "visible_prior_audit": {
+          "type": "object", "additionalProperties": false,
+          "required": ["performed", "audited_visible_paper_ids", "collision_visible_paper_ids"],
+          "properties": {"performed": {"type": "boolean"}, "audited_visible_paper_ids": {"$ref": "#/$defs/ids"}, "collision_visible_paper_ids": {"$ref": "#/$defs/ids"}}
+        },
+        "implementation": {
+          "type": "object", "additionalProperties": false,
+          "required": ["status", "artifact_sha256s"],
+          "properties": {"status": {"enum": ["not_started", "attempted_failed", "implemented"]}, "artifact_sha256s": {"type": "array", "items": {"$ref": "#/$defs/sha256"}}}
+        },
+        "outcome": {
+          "type": "object", "additionalProperties": false,
+          "required": ["status", "decision_stage", "decision_reason"],
+          "properties": {"status": {"enum": ["survived", "early_killed", "late_killed", "unresolved"]}, "decision_stage": {"enum": ["proposal", "prior_audit", "falsification_design", "implementation", "matched_baseline", "none"]}, "decision_reason": {"type": "string"}}
+        },
+        "empirical_evaluations": {
+          "type": "array",
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["comparison_id", "baseline_id", "parity_status", "survived", "decision_rule", "metric_name", "sampling_unit"],
+            "properties": {"comparison_id": {"$ref": "#/$defs/id"}, "baseline_id": {"$ref": "#/$defs/id"}, "parity_status": {"enum": ["matched", "mismatched", "unknown", "not_applicable"]}, "survived": {"type": ["boolean", "null"]}, "decision_rule": {"type": "string"}, "metric_name": {"type": "string"}, "sampling_unit": {"type": "string"}}
+          }
+        }
+      }
+    }
+  }
+}

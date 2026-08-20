@@ -1,0 +1,59 @@
+{
+  "evaluator_definition_sha256": "e0d35083b1427e9f8861ba576304b97657498fee46480d5e07e8e0b02cea6e5b",
+  "evaluator_version": "CRL-EVAL-1.0",
+  "events_sha256": "0c65f9404467267d78beb0a04f490599664331b876d9515d37d0f394319a5099",
+  "fixture": "weak",
+  "fixture_sha256": "e034f4462543875f08076891818f083146d229dadc4c3dd008a5911d25c1b7f4",
+  "invalid_reasons": [],
+  "output": {
+    "confidence": "high",
+    "critical_risk": "potentially_fatal",
+    "diagnostics": {
+      "best_stress_test": "预注册一组随机抽取的隐藏测试任务，在选择器明确不可见参考答案的条件下，对反思方法与多次采样、最佳单答等强等预算基线进行多 seed 比较；保存全部逐样本输出，并由独立盲评者按固定标签判分。",
+      "boundary_warning": "结论至多涉及该未披露模型在这 20 个手选任务和单次运行、三倍预算条件下的自评结果，不能外推到其他模型、任务分布、预算、seed 或真实可靠性。",
+      "hidden_assumption": "模型对自身两个答案的偏好能够可靠代表外部正确性，并且这种自评不会因同源偏差或参考答案可见性而产生系统性偏置。",
+      "most_fatal_failure_mode": "在独立盲评且严格等预算后，16 对 13 的增益完全消失，表明结果来自同源自评、人工选题或额外计算，而非“反思并选择”机制本身。",
+      "reproduction_breakpoint": "复现会在构造任务与执行提示阶段立即中断：任务清单、完整提示、模型配置、seed、选择器可见信息和判分规则均缺失。"
+    },
+    "evaluator_version": "CRL-EVAL-1.0",
+    "free_review": "当前证据无法把方法效应与三类替代解释分开：三倍计算预算、人工选题和同源自评。3 个净增正确样本既无逐项证据，也无重复运行或独立标签，选择器是否接触参考答案甚至未披露。更严重的是，方法核、changed computation、适用边界和证伪条件均未定义，因此失败时可被事后解释，成功时又被外推为普遍可靠性提升。独立复现者连相同实验都无法搭建，更无法确认汇总数字。除非在隐藏随机任务、独立盲评、严格等预算、多 seed 和完整 artifact 条件下仍保持优势，否则该结论应视为未建立。",
+    "model_identity": "gpt-5.6-sol",
+    "reasoning_effort": "xhigh",
+    "reasons": {
+      "adversarial_survivability": "没有消融、鲁棒性、反例、失败案例或预先定义的可证伪标准。方法尚未面对独立评价、等预算比较、重复 seed 或分布外任务等最基本的对抗检验，核心增益可能在任一检验下消失。",
+      "boundary_generalization": "证据仅来自人工挑选的 20 个未描述任务、单次运行，模型、seed、任务分布和 horizon 均未界定。packet insufficient，无法判断效果能否超出这一窄样本，更不能支持“普遍提高可靠性”的外推。",
+      "confound_leakage_control": "任务为人工挑选，正确性由生成答案的同一模型判断，且新方法约有三倍调用与令牌预算。选择器是否看到参考答案未披露，因此评价泄漏和 oracle 使用均未被排除；没有同预算基线可分离反思机制与额外计算的作用。",
+      "evidence_auditability": "16/20 与 13/20 无逐样本输出、独立标签、评分记录、原始日志或统计不确定性支持。任务选择过程及选择器输入也不可审计，因而无法核验哪些样本改变、为何改变，以及汇总数字是否按声明产生。",
+      "reproducibility_traceability": "没有代码、提交身份、完整提示、模型与环境配置、命令、随机种子或输出哈希。仅有汇总数字，独立团队无法重建任务、执行流程或逐样本判定，因此结果不可复现也不可追溯。"
+    },
+    "review_protocol": "CRL-IR-1.0",
+    "reviewer_role": "ADV",
+    "scores": {
+      "adversarial_survivability": 0,
+      "boundary_generalization": 0,
+      "confound_leakage_control": 0,
+      "evidence_auditability": 0,
+      "reproducibility_traceability": 0
+    }
+  },
+  "raw_output_sha256": "4f093730754554cbb85b7ddf17340e2376a8bb2a46e8a54711e28398e2cb741a",
+  "reviewer_role": "ADV",
+  "role_score_basis_points": 0,
+  "runtime": {
+    "backend": "codex_exec_jsonl_v1",
+    "codex_version": "codex-cli 0.147.0",
+    "ephemeral": true,
+    "event_count": 4,
+    "executable": "D:\\Desktop\\crl\\runtimes\\codex-cli\\0.147.0\\codex.cmd",
+    "forbidden_events": [],
+    "network_requested": false,
+    "reasoning_effort": "xhigh",
+    "requested_model": "gpt-5.6-sol",
+    "returncode": 0,
+    "sandbox": "read-only",
+    "timed_out": false
+  },
+  "schema_version": 1,
+  "stderr_sha256": "95117d9587df8fd371116c340149155104fe2bf0a6059bf2fabacdf336c03a50",
+  "valid": true
+}

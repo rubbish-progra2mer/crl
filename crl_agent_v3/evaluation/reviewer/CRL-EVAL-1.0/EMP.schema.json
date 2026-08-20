@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["review_protocol", "reviewer_role", "evaluator_version", "model_identity", "reasoning_effort", "scores", "reasons", "diagnostics", "critical_risk", "confidence", "free_review"],
+  "properties": {
+    "review_protocol": {"type": "string", "const": "CRL-IR-1.0"},
+    "reviewer_role": {"type": "string", "const": "EMP"},
+    "evaluator_version": {"type": "string", "const": "CRL-EVAL-1.0"},
+    "model_identity": {"type": "string", "const": "gpt-5.6-sol"},
+    "reasoning_effort": {"type": "string", "const": "xhigh"},
+    "scores": {
+      "type": "object", "additionalProperties": false,
+      "required": ["experimental_validity", "baseline_fairness", "measurement_reliability", "robustness_falsification", "result_strength"],
+      "properties": {
+        "experimental_validity": {"type": "integer", "minimum": 0, "maximum": 4},
+        "baseline_fairness": {"type": "integer", "minimum": 0, "maximum": 4},
+        "measurement_reliability": {"type": "integer", "minimum": 0, "maximum": 4},
+        "robustness_falsification": {"type": "integer", "minimum": 0, "maximum": 4},
+        "result_strength": {"type": "integer", "minimum": 0, "maximum": 4}
+      }
+    },
+    "reasons": {
+      "type": "object", "additionalProperties": false,
+      "required": ["experimental_validity", "baseline_fairness", "measurement_reliability", "robustness_falsification", "result_strength"],
+      "properties": {
+        "experimental_validity": {"type": "string"}, "baseline_fairness": {"type": "string"},
+        "measurement_reliability": {"type": "string"}, "robustness_falsification": {"type": "string"},
+        "result_strength": {"type": "string"}
+      }
+    },
+    "diagnostics": {
+      "type": "object", "additionalProperties": false,
+      "required": ["strongest_empirical_evidence", "biggest_empirical_threat", "baseline_confound", "killer_experiment", "missing_validation"],
+      "properties": {
+        "strongest_empirical_evidence": {"type": "string"}, "biggest_empirical_threat": {"type": "string"},
+        "baseline_confound": {"type": "string"}, "killer_experiment": {"type": "string"},
+        "missing_validation": {"type": "string"}
+      }
+    },
+    "critical_risk": {"type": "string", "enum": ["none", "serious", "potentially_fatal"]},
+    "confidence": {"type": "string", "enum": ["low", "medium", "high"]},
+    "free_review": {"type": "string"}
+  }
+}

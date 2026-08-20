@@ -1,0 +1,26 @@
+{
+  "task_id": "synthetic-agent-discovery-001",
+  "system_id": "syn-passage",
+  "system_configuration": {"retrieval": "synthetic_passages", "top_k": 1},
+  "random_seed": 12,
+  "task_packet_sha256": "910d0510b2169aeccbe157c477f6bacc7b0b26e031bfbd90c6dd674a2bba3592",
+  "retrieval": {"paper_ids": ["syn-visible-2019"], "passage_ids": ["synthetic-passage-1"]},
+  "provenance": {"generated_at_utc": "2026-01-01T00:00:00Z", "model": "synthetic-model", "provider": "offline-fixture", "prompt_revision": "synthetic-r1"},
+  "cost": {"tokens": 300, "api_calls": 1, "wall_time_seconds": 2, "gpu_time_seconds": 0, "estimated_cost_usd": 0.02},
+  "hypotheses": [
+    {
+      "candidate_id": "passage-idea-1",
+      "title": "带可见段落的合成候选",
+      "problem": "合成问题",
+      "mechanism_claim": "在规划前过滤冲突动作。",
+      "descriptors": {"problem_family": "planning", "computation_stage": "precondition", "intervention_family": "filter", "information_source": "visible-passage", "timing_class": "pre-action", "budget_class": "small", "evaluation_mode": "synthetic"},
+      "changed_computation": {"baseline": "直接规划", "intervention": "先过滤冲突动作", "information_available": "相同可见段落", "timing": "规划前", "budget_effect": "一次过滤"},
+      "falsifier": {"statement": "过滤不降低失败率", "observable": "失败率", "decision_rule": "改善不大于零则否定"},
+      "killer_experiment": {"experiment_id": "passage-killer", "research_question": "过滤是否有效？", "independent_ground_truth": "合成外部终局", "primary_metric": "failure_rate", "sampling_unit": "task", "baseline_ids": ["synthetic-strong"]},
+      "visible_prior_audit": {"performed": true, "audited_visible_paper_ids": ["syn-visible-2019"], "collision_visible_paper_ids": []},
+      "implementation": {"status": "not_started", "artifact_sha256s": []},
+      "outcome": {"status": "early_killed", "decision_stage": "falsification_design", "decision_reason": "合成反证设计暴露不可测主张。"},
+      "empirical_evaluations": []
+    }
+  ]
+}

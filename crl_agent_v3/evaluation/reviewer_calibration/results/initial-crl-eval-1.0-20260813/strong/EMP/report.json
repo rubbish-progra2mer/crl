@@ -1,0 +1,59 @@
+{
+  "evaluator_definition_sha256": "e0d35083b1427e9f8861ba576304b97657498fee46480d5e07e8e0b02cea6e5b",
+  "evaluator_version": "CRL-EVAL-1.0",
+  "events_sha256": "fee2703aad9e7a9d86c3ededf1df4b8c9acb977268ea06bcfb326261c7824e49",
+  "fixture": "strong",
+  "fixture_sha256": "2261aae0ebc161b21d8f17e107400bd480774f30ec289743a0a2b1d4ff29f142",
+  "invalid_reasons": [],
+  "output": {
+    "confidence": "high",
+    "critical_risk": "none",
+    "diagnostics": {
+      "baseline_confound": "none identified from packet",
+      "biggest_empirical_threat": "全部任务仍为合成环境且仅覆盖一个模型家族；真实权限结构、长期状态漂移和人工操作成本可能改变来源独立性判断的准确性及净收益。",
+      "killer_experiment": "在独立构建的真实或高保真任务上做配对因子实验：固定观测内容、边际正确率、验证次数与总预算，只操纵两个来源的真实相关性，并比较独立性门、置信度门和等频随机门；若独立性门不呈现预注册的来源相关性×方法交互，其机制主张将被直接削弱。",
+      "missing_validation": "最值得补充的是在另一个模型家族和至少一个带真实权限约束的外部任务域上进行预注册、盲评、等预算复现。",
+      "strongest_empirical_evidence": "在相同模型、工具、可见信息和预算约束下，候选于600个保留样本、三个任务域和五个预注册种子中均降低不可逆失败率，且等成本、等调用、等延迟比较方向一致。"
+    },
+    "evaluator_version": "CRL-EVAL-1.0",
+    "free_review": "该实验包对限定机制主张提供了强而直接的内部效度证据：核心终点匹配主张，基线在信息、模型、工具、调参和多种预算口径上公平，评价标签独立且可追溯。消融和压力测试不仅显示平均优势，还复现了“来源相关时优势消失”的预声明失败边界，较好排除了单纯增加验证调用、置信度阈值或触发频率带来的解释。当前主要缺口不是内部比较，而是外部效度：合成任务和单一模型家族无法代表真实权限、漂移与人工成本。因此可较强认可受测范围内的结论，但不宜据此宣称生产环境普适有效。",
+    "model_identity": "gpt-5.6-sol",
+    "reasoning_effort": "xhigh",
+    "reasons": {
+      "baseline_fairness": "候选与三个强基线使用相同模型快照、工具、可见信息、调用上限、令牌上限及调参预算。固定验证基线还可使用候选剩余调用，避免候选因节省调用而获得不对称优势。等成本、等调用和等延迟比较方向一致，并同时报告多类资源消耗，未发现明显预算不公平。",
+      "experimental_validity": "核心指标直接测量不可逆失败率，与执行前来源独立性检查减少单一错误观测所致失败的限定主张一致。600个保留样本覆盖三个任务域，并采用五个预注册随机种子、预先固定指标和停止条件，显著降低选择性报告风险。逐域、逐种子结果及原始输出均可核查，未见核心实验被容易获胜的代理任务替代。",
+      "measurement_reliability": "参考标签由与方法构造无关的双人盲评及仲裁产生，避免直接自评和明显构造同源泄漏。主要指标预注册，且提供置信区间、效应量、逐样本输出、评价与聚合脚本及哈希。五个种子和逐域报告使方差与异质性具有较强可检查性。",
+      "result_strength": "候选在五个预注册种子中均优于三个强基线，并有逐域结果、置信区间和效应量支持，结果一致性较强。多种预算匹配视角和机制消融进一步增强了结论。不过证据仅来自合成任务和单一模型家族，尚不足以把效果强度可靠外推到真实组织权限、长期漂移或开放网络环境，因此评为3分。",
+      "robustness_falsification": "消融覆盖去除独立性检查、置信度替代、执行后检查、随机触发等关键替代解释。伪造相关双来源和高置信错误压力测试直接针对机制边界；相关双来源下优势按预声明条件消失，形成有力的机制一致性证据。跨模型规模和预算区间方向一致，主要混淆已得到较充分排查。"
+    },
+    "review_protocol": "CRL-IR-1.0",
+    "reviewer_role": "EMP",
+    "scores": {
+      "baseline_fairness": 4,
+      "experimental_validity": 4,
+      "measurement_reliability": 4,
+      "result_strength": 3,
+      "robustness_falsification": 4
+    }
+  },
+  "raw_output_sha256": "c3f362af17782d76518e53c78d0323dd55611c2b203f00af6d8bdedcbe8f5393",
+  "reviewer_role": "EMP",
+  "role_score_basis_points": 9750,
+  "runtime": {
+    "backend": "codex_exec_jsonl_v1",
+    "codex_version": "codex-cli 0.147.0",
+    "ephemeral": true,
+    "event_count": 4,
+    "executable": "D:\\Desktop\\crl\\runtimes\\codex-cli\\0.147.0\\codex.cmd",
+    "forbidden_events": [],
+    "network_requested": false,
+    "reasoning_effort": "xhigh",
+    "requested_model": "gpt-5.6-sol",
+    "returncode": 0,
+    "sandbox": "read-only",
+    "timed_out": false
+  },
+  "schema_version": 1,
+  "stderr_sha256": "e1e1cbc069c25a2164d494150e4a9eadf37cc448da52d982f0b3cb5dd63074fe",
+  "valid": true
+}

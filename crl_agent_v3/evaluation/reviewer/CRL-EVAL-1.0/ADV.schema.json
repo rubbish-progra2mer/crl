@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["review_protocol", "reviewer_role", "evaluator_version", "model_identity", "reasoning_effort", "scores", "reasons", "diagnostics", "critical_risk", "confidence", "free_review"],
+  "properties": {
+    "review_protocol": {"type": "string", "const": "CRL-IR-1.0"},
+    "reviewer_role": {"type": "string", "const": "ADV"},
+    "evaluator_version": {"type": "string", "const": "CRL-EVAL-1.0"},
+    "model_identity": {"type": "string", "const": "gpt-5.6-sol"},
+    "reasoning_effort": {"type": "string", "const": "xhigh"},
+    "scores": {
+      "type": "object", "additionalProperties": false,
+      "required": ["reproducibility_traceability", "confound_leakage_control", "boundary_generalization", "adversarial_survivability", "evidence_auditability"],
+      "properties": {
+        "reproducibility_traceability": {"type": "integer", "minimum": 0, "maximum": 4},
+        "confound_leakage_control": {"type": "integer", "minimum": 0, "maximum": 4},
+        "boundary_generalization": {"type": "integer", "minimum": 0, "maximum": 4},
+        "adversarial_survivability": {"type": "integer", "minimum": 0, "maximum": 4},
+        "evidence_auditability": {"type": "integer", "minimum": 0, "maximum": 4}
+      }
+    },
+    "reasons": {
+      "type": "object", "additionalProperties": false,
+      "required": ["reproducibility_traceability", "confound_leakage_control", "boundary_generalization", "adversarial_survivability", "evidence_auditability"],
+      "properties": {
+        "reproducibility_traceability": {"type": "string"}, "confound_leakage_control": {"type": "string"},
+        "boundary_generalization": {"type": "string"}, "adversarial_survivability": {"type": "string"},
+        "evidence_auditability": {"type": "string"}
+      }
+    },
+    "diagnostics": {
+      "type": "object", "additionalProperties": false,
+      "required": ["most_fatal_failure_mode", "reproduction_breakpoint", "hidden_assumption", "boundary_warning", "best_stress_test"],
+      "properties": {
+        "most_fatal_failure_mode": {"type": "string"}, "reproduction_breakpoint": {"type": "string"},
+        "hidden_assumption": {"type": "string"}, "boundary_warning": {"type": "string"},
+        "best_stress_test": {"type": "string"}
+      }
+    },
+    "critical_risk": {"type": "string", "enum": ["none", "serious", "potentially_fatal"]},
+    "confidence": {"type": "string", "enum": ["low", "medium", "high"]},
+    "free_review": {"type": "string"}
+  }
+}

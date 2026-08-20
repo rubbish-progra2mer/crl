@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["review_protocol", "reviewer_role", "evaluator_version", "model_identity", "reasoning_effort", "scores", "reasons", "diagnostics", "critical_risk", "confidence", "free_review"],
+  "properties": {
+    "review_protocol": {"type": "string", "const": "CRL-IR-1.0"},
+    "reviewer_role": {"type": "string", "const": "SCI"},
+    "evaluator_version": {"type": "string", "const": "CRL-EVAL-1.0"},
+    "model_identity": {"type": "string", "const": "gpt-5.6-sol"},
+    "reasoning_effort": {"type": "string", "const": "xhigh"},
+    "scores": {
+      "type": "object", "additionalProperties": false,
+      "required": ["problem_value", "prior_separation", "mechanism_clarity", "scientific_specificity", "claim_calibration"],
+      "properties": {
+        "problem_value": {"type": "integer", "minimum": 0, "maximum": 4},
+        "prior_separation": {"type": "integer", "minimum": 0, "maximum": 4},
+        "mechanism_clarity": {"type": "integer", "minimum": 0, "maximum": 4},
+        "scientific_specificity": {"type": "integer", "minimum": 0, "maximum": 4},
+        "claim_calibration": {"type": "integer", "minimum": 0, "maximum": 4}
+      }
+    },
+    "reasons": {
+      "type": "object", "additionalProperties": false,
+      "required": ["problem_value", "prior_separation", "mechanism_clarity", "scientific_specificity", "claim_calibration"],
+      "properties": {
+        "problem_value": {"type": "string"}, "prior_separation": {"type": "string"},
+        "mechanism_clarity": {"type": "string"}, "scientific_specificity": {"type": "string"},
+        "claim_calibration": {"type": "string"}
+      }
+    },
+    "diagnostics": {
+      "type": "object", "additionalProperties": false,
+      "required": ["strongest_scientific_contribution", "biggest_scientific_risk", "most_dangerous_prior_collision", "mechanism_falsifier"],
+      "properties": {
+        "strongest_scientific_contribution": {"type": "string"}, "biggest_scientific_risk": {"type": "string"},
+        "most_dangerous_prior_collision": {"type": "string"}, "mechanism_falsifier": {"type": "string"}
+      }
+    },
+    "critical_risk": {"type": "string", "enum": ["none", "serious", "potentially_fatal"]},
+    "confidence": {"type": "string", "enum": ["low", "medium", "high"]},
+    "free_review": {"type": "string"}
+  }
+}

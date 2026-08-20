@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crl.local/evaluation/research_discovery/expert_annotation.schema.json",
+  "title": "CRL Research Discovery ExpertAnnotationBatch schema 1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "task_id", "annotation_batch_id", "annotation_source", "authority", "used_for_primary_conclusions", "annotator_id_hash", "blinding", "sampling_unit", "annotations", "unblinding_map", "heldout_mechanism_assessments"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "task_id": {"$ref": "#/$defs/id"},
+    "annotation_batch_id": {"$ref": "#/$defs/id"},
+    "annotation_source": {"enum": ["blinded_expert", "llm_auxiliary"]},
+    "authority": {"enum": ["primary_allowed", "auxiliary_only"]},
+    "used_for_primary_conclusions": {"type": "boolean"},
+    "annotator_id_hash": {"$ref": "#/$defs/sha256"},
+    "blinding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["system_identity_hidden", "candidate_order_randomized", "annotation_collected_before_unblinding", "packet_sha256"],
+      "properties": {"system_identity_hidden": {"type": "boolean"}, "candidate_order_randomized": {"type": "boolean"}, "annotation_collected_before_unblinding": {"type": "boolean"}, "packet_sha256": {"$ref": "#/$defs/sha256"}}
+    },
+    "sampling_unit": {"const": "candidate_annotation"},
+    "annotations": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["blinded_candidate_id", "novelty", "significance", "technical_correctness", "overall_notes"],
+        "properties": {"blinded_candidate_id": {"$ref": "#/$defs/id"}, "novelty": {"$ref": "#/$defs/score"}, "significance": {"$ref": "#/$defs/score"}, "technical_correctness": {"$ref": "#/$defs/score"}, "overall_notes": {"type": "string"}}
+      }
+    },
+    "unblinding_map": {
+      "type": "array",
+      "items": {"type": "object", "additionalProperties": false, "required": ["blinded_candidate_id", "system_id", "candidate_id"], "properties": {"blinded_candidate_id": {"$ref": "#/$defs/id"}, "system_id": {"$ref": "#/$defs/id"}, "candidate_id": {"$ref": "#/$defs/id"}}}
+    },
+    "heldout_mechanism_assessments": {
+      "type": "array",
+      "items": {"type": "object", "additionalProperties": false, "required": ["blinded_candidate_id", "heldout_paper_id", "mechanism_rediscovered", "mechanism_rationale", "simple_text_similarity"], "properties": {"blinded_candidate_id": {"$ref": "#/$defs/id"}, "heldout_paper_id": {"$ref": "#/$defs/id"}, "mechanism_rediscovered": {"type": "boolean"}, "mechanism_rationale": {"type": "string", "minLength": 1}, "simple_text_similarity": {"type": ["number", "null"], "minimum": 0, "maximum": 1}}}
+    }
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "score": {"type": "object", "additionalProperties": false, "required": ["value", "confidence", "rationale"], "properties": {"value": {"type": "integer", "minimum": 1, "maximum": 5}, "confidence": {"type": "number", "minimum": 0, "maximum": 1}, "rationale": {"type": "string", "minLength": 1}}}
+  }
+}

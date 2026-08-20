@@ -1,0 +1,52 @@
+{
+  "task_id": "synthetic-agent-discovery-001",
+  "system_id": "syn-current",
+  "system_configuration": {"workflow": "crl_contract_v2"},
+  "random_seed": 14,
+  "task_packet_sha256": "910d0510b2169aeccbe157c477f6bacc7b0b26e031bfbd90c6dd674a2bba3592",
+  "visible_paper_ids": ["syn-visible-2019", "syn-visible-2020"],
+  "run_local_artifact_ids": ["synthetic-portfolio-v001"],
+  "provenance": {"generated_at_utc": "2026-01-01T00:00:00Z", "model": "synthetic-model", "provider": "offline-fixture", "prompt_revision": "synthetic-r1"},
+  "cost": {"tokens": 500, "api_calls": 2, "wall_time_seconds": 5, "gpu_time_seconds": 0, "estimated_cost_usd": 0.05},
+  "portfolio": {
+    "schema_version": 1,
+    "run_id": "synthetic-run",
+    "version": "v001",
+    "revision": 1,
+    "created_at_utc": "2026-01-01T00:00:00Z",
+    "updated_at_utc": "2026-01-01T00:00:00Z",
+    "hypotheses": [
+      {
+        "hypothesis_id": "current-idea-1",
+        "title": "实现并比较的合成候选",
+        "status": "active",
+        "status_reason": "合成夹具。",
+        "parent_ids": [],
+        "lineage_note": "合成起点。",
+        "problem": "合成问题",
+        "target_failure": {"summary": "规划失败", "card_ids": [], "evidence_ids": []},
+        "changed_computation": {"baseline": "直接规划", "intervention": "执行前反事实检查", "information_available": "相同任务状态", "timing": "执行前", "budget_effect": "一次检查"},
+        "mechanism_claim": "反事实检查减少合成失败。",
+        "falsifier": "匹配基线下失败率未下降。",
+        "minimal_killer_experiment": "合成独立终局比较。",
+        "nearest_prior_risk": "可能与可见过滤工作重合。",
+        "alternative_explanations": ["预算差异"],
+        "descriptors": {"problem_family": "planning", "computation_stage": "execution", "intervention_family": "counterfactual-check", "information_source": "task-state", "timing_class": "pre-execution", "budget_class": "small", "evaluation_mode": "independent-synthetic"},
+        "literature_refs": [],
+        "created_at_utc": "2026-01-01T00:00:00Z",
+        "updated_at_utc": "2026-01-01T00:00:00Z",
+        "revision": 1
+      }
+    ]
+  },
+  "candidate_facts": {
+    "current-idea-1": {
+      "falsifier": {"statement": "失败率未下降", "observable": "failure_rate", "decision_rule": "候选失败率必须更低"},
+      "killer_experiment": {"experiment_id": "current-killer", "research_question": "反事实检查是否存活？", "independent_ground_truth": "合成外部终局", "primary_metric": "failure_rate", "sampling_unit": "task", "baseline_ids": ["synthetic-strong"]},
+      "visible_prior_audit": {"performed": true, "audited_visible_paper_ids": ["syn-visible-2019", "syn-visible-2020"], "collision_visible_paper_ids": []},
+      "implementation": {"status": "implemented", "artifact_sha256s": ["1111111111111111111111111111111111111111111111111111111111111111"]},
+      "outcome": {"status": "survived", "decision_stage": "matched_baseline", "decision_reason": "合成比较记录为存活。"},
+      "empirical_evaluations": [{"comparison_id": "current-comparison", "baseline_id": "synthetic-strong", "parity_status": "matched", "survived": true, "decision_rule": "failure_rate 更低", "metric_name": "failure_rate", "sampling_unit": "task"}]
+    }
+  }
+}

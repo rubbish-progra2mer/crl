@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "task_id": "synthetic-agent-discovery-001",
+  "annotation_batch_id": "synthetic-expert-001",
+  "annotation_source": "blinded_expert",
+  "authority": "primary_allowed",
+  "used_for_primary_conclusions": true,
+  "annotator_id_hash": "4444444444444444444444444444444444444444444444444444444444444444",
+  "blinding": {
+    "system_identity_hidden": true,
+    "candidate_order_randomized": true,
+    "annotation_collected_before_unblinding": true,
+    "packet_sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "sampling_unit": "candidate_annotation",
+  "annotations": [
+    {
+      "blinded_candidate_id": "blind-a",
+      "novelty": {"value": 2, "confidence": 0.8, "rationale": "完全合成的低分示例。"},
+      "significance": {"value": 2, "confidence": 0.8, "rationale": "完全合成的低分示例。"},
+      "technical_correctness": {"value": 2, "confidence": 0.8, "rationale": "没有实现或实证记录。"},
+      "overall_notes": "仅用于测试盲化标注导入。"
+    },
+    {
+      "blinded_candidate_id": "blind-b",
+      "novelty": {"value": 3, "confidence": 0.7, "rationale": "完全合成的中间分示例。"},
+      "significance": {"value": 3, "confidence": 0.7, "rationale": "完全合成的中间分示例。"},
+      "technical_correctness": {"value": 4, "confidence": 0.7, "rationale": "存在合成实现与匹配比较记录。"},
+      "overall_notes": "仅用于测试系统身份解盲后的归组。"
+    },
+    {
+      "blinded_candidate_id": "blind-c",
+      "novelty": {"value": 3, "confidence": 0.6, "rationale": "完全合成的中间分示例。"},
+      "significance": {"value": 3, "confidence": 0.6, "rationale": "完全合成的中间分示例。"},
+      "technical_correctness": {"value": 2, "confidence": 0.6, "rationale": "比较预算不匹配。"},
+      "overall_notes": "仅用于测试辅助系统的分解结果。"
+    }
+  ],
+  "unblinding_map": [
+    {"blinded_candidate_id": "blind-a", "system_id": "syn-bare", "candidate_id": "bare-idea-1"},
+    {"blinded_candidate_id": "blind-b", "system_id": "syn-current", "candidate_id": "current-idea-1"},
+    {"blinded_candidate_id": "blind-c", "system_id": "syn-search", "candidate_id": "search-idea-1"}
+  ],
+  "heldout_mechanism_assessments": [
+    {"blinded_candidate_id": "blind-a", "heldout_paper_id": "syn-heldout-2020", "mechanism_rediscovered": false, "mechanism_rationale": "合成标注认为机制不同。", "simple_text_similarity": 0.8},
+    {"blinded_candidate_id": "blind-b", "heldout_paper_id": "syn-heldout-2020", "mechanism_rediscovered": true, "mechanism_rationale": "合成标注认为计算机制一致。", "simple_text_similarity": 0.2},
+    {"blinded_candidate_id": "blind-c", "heldout_paper_id": "syn-heldout-2020", "mechanism_rediscovered": false, "mechanism_rationale": "合成标注认为仅文本接近。", "simple_text_similarity": 0.7}
+  ]
+}

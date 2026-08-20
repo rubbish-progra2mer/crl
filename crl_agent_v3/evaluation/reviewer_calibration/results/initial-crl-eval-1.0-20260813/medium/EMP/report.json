@@ -1,0 +1,59 @@
+{
+  "evaluator_definition_sha256": "e0d35083b1427e9f8861ba576304b97657498fee46480d5e07e8e0b02cea6e5b",
+  "evaluator_version": "CRL-EVAL-1.0",
+  "events_sha256": "ccad61eb6b4e9a5d68d870af472572ff978f6dd4aec4248347b3e3e05f64a26f",
+  "fixture": "medium",
+  "fixture_sha256": "9ca11eea5a62b8bba68424a6afd553dabed20a79a31f66780655bf55469c08bf",
+  "invalid_reasons": [],
+  "output": {
+    "confidence": "high",
+    "critical_risk": "serious",
+    "diagnostics": {
+      "baseline_confound": "候选在开发集调节了触发阈值，但基线获得的调参机会未说明；同时未记录实际调用数和令牌消耗，候选可能因更多实际验证调用或更多调参而获益。",
+      "biggest_empirical_threat": "样本量有限却未提供配对置信区间或显著性分析，加之只测试一个合成域，当前5–6个百分点优势可能不稳定或由任务特定分布驱动。",
+      "killer_experiment": "在预注册阈值后，用多个独立测试集进行逐样本配对比较，并加入获得同等开发集调参机会、且实际调用数与令牌消耗匹配的强基线；若优势消失，将直接推翻当前可靠性增益主张。",
+      "missing_validation": "最应补充逐样本配对的效应量与置信区间，并报告各方法实际调用次数和令牌消耗。",
+      "strongest_empirical_evidence": "在独立人工标注的120个保留样本上，候选三个种子均比同模型、同工具和同调用上限基线高5–6个百分点，且逐样本输出哈希可供核验。"
+    },
+    "evaluator_version": "CRL-EVAL-1.0",
+    "free_review": "实验与窄化后的核心主张基本对齐：保留集有人工作为独立标签，三个种子方向一致，且两个消融提示“按置信度条件触发”优于关闭或随机触发。主要问题不是完全没有信号，而是信号的统计与公平性边界不清。5–6个百分点在每种子120例上可能只涉及少量样本，却没有配对区间、显著性或错误重合分析；候选阈值经过开发集调节，基线调参待遇和实际计算消耗又未披露。再加上只有一个合成域且缺少阈值、高置信错误和跨模型压力测试，现有结果可视为有希望的初步证据，尚不足以证明稳健、预算公平的普遍可靠性提升。",
+    "model_identity": "gpt-5.6-sol",
+    "reasoning_effort": "xhigh",
+    "reasons": {
+      "baseline_fairness": "候选与主要基线共享模型、工具、两次调用上限和4000令牌上限，表面预算具有可比性。但候选阈值经过开发集调节，而基线的调参机会没有说明，这是重要的不对称。墙钟时间、实际调用次数、令牌消耗和费用也未记录，因此相同上限不等于相同实际计算预算。",
+      "experimental_validity": "核心实验直接比较了条件验证与单次路由，且模型、工具集合及调用和令牌上限一致，基本对应限定后的核心主张。三个种子均显示候选高于基线，关闭验证器和随机触发也未达到候选表现。不过证据仅来自一个合成任务域，尚不能判断提升是否依赖特定数据构造或错误分布。",
+      "measurement_reliability": "120个保留样本具有独立人工标签，并报告逐种子准确率和逐样本输出哈希，降低了自评与结果选择的风险。可是没有置信区间、显著性检验或配对误差分析，也未说明标签一致性和仲裁过程。三个随机种子不能替代对120个样本层面的统计不确定性估计。",
+      "result_strength": "候选在三个种子上分别比基线高5、5、6个百分点，方向一致，构成真实但规模有限的经验信号。由于每种子仅120个样本且没有区间估计，差异可能对应很少的样本，精度尚不足以确认稳定优势。单一合成域也使结果强度只能支持窄范围主张。",
+      "robustness_falsification": "关闭验证器和随机触发验证器两个消融都低于条件触发，为触发机制提供了初步支持。然而缺少阈值敏感性、跨模型复现、负控制及高置信错误压力测试，无法排除收益仅来自某一阈值、模型校准特征或合成分布。现有消融尚不足以检验主要边界和失败机制。"
+    },
+    "review_protocol": "CRL-IR-1.0",
+    "reviewer_role": "EMP",
+    "scores": {
+      "baseline_fairness": 2,
+      "experimental_validity": 3,
+      "measurement_reliability": 2,
+      "result_strength": 2,
+      "robustness_falsification": 2
+    }
+  },
+  "raw_output_sha256": "04b8408be5f0ceb498d451a041c1462c88278a5d9e81e7192ed919b109806f92",
+  "reviewer_role": "EMP",
+  "role_score_basis_points": 5625,
+  "runtime": {
+    "backend": "codex_exec_jsonl_v1",
+    "codex_version": "codex-cli 0.147.0",
+    "ephemeral": true,
+    "event_count": 4,
+    "executable": "D:\\Desktop\\crl\\runtimes\\codex-cli\\0.147.0\\codex.cmd",
+    "forbidden_events": [],
+    "network_requested": false,
+    "reasoning_effort": "xhigh",
+    "requested_model": "gpt-5.6-sol",
+    "returncode": 0,
+    "sandbox": "read-only",
+    "timed_out": false
+  },
+  "schema_version": 1,
+  "stderr_sha256": "95beab98e72548cf96728da59dd7b2ae338e034efc16583f34fae3a99cde6868",
+  "valid": true
+}

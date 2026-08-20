@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crl.local/evaluation/research_discovery/task_manifest.schema.json",
+  "title": "CRL Research Discovery TaskManifest schema 1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "task_id",
+    "agent_subfield",
+    "research_question",
+    "temporal_visibility",
+    "heldout_paper_ids",
+    "paper_timeline",
+    "resource_budget",
+    "known_strong_baselines",
+    "blinding",
+    "human_annotation_instructions",
+    "system_profiles",
+    "synthetic_fixture",
+    "synthetic_notice"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "task_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+    "agent_subfield": {"type": "string", "minLength": 1},
+    "research_question": {"type": "string", "minLength": 1},
+    "temporal_visibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cutoff", "visible_paper_ids", "visible_artifact_ids"],
+      "properties": {
+        "cutoff": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["precision", "value"],
+              "properties": {
+                "precision": {"const": "day"},
+                "value": {"type": "string", "format": "date"}
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["precision", "value"],
+              "properties": {
+                "precision": {"const": "year"},
+                "value": {"type": "integer", "minimum": 1000, "maximum": 9999}
+              }
+            }
+          ]
+        },
+        "visible_paper_ids": {"$ref": "#/$defs/unique_ids"},
+        "visible_artifact_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "heldout_paper_ids": {"$ref": "#/$defs/unique_ids"},
+    "paper_timeline": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["paper_id", "publication_date", "publication_year"],
+        "properties": {
+          "paper_id": {"$ref": "#/$defs/id"},
+          "publication_date": {"type": ["string", "null"], "format": "date"},
+          "publication_year": {"type": ["integer", "null"], "minimum": 1000, "maximum": 9999}
+        }
+      }
+    },
+    "resource_budget": {"$ref": "#/$defs/resources"},
+    "known_strong_baselines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["baseline_id", "description"],
+        "properties": {
+          "baseline_id": {"$ref": "#/$defs/id"},
+          "description": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "blinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "system_identity_hidden_from_experts",
+        "candidate_order_randomized",
+        "heldout_not_in_system_input"
+      ],
+      "properties": {
+        "system_identity_hidden_from_experts": {"type": "boolean"},
+        "candidate_order_randomized": {"type": "boolean"},
+        "heldout_not_in_system_input": {"const": true}
+      }
+    },
+    "human_annotation_instructions": {"type": "string", "minLength": 1},
+    "system_profiles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["system_id", "system_type", "configuration_sha256"],
+        "properties": {
+          "system_id": {"$ref": "#/$defs/id"},
+          "system_type": {"$ref": "#/$defs/system_type"},
+          "configuration_sha256": {"$ref": "#/$defs/sha256"}
+        }
+      }
+    },
+    "synthetic_fixture": {"type": "boolean"},
+    "synthetic_notice": {"type": "string"}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "unique_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+    "system_type": {"enum": ["bare_llm", "passage_rag", "card_only", "current_crl", "crl_scientific_search"]},
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tokens", "api_calls", "wall_time_seconds", "gpu_time_seconds", "estimated_cost_usd"],
+      "properties": {
+        "tokens": {"type": ["number", "null"], "minimum": 0},
+        "api_calls": {"type": ["number", "null"], "minimum": 0},
+        "wall_time_seconds": {"type": ["number", "null"], "minimum": 0},
+        "gpu_time_seconds": {"type": ["number", "null"], "minimum": 0},
+        "estimated_cost_usd": {"type": ["number", "null"], "minimum": 0}
+      }
+    }
+  }
+}

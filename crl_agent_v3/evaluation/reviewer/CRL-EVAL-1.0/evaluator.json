@@ -1,0 +1,33 @@
+{
+  "evaluator_version": "CRL-EVAL-1.0",
+  "review_protocol": "CRL-IR-1.0",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "xhigh",
+  "backend": "codex_exec_jsonl_v1",
+  "codex_cli_version": "0.147.0",
+  "service_tier": "fast",
+  "sandbox": "read-only",
+  "network": "disabled_by_sandbox_and_forbidden_by_protocol",
+  "session": "ephemeral_fresh",
+  "roles": ["SCI", "EMP", "ADV"],
+  "role_weights": {"SCI": 35, "EMP": 40, "ADV": 25},
+  "dimension_weights": {
+    "SCI": {"problem_value": 20, "prior_separation": 25, "mechanism_clarity": 25, "scientific_specificity": 15, "claim_calibration": 15},
+    "EMP": {"experimental_validity": 25, "baseline_fairness": 25, "measurement_reliability": 20, "robustness_falsification": 20, "result_strength": 10},
+    "ADV": {"reproducibility_traceability": 25, "confound_leakage_control": 25, "boundary_generalization": 15, "adversarial_survivability": 25, "evidence_auditability": 10}
+  },
+  "prompt_files": {"common": "common.md", "SCI": "SCI.md", "EMP": "EMP.md", "ADV": "ADV.md"},
+  "output_schemas": {"SCI": "SCI.schema.json", "EMP": "EMP.schema.json", "ADV": "ADV.schema.json"},
+  "packet_sections": [
+    "Implementation / Seed Overview",
+    "Closest Prior Evidence",
+    "Core Experimental Evidence",
+    "Baseline & Budget Facts",
+    "Ablation / Robustness / Falsification Evidence",
+    "Reproducibility Facts",
+    "Known Limitations"
+  ],
+  "tool_event_policy": "any_tool_or_external_access_event_invalidates_entire_group",
+  "canonical_policy": "first_valid_triplet_per_measurement_key",
+  "stability_policy": "later_same_key_never_replaces_canonical"
+}
