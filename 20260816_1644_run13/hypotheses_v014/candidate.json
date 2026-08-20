@@ -1,0 +1,42 @@
+{
+  "hypothesis_id": "h-v014-delayed-column-reliability",
+  "title": "延迟列生成的无依赖可靠性证书",
+  "problem": "无依赖假设的多智能体组合可靠性证书需要在二的组件数次方个联合结果单元上求解线性规划，无法直接扩展到较大组合。",
+  "target_failure": {
+    "summary": "尖锐、有限样本、无依赖假设的可靠性下界因联合状态空间指数增长而无法用于大规模智能体图。",
+    "card_ids": [],
+    "evidence_ids": []
+  },
+  "mechanism_claim": "用受限主问题与二元整数定价问题按需生成联合配置，可以避免显式保存全部联合单元，同时保持给定矩信息下的同一尖锐可靠性下界。",
+  "changed_computation": {
+    "baseline": "显式枚举全部联合成功/失败配置后求解极值线性规划。",
+    "intervention": "只保留当前联合配置列，并用对偶价格驱动的二元整数问题寻找负约化成本配置，迭代到没有违约列。",
+    "information_available": "与基线相同的组件边缘和联合成功/失败矩区间，不增加独立性或参数化分布假设。",
+    "timing": "离线证书求解阶段。",
+    "budget_effect": "把指数内存改为关于约束数的多项式内存，但需要重复求解定价问题。"
+  },
+  "minimal_killer_experiment": "在合成相关伯努利流水线上比较显式线性规划与延迟列生成的下界一致性、峰值内存和规模上限。",
+  "falsifier": "已有方法已经对同一可靠性极值线性规划使用延迟列生成，或源论文已明确给出这一直接路线。",
+  "alternative_explanations": [
+    "只是通用列生成的领域适配",
+    "局部矩结构使定价问题仍然困难",
+    "近似定价破坏尖锐性",
+    "经典系统可靠性方法已等价实现"
+  ],
+  "nearest_prior_risk": "Boole—Hailperin 概率界、系统可靠性线性规划、延迟列生成与图模型边缘多面体可能直接覆盖。",
+  "lineage_note": "来自 Agent Behavioral Contracts II 对大组合认证的明确局限与未来工作。",
+  "literature_refs": [
+    "arXiv:2608.12895",
+    "DOI:10.1061/(ASCE)EM.1943-7889.0001717",
+    "arXiv:2110.10672"
+  ],
+  "descriptors": {
+    "problem_family": "多智能体组合可靠性",
+    "intervention_family": "延迟列生成",
+    "computation_stage": "离线证书求解",
+    "information_source": "共执行矩区间",
+    "evaluation_mode": "可靠性下界尖锐性与规模",
+    "timing_class": "认证时",
+    "budget_class": "多项式内存、迭代定价"
+  }
+}

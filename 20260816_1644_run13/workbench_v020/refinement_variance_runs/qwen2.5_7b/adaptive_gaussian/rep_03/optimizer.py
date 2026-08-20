@@ -1,0 +1,60 @@
+import numpy as np
+from problems import BudgetExhausted
+
+class Optimizer:
+    def __init__(self, dim, bounds, sigma_init=0.1, mu=10, lambda_=20, eta=0.5, alpha=0.99, min_sigma=1e-5, max_sigma=1.0, stagnation_limit=100):
+        self.dim = dim
+        self.bounds = bounds
+        self.sigma = sigma_init
+        self.mu = mu
+        self.lambda_ = lambda_
+        self.eta = eta
+        self.alpha = alpha
+        self.min_sigma = min_sigma
+        self.max_sigma = max_sigma
+        self.stagnation_limit = stagnation_limit
+        self.stagnation_count = 0
+        self.incumbent = None
+        self.incumbent_fitness = float('inf')
+        self.evaluations = 0
+
+    def sample(self):
+        return np.random.normal(self.incumbent, self.sigma, self.dim)
+
+    def update(self, solutions):
+        self.evaluations += len(solutions)
+        mean = np.mean(solutions, axis=0)
+        std = np.std(solutions, axis=0)
+
+        if np.all(std < self.min_sigma):
+            self.stagnation_count += 1
+        else:
+            self.stagnation_count = 0
+
+        if self.incumbent_fitness > np.min([np.linalg.norm(x - self.incumbent) for x in solutions]):
+            self.incumbent = mean
+            self.incumbent_fitness = np.min([np.linalg.norm(x - self.incumbent) for x in solutions])
+            self.stagnation_count = 0
+
+        self.sigma = min(self.max_sigma, max(self.min_sigma, self.sigma * self.alpha ** (self.stagnation_count / self.stagnation_limit)))
+
+    def optimize(self, f, budget):
+        while self.evaluations < budget:
+            solutions = [self.sample() for _ in range(self.lambda_)]
+            for solution in solutions:
+                for i in range(self.dim):
+                    if solution[i] < self.bounds[0][i] or solution[i] > self.bounds[1][i]:
+                        solution[i] = np.random.uniform(self.bounds[0][i], self.bounds[1][i])
+            fitnesses = [f(solution) for solution in solutions]
+            self.update(solutions)
+
+        return {'incumbent': self.incumbent, 'evaluations': self.evaluations}
+
+def optimize(f, dim, bounds, budget, seed=None):
+    if seed is not None:
+        np.random.seed(seed)
+    optimizer = Optimizer(dim, bounds)
+    try:
+        return optimizer.optimize(f, budget)
+    except BudgetExhausted:
+        return {'incumbent': optimizer.incumbent, 'evaluations': optimizer.evaluations}

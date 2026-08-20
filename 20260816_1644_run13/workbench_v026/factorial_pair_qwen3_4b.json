@@ -1,0 +1,768 @@
+{
+  "schema_version": 1,
+  "model": "qwen3:4b",
+  "created_at_utc": "2026-08-16T12:13:11.541846Z",
+  "rows": [
+    {
+      "id": "C-A-01",
+      "cell": "A",
+      "subclass": "quantity_drift",
+      "lexical": "CLOSE",
+      "gold": "DIFFERENT",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "The reference policy allows up to 3 retries, while the candidate policy allows up to 30 retries. The quantities (3 vs 30) differ, so the policies are not the same."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"The reference policy allows up to 3 retries, while the candidate policy allows up to 30 retries. The quantities (3 vs 30) differ, so the policies are not the same.\"\n}",
+        "wall_seconds": 5.1913,
+        "prompt_eval_count": 127,
+        "eval_count": 58
+      }
+    },
+    {
+      "id": "C-C-01",
+      "cell": "C",
+      "subclass": "quantity_drift",
+      "lexical": "CLOSE",
+      "gold": "SAME",
+      "response": {
+        "ok": true,
+        "decision": "SAME",
+        "parsed": {
+          "decision": "SAME",
+          "reason": "Both policies specify a maximum of three retries, with 'at most three times' and 'at most three attempts' being synonymous in this context."
+        },
+        "raw": "{\n  \"decision\": \"SAME\",\n  \"reason\": \"Both policies specify a maximum of three retries, with 'at most three times' and 'at most three attempts' being synonymous in this context.\"\n}",
+        "wall_seconds": 0.6219,
+        "prompt_eval_count": 127,
+        "eval_count": 44
+      }
+    },
+    {
+      "id": "C-B-01",
+      "cell": "B",
+      "subclass": "quantity_drift",
+      "lexical": "DISTANT",
+      "gold": "DIFFERENT",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "Reference policy limits retries to three times, while candidate policy has no retry limit and continues until success."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"Reference policy limits retries to three times, while candidate policy has no retry limit and continues until success.\"\n}",
+        "wall_seconds": 0.5682,
+        "prompt_eval_count": 132,
+        "eval_count": 37
+      }
+    },
+    {
+      "id": "C-D-01",
+      "cell": "D",
+      "subclass": "quantity_drift",
+      "lexical": "DISTANT",
+      "gold": "SAME",
+      "response": {
+        "ok": true,
+        "decision": "SAME",
+        "parsed": {
+          "decision": "SAME",
+          "reason": "Both policies specify a maximum of three attempts with no further action after the third attempt."
+        },
+        "raw": "{\n  \"decision\": \"SAME\",\n  \"reason\": \"Both policies specify a maximum of three attempts with no further action after the third attempt.\"\n}",
+        "wall_seconds": 0.525,
+        "prompt_eval_count": 130,
+        "eval_count": 32
+      }
+    },
+    {
+      "id": "C-A-02",
+      "cell": "A",
+      "subclass": "modal_downgrade",
+      "lexical": "CLOSE",
+      "gold": "DIFFERENT",
+      "response": {
+        "ok": true,
+        "decision": "SAME",
+        "parsed": {
+          "decision": "SAME",
+          "reason": "Both policies specify the same requirement for token rotation frequency (every 24 hours), with only the wording 'must' vs 'should' differing. The operational semantics focus on the requirement's timing and frequency, not the strength of obligation."
+        },
+        "raw": "{\n  \"decision\": \"SAME\",\n  \"reason\": \"Both policies specify the same requirement for token rotation frequency (every 24 hours), with only the wording 'must' vs 'should' differing. The operational semantics focus on the requirement's timing and frequency, not the strength of obligation.\"\n}",
+        "wall_seconds": 0.794,
+        "prompt_eval_count": 133,
+        "eval_count": 63
+      }
+    },
+    {
+      "id": "C-C-02",
+      "cell": "C",
+      "subclass": "modal_downgrade",
+      "lexical": "CLOSE",
+      "gold": "SAME",
+      "response": {
+        "ok": true,
+        "decision": "SAME",
+        "parsed": {
+          "decision": "SAME",
+          "reason": "Both policies specify the same requirement: token rotation every 24 hours. The difference in 'hours' vs 'hrs' is a stylistic variation and does not change the meaning or technical specification."
+        },
+        "raw": "{\n  \"decision\": \"SAME\",\n  \"reason\": \"Both policies specify the same requirement: token rotation every 24 hours. The difference in 'hours' vs 'hrs' is a stylistic variation and does not change the meaning or technical specification.\"\n}",
+        "wall_seconds": 0.7112,
+        "prompt_eval_count": 133,
+        "eval_count": 55
+      }
+    },
+    {
+      "id": "C-B-02",
+      "cell": "B",
+      "subclass": "modal_downgrade",
+      "lexical": "DISTANT",
+      "gold": "DIFFERENT",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "Reference policy specifies a fixed 24-hour rotation interval, while candidate policy allows discretionary refresh timing without defined interval or constraints."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"Reference policy specifies a fixed 24-hour rotation interval, while candidate policy allows discretionary refresh timing without defined interval or constraints.\"\n}",
+        "wall_seconds": 0.5939,
+        "prompt_eval_count": 132,
+        "eval_count": 42
+      }
+    },
+    {
+      "id": "C-D-02",
+      "cell": "D",
+      "subclass": "modal_downgrade",
+      "lexical": "DISTANT",
+      "gold": "SAME",
+      "response": {
+        "ok": true,
+        "decision": "SAME",
+        "parsed": {
+          "decision": "SAME",
+          "reason": "Both policies specify a daily rotation requirement with no exceptions, matching in frequency (every 24 hours), scope (secrets), and strictness (no exceptions)."
+        },
+        "raw": "{\n  \"decision\": \"SAME\",\n  \"reason\": \"Both policies specify a daily rotation requirement with no exceptions, matching in frequency (every 24 hours), scope (secrets), and strictness (no exceptions).\"\n}",
+        "wall_seconds": 0.6515,
+        "prompt_eval_count": 134,
+        "eval_count": 49
+      }
+    },
+    {
+      "id": "C-A-03",
+      "cell": "A",
+      "subclass": "modal_downgrade",
+      "lexical": "CLOSE",
+      "gold": "DIFFERENT",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "The reference policy states 'Never log the raw API key' while the candidate policy states 'Rarely log the raw API key'. The key difference is in the frequency of logging: 'never' implies zero occurrences, whereas 'rarely' implies occasional occurrences. This difference in frequency violates the requirement that all actions, conditions, scope, exceptions, modality, quantities or units, ordering, and timing must agree."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"The reference policy states 'Never log the raw API key' while the candidate policy states 'Rarely log the raw API key'. The key difference is in the frequency of logging: 'never' implies zero occurrences, whereas 'rarely' implies occasional occurrences. This difference in frequency violates the requirement that all actions, conditions, scope, exceptions, modality, quantities or units, ordering, and timing must agree.\"\n}",
+        "wall_seconds": 1.0581,
+        "prompt_eval_count": 126,
+        "eval_count": 101
+      }
+    },
+    {
+      "id": "C-C-03",
+      "cell": "C",
+      "subclass": "modal_downgrade",
+      "lexical": "CLOSE",
+      "gold": "SAME",
+      "response": {
+        "ok": true,
+        "decision": "SAME",
+        "parsed": {
+          "decision": "SAME",
+          "reason": "Both policies prohibit logging raw credentials (API key vs. API token) with identical intent and scope."
+        },
+        "raw": "{\n  \"decision\": \"SAME\",\n  \"reason\": \"Both policies prohibit logging raw credentials (API key vs. API token) with identical intent and scope.\"\n}",
+        "wall_seconds": 0.5633,
+        "prompt_eval_count": 125,
+        "eval_count": 35
+      }
+    },
+    {
+      "id": "C-B-03",
+      "cell": "B",
+      "subclass": "modal_downgrade",
+      "lexical": "DISTANT",
+      "gold": "DIFFERENT",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "Reference policy prohibits logging raw API keys, while candidate policy allows verbose diagnostics to include credential material during troubleshooting."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"Reference policy prohibits logging raw API keys, while candidate policy allows verbose diagnostics to include credential material during troubleshooting.\"\n}",
+        "wall_seconds": 0.583,
+        "prompt_eval_count": 127,
+        "eval_count": 38
+      }
+    },
+    {
+      "id": "C-D-03",
+      "cell": "D",
+      "subclass": "modal_downgrade",
+      "lexical": "DISTANT",
+      "gold": "SAME",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "Reference policy specifically addresses API keys, while candidate policy is broader (covers all secret material)."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"Reference policy specifically addresses API keys, while candidate policy is broader (covers all secret material).\"\n}",
+        "wall_seconds": 0.5582,
+        "prompt_eval_count": 129,
+        "eval_count": 36
+      }
+    },
+    {
+      "id": "C-A-04",
+      "cell": "A",
+      "subclass": "order_inversion",
+      "lexical": "CLOSE",
+      "gold": "DIFFERENT",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "The reference policy specifies deleting temp files after job completion, while the candidate policy specifies deleting them before job completion. This difference in timing (after vs. before) changes the sequence of operations and the state of the system at the time of deletion."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"The reference policy specifies deleting temp files after job completion, while the candidate policy specifies deleting them before job completion. This difference in timing (after vs. before) changes the sequence of operations and the state of the system at the time of deletion.\"\n}",
+        "wall_seconds": 0.8033,
+        "prompt_eval_count": 129,
+        "eval_count": 66
+      }
+    },
+    {
+      "id": "C-C-04",
+      "cell": "C",
+      "subclass": "order_inversion",
+      "lexical": "CLOSE",
+      "gold": "SAME",
+      "response": {
+        "ok": true,
+        "decision": "SAME",
+        "parsed": {
+          "decision": "SAME",
+          "reason": "Both policies specify deleting/removing temporary files after job completion with identical meaning and timing."
+        },
+        "raw": "{\n  \"decision\": \"SAME\",\n  \"reason\": \"Both policies specify deleting/removing temporary files after job completion with identical meaning and timing.\"\n}",
+        "wall_seconds": 0.5145,
+        "prompt_eval_count": 129,
+        "eval_count": 32
+      }
+    },
+    {
+      "id": "C-B-04",
+      "cell": "B",
+      "subclass": "order_inversion",
+      "lexical": "DISTANT",
+      "gold": "DIFFERENT",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "Reference policy specifies deletion of temp files after job completion, while candidate policy states scratch data persists on disk post-processing. The actions (deletion vs persistence) and conditions (temp files vs scratch data) differ fundamentally."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"Reference policy specifies deletion of temp files after job completion, while candidate policy states scratch data persists on disk post-processing. The actions (deletion vs persistence) and conditions (temp files vs scratch data) differ fundamentally.\"\n}",
+        "wall_seconds": 0.7401,
+        "prompt_eval_count": 130,
+        "eval_count": 60
+      }
+    },
+    {
+      "id": "C-D-04",
+      "cell": "D",
+      "subclass": "order_inversion",
+      "lexical": "DISTANT",
+      "gold": "SAME",
+      "response": {
+        "ok": true,
+        "decision": "SAME",
+        "parsed": {
+          "decision": "SAME",
+          "reason": "Both policies specify removing temporary files after job completion, with 'scratch data' being synonymous with 'temp files' in this context."
+        },
+        "raw": "{\n  \"decision\": \"SAME\",\n  \"reason\": \"Both policies specify removing temporary files after job completion, with 'scratch data' being synonymous with 'temp files' in this context.\"\n}",
+        "wall_seconds": 0.5993,
+        "prompt_eval_count": 129,
+        "eval_count": 41
+      }
+    },
+    {
+      "id": "C-A-05",
+      "cell": "A",
+      "subclass": "quantity_drift",
+      "lexical": "CLOSE",
+      "gold": "DIFFERENT",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "The reference policy specifies alerting when latency exceeds 200ms, while the candidate policy specifies alerting when latency exceeds 2.000ms (2000ms). The threshold values differ by a factor of 10, which changes the condition for triggering the alert."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"The reference policy specifies alerting when latency exceeds 200ms, while the candidate policy specifies alerting when latency exceeds 2.000ms (2000ms). The threshold values differ by a factor of 10, which changes the condition for triggering the alert.\"\n}",
+        "wall_seconds": 0.8931,
+        "prompt_eval_count": 132,
+        "eval_count": 77
+      }
+    },
+    {
+      "id": "C-C-05",
+      "cell": "C",
+      "subclass": "quantity_drift",
+      "lexical": "CLOSE",
+      "gold": "SAME",
+      "response": {
+        "ok": true,
+        "decision": "SAME",
+        "parsed": {
+          "decision": "SAME",
+          "reason": "Both policies specify an alert condition based on a threshold of 200ms, with the only difference being the use of 'latency' vs 'delay' which are synonymous in this context."
+        },
+        "raw": "{\n  \"decision\": \"SAME\",\n  \"reason\": \"Both policies specify an alert condition based on a threshold of 200ms, with the only difference being the use of 'latency' vs 'delay' which are synonymous in this context.\"\n}",
+        "wall_seconds": 0.6997,
+        "prompt_eval_count": 131,
+        "eval_count": 55
+      }
+    },
+    {
+      "id": "C-B-05",
+      "cell": "B",
+      "subclass": "quantity_drift",
+      "lexical": "DISTANT",
+      "gold": "DIFFERENT",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "Reference policy triggers at 200ms latency, candidate policy requires 2 seconds (2000ms) with a condition of 'full seconds' and 'on-call engineer' notification"
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"Reference policy triggers at 200ms latency, candidate policy requires 2 seconds (2000ms) with a condition of 'full seconds' and 'on-call engineer' notification\"\n}",
+        "wall_seconds": 0.715,
+        "prompt_eval_count": 135,
+        "eval_count": 57
+      }
+    },
+    {
+      "id": "C-D-05",
+      "cell": "D",
+      "subclass": "quantity_drift",
+      "lexical": "DISTANT",
+      "gold": "SAME",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "The reference policy uses 'latency exceeds 200ms' while the candidate policy uses 'a fifth of a second' (200ms), but the action differs: 'Alert' vs 'Page the on-call engineer'. The reference specifies an alert action, while the candidate specifies a page action, which is a different operational response."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"The reference policy uses 'latency exceeds 200ms' while the candidate policy uses 'a fifth of a second' (200ms), but the action differs: 'Alert' vs 'Page the on-call engineer'. The reference specifies an alert action, while the candidate specifies a page action, which is a different operational response.\"\n}",
+        "wall_seconds": 0.9654,
+        "prompt_eval_count": 136,
+        "eval_count": 87
+      }
+    },
+    {
+      "id": "C-A-06",
+      "cell": "A",
+      "subclass": "constraint_deletion",
+      "lexical": "CLOSE",
+      "gold": "DIFFERENT",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "Reference policy restricts approval to admins only, while candidate policy allows any user to approve, violating the restriction on who may approve."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"Reference policy restricts approval to admins only, while candidate policy allows any user to approve, violating the restriction on who may approve.\"\n}",
+        "wall_seconds": 0.6149,
+        "prompt_eval_count": 125,
+        "eval_count": 43
+      }
+    },
+    {
+      "id": "C-C-06",
+      "cell": "C",
+      "subclass": "constraint_deletion",
+      "lexical": "CLOSE",
+      "gold": "SAME",
+      "response": {
+        "ok": true,
+        "decision": "SAME",
+        "parsed": {
+          "decision": "SAME",
+          "reason": "Both policies specify that only admins have the authority to approve/authorise a deploy, with identical meaning in operational terms."
+        },
+        "raw": "{\n  \"decision\": \"SAME\",\n  \"reason\": \"Both policies specify that only admins have the authority to approve/authorise a deploy, with identical meaning in operational terms.\"\n}",
+        "wall_seconds": 0.5705,
+        "prompt_eval_count": 126,
+        "eval_count": 39
+      }
+    },
+    {
+      "id": "C-B-06",
+      "cell": "B",
+      "subclass": "constraint_deletion",
+      "lexical": "DISTANT",
+      "gold": "DIFFERENT",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "Reference policy restricts approval to admins only, while candidate policy allows any team member with repository access to sign off."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"Reference policy restricts approval to admins only, while candidate policy allows any team member with repository access to sign off.\"\n}",
+        "wall_seconds": 0.5937,
+        "prompt_eval_count": 131,
+        "eval_count": 40
+      }
+    },
+    {
+      "id": "C-D-06",
+      "cell": "D",
+      "subclass": "constraint_deletion",
+      "lexical": "DISTANT",
+      "gold": "SAME",
+      "response": {
+        "ok": true,
+        "decision": "SAME",
+        "parsed": {
+          "decision": "SAME",
+          "reason": "Both policies state that only administrators can approve/deploy releases. The phrasing differs but the meaning and requirements are identical."
+        },
+        "raw": "{\n  \"decision\": \"SAME\",\n  \"reason\": \"Both policies state that only administrators can approve/deploy releases. The phrasing differs but the meaning and requirements are identical.\"\n}",
+        "wall_seconds": 0.5792,
+        "prompt_eval_count": 129,
+        "eval_count": 39
+      }
+    },
+    {
+      "id": "C-A-07",
+      "cell": "A",
+      "subclass": "order_inversion",
+      "lexical": "CLOSE",
+      "gold": "DIFFERENT",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "The reference policy requires encryption before uploading, while the candidate policy requires encryption after uploading, changing the timing of encryption relative to the upload process."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"The reference policy requires encryption before uploading, while the candidate policy requires encryption after uploading, changing the timing of encryption relative to the upload process.\"\n}",
+        "wall_seconds": 0.6261,
+        "prompt_eval_count": 125,
+        "eval_count": 45
+      }
+    },
+    {
+      "id": "C-C-07",
+      "cell": "C",
+      "subclass": "order_inversion",
+      "lexical": "CLOSE",
+      "gold": "SAME",
+      "response": {
+        "ok": true,
+        "decision": "SAME",
+        "parsed": {
+          "decision": "SAME",
+          "reason": "Both policies specify encrypting the backup prior to transmission (uploading vs sending), with identical intent and technical requirements."
+        },
+        "raw": "{\n  \"decision\": \"SAME\",\n  \"reason\": \"Both policies specify encrypting the backup prior to transmission (uploading vs sending), with identical intent and technical requirements.\"\n}",
+        "wall_seconds": 0.5774,
+        "prompt_eval_count": 125,
+        "eval_count": 38
+      }
+    },
+    {
+      "id": "C-B-07",
+      "cell": "B",
+      "subclass": "order_inversion",
+      "lexical": "DISTANT",
+      "gold": "DIFFERENT",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "Reference policy requires encryption before upload, while candidate policy states transfer in plaintext with security at rest by provider."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"Reference policy requires encryption before upload, while candidate policy states transfer in plaintext with security at rest by provider.\"\n}",
+        "wall_seconds": 0.5667,
+        "prompt_eval_count": 132,
+        "eval_count": 38
+      }
+    },
+    {
+      "id": "C-D-07",
+      "cell": "D",
+      "subclass": "order_inversion",
+      "lexical": "DISTANT",
+      "gold": "SAME",
+      "response": {
+        "ok": true,
+        "decision": "SAME",
+        "parsed": {
+          "decision": "SAME",
+          "reason": "Both policies require encryption before uploading/transferring the backup/archive, with identical intent and operational semantics."
+        },
+        "raw": "{\n  \"decision\": \"SAME\",\n  \"reason\": \"Both policies require encryption before uploading/transferring the backup/archive, with identical intent and operational semantics.\"\n}",
+        "wall_seconds": 0.5393,
+        "prompt_eval_count": 127,
+        "eval_count": 35
+      }
+    },
+    {
+      "id": "C-A-08",
+      "cell": "A",
+      "subclass": "polarity_flip",
+      "lexical": "CLOSE",
+      "gold": "DIFFERENT",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "Reference policy specifies 'Fail closed' while candidate policy specifies 'Fail open' for the same condition (auth service unreachable). The action (fail closed vs fail open) is explicitly different."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"Reference policy specifies 'Fail closed' while candidate policy specifies 'Fail open' for the same condition (auth service unreachable). The action (fail closed vs fail open) is explicitly different.\"\n}",
+        "wall_seconds": 0.6896,
+        "prompt_eval_count": 129,
+        "eval_count": 54
+      }
+    },
+    {
+      "id": "C-C-08",
+      "cell": "C",
+      "subclass": "polarity_flip",
+      "lexical": "CLOSE",
+      "gold": "SAME",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "The reference policy specifies 'Fail closed' while the candidate policy specifies 'Fail shut', which are distinct operational semantics."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"The reference policy specifies 'Fail closed' while the candidate policy specifies 'Fail shut', which are distinct operational semantics.\"\n}",
+        "wall_seconds": 0.5807,
+        "prompt_eval_count": 129,
+        "eval_count": 40
+      }
+    },
+    {
+      "id": "C-B-08",
+      "cell": "B",
+      "subclass": "polarity_flip",
+      "lexical": "DISTANT",
+      "gold": "DIFFERENT",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "Reference policy fails closed (blocks requests) when auth service is unreachable, while candidate policy allows requests and logs a gap when identity checks are unavailable. The actions, conditions, and consequences differ significantly."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"Reference policy fails closed (blocks requests) when auth service is unreachable, while candidate policy allows requests and logs a gap when identity checks are unavailable. The actions, conditions, and consequences differ significantly.\"\n}",
+        "wall_seconds": 0.7081,
+        "prompt_eval_count": 135,
+        "eval_count": 56
+      }
+    },
+    {
+      "id": "C-D-08",
+      "cell": "D",
+      "subclass": "polarity_flip",
+      "lexical": "DISTANT",
+      "gold": "SAME",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "The reference policy specifies failing closed when the auth service is unreachable, while the candidate policy denies requests when identity verification cannot be reached. The conditions (auth service vs identity verification), actions (fail closed vs deny), and scope differ."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"The reference policy specifies failing closed when the auth service is unreachable, while the candidate policy denies requests when identity verification cannot be reached. The conditions (auth service vs identity verification), actions (fail closed vs deny), and scope differ.\"\n}",
+        "wall_seconds": 0.7785,
+        "prompt_eval_count": 131,
+        "eval_count": 63
+      }
+    },
+    {
+      "id": "C-A-09",
+      "cell": "A",
+      "subclass": "quantity_drift",
+      "lexical": "CLOSE",
+      "gold": "DIFFERENT",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "The reference policy caps concurrent workers at eight, while the candidate policy caps them at eighty. The quantities differ significantly, leading to a different cap value."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"The reference policy caps concurrent workers at eight, while the candidate policy caps them at eighty. The quantities differ significantly, leading to a different cap value.\"\n}",
+        "wall_seconds": 0.6489,
+        "prompt_eval_count": 123,
+        "eval_count": 47
+      }
+    },
+    {
+      "id": "C-C-09",
+      "cell": "C",
+      "subclass": "quantity_drift",
+      "lexical": "CLOSE",
+      "gold": "SAME",
+      "response": {
+        "ok": true,
+        "decision": "SAME",
+        "parsed": {
+          "decision": "SAME",
+          "reason": "Both policies specify the same numerical limit of eight concurrent workers with identical wording and meaning."
+        },
+        "raw": "{\n  \"decision\": \"SAME\",\n  \"reason\": \"Both policies specify the same numerical limit of eight concurrent workers with identical wording and meaning.\"\n}",
+        "wall_seconds": 0.5197,
+        "prompt_eval_count": 124,
+        "eval_count": 32
+      }
+    },
+    {
+      "id": "C-B-09",
+      "cell": "B",
+      "subclass": "quantity_drift",
+      "lexical": "DISTANT",
+      "gold": "DIFFERENT",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "Reference policy caps concurrent workers at eight, while candidate policy states parallelism is unbounded (no cap) and only limited by memory. The cap of eight in reference policy is explicitly prohibited by candidate policy's unbounded nature."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"Reference policy caps concurrent workers at eight, while candidate policy states parallelism is unbounded (no cap) and only limited by memory. The cap of eight in reference policy is explicitly prohibited by candidate policy's unbounded nature.\"\n}",
+        "wall_seconds": 0.7538,
+        "prompt_eval_count": 129,
+        "eval_count": 62
+      }
+    },
+    {
+      "id": "C-D-09",
+      "cell": "D",
+      "subclass": "quantity_drift",
+      "lexical": "DISTANT",
+      "gold": "SAME",
+      "response": {
+        "ok": true,
+        "decision": "SAME",
+        "parsed": {
+          "decision": "SAME",
+          "reason": "Both policies limit the number of concurrent workers to eight, using different phrasing but same meaning."
+        },
+        "raw": "{\n  \"decision\": \"SAME\",\n  \"reason\": \"Both policies limit the number of concurrent workers to eight, using different phrasing but same meaning.\"\n}",
+        "wall_seconds": 0.5322,
+        "prompt_eval_count": 128,
+        "eval_count": 34
+      }
+    },
+    {
+      "id": "C-A-10",
+      "cell": "A",
+      "subclass": "modal_downgrade",
+      "lexical": "CLOSE",
+      "gold": "DIFFERENT",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "Reference policy states all writes must go through transaction wrapper, candidate policy states only some writes must go through. The scope of 'all' vs 'some' implies different requirements."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"Reference policy states all writes must go through transaction wrapper, candidate policy states only some writes must go through. The scope of 'all' vs 'some' implies different requirements.\"\n}",
+        "wall_seconds": 0.6793,
+        "prompt_eval_count": 129,
+        "eval_count": 52
+      }
+    },
+    {
+      "id": "C-C-10",
+      "cell": "C",
+      "subclass": "modal_downgrade",
+      "lexical": "CLOSE",
+      "gold": "SAME",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "The reference policy specifies 'transaction wrapper' while the candidate policy specifies 'transaction helper'. These are distinct terms with different meanings in operational semantics."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"The reference policy specifies 'transaction wrapper' while the candidate policy specifies 'transaction helper'. These are distinct terms with different meanings in operational semantics.\"\n}",
+        "wall_seconds": 0.7253,
+        "prompt_eval_count": 129,
+        "eval_count": 45
+      }
+    },
+    {
+      "id": "C-B-10",
+      "cell": "B",
+      "subclass": "modal_downgrade",
+      "lexical": "DISTANT",
+      "gold": "DIFFERENT",
+      "response": {
+        "ok": true,
+        "decision": "DIFFERENT",
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "Reference policy requires all writes to go through transaction wrapper, while candidate policy allows direct database access for performance-critical paths, violating the requirement of all writes going through transaction wrapper."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"Reference policy requires all writes to go through transaction wrapper, while candidate policy allows direct database access for performance-critical paths, violating the requirement of all writes going through transaction wrapper.\"\n}",
+        "wall_seconds": 0.6755,
+        "prompt_eval_count": 131,
+        "eval_count": 52
+      }
+    },
+    {
+      "id": "C-D-10",
+      "cell": "D",
+      "subclass": "modal_downgrade",
+      "lexical": "DISTANT",
+      "gold": "SAME",
+      "response": {
+        "ok": true,
+        "decision": "SAME",
+        "parsed": {
+          "decision": "SAME",
+          "reason": "Both policies enforce that writes are confined to transactional boundaries, ensuring storage operations occur within a transaction wrapper without external storage access."
+        },
+        "raw": "{\n  \"decision\": \"SAME\",\n  \"reason\": \"Both policies enforce that writes are confined to transactional boundaries, ensuring storage operations occur within a transaction wrapper without external storage access.\"\n}",
+        "wall_seconds": 0.5921,
+        "prompt_eval_count": 129,
+        "eval_count": 40
+      }
+    }
+  ],
+  "updated_at_utc": "2026-08-16T12:13:42.525961Z"
+}

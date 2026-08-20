@@ -1,0 +1,1783 @@
+{
+  "model": "qwen2.5:7b",
+  "source": "UKPLab/scicoqa synthetic first rows via Hugging Face datasets server",
+  "task_count": 24,
+  "source_pair_count": 12,
+  "safety": "Only a whitelisted Python AST evaluator executed model-produced scalar expressions; repository and arbitrary generated code were not executed.",
+  "elapsed_seconds": 175.51967906951904,
+  "metrics": {
+    "direct": {
+      "total": 24,
+      "valid": 24,
+      "accuracy_strict": 0.875,
+      "changed_recall": 1.0,
+      "benign_specificity": 0.75,
+      "mean_seconds": 0.8980818490187327,
+      "tokens": 721
+    },
+    "structured": {
+      "total": 24,
+      "valid": 21,
+      "accuracy_strict": 0.7916666666666666,
+      "changed_recall": 0.9166666666666666,
+      "benign_specificity": 0.6666666666666666,
+      "mean_seconds": 3.2453835904598236,
+      "tokens": 5421
+    },
+    "execution_witness": {
+      "total": 24,
+      "valid": 17,
+      "accuracy_strict": 0.4166666666666667,
+      "changed_recall": 0.4166666666666667,
+      "benign_specificity": 0.4166666666666667,
+      "mean_seconds": 3.168923149506251,
+      "tokens": 5626
+    }
+  },
+  "records": [
+    {
+      "method": "direct",
+      "task_id": "acec6f2b-changed",
+      "source_id": "acec6f2b",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 4.091325759887695,
+      "eval_count": 31,
+      "parsed": {
+        "label": "MISMATCH",
+        "reason": "待核验代码中的t1计算与论文中关于密度比和单调函数的描述无关。"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MISMATCH\",\"reason\":\"待核验代码中的t1计算与论文中关于密度比和单调函数的描述无关。\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "acec6f2b-benign",
+      "source_id": "acec6f2b",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MISMATCH",
+      "correct": false,
+      "seconds": 0.6847245693206787,
+      "eval_count": 29,
+      "parsed": {
+        "label": "MISMATCH",
+        "reason": "待核验代码与论文段落和基线代码无关，未实现相关计算。"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MISMATCH\",\"reason\":\"待核验代码与论文段落和基线代码无关，未实现相关计算。\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "74089ac7-changed",
+      "source_id": "74089ac7",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 0.7588071823120117,
+      "eval_count": 29,
+      "parsed": {
+        "label": "MISMATCH",
+        "reason": "待核验代码中对y的修改与论文段落所述的分类问题无关。"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MISMATCH\",\"reason\":\"待核验代码中对y的修改与论文段落所述的分类问题无关。\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "74089ac7-benign",
+      "source_id": "74089ac7",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MATCH",
+      "correct": true,
+      "seconds": 0.7243356704711914,
+      "eval_count": 31,
+      "parsed": {
+        "label": "MATCH",
+        "reason": "待核验代码与基线代码相同，未进行任何修改，因此保持了关键计算关系。"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MATCH\",\"reason\":\"待核验代码与基线代码相同，未进行任何修改，因此保持了关键计算关系。\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "9ce8706f-changed",
+      "source_id": "9ce8706f",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 0.7149834632873535,
+      "eval_count": 26,
+      "parsed": {
+        "label": "MISMATCH",
+        "reason": "s_hat的处理方式改变了，不再保持与r(x)的单调性"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MISMATCH\",\"reason\":\"s_hat的处理方式改变了，不再保持与r(x)的单调性\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "9ce8706f-benign",
+      "source_id": "9ce8706f",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MATCH",
+      "correct": true,
+      "seconds": 0.7422194480895996,
+      "eval_count": 32,
+      "parsed": {
+        "label": "MATCH",
+        "reason": "待核验代码保持了与基线代码相同的计算关系，符合论文中关于likelihood ratio的描述。"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MATCH\",\"reason\":\"待核验代码保持了与基线代码相同的计算关系，符合论文中关于likelihood ratio的描述。\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "2a5dc3f7-changed",
+      "source_id": "2a5dc3f7",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 0.5734748840332031,
+      "eval_count": 15,
+      "parsed": {
+        "label": "MISMATCH",
+        "reason": "α的值不一致"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MISMATCH\",\"reason\":\"α的值不一致\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "2a5dc3f7-benign",
+      "source_id": "2a5dc3f7",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MATCH",
+      "correct": true,
+      "seconds": 0.8308718204498291,
+      "eval_count": 39,
+      "parsed": {
+        "label": "MATCH",
+        "reason": "待核验代码保持了与论文中使用FGW距离作为损失的一致性，且与基线代码实现的关键计算关系相同。"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MATCH\",\"reason\":\"待核验代码保持了与论文中使用FGW距离作为损失的一致性，且与基线代码实现的关键计算关系相同。\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "55cc1477-changed",
+      "source_id": "55cc1477",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 0.9862987995147705,
+      "eval_count": 37,
+      "parsed": {
+        "label": "MISMATCH",
+        "reason": "待核验代码中的梯度估计使用了不同的差商公式，未遵循论文中所述的对称差商方法。"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MISMATCH\",\"reason\":\"待核验代码中的梯度估计使用了不同的差商公式，未遵循论文中所述的对称差商方法。\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "55cc1477-benign",
+      "source_id": "55cc1477",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MISMATCH",
+      "correct": false,
+      "seconds": 0.9537584781646729,
+      "eval_count": 42,
+      "parsed": {
+        "label": "MISMATCH",
+        "reason": "待核验代码中没有实现梯度估计的二阶差商，与论文中提到的O(h^2)误差阶次不匹配。"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MISMATCH\",\"reason\":\"待核验代码中没有实现梯度估计的二阶差商，与论文中提到的O(h^2)误差阶次不匹配。\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "a04bbadd-changed",
+      "source_id": "a04bbadd",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 0.8798034191131592,
+      "eval_count": 33,
+      "parsed": {
+        "label": "MISMATCH",
+        "reason": "待核验代码中使用了类别标签的one-hot表示，而论文描述的是直接使用实例ID。"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MISMATCH\",\"reason\":\"待核验代码中使用了类别标签的one-hot表示，而论文描述的是直接使用实例ID。\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "a04bbadd-benign",
+      "source_id": "a04bbadd",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MATCH",
+      "correct": true,
+      "seconds": 0.7743735313415527,
+      "eval_count": 33,
+      "parsed": {
+        "label": "MATCH",
+        "reason": "待核验代码保持了与论文中所述的一致性，并且实现了与最近基线相同的计算关系。"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MATCH\",\"reason\":\"待核验代码保持了与论文中所述的一致性，并且实现了与最近基线相同的计算关系。\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "d0e56841-changed",
+      "source_id": "d0e56841",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 0.7495043277740479,
+      "eval_count": 27,
+      "parsed": {
+        "label": "MISMATCH",
+        "reason": "缺少了label_map和boundary_map的输入，与论文和基线代码不符"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MISMATCH\",\"reason\":\"缺少了label_map和boundary_map的输入，与论文和基线代码不符\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "d0e56841-benign",
+      "source_id": "d0e56841",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MATCH",
+      "correct": true,
+      "seconds": 0.6490170955657959,
+      "eval_count": 24,
+      "parsed": {
+        "label": "MATCH",
+        "reason": "待核验代码与论文段落和基线代码保持一致。"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MATCH\",\"reason\":\"待核验代码与论文段落和基线代码保持一致。\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "b66dd4e8-changed",
+      "source_id": "b66dd4e8",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 0.7572245597839355,
+      "eval_count": 30,
+      "parsed": {
+        "label": "MISMATCH",
+        "reason": "论文中使用的是InstanceNorm而不是BatchNorm，并且指出了特定层不使用InstanceNorm。"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MISMATCH\",\"reason\":\"论文中使用的是InstanceNorm而不是BatchNorm，并且指出了特定层不使用InstanceNorm。\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "b66dd4e8-benign",
+      "source_id": "b66dd4e8",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MATCH",
+      "correct": true,
+      "seconds": 0.696617603302002,
+      "eval_count": 30,
+      "parsed": {
+        "label": "MATCH",
+        "reason": "待核验代码与论文中关于InstanceNorm的描述一致，且与基线代码相同。"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MATCH\",\"reason\":\"待核验代码与论文中关于InstanceNorm的描述一致，且与基线代码相同。\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "95f19c13-changed",
+      "source_id": "95f19c13",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 0.8084890842437744,
+      "eval_count": 29,
+      "parsed": {
+        "label": "MISMATCH",
+        "reason": "待核验代码中的'count'类型损失函数与论文不符，缺少log项。"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MISMATCH\",\"reason\":\"待核验代码中的'count'类型损失函数与论文不符，缺少log项。\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "95f19c13-benign",
+      "source_id": "95f19c13",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MATCH",
+      "correct": true,
+      "seconds": 0.6857335567474365,
+      "eval_count": 26,
+      "parsed": {
+        "label": "MATCH",
+        "reason": "待核验代码与论文段落和基线代码的关键计算关系一致。"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MATCH\",\"reason\":\"待核验代码与论文段落和基线代码的关键计算关系一致。\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "f03d4577-changed",
+      "source_id": "f03d4577",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 0.597944974899292,
+      "eval_count": 14,
+      "parsed": {
+        "label": "MISMATCH",
+        "reason": "条件判断相反了"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MISMATCH\",\"reason\":\"条件判断相反了\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "f03d4577-benign",
+      "source_id": "f03d4577",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MATCH",
+      "correct": true,
+      "seconds": 0.7560267448425293,
+      "eval_count": 29,
+      "parsed": {
+        "label": "MATCH",
+        "reason": "代码保持了论文所述的策略网络采样新动作以扩展树搜索的关键计算关系。"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MATCH\",\"reason\":\"代码保持了论文所述的策略网络采样新动作以扩展树搜索的关键计算关系。\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "add47c47-changed",
+      "source_id": "add47c47",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 0.8124959468841553,
+      "eval_count": 37,
+      "parsed": {
+        "label": "MISMATCH",
+        "reason": "待核验代码未使用图卷积进行多层传播，且节点嵌入的聚合方式与基线代码不同。"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MISMATCH\",\"reason\":\"待核验代码未使用图卷积进行多层传播，且节点嵌入的聚合方式与基线代码不同。\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "add47c47-benign",
+      "source_id": "add47c47",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MISMATCH",
+      "correct": false,
+      "seconds": 0.6789631843566895,
+      "eval_count": 32,
+      "parsed": {
+        "label": "MISMATCH",
+        "reason": "待核验代码未实现节点嵌入聚合为图级别表示向量，与论文描述不符。"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MISMATCH\",\"reason\":\"待核验代码未实现节点嵌入聚合为图级别表示向量，与论文描述不符。\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "e7c4ffa5-changed",
+      "source_id": "e7c4ffa5",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 0.7946047782897949,
+      "eval_count": 29,
+      "parsed": {
+        "label": "MISMATCH",
+        "reason": "待核验代码使用加法运算，而论文段落描述的是乘法运算。"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MISMATCH\",\"reason\":\"待核验代码使用加法运算，而论文段落描述的是乘法运算。\"}",
+      "error": null
+    },
+    {
+      "method": "direct",
+      "task_id": "e7c4ffa5-benign",
+      "source_id": "e7c4ffa5",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MATCH",
+      "correct": true,
+      "seconds": 0.8523654937744141,
+      "eval_count": 37,
+      "parsed": {
+        "label": "MATCH",
+        "reason": "待核验代码保持了与论文段落所述的关键计算关系，即通过计算所有目标的乘积来定义联合奖励。"
+      },
+      "witness": null,
+      "raw": "{\"label\":\"MATCH\",\"reason\":\"待核验代码保持了与论文段落所述的关键计算关系，即通过计算所有目标的乘积来定义联合奖励。\"}",
+      "error": null
+    },
+    {
+      "method": "structured",
+      "task_id": "acec6f2b-changed",
+      "source_id": "acec6f2b",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 3.6133313179016113,
+      "eval_count": 242,
+      "parsed": {
+        "paper_rule": "在定义函数s时，需要考虑密度比r(x; θ0, θ1)，并且指出分母p(s(x; θ, θ1)|θ1)很重要，因为它会抵消与θ相关的雅可比因子。",
+        "baseline_behavior": "基线代码将T数组根据y标签0和1进行分割，但没有体现论文中提到的密度比r(x; θ0, θ1)或分母p(s(x; θ, θ1)|θ1)的概念。",
+        "candidate_behavior": "待核验代码同样将T数组根据y标签0和1进行分割，但将标签1对应的值设置为1.0 - T[y == 1]，这与论文中的规则不直接相关，也没有体现密度比或分母的概念。",
+        "label": "MISMATCH",
+        "reason": "基线和待核验代码都没有体现论文中提到的关于密度比r(x; θ0, θ1)和分母p(s(x; θ, θ1)|θ1)的概念。"
+      },
+      "witness": null,
+      "raw": "{\n  \"paper_rule\": \"在定义函数s时，需要考虑密度比r(x; θ0, θ1)，并且指出分母p(s(x; θ, θ1)|θ1)很重要，因为它会抵消与θ相关的雅可比因子。\",\n  \"baseline_behavior\": \"基线代码将T数组根据y标签0和1进行分割，但没有体现论文中提到的密度比r(x; θ0, θ1)或分母p(s(x; θ, θ1)|θ1)的概念。\",\n  \"candidate_behavior\": \"待核验代码同样将T数组根据y标签0和1进行分割，但将标签1对应的值设置为1.0 - T[y == 1]，这与论文中的规则不直接相关，也没有体现密度比或分母的概念。\",\n  \"label\": \"MISMATCH\",\n  \"reason\": \"基线和待核验代码都没有体现论文中提到的关于密度比r(x; θ0, θ1)和分母p(s(x; θ, θ1)|θ1)的概念。\"\n}",
+      "error": null
+    },
+    {
+      "method": "structured",
+      "task_id": "acec6f2b-benign",
+      "source_id": "acec6f2b",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MATCH",
+      "correct": true,
+      "seconds": 3.4830057621002197,
+      "eval_count": 244,
+      "parsed": {
+        "paper_rule": "定义了一个函数s: Rp → R，该函数与密度比r(x; θ0, θ1)单调相关，其中r(x; θ0, θ1) = pU(u = s(x)|θ0) / pU(u = s(x)|θ1)。特别指出，必须包含分母p(s(x; θ, θ1)|θ1)，因为这会抵消与θ相关的雅可比因子。",
+        "baseline_behavior": "对T进行一维化处理，然后根据y的值将T分割成两部分t0和t1。",
+        "candidate_behavior": "对T进行一维化处理，然后根据y的值将T分割成两部分t0和t1，仅添加了注释。",
+        "label": "MATCH",
+        "reason": "尽管待核验代码中添加了注释，但其核心行为与基线代码一致，都是对T进行一维化处理并根据y的值分割T。这与论文中提到的s函数和密度比无关，因此代码与论文规则一致。"
+      },
+      "witness": null,
+      "raw": "{\n  \"paper_rule\": \"定义了一个函数s: Rp → R，该函数与密度比r(x; θ0, θ1)单调相关，其中r(x; θ0, θ1) = pU(u = s(x)|θ0) / pU(u = s(x)|θ1)。特别指出，必须包含分母p(s(x; θ, θ1)|θ1)，因为这会抵消与θ相关的雅可比因子。\",\n  \"baseline_behavior\": \"对T进行一维化处理，然后根据y的值将T分割成两部分t0和t1。\",\n  \"candidate_behavior\": \"对T进行一维化处理，然后根据y的值将T分割成两部分t0和t1，仅添加了注释。\",\n  \"label\": \"MATCH\",\n  \"reason\": \"尽管待核验代码中添加了注释，但其核心行为与基线代码一致，都是对T进行一维化处理并根据y的值分割T。这与论文中提到的s函数和密度比无关，因此代码与论文规则一致。\"\n}",
+      "error": null
+    },
+    {
+      "method": "structured",
+      "task_id": "74089ac7-changed",
+      "source_id": "74089ac7",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 3.561947822570801,
+      "eval_count": 229,
+      "parsed": {
+        "paper_rule": "论文指出，基于这个结果，似然比估计问题可以重新表述为一个概率分类问题，通过训练一个分类器来区分来自pθ0和pθ1的样本x，满足定理1的条件。监督学习提供了一个足够程序，确保任何普遍强一致算法可以用于学习s∗。",
+        "baseline_behavior": "基线代码只是简单地将输入的x和y打包成一个有序字典，没有进行任何额外的处理或修改。",
+        "candidate_behavior": "待核验代码同样将输入的x和y打包成一个有序字典，但对y进行了额外处理：如果y是numpy数组，则有10%的概率将y中的某些值翻转。",
+        "label": "MISMATCH",
+        "reason": "基线代码和待核验代码在处理y的方式上有所不同。基线代码直接使用输入的y，而待核验代码对y进行了随机翻转处理。这与论文中提到的监督学习直接使用y进行分类的描述不完全一致。"
+      },
+      "witness": null,
+      "raw": "{\n  \"paper_rule\": \"论文指出，基于这个结果，似然比估计问题可以重新表述为一个概率分类问题，通过训练一个分类器来区分来自pθ0和pθ1的样本x，满足定理1的条件。监督学习提供了一个足够程序，确保任何普遍强一致算法可以用于学习s∗。\",\n  \"baseline_behavior\": \"基线代码只是简单地将输入的x和y打包成一个有序字典，没有进行任何额外的处理或修改。\",\n  \"candidate_behavior\": \"待核验代码同样将输入的x和y打包成一个有序字典，但对y进行了额外处理：如果y是numpy数组，则有10%的概率将y中的某些值翻转。\",\n  \"label\": \"MISMATCH\",\n  \"reason\": \"基线代码和待核验代码在处理y的方式上有所不同。基线代码直接使用输入的y，而待核验代码对y进行了随机翻转处理。这与论文中提到的监督学习直接使用y进行分类的描述不完全一致。\"\n}",
+      "error": null
+    },
+    {
+      "method": "structured",
+      "task_id": "74089ac7-benign",
+      "source_id": "74089ac7",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MISMATCH",
+      "correct": false,
+      "seconds": 3.2380614280700684,
+      "eval_count": 217,
+      "parsed": {
+        "paper_rule": "将似然比估计问题重新表述为一种（概率）分类问题，并通过训练分类器来区分来自pθ0和pθ1的样本x来解决，这满足定理1的条件。监督学习提供了一种足够的方法来确保定理1成立，从而保证任何普遍强一致的算法都可以用于学习s∗。",
+        "baseline_behavior": "定义了一个静态方法_package_training_data，用于打包训练数据，其中包含输入x和标签y。",
+        "candidate_behavior": "定义了一个静态方法_package_training_data，该方法仅包含注释，与基线代码相同，用于打包训练数据，其中包含输入x和标签y。",
+        "label": "MISMATCH",
+        "reason": "虽然待核验代码与基线代码在行为上是相同的，但根据论文规则，待核验代码中仅包含注释，这与论文中关于似然比估计问题和监督学习的讨论无关。因此，它们之间存在不一致。"
+      },
+      "witness": null,
+      "raw": "{\n  \"paper_rule\": \"将似然比估计问题重新表述为一种（概率）分类问题，并通过训练分类器来区分来自pθ0和pθ1的样本x来解决，这满足定理1的条件。监督学习提供了一种足够的方法来确保定理1成立，从而保证任何普遍强一致的算法都可以用于学习s∗。\",\n  \"baseline_behavior\": \"定义了一个静态方法_package_training_data，用于打包训练数据，其中包含输入x和标签y。\",\n  \"candidate_behavior\": \"定义了一个静态方法_package_training_data，该方法仅包含注释，与基线代码相同，用于打包训练数据，其中包含输入x和标签y。\",\n  \"label\": \"MISMATCH\",\n  \"reason\": \"虽然待核验代码与基线代码在行为上是相同的，但根据论文规则，待核验代码中仅包含注释，这与论文中关于似然比估计问题和监督学习的讨论无关。因此，它们之间存在不一致。\"\n}",
+      "error": null
+    },
+    {
+      "method": "structured",
+      "task_id": "9ce8706f-changed",
+      "source_id": "9ce8706f",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 3.393606424331665,
+      "eval_count": 225,
+      "parsed": {
+        "paper_rule": "The main result is that the likelihood ratio is invariant under dimensionality reductions, provided the transformation is monotonic with the likelihood ratio. If the transformation is not monotonic, the induced probability does not factorize as in Eqn. 2.8, leading to artifacts in the density ratio approximation.",
+        "baseline_behavior": "The baseline code calculates the likelihood ratio (r_hat) as (1 - s_hat) / s_hat, assuming s_hat is monotonic with r(x).",
+        "candidate_behavior": "The candidate code sets s_hat to the minimum of s_hat and 1 - s_hat, then uses this value directly as r_hat, which does not follow the monotonicity assumption.",
+        "label": "MISMATCH",
+        "reason": "The candidate code modifies s_hat to ensure it is always less than or equal to 0.5, which breaks the monotonicity assumption required for the likelihood ratio calculation as described in the paper. This change introduces artifacts in the density ratio approximation, as stated in the paper."
+      },
+      "witness": null,
+      "raw": "```json\n{\n  \"paper_rule\": \"The main result is that the likelihood ratio is invariant under dimensionality reductions, provided the transformation is monotonic with the likelihood ratio. If the transformation is not monotonic, the induced probability does not factorize as in Eqn. 2.8, leading to artifacts in the density ratio approximation.\",\n  \"baseline_behavior\": \"The baseline code calculates the likelihood ratio (r_hat) as (1 - s_hat) / s_hat, assuming s_hat is monotonic with r(x).\",\n  \"candidate_behavior\": \"The candidate code sets s_hat to the minimum of s_hat and 1 - s_hat, then uses this value directly as r_hat, which does not follow the monotonicity assumption.\",\n  \"label\": \"MISMATCH\",\n  \"reason\": \"The candidate code modifies s_hat to ensure it is always less than or equal to 0.5, which breaks the monotonicity assumption required for the likelihood ratio calculation as described in the paper. This change introduces artifacts in the density ratio approximation, as stated in the paper.\"\n}\n```",
+      "error": null
+    },
+    {
+      "method": "structured",
+      "task_id": "9ce8706f-benign",
+      "source_id": "9ce8706f",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "INVALID",
+      "correct": false,
+      "seconds": 3.915353298187256,
+      "eval_count": 262,
+      "parsed": null,
+      "witness": null,
+      "raw": "```json\n{\n  \"paper_rule\": \"The main result is that the likelihood ratio is invariant under dimensionality reductions, provided the transformation is monotonic. If the transformation is not monotonic, the induced probability does not factorize as expected, leading to artifacts in the density ratio approximation.\",\n  \"baseline_behavior\": \"The baseline code computes a likelihood ratio \\( r_hat \\) and a score \\( s_hat \\) from an input tensor \\( x \\). The computation involves passing \\( x \\) through a series of layers, applying an activation function after the first layer, and finally applying a sigmoid function to produce \\( s_hat \\). The likelihood ratio \\( r_hat \\) is then calculated as \\( \\frac{1 - s_hat}{s_hat} \\).\",\n  \"candidate_behavior\": \"The candidate code is identical to the baseline code, with only comments added. It computes the same likelihood ratio \\( r_hat \\) and score \\( s_hat \\) from an input tensor \\( x \\) using the same steps as the baseline code.\",\n  \"label\": \"MATCH\",\n  \"reason\": \"The candidate code is functionally identical to the baseline code, performing the same computations and producing the same outputs. The addition of comments does not change the behavior of the code.\"\n}\n```",
+      "error": "JSONDecodeError: Invalid \\escape: line 3 column 71 (char 377)"
+    },
+    {
+      "method": "structured",
+      "task_id": "2a5dc3f7-changed",
+      "source_id": "2a5dc3f7",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 2.578693389892578,
+      "eval_count": 135,
+      "parsed": {
+        "paper_rule": "Δ_FGW(z, y) := FGW_2^2(z, z_y)，参数β通常由应用驱动选择。",
+        "baseline_behavior": "使用`alpha=self.alpha`作为参数β的选择。",
+        "candidate_behavior": "使用`alpha=1 - self.alpha`作为参数β的选择。",
+        "label": "MISMATCH",
+        "reason": "论文中提到参数β的选择通常由应用驱动，但具体实现中，候选代码使用了1 - self.alpha，而基线代码使用了self.alpha。这表明候选代码与论文中关于β参数的选择不一致。"
+      },
+      "witness": null,
+      "raw": "{\n  \"paper_rule\": \"Δ_FGW(z, y) := FGW_2^2(z, z_y)，参数β通常由应用驱动选择。\",\n  \"baseline_behavior\": \"使用`alpha=self.alpha`作为参数β的选择。\",\n  \"candidate_behavior\": \"使用`alpha=1 - self.alpha`作为参数β的选择。\",\n  \"label\": \"MISMATCH\",\n  \"reason\": \"论文中提到参数β的选择通常由应用驱动，但具体实现中，候选代码使用了1 - self.alpha，而基线代码使用了self.alpha。这表明候选代码与论文中关于β参数的选择不一致。\"\n}",
+      "error": null
+    },
+    {
+      "method": "structured",
+      "task_id": "2a5dc3f7-benign",
+      "source_id": "2a5dc3f7",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MATCH",
+      "correct": true,
+      "seconds": 2.781190872192383,
+      "eval_count": 175,
+      "parsed": {
+        "paper_rule": "使用FGW距离作为损失函数，定义为Δ_FGW(z, y) := FGW_2^2(z, z_y)，其中β参数调节结构信息和标签信息之间的权衡。",
+        "baseline_behavior": "使用OT库中的fused_gromov_wasserstein2函数计算FGW距离，参数alpha对应于论文中的β参数。",
+        "candidate_behavior": "注释语义等价改写，直接调用OT库中的fused_gromov_wasserstein2函数，参数设置与基线代码一致。",
+        "label": "MATCH",
+        "reason": "待核验代码与论文规则和基线代码在行为上是一致的，都正确地使用了FGW距离作为损失函数，并且参数设置也保持一致。"
+      },
+      "witness": null,
+      "raw": "{\n  \"paper_rule\": \"使用FGW距离作为损失函数，定义为Δ_FGW(z, y) := FGW_2^2(z, z_y)，其中β参数调节结构信息和标签信息之间的权衡。\",\n  \"baseline_behavior\": \"使用OT库中的fused_gromov_wasserstein2函数计算FGW距离，参数alpha对应于论文中的β参数。\",\n  \"candidate_behavior\": \"注释语义等价改写，直接调用OT库中的fused_gromov_wasserstein2函数，参数设置与基线代码一致。\",\n  \"label\": \"MATCH\",\n  \"reason\": \"待核验代码与论文规则和基线代码在行为上是一致的，都正确地使用了FGW距离作为损失函数，并且参数设置也保持一致。\"\n}",
+      "error": null
+    },
+    {
+      "method": "structured",
+      "task_id": "55cc1477-changed",
+      "source_id": "55cc1477",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 3.42883038520813,
+      "eval_count": 209,
+      "parsed": {
+        "paper_rule": "We use the symmetric difference quotient to estimate the gradient … The estimation error … is in the order of O(h^2).",
+        "baseline_behavior": "在基线代码中，使用的是对称差商来估计梯度，其中h的值为0.0002，误差为O(h^2)。",
+        "candidate_behavior": "在待核验代码中，也使用了对称差商来估计梯度，其中h的值为0.0001，误差为O(h^2)。",
+        "label": "MISMATCH",
+        "reason": "虽然两者都使用了对称差商来估计梯度，但基线代码中的h值为0.0002，而待核验代码中的h值为0.0001，这与论文中提到的误差阶数O(h^2)一致，但具体的h值不匹配。"
+      },
+      "witness": null,
+      "raw": "```json\n{\n  \"paper_rule\": \"We use the symmetric difference quotient to estimate the gradient … The estimation error … is in the order of O(h^2).\",\n  \"baseline_behavior\": \"在基线代码中，使用的是对称差商来估计梯度，其中h的值为0.0002，误差为O(h^2)。\",\n  \"candidate_behavior\": \"在待核验代码中，也使用了对称差商来估计梯度，其中h的值为0.0001，误差为O(h^2)。\",\n  \"label\": \"MISMATCH\",\n  \"reason\": \"虽然两者都使用了对称差商来估计梯度，但基线代码中的h值为0.0002，而待核验代码中的h值为0.0001，这与论文中提到的误差阶数O(h^2)一致，但具体的h值不匹配。\"\n}\n```",
+      "error": null
+    },
+    {
+      "method": "structured",
+      "task_id": "55cc1477-benign",
+      "source_id": "55cc1477",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MATCH",
+      "correct": true,
+      "seconds": 2.98618745803833,
+      "eval_count": 187,
+      "parsed": {
+        "paper_rule": "使用对称差商商 quotient 来估计梯度，估计误差是 O(h^2) 的量级。",
+        "baseline_behavior": "使用对称差商 quotient 来估计梯度，具体实现中 h 的值为 0.0002，符合 O(h^2) 的误差估计。",
+        "candidate_behavior": "同样使用对称差商 quotient 来估计梯度，具体实现中 h 的值为 0.0002，符合 O(h^2) 的误差估计。",
+        "label": "MATCH",
+        "reason": "待核验代码与基线代码在估计梯度的方法和具体实现上保持一致，均使用了对称差商 quotient，并且 h 的值相同，符合论文中提到的 O(h^2) 误差估计。"
+      },
+      "witness": null,
+      "raw": "```json\n{\n  \"paper_rule\": \"使用对称差商商 quotient 来估计梯度，估计误差是 O(h^2) 的量级。\",\n  \"baseline_behavior\": \"使用对称差商 quotient 来估计梯度，具体实现中 h 的值为 0.0002，符合 O(h^2) 的误差估计。\",\n  \"candidate_behavior\": \"同样使用对称差商 quotient 来估计梯度，具体实现中 h 的值为 0.0002，符合 O(h^2) 的误差估计。\",\n  \"label\": \"MATCH\",\n  \"reason\": \"待核验代码与基线代码在估计梯度的方法和具体实现上保持一致，均使用了对称差商 quotient，并且 h 的值相同，符合论文中提到的 O(h^2) 误差估计。\"\n}\n```",
+      "error": null
+    },
+    {
+      "method": "structured",
+      "task_id": "a04bbadd-changed",
+      "source_id": "a04bbadd",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 3.68588924407959,
+      "eval_count": 237,
+      "parsed": {
+        "paper_rule": "一个像素在实例边界图中为1，如果它的对象ID与其4个邻域中的任何一个不同，否则为0。实例边界图随后与语义标签图的一_hot向量表示连接，并输入生成器网络。同样，判别器的输入是实例边界图、语义标签图和真实/合成图像的通道级连接。",
+        "baseline_behavior": "将实例图转换为实例边界图，通过比较每个像素与其4个邻域的值来确定边界像素。",
+        "candidate_behavior": "将标签图转换为类别图，然后将类别图转换为实例边界图，通过比较每个像素与其4个邻域的值来确定边界像素。",
+        "label": "MISMATCH",
+        "reason": "待核验代码首先将标签图转换为类别图，这与论文规则中直接使用实例图的描述不符。此外，待核验代码的行为与基线代码相同，都是通过比较像素与其4个邻域来确定边界像素，因此在行为上是一致的，但在规则上与论文规则不符。"
+      },
+      "witness": null,
+      "raw": "{\n  \"paper_rule\": \"一个像素在实例边界图中为1，如果它的对象ID与其4个邻域中的任何一个不同，否则为0。实例边界图随后与语义标签图的一_hot向量表示连接，并输入生成器网络。同样，判别器的输入是实例边界图、语义标签图和真实/合成图像的通道级连接。\",\n  \"baseline_behavior\": \"将实例图转换为实例边界图，通过比较每个像素与其4个邻域的值来确定边界像素。\",\n  \"candidate_behavior\": \"将标签图转换为类别图，然后将类别图转换为实例边界图，通过比较每个像素与其4个邻域的值来确定边界像素。\",\n  \"label\": \"MISMATCH\",\n  \"reason\": \"待核验代码首先将标签图转换为类别图，这与论文规则中直接使用实例图的描述不符。此外，待核验代码的行为与基线代码相同，都是通过比较像素与其4个邻域来确定边界像素，因此在行为上是一致的，但在规则上与论文规则不符。\"\n}",
+      "error": null
+    },
+    {
+      "method": "structured",
+      "task_id": "a04bbadd-benign",
+      "source_id": "a04bbadd",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MATCH",
+      "correct": true,
+      "seconds": 3.4660797119140625,
+      "eval_count": 250,
+      "parsed": {
+        "paper_rule": "一个像素在实例边界图中为1，如果它的对象ID与其4个邻域中的任何一个不同，否则为0。然后将实例边界图与语义标签图的一热向量表示连接起来，输入到生成器网络中。同样，判别器的输入是实例边界图、语义标签图和真实/合成图像的通道级连接。",
+        "baseline_behavior": "将实例图转换为实例边界图，通过比较每个像素与其4个邻域的值来确定边界像素，并将结果转换为与图像数据类型相同的张量。",
+        "candidate_behavior": "仅添加注释的语义等价改写，将实例图转换为实例边界图，通过比较每个像素与其4个邻域的值来确定边界像素，并将结果转换为与图像数据类型相同的张量。",
+        "label": "MATCH",
+        "reason": "待核验代码与基线代码的行为一致，都是通过比较像素与其4个邻域的值来生成边界图，并且都进行了数据类型的转换。唯一的区别是待核验代码中添加了注释，但不影响行为逻辑。"
+      },
+      "witness": null,
+      "raw": "{\n  \"paper_rule\": \"一个像素在实例边界图中为1，如果它的对象ID与其4个邻域中的任何一个不同，否则为0。然后将实例边界图与语义标签图的一热向量表示连接起来，输入到生成器网络中。同样，判别器的输入是实例边界图、语义标签图和真实/合成图像的通道级连接。\",\n  \"baseline_behavior\": \"将实例图转换为实例边界图，通过比较每个像素与其4个邻域的值来确定边界像素，并将结果转换为与图像数据类型相同的张量。\",\n  \"candidate_behavior\": \"仅添加注释的语义等价改写，将实例图转换为实例边界图，通过比较每个像素与其4个邻域的值来确定边界像素，并将结果转换为与图像数据类型相同的张量。\",\n  \"label\": \"MATCH\",\n  \"reason\": \"待核验代码与基线代码的行为一致，都是通过比较像素与其4个邻域的值来生成边界图，并且都进行了数据类型的转换。唯一的区别是待核验代码中添加了注释，但不影响行为逻辑。\"\n}",
+      "error": null
+    },
+    {
+      "method": "structured",
+      "task_id": "d0e56841-changed",
+      "source_id": "d0e56841",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 2.8204076290130615,
+      "eval_count": 207,
+      "parsed": {
+        "paper_rule": "The input to the discriminator is the channel-wise concatenation of instance boundary map, semantic label map, and the real/synthesized image. The generator network takes the instance boundary map concatenated with the one-hot vector representation of the semantic label map as input.",
+        "baseline_behavior": "The discriminator receives inputs that are the concatenation of label map, boundary map, and either the real or synthesized image (with or without detaching).",
+        "candidate_behavior": "The discriminator receives inputs that are the synthesized image (x_fake) or the real image (x_real) directly, without concatenation with the label map or boundary map.",
+        "label": "MISMATCH",
+        "reason": "The paper specifies that the discriminator should receive a concatenated input of the label map, boundary map, and the real/synthesized image. However, the candidate code directly passes the image to the discriminator without any concatenation, which does not match the paper's description."
+      },
+      "witness": null,
+      "raw": "```json\n{\n  \"paper_rule\": \"The input to the discriminator is the channel-wise concatenation of instance boundary map, semantic label map, and the real/synthesized image. The generator network takes the instance boundary map concatenated with the one-hot vector representation of the semantic label map as input.\",\n  \"baseline_behavior\": \"The discriminator receives inputs that are the concatenation of label map, boundary map, and either the real or synthesized image (with or without detaching).\",\n  \"candidate_behavior\": \"The discriminator receives inputs that are the synthesized image (x_fake) or the real image (x_real) directly, without concatenation with the label map or boundary map.\",\n  \"label\": \"MISMATCH\",\n  \"reason\": \"The paper specifies that the discriminator should receive a concatenated input of the label map, boundary map, and the real/synthesized image. However, the candidate code directly passes the image to the discriminator without any concatenation, which does not match the paper's description.\"\n}\n```",
+      "error": null
+    },
+    {
+      "method": "structured",
+      "task_id": "d0e56841-benign",
+      "source_id": "d0e56841",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MATCH",
+      "correct": true,
+      "seconds": 2.506934404373169,
+      "eval_count": 182,
+      "parsed": {
+        "paper_rule": "The input to the discriminator is the channel-wise concatenation of instance boundary map, semantic label map, and the real/synthesized image. This is applied to both real and fake images for both generator and discriminator predictions.",
+        "baseline_behavior": "The discriminator receives a concatenated input of label map, boundary map, and either the real or fake image (with or without detaching the gradient). This is done for both generator and discriminator predictions.",
+        "candidate_behavior": "The discriminator receives a concatenated input of label map, boundary map, and either the real or fake image (with or without detaching the gradient). This is done for both generator and discriminator predictions.",
+        "label": "MATCH",
+        "reason": "Both the paper rule and the baseline behavior describe the same input process for the discriminator, which is also accurately reflected in the candidate behavior."
+      },
+      "witness": null,
+      "raw": "{\n  \"paper_rule\": \"The input to the discriminator is the channel-wise concatenation of instance boundary map, semantic label map, and the real/synthesized image. This is applied to both real and fake images for both generator and discriminator predictions.\",\n  \"baseline_behavior\": \"The discriminator receives a concatenated input of label map, boundary map, and either the real or fake image (with or without detaching the gradient). This is done for both generator and discriminator predictions.\",\n  \"candidate_behavior\": \"The discriminator receives a concatenated input of label map, boundary map, and either the real or fake image (with or without detaching the gradient). This is done for both generator and discriminator predictions.\",\n  \"label\": \"MATCH\",\n  \"reason\": \"Both the paper rule and the baseline behavior describe the same input process for the discriminator, which is also accurately reflected in the candidate behavior.\"\n}",
+      "error": null
+    },
+    {
+      "method": "structured",
+      "task_id": "b66dd4e8-changed",
+      "source_id": "b66dd4e8",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 2.968165874481201,
+      "eval_count": 222,
+      "parsed": {
+        "paper_rule": "对于判别网络，使用70×70 PatchGAN。Ck表示一个带有k个滤波器、步长为2的4×4卷积-实例归一化-泄漏ReLU层。最后一层之后，应用一个卷积层以产生1维输出。第一个C64层不使用实例归一化。使用泄漏ReLU，斜率为0.2。三个判别器的结构完全相同：C64-C128-C256-C512。",
+        "baseline_behavior": "使用了InstanceNorm2d，且affine参数设置为False。",
+        "candidate_behavior": "使用了BatchNorm2d，且affine参数设置为True。",
+        "label": "MISMATCH",
+        "reason": "论文中明确指出不使用InstanceNorm2d，而是使用BatchNorm2d，并且affine参数应为False。而待核验代码使用了BatchNorm2d且affine参数为True，这与论文规则不符。"
+      },
+      "witness": null,
+      "raw": "{\n  \"paper_rule\": \"对于判别网络，使用70×70 PatchGAN。Ck表示一个带有k个滤波器、步长为2的4×4卷积-实例归一化-泄漏ReLU层。最后一层之后，应用一个卷积层以产生1维输出。第一个C64层不使用实例归一化。使用泄漏ReLU，斜率为0.2。三个判别器的结构完全相同：C64-C128-C256-C512。\",\n  \"baseline_behavior\": \"使用了InstanceNorm2d，且affine参数设置为False。\",\n  \"candidate_behavior\": \"使用了BatchNorm2d，且affine参数设置为True。\",\n  \"label\": \"MISMATCH\",\n  \"reason\": \"论文中明确指出不使用InstanceNorm2d，而是使用BatchNorm2d，并且affine参数应为False。而待核验代码使用了BatchNorm2d且affine参数为True，这与论文规则不符。\"\n}",
+      "error": null
+    },
+    {
+      "method": "structured",
+      "task_id": "b66dd4e8-benign",
+      "source_id": "b66dd4e8",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MISMATCH",
+      "correct": false,
+      "seconds": 3.0133421421051025,
+      "eval_count": 228,
+      "parsed": {
+        "paper_rule": "对于判别网络，使用70×70 PatchGAN。Ck表示一个带有k个滤波器且步长为2的4×4卷积-实例归一化-泄漏ReLU层。最后一层之后，应用一个卷积层以产生1维输出。第一个C64层不使用实例归一化。使用泄漏ReLU激活函数，斜率为0.2。三个判别网络具有相同的架构：C64-C128-C256-C512。",
+        "baseline_behavior": "代码中实例归一化层的使用是正确的，但没有体现泄漏ReLU和具体的架构信息。",
+        "candidate_behavior": "待核验代码只是添加了注释，没有实际的代码行为，因此无法直接与论文规则和基线行为进行对比。",
+        "label": "MISMATCH",
+        "reason": "待核验代码只是注释，并未体现具体的网络架构或激活函数设置，因此无法直接与论文规则和基线代码行为进行一致性核验。"
+      },
+      "witness": null,
+      "raw": "{\n  \"paper_rule\": \"对于判别网络，使用70×70 PatchGAN。Ck表示一个带有k个滤波器且步长为2的4×4卷积-实例归一化-泄漏ReLU层。最后一层之后，应用一个卷积层以产生1维输出。第一个C64层不使用实例归一化。使用泄漏ReLU激活函数，斜率为0.2。三个判别网络具有相同的架构：C64-C128-C256-C512。\",\n  \"baseline_behavior\": \"代码中实例归一化层的使用是正确的，但没有体现泄漏ReLU和具体的架构信息。\",\n  \"candidate_behavior\": \"待核验代码只是添加了注释，没有实际的代码行为，因此无法直接与论文规则和基线行为进行对比。\",\n  \"label\": \"MISMATCH\",\n  \"reason\": \"待核验代码只是注释，并未体现具体的网络架构或激活函数设置，因此无法直接与论文规则和基线代码行为进行一致性核验。\"\n}",
+      "error": null
+    },
+    {
+      "method": "structured",
+      "task_id": "95f19c13-changed",
+      "source_id": "95f19c13",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "INVALID",
+      "correct": false,
+      "seconds": 7.377093076705933,
+      "eval_count": 579,
+      "parsed": null,
+      "witness": null,
+      "raw": "```json\n{\n  \"paper_rule\": \"政策损失 \\( L_{\\text{policy}}(\\phi) \\) 是基于网络输出 \\( \\pi_{\\phi}(a|s) \\) 和经验密度 \\( \\hat{\\pi}(a|s) \\) 之间的Kullback-Leibler散度。最终的梯度估计器为 \\( \\nabla_{\\phi}L_{\\text{policy}}(\\phi) = \\mathbb{E}_{s \\sim D, a_i \\sim D_s}[(\\log \\pi_{\\phi}(a_i|s) - \\tau \\log n(s, a_i)) \\nabla_{\\phi} \\log \\pi_{\\phi}(a_i|s)] \\)。\",\n  \"baseline_behavior\": \"根据不同的损失类型，计算策略损失。对于'count'类型，策略损失是 \\( \\log \\pi_{\\phi}(a|s) - \\log \\text{tf.squeeze}(n_a, axis=1) \\) 的负值乘以 \\( \\log \\pi_{\\phi}(a|s) \\)。对于'Q'类型，策略损失是 \\( \\log \\pi_{\\phi}(a|s) - \\text{tf.squeeze}((n_a \\cdot \\text{temp}) - \\text{self.V_hat}, axis=1) \\) 的负值乘以 \\( \\log \\pi_{\\phi}(a|s) \\)。\",\n  \"candidate_behavior\": \"根据不同的损失类型，计算策略损失。对于'count'类型，策略损失是 \\( -\\text{tf.squeeze}(n_a, axis=1) \\) 乘以 \\( \\log \\pi_{\\phi}(a|s) \\)。对于'Q'类型，策略损失是 \\( \\log \\pi_{\\phi}(a|s) - \\text{tf.squeeze}((n_a \\cdot \\text{temp}) - \\text{self.V_hat}, axis=1) \\) 的负值乘以 \\( \\log \\pi_{\\phi}(a|s) \\)。\",\n  \"label\": \"MISMATCH\",\n  \"reason\": \"对于'count'类型的损失，基线代码中的策略损失是 \\( \\log \\pi_{\\phi}(a|s) - \\log \\text{tf.squeeze}(n_a, axis=1) \\) 的负值，而待核验代码中的策略损失直接是 \\( -\\text{tf.squeeze}(n_a, axis=1) \\) 乘以 \\( \\log \\pi_{\\phi}(a|s) \\)，缺少了 \\( \\log \\pi_{\\phi}(a|s) \\) 的减法部分。\"\n}\n```",
+      "error": "JSONDecodeError: Invalid \\escape: line 2 column 23 (char 24)"
+    },
+    {
+      "method": "structured",
+      "task_id": "95f19c13-benign",
+      "source_id": "95f19c13",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "INVALID",
+      "correct": false,
+      "seconds": 4.962973356246948,
+      "eval_count": 388,
+      "parsed": null,
+      "witness": null,
+      "raw": "```json\n{\n  \"paper_rule\": \"政策损失 \\( L_{\\text{policy}}(\\phi) \\) 是基于网络输出 \\( \\pi_{\\phi}(a|s) \\) 和经验密度 \\( \\hat{\\pi}(a|s) \\) 之间的Kullback-Leibler散度，其形式为：\\[ L_{\\text{policy}}(\\phi) = D_{\\text{KL}}(\\pi_{\\phi}(a|s) \\| \\hat{\\pi}(a|s)) = \\mathbb{E}_{a \\sim \\pi_{\\phi}}[\\log \\pi_{\\phi}(a|s) - \\log \\hat{\\pi}(a|s)] \\]。对于最终的梯度估计器，形式为：\\[ \\nabla_{\\phi} L_{\\text{policy}}(\\phi) = \\mathbb{E}_{s \\sim D, a_i \\sim D_s}[(\\log \\pi_{\\phi}(a_i|s) - \\tau \\log n(s, a_i)) \\nabla_{\\phi} \\log \\pi_{\\phi}(a_i|s)] \\]\",\n  \"baseline_behavior\": \"根据不同的损失类型，计算策略损失。对于'count'类型，策略损失是基于对数比的乘积；对于'Q'类型，策略损失是基于对数比和温度因子的调整。\",\n  \"candidate_behavior\": \"根据不同的损失类型，计算策略损失。对于'count'类型，策略损失是基于对数比的乘积；对于'Q'类型，策略损失是基于对数比和温度因子的调整。\",\n  \"label\": \"MATCH\",\n  \"reason\": \"待核验代码与论文规则和基线代码在逻辑和实现上完全一致。\"\n}\n```",
+      "error": "JSONDecodeError: Invalid \\escape: line 2 column 23 (char 24)"
+    },
+    {
+      "method": "structured",
+      "task_id": "f03d4577-changed",
+      "source_id": "f03d4577",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 2.381819725036621,
+      "eval_count": 169,
+      "parsed": {
+        "paper_rule": "使用策略网络来采样树搜索中的新子动作（在基于逐步扩展添加新动作时），从而让策略网络引导我们将考虑的动作。",
+        "baseline_behavior": "如果需要的子动作数量多于当前已有的子动作数量，则根据随机概率选择策略网络采样或随机采样动作。",
+        "candidate_behavior": "如果需要的子动作数量多于当前已有的子动作数量，则根据随机概率选择策略网络采样或随机采样动作，但条件判断符号相反。",
+        "label": "MISMATCH",
+        "reason": "基线代码中条件判断使用的是 `>` 符号，而待核验代码中条件判断使用的是 `<` 符号，这与论文中描述的行为不一致。"
+      },
+      "witness": null,
+      "raw": "{\n  \"paper_rule\": \"使用策略网络来采样树搜索中的新子动作（在基于逐步扩展添加新动作时），从而让策略网络引导我们将考虑的动作。\",\n  \"baseline_behavior\": \"如果需要的子动作数量多于当前已有的子动作数量，则根据随机概率选择策略网络采样或随机采样动作。\",\n  \"candidate_behavior\": \"如果需要的子动作数量多于当前已有的子动作数量，则根据随机概率选择策略网络采样或随机采样动作，但条件判断符号相反。\",\n  \"label\": \"MISMATCH\",\n  \"reason\": \"基线代码中条件判断使用的是 `>` 符号，而待核验代码中条件判断使用的是 `<` 符号，这与论文中描述的行为不一致。\"\n}",
+      "error": null
+    },
+    {
+      "method": "structured",
+      "task_id": "f03d4577-benign",
+      "source_id": "f03d4577",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MATCH",
+      "correct": true,
+      "seconds": 2.551384687423706,
+      "eval_count": 178,
+      "parsed": {
+        "paper_rule": "使用策略网络来在树搜索中采样新的子动作（当基于逐步扩展添加新动作时）。因此，策略网络引导我们在树搜索中考虑的动作。",
+        "baseline_behavior": "如果所需子动作数量多于当前已有的子动作数量，则根据概率选择采样动作或随机动作，并相应地添加子动作。",
+        "candidate_behavior": "如果所需子动作数量多于当前已有的子动作数量，则根据概率选择采样动作或随机动作，并相应地添加子动作。",
+        "label": "MATCH",
+        "reason": "待核验代码与基线代码的行为一致，都实现了根据策略网络采样动作或随机动作，并在满足条件时添加子动作。这符合论文中关于使用策略网络来引导树搜索中动作选择的描述。"
+      },
+      "witness": null,
+      "raw": "{\n  \"paper_rule\": \"使用策略网络来在树搜索中采样新的子动作（当基于逐步扩展添加新动作时）。因此，策略网络引导我们在树搜索中考虑的动作。\",\n  \"baseline_behavior\": \"如果所需子动作数量多于当前已有的子动作数量，则根据概率选择采样动作或随机动作，并相应地添加子动作。\",\n  \"candidate_behavior\": \"如果所需子动作数量多于当前已有的子动作数量，则根据概率选择采样动作或随机动作，并相应地添加子动作。\",\n  \"label\": \"MATCH\",\n  \"reason\": \"待核验代码与基线代码的行为一致，都实现了根据策略网络采样动作或随机动作，并在满足条件时添加子动作。这符合论文中关于使用策略网络来引导树搜索中动作选择的描述。\"\n}",
+      "error": null
+    },
+    {
+      "method": "structured",
+      "task_id": "add47c47-changed",
+      "source_id": "add47c47",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 2.0412306785583496,
+      "eval_count": 146,
+      "parsed": {
+        "paper_rule": "在多层图卷积传播之后，将节点嵌入聚合为图级别的表示向量。",
+        "baseline_behavior": "将两个中间层输出的张量逐元素相乘，然后求和，激活，dropout。",
+        "candidate_behavior": "直接对一个中间层输出的张量求和，激活，dropout。",
+        "label": "MISMATCH",
+        "reason": "基线代码中的行为是将两个中间层输出的张量逐元素相乘后再求和，而待核验代码直接对一个中间层输出的张量求和，这与论文中描述的节点嵌入聚合方式不一致。"
+      },
+      "witness": null,
+      "raw": "{\n  \"paper_rule\": \"在多层图卷积传播之后，将节点嵌入聚合为图级别的表示向量。\",\n  \"baseline_behavior\": \"将两个中间层输出的张量逐元素相乘，然后求和，激活，dropout。\",\n  \"candidate_behavior\": \"直接对一个中间层输出的张量求和，激活，dropout。\",\n  \"label\": \"MISMATCH\",\n  \"reason\": \"基线代码中的行为是将两个中间层输出的张量逐元素相乘后再求和，而待核验代码直接对一个中间层输出的张量求和，这与论文中描述的节点嵌入聚合方式不一致。\"\n}",
+      "error": null
+    },
+    {
+      "method": "structured",
+      "task_id": "add47c47-benign",
+      "source_id": "add47c47",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MATCH",
+      "correct": true,
+      "seconds": 2.1087779998779297,
+      "eval_count": 155,
+      "parsed": {
+        "paper_rule": "在多层图卷积传播之后，按照Li等人(2016)的方法，将节点嵌入聚合为图级别的表示向量。",
+        "baseline_behavior": "该代码实现了一个简单的神经网络层，通过两个线性变换、逐元素相乘、求和操作、激活函数和Dropout层处理输入数据。",
+        "candidate_behavior": "待核验代码与基线代码完全相同，只是添加了注释。",
+        "label": "MATCH",
+        "reason": "尽管待核验代码添加了注释，但其行为与基线代码完全一致，均实现了论文中描述的节点嵌入聚合为图级别表示向量的过程。"
+      },
+      "witness": null,
+      "raw": "{\n  \"paper_rule\": \"在多层图卷积传播之后，按照Li等人(2016)的方法，将节点嵌入聚合为图级别的表示向量。\",\n  \"baseline_behavior\": \"该代码实现了一个简单的神经网络层，通过两个线性变换、逐元素相乘、求和操作、激活函数和Dropout层处理输入数据。\",\n  \"candidate_behavior\": \"待核验代码与基线代码完全相同，只是添加了注释。\",\n  \"label\": \"MATCH\",\n  \"reason\": \"尽管待核验代码添加了注释，但其行为与基线代码完全一致，均实现了论文中描述的节点嵌入聚合为图级别表示向量的过程。\"\n}",
+      "error": null
+    },
+    {
+      "method": "structured",
+      "task_id": "e7c4ffa5-changed",
+      "source_id": "e7c4ffa5",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 2.512479782104492,
+      "eval_count": 174,
+      "parsed": {
+        "paper_rule": "优化目标是通过定义为所有目标的乘积（范围在[0,1]内）的联合奖励来实现的。",
+        "baseline_behavior": "基线代码计算每个目标的分数，并将它们的分数相乘，最终奖励值范围在[0,1]内。",
+        "candidate_behavior": "待核验代码计算每个目标的分数，并将它们的分数相加，没有限制奖励值的范围。",
+        "label": "MISMATCH",
+        "reason": "论文要求联合奖励是所有目标分数的乘积，而待核验代码则是所有目标分数的累加，这与论文的要求不符。此外，论文中提到的联合奖励值应该在[0,1]范围内，但待核验代码中没有这种限制。"
+      },
+      "witness": null,
+      "raw": "{\n  \"paper_rule\": \"优化目标是通过定义为所有目标的乘积（范围在[0,1]内）的联合奖励来实现的。\",\n  \"baseline_behavior\": \"基线代码计算每个目标的分数，并将它们的分数相乘，最终奖励值范围在[0,1]内。\",\n  \"candidate_behavior\": \"待核验代码计算每个目标的分数，并将它们的分数相加，没有限制奖励值的范围。\",\n  \"label\": \"MISMATCH\",\n  \"reason\": \"论文要求联合奖励是所有目标分数的乘积，而待核验代码则是所有目标分数的累加，这与论文的要求不符。此外，论文中提到的联合奖励值应该在[0,1]范围内，但待核验代码中没有这种限制。\"\n}",
+      "error": null
+    },
+    {
+      "method": "structured",
+      "task_id": "e7c4ffa5-benign",
+      "source_id": "e7c4ffa5",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MATCH",
+      "correct": true,
+      "seconds": 2.5124197006225586,
+      "eval_count": 181,
+      "parsed": {
+        "paper_rule": "为了同时优化所有目标，我们不交替优化各个目标，而是定义一个联合奖励，该奖励是所有目标奖励的乘积（范围在[0,1]之间）。",
+        "baseline_behavior": "基线代码实现了将多个分子性质指标（如logp、sas、qed等）的评分进行乘法运算，最终返回一个归一化的联合奖励值。",
+        "candidate_behavior": "待核验代码只是添加了注释，没有改变原有的逻辑和实现，同样实现了将多个分子性质指标的评分进行乘法运算，最终返回一个归一化的联合奖励值。",
+        "label": "MATCH",
+        "reason": "待核验代码与基线代码的行为一致，都实现了将多个分子性质指标的评分进行乘法运算，以计算联合奖励。"
+      },
+      "witness": null,
+      "raw": "{\n  \"paper_rule\": \"为了同时优化所有目标，我们不交替优化各个目标，而是定义一个联合奖励，该奖励是所有目标奖励的乘积（范围在[0,1]之间）。\",\n  \"baseline_behavior\": \"基线代码实现了将多个分子性质指标（如logp、sas、qed等）的评分进行乘法运算，最终返回一个归一化的联合奖励值。\",\n  \"candidate_behavior\": \"待核验代码只是添加了注释，没有改变原有的逻辑和实现，同样实现了将多个分子性质指标的评分进行乘法运算，最终返回一个归一化的联合奖励值。\",\n  \"label\": \"MATCH\",\n  \"reason\": \"待核验代码与基线代码的行为一致，都实现了将多个分子性质指标的评分进行乘法运算，以计算联合奖励。\"\n}",
+      "error": null
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "acec6f2b-changed",
+      "source_id": "acec6f2b",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 3.131004571914673,
+      "eval_count": 234,
+      "parsed": {
+        "paper_rule": "Let s: Rp → R be a function monotonic with the density ratio r(x; θ0, θ1) ... r(x; θ0, θ1) = pU(u = s(x)|θ0) / pU(u = θ1|θ1). Note that it is important that we include the denominator p(s(x; θ, θ1)|θ1) because this cancels Jacobian factors that vary with θ.",
+        "variable_meanings": {
+          "x0": "The input value for the function s, which represents the density ratio."
+        },
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_expr": "x0",
+        "candidate_expr": "1.0 - x0",
+        "predicted_label": "MISMATCH",
+        "binding_reason": "The baseline expression represents the density ratio directly, while the candidate expression represents 1 - the density ratio. This mismatch violates the paper's rule that the denominator must be included to cancel Jacobian factors."
+      },
+      "witness": {
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_value": 0.2,
+        "candidate_value": 0.8,
+        "verified_label": "MISMATCH"
+      },
+      "raw": "```json\n{\n    \"paper_rule\": \"Let s: Rp → R be a function monotonic with the density ratio r(x; θ0, θ1) ... r(x; θ0, θ1) = pU(u = s(x)|θ0) / pU(u = θ1|θ1). Note that it is important that we include the denominator p(s(x; θ, θ1)|θ1) because this cancels Jacobian factors that vary with θ.\",\n    \"variable_meanings\": {\n        \"x0\": \"The input value for the function s, which represents the density ratio.\"\n    },\n    \"variables\": {\n        \"x0\": 0.2\n    },\n    \"baseline_expr\": \"x0\",\n    \"candidate_expr\": \"1.0 - x0\",\n    \"predicted_label\": \"MISMATCH\",\n    \"binding_reason\": \"The baseline expression represents the density ratio directly, while the candidate expression represents 1 - the density ratio. This mismatch violates the paper's rule that the denominator must be included to cancel Jacobian factors.\"\n}\n```",
+      "error": null
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "acec6f2b-benign",
+      "source_id": "acec6f2b",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "INVALID",
+      "correct": false,
+      "seconds": 3.3965041637420654,
+      "eval_count": 257,
+      "parsed": {
+        "paper_rule": "Let s: Rp → R be a function monotonic with the density ratio r(x; θ0, θ1) ... r(x; θ0, θ1) = pU(u = s(x)|θ0) / pU(u = s(x)|θ1). Note that it is important that we include the denominator p(s(x; θ, θ1)|θ1) because this cancels Jacobian factors that vary with θ.",
+        "variable_meanings": {
+          "x0": "A scalar value representing the input to the function s."
+        },
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_expr": "t0 = x0 if x0 < 0.5 else 1 - x0",
+        "candidate_expr": "t0 = x0 if x0 < 0.5 else 1 - x0",
+        "predicted_label": "MATCH",
+        "binding_reason": "Both expressions are identical and represent the same logic for calculating t0 based on the value of x0. This matches the paper's rule by using a scalar value and a simple conditional expression."
+      },
+      "witness": null,
+      "raw": "```json\n{\n    \"paper_rule\": \"Let s: Rp → R be a function monotonic with the density ratio r(x; θ0, θ1) ... r(x; θ0, θ1) = pU(u = s(x)|θ0) / pU(u = s(x)|θ1). Note that it is important that we include the denominator p(s(x; θ, θ1)|θ1) because this cancels Jacobian factors that vary with θ.\",\n    \"variable_meanings\": {\n        \"x0\": \"A scalar value representing the input to the function s.\"\n    },\n    \"variables\": {\n        \"x0\": 0.2\n    },\n    \"baseline_expr\": \"t0 = x0 if x0 < 0.5 else 1 - x0\",\n    \"candidate_expr\": \"t0 = x0 if x0 < 0.5 else 1 - x0\",\n    \"predicted_label\": \"MATCH\",\n    \"binding_reason\": \"Both expressions are identical and represent the same logic for calculating t0 based on the value of x0. This matches the paper's rule by using a scalar value and a simple conditional expression.\"\n}\n```",
+      "error": "SyntaxError: invalid syntax (<unknown>, line 1)"
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "74089ac7-changed",
+      "source_id": "74089ac7",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MATCH",
+      "correct": false,
+      "seconds": 2.7239997386932373,
+      "eval_count": 199,
+      "parsed": {
+        "paper_rule": "Supervised learning yields a sufficient procedure for Thm. 1 to hold, guaranteeing that any universally strongly consistent algorithm can be used for learning s∗.",
+        "variable_meanings": {
+          "x0": "A sample x from the distribution pθ0 or pθ1"
+        },
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_expr": "x0 > 0.5",
+        "candidate_expr": "x0 > 0.5",
+        "predicted_label": "MATCH",
+        "binding_reason": "Both expressions are simple threshold-based classification rules that do not depend on the specific nature of the input sample x0. They both classify x0 based on whether it is greater than 0.5, which is a direct application of a supervised learning classifier without any additional complexity or randomness introduced by the y processing in the candidate expression."
+      },
+      "witness": {
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_value": false,
+        "candidate_value": false,
+        "verified_label": "MATCH"
+      },
+      "raw": "```json\n{\n  \"paper_rule\": \"Supervised learning yields a sufficient procedure for Thm. 1 to hold, guaranteeing that any universally strongly consistent algorithm can be used for learning s∗.\",\n  \"variable_meanings\": {\n    \"x0\": \"A sample x from the distribution pθ0 or pθ1\"\n  },\n  \"variables\": {\n    \"x0\": 0.2\n  },\n  \"baseline_expr\": \"x0 > 0.5\",\n  \"candidate_expr\": \"x0 > 0.5\",\n  \"predicted_label\": \"MATCH\",\n  \"binding_reason\": \"Both expressions are simple threshold-based classification rules that do not depend on the specific nature of the input sample x0. They both classify x0 based on whether it is greater than 0.5, which is a direct application of a supervised learning classifier without any additional complexity or randomness introduced by the y processing in the candidate expression.\"\n}\n```",
+      "error": null
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "74089ac7-benign",
+      "source_id": "74089ac7",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MATCH",
+      "correct": true,
+      "seconds": 3.0717546939849854,
+      "eval_count": 232,
+      "parsed": {
+        "paper_rule": "In light of this result, the likelihood ratio estimation problem can now be recast as a (probabilistic) classification problem... modeled by a classifier trained to distinguish samples x ∼ pθ0 from samples x ∼ pθ1 satisfies the conditions of Thm. 1. Supervised learning yields a sufficient procedure for Thm. 1 to hold, guaranteeing that any universally strongly consistent algorithm can be used for learning s∗.",
+        "variable_meanings": {
+          "x0": "A sample from distribution pθ0"
+        },
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_expr": "1 if x0 < 0.5 else 0",
+        "candidate_expr": "1 if x0 < 0.5 else 0",
+        "predicted_label": "MATCH",
+        "binding_reason": "Both the baseline and candidate expressions classify the sample x0 based on a threshold. Since the expressions are identical, they are semantically equivalent and thus match the paper's rule for classification."
+      },
+      "witness": {
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_value": 1,
+        "candidate_value": 1,
+        "verified_label": "MATCH"
+      },
+      "raw": "```json\n{\n    \"paper_rule\": \"In light of this result, the likelihood ratio estimation problem can now be recast as a (probabilistic) classification problem... modeled by a classifier trained to distinguish samples x ∼ pθ0 from samples x ∼ pθ1 satisfies the conditions of Thm. 1. Supervised learning yields a sufficient procedure for Thm. 1 to hold, guaranteeing that any universally strongly consistent algorithm can be used for learning s∗.\",\n    \"variable_meanings\": {\n        \"x0\": \"A sample from distribution pθ0\"\n    },\n    \"variables\": {\n        \"x0\": 0.2\n    },\n    \"baseline_expr\": \"1 if x0 < 0.5 else 0\",\n    \"candidate_expr\": \"1 if x0 < 0.5 else 0\",\n    \"predicted_label\": \"MATCH\",\n    \"binding_reason\": \"Both the baseline and candidate expressions classify the sample x0 based on a threshold. Since the expressions are identical, they are semantically equivalent and thus match the paper's rule for classification.\"\n}\n```",
+      "error": null
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "9ce8706f-changed",
+      "source_id": "9ce8706f",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 3.1362457275390625,
+      "eval_count": 231,
+      "parsed": {
+        "paper_rule": "The main result of this paper is to show that the likelihood ratio is invariant under dimensionality reductions Rp → R, under the assumption that the corresponding transformation is itself monotonic with the likelihood ratio. In such cases where ŝ(x) is not monotonic with r(x), the induced probability does not factorize as in Eqn. 2.8, leading to artifacts in the resulting approximation of the density ratio.",
+        "variable_meanings": {
+          "x0": "The input scalar value to the model."
+        },
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_expr": "(1 - x0) / x0",
+        "candidate_expr": "x0",
+        "predicted_label": "MISMATCH",
+        "binding_reason": "The baseline expression calculates the likelihood ratio assuming a monotonic transformation, which is consistent with the paper's claim. The candidate expression, however, directly uses the output of the sigmoid function without ensuring monotonicity, leading to a mismatch in the context of the paper's requirement."
+      },
+      "witness": {
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_value": 4.0,
+        "candidate_value": 0.2,
+        "verified_label": "MISMATCH"
+      },
+      "raw": "```json\n{\n  \"paper_rule\": \"The main result of this paper is to show that the likelihood ratio is invariant under dimensionality reductions Rp → R, under the assumption that the corresponding transformation is itself monotonic with the likelihood ratio. In such cases where ŝ(x) is not monotonic with r(x), the induced probability does not factorize as in Eqn. 2.8, leading to artifacts in the resulting approximation of the density ratio.\",\n  \"variable_meanings\": {\n    \"x0\": \"The input scalar value to the model.\"\n  },\n  \"variables\": {\n    \"x0\": 0.2\n  },\n  \"baseline_expr\": \"(1 - x0) / x0\",\n  \"candidate_expr\": \"x0\",\n  \"predicted_label\": \"MISMATCH\",\n  \"binding_reason\": \"The baseline expression calculates the likelihood ratio assuming a monotonic transformation, which is consistent with the paper's claim. The candidate expression, however, directly uses the output of the sigmoid function without ensuring monotonicity, leading to a mismatch in the context of the paper's requirement.\"\n}\n```",
+      "error": null
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "9ce8706f-benign",
+      "source_id": "9ce8706f",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MATCH",
+      "correct": true,
+      "seconds": 3.3864548206329346,
+      "eval_count": 255,
+      "parsed": {
+        "paper_rule": "The main result of this paper is to show that the likelihood ratio is invariant under dimensionality reductions Rp → R, under the assumption that the corresponding transformation is itself monotonic with the likelihood ratio. In such cases where ŝ(x) is not monotonic with r(x), the induced probability does not factorize as in Eqn. 2.8, leading to artifacts in the resulting approximation of the density ratio.",
+        "variable_meanings": {
+          "x0": "The input scalar value to the forward pass of the model."
+        },
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_expr": "(1 - x0) / x0",
+        "candidate_expr": "(1 - x0) / x0",
+        "predicted_label": "MATCH",
+        "binding_reason": "Both the baseline and candidate expressions calculate the likelihood ratio r_hat using the same formula (1 - s_hat) / s_hat, where s_hat is the output of the model. Given the input x0, both expressions produce the same result, indicating that the candidate expression is semantically equivalent to the baseline code in terms of the paper's rule."
+      },
+      "witness": {
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_value": 4.0,
+        "candidate_value": 4.0,
+        "verified_label": "MATCH"
+      },
+      "raw": "```json\n{\n    \"paper_rule\": \"The main result of this paper is to show that the likelihood ratio is invariant under dimensionality reductions Rp → R, under the assumption that the corresponding transformation is itself monotonic with the likelihood ratio. In such cases where ŝ(x) is not monotonic with r(x), the induced probability does not factorize as in Eqn. 2.8, leading to artifacts in the resulting approximation of the density ratio.\",\n    \"variable_meanings\": {\n        \"x0\": \"The input scalar value to the forward pass of the model.\"\n    },\n    \"variables\": {\n        \"x0\": 0.2\n    },\n    \"baseline_expr\": \"(1 - x0) / x0\",\n    \"candidate_expr\": \"(1 - x0) / x0\",\n    \"predicted_label\": \"MATCH\",\n    \"binding_reason\": \"Both the baseline and candidate expressions calculate the likelihood ratio r_hat using the same formula (1 - s_hat) / s_hat, where s_hat is the output of the model. Given the input x0, both expressions produce the same result, indicating that the candidate expression is semantically equivalent to the baseline code in terms of the paper's rule.\"\n}\n```",
+      "error": null
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "2a5dc3f7-changed",
+      "source_id": "2a5dc3f7",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MATCH",
+      "correct": false,
+      "seconds": 2.741661548614502,
+      "eval_count": 200,
+      "parsed": {
+        "paper_rule": "Parameter β governs the trade-off between structure and label information. Its choice is typically driven by the application.",
+        "variable_meanings": {
+          "x0": "The value of the parameter β as defined in the paper."
+        },
+        "variables": {
+          "x0": 0.5
+        },
+        "baseline_expr": "1 - x0",
+        "candidate_expr": "x0",
+        "predicted_label": "MISMATCH",
+        "binding_reason": "The baseline expression uses 1 - x0, while the candidate expression uses x0. Given that β is a trade-off parameter, the expressions are inversely related. If x0 is set to 0.5, the baseline expression evaluates to 0.5 and the candidate expression also evaluates to 0.5, but the context of the paper suggests that the expressions should be inversely related, indicating a mismatch."
+      },
+      "witness": {
+        "variables": {
+          "x0": 0.5
+        },
+        "baseline_value": 0.5,
+        "candidate_value": 0.5,
+        "verified_label": "MATCH"
+      },
+      "raw": "```json\n{\n  \"paper_rule\": \"Parameter β governs the trade-off between structure and label information. Its choice is typically driven by the application.\",\n  \"variable_meanings\": {\n    \"x0\": \"The value of the parameter β as defined in the paper.\"\n  },\n  \"variables\": {\n    \"x0\": 0.5\n  },\n  \"baseline_expr\": \"1 - x0\",\n  \"candidate_expr\": \"x0\",\n  \"predicted_label\": \"MISMATCH\",\n  \"binding_reason\": \"The baseline expression uses 1 - x0, while the candidate expression uses x0. Given that β is a trade-off parameter, the expressions are inversely related. If x0 is set to 0.5, the baseline expression evaluates to 0.5 and the candidate expression also evaluates to 0.5, but the context of the paper suggests that the expressions should be inversely related, indicating a mismatch.\"\n}\n```",
+      "error": null
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "2a5dc3f7-benign",
+      "source_id": "2a5dc3f7",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "INVALID",
+      "correct": false,
+      "seconds": 6.07815957069397,
+      "eval_count": 482,
+      "parsed": {
+        "paper_rule": "Parameter β governs the trade-off between structure and label information. Its choice is typically driven by the application. FGW as training loss. We propose in this paper to use the FGW distance as the loss. More precisely, we define: Δ_FGW(z, y) := FGW_2^2(z, z_y). Structured prediction model. … f_θ(x) = argmin_{z∈Z_n} ∑_{j=1}^M α_j(x;W) FGW_2^2(z, z̄_j).",
+        "variable_meanings": {
+          "x0": "M (cost matrix between features and prototypes)",
+          "x1": "C_pred (cost matrix between predicted labels and prototypes)",
+          "x2": "C_true (cost matrix between true labels and prototypes)",
+          "x3": "p1 (distribution over predicted labels)",
+          "x4": "p2 (distribution over true labels)",
+          "x5": "α (weights for each prototype)",
+          "x6": "W (weights for each feature)",
+          "x7": "self.alpha (a specific value for alpha)"
+        },
+        "variables": {
+          "x0": 0.2,
+          "x1": 0.2,
+          "x2": 0.2,
+          "x3": 0.2,
+          "x4": 0.2,
+          "x5": 0.2,
+          "x6": 0.2,
+          "x7": 0.2
+        },
+        "baseline_expr": "ot.gromov.fused_gromov_wasserstein2(x0, x1, x2, x3, x4, loss_fun='square_loss', alpha=x7, log=False)",
+        "candidate_expr": "ot.gromov.fused_gromov_wasserstein2(x0, x1, x2, x3, x4, loss_fun='square_loss', alpha=x7, log=False)",
+        "predicted_label": "MATCH",
+        "binding_reason": "两个表达式都使用了相同的参数和参数值，且都调用了相同的函数，因此它们是语义等价的。"
+      },
+      "witness": null,
+      "raw": "```json\n{\n  \"paper_rule\": \"Parameter β governs the trade-off between structure and label information. Its choice is typically driven by the application. FGW as training loss. We propose in this paper to use the FGW distance as the loss. More precisely, we define: Δ_FGW(z, y) := FGW_2^2(z, z_y). Structured prediction model. … f_θ(x) = argmin_{z∈Z_n} ∑_{j=1}^M α_j(x;W) FGW_2^2(z, z̄_j).\",\n  \"variable_meanings\": {\n    \"x0\": \"M (cost matrix between features and prototypes)\",\n    \"x1\": \"C_pred (cost matrix between predicted labels and prototypes)\",\n    \"x2\": \"C_true (cost matrix between true labels and prototypes)\",\n    \"x3\": \"p1 (distribution over predicted labels)\",\n    \"x4\": \"p2 (distribution over true labels)\",\n    \"x5\": \"α (weights for each prototype)\",\n    \"x6\": \"W (weights for each feature)\",\n    \"x7\": \"self.alpha (a specific value for alpha)\"\n  },\n  \"variables\": {\n    \"x0\": 0.2,\n    \"x1\": 0.2,\n    \"x2\": 0.2,\n    \"x3\": 0.2,\n    \"x4\": 0.2,\n    \"x5\": 0.2,\n    \"x6\": 0.2,\n    \"x7\": 0.2\n  },\n  \"baseline_expr\": \"ot.gromov.fused_gromov_wasserstein2(x0, x1, x2, x3, x4, loss_fun='square_loss', alpha=x7, log=False)\",\n  \"candidate_expr\": \"ot.gromov.fused_gromov_wasserstein2(x0, x1, x2, x3, x4, loss_fun='square_loss', alpha=x7, log=False)\",\n  \"predicted_label\": \"MATCH\",\n  \"binding_reason\": \"两个表达式都使用了相同的参数和参数值，且都调用了相同的函数，因此它们是语义等价的。\"\n}\n```",
+      "error": "ValueError: disallowed AST node: Call"
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "55cc1477-changed",
+      "source_id": "55cc1477",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MATCH",
+      "correct": false,
+      "seconds": 2.8766462802886963,
+      "eval_count": 200,
+      "parsed": {
+        "paper_rule": "We use the symmetric difference quotient to estimate the gradient … The estimation error … is in the order of O(h^2).",
+        "variable_meanings": {
+          "x0": "The first loss value in the batch"
+        },
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_expr": "(x0 - x0) / 0.0002",
+        "candidate_expr": "(x0 - x0) / 0.0001",
+        "predicted_label": "MISMATCH",
+        "binding_reason": "根据论文声明，使用对称差分商来估计梯度，误差为O(h^2)。基线代码使用0.0002作为h，而待核验代码使用0.0001作为h，这违反了论文中关于误差阶数的声明。"
+      },
+      "witness": {
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_value": 0.0,
+        "candidate_value": 0.0,
+        "verified_label": "MATCH"
+      },
+      "raw": "```json\n{\n  \"paper_rule\": \"We use the symmetric difference quotient to estimate the gradient … The estimation error … is in the order of O(h^2).\",\n  \"variable_meanings\": {\n    \"x0\": \"The first loss value in the batch\"\n  },\n  \"variables\": {\n    \"x0\": 0.2\n  },\n  \"baseline_expr\": \"(x0 - x0) / 0.0002\",\n  \"candidate_expr\": \"(x0 - x0) / 0.0001\",\n  \"predicted_label\": \"MISMATCH\",\n  \"binding_reason\": \"根据论文声明，使用对称差分商来估计梯度，误差为O(h^2)。基线代码使用0.0002作为h，而待核验代码使用0.0001作为h，这违反了论文中关于误差阶数的声明。\"\n}\n```",
+      "error": null
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "55cc1477-benign",
+      "source_id": "55cc1477",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MATCH",
+      "correct": true,
+      "seconds": 3.4422969818115234,
+      "eval_count": 255,
+      "parsed": {
+        "paper_rule": "We use the symmetric difference quotient to estimate the gradient … The estimation error … is in the order of O(h^2).",
+        "variable_meanings": {
+          "x0": "losses[0] - the first loss value in the batch",
+          "x1": "losses[1] - the second loss value in the batch",
+          "x2": "losses[2] - the third loss value in the batch",
+          "x3": "h - the step size used in the difference quotient"
+        },
+        "variables": {
+          "x0": 0.2,
+          "x1": 0.3,
+          "x2": 0.4,
+          "x3": 0.0002
+        },
+        "baseline_expr": "(x1 - x2) / x3",
+        "candidate_expr": "(x1 - x2) / x3",
+        "predicted_label": "MATCH",
+        "binding_reason": "Both the baseline and candidate expressions use the symmetric difference quotient to estimate the gradient, which is consistent with the paper's statement. The expressions are identical, thus they match."
+      },
+      "witness": {
+        "variables": {
+          "x0": 0.2,
+          "x1": 0.3,
+          "x2": 0.4,
+          "x3": 0.0002
+        },
+        "baseline_value": -500.00000000000017,
+        "candidate_value": -500.00000000000017,
+        "verified_label": "MATCH"
+      },
+      "raw": "```json\n{\n  \"paper_rule\": \"We use the symmetric difference quotient to estimate the gradient … The estimation error … is in the order of O(h^2).\",\n  \"variable_meanings\": {\n    \"x0\": \"losses[0] - the first loss value in the batch\",\n    \"x1\": \"losses[1] - the second loss value in the batch\",\n    \"x2\": \"losses[2] - the third loss value in the batch\",\n    \"x3\": \"h - the step size used in the difference quotient\"\n  },\n  \"variables\": {\n    \"x0\": 0.2,\n    \"x1\": 0.3,\n    \"x2\": 0.4,\n    \"x3\": 0.0002\n  },\n  \"baseline_expr\": \"(x1 - x2) / x3\",\n  \"candidate_expr\": \"(x1 - x2) / x3\",\n  \"predicted_label\": \"MATCH\",\n  \"binding_reason\": \"Both the baseline and candidate expressions use the symmetric difference quotient to estimate the gradient, which is consistent with the paper's statement. The expressions are identical, thus they match.\"\n}\n```",
+      "error": null
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "a04bbadd-changed",
+      "source_id": "a04bbadd",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "INVALID",
+      "correct": false,
+      "seconds": 3.14697265625,
+      "eval_count": 227,
+      "parsed": {
+        "paper_rule": "A pixel in the instance boundary map is 1 if its object ID is different from any of its 4-neighbors, and 0 otherwise.",
+        "variable_meanings": {
+          "x0": "A 2D tensor representing the semantic label map."
+        },
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_expr": "bound = (x0[:, :, 1:] != x0[:, :, :-1]) | (x0[:, :, 1:] != x0[:, :, :-1]).to(torch.uint8)",
+        "candidate_expr": "bound = (x0[:, :, 1:] != x0[:, :, :-1]) | (x0[:, :, 1:] != x0[:, :, :-1]).to(torch.uint8)",
+        "predicted_label": "MATCH",
+        "binding_reason": "Both expressions are calculating the boundary map by comparing adjacent pixels in the semantic label map. The candidate expression correctly follows the rule described in the paper, and matches the baseline implementation."
+      },
+      "witness": null,
+      "raw": "```json\n{\n  \"paper_rule\": \"A pixel in the instance boundary map is 1 if its object ID is different from any of its 4-neighbors, and 0 otherwise.\",\n  \"variable_meanings\": {\n    \"x0\": \"A 2D tensor representing the semantic label map.\"\n  },\n  \"variables\": {\n    \"x0\": 0.2\n  },\n  \"baseline_expr\": \"bound = (x0[:, :, 1:] != x0[:, :, :-1]) | (x0[:, :, 1:] != x0[:, :, :-1]).to(torch.uint8)\",\n  \"candidate_expr\": \"bound = (x0[:, :, 1:] != x0[:, :, :-1]) | (x0[:, :, 1:] != x0[:, :, :-1]).to(torch.uint8)\",\n  \"predicted_label\": \"MATCH\",\n  \"binding_reason\": \"Both expressions are calculating the boundary map by comparing adjacent pixels in the semantic label map. The candidate expression correctly follows the rule described in the paper, and matches the baseline implementation.\"\n}\n```",
+      "error": "SyntaxError: invalid syntax (<unknown>, line 1)"
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "a04bbadd-benign",
+      "source_id": "a04bbadd",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "INVALID",
+      "correct": false,
+      "seconds": 3.955437660217285,
+      "eval_count": 300,
+      "parsed": {
+        "paper_rule": "A pixel in the instance boundary map is 1 if its object ID is different from any of its 4-neighbors, and 0 otherwise.",
+        "variable_meanings": {
+          "x0": "A 3D tensor representing the instance map, where each element is an object ID."
+        },
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_expr": "(x0[:, :, 1:] != x0[:, :, :-1]) | (x0[:, :, :-1] != x0[:, :, 1:]) | (x0[:, 1:, :] != x0[:, :-1, :]) | (x0[:, :-1, :] != x0[:, 1:, :])",
+        "candidate_expr": "(x0[:, :, 1:] != x0[:, :, :-1]) | (x0[:, :, :-1] != x0[:, :, 1:]) | (x0[:, 1:, :] != x0[:, :-1, :]) | (x0[:, :-1, :] != x0[:, 1:, :])",
+        "predicted_label": "MATCH",
+        "binding_reason": "Both expressions check if a pixel's object ID is different from its 4-neighbors (top, bottom, left, right) in the instance map. The expressions are logically equivalent and will produce the same result."
+      },
+      "witness": null,
+      "raw": "```json\n{\n  \"paper_rule\": \"A pixel in the instance boundary map is 1 if its object ID is different from any of its 4-neighbors, and 0 otherwise.\",\n  \"variable_meanings\": {\n    \"x0\": \"A 3D tensor representing the instance map, where each element is an object ID.\"\n  },\n  \"variables\": {\n    \"x0\": 0.2\n  },\n  \"baseline_expr\": \"(x0[:, :, 1:] != x0[:, :, :-1]) | (x0[:, :, :-1] != x0[:, :, 1:]) | (x0[:, 1:, :] != x0[:, :-1, :]) | (x0[:, :-1, :] != x0[:, 1:, :])\",\n  \"candidate_expr\": \"(x0[:, :, 1:] != x0[:, :, :-1]) | (x0[:, :, :-1] != x0[:, :, 1:]) | (x0[:, 1:, :] != x0[:, :-1, :]) | (x0[:, :-1, :] != x0[:, 1:, :])\",\n  \"predicted_label\": \"MATCH\",\n  \"binding_reason\": \"Both expressions check if a pixel's object ID is different from its 4-neighbors (top, bottom, left, right) in the instance map. The expressions are logically equivalent and will produce the same result.\"\n}\n```",
+      "error": "ValueError: disallowed AST node: BinOp"
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "d0e56841-changed",
+      "source_id": "d0e56841",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 3.168407440185547,
+      "eval_count": 231,
+      "parsed": {
+        "paper_rule": "The discriminator input is a channel-wise concatenation of the instance boundary map, semantic label map, and the real/synthesized image.",
+        "variable_meanings": {
+          "x0": "Semantic label map (channel-wise concatenated with instance boundary map)",
+          "x1": "Instance boundary map",
+          "x2": "Real image",
+          "x3": "Synthesized image"
+        },
+        "variables": {
+          "x0": 0.2,
+          "x1": 0.3,
+          "x2": 0.4,
+          "x3": 0.5
+        },
+        "baseline_expr": "(x1 + x0 + x2) / 3",
+        "candidate_expr": "(x1 + x0 + x3) / 3",
+        "predicted_label": "MISMATCH",
+        "binding_reason": "The baseline code correctly concatenates the instance boundary map, semantic label map, and the real image, while the candidate code incorrectly uses the synthesized image instead of the real image."
+      },
+      "witness": {
+        "variables": {
+          "x0": 0.2,
+          "x1": 0.3,
+          "x2": 0.4,
+          "x3": 0.5
+        },
+        "baseline_value": 0.3,
+        "candidate_value": 0.3333333333333333,
+        "verified_label": "MISMATCH"
+      },
+      "raw": "```json\n{\n  \"paper_rule\": \"The discriminator input is a channel-wise concatenation of the instance boundary map, semantic label map, and the real/synthesized image.\",\n  \"variable_meanings\": {\n    \"x0\": \"Semantic label map (channel-wise concatenated with instance boundary map)\",\n    \"x1\": \"Instance boundary map\",\n    \"x2\": \"Real image\",\n    \"x3\": \"Synthesized image\"\n  },\n  \"variables\": {\n    \"x0\": 0.2,\n    \"x1\": 0.3,\n    \"x2\": 0.4,\n    \"x3\": 0.5\n  },\n  \"baseline_expr\": \"(x1 + x0 + x2) / 3\",\n  \"candidate_expr\": \"(x1 + x0 + x3) / 3\",\n  \"predicted_label\": \"MISMATCH\",\n  \"binding_reason\": \"The baseline code correctly concatenates the instance boundary map, semantic label map, and the real image, while the candidate code incorrectly uses the synthesized image instead of the real image.\"\n}\n```",
+      "error": null
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "d0e56841-benign",
+      "source_id": "d0e56841",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "INVALID",
+      "correct": false,
+      "seconds": 3.203758955001831,
+      "eval_count": 239,
+      "parsed": {
+        "paper_rule": "The pix2pix method uses a U-Net as the generator and a patch-based fully convolutional network as the discriminator. The discriminator's input is a channelwise concatenation of the semantic label map, the instance boundary map, and the real/synthesized image.",
+        "variable_meanings": {
+          "x0": "Semantic label map",
+          "x1": "Instance boundary map",
+          "x2": "Real image",
+          "x3": "Synthesized image"
+        },
+        "variables": {
+          "x0": 0.2,
+          "x1": 0.3,
+          "x2": 0.4,
+          "x3": 0.5
+        },
+        "baseline_expr": "(x0, x1, x3)",
+        "candidate_expr": "(x0, x1, x3)",
+        "predicted_label": "MATCH",
+        "binding_reason": "Both the baseline and candidate expressions concatenate the semantic label map, instance boundary map, and synthesized image along the channel dimension, which aligns with the paper's description."
+      },
+      "witness": null,
+      "raw": "```json\n{\n  \"paper_rule\": \"The pix2pix method uses a U-Net as the generator and a patch-based fully convolutional network as the discriminator. The discriminator's input is a channelwise concatenation of the semantic label map, the instance boundary map, and the real/synthesized image.\",\n  \"variable_meanings\": {\n    \"x0\": \"Semantic label map\",\n    \"x1\": \"Instance boundary map\",\n    \"x2\": \"Real image\",\n    \"x3\": \"Synthesized image\"\n  },\n  \"variables\": {\n    \"x0\": 0.2,\n    \"x1\": 0.3,\n    \"x2\": 0.4,\n    \"x3\": 0.5\n  },\n  \"baseline_expr\": \"(x0, x1, x3)\",\n  \"candidate_expr\": \"(x0, x1, x3)\",\n  \"predicted_label\": \"MATCH\",\n  \"binding_reason\": \"Both the baseline and candidate expressions concatenate the semantic label map, instance boundary map, and synthesized image along the channel dimension, which aligns with the paper's description.\"\n}\n```",
+      "error": "ValueError: disallowed AST node: Tuple"
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "b66dd4e8-changed",
+      "source_id": "b66dd4e8",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MATCH",
+      "correct": false,
+      "seconds": 3.121821165084839,
+      "eval_count": 233,
+      "parsed": {
+        "paper_rule": "Ck denote a 4 × 4 Convolution-InstanceNorm-LeakyReLU layer with k filters and stride 2. After the last layer, we apply a convolution to produce a 1 dimensional output. We do not use InstanceNorm for the first C64 layer. We use leaky ReLUs with slope 0.2.",
+        "variable_meanings": {
+          "x0": "LeakyReLU slope"
+        },
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_expr": "(x0 < 0.2) and (x0 > -0.2)",
+        "candidate_expr": "(x0 < 0.2) and (x0 > -0.2)",
+        "predicted_label": "MATCH",
+        "binding_reason": "Both the baseline and candidate expressions check if the LeakyReLU slope is within the range of -0.2 to 0.2, which matches the paper's statement of using leaky ReLUs with a slope of 0.2."
+      },
+      "witness": {
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_value": false,
+        "candidate_value": false,
+        "verified_label": "MATCH"
+      },
+      "raw": "```json\n{\n    \"paper_rule\": \"Ck denote a 4 × 4 Convolution-InstanceNorm-LeakyReLU layer with k filters and stride 2. After the last layer, we apply a convolution to produce a 1 dimensional output. We do not use InstanceNorm for the first C64 layer. We use leaky ReLUs with slope 0.2.\",\n    \"variable_meanings\": {\n        \"x0\": \"LeakyReLU slope\"\n    },\n    \"variables\": {\n        \"x0\": 0.2\n    },\n    \"baseline_expr\": \"(x0 < 0.2) and (x0 > -0.2)\",\n    \"candidate_expr\": \"(x0 < 0.2) and (x0 > -0.2)\",\n    \"predicted_label\": \"MATCH\",\n    \"binding_reason\": \"Both the baseline and candidate expressions check if the LeakyReLU slope is within the range of -0.2 to 0.2, which matches the paper's statement of using leaky ReLUs with a slope of 0.2.\"\n}\n```",
+      "error": null
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "b66dd4e8-benign",
+      "source_id": "b66dd4e8",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MATCH",
+      "correct": true,
+      "seconds": 2.9734673500061035,
+      "eval_count": 224,
+      "parsed": {
+        "paper_rule": "Ck denote a 4 × 4 Convolution-InstanceNorm-LeakyReLU layer with k filters and stride 2. After the last layer, we apply a convolution to produce a 1 dimensional output. We do not use InstanceNorm for the first C64 layer. We use leaky ReLUs with slope 0.2.",
+        "variable_meanings": {
+          "x0": "The slope of the leaky ReLU activation function"
+        },
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_expr": "x0",
+        "candidate_expr": "x0",
+        "predicted_label": "MATCH",
+        "binding_reason": "Both the paper and the candidate code use a leaky ReLU activation function with a slope of 0.2. The paper does not specify the use of InstanceNorm for the first C64 layer, which is not reflected in the provided code snippets, but this does not affect the leaky ReLU slope value."
+      },
+      "witness": {
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_value": 0.2,
+        "candidate_value": 0.2,
+        "verified_label": "MATCH"
+      },
+      "raw": "```json\n{\n    \"paper_rule\": \"Ck denote a 4 × 4 Convolution-InstanceNorm-LeakyReLU layer with k filters and stride 2. After the last layer, we apply a convolution to produce a 1 dimensional output. We do not use InstanceNorm for the first C64 layer. We use leaky ReLUs with slope 0.2.\",\n    \"variable_meanings\": {\n        \"x0\": \"The slope of the leaky ReLU activation function\"\n    },\n    \"variables\": {\n        \"x0\": 0.2\n    },\n    \"baseline_expr\": \"x0\",\n    \"candidate_expr\": \"x0\",\n    \"predicted_label\": \"MATCH\",\n    \"binding_reason\": \"Both the paper and the candidate code use a leaky ReLU activation function with a slope of 0.2. The paper does not specify the use of InstanceNorm for the first C64 layer, which is not reflected in the provided code snippets, but this does not affect the leaky ReLU slope value.\"\n}\n```",
+      "error": null
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "95f19c13-changed",
+      "source_id": "95f19c13",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MATCH",
+      "correct": false,
+      "seconds": 3.037532329559326,
+      "eval_count": 217,
+      "parsed": {
+        "paper_rule": "Lpolicy(ϕ)=D_KL(πϕ(a∣s)∥π̂(a∣s))=E_{a∼πϕ}[log πϕ(a∣s)−log π̂(a∣s)]",
+        "variable_meanings": {
+          "x0": "log πϕ(ai∣s)",
+          "x1": "log π̂(a∣s)"
+        },
+        "variables": {
+          "x0": 0.5,
+          "x1": 0.3
+        },
+        "baseline_expr": "(x0 - x1) * x0",
+        "candidate_expr": "(x0 - x1) * x0",
+        "predicted_label": "MATCH",
+        "binding_reason": "两个表达式都表示基于Kullback-Leibler散度的策略损失，且都使用了相同的变量x0和x1来表示网络输出的对数和经验密度的对数。"
+      },
+      "witness": {
+        "variables": {
+          "x0": 0.5,
+          "x1": 0.3
+        },
+        "baseline_value": 0.1,
+        "candidate_value": 0.1,
+        "verified_label": "MATCH"
+      },
+      "raw": "```json\n{\n    \"paper_rule\": \"Lpolicy(ϕ)=D_KL(πϕ(a∣s)∥π̂(a∣s))=E_{a∼πϕ}[log πϕ(a∣s)−log π̂(a∣s)]\",\n    \"variable_meanings\": {\n        \"x0\": \"log πϕ(ai∣s)\",\n        \"x1\": \"log π̂(a∣s)\"\n    },\n    \"variables\": {\n        \"x0\": 0.5,\n        \"x1\": 0.3\n    },\n    \"baseline_expr\": \"(x0 - x1) * x0\",\n    \"candidate_expr\": \"(x0 - x1) * x0\",\n    \"predicted_label\": \"MATCH\",\n    \"binding_reason\": \"两个表达式都表示基于Kullback-Leibler散度的策略损失，且都使用了相同的变量x0和x1来表示网络输出的对数和经验密度的对数。\"\n}\n```",
+      "error": null
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "95f19c13-benign",
+      "source_id": "95f19c13",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MISMATCH",
+      "correct": false,
+      "seconds": 3.7391533851623535,
+      "eval_count": 284,
+      "parsed": {
+        "paper_rule": "Lpolicy(ϕ)=D_KL(πϕ(a∣s)∥π̂(a∣s))=E_{a∼πϕ}[log πϕ(a∣s)−log π̂(a∣s)]",
+        "variable_meanings": {
+          "x0": "log πϕ(ai∣s)",
+          "x1": "log π̂(a∣s)",
+          "x2": "τ log n(s,ai)",
+          "x3": "log πϕ(ai∣s) - log π̂(a∣s)"
+        },
+        "variables": {
+          "x0": 0.5,
+          "x1": 0.3,
+          "x2": 0.1,
+          "x3": 0.2
+        },
+        "baseline_expr": "(x0 - x1) * x0",
+        "candidate_expr": "(x0 - x2) * x0",
+        "predicted_label": "MISMATCH",
+        "binding_reason": "基线代码中的pi_loss表达式使用了τ log n(s,ai)作为减项，而候选代码直接使用了log π̂(a∣s)。这与论文中的KL散度定义不符，因此表达式不匹配。"
+      },
+      "witness": {
+        "variables": {
+          "x0": 0.5,
+          "x1": 0.3,
+          "x2": 0.1,
+          "x3": 0.2
+        },
+        "baseline_value": 0.1,
+        "candidate_value": 0.2,
+        "verified_label": "MISMATCH"
+      },
+      "raw": "```json\n{\n    \"paper_rule\": \"Lpolicy(ϕ)=D_KL(πϕ(a∣s)∥π̂(a∣s))=E_{a∼πϕ}[log πϕ(a∣s)−log π̂(a∣s)]\",\n    \"variable_meanings\": {\n        \"x0\": \"log πϕ(ai∣s)\",\n        \"x1\": \"log π̂(a∣s)\",\n        \"x2\": \"τ log n(s,ai)\",\n        \"x3\": \"log πϕ(ai∣s) - log π̂(a∣s)\"\n    },\n    \"variables\": {\n        \"x0\": 0.5,\n        \"x1\": 0.3,\n        \"x2\": 0.1,\n        \"x3\": 0.2\n    },\n    \"baseline_expr\": \"(x0 - x1) * x0\",\n    \"candidate_expr\": \"(x0 - x2) * x0\",\n    \"predicted_label\": \"MISMATCH\",\n    \"binding_reason\": \"基线代码中的pi_loss表达式使用了τ log n(s,ai)作为减项，而候选代码直接使用了log π̂(a∣s)。这与论文中的KL散度定义不符，因此表达式不匹配。\"\n}\n```",
+      "error": null
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "f03d4577-changed",
+      "source_id": "f03d4577",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 2.8639886379241943,
+      "eval_count": 206,
+      "parsed": {
+        "paper_rule": "The policy network steers the actions that we will consider in the tree search by sampling new child actions based on progressive widening.",
+        "variable_meanings": {
+          "x0": "random_action_frac, a float value between 0 and 1 indicating the fraction of actions to be sampled by the policy network"
+        },
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_expr": "x0 > 0.5",
+        "candidate_expr": "x0 < 0.5",
+        "predicted_label": "MISMATCH",
+        "binding_reason": "The baseline code uses the condition `np.random.random() > self.random_action_frac` to decide whether to sample from the policy network, while the candidate code uses `np.random.random() < self.random_action_frac`. This difference in the condition leads to opposite behavior based on the value of `self.random_action_frac`, hence the mismatch."
+      },
+      "witness": {
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_value": false,
+        "candidate_value": true,
+        "verified_label": "MISMATCH"
+      },
+      "raw": "```json\n{\n  \"paper_rule\": \"The policy network steers the actions that we will consider in the tree search by sampling new child actions based on progressive widening.\",\n  \"variable_meanings\": {\n    \"x0\": \"random_action_frac, a float value between 0 and 1 indicating the fraction of actions to be sampled by the policy network\"\n  },\n  \"variables\": {\n    \"x0\": 0.2\n  },\n  \"baseline_expr\": \"x0 > 0.5\",\n  \"candidate_expr\": \"x0 < 0.5\",\n  \"predicted_label\": \"MISMATCH\",\n  \"binding_reason\": \"The baseline code uses the condition `np.random.random() > self.random_action_frac` to decide whether to sample from the policy network, while the candidate code uses `np.random.random() < self.random_action_frac`. This difference in the condition leads to opposite behavior based on the value of `self.random_action_frac`, hence the mismatch.\"\n}\n```",
+      "error": null
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "f03d4577-benign",
+      "source_id": "f03d4577",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MATCH",
+      "correct": true,
+      "seconds": 2.2948853969573975,
+      "eval_count": 164,
+      "parsed": {
+        "paper_rule": "使用策略网络在树搜索中采样新的子动作，以指导树搜索中的动作选择。",
+        "variable_meanings": {
+          "x0": "随机数生成器产生的随机数"
+        },
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_expr": "x0 > 0.5",
+        "candidate_expr": "x0 > 0.5",
+        "predicted_label": "MATCH",
+        "binding_reason": "两个表达式都检查了随机数是否大于0.5，如果大于0.5，则从策略网络采样动作，否则随机采样动作。这符合论文中关于使用策略网络指导动作选择的声明。"
+      },
+      "witness": {
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_value": false,
+        "candidate_value": false,
+        "verified_label": "MATCH"
+      },
+      "raw": "```json\n{\n  \"paper_rule\": \"使用策略网络在树搜索中采样新的子动作，以指导树搜索中的动作选择。\",\n  \"variable_meanings\": {\n    \"x0\": \"随机数生成器产生的随机数\"\n  },\n  \"variables\": {\n    \"x0\": 0.2\n  },\n  \"baseline_expr\": \"x0 > 0.5\",\n  \"candidate_expr\": \"x0 > 0.5\",\n  \"predicted_label\": \"MATCH\",\n  \"binding_reason\": \"两个表达式都检查了随机数是否大于0.5，如果大于0.5，则从策略网络采样动作，否则随机采样动作。这符合论文中关于使用策略网络指导动作选择的声明。\"\n}\n```",
+      "error": null
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "add47c47-changed",
+      "source_id": "add47c47",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "INVALID",
+      "correct": false,
+      "seconds": 2.2466981410980225,
+      "eval_count": 160,
+      "parsed": {
+        "paper_rule": "After several layers of propagation via graph convolutions, following Li et al. (2016) we aggregate node embeddings into a graph level representation vector as",
+        "variable_meanings": {
+          "x0": "Node embedding vector"
+        },
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_expr": "sum(x0 * x0, 1)",
+        "candidate_expr": "sum(x0, 1)",
+        "predicted_label": "MISMATCH",
+        "binding_reason": "The baseline expression aggregates node embeddings by element-wise multiplication and summation, while the candidate expression only performs summation. This difference in the aggregation method leads to a mismatch."
+      },
+      "witness": null,
+      "raw": "```json\n{\n  \"paper_rule\": \"After several layers of propagation via graph convolutions, following Li et al. (2016) we aggregate node embeddings into a graph level representation vector as\",\n  \"variable_meanings\": {\n    \"x0\": \"Node embedding vector\"\n  },\n  \"variables\": {\n    \"x0\": 0.2\n  },\n  \"baseline_expr\": \"sum(x0 * x0, 1)\",\n  \"candidate_expr\": \"sum(x0, 1)\",\n  \"predicted_label\": \"MISMATCH\",\n  \"binding_reason\": \"The baseline expression aggregates node embeddings by element-wise multiplication and summation, while the candidate expression only performs summation. This difference in the aggregation method leads to a mismatch.\"\n}\n```",
+      "error": "ValueError: disallowed AST node: Call"
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "add47c47-benign",
+      "source_id": "add47c47",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "MISMATCH",
+      "correct": false,
+      "seconds": 2.4447414875030518,
+      "eval_count": 178,
+      "parsed": {
+        "paper_rule": "After several layers of propagation via graph convolutions, following Li et al. (2016) we aggregate node embeddings into a graph level representation vector as",
+        "variable_meanings": {
+          "x0": "Node embedding for a single node"
+        },
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_expr": "x0 * x0",
+        "candidate_expr": "(x0 * x0) ** 0.5",
+        "predicted_label": "MISMATCH",
+        "binding_reason": "The baseline expression represents the square of the node embedding, while the candidate expression represents the square root of the node embedding. These are different operations and do not match the paper's description of aggregating node embeddings into a graph level representation vector."
+      },
+      "witness": {
+        "variables": {
+          "x0": 0.2
+        },
+        "baseline_value": 0.04000000000000001,
+        "candidate_value": 0.2,
+        "verified_label": "MISMATCH"
+      },
+      "raw": "```json\n{\n    \"paper_rule\": \"After several layers of propagation via graph convolutions, following Li et al. (2016) we aggregate node embeddings into a graph level representation vector as\",\n    \"variable_meanings\": {\n        \"x0\": \"Node embedding for a single node\"\n    },\n    \"variables\": {\n        \"x0\": 0.2\n    },\n    \"baseline_expr\": \"x0 * x0\",\n    \"candidate_expr\": \"(x0 * x0) ** 0.5\",\n    \"predicted_label\": \"MISMATCH\",\n    \"binding_reason\": \"The baseline expression represents the square of the node embedding, while the candidate expression represents the square root of the node embedding. These are different operations and do not match the paper's description of aggregating node embeddings into a graph level representation vector.\"\n}\n```",
+      "error": null
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "e7c4ffa5-changed",
+      "source_id": "e7c4ffa5",
+      "variant": "changed",
+      "gold": "MISMATCH",
+      "prediction": "MISMATCH",
+      "correct": true,
+      "seconds": 3.4453516006469727,
+      "eval_count": 248,
+      "parsed": {
+        "paper_rule": "优化目标是所有目标的乘积，结果在[0,1]范围内。",
+        "variable_meanings": {
+          "x0": "logp分数",
+          "x1": "sas分数",
+          "x2": "qed分数",
+          "x3": "独特性分数"
+        },
+        "variables": {
+          "x0": 0.8,
+          "x1": 0.7,
+          "x2": 0.9,
+          "x3": 0.6
+        },
+        "baseline_expr": "(x0 * x1 * x2 * x3) ** 0.5",
+        "candidate_expr": "(x0 + x1 + x2 + x3) / 4",
+        "predicted_label": "MISMATCH",
+        "binding_reason": "基线代码中的奖励是所有目标分数的乘积的平方根，而候选代码中的奖励是所有目标分数的平均值。当目标分数在[0,1]范围内时，乘积的平方根和平均值会有显著差异，特别是在分数分布不均匀的情况下。"
+      },
+      "witness": {
+        "variables": {
+          "x0": 0.8,
+          "x1": 0.7,
+          "x2": 0.9,
+          "x3": 0.6
+        },
+        "baseline_value": 0.5499090833947008,
+        "candidate_value": 0.75,
+        "verified_label": "MISMATCH"
+      },
+      "raw": "```json\n{\n  \"paper_rule\": \"优化目标是所有目标的乘积，结果在[0,1]范围内。\",\n  \"variable_meanings\": {\n    \"x0\": \"logp分数\",\n    \"x1\": \"sas分数\",\n    \"x2\": \"qed分数\",\n    \"x3\": \"独特性分数\"\n  },\n  \"variables\": {\n    \"x0\": 0.8,\n    \"x1\": 0.7,\n    \"x2\": 0.9,\n    \"x3\": 0.6\n  },\n  \"baseline_expr\": \"(x0 * x1 * x2 * x3) ** 0.5\",\n  \"candidate_expr\": \"(x0 + x1 + x2 + x3) / 4\",\n  \"predicted_label\": \"MISMATCH\",\n  \"binding_reason\": \"基线代码中的奖励是所有目标分数的乘积的平方根，而候选代码中的奖励是所有目标分数的平均值。当目标分数在[0,1]范围内时，乘积的平方根和平均值会有显著差异，特别是在分数分布不均匀的情况下。\"\n}\n```",
+      "error": null
+    },
+    {
+      "method": "execution_witness",
+      "task_id": "e7c4ffa5-benign",
+      "source_id": "e7c4ffa5",
+      "variant": "benign_comment",
+      "gold": "MATCH",
+      "prediction": "INVALID",
+      "correct": false,
+      "seconds": 2.427211284637451,
+      "eval_count": 170,
+      "parsed": {
+        "paper_rule": "优化目标为所有目标的乘积，结果在[0,1]范围内。",
+        "variable_meanings": {
+          "x0": "logp分数"
+        },
+        "variables": {
+          "x0": 0.8
+        },
+        "baseline_expr": "(x0 * 0.9) if self.metric == 'logp' else 1.0",
+        "candidate_expr": "(x0 * 0.9) if self.metric == 'logp' else 1.0",
+        "predicted_label": "MATCH",
+        "binding_reason": "两段代码都计算了logp分数，并且在其他情况下返回1.0，因此它们在给定输入x0时产生相同的输出。"
+      },
+      "witness": null,
+      "raw": "```json\n{\n  \"paper_rule\": \"优化目标为所有目标的乘积，结果在[0,1]范围内。\",\n  \"variable_meanings\": {\n    \"x0\": \"logp分数\"\n  },\n  \"variables\": {\n    \"x0\": 0.8\n  },\n  \"baseline_expr\": \"(x0 * 0.9) if self.metric == 'logp' else 1.0\",\n  \"candidate_expr\": \"(x0 * 0.9) if self.metric == 'logp' else 1.0\",\n  \"predicted_label\": \"MATCH\",\n  \"binding_reason\": \"两段代码都计算了logp分数，并且在其他情况下返回1.0，因此它们在给定输入x0时产生相同的输出。\"\n}\n```",
+      "error": "ValueError: disallowed AST node: Attribute"
+    }
+  ]
+}

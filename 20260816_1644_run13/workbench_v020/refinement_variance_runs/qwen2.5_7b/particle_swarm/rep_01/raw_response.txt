@@ -1,0 +1,79 @@
+```python
+import numpy as np
+from problems import BudgetExhausted
+
+def optimize(f, dim, bounds, budget, seed):
+    np.random.seed(seed)
+    
+    # Particle Swarm Optimization parameters
+    n_particles = 10
+    inertia_weight = 0.729
+    cognitive_parameter = 1.494
+    social_parameter = 1.494
+    min_inertia = 0.4
+    max_inertia = 0.9
+    stagnation_threshold = 100
+    stagnation_count = 0
+    min_velocity = -0.1
+    max_velocity = 0.1
+    
+    # Initialize particles
+    positions = np.random.uniform(bounds[0], bounds[1], (n_particles, dim))
+    velocities = np.random.uniform(min_velocity, max_velocity, (n_particles, dim))
+    personal_best_positions = positions.copy()
+    personal_best_values = np.array([f(pos) for pos in positions])
+    global_best_position = positions[np.argmin(personal_best_values)].copy()
+    global_best_value = personal_best_values.min()
+    
+    # Main loop
+    for t in range(budget):
+        # Update velocities and positions
+        for i in range(n_particles):
+            r1, r2 = np.random.random(2)
+            cognitive_influence = cognitive_parameter * r1 * (personal_best_positions[i] - positions[i])
+            social_influence = social_parameter * r2 * (global_best_position - positions[i])
+            velocities[i] = (inertia_weight * velocities[i] + cognitive_influence + social_influence)
+            velocities[i] = np.clip(velocities[i], min_velocity, max_velocity)
+            positions[i] += velocities[i]
+            positions[i] = np.clip(positions[i], bounds[0], bounds[1])
+        
+        # Evaluate new positions
+        new_values = np.array([f(pos) for pos in positions])
+        
+        # Update personal bests
+        for i in range(n_particles):
+            if new_values[i] < personal_best_values[i]:
+                personal_best_positions[i] = positions[i].copy()
+                personal_best_values[i] = new_values[i]
+        
+        # Update global best
+        if new_values.min() < global_best_value:
+            global_best_position = positions[np.argmin(new_values)].copy()
+            global_best_value = new_values.min()
+        
+        # Stagnation check
+        if global_best_value == personal_best_values.min():
+            stagnation_count += 1
+            if stagnation_count >= stagnation_threshold:
+                # Restart with new global best
+                personal_best_positions = positions.copy()
+                personal_best_values = new_values.copy()
+                global_best_position = positions[np.argmin(new_values)].copy()
+                global_best_value = new_values.min()
+                stagnation_count = 0
+        else:
+            stagnation_count = 0
+        
+        # Update inertia weight
+        inertia_weight = max_inertia - (max_inertia - min_inertia) * (t / budget)
+    
+    # Return best result
+    best_position = global_best_position
+    best_value = global_best_value
+    return {"position": best_position, "value": best_value}
+
+try:
+    return optimize(f, dim, bounds, budget, seed)
+except BudgetExhausted:
+    raise
+```

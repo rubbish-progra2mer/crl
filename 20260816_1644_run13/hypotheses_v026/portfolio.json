@@ -1,0 +1,59 @@
+{
+  "created_at_utc": "2026-08-16T12:15:06.176714Z",
+  "hypotheses": [
+    {
+      "alternative_explanations": [
+        "误报可能来自模型词汇知识不足而非原则性不可识别",
+        "单一作者标签可能仍符合特定但未写出的领域约定",
+        "三值输出会通过大量弃答虚增精度",
+        "强化与弱化的方向需要明确哪一段是参考政策"
+      ],
+      "changed_computation": {
+        "baseline": "让判别器直接对文本对输出 SAME 或 DIFFERENT。",
+        "budget_effect": "增加一次确定性审计和可能的人类或环境定义请求，减少不可识别样本上的强制决策。",
+        "information_available": "两段政策文本、可选的领域词汇表和环境实体定义；不允许用未声明的部署约定补齐共指。",
+        "intervention": "先判定引用与术语映射能否由给定上下文唯一支持；不确定时弃答，确定时再做双向蕴含并输出细粒度约束关系。",
+        "timing": "文本重写语义门的最终二值判定之前。"
+      },
+      "created_at_utc": "2026-08-16T12:15:42.261405Z",
+      "descriptors": {
+        "budget_class": "额外确定性审计",
+        "computation_stage": "成对语义判断之前",
+        "evaluation_mode": "三值确定性和细粒度约束关系",
+        "information_source": "文本对、词汇表与环境实体定义",
+        "intervention_family": "引用确定性门与选择性弃答",
+        "problem_family": "操作政策文本的语义等价与可识别性",
+        "timing_class": "推理时"
+      },
+      "falsifier": "若已有工作已经把引用是否指向同一上下文作为自然语言推断的独立诊断变量，对不完整或不可回答输入进行选择性弃答，并把改写等价归约为双向文本蕴含，则该候选只是已有部件在政策文本上的组合。",
+      "hypothesis_id": "h-v026-reference-determinacy-gated-equivalence",
+      "lineage_note": "由 v025 强基线在 PolarityCheck 因子样本上的误报审计触发；不把含混单一作者标签直接当作模型错误。",
+      "literature_refs": [
+        "ACL Findings NAACL 2025: On Reference (In-)Determinacy in Natural Language Inference",
+        "arXiv:2506.09038",
+        "ACL *SEM 2024: Paraphrase Identification via Textual Inference",
+        "arXiv:2608.10216"
+      ],
+      "mechanism_claim": "在语义等价判断前单独审计引用确定性：显式列出实体、动作、范围与术语映射；若二值结论依赖文本外映射，则返回 UNDERDETERMINED 并请求词汇表或环境定义；只有确定样本才做双向约束蕴含，区分等价、强化、弱化和冲突。",
+      "minimal_killer_experiment": "构造由领域专家标注的确定/不确定术语映射分层集，同时保留等价、强化、弱化、冲突标签；比较二值成对判断、仅提示弃答、确定性门加双向蕴含，并测量确定样本准确率、不确定样本选择性召回和覆盖率—风险曲线。",
+      "nearest_prior_risk": "RefNLI 已显式诊断引用不确定性；AbstentionBench 已系统覆盖欠说明与不可回答输入的选择性弃答；自然语言推断归约的改写识别已用双向蕴含刻画等价。",
+      "parent_ids": [],
+      "problem": "二值操作语义判别把术语是否共指、动作是否同义等未给出的世界约定强行折叠为相同或不同，既可能制造误报，也可能把基准标签含混误作模型错误。",
+      "revision": 3,
+      "status": "prior_collision",
+      "status_reason": "RefNLI已把引用是否落在同一上下文作为独立诊断变量，AbstentionBench覆盖欠说明输入的选择性弃答，改写识别已有双向自然语言推断归约；候选只是三者在操作政策门上的模块组合。",
+      "target_failure": {
+        "card_ids": [],
+        "evidence_ids": [],
+        "summary": "PolarityCheck 的 40 个因子样本上，qwen2.5:7b 检出全部 20 个变异，但对 4 个忠实标签误报；其中至少 3 个依赖未给出的术语共指或动作映射，另 1 个将窄禁令改为更宽禁令。样本标明为单一作者且独立决策标签为空。"
+      },
+      "title": "引用确定性先行的三值操作等价门",
+      "updated_at_utc": "2026-08-16T12:15:42.471505Z"
+    }
+  ],
+  "revision": 3,
+  "run_id": "20260816_1644_run13",
+  "schema_version": 1,
+  "updated_at_utc": "2026-08-16T12:15:42.471505Z",
+  "version": "v026"
+}

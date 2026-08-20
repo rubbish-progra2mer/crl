@@ -1,0 +1,901 @@
+{
+ "experiment": "graded lexical reanalysis (pole-placement control)",
+ "question": "does cosine still track lexical overlap when the poles are close?",
+ "date": "2026-07-26 17:58:17",
+ "node": "redacted",
+ "platform": "Windows-11-10.0.26200-SP0",
+ "encoders_available": [
+  "nomic-embed-text-v1.5 MRL-256 [PRODUCTION PATH, search_document:]",
+  "nomic-embed-text-v1.5 [clustering: \u2014 documented symmetric prefix]",
+  "sentence-transformers/all-MiniLM-L6-v2",
+  "sentence-transformers/all-mpnet-base-v2",
+  "BAAI/bge-base-en-v1.5",
+  "thenlper/gte-base",
+  "e5-base-v2 [query: \u2014 card's symmetric convention]",
+  "e5-base-v2 [NO prefix \u2014 sensitivity variant]",
+  "mixedbread-ai/mxbai-embed-large-v1"
+ ],
+ "encoders_absent": [],
+ "tasks": {
+  "distinctness": {
+   "n_pairs": 40,
+   "coverage": "40 distinctness pairs (of the frozen 2x2 corpus) \u2014 full enumeration\n    caveat: n=10 per cell; the median split halves that again, so every narrow contrast is n=5 vs n=5 and is directional, not an estimate",
+   "per_encoder": [
+    {
+     "encoder": "nomic-embed-text-v1.5 MRL-256 [PRODUCTION PATH, search_document:]",
+     "family": "nomic",
+     "strata": {
+      "CLOSE": {
+       "n_high": 7,
+       "n_low": 13,
+       "median_jaccard": 0.7143,
+       "jaccard_range": [
+        0.6,
+        1.0
+       ],
+       "narrow_auroc": 0.8462,
+       "narrow_jaccard_separation": 0.157,
+       "ci95": [
+        0.648,
+        0.978
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.3441
+      },
+      "DISTANT": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.0742,
+       "jaccard_range": [
+        0.0,
+        0.3077
+       ],
+       "narrow_auroc": 0.66,
+       "narrow_jaccard_separation": 0.1257,
+       "ci95": [
+        0.41,
+        0.91
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.278
+      }
+     },
+     "wide_contrast": {
+      "auroc": 0.985,
+      "n_high": 20,
+      "n_low": 20,
+      "mean_jaccard_high": 0.7194,
+      "mean_jaccard_low": 0.0771,
+      "jaccard_separation": 0.6423
+     }
+    },
+    {
+     "encoder": "nomic-embed-text-v1.5 [clustering: \u2014 documented symmetric prefix]",
+     "family": "nomic",
+     "strata": {
+      "CLOSE": {
+       "n_high": 7,
+       "n_low": 13,
+       "median_jaccard": 0.7143,
+       "jaccard_range": [
+        0.6,
+        1.0
+       ],
+       "narrow_auroc": 0.7363,
+       "narrow_jaccard_separation": 0.157,
+       "ci95": [
+        0.495,
+        0.934
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.2263
+      },
+      "DISTANT": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.0742,
+       "jaccard_range": [
+        0.0,
+        0.3077
+       ],
+       "narrow_auroc": 0.7,
+       "narrow_jaccard_separation": 0.1257,
+       "ci95": [
+        0.45,
+        0.92
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.4555
+      }
+     },
+     "wide_contrast": {
+      "auroc": 0.9875,
+      "n_high": 20,
+      "n_low": 20,
+      "mean_jaccard_high": 0.7194,
+      "mean_jaccard_low": 0.0771,
+      "jaccard_separation": 0.6423
+     }
+    },
+    {
+     "encoder": "sentence-transformers/all-MiniLM-L6-v2",
+     "family": "minilm",
+     "strata": {
+      "CLOSE": {
+       "n_high": 7,
+       "n_low": 13,
+       "median_jaccard": 0.7143,
+       "jaccard_range": [
+        0.6,
+        1.0
+       ],
+       "narrow_auroc": 0.7582,
+       "narrow_jaccard_separation": 0.157,
+       "ci95": [
+        0.516,
+        0.956
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.2602
+      },
+      "DISTANT": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.0742,
+       "jaccard_range": [
+        0.0,
+        0.3077
+       ],
+       "narrow_auroc": 0.93,
+       "narrow_jaccard_separation": 0.1257,
+       "ci95": [
+        0.79,
+        1.0
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.8184
+      }
+     },
+     "wide_contrast": {
+      "auroc": 0.985,
+      "n_high": 20,
+      "n_low": 20,
+      "mean_jaccard_high": 0.7194,
+      "mean_jaccard_low": 0.0771,
+      "jaccard_separation": 0.6423
+     }
+    },
+    {
+     "encoder": "sentence-transformers/all-mpnet-base-v2",
+     "family": "mpnet",
+     "strata": {
+      "CLOSE": {
+       "n_high": 7,
+       "n_low": 13,
+       "median_jaccard": 0.7143,
+       "jaccard_range": [
+        0.6,
+        1.0
+       ],
+       "narrow_auroc": 0.6923,
+       "narrow_jaccard_separation": 0.157,
+       "ci95": [
+        0.429,
+        0.923
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.294
+      },
+      "DISTANT": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.0742,
+       "jaccard_range": [
+        0.0,
+        0.3077
+       ],
+       "narrow_auroc": 0.82,
+       "narrow_jaccard_separation": 0.1257,
+       "ci95": [
+        0.6,
+        0.96
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.6323
+      }
+     },
+     "wide_contrast": {
+      "auroc": 0.9925,
+      "n_high": 20,
+      "n_low": 20,
+      "mean_jaccard_high": 0.7194,
+      "mean_jaccard_low": 0.0771,
+      "jaccard_separation": 0.6423
+     }
+    },
+    {
+     "encoder": "BAAI/bge-base-en-v1.5",
+     "family": "bge",
+     "strata": {
+      "CLOSE": {
+       "n_high": 7,
+       "n_low": 13,
+       "median_jaccard": 0.7143,
+       "jaccard_range": [
+        0.6,
+        1.0
+       ],
+       "narrow_auroc": 0.6593,
+       "narrow_jaccard_separation": 0.157,
+       "ci95": [
+        0.363,
+        0.923
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.2848
+      },
+      "DISTANT": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.0742,
+       "jaccard_range": [
+        0.0,
+        0.3077
+       ],
+       "narrow_auroc": 0.71,
+       "narrow_jaccard_separation": 0.1257,
+       "ci95": [
+        0.47,
+        0.92
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.5155
+      }
+     },
+     "wide_contrast": {
+      "auroc": 0.99,
+      "n_high": 20,
+      "n_low": 20,
+      "mean_jaccard_high": 0.7194,
+      "mean_jaccard_low": 0.0771,
+      "jaccard_separation": 0.6423
+     }
+    },
+    {
+     "encoder": "thenlper/gte-base",
+     "family": "gte",
+     "strata": {
+      "CLOSE": {
+       "n_high": 7,
+       "n_low": 13,
+       "median_jaccard": 0.7143,
+       "jaccard_range": [
+        0.6,
+        1.0
+       ],
+       "narrow_auroc": 0.7198,
+       "narrow_jaccard_separation": 0.157,
+       "ci95": [
+        0.445,
+        0.945
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.3497
+      },
+      "DISTANT": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.0742,
+       "jaccard_range": [
+        0.0,
+        0.3077
+       ],
+       "narrow_auroc": 0.695,
+       "narrow_jaccard_separation": 0.1257,
+       "ci95": [
+        0.44,
+        0.92
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.4736
+      }
+     },
+     "wide_contrast": {
+      "auroc": 0.985,
+      "n_high": 20,
+      "n_low": 20,
+      "mean_jaccard_high": 0.7194,
+      "mean_jaccard_low": 0.0771,
+      "jaccard_separation": 0.6423
+     }
+    },
+    {
+     "encoder": "e5-base-v2 [query: \u2014 card's symmetric convention]",
+     "family": "e5",
+     "strata": {
+      "CLOSE": {
+       "n_high": 7,
+       "n_low": 13,
+       "median_jaccard": 0.7143,
+       "jaccard_range": [
+        0.6,
+        1.0
+       ],
+       "narrow_auroc": 0.7033,
+       "narrow_jaccard_separation": 0.157,
+       "ci95": [
+        0.451,
+        0.923
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.3002
+      },
+      "DISTANT": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.0742,
+       "jaccard_range": [
+        0.0,
+        0.3077
+       ],
+       "narrow_auroc": 0.75,
+       "narrow_jaccard_separation": 0.1257,
+       "ci95": [
+        0.5,
+        0.94
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.496
+      }
+     },
+     "wide_contrast": {
+      "auroc": 0.99,
+      "n_high": 20,
+      "n_low": 20,
+      "mean_jaccard_high": 0.7194,
+      "mean_jaccard_low": 0.0771,
+      "jaccard_separation": 0.6423
+     }
+    },
+    {
+     "encoder": "e5-base-v2 [NO prefix \u2014 sensitivity variant]",
+     "family": "e5",
+     "strata": {
+      "CLOSE": {
+       "n_high": 7,
+       "n_low": 13,
+       "median_jaccard": 0.7143,
+       "jaccard_range": [
+        0.6,
+        1.0
+       ],
+       "narrow_auroc": 0.7143,
+       "narrow_jaccard_separation": 0.157,
+       "ci95": [
+        0.462,
+        0.934
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.3133
+      },
+      "DISTANT": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.0742,
+       "jaccard_range": [
+        0.0,
+        0.3077
+       ],
+       "narrow_auroc": 0.73,
+       "narrow_jaccard_separation": 0.1257,
+       "ci95": [
+        0.48,
+        0.93
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.4766
+      }
+     },
+     "wide_contrast": {
+      "auroc": 0.9875,
+      "n_high": 20,
+      "n_low": 20,
+      "mean_jaccard_high": 0.7194,
+      "mean_jaccard_low": 0.0771,
+      "jaccard_separation": 0.6423
+     }
+    },
+    {
+     "encoder": "mixedbread-ai/mxbai-embed-large-v1",
+     "family": "mxbai",
+     "strata": {
+      "CLOSE": {
+       "n_high": 7,
+       "n_low": 13,
+       "median_jaccard": 0.7143,
+       "jaccard_range": [
+        0.6,
+        1.0
+       ],
+       "narrow_auroc": 0.6484,
+       "narrow_jaccard_separation": 0.157,
+       "ci95": [
+        0.352,
+        0.923
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.2795
+      },
+      "DISTANT": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.0742,
+       "jaccard_range": [
+        0.0,
+        0.3077
+       ],
+       "narrow_auroc": 0.76,
+       "narrow_jaccard_separation": 0.1257,
+       "ci95": [
+        0.51,
+        0.98
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.6113
+      }
+     },
+     "wide_contrast": {
+      "auroc": 0.98,
+      "n_high": 20,
+      "n_low": 20,
+      "mean_jaccard_high": 0.7194,
+      "mean_jaccard_low": 0.0771,
+      "jaccard_separation": 0.6423
+     }
+    }
+   ],
+   "summary": {
+    "wide_auroc": {
+     "n": 9,
+     "min": 0.98,
+     "median": 0.9875,
+     "max": 0.9925
+    },
+    "narrow_auroc": {
+     "n": 18,
+     "min": 0.6484,
+     "median": 0.71705,
+     "max": 0.93
+    },
+    "within_stratum_spearman": {
+     "n": 18,
+     "min": 0.2263,
+     "median": 0.3469,
+     "max": 0.8184
+    }
+   }
+  },
+  "constraint": {
+   "n_pairs": 40,
+   "coverage": "40 constraint pairs (of the frozen 2x2 corpus) \u2014 full enumeration\n    caveat: n=10 per cell; the median split halves that again, so every narrow contrast is n=5 vs n=5 and is directional, not an estimate",
+   "per_encoder": [
+    {
+     "encoder": "nomic-embed-text-v1.5 MRL-256 [PRODUCTION PATH, search_document:]",
+     "family": "nomic",
+     "strata": {
+      "CLOSE": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.7321,
+       "jaccard_range": [
+        0.5,
+        0.7778
+       ],
+       "narrow_auroc": 0.69,
+       "narrow_jaccard_separation": 0.0929,
+       "ci95": [
+        0.43,
+        0.9
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.2531
+      },
+      "DISTANT": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.0263,
+       "jaccard_range": [
+        0.0,
+        0.1429
+       ],
+       "narrow_auroc": 0.73,
+       "narrow_jaccard_separation": 0.0788,
+       "ci95": [
+        0.46,
+        0.94
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.4323
+      }
+     },
+     "wide_contrast": {
+      "auroc": 1.0,
+      "n_high": 20,
+      "n_low": 20,
+      "mean_jaccard_high": 0.7202,
+      "mean_jaccard_low": 0.0394,
+      "jaccard_separation": 0.6808
+     }
+    },
+    {
+     "encoder": "nomic-embed-text-v1.5 [clustering: \u2014 documented symmetric prefix]",
+     "family": "nomic",
+     "strata": {
+      "CLOSE": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.7321,
+       "jaccard_range": [
+        0.5,
+        0.7778
+       ],
+       "narrow_auroc": 0.74,
+       "narrow_jaccard_separation": 0.0929,
+       "ci95": [
+        0.49,
+        0.93
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.4164
+      },
+      "DISTANT": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.0263,
+       "jaccard_range": [
+        0.0,
+        0.1429
+       ],
+       "narrow_auroc": 0.9,
+       "narrow_jaccard_separation": 0.0788,
+       "ci95": [
+        0.72,
+        1.0
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.7439
+      }
+     },
+     "wide_contrast": {
+      "auroc": 1.0,
+      "n_high": 20,
+      "n_low": 20,
+      "mean_jaccard_high": 0.7202,
+      "mean_jaccard_low": 0.0394,
+      "jaccard_separation": 0.6808
+     }
+    },
+    {
+     "encoder": "sentence-transformers/all-MiniLM-L6-v2",
+     "family": "minilm",
+     "strata": {
+      "CLOSE": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.7321,
+       "jaccard_range": [
+        0.5,
+        0.7778
+       ],
+       "narrow_auroc": 0.8,
+       "narrow_jaccard_separation": 0.0929,
+       "ci95": [
+        0.56,
+        0.97
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.4675
+      },
+      "DISTANT": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.0263,
+       "jaccard_range": [
+        0.0,
+        0.1429
+       ],
+       "narrow_auroc": 0.79,
+       "narrow_jaccard_separation": 0.0788,
+       "ci95": [
+        0.56,
+        0.96
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.5128
+      }
+     },
+     "wide_contrast": {
+      "auroc": 1.0,
+      "n_high": 20,
+      "n_low": 20,
+      "mean_jaccard_high": 0.7202,
+      "mean_jaccard_low": 0.0394,
+      "jaccard_separation": 0.6808
+     }
+    },
+    {
+     "encoder": "sentence-transformers/all-mpnet-base-v2",
+     "family": "mpnet",
+     "strata": {
+      "CLOSE": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.7321,
+       "jaccard_range": [
+        0.5,
+        0.7778
+       ],
+       "narrow_auroc": 0.64,
+       "narrow_jaccard_separation": 0.0929,
+       "ci95": [
+        0.37,
+        0.87
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.1579
+      },
+      "DISTANT": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.0263,
+       "jaccard_range": [
+        0.0,
+        0.1429
+       ],
+       "narrow_auroc": 0.69,
+       "narrow_jaccard_separation": 0.0788,
+       "ci95": [
+        0.43,
+        0.91
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.3309
+      }
+     },
+     "wide_contrast": {
+      "auroc": 1.0,
+      "n_high": 20,
+      "n_low": 20,
+      "mean_jaccard_high": 0.7202,
+      "mean_jaccard_low": 0.0394,
+      "jaccard_separation": 0.6808
+     }
+    },
+    {
+     "encoder": "BAAI/bge-base-en-v1.5",
+     "family": "bge",
+     "strata": {
+      "CLOSE": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.7321,
+       "jaccard_range": [
+        0.5,
+        0.7778
+       ],
+       "narrow_auroc": 0.72,
+       "narrow_jaccard_separation": 0.0929,
+       "ci95": [
+        0.48,
+        0.93
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.3816
+      },
+      "DISTANT": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.0263,
+       "jaccard_range": [
+        0.0,
+        0.1429
+       ],
+       "narrow_auroc": 0.79,
+       "narrow_jaccard_separation": 0.0788,
+       "ci95": [
+        0.55,
+        0.99
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.5684
+      }
+     },
+     "wide_contrast": {
+      "auroc": 0.9975,
+      "n_high": 20,
+      "n_low": 20,
+      "mean_jaccard_high": 0.7202,
+      "mean_jaccard_low": 0.0394,
+      "jaccard_separation": 0.6808
+     }
+    },
+    {
+     "encoder": "thenlper/gte-base",
+     "family": "gte",
+     "strata": {
+      "CLOSE": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.7321,
+       "jaccard_range": [
+        0.5,
+        0.7778
+       ],
+       "narrow_auroc": 0.76,
+       "narrow_jaccard_separation": 0.0929,
+       "ci95": [
+        0.51,
+        0.98
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.4313
+      },
+      "DISTANT": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.0263,
+       "jaccard_range": [
+        0.0,
+        0.1429
+       ],
+       "narrow_auroc": 0.77,
+       "narrow_jaccard_separation": 0.0788,
+       "ci95": [
+        0.52,
+        0.95
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.4855
+      }
+     },
+     "wide_contrast": {
+      "auroc": 1.0,
+      "n_high": 20,
+      "n_low": 20,
+      "mean_jaccard_high": 0.7202,
+      "mean_jaccard_low": 0.0394,
+      "jaccard_separation": 0.6808
+     }
+    },
+    {
+     "encoder": "e5-base-v2 [query: \u2014 card's symmetric convention]",
+     "family": "e5",
+     "strata": {
+      "CLOSE": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.7321,
+       "jaccard_range": [
+        0.5,
+        0.7778
+       ],
+       "narrow_auroc": 0.72,
+       "narrow_jaccard_separation": 0.0929,
+       "ci95": [
+        0.48,
+        0.94
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.4876
+      },
+      "DISTANT": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.0263,
+       "jaccard_range": [
+        0.0,
+        0.1429
+       ],
+       "narrow_auroc": 0.88,
+       "narrow_jaccard_separation": 0.0788,
+       "ci95": [
+        0.7,
+        1.0
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.6996
+      }
+     },
+     "wide_contrast": {
+      "auroc": 0.9975,
+      "n_high": 20,
+      "n_low": 20,
+      "mean_jaccard_high": 0.7202,
+      "mean_jaccard_low": 0.0394,
+      "jaccard_separation": 0.6808
+     }
+    },
+    {
+     "encoder": "e5-base-v2 [NO prefix \u2014 sensitivity variant]",
+     "family": "e5",
+     "strata": {
+      "CLOSE": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.7321,
+       "jaccard_range": [
+        0.5,
+        0.7778
+       ],
+       "narrow_auroc": 0.71,
+       "narrow_jaccard_separation": 0.0929,
+       "ci95": [
+        0.45,
+        0.94
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.4156
+      },
+      "DISTANT": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.0263,
+       "jaccard_range": [
+        0.0,
+        0.1429
+       ],
+       "narrow_auroc": 0.83,
+       "narrow_jaccard_separation": 0.0788,
+       "ci95": [
+        0.62,
+        0.99
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.636
+      }
+     },
+     "wide_contrast": {
+      "auroc": 0.9975,
+      "n_high": 20,
+      "n_low": 20,
+      "mean_jaccard_high": 0.7202,
+      "mean_jaccard_low": 0.0394,
+      "jaccard_separation": 0.6808
+     }
+    },
+    {
+     "encoder": "mixedbread-ai/mxbai-embed-large-v1",
+     "family": "mxbai",
+     "strata": {
+      "CLOSE": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.7321,
+       "jaccard_range": [
+        0.5,
+        0.7778
+       ],
+       "narrow_auroc": 0.73,
+       "narrow_jaccard_separation": 0.0929,
+       "ci95": [
+        0.49,
+        0.93
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.3715
+      },
+      "DISTANT": {
+       "n_high": 10,
+       "n_low": 10,
+       "median_jaccard": 0.0263,
+       "jaccard_range": [
+        0.0,
+        0.1429
+       ],
+       "narrow_auroc": 0.62,
+       "narrow_jaccard_separation": 0.0788,
+       "ci95": [
+        0.34,
+        0.88
+       ],
+       "spearman_cos_vs_jaccard_within_stratum": 0.2737
+      }
+     },
+     "wide_contrast": {
+      "auroc": 0.9925,
+      "n_high": 20,
+      "n_low": 20,
+      "mean_jaccard_high": 0.7202,
+      "mean_jaccard_low": 0.0394,
+      "jaccard_separation": 0.6808
+     }
+    }
+   ],
+   "summary": {
+    "wide_auroc": {
+     "n": 9,
+     "min": 0.9925,
+     "median": 1.0,
+     "max": 1.0
+    },
+    "narrow_auroc": {
+     "n": 18,
+     "min": 0.62,
+     "median": 0.735,
+     "max": 0.9
+    },
+    "within_stratum_spearman": {
+     "n": 18,
+     "min": 0.1579,
+     "median": 0.4318,
+     "max": 0.7439
+    }
+   }
+  }
+ }
+}

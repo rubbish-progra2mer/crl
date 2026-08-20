@@ -1,0 +1,93 @@
+{
+  "baseline_specs": [
+    "均匀随机十状态一千次",
+    "字段平衡随机十状态一千次",
+    "候选分歧贪心十状态"
+  ],
+  "budget_ceiling": "{\"api_calls\": 0, \"duration_seconds\": 600, \"tokens\": 0}",
+  "claim_ids": [
+    "c-v007-activation-advantage"
+  ],
+  "confounders": [
+    "固定候选池",
+    "随机重复数",
+    "候选分歧不足",
+    "字段平衡重复状态",
+    "完整状态空间较小"
+  ],
+  "dataset": "首个正式实验的九十六个固定候选、十二个五字段政策与完整三十二状态真值。",
+  "declared_inputs": [
+    "workbench_v007/contract_activation_baseline_audit.py",
+    "experiment_v007/baseline_audit_spec.md",
+    "experiment_v007/attempts/contract-activation-probe-001/details.json"
+  ],
+  "declared_outputs": [
+    "experiment_v007/attempts/contract-activation-baseline-audit-001/metrics_source.json",
+    "experiment_v007/attempts/contract-activation-baseline-audit-001/details.json"
+  ],
+  "expected_signatures": [
+    "activation_fault_recall_advantage_over_strongest_baseline",
+    "activation_selection_advantage_over_strongest_baseline",
+    "uniform_mean_fault_recall",
+    "balanced_mean_fault_recall",
+    "disagreement_fault_recall"
+  ],
+  "experiment_id": "contract-activation-baseline-audit-001",
+  "falsification_rule": "激活召回相对最强基线优势低于零点一且选择完整状态准确率优势低于零点零五时，候选死亡。",
+  "hypothesis_id": "h-v007-contract-activation",
+  "independent_ground_truth": {
+    "description": "复用首个正式实验中已捕获的候选策略与手工参考策略；所有状态标签由确定性解释器在完整布尔空间计算。",
+    "external_card_ids": [],
+    "external_evidence_ids": [],
+    "external_literature_refs": [],
+    "run_local_fact_refs": [
+      "experiment_v007/attempts/contract-activation-probe-001/details.json",
+      "experiment_v007/baseline_audit_spec.md",
+      "workbench_v007/contract_activation_baseline_audit.py"
+    ]
+  },
+  "model": "无新增模型调用；复用 qwen2.5:7b 与 qwen3:8b 已捕获候选。",
+  "parity_dimensions": {
+    "budget": {
+      "notes": "所有比较方法每候选只消费十个状态标签。",
+      "status": "matched"
+    },
+    "information_access": {
+      "notes": "全部方法访问同一候选池、字段空间和参考模拟器；选点时不使用完整评估分数。",
+      "status": "matched"
+    },
+    "model_provider_revision": {
+      "notes": "候选池固定，不发生新增模型调用。",
+      "status": "matched"
+    },
+    "sampling_protocol": {
+      "notes": "每个候选均为十状态预算；随机方法重复一千次估计分布。",
+      "status": "matched"
+    },
+    "tool_capability": {
+      "notes": "全部方法使用同一确定性策略解释器。",
+      "status": "matched"
+    }
+  },
+  "primary_metric": "activation_fault_recall_advantage_over_strongest_baseline",
+  "provider": "确定性本机 Python 解释器",
+  "purpose": "mechanism_consistency",
+  "research_question": "逐约束激活相对多种子均匀随机、字段平衡随机和候选分歧驱动选点是否仍有独立优势？",
+  "revision": "固定源 details 哈希、1000 重复与脚本哈希",
+  "run_id": "20260816_1644_run13",
+  "sampling_unit": "固定候选策略—验证状态集；随机基线重复单位为状态集种子。",
+  "schema_version": 1,
+  "secondary_metrics": [
+    "activation_selection_advantage_over_strongest_baseline",
+    "activation_fault_recall",
+    "uniform_mean_fault_recall",
+    "balanced_mean_fault_recall",
+    "disagreement_fault_recall",
+    "activation_selection_hidden_accuracy",
+    "disagreement_selection_hidden_accuracy"
+  ],
+  "seeds": [
+    20260816
+  ],
+  "version": "v007"
+}

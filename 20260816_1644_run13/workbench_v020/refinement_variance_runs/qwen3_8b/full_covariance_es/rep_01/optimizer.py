@@ -1,0 +1,56 @@
+import numpy as np
+from problems import BudgetExhausted
+
+def optimize(f, dim, bounds, budget, seed):
+    np.random.seed(seed)
+    low, high = bounds
+    mean = np.random.uniform(low, high, dim)
+    cov = np.eye(dim) * 1.0
+    elite_size = max(1, int(dim * 0.3))
+    population_size = 100
+    scale = 1.0
+    num_elites = min(elite_size, population_size)
+    num_samples = population_size
+    num_evaluations = 0
+    while num_evaluations < budget:
+        samples = np.random.multivariate_normal(mean, cov, num_samples)
+        samples = np.clip(samples, low, high)
+        scores = []
+        for x in samples:
+            try:
+                score = f(x)
+                scores.append(score)
+                num_evaluations += 1
+                if num_evaluations >= budget:
+                    break
+            except BudgetExhausted:
+                break
+        if num_evaluations >= budget:
+            break
+        scores = np.array(scores)
+        elite_indices = np.argsort(scores)[:num_elites]
+        elite_samples = samples[elite_indices]
+        elite_scores = scores[elite_indices]
+        best_idx = np.argmin(elite_scores)
+        best_sample = elite_samples[best_idx]
+        mean = np.mean(elite_samples, axis=0)
+        cov = np.cov(elite_samples, rowvar=False)
+        cov = (cov + cov.T - np.diag(np.diag(cov))) / 2
+        reg = 1e-6
+        cov = cov + np.eye(dim) * reg
+        scale = np.std(elite_scores) * 1.5
+        if scale < 0.1:
+            scale = 0.1
+        if scale > 10:
+            scale = 10
+        mean = best_sample
+        cov = np.eye(dim) * scale
+        if num_evaluations >= budget:
+            break
+    result = {
+        "mean": mean,
+        "cov": cov,
+        "num_evaluations": num_evaluations,
+        "best_score": f(mean)
+    }
+    return result

@@ -1,0 +1,106 @@
+{
+  "results": [
+    {
+      "model": "qwen2.5:7b",
+      "total": 40,
+      "scorable": 40,
+      "accuracy": 0.9,
+      "violation_recall": 1.0,
+      "faithful_specificity": 0.8,
+      "group_accuracy": {
+        "cell=A": 1.0,
+        "cell=B": 1.0,
+        "cell=C": 0.8,
+        "cell=D": 0.8,
+        "subclass=constraint_deletion": 1.0,
+        "subclass=modal_downgrade": 0.9166666666666666,
+        "subclass=order_inversion": 1.0,
+        "subclass=polarity_flip": 0.5,
+        "subclass=quantity_drift": 0.9166666666666666
+      },
+      "errors": [
+        {
+          "id": "C-D-05",
+          "gold": "SAME",
+          "prediction": "DIFFERENT",
+          "reason": "latency threshold and action differ"
+        },
+        {
+          "id": "C-C-08",
+          "gold": "SAME",
+          "prediction": "DIFFERENT",
+          "reason": "The terms 'fail closed' and 'fail shut' are not synonymous in operational semantics."
+        },
+        {
+          "id": "C-D-08",
+          "gold": "SAME",
+          "prediction": "DIFFERENT",
+          "reason": "Action differs: 'Fail closed' implies maintaining the previous state or default action, while 'Deny the request' explicitly rejects the request."
+        },
+        {
+          "id": "C-C-10",
+          "gold": "SAME",
+          "prediction": "DIFFERENT",
+          "reason": "different terminology for the same concept"
+        }
+      ]
+    },
+    {
+      "model": "qwen3:4b",
+      "total": 40,
+      "scorable": 40,
+      "accuracy": 0.85,
+      "violation_recall": 0.95,
+      "faithful_specificity": 0.75,
+      "group_accuracy": {
+        "cell=A": 0.9,
+        "cell=B": 1.0,
+        "cell=C": 0.8,
+        "cell=D": 0.7,
+        "subclass=constraint_deletion": 1.0,
+        "subclass=modal_downgrade": 0.75,
+        "subclass=order_inversion": 1.0,
+        "subclass=polarity_flip": 0.5,
+        "subclass=quantity_drift": 0.9166666666666666
+      },
+      "errors": [
+        {
+          "id": "C-A-02",
+          "gold": "DIFFERENT",
+          "prediction": "SAME",
+          "reason": "Both policies specify the same requirement for token rotation frequency (every 24 hours), with only the wording 'must' vs 'should' differing. The operational semantics focus on the requirement's timing and frequency, not the strength of obligation."
+        },
+        {
+          "id": "C-D-03",
+          "gold": "SAME",
+          "prediction": "DIFFERENT",
+          "reason": "Reference policy specifically addresses API keys, while candidate policy is broader (covers all secret material)."
+        },
+        {
+          "id": "C-D-05",
+          "gold": "SAME",
+          "prediction": "DIFFERENT",
+          "reason": "The reference policy uses 'latency exceeds 200ms' while the candidate policy uses 'a fifth of a second' (200ms), but the action differs: 'Alert' vs 'Page the on-call engineer'. The reference specifies an alert action, while the candidate specifies a page action, which is a different operational response."
+        },
+        {
+          "id": "C-C-08",
+          "gold": "SAME",
+          "prediction": "DIFFERENT",
+          "reason": "The reference policy specifies 'Fail closed' while the candidate policy specifies 'Fail shut', which are distinct operational semantics."
+        },
+        {
+          "id": "C-D-08",
+          "gold": "SAME",
+          "prediction": "DIFFERENT",
+          "reason": "The reference policy specifies failing closed when the auth service is unreachable, while the candidate policy denies requests when identity verification cannot be reached. The conditions (auth service vs identity verification), actions (fail closed vs deny), and scope differ."
+        },
+        {
+          "id": "C-C-10",
+          "gold": "SAME",
+          "prediction": "DIFFERENT",
+          "reason": "The reference policy specifies 'transaction wrapper' while the candidate policy specifies 'transaction helper'. These are distinct terms with different meanings in operational semantics."
+        }
+      ]
+    }
+  ]
+}

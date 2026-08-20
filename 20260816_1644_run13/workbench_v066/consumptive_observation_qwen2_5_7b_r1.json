@@ -1,0 +1,659 @@
+{
+  "model": "qwen2.5:7b",
+  "endpoint": "http://127.0.0.1:11434/api/chat",
+  "temperature": 0,
+  "seed": 66,
+  "pair_count": 12,
+  "task_count": 24,
+  "summary": {
+    "prose": {
+      "n": 24,
+      "paired_n": 12,
+      "paired_correct": 9,
+      "preserve_correct": 9,
+      "claim_correct": 12,
+      "invalid_json": 0,
+      "prompt_tokens": 5424,
+      "output_tokens": 1310,
+      "elapsed_seconds": 27.08025300008012
+    },
+    "effect_typed": {
+      "n": 24,
+      "paired_n": 12,
+      "paired_correct": 7,
+      "preserve_correct": 7,
+      "claim_correct": 12,
+      "invalid_json": 0,
+      "prompt_tokens": 5808,
+      "output_tokens": 1295,
+      "elapsed_seconds": 23.94671099988045
+    }
+  },
+  "rows": [
+    {
+      "pair_id": "01_inbox",
+      "task_type": "preserve",
+      "prose": {
+        "choice": "access_inbox_beta",
+        "correct_tool": "access_inbox_beta",
+        "correct": true,
+        "valid_json": true,
+        "reason": "It meets the requirement of inspecting the current next inbox entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor, while being more cost-effective.",
+        "raw_content": "{\n  \"choice\": \"access_inbox_beta\",\n  \"reason\": \"It meets the requirement of inspecting the current next inbox entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor, while being more cost-effective.\"\n}",
+        "prompt_tokens": 223,
+        "output_tokens": 53,
+        "elapsed_seconds": 3.7737584999995306
+      },
+      "effect_typed": {
+        "choice": "access_inbox_beta",
+        "correct_tool": "access_inbox_beta",
+        "correct": true,
+        "valid_json": true,
+        "reason": "It meets the requirement of observing the current next inbox entry without altering its availability, ordering, acknowledgement state, reservation state, or shared cursor.",
+        "raw_content": "{\n  \"choice\": \"access_inbox_beta\",\n  \"reason\": \"It meets the requirement of observing the current next inbox entry without altering its availability, ordering, acknowledgement state, reservation state, or shared cursor.\"\n}",
+        "prompt_tokens": 239,
+        "output_tokens": 48,
+        "elapsed_seconds": 0.9494531999807805
+      }
+    },
+    {
+      "pair_id": "01_inbox",
+      "task_type": "claim",
+      "prose": {
+        "choice": "access_inbox_alpha",
+        "correct_tool": "access_inbox_alpha",
+        "correct": true,
+        "valid_json": true,
+        "reason": "It atomically claims the current next inbox entry, satisfying the stateful requirement, and has a lower cost compared to access_inbox_beta.",
+        "raw_content": "{\n  \"choice\": \"access_inbox_alpha\",\n  \"reason\": \"It atomically claims the current next inbox entry, satisfying the stateful requirement, and has a lower cost compared to access_inbox_beta.\"\n}",
+        "prompt_tokens": 224,
+        "output_tokens": 46,
+        "elapsed_seconds": 0.8918394000211265
+      },
+      "effect_typed": {
+        "choice": "access_inbox_alpha",
+        "correct_tool": "access_inbox_alpha",
+        "correct": true,
+        "valid_json": true,
+        "reason": "It atomically claims the current next inbox entry, satisfying the stateful requirement, and has a lower cost.",
+        "raw_content": "{\n  \"choice\": \"access_inbox_alpha\",\n  \"reason\": \"It atomically claims the current next inbox entry, satisfying the stateful requirement, and has a lower cost.\"\n}",
+        "prompt_tokens": 240,
+        "output_tokens": 40,
+        "elapsed_seconds": 0.8194811999856029
+      }
+    },
+    {
+      "pair_id": "02_queue",
+      "task_type": "preserve",
+      "prose": {
+        "choice": "access_queue_beta",
+        "correct_tool": "access_queue_alpha",
+        "correct": false,
+        "valid_json": true,
+        "reason": "It meets the requirement of inspecting the next queue entry without altering its availability, ordering, acknowledgement state, reservation state, and shared cursor, while being more cost-effective.",
+        "raw_content": "{\n  \"choice\": \"access_queue_beta\",\n  \"reason\": \"It meets the requirement of inspecting the next queue entry without altering its availability, ordering, acknowledgement state, reservation state, and shared cursor, while being more cost-effective.\"\n}",
+        "prompt_tokens": 221,
+        "output_tokens": 51,
+        "elapsed_seconds": 0.9601180000172462
+      },
+      "effect_typed": {
+        "choice": "access_queue_beta",
+        "correct_tool": "access_queue_alpha",
+        "correct": false,
+        "valid_json": true,
+        "reason": "It respects the state effect of leaving the availability, ordering, acknowledgement state, reservation state, and shared cursor unchanged while providing the required functionality at a lower cost.",
+        "raw_content": "{\n  \"choice\": \"access_queue_beta\",\n  \"reason\": \"It respects the state effect of leaving the availability, ordering, acknowledgement state, reservation state, and shared cursor unchanged while providing the required functionality at a lower cost.\"\n}",
+        "prompt_tokens": 237,
+        "output_tokens": 49,
+        "elapsed_seconds": 0.9263447000121232
+      }
+    },
+    {
+      "pair_id": "02_queue",
+      "task_type": "claim",
+      "prose": {
+        "choice": "access_queue_beta",
+        "correct_tool": "access_queue_beta",
+        "correct": true,
+        "valid_json": true,
+        "reason": "It atomically claims the current next queue entry, satisfying the stateful requirement, and has a lower cost compared to access_queue_alpha.",
+        "raw_content": "{\n  \"choice\": \"access_queue_beta\",\n  \"reason\": \"It atomically claims the current next queue entry, satisfying the stateful requirement, and has a lower cost compared to access_queue_alpha.\"\n}",
+        "prompt_tokens": 222,
+        "output_tokens": 44,
+        "elapsed_seconds": 0.8651030999899376
+      },
+      "effect_typed": {
+        "choice": "access_queue_beta",
+        "correct_tool": "access_queue_beta",
+        "correct": true,
+        "valid_json": true,
+        "reason": "It atomically claims the current next queue entry, satisfying the stateful requirement, and has a lower cost compared to access_queue_alpha.",
+        "raw_content": "{\n  \"choice\": \"access_queue_beta\",\n  \"reason\": \"It atomically claims the current next queue entry, satisfying the stateful requirement, and has a lower cost compared to access_queue_alpha.\"\n}",
+        "prompt_tokens": 238,
+        "output_tokens": 44,
+        "elapsed_seconds": 0.8627714999893215
+      }
+    },
+    {
+      "pair_id": "03_token_pool",
+      "task_type": "preserve",
+      "prose": {
+        "choice": "access_token_pool_beta",
+        "correct_tool": "access_token_pool_beta",
+        "correct": true,
+        "valid_json": true,
+        "reason": "This interface meets the requirement of inspecting the current next token_pool entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor. It also has a lower cost compared to the other option.",
+        "raw_content": "{\n  \"choice\": \"access_token_pool_beta\",\n  \"reason\": \"This interface meets the requirement of inspecting the current next token_pool entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor. It also has a lower cost compared to the other option.\"\n}",
+        "prompt_tokens": 226,
+        "output_tokens": 61,
+        "elapsed_seconds": 1.0963301000010688
+      },
+      "effect_typed": {
+        "choice": "access_token_pool_beta",
+        "correct_tool": "access_token_pool_beta",
+        "correct": true,
+        "valid_json": true,
+        "reason": "The task requires a stateful tool-using agent to inspect the current next token_pool entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor. The access_token_pool_beta interface meets this requirement as it only provides a snapshot of the current entry without altering its state, while also being more cost-effective.",
+        "raw_content": "{\n  \"choice\": \"access_token_pool_beta\",\n  \"reason\": \"The task requires a stateful tool-using agent to inspect the current next token_pool entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor. The access_token_pool_beta interface meets this requirement as it only provides a snapshot of the current entry without altering its state, while also being more cost-effective.\"\n}",
+        "prompt_tokens": 242,
+        "output_tokens": 83,
+        "elapsed_seconds": 1.4150319999898784
+      }
+    },
+    {
+      "pair_id": "03_token_pool",
+      "task_type": "claim",
+      "prose": {
+        "choice": "access_token_pool_alpha",
+        "correct_tool": "access_token_pool_alpha",
+        "correct": true,
+        "valid_json": true,
+        "reason": "This interface atomically claims the current next token_pool entry, satisfying the stateful requirement, and has a lower cost of 1.",
+        "raw_content": "{\n  \"choice\": \"access_token_pool_alpha\",\n  \"reason\": \"This interface atomically claims the current next token_pool entry, satisfying the stateful requirement, and has a lower cost of 1.\"\n}",
+        "prompt_tokens": 227,
+        "output_tokens": 45,
+        "elapsed_seconds": 0.8697664999926928
+      },
+      "effect_typed": {
+        "choice": "access_token_pool_alpha",
+        "correct_tool": "access_token_pool_alpha",
+        "correct": true,
+        "valid_json": true,
+        "reason": "It atomically claims the current next token_pool entry while also reducing the cost.",
+        "raw_content": "{\n  \"choice\": \"access_token_pool_alpha\",\n  \"reason\": \"It atomically claims the current next token_pool entry while also reducing the cost.\"\n}",
+        "prompt_tokens": 243,
+        "output_tokens": 34,
+        "elapsed_seconds": 0.7541130000026897
+      }
+    },
+    {
+      "pair_id": "04_job_pool",
+      "task_type": "preserve",
+      "prose": {
+        "choice": "access_job_pool_alpha",
+        "correct_tool": "access_job_pool_alpha",
+        "correct": true,
+        "valid_json": true,
+        "reason": "This interface meets the requirement of inspecting the next job_pool entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor. It also has a lower cost compared to the other option.",
+        "raw_content": "{\n  \"choice\": \"access_job_pool_alpha\",\n  \"reason\": \"This interface meets the requirement of inspecting the next job_pool entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor. It also has a lower cost compared to the other option.\"\n}",
+        "prompt_tokens": 226,
+        "output_tokens": 60,
+        "elapsed_seconds": 1.1013788999989629
+      },
+      "effect_typed": {
+        "choice": "access_job_pool_beta",
+        "correct_tool": "access_job_pool_alpha",
+        "correct": false,
+        "valid_json": true,
+        "reason": "It meets the requirement of observing the current next job_pool entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor, while being the cheaper option.",
+        "raw_content": "{\n  \"choice\": \"access_job_pool_beta\",\n  \"reason\": \"It meets the requirement of observing the current next job_pool entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor, while being the cheaper option.\"\n}",
+        "prompt_tokens": 242,
+        "output_tokens": 53,
+        "elapsed_seconds": 1.0078413999872282
+      }
+    },
+    {
+      "pair_id": "04_job_pool",
+      "task_type": "claim",
+      "prose": {
+        "choice": "access_job_pool_beta",
+        "correct_tool": "access_job_pool_beta",
+        "correct": true,
+        "valid_json": true,
+        "reason": "The 'access_job_pool_beta' interface atomically claims the current next job_pool entry, satisfying the stateful requirement, and has a lower cost of 1.",
+        "raw_content": "{\n  \"choice\": \"access_job_pool_beta\",\n  \"reason\": \"The 'access_job_pool_beta' interface atomically claims the current next job_pool entry, satisfying the stateful requirement, and has a lower cost of 1.\"\n}",
+        "prompt_tokens": 227,
+        "output_tokens": 51,
+        "elapsed_seconds": 0.9750180999981239
+      },
+      "effect_typed": {
+        "choice": "access_job_pool_beta",
+        "correct_tool": "access_job_pool_beta",
+        "correct": true,
+        "valid_json": true,
+        "reason": "It atomically claims the current next job_pool entry while satisfying the stateful requirement and has a lower cost.",
+        "raw_content": "{\n  \"choice\": \"access_job_pool_beta\",\n  \"reason\": \"It atomically claims the current next job_pool entry while satisfying the stateful requirement and has a lower cost.\"\n}",
+        "prompt_tokens": 243,
+        "output_tokens": 40,
+        "elapsed_seconds": 0.8389565999968909
+      }
+    },
+    {
+      "pair_id": "05_alert_feed",
+      "task_type": "preserve",
+      "prose": {
+        "choice": "access_alert_feed_alpha",
+        "correct_tool": "access_alert_feed_beta",
+        "correct": false,
+        "valid_json": true,
+        "reason": "It meets the requirement of inspecting the current next alert_feed entry while respecting the unchanged availability, ordering, acknowledgement state, reservation state, and shared cursor. Additionally, it is the more cost-effective option at a cost of 1.",
+        "raw_content": "{\n  \"choice\": \"access_alert_feed_alpha\",\n  \"reason\": \"It meets the requirement of inspecting the current next alert_feed entry while respecting the unchanged availability, ordering, acknowledgement state, reservation state, and shared cursor. Additionally, it is the more cost-effective option at a cost of 1.\"\n}",
+        "prompt_tokens": 226,
+        "output_tokens": 65,
+        "elapsed_seconds": 1.1276997000095434
+      },
+      "effect_typed": {
+        "choice": "access_alert_feed_alpha",
+        "correct_tool": "access_alert_feed_beta",
+        "correct": false,
+        "valid_json": true,
+        "reason": "It satisfies the requirement of inspecting the current next alert_feed entry while leaving the availability, ordering, acknowledgement state, reservation state, and shared cursor unchanged, and it is the cheaper option.",
+        "raw_content": "{\n  \"choice\": \"access_alert_feed_alpha\",\n  \"reason\": \"It satisfies the requirement of inspecting the current next alert_feed entry while leaving the availability, ordering, acknowledgement state, reservation state, and shared cursor unchanged, and it is the cheaper option.\"\n}",
+        "prompt_tokens": 242,
+        "output_tokens": 56,
+        "elapsed_seconds": 1.0126516000018455
+      }
+    },
+    {
+      "pair_id": "05_alert_feed",
+      "task_type": "claim",
+      "prose": {
+        "choice": "access_alert_feed_alpha",
+        "correct_tool": "access_alert_feed_alpha",
+        "correct": true,
+        "valid_json": true,
+        "reason": "This interface atomically claims the current next alert_feed entry, satisfying the stateful requirement, and has a lower cost compared to the other option.",
+        "raw_content": "{\n  \"choice\": \"access_alert_feed_alpha\",\n  \"reason\": \"This interface atomically claims the current next alert_feed entry, satisfying the stateful requirement, and has a lower cost compared to the other option.\"\n}",
+        "prompt_tokens": 227,
+        "output_tokens": 47,
+        "elapsed_seconds": 0.9041491000098176
+      },
+      "effect_typed": {
+        "choice": "access_alert_feed_alpha",
+        "correct_tool": "access_alert_feed_alpha",
+        "correct": true,
+        "valid_json": true,
+        "reason": "It atomically claims the current next alert_feed entry, satisfying the stateful requirement, and has a lower cost.",
+        "raw_content": "{\n  \"choice\": \"access_alert_feed_alpha\",\n  \"reason\": \"It atomically claims the current next alert_feed entry, satisfying the stateful requirement, and has a lower cost.\"\n}",
+        "prompt_tokens": 243,
+        "output_tokens": 41,
+        "elapsed_seconds": 0.842463700013468
+      }
+    },
+    {
+      "pair_id": "06_ticket_bin",
+      "task_type": "preserve",
+      "prose": {
+        "choice": "access_ticket_bin_alpha",
+        "correct_tool": "access_ticket_bin_alpha",
+        "correct": true,
+        "valid_json": true,
+        "reason": "This interface meets the requirement of inspecting the current next ticket_bin entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor, while being more cost-effective.",
+        "raw_content": "{\n  \"choice\": \"access_ticket_bin_alpha\",\n  \"reason\": \"This interface meets the requirement of inspecting the current next ticket_bin entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor, while being more cost-effective.\"\n}",
+        "prompt_tokens": 226,
+        "output_tokens": 55,
+        "elapsed_seconds": 1.0409287000074983
+      },
+      "effect_typed": {
+        "choice": "access_ticket_bin_alpha",
+        "correct_tool": "access_ticket_bin_alpha",
+        "correct": true,
+        "valid_json": true,
+        "reason": "The task requires a stateful tool-using agent to inspect the current next ticket_bin entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor. The 'access_ticket_bin_alpha' interface meets this requirement as it provides a pure read operation without altering the state, even though it is more costly.",
+        "raw_content": "{\n  \"choice\": \"access_ticket_bin_alpha\",\n  \"reason\": \"The task requires a stateful tool-using agent to inspect the current next ticket_bin entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor. The 'access_ticket_bin_alpha' interface meets this requirement as it provides a pure read operation without altering the state, even though it is more costly.\"\n}",
+        "prompt_tokens": 242,
+        "output_tokens": 82,
+        "elapsed_seconds": 1.3405172000057064
+      }
+    },
+    {
+      "pair_id": "06_ticket_bin",
+      "task_type": "claim",
+      "prose": {
+        "choice": "access_ticket_bin_beta",
+        "correct_tool": "access_ticket_bin_beta",
+        "correct": true,
+        "valid_json": true,
+        "reason": "This interface atomically claims the current next ticket_bin entry, satisfying the stateful requirement, and has a lower cost compared to the other option.",
+        "raw_content": "{\n  \"choice\": \"access_ticket_bin_beta\",\n  \"reason\": \"This interface atomically claims the current next ticket_bin entry, satisfying the stateful requirement, and has a lower cost compared to the other option.\"\n}",
+        "prompt_tokens": 227,
+        "output_tokens": 47,
+        "elapsed_seconds": 0.9029967999958899
+      },
+      "effect_typed": {
+        "choice": "access_ticket_bin_beta",
+        "correct_tool": "access_ticket_bin_beta",
+        "correct": true,
+        "valid_json": true,
+        "reason": "It atomically claims the current next ticket_bin entry, satisfying the stateful requirement, and has a lower cost compared to access_ticket_bin_alpha.",
+        "raw_content": "{\n  \"choice\": \"access_ticket_bin_beta\",\n  \"reason\": \"It atomically claims the current next ticket_bin entry, satisfying the stateful requirement, and has a lower cost compared to access_ticket_bin_alpha.\"\n}",
+        "prompt_tokens": 243,
+        "output_tokens": 47,
+        "elapsed_seconds": 0.8977232000033837
+      }
+    },
+    {
+      "pair_id": "07_approval_box",
+      "task_type": "preserve",
+      "prose": {
+        "choice": "access_approval_box_beta",
+        "correct_tool": "access_approval_box_beta",
+        "correct": true,
+        "valid_json": true,
+        "reason": "This interface meets the requirement of inspecting the current next approval_box entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor, while also being more cost-effective.",
+        "raw_content": "{\n  \"choice\": \"access_approval_box_beta\",\n  \"reason\": \"This interface meets the requirement of inspecting the current next approval_box entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor, while also being more cost-effective.\"\n}",
+        "prompt_tokens": 226,
+        "output_tokens": 56,
+        "elapsed_seconds": 1.0232619000016712
+      },
+      "effect_typed": {
+        "choice": "access_approval_box_alpha",
+        "correct_tool": "access_approval_box_beta",
+        "correct": false,
+        "valid_json": true,
+        "reason": "This interface meets the requirement of observing the current next approval_box entry without changing its availability, ordering, acknowledgement state, or reservation state, and it has a lower cost.",
+        "raw_content": "{\n  \"choice\": \"access_approval_box_alpha\",\n  \"reason\": \"This interface meets the requirement of observing the current next approval_box entry without changing its availability, ordering, acknowledgement state, or reservation state, and it has a lower cost.\"\n}",
+        "prompt_tokens": 242,
+        "output_tokens": 52,
+        "elapsed_seconds": 0.970822599978419
+      }
+    },
+    {
+      "pair_id": "07_approval_box",
+      "task_type": "claim",
+      "prose": {
+        "choice": "access_approval_box_alpha",
+        "correct_tool": "access_approval_box_alpha",
+        "correct": true,
+        "valid_json": true,
+        "reason": "This interface atomically claims the current next approval_box entry, satisfying the stateful requirement, and has a lower cost of 1.",
+        "raw_content": "{\n  \"choice\": \"access_approval_box_alpha\",\n  \"reason\": \"This interface atomically claims the current next approval_box entry, satisfying the stateful requirement, and has a lower cost of 1.\"\n}",
+        "prompt_tokens": 227,
+        "output_tokens": 45,
+        "elapsed_seconds": 0.8843685000028927
+      },
+      "effect_typed": {
+        "choice": "access_approval_box_alpha",
+        "correct_tool": "access_approval_box_alpha",
+        "correct": true,
+        "valid_json": true,
+        "reason": "It atomically claims the current next approval_box entry while satisfying the stateful requirement and has a lower cost.",
+        "raw_content": "{\n  \"choice\": \"access_approval_box_alpha\",\n  \"reason\": \"It atomically claims the current next approval_box entry while satisfying the stateful requirement and has a lower cost.\"\n}",
+        "prompt_tokens": 243,
+        "output_tokens": 40,
+        "elapsed_seconds": 0.8184666999732144
+      }
+    },
+    {
+      "pair_id": "08_command_stream",
+      "task_type": "preserve",
+      "prose": {
+        "choice": "access_command_stream_alpha",
+        "correct_tool": "access_command_stream_alpha",
+        "correct": true,
+        "valid_json": true,
+        "reason": "This interface meets the requirement of inspecting the current next command_stream entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor, and it has a lower cost compared to the other option.",
+        "raw_content": "{\n  \"choice\": \"access_command_stream_alpha\",\n  \"reason\": \"This interface meets the requirement of inspecting the current next command_stream entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor, and it has a lower cost compared to the other option.\"\n}",
+        "prompt_tokens": 226,
+        "output_tokens": 61,
+        "elapsed_seconds": 1.0847281999886036
+      },
+      "effect_typed": {
+        "choice": "access_command_stream_beta",
+        "correct_tool": "access_command_stream_alpha",
+        "correct": false,
+        "valid_json": true,
+        "reason": "It meets the requirement of observing the current next command_stream entry without changing its availability, ordering, acknowledgement state, or reservation state, while also being the cheaper option.",
+        "raw_content": "{\n  \"choice\": \"access_command_stream_beta\",\n  \"reason\": \"It meets the requirement of observing the current next command_stream entry without changing its availability, ordering, acknowledgement state, or reservation state, while also being the cheaper option.\"\n}",
+        "prompt_tokens": 242,
+        "output_tokens": 51,
+        "elapsed_seconds": 0.9455674999917392
+      }
+    },
+    {
+      "pair_id": "08_command_stream",
+      "task_type": "claim",
+      "prose": {
+        "choice": "access_command_stream_beta",
+        "correct_tool": "access_command_stream_beta",
+        "correct": true,
+        "valid_json": true,
+        "reason": "This interface atomically claims the current next command_stream entry, satisfying the stateful requirement, and has a lower cost of 1.",
+        "raw_content": "{\n  \"choice\": \"access_command_stream_beta\",\n  \"reason\": \"This interface atomically claims the current next command_stream entry, satisfying the stateful requirement, and has a lower cost of 1.\"\n}",
+        "prompt_tokens": 227,
+        "output_tokens": 45,
+        "elapsed_seconds": 0.9354037000157405
+      },
+      "effect_typed": {
+        "choice": "access_command_stream_beta",
+        "correct_tool": "access_command_stream_beta",
+        "correct": true,
+        "valid_json": true,
+        "reason": "It satisfies the stateful requirement of atomically claiming the current next command_stream entry while having a lower cost.",
+        "raw_content": "{\n  \"choice\": \"access_command_stream_beta\",\n  \"reason\": \"It satisfies the stateful requirement of atomically claiming the current next command_stream entry while having a lower cost.\"\n}",
+        "prompt_tokens": 243,
+        "output_tokens": 40,
+        "elapsed_seconds": 0.8186109999951441
+      }
+    },
+    {
+      "pair_id": "09_sensor_buffer",
+      "task_type": "preserve",
+      "prose": {
+        "choice": "access_sensor_buffer_beta",
+        "correct_tool": "access_sensor_buffer_beta",
+        "correct": true,
+        "valid_json": true,
+        "reason": "This interface meets the requirement of inspecting the current next sensor_buffer entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor. It also has a lower cost compared to the other option.",
+        "raw_content": "{\n  \"choice\": \"access_sensor_buffer_beta\",\n  \"reason\": \"This interface meets the requirement of inspecting the current next sensor_buffer entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor. It also has a lower cost compared to the other option.\"\n}",
+        "prompt_tokens": 226,
+        "output_tokens": 61,
+        "elapsed_seconds": 1.105743899999652
+      },
+      "effect_typed": {
+        "choice": "access_sensor_buffer_beta",
+        "correct_tool": "access_sensor_buffer_beta",
+        "correct": true,
+        "valid_json": true,
+        "reason": "The task requires a stateful tool-using agent to inspect the current next sensor_buffer entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor. The access_sensor_buffer_beta interface meets this requirement as it provides a pure read of the current snapshot at a higher cost, but leaves the state unchanged.",
+        "raw_content": "{\n  \"choice\": \"access_sensor_buffer_beta\",\n  \"reason\": \"The task requires a stateful tool-using agent to inspect the current next sensor_buffer entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor. The access_sensor_buffer_beta interface meets this requirement as it provides a pure read of the current snapshot at a higher cost, but leaves the state unchanged.\"\n}",
+        "prompt_tokens": 242,
+        "output_tokens": 82,
+        "elapsed_seconds": 1.3357963000016753
+      }
+    },
+    {
+      "pair_id": "09_sensor_buffer",
+      "task_type": "claim",
+      "prose": {
+        "choice": "access_sensor_buffer_alpha",
+        "correct_tool": "access_sensor_buffer_alpha",
+        "correct": true,
+        "valid_json": true,
+        "reason": "This interface atomically claims the current next sensor_buffer entry, ensuring no other worker can receive the same entry, which satisfies the stateful requirement. It also has a lower cost compared to the other option.",
+        "raw_content": "{\n  \"choice\": \"access_sensor_buffer_alpha\",\n  \"reason\": \"This interface atomically claims the current next sensor_buffer entry, ensuring no other worker can receive the same entry, which satisfies the stateful requirement. It also has a lower cost compared to the other option.\"\n}",
+        "prompt_tokens": 227,
+        "output_tokens": 59,
+        "elapsed_seconds": 1.0784090000088327
+      },
+      "effect_typed": {
+        "choice": "access_sensor_buffer_alpha",
+        "correct_tool": "access_sensor_buffer_alpha",
+        "correct": true,
+        "valid_json": true,
+        "reason": "It atomically claims the current next sensor_buffer entry, satisfying the stateful requirement, and has a lower cost.",
+        "raw_content": "{\n  \"choice\": \"access_sensor_buffer_alpha\",\n  \"reason\": \"It atomically claims the current next sensor_buffer entry, satisfying the stateful requirement, and has a lower cost.\"\n}",
+        "prompt_tokens": 243,
+        "output_tokens": 41,
+        "elapsed_seconds": 0.8264122999971732
+      }
+    },
+    {
+      "pair_id": "10_voucher_stack",
+      "task_type": "preserve",
+      "prose": {
+        "choice": "access_voucher_stack_beta",
+        "correct_tool": "access_voucher_stack_alpha",
+        "correct": false,
+        "valid_json": true,
+        "reason": "It meets the requirement of inspecting the current next voucher_stack entry without changing its availability, ordering, acknowledgement state, reservation state, and shared cursor, while being the more cost-effective option.",
+        "raw_content": "{\n  \"choice\": \"access_voucher_stack_beta\",\n  \"reason\": \"It meets the requirement of inspecting the current next voucher_stack entry without changing its availability, ordering, acknowledgement state, reservation state, and shared cursor, while being the more cost-effective option.\"\n}",
+        "prompt_tokens": 228,
+        "output_tokens": 57,
+        "elapsed_seconds": 1.0668701000104193
+      },
+      "effect_typed": {
+        "choice": "access_voucher_stack_alpha",
+        "correct_tool": "access_voucher_stack_alpha",
+        "correct": true,
+        "valid_json": true,
+        "reason": "The task requires a stateful tool to inspect the current next voucher_stack entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor. The 'access_voucher_stack_alpha' interface meets this requirement as it provides a pure read operation without altering the state, even though it is more costly.",
+        "raw_content": "{\n  \"choice\": \"access_voucher_stack_alpha\",\n  \"reason\": \"The task requires a stateful tool to inspect the current next voucher_stack entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor. The 'access_voucher_stack_alpha' interface meets this requirement as it provides a pure read operation without altering the state, even though it is more costly.\"\n}",
+        "prompt_tokens": 244,
+        "output_tokens": 82,
+        "elapsed_seconds": 1.3413124000071548
+      }
+    },
+    {
+      "pair_id": "10_voucher_stack",
+      "task_type": "claim",
+      "prose": {
+        "choice": "access_voucher_stack_beta",
+        "correct_tool": "access_voucher_stack_beta",
+        "correct": true,
+        "valid_json": true,
+        "reason": "This interface atomically claims the current next voucher_stack entry, ensuring no other worker can receive that same entry, which is the required state effect. It also has a lower cost compared to the other option.",
+        "raw_content": "{\n  \"choice\": \"access_voucher_stack_beta\",\n  \"reason\": \"This interface atomically claims the current next voucher_stack entry, ensuring no other worker can receive that same entry, which is the required state effect. It also has a lower cost compared to the other option.\"\n}",
+        "prompt_tokens": 229,
+        "output_tokens": 60,
+        "elapsed_seconds": 1.068126400001347
+      },
+      "effect_typed": {
+        "choice": "access_voucher_stack_beta",
+        "correct_tool": "access_voucher_stack_beta",
+        "correct": true,
+        "valid_json": true,
+        "reason": "It atomically claims the current next voucher_stack entry, satisfying the stateful requirement, and has a lower cost compared to the other interface.",
+        "raw_content": "{\n  \"choice\": \"access_voucher_stack_beta\",\n  \"reason\": \"It atomically claims the current next voucher_stack entry, satisfying the stateful requirement, and has a lower cost compared to the other interface.\"\n}",
+        "prompt_tokens": 245,
+        "output_tokens": 47,
+        "elapsed_seconds": 0.8986753999779467
+      }
+    },
+    {
+      "pair_id": "11_reservation_hold",
+      "task_type": "preserve",
+      "prose": {
+        "choice": "access_reservation_hold_beta",
+        "correct_tool": "access_reservation_hold_beta",
+        "correct": true,
+        "valid_json": true,
+        "reason": "This interface meets the requirement of inspecting the current next reservation_hold entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor, thus respecting the requested state effect.",
+        "raw_content": "{\n  \"choice\": \"access_reservation_hold_beta\",\n  \"reason\": \"This interface meets the requirement of inspecting the current next reservation_hold entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor, thus respecting the requested state effect.\"\n}",
+        "prompt_tokens": 226,
+        "output_tokens": 56,
+        "elapsed_seconds": 1.019595699995989
+      },
+      "effect_typed": {
+        "choice": "access_reservation_hold_beta",
+        "correct_tool": "access_reservation_hold_beta",
+        "correct": true,
+        "valid_json": true,
+        "reason": "The task requires a stateful tool-using agent to inspect the current next reservation_hold entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor. The 'access_reservation_hold_beta' interface meets this requirement as it only provides a read of the current snapshot at a cost of 3.",
+        "raw_content": "{\n  \"choice\": \"access_reservation_hold_beta\",\n  \"reason\": \"The task requires a stateful tool-using agent to inspect the current next reservation_hold entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor. The 'access_reservation_hold_beta' interface meets this requirement as it only provides a read of the current snapshot at a cost of 3.\"\n}",
+        "prompt_tokens": 242,
+        "output_tokens": 80,
+        "elapsed_seconds": 1.3364247999852523
+      }
+    },
+    {
+      "pair_id": "11_reservation_hold",
+      "task_type": "claim",
+      "prose": {
+        "choice": "access_reservation_hold_alpha",
+        "correct_tool": "access_reservation_hold_alpha",
+        "correct": true,
+        "valid_json": true,
+        "reason": "This interface meets the stateful requirement by atomically claiming the current next reservation_hold entry, ensuring no other worker can receive the same entry. It also has a lower cost compared to the other option.",
+        "raw_content": "{\n  \"choice\": \"access_reservation_hold_alpha\",\n  \"reason\": \"This interface meets the stateful requirement by atomically claiming the current next reservation_hold entry, ensuring no other worker can receive the same entry. It also has a lower cost compared to the other option.\"\n}",
+        "prompt_tokens": 227,
+        "output_tokens": 58,
+        "elapsed_seconds": 1.0375612000061665
+      },
+      "effect_typed": {
+        "choice": "access_reservation_hold_alpha",
+        "correct_tool": "access_reservation_hold_alpha",
+        "correct": true,
+        "valid_json": true,
+        "reason": "It atomically claims the current next reservation_hold entry, satisfying the stateful requirement, and has a lower cost of 1.",
+        "raw_content": "{\n  \"choice\": \"access_reservation_hold_alpha\",\n  \"reason\": \"It atomically claims the current next reservation_hold entry, satisfying the stateful requirement, and has a lower cost of 1.\"\n}",
+        "prompt_tokens": 243,
+        "output_tokens": 44,
+        "elapsed_seconds": 0.8803783000039402
+      }
+    },
+    {
+      "pair_id": "12_work_item",
+      "task_type": "preserve",
+      "prose": {
+        "choice": "access_work_item_alpha",
+        "correct_tool": "access_work_item_alpha",
+        "correct": true,
+        "valid_json": true,
+        "reason": "This interface meets the requirement of inspecting the next work_item entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor. It also has a lower cost compared to the other option.",
+        "raw_content": "{\n  \"choice\": \"access_work_item_alpha\",\n  \"reason\": \"This interface meets the requirement of inspecting the next work_item entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor. It also has a lower cost compared to the other option.\"\n}",
+        "prompt_tokens": 226,
+        "output_tokens": 60,
+        "elapsed_seconds": 1.0803458000009414
+      },
+      "effect_typed": {
+        "choice": "access_work_item_alpha",
+        "correct_tool": "access_work_item_alpha",
+        "correct": true,
+        "valid_json": true,
+        "reason": "The task requires a stateful tool-using agent to inspect the current next work_item entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor. access_work_item_alpha meets this requirement with a PURE_READ effect and a cost of 3.",
+        "raw_content": "{\n  \"choice\": \"access_work_item_alpha\",\n  \"reason\": \"The task requires a stateful tool-using agent to inspect the current next work_item entry without changing its availability, ordering, acknowledgement state, reservation state, or shared cursor. access_work_item_alpha meets this requirement with a PURE_READ effect and a cost of 3.\"\n}",
+        "prompt_tokens": 242,
+        "output_tokens": 71,
+        "elapsed_seconds": 1.1992248999886215
+      }
+    },
+    {
+      "pair_id": "12_work_item",
+      "task_type": "claim",
+      "prose": {
+        "choice": "access_work_item_beta",
+        "correct_tool": "access_work_item_beta",
+        "correct": true,
+        "valid_json": true,
+        "reason": "The 'access_work_item_beta' interface meets the stateful requirement of atomically claiming the current next work_item entry, ensuring no other worker can receive the same entry. It also has a lower cost compared to 'access_work_item_alpha'.",
+        "raw_content": "{\n  \"choice\": \"access_work_item_beta\",\n  \"reason\": \"The 'access_work_item_beta' interface meets the stateful requirement of atomically claiming the current next work_item entry, ensuring no other worker can receive the same entry. It also has a lower cost compared to 'access_work_item_alpha'.\"\n}",
+        "prompt_tokens": 227,
+        "output_tokens": 67,
+        "elapsed_seconds": 1.1867517000064254
+      },
+      "effect_typed": {
+        "choice": "access_work_item_beta",
+        "correct_tool": "access_work_item_beta",
+        "correct": true,
+        "valid_json": true,
+        "reason": "It atomically claims the current next work_item entry while also ensuring that no other worker can receive the same entry, which is the required state effect.",
+        "raw_content": "{\n  \"choice\": \"access_work_item_beta\",\n  \"reason\": \"It atomically claims the current next work_item entry while also ensuring that no other worker can receive the same entry, which is the required state effect.\"\n}",
+        "prompt_tokens": 243,
+        "output_tokens": 48,
+        "elapsed_seconds": 0.9076695000112522
+      }
+    }
+  ],
+  "scope_note": "Synthetic benign interface selection only. No represented access interface was executed."
+}

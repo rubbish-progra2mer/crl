@@ -1,0 +1,96 @@
+{
+  "baseline_specs": [
+    "一个名义允许状态",
+    "十个固定种子均匀随机状态",
+    "三十二状态完整真值只作独立评估与上界"
+  ],
+  "budget_ceiling": "{\"api_calls\": 96, \"duration_seconds\": 1800, \"tokens\": 150000}",
+  "claim_ids": [
+    "c-v007-activation-advantage"
+  ],
+  "confounders": [
+    "自然候选错误稀少",
+    "随机抽样方差",
+    "受限策略表达",
+    "手工政策结构",
+    "候选生成无多样性"
+  ],
+  "dataset": "十二个手工确定性五字段工具提交政策，每任务三十二状态完整真值。",
+  "declared_inputs": [
+    "workbench_v007/contract_activation_probe.py",
+    "experiment_v007/experiment_spec.md"
+  ],
+  "declared_outputs": [
+    "experiment_v007/attempts/contract-activation-probe-001/metrics_source.json",
+    "experiment_v007/attempts/contract-activation-probe-001/details.json"
+  ],
+  "expected_signatures": [
+    "contract_activation_fault_recall_advantage",
+    "latent_fault_rate_among_nominal_pass",
+    "activation_fault_recall",
+    "random_fault_recall",
+    "activation_selection_hidden_accuracy",
+    "random_selection_hidden_accuracy",
+    "selection_hidden_accuracy_advantage"
+  ],
+  "experiment_id": "contract-activation-probe-001",
+  "falsification_rule": "名义通过潜伏错误少于八个，或召回优势低于零点一且选择完整状态准确率优势低于零点零五时，候选死亡。",
+  "hypothesis_id": "h-v007-contract-activation",
+  "independent_ground_truth": {
+    "description": "十二个参考布尔政策由实验规范手工定义；脚本穷举每任务三十二状态计算标签，被测模型只生成候选策略。",
+    "external_card_ids": [],
+    "external_evidence_ids": [],
+    "external_literature_refs": [],
+    "run_local_fact_refs": [
+      "experiment_v007/experiment_spec.md",
+      "workbench_v007/contract_activation_probe.py"
+    ]
+  },
+  "model": "qwen2.5:7b 与 qwen3:8b",
+  "parity_dimensions": {
+    "budget": {
+      "notes": "每候选十次确定性状态执行，候选生成调用完全共享。",
+      "status": "matched"
+    },
+    "information_access": {
+      "notes": "激活与随机选择都访问同一字段空间、候选策略和独立参考模拟器。",
+      "status": "matched"
+    },
+    "model_provider_revision": {
+      "notes": "候选池共享；验证方法不重新调用模型。",
+      "status": "matched"
+    },
+    "sampling_protocol": {
+      "notes": "每个候选均评估十个状态；只有状态选择规则不同。",
+      "status": "matched"
+    },
+    "tool_capability": {
+      "notes": "两者都只执行同一确定性布尔策略解释器，不调用额外外部工具。",
+      "status": "matched"
+    }
+  },
+  "primary_metric": "contract_activation_fault_recall_advantage",
+  "provider": "本机 Ollama 0.32.13",
+  "purpose": "mechanism_consistency",
+  "research_question": "逐约束动作边界状态是否比等数量随机状态更能发现并筛除自然生成工具策略的潜伏约束错误？",
+  "revision": "固定本机模型标签、受限析取范式与脚本哈希",
+  "run_id": "20260816_1644_run13",
+  "sampling_unit": "模型—政策任务—候选策略；验证观测单位为布尔工具状态。",
+  "schema_version": 1,
+  "secondary_metrics": [
+    "latent_fault_rate_among_nominal_pass",
+    "activation_fault_recall",
+    "random_fault_recall",
+    "activation_selection_hidden_accuracy",
+    "random_selection_hidden_accuracy",
+    "selection_hidden_accuracy_advantage",
+    "oracle_selection_hidden_accuracy"
+  ],
+  "seeds": [
+    20260816,
+    20260817,
+    20260818,
+    20260819
+  ],
+  "version": "v007"
+}

@@ -1,0 +1,3677 @@
+{
+  "model": "qwen2.5:7b",
+  "task_count": 10,
+  "design": "10 个本地多文档、多变量、非临床决策合成任务；直接综合与强两阶段基线使用同一模型，自动范围分割复用同一抽取结果。",
+  "summary": {
+    "direct": {
+      "tasks": 10,
+      "full_success": 3,
+      "exact_cells": 3,
+      "exact_sources": 3,
+      "global_safe": 10,
+      "mean_cell_precision": 0.48,
+      "mean_cell_recall": 0.5499999999999999
+    },
+    "strong_two_stage": {
+      "tasks": 10,
+      "full_success": 2,
+      "exact_cells": 2,
+      "exact_sources": 2,
+      "global_safe": 10,
+      "mean_cell_precision": 0.41,
+      "mean_cell_recall": 0.45
+    },
+    "auto_partition": {
+      "tasks": 10,
+      "full_success": 10,
+      "exact_cells": 10,
+      "exact_sources": 10,
+      "global_safe": 10,
+      "mean_cell_precision": 1.0,
+      "mean_cell_recall": 1.0
+    },
+    "oracle_partition": {
+      "tasks": 10,
+      "full_success": 10,
+      "exact_cells": 10,
+      "exact_sources": 10,
+      "global_safe": 10,
+      "mean_cell_precision": 1.0,
+      "mean_cell_recall": 1.0
+    }
+  },
+  "totals": {
+    "seconds": 107.20611357688904,
+    "output_tokens": 4867
+  },
+  "records": [
+    {
+      "task_id": "crop_xor",
+      "dimensions": {
+        "土壤": [
+          "黏土",
+          "沙土"
+        ],
+        "降雨": [
+          "低",
+          "高"
+        ]
+      },
+      "studies": [
+        [
+          "S1",
+          "在黏土且降雨低的地块，处理剂使产量上升。"
+        ],
+        [
+          "S2",
+          "在沙土且降雨低的地块，处理剂使产量下降。"
+        ],
+        [
+          "S3",
+          "在黏土且降雨高的地块，处理剂使产量下降。"
+        ],
+        [
+          "S4",
+          "在沙土且降雨高的地块，处理剂使产量上升。"
+        ]
+      ],
+      "gold_atoms": [
+        {
+          "source_id": "S1",
+          "conditions": {
+            "土壤": "黏土",
+            "降雨": "低"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "S2",
+          "conditions": {
+            "土壤": "沙土",
+            "降雨": "低"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "S3",
+          "conditions": {
+            "土壤": "黏土",
+            "降雨": "高"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "S4",
+          "conditions": {
+            "土壤": "沙土",
+            "降雨": "高"
+          },
+          "direction": "上升"
+        }
+      ],
+      "gold_partition": {
+        "cells": [
+          {
+            "conditions": {
+              "土壤": "沙土",
+              "降雨": "低"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "S2"
+            ]
+          },
+          {
+            "conditions": {
+              "土壤": "沙土",
+              "降雨": "高"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "S4"
+            ]
+          },
+          {
+            "conditions": {
+              "土壤": "黏土",
+              "降雨": "低"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "S1"
+            ]
+          },
+          {
+            "conditions": {
+              "土壤": "黏土",
+              "降雨": "高"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "S3"
+            ]
+          }
+        ],
+        "global_claim": "无"
+      },
+      "extraction": {
+        "raw_text": "{\"atoms\":[{\"source_id\":\"S1\",\"conditions\":{\"土壤\":\"黏土\",\"降雨\":\"低\"},\"direction\":\"上升\"},{\"source_id\":\"S2\",\"conditions\":{\"土壤\":\"沙土\",\"降雨\":\"低\"},\"direction\":\"下降\"},{\"source_id\":\"S3\",\"conditions\":{\"土壤\":\"黏土\",\"降雨\":\"高\"},\"direction\":\"下降\"},{\"source_id\":\"S4\",\"conditions\":{\"土壤\":\"沙土\",\"降雨\":\"高\"},\"direction\":\"上升\"}]}",
+        "parse_error": null,
+        "atoms": [
+          {
+            "source_id": "S1",
+            "conditions": {
+              "土壤": "黏土",
+              "降雨": "低"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "S2",
+            "conditions": {
+              "土壤": "沙土",
+              "降雨": "低"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "S3",
+            "conditions": {
+              "土壤": "黏土",
+              "降雨": "高"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "S4",
+            "conditions": {
+              "土壤": "沙土",
+              "降雨": "高"
+            },
+            "direction": "上升"
+          }
+        ],
+        "seconds": 8.374022006988525,
+        "output_tokens": 89
+      },
+      "strategies": {
+        "direct": {
+          "raw_text": "```json\n{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"土壤\": \"任意\",\n        \"降雨\": \"低\"\n      },\n      \"direction\": \"混合\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S1\", \"S2\"]\n    },\n    {\n      \"conditions\": {\n        \"土壤\": \"任意\",\n        \"降雨\": \"高\"\n      },\n      \"direction\": \"混合\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S3\", \"S4\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}\n```",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "土壤": "任意",
+                  "降雨": "低"
+                },
+                "direction": "混合",
+                "status": "支持",
+                "source_ids": [
+                  "S1",
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "土壤": "任意",
+                  "降雨": "高"
+                },
+                "direction": "混合",
+                "status": "支持",
+                "source_ids": [
+                  "S3",
+                  "S4"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 0.0,
+            "cell_recall": 0.0,
+            "exact_cells": false,
+            "exact_sources": false,
+            "global_safe": true,
+            "full_success": false
+          },
+          "seconds": 2.615255355834961,
+          "output_tokens": 126
+        },
+        "strong_two_stage": {
+          "raw_text": "{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"土壤\": \"允许值\",\n        \"降雨\": \"低\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S1\"]\n    },\n    {\n      \"conditions\": {\n        \"土壤\": \"沙土\",\n        \"降雨\": \"低\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S2\"]\n    },\n    {\n      \"conditions\": {\n        \"土壤\": \"黏土\",\n        \"降雨\": \"高\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S3\"]\n    },\n    {\n      \"conditions\": {\n        \"土壤\": \"沙土\",\n        \"降雨\": \"高\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S4\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "土壤": "允许值",
+                  "降雨": "低"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1"
+                ]
+              },
+              {
+                "conditions": {
+                  "土壤": "沙土",
+                  "降雨": "低"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "土壤": "黏土",
+                  "降雨": "高"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              },
+              {
+                "conditions": {
+                  "土壤": "沙土",
+                  "降雨": "高"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S4"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 0.75,
+            "cell_recall": 0.75,
+            "exact_cells": false,
+            "exact_sources": false,
+            "global_safe": true,
+            "full_success": false
+          },
+          "seconds": 4.28315281867981,
+          "output_tokens": 214
+        },
+        "auto_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "土壤": "沙土",
+                  "降雨": "低"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "土壤": "沙土",
+                  "降雨": "高"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S4"
+                ]
+              },
+              {
+                "conditions": {
+                  "土壤": "黏土",
+                  "降雨": "低"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1"
+                ]
+              },
+              {
+                "conditions": {
+                  "土壤": "黏土",
+                  "降雨": "高"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          }
+        },
+        "oracle_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "土壤": "沙土",
+                  "降雨": "低"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "土壤": "沙土",
+                  "降雨": "高"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S4"
+                ]
+              },
+              {
+                "conditions": {
+                  "土壤": "黏土",
+                  "降雨": "低"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1"
+                ]
+              },
+              {
+                "conditions": {
+                  "土壤": "黏土",
+                  "降雨": "高"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          }
+        }
+      }
+    },
+    {
+      "task_id": "latency_by_load",
+      "dimensions": {
+        "部署": [
+          "边缘",
+          "云端"
+        ],
+        "负载": [
+          "突发",
+          "稳定"
+        ]
+      },
+      "studies": [
+        [
+          "S1",
+          "边缘部署在突发负载下使尾延迟上升。"
+        ],
+        [
+          "S2",
+          "云端部署在突发负载下也使尾延迟上升。"
+        ],
+        [
+          "S3",
+          "边缘部署在稳定负载下使尾延迟下降。"
+        ],
+        [
+          "S4",
+          "云端部署在稳定负载下也使尾延迟下降。"
+        ]
+      ],
+      "gold_atoms": [
+        {
+          "source_id": "S1",
+          "conditions": {
+            "部署": "边缘",
+            "负载": "突发"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "S2",
+          "conditions": {
+            "部署": "云端",
+            "负载": "突发"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "S3",
+          "conditions": {
+            "部署": "边缘",
+            "负载": "稳定"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "S4",
+          "conditions": {
+            "部署": "云端",
+            "负载": "稳定"
+          },
+          "direction": "下降"
+        }
+      ],
+      "gold_partition": {
+        "cells": [
+          {
+            "conditions": {
+              "部署": "任意",
+              "负载": "稳定"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "S3",
+              "S4"
+            ]
+          },
+          {
+            "conditions": {
+              "部署": "任意",
+              "负载": "突发"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "S1",
+              "S2"
+            ]
+          }
+        ],
+        "global_claim": "无"
+      },
+      "extraction": {
+        "raw_text": "{\"atoms\":[{\"source_id\":\"S1\",\"conditions\":{\"部署\":\"边缘\",\"负载\":\"突发\"},\"direction\":\"上升\"},{\"source_id\":\"S2\",\"conditions\":{\"部署\":\"云端\",\"负载\":\"突发\"},\"direction\":\"上升\"},{\"source_id\":\"S3\",\"conditions\":{\"部署\":\"边缘\",\"负载\":\"稳定\"},\"direction\":\"下降\"},{\"source_id\":\"S4\",\"conditions\":{\"部署\":\"云端\",\"负载\":\"稳定\"},\"direction\":\"下降\"}]}",
+        "parse_error": null,
+        "atoms": [
+          {
+            "source_id": "S1",
+            "conditions": {
+              "部署": "边缘",
+              "负载": "突发"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "S2",
+            "conditions": {
+              "部署": "云端",
+              "负载": "突发"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "S3",
+            "conditions": {
+              "部署": "边缘",
+              "负载": "稳定"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "S4",
+            "conditions": {
+              "部署": "云端",
+              "负载": "稳定"
+            },
+            "direction": "下降"
+          }
+        ],
+        "seconds": 1.9162225723266602,
+        "output_tokens": 85
+      },
+      "strategies": {
+        "direct": {
+          "raw_text": "```json\n{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"部署\": \"边缘\",\n        \"负载\": \"突发\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S1\"]\n    },\n    {\n      \"conditions\": {\n        \"部署\": \"云端\",\n        \"负载\": \"突发\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S2\"]\n    },\n    {\n      \"conditions\": {\n        \"部署\": \"边缘\",\n        \"负载\": \"稳定\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S3\"]\n    },\n    {\n      \"conditions\": {\n        \"部署\": \"云端\",\n        \"负载\": \"稳定\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S4\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}\n```",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "部署": "边缘",
+                  "负载": "突发"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1"
+                ]
+              },
+              {
+                "conditions": {
+                  "部署": "云端",
+                  "负载": "突发"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "部署": "边缘",
+                  "负载": "稳定"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              },
+              {
+                "conditions": {
+                  "部署": "云端",
+                  "负载": "稳定"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S4"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 0.0,
+            "cell_recall": 0.0,
+            "exact_cells": false,
+            "exact_sources": false,
+            "global_safe": true,
+            "full_success": false
+          },
+          "seconds": 4.337990760803223,
+          "output_tokens": 214
+        },
+        "strong_two_stage": {
+          "raw_text": "{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"部署\": \"边缘\",\n        \"负载\": \"突发/稳定\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S1\", \"S3\"]\n    },\n    {\n      \"conditions\": {\n        \"部署\": \"云端\",\n        \"负载\": \"突发/稳定\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S2\", \"S4\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "部署": "边缘",
+                  "负载": "突发/稳定"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1",
+                  "S3"
+                ]
+              },
+              {
+                "conditions": {
+                  "部署": "云端",
+                  "负载": "突发/稳定"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S2",
+                  "S4"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 0.0,
+            "cell_recall": 0.0,
+            "exact_cells": false,
+            "exact_sources": false,
+            "global_safe": true,
+            "full_success": false
+          },
+          "seconds": 2.6399097442626953,
+          "output_tokens": 126
+        },
+        "auto_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "部署": "任意",
+                  "负载": "稳定"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3",
+                  "S4"
+                ]
+              },
+              {
+                "conditions": {
+                  "部署": "任意",
+                  "负载": "突发"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1",
+                  "S2"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          }
+        },
+        "oracle_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "部署": "任意",
+                  "负载": "稳定"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3",
+                  "S4"
+                ]
+              },
+              {
+                "conditions": {
+                  "部署": "任意",
+                  "负载": "突发"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1",
+                  "S2"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          }
+        }
+      }
+    },
+    {
+      "task_id": "battery_by_chemistry",
+      "dimensions": {
+        "化学体系": [
+          "磷酸铁锂",
+          "三元锂"
+        ],
+        "温度": [
+          "低温",
+          "常温"
+        ]
+      },
+      "studies": [
+        [
+          "S1",
+          "磷酸铁锂电芯在低温下循环寿命上升。"
+        ],
+        [
+          "S2",
+          "磷酸铁锂电芯在常温下循环寿命上升。"
+        ],
+        [
+          "S3",
+          "三元锂电芯在低温下循环寿命下降。"
+        ],
+        [
+          "S4",
+          "三元锂电芯在常温下循环寿命下降。"
+        ]
+      ],
+      "gold_atoms": [
+        {
+          "source_id": "S1",
+          "conditions": {
+            "化学体系": "磷酸铁锂",
+            "温度": "低温"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "S2",
+          "conditions": {
+            "化学体系": "磷酸铁锂",
+            "温度": "常温"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "S3",
+          "conditions": {
+            "化学体系": "三元锂",
+            "温度": "低温"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "S4",
+          "conditions": {
+            "化学体系": "三元锂",
+            "温度": "常温"
+          },
+          "direction": "下降"
+        }
+      ],
+      "gold_partition": {
+        "cells": [
+          {
+            "conditions": {
+              "化学体系": "三元锂",
+              "温度": "任意"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "S3",
+              "S4"
+            ]
+          },
+          {
+            "conditions": {
+              "化学体系": "磷酸铁锂",
+              "温度": "任意"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "S1",
+              "S2"
+            ]
+          }
+        ],
+        "global_claim": "无"
+      },
+      "extraction": {
+        "raw_text": "{\"atoms\":[{\"source_id\":\"S1\",\"conditions\":{\"化学体系\":\"磷酸铁锂\",\"温度\":\"低温\"},\"direction\":\"上升\"},{\"source_id\":\"S2\",\"conditions\":{\"化学体系\":\"磷酸铁锂\",\"温度\":\"常温\"},\"direction\":\"上升\"},{\"source_id\":\"S3\",\"conditions\":{\"化学体系\":\"三元锂\",\"温度\":\"低温\"},\"direction\":\"下降\"},{\"source_id\":\"S4\",\"conditions\":{\"化学体系\":\"三元锂\",\"温度\":\"常温\"},\"direction\":\"下降\"}]}",
+        "parse_error": null,
+        "atoms": [
+          {
+            "source_id": "S1",
+            "conditions": {
+              "化学体系": "磷酸铁锂",
+              "温度": "低温"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "S2",
+            "conditions": {
+              "化学体系": "磷酸铁锂",
+              "温度": "常温"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "S3",
+            "conditions": {
+              "化学体系": "三元锂",
+              "温度": "低温"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "S4",
+            "conditions": {
+              "化学体系": "三元锂",
+              "温度": "常温"
+            },
+            "direction": "下降"
+          }
+        ],
+        "seconds": 2.1755967140197754,
+        "output_tokens": 99
+      },
+      "strategies": {
+        "direct": {
+          "raw_text": "```json\n{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"化学体系\": \"磷酸铁锂\",\n        \"温度\": \"任意\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S1\", \"S2\"]\n    },\n    {\n      \"conditions\": {\n        \"化学体系\": \"三元锂\",\n        \"温度\": \"任意\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S3\", \"S4\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}\n```",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "化学体系": "磷酸铁锂",
+                  "温度": "任意"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1",
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "化学体系": "三元锂",
+                  "温度": "任意"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3",
+                  "S4"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          },
+          "seconds": 2.7906575202941895,
+          "output_tokens": 132
+        },
+        "strong_two_stage": {
+          "raw_text": "{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"化学体系\": \"磷酸铁锂\",\n        \"温度\": \"任意\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S1\", \"S2\"]\n    },\n    {\n      \"conditions\": {\n        \"化学体系\": \"三元锂\",\n        \"温度\": \"任意\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S3\", \"S4\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "化学体系": "磷酸铁锂",
+                  "温度": "任意"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1",
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "化学体系": "三元锂",
+                  "温度": "任意"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3",
+                  "S4"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          },
+          "seconds": 2.687465190887451,
+          "output_tokens": 128
+        },
+        "auto_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "化学体系": "三元锂",
+                  "温度": "任意"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3",
+                  "S4"
+                ]
+              },
+              {
+                "conditions": {
+                  "化学体系": "磷酸铁锂",
+                  "温度": "任意"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1",
+                  "S2"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          }
+        },
+        "oracle_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "化学体系": "三元锂",
+                  "温度": "任意"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3",
+                  "S4"
+                ]
+              },
+              {
+                "conditions": {
+                  "化学体系": "磷酸铁锂",
+                  "温度": "任意"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1",
+                  "S2"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          }
+        }
+      }
+    },
+    {
+      "task_id": "education_unresolved",
+      "dimensions": {
+        "学习方式": [
+          "小组",
+          "独立"
+        ],
+        "基础": [
+          "初学",
+          "进阶"
+        ]
+      },
+      "studies": [
+        [
+          "S1",
+          "小组学习对初学者使测验成绩上升。"
+        ],
+        [
+          "S2",
+          "另一项相同设置的研究报告：小组学习对初学者使测验成绩下降。"
+        ],
+        [
+          "S3",
+          "小组学习对进阶者使测验成绩上升。"
+        ],
+        [
+          "S4",
+          "独立学习对初学者使测验成绩不变。"
+        ],
+        [
+          "S5",
+          "独立学习对进阶者使测验成绩不变。"
+        ]
+      ],
+      "gold_atoms": [
+        {
+          "source_id": "S1",
+          "conditions": {
+            "学习方式": "小组",
+            "基础": "初学"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "S2",
+          "conditions": {
+            "学习方式": "小组",
+            "基础": "初学"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "S3",
+          "conditions": {
+            "学习方式": "小组",
+            "基础": "进阶"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "S4",
+          "conditions": {
+            "学习方式": "独立",
+            "基础": "初学"
+          },
+          "direction": "不变"
+        },
+        {
+          "source_id": "S5",
+          "conditions": {
+            "学习方式": "独立",
+            "基础": "进阶"
+          },
+          "direction": "不变"
+        }
+      ],
+      "gold_partition": {
+        "cells": [
+          {
+            "conditions": {
+              "学习方式": "独立",
+              "基础": "任意"
+            },
+            "direction": "不变",
+            "status": "支持",
+            "source_ids": [
+              "S4",
+              "S5"
+            ]
+          },
+          {
+            "conditions": {
+              "学习方式": "小组",
+              "基础": "初学"
+            },
+            "direction": "混合",
+            "status": "未解决",
+            "source_ids": [
+              "S1",
+              "S2"
+            ]
+          },
+          {
+            "conditions": {
+              "学习方式": "小组",
+              "基础": "进阶"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "S3"
+            ]
+          }
+        ],
+        "global_claim": "无"
+      },
+      "extraction": {
+        "raw_text": "{\"atoms\":[{\"source_id\":\"S1\",\"conditions\":{\"学习方式\":\"小组\",\"基础\":\"初学\"},\"direction\":\"上升\"},{\"source_id\":\"S2\",\"conditions\":{\"学习方式\":\"小组\",\"基础\":\"初学\"},\"direction\":\"下降\"},{\"source_id\":\"S3\",\"conditions\":{\"学习方式\":\"小组\",\"基础\":\"进阶\"},\"direction\":\"上升\"},{\"source_id\":\"S4\",\"conditions\":{\"学习方式\":\"独立\",\"基础\":\"初学\"},\"direction\":\"不变\"},{\"source_id\":\"S5\",\"conditions\":{\"学习方式\":\"独立\",\"基础\":\"进阶\"},\"direction\":\"不变\"}]}",
+        "parse_error": null,
+        "atoms": [
+          {
+            "source_id": "S1",
+            "conditions": {
+              "学习方式": "小组",
+              "基础": "初学"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "S2",
+            "conditions": {
+              "学习方式": "小组",
+              "基础": "初学"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "S3",
+            "conditions": {
+              "学习方式": "小组",
+              "基础": "进阶"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "S4",
+            "conditions": {
+              "学习方式": "独立",
+              "基础": "初学"
+            },
+            "direction": "不变"
+          },
+          {
+            "source_id": "S5",
+            "conditions": {
+              "学习方式": "独立",
+              "基础": "进阶"
+            },
+            "direction": "不变"
+          }
+        ],
+        "seconds": 2.493229866027832,
+        "output_tokens": 115
+      },
+      "strategies": {
+        "direct": {
+          "raw_text": "```json\n{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"学习方式\": \"小组\",\n        \"基础\": \"初学\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S1\"]\n    },\n    {\n      \"conditions\": {\n        \"学习方式\": \"小组\",\n        \"基础\": \"进阶\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S3\"]\n    },\n    {\n      \"conditions\": {\n        \"学习方式\": \"独立\",\n        \"基础\": \"初学\"\n      },\n      \"direction\": \"不变\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S4\"]\n    },\n    {\n      \"conditions\": {\n        \"学习方式\": \"独立\",\n        \"基础\": \"进阶\"\n      },\n      \"direction\": \"不变\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S5\"]\n    },\n    {\n      \"conditions\": {\n        \"学习方式\": \"混合\",\n        \"基础\": \"初学\"\n      },\n      \"direction\": \"混合\",\n      \"status\": \"未解决\",\n      \"source_ids\": [\"S1\", \"S2\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}\n```",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "学习方式": "小组",
+                  "基础": "初学"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1"
+                ]
+              },
+              {
+                "conditions": {
+                  "学习方式": "小组",
+                  "基础": "进阶"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              },
+              {
+                "conditions": {
+                  "学习方式": "独立",
+                  "基础": "初学"
+                },
+                "direction": "不变",
+                "status": "支持",
+                "source_ids": [
+                  "S4"
+                ]
+              },
+              {
+                "conditions": {
+                  "学习方式": "独立",
+                  "基础": "进阶"
+                },
+                "direction": "不变",
+                "status": "支持",
+                "source_ids": [
+                  "S5"
+                ]
+              },
+              {
+                "conditions": {
+                  "学习方式": "混合",
+                  "基础": "初学"
+                },
+                "direction": "混合",
+                "status": "未解决",
+                "source_ids": [
+                  "S1",
+                  "S2"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 0.2,
+            "cell_recall": 0.3333333333333333,
+            "exact_cells": false,
+            "exact_sources": false,
+            "global_safe": true,
+            "full_success": false
+          },
+          "seconds": 5.410845041275024,
+          "output_tokens": 277
+        },
+        "strong_two_stage": {
+          "raw_text": "{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"学习方式\": \"小组\",\n        \"基础\": \"初学\"\n      },\n      \"direction\": \"混合\",\n      \"status\": \"未解决\",\n      \"source_ids\": [\"S1\", \"S2\"]\n    },\n    {\n      \"conditions\": {\n        \"学习方式\": \"小组\",\n        \"基础\": \"进阶\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S3\"]\n    },\n    {\n      \"conditions\": {\n        \"学习方式\": \"独立\",\n        \"基础\": \"初学\"\n      },\n      \"direction\": \"不变\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S4\"]\n    },\n    {\n      \"conditions\": {\n        \"学习方式\": \"独立\",\n        \"基础\": \"进阶\"\n      },\n      \"direction\": \"不变\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S5\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "学习方式": "小组",
+                  "基础": "初学"
+                },
+                "direction": "混合",
+                "status": "未解决",
+                "source_ids": [
+                  "S1",
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "学习方式": "小组",
+                  "基础": "进阶"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              },
+              {
+                "conditions": {
+                  "学习方式": "独立",
+                  "基础": "初学"
+                },
+                "direction": "不变",
+                "status": "支持",
+                "source_ids": [
+                  "S4"
+                ]
+              },
+              {
+                "conditions": {
+                  "学习方式": "独立",
+                  "基础": "进阶"
+                },
+                "direction": "不变",
+                "status": "支持",
+                "source_ids": [
+                  "S5"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 0.5,
+            "cell_recall": 0.6666666666666666,
+            "exact_cells": false,
+            "exact_sources": false,
+            "global_safe": true,
+            "full_success": false
+          },
+          "seconds": 4.5204713344573975,
+          "output_tokens": 223
+        },
+        "auto_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "学习方式": "独立",
+                  "基础": "任意"
+                },
+                "direction": "不变",
+                "status": "支持",
+                "source_ids": [
+                  "S4",
+                  "S5"
+                ]
+              },
+              {
+                "conditions": {
+                  "学习方式": "小组",
+                  "基础": "初学"
+                },
+                "direction": "混合",
+                "status": "未解决",
+                "source_ids": [
+                  "S1",
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "学习方式": "小组",
+                  "基础": "进阶"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          }
+        },
+        "oracle_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "学习方式": "独立",
+                  "基础": "任意"
+                },
+                "direction": "不变",
+                "status": "支持",
+                "source_ids": [
+                  "S4",
+                  "S5"
+                ]
+              },
+              {
+                "conditions": {
+                  "学习方式": "小组",
+                  "基础": "初学"
+                },
+                "direction": "混合",
+                "status": "未解决",
+                "source_ids": [
+                  "S1",
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "学习方式": "小组",
+                  "基础": "进阶"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          }
+        }
+      }
+    },
+    {
+      "task_id": "ecology_sparse",
+      "dimensions": {
+        "生境": [
+          "城市",
+          "乡村"
+        ],
+        "季节": [
+          "旱季",
+          "雨季"
+        ]
+      },
+      "studies": [
+        [
+          "S1",
+          "在城市旱季，干预使物种丰富度上升。"
+        ],
+        [
+          "S2",
+          "在乡村旱季，干预使物种丰富度上升。"
+        ],
+        [
+          "S3",
+          "在城市雨季，干预使物种丰富度下降。"
+        ],
+        [
+          "S4",
+          "在乡村雨季，干预使物种丰富度上升。"
+        ]
+      ],
+      "gold_atoms": [
+        {
+          "source_id": "S1",
+          "conditions": {
+            "生境": "城市",
+            "季节": "旱季"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "S2",
+          "conditions": {
+            "生境": "乡村",
+            "季节": "旱季"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "S3",
+          "conditions": {
+            "生境": "城市",
+            "季节": "雨季"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "S4",
+          "conditions": {
+            "生境": "乡村",
+            "季节": "雨季"
+          },
+          "direction": "上升"
+        }
+      ],
+      "gold_partition": {
+        "cells": [
+          {
+            "conditions": {
+              "生境": "任意",
+              "季节": "旱季"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "S1",
+              "S2"
+            ]
+          },
+          {
+            "conditions": {
+              "生境": "乡村",
+              "季节": "雨季"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "S4"
+            ]
+          },
+          {
+            "conditions": {
+              "生境": "城市",
+              "季节": "雨季"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "S3"
+            ]
+          }
+        ],
+        "global_claim": "无"
+      },
+      "extraction": {
+        "raw_text": "{\"atoms\":[{\"source_id\":\"S1\",\"conditions\":{\"生境\":\"城市\",\"季节\":\"旱季\"},\"direction\":\"上升\"},{\"source_id\":\"S2\",\"conditions\":{\"生境\":\"乡村\",\"季节\":\"旱季\"},\"direction\":\"上升\"},{\"source_id\":\"S3\",\"conditions\":{\"生境\":\"城市\",\"季节\":\"雨季\"},\"direction\":\"下降\"},{\"source_id\":\"S4\",\"conditions\":{\"生境\":\"乡村\",\"季节\":\"雨季\"},\"direction\":\"上升\"}]}",
+        "parse_error": null,
+        "atoms": [
+          {
+            "source_id": "S1",
+            "conditions": {
+              "生境": "城市",
+              "季节": "旱季"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "S2",
+            "conditions": {
+              "生境": "乡村",
+              "季节": "旱季"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "S3",
+            "conditions": {
+              "生境": "城市",
+              "季节": "雨季"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "S4",
+            "conditions": {
+              "生境": "乡村",
+              "季节": "雨季"
+            },
+            "direction": "上升"
+          }
+        ],
+        "seconds": 2.0668904781341553,
+        "output_tokens": 93
+      },
+      "strategies": {
+        "direct": {
+          "raw_text": "```json\n{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"生境\": \"城市/任意\",\n        \"季节\": \"旱季\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S1\"]\n    },\n    {\n      \"conditions\": {\n        \"生境\": \"乡村\",\n        \"季节\": \"旱季\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S2\"]\n    },\n    {\n      \"conditions\": {\n        \"生境\": \"城市\",\n        \"季节\": \"雨季\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S3\"]\n    },\n    {\n      \"conditions\": {\n        \"生境\": \"乡村\",\n        \"季节\": \"雨季\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S4\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}\n```",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "生境": "城市/任意",
+                  "季节": "旱季"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1"
+                ]
+              },
+              {
+                "conditions": {
+                  "生境": "乡村",
+                  "季节": "旱季"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "生境": "城市",
+                  "季节": "雨季"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              },
+              {
+                "conditions": {
+                  "生境": "乡村",
+                  "季节": "雨季"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S4"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 0.5,
+            "cell_recall": 0.6666666666666666,
+            "exact_cells": false,
+            "exact_sources": false,
+            "global_safe": true,
+            "full_success": false
+          },
+          "seconds": 4.462256908416748,
+          "output_tokens": 224
+        },
+        "strong_two_stage": {
+          "raw_text": "{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"生境\": \"城市\",\n        \"季节\": \"任意\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S3\"]\n    },\n    {\n      \"conditions\": {\n        \"生境\": \"乡村\",\n        \"季节\": \"任意\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S2\", \"S4\"]\n    },\n    {\n      \"conditions\": {\n        \"生境\": \"任意\",\n        \"季节\": \"旱季\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S1\", \"S2\"]\n    },\n    {\n      \"conditions\": {\n        \"生境\": \"任意\",\n        \"季节\": \"雨季\"\n      },\n      \"direction\": \"混合\",\n      \"status\": \"未解决\",\n      \"source_ids\": [\"S3\", \"S4\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "生境": "城市",
+                  "季节": "任意"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              },
+              {
+                "conditions": {
+                  "生境": "乡村",
+                  "季节": "任意"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S2",
+                  "S4"
+                ]
+              },
+              {
+                "conditions": {
+                  "生境": "任意",
+                  "季节": "旱季"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1",
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "生境": "任意",
+                  "季节": "雨季"
+                },
+                "direction": "混合",
+                "status": "未解决",
+                "source_ids": [
+                  "S3",
+                  "S4"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 0.25,
+            "cell_recall": 0.3333333333333333,
+            "exact_cells": false,
+            "exact_sources": false,
+            "global_safe": true,
+            "full_success": false
+          },
+          "seconds": 4.9989237785339355,
+          "output_tokens": 229
+        },
+        "auto_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "生境": "任意",
+                  "季节": "旱季"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1",
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "生境": "乡村",
+                  "季节": "雨季"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S4"
+                ]
+              },
+              {
+                "conditions": {
+                  "生境": "城市",
+                  "季节": "雨季"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          }
+        },
+        "oracle_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "生境": "任意",
+                  "季节": "旱季"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1",
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "生境": "乡村",
+                  "季节": "雨季"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S4"
+                ]
+              },
+              {
+                "conditions": {
+                  "生境": "城市",
+                  "季节": "雨季"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          }
+        }
+      }
+    },
+    {
+      "task_id": "manufacturing_xor",
+      "dimensions": {
+        "材料": [
+          "甲",
+          "乙"
+        ],
+        "湿度": [
+          "低",
+          "高"
+        ]
+      },
+      "studies": [
+        [
+          "S1",
+          "材料甲在低湿度时缺陷率上升。"
+        ],
+        [
+          "S2",
+          "材料乙在低湿度时缺陷率下降。"
+        ],
+        [
+          "S3",
+          "材料甲在高湿度时缺陷率下降。"
+        ],
+        [
+          "S4",
+          "材料乙在高湿度时缺陷率上升。"
+        ]
+      ],
+      "gold_atoms": [
+        {
+          "source_id": "S1",
+          "conditions": {
+            "材料": "甲",
+            "湿度": "低"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "S2",
+          "conditions": {
+            "材料": "乙",
+            "湿度": "低"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "S3",
+          "conditions": {
+            "材料": "甲",
+            "湿度": "高"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "S4",
+          "conditions": {
+            "材料": "乙",
+            "湿度": "高"
+          },
+          "direction": "上升"
+        }
+      ],
+      "gold_partition": {
+        "cells": [
+          {
+            "conditions": {
+              "材料": "乙",
+              "湿度": "低"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "S2"
+            ]
+          },
+          {
+            "conditions": {
+              "材料": "乙",
+              "湿度": "高"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "S4"
+            ]
+          },
+          {
+            "conditions": {
+              "材料": "甲",
+              "湿度": "低"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "S1"
+            ]
+          },
+          {
+            "conditions": {
+              "材料": "甲",
+              "湿度": "高"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "S3"
+            ]
+          }
+        ],
+        "global_claim": "无"
+      },
+      "extraction": {
+        "raw_text": "{\"atoms\":[{\"source_id\":\"S1\",\"conditions\":{\"材料\":\"甲\",\"湿度\":\"低\"},\"direction\":\"上升\"},{\"source_id\":\"S2\",\"conditions\":{\"材料\":\"乙\",\"湿度\":\"低\"},\"direction\":\"下降\"},{\"source_id\":\"S3\",\"conditions\":{\"材料\":\"甲\",\"湿度\":\"高\"},\"direction\":\"下降\"},{\"source_id\":\"S4\",\"conditions\":{\"材料\":\"乙\",\"湿度\":\"高\"},\"direction\":\"上升\"}]}",
+        "parse_error": null,
+        "atoms": [
+          {
+            "source_id": "S1",
+            "conditions": {
+              "材料": "甲",
+              "湿度": "低"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "S2",
+            "conditions": {
+              "材料": "乙",
+              "湿度": "低"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "S3",
+            "conditions": {
+              "材料": "甲",
+              "湿度": "高"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "S4",
+            "conditions": {
+              "材料": "乙",
+              "湿度": "高"
+            },
+            "direction": "上升"
+          }
+        ],
+        "seconds": 2.0507445335388184,
+        "output_tokens": 85
+      },
+      "strategies": {
+        "direct": {
+          "raw_text": "```json\n{\n  \"cells\": [\n    {\n      \"conditions\": {\"材料\": \"甲\", \"湿度\": \"低\"},\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S1\"]\n    },\n    {\n      \"conditions\": {\"材料\": \"乙\", \"湿度\": \"低\"},\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S2\"]\n    },\n    {\n      \"conditions\": {\"材料\": \"甲\", \"湿度\": \"高\"},\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S3\"]\n    },\n    {\n      \"conditions\": {\"材料\": \"乙\", \"湿度\": \"高\"},\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S4\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}\n```",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "材料": "甲",
+                  "湿度": "低"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1"
+                ]
+              },
+              {
+                "conditions": {
+                  "材料": "乙",
+                  "湿度": "低"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "材料": "甲",
+                  "湿度": "高"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              },
+              {
+                "conditions": {
+                  "材料": "乙",
+                  "湿度": "高"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S4"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          },
+          "seconds": 4.018584966659546,
+          "output_tokens": 194
+        },
+        "strong_two_stage": {
+          "raw_text": "{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"材料\": \"甲\",\n        \"湿度\": \"任意\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S1\", \"S3\"]\n    },\n    {\n      \"conditions\": {\n        \"材料\": \"乙\",\n        \"湿度\": \"任意\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S2\", \"S4\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "材料": "甲",
+                  "湿度": "任意"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S1",
+                  "S3"
+                ]
+              },
+              {
+                "conditions": {
+                  "材料": "乙",
+                  "湿度": "任意"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S2",
+                  "S4"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 0.0,
+            "cell_recall": 0.0,
+            "exact_cells": false,
+            "exact_sources": false,
+            "global_safe": true,
+            "full_success": false
+          },
+          "seconds": 2.7545363903045654,
+          "output_tokens": 122
+        },
+        "auto_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "材料": "乙",
+                  "湿度": "低"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "材料": "乙",
+                  "湿度": "高"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S4"
+                ]
+              },
+              {
+                "conditions": {
+                  "材料": "甲",
+                  "湿度": "低"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1"
+                ]
+              },
+              {
+                "conditions": {
+                  "材料": "甲",
+                  "湿度": "高"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          }
+        },
+        "oracle_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "材料": "乙",
+                  "湿度": "低"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "材料": "乙",
+                  "湿度": "高"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S4"
+                ]
+              },
+              {
+                "conditions": {
+                  "材料": "甲",
+                  "湿度": "低"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1"
+                ]
+              },
+              {
+                "conditions": {
+                  "材料": "甲",
+                  "湿度": "高"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          }
+        }
+      }
+    },
+    {
+      "task_id": "traffic_partial_merge",
+      "dimensions": {
+        "路网": [
+          "网格",
+          "环形"
+        ],
+        "需求": [
+          "低",
+          "高"
+        ]
+      },
+      "studies": [
+        [
+          "S1",
+          "网格路网在低需求下平均行程时间不变。"
+        ],
+        [
+          "S2",
+          "环形路网在低需求下平均行程时间不变。"
+        ],
+        [
+          "S3",
+          "网格路网在高需求下平均行程时间上升。"
+        ],
+        [
+          "S4",
+          "环形路网在高需求下平均行程时间下降。"
+        ]
+      ],
+      "gold_atoms": [
+        {
+          "source_id": "S1",
+          "conditions": {
+            "路网": "网格",
+            "需求": "低"
+          },
+          "direction": "不变"
+        },
+        {
+          "source_id": "S2",
+          "conditions": {
+            "路网": "环形",
+            "需求": "低"
+          },
+          "direction": "不变"
+        },
+        {
+          "source_id": "S3",
+          "conditions": {
+            "路网": "网格",
+            "需求": "高"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "S4",
+          "conditions": {
+            "路网": "环形",
+            "需求": "高"
+          },
+          "direction": "下降"
+        }
+      ],
+      "gold_partition": {
+        "cells": [
+          {
+            "conditions": {
+              "路网": "任意",
+              "需求": "低"
+            },
+            "direction": "不变",
+            "status": "支持",
+            "source_ids": [
+              "S1",
+              "S2"
+            ]
+          },
+          {
+            "conditions": {
+              "路网": "环形",
+              "需求": "高"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "S4"
+            ]
+          },
+          {
+            "conditions": {
+              "路网": "网格",
+              "需求": "高"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "S3"
+            ]
+          }
+        ],
+        "global_claim": "无"
+      },
+      "extraction": {
+        "raw_text": "{\"atoms\":[{\"source_id\":\"S1\",\"conditions\":{\"路网\":\"网格\",\"需求\":\"低\"},\"direction\":\"不变\"},{\"source_id\":\"S2\",\"conditions\":{\"路网\":\"环形\",\"需求\":\"低\"},\"direction\":\"不变\"},{\"source_id\":\"S3\",\"conditions\":{\"路网\":\"网格\",\"需求\":\"高\"},\"direction\":\"上升\"},{\"source_id\":\"S4\",\"conditions\":{\"路网\":\"环形\",\"需求\":\"高\"},\"direction\":\"下降\"}]}",
+        "parse_error": null,
+        "atoms": [
+          {
+            "source_id": "S1",
+            "conditions": {
+              "路网": "网格",
+              "需求": "低"
+            },
+            "direction": "不变"
+          },
+          {
+            "source_id": "S2",
+            "conditions": {
+              "路网": "环形",
+              "需求": "低"
+            },
+            "direction": "不变"
+          },
+          {
+            "source_id": "S3",
+            "conditions": {
+              "路网": "网格",
+              "需求": "高"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "S4",
+            "conditions": {
+              "路网": "环形",
+              "需求": "高"
+            },
+            "direction": "下降"
+          }
+        ],
+        "seconds": 1.9947867393493652,
+        "output_tokens": 91
+      },
+      "strategies": {
+        "direct": {
+          "raw_text": "```json\n{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"路网\": \"网格\",\n        \"需求\": \"低\"\n      },\n      \"direction\": \"不变\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S1\"]\n    },\n    {\n      \"conditions\": {\n        \"路网\": \"环形\",\n        \"需求\": \"低\"\n      },\n      \"direction\": \"不变\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S2\"]\n    },\n    {\n      \"conditions\": {\n        \"路网\": \"网格\",\n        \"需求\": \"高\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S3\"]\n    },\n    {\n      \"conditions\": {\n        \"路网\": \"环形\",\n        \"需求\": \"高\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S4\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}\n```",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "路网": "网格",
+                  "需求": "低"
+                },
+                "direction": "不变",
+                "status": "支持",
+                "source_ids": [
+                  "S1"
+                ]
+              },
+              {
+                "conditions": {
+                  "路网": "环形",
+                  "需求": "低"
+                },
+                "direction": "不变",
+                "status": "支持",
+                "source_ids": [
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "路网": "网格",
+                  "需求": "高"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              },
+              {
+                "conditions": {
+                  "路网": "环形",
+                  "需求": "高"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S4"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 0.5,
+            "cell_recall": 0.6666666666666666,
+            "exact_cells": false,
+            "exact_sources": false,
+            "global_safe": true,
+            "full_success": false
+          },
+          "seconds": 4.405784845352173,
+          "output_tokens": 220
+        },
+        "strong_two_stage": {
+          "raw_text": "{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"路网\": \"任意\",\n        \"需求\": \"任意\"\n      },\n      \"direction\": \"混合\",\n      \"status\": \"未解决\",\n      \"source_ids\": [\"S1\", \"S2\", \"S3\", \"S4\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "路网": "任意",
+                  "需求": "任意"
+                },
+                "direction": "混合",
+                "status": "未解决",
+                "source_ids": [
+                  "S1",
+                  "S2",
+                  "S3",
+                  "S4"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 0.0,
+            "cell_recall": 0.0,
+            "exact_cells": false,
+            "exact_sources": false,
+            "global_safe": true,
+            "full_success": false
+          },
+          "seconds": 1.8294391632080078,
+          "output_tokens": 80
+        },
+        "auto_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "路网": "任意",
+                  "需求": "低"
+                },
+                "direction": "不变",
+                "status": "支持",
+                "source_ids": [
+                  "S1",
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "路网": "环形",
+                  "需求": "高"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S4"
+                ]
+              },
+              {
+                "conditions": {
+                  "路网": "网格",
+                  "需求": "高"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          }
+        },
+        "oracle_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "路网": "任意",
+                  "需求": "低"
+                },
+                "direction": "不变",
+                "status": "支持",
+                "source_ids": [
+                  "S1",
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "路网": "环形",
+                  "需求": "高"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S4"
+                ]
+              },
+              {
+                "conditions": {
+                  "路网": "网格",
+                  "需求": "高"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          }
+        }
+      }
+    },
+    {
+      "task_id": "network_unknown_not_any",
+      "dimensions": {
+        "协议": [
+          "甲协议",
+          "乙协议"
+        ],
+        "丢包率": [
+          "低",
+          "高"
+        ]
+      },
+      "studies": [
+        [
+          "S1",
+          "甲协议在低丢包率下使吞吐量上升。"
+        ],
+        [
+          "S2",
+          "甲协议在高丢包率下使吞吐量下降。"
+        ],
+        [
+          "S3",
+          "乙协议在低丢包率下使吞吐量不变。"
+        ],
+        [
+          "S4",
+          "乙协议在高丢包率下使吞吐量不变。"
+        ],
+        [
+          "S5",
+          "一项未报告丢包率的甲协议实验发现吞吐量上升。"
+        ]
+      ],
+      "gold_atoms": [
+        {
+          "source_id": "S1",
+          "conditions": {
+            "协议": "甲协议",
+            "丢包率": "低"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "S2",
+          "conditions": {
+            "协议": "甲协议",
+            "丢包率": "高"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "S3",
+          "conditions": {
+            "协议": "乙协议",
+            "丢包率": "低"
+          },
+          "direction": "不变"
+        },
+        {
+          "source_id": "S4",
+          "conditions": {
+            "协议": "乙协议",
+            "丢包率": "高"
+          },
+          "direction": "不变"
+        },
+        {
+          "source_id": "S5",
+          "conditions": {
+            "协议": "甲协议",
+            "丢包率": "未报告"
+          },
+          "direction": "上升"
+        }
+      ],
+      "gold_partition": {
+        "cells": [
+          {
+            "conditions": {
+              "协议": "乙协议",
+              "丢包率": "任意"
+            },
+            "direction": "不变",
+            "status": "支持",
+            "source_ids": [
+              "S3",
+              "S4"
+            ]
+          },
+          {
+            "conditions": {
+              "协议": "甲协议",
+              "丢包率": "低"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "S1"
+            ]
+          },
+          {
+            "conditions": {
+              "协议": "甲协议",
+              "丢包率": "未报告"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "S5"
+            ]
+          },
+          {
+            "conditions": {
+              "协议": "甲协议",
+              "丢包率": "高"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "S2"
+            ]
+          }
+        ],
+        "global_claim": "无"
+      },
+      "extraction": {
+        "raw_text": "```json\n{\n  \"atoms\": [\n    {\"source_id\": \"S1\", \"conditions\": {\"协议\": \"甲协议\", \"丢包率\": \"低\"}, \"direction\": \"上升\"},\n    {\"source_id\": \"S2\", \"conditions\": {\"协议\": \"甲协议\", \"丢包率\": \"高\"}, \"direction\": \"下降\"},\n    {\"source_id\": \"S3\", \"conditions\": {\"协议\": \"乙协议\", \"丢包率\": \"低\"}, \"direction\": \"不变\"},\n    {\"source_id\": \"S4\", \"conditions\": {\"协议\": \"乙协议\", \"丢包率\": \"高\"}, \"direction\": \"不变\"},\n    {\"source_id\": \"S5\", \"conditions\": {\"协议\": \"甲协议\", \"丢包率\": \"未报告\"}, \"direction\": \"上升\"}\n  ]\n}\n```",
+        "parse_error": null,
+        "atoms": [
+          {
+            "source_id": "S1",
+            "conditions": {
+              "协议": "甲协议",
+              "丢包率": "低"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "S2",
+            "conditions": {
+              "协议": "甲协议",
+              "丢包率": "高"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "S3",
+            "conditions": {
+              "协议": "乙协议",
+              "丢包率": "低"
+            },
+            "direction": "不变"
+          },
+          {
+            "source_id": "S4",
+            "conditions": {
+              "协议": "乙协议",
+              "丢包率": "高"
+            },
+            "direction": "不变"
+          },
+          {
+            "source_id": "S5",
+            "conditions": {
+              "协议": "甲协议",
+              "丢包率": "未报告"
+            },
+            "direction": "上升"
+          }
+        ],
+        "seconds": 3.5528576374053955,
+        "output_tokens": 180
+      },
+      "strategies": {
+        "direct": {
+          "raw_text": "```json\n{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"协议\": \"甲协议\",\n        \"丢包率\": \"低\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S1\"]\n    },\n    {\n      \"conditions\": {\n        \"协议\": \"甲协议\",\n        \"丢包率\": \"高\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S2\"]\n    },\n    {\n      \"conditions\": {\n        \"协议\": \"乙协议\",\n        \"丢包率\": \"低\"\n      },\n      \"direction\": \"不变\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S3\"]\n    },\n    {\n      \"conditions\": {\n        \"协议\": \"乙协议\",\n        \"丢包率\": \"高\"\n      },\n      \"direction\": \"不变\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S4\"]\n    },\n    {\n      \"conditions\": {\n        \"协议\": \"甲协议\",\n        \"丢包率\": \"未报告\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"未解决\",\n      \"source_ids\": [\"S5\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}\n```",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "协议": "甲协议",
+                  "丢包率": "低"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1"
+                ]
+              },
+              {
+                "conditions": {
+                  "协议": "甲协议",
+                  "丢包率": "高"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "协议": "乙协议",
+                  "丢包率": "低"
+                },
+                "direction": "不变",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              },
+              {
+                "conditions": {
+                  "协议": "乙协议",
+                  "丢包率": "高"
+                },
+                "direction": "不变",
+                "status": "支持",
+                "source_ids": [
+                  "S4"
+                ]
+              },
+              {
+                "conditions": {
+                  "协议": "甲协议",
+                  "丢包率": "未报告"
+                },
+                "direction": "上升",
+                "status": "未解决",
+                "source_ids": [
+                  "S5"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 0.4,
+            "cell_recall": 0.5,
+            "exact_cells": false,
+            "exact_sources": false,
+            "global_safe": true,
+            "full_success": false
+          },
+          "seconds": 5.62406587600708,
+          "output_tokens": 279
+        },
+        "strong_two_stage": {
+          "raw_text": "{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"协议\": \"甲协议\",\n        \"丢包率\": \"低\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S1\"]\n    },\n    {\n      \"conditions\": {\n        \"协议\": \"甲协议\",\n        \"丢包率\": \"高\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S2\"]\n    },\n    {\n      \"conditions\": {\n        \"协议\": \"乙协议\",\n        \"丢包率\": \"低\"\n      },\n      \"direction\": \"不变\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S3\"]\n    },\n    {\n      \"conditions\": {\n        \"协议\": \"乙协议\",\n        \"丢包率\": \"高\"\n      },\n      \"direction\": \"不变\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S4\"]\n    },\n    {\n      \"conditions\": {\n        \"协议\": \"甲协议\",\n        \"丢包率\": \"未报告\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S5\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "协议": "甲协议",
+                  "丢包率": "低"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1"
+                ]
+              },
+              {
+                "conditions": {
+                  "协议": "甲协议",
+                  "丢包率": "高"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "协议": "乙协议",
+                  "丢包率": "低"
+                },
+                "direction": "不变",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              },
+              {
+                "conditions": {
+                  "协议": "乙协议",
+                  "丢包率": "高"
+                },
+                "direction": "不变",
+                "status": "支持",
+                "source_ids": [
+                  "S4"
+                ]
+              },
+              {
+                "conditions": {
+                  "协议": "甲协议",
+                  "丢包率": "未报告"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S5"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 0.6,
+            "cell_recall": 0.75,
+            "exact_cells": false,
+            "exact_sources": false,
+            "global_safe": true,
+            "full_success": false
+          },
+          "seconds": 5.479613542556763,
+          "output_tokens": 274
+        },
+        "auto_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "协议": "乙协议",
+                  "丢包率": "任意"
+                },
+                "direction": "不变",
+                "status": "支持",
+                "source_ids": [
+                  "S3",
+                  "S4"
+                ]
+              },
+              {
+                "conditions": {
+                  "协议": "甲协议",
+                  "丢包率": "低"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1"
+                ]
+              },
+              {
+                "conditions": {
+                  "协议": "甲协议",
+                  "丢包率": "未报告"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S5"
+                ]
+              },
+              {
+                "conditions": {
+                  "协议": "甲协议",
+                  "丢包率": "高"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S2"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          }
+        },
+        "oracle_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "协议": "乙协议",
+                  "丢包率": "任意"
+                },
+                "direction": "不变",
+                "status": "支持",
+                "source_ids": [
+                  "S3",
+                  "S4"
+                ]
+              },
+              {
+                "conditions": {
+                  "协议": "甲协议",
+                  "丢包率": "低"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1"
+                ]
+              },
+              {
+                "conditions": {
+                  "协议": "甲协议",
+                  "丢包率": "未报告"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S5"
+                ]
+              },
+              {
+                "conditions": {
+                  "协议": "甲协议",
+                  "丢包率": "高"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S2"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          }
+        }
+      }
+    },
+    {
+      "task_id": "solver_by_resolution",
+      "dimensions": {
+        "求解器": [
+          "显式",
+          "隐式"
+        ],
+        "分辨率": [
+          "粗",
+          "细"
+        ]
+      },
+      "studies": [
+        [
+          "S1",
+          "显式求解器在粗分辨率下使误差上升。"
+        ],
+        [
+          "S2",
+          "隐式求解器在粗分辨率下也使误差上升。"
+        ],
+        [
+          "S3",
+          "显式求解器在细分辨率下使误差下降。"
+        ],
+        [
+          "S4",
+          "隐式求解器在细分辨率下也使误差下降。"
+        ]
+      ],
+      "gold_atoms": [
+        {
+          "source_id": "S1",
+          "conditions": {
+            "求解器": "显式",
+            "分辨率": "粗"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "S2",
+          "conditions": {
+            "求解器": "隐式",
+            "分辨率": "粗"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "S3",
+          "conditions": {
+            "求解器": "显式",
+            "分辨率": "细"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "S4",
+          "conditions": {
+            "求解器": "隐式",
+            "分辨率": "细"
+          },
+          "direction": "下降"
+        }
+      ],
+      "gold_partition": {
+        "cells": [
+          {
+            "conditions": {
+              "求解器": "任意",
+              "分辨率": "粗"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "S1",
+              "S2"
+            ]
+          },
+          {
+            "conditions": {
+              "求解器": "任意",
+              "分辨率": "细"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "S3",
+              "S4"
+            ]
+          }
+        ],
+        "global_claim": "无"
+      },
+      "extraction": {
+        "raw_text": "{\"atoms\":[{\"source_id\":\"S1\",\"conditions\":{\"求解器\":\"显式\",\"分辨率\":\"粗\"},\"direction\":\"上升\"},{\"source_id\":\"S2\",\"conditions\":{\"求解器\":\"隐式\",\"分辨率\":\"粗\"},\"direction\":\"上升\"},{\"source_id\":\"S3\",\"conditions\":{\"求解器\":\"显式\",\"分辨率\":\"细\"},\"direction\":\"下降\"},{\"source_id\":\"S4\",\"conditions\":{\"求解器\":\"隐式\",\"分辨率\":\"细\"},\"direction\":\"下降\"}]}",
+        "parse_error": null,
+        "atoms": [
+          {
+            "source_id": "S1",
+            "conditions": {
+              "求解器": "显式",
+              "分辨率": "粗"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "S2",
+            "conditions": {
+              "求解器": "隐式",
+              "分辨率": "粗"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "S3",
+            "conditions": {
+              "求解器": "显式",
+              "分辨率": "细"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "S4",
+            "conditions": {
+              "求解器": "隐式",
+              "分辨率": "细"
+            },
+            "direction": "下降"
+          }
+        ],
+        "seconds": 2.109929323196411,
+        "output_tokens": 97
+      },
+      "strategies": {
+        "direct": {
+          "raw_text": "```json\n{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"求解器\": \"任意\",\n        \"分辨率\": \"粗\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S1\", \"S2\"]\n    },\n    {\n      \"conditions\": {\n        \"求解器\": \"任意\",\n        \"分辨率\": \"细\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S3\", \"S4\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}\n```",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "求解器": "任意",
+                  "分辨率": "粗"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1",
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "求解器": "任意",
+                  "分辨率": "细"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3",
+                  "S4"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          },
+          "seconds": 2.6710216999053955,
+          "output_tokens": 130
+        },
+        "strong_two_stage": {
+          "raw_text": "{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"求解器\": \"任意\",\n        \"分辨率\": \"粗\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S1\", \"S2\"]\n    },\n    {\n      \"conditions\": {\n        \"求解器\": \"任意\",\n        \"分辨率\": \"细\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S3\", \"S4\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "求解器": "任意",
+                  "分辨率": "粗"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1",
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "求解器": "任意",
+                  "分辨率": "细"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3",
+                  "S4"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          },
+          "seconds": 2.6939072608947754,
+          "output_tokens": 126
+        },
+        "auto_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "求解器": "任意",
+                  "分辨率": "粗"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1",
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "求解器": "任意",
+                  "分辨率": "细"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3",
+                  "S4"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          }
+        },
+        "oracle_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "求解器": "任意",
+                  "分辨率": "粗"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1",
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "求解器": "任意",
+                  "分辨率": "细"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3",
+                  "S4"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          }
+        }
+      }
+    },
+    {
+      "task_id": "retrieval_unresolved",
+      "dimensions": {
+        "语料": [
+          "干净",
+          "噪声"
+        ],
+        "查询": [
+          "短",
+          "长"
+        ]
+      },
+      "studies": [
+        [
+          "S1",
+          "干净语料配合短查询时召回率上升。"
+        ],
+        [
+          "S2",
+          "干净语料配合长查询时召回率上升。"
+        ],
+        [
+          "S3",
+          "噪声语料配合短查询时召回率下降。"
+        ],
+        [
+          "S4",
+          "噪声语料配合长查询时召回率上升。"
+        ],
+        [
+          "S5",
+          "另一项噪声语料配合长查询的实验报告召回率下降。"
+        ]
+      ],
+      "gold_atoms": [
+        {
+          "source_id": "S1",
+          "conditions": {
+            "语料": "干净",
+            "查询": "短"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "S2",
+          "conditions": {
+            "语料": "干净",
+            "查询": "长"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "S3",
+          "conditions": {
+            "语料": "噪声",
+            "查询": "短"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "S4",
+          "conditions": {
+            "语料": "噪声",
+            "查询": "长"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "S5",
+          "conditions": {
+            "语料": "噪声",
+            "查询": "长"
+          },
+          "direction": "下降"
+        }
+      ],
+      "gold_partition": {
+        "cells": [
+          {
+            "conditions": {
+              "语料": "干净",
+              "查询": "任意"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "S1",
+              "S2"
+            ]
+          },
+          {
+            "conditions": {
+              "语料": "噪声",
+              "查询": "短"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "S3"
+            ]
+          },
+          {
+            "conditions": {
+              "语料": "噪声",
+              "查询": "长"
+            },
+            "direction": "混合",
+            "status": "未解决",
+            "source_ids": [
+              "S4",
+              "S5"
+            ]
+          }
+        ],
+        "global_claim": "无"
+      },
+      "extraction": {
+        "raw_text": "{\n  \"atoms\": [\n    {\n      \"source_id\": \"S1\",\n      \"conditions\": {\n        \"语料\": \"干净\",\n        \"查询\": \"短\"\n      },\n      \"direction\": \"上升\"\n    },\n    {\n      \"source_id\": \"S2\",\n      \"conditions\": {\n        \"语料\": \"干净\",\n        \"查询\": \"长\"\n      },\n      \"direction\": \"上升\"\n    },\n    {\n      \"source_id\": \"S3\",\n      \"conditions\": {\n        \"语料\": \"噪声\",\n        \"查询\": \"短\"\n      },\n      \"direction\": \"下降\"\n    },\n    {\n      \"source_id\": \"S4\",\n      \"conditions\": {\n        \"语料\": \"噪声\",\n        \"查询\": \"长\"\n      },\n      \"direction\": \"上升\"\n    },\n    {\n      \"source_id\": \"S5\",\n      \"conditions\": {\n        \"语料\": \"噪声\",\n        \"查询\": \"长\"\n      },\n      \"direction\": \"下降\"\n    }\n  ]\n}",
+        "parse_error": null,
+        "atoms": [
+          {
+            "source_id": "S1",
+            "conditions": {
+              "语料": "干净",
+              "查询": "短"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "S2",
+            "conditions": {
+              "语料": "干净",
+              "查询": "长"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "S3",
+            "conditions": {
+              "语料": "噪声",
+              "查询": "短"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "S4",
+            "conditions": {
+              "语料": "噪声",
+              "查询": "长"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "S5",
+            "conditions": {
+              "语料": "噪声",
+              "查询": "长"
+            },
+            "direction": "下降"
+          }
+        ],
+        "seconds": 4.293720483779907,
+        "output_tokens": 220
+      },
+      "strategies": {
+        "direct": {
+          "raw_text": "```json\n{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"语料\": \"干净\",\n        \"查询\": \"短\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S1\"]\n    },\n    {\n      \"conditions\": {\n        \"语料\": \"干净\",\n        \"查询\": \"长\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S2\"]\n    },\n    {\n      \"conditions\": {\n        \"语料\": \"噪声\",\n        \"查询\": \"短\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S3\"]\n    },\n    {\n      \"conditions\": {\n        \"语料\": \"噪声\",\n        \"查询\": \"长\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S4\"]\n    },\n    {\n      \"conditions\": {\n        \"语料\": \"噪声\",\n        \"查询\": \"长\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"未解决\",\n      \"source_ids\": [\"S5\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}\n```",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "语料": "干净",
+                  "查询": "短"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1"
+                ]
+              },
+              {
+                "conditions": {
+                  "语料": "干净",
+                  "查询": "长"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "语料": "噪声",
+                  "查询": "短"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              },
+              {
+                "conditions": {
+                  "语料": "噪声",
+                  "查询": "长"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S4"
+                ]
+              },
+              {
+                "conditions": {
+                  "语料": "噪声",
+                  "查询": "长"
+                },
+                "direction": "下降",
+                "status": "未解决",
+                "source_ids": [
+                  "S5"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 0.2,
+            "cell_recall": 0.3333333333333333,
+            "exact_cells": false,
+            "exact_sources": false,
+            "global_safe": true,
+            "full_success": false
+          },
+          "seconds": 5.205101490020752,
+          "output_tokens": 268
+        },
+        "strong_two_stage": {
+          "raw_text": "{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"语料\": \"允许值\",\n        \"查询\": \"短\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"S1\"]\n    },\n    {\n      \"conditions\": {\n        \"语料\": \"允许值\",\n        \"查询\": \"长\"\n      },\n      \"direction\": \"混合\",\n      \"status\": \"未解决\",\n      \"source_ids\": [\"S2\", \"S4\", \"S5\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "语料": "允许值",
+                  "查询": "短"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1"
+                ]
+              },
+              {
+                "conditions": {
+                  "语料": "允许值",
+                  "查询": "长"
+                },
+                "direction": "混合",
+                "status": "未解决",
+                "source_ids": [
+                  "S2",
+                  "S4",
+                  "S5"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 0.0,
+            "cell_recall": 0.0,
+            "exact_cells": false,
+            "exact_sources": false,
+            "global_safe": true,
+            "full_success": false
+          },
+          "seconds": 2.7491295337677,
+          "output_tokens": 127
+        },
+        "auto_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "语料": "干净",
+                  "查询": "任意"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1",
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "语料": "噪声",
+                  "查询": "短"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              },
+              {
+                "conditions": {
+                  "语料": "噪声",
+                  "查询": "长"
+                },
+                "direction": "混合",
+                "status": "未解决",
+                "source_ids": [
+                  "S4",
+                  "S5"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          }
+        },
+        "oracle_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "语料": "干净",
+                  "查询": "任意"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "S1",
+                  "S2"
+                ]
+              },
+              {
+                "conditions": {
+                  "语料": "噪声",
+                  "查询": "短"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "S3"
+                ]
+              },
+              {
+                "conditions": {
+                  "语料": "噪声",
+                  "查询": "长"
+                },
+                "direction": "混合",
+                "status": "未解决",
+                "source_ids": [
+                  "S4",
+                  "S5"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "cell_precision": 1.0,
+            "cell_recall": 1.0,
+            "exact_cells": true,
+            "exact_sources": true,
+            "global_safe": true,
+            "full_success": true
+          }
+        }
+      }
+    }
+  ]
+}

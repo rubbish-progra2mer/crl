@@ -1,0 +1,392 @@
+{
+  "experiment": "H2 intervention demo (pre-registered)",
+  "preregistration": "findings/h2_intervention_preregistration_2026-07-27.md",
+  "date": "2026-07-27T10:49:28-04:00",
+  "fit_corpus": "factorial_pilot 80 pairs (both tasks); guard-stack never touched during fit",
+  "baseline_production_drift_gate_threshold_0.4": {
+    "in_sample": {
+      "n_positive": 26,
+      "n_control": 5,
+      "catch_rate": 0.0,
+      "false_positive_rate": 0.0,
+      "balanced_accuracy": 0.5,
+      "per_class_fire_rate": {
+        "constraint_deletion": {
+          "n": 5,
+          "fired": 0,
+          "rate": 0.0
+        },
+        "faithful_control": {
+          "n": 5,
+          "fired": 0,
+          "rate": 0.0
+        },
+        "modal_downgrade": {
+          "n": 5,
+          "fired": 0,
+          "rate": 0.0
+        },
+        "negation_flip": {
+          "n": 6,
+          "fired": 0,
+          "rate": 0.0
+        },
+        "quantity_unit_drift": {
+          "n": 5,
+          "fired": 0,
+          "rate": 0.0
+        },
+        "scope_inversion": {
+          "n": 5,
+          "fired": 0,
+          "rate": 0.0
+        }
+      }
+    },
+    "held_out": {
+      "n_positive": 30,
+      "n_control": 10,
+      "catch_rate": 0.0,
+      "false_positive_rate": 0.0,
+      "balanced_accuracy": 0.5,
+      "per_class_fire_rate": {
+        "constraint_deletion": {
+          "n": 6,
+          "fired": 0,
+          "rate": 0.0
+        },
+        "faithful_control": {
+          "n": 10,
+          "fired": 0,
+          "rate": 0.0
+        },
+        "modal_downgrade": {
+          "n": 6,
+          "fired": 0,
+          "rate": 0.0
+        },
+        "negation_flip": {
+          "n": 6,
+          "fired": 0,
+          "rate": 0.0
+        },
+        "quantity_unit_drift": {
+          "n": 6,
+          "fired": 0,
+          "rate": 0.0
+        },
+        "scope_inversion": {
+          "n": 6,
+          "fired": 0,
+          "rate": 0.0
+        }
+      }
+    }
+  },
+  "arms": {
+    "I1_mxbai_cosine_only": {
+      "encoder": "mixedbread-ai/mxbai-embed-large-v1",
+      "rule": "cosine_threshold",
+      "frozen_threshold": 0.935303,
+      "fit_balanced_accuracy_on_pilot": 0.6625,
+      "in_sample": {
+        "n_positive": 26,
+        "n_control": 5,
+        "catch_rate": 0.7692,
+        "false_positive_rate": 0.8,
+        "balanced_accuracy": 0.4846,
+        "per_class_fire_rate": {
+          "constraint_deletion": {
+            "n": 5,
+            "fired": 5,
+            "rate": 1.0
+          },
+          "faithful_control": {
+            "n": 5,
+            "fired": 4,
+            "rate": 0.8
+          },
+          "modal_downgrade": {
+            "n": 5,
+            "fired": 2,
+            "rate": 0.4
+          },
+          "negation_flip": {
+            "n": 6,
+            "fired": 6,
+            "rate": 1.0
+          },
+          "quantity_unit_drift": {
+            "n": 5,
+            "fired": 2,
+            "rate": 0.4
+          },
+          "scope_inversion": {
+            "n": 5,
+            "fired": 5,
+            "rate": 1.0
+          }
+        },
+        "sensitivity_pm_0.05": {
+          "+0.885": 0.4115,
+          "+0.985": 0.4808
+        }
+      },
+      "held_out": {
+        "n_positive": 30,
+        "n_control": 10,
+        "catch_rate": 0.7667,
+        "false_positive_rate": 0.9,
+        "balanced_accuracy": 0.4333,
+        "per_class_fire_rate": {
+          "constraint_deletion": {
+            "n": 6,
+            "fired": 6,
+            "rate": 1.0
+          },
+          "faithful_control": {
+            "n": 10,
+            "fired": 9,
+            "rate": 0.9
+          },
+          "modal_downgrade": {
+            "n": 6,
+            "fired": 4,
+            "rate": 0.6667
+          },
+          "negation_flip": {
+            "n": 6,
+            "fired": 5,
+            "rate": 0.8333
+          },
+          "quantity_unit_drift": {
+            "n": 6,
+            "fired": 2,
+            "rate": 0.3333
+          },
+          "scope_inversion": {
+            "n": 6,
+            "fired": 6,
+            "rate": 1.0
+          }
+        },
+        "sensitivity_pm_0.05": {
+          "+0.885": 0.2833,
+          "+0.985": 0.45
+        }
+      }
+    },
+    "I2_mxbai_confound_aware": {
+      "encoder": "mixedbread-ai/mxbai-embed-large-v1",
+      "rule": "logistic_cos_jaccard",
+      "frozen_standardization": {
+        "mean": [
+          0.78186,
+          0.389044
+        ],
+        "std": [
+          0.164094,
+          0.340684
+        ]
+      },
+      "frozen_weights_bias_cos_jac": [
+        0.078607,
+        -3.440231,
+        2.987063
+      ],
+      "fit_balanced_accuracy_on_pilot": 0.725,
+      "in_sample": {
+        "n_positive": 26,
+        "n_control": 5,
+        "catch_rate": 0.5,
+        "false_positive_rate": 0.0,
+        "balanced_accuracy": 0.75,
+        "per_class_fire_rate": {
+          "constraint_deletion": {
+            "n": 5,
+            "fired": 2,
+            "rate": 0.4
+          },
+          "faithful_control": {
+            "n": 5,
+            "fired": 0,
+            "rate": 0.0
+          },
+          "modal_downgrade": {
+            "n": 5,
+            "fired": 3,
+            "rate": 0.6
+          },
+          "negation_flip": {
+            "n": 6,
+            "fired": 4,
+            "rate": 0.6667
+          },
+          "quantity_unit_drift": {
+            "n": 5,
+            "fired": 3,
+            "rate": 0.6
+          },
+          "scope_inversion": {
+            "n": 5,
+            "fired": 1,
+            "rate": 0.2
+          }
+        },
+        "sensitivity_p_cut": {
+          "0.45": 0.75,
+          "0.55": 0.7308
+        }
+      },
+      "held_out": {
+        "n_positive": 30,
+        "n_control": 10,
+        "catch_rate": 0.4667,
+        "false_positive_rate": 0.4,
+        "balanced_accuracy": 0.5333,
+        "per_class_fire_rate": {
+          "constraint_deletion": {
+            "n": 6,
+            "fired": 1,
+            "rate": 0.1667
+          },
+          "faithful_control": {
+            "n": 10,
+            "fired": 4,
+            "rate": 0.4
+          },
+          "modal_downgrade": {
+            "n": 6,
+            "fired": 2,
+            "rate": 0.3333
+          },
+          "negation_flip": {
+            "n": 6,
+            "fired": 5,
+            "rate": 0.8333
+          },
+          "quantity_unit_drift": {
+            "n": 6,
+            "fired": 2,
+            "rate": 0.3333
+          },
+          "scope_inversion": {
+            "n": 6,
+            "fired": 4,
+            "rate": 0.6667
+          }
+        },
+        "sensitivity_p_cut": {
+          "0.45": 0.5333,
+          "0.55": 0.5333
+        }
+      }
+    },
+    "I3_production_confound_aware": {
+      "encoder": "nomic-embed-text-v1.5 MRL-256 [PRODUCTION PATH, search_document:]",
+      "rule": "logistic_cos_jaccard",
+      "frozen_standardization": {
+        "mean": [
+          0.875186,
+          0.389044
+        ],
+        "std": [
+          0.114333,
+          0.340684
+        ]
+      },
+      "frozen_weights_bias_cos_jac": [
+        1e-06,
+        0.072513,
+        -0.088929
+      ],
+      "fit_balanced_accuracy_on_pilot": 0.5,
+      "in_sample": {
+        "n_positive": 26,
+        "n_control": 5,
+        "catch_rate": 0.4231,
+        "false_positive_rate": 1.0,
+        "balanced_accuracy": 0.2115,
+        "per_class_fire_rate": {
+          "constraint_deletion": {
+            "n": 5,
+            "fired": 5,
+            "rate": 1.0
+          },
+          "faithful_control": {
+            "n": 5,
+            "fired": 5,
+            "rate": 1.0
+          },
+          "modal_downgrade": {
+            "n": 5,
+            "fired": 0,
+            "rate": 0.0
+          },
+          "negation_flip": {
+            "n": 6,
+            "fired": 2,
+            "rate": 0.3333
+          },
+          "quantity_unit_drift": {
+            "n": 5,
+            "fired": 0,
+            "rate": 0.0
+          },
+          "scope_inversion": {
+            "n": 5,
+            "fired": 4,
+            "rate": 0.8
+          }
+        },
+        "sensitivity_p_cut": {
+          "0.45": 0.5,
+          "0.55": 0.5
+        }
+      },
+      "held_out": {
+        "n_positive": 30,
+        "n_control": 10,
+        "catch_rate": 0.4333,
+        "false_positive_rate": 0.9,
+        "balanced_accuracy": 0.2667,
+        "per_class_fire_rate": {
+          "constraint_deletion": {
+            "n": 6,
+            "fired": 4,
+            "rate": 0.6667
+          },
+          "faithful_control": {
+            "n": 10,
+            "fired": 9,
+            "rate": 0.9
+          },
+          "modal_downgrade": {
+            "n": 6,
+            "fired": 3,
+            "rate": 0.5
+          },
+          "negation_flip": {
+            "n": 6,
+            "fired": 1,
+            "rate": 0.1667
+          },
+          "quantity_unit_drift": {
+            "n": 6,
+            "fired": 1,
+            "rate": 0.1667
+          },
+          "scope_inversion": {
+            "n": 6,
+            "fired": 4,
+            "rate": 0.6667
+          }
+        },
+        "sensitivity_p_cut": {
+          "0.45": 0.5,
+          "0.55": 0.5
+        }
+      }
+    }
+  }
+}

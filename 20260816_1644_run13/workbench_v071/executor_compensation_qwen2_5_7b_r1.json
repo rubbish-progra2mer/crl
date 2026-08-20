@@ -1,0 +1,793 @@
+{
+  "model": "qwen2.5:7b",
+  "endpoint": "http://127.0.0.1:11434/api/chat",
+  "temperature": 0,
+  "seed": 71,
+  "summary": {
+    "n": 20,
+    "valid_json": 20,
+    "strict_success": 20,
+    "forgiving_success": 20,
+    "compensation_gap": 0,
+    "compensated_family_count": 0,
+    "compensated_families": [],
+    "by_family": {
+      "enum_normalization": {
+        "n": 4,
+        "strict_success": 4,
+        "forgiving_success": 4,
+        "compensated": 0
+      },
+      "identifier_type_recovery": {
+        "n": 4,
+        "strict_success": 4,
+        "forgiving_success": 4,
+        "compensated": 0
+      },
+      "key_alias": {
+        "n": 4,
+        "strict_success": 4,
+        "forgiving_success": 4,
+        "compensated": 0
+      },
+      "missing_standard_policy": {
+        "n": 4,
+        "strict_success": 4,
+        "forgiving_success": 4,
+        "compensated": 0
+      },
+      "resource_code_normalization": {
+        "n": 4,
+        "strict_success": 4,
+        "forgiving_success": 4,
+        "compensated": 0
+      }
+    },
+    "prompt_tokens": 2332,
+    "output_tokens": 832,
+    "elapsed_seconds": 18.46975480002584
+  },
+  "rows": [
+    {
+      "case_id": "01_invoice",
+      "family": "key_alias",
+      "tool": "update_invoice_record",
+      "request": "Move invoice INV-0031 to destination DST-007. Use the canonical codes exactly.",
+      "schema": {
+        "resource_id": "required string; exact canonical resource code",
+        "destination_id": "required string; exact canonical destination code"
+      },
+      "expected": {
+        "resource_id": "INV-0031",
+        "destination_id": "DST-007"
+      },
+      "action": {
+        "tool": "update_invoice_record",
+        "arguments": {
+          "resource_id": "INV-0031",
+          "destination_id": "DST-007"
+        }
+      },
+      "raw_content": "{\n  \"tool\": \"update_invoice_record\",\n  \"arguments\": {\n    \"resource_id\": \"INV-0031\",\n    \"destination_id\": \"DST-007\"\n  }\n}",
+      "valid_json": true,
+      "strict_success": true,
+      "forgiving_action": {
+        "tool": "update_invoice_record",
+        "arguments": {
+          "resource_id": "INV-0031",
+          "destination_id": "DST-007"
+        }
+      },
+      "forgiving_success": true,
+      "compensated": false,
+      "repairs": [],
+      "prompt_tokens": 113,
+      "output_tokens": 45,
+      "elapsed_seconds": 3.60613570001442
+    },
+    {
+      "case_id": "02_shipment",
+      "family": "enum_normalization",
+      "tool": "update_shipment_record",
+      "request": "Set shipment SHI-0032 to priority P1_URGENT. Use the exact enum token.",
+      "schema": {
+        "resource_id": "required string; exact canonical resource code",
+        "priority": "required enum: P1_URGENT | P2_HIGH | P3_NORMAL | P4_LOW"
+      },
+      "expected": {
+        "resource_id": "SHI-0032",
+        "priority": "P1_URGENT"
+      },
+      "action": {
+        "tool": "update_shipment_record",
+        "arguments": {
+          "resource_id": "SHI-0032",
+          "priority": "P1_URGENT"
+        }
+      },
+      "raw_content": "{\n  \"tool\": \"update_shipment_record\",\n  \"arguments\": {\n    \"resource_id\": \"SHI-0032\",\n    \"priority\": \"P1_URGENT\"\n  }\n}",
+      "valid_json": true,
+      "strict_success": true,
+      "forgiving_action": {
+        "tool": "update_shipment_record",
+        "arguments": {
+          "resource_id": "SHI-0032",
+          "priority": "P1_URGENT"
+        }
+      },
+      "forgiving_success": true,
+      "compensated": false,
+      "repairs": [],
+      "prompt_tokens": 129,
+      "output_tokens": 46,
+      "elapsed_seconds": 0.8637647999858018
+    },
+    {
+      "case_id": "03_ticket",
+      "family": "resource_code_normalization",
+      "tool": "update_ticket_record",
+      "request": "Activate ticket whose canonical code is TI-0033. Preserve capitalization, hyphen, and zero padding.",
+      "schema": {
+        "resource_id": "required string matching TI-NNNN",
+        "active": "required JSON boolean"
+      },
+      "expected": {
+        "resource_id": "TI-0033",
+        "active": true
+      },
+      "action": {
+        "tool": "update_ticket_record",
+        "arguments": {
+          "resource_id": "TI-0033",
+          "active": true
+        }
+      },
+      "raw_content": "{\n  \"tool\": \"update_ticket_record\",\n  \"arguments\": {\n    \"resource_id\": \"TI-0033\",\n    \"active\": true\n  }\n}",
+      "valid_json": true,
+      "strict_success": true,
+      "forgiving_action": {
+        "tool": "update_ticket_record",
+        "arguments": {
+          "resource_id": "TI-0033",
+          "active": true
+        }
+      },
+      "forgiving_success": true,
+      "compensated": false,
+      "repairs": [],
+      "prompt_tokens": 110,
+      "output_tokens": 38,
+      "elapsed_seconds": 0.7531397999846376
+    },
+    {
+      "case_id": "04_catalog",
+      "family": "identifier_type_recovery",
+      "tool": "update_catalog_record",
+      "request": "Reserve quantity 1 of catalog identifier 000044. The identifier must remain a six-character string.",
+      "schema": {
+        "resource_id": "required six-character decimal string; leading zeros are significant",
+        "quantity": "required JSON integer"
+      },
+      "expected": {
+        "resource_id": "000044",
+        "quantity": 1
+      },
+      "action": {
+        "tool": "update_catalog_record",
+        "arguments": {
+          "resource_id": "000044",
+          "quantity": 1
+        }
+      },
+      "raw_content": "{\n  \"tool\": \"update_catalog_record\",\n  \"arguments\": {\n    \"resource_id\": \"000044\",\n    \"quantity\": 1\n  }\n}",
+      "valid_json": true,
+      "strict_success": true,
+      "forgiving_action": {
+        "tool": "update_catalog_record",
+        "arguments": {
+          "resource_id": "000044",
+          "quantity": 1
+        }
+      },
+      "forgiving_success": true,
+      "compensated": false,
+      "repairs": [],
+      "prompt_tokens": 114,
+      "output_tokens": 39,
+      "elapsed_seconds": 0.751039499999024
+    },
+    {
+      "case_id": "05_booking",
+      "family": "missing_standard_policy",
+      "tool": "update_booking_record",
+      "request": "Submit booking BOO-0035 under the STANDARD_REVIEW policy. Both fields are required.",
+      "schema": {
+        "resource_id": "required string; exact canonical resource code",
+        "review_policy": "required enum: STANDARD_REVIEW | EXPEDITED_REVIEW | MANUAL_REVIEW"
+      },
+      "expected": {
+        "resource_id": "BOO-0035",
+        "review_policy": "STANDARD_REVIEW"
+      },
+      "action": {
+        "tool": "update_booking_record",
+        "arguments": {
+          "resource_id": "BOO-0035",
+          "review_policy": "STANDARD_REVIEW"
+        }
+      },
+      "raw_content": "{\n  \"tool\": \"update_booking_record\",\n  \"arguments\": {\n    \"resource_id\": \"BOO-0035\",\n    \"review_policy\": \"STANDARD_REVIEW\"\n  }\n}",
+      "valid_json": true,
+      "strict_success": true,
+      "forgiving_action": {
+        "tool": "update_booking_record",
+        "arguments": {
+          "resource_id": "BOO-0035",
+          "review_policy": "STANDARD_REVIEW"
+        }
+      },
+      "forgiving_success": true,
+      "compensated": false,
+      "repairs": [],
+      "prompt_tokens": 121,
+      "output_tokens": 44,
+      "elapsed_seconds": 0.8055749000050128
+    },
+    {
+      "case_id": "06_archive",
+      "family": "key_alias",
+      "tool": "update_archive_record",
+      "request": "Move archive ARC-0036 to destination DST-012. Use the canonical codes exactly.",
+      "schema": {
+        "resource_id": "required string; exact canonical resource code",
+        "destination_id": "required string; exact canonical destination code"
+      },
+      "expected": {
+        "resource_id": "ARC-0036",
+        "destination_id": "DST-012"
+      },
+      "action": {
+        "tool": "update_archive_record",
+        "arguments": {
+          "resource_id": "ARC-0036",
+          "destination_id": "DST-012"
+        }
+      },
+      "raw_content": "{\n  \"tool\": \"update_archive_record\",\n  \"arguments\": {\n    \"resource_id\": \"ARC-0036\",\n    \"destination_id\": \"DST-012\"\n  }\n}",
+      "valid_json": true,
+      "strict_success": true,
+      "forgiving_action": {
+        "tool": "update_archive_record",
+        "arguments": {
+          "resource_id": "ARC-0036",
+          "destination_id": "DST-012"
+        }
+      },
+      "forgiving_success": true,
+      "compensated": false,
+      "repairs": [],
+      "prompt_tokens": 113,
+      "output_tokens": 45,
+      "elapsed_seconds": 0.8261690000072122
+    },
+    {
+      "case_id": "07_workspace",
+      "family": "enum_normalization",
+      "tool": "update_workspace_record",
+      "request": "Set workspace WOR-0037 to priority P2_HIGH. Use the exact enum token.",
+      "schema": {
+        "resource_id": "required string; exact canonical resource code",
+        "priority": "required enum: P1_URGENT | P2_HIGH | P3_NORMAL | P4_LOW"
+      },
+      "expected": {
+        "resource_id": "WOR-0037",
+        "priority": "P2_HIGH"
+      },
+      "action": {
+        "tool": "update_workspace_record",
+        "arguments": {
+          "resource_id": "WOR-0037",
+          "priority": "P2_HIGH"
+        }
+      },
+      "raw_content": "{\n  \"tool\": \"update_workspace_record\",\n  \"arguments\": {\n    \"resource_id\": \"WOR-0037\",\n    \"priority\": \"P2_HIGH\"\n  }\n}",
+      "valid_json": true,
+      "strict_success": true,
+      "forgiving_action": {
+        "tool": "update_workspace_record",
+        "arguments": {
+          "resource_id": "WOR-0037",
+          "priority": "P2_HIGH"
+        }
+      },
+      "forgiving_success": true,
+      "compensated": false,
+      "repairs": [],
+      "prompt_tokens": 125,
+      "output_tokens": 42,
+      "elapsed_seconds": 0.7834840000141412
+    },
+    {
+      "case_id": "08_inventory",
+      "family": "resource_code_normalization",
+      "tool": "update_inventory_record",
+      "request": "Activate inventory whose canonical code is IN-0038. Preserve capitalization, hyphen, and zero padding.",
+      "schema": {
+        "resource_id": "required string matching IN-NNNN",
+        "active": "required JSON boolean"
+      },
+      "expected": {
+        "resource_id": "IN-0038",
+        "active": true
+      },
+      "action": {
+        "tool": "update_inventory_record",
+        "arguments": {
+          "resource_id": "IN-0038",
+          "active": true
+        }
+      },
+      "raw_content": "{\n  \"tool\": \"update_inventory_record\",\n  \"arguments\": {\n    \"resource_id\": \"IN-0038\",\n    \"active\": true\n  }\n}",
+      "valid_json": true,
+      "strict_success": true,
+      "forgiving_action": {
+        "tool": "update_inventory_record",
+        "arguments": {
+          "resource_id": "IN-0038",
+          "active": true
+        }
+      },
+      "forgiving_success": true,
+      "compensated": false,
+      "repairs": [],
+      "prompt_tokens": 110,
+      "output_tokens": 38,
+      "elapsed_seconds": 0.7334452000213787
+    },
+    {
+      "case_id": "09_report",
+      "family": "identifier_type_recovery",
+      "tool": "update_report_record",
+      "request": "Reserve quantity 3 of report identifier 000049. The identifier must remain a six-character string.",
+      "schema": {
+        "resource_id": "required six-character decimal string; leading zeros are significant",
+        "quantity": "required JSON integer"
+      },
+      "expected": {
+        "resource_id": "000049",
+        "quantity": 3
+      },
+      "action": {
+        "tool": "update_report_record",
+        "arguments": {
+          "resource_id": "000049",
+          "quantity": 3
+        }
+      },
+      "raw_content": "{\n  \"tool\": \"update_report_record\",\n  \"arguments\": {\n    \"resource_id\": \"000049\",\n    \"quantity\": 3\n  }\n}",
+      "valid_json": true,
+      "strict_success": true,
+      "forgiving_action": {
+        "tool": "update_report_record",
+        "arguments": {
+          "resource_id": "000049",
+          "quantity": 3
+        }
+      },
+      "forgiving_success": true,
+      "compensated": false,
+      "repairs": [],
+      "prompt_tokens": 114,
+      "output_tokens": 39,
+      "elapsed_seconds": 0.7585057000105735
+    },
+    {
+      "case_id": "10_subscription",
+      "family": "missing_standard_policy",
+      "tool": "update_subscription_record",
+      "request": "Submit subscription SUB-0040 under the STANDARD_REVIEW policy. Both fields are required.",
+      "schema": {
+        "resource_id": "required string; exact canonical resource code",
+        "review_policy": "required enum: STANDARD_REVIEW | EXPEDITED_REVIEW | MANUAL_REVIEW"
+      },
+      "expected": {
+        "resource_id": "SUB-0040",
+        "review_policy": "STANDARD_REVIEW"
+      },
+      "action": {
+        "tool": "update_subscription_record",
+        "arguments": {
+          "resource_id": "SUB-0040",
+          "review_policy": "STANDARD_REVIEW"
+        }
+      },
+      "raw_content": "{\n  \"tool\": \"update_subscription_record\",\n  \"arguments\": {\n    \"resource_id\": \"SUB-0040\",\n    \"review_policy\": \"STANDARD_REVIEW\"\n  }\n}",
+      "valid_json": true,
+      "strict_success": true,
+      "forgiving_action": {
+        "tool": "update_subscription_record",
+        "arguments": {
+          "resource_id": "SUB-0040",
+          "review_policy": "STANDARD_REVIEW"
+        }
+      },
+      "forgiving_success": true,
+      "compensated": false,
+      "repairs": [],
+      "prompt_tokens": 120,
+      "output_tokens": 43,
+      "elapsed_seconds": 0.7958519000094384
+    },
+    {
+      "case_id": "11_dataset",
+      "family": "key_alias",
+      "tool": "update_dataset_record",
+      "request": "Move dataset DAT-0041 to destination DST-017. Use the canonical codes exactly.",
+      "schema": {
+        "resource_id": "required string; exact canonical resource code",
+        "destination_id": "required string; exact canonical destination code"
+      },
+      "expected": {
+        "resource_id": "DAT-0041",
+        "destination_id": "DST-017"
+      },
+      "action": {
+        "tool": "update_dataset_record",
+        "arguments": {
+          "resource_id": "DAT-0041",
+          "destination_id": "DST-017"
+        }
+      },
+      "raw_content": "{\n  \"tool\": \"update_dataset_record\",\n  \"arguments\": {\n    \"resource_id\": \"DAT-0041\",\n    \"destination_id\": \"DST-017\"\n  }\n}",
+      "valid_json": true,
+      "strict_success": true,
+      "forgiving_action": {
+        "tool": "update_dataset_record",
+        "arguments": {
+          "resource_id": "DAT-0041",
+          "destination_id": "DST-017"
+        }
+      },
+      "forgiving_success": true,
+      "compensated": false,
+      "repairs": [],
+      "prompt_tokens": 113,
+      "output_tokens": 45,
+      "elapsed_seconds": 0.8190367000061087
+    },
+    {
+      "case_id": "12_calendar",
+      "family": "enum_normalization",
+      "tool": "update_calendar_record",
+      "request": "Set calendar CAL-0042 to priority P3_NORMAL. Use the exact enum token.",
+      "schema": {
+        "resource_id": "required string; exact canonical resource code",
+        "priority": "required enum: P1_URGENT | P2_HIGH | P3_NORMAL | P4_LOW"
+      },
+      "expected": {
+        "resource_id": "CAL-0042",
+        "priority": "P3_NORMAL"
+      },
+      "action": {
+        "tool": "update_calendar_record",
+        "arguments": {
+          "resource_id": "CAL-0042",
+          "priority": "P3_NORMAL"
+        }
+      },
+      "raw_content": "{\n  \"tool\": \"update_calendar_record\",\n  \"arguments\": {\n    \"resource_id\": \"CAL-0042\",\n    \"priority\": \"P3_NORMAL\"\n  }\n}",
+      "valid_json": true,
+      "strict_success": true,
+      "forgiving_action": {
+        "tool": "update_calendar_record",
+        "arguments": {
+          "resource_id": "CAL-0042",
+          "priority": "P3_NORMAL"
+        }
+      },
+      "forgiving_success": true,
+      "compensated": false,
+      "repairs": [],
+      "prompt_tokens": 124,
+      "output_tokens": 41,
+      "elapsed_seconds": 0.7717918999842368
+    },
+    {
+      "case_id": "13_profile",
+      "family": "resource_code_normalization",
+      "tool": "update_profile_record",
+      "request": "Activate profile whose canonical code is PR-0043. Preserve capitalization, hyphen, and zero padding.",
+      "schema": {
+        "resource_id": "required string matching PR-NNNN",
+        "active": "required JSON boolean"
+      },
+      "expected": {
+        "resource_id": "PR-0043",
+        "active": true
+      },
+      "action": {
+        "tool": "update_profile_record",
+        "arguments": {
+          "resource_id": "PR-0043",
+          "active": true
+        }
+      },
+      "raw_content": "{\n  \"tool\": \"update_profile_record\",\n  \"arguments\": {\n    \"resource_id\": \"PR-0043\",\n    \"active\": true\n  }\n}",
+      "valid_json": true,
+      "strict_success": true,
+      "forgiving_action": {
+        "tool": "update_profile_record",
+        "arguments": {
+          "resource_id": "PR-0043",
+          "active": true
+        }
+      },
+      "forgiving_success": true,
+      "compensated": false,
+      "repairs": [],
+      "prompt_tokens": 110,
+      "output_tokens": 38,
+      "elapsed_seconds": 0.7419936000078451
+    },
+    {
+      "case_id": "14_order",
+      "family": "identifier_type_recovery",
+      "tool": "update_order_record",
+      "request": "Reserve quantity 2 of order identifier 000054. The identifier must remain a six-character string.",
+      "schema": {
+        "resource_id": "required six-character decimal string; leading zeros are significant",
+        "quantity": "required JSON integer"
+      },
+      "expected": {
+        "resource_id": "000054",
+        "quantity": 2
+      },
+      "action": {
+        "tool": "update_order_record",
+        "arguments": {
+          "resource_id": "000054",
+          "quantity": 2
+        }
+      },
+      "raw_content": "{\n  \"tool\": \"update_order_record\",\n  \"arguments\": {\n    \"resource_id\": \"000054\",\n    \"quantity\": 2\n  }\n}",
+      "valid_json": true,
+      "strict_success": true,
+      "forgiving_action": {
+        "tool": "update_order_record",
+        "arguments": {
+          "resource_id": "000054",
+          "quantity": 2
+        }
+      },
+      "forgiving_success": true,
+      "compensated": false,
+      "repairs": [],
+      "prompt_tokens": 114,
+      "output_tokens": 39,
+      "elapsed_seconds": 0.7596750999800861
+    },
+    {
+      "case_id": "15_project",
+      "family": "missing_standard_policy",
+      "tool": "update_project_record",
+      "request": "Submit project PRO-0045 under the STANDARD_REVIEW policy. Both fields are required.",
+      "schema": {
+        "resource_id": "required string; exact canonical resource code",
+        "review_policy": "required enum: STANDARD_REVIEW | EXPEDITED_REVIEW | MANUAL_REVIEW"
+      },
+      "expected": {
+        "resource_id": "PRO-0045",
+        "review_policy": "STANDARD_REVIEW"
+      },
+      "action": {
+        "tool": "update_project_record",
+        "arguments": {
+          "resource_id": "PRO-0045",
+          "review_policy": "STANDARD_REVIEW"
+        }
+      },
+      "raw_content": "{\n  \"tool\": \"update_project_record\",\n  \"arguments\": {\n    \"resource_id\": \"PRO-0045\",\n    \"review_policy\": \"STANDARD_REVIEW\"\n  }\n}",
+      "valid_json": true,
+      "strict_success": true,
+      "forgiving_action": {
+        "tool": "update_project_record",
+        "arguments": {
+          "resource_id": "PRO-0045",
+          "review_policy": "STANDARD_REVIEW"
+        }
+      },
+      "forgiving_success": true,
+      "compensated": false,
+      "repairs": [],
+      "prompt_tokens": 120,
+      "output_tokens": 43,
+      "elapsed_seconds": 0.7884829000104219
+    },
+    {
+      "case_id": "16_document",
+      "family": "key_alias",
+      "tool": "update_document_record",
+      "request": "Move document DOC-0046 to destination DST-022. Use the canonical codes exactly.",
+      "schema": {
+        "resource_id": "required string; exact canonical resource code",
+        "destination_id": "required string; exact canonical destination code"
+      },
+      "expected": {
+        "resource_id": "DOC-0046",
+        "destination_id": "DST-022"
+      },
+      "action": {
+        "tool": "update_document_record",
+        "arguments": {
+          "resource_id": "DOC-0046",
+          "destination_id": "DST-022"
+        }
+      },
+      "raw_content": "{\n  \"tool\": \"update_document_record\",\n  \"arguments\": {\n    \"resource_id\": \"DOC-0046\",\n    \"destination_id\": \"DST-022\"\n  }\n}",
+      "valid_json": true,
+      "strict_success": true,
+      "forgiving_action": {
+        "tool": "update_document_record",
+        "arguments": {
+          "resource_id": "DOC-0046",
+          "destination_id": "DST-022"
+        }
+      },
+      "forgiving_success": true,
+      "compensated": false,
+      "repairs": [],
+      "prompt_tokens": 113,
+      "output_tokens": 45,
+      "elapsed_seconds": 0.8146591999975499
+    },
+    {
+      "case_id": "17_queue",
+      "family": "enum_normalization",
+      "tool": "update_queue_record",
+      "request": "Set queue QUE-0047 to priority P4_LOW. Use the exact enum token.",
+      "schema": {
+        "resource_id": "required string; exact canonical resource code",
+        "priority": "required enum: P1_URGENT | P2_HIGH | P3_NORMAL | P4_LOW"
+      },
+      "expected": {
+        "resource_id": "QUE-0047",
+        "priority": "P4_LOW"
+      },
+      "action": {
+        "tool": "update_queue_record",
+        "arguments": {
+          "resource_id": "QUE-0047",
+          "priority": "P4_LOW"
+        }
+      },
+      "raw_content": "{\n  \"tool\": \"update_queue_record\",\n  \"arguments\": {\n    \"resource_id\": \"QUE-0047\",\n    \"priority\": \"P4_LOW\"\n  }\n}",
+      "valid_json": true,
+      "strict_success": true,
+      "forgiving_action": {
+        "tool": "update_queue_record",
+        "arguments": {
+          "resource_id": "QUE-0047",
+          "priority": "P4_LOW"
+        }
+      },
+      "forgiving_success": true,
+      "compensated": false,
+      "repairs": [],
+      "prompt_tokens": 124,
+      "output_tokens": 41,
+      "elapsed_seconds": 0.7801156000059564
+    },
+    {
+      "case_id": "18_registry",
+      "family": "resource_code_normalization",
+      "tool": "update_registry_record",
+      "request": "Activate registry whose canonical code is RE-0048. Preserve capitalization, hyphen, and zero padding.",
+      "schema": {
+        "resource_id": "required string matching RE-NNNN",
+        "active": "required JSON boolean"
+      },
+      "expected": {
+        "resource_id": "RE-0048",
+        "active": true
+      },
+      "action": {
+        "tool": "update_registry_record",
+        "arguments": {
+          "resource_id": "RE-0048",
+          "active": true
+        }
+      },
+      "raw_content": "{\n  \"tool\": \"update_registry_record\",\n  \"arguments\": {\n    \"resource_id\": \"RE-0048\",\n    \"active\": true\n  }\n}",
+      "valid_json": true,
+      "strict_success": true,
+      "forgiving_action": {
+        "tool": "update_registry_record",
+        "arguments": {
+          "resource_id": "RE-0048",
+          "active": true
+        }
+      },
+      "forgiving_success": true,
+      "compensated": false,
+      "repairs": [],
+      "prompt_tokens": 110,
+      "output_tokens": 38,
+      "elapsed_seconds": 0.7359936999855563
+    },
+    {
+      "case_id": "19_collection",
+      "family": "identifier_type_recovery",
+      "tool": "update_collection_record",
+      "request": "Reserve quantity 1 of collection identifier 000059. The identifier must remain a six-character string.",
+      "schema": {
+        "resource_id": "required six-character decimal string; leading zeros are significant",
+        "quantity": "required JSON integer"
+      },
+      "expected": {
+        "resource_id": "000059",
+        "quantity": 1
+      },
+      "action": {
+        "tool": "update_collection_record",
+        "arguments": {
+          "resource_id": "000059",
+          "quantity": 1
+        }
+      },
+      "raw_content": "{\n  \"tool\": \"update_collection_record\",\n  \"arguments\": {\n    \"resource_id\": \"000059\",\n    \"quantity\": 1\n  }\n}",
+      "valid_json": true,
+      "strict_success": true,
+      "forgiving_action": {
+        "tool": "update_collection_record",
+        "arguments": {
+          "resource_id": "000059",
+          "quantity": 1
+        }
+      },
+      "forgiving_success": true,
+      "compensated": false,
+      "repairs": [],
+      "prompt_tokens": 114,
+      "output_tokens": 39,
+      "elapsed_seconds": 0.7709627999865916
+    },
+    {
+      "case_id": "20_dashboard",
+      "family": "missing_standard_policy",
+      "tool": "update_dashboard_record",
+      "request": "Submit dashboard DAS-0050 under the STANDARD_REVIEW policy. Both fields are required.",
+      "schema": {
+        "resource_id": "required string; exact canonical resource code",
+        "review_policy": "required enum: STANDARD_REVIEW | EXPEDITED_REVIEW | MANUAL_REVIEW"
+      },
+      "expected": {
+        "resource_id": "DAS-0050",
+        "review_policy": "STANDARD_REVIEW"
+      },
+      "action": {
+        "tool": "update_dashboard_record",
+        "arguments": {
+          "resource_id": "DAS-0050",
+          "review_policy": "STANDARD_REVIEW"
+        }
+      },
+      "raw_content": "{\n  \"tool\": \"update_dashboard_record\",\n  \"arguments\": {\n    \"resource_id\": \"DAS-0050\",\n    \"review_policy\": \"STANDARD_REVIEW\"\n  }\n}",
+      "valid_json": true,
+      "strict_success": true,
+      "forgiving_action": {
+        "tool": "update_dashboard_record",
+        "arguments": {
+          "resource_id": "DAS-0050",
+          "review_policy": "STANDARD_REVIEW"
+        }
+      },
+      "forgiving_success": true,
+      "compensated": false,
+      "repairs": [],
+      "prompt_tokens": 121,
+      "output_tokens": 44,
+      "elapsed_seconds": 0.8099328000098467
+    }
+  ],
+  "scope_note": "Benign synthetic action generation and offline validation only; no represented tool was executed."
+}

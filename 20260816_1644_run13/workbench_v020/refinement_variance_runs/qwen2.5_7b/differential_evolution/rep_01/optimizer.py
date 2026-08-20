@@ -1,0 +1,77 @@
+import random
+import numpy as np
+from problems import BudgetExhausted
+
+class DifferentialEvolutionOptimizer:
+    def __init__(self, dim, bounds, population_size=10, mutation_factor=0.5, crossover_prob=0.9, restart_prob=0.1, budget=None, seed=None):
+        self.dim = dim
+        self.bounds = bounds
+        self.population_size = population_size
+        self.mutation_factor = mutation_factor
+        self.crossover_prob = crossover_prob
+        self.restart_prob = restart_prob
+        self.population = [np.random.uniform(bounds[0], bounds[1], dim) for _ in range(population_size)]
+        self.fitness = [float('inf')] * population_size
+        self.best_solution = None
+        self.best_fitness = float('inf')
+        self.budget = budget
+        self.seed = seed
+        self.random_state = random.Random(seed)
+        self.eval_count = 0
+
+    def optimize(self, f):
+        if self.seed is not None:
+            np.random.seed(self.seed)
+
+        for i in range(self.population_size):
+            self.fitness[i] = float('inf')
+
+        while self.budget is None or self.eval_count < self.budget:
+            for i in range(self.population_size):
+                if self.fitness[i] == float('inf'):
+                    # Evaluate new candidate if fitness is infinity
+                    candidate = self.population[i]
+                    fitness = f(candidate)
+                    self.fitness[i] = fitness
+                    self.eval_count += 1
+                    if fitness < self.best_fitness:
+                        self.best_solution = candidate
+                        self.best_fitness = fitness
+                    break
+
+            if self.eval_count >= self.budget:
+                break
+
+            # Mutation
+            for i in range(self.population_size):
+                if self.fitness[i] != float('inf'):
+                    chosen_indices = self.random_state.sample(range(self.population_size), 3)
+                    target = self.population[chosen_indices[0]]
+                    mutant = target + self.mutation_factor * (self.population[chosen_indices[1]] - self.population[chosen_indices[2]])
+                    self.population[i] = np.clip(mutant, self.bounds[0], self.bounds[1])
+
+            # Binomial crossover
+            for i in range(self.population_size):
+                if self.fitness[i] != float('inf'):
+                    for j in range(self.dim):
+                        if self.random_state.random() < self.crossover_prob:
+                            self.population[i][j] = self.population[i][j] if self.random_state.random() < 0.5 else self.population[i][j]
+
+            # Selection
+            for i in range(self.population_size):
+                if self.fitness[i] != float('inf'):
+                    if self.fitness[i] < self.fitness[self.eval_count % self.population_size]:
+                        self.population[self.eval_count % self.population_size] = self.population[i]
+                        self.fitness[self.eval_count % self.population_size] = self.fitness[i]
+
+            # Diversity-preserving restart
+            if self.random_state.random() < self.restart_prob:
+                self.population = [np.random.uniform(self.bounds[0], self.bounds[1], self.dim) for _ in range(self.population_size)]
+                self.fitness = [float('inf')] * self.population_size
+
+        return {'solution': self.best_solution, 'fitness': self.best_fitness, 'evaluations': self.eval_count}
+
+def optimize(f, dim, bounds, budget, seed):
+    optimizer = DifferentialEvolutionOptimizer(dim, bounds, population_size=10, mutation_factor=0.5, crossover_prob=0.9, restart_prob=0.1, budget=budget, seed=seed)
+    result = optimizer.optimize(f)
+    return result

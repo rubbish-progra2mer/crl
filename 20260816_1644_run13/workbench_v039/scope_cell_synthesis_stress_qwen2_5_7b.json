@@ -1,0 +1,3368 @@
+{
+  "model": "qwen2.5:7b",
+  "task_count": 6,
+  "design": "6 个本地三维或干扰压力任务；包含自然改写、否定、背景数值、同域冲突、一条摘要双原子和未报告变量。",
+  "summary": {
+    "direct": {
+      "tasks": 6,
+      "semantic_full_success": 0,
+      "exact_semantics": 0,
+      "global_safe": 6,
+      "mean_semantic_precision": 0.4898809523809524,
+      "mean_semantic_recall": 0.5097222222222223,
+      "mean_evidence_coverage": 0.5648809523809524,
+      "mean_compactness_ratio": 1.2361111111111112
+    },
+    "strong_two_stage": {
+      "tasks": 6,
+      "semantic_full_success": 0,
+      "exact_semantics": 0,
+      "global_safe": 6,
+      "mean_semantic_precision": 0.24368686868686865,
+      "mean_semantic_recall": 0.2972222222222222,
+      "mean_evidence_coverage": 0.31011904761904757,
+      "mean_compactness_ratio": 1.722222222222222
+    },
+    "auto_partition": {
+      "tasks": 6,
+      "semantic_full_success": 4,
+      "exact_semantics": 5,
+      "global_safe": 6,
+      "mean_semantic_precision": 0.9722222222222223,
+      "mean_semantic_recall": 0.9722222222222223,
+      "mean_evidence_coverage": 0.8095238095238096,
+      "mean_compactness_ratio": 1.0
+    },
+    "oracle_partition": {
+      "tasks": 6,
+      "semantic_full_success": 6,
+      "exact_semantics": 6,
+      "global_safe": 6,
+      "mean_semantic_precision": 1.0,
+      "mean_semantic_recall": 1.0,
+      "mean_evidence_coverage": 1.0,
+      "mean_compactness_ratio": 1.0
+    }
+  },
+  "totals": {
+    "seconds": 97.9853208065033,
+    "output_tokens": 4821
+  },
+  "records": [
+    {
+      "task_id": "coating_three_dimensional_merge",
+      "dimensions": {
+        "基材": [
+          "铝",
+          "钢"
+        ],
+        "温度": [
+          "低温",
+          "高温"
+        ],
+        "工艺": [
+          "喷涂",
+          "浸涂"
+        ]
+      },
+      "studies": [
+        [
+          "A1",
+          "铝基材在低温喷涂时，附着强度比对照低 8%，即附着强度下降。"
+        ],
+        [
+          "A2",
+          "钢基材采用低温喷涂，测得附着强度下降；样品厚度为 2 毫米。"
+        ],
+        [
+          "A3",
+          "对铝片实施低温浸涂后，附着强度有所下降。"
+        ],
+        [
+          "A4",
+          "钢片的低温浸涂实验重复三次，结论仍是附着强度下降。"
+        ],
+        [
+          "A5",
+          "铝基材在高温喷涂条件下，附着强度上升。"
+        ],
+        [
+          "A6",
+          "尽管早期试验讨论过腐蚀，当前钢基材高温喷涂结果显示附着强度上升。"
+        ],
+        [
+          "A7",
+          "高温浸涂的铝片，其附着强度提高，幅度为 6%。"
+        ],
+        [
+          "A8",
+          "钢片经高温浸涂后并未下降，而是出现附着强度上升。"
+        ]
+      ],
+      "gold_atoms": [
+        {
+          "source_id": "A1",
+          "conditions": {
+            "基材": "铝",
+            "温度": "低温",
+            "工艺": "喷涂"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "A2",
+          "conditions": {
+            "基材": "钢",
+            "温度": "低温",
+            "工艺": "喷涂"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "A3",
+          "conditions": {
+            "基材": "铝",
+            "温度": "低温",
+            "工艺": "浸涂"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "A4",
+          "conditions": {
+            "基材": "钢",
+            "温度": "低温",
+            "工艺": "浸涂"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "A5",
+          "conditions": {
+            "基材": "铝",
+            "温度": "高温",
+            "工艺": "喷涂"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "A6",
+          "conditions": {
+            "基材": "钢",
+            "温度": "高温",
+            "工艺": "喷涂"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "A7",
+          "conditions": {
+            "基材": "铝",
+            "温度": "高温",
+            "工艺": "浸涂"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "A8",
+          "conditions": {
+            "基材": "钢",
+            "温度": "高温",
+            "工艺": "浸涂"
+          },
+          "direction": "上升"
+        }
+      ],
+      "gold_partition": {
+        "cells": [
+          {
+            "conditions": {
+              "基材": "任意",
+              "温度": "低温",
+              "工艺": "任意"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "A1",
+              "A2",
+              "A3",
+              "A4"
+            ]
+          },
+          {
+            "conditions": {
+              "基材": "任意",
+              "温度": "高温",
+              "工艺": "任意"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "A5",
+              "A6",
+              "A7",
+              "A8"
+            ]
+          }
+        ],
+        "global_claim": "无"
+      },
+      "extraction": {
+        "raw_text": "```json\n[\n    {\"source_id\":\"A1\",\"conditions\":{\"基材\":\"铝\",\"温度\":\"低温\",\"工艺\":\"喷涂\"},\"direction\":\"下降\"},\n    {\"source_id\":\"A2\",\"conditions\":{\"基材\":\"钢\",\"温度\":\"低温\",\"工艺\":\"喷涂\"},\"direction\":\"下降\"},\n    {\"source_id\":\"A3\",\"conditions\":{\"基材\":\"铝\",\"温度\":\"低温\",\"工艺\":\"浸涂\"},\"direction\":\"下降\"},\n    {\"source_id\":\"A4\",\"conditions\":{\"基材\":\"钢\",\"温度\":\"低温\",\"工艺\":\"浸涂\"},\"direction\":\"下降\"},\n    {\"source_id\":\"A5\",\"conditions\":{\"基材\":\"铝\",\"温度\":\"高温\",\"工艺\":\"喷涂\"},\"direction\":\"上升\"},\n    {\"source_id\":\"A6\",\"conditions\":{\"基材\":\"钢\",\"温度\":\"高温\",\"工艺\":\"喷涂\"},\"direction\":\"上升\"},\n    {\"source_id\":\"A7\",\"conditions\":{\"基材\":\"铝\",\"温度\":\"高温\",\"工艺\":\"浸涂\"},\"direction\":\"上升\"},\n    {\"source_id\":\"A8\",\"conditions\":{\"基材\":\"钢\",\"温度\":\"高温\",\"工艺\":\"浸涂\"},\"direction\":\"上升\"}\n]\n```",
+        "parse_error": null,
+        "atoms": [
+          {
+            "source_id": "A1",
+            "conditions": {
+              "基材": "铝",
+              "温度": "低温",
+              "工艺": "喷涂"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "A2",
+            "conditions": {
+              "基材": "钢",
+              "温度": "低温",
+              "工艺": "喷涂"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "A3",
+            "conditions": {
+              "基材": "铝",
+              "温度": "低温",
+              "工艺": "浸涂"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "A4",
+            "conditions": {
+              "基材": "钢",
+              "温度": "低温",
+              "工艺": "浸涂"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "A5",
+            "conditions": {
+              "基材": "铝",
+              "温度": "高温",
+              "工艺": "喷涂"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "A6",
+            "conditions": {
+              "基材": "钢",
+              "温度": "高温",
+              "工艺": "喷涂"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "A7",
+            "conditions": {
+              "基材": "铝",
+              "温度": "高温",
+              "工艺": "浸涂"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "A8",
+            "conditions": {
+              "基材": "钢",
+              "温度": "高温",
+              "工艺": "浸涂"
+            },
+            "direction": "上升"
+          }
+        ],
+        "seconds": 4.721360445022583,
+        "output_tokens": 227
+      },
+      "strategies": {
+        "direct": {
+          "raw_text": "```json\n{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"基材\": \"铝\",\n        \"温度\": \"低温\",\n        \"工艺\": \"喷涂\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"A1\", \"A3\"]\n    },\n    {\n      \"conditions\": {\n        \"基材\": \"铝\",\n        \"温度\": \"高温\",\n        \"工艺\": \"喷涂\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"A5\"]\n    },\n    {\n      \"conditions\": {\n        \"基材\": \"钢\",\n        \"温度\": \"低温\",\n        \"工艺\": \"喷涂\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"A2\"]\n    },\n    {\n      \"conditions\": {\n        \"基材\": \"钢\",\n        \"温度\": \"高温\",\n        \"工艺\": \"喷涂\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"A6\"]\n    },\n    {\n      \"conditions\": {\n        \"基材\": \"铝\",\n        \"温度\": \"低温\",\n        \"工艺\": \"浸涂\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"A3\"]\n    },\n    {\n      \"conditions\": {\n        \"基材\": \"铝\",\n        \"温度\": \"高温\",\n        \"工艺\": \"浸涂\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"A7\"]\n    },\n    {\n      \"conditions\": {\n        \"基材\": \"钢\",\n        \"温度\": \"低温\",\n        \"工艺\": \"浸涂\"\n      },\n      \"direction\": \"不变\",\n      \"status\": \"未解决\",\n      \"source_ids\": [\"A4\"]\n    },\n    {\n      \"conditions\": {\n        \"基材\": \"钢\",\n        \"温度\": \"高温\",\n        \"工艺\": \"浸涂\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"A8\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}\n```",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "基材": "铝",
+                  "温度": "低温",
+                  "工艺": "喷涂"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "A1",
+                  "A3"
+                ]
+              },
+              {
+                "conditions": {
+                  "基材": "铝",
+                  "温度": "高温",
+                  "工艺": "喷涂"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "A5"
+                ]
+              },
+              {
+                "conditions": {
+                  "基材": "钢",
+                  "温度": "低温",
+                  "工艺": "喷涂"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "A2"
+                ]
+              },
+              {
+                "conditions": {
+                  "基材": "钢",
+                  "温度": "高温",
+                  "工艺": "喷涂"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "A6"
+                ]
+              },
+              {
+                "conditions": {
+                  "基材": "铝",
+                  "温度": "低温",
+                  "工艺": "浸涂"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "A3"
+                ]
+              },
+              {
+                "conditions": {
+                  "基材": "铝",
+                  "温度": "高温",
+                  "工艺": "浸涂"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "A7"
+                ]
+              },
+              {
+                "conditions": {
+                  "基材": "钢",
+                  "温度": "低温",
+                  "工艺": "浸涂"
+                },
+                "direction": "不变",
+                "status": "未解决",
+                "source_ids": [
+                  "A4"
+                ]
+              },
+              {
+                "conditions": {
+                  "基材": "钢",
+                  "温度": "高温",
+                  "工艺": "浸涂"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "A8"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 0.875,
+            "semantic_recall": 0.875,
+            "exact_semantics": false,
+            "global_safe": true,
+            "evidence_coverage": 0.875,
+            "cell_count": 8,
+            "gold_cell_count": 2,
+            "compactness_ratio": 0.25,
+            "semantic_full_success": false
+          }
+        },
+        "strong_two_stage": {
+          "raw_text": "{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"基材\": \"任意\",\n        \"温度\": \"任意\",\n        \"工艺\": \"喷涂\"\n      },\n      \"direction\": \"上升/下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"A1\", \"A2\", \"A5\", \"A6\"]\n    },\n    {\n      \"conditions\": {\n        \"基材\": \"任意\",\n        \"温度\": \"任意\",\n        \"工艺\": \"浸涂\"\n      },\n      \"direction\": \"上升/下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"A3\", \"A4\", \"A7\", \"A8\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "基材": "任意",
+                  "温度": "任意",
+                  "工艺": "喷涂"
+                },
+                "direction": "上升/下降",
+                "status": "支持",
+                "source_ids": [
+                  "A1",
+                  "A2",
+                  "A5",
+                  "A6"
+                ]
+              },
+              {
+                "conditions": {
+                  "基材": "任意",
+                  "温度": "任意",
+                  "工艺": "浸涂"
+                },
+                "direction": "上升/下降",
+                "status": "支持",
+                "source_ids": [
+                  "A3",
+                  "A4",
+                  "A7",
+                  "A8"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 0.0,
+            "semantic_recall": 0.0,
+            "exact_semantics": false,
+            "global_safe": true,
+            "evidence_coverage": 0.0,
+            "cell_count": 2,
+            "gold_cell_count": 2,
+            "compactness_ratio": 1.0,
+            "semantic_full_success": false
+          }
+        },
+        "auto_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "基材": "任意",
+                  "温度": "低温",
+                  "工艺": "任意"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "A1",
+                  "A2",
+                  "A3",
+                  "A4"
+                ]
+              },
+              {
+                "conditions": {
+                  "基材": "任意",
+                  "温度": "高温",
+                  "工艺": "任意"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "A5",
+                  "A6",
+                  "A7",
+                  "A8"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 1.0,
+            "semantic_recall": 1.0,
+            "exact_semantics": true,
+            "global_safe": true,
+            "evidence_coverage": 1.0,
+            "cell_count": 2,
+            "gold_cell_count": 2,
+            "compactness_ratio": 1.0,
+            "semantic_full_success": true
+          }
+        },
+        "oracle_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "基材": "任意",
+                  "温度": "低温",
+                  "工艺": "任意"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "A1",
+                  "A2",
+                  "A3",
+                  "A4"
+                ]
+              },
+              {
+                "conditions": {
+                  "基材": "任意",
+                  "温度": "高温",
+                  "工艺": "任意"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "A5",
+                  "A6",
+                  "A7",
+                  "A8"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 1.0,
+            "semantic_recall": 1.0,
+            "exact_semantics": true,
+            "global_safe": true,
+            "evidence_coverage": 1.0,
+            "cell_count": 2,
+            "gold_cell_count": 2,
+            "compactness_ratio": 1.0,
+            "semantic_full_success": true
+          }
+        }
+      }
+    },
+    {
+      "task_id": "compiler_three_way_interaction",
+      "dimensions": {
+        "语言": [
+          "甲语言",
+          "乙语言"
+        ],
+        "优化": [
+          "开启",
+          "关闭"
+        ],
+        "程序": [
+          "递归",
+          "迭代"
+        ]
+      },
+      "studies": [
+        [
+          "B1",
+          "甲语言、开启优化、递归程序的峰值内存上升。"
+        ],
+        [
+          "B2",
+          "甲语言在开启优化后运行迭代程序，峰值内存下降。"
+        ],
+        [
+          "B3",
+          "关闭优化的甲语言递归程序没有保持原值，峰值内存下降。"
+        ],
+        [
+          "B4",
+          "甲语言、关闭优化、迭代实现的峰值内存上升。"
+        ],
+        [
+          "B5",
+          "乙语言的递归程序在开启优化时峰值内存下降。"
+        ],
+        [
+          "B6",
+          "乙语言、优化开启、迭代程序使峰值内存上升。"
+        ],
+        [
+          "B7",
+          "对乙语言关闭优化并使用递归实现，峰值内存上升。"
+        ],
+        [
+          "B8",
+          "乙语言的迭代实现关闭优化后，峰值内存下降。"
+        ]
+      ],
+      "gold_atoms": [
+        {
+          "source_id": "B1",
+          "conditions": {
+            "语言": "甲语言",
+            "优化": "开启",
+            "程序": "递归"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "B2",
+          "conditions": {
+            "语言": "甲语言",
+            "优化": "开启",
+            "程序": "迭代"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "B3",
+          "conditions": {
+            "语言": "甲语言",
+            "优化": "关闭",
+            "程序": "递归"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "B4",
+          "conditions": {
+            "语言": "甲语言",
+            "优化": "关闭",
+            "程序": "迭代"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "B5",
+          "conditions": {
+            "语言": "乙语言",
+            "优化": "开启",
+            "程序": "递归"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "B6",
+          "conditions": {
+            "语言": "乙语言",
+            "优化": "开启",
+            "程序": "迭代"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "B7",
+          "conditions": {
+            "语言": "乙语言",
+            "优化": "关闭",
+            "程序": "递归"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "B8",
+          "conditions": {
+            "语言": "乙语言",
+            "优化": "关闭",
+            "程序": "迭代"
+          },
+          "direction": "下降"
+        }
+      ],
+      "gold_partition": {
+        "cells": [
+          {
+            "conditions": {
+              "语言": "乙语言",
+              "优化": "关闭",
+              "程序": "迭代"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "B8"
+            ]
+          },
+          {
+            "conditions": {
+              "语言": "甲语言",
+              "优化": "关闭",
+              "程序": "迭代"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "B4"
+            ]
+          },
+          {
+            "conditions": {
+              "语言": "乙语言",
+              "优化": "关闭",
+              "程序": "递归"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "B7"
+            ]
+          },
+          {
+            "conditions": {
+              "语言": "甲语言",
+              "优化": "关闭",
+              "程序": "递归"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "B3"
+            ]
+          },
+          {
+            "conditions": {
+              "语言": "乙语言",
+              "优化": "开启",
+              "程序": "迭代"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "B6"
+            ]
+          },
+          {
+            "conditions": {
+              "语言": "甲语言",
+              "优化": "开启",
+              "程序": "迭代"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "B2"
+            ]
+          },
+          {
+            "conditions": {
+              "语言": "乙语言",
+              "优化": "开启",
+              "程序": "递归"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "B5"
+            ]
+          },
+          {
+            "conditions": {
+              "语言": "甲语言",
+              "优化": "开启",
+              "程序": "递归"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "B1"
+            ]
+          }
+        ],
+        "global_claim": "无"
+      },
+      "extraction": {
+        "raw_text": "```json\n[\n    {\"source_id\":\"B1\",\"conditions\":{\"语言\":\"甲语言\",\"优化\":\"开启\",\"程序\":\"递归\"},\"direction\":\"上升\"},\n    {\"source_id\":\"B2\",\"conditions\":{\"语言\":\"甲语言\",\"优化\":\"开启\",\"程序\":\"迭代\"},\"direction\":\"下降\"},\n    {\"source_id\":\"B3\",\"conditions\":{\"语言\":\"甲语言\",\"优化\":\"关闭\",\"程序\":\"递归\"},\"direction\":\"下降\"},\n    {\"source_id\":\"B4\",\"conditions\":{\"语言\":\"甲语言\",\"优化\":\"关闭\",\"程序\":\"迭代\"},\"direction\":\"上升\"},\n    {\"source_id\":\"B5\",\"conditions\":{\"语言\":\"乙语言\",\"优化\":\"开启\",\"程序\":\"递归\"},\"direction\":\"下降\"},\n    {\"source_id\":\"B6\",\"conditions\":{\"语言\":\"乙语言\",\"优化\":\"开启\",\"程序\":\"迭代\"},\"direction\":\"上升\"},\n    {\"source_id\":\"B7\",\"conditions\":{\"语言\":\"乙语言\",\"优化\":\"关闭\",\"程序\":\"递归\"},\"direction\":\"上升\"},\n    {\"source_id\":\"B8\",\"conditions\":{\"语言\":\"乙语言\",\"优化\":\"关闭\",\"程序\":\"迭代\"},\"direction\":\"下降\"}\n]\n```",
+        "parse_error": null,
+        "atoms": [
+          {
+            "source_id": "B1",
+            "conditions": {
+              "语言": "甲语言",
+              "优化": "开启",
+              "程序": "递归"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "B2",
+            "conditions": {
+              "语言": "甲语言",
+              "优化": "开启",
+              "程序": "迭代"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "B3",
+            "conditions": {
+              "语言": "甲语言",
+              "优化": "关闭",
+              "程序": "递归"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "B4",
+            "conditions": {
+              "语言": "甲语言",
+              "优化": "关闭",
+              "程序": "迭代"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "B5",
+            "conditions": {
+              "语言": "乙语言",
+              "优化": "开启",
+              "程序": "递归"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "B6",
+            "conditions": {
+              "语言": "乙语言",
+              "优化": "开启",
+              "程序": "迭代"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "B7",
+            "conditions": {
+              "语言": "乙语言",
+              "优化": "关闭",
+              "程序": "递归"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "B8",
+            "conditions": {
+              "语言": "乙语言",
+              "优化": "关闭",
+              "程序": "迭代"
+            },
+            "direction": "下降"
+          }
+        ],
+        "seconds": 4.674984455108643,
+        "output_tokens": 227
+      },
+      "strategies": {
+        "direct": {
+          "raw_text": "```json\n{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"语言\": \"甲语言\",\n        \"优化\": \"开启/关闭\",\n        \"程序\": \"递归/迭代\"\n      },\n      \"direction\": \"混合\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"B1\", \"B2\", \"B3\", \"B4\"]\n    },\n    {\n      \"conditions\": {\n        \"语言\": \"乙语言\",\n        \"优化\": \"开启/关闭\",\n        \"程序\": \"递归/迭代\"\n      },\n      \"direction\": \"混合\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"B5\", \"B6\", \"B7\", \"B8\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}\n```",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "语言": "甲语言",
+                  "优化": "开启/关闭",
+                  "程序": "递归/迭代"
+                },
+                "direction": "混合",
+                "status": "支持",
+                "source_ids": [
+                  "B1",
+                  "B2",
+                  "B3",
+                  "B4"
+                ]
+              },
+              {
+                "conditions": {
+                  "语言": "乙语言",
+                  "优化": "开启/关闭",
+                  "程序": "递归/迭代"
+                },
+                "direction": "混合",
+                "status": "支持",
+                "source_ids": [
+                  "B5",
+                  "B6",
+                  "B7",
+                  "B8"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 0.0,
+            "semantic_recall": 0.0,
+            "exact_semantics": false,
+            "global_safe": true,
+            "evidence_coverage": 0.0,
+            "cell_count": 2,
+            "gold_cell_count": 8,
+            "compactness_ratio": 4.0,
+            "semantic_full_success": false
+          }
+        },
+        "strong_two_stage": {
+          "raw_text": "{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"语言\": \"任意\",\n        \"优化\": \"开启\",\n        \"程序\": \"任意\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"未解决\",\n      \"source_ids\": [\"B1\", \"B6\"]\n    },\n    {\n      \"conditions\": {\n        \"语言\": \"任意\",\n        \"优化\": \"关闭\",\n        \"程序\": \"任意\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"未解决\",\n      \"source_ids\": [\"B3\", \"B4\", \"B7\", \"B8\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "语言": "任意",
+                  "优化": "开启",
+                  "程序": "任意"
+                },
+                "direction": "上升",
+                "status": "未解决",
+                "source_ids": [
+                  "B1",
+                  "B6"
+                ]
+              },
+              {
+                "conditions": {
+                  "语言": "任意",
+                  "优化": "关闭",
+                  "程序": "任意"
+                },
+                "direction": "下降",
+                "status": "未解决",
+                "source_ids": [
+                  "B3",
+                  "B4",
+                  "B7",
+                  "B8"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 0.0,
+            "semantic_recall": 0.0,
+            "exact_semantics": false,
+            "global_safe": true,
+            "evidence_coverage": 0.5,
+            "cell_count": 2,
+            "gold_cell_count": 8,
+            "compactness_ratio": 4.0,
+            "semantic_full_success": false
+          }
+        },
+        "auto_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "语言": "乙语言",
+                  "优化": "关闭",
+                  "程序": "迭代"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "B8"
+                ]
+              },
+              {
+                "conditions": {
+                  "语言": "甲语言",
+                  "优化": "关闭",
+                  "程序": "迭代"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "B4"
+                ]
+              },
+              {
+                "conditions": {
+                  "语言": "乙语言",
+                  "优化": "关闭",
+                  "程序": "递归"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "B7"
+                ]
+              },
+              {
+                "conditions": {
+                  "语言": "甲语言",
+                  "优化": "关闭",
+                  "程序": "递归"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "B3"
+                ]
+              },
+              {
+                "conditions": {
+                  "语言": "乙语言",
+                  "优化": "开启",
+                  "程序": "迭代"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "B6"
+                ]
+              },
+              {
+                "conditions": {
+                  "语言": "甲语言",
+                  "优化": "开启",
+                  "程序": "迭代"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "B2"
+                ]
+              },
+              {
+                "conditions": {
+                  "语言": "乙语言",
+                  "优化": "开启",
+                  "程序": "递归"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "B5"
+                ]
+              },
+              {
+                "conditions": {
+                  "语言": "甲语言",
+                  "优化": "开启",
+                  "程序": "递归"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "B1"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 1.0,
+            "semantic_recall": 1.0,
+            "exact_semantics": true,
+            "global_safe": true,
+            "evidence_coverage": 1.0,
+            "cell_count": 8,
+            "gold_cell_count": 8,
+            "compactness_ratio": 1.0,
+            "semantic_full_success": true
+          }
+        },
+        "oracle_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "语言": "乙语言",
+                  "优化": "关闭",
+                  "程序": "迭代"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "B8"
+                ]
+              },
+              {
+                "conditions": {
+                  "语言": "甲语言",
+                  "优化": "关闭",
+                  "程序": "迭代"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "B4"
+                ]
+              },
+              {
+                "conditions": {
+                  "语言": "乙语言",
+                  "优化": "关闭",
+                  "程序": "递归"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "B7"
+                ]
+              },
+              {
+                "conditions": {
+                  "语言": "甲语言",
+                  "优化": "关闭",
+                  "程序": "递归"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "B3"
+                ]
+              },
+              {
+                "conditions": {
+                  "语言": "乙语言",
+                  "优化": "开启",
+                  "程序": "迭代"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "B6"
+                ]
+              },
+              {
+                "conditions": {
+                  "语言": "甲语言",
+                  "优化": "开启",
+                  "程序": "迭代"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "B2"
+                ]
+              },
+              {
+                "conditions": {
+                  "语言": "乙语言",
+                  "优化": "开启",
+                  "程序": "递归"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "B5"
+                ]
+              },
+              {
+                "conditions": {
+                  "语言": "甲语言",
+                  "优化": "开启",
+                  "程序": "递归"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "B1"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 1.0,
+            "semantic_recall": 1.0,
+            "exact_semantics": true,
+            "global_safe": true,
+            "evidence_coverage": 1.0,
+            "cell_count": 8,
+            "gold_cell_count": 8,
+            "compactness_ratio": 1.0,
+            "semantic_full_success": true
+          }
+        }
+      }
+    },
+    {
+      "task_id": "irrigation_partial_invariance",
+      "dimensions": {
+        "土质": [
+          "壤土",
+          "砂土"
+        ],
+        "季节": [
+          "春季",
+          "秋季"
+        ],
+        "剂量": [
+          "低剂量",
+          "高剂量"
+        ]
+      },
+      "studies": [
+        [
+          "C1",
+          "壤土春季使用低剂量方案，耗水量下降。"
+        ],
+        [
+          "C2",
+          "在壤土的春季，高剂量方案同样降低耗水量。"
+        ],
+        [
+          "C3",
+          "壤土秋季低剂量使耗水量上升。"
+        ],
+        [
+          "C4",
+          "壤土秋季高剂量也使耗水量上升。"
+        ],
+        [
+          "C5",
+          "砂土春季低剂量的耗水量上升。"
+        ],
+        [
+          "C6",
+          "砂土春季高剂量方案下，耗水量仍然上升。"
+        ],
+        [
+          "C7",
+          "砂土秋季低剂量使耗水量下降。"
+        ],
+        [
+          "C8",
+          "砂土秋季高剂量实验观测到耗水量下降。"
+        ]
+      ],
+      "gold_atoms": [
+        {
+          "source_id": "C1",
+          "conditions": {
+            "土质": "壤土",
+            "季节": "春季",
+            "剂量": "低剂量"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "C2",
+          "conditions": {
+            "土质": "壤土",
+            "季节": "春季",
+            "剂量": "高剂量"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "C3",
+          "conditions": {
+            "土质": "壤土",
+            "季节": "秋季",
+            "剂量": "低剂量"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "C4",
+          "conditions": {
+            "土质": "壤土",
+            "季节": "秋季",
+            "剂量": "高剂量"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "C5",
+          "conditions": {
+            "土质": "砂土",
+            "季节": "春季",
+            "剂量": "低剂量"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "C6",
+          "conditions": {
+            "土质": "砂土",
+            "季节": "春季",
+            "剂量": "高剂量"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "C7",
+          "conditions": {
+            "土质": "砂土",
+            "季节": "秋季",
+            "剂量": "低剂量"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "C8",
+          "conditions": {
+            "土质": "砂土",
+            "季节": "秋季",
+            "剂量": "高剂量"
+          },
+          "direction": "下降"
+        }
+      ],
+      "gold_partition": {
+        "cells": [
+          {
+            "conditions": {
+              "土质": "壤土",
+              "季节": "春季",
+              "剂量": "任意"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "C1",
+              "C2"
+            ]
+          },
+          {
+            "conditions": {
+              "土质": "壤土",
+              "季节": "秋季",
+              "剂量": "任意"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "C3",
+              "C4"
+            ]
+          },
+          {
+            "conditions": {
+              "土质": "砂土",
+              "季节": "春季",
+              "剂量": "任意"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "C5",
+              "C6"
+            ]
+          },
+          {
+            "conditions": {
+              "土质": "砂土",
+              "季节": "秋季",
+              "剂量": "任意"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "C7",
+              "C8"
+            ]
+          }
+        ],
+        "global_claim": "无"
+      },
+      "extraction": {
+        "raw_text": "```json\n[\n    {\"source_id\":\"C1\",\"conditions\":{\"土质\":\"壤土\",\"季节\":\"春季\",\"剂量\":\"低剂量\"},\"direction\":\"下降\"},\n    {\"source_id\":\"C2\",\"conditions\":{\"土质\":\"壤土\",\"季节\":\"春季\",\"剂量\":\"高剂量\"},\"direction\":\"下降\"},\n    {\"source_id\":\"C3\",\"conditions\":{\"土质\":\"壤土\",\"季节\":\"秋季\",\"剂量\":\"低剂量\"},\"direction\":\"上升\"},\n    {\"source_id\":\"C4\",\"conditions\":{\"土质\":\"壤土\",\"季节\":\"秋季\",\"剂量\":\"高剂量\"},\"direction\":\"上升\"},\n    {\"source_id\":\"C5\",\"conditions\":{\"土质\":\"砂土\",\"季节\":\"春季\",\"剂量\":\"低剂量\"},\"direction\":\"上升\"},\n    {\"source_id\":\"C6\",\"conditions\":{\"土质\":\"砂土\",\"季节\":\"春季\",\"剂量\":\"高剂量\"},\"direction\":\"上升\"},\n    {\"source_id\":\"C7\",\"conditions\":{\"土质\":\"砂土\",\"季节\":\"秋季\",\"剂量\":\"低剂量\"},\"direction\":\"下降\"},\n    {\"source_id\":\"C8\",\"conditions\":{\"土质\":\"砂土\",\"季节\":\"秋季\",\"剂量\":\"高剂量\"},\"direction\":\"下降\"}\n]\n```",
+        "parse_error": null,
+        "atoms": [
+          {
+            "source_id": "C1",
+            "conditions": {
+              "土质": "壤土",
+              "季节": "春季",
+              "剂量": "低剂量"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "C2",
+            "conditions": {
+              "土质": "壤土",
+              "季节": "春季",
+              "剂量": "高剂量"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "C3",
+            "conditions": {
+              "土质": "壤土",
+              "季节": "秋季",
+              "剂量": "低剂量"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "C4",
+            "conditions": {
+              "土质": "壤土",
+              "季节": "秋季",
+              "剂量": "高剂量"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "C5",
+            "conditions": {
+              "土质": "砂土",
+              "季节": "春季",
+              "剂量": "低剂量"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "C6",
+            "conditions": {
+              "土质": "砂土",
+              "季节": "春季",
+              "剂量": "高剂量"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "C7",
+            "conditions": {
+              "土质": "砂土",
+              "季节": "秋季",
+              "剂量": "低剂量"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "C8",
+            "conditions": {
+              "土质": "砂土",
+              "季节": "秋季",
+              "剂量": "高剂量"
+            },
+            "direction": "下降"
+          }
+        ],
+        "seconds": 4.965946197509766,
+        "output_tokens": 239
+      },
+      "strategies": {
+        "direct": {
+          "raw_text": "```json\n{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"土质\": \"壤土\",\n        \"季节\": \"春季\",\n        \"剂量\": \"低剂量/高剂量\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"C1\", \"C2\"]\n    },\n    {\n      \"conditions\": {\n        \"土质\": \"壤土\",\n        \"季节\": \"秋季\",\n        \"剂量\": \"低剂量/高剂量\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"C3\", \"C4\"]\n    },\n    {\n      \"conditions\": {\n        \"土质\": \"砂土\",\n        \"季节\": \"春季\",\n        \"剂量\": \"低剂量/高剂量\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"C5\", \"C6\"]\n    },\n    {\n      \"conditions\": {\n        \"土质\": \"砂土\",\n        \"季节\": \"秋季\",\n        \"剂量\": \"低剂量/高剂量\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"C7\", \"C8\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}\n```",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "土质": "壤土",
+                  "季节": "春季",
+                  "剂量": "低剂量/高剂量"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "C1",
+                  "C2"
+                ]
+              },
+              {
+                "conditions": {
+                  "土质": "壤土",
+                  "季节": "秋季",
+                  "剂量": "低剂量/高剂量"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "C3",
+                  "C4"
+                ]
+              },
+              {
+                "conditions": {
+                  "土质": "砂土",
+                  "季节": "春季",
+                  "剂量": "低剂量/高剂量"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "C5",
+                  "C6"
+                ]
+              },
+              {
+                "conditions": {
+                  "土质": "砂土",
+                  "季节": "秋季",
+                  "剂量": "低剂量/高剂量"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "C7",
+                  "C8"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 0.0,
+            "semantic_recall": 0.0,
+            "exact_semantics": false,
+            "global_safe": true,
+            "evidence_coverage": 0.0,
+            "cell_count": 4,
+            "gold_cell_count": 4,
+            "compactness_ratio": 1.0,
+            "semantic_full_success": false
+          }
+        },
+        "strong_two_stage": {
+          "raw_text": "{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"土质\": \"任意\",\n        \"季节\": \"任意\",\n        \"剂量\": \"低剂量\"\n      },\n      \"direction\": \"混合\",\n      \"status\": \"未解决\",\n      \"source_ids\": [\"C1\", \"C3\", \"C5\"]\n    },\n    {\n      \"conditions\": {\n        \"土质\": \"任意\",\n        \"季节\": \"任意\",\n        \"剂量\": \"高剂量\"\n      },\n      \"direction\": \"混合\",\n      \"status\": \"未解决\",\n      \"source_ids\": [\"C2\", \"C4\", \"C6\", \"C8\"]\n    },\n    {\n      \"conditions\": {\n        \"土质\": \"任意\",\n        \"季节\": \"秋季\",\n        \"剂量\": \"任意\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"C3\", \"C4\", \"C7\", \"C8\"]\n    },\n    {\n      \"conditions\": {\n        \"土质\": \"任意\",\n        \"季节\": \"春季\",\n        \"剂量\": \"任意\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"C1\", \"C2\", \"C5\", \"C6\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "土质": "任意",
+                  "季节": "任意",
+                  "剂量": "低剂量"
+                },
+                "direction": "混合",
+                "status": "未解决",
+                "source_ids": [
+                  "C1",
+                  "C3",
+                  "C5"
+                ]
+              },
+              {
+                "conditions": {
+                  "土质": "任意",
+                  "季节": "任意",
+                  "剂量": "高剂量"
+                },
+                "direction": "混合",
+                "status": "未解决",
+                "source_ids": [
+                  "C2",
+                  "C4",
+                  "C6",
+                  "C8"
+                ]
+              },
+              {
+                "conditions": {
+                  "土质": "任意",
+                  "季节": "秋季",
+                  "剂量": "任意"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "C3",
+                  "C4",
+                  "C7",
+                  "C8"
+                ]
+              },
+              {
+                "conditions": {
+                  "土质": "任意",
+                  "季节": "春季",
+                  "剂量": "任意"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "C1",
+                  "C2",
+                  "C5",
+                  "C6"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 0.25,
+            "semantic_recall": 0.5,
+            "exact_semantics": false,
+            "global_safe": true,
+            "evidence_coverage": 0.875,
+            "cell_count": 4,
+            "gold_cell_count": 4,
+            "compactness_ratio": 1.0,
+            "semantic_full_success": false
+          }
+        },
+        "auto_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "土质": "壤土",
+                  "季节": "春季",
+                  "剂量": "任意"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "C1",
+                  "C2"
+                ]
+              },
+              {
+                "conditions": {
+                  "土质": "壤土",
+                  "季节": "秋季",
+                  "剂量": "任意"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "C3",
+                  "C4"
+                ]
+              },
+              {
+                "conditions": {
+                  "土质": "砂土",
+                  "季节": "春季",
+                  "剂量": "任意"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "C5",
+                  "C6"
+                ]
+              },
+              {
+                "conditions": {
+                  "土质": "砂土",
+                  "季节": "秋季",
+                  "剂量": "任意"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "C7",
+                  "C8"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 1.0,
+            "semantic_recall": 1.0,
+            "exact_semantics": true,
+            "global_safe": true,
+            "evidence_coverage": 1.0,
+            "cell_count": 4,
+            "gold_cell_count": 4,
+            "compactness_ratio": 1.0,
+            "semantic_full_success": true
+          }
+        },
+        "oracle_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "土质": "壤土",
+                  "季节": "春季",
+                  "剂量": "任意"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "C1",
+                  "C2"
+                ]
+              },
+              {
+                "conditions": {
+                  "土质": "壤土",
+                  "季节": "秋季",
+                  "剂量": "任意"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "C3",
+                  "C4"
+                ]
+              },
+              {
+                "conditions": {
+                  "土质": "砂土",
+                  "季节": "春季",
+                  "剂量": "任意"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "C5",
+                  "C6"
+                ]
+              },
+              {
+                "conditions": {
+                  "土质": "砂土",
+                  "季节": "秋季",
+                  "剂量": "任意"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "C7",
+                  "C8"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 1.0,
+            "semantic_recall": 1.0,
+            "exact_semantics": true,
+            "global_safe": true,
+            "evidence_coverage": 1.0,
+            "cell_count": 4,
+            "gold_cell_count": 4,
+            "compactness_ratio": 1.0,
+            "semantic_full_success": true
+          }
+        }
+      }
+    },
+    {
+      "task_id": "robot_unresolved_with_distractors",
+      "dimensions": {
+        "场地": [
+          "室内",
+          "室外"
+        ],
+        "光照": [
+          "弱光",
+          "强光"
+        ],
+        "控制器": [
+          "甲控制器",
+          "乙控制器"
+        ]
+      },
+      "studies": [
+        [
+          "D1",
+          "室内弱光下，甲控制器使定位误差下降。旧版机器人重量为 12 千克。"
+        ],
+        [
+          "D2",
+          "相同的室内弱光和甲控制器设置，却报告定位误差上升；摘要没有给出可解释差异。"
+        ],
+        [
+          "D3",
+          "室内弱光下使用乙控制器，定位误差不变。"
+        ],
+        [
+          "D4",
+          "室外弱光实验采用甲控制器，定位误差上升。"
+        ],
+        [
+          "D5",
+          "室外弱光实验改用乙控制器后，定位误差仍上升。"
+        ],
+        [
+          "D6",
+          "室外强光下，甲控制器和乙控制器分别测试，两个实验均发现定位误差下降。"
+        ]
+      ],
+      "gold_atoms": [
+        {
+          "source_id": "D1",
+          "conditions": {
+            "场地": "室内",
+            "光照": "弱光",
+            "控制器": "甲控制器"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "D2",
+          "conditions": {
+            "场地": "室内",
+            "光照": "弱光",
+            "控制器": "甲控制器"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "D3",
+          "conditions": {
+            "场地": "室内",
+            "光照": "弱光",
+            "控制器": "乙控制器"
+          },
+          "direction": "不变"
+        },
+        {
+          "source_id": "D4",
+          "conditions": {
+            "场地": "室外",
+            "光照": "弱光",
+            "控制器": "甲控制器"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "D5",
+          "conditions": {
+            "场地": "室外",
+            "光照": "弱光",
+            "控制器": "乙控制器"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "D6",
+          "conditions": {
+            "场地": "室外",
+            "光照": "强光",
+            "控制器": "甲控制器"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "D6",
+          "conditions": {
+            "场地": "室外",
+            "光照": "强光",
+            "控制器": "乙控制器"
+          },
+          "direction": "下降"
+        }
+      ],
+      "gold_partition": {
+        "cells": [
+          {
+            "conditions": {
+              "场地": "室内",
+              "光照": "弱光",
+              "控制器": "乙控制器"
+            },
+            "direction": "不变",
+            "status": "支持",
+            "source_ids": [
+              "D3"
+            ]
+          },
+          {
+            "conditions": {
+              "场地": "室内",
+              "光照": "弱光",
+              "控制器": "甲控制器"
+            },
+            "direction": "混合",
+            "status": "未解决",
+            "source_ids": [
+              "D1",
+              "D2"
+            ]
+          },
+          {
+            "conditions": {
+              "场地": "室外",
+              "光照": "弱光",
+              "控制器": "任意"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "D4",
+              "D5"
+            ]
+          },
+          {
+            "conditions": {
+              "场地": "室外",
+              "光照": "强光",
+              "控制器": "任意"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "D6"
+            ]
+          }
+        ],
+        "global_claim": "无"
+      },
+      "extraction": {
+        "raw_text": "```json\n{\n  \"atoms\": [\n    {\"source_id\": \"D1\", \"conditions\": {\"场地\": \"室内\", \"光照\": \"弱光\", \"控制器\": \"甲控制器\"}, \"direction\": \"下降\"},\n    {\"source_id\": \"D3\", \"conditions\": {\"场地\": \"室内\", \"光照\": \"弱光\", \"控制器\": \"乙控制器\"}, \"direction\": \"不变\"},\n    {\"source_id\": \"D4\", \"conditions\": {\"场地\": \"室外\", \"光照\": \"弱光\", \"控制器\": \"甲控制器\"}, \"direction\": \"上升\"},\n    {\"source_id\": \"D5\", \"conditions\": {\"场地\": \"室外\", \"光照\": \"弱光\", \"控制器\": \"乙控制器\"}, \"direction\": \"上升\"},\n    {\"source_id\": \"D6\", \"conditions\": {\"场地\": \"室外\", \"光照\": \"强光\", \"控制器\": \"甲控制器\"}, \"direction\": \"下降\"},\n    {\"source_id\": \"D6\", \"conditions\": {\"场地\": \"室外\", \"光照\": \"强光\", \"控制器\": \"乙控制器\"}, \"direction\": \"下降\"}\n  ]\n}\n```",
+        "parse_error": null,
+        "atoms": [
+          {
+            "source_id": "D1",
+            "conditions": {
+              "场地": "室内",
+              "光照": "弱光",
+              "控制器": "甲控制器"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "D3",
+            "conditions": {
+              "场地": "室内",
+              "光照": "弱光",
+              "控制器": "乙控制器"
+            },
+            "direction": "不变"
+          },
+          {
+            "source_id": "D4",
+            "conditions": {
+              "场地": "室外",
+              "光照": "弱光",
+              "控制器": "甲控制器"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "D5",
+            "conditions": {
+              "场地": "室外",
+              "光照": "弱光",
+              "控制器": "乙控制器"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "D6",
+            "conditions": {
+              "场地": "室外",
+              "光照": "强光",
+              "控制器": "甲控制器"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "D6",
+            "conditions": {
+              "场地": "室外",
+              "光照": "强光",
+              "控制器": "乙控制器"
+            },
+            "direction": "下降"
+          }
+        ],
+        "seconds": 4.936415672302246,
+        "output_tokens": 242
+      },
+      "strategies": {
+        "direct": {
+          "raw_text": "```json\n{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"场地\": \"室内/任意\",\n        \"光照\": \"弱光\",\n        \"控制器\": \"甲控制器\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"D1\"]\n    },\n    {\n      \"conditions\": {\n        \"场地\": \"室内/任意\",\n        \"光照\": \"弱光\",\n        \"控制器\": \"甲控制器\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"未解决\",\n      \"source_ids\": [\"D2\"]\n    },\n    {\n      \"conditions\": {\n        \"场地\": \"室内\",\n        \"光照\": \"弱光\",\n        \"控制器\": \"乙控制器\"\n      },\n      \"direction\": \"不变\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"D3\"]\n    },\n    {\n      \"conditions\": {\n        \"场地\": \"室外\",\n        \"光照\": \"弱光\",\n        \"控制器\": \"甲控制器\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"D4\"]\n    },\n    {\n      \"conditions\": {\n        \"场地\": \"室外\",\n        \"光照\": \"弱光\",\n        \"控制器\": \"乙控制器\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"D5\"]\n    },\n    {\n      \"conditions\": {\n        \"场地\": \"室外\",\n        \"光照\": \"强光\",\n        \"控制器\": \"任意\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"D6\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}\n```",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "场地": "室内/任意",
+                  "光照": "弱光",
+                  "控制器": "甲控制器"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "D1"
+                ]
+              },
+              {
+                "conditions": {
+                  "场地": "室内/任意",
+                  "光照": "弱光",
+                  "控制器": "甲控制器"
+                },
+                "direction": "上升",
+                "status": "未解决",
+                "source_ids": [
+                  "D2"
+                ]
+              },
+              {
+                "conditions": {
+                  "场地": "室内",
+                  "光照": "弱光",
+                  "控制器": "乙控制器"
+                },
+                "direction": "不变",
+                "status": "支持",
+                "source_ids": [
+                  "D3"
+                ]
+              },
+              {
+                "conditions": {
+                  "场地": "室外",
+                  "光照": "弱光",
+                  "控制器": "甲控制器"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "D4"
+                ]
+              },
+              {
+                "conditions": {
+                  "场地": "室外",
+                  "光照": "弱光",
+                  "控制器": "乙控制器"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "D5"
+                ]
+              },
+              {
+                "conditions": {
+                  "场地": "室外",
+                  "光照": "强光",
+                  "控制器": "任意"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "D6"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 0.7142857142857143,
+            "semantic_recall": 0.8333333333333334,
+            "exact_semantics": false,
+            "global_safe": true,
+            "evidence_coverage": 0.7142857142857143,
+            "cell_count": 6,
+            "gold_cell_count": 4,
+            "compactness_ratio": 0.6666666666666666,
+            "semantic_full_success": false
+          }
+        },
+        "strong_two_stage": {
+          "raw_text": "{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"场地\": \"任意\",\n        \"光照\": \"弱光\",\n        \"控制器\": \"任意\"\n      },\n      \"direction\": \"混合\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"D1\", \"D3\", \"D4\", \"D5\"]\n    },\n    {\n      \"conditions\": {\n        \"场地\": \"室外\",\n        \"光照\": \"强光\",\n        \"控制器\": \"任意\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"D6\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "场地": "任意",
+                  "光照": "弱光",
+                  "控制器": "任意"
+                },
+                "direction": "混合",
+                "status": "支持",
+                "source_ids": [
+                  "D1",
+                  "D3",
+                  "D4",
+                  "D5"
+                ]
+              },
+              {
+                "conditions": {
+                  "场地": "室外",
+                  "光照": "强光",
+                  "控制器": "任意"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "D6"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 0.3333333333333333,
+            "semantic_recall": 0.3333333333333333,
+            "exact_semantics": false,
+            "global_safe": true,
+            "evidence_coverage": 0.2857142857142857,
+            "cell_count": 2,
+            "gold_cell_count": 4,
+            "compactness_ratio": 2.0,
+            "semantic_full_success": false
+          }
+        },
+        "auto_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "场地": "室内",
+                  "光照": "弱光",
+                  "控制器": "乙控制器"
+                },
+                "direction": "不变",
+                "status": "支持",
+                "source_ids": [
+                  "D3"
+                ]
+              },
+              {
+                "conditions": {
+                  "场地": "室内",
+                  "光照": "弱光",
+                  "控制器": "甲控制器"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "D1"
+                ]
+              },
+              {
+                "conditions": {
+                  "场地": "室外",
+                  "光照": "弱光",
+                  "控制器": "任意"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "D4",
+                  "D5"
+                ]
+              },
+              {
+                "conditions": {
+                  "场地": "室外",
+                  "光照": "强光",
+                  "控制器": "任意"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "D6"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 0.8333333333333334,
+            "semantic_recall": 0.8333333333333334,
+            "exact_semantics": false,
+            "global_safe": true,
+            "evidence_coverage": 0.8571428571428571,
+            "cell_count": 4,
+            "gold_cell_count": 4,
+            "compactness_ratio": 1.0,
+            "semantic_full_success": false
+          }
+        },
+        "oracle_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "场地": "室内",
+                  "光照": "弱光",
+                  "控制器": "乙控制器"
+                },
+                "direction": "不变",
+                "status": "支持",
+                "source_ids": [
+                  "D3"
+                ]
+              },
+              {
+                "conditions": {
+                  "场地": "室内",
+                  "光照": "弱光",
+                  "控制器": "甲控制器"
+                },
+                "direction": "混合",
+                "status": "未解决",
+                "source_ids": [
+                  "D1",
+                  "D2"
+                ]
+              },
+              {
+                "conditions": {
+                  "场地": "室外",
+                  "光照": "弱光",
+                  "控制器": "任意"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "D4",
+                  "D5"
+                ]
+              },
+              {
+                "conditions": {
+                  "场地": "室外",
+                  "光照": "强光",
+                  "控制器": "任意"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "D6"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 1.0,
+            "semantic_recall": 1.0,
+            "exact_semantics": true,
+            "global_safe": true,
+            "evidence_coverage": 1.0,
+            "cell_count": 4,
+            "gold_cell_count": 4,
+            "compactness_ratio": 1.0,
+            "semantic_full_success": true
+          }
+        }
+      }
+    },
+    {
+      "task_id": "storage_unknown_dimension",
+      "dimensions": {
+        "介质": [
+          "固态盘",
+          "机械盘"
+        ],
+        "队列": [
+          "短队列",
+          "长队列"
+        ],
+        "缓存": [
+          "开启",
+          "关闭"
+        ]
+      },
+      "studies": [
+        [
+          "E1",
+          "固态盘、短队列且开启缓存时，写入延迟下降。"
+        ],
+        [
+          "E2",
+          "固态盘在短队列、关闭缓存时，写入延迟上升。"
+        ],
+        [
+          "E3",
+          "机械盘使用长队列并开启缓存，写入延迟下降。"
+        ],
+        [
+          "E4",
+          "机械盘、长队列、关闭缓存的实验显示写入延迟上升。"
+        ],
+        [
+          "E5",
+          "固态盘长队列实验发现写入延迟下降，但摘要没有报告缓存是否开启。"
+        ]
+      ],
+      "gold_atoms": [
+        {
+          "source_id": "E1",
+          "conditions": {
+            "介质": "固态盘",
+            "队列": "短队列",
+            "缓存": "开启"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "E2",
+          "conditions": {
+            "介质": "固态盘",
+            "队列": "短队列",
+            "缓存": "关闭"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "E3",
+          "conditions": {
+            "介质": "机械盘",
+            "队列": "长队列",
+            "缓存": "开启"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "E4",
+          "conditions": {
+            "介质": "机械盘",
+            "队列": "长队列",
+            "缓存": "关闭"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "E5",
+          "conditions": {
+            "介质": "固态盘",
+            "队列": "长队列",
+            "缓存": "未报告"
+          },
+          "direction": "下降"
+        }
+      ],
+      "gold_partition": {
+        "cells": [
+          {
+            "conditions": {
+              "介质": "固态盘",
+              "队列": "短队列",
+              "缓存": "关闭"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "E2"
+            ]
+          },
+          {
+            "conditions": {
+              "介质": "固态盘",
+              "队列": "短队列",
+              "缓存": "开启"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "E1"
+            ]
+          },
+          {
+            "conditions": {
+              "介质": "固态盘",
+              "队列": "长队列",
+              "缓存": "未报告"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "E5"
+            ]
+          },
+          {
+            "conditions": {
+              "介质": "机械盘",
+              "队列": "长队列",
+              "缓存": "关闭"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "E4"
+            ]
+          },
+          {
+            "conditions": {
+              "介质": "机械盘",
+              "队列": "长队列",
+              "缓存": "开启"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "E3"
+            ]
+          }
+        ],
+        "global_claim": "无"
+      },
+      "extraction": {
+        "raw_text": "```json\n[\n    {\"source_id\":\"E1\",\"conditions\":{\"介质\":\"固态盘\",\"队列\":\"短队列\",\"缓存\":\"开启\"},\"direction\":\"下降\"},\n    {\"source_id\":\"E2\",\"conditions\":{\"介质\":\"固态盘\",\"队列\":\"短队列\",\"缓存\":\"关闭\"},\"direction\":\"上升\"},\n    {\"source_id\":\"E3\",\"conditions\":{\"介质\":\"机械盘\",\"队列\":\"长队列\",\"缓存\":\"开启\"},\"direction\":\"下降\"},\n    {\"source_id\":\"E4\",\"conditions\":{\"介质\":\"机械盘\",\"队列\":\"长队列\",\"缓存\":\"关闭\"},\"direction\":\"上升\"},\n    {\"source_id\":\"E5\",\"conditions\":{\"介质\":\"固态盘\",\"队列\":\"长队列\",\"缓存\":\"未报告\"},\"direction\":\"下降\"}\n]\n```",
+        "parse_error": null,
+        "atoms": [
+          {
+            "source_id": "E1",
+            "conditions": {
+              "介质": "固态盘",
+              "队列": "短队列",
+              "缓存": "开启"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "E2",
+            "conditions": {
+              "介质": "固态盘",
+              "队列": "短队列",
+              "缓存": "关闭"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "E3",
+            "conditions": {
+              "介质": "机械盘",
+              "队列": "长队列",
+              "缓存": "开启"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "E4",
+            "conditions": {
+              "介质": "机械盘",
+              "队列": "长队列",
+              "缓存": "关闭"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "E5",
+            "conditions": {
+              "介质": "固态盘",
+              "队列": "长队列",
+              "缓存": "未报告"
+            },
+            "direction": "下降"
+          }
+        ],
+        "seconds": 3.500837564468384,
+        "output_tokens": 166
+      },
+      "strategies": {
+        "direct": {
+          "raw_text": "```json\n{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"介质\": \"固态盘/任意\",\n        \"队列\": \"短队列\",\n        \"缓存\": \"开启/关闭\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"E1\", \"E3\"]\n    },\n    {\n      \"conditions\": {\n        \"介质\": \"固态盘\",\n        \"队列\": \"短队列\",\n        \"缓存\": \"关闭\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"E2\"]\n    },\n    {\n      \"conditions\": {\n        \"介质\": \"机械盘\",\n        \"队列\": \"长队列\",\n        \"缓存\": \"开启\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"E3\"]\n    },\n    {\n      \"conditions\": {\n        \"介质\": \"机械盘\",\n        \"队列\": \"长队列\",\n        \"缓存\": \"关闭\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"E4\"]\n    },\n    {\n      \"conditions\": {\n        \"介质\": \"固态盘\",\n        \"队列\": \"长队列\",\n        \"缓存\": \"未报告\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"未解决\",\n      \"source_ids\": [\"E5\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}\n```",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "介质": "固态盘/任意",
+                  "队列": "短队列",
+                  "缓存": "开启/关闭"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "E1",
+                  "E3"
+                ]
+              },
+              {
+                "conditions": {
+                  "介质": "固态盘",
+                  "队列": "短队列",
+                  "缓存": "关闭"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "E2"
+                ]
+              },
+              {
+                "conditions": {
+                  "介质": "机械盘",
+                  "队列": "长队列",
+                  "缓存": "开启"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "E3"
+                ]
+              },
+              {
+                "conditions": {
+                  "介质": "机械盘",
+                  "队列": "长队列",
+                  "缓存": "关闭"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "E4"
+                ]
+              },
+              {
+                "conditions": {
+                  "介质": "固态盘",
+                  "队列": "长队列",
+                  "缓存": "未报告"
+                },
+                "direction": "下降",
+                "status": "未解决",
+                "source_ids": [
+                  "E5"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 0.6,
+            "semantic_recall": 0.6,
+            "exact_semantics": false,
+            "global_safe": true,
+            "evidence_coverage": 0.8,
+            "cell_count": 5,
+            "gold_cell_count": 5,
+            "compactness_ratio": 1.0,
+            "semantic_full_success": false
+          }
+        },
+        "strong_two_stage": {
+          "raw_text": "{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"介质\": \"固态盘\",\n        \"队列\": \"短队列\",\n        \"缓存\": \"开启/关闭\"\n      },\n      \"direction\": \"混合\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"E1\", \"E2\"]\n    },\n    {\n      \"conditions\": {\n        \"介质\": \"机械盘\",\n        \"队列\": \"长队列\",\n        \"缓存\": \"开启/关闭\"\n      },\n      \"direction\": \"混合\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"E3\", \"E4\"]\n    },\n    {\n      \"conditions\": {\n        \"介质\": \"固态盘\",\n        \"队列\": \"长队列\",\n        \"缓存\": \"未报告\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"E5\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "介质": "固态盘",
+                  "队列": "短队列",
+                  "缓存": "开启/关闭"
+                },
+                "direction": "混合",
+                "status": "支持",
+                "source_ids": [
+                  "E1",
+                  "E2"
+                ]
+              },
+              {
+                "conditions": {
+                  "介质": "机械盘",
+                  "队列": "长队列",
+                  "缓存": "开启/关闭"
+                },
+                "direction": "混合",
+                "status": "支持",
+                "source_ids": [
+                  "E3",
+                  "E4"
+                ]
+              },
+              {
+                "conditions": {
+                  "介质": "固态盘",
+                  "队列": "长队列",
+                  "缓存": "未报告"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "E5"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 0.3333333333333333,
+            "semantic_recall": 0.2,
+            "exact_semantics": false,
+            "global_safe": true,
+            "evidence_coverage": 0.2,
+            "cell_count": 3,
+            "gold_cell_count": 5,
+            "compactness_ratio": 1.6666666666666667,
+            "semantic_full_success": false
+          }
+        },
+        "auto_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "介质": "固态盘",
+                  "队列": "短队列",
+                  "缓存": "关闭"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "E2"
+                ]
+              },
+              {
+                "conditions": {
+                  "介质": "固态盘",
+                  "队列": "短队列",
+                  "缓存": "开启"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "E1"
+                ]
+              },
+              {
+                "conditions": {
+                  "介质": "固态盘",
+                  "队列": "长队列",
+                  "缓存": "未报告"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "E5"
+                ]
+              },
+              {
+                "conditions": {
+                  "介质": "机械盘",
+                  "队列": "长队列",
+                  "缓存": "关闭"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "E4"
+                ]
+              },
+              {
+                "conditions": {
+                  "介质": "机械盘",
+                  "队列": "长队列",
+                  "缓存": "开启"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "E3"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 1.0,
+            "semantic_recall": 1.0,
+            "exact_semantics": true,
+            "global_safe": true,
+            "evidence_coverage": 1.0,
+            "cell_count": 5,
+            "gold_cell_count": 5,
+            "compactness_ratio": 1.0,
+            "semantic_full_success": true
+          }
+        },
+        "oracle_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "介质": "固态盘",
+                  "队列": "短队列",
+                  "缓存": "关闭"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "E2"
+                ]
+              },
+              {
+                "conditions": {
+                  "介质": "固态盘",
+                  "队列": "短队列",
+                  "缓存": "开启"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "E1"
+                ]
+              },
+              {
+                "conditions": {
+                  "介质": "固态盘",
+                  "队列": "长队列",
+                  "缓存": "未报告"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "E5"
+                ]
+              },
+              {
+                "conditions": {
+                  "介质": "机械盘",
+                  "队列": "长队列",
+                  "缓存": "关闭"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "E4"
+                ]
+              },
+              {
+                "conditions": {
+                  "介质": "机械盘",
+                  "队列": "长队列",
+                  "缓存": "开启"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "E3"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 1.0,
+            "semantic_recall": 1.0,
+            "exact_semantics": true,
+            "global_safe": true,
+            "evidence_coverage": 1.0,
+            "cell_count": 5,
+            "gold_cell_count": 5,
+            "compactness_ratio": 1.0,
+            "semantic_full_success": true
+          }
+        }
+      }
+    },
+    {
+      "task_id": "sensor_negation_and_background",
+      "dimensions": {
+        "传感器": [
+          "甲型",
+          "乙型"
+        ],
+        "天气": [
+          "晴天",
+          "雨天"
+        ],
+        "校准": [
+          "单点",
+          "多点"
+        ]
+      },
+      "studies": [
+        [
+          "F1",
+          "背景工作认为甲型传感器不稳定；但本研究在晴天单点校准后，测量偏差并未上升，而是下降。"
+        ],
+        [
+          "F2",
+          "甲型、晴天、多点校准没有带来改善，测量偏差保持不变。"
+        ],
+        [
+          "F3",
+          "在雨天对甲型做单点校准，测量偏差提高。"
+        ],
+        [
+          "F4",
+          "甲型雨天多点校准使偏差降低，尽管电池电压下降了 0.2 伏。"
+        ],
+        [
+          "F5",
+          "乙型晴天单点校准，测量偏差下降。"
+        ],
+        [
+          "F6",
+          "乙型晴天多点校准后偏差没有显著变化。"
+        ],
+        [
+          "F7",
+          "乙型雨天单点校准的偏差不降反升。"
+        ],
+        [
+          "F8",
+          "乙型雨天多点校准把测量偏差降了下来。"
+        ]
+      ],
+      "gold_atoms": [
+        {
+          "source_id": "F1",
+          "conditions": {
+            "传感器": "甲型",
+            "天气": "晴天",
+            "校准": "单点"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "F2",
+          "conditions": {
+            "传感器": "甲型",
+            "天气": "晴天",
+            "校准": "多点"
+          },
+          "direction": "不变"
+        },
+        {
+          "source_id": "F3",
+          "conditions": {
+            "传感器": "甲型",
+            "天气": "雨天",
+            "校准": "单点"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "F4",
+          "conditions": {
+            "传感器": "甲型",
+            "天气": "雨天",
+            "校准": "多点"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "F5",
+          "conditions": {
+            "传感器": "乙型",
+            "天气": "晴天",
+            "校准": "单点"
+          },
+          "direction": "下降"
+        },
+        {
+          "source_id": "F6",
+          "conditions": {
+            "传感器": "乙型",
+            "天气": "晴天",
+            "校准": "多点"
+          },
+          "direction": "不变"
+        },
+        {
+          "source_id": "F7",
+          "conditions": {
+            "传感器": "乙型",
+            "天气": "雨天",
+            "校准": "单点"
+          },
+          "direction": "上升"
+        },
+        {
+          "source_id": "F8",
+          "conditions": {
+            "传感器": "乙型",
+            "天气": "雨天",
+            "校准": "多点"
+          },
+          "direction": "下降"
+        }
+      ],
+      "gold_partition": {
+        "cells": [
+          {
+            "conditions": {
+              "传感器": "任意",
+              "天气": "晴天",
+              "校准": "单点"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "F1",
+              "F5"
+            ]
+          },
+          {
+            "conditions": {
+              "传感器": "任意",
+              "天气": "晴天",
+              "校准": "多点"
+            },
+            "direction": "不变",
+            "status": "支持",
+            "source_ids": [
+              "F2",
+              "F6"
+            ]
+          },
+          {
+            "conditions": {
+              "传感器": "任意",
+              "天气": "雨天",
+              "校准": "单点"
+            },
+            "direction": "上升",
+            "status": "支持",
+            "source_ids": [
+              "F3",
+              "F7"
+            ]
+          },
+          {
+            "conditions": {
+              "传感器": "任意",
+              "天气": "雨天",
+              "校准": "多点"
+            },
+            "direction": "下降",
+            "status": "支持",
+            "source_ids": [
+              "F4",
+              "F8"
+            ]
+          }
+        ],
+        "global_claim": "无"
+      },
+      "extraction": {
+        "raw_text": "```json\n[\n    {\"source_id\":\"A1\",\"conditions\":{\"传感器\":\"甲型\",\"天气\":\"晴天\",\"校准\":\"单点\"},\"direction\":\"下降\"},\n    {\"source_id\":\"A2\",\"conditions\":{\"传感器\":\"甲型\",\"天气\":\"晴天\",\"校准\":\"多点\"},\"direction\":\"不变\"},\n    {\"source_id\":\"A3\",\"conditions\":{\"传感器\":\"甲型\",\"天气\":\"雨天\",\"校准\":\"单点\"},\"direction\":\"上升\"},\n    {\"source_id\":\"A4\",\"conditions\":{\"传感器\":\"甲型\",\"天气\":\"雨天\",\"校准\":\"多点\"},\"direction\":\"下降\"},\n    {\"source_id\":\"A5\",\"conditions\":{\"传感器\":\"乙型\",\"天气\":\"晴天\",\"校准\":\"单点\"},\"direction\":\"下降\"},\n    {\"source_id\":\"A6\",\"conditions\":{\"传感器\":\"乙型\",\"天气\":\"晴天\",\"校准\":\"多点\"},\"direction\":\"不变\"},\n    {\"source_id\":\"A7\",\"conditions\":{\"传感器\":\"乙型\",\"天气\":\"雨天\",\"校准\":\"单点\"},\"direction\":\"上升\"},\n    {\"source_id\":\"A8\",\"conditions\":{\"传感器\":\"乙型\",\"天气\":\"雨天\",\"校准\":\"多点\"},\"direction\":\"下降\"}\n]\n```",
+        "parse_error": null,
+        "atoms": [
+          {
+            "source_id": "A1",
+            "conditions": {
+              "传感器": "甲型",
+              "天气": "晴天",
+              "校准": "单点"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "A2",
+            "conditions": {
+              "传感器": "甲型",
+              "天气": "晴天",
+              "校准": "多点"
+            },
+            "direction": "不变"
+          },
+          {
+            "source_id": "A3",
+            "conditions": {
+              "传感器": "甲型",
+              "天气": "雨天",
+              "校准": "单点"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "A4",
+            "conditions": {
+              "传感器": "甲型",
+              "天气": "雨天",
+              "校准": "多点"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "A5",
+            "conditions": {
+              "传感器": "乙型",
+              "天气": "晴天",
+              "校准": "单点"
+            },
+            "direction": "下降"
+          },
+          {
+            "source_id": "A6",
+            "conditions": {
+              "传感器": "乙型",
+              "天气": "晴天",
+              "校准": "多点"
+            },
+            "direction": "不变"
+          },
+          {
+            "source_id": "A7",
+            "conditions": {
+              "传感器": "乙型",
+              "天气": "雨天",
+              "校准": "单点"
+            },
+            "direction": "上升"
+          },
+          {
+            "source_id": "A8",
+            "conditions": {
+              "传感器": "乙型",
+              "天气": "雨天",
+              "校准": "多点"
+            },
+            "direction": "下降"
+          }
+        ],
+        "seconds": 5.048364639282227,
+        "output_tokens": 247
+      },
+      "strategies": {
+        "direct": {
+          "raw_text": "```json\n{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"传感器\": \"甲型\",\n        \"天气\": \"晴天\",\n        \"校准\": \"单点\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"F1\", \"F5\"]\n    },\n    {\n      \"conditions\": {\n        \"传感器\": \"甲型\",\n        \"天气\": \"晴天\",\n        \"校准\": \"多点\"\n      },\n      \"direction\": \"不变\",\n      \"status\": \"未解决\",\n      \"source_ids\": [\"F2\"]\n    },\n    {\n      \"conditions\": {\n        \"传感器\": \"甲型\",\n        \"天气\": \"雨天\",\n        \"校准\": \"单点\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"F3\", \"F7\"]\n    },\n    {\n      \"conditions\": {\n        \"传感器\": \"甲型\",\n        \"天气\": \"雨天\",\n        \"校准\": \"多点\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"F4\"]\n    },\n    {\n      \"conditions\": {\n        \"传感器\": \"乙型\",\n        \"天气\": \"晴天\",\n        \"校准\": \"单点\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"F5\"]\n    },\n    {\n      \"conditions\": {\n        \"传感器\": \"乙型\",\n        \"天气\": \"晴天\",\n        \"校准\": \"多点\"\n      },\n      \"direction\": \"不变\",\n      \"status\": \"未解决\",\n      \"source_ids\": [\"F6\"]\n    },\n    {\n      \"conditions\": {\n        \"传感器\": \"乙型\",\n        \"天气\": \"雨天\",\n        \"校准\": \"单点\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"F7\"]\n    },\n    {\n      \"conditions\": {\n        \"传感器\": \"乙型\",\n        \"天气\": \"雨天\",\n        \"校准\": \"多点\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"F8\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}\n```",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "传感器": "甲型",
+                  "天气": "晴天",
+                  "校准": "单点"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "F1",
+                  "F5"
+                ]
+              },
+              {
+                "conditions": {
+                  "传感器": "甲型",
+                  "天气": "晴天",
+                  "校准": "多点"
+                },
+                "direction": "不变",
+                "status": "未解决",
+                "source_ids": [
+                  "F2"
+                ]
+              },
+              {
+                "conditions": {
+                  "传感器": "甲型",
+                  "天气": "雨天",
+                  "校准": "单点"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "F3",
+                  "F7"
+                ]
+              },
+              {
+                "conditions": {
+                  "传感器": "甲型",
+                  "天气": "雨天",
+                  "校准": "多点"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "F4"
+                ]
+              },
+              {
+                "conditions": {
+                  "传感器": "乙型",
+                  "天气": "晴天",
+                  "校准": "单点"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "F5"
+                ]
+              },
+              {
+                "conditions": {
+                  "传感器": "乙型",
+                  "天气": "晴天",
+                  "校准": "多点"
+                },
+                "direction": "不变",
+                "status": "未解决",
+                "source_ids": [
+                  "F6"
+                ]
+              },
+              {
+                "conditions": {
+                  "传感器": "乙型",
+                  "天气": "雨天",
+                  "校准": "单点"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "F7"
+                ]
+              },
+              {
+                "conditions": {
+                  "传感器": "乙型",
+                  "天气": "雨天",
+                  "校准": "多点"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "F8"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 0.75,
+            "semantic_recall": 0.75,
+            "exact_semantics": false,
+            "global_safe": true,
+            "evidence_coverage": 1.0,
+            "cell_count": 8,
+            "gold_cell_count": 4,
+            "compactness_ratio": 0.5,
+            "semantic_full_success": false
+          }
+        },
+        "strong_two_stage": {
+          "raw_text": "{\n  \"cells\": [\n    {\n      \"conditions\": {\n        \"传感器\": \"任意\",\n        \"天气\": \"雨天\",\n        \"校准\": \"单点\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"A3\", \"A7\"]\n    },\n    {\n      \"conditions\": {\n        \"传感器\": \"任意\",\n        \"天气\": \"雨天\",\n        \"校准\": \"多点\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"A4\", \"A8\"]\n    },\n    {\n      \"conditions\": {\n        \"传感器\": \"甲型\",\n        \"天气\": \"任意\",\n        \"校准\": \"单点\"\n      },\n      \"direction\": \"上升\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"A3\"]\n    },\n    {\n      \"conditions\": {\n        \"传感器\": \"甲型\",\n        \"天气\": \"任意\",\n        \"校准\": \"多点\"\n      },\n      \"direction\": \"混合\",\n      \"status\": \"未解决\",\n      \"source_ids\": [\"A1\", \"A2\", \"A4\"]\n    },\n    {\n      \"conditions\": {\n        \"传感器\": \"乙型\",\n        \"天气\": \"任意\",\n        \"校准\": \"单点\"\n      },\n      \"direction\": \"下降\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"A5\", \"A7\"]\n    },\n    {\n      \"conditions\": {\n        \"传感器\": \"乙型\",\n        \"天气\": \"任意\",\n        \"校准\": \"多点\"\n      },\n      \"direction\": \"不变\",\n      \"status\": \"支持\",\n      \"source_ids\": [\"A6\"]\n    }\n  ],\n  \"global_claim\": \"无\"\n}",
+          "parse_error": null,
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "传感器": "任意",
+                  "天气": "雨天",
+                  "校准": "单点"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "A3",
+                  "A7"
+                ]
+              },
+              {
+                "conditions": {
+                  "传感器": "任意",
+                  "天气": "雨天",
+                  "校准": "多点"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "A4",
+                  "A8"
+                ]
+              },
+              {
+                "conditions": {
+                  "传感器": "甲型",
+                  "天气": "任意",
+                  "校准": "单点"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "A3"
+                ]
+              },
+              {
+                "conditions": {
+                  "传感器": "甲型",
+                  "天气": "任意",
+                  "校准": "多点"
+                },
+                "direction": "混合",
+                "status": "未解决",
+                "source_ids": [
+                  "A1",
+                  "A2",
+                  "A4"
+                ]
+              },
+              {
+                "conditions": {
+                  "传感器": "乙型",
+                  "天气": "任意",
+                  "校准": "单点"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "A5",
+                  "A7"
+                ]
+              },
+              {
+                "conditions": {
+                  "传感器": "乙型",
+                  "天气": "任意",
+                  "校准": "多点"
+                },
+                "direction": "不变",
+                "status": "支持",
+                "source_ids": [
+                  "A6"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 0.5454545454545454,
+            "semantic_recall": 0.75,
+            "exact_semantics": false,
+            "global_safe": true,
+            "evidence_coverage": 0.0,
+            "cell_count": 6,
+            "gold_cell_count": 4,
+            "compactness_ratio": 0.6666666666666666,
+            "semantic_full_success": false
+          }
+        },
+        "auto_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "传感器": "任意",
+                  "天气": "晴天",
+                  "校准": "单点"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "A1",
+                  "A5"
+                ]
+              },
+              {
+                "conditions": {
+                  "传感器": "任意",
+                  "天气": "晴天",
+                  "校准": "多点"
+                },
+                "direction": "不变",
+                "status": "支持",
+                "source_ids": [
+                  "A2",
+                  "A6"
+                ]
+              },
+              {
+                "conditions": {
+                  "传感器": "任意",
+                  "天气": "雨天",
+                  "校准": "单点"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "A3",
+                  "A7"
+                ]
+              },
+              {
+                "conditions": {
+                  "传感器": "任意",
+                  "天气": "雨天",
+                  "校准": "多点"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "A4",
+                  "A8"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 1.0,
+            "semantic_recall": 1.0,
+            "exact_semantics": true,
+            "global_safe": true,
+            "evidence_coverage": 0.0,
+            "cell_count": 4,
+            "gold_cell_count": 4,
+            "compactness_ratio": 1.0,
+            "semantic_full_success": false
+          }
+        },
+        "oracle_partition": {
+          "output": {
+            "cells": [
+              {
+                "conditions": {
+                  "传感器": "任意",
+                  "天气": "晴天",
+                  "校准": "单点"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "F1",
+                  "F5"
+                ]
+              },
+              {
+                "conditions": {
+                  "传感器": "任意",
+                  "天气": "晴天",
+                  "校准": "多点"
+                },
+                "direction": "不变",
+                "status": "支持",
+                "source_ids": [
+                  "F2",
+                  "F6"
+                ]
+              },
+              {
+                "conditions": {
+                  "传感器": "任意",
+                  "天气": "雨天",
+                  "校准": "单点"
+                },
+                "direction": "上升",
+                "status": "支持",
+                "source_ids": [
+                  "F3",
+                  "F7"
+                ]
+              },
+              {
+                "conditions": {
+                  "传感器": "任意",
+                  "天气": "雨天",
+                  "校准": "多点"
+                },
+                "direction": "下降",
+                "status": "支持",
+                "source_ids": [
+                  "F4",
+                  "F8"
+                ]
+              }
+            ],
+            "global_claim": "无"
+          },
+          "score": {
+            "semantic_precision": 1.0,
+            "semantic_recall": 1.0,
+            "exact_semantics": true,
+            "global_safe": true,
+            "evidence_coverage": 1.0,
+            "cell_count": 4,
+            "gold_cell_count": 4,
+            "compactness_ratio": 1.0,
+            "semantic_full_success": true
+          }
+        }
+      }
+    }
+  ]
+}

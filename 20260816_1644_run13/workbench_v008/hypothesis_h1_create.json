@@ -1,0 +1,35 @@
+{
+  "hypothesis_id": "h-v008-active-effect-diagnosis",
+  "title": "恢复动作充分的主动作用诊断",
+  "status": "draft",
+  "parent_ids": [],
+  "lineage_note": "从 v001 的工具结果语义失败转向非原子副作用后的主动状态核验，并在实验前执行组件级先行工作审计。",
+  "problem": "写工具返回含糊时，智能体无法判断外部系统未执行、部分执行或全部执行，固定核验可能被陈旧或不完整读取误导。",
+  "target_failure": {
+    "summary": "非原子工具调用后的作用状态不确定性导致重复副作用、错误补偿或虚假完成。",
+    "card_ids": ["failure-incomplete-tool-contracts-false-verified-state", "failure-confident-completion-without-state-success"],
+    "evidence_ids": []
+  },
+  "changed_computation": {
+    "baseline": "使用固定后置条件查询后执行先验证再重试。",
+    "intervention": "维护可达作用状态集合，按预期恢复损失下降与查询成本选择只读诊断，并在剩余状态共享同一安全恢复动作时停止。",
+    "information_available": "两者访问同一写工具合同、候选只读工具、历史返回与恢复动作集合。",
+    "timing": "含糊写调用返回之后、任何重试、补全、补偿或完成声明之前。",
+    "budget_effect": "候选增加自适应只读调用，但以显式读取成本和上限约束。"
+  },
+  "mechanism_claim": "面向恢复动作而非完整状态熵的查询价值会忽略不改变安全动作的状态差异，从而减少读取并降低错误恢复。",
+  "falsifier": "组件级先行工作已吸收核心计算，或相对最强固定与信息增益基线没有同时降低恢复损失和读取成本。",
+  "minimal_killer_experiment": "在多副作用、部分提交与延迟可见模拟器中，以匹配查询预算比较固定后置条件、随机、状态信息增益与恢复损失价值选择。",
+  "nearest_prior_risk": "先验证再重试、P072 成本惩罚信息价值、P074 条件状态提交与 Atomix 事务型作用管理可能组合吸收候选。",
+  "alternative_explanations": ["合成生成器按候选目标构造", "手工损失矩阵偏向候选", "读取噪声模型已知", "经典主动诊断的直接迁移"],
+  "descriptors": {
+    "problem_family": "非原子工具副作用恢复",
+    "computation_stage": "含糊写调用后的恢复前核验",
+    "intervention_family": "恢复动作导向的主动诊断",
+    "information_source": "工具合同、只读探针与作用状态集合",
+    "timing_class": "调用返回后、状态提交前",
+    "budget_class": "成本约束的自适应只读调用",
+    "evaluation_mode": "故障注入与环境终态核验"
+  },
+  "literature_refs": ["P074", "P072", "P007", "P040", "arXiv:2608.02645", "arXiv:2602.14849", "arXiv:2601.22352"]
+}

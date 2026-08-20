@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "version": "v115",
+  "revision": 2,
+  "hypotheses": [
+    {
+      "id": "H-v115-1",
+      "name": "QUESTION_ONLY_MEASUREMENT_ROLE_CLOSURE",
+      "status": "falsified",
+      "registered_before_execution": true,
+      "primary_metrics": [
+        "macro_exact_column_recall_at_5R",
+        "macro_component_any_recall_at_5R",
+        "macro_component_complete_recall_at_5R",
+        "every_component_question_count_at_5R",
+        "valid_plan_count"
+      ],
+      "success_conditions": [
+        "valid_plan_count >= 30 of 32",
+        "role_closure macro Recall@5R - flat_rrf macro Recall@5R >= 0.025",
+        "role_closure every-component question rate - flat_rrf rate >= 0.10 and count gain >= 4",
+        "role_closure macro complete-component rate - flat_rrf rate >= 0.025",
+        "role_closure macro Recall@5R >= direct_bm25 macro Recall@5R"
+      ],
+      "kill_conditions": [
+        "any success condition is not met",
+        "generation reads source papers, explanations, provenance, target identifiers, or evidence before all predictions are written",
+        "flat_rrf and role_closure do not share exactly the same component queries and per-query rankings"
+      ],
+      "scope": "Recorded local OADD-Bench pilot on 32 hash-selected questions using qwen2.5:7b and offline HRS metadata only",
+      "outcome": {
+        "decisive_record": "oadd-role-closure-qwen2-5-7b-001",
+        "valid_plan_count": 32,
+        "direct_bm25_recall_at_5R": 0.18674816280103626,
+        "flat_rrf_recall_at_5R": 0.20320136911998568,
+        "role_closure_recall_at_5R": 0.19369905158457995,
+        "role_closure_minus_flat_recall_at_5R": -0.00950231753540573,
+        "role_closure_minus_flat_complete_component_rate": -0.022623106060606024,
+        "role_closure_minus_flat_every_component_question_count": 0,
+        "paired_bootstrap_95_percent_ci": [
+          -0.06490530303030304,
+          0.03692234848484848
+        ],
+        "all_continue_conditions_met": false,
+        "reason": "the carrier was valid, but hierarchical role-component round robin did not improve every-component coverage and reduced both exact-column recall and complete-component rate relative to the shared-query flat RRF baseline"
+      }
+    }
+  ]
+}

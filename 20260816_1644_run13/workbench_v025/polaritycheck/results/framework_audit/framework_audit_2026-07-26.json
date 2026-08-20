@@ -1,0 +1,277 @@
+{
+  "experiment": "in-the-wild framework audit at shipped defaults",
+  "date": "2026-07-26 11:51:08",
+  "node": "redacted",
+  "scope_notes": [
+    "components run at their OWN shipped default thresholds",
+    "defaults are defaults: callers may override; this is the no-override case",
+    "LlamaIndex's default embed model is an OpenAI endpoint (no key used here); the audit runs across local encoders so no single encoder carries the result",
+    "components measured in isolation; downstream rerankers/LLM judges may catch some"
+  ],
+  "probes": [
+    {
+      "component": "llama_index.core.evaluation.SemanticSimilarityEvaluator",
+      "threshold": 0.8,
+      "provenance": "read from the INSTALLED llama-index-core package",
+      "consequence": "a WRONG answer is scored as correct -> every eval built on it reports inflated accuracy",
+      "per_encoder": [
+        {
+          "encoder": "nomic-embed-text-v1.5 MRL-256 [PRODUCTION PATH, search_document:]",
+          "correct_fire_rate": 0.75,
+          "harmful_fire_rate": 0.65,
+          "youden_j": 0.1,
+          "n_should": 40,
+          "n_must_not": 40
+        },
+        {
+          "encoder": "nomic-embed-text-v1.5 [clustering: — documented symmetric prefix]",
+          "correct_fire_rate": 0.65,
+          "harmful_fire_rate": 0.525,
+          "youden_j": 0.125,
+          "n_should": 40,
+          "n_must_not": 40
+        },
+        {
+          "encoder": "sentence-transformers/all-MiniLM-L6-v2",
+          "correct_fire_rate": 0.5,
+          "harmful_fire_rate": 0.475,
+          "youden_j": 0.025,
+          "n_should": 40,
+          "n_must_not": 40
+        },
+        {
+          "encoder": "sentence-transformers/all-mpnet-base-v2",
+          "correct_fire_rate": 0.5,
+          "harmful_fire_rate": 0.425,
+          "youden_j": 0.075,
+          "n_should": 40,
+          "n_must_not": 40
+        },
+        {
+          "encoder": "BAAI/bge-base-en-v1.5",
+          "correct_fire_rate": 0.525,
+          "harmful_fire_rate": 0.5,
+          "youden_j": 0.025,
+          "n_should": 40,
+          "n_must_not": 40
+        },
+        {
+          "encoder": "thenlper/gte-base",
+          "correct_fire_rate": 0.95,
+          "harmful_fire_rate": 0.85,
+          "youden_j": 0.1,
+          "n_should": 40,
+          "n_must_not": 40
+        },
+        {
+          "encoder": "e5-base-v2 [query: — card's symmetric convention]",
+          "correct_fire_rate": 0.9,
+          "harmful_fire_rate": 0.775,
+          "youden_j": 0.125,
+          "n_should": 40,
+          "n_must_not": 40
+        },
+        {
+          "encoder": "e5-base-v2 [NO prefix — sensitivity variant]",
+          "correct_fire_rate": 0.95,
+          "harmful_fire_rate": 0.775,
+          "youden_j": 0.175,
+          "n_should": 40,
+          "n_must_not": 40
+        },
+        {
+          "encoder": "mixedbread-ai/mxbai-embed-large-v1",
+          "correct_fire_rate": 0.525,
+          "harmful_fire_rate": 0.425,
+          "youden_j": 0.1,
+          "n_should": 40,
+          "n_must_not": 40
+        }
+      ],
+      "youden_j_range": [
+        0.025,
+        0.175
+      ],
+      "harmful_fire_rate_range": [
+        0.425,
+        0.85
+      ]
+    },
+    {
+      "component": "langchain EmbeddingsRedundantFilter",
+      "threshold": 0.95,
+      "provenance": "documented default: similarity_fn=cosine_similarity, similarity_threshold=0.95",
+      "consequence": "the document that DISAGREED is silently removed from the context",
+      "per_encoder": [
+        {
+          "encoder": "nomic-embed-text-v1.5 MRL-256 [PRODUCTION PATH, search_document:]",
+          "correct_fire_rate": 0.85,
+          "harmful_fire_rate": 0.9,
+          "youden_j": -0.05,
+          "n_should": 20,
+          "n_must_not": 20
+        },
+        {
+          "encoder": "nomic-embed-text-v1.5 [clustering: — documented symmetric prefix]",
+          "correct_fire_rate": 0.85,
+          "harmful_fire_rate": 0.8,
+          "youden_j": 0.05,
+          "n_should": 20,
+          "n_must_not": 20
+        },
+        {
+          "encoder": "sentence-transformers/all-MiniLM-L6-v2",
+          "correct_fire_rate": 0.65,
+          "harmful_fire_rate": 0.4,
+          "youden_j": 0.25,
+          "n_should": 20,
+          "n_must_not": 20
+        },
+        {
+          "encoder": "sentence-transformers/all-mpnet-base-v2",
+          "correct_fire_rate": 0.6,
+          "harmful_fire_rate": 0.45,
+          "youden_j": 0.15,
+          "n_should": 20,
+          "n_must_not": 20
+        },
+        {
+          "encoder": "BAAI/bge-base-en-v1.5",
+          "correct_fire_rate": 0.8,
+          "harmful_fire_rate": 0.3,
+          "youden_j": 0.5,
+          "n_should": 20,
+          "n_must_not": 20
+        },
+        {
+          "encoder": "thenlper/gte-base",
+          "correct_fire_rate": 0.95,
+          "harmful_fire_rate": 0.7,
+          "youden_j": 0.25,
+          "n_should": 20,
+          "n_must_not": 20
+        },
+        {
+          "encoder": "e5-base-v2 [query: — card's symmetric convention]",
+          "correct_fire_rate": 0.95,
+          "harmful_fire_rate": 0.55,
+          "youden_j": 0.4,
+          "n_should": 20,
+          "n_must_not": 20
+        },
+        {
+          "encoder": "e5-base-v2 [NO prefix — sensitivity variant]",
+          "correct_fire_rate": 0.95,
+          "harmful_fire_rate": 0.6,
+          "youden_j": 0.35,
+          "n_should": 20,
+          "n_must_not": 20
+        },
+        {
+          "encoder": "mixedbread-ai/mxbai-embed-large-v1",
+          "correct_fire_rate": 0.75,
+          "harmful_fire_rate": 0.2,
+          "youden_j": 0.55,
+          "n_should": 20,
+          "n_must_not": 20
+        }
+      ],
+      "youden_j_range": [
+        -0.05,
+        0.55
+      ],
+      "harmful_fire_rate_range": [
+        0.2,
+        0.9
+      ]
+    },
+    {
+      "component": "semantic cache hit logic",
+      "threshold": 0.8,
+      "provenance": "GPTCache-style similarity_threshold",
+      "consequence": "the user is served the answer to a DIFFERENT question",
+      "per_encoder": [
+        {
+          "encoder": "nomic-embed-text-v1.5 MRL-256 [PRODUCTION PATH, search_document:]",
+          "correct_fire_rate": 0.75,
+          "harmful_fire_rate": 0.65,
+          "youden_j": 0.1,
+          "n_should": 40,
+          "n_must_not": 40
+        },
+        {
+          "encoder": "nomic-embed-text-v1.5 [clustering: — documented symmetric prefix]",
+          "correct_fire_rate": 0.65,
+          "harmful_fire_rate": 0.525,
+          "youden_j": 0.125,
+          "n_should": 40,
+          "n_must_not": 40
+        },
+        {
+          "encoder": "sentence-transformers/all-MiniLM-L6-v2",
+          "correct_fire_rate": 0.5,
+          "harmful_fire_rate": 0.475,
+          "youden_j": 0.025,
+          "n_should": 40,
+          "n_must_not": 40
+        },
+        {
+          "encoder": "sentence-transformers/all-mpnet-base-v2",
+          "correct_fire_rate": 0.5,
+          "harmful_fire_rate": 0.425,
+          "youden_j": 0.075,
+          "n_should": 40,
+          "n_must_not": 40
+        },
+        {
+          "encoder": "BAAI/bge-base-en-v1.5",
+          "correct_fire_rate": 0.525,
+          "harmful_fire_rate": 0.5,
+          "youden_j": 0.025,
+          "n_should": 40,
+          "n_must_not": 40
+        },
+        {
+          "encoder": "thenlper/gte-base",
+          "correct_fire_rate": 0.95,
+          "harmful_fire_rate": 0.85,
+          "youden_j": 0.1,
+          "n_should": 40,
+          "n_must_not": 40
+        },
+        {
+          "encoder": "e5-base-v2 [query: — card's symmetric convention]",
+          "correct_fire_rate": 0.9,
+          "harmful_fire_rate": 0.775,
+          "youden_j": 0.125,
+          "n_should": 40,
+          "n_must_not": 40
+        },
+        {
+          "encoder": "e5-base-v2 [NO prefix — sensitivity variant]",
+          "correct_fire_rate": 0.95,
+          "harmful_fire_rate": 0.775,
+          "youden_j": 0.175,
+          "n_should": 40,
+          "n_must_not": 40
+        },
+        {
+          "encoder": "mixedbread-ai/mxbai-embed-large-v1",
+          "correct_fire_rate": 0.525,
+          "harmful_fire_rate": 0.425,
+          "youden_j": 0.1,
+          "n_should": 40,
+          "n_must_not": 40
+        }
+      ],
+      "youden_j_range": [
+        0.025,
+        0.175
+      ],
+      "harmful_fire_rate_range": [
+        0.425,
+        0.85
+      ]
+    }
+  ]
+}

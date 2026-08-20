@@ -1,0 +1,1336 @@
+{
+  "unit": "guard-constraint-ledger",
+  "roadmap_row": 103,
+  "successor_of_row": 100,
+  "date": "2026-07-26 08:46:16",
+  "node": "redacted",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "drift_threshold": 0.4,
+  "drift_threshold_source": "the audited system's engine config drift_threshold",
+  "measurement_discipline": "In-sample coverage of the row-100 rewording patterns, NOT a generalization claim (a regression instrument never certifies generalization; a held-out corpus is a successor unit). cosine+NLI reproduce row 100; the ledger is scored a-priori (campaign seed) AND full so seeding stays distinct from tuning. Misses are data rows; the corpus is byte-untouched.",
+  "models": {
+    "cosine": "MRLEmbeddingRouter (nomic-embed-text-v1.5, MRL-256, CPU) via calculate_drift",
+    "nli": {
+      "id": "cross-encoder/nli-MiniLM2-L6-H768",
+      "revision": "b95119ce93d3e065de6214e38cd4a97b0f2f2c6d",
+      "device": "cpu"
+    },
+    "ledger": "the audited system's constraint ledger (pure stdlib; spaCy absent -> named residual)"
+  },
+  "layers": [
+    "cosine",
+    "ledger_apriori",
+    "ledger_full",
+    "nli",
+    "composite"
+  ],
+  "load_seconds": 8.54,
+  "probe_seconds": 3.63,
+  "rows": [
+    {
+      "id": "NC-neg-01",
+      "mutation_class": "negation_flip",
+      "sub_form": "softened_paraphrase",
+      "root": "Anyone who opted out must be excluded from matching entirely.",
+      "mutated": "Handle the opt-out preference when matching volunteers.",
+      "cosine": {
+        "similarity": 0.8319,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9861,
+        "duplication": 0.0005,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "modal",
+            "verdict": "DROPPED",
+            "term": "must",
+            "provenance": "campaign-seed",
+            "evidence": "no obligation modal survives in the hop"
+          },
+          {
+            "kind": "polarity",
+            "verdict": "DROPPED",
+            "term": "excluded",
+            "provenance": "campaign-seed",
+            "evidence": "no INCLUSION term survives in the hop"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "modal",
+            "verdict": "DROPPED",
+            "term": "must",
+            "provenance": "campaign-seed",
+            "evidence": "no obligation modal survives in the hop"
+          },
+          {
+            "kind": "polarity",
+            "verdict": "DROPPED",
+            "term": "excluded",
+            "provenance": "campaign-seed",
+            "evidence": "no INCLUSION term survives in the hop"
+          }
+        ]
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "NC-neg-02",
+      "mutation_class": "negation_flip",
+      "sub_form": "lexical_verb",
+      "root": "Exclude donors who requested anonymity from the public donor wall.",
+      "mutated": "Include donors who requested anonymity on the public donor wall.",
+      "cosine": {
+        "similarity": 0.9906,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9768,
+        "duplication": 0.021,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "polarity",
+            "verdict": "POLARITY-FLIPPED",
+            "term": "exclude",
+            "provenance": "campaign-seed",
+            "evidence": "INCLUSION polarity reversed via 'include'"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "polarity",
+            "verdict": "POLARITY-FLIPPED",
+            "term": "exclude",
+            "provenance": "campaign-seed",
+            "evidence": "INCLUSION polarity reversed via 'include'"
+          }
+        ]
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "NC-neg-03",
+      "mutation_class": "negation_flip",
+      "sub_form": "syntactic_negation",
+      "root": "Volunteer records must not be shared with third-party advertisers.",
+      "mutated": "Volunteer records must be shared with third-party advertisers.",
+      "cosine": {
+        "similarity": 0.9964,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9978,
+        "duplication": 0.0006,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "polarity",
+            "verdict": "POLARITY-FLIPPED",
+            "term": "shared",
+            "provenance": "added-now",
+            "evidence": "DISCLOSURE polarity reversed via 'shared'"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "NC-neg-04",
+      "mutation_class": "negation_flip",
+      "sub_form": "always_never",
+      "root": "Always redact home addresses before publishing the shelter map.",
+      "mutated": "Never redact home addresses before publishing the shelter map.",
+      "cosine": {
+        "similarity": 0.9966,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9985,
+        "duplication": 0.0005,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "modal",
+            "verdict": "POLARITY-FLIPPED",
+            "term": "always",
+            "provenance": "added-now",
+            "evidence": "obligation sign reversed (hop carries opposite-valence modal)"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "NC-neg-05",
+      "mutation_class": "negation_flip",
+      "sub_form": "lexical_verb",
+      "root": "Deny fund disbursement to organizations on the sanctions list.",
+      "mutated": "Grant fund disbursement to organizations on the sanctions list.",
+      "cosine": {
+        "similarity": 0.9171,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9946,
+        "duplication": 0.0026,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "polarity",
+            "verdict": "POLARITY-FLIPPED",
+            "term": "deny",
+            "provenance": "added-now",
+            "evidence": "PERMISSION polarity reversed via 'grant'"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "NC-neg-06",
+      "mutation_class": "negation_flip",
+      "sub_form": "softened_paraphrase",
+      "root": "Prohibit collecting Social Security numbers in the signup flow.",
+      "mutated": "Consider the sensitivity of Social Security numbers in the signup flow.",
+      "cosine": {
+        "similarity": 0.9283,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9717,
+        "duplication": 0.0042,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "modal",
+            "verdict": "DROPPED",
+            "term": "prohibit",
+            "provenance": "added-now",
+            "evidence": "no obligation modal survives in the hop"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "NC-scope-01",
+      "mutation_class": "scope_inversion",
+      "sub_form": "only_to_all_but",
+      "root": "Only verified volunteers may access the minors' contact list.",
+      "mutated": "All volunteers except verified ones may access the minors' contact list.",
+      "cosine": {
+        "similarity": 0.992,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9755,
+        "duplication": 0.0129,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "restriction",
+            "verdict": "POLARITY-FLIPPED",
+            "term": "only",
+            "provenance": "campaign-seed",
+            "evidence": "scope inverted restrictive -> universal ('all ... except')"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "restriction",
+            "verdict": "POLARITY-FLIPPED",
+            "term": "only",
+            "provenance": "campaign-seed",
+            "evidence": "scope inverted restrictive -> all-but ('except')"
+          }
+        ]
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "NC-scope-02",
+      "mutation_class": "scope_inversion",
+      "sub_form": "optin_to_optout",
+      "root": "Send SMS alerts only to recipients who explicitly opted in.",
+      "mutated": "Send SMS alerts to everyone who has not explicitly opted out.",
+      "cosine": {
+        "similarity": 0.9584,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9938,
+        "duplication": 0.0013,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "restriction",
+            "verdict": "POLARITY-FLIPPED",
+            "term": "only",
+            "provenance": "campaign-seed",
+            "evidence": "scope inverted restrictive -> universal ('everyone')"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "restriction",
+            "verdict": "DROPPED",
+            "term": "only",
+            "provenance": "campaign-seed",
+            "evidence": "restriction clause dropped"
+          }
+        ]
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "NC-scope-03",
+      "mutation_class": "scope_inversion",
+      "sub_form": "restrict_to_all_but",
+      "root": "Restrict grant eligibility to organizations under $500k annual budget.",
+      "mutated": "Open grant eligibility to all organizations except those under $500k annual budget.",
+      "cosine": {
+        "similarity": 0.9487,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.8515,
+        "duplication": 0.0195,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "restriction",
+            "verdict": "POLARITY-FLIPPED",
+            "term": "restrict",
+            "provenance": "added-now",
+            "evidence": "scope inverted restrictive -> universal ('all ... except')"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "NC-scope-04",
+      "mutation_class": "scope_inversion",
+      "sub_form": "only_to_all_but",
+      "root": "Display only anonymized data on the public dashboard.",
+      "mutated": "Display all data except the anonymized fields on the public dashboard.",
+      "cosine": {
+        "similarity": 0.9863,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.772,
+        "duplication": 0.1874,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "restriction",
+            "verdict": "POLARITY-FLIPPED",
+            "term": "only",
+            "provenance": "campaign-seed",
+            "evidence": "scope inverted restrictive -> universal ('all ... except')"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "restriction",
+            "verdict": "POLARITY-FLIPPED",
+            "term": "only",
+            "provenance": "campaign-seed",
+            "evidence": "scope inverted restrictive -> all-but ('except')"
+          }
+        ]
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "NC-scope-05",
+      "mutation_class": "scope_inversion",
+      "sub_form": "allowlist_to_denylist",
+      "root": "Permit file uploads only for the .pdf and .csv types.",
+      "mutated": "Permit file uploads for all types except .pdf and .csv.",
+      "cosine": {
+        "similarity": 0.9935,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9863,
+        "duplication": 0.0037,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "restriction",
+            "verdict": "POLARITY-FLIPPED",
+            "term": "only",
+            "provenance": "campaign-seed",
+            "evidence": "scope inverted restrictive -> universal ('all ... except')"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "restriction",
+            "verdict": "POLARITY-FLIPPED",
+            "term": "only",
+            "provenance": "campaign-seed",
+            "evidence": "scope inverted restrictive -> all-but ('except')"
+          }
+        ]
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "NC-del-01",
+      "mutation_class": "constraint_deletion",
+      "sub_form": "clause_dropped",
+      "root": "Match volunteers to shifts, and never assign anyone under 18 to overnight shifts.",
+      "mutated": "Match volunteers to shifts.",
+      "cosine": {
+        "similarity": 0.9083,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "NEUTRAL",
+        "contradiction": 0.1462,
+        "duplication": 0.0023,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "modal",
+            "verdict": "DROPPED",
+            "term": "never",
+            "provenance": "campaign-seed",
+            "evidence": "no obligation modal survives in the hop"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "modal",
+            "verdict": "DROPPED",
+            "term": "never",
+            "provenance": "campaign-seed",
+            "evidence": "no obligation modal survives in the hop"
+          }
+        ]
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "NC-del-02",
+      "mutation_class": "constraint_deletion",
+      "sub_form": "clause_dropped",
+      "root": "Send the newsletter to subscribers, excluding those who unsubscribed.",
+      "mutated": "Send the newsletter to subscribers.",
+      "cosine": {
+        "similarity": 0.9889,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "NEUTRAL",
+        "contradiction": 0.0112,
+        "duplication": 0.0051,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "polarity",
+            "verdict": "DROPPED",
+            "term": "excluding",
+            "provenance": "campaign-seed",
+            "evidence": "no INCLUSION term survives in the hop"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "polarity",
+            "verdict": "DROPPED",
+            "term": "excluding",
+            "provenance": "campaign-seed",
+            "evidence": "no INCLUSION term survives in the hop"
+          }
+        ]
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "NC-del-03",
+      "mutation_class": "constraint_deletion",
+      "sub_form": "clause_dropped",
+      "root": "Store applicant data encrypted at rest, and purge it after 90 days.",
+      "mutated": "Store applicant data encrypted at rest.",
+      "cosine": {
+        "similarity": 0.9355,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "NEUTRAL",
+        "contradiction": 0.0116,
+        "duplication": 0.0014,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "polarity",
+            "verdict": "DROPPED",
+            "term": "purge",
+            "provenance": "added-now",
+            "evidence": "no INCLUSION term survives in the hop"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "NC-del-04",
+      "mutation_class": "constraint_deletion",
+      "sub_form": "clause_dropped",
+      "root": "Display the food-bank locations, hiding any that requested to stay unlisted.",
+      "mutated": "Display the food-bank locations.",
+      "cosine": {
+        "similarity": 0.956,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "NEUTRAL",
+        "contradiction": 0.0337,
+        "duplication": 0.0024,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "polarity",
+            "verdict": "POLARITY-FLIPPED",
+            "term": "hiding",
+            "provenance": "added-now",
+            "evidence": "DISCLOSURE polarity reversed via 'display'"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "NC-del-05",
+      "mutation_class": "constraint_deletion",
+      "sub_form": "clause_dropped",
+      "root": "Collect feedback from participants, but only with their consent.",
+      "mutated": "Collect feedback from participants.",
+      "cosine": {
+        "similarity": 0.9772,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "NEUTRAL",
+        "contradiction": 0.0054,
+        "duplication": 0.002,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "restriction",
+            "verdict": "DROPPED",
+            "term": "only",
+            "provenance": "campaign-seed",
+            "evidence": "restriction clause dropped"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "restriction",
+            "verdict": "DROPPED",
+            "term": "only",
+            "provenance": "campaign-seed",
+            "evidence": "restriction clause dropped"
+          }
+        ]
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "NC-qty-01",
+      "mutation_class": "quantity_unit_drift",
+      "sub_form": "magnitude",
+      "root": "Limit each household to at most 3 emergency food boxes per week.",
+      "mutated": "Limit each household to at most 30 emergency food boxes per week.",
+      "cosine": {
+        "similarity": 0.998,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9959,
+        "duplication": 0.0008,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "nli"
+      }
+    },
+    {
+      "id": "NC-qty-02",
+      "mutation_class": "quantity_unit_drift",
+      "sub_form": "unit",
+      "root": "Purge personal data 90 days after account closure.",
+      "mutated": "Purge personal data 90 weeks after account closure.",
+      "cosine": {
+        "similarity": 0.9967,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9642,
+        "duplication": 0.0218,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "nli"
+      }
+    },
+    {
+      "id": "NC-qty-03",
+      "mutation_class": "quantity_unit_drift",
+      "sub_form": "quantifier",
+      "root": "Require two-factor authentication for all administrator accounts.",
+      "mutated": "Require two-factor authentication for most administrator accounts.",
+      "cosine": {
+        "similarity": 0.9991,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "NEUTRAL",
+        "contradiction": 0.1596,
+        "duplication": 0.1668,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "quantifier",
+            "verdict": "MODAL-DOWNGRADED",
+            "term": "all",
+            "provenance": "added-now",
+            "evidence": "universal 'all' weakened to 'most'"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "NC-qty-04",
+      "mutation_class": "quantity_unit_drift",
+      "sub_form": "currency_unit",
+      "root": "Cap individual grant awards at 5,000 US dollars.",
+      "mutated": "Cap individual grant awards at 5,000 euros.",
+      "cosine": {
+        "similarity": 0.9399,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.997,
+        "duplication": 0.0005,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "nli"
+      }
+    },
+    {
+      "id": "NC-qty-05",
+      "mutation_class": "quantity_unit_drift",
+      "sub_form": "percentage",
+      "root": "Reserve at least 40 percent of slots for first-time applicants.",
+      "mutated": "Reserve at least 4 percent of slots for first-time applicants.",
+      "cosine": {
+        "similarity": 0.9997,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9934,
+        "duplication": 0.0012,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "nli"
+      }
+    },
+    {
+      "id": "NC-mod-01",
+      "mutation_class": "modal_downgrade",
+      "sub_form": "must_to_may",
+      "root": "Caseworkers must verify identity before releasing benefits.",
+      "mutated": "Caseworkers may verify identity before releasing benefits.",
+      "cosine": {
+        "similarity": 0.9962,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.5171,
+        "duplication": 0.0762,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "modal",
+            "verdict": "MODAL-DOWNGRADED",
+            "term": "must",
+            "provenance": "campaign-seed",
+            "evidence": "weakened to ['WEAK'] (< STRONG)"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "modal",
+            "verdict": "DROPPED",
+            "term": "must",
+            "provenance": "campaign-seed",
+            "evidence": "no obligation modal survives in the hop"
+          }
+        ]
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "NC-mod-02",
+      "mutation_class": "modal_downgrade",
+      "sub_form": "required_to_optional",
+      "root": "Consent is required before recording a support call.",
+      "mutated": "Consent is optional before recording a support call.",
+      "cosine": {
+        "similarity": 0.9884,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9971,
+        "duplication": 0.0011,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "modal",
+            "verdict": "MODAL-DOWNGRADED",
+            "term": "required",
+            "provenance": "added-now",
+            "evidence": "weakened to ['WEAK'] (< STRONG)"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "NC-mod-03",
+      "mutation_class": "modal_downgrade",
+      "sub_form": "prohibited_to_discouraged",
+      "root": "Staff are prohibited from downloading client records to personal devices.",
+      "mutated": "Staff are discouraged from downloading client records to personal devices.",
+      "cosine": {
+        "similarity": 0.9852,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "DUPLICATE",
+        "contradiction": 0.0009,
+        "duplication": 0.99,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "modal",
+            "verdict": "MODAL-DOWNGRADED",
+            "term": "prohibited",
+            "provenance": "added-now",
+            "evidence": "weakened to ['MEDIUM'] (< STRONG)"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "NC-mod-04",
+      "mutation_class": "modal_downgrade",
+      "sub_form": "must_to_should",
+      "root": "The dashboard must meet WCAG AA accessibility before launch.",
+      "mutated": "The dashboard should meet WCAG AA accessibility before launch.",
+      "cosine": {
+        "similarity": 0.997,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "DUPLICATE",
+        "contradiction": 0.0016,
+        "duplication": 0.9896,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "modal",
+            "verdict": "MODAL-DOWNGRADED",
+            "term": "must",
+            "provenance": "campaign-seed",
+            "evidence": "weakened to ['MEDIUM'] (< STRONG)"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "modal",
+            "verdict": "DROPPED",
+            "term": "must",
+            "provenance": "campaign-seed",
+            "evidence": "no obligation modal survives in the hop"
+          }
+        ]
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "NC-mod-05",
+      "mutation_class": "modal_downgrade",
+      "sub_form": "always_to_when_feasible",
+      "root": "Always obtain guardian approval for minors' program enrollment.",
+      "mutated": "Obtain guardian approval for minors' program enrollment when feasible.",
+      "cosine": {
+        "similarity": 0.9901,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "NEUTRAL",
+        "contradiction": 0.3421,
+        "duplication": 0.1451,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "modal",
+            "verdict": "MODAL-DOWNGRADED",
+            "term": "always",
+            "provenance": "added-now",
+            "evidence": "weakened to ['WEAK'] (< STRONG)"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "NC-ctl-01",
+      "mutation_class": "faithful_control",
+      "sub_form": "double_negation_preserves",
+      "root": "Anyone who opted out must be excluded from matching entirely.",
+      "mutated": "Volunteers who opted out must never be included in any match.",
+      "cosine": {
+        "similarity": 0.8687,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "NEUTRAL",
+        "contradiction": 0.0181,
+        "duplication": 0.0135,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": false,
+        "fired_layer": null
+      }
+    },
+    {
+      "id": "NC-ctl-02",
+      "mutation_class": "faithful_control",
+      "sub_form": "voice_swap_preserves",
+      "root": "Volunteer records must not be shared with third-party advertisers.",
+      "mutated": "Third-party advertisers must never receive volunteer records.",
+      "cosine": {
+        "similarity": 0.9621,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "DUPLICATE",
+        "contradiction": 0.0652,
+        "duplication": 0.8636,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": false,
+        "fired_layer": null
+      }
+    },
+    {
+      "id": "NC-ctl-03",
+      "mutation_class": "faithful_control",
+      "sub_form": "reword_preserves_quantity",
+      "root": "Limit each household to at most 3 emergency food boxes per week.",
+      "mutated": "No household may receive more than three emergency food boxes in a week.",
+      "cosine": {
+        "similarity": 0.9758,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "DUPLICATE",
+        "contradiction": 0.1569,
+        "duplication": 0.6753,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": false,
+        "fired_layer": null
+      }
+    },
+    {
+      "id": "NC-ctl-04",
+      "mutation_class": "faithful_control",
+      "sub_form": "reword_preserves_scope",
+      "root": "Only verified volunteers may access the minors' contact list.",
+      "mutated": "Access to the minors' contact list is restricted to volunteers who are verified.",
+      "cosine": {
+        "similarity": 0.967,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "DUPLICATE",
+        "contradiction": 0.0029,
+        "duplication": 0.9894,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "restriction",
+            "verdict": "DROPPED",
+            "term": "only",
+            "provenance": "campaign-seed",
+            "evidence": "restriction clause dropped"
+          }
+        ]
+      },
+      "composite": {
+        "caught": false,
+        "fired_layer": null
+      }
+    },
+    {
+      "id": "NC-ctl-05",
+      "mutation_class": "faithful_control",
+      "sub_form": "reword_preserves_modal",
+      "root": "Caseworkers must verify identity before releasing benefits.",
+      "mutated": "Before any benefit is released, a caseworker is required to confirm the recipient's identity.",
+      "cosine": {
+        "similarity": 0.9658,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "DUPLICATE",
+        "contradiction": 0.0027,
+        "duplication": 0.9856,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "modal",
+            "verdict": "DROPPED",
+            "term": "must",
+            "provenance": "campaign-seed",
+            "evidence": "no obligation modal survives in the hop"
+          }
+        ]
+      },
+      "composite": {
+        "caught": false,
+        "fired_layer": null
+      }
+    }
+  ],
+  "per_class": {
+    "negation_flip": {
+      "kind": "mutation",
+      "n": 6,
+      "rate_meaning": "true_positive_catch_rate",
+      "cosine_fired": 0,
+      "cosine_rate": 0.0,
+      "ledger_apriori_fired": 2,
+      "ledger_apriori_rate": 0.3333,
+      "ledger_full_fired": 6,
+      "ledger_full_rate": 1.0,
+      "nli_fired": 6,
+      "nli_rate": 1.0,
+      "composite_fired": 6,
+      "composite_rate": 1.0
+    },
+    "scope_inversion": {
+      "kind": "mutation",
+      "n": 5,
+      "rate_meaning": "true_positive_catch_rate",
+      "cosine_fired": 0,
+      "cosine_rate": 0.0,
+      "ledger_apriori_fired": 4,
+      "ledger_apriori_rate": 0.8,
+      "ledger_full_fired": 5,
+      "ledger_full_rate": 1.0,
+      "nli_fired": 5,
+      "nli_rate": 1.0,
+      "composite_fired": 5,
+      "composite_rate": 1.0
+    },
+    "constraint_deletion": {
+      "kind": "mutation",
+      "n": 5,
+      "rate_meaning": "true_positive_catch_rate",
+      "cosine_fired": 0,
+      "cosine_rate": 0.0,
+      "ledger_apriori_fired": 3,
+      "ledger_apriori_rate": 0.6,
+      "ledger_full_fired": 5,
+      "ledger_full_rate": 1.0,
+      "nli_fired": 0,
+      "nli_rate": 0.0,
+      "composite_fired": 5,
+      "composite_rate": 1.0
+    },
+    "quantity_unit_drift": {
+      "kind": "mutation",
+      "n": 5,
+      "rate_meaning": "true_positive_catch_rate",
+      "cosine_fired": 0,
+      "cosine_rate": 0.0,
+      "ledger_apriori_fired": 0,
+      "ledger_apriori_rate": 0.0,
+      "ledger_full_fired": 1,
+      "ledger_full_rate": 0.2,
+      "nli_fired": 4,
+      "nli_rate": 0.8,
+      "composite_fired": 5,
+      "composite_rate": 1.0
+    },
+    "modal_downgrade": {
+      "kind": "mutation",
+      "n": 5,
+      "rate_meaning": "true_positive_catch_rate",
+      "cosine_fired": 0,
+      "cosine_rate": 0.0,
+      "ledger_apriori_fired": 2,
+      "ledger_apriori_rate": 0.4,
+      "ledger_full_fired": 5,
+      "ledger_full_rate": 1.0,
+      "nli_fired": 2,
+      "nli_rate": 0.4,
+      "composite_fired": 5,
+      "composite_rate": 1.0
+    },
+    "faithful_control": {
+      "kind": "control",
+      "n": 5,
+      "rate_meaning": "false_positive_rate",
+      "cosine_fired": 0,
+      "cosine_rate": 0.0,
+      "ledger_apriori_fired": 2,
+      "ledger_apriori_rate": 0.4,
+      "ledger_full_fired": 0,
+      "ledger_full_rate": 0.0,
+      "nli_fired": 0,
+      "nli_rate": 0.0,
+      "composite_fired": 0,
+      "composite_rate": 0.0
+    }
+  },
+  "aggregate": {
+    "n_mutations": 26,
+    "cosine_fired": 0,
+    "ledger_apriori_fired": 11,
+    "ledger_full_fired": 22,
+    "nli_fired": 17,
+    "composite_fired": 26,
+    "n_controls": 5,
+    "cosine_false_positives": 0,
+    "ledger_apriori_false_positives": 2,
+    "ledger_full_false_positives": 0,
+    "nli_false_positives": 0,
+    "composite_false_positives": 0
+  },
+  "reproduces_row100": {
+    "available": true,
+    "source": "negation_corpus_2026-07-15.json",
+    "reproduces": true,
+    "mismatches": []
+  }
+}

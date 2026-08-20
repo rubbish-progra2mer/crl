@@ -1,0 +1,46 @@
+import random
+import numpy as np
+from problems import BudgetExhausted
+
+def optimize(f, dim, bounds, budget, seed):
+    random.seed(seed)
+    np.random.seed(seed)
+    
+    # Initialize the best solution and score
+    best_solution = [bounds[0][0] + (bounds[1][0] - bounds[0][0]) * random.random() for _ in range(dim)]
+    best_score = f(best_solution)
+    
+    # Parameters for the coordinate pattern search
+    step_size = 0.1
+    step_adjustment = 0.5
+    num_restarts = 3
+    num_steps = 5
+    
+    for restart in range(num_restarts):
+        for _ in range(num_steps):
+            # Randomly select a dimension to update
+            dim_to_update = np.random.randint(dim)
+            
+            # Generate a new candidate solution
+            candidate_solution = best_solution.copy()
+            candidate_solution[dim_to_update] += step_size * (2 * random.random() - 1)
+            
+            # Ensure candidate is within bounds
+            candidate_solution[dim_to_update] = max(bounds[0][dim_to_update], min(bounds[1][dim_to_update], candidate_solution[dim_to_update]))
+            
+            # Evaluate the candidate
+            try:
+                candidate_score = f(candidate_solution)
+            except Exception as e:
+                raise BudgetExhausted from e
+            
+            # Update the best solution if the candidate is better
+            if candidate_score < best_score:
+                best_solution = candidate_solution
+                best_score = candidate_score
+                step_size *= 1 + step_adjustment
+            else:
+                step_size *= 1 - step_adjustment
+    
+    # Return the best solution and score
+    return {'solution': best_solution, 'score': best_score}

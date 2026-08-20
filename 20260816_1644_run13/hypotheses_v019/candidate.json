@@ -1,0 +1,43 @@
+{
+  "hypothesis_id": "h-v019-gricean-specificity-retreat",
+  "title": "知识边界驱动的回答具体度退让",
+  "problem": "大语言模型在不熟悉实体上仍偏好生成具体指称，即使存在正确的上位概念也不退让，因而把可提供的粗粒度真信息替换成具体幻觉。",
+  "target_failure": {
+    "summary": "最新探针显示模型内部同时编码实体是否超出知识边界和即将生成的指称具体度，但两个信号没有在生成策略中协调。",
+    "card_ids": [],
+    "evidence_ids": []
+  },
+  "mechanism_claim": "把候选回答组织为指称具体度层级，并用内部知识边界分数选择满足风险约束的最深节点，可在完全拒答前退到仍然真实且有信息量的上位概念。",
+  "changed_computation": {
+    "baseline": "模型直接生成具体答案，或用单一阈值在完整回答与完全拒答之间二选一。",
+    "intervention": "同时估计知识边界与候选指称层级，在具体度树上从叶节点向上退让，输出通过校准风险约束的最具体祖先。",
+    "information_available": "模型内部表示、候选指称及外部或自动构造的概念层级。",
+    "timing": "生成指称前或解码重排阶段。",
+    "budget_effect": "增加内部探针、候选层级构造和一次层级选择。"
+  },
+  "minimal_killer_experiment": "在实体熟悉度与指称具体度正交变化的基准上，比较直接回答、二元拒答、层级选择性分类和知识边界驱动退让的真实性、信息量及风险—具体度曲线。",
+  "falsifier": "若源工作已经提出耦合知识边界与具体度的训练或转向目标，且分层选择性分类已形式化不确定性下的具体度退让与准确率保证，则候选只是已有问题建议和成熟方法的组合。",
+  "alternative_explanations": [
+    "概念层级本身提供了外部答案信息",
+    "内部知识边界探针在分布外实体上不校准",
+    "收益可由普通置信度阈值加模板化上位概念复制",
+    "自由文本指称不形成唯一树结构"
+  ],
+  "nearest_prior_risk": "Toward a Gricean Retreat 已提出耦合知识边界与指称具体度的训练/转向方向；Hierarchical Selective Classification 已让不确定预测降低具体度并给出风险约束；分层保形分类和几何校准拒答覆盖统计保证。",
+  "lineage_note": "从 arXiv:2608.13484 报告的知识边界—具体度解耦现象出发。",
+  "literature_refs": [
+    "arXiv:2608.13484",
+    "arXiv:2405.11533",
+    "arXiv:2501.19038",
+    "arXiv:2604.27914"
+  ],
+  "descriptors": {
+    "problem_family": "知识边界与幻觉控制",
+    "intervention_family": "分层选择性生成",
+    "computation_stage": "指称生成前",
+    "information_source": "内部知识边界与概念层级",
+    "evaluation_mode": "风险—具体度权衡",
+    "timing_class": "推理时",
+    "budget_class": "增加探针与层级选择"
+  }
+}

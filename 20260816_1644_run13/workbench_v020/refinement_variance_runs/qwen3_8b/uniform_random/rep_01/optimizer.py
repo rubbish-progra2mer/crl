@@ -1,0 +1,22 @@
+import numpy as np
+from problems import BudgetExhausted
+
+def optimize(f, dim, bounds, budget, seed):
+    np.random.seed(seed)
+    low, high = bounds
+    best_x = np.random.uniform(low, high, dim)
+    best_f = f(best_x)
+    evaluations = 1
+
+    while evaluations < budget:
+        try:
+            x = np.random.uniform(low, high, dim)
+            f_val = f(x)
+            evaluations += 1
+            if f_val < best_f:
+                best_f = f_val
+                best_x = x
+        except BudgetExhausted:
+            break
+
+    return {'best_x': best_x, 'best_f': best_f}

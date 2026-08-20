@@ -1,0 +1,54 @@
+```python
+import numpy as np
+from problems import BudgetExhausted
+
+def optimize(f, dim, bounds, budget, seed):
+    np.random.seed(seed)
+    
+    # Constants for the hybrid algorithm
+    NUM_INIT_SAMPLES = 50
+    LOCAL_SEARCHES = 5
+    LOCAL_BUDGET = budget // (LOCAL_SEARCHES + 1)
+    INIT_BUDGET = budget - LOCAL_SEARCHES * LOCAL_BUDGET
+    
+    # Initialize the sample points
+    samples = np.random.uniform(bounds[0], bounds[1], (NUM_INIT_SAMPLES, dim))
+    values = np.array([f(x) for x in samples])
+    best_index = np.argmin(values)
+    best_point = samples[best_index]
+    best_value = values[best_index]
+    
+    # Perform local searches
+    local_points = [best_point]
+    for _ in range(LOCAL_SEARCHES):
+        # Randomly perturb the best point
+        perturbation = np.random.uniform(-0.1, 0.1, dim)
+        new_point = best_point + perturbation
+        # Clip to bounds
+        new_point = np.clip(new_point, bounds[0], bounds[1])
+        
+        # Perform a local search
+        local_values = [f(new_point + np.random.uniform(-0.1, 0.1, dim)) for _ in range(LOCAL_BUDGET)]
+        new_value = min(local_values)
+        
+        # Update the best point if the new value is better
+        if new_value < best_value:
+            best_value = new_value
+            best_point = new_point
+            local_points.append(best_point)
+        
+        if len(local_points) > 1 and local_points[-1] in local_points[:-1]:
+            break  # Avoid infinite loops
+    
+    # Ensure we did not exhaust the budget
+    if len(local_points) * LOCAL_BUDGET + INIT_BUDGET > budget:
+        raise BudgetExhausted("Budget exhausted during optimization")
+    
+    # Return the best point found
+    return {"point": best_point, "value": best_value}
+
+# Example usage:
+# optimize(lambda x: np.sum(x**2), 5, (-5.12, 5.12), 100, 42)
+```
+
+This implementation of the `optimize` function follows the global-local hybrid strategy. It first performs an initial sampling of the search space, then conducts several local searches from the best points found during the initial sampling. The function ensures that the budget is not exceeded and raises a `BudgetExhausted` exception if this occurs.

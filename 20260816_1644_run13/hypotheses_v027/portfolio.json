@@ -1,0 +1,59 @@
+{
+  "created_at_utc": "2026-08-16T12:18:17.904031Z",
+  "hypotheses": [
+    {
+      "alternative_explanations": [
+        "评分源可能只在真实分布上被投毒而对探针正常",
+        "探针模板泄漏后自适应攻击者可选择性通过",
+        "已知安全偏序本身需要昂贵人工标注",
+        "独立守护指标可以更直接地阻止不安全候选"
+      ],
+      "changed_computation": {
+        "baseline": "依据外部主指标更新提示，最多在候选提示性能下降时做回滚。",
+        "budget_effect": "每批增加少量评分查询，以换取对反馈通道投毒的在线检测。",
+        "information_available": "少量受信任的安全偏序模板、随机探针种子、外部评分接口、候选提示与版本历史。",
+        "intervention": "把评分源本身作为待认证对象，用隐藏的已知偏序探针检验其局部单调性；认证失败阻断该反馈对提示更新的因果影响。",
+        "timing": "反馈到达之后、优化器读取反馈并产生或接受提示更新之前。"
+      },
+      "created_at_utc": "2026-08-16T12:18:51.375844Z",
+      "descriptors": {
+        "budget_class": "每批额外探针查询",
+        "computation_stage": "优化反馈接受之前",
+        "evaluation_mode": "反馈投毒攻击与安全效用联合指标",
+        "information_source": "评分接口与受信任反事实偏序",
+        "intervention_family": "隐藏支配探针和反馈隔离",
+        "problem_family": "自动提示优化的反馈通道完整性",
+        "timing_class": "在线优化时"
+      },
+      "falsifier": "若已有提示优化框架已经以独立守护指标下限和自动回滚阻止不安全候选，且奖励审计方法已用受控、类别保持的反事实对发现评分不一致，则随机隐藏探针没有新的接受规则或统计保证。",
+      "hypothesis_id": "h-v027-dominance-canary-feedback-attestation",
+      "lineage_note": "由提示优化反馈投毒现象触发；未执行本地攻击复现，因为先行工作差分审计先于实验投资。",
+      "literature_refs": [
+        "arXiv:2510.14381",
+        "arXiv:2605.26275",
+        "arXiv:2512.00920",
+        "ACL 2026: Teach a Reward Model to Correct Itself"
+      ],
+      "mechanism_claim": "在每次接受优化反馈前，私下采样一批具有已知安全偏序的反事实响应对并查询同一评分源；若评分违反预注册支配关系达到序贯阈值，则把反馈批次标为不可信、拒绝候选提示并回滚到最近可信版本。",
+      "minimal_killer_experiment": "复现提示优化反馈操纵与伪奖励攻击，对比无防御、查询边界高亮、独立守护指标下限、固定探针集和随机支配金丝雀；测量攻击成功率、主任务分数、投毒检测延迟、误报率、探针查询成本和自适应攻击下的绕过率。",
+      "nearest_prior_risk": "SPEAR 的守护指标下限与自动回滚、Reward Auditor 的受控扰动可靠性审计、REFORM 的类别保持奖励不一致搜索共同覆盖核心计算。",
+      "parent_ids": [],
+      "problem": "自动提示优化器会把外部标量反馈当成可信方向；反馈被投毒或指标与安全目标解耦时，优化器可在主分数上改进却系统性增加有害行为。",
+      "revision": 3,
+      "status": "prior_collision",
+      "status_reason": "SPEAR已用独立守护指标下限和自动回滚阻断不安全提示，Reward Auditor用受控扰动审计评分可靠性，REFORM搜索偏好类别保持但奖励不一致的反例；随机隐藏探针仅是三者的在线部署变体。",
+      "target_failure": {
+        "card_ids": [],
+        "evidence_ids": [],
+        "summary": "Are My Optimized Prompts Compromised（arXiv:2510.14381）报告反馈操纵可把攻击成功率提高最多0.48，伪奖励攻击提高0.23；论文指出标量反馈语义不透明，并把多独立指标分歧检测留作方向。"
+      },
+      "title": "支配金丝雀驱动的提示优化反馈认证",
+      "updated_at_utc": "2026-08-16T12:18:51.575842Z"
+    }
+  ],
+  "revision": 3,
+  "run_id": "20260816_1644_run13",
+  "schema_version": 1,
+  "updated_at_utc": "2026-08-16T12:18:51.575842Z",
+  "version": "v027"
+}

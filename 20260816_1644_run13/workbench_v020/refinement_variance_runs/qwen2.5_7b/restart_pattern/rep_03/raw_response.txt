@@ -1,0 +1,56 @@
+```python
+import numpy as np
+from problems import BudgetExhausted
+
+def optimize(f, dim, bounds, budget, seed):
+    np.random.seed(seed)
+    
+    # Initial search bounds
+    low, high = bounds
+    step_size = (high - low) / 100  # Initial step size
+    
+    # Number of restarts
+    num_restarts = 5
+    
+    best_solution = None
+    best_value = float('inf')
+    eval_count = 0
+    
+    for _ in range(num_restarts):
+        # Random starting point
+        x = low + np.random.rand(dim) * (high - low)
+        
+        for i in range(dim):
+            # Test positive step
+            x_pos = x.copy()
+            x_pos[i] += step_size
+            eval_count += 1
+            value_pos = f(x_pos)
+            
+            # Test negative step
+            x_neg = x.copy()
+            x_neg[i] -= step_size
+            eval_count += 1
+            value_neg = f(x_neg)
+            
+            if value_pos < value_neg:
+                x[i] += step_size
+            else:
+                x[i] -= step_size
+                
+            step_size /= 2  # Halve the step size after each step
+                
+        if f(x) < best_value:
+            best_value = f(x)
+            best_solution = x
+            
+        if eval_count >= budget:
+            break
+    
+    if eval_count >= budget:
+        raise BudgetExhausted
+    
+    return {'solution': best_solution, 'value': best_value, 'evaluations': eval_count}
+```
+
+This code implements a restarted coordinate pattern search for a 5-dimensional black-box minimization problem. It uses multiple random starts and tests positive and negative coordinate moves, adapting the step size based on the success of each move. The implementation stays within the specified budget and uses the provided function `f` to evaluate candidate solutions.

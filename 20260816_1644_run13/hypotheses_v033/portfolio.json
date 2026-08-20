@@ -1,0 +1,60 @@
+{
+  "created_at_utc": "2026-08-16T15:56:17.187479Z",
+  "hypotheses": [
+    {
+      "alternative_explanations": [
+        "收益只是多一次模型调用带来的计算量增加",
+        "先导任务由人工模板构造并偏向字段隔离方法",
+        "关键词评分把翻译同义词误判为错误或把不完整语义误判为正确",
+        "目标语言正文恰好是唯一自由文本字段，方法无法推广到多个依赖字段",
+        "显式字段描述或前置翻译已经足够，只是先导提示没有调优"
+      ],
+      "changed_computation": {
+        "baseline": "一次联合生成全部工具参数，或再次联合修订整个调用。",
+        "budget_effect": "增加局部语言渲染调用；输出空间从整个调用收缩到被标注字段。",
+        "information_available": "原始请求、模式中的字段语言类型、初始字段值和目标语言。",
+        "intervention": "固定工具骨架与 COPY_SOURCE/CANONICAL 槽位，只重新生成 REQUESTED_LANGUAGE 槽位并确定性装配。",
+        "timing": "初始工具调用形成后、真实工具执行前。"
+      },
+      "created_at_utc": "2026-08-16T15:56:17.393977Z",
+      "descriptors": {
+        "budget_class": "增加一次局部字段渲染，避免整调用重生成",
+        "computation_stage": "初始工具调用生成之后、执行之前",
+        "evaluation_mode": "本地合成多语言工具调用",
+        "information_source": "用户请求、工具模式、字段语言类型和初始调用骨架",
+        "intervention_family": "字段语言类型与选择性参数编译",
+        "problem_family": "多语言工具调用的异质参数语言约束",
+        "timing_class": "每次包含语言类型字段的工具调用"
+      },
+      "falsifier": "若相同调用预算的整调用修订或简单提示取得同等效果，或已有工作已按每个参数声明语言行为并做选择性生成与装配，则候选没有独立方法贡献。",
+      "hypothesis_id": "h-v033-language-typed-argument-compiler",
+      "lineage_note": "v033 从工具执行粒度转向多语言工具参数实现；完全本地、非安全、非操作性。",
+      "literature_refs": [
+        "ACL 2026 2026.acl-long.2039 Lost in Execution",
+        "arXiv:2608.11715 When the API Speaks the Wrong Language",
+        "arXiv:2604.13519 ToolSpec",
+        "NAACL Industry 2025 2025.naacl-industry.9"
+      ],
+      "mechanism_claim": "先生成工具调用骨架，把字符串参数标注为 COPY_SOURCE、CANONICAL 或 REQUESTED_LANGUAGE；只对最后一类字段做隔离语言渲染，并以确定性装配保留其他字段。",
+      "minimal_killer_experiment": "在完全本地的多语言合成工具任务中，对比原生调用、显式语言提示、整调用二次修订与字段隔离渲染，测量目标文本语义、标识符保持、枚举规范、令牌和延迟。",
+      "nearest_prior_risk": "Lost in Execution 的统一后置翻译、When the API Speaks the Wrong Language 的参数分解语言奖励，以及 ToolSpec 的模式／变量分离共同逼近该候选。",
+      "parent_ids": [],
+      "problem": "同一工具调用内的标识符、规范值和用户可见文本可能要求不同语言行为，统一语言一致性会修复一个字段却破坏另一个字段。",
+      "revision": 3,
+      "status": "prior_collision",
+      "status_reason": "工具调用参数语言分解与选择性/约束翻译已覆盖核心计算；公平实验仅显示单模型一次旁损避免，qwen3:8b 无准确率差分。",
+      "target_failure": {
+        "card_ids": [],
+        "evidence_ids": [],
+        "summary": "统一语言修复在混合语言调用中造成过度翻译、漏翻译或标识符／规范值漂移。"
+      },
+      "title": "语言类型化的工具参数编译器",
+      "updated_at_utc": "2026-08-16T16:03:54.903990Z"
+    }
+  ],
+  "revision": 3,
+  "run_id": "20260816_1644_run13",
+  "schema_version": 1,
+  "updated_at_utc": "2026-08-16T16:03:54.903990Z",
+  "version": "v033"
+}

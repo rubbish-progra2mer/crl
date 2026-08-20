@@ -1,0 +1,76 @@
+import numpy as np
+from numpy.random import default_rng
+from math import sqrt
+from time import time
+from problems import BudgetExhausted
+
+# Constants
+MU = 5  # Number of offspring
+SIGMA_INIT = 0.1  # Initial step size
+SIGMA_DECAY = 0.995  # Step size decay factor
+MIN_SIGMA = 1e-6  # Minimum step size
+RESTART_THRESHOLD = 100  # Number of evaluations before restarting
+TIMEOUT_THRESHOLD = 10  # Time in seconds before restarting
+
+class Optimizer:
+    def __init__(self, dim, bounds, seed):
+        self.dim = dim
+        self.bounds = bounds
+        self.seed = seed
+        self.rng = default_rng(seed)
+        self.incumbent = None
+        self.incumbent_value = float('inf')
+        self.evaluations = 0
+        self.last_improvement = 0
+        self.start_time = time()
+        self.step_size = SIGMA_INIT
+
+    def restart(self):
+        self.incumbent = None
+        self.incumbent_value = float('inf')
+        self.evaluations = 0
+        self.last_improvement = 0
+        self.step_size = SIGMA_INIT
+        self.rng = default_rng(self.seed)
+
+    def sample_offspring(self):
+        return self.incumbent + self.step_size * self.rng.standard_normal(self.dim)
+
+    def evaluate(self, f):
+        if self.incumbent is None:
+            x = self.rng.uniform(self.bounds[0], self.bounds[1], self.dim)
+        else:
+            x = self.sample_offspring()
+
+        value = f(x)
+        self.evaluations += 1
+
+        if value < self.incumbent_value:
+            self.incumbent = x.copy()
+            self.incumbent_value = value
+            self.last_improvement = self.evaluations
+            self.step_size *= SIGMA_DECAY
+        else:
+            self.step_size *= 1.1
+
+        if self.step_size < MIN_SIGMA:
+            self.step_size = MIN_SIGMA
+
+        if self.evaluations - self.last_improvement > RESTART_THRESHOLD:
+            self.restart()
+
+        if time() - self.start_time > TIMEOUT_THRESHOLD:
+            self.restart()
+
+    def optimize(self, f):
+        try:
+            while self.evaluations < self.budget:
+                self.evaluate(f)
+        except BudgetExhausted:
+            pass
+
+        return {'incumbent': self.incumbent, 'incumbent_value': self.incumbent_value, 'evaluations': self.evaluations}
+
+def optimize(f, dim, bounds, budget, seed):
+    optimizer = Optimizer(dim, bounds, seed)
+    return optimizer.optimize(f)

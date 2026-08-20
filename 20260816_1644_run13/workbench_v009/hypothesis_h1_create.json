@@ -1,0 +1,35 @@
+{
+  "hypothesis_id": "h-v009-lineage-normalized-consensus",
+  "title": "证据根归一化共识",
+  "status": "draft",
+  "parent_ids": [],
+  "lineage_note": "从多智能体错误传播与来源谱系诊断出发，把分析用谱系变为直接改变最终聚合权重的运行时计算。",
+  "problem": "同一错误证据被多个智能体转述后会被多数票误当成多份独立支持，形成虚假共识。",
+  "target_failure": {
+    "summary": "无一手证据的智能体采纳并转述同一错误根，使消息数与真实证据独立性脱钩。",
+    "card_ids": ["failure-sparse-topology-suppresses-correct-insight", "failure-debate-cost-nondominance"],
+    "evidence_ids": []
+  },
+  "changed_computation": {
+    "baseline": "每个智能体的末轮结论计一票，或每个一手证据持有者计一票。",
+    "intervention": "运行时为一手观测签发证据根，转述继承根标识；每个唯一根对其支撑结论最多贡献一次。",
+    "information_available": "所有方法访问相同私有证据、公开消息、模型输出与调用预算；候选额外使用运行时已附着的根标识。",
+    "timing": "一手观测进入通信时签发根，最终决策时按根归一化聚合。",
+    "budget_effect": "不增加模型或工具调用，只增加确定性谱系记录与集合去重。"
+  },
+  "mechanism_claim": "把证据质量单位从消息或智能体改为不可伪造的一手根，可使无新根的复制和多跳转述不再扩大支持，从而阻断错误回声多数。",
+  "falsifier": "欺骗条件下末轮多数的诱饵共识低于 0.20，或相对最强非根基线的真实恢复优势低于 0.15，或全诚实真实恢复下降超过 0.05。",
+  "minimal_killer_experiment": "八个全诚实/单虚假根配对任务，五个同构本地智能体两轮讨论；比较末轮多数、证据持有者去重和证据根归一化。",
+  "nearest_prior_risk": "ForesightSafety-TIDE 已追踪根谱系，ProvenanceGuard 已做来源支撑核验，Free-MAD 已改变讨论聚合；它们可能组合吸收候选。",
+  "alternative_explanations": ["合成任务直接暴露根支撑标签", "根独立性由生成器保证", "错误角色提示过强", "根计数等价于简单多数传感器", "只把错误共识转成不确定"],
+  "descriptors": {
+    "problem_family": "多智能体错误证据回声",
+    "computation_stage": "讨论后的集体决策",
+    "intervention_family": "证据谱系归一化聚合",
+    "information_source": "运行时认证的一手证据根与多轮消息",
+    "timing_class": "证据进入时登记、决策时去重",
+    "budget_class": "相同模型调用预算",
+    "evaluation_mode": "全诚实与单虚假根配对故障注入"
+  },
+  "literature_refs": ["P017", "P022", "P015", "P081", "P083", "arXiv:2608.03421", "arXiv:2606.18037", "arXiv:2509.11035", "arXiv:2606.16710"]
+}

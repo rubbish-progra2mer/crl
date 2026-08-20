@@ -1,0 +1,67 @@
+{
+  "created_at_utc": "2026-08-16T10:14:17.169022Z",
+  "hypotheses": [
+    {
+      "alternative_explanations": [
+        "模型未读游标字段",
+        "工具描述不完整",
+        "自动分页即可解决",
+        "查询重写即可解决",
+        "合成数据把候选优势写入生成器"
+      ],
+      "changed_computation": {
+        "baseline": "语言模型读取单次或自行控制的工具结果并决定是否停止。",
+        "budget_effect": "可能增加只读页面或分区调用；不增加模型推理调用。",
+        "information_available": "访问相同接口、参数与结果；候选使用接口契约中已有的分页和覆盖元数据。",
+        "intervention": "运行时传播分页、分区、筛选域与快照覆盖义务，只在义务闭合后签发可用于全局否定的覆盖状态。",
+        "timing": "工具返回后、否定结论提交前。"
+      },
+      "created_at_utc": "2026-08-16T10:14:17.271170Z",
+      "descriptors": {
+        "budget_class": "增加只读覆盖调用",
+        "computation_stage": "只读工具结果到最终结论",
+        "evaluation_mode": "隐藏后页与遗漏分区故障注入",
+        "information_source": "分页、分区、筛选与快照元数据",
+        "intervention_family": "覆盖义务门控",
+        "problem_family": "工具查询错误否定",
+        "timing_class": "否定结论提交前"
+      },
+      "falsifier": "相对自动分页加查询完备性基线没有独立 changed computation，或只能在构造的隐藏后页任务上取得显然优势。",
+      "hypothesis_id": "h-v010-coverage-bearing-negation",
+      "lineage_note": "从工具结果的局部空集与全局不存在之间的语义鸿沟出发，尝试把覆盖义务加入最终提交。",
+      "literature_refs": [
+        "P040",
+        "P074",
+        "P085",
+        "P030",
+        "arXiv:2605.05247",
+        "VLDB:Levy1996",
+        "TODS:FanGeerts2010",
+        "arXiv:2305.05403"
+      ],
+      "mechanism_claim": "把覆盖状态作为否定结论的必要前提，可阻止局部空集被提升为全局不存在。",
+      "minimal_killer_experiment": "隐藏匹配项位于后续页、遗漏分区与截断边界的成对任务，比较错误否定率和额外调用成本。",
+      "nearest_prior_risk": "DADL 自动分页、数据库查询完备性、部分闭世界语义和完备性陈述可能组合吸收全部核心计算。",
+      "parent_ids": [],
+      "problem": "智能体把未耗尽分页、截断或部分筛选下的空结果误当成全局不存在。",
+      "revision": 3,
+      "status": "prior_collision",
+      "status_reason": "DADL 已支持运行时自动耗尽分页；Levy 1996、Fan 与 Geerts 2010 及开放世界完备性研究已形式化判断部分数据是否足以给出完整查询答案，组合吸收覆盖门控核心计算。",
+      "target_failure": {
+        "card_ids": [
+          "failure-incomplete-tool-contracts-false-verified-state",
+          "failure-fixed-shortlist-depth-masks-hard-query-zero"
+        ],
+        "evidence_ids": [],
+        "summary": "局部观察范围不足却提交全局否定事实。"
+      },
+      "title": "覆盖携带型否定结论",
+      "updated_at_utc": "2026-08-16T10:14:17.475593Z"
+    }
+  ],
+  "revision": 3,
+  "run_id": "20260816_1644_run13",
+  "schema_version": 1,
+  "updated_at_utc": "2026-08-16T10:14:17.475593Z",
+  "version": "v010"
+}

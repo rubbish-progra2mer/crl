@@ -1,0 +1,43 @@
+```python
+import numpy as np
+from problems import BudgetExhausted
+
+def optimize(f, dim, bounds, budget, seed):
+    np.random.seed(seed)
+    low, high = bounds
+    population_size = 10
+    sigma = 0.5
+    incumbent = np.random.uniform(low, high, dim)
+    best_score = float('inf')
+    evals_used = 0
+    stagnation_count = 0
+    max_stagnation = 10
+
+    while evals_used < budget:
+        try:
+            samples = np.random.normal(loc=incumbent, scale=sigma, size=(population_size, dim))
+            samples = np.clip(samples, low, high)
+            scores = np.array([f(x) for x in samples])
+            evals_used += population_size
+
+            if np.min(scores) < best_score:
+                best_score = np.min(scores)
+                incumbent = samples[np.argmin(scores)]
+                stagnation_count = 0
+            else:
+                stagnation_count += 1
+
+            if stagnation_count >= max_stagnation:
+                sigma *= 0.5
+                stagnation_count = 0
+
+        except BudgetExhausted:
+            break
+
+    return {
+        'incumbent': incumbent.tolist(),
+        'score': best_score,
+        'evals_used': evals_used,
+        'sigma': sigma
+    }
+```

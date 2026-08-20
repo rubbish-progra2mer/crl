@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "version": "v063",
+  "revision": 3,
+  "hypotheses": [
+    {
+      "id": "H-v063-1",
+      "name": "FAULT_DOMAIN_CONDITIONAL_REROUTING",
+      "status": "rejected_after_answer_leakage_ablation",
+      "registered_before_execution": true,
+      "models": ["qwen2.5:7b", "qwen3:8b"],
+      "conditions": ["raw", "principle", "domain_card"],
+      "primary_metrics": ["paired_accuracy", "common_accuracy", "local_accuracy", "no_call"],
+      "success_conditions": [
+        "domain_card paired accuracy is at least 11/12 for each model",
+        "domain_card improves paired accuracy over raw by at least 3/12 for each model",
+        "domain_card improves paired accuracy over principle by at least 2/12 for each model",
+        "domain_card common and local accuracies are each at least 11/12 for each model"
+      ],
+      "kill_conditions": [
+        "raw paired accuracy is at least 11/12 on both models",
+        "principle is within one paired success of domain_card on either model",
+        "domain_card paired accuracy is below 11/12 or trades away local-fault accuracy"
+      ],
+      "scope": "Local benign synthetic tool selection; represented fallback tools are never executed",
+      "result_record_ids": [
+        "fault-domain-routing-qwen2-5-7b-001",
+        "fault-domain-routing-qwen3-8b-001"
+      ]
+    },
+    {
+      "id": "H-v063-2",
+      "name": "NO_RECOMMENDATION_STATE_CARD_ABLATION",
+      "status": "falsified",
+      "registered_before_execution": true,
+      "models": ["qwen2.5:7b", "qwen3:8b"],
+      "condition": "state_card_without_best_fallback_line",
+      "fixed_comparators": "H-v063-1 raw results from the same model",
+      "primary_metrics": ["paired_accuracy", "common_accuracy", "local_accuracy", "no_call"],
+      "success_conditions": [
+        "state card paired accuracy is at least 10/12 for each model",
+        "state card improves paired accuracy over the fixed raw result by at least 8/12 for each model",
+        "state card common and local accuracies are each at least 10/12 for each model",
+        "state card no_call is at most 2/24 for each model"
+      ],
+      "kill_conditions": [
+        "either model has paired accuracy below 10/12",
+        "either model improves over its fixed raw result by less than 8/12",
+        "either fault type is below 10/12 on either model",
+        "no_call exceeds 2/24 on either model"
+      ],
+      "scope": "Registered answer-leakage ablation; the card omits any recommended or best fallback",
+      "result_record_ids": ["fault-domain-state-card-qwen2-5-7b-001"],
+      "early_stop": "qwen2.5:7b hit multiple preregistered kill conditions; qwen3:8b was not run"
+    }
+  ]
+}

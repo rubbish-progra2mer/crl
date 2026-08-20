@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "version": "v066",
+  "revision": 2,
+  "hypotheses": [
+    {
+      "id": "H-v066-1",
+      "name": "CONSUMPTIVE_OBSERVATION_BLINDNESS",
+      "status": "falsified",
+      "registered_before_execution": true,
+      "models": ["qwen2.5:7b", "qwen3:8b"],
+      "conditions": ["prose", "effect_typed"],
+      "task_types": ["preserve", "claim"],
+      "primary_metrics": ["paired_correct", "preserve_correct", "claim_correct", "invalid_json"],
+      "success_conditions": [
+        "for each model prose preserve_correct is at most 8/12",
+        "for each model prose claim_correct is at least 10/12",
+        "for each model effect_typed preserve_correct is at least 10/12 and improves over prose by at least 3/12",
+        "for each model effect_typed claim_correct is at least 10/12",
+        "for each model invalid_json is at most 1/24 per condition"
+      ],
+      "kill_conditions": [
+        "either model has prose preserve_correct at least 10/12",
+        "either model has claim_correct below 10/12 in either condition",
+        "either model gains less than 3/12 preserve_correct from effect_typed",
+        "either model has effect_typed preserve_correct below 10/12",
+        "either model has invalid_json above 1/24 in either condition"
+      ],
+      "scope": "Local benign synthetic choice only; represented access tools are never executed",
+      "result_record_ids": ["consumptive-observation-qwen2-5-7b-001"],
+      "result_summary": {
+        "prose": {"paired_correct": 9, "preserve_correct": 9, "claim_correct": 12, "invalid_json": 0},
+        "effect_typed": {"paired_correct": 7, "preserve_correct": 7, "claim_correct": 12, "invalid_json": 0},
+        "preserve_gain": -2
+      },
+      "early_stop": "qwen2.5:7b hit two preregistered kill conditions; qwen3:8b was not run"
+    }
+  ]
+}

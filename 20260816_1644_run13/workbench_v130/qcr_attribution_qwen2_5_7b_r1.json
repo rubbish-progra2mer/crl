@@ -1,0 +1,3528 @@
+{
+  "model": "qwen2.5:7b",
+  "endpoint": "http://127.0.0.1:11434/api/chat",
+  "case_count": 16,
+  "conditions": [
+    "direct",
+    "target_plan",
+    "qcr_correct",
+    "qcr_shuffled"
+  ],
+  "temperature": 0,
+  "real_tool_execution": false,
+  "external_network": false,
+  "security_bypass_content": false,
+  "rows": [
+    {
+      "case_id": "case_00_transfer_needed_p0_r0",
+      "kind": "transfer_needed",
+      "condition": "direct",
+      "condition_order": [
+        "direct",
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled"
+      ],
+      "target_id": "TGT-N0-0",
+      "source_id": "SRC-C0-0",
+      "shuffled_source_id": "SRC-S1-0",
+      "expected_sequence": [
+        "op_amber",
+        "op_blue",
+        "op_coral",
+        "op_dusk"
+      ],
+      "support_content": null,
+      "support_prompt_tokens": 0,
+      "support_output_tokens": 0,
+      "support_elapsed_seconds": 0,
+      "actor_prompt_tokens": 171,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 4.556281400000444,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N0-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N0-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N0-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N0-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N0-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N0-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N0-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N0-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_00_transfer_needed_p0_r0",
+      "kind": "transfer_needed",
+      "condition": "target_plan",
+      "condition_order": [
+        "direct",
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled"
+      ],
+      "target_id": "TGT-N0-0",
+      "source_id": "SRC-C0-0",
+      "shuffled_source_id": "SRC-S1-0",
+      "expected_sequence": [
+        "op_amber",
+        "op_blue",
+        "op_coral",
+        "op_dusk"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"TGT-N0-0\"\n  ],\n  \"applicability_conditions\": \"All operations must be used exactly once.\",\n  \"verification_guardrail\": \"Ensure the workflow cycle is complete and valid.\"\n}",
+      "support_prompt_tokens": 136,
+      "support_output_tokens": 92,
+      "support_elapsed_seconds": 1.7292632999888156,
+      "actor_prompt_tokens": 250,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.771110800007591,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N0-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N0-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N0-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N0-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N0-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N0-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N0-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N0-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_00_transfer_needed_p0_r0",
+      "kind": "transfer_needed",
+      "condition": "qcr_correct",
+      "condition_order": [
+        "direct",
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled"
+      ],
+      "target_id": "TGT-N0-0",
+      "source_id": "SRC-C0-0",
+      "shuffled_source_id": "SRC-S1-0",
+      "expected_sequence": [
+        "op_amber",
+        "op_blue",
+        "op_coral",
+        "op_dusk"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"TGT-N0-0\"\n  ],\n  \"applicability_conditions\": \"The current record TGT-N0-0 supports the workflow cycle.\",\n  \"verification_guardrail\": \"Each operation must be used exactly once and in the correct phase sequence.\"\n}",
+      "support_prompt_tokens": 298,
+      "support_output_tokens": 103,
+      "support_elapsed_seconds": 1.9426159000140615,
+      "actor_prompt_tokens": 261,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7583343999867793,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N0-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N0-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N0-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N0-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N0-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N0-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N0-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N0-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_00_transfer_needed_p0_r0",
+      "kind": "transfer_needed",
+      "condition": "qcr_shuffled",
+      "condition_order": [
+        "direct",
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled"
+      ],
+      "target_id": "TGT-N0-0",
+      "source_id": "SRC-C0-0",
+      "shuffled_source_id": "SRC-S1-0",
+      "expected_sequence": [
+        "op_amber",
+        "op_blue",
+        "op_coral",
+        "op_dusk"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_amber(TGT-N0-0)\",\n    \"op_blue(TGT-N0-0)\",\n    \"op_dusk(TGT-N0-0)\",\n    \"op_coral(TGT-N0-0)\"\n  ],\n  \"applicability_conditions\": \"The current target evidence is sufficient to establish a verified accepted workflow.\",\n  \"verification_guardrail\": \"The workflow must use each operation exactly once and complete the cycle for TGT-N0-0.\"\n}",
+      "support_prompt_tokens": 299,
+      "support_output_tokens": 144,
+      "support_elapsed_seconds": 2.4249291000014637,
+      "actor_prompt_tokens": 304,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7849599000182934,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N0-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N0-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N0-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N0-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N0-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N0-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N0-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N0-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_01_target_sufficient_p0_r0",
+      "kind": "target_sufficient",
+      "condition": "target_plan",
+      "condition_order": [
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct"
+      ],
+      "target_id": "TGT-S0-0",
+      "source_id": "SRC-C0-0",
+      "shuffled_source_id": "SRC-S1-0",
+      "expected_sequence": [
+        "op_amber",
+        "op_blue",
+        "op_coral",
+        "op_dusk"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"TGT-S0-0\"\n  ],\n  \"applicability_conditions\": \"All operations must be used exactly once in the specified order.\",\n  \"verification_guardrail\": \"Ensure the workflow cycle is completed with TGT-S0-0 as the current record.\"\n}",
+      "support_prompt_tokens": 153,
+      "support_output_tokens": 104,
+      "support_elapsed_seconds": 1.8946783000137657,
+      "actor_prompt_tokens": 280,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.8039340999966953,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S0-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S0-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S0-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S0-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S0-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S0-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S0-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S0-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_01_target_sufficient_p0_r0",
+      "kind": "target_sufficient",
+      "condition": "qcr_correct",
+      "condition_order": [
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct"
+      ],
+      "target_id": "TGT-S0-0",
+      "source_id": "SRC-C0-0",
+      "shuffled_source_id": "SRC-S1-0",
+      "expected_sequence": [
+        "op_amber",
+        "op_blue",
+        "op_coral",
+        "op_dusk"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_amber(TGT-S0-0)\",\n    \"op_blue(TGT-S0-0)\",\n    \"op_coral(TGT-S0-0)\",\n    \"op_dusk(TGT-S0-0)\"\n  ],\n  \"applicability_conditions\": \"The current target-side runbook explicitly defines the order of operations, and the target record identifier is TGT-S0-0.\",\n  \"verification_guardrail\": \"All operations must be performed in the order op_amber -> op_blue -> op_coral -> op_dusk to complete the workflow cycle.\"\n}",
+      "support_prompt_tokens": 315,
+      "support_output_tokens": 167,
+      "support_elapsed_seconds": 2.675747200002661,
+      "actor_prompt_tokens": 342,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.8177443000022322,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S0-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S0-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S0-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S0-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S0-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S0-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S0-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S0-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_01_target_sufficient_p0_r0",
+      "kind": "target_sufficient",
+      "condition": "qcr_shuffled",
+      "condition_order": [
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct"
+      ],
+      "target_id": "TGT-S0-0",
+      "source_id": "SRC-C0-0",
+      "shuffled_source_id": "SRC-S1-0",
+      "expected_sequence": [
+        "op_amber",
+        "op_blue",
+        "op_coral",
+        "op_dusk"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_amber(TGT-S0-0)\",\n    \"op_blue(TGT-S0-0)\",\n    \"op_coral(TGT-S0-0)\",\n    \"op_dusk(TGT-S0-0)\"\n  ],\n  \"applicability_conditions\": \"The current target-side runbook explicitly defines the order of operations, and all operations must be used exactly once.\",\n  \"verification_guardrail\": \"All operations must be completed in the specified order to ensure the workflow cycle is fully completed.\"\n}",
+      "support_prompt_tokens": 316,
+      "support_output_tokens": 153,
+      "support_elapsed_seconds": 2.4924574000178836,
+      "actor_prompt_tokens": 328,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7651366000063717,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S0-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S0-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S0-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S0-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S0-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S0-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S0-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S0-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_01_target_sufficient_p0_r0",
+      "kind": "target_sufficient",
+      "condition": "direct",
+      "condition_order": [
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct"
+      ],
+      "target_id": "TGT-S0-0",
+      "source_id": "SRC-C0-0",
+      "shuffled_source_id": "SRC-S1-0",
+      "expected_sequence": [
+        "op_amber",
+        "op_blue",
+        "op_coral",
+        "op_dusk"
+      ],
+      "support_content": null,
+      "support_prompt_tokens": 0,
+      "support_output_tokens": 0,
+      "support_elapsed_seconds": 0,
+      "actor_prompt_tokens": 188,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.75294199999189,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S0-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S0-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S0-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S0-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S0-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S0-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S0-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S0-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_02_transfer_needed_p1_r0",
+      "kind": "transfer_needed",
+      "condition": "qcr_correct",
+      "condition_order": [
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct",
+        "target_plan"
+      ],
+      "target_id": "TGT-N1-0",
+      "source_id": "SRC-C1-0",
+      "shuffled_source_id": "SRC-S2-0",
+      "expected_sequence": [
+        "op_blue",
+        "op_dusk",
+        "op_amber",
+        "op_coral"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_amber(TGT-N1-0)\",\n    \"op_blue(TGT-N1-0)\",\n    \"op_dusk(TGT-N1-0)\",\n    \"op_coral(TGT-N1-0)\"\n  ],\n  \"applicability_conditions\": \"The current target evidence (TGT-N1-0) and the available operations match the historical workflow. The operations must be performed in the order amber, blue, dusk, and coral.\",\n  \"verification_guardrail\": \"Each operation must be applied to the current target identifier (TGT-N1-0) and must be used exactly once.\"\n}",
+      "support_prompt_tokens": 299,
+      "support_output_tokens": 176,
+      "support_elapsed_seconds": 3.081733900005929,
+      "actor_prompt_tokens": 334,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.8198978999862447,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N1-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N1-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N1-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N1-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N1-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N1-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N1-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N1-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_02_transfer_needed_p1_r0",
+      "kind": "transfer_needed",
+      "condition": "qcr_shuffled",
+      "condition_order": [
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct",
+        "target_plan"
+      ],
+      "target_id": "TGT-N1-0",
+      "source_id": "SRC-C1-0",
+      "shuffled_source_id": "SRC-S2-0",
+      "expected_sequence": [
+        "op_blue",
+        "op_dusk",
+        "op_amber",
+        "op_coral"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_coral\",\n    \"op_dusk\",\n    \"op_blue\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_amber(TGT-N1-0)\",\n    \"op_coral(TGT-N1-0)\",\n    \"op_dusk(TGT-N1-0)\",\n    \"op_blue(TGT-N1-0)\"\n  ],\n  \"applicability_conditions\": \"The current target evidence is consistent with the historical workflow, and the operations must be performed in a specific order.\",\n  \"verification_guardrail\": \"The workflow must use each operation exactly once and complete the cycle for TGT-N1-0.\"\n}",
+      "support_prompt_tokens": 299,
+      "support_output_tokens": 152,
+      "support_elapsed_seconds": 2.5084361999761313,
+      "actor_prompt_tokens": 313,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.8154068999865558,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N1-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N1-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N1-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N1-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N1-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N1-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N1-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N1-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_02_transfer_needed_p1_r0",
+      "kind": "transfer_needed",
+      "condition": "direct",
+      "condition_order": [
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct",
+        "target_plan"
+      ],
+      "target_id": "TGT-N1-0",
+      "source_id": "SRC-C1-0",
+      "shuffled_source_id": "SRC-S2-0",
+      "expected_sequence": [
+        "op_blue",
+        "op_dusk",
+        "op_amber",
+        "op_coral"
+      ],
+      "support_content": null,
+      "support_prompt_tokens": 0,
+      "support_output_tokens": 0,
+      "support_elapsed_seconds": 0,
+      "actor_prompt_tokens": 171,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7771695999836084,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N1-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N1-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N1-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N1-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N1-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N1-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N1-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N1-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_02_transfer_needed_p1_r0",
+      "kind": "transfer_needed",
+      "condition": "target_plan",
+      "condition_order": [
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct",
+        "target_plan"
+      ],
+      "target_id": "TGT-N1-0",
+      "source_id": "SRC-C1-0",
+      "shuffled_source_id": "SRC-S2-0",
+      "expected_sequence": [
+        "op_blue",
+        "op_dusk",
+        "op_amber",
+        "op_coral"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"TGT-N1-0\"\n  ],\n  \"applicability_conditions\": \"All operations must be used exactly once.\",\n  \"verification_guardrail\": \"Ensure the workflow cycle is complete for TGT-N1-0.\"\n}",
+      "support_prompt_tokens": 136,
+      "support_output_tokens": 97,
+      "support_elapsed_seconds": 1.821601199975703,
+      "actor_prompt_tokens": 255,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7815652000135742,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N1-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N1-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N1-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N1-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N1-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N1-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N1-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N1-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_03_target_sufficient_p1_r0",
+      "kind": "target_sufficient",
+      "condition": "qcr_shuffled",
+      "condition_order": [
+        "qcr_shuffled",
+        "direct",
+        "target_plan",
+        "qcr_correct"
+      ],
+      "target_id": "TGT-S1-0",
+      "source_id": "SRC-C1-0",
+      "shuffled_source_id": "SRC-S2-0",
+      "expected_sequence": [
+        "op_blue",
+        "op_dusk",
+        "op_amber",
+        "op_coral"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_blue\",\n    \"op_dusk\",\n    \"op_amber\",\n    \"op_coral\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_blue(TGT-S1-0)\",\n    \"op_dusk(TGT-S1-0)\",\n    \"op_amber(TGT-S1-0)\",\n    \"op_coral(TGT-S1-0)\"\n  ],\n  \"applicability_conditions\": \"The current target-side runbook explicitly defines the order of operations, and the target record identifier is TGT-S1-0.\",\n  \"verification_guardrail\": \"All operations must be performed in the specified order and on the current record identifier.\"\n}",
+      "support_prompt_tokens": 316,
+      "support_output_tokens": 155,
+      "support_elapsed_seconds": 2.530031100002816,
+      "actor_prompt_tokens": 330,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.8285869999963325,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S1-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S1-0"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S1-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S1-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S1-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S1-0\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S1-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S1-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_03_target_sufficient_p1_r0",
+      "kind": "target_sufficient",
+      "condition": "direct",
+      "condition_order": [
+        "qcr_shuffled",
+        "direct",
+        "target_plan",
+        "qcr_correct"
+      ],
+      "target_id": "TGT-S1-0",
+      "source_id": "SRC-C1-0",
+      "shuffled_source_id": "SRC-S2-0",
+      "expected_sequence": [
+        "op_blue",
+        "op_dusk",
+        "op_amber",
+        "op_coral"
+      ],
+      "support_content": null,
+      "support_prompt_tokens": 0,
+      "support_output_tokens": 0,
+      "support_elapsed_seconds": 0,
+      "actor_prompt_tokens": 188,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.763530099997297,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S1-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S1-0"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S1-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S1-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S1-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S1-0\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S1-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S1-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_03_target_sufficient_p1_r0",
+      "kind": "target_sufficient",
+      "condition": "target_plan",
+      "condition_order": [
+        "qcr_shuffled",
+        "direct",
+        "target_plan",
+        "qcr_correct"
+      ],
+      "target_id": "TGT-S1-0",
+      "source_id": "SRC-C1-0",
+      "shuffled_source_id": "SRC-S2-0",
+      "expected_sequence": [
+        "op_blue",
+        "op_dusk",
+        "op_amber",
+        "op_coral"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_blue\",\n    \"op_dusk\",\n    \"op_amber\",\n    \"op_coral\"\n  ],\n  \"bindings_to_reobtain\": [],\n  \"applicability_conditions\": \"All operations must be used exactly once in the specified order.\",\n  \"verification_guardrail\": \"Ensure the workflow cycle for TGT-S1-0 is completed with the operations in the exact order: op_blue -> op_dusk -> op_amber -> op_coral.\"\n}",
+      "support_prompt_tokens": 153,
+      "support_output_tokens": 113,
+      "support_elapsed_seconds": 2.0359979999775533,
+      "actor_prompt_tokens": 287,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7586056000145618,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S1-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S1-0"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S1-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S1-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S1-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S1-0\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S1-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S1-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_03_target_sufficient_p1_r0",
+      "kind": "target_sufficient",
+      "condition": "qcr_correct",
+      "condition_order": [
+        "qcr_shuffled",
+        "direct",
+        "target_plan",
+        "qcr_correct"
+      ],
+      "target_id": "TGT-S1-0",
+      "source_id": "SRC-C1-0",
+      "shuffled_source_id": "SRC-S2-0",
+      "expected_sequence": [
+        "op_blue",
+        "op_dusk",
+        "op_amber",
+        "op_coral"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_blue\",\n    \"op_dusk\",\n    \"op_amber\",\n    \"op_coral\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_blue(TGT-S1-0)\",\n    \"op_dusk(TGT-S1-0)\",\n    \"op_amber(TGT-S1-0)\",\n    \"op_coral(TGT-S1-0)\"\n  ],\n  \"applicability_conditions\": \"The current target-side runbook explicitly defines the order of operations, and the target record identifier is TGT-S1-0.\",\n  \"verification_guardrail\": \"All operations must be performed in the specified order and on the current record identifier.\"\n}",
+      "support_prompt_tokens": 316,
+      "support_output_tokens": 155,
+      "support_elapsed_seconds": 2.511240599997109,
+      "actor_prompt_tokens": 330,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.8084987000038382,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S1-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S1-0"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S1-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S1-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S1-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S1-0\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S1-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S1-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_04_transfer_needed_p2_r0",
+      "kind": "transfer_needed",
+      "condition": "direct",
+      "condition_order": [
+        "direct",
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled"
+      ],
+      "target_id": "TGT-N2-0",
+      "source_id": "SRC-C2-0",
+      "shuffled_source_id": "SRC-S3-0",
+      "expected_sequence": [
+        "op_coral",
+        "op_amber",
+        "op_dusk",
+        "op_blue"
+      ],
+      "support_content": null,
+      "support_prompt_tokens": 0,
+      "support_output_tokens": 0,
+      "support_elapsed_seconds": 0,
+      "actor_prompt_tokens": 171,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7482929000107106,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N2-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N2-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N2-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N2-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N2-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N2-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N2-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N2-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_04_transfer_needed_p2_r0",
+      "kind": "transfer_needed",
+      "condition": "target_plan",
+      "condition_order": [
+        "direct",
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled"
+      ],
+      "target_id": "TGT-N2-0",
+      "source_id": "SRC-C2-0",
+      "shuffled_source_id": "SRC-S3-0",
+      "expected_sequence": [
+        "op_coral",
+        "op_amber",
+        "op_dusk",
+        "op_blue"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"TGT-N2-0\"\n  ],\n  \"applicability_conditions\": \"All operations must be used exactly once.\",\n  \"verification_guardrail\": \"Ensure the sequence of operations is valid and the current record identifier is correctly used in each operation.\"\n}",
+      "support_prompt_tokens": 136,
+      "support_output_tokens": 101,
+      "support_elapsed_seconds": 1.8298955999780446,
+      "actor_prompt_tokens": 260,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7978087000083178,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N2-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N2-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N2-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N2-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N2-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N2-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N2-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N2-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_04_transfer_needed_p2_r0",
+      "kind": "transfer_needed",
+      "condition": "qcr_correct",
+      "condition_order": [
+        "direct",
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled"
+      ],
+      "target_id": "TGT-N2-0",
+      "source_id": "SRC-C2-0",
+      "shuffled_source_id": "SRC-S3-0",
+      "expected_sequence": [
+        "op_coral",
+        "op_amber",
+        "op_dusk",
+        "op_blue"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_coral\",\n    \"op_dusk\",\n    \"op_blue\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_amber(TGT-N2-0)\",\n    \"op_coral(TGT-N2-0)\",\n    \"op_dusk(TGT-N2-0)\",\n    \"op_blue(TGT-N2-0)\"\n  ],\n  \"applicability_conditions\": \"The current target evidence is sufficient to establish a verified accepted workflow.\",\n  \"verification_guardrail\": \"The workflow must use each operation exactly once and complete the cycle for TGT-N2-0.\"\n}",
+      "support_prompt_tokens": 299,
+      "support_output_tokens": 143,
+      "support_elapsed_seconds": 2.4038942999904975,
+      "actor_prompt_tokens": 304,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.8023424000130035,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N2-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N2-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N2-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N2-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N2-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N2-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N2-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N2-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_04_transfer_needed_p2_r0",
+      "kind": "transfer_needed",
+      "condition": "qcr_shuffled",
+      "condition_order": [
+        "direct",
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled"
+      ],
+      "target_id": "TGT-N2-0",
+      "source_id": "SRC-C2-0",
+      "shuffled_source_id": "SRC-S3-0",
+      "expected_sequence": [
+        "op_coral",
+        "op_amber",
+        "op_dusk",
+        "op_blue"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"TGT-N2-0\"\n  ],\n  \"applicability_conditions\": \"The current service does not display the required order, but the operations must be used in a specific sequence to complete the workflow.\",\n  \"verification_guardrail\": \"Each operation must be called exactly once with the current record identifier TGT-N2-0.\"\n}",
+      "support_prompt_tokens": 299,
+      "support_output_tokens": 119,
+      "support_elapsed_seconds": 2.140623500017682,
+      "actor_prompt_tokens": 277,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.8278075999987777,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N2-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N2-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N2-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N2-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N2-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N2-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N2-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N2-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_05_target_sufficient_p2_r0",
+      "kind": "target_sufficient",
+      "condition": "target_plan",
+      "condition_order": [
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct"
+      ],
+      "target_id": "TGT-S2-0",
+      "source_id": "SRC-C2-0",
+      "shuffled_source_id": "SRC-S3-0",
+      "expected_sequence": [
+        "op_coral",
+        "op_amber",
+        "op_dusk",
+        "op_blue"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_coral\",\n    \"op_amber\",\n    \"op_dusk\",\n    \"op_blue\"\n  ],\n  \"bindings_to_reobtain\": [],\n  \"applicability_conditions\": \"All operations must be used exactly once in the specified order.\",\n  \"verification_guardrail\": \"Ensure the sequence of operations matches the runbook: op_coral -> op_amber -> op_dusk -> op_blue.\"\n}",
+      "support_prompt_tokens": 153,
+      "support_output_tokens": 102,
+      "support_elapsed_seconds": 1.8838694000151008,
+      "actor_prompt_tokens": 276,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.8524685000011232,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S2-0"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S2-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S2-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S2-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S2-0\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S2-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S2-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S2-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_05_target_sufficient_p2_r0",
+      "kind": "target_sufficient",
+      "condition": "qcr_correct",
+      "condition_order": [
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct"
+      ],
+      "target_id": "TGT-S2-0",
+      "source_id": "SRC-C2-0",
+      "shuffled_source_id": "SRC-S3-0",
+      "expected_sequence": [
+        "op_coral",
+        "op_amber",
+        "op_dusk",
+        "op_blue"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_coral\",\n    \"op_amber\",\n    \"op_dusk\",\n    \"op_blue\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_coral(TGT-S2-0)\",\n    \"op_amber(TGT-S2-0)\",\n    \"op_dusk(TGT-S2-0)\",\n    \"op_blue(TGT-S2-0)\"\n  ],\n  \"applicability_conditions\": \"The current target-side runbook explicitly defines the order of operations, and the target record identifier is TGT-S2-0.\",\n  \"verification_guardrail\": \"All operations must be performed in the specified order and on the current record identifier.\"\n}",
+      "support_prompt_tokens": 316,
+      "support_output_tokens": 155,
+      "support_elapsed_seconds": 2.508084199973382,
+      "actor_prompt_tokens": 330,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.814071500004502,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S2-0"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S2-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S2-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S2-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S2-0\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S2-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S2-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S2-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_05_target_sufficient_p2_r0",
+      "kind": "target_sufficient",
+      "condition": "qcr_shuffled",
+      "condition_order": [
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct"
+      ],
+      "target_id": "TGT-S2-0",
+      "source_id": "SRC-C2-0",
+      "shuffled_source_id": "SRC-S3-0",
+      "expected_sequence": [
+        "op_coral",
+        "op_amber",
+        "op_dusk",
+        "op_blue"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_coral\",\n    \"op_amber\",\n    \"op_dusk\",\n    \"op_blue\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_coral(TGT-S2-0)\",\n    \"op_amber(TGT-S2-0)\",\n    \"op_dusk(TGT-S2-0)\",\n    \"op_blue(TGT-S2-0)\"\n  ],\n  \"applicability_conditions\": \"The current target-side runbook explicitly defines the order of operations, and the target record identifier is TGT-S2-0.\",\n  \"verification_guardrail\": \"Each operation must be performed exactly once in the specified order.\"\n}",
+      "support_prompt_tokens": 316,
+      "support_output_tokens": 151,
+      "support_elapsed_seconds": 2.4683141999994405,
+      "actor_prompt_tokens": 326,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.8003040000039618,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S2-0"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S2-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S2-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S2-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S2-0\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S2-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S2-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S2-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_05_target_sufficient_p2_r0",
+      "kind": "target_sufficient",
+      "condition": "direct",
+      "condition_order": [
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct"
+      ],
+      "target_id": "TGT-S2-0",
+      "source_id": "SRC-C2-0",
+      "shuffled_source_id": "SRC-S3-0",
+      "expected_sequence": [
+        "op_coral",
+        "op_amber",
+        "op_dusk",
+        "op_blue"
+      ],
+      "support_content": null,
+      "support_prompt_tokens": 0,
+      "support_output_tokens": 0,
+      "support_elapsed_seconds": 0,
+      "actor_prompt_tokens": 188,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.8078918999817688,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S2-0"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S2-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S2-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S2-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S2-0\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S2-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S2-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S2-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_06_transfer_needed_p3_r0",
+      "kind": "transfer_needed",
+      "condition": "qcr_correct",
+      "condition_order": [
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct",
+        "target_plan"
+      ],
+      "target_id": "TGT-N3-0",
+      "source_id": "SRC-C3-0",
+      "shuffled_source_id": "SRC-S0-0",
+      "expected_sequence": [
+        "op_dusk",
+        "op_coral",
+        "op_blue",
+        "op_amber"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"TGT-N3-0\"\n  ],\n  \"applicability_conditions\": \"The current service does not display the required order, but the workflow can be completed by following the sequence of operations.\",\n  \"verification_guardrail\": \"Each operation must be applied to the current record TGT-N3-0 exactly once.\"\n}",
+      "support_prompt_tokens": 299,
+      "support_output_tokens": 116,
+      "support_elapsed_seconds": 2.1253801000129897,
+      "actor_prompt_tokens": 274,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7987728999869432,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N3-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N3-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N3-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N3-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N3-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N3-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N3-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N3-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_06_transfer_needed_p3_r0",
+      "kind": "transfer_needed",
+      "condition": "qcr_shuffled",
+      "condition_order": [
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct",
+        "target_plan"
+      ],
+      "target_id": "TGT-N3-0",
+      "source_id": "SRC-C3-0",
+      "shuffled_source_id": "SRC-S0-0",
+      "expected_sequence": [
+        "op_dusk",
+        "op_coral",
+        "op_blue",
+        "op_amber"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"TGT-N3-0\"\n  ],\n  \"applicability_conditions\": \"The current record TGT-N3-0 requires a workflow cycle that includes each operation exactly once.\",\n  \"verification_guardrail\": \"Each operation must be applied to the current record identifier TGT-N3-0.\"\n}",
+      "support_prompt_tokens": 298,
+      "support_output_tokens": 112,
+      "support_elapsed_seconds": 2.0833470999787096,
+      "actor_prompt_tokens": 270,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.763879000005545,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N3-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N3-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N3-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N3-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N3-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N3-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N3-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N3-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_06_transfer_needed_p3_r0",
+      "kind": "transfer_needed",
+      "condition": "direct",
+      "condition_order": [
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct",
+        "target_plan"
+      ],
+      "target_id": "TGT-N3-0",
+      "source_id": "SRC-C3-0",
+      "shuffled_source_id": "SRC-S0-0",
+      "expected_sequence": [
+        "op_dusk",
+        "op_coral",
+        "op_blue",
+        "op_amber"
+      ],
+      "support_content": null,
+      "support_prompt_tokens": 0,
+      "support_output_tokens": 0,
+      "support_elapsed_seconds": 0,
+      "actor_prompt_tokens": 171,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.745337100001052,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N3-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N3-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N3-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N3-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N3-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N3-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N3-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N3-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_06_transfer_needed_p3_r0",
+      "kind": "transfer_needed",
+      "condition": "target_plan",
+      "condition_order": [
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct",
+        "target_plan"
+      ],
+      "target_id": "TGT-N3-0",
+      "source_id": "SRC-C3-0",
+      "shuffled_source_id": "SRC-S0-0",
+      "expected_sequence": [
+        "op_dusk",
+        "op_coral",
+        "op_blue",
+        "op_amber"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"TGT-N3-0\"\n  ],\n  \"applicability_conditions\": \"All operations must be used exactly once.\",\n  \"verification_guardrail\": \"Ensure the workflow cycle is complete for TGT-N3-0.\"\n}",
+      "support_prompt_tokens": 136,
+      "support_output_tokens": 97,
+      "support_elapsed_seconds": 1.7940777000039816,
+      "actor_prompt_tokens": 255,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7679057999921497,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N3-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N3-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N3-0"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N3-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N3-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N3-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N3-0\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N3-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_07_target_sufficient_p3_r0",
+      "kind": "target_sufficient",
+      "condition": "qcr_shuffled",
+      "condition_order": [
+        "qcr_shuffled",
+        "direct",
+        "target_plan",
+        "qcr_correct"
+      ],
+      "target_id": "TGT-S3-0",
+      "source_id": "SRC-C3-0",
+      "shuffled_source_id": "SRC-S0-0",
+      "expected_sequence": [
+        "op_dusk",
+        "op_coral",
+        "op_blue",
+        "op_amber"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_dusk\",\n    \"op_coral\",\n    \"op_blue\",\n    \"op_amber\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_dusk(TGT-S3-0)\",\n    \"op_coral(TGT-S3-0)\",\n    \"op_blue(TGT-S3-0)\",\n    \"op_amber(TGT-S3-0)\"\n  ],\n  \"applicability_conditions\": \"The current target-side runbook explicitly defines the order of operations, and the target record identifier is TGT-S3-0.\",\n  \"verification_guardrail\": \"The workflow is verified if all operations are completed in the specified order without any rejections.\"\n}",
+      "support_prompt_tokens": 315,
+      "support_output_tokens": 158,
+      "support_elapsed_seconds": 2.5954837999888696,
+      "actor_prompt_tokens": 332,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.815504600002896,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S3-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S3-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S3-0"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S3-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S3-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S3-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S3-0\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S3-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_07_target_sufficient_p3_r0",
+      "kind": "target_sufficient",
+      "condition": "direct",
+      "condition_order": [
+        "qcr_shuffled",
+        "direct",
+        "target_plan",
+        "qcr_correct"
+      ],
+      "target_id": "TGT-S3-0",
+      "source_id": "SRC-C3-0",
+      "shuffled_source_id": "SRC-S0-0",
+      "expected_sequence": [
+        "op_dusk",
+        "op_coral",
+        "op_blue",
+        "op_amber"
+      ],
+      "support_content": null,
+      "support_prompt_tokens": 0,
+      "support_output_tokens": 0,
+      "support_elapsed_seconds": 0,
+      "actor_prompt_tokens": 188,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7894912000047043,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S3-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S3-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S3-0"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S3-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S3-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S3-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S3-0\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S3-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_07_target_sufficient_p3_r0",
+      "kind": "target_sufficient",
+      "condition": "target_plan",
+      "condition_order": [
+        "qcr_shuffled",
+        "direct",
+        "target_plan",
+        "qcr_correct"
+      ],
+      "target_id": "TGT-S3-0",
+      "source_id": "SRC-C3-0",
+      "shuffled_source_id": "SRC-S0-0",
+      "expected_sequence": [
+        "op_dusk",
+        "op_coral",
+        "op_blue",
+        "op_amber"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_dusk\",\n    \"op_coral\",\n    \"op_blue\",\n    \"op_amber\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"TGT-S3-0\"\n  ],\n  \"applicability_conditions\": \"All operations must be used exactly once in the specified order.\",\n  \"verification_guardrail\": \"Ensure the workflow cycle is completed in the order: op_dusk -> op_coral -> op_blue -> op_amber.\"\n}",
+      "support_prompt_tokens": 153,
+      "support_output_tokens": 112,
+      "support_elapsed_seconds": 1.995206199993845,
+      "actor_prompt_tokens": 287,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.789377200009767,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S3-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S3-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S3-0"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S3-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S3-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S3-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S3-0\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S3-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_07_target_sufficient_p3_r0",
+      "kind": "target_sufficient",
+      "condition": "qcr_correct",
+      "condition_order": [
+        "qcr_shuffled",
+        "direct",
+        "target_plan",
+        "qcr_correct"
+      ],
+      "target_id": "TGT-S3-0",
+      "source_id": "SRC-C3-0",
+      "shuffled_source_id": "SRC-S0-0",
+      "expected_sequence": [
+        "op_dusk",
+        "op_coral",
+        "op_blue",
+        "op_amber"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_dusk\",\n    \"op_coral\",\n    \"op_blue\",\n    \"op_amber\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_dusk(TGT-S3-0)\",\n    \"op_coral(TGT-S3-0)\",\n    \"op_blue(TGT-S3-0)\",\n    \"op_amber(TGT-S3-0)\"\n  ],\n  \"applicability_conditions\": \"The current target-side runbook explicitly defines the order of operations, and the target record identifier is TGT-S3-0.\",\n  \"verification_guardrail\": \"The workflow is considered complete if all operations are performed in the specified order and the target record identifier is used in each operation.\"\n}",
+      "support_prompt_tokens": 316,
+      "support_output_tokens": 163,
+      "support_elapsed_seconds": 2.6028114999935497,
+      "actor_prompt_tokens": 339,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.8046039000037126,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S3-0"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S3-0"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S3-0"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S3-0"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S3-0\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S3-0\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S3-0\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S3-0\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_08_transfer_needed_p0_r1",
+      "kind": "transfer_needed",
+      "condition": "direct",
+      "condition_order": [
+        "direct",
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled"
+      ],
+      "target_id": "TGT-N0-1",
+      "source_id": "SRC-C0-1",
+      "shuffled_source_id": "SRC-S2-1",
+      "expected_sequence": [
+        "op_amber",
+        "op_blue",
+        "op_coral",
+        "op_dusk"
+      ],
+      "support_content": null,
+      "support_prompt_tokens": 0,
+      "support_output_tokens": 0,
+      "support_elapsed_seconds": 0,
+      "actor_prompt_tokens": 171,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7495952000026591,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N0-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N0-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N0-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N0-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N0-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N0-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N0-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N0-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_08_transfer_needed_p0_r1",
+      "kind": "transfer_needed",
+      "condition": "target_plan",
+      "condition_order": [
+        "direct",
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled"
+      ],
+      "target_id": "TGT-N0-1",
+      "source_id": "SRC-C0-1",
+      "shuffled_source_id": "SRC-S2-1",
+      "expected_sequence": [
+        "op_amber",
+        "op_blue",
+        "op_coral",
+        "op_dusk"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"TGT-N0-1\"\n  ],\n  \"applicability_conditions\": \"All operations must be used exactly once.\",\n  \"verification_guardrail\": \"Ensure the workflow cycle is complete for TGT-N0-1.\"\n}",
+      "support_prompt_tokens": 136,
+      "support_output_tokens": 98,
+      "support_elapsed_seconds": 1.8718598000123166,
+      "actor_prompt_tokens": 255,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.769821599998977,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N0-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N0-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N0-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N0-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N0-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N0-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N0-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N0-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_08_transfer_needed_p0_r1",
+      "kind": "transfer_needed",
+      "condition": "qcr_correct",
+      "condition_order": [
+        "direct",
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled"
+      ],
+      "target_id": "TGT-N0-1",
+      "source_id": "SRC-C0-1",
+      "shuffled_source_id": "SRC-S2-1",
+      "expected_sequence": [
+        "op_amber",
+        "op_blue",
+        "op_coral",
+        "op_dusk"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"TGT-N0-1\"\n  ],\n  \"applicability_conditions\": \"The current record TGT-N0-1 supports the workflow cycle.\",\n  \"verification_guardrail\": \"Each operation must be used exactly once and in the correct phase sequence.\"\n}",
+      "support_prompt_tokens": 298,
+      "support_output_tokens": 103,
+      "support_elapsed_seconds": 1.9492788000206929,
+      "actor_prompt_tokens": 261,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7842241000034846,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N0-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N0-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N0-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N0-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N0-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N0-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N0-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N0-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_08_transfer_needed_p0_r1",
+      "kind": "transfer_needed",
+      "condition": "qcr_shuffled",
+      "condition_order": [
+        "direct",
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled"
+      ],
+      "target_id": "TGT-N0-1",
+      "source_id": "SRC-C0-1",
+      "shuffled_source_id": "SRC-S2-1",
+      "expected_sequence": [
+        "op_amber",
+        "op_blue",
+        "op_coral",
+        "op_dusk"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"TGT-N0-1\"\n  ],\n  \"applicability_conditions\": \"The current target evidence overrides historical records, and the workflow is applicable.\",\n  \"verification_guardrail\": \"Each operation must be used exactly once and in a sequence that completes the workflow cycle.\"\n}",
+      "support_prompt_tokens": 299,
+      "support_output_tokens": 106,
+      "support_elapsed_seconds": 1.9728321000002325,
+      "actor_prompt_tokens": 264,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7893105999974068,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N0-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N0-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N0-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N0-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N0-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N0-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N0-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N0-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_09_target_sufficient_p0_r1",
+      "kind": "target_sufficient",
+      "condition": "target_plan",
+      "condition_order": [
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct"
+      ],
+      "target_id": "TGT-S0-1",
+      "source_id": "SRC-C0-1",
+      "shuffled_source_id": "SRC-S2-1",
+      "expected_sequence": [
+        "op_amber",
+        "op_blue",
+        "op_coral",
+        "op_dusk"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"TGT-S0-1\"\n  ],\n  \"applicability_conditions\": \"All operations must be used exactly once in the specified order.\",\n  \"verification_guardrail\": \"Ensure the workflow completes without skipping or repeating any operations.\"\n}",
+      "support_prompt_tokens": 153,
+      "support_output_tokens": 98,
+      "support_elapsed_seconds": 1.845190599997295,
+      "actor_prompt_tokens": 273,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.8144221999973524,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S0-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S0-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S0-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S0-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S0-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S0-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S0-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S0-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_09_target_sufficient_p0_r1",
+      "kind": "target_sufficient",
+      "condition": "qcr_correct",
+      "condition_order": [
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct"
+      ],
+      "target_id": "TGT-S0-1",
+      "source_id": "SRC-C0-1",
+      "shuffled_source_id": "SRC-S2-1",
+      "expected_sequence": [
+        "op_amber",
+        "op_blue",
+        "op_coral",
+        "op_dusk"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_amber(TGT-S0-1)\",\n    \"op_blue(TGT-S0-1)\",\n    \"op_coral(TGT-S0-1)\",\n    \"op_dusk(TGT-S0-1)\"\n  ],\n  \"applicability_conditions\": \"The current target-side runbook explicitly defines the order of operations, and the target record identifier is TGT-S0-1.\",\n  \"verification_guardrail\": \"Each operation must be performed exactly once in the specified order.\"\n}",
+      "support_prompt_tokens": 315,
+      "support_output_tokens": 151,
+      "support_elapsed_seconds": 2.47382590000052,
+      "actor_prompt_tokens": 326,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7973424000083469,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S0-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S0-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S0-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S0-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S0-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S0-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S0-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S0-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_09_target_sufficient_p0_r1",
+      "kind": "target_sufficient",
+      "condition": "qcr_shuffled",
+      "condition_order": [
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct"
+      ],
+      "target_id": "TGT-S0-1",
+      "source_id": "SRC-C0-1",
+      "shuffled_source_id": "SRC-S2-1",
+      "expected_sequence": [
+        "op_amber",
+        "op_blue",
+        "op_coral",
+        "op_dusk"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_amber(TGT-S0-1)\",\n    \"op_blue(TGT-S0-1)\",\n    \"op_coral(TGT-S0-1)\",\n    \"op_dusk(TGT-S0-1)\"\n  ],\n  \"applicability_conditions\": \"The current target-side runbook explicitly defines the order of operations, and all operations are available.\",\n  \"verification_guardrail\": \"Each operation must be called exactly once in the specified order.\"\n}",
+      "support_prompt_tokens": 316,
+      "support_output_tokens": 144,
+      "support_elapsed_seconds": 2.4045090999861713,
+      "actor_prompt_tokens": 319,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.8005639000039082,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S0-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S0-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S0-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S0-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S0-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S0-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S0-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S0-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_09_target_sufficient_p0_r1",
+      "kind": "target_sufficient",
+      "condition": "direct",
+      "condition_order": [
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct"
+      ],
+      "target_id": "TGT-S0-1",
+      "source_id": "SRC-C0-1",
+      "shuffled_source_id": "SRC-S2-1",
+      "expected_sequence": [
+        "op_amber",
+        "op_blue",
+        "op_coral",
+        "op_dusk"
+      ],
+      "support_content": null,
+      "support_prompt_tokens": 0,
+      "support_output_tokens": 0,
+      "support_elapsed_seconds": 0,
+      "actor_prompt_tokens": 188,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7712515000021085,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S0-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S0-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S0-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S0-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S0-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S0-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S0-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S0-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_10_transfer_needed_p1_r1",
+      "kind": "transfer_needed",
+      "condition": "qcr_correct",
+      "condition_order": [
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct",
+        "target_plan"
+      ],
+      "target_id": "TGT-N1-1",
+      "source_id": "SRC-C1-1",
+      "shuffled_source_id": "SRC-S3-1",
+      "expected_sequence": [
+        "op_blue",
+        "op_dusk",
+        "op_amber",
+        "op_coral"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_amber(TGT-N1-1)\",\n    \"op_blue(TGT-N1-1)\",\n    \"op_dusk(TGT-N1-1)\",\n    \"op_coral(TGT-N1-1)\"\n  ],\n  \"applicability_conditions\": \"The current target evidence is sufficient to establish a verified accepted workflow.\",\n  \"verification_guardrail\": \"The workflow must use each operation exactly once and in a sequence that completes the cycle.\"\n}",
+      "support_prompt_tokens": 299,
+      "support_output_tokens": 143,
+      "support_elapsed_seconds": 2.436699200014118,
+      "actor_prompt_tokens": 301,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.8208268999878783,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N1-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N1-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N1-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N1-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N1-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N1-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N1-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N1-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_10_transfer_needed_p1_r1",
+      "kind": "transfer_needed",
+      "condition": "qcr_shuffled",
+      "condition_order": [
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct",
+        "target_plan"
+      ],
+      "target_id": "TGT-N1-1",
+      "source_id": "SRC-C1-1",
+      "shuffled_source_id": "SRC-S3-1",
+      "expected_sequence": [
+        "op_blue",
+        "op_dusk",
+        "op_amber",
+        "op_coral"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"TGT-N1-1\"\n  ],\n  \"applicability_conditions\": \"The current service does not display the required order, but the operations must be used in a specific sequence to complete the workflow.\",\n  \"verification_guardrail\": \"Each operation must be called exactly once with the current record identifier TGT-N1-1.\"\n}",
+      "support_prompt_tokens": 299,
+      "support_output_tokens": 119,
+      "support_elapsed_seconds": 2.1435238999838475,
+      "actor_prompt_tokens": 277,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.790803199983202,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N1-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N1-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N1-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N1-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N1-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N1-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N1-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N1-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_10_transfer_needed_p1_r1",
+      "kind": "transfer_needed",
+      "condition": "direct",
+      "condition_order": [
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct",
+        "target_plan"
+      ],
+      "target_id": "TGT-N1-1",
+      "source_id": "SRC-C1-1",
+      "shuffled_source_id": "SRC-S3-1",
+      "expected_sequence": [
+        "op_blue",
+        "op_dusk",
+        "op_amber",
+        "op_coral"
+      ],
+      "support_content": null,
+      "support_prompt_tokens": 0,
+      "support_output_tokens": 0,
+      "support_elapsed_seconds": 0,
+      "actor_prompt_tokens": 171,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7641632999875583,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N1-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N1-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N1-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N1-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N1-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N1-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N1-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N1-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_10_transfer_needed_p1_r1",
+      "kind": "transfer_needed",
+      "condition": "target_plan",
+      "condition_order": [
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct",
+        "target_plan"
+      ],
+      "target_id": "TGT-N1-1",
+      "source_id": "SRC-C1-1",
+      "shuffled_source_id": "SRC-S3-1",
+      "expected_sequence": [
+        "op_blue",
+        "op_dusk",
+        "op_amber",
+        "op_coral"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"TGT-N1-1\"\n  ],\n  \"applicability_conditions\": \"All operations must be used exactly once.\",\n  \"verification_guardrail\": \"Ensure the workflow cycle is complete for TGT-N1-1.\"\n}",
+      "support_prompt_tokens": 136,
+      "support_output_tokens": 97,
+      "support_elapsed_seconds": 1.786873100005323,
+      "actor_prompt_tokens": 255,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7593476999900304,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N1-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N1-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N1-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N1-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N1-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N1-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N1-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N1-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_11_target_sufficient_p1_r1",
+      "kind": "target_sufficient",
+      "condition": "qcr_shuffled",
+      "condition_order": [
+        "qcr_shuffled",
+        "direct",
+        "target_plan",
+        "qcr_correct"
+      ],
+      "target_id": "TGT-S1-1",
+      "source_id": "SRC-C1-1",
+      "shuffled_source_id": "SRC-S3-1",
+      "expected_sequence": [
+        "op_blue",
+        "op_dusk",
+        "op_amber",
+        "op_coral"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_blue\",\n    \"op_dusk\",\n    \"op_amber\",\n    \"op_coral\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_blue(TGT-S1-1)\",\n    \"op_dusk(TGT-S1-1)\",\n    \"op_amber(TGT-S1-1)\",\n    \"op_coral(TGT-S1-1)\"\n  ],\n  \"applicability_conditions\": \"The current target-side runbook explicitly defines the order of operations, and the target record identifier is TGT-S1-1.\",\n  \"verification_guardrail\": \"Each operation must be performed exactly once and in the specified order.\"\n}",
+      "support_prompt_tokens": 316,
+      "support_output_tokens": 153,
+      "support_elapsed_seconds": 2.5407690000138246,
+      "actor_prompt_tokens": 327,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.853371100005461,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S1-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S1-1"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S1-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S1-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S1-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S1-1\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S1-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S1-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_11_target_sufficient_p1_r1",
+      "kind": "target_sufficient",
+      "condition": "direct",
+      "condition_order": [
+        "qcr_shuffled",
+        "direct",
+        "target_plan",
+        "qcr_correct"
+      ],
+      "target_id": "TGT-S1-1",
+      "source_id": "SRC-C1-1",
+      "shuffled_source_id": "SRC-S3-1",
+      "expected_sequence": [
+        "op_blue",
+        "op_dusk",
+        "op_amber",
+        "op_coral"
+      ],
+      "support_content": null,
+      "support_prompt_tokens": 0,
+      "support_output_tokens": 0,
+      "support_elapsed_seconds": 0,
+      "actor_prompt_tokens": 188,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.8352743999857921,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S1-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S1-1"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S1-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S1-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S1-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S1-1\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S1-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S1-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_11_target_sufficient_p1_r1",
+      "kind": "target_sufficient",
+      "condition": "target_plan",
+      "condition_order": [
+        "qcr_shuffled",
+        "direct",
+        "target_plan",
+        "qcr_correct"
+      ],
+      "target_id": "TGT-S1-1",
+      "source_id": "SRC-C1-1",
+      "shuffled_source_id": "SRC-S3-1",
+      "expected_sequence": [
+        "op_blue",
+        "op_dusk",
+        "op_amber",
+        "op_coral"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_blue\",\n    \"op_dusk\",\n    \"op_amber\",\n    \"op_coral\"\n  ],\n  \"bindings_to_reobtain\": [],\n  \"applicability_conditions\": \"All operations must be used exactly once in the specified order.\",\n  \"verification_guardrail\": \"Ensure the workflow cycle for TGT-S1-1 is completed with the operations in the exact order: op_blue -> op_dusk -> op_amber -> op_coral.\"\n}",
+      "support_prompt_tokens": 153,
+      "support_output_tokens": 113,
+      "support_elapsed_seconds": 2.02259830001276,
+      "actor_prompt_tokens": 287,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.785097300016787,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S1-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S1-1"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S1-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S1-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S1-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S1-1\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S1-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S1-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_11_target_sufficient_p1_r1",
+      "kind": "target_sufficient",
+      "condition": "qcr_correct",
+      "condition_order": [
+        "qcr_shuffled",
+        "direct",
+        "target_plan",
+        "qcr_correct"
+      ],
+      "target_id": "TGT-S1-1",
+      "source_id": "SRC-C1-1",
+      "shuffled_source_id": "SRC-S3-1",
+      "expected_sequence": [
+        "op_blue",
+        "op_dusk",
+        "op_amber",
+        "op_coral"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_blue\",\n    \"op_dusk\",\n    \"op_amber\",\n    \"op_coral\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_blue(TGT-S1-1)\",\n    \"op_dusk(TGT-S1-1)\",\n    \"op_amber(TGT-S1-1)\",\n    \"op_coral(TGT-S1-1)\"\n  ],\n  \"applicability_conditions\": \"The current target-side runbook explicitly defines the order of operations, and the target record identifier is TGT-S1-1.\",\n  \"verification_guardrail\": \"All operations must be performed exactly once in the specified order to complete the workflow cycle.\"\n}",
+      "support_prompt_tokens": 316,
+      "support_output_tokens": 156,
+      "support_elapsed_seconds": 2.5367223000212107,
+      "actor_prompt_tokens": 331,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.8587799000088125,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S1-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S1-1"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S1-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S1-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S1-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S1-1\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S1-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S1-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_12_transfer_needed_p2_r1",
+      "kind": "transfer_needed",
+      "condition": "direct",
+      "condition_order": [
+        "direct",
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled"
+      ],
+      "target_id": "TGT-N2-1",
+      "source_id": "SRC-C2-1",
+      "shuffled_source_id": "SRC-S0-1",
+      "expected_sequence": [
+        "op_coral",
+        "op_amber",
+        "op_dusk",
+        "op_blue"
+      ],
+      "support_content": null,
+      "support_prompt_tokens": 0,
+      "support_output_tokens": 0,
+      "support_elapsed_seconds": 0,
+      "actor_prompt_tokens": 171,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7738101000140887,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N2-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N2-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N2-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N2-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N2-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N2-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N2-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N2-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_12_transfer_needed_p2_r1",
+      "kind": "transfer_needed",
+      "condition": "target_plan",
+      "condition_order": [
+        "direct",
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled"
+      ],
+      "target_id": "TGT-N2-1",
+      "source_id": "SRC-C2-1",
+      "shuffled_source_id": "SRC-S0-1",
+      "expected_sequence": [
+        "op_coral",
+        "op_amber",
+        "op_dusk",
+        "op_blue"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"TGT-N2-1\"\n  ],\n  \"applicability_conditions\": \"All operations must be used exactly once.\",\n  \"verification_guardrail\": \"Ensure the workflow cycle is complete for TGT-N2-1.\"\n}",
+      "support_prompt_tokens": 136,
+      "support_output_tokens": 98,
+      "support_elapsed_seconds": 1.8088492000242695,
+      "actor_prompt_tokens": 255,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7745941000175662,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N2-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N2-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N2-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N2-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N2-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N2-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N2-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N2-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_12_transfer_needed_p2_r1",
+      "kind": "transfer_needed",
+      "condition": "qcr_correct",
+      "condition_order": [
+        "direct",
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled"
+      ],
+      "target_id": "TGT-N2-1",
+      "source_id": "SRC-C2-1",
+      "shuffled_source_id": "SRC-S0-1",
+      "expected_sequence": [
+        "op_coral",
+        "op_amber",
+        "op_dusk",
+        "op_blue"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_coral\",\n    \"op_dusk\",\n    \"op_blue\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_amber(TGT-N2-1)\",\n    \"op_coral(TGT-N2-1)\",\n    \"op_dusk(TGT-N2-1)\",\n    \"op_blue(TGT-N2-1)\"\n  ],\n  \"applicability_conditions\": \"The current target evidence (TGT-N2-1) and the available operations match the historical workflow. The operations must be performed in the order amber, coral, dusk, blue to complete the cycle.\",\n  \"verification_guardrail\": \"Since the historical record (SRC-C2-1) has a verified accepted workflow, the target TGT-N2-1 can follow the same sequence of operations.\"\n}",
+      "support_prompt_tokens": 299,
+      "support_output_tokens": 186,
+      "support_elapsed_seconds": 2.9505902999953832,
+      "actor_prompt_tokens": 345,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.8016143999993801,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N2-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N2-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N2-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N2-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N2-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N2-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N2-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N2-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_12_transfer_needed_p2_r1",
+      "kind": "transfer_needed",
+      "condition": "qcr_shuffled",
+      "condition_order": [
+        "direct",
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled"
+      ],
+      "target_id": "TGT-N2-1",
+      "source_id": "SRC-C2-1",
+      "shuffled_source_id": "SRC-S0-1",
+      "expected_sequence": [
+        "op_coral",
+        "op_amber",
+        "op_dusk",
+        "op_blue"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"TGT-N2-1\"\n  ],\n  \"applicability_conditions\": \"The current record TGT-N2-1 requires a workflow cycle using each operation exactly once.\",\n  \"verification_guardrail\": \"Each operation must be applied to the current record identifier TGT-N2-1.\"\n}",
+      "support_prompt_tokens": 298,
+      "support_output_tokens": 111,
+      "support_elapsed_seconds": 2.0500911999843083,
+      "actor_prompt_tokens": 269,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7789580000098795,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N2-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N2-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N2-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N2-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N2-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N2-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N2-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N2-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_13_target_sufficient_p2_r1",
+      "kind": "target_sufficient",
+      "condition": "target_plan",
+      "condition_order": [
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct"
+      ],
+      "target_id": "TGT-S2-1",
+      "source_id": "SRC-C2-1",
+      "shuffled_source_id": "SRC-S0-1",
+      "expected_sequence": [
+        "op_coral",
+        "op_amber",
+        "op_dusk",
+        "op_blue"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_coral\",\n    \"op_amber\",\n    \"op_dusk\",\n    \"op_blue\"\n  ],\n  \"bindings_to_reobtain\": [],\n  \"applicability_conditions\": \"All operations must be used exactly once in the specified order.\",\n  \"verification_guardrail\": \"Ensure the sequence of operations matches the required order: op_coral -> op_amber -> op_dusk -> op_blue.\"\n}",
+      "support_prompt_tokens": 153,
+      "support_output_tokens": 102,
+      "support_elapsed_seconds": 1.894507999997586,
+      "actor_prompt_tokens": 276,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.8461712000134867,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S2-1"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S2-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S2-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S2-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S2-1\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S2-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S2-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S2-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_13_target_sufficient_p2_r1",
+      "kind": "target_sufficient",
+      "condition": "qcr_correct",
+      "condition_order": [
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct"
+      ],
+      "target_id": "TGT-S2-1",
+      "source_id": "SRC-C2-1",
+      "shuffled_source_id": "SRC-S0-1",
+      "expected_sequence": [
+        "op_coral",
+        "op_amber",
+        "op_dusk",
+        "op_blue"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_coral\",\n    \"op_amber\",\n    \"op_dusk\",\n    \"op_blue\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_coral(TGT-S2-1)\",\n    \"op_amber(TGT-S2-1)\",\n    \"op_dusk(TGT-S2-1)\",\n    \"op_blue(TGT-S2-1)\"\n  ],\n  \"applicability_conditions\": \"The current target-side runbook explicitly defines the order of operations, and the target record identifier is TGT-S2-1.\",\n  \"verification_guardrail\": \"All operations must be performed in the specified order and with the correct target identifier.\"\n}",
+      "support_prompt_tokens": 316,
+      "support_output_tokens": 155,
+      "support_elapsed_seconds": 2.517119099997217,
+      "actor_prompt_tokens": 330,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7826600999978837,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S2-1"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S2-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S2-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S2-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S2-1\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S2-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S2-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S2-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_13_target_sufficient_p2_r1",
+      "kind": "target_sufficient",
+      "condition": "qcr_shuffled",
+      "condition_order": [
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct"
+      ],
+      "target_id": "TGT-S2-1",
+      "source_id": "SRC-C2-1",
+      "shuffled_source_id": "SRC-S0-1",
+      "expected_sequence": [
+        "op_coral",
+        "op_amber",
+        "op_dusk",
+        "op_blue"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_coral\",\n    \"op_amber\",\n    \"op_dusk\",\n    \"op_blue\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_coral(TGT-S2-1)\",\n    \"op_amber(TGT-S2-1)\",\n    \"op_dusk(TGT-S2-1)\",\n    \"op_blue(TGT-S2-1)\"\n  ],\n  \"applicability_conditions\": \"The current target-side runbook explicitly defines the order of operations, and the target record identifier is TGT-S2-1.\",\n  \"verification_guardrail\": \"Each operation must be performed in the specified order and with the correct target identifier.\"\n}",
+      "support_prompt_tokens": 315,
+      "support_output_tokens": 156,
+      "support_elapsed_seconds": 2.5699092999857385,
+      "actor_prompt_tokens": 330,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7698926999873947,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S2-1"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S2-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S2-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S2-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S2-1\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S2-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S2-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S2-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_13_target_sufficient_p2_r1",
+      "kind": "target_sufficient",
+      "condition": "direct",
+      "condition_order": [
+        "target_plan",
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct"
+      ],
+      "target_id": "TGT-S2-1",
+      "source_id": "SRC-C2-1",
+      "shuffled_source_id": "SRC-S0-1",
+      "expected_sequence": [
+        "op_coral",
+        "op_amber",
+        "op_dusk",
+        "op_blue"
+      ],
+      "support_content": null,
+      "support_prompt_tokens": 0,
+      "support_output_tokens": 0,
+      "support_elapsed_seconds": 0,
+      "actor_prompt_tokens": 188,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7580250999890268,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S2-1"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S2-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S2-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S2-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S2-1\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S2-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S2-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S2-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_14_transfer_needed_p3_r1",
+      "kind": "transfer_needed",
+      "condition": "qcr_correct",
+      "condition_order": [
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct",
+        "target_plan"
+      ],
+      "target_id": "TGT-N3-1",
+      "source_id": "SRC-C3-1",
+      "shuffled_source_id": "SRC-S1-1",
+      "expected_sequence": [
+        "op_dusk",
+        "op_coral",
+        "op_blue",
+        "op_amber"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"TGT-N3-1\"\n  ],\n  \"applicability_conditions\": \"The current service does not display the required order, but the operations can be applied in any order as long as each is used exactly once.\",\n  \"verification_guardrail\": \"Each operation must be applied to the current record TGT-N3-1 and used exactly once.\"\n}",
+      "support_prompt_tokens": 299,
+      "support_output_tokens": 123,
+      "support_elapsed_seconds": 2.1928926999971736,
+      "actor_prompt_tokens": 281,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.8109561000019312,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N3-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N3-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N3-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N3-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N3-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N3-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N3-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N3-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_14_transfer_needed_p3_r1",
+      "kind": "transfer_needed",
+      "condition": "qcr_shuffled",
+      "condition_order": [
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct",
+        "target_plan"
+      ],
+      "target_id": "TGT-N3-1",
+      "source_id": "SRC-C3-1",
+      "shuffled_source_id": "SRC-S1-1",
+      "expected_sequence": [
+        "op_dusk",
+        "op_coral",
+        "op_blue",
+        "op_amber"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_amber(TGT-N3-1)\",\n    \"op_blue(TGT-N3-1)\",\n    \"op_dusk(TGT-N3-1)\",\n    \"op_coral(TGT-N3-1)\"\n  ],\n  \"applicability_conditions\": \"The current target evidence is sufficient to establish a verified accepted workflow.\",\n  \"verification_guardrail\": \"Each operation must be called exactly once with the current record identifier TGT-N3-1.\"\n}",
+      "support_prompt_tokens": 299,
+      "support_output_tokens": 145,
+      "support_elapsed_seconds": 2.458551499992609,
+      "actor_prompt_tokens": 303,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.8027005000039935,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N3-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N3-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N3-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N3-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N3-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N3-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N3-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N3-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_14_transfer_needed_p3_r1",
+      "kind": "transfer_needed",
+      "condition": "direct",
+      "condition_order": [
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct",
+        "target_plan"
+      ],
+      "target_id": "TGT-N3-1",
+      "source_id": "SRC-C3-1",
+      "shuffled_source_id": "SRC-S1-1",
+      "expected_sequence": [
+        "op_dusk",
+        "op_coral",
+        "op_blue",
+        "op_amber"
+      ],
+      "support_content": null,
+      "support_prompt_tokens": 0,
+      "support_output_tokens": 0,
+      "support_elapsed_seconds": 0,
+      "actor_prompt_tokens": 171,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7694888999976683,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N3-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N3-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N3-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N3-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N3-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N3-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N3-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N3-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_14_transfer_needed_p3_r1",
+      "kind": "transfer_needed",
+      "condition": "target_plan",
+      "condition_order": [
+        "qcr_correct",
+        "qcr_shuffled",
+        "direct",
+        "target_plan"
+      ],
+      "target_id": "TGT-N3-1",
+      "source_id": "SRC-C3-1",
+      "shuffled_source_id": "SRC-S1-1",
+      "expected_sequence": [
+        "op_dusk",
+        "op_coral",
+        "op_blue",
+        "op_amber"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_amber\",\n    \"op_blue\",\n    \"op_coral\",\n    \"op_dusk\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"TGT-N3-1\"\n  ],\n  \"applicability_conditions\": \"All operations must be used exactly once.\",\n  \"verification_guardrail\": \"Ensure the workflow cycle is complete for TGT-N3-1.\"\n}",
+      "support_prompt_tokens": 136,
+      "support_output_tokens": 96,
+      "support_elapsed_seconds": 1.7549078000010923,
+      "actor_prompt_tokens": 255,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7606770999846049,
+      "score": {
+        "valid": true,
+        "correct_order": false,
+        "correct_binding": true,
+        "exact": false,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-N3-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-N3-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-N3-1"
+          },
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-N3-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-N3-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-N3-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-N3-1\"\n    },\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-N3-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_15_target_sufficient_p3_r1",
+      "kind": "target_sufficient",
+      "condition": "qcr_shuffled",
+      "condition_order": [
+        "qcr_shuffled",
+        "direct",
+        "target_plan",
+        "qcr_correct"
+      ],
+      "target_id": "TGT-S3-1",
+      "source_id": "SRC-C3-1",
+      "shuffled_source_id": "SRC-S1-1",
+      "expected_sequence": [
+        "op_dusk",
+        "op_coral",
+        "op_blue",
+        "op_amber"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_dusk\",\n    \"op_coral\",\n    \"op_blue\",\n    \"op_amber\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_dusk(TGT-S3-1)\",\n    \"op_coral(TGT-S3-1)\",\n    \"op_blue(TGT-S3-1)\",\n    \"op_amber(TGT-S3-1)\"\n  ],\n  \"applicability_conditions\": \"The current target-side runbook explicitly defines the order of operations, and all operations must be used exactly once.\",\n  \"verification_guardrail\": \"The workflow is considered complete if all operations are performed in the specified order and the current record identifier is used for each operation.\"\n}",
+      "support_prompt_tokens": 316,
+      "support_output_tokens": 161,
+      "support_elapsed_seconds": 2.6190104999986943,
+      "actor_prompt_tokens": 335,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.841033000004245,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S3-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S3-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S3-1"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S3-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S3-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S3-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S3-1\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S3-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_15_target_sufficient_p3_r1",
+      "kind": "target_sufficient",
+      "condition": "direct",
+      "condition_order": [
+        "qcr_shuffled",
+        "direct",
+        "target_plan",
+        "qcr_correct"
+      ],
+      "target_id": "TGT-S3-1",
+      "source_id": "SRC-C3-1",
+      "shuffled_source_id": "SRC-S1-1",
+      "expected_sequence": [
+        "op_dusk",
+        "op_coral",
+        "op_blue",
+        "op_amber"
+      ],
+      "support_content": null,
+      "support_prompt_tokens": 0,
+      "support_output_tokens": 0,
+      "support_elapsed_seconds": 0,
+      "actor_prompt_tokens": 188,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7680461999843828,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S3-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S3-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S3-1"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S3-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S3-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S3-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S3-1\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S3-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_15_target_sufficient_p3_r1",
+      "kind": "target_sufficient",
+      "condition": "target_plan",
+      "condition_order": [
+        "qcr_shuffled",
+        "direct",
+        "target_plan",
+        "qcr_correct"
+      ],
+      "target_id": "TGT-S3-1",
+      "source_id": "SRC-C3-1",
+      "shuffled_source_id": "SRC-S1-1",
+      "expected_sequence": [
+        "op_dusk",
+        "op_coral",
+        "op_blue",
+        "op_amber"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_dusk\",\n    \"op_coral\",\n    \"op_blue\",\n    \"op_amber\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"TGT-S3-1\"\n  ],\n  \"applicability_conditions\": \"All operations must be used exactly once in the specified order.\",\n  \"verification_guardrail\": \"Ensure the sequence of operations is strictly followed: op_dusk -> op_coral -> op_blue -> op_amber.\"\n}",
+      "support_prompt_tokens": 153,
+      "support_output_tokens": 111,
+      "support_elapsed_seconds": 1.9881225999852177,
+      "actor_prompt_tokens": 286,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7874156000034418,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S3-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S3-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S3-1"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S3-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S3-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S3-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S3-1\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S3-1\"\n    }\n  ]\n}"
+      }
+    },
+    {
+      "case_id": "case_15_target_sufficient_p3_r1",
+      "kind": "target_sufficient",
+      "condition": "qcr_correct",
+      "condition_order": [
+        "qcr_shuffled",
+        "direct",
+        "target_plan",
+        "qcr_correct"
+      ],
+      "target_id": "TGT-S3-1",
+      "source_id": "SRC-C3-1",
+      "shuffled_source_id": "SRC-S1-1",
+      "expected_sequence": [
+        "op_dusk",
+        "op_coral",
+        "op_blue",
+        "op_amber"
+      ],
+      "support_content": "{\n  \"workflow_invariant\": [\n    \"op_dusk\",\n    \"op_coral\",\n    \"op_blue\",\n    \"op_amber\"\n  ],\n  \"bindings_to_reobtain\": [\n    \"op_dusk(TGT-S3-1)\",\n    \"op_coral(TGT-S3-1)\",\n    \"op_blue(TGT-S3-1)\",\n    \"op_amber(TGT-S3-1)\"\n  ],\n  \"applicability_conditions\": \"The current target-side runbook explicitly defines the order of operations, and the target record identifier is TGT-S3-1.\",\n  \"verification_guardrail\": \"All operations must be performed in the specified order and with the correct target identifier.\"\n}",
+      "support_prompt_tokens": 316,
+      "support_output_tokens": 156,
+      "support_elapsed_seconds": 2.540109499997925,
+      "actor_prompt_tokens": 330,
+      "actor_output_tokens": 114,
+      "actor_elapsed_seconds": 1.7992394999891985,
+      "score": {
+        "valid": true,
+        "correct_order": true,
+        "correct_binding": true,
+        "exact": true,
+        "stale_source_binding": false,
+        "parsed_actions": [
+          {
+            "tool": "op_dusk",
+            "record_id": "TGT-S3-1"
+          },
+          {
+            "tool": "op_coral",
+            "record_id": "TGT-S3-1"
+          },
+          {
+            "tool": "op_blue",
+            "record_id": "TGT-S3-1"
+          },
+          {
+            "tool": "op_amber",
+            "record_id": "TGT-S3-1"
+          }
+        ],
+        "raw_content": "{\n  \"actions\": [\n    {\n      \"tool\": \"op_dusk\",\n      \"record_id\": \"TGT-S3-1\"\n    },\n    {\n      \"tool\": \"op_coral\",\n      \"record_id\": \"TGT-S3-1\"\n    },\n    {\n      \"tool\": \"op_blue\",\n      \"record_id\": \"TGT-S3-1\"\n    },\n    {\n      \"tool\": \"op_amber\",\n      \"record_id\": \"TGT-S3-1\"\n    }\n  ]\n}"
+      }
+    }
+  ],
+  "metrics": {
+    "overall": {
+      "direct": {
+        "n": 16,
+        "valid_count": 16,
+        "exact_count": 10,
+        "correct_order_count": 10,
+        "correct_binding_count": 16,
+        "stale_source_binding_count": 0
+      },
+      "target_plan": {
+        "n": 16,
+        "valid_count": 16,
+        "exact_count": 10,
+        "correct_order_count": 10,
+        "correct_binding_count": 16,
+        "stale_source_binding_count": 0
+      },
+      "qcr_correct": {
+        "n": 16,
+        "valid_count": 16,
+        "exact_count": 10,
+        "correct_order_count": 10,
+        "correct_binding_count": 16,
+        "stale_source_binding_count": 0
+      },
+      "qcr_shuffled": {
+        "n": 16,
+        "valid_count": 16,
+        "exact_count": 10,
+        "correct_order_count": 10,
+        "correct_binding_count": 16,
+        "stale_source_binding_count": 0
+      }
+    },
+    "by_kind": {
+      "transfer_needed": {
+        "direct": {
+          "n": 8,
+          "valid_count": 8,
+          "exact_count": 2,
+          "correct_order_count": 2,
+          "correct_binding_count": 8,
+          "stale_source_binding_count": 0
+        },
+        "target_plan": {
+          "n": 8,
+          "valid_count": 8,
+          "exact_count": 2,
+          "correct_order_count": 2,
+          "correct_binding_count": 8,
+          "stale_source_binding_count": 0
+        },
+        "qcr_correct": {
+          "n": 8,
+          "valid_count": 8,
+          "exact_count": 2,
+          "correct_order_count": 2,
+          "correct_binding_count": 8,
+          "stale_source_binding_count": 0
+        },
+        "qcr_shuffled": {
+          "n": 8,
+          "valid_count": 8,
+          "exact_count": 2,
+          "correct_order_count": 2,
+          "correct_binding_count": 8,
+          "stale_source_binding_count": 0
+        }
+      },
+      "target_sufficient": {
+        "direct": {
+          "n": 8,
+          "valid_count": 8,
+          "exact_count": 8,
+          "correct_order_count": 8,
+          "correct_binding_count": 8,
+          "stale_source_binding_count": 0
+        },
+        "target_plan": {
+          "n": 8,
+          "valid_count": 8,
+          "exact_count": 8,
+          "correct_order_count": 8,
+          "correct_binding_count": 8,
+          "stale_source_binding_count": 0
+        },
+        "qcr_correct": {
+          "n": 8,
+          "valid_count": 8,
+          "exact_count": 8,
+          "correct_order_count": 8,
+          "correct_binding_count": 8,
+          "stale_source_binding_count": 0
+        },
+        "qcr_shuffled": {
+          "n": 8,
+          "valid_count": 8,
+          "exact_count": 8,
+          "correct_order_count": 8,
+          "correct_binding_count": 8,
+          "stale_source_binding_count": 0
+        }
+      }
+    },
+    "transfer_exact_deltas": {
+      "qcr_correct_minus_target_plan": 0,
+      "qcr_correct_minus_qcr_shuffled": 0
+    },
+    "continuation_checks": {
+      "all_conditions_valid_at_least_15_of_16": true,
+      "target_plan_sufficient_exact_at_least_7_of_8": true,
+      "qcr_correct_transfer_exact_at_least_7_of_8": false,
+      "correct_minus_target_plan_transfer_at_least_4": false,
+      "correct_minus_shuffled_transfer_at_least_4": false
+    },
+    "all_continuation_conditions": false
+  },
+  "scope_note": "Benign local synthetic workflow planning only. No real tool or business-state mutation, no external network, and no security-control interaction."
+}

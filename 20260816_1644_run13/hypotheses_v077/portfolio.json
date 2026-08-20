@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "version": "v077",
+  "revision": 2,
+  "hypotheses": [
+    {
+      "id": "H-v077-1",
+      "name": "DEMONSTRATION_ARGUMENT_SCOPE_ISOLATION",
+      "status": "falsified",
+      "registered_before_execution": true,
+      "primary_metrics": [
+        "valid_call_count",
+        "exact_count",
+        "leakage_count",
+        "leakage_families",
+        "other_error_count"
+      ],
+      "success_conditions": [
+        "concrete leakage_count >= 6 and leakage_families >= 3",
+        "each condition valid_call_count >= 19",
+        "concrete leakage_count - warning leakage_count <= 1",
+        "concrete leakage_count - scoped leakage_count >= 4",
+        "scoped exact_count - concrete exact_count >= 4",
+        "scoped exact_count - warning exact_count >= 3"
+      ],
+      "kill_conditions": [
+        "concrete leakage_count < 6 or leakage_families < 3",
+        "any condition valid_call_count < 19",
+        "warning reduces leakage by at least 2",
+        "scoped reduces leakage by fewer than 4",
+        "scoped exact gain over concrete is below 4",
+        "scoped exact gain over warning is below 3"
+      ],
+      "scope": "Recorded local benign synthetic tool-call evaluation only; generated calls are never executed",
+      "outcome": {
+        "decisive_record": "demonstration-argument-leakage-qwen2-5-7b-001",
+        "model": "qwen2.5:7b",
+        "concrete_valid_call_count": 20,
+        "concrete_exact_count": 20,
+        "concrete_leakage_count": 0,
+        "warning_exact_count": 20,
+        "warning_leakage_count": 0,
+        "scoped_exact_count": 20,
+        "scoped_leakage_count": 0,
+        "reason": "the ordinary concrete-demo condition produced zero leakage across all 20 fully explicit tasks, so the registered phenomenon threshold failed before intervention comparison"
+      }
+    }
+  ]
+}

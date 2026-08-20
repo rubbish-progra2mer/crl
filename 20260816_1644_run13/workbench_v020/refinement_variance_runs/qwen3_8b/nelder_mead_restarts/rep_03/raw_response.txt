@@ -1,0 +1,59 @@
+```python
+import numpy as np
+from problems import BudgetExhausted
+
+def optimize(f, dim, bounds, budget, seed):
+    np.random.seed(seed)
+    low, high = bounds
+    best_x = None
+    best_f = float('inf')
+    evals = 0
+
+    def nelder_mead(f, dim, bounds, max_iter=100, restarts=5):
+        nonlocal evals
+        np.random.seed(np.random.randint(0, 100000))
+        simplex = np.random.uniform(low, high, (dim + 1, dim))
+        for _ in range(restarts):
+            for _ in range(max_iter):
+                if evals >= budget:
+                    raise BudgetExhausted
+                f_values = np.array([f(x) for x in simplex])
+                idx = np.argmin(f_values)
+                centroid = np.mean(simplex[~(np.arange(dim + 1) == idx)], axis=0)
+                reflection = centroid + np.random.uniform(-1, 1, dim) * (centroid - simplex[idx])
+                if evals >= budget:
+                    raise BudgetExhausted
+                reflection_f = f(reflection)
+                if f_values[idx] <= reflection_f <= f_values[-1]:
+                    simplex[idx] = reflection
+                elif reflection_f < f_values[idx]:
+                    simplex[idx] = reflection
+                else:
+                    contraction = centroid + np.random.uniform(0, 0.5, dim) * (simplex[-1] - centroid)
+                    if evals >= budget:
+                        raise BudgetExhausted
+                    contraction_f = f(contraction)
+                    if contraction_f < f_values[-1]:
+                        simplex[-1] = contraction
+                    else:
+                        shrink = np.random.uniform(0.1, 0.5) * (simplex[0] - simplex[-1])
+                        simplex = simplex[0] + np.random.rand(dim + 1) * shrink
+                evals += 1
+                if f_values[0] < best_f:
+                    best_f = f_values[0]
+                    best_x = simplex[0]
+            if evals >= budget:
+                raise BudgetExhausted
+        return best_x, best_f
+
+    try:
+        best_x, best_f = nelder_mead(f, dim, bounds, max_iter=100, restarts=5)
+    except BudgetExhausted:
+        pass
+
+    return {
+        'x': best_x,
+        'f': best_f,
+        'evaluations': evals
+    }
+```

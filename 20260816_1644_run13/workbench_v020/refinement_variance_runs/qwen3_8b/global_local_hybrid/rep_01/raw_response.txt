@@ -1,0 +1,50 @@
+```python
+import numpy as np
+from problems import BudgetExhausted
+
+def optimize(f, dim, bounds, budget, seed):
+    np.random.seed(seed)
+    low, high = bounds
+    n_samples = max(1, int(budget * 0.3))
+    n_local_searches = max(1, int(budget * 0.5))
+    n_evals_per_search = max(1, int((budget - n_samples) // n_local_searches))
+    
+    # Initial random sampling
+    points = []
+    for _ in range(n_samples):
+        if dim == 1:
+            x = np.random.uniform(low, high)
+        else:
+            x = np.random.uniform(low, high, size=dim)
+        points.append((x, f(x)))
+    
+    # Select best points for local search
+    points.sort(key=lambda p: p[1])
+    best_points = points[:min(5, len(points))]
+    
+    # Local search from best points
+    for x, _ in best_points:
+        if budget <= 0:
+            break
+        for _ in range(n_evals_per_search):
+            if budget <= 0:
+                break
+            perturb = np.random.uniform(-0.1, 0.1, size=dim)
+            new_x = np.clip(x + perturb, low, high)
+            try:
+                score = f(new_x)
+                budget -= 1
+                points.append((new_x, score))
+            except BudgetExhausted:
+                break
+    
+    # Select best overall
+    points.sort(key=lambda p: p[1])
+    best_x, best_score = points[0]
+    
+    return {
+        'x': best_x,
+        'f': best_score,
+        'nfev': budget + len(points) - len(best_points)
+    }
+```

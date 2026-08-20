@@ -1,0 +1,20 @@
+{
+  "hypothesis_id": "h-v007-contract-activation",
+  "plan_id": "plan-v007-contract-activation",
+  "claims": [
+    {
+      "claim_id": "c-v007-activation-advantage",
+      "claim_text": "在自然生成且名义通过但语义错误的工具策略上，逐约束激活剖面比等数量随机状态具有可辨识的错误召回或候选选择优势。",
+      "scope": "十二个手工五字段布尔提交政策、两个本地模型、每模型每任务四个候选、每候选十状态验证预算。",
+      "observable": "名义通过潜伏错误数、激活与随机错误召回率差、激活与随机候选选择后的三十二状态准确率差。",
+      "falsifier": "潜伏错误少于八个，或召回率优势低于 0.10 且选择准确率优势低于 0.05。",
+      "minimum_effect_or_decision_rule": "只有存在至少八个自然潜伏错误，且召回优势达到 0.10 或选择优势达到 0.05，才允许进入扩大实验。",
+      "alternative_explanations": ["随机基线方差", "政策表达受限", "候选种子未产生多样性", "手工参考策略偏向激活方法", "模型调用失败"],
+      "killer_experiment_id": "contract-activation-probe-001",
+      "supporting_experiment_ids": [],
+      "status": "testing",
+      "status_reason": "进入等状态预算的自然候选最小杀手实验。"
+    }
+  ],
+  "global_confounders": ["模型与提供方版本", "候选生成提示", "候选数量", "状态执行预算", "参考策略", "完整状态评估空间", "随机采样种子"]
+}

@@ -1,0 +1,32 @@
+name: Publish to npm
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    name: Publish npm placeholder
+    runs-on: ubuntu-latest
+
+    steps:
+      # Ledger 4b: SHA-pinned to prevent tag-mutation supply-chain attacks.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Update package.json version from release tag
+        working-directory: claim/npm
+        run: |
+          TAG="${GITHUB_REF#refs/tags/v}"
+          echo "Setting npm package version to ${TAG}"
+          npm version "${TAG}" --no-git-tag-version --allow-same-version
+
+      - name: Publish to npm
+        working-directory: claim/npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

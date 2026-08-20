@@ -1,0 +1,44 @@
+import numpy as np
+from problems import BudgetExhausted
+
+def optimize(f, dim, bounds, budget, seed):
+    np.random.seed(seed)
+    low, high = bounds
+    std = 1.0
+    population_size = 10
+    elite_ratio = 0.2
+    elite_count = int(population_size * elite_ratio)
+    covariance_regularization = 1e-6
+    iteration = 0
+    while iteration < budget:
+        try:
+            population = np.random.uniform(low, high, (population_size, dim))
+            evaluations = np.array([f(x) for x in population])
+            elite_indices = np.argsort(evaluations)[:elite_count]
+            elites = population[elite_indices]
+            elite_evals = evaluations[elite_indices]
+            mean = np.mean(elites, axis=0)
+            covariance = np.cov(elites, rowvar=False)
+            covariance = covariance + covariance_regularization * np.eye(dim)
+            std = np.sqrt(np.trace(covariance) / dim)
+            population = np.random.multivariate_normal(mean, covariance, population_size)
+            population = np.clip(population, low, high)
+            evaluations = np.array([f(x) for x in population])
+            elite_indices = np.argsort(evaluations)[:elite_count]
+            elites = population[elite_indices]
+            mean = np.mean(elites, axis=0)
+            covariance = np.cov(elites, rowvar=False)
+            covariance = covariance + covariance_regularization * np.eye(dim)
+            std = np.sqrt(np.trace(covariance) / dim)
+            iteration += population_size
+        except BudgetExhausted:
+            break
+    best_index = np.argmin(evaluations)
+    best_x = population[best_index]
+    best_f = evaluations[best_index]
+    return {
+        'x': best_x,
+        'f': best_f,
+        'iterations': iteration,
+        'evaluations': budget - iteration
+    }

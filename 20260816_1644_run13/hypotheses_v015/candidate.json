@@ -1,0 +1,42 @@
+{
+  "hypothesis_id": "h-v015-dual-witness-eprocess",
+  "title": "对偶见证的持续组合可靠性认证",
+  "problem": "静态多智能体组合可靠性证书在部署分布或模型版本漂移后会陈旧，而现有随时有效证书只直接使用最终全流程成功二值结果并永久锁存。",
+  "target_failure": {
+    "summary": "已签发证书不能反映部署漂移；仅使用最终二值结果可能浪费组件级共同成败信息。",
+    "card_ids": [],
+    "evidence_ids": []
+  },
+  "mechanism_claim": "把矩线性规划的可预测对偶可行解转成逐任务下界见证并用于电子过程，可在保持无依赖假设和随时有效性的同时，比直接全成功投注更快认证。",
+  "changed_computation": {
+    "baseline": "只对每个任务的最终全流程成功二值指标运行随时有效正向均值投注。",
+    "intervention": "用历史数据求可靠性矩线性规划的对偶可行解，将新任务组件结果映射为逐配置下界见证，再对见证运行可预测投注。",
+    "information_available": "与基线相同的每任务组件成败和最终全流程结果；对偶解只依赖过去数据。",
+    "timing": "部署中的每个完成任务后。",
+    "budget_effect": "不增加模型调用；每次更新需要计算线性见证值，周期性重求对偶。"
+  },
+  "minimal_killer_experiment": "在合成相关组件联合分布上比较对偶见证与直接全成功电子过程的最优期望对数财富增长，并检查对偶见证是否逐点被直接指标支配。",
+  "falsifier": "若对偶可行性必然给出逐点见证不超过最终成功指标，则正向投注的直接基线逐路径支配候选。",
+  "alternative_explanations": [
+    "低方差不足以弥补更小的均值间隙",
+    "直接最终指标已经是同一零假设下的点态最大安全收益",
+    "漂移检测收益来自经典变点方法而非对偶见证",
+    "数值对偶误差产生虚假微小优势"
+  ],
+  "nearest_prior_risk": "Agent Behavioral Contracts II 的随时有效图可靠性电子过程、经典置信序列、电子过程与序贯变点检测。",
+  "lineage_note": "从该论文的证书衰减开放问题与静态矩证书的对偶结构出发。",
+  "literature_refs": [
+    "arXiv:2608.12895",
+    "Howard et al. 2021 time-uniform confidence sequences",
+    "Waudby-Smith and Ramdas 2024 betting confidence sequences"
+  ],
+  "descriptors": {
+    "problem_family": "部署漂移下的组合可靠性",
+    "intervention_family": "对偶见证电子过程",
+    "computation_stage": "在线认证",
+    "information_source": "组件共同成败矩",
+    "evaluation_mode": "随时有效性与认证延迟",
+    "timing_class": "逐任务更新",
+    "budget_class": "无额外模型调用"
+  }
+}

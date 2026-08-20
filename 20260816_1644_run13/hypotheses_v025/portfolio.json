@@ -1,0 +1,57 @@
+{
+  "created_at_utc": "2026-08-16T11:59:02.323340Z",
+  "hypotheses": [
+    {
+      "alternative_explanations": [
+        "保留样本多为短句，直接成对判断已经足够",
+        "编译器可能生成不能区分政策边界的平凡见证",
+        "同一模型同时编译和执行会引入相关错误",
+        "原始文本自校验会选择性丢弃最困难的见证",
+        "四次调用相对单次判别的收益可能只是额外计算量"
+      ],
+      "changed_computation": {
+        "baseline": "直接比较原始文本与候选文本的嵌入、词面特征、自然语言推断分数或成对语言模型判断。",
+        "budget_effect": "每个文本对需要一次见证编译、两次批量执行；直接成对判断作为等调用条件之外的强基线。",
+        "information_available": "编译器只看原始政策；两个执行器分别只看一段政策及同一组源生成见证；变异类别和人工约束说明不进入模型输入。",
+        "intervention": "把原始政策单边编译为可执行决策见证，对两段文本做分离执行，并确定性比较离散动作。",
+        "timing": "文本重写生成之后、允许重写进入下游之前。"
+      },
+      "created_at_utc": "2026-08-16T12:01:13.443034Z",
+      "descriptors": {
+        "budget_class": "固定四见证与三阶段调用",
+        "computation_stage": "重写后的部署前语义门",
+        "evaluation_mode": "跨作者保留语义变异集",
+        "information_source": "原始政策和源生成决策情景",
+        "intervention_family": "源规范编译的反事实决策见证",
+        "problem_family": "指令重写的操作语义漂移检测",
+        "timing_class": "推理时"
+      },
+      "falsifier": "若已有方法已经只从参考指令单边编译具体反事实情景与预期决策，独立执行参考文本和候选文本，再以同一批源生成见证的离散决策差异确定性判别语义漂移，则该控制流不具方法新颖性；若完整保留集上不稳定优于同模型直接成对判断，经验主张失败。",
+      "hypothesis_id": "h-v025-source-compiled-decision-witness",
+      "lineage_note": "由 arXiv:2608.10216 的跨作者校准失败触发；使用其公开 PolarityCheck v1.0.0 工件提交 faa72a7ac58a9d4fa204e079e9722d177deb391b，仅以 id、root、mutated 和事后 mutation_class 进行实验与分析。",
+      "literature_refs": [
+        "arXiv:2608.10216"
+      ],
+      "mechanism_claim": "只从原始政策编译一组带离散动作选项和预期决策的反事实见证，再让独立执行器分别依据原始文本与候选文本回答同一组见证；若任一在原始文本上自校验通过的见证发生动作变化，则判定语义漂移。",
+      "minimal_killer_experiment": "在 PolarityCheck 的 40 个跨作者保留样本上，固定本地模型、温度、随机种子和四见证预算，对比源编译决策见证与同模型直接成对判断；报告平衡准确率、变异召回率、忠实改写特异度、各变异类别召回率、解析率和有效见证数，并在至少两个模型上检查方向一致性。",
+      "nearest_prior_risk": "行为测试、检查表式测试、变形测试、政策即代码和大语言模型生成测试用例可能已覆盖从规范生成例子再执行的核心计算。",
+      "parent_ids": [],
+      "problem": "文本重写的语义漂移门通常直接比较两段文本的表示或让判别器阅读文本对，因此会把词面相近误作操作语义相同，并在作者分布变化后失去校准。",
+      "revision": 3,
+      "status": "falsified",
+      "status_reason": "PolarityCheck 40例跨作者保留集上，qwen2.5:7b严格源见证门仅36例可评分，平衡准确率0.650、变异召回率0.500；同模型直接成对判断40/40正确。候选以更多调用丢失对比信息，经验主张失败。",
+      "target_failure": {
+        "card_ids": [],
+        "evidence_ids": [],
+        "summary": "Similarity Gates Approve Reversals（arXiv:2608.10216）在 40 个保留样本上发现余弦、词面重叠校准和自然语言推断修复均不能稳定跨作者泛化；生产漂移门漏掉全部 56 个人工变异。"
+      },
+      "title": "源编译决策见证的语义漂移门",
+      "updated_at_utc": "2026-08-16T12:11:09.733916Z"
+    }
+  ],
+  "revision": 3,
+  "run_id": "20260816_1644_run13",
+  "schema_version": 1,
+  "updated_at_utc": "2026-08-16T12:11:09.733916Z",
+  "version": "v025"
+}

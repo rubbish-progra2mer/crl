@@ -1,0 +1,10 @@
+# v084 假设组合
+
+本版本没有注册实验假设。
+
+- 多模型评审独立性：`DIRECT_BEHAVIORAL_ENTANGLEMENT_AND_REWEIGHTING_COLLISION`。
+- 执行—最终陈述一致性：`DIRECT_FALSE_SUCCESS_AND_STATE_GATING_COLLISION`。
+- 科研统计有效性与论文复现：`DIRECT_RESEARCH_BENCHMARK_AND_TRAINING_COLLISION`。
+- 工具置信校准与按实例调用：`DIRECT_CALIBRATION_AND_REWARD_SNR_COLLISION`。
+
+这些入口都不能通过换成本地良性任务获得论文级差分；实验只会重复已发表的大规模轨迹、跨模型或可验证任务结果。

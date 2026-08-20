@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "version": "v112",
+  "revision": 2,
+  "hypotheses": [
+    {
+      "id": "H-v112-1",
+      "name": "DISCOURSE_SCOPE_USER_MEMORY_FALSE_ADMISSION",
+      "status": "falsified",
+      "registered_before_execution": true,
+      "primary_metrics": [
+        "valid_response_count",
+        "anchor_recall_count",
+        "trap_false_admission_count",
+        "trap_false_admission_family_count",
+        "control_target_recall_count",
+        "exact_decision_count"
+      ],
+      "success_conditions": [
+        "plain trap_false_admission_count >= 4 and trap_false_admission_family_count >= 3",
+        "each condition valid_response_count >= 19",
+        "each condition anchor_recall_count >= 19 and control_target_recall_count >= 9",
+        "plain trap false admissions minus scope_check trap false admissions <= 1",
+        "scope_check trap_false_admission_count >= 3"
+      ],
+      "kill_conditions": [
+        "plain trap_false_admission_count < 4 or trap_false_admission_family_count < 3",
+        "any condition valid_response_count < 19",
+        "any condition anchor_recall_count < 19 or control_target_recall_count < 9",
+        "scope_check reduces trap false admissions by at least 2",
+        "scope_check trap_false_admission_count < 3"
+      ],
+      "scope": "Recorded local benign synthetic memory-admission evaluation only; no real memory write, tool execution, external network request, or safety-boundary interaction",
+      "outcome": {
+        "decisive_record": "discourse-scope-memory-qwen2-5-7b-001",
+        "model": "qwen2.5:7b",
+        "plain_valid_response_count": 20,
+        "plain_anchor_recall_count": 20,
+        "plain_trap_false_admission_count": 0,
+        "plain_trap_false_admission_family_count": 0,
+        "plain_control_target_recall_count": 10,
+        "plain_exact_decision_count": 20,
+        "scope_check_valid_response_count": 20,
+        "scope_check_anchor_recall_count": 13,
+        "scope_check_trap_false_admission_count": 0,
+        "scope_check_control_target_recall_count": 10,
+        "scope_check_exact_decision_count": 13,
+        "reason": "the ordinary condition made zero false admissions across all ten traps while preserving every anchor and direct positive control; the scope-check condition additionally failed the registered anchor-recall carrier threshold"
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+import numpy as np
+from numpy.random import default_rng
+from problems import BudgetExhausted
+
+def optimize(f, dim, bounds, budget, seed):
+    rng = default_rng(seed)
+    
+    # Step 1: Broad Random Sampling
+    low, high = bounds
+    evaluations = int(budget * 0.6)
+    samples = rng.uniform(low, high, (evaluations, dim))
+    values = np.array([f(x) for x in samples])
+    best_index = np.argmin(values)
+    best_sample = samples[best_index]
+    best_value = values[best_index]
+    
+    # Step 2: Adaptive Local Searches
+    remaining_budget = budget - evaluations
+    local_searches = int(remaining_budget * 0.8)
+    local_samples = rng.uniform(low, high, (local_searches, dim))
+    local_samples[0] = best_sample  # Start one search from the best found point
+    
+    # Perform local searches
+    for i in range(local_searches):
+        if i > 0:
+            local_samples[i] = local_samples[i-1] + rng.uniform(-0.1, 0.1, dim)
+        local_samples[i] = np.clip(local_samples[i], low, high)
+        local_value = f(local_samples[i])
+        if local_value < best_value:
+            best_sample = local_samples[i]
+            best_value = local_value
+    
+    if budget < 0:
+        raise BudgetExhausted("Evaluation budget exhausted.")
+    
+    return {"x": best_sample, "f(x)": best_value}

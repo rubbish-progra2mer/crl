@@ -1,0 +1,52 @@
+```python
+import numpy as np
+from problems import BudgetExhausted
+
+class Particle:
+    def __init__(self, dim, bounds, seed):
+        np.random.seed(seed)
+        self.position = np.random.uniform(bounds[0], bounds[1], dim)
+        self.best_position = self.position.copy()
+        self.velocity = np.zeros(dim)
+        self.best_fitness = float('inf')
+
+class PSOOptimizer:
+    def __init__(self, dim, bounds, inertia_schedule):
+        self.dim = dim
+        self.bounds = bounds
+        self.inertia_schedule = inertia_schedule
+        self.particles = [Particle(dim, bounds, i) for i in range(100)]
+
+    def optimize(self, f, budget, seed):
+        np.random.seed(seed)
+        t = 0
+        while t < budget:
+            for particle in self.particles:
+                fitness = f(particle.position)
+                if fitness < particle.best_fitness:
+                    particle.best_fitness = fitness
+                    particle.best_position = particle.position.copy()
+                for i in range(self.dim):
+                    self.velocity[i] = (
+                        self.inertia_schedule(t) *
+                        self.velocity[i] +
+                        2 * np.random.rand() * (particle.best_position[i] - particle.position[i]) +
+                        2 * np.random.rand() * (particle.best_position[0] - particle.position[i])
+                    )
+                    particle.position[i] = np.clip(particle.position[i] + self.velocity[i], self.bounds[0], self.bounds[1])
+                t += 1
+                if t >= budget:
+                    break
+            if t >= budget:
+                break
+        best_particle = min(self.particles, key=lambda p: p.best_fitness)
+        return {'position': best_particle.best_position, 'fitness': best_particle.best_fitness}
+
+def optimize(f, dim, bounds, budget, seed):
+    inertia_schedule = lambda t: 0.729 + 0.48 * np.cos(np.pi * t / budget)
+    optimizer = PSOOptimizer(dim, bounds, inertia_schedule)
+    try:
+        return optimizer.optimize(f, budget, seed)
+    except IndexError:
+        raise BudgetExhausted()
+```

@@ -1,0 +1,39 @@
+{
+  "claims": [
+    {
+      "alternative_explanations": [
+        "一般序列位置偏置",
+        "工具结果与调用关联失败",
+        "任务规则歧义",
+        "模型服务非确定性"
+      ],
+      "claim_id": "c-v005-order-instability",
+      "claim_text": "只置换同一并行批次的工具结果消息，会在固定模型与解码下改变至少两个任务的后续决策。",
+      "falsifier": "每个模型至少 7/8 个任务全排列决策相同，且剩余错误不表现为顺序相关翻转。",
+      "killer_experiment_id": "parallel-result-order-probe-001",
+      "minimum_effect_or_decision_rule": "只有至少一个模型出现不少于 2/8 的翻转任务，才允许进入扩大实验。",
+      "observable": "每模型翻转任务数、每任务决策集合、平均置换不稳定度与全排列正确率。",
+      "scope": "八个三工具受控任务、全部六种排列、qwen2.5:7b 与 qwen3:8b。",
+      "status": "falsified",
+      "status_reason": "正式尝试中两个模型各 8/8 个任务全排列不变且 48/48 正确；翻转任务率均为 0，满足预注册判死规则。",
+      "supporting_experiment_ids": [
+        "parallel-result-order-probe-001"
+      ]
+    }
+  ],
+  "created_at": "2026-08-16T09:20:35.920464Z",
+  "global_confounders": [
+    "提示长度",
+    "工具调用列表顺序",
+    "结果文本",
+    "正确证据源计划位置",
+    "解码种子",
+    "模型模板"
+  ],
+  "hypothesis_id": "h-v005-result-order",
+  "plan_id": "plan-v005-result-order",
+  "run_id": "20260816_1644_run13",
+  "schema_version": 1,
+  "updated_at": "2026-08-16T09:26:35.567055Z",
+  "version": "v005"
+}

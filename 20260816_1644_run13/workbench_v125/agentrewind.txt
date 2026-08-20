@@ -1,0 +1,1282 @@
+AgentRewind: Recoverable Execution
+for Long-Horizon LLM Agents
+YuZhuang1,3,4∗,KefeiChen2,3∗,YitongDuan3†,ShuxinZheng3,JianLi2,Xu-YaoZhang1,4†
+1UniversityofChineseAcademyofSciences
+2IIIS,TsinghuaUniversity
+3ZhongguancunAcademy,Beijing,China
+4InstituteofAutomation,ChineseAcademyofSciences
+zhuangyu24@mails.ucas.ac.cn,ckf25@mails.tsinghua.edu.cn,duanyitong@zgci.ac.cn,xyz@nlpr.ia.ac.cn
+Abstract etal.2023;Liuetal.2024;Wangetal.2026).Duringexe-
+cution,anagentmayalsodeletecriticalfiles,corruptconfig-
+Many real-world tasks require LLM agents to interact with
+urations,orcontaminatedatabasestates,forcingsubsequent
+theirenvironmentsoverlongexecutionhorizons.Errorsthat
+actionstoproceedinadegradedenvironmentandpotentially
+occurearlyinexecutionmaypropagatethroughboththeagent
+preventingtaskcompletion(Ruanetal.2024;Trivedietal.
+contextandenvironmentstate,andtheireffectsmaybediffi-
+2024). Because long-horizon tasks involve more execution
+culttoreversethroughsubsequentactions.Existingmethods
+mainlyseektoreducesucherrorsthroughplanrefinementand steps, agents are more likely to make such errors along the
+safetychecksbutprovidelittlesupportaftererrorsoccur.To executiontrajectoryandthereforefaceahigherriskoftask
+enable recovery during long-horizon execution, we present failure.
+AgentRewind, a runtime recovery framework that records Existingapproachesprimarilyseektoimproveagentper-
+alignedcheckpointsoftheagentcontextandcontrolledenvi- formanceonlong-horizontasksthroughplanrefinementand
+ronment,allowingagentstoreturntoanearlierstateandre- safetychecks.Onelineofworkgeneratesandrevisesplans
+sumeexecutionwithinformationfrompreviousattempts.We before execution to identify more effective execution paths
+alsoconstructMettleBench,abenchmarkforevaluatingtask
+(Erdoganetal.2025;Zhouetal.2024).Anotherlineofwork
+completionandpartialprogressonlong-horizonengineering
+applies safety checks during execution to detect unsafe be-
+assignmentscontainingaseriesofrelatedrequirements.Ex-
+havior (Wang, Poskitt, and Sun 2026; Xiang et al. 2025).
+perimentsacrosstasks,multiplemodels,executionstrategies,
+and agent harnesses show that AgentRewind improves task However, even with a low probability of error at each step,
+successrateandaveragechecklistprogressoverthecompared cumulative failure risk grows with trajectory length. These
+baselines. methods do not adequately address recovery after an error
+hasdisruptedexecution.
+Code—https://github.com/Futuresis/replay-agent-recorder WethereforeintroduceAgentRewind,aruntimerecovery
+Dataset—https://github.com/Kelvin-Coffee/MettleBench frameworkthatallowsagentstorewindexecutiontoanear-
+lier state. When the agent determines that it is unlikely to
+makefurtherprogressalongthecurrenttrajectory,itcanse-
+Introduction lect an earlier checkpoint based on the recorded trajectory.
+LLM agents solve tasks through tool-mediated interaction AgentRewind then restores the agent context and environ-
+withtheirenvironments.Unlikenon-agenticLLMs,theyob- ment to the states recorded at that checkpoint, allowing the
+serve environmental states, invoke tools, and adjust subse- agenttocontinueexecutionfromthere.Italsoretainsasum-
+quentactionsbasedonfeedback(Yaoetal.2023;Liuetal. mary of the previous attempt as rewind memory to guide
+2024). They are increasingly applied to long-horizon tasks theagent’ssubsequentdecisions.Throughthesecapabilities,
+suchasiterativescientificexperimentation,cross-application AgentRewind enables agents to recover from errors during
+workflows, and repository-level software engineering (Kon taskexecution,improvingtheirperformanceonlong-horizon
+et al. 2026; Li et al. 2026; Jimenez et al. 2024). Improving tasks.Ourmaincontributionsaresummarizedasfollows:
+their performance on such tasks is therefore an important
+• WedevelopAgentRewind,asystemthatcanreturnboth
+researchobjective.
+theagentcontextandtheenvironmentstatetoaselected
+However, operating over long horizons presents distinct
+checkpoint. This allows the agent to continue from an
+challengesforLLMagents.Forexample,anagentmayfor-
+earliercheckpointandexploreadifferenttrajectorywhen
+mulate an incorrect plan early in execution, causing subse-
+errorspreventfurtherprogress.
+quentactionstoproceedinthewrongdirection(Valmeekam
+• We construct MettleBench, a benchmark derived from
+∗Theseauthorscontributedequally. real-world engineering resources, to evaluate task com-
+†Correspondingauthor. pletionandchecklistprogressonassignmentscontaining
+6202
+guA
+41
+]IA.sc[
+1v08341.8062:viXra
+
+aseriesofrelatedrequirements. etal.2026).However,thesesystemsprimarilyprovidelow-
+• We evaluate AgentRewind across multiple base models, levelrollbackmechanismsratherthananagent-levelrecovery
+executionstrategies,andagentharnesses,andshowthatit processforlong-horizonexecution.AgentRewindcombines
+improvestasksuccessrateandaveragechecklistprogress coordinatedrestorationoftheagentcontextandenvironment
+inlong-horizonsettings. statewithrewindmemory,allowingtheagenttoreturntoan
+earlier checkpoint and continue execution with information
+frompreviousattempts.
+RelatedWork
+Long-HorizonAgents
+AgentRewindFramework
+Long-horizon agents have been studied across embodied,
+scientific, web-based, software engineering, and database AgentRewind provides a runtime recovery framework for
+settings. ALFWorld, ScienceWorld, and WebShop evaluate long-horizon agent execution. It records recoverable check-
+long-horizon interaction in embodied, scientific, and web points that capture the agent context and controlled envi-
+environments (Shridhar et al. 2021; Wang et al. 2022; Yao ronment state. When a rewind is triggered, AgentRewind
+etal.2022).InterCodeandSWE-benchstudyinteractivepro- restorestheselectedcheckpointandinjectsagent-generated
+gramming and repository-level software engineering (Yang rewindmemoryintotherestoredcontext.Figure1provides
+etal.2023;Jimenezetal.2024;Yangetal.2024),whileSpi- an overview of the system architecture and the recoverable
+der2.0,CoSQL,andBIRD-INTERACTfocusonmulti-turn executionprocess.
+database tasks (Lei et al. 2025; Yu et al. 2019; Huo et al.
+2026). More recent benchmarks, including TheAgentCom- Long-HorizonExecutionwithRewind
+panyandOdysseys,extendevaluationtorealisticcomputer-
+Weconsideranagentexecutinglong-horizontasksinacon-
+usetasksandshowthatevenstrongmodelsoftenfailtocom-
+pletelong-horizontasks(Xuetal.2025;Jangetal.2026).
+trolledexternalenvironment.Givenataskinstructionx,the
+agentiterativelychangestheenvironmentstatethroughtool
+AgentReliability calls. At step t, the LLM generates a decision u t from its
+contextc .Theenvironmenttransitionsfroms tos and
+Prior work on agent reliability improves execution through t t t+1
+returns observation o , after which the agent context is
+betteractiongenerationandsafetymonitoring.Methodssuch t+1
+updated:
+as ReAct, SayCan, and LATS guide agent behavior using
+reasoning, planning, search, and environment models (Yao u ∼π(c ),
+t t
+et al. 2023; Ichter et al. 2023; Huang et al. 2023; Erdogan (s ,o )=T(s ,u ), (1)
+t+1 t+1 t t
+et al. 2025; Zhou et al. 2024; Koh et al. 2025; Chae et al.
+c =U(c ,u ,o ).
+2025).Safety-orientedmethodsmonitoragentexecutionand t+1 t t t+1
+identifyriskybehavior(Wang,Poskitt,andSun2026;Xiang Theseupdatesproduceaforward-growingtrajectory:
+etal.2025;Liuetal.2026).
+Another line of work uses information from previous at- τ = (cid:0) (c 0 ,s 0 ),u 0 ,o 1 ,(c 1 ,s 1 ),...,(c T ,s T ) (cid:1) . (2)
+temptstoimprovelaterbehavior.Self-Refine,Reflexion,and
+Under standard execution, the trajectory can only grow
+ExpeLusefeedbackfrompriorattemptstorevisesubsequent
+decisions(Madaanetal.2023;Shinnetal.2023;Zhaoetal. forward. Once an early decision u k introduces an error, its
+2024).Relatedfailure-analysismethodsdiagnosethecauses
+effectsmaypropagatethroughsubsequentcontextsc
+k+1
+and
+of failure from completed execution trajectories (Zhu et al. environment states s k+1 . Even if the agent later recognizes
+theerror,itcanonlyappendcorrectiveactionstotheexisting
+2025; Barke et al. 2026). These methods use information
+trajectoryandmaybeunabletofullyreversethestatechanges
+frompreviousexecutionstoimprovelaterbehavior,butpro-
+causedbytheerroneousprefix.
+vide little support for recovery after an error occurs during
+AgentRewind records the execution state at each LLM
+execution.
+decisionboundaryasarecoverablecheckpointd :
+t
+RollbackforLLMAgents
+d =(c ,s ). (3)
+SeveralstudieshaveexploredrollbackforLLMagents.GA- t t t
+Rollback (Li et al. 2025) performs stepwise recovery in re- For each state checkpoint, AgentRewind constructs associ-
+playableenvironments,whereasWebRollback(Zhangetal. ated checkpoint metadata η . The metadata describes the
+t
+2026) specializes rollback to browser navigation. DART executionsegmentbetweend andd .Itisusedtopresent
+t t+1
+(Yangetal.2026b)selectssemanticallyvalidrestorepoints possiblerewindlocationstotheagent.
+for structured tool agents but relies on explicit control flow Giventhetrajectoryτ ,whentheagentdeterminesthat
+and recovery boundaries, limiting its applicability to open- the current trajectory ca 0 n :T no longer make progress, it can
+endedagenttrajectories. select a historical checkpoint d based on its context and
+System-level checkpointing tools such as DMTCP and checkpointmetadatalist,wherek k ≤T,andgeneraterewind
+CRIUprovidegeneralmechanismsforrestoringprocessstate memory m from the current trajectory. AgentRewind adds
+(Ansel, Arya, and Cooperman 2009; CRIU Project 2026). mtothesetofhistoricalrewindmemoriesM:
+DeltaBoxextendsthesemechanismstoagentsandboxes,en-
+ablingefficientrollbackoffilesystemandprocessstate(Dong M ←M ∪{m}. (4)
+
+Figure1:OverviewofAgentRewind.(a)AgentRewindoperatesasaruntimelayerbetweentheagentandthecontrolledexternal
+environment.Thecontextrecorderandenvironment-staterecordercreatealignedcheckpointsd =(c ,s ).Duringrewind,the
+t t t
+agentselectsatargetcheckpoint,afterwhichtherewindexecutorrestoresthecorrespondingcontextandenvironmentstateand
+injectsrewindmemory.(b)Anillustrativerecoverableexecution.Whentheagentdeterminesthatthecurrenttrajectorycanno
+longermakeprogress,itinvokesrewind.Thetrajectoryreturnstod ,retainstheprefixthroughthatcheckpoint,andcontinues
+k
+withanewsuffix.
+AgentRewind then restores the controlled external environ- environment and aligns them with the corresponding con-
+mentstatetos andinjectstheaccumulatedrewindmemo- textrecordstoformrecoverablecheckpoints.Therefore,the
+k
+riesintotherecordedagentcontextc : recorded trajectory supports the joint recovery of the agent
+k
+contextandthecontrolledenvironmentstate.
+s′ ←s ,
+k k (5)
+c′ k ←Inject(c k ,M). RewindModule
+The agent subsequently resumes execution from (c′,s′), AgentRewindexposesrewindasanadditionalcontrolaction
+k k
+producinganewcontinuationofthetrajectory: totheagent.Whentheagentdecidestoinvokerewind,Agen-
+τ′ = (cid:0) (c′,s′),u′,o′ ,... (cid:1) . (6) tRewind organizes the recorded trajectory into checkpoint
+k k k k+1 metadataentries.EachentrysummarizesanLLMoutputto-
+Figure 1(b) illustrates this recoverable execution process. gether with the tool interactions and environment changes
+Ratherthancontinuingonlyfromthelatestexecutionstate, that occur before the next LLM output. Based on the cur-
+theagentcanreturntoanearliercheckpointandresumeexe- rentexecutiontrajectory,checkpointmetadata,environment
+cution,whileretaininginformationfrompreviousattempts. feedback,andaccumulatedrewindmemory,theagentselects
+acheckpointandgeneratesanewrewindmemorythatsum-
+AgentRewindRuntimeRecoveryLayer marizesusefulinformationfromthecurrenttrajectory,such
+Based on the formalization above, AgentRewind augments asfalsifiedhypothesesandalternativestrategies.
+the standard agent–environment interaction loop with run- During rewind execution, AgentRewind terminates the
+timerecovery.AsshowninFigure1(a),AgentRewindoper- currentexecutionandrestoresboththeexternalenvironment
+ates between the agent and the controlled external environ- and the agent context to the selected checkpoint. The pre-
+ment.Duringnormalexecution,AgentRewindtransparently ceding LLM outputs and tool results are restored from the
+recordstheagent’strajectorywithoutalteringitsinteraction executionlogratherthanregeneratedorre-executed.Agen-
+with the environment. The recorded trajectory includes the tRewind then injects the accumulated rewind memory into
+taskinstruction,LLMinputsandoutputs,toolcalls,andtool therestoredcontext.Theagentthenbeginsgeneratinganew
+results.Italsotrackstool-inducedchangestothecontrolled suffixfromtherestoredstate.
+
+ExternalEnvironmentRecoveryBoundary
+ThecontrolledenvironmentrestoredbyAgentRewindisthe
+workspace directory tree, whether the agent runs locally or
+in an isolated container. At each checkpoint, AgentRewind
+recordsfile-levelchanges;rewindingrevertslatermodifica-
+tions,restoresdeletedfiles,andremovesnewlycreatedfiles.
+Effects outside the workspace filesystem, such as network
+requests, external-service calls, and external runtime state,
+cannot be undone. Because the retained prefix is restored
+fromtheexecutionlog,theseeffectsarenottriggeredagain.
+MettleBench
+We next introduce the benchmark used for our main eval-
+uation of long-horizon execution. Complex, long-horizon
+engineering assignments are rarely defined by a single re-
+quirement.Instead,theyoftencontainaseriesofrelatedre-
+quirementsthattogetherdeterminewhethertheassignment
+Figure 2: Distribution of the 82 MettleBench tasks across
+hasbeencompleted.Forexample,migratinganinternalser-
+sourcebenchmarks.Percentagesareroundedtoonedecimal
+vice may require upgrading its dependencies, transferring
+place.
+configurationanddata,preservingcompatibilitywithexist-
+ing clients, updating deployment scripts, verifying service
+availability,anddocumentingtheresultingchanges.Bycon-
+trast, many existing agent benchmarks formulate each task executable task environments while rewriting the natural-
+around one primary requirement, even when completing it language task instructions to express a series of related re-
+involves multiple execution steps. MettleBench represents quirements within each assignment. For each rewritten in-
+thisformoflong-horizonworkbytreatingeachtaskasasin- struction, we construct a hidden, ordered checklist of in-
+gle engineering assignment containing a series of complex terdependent acceptance criteria, each implemented as an
+requirements. Formally, a task and its ordered acceptance executablecheck.
+criteriaarerepresentedas Uponeachagentsubmission,thebackendexecutesthese
+checksintheirpredefinedorderandreturnsnatural-language
+T =(x,s ,U,G), G=(g ,...,g ), (7) feedbackidentifyingonlythefirstunsatisfiedchecklistitem.
+0 1 n
+Thefullchecklistremainshiddenfromtheagent,whichmay
+wherexisanatural-languagetaskinstruction,s istheinitial
+0 continue revising its execution based on the returned feed-
+environment state, U is the agent’s decision space, and G
+back.Becauseallcriteriasharethesameenvironmentstate,
+is the ordered list of acceptance criteria. Each acceptance
+satisfying one criterion may enable or hinder later criteria,
+criterion corresponds to a binary evaluation function g :
+i whilesubsequentactionsmayinvalidatepreviouslysatisfied
+S →{0,1},whereg (s)=1indicatesthattheenvironment
+i criteria.MettleBenchdoesnotrequireagentstouseanypar-
+state s satisfies the i-th criterion. Task success at the final
+ticularrecoverymechanism.Eachtaskisscreenedforavalid
+states isdefinedas
+T forward-only solution, allowing the benchmark to evaluate
+n long-horizonexecutionindependentlyofanyspecificrecov-
+Succ(s )= (cid:94)(cid:0) g (s )=1 (cid:1) . (8) ery design. Continue trace lengths in Table 1 provide an
+T i T
+empiricalcharacterizationofMettleBench’sexecutionhori-
+i=1
+zons.Furtherbenchmarkconstructiondetailsareprovidedin
+Ataskisthereforesuccessfulonlywhenthefinalstatesatis-
+AppendixA.
+fiesallacceptancecriteria.Tocharacterizepartialprogress,
+let ℓ ∈ {0,...,n} denote the length of the longest prefix
+(g ,...,g )suchthatg (s )=1foralli≤ℓ.Thechecklist Experiments
+1 ℓ i T
+prefixprogressisdefinedas We evaluate AgentRewind on MettleBench using task suc-
+cess rate and average checklist progress. Task success rate
+ℓ
+ρ(s )= . (9) istheproportionoftasksthatsatisfyallacceptancecriteria
+T n before termination. Average checklist progress is the mean
+This metric distinguishes different levels of progress when of the task-level checklist prefix progress ρ(s ) defined in
+T
+a task is not fully completed. MettleBench comprises 82 the MettleBench section, where s denotes the final envi-
+T
+tasks derived from five existing engineering benchmarks: ronmentstateattheendofarun.Weimposenopresetlimits
+Terminal-Bench 2.0 (Merrill et al. 2026), ProgramBench on wall-clock time, execution steps, or total token usage.
+(Yangetal.2026a),SWE-bench(Jimenezetal.2024),Pro- A run ends upon task success; otherwise, to prevent meth-
+jectEval(Liuetal.2025),andGitTaskBench(Nietal.2026). ods from continuing or retrying indefinitely, we apply the
+Figure 2 summarizes the distribution of tasks across these samerepeated-failureterminationconditiontoallstrategies.
+sources. We retain the underlying engineering artifacts and If the environment identifies the same first unsatisfied ac-
+
+SR Avg.Checklist Avg.Trace
+Model (%)↑ progress(%)↑ Length
+GPT-5.4 62.2 81.4 50.5
+GPT-5.4mini 33.7 64.6 72.4
+Qwen3.7-Max 73.2 84.8 126.3
+Qwen3.5-27B 56.1 79.1 211.6
+KimiK2.5 28.0 61.3 312.4
+DeepSeek-V4-Flash 37.8 63.6 337.2
+GLM-5.1 59.8 75.1 324.8
+Table 1: Continue baselines across seven base models on
+MettleBench.
+ceptancecriterioninfiveconsecutivesubmissions,therunis
+terminated and recorded as unsuccessful. Unless otherwise
+specified, all experiments use GPT-5.4 as the base model
+and mini-SWE-agent as the agent harness, with the same
+task environments, tool interfaces, and termination condi-
+tionsacrosscomparedmethods.Furtherexperimentaldetails
+Figure3:Tasksuccess(top)andchecklistprogress(bottom)
+areprovidedinAppendixB.
+over trace length for GPT-5.4 and GPT-5.4 mini. Curves
+showaveragesoverthreerunsandareextendedhorizontally
+MainResults
+attheirfinalobservedvaluesaftertermination.
+ContinueBaselinesAcrossBaseModels. Wefirstestab-
+lish standard forward-execution baselines on MettleBench
+acrosssevenbasemodels.Allmodelsusemini-SWE-agent progressortaskcompletion.Together,thesebaselinesestab-
+(Yang et al. 2024) with the Continue strategy, under which lishtheperformancerangeandremainingrecoveryheadroom
+executionproceedsfromthecurrentcontextandenvironment fortheexecution-strategycomparisonsthatfollow.
+stateaftereachvalidationresponse.Executiontracelengthis
+measuredbythenumberofrecordedLLMandtoolevents. Comparison of Execution Strategies. We compare exe-
+cutionstrategiesusingGPT-5.4andGPT-5.4mini,twomod-
+Table1reportstasksuccess,averagechecklistprogress,and
+elsfromthesamefamilythatexhibitdifferentperformance
+averagetracelength,withallotherexperimentalsettingsheld
+underContinue.Wecomparethefollowingexecutionstrate-
+fixed.
+gies:
+Under Continue, task success rates range from 28.0% to
+73.2% and no model saturates MettleBench, leaving sub- • Continue:Afterreceivingvalidationfeedback,theagent
+stantial room for improved execution strategies. Qwen3.7- continuesexecutionfromitscurrentcontextandenviron-
+Maxachievesthehighesttasksuccessandchecklistprogress, mentstate.
+whereas Kimi K2.5 records the lowest values on both met- • RestartwithExperiences:Afteravalidationfailure,the
+rics.Thevariationacrossmodelsalsoshowsthatthebench- environment is reset to its initial state. The agent then
+mark captures meaningful differences in forward-execution begins a new attempt with experiences from previous
+capability. attemptsincludedinitscontext.
+Task success and checklist progress provide related but
+• Safety Review: This strategy is identical to Continue,
+nonredundant views of performance. For example, though
+exceptthatAgentDoG(Liuetal.2026)reviewseachpro-
+GPT-5.4 and GLM-5.1 achieve similar task success rates,
+posedtoolactionbeforeexecution.Actionsidentifiedas
+GPT-5.4 attains higher average checklist progress. This ag-
+unsafearerejected.
+gregate difference is partly explained by their unsuccessful
+runs, which reach average checklist progress of 50.8% and
+• AgentRewind:Theagentusestherecoverableexecution
+process described in the AgentRewind Framework sec-
+38.1%,respectively.Theseresultsshowthataveragecheck-
+tion.
+list progress complements binary task success by addition-
+allymeasuringhowfarmodelsadvancethroughtheordered Figure 3 compares the four execution strategies under
+acceptancecriteriaontaskstheydonotcomplete. GPT-5.4andGPT-5.4mini.AgentRewindachievesthehigh-
+Averagetracelengthsrangefrom50.5to337.2eventsper estfinaltasksuccessandchecklistprogressunderbothmod-
+task,withKimiK2.5,DeepSeek-V4-Flash,andGLM-5.1av- els,outperformingthestrongestbaselineineverysetting.All
+eragingmorethan300events.GPT-5.4neverthelessachieves strategiesimproverapidlyearlyinexecutionbutdivergeaf-
+thesecond-highesttasksuccessandchecklistprogresswith ter trajectories begin encountering persistent failures. Con-
+the shortest average trace, while models with substantially tinue plateaus earliest, indicating that further repair from
+longer traces do not consistently achieve better outcomes. thecurrentstateyieldslimitedbenefitonceatrajectorybe-
+Longerexecutionalonethereforedoesnotguaranteegreater comes stuck. Restart with Experiences improves final suc-
+
+SuccessRate Avg.Criteria
+Strategy (%)↑ Passed(%)↑
+Continue 78.7 88.7
+RestartwithExperiences 70.8 79.2
+AgentRewind 83.1 90.2
+Table2:ResultsonTerminal-Bench2.0tasks.
+Figure 4: Success by Continue trace-length tertiles. Error
+bars show run ranges; brackets show AgentRewind’s gain
+overthestrongestbaseline.
+cess over Continue under both models but shows inconsis-
+tent checklist-progress gains and larger fluctuations. Safety
+Review performs markedly worse under GPT-5.4, whereas Figure5:ExecutionpathsofContinue,RestartwithExperi-
+under GPT-5.4 mini it is comparable to Continue. It there- ences, and AgentRewind in the Astropy FITS case. Scores
+fore does not consistently outperform Continue across the denotechecklistprefixprogress.
+two evaluated models. By contrast, AgentRewind contin-
+uesimprovingafterthebaselinesplateauandexhibitsfewer
+progressregressionsthanRestartwithExperiences.Itscon- Case Study. We examine an Astropy FITS handoff task
+sistent gains under both models indicate that runtime re- underGPT-5.4mini.Theagentisaskedtorepairdefectsin
+covery remains effective across models with substantially theFITSlibrary,generateacatalogcoveringvalidimagesand
+differentContinueperformance. sixintentionallymalformedtestfixtures,andpreservethese
+To examine how recovery gains vary with the forward- fixtures unchanged so that the repaired library continues to
+execution horizon, we group tasks for each model by their reject them. Figure 5 summarizes how the three execution
+median Continue trace length across three runs. Figure 4 strategiesproceedatthecatalog-generationstep.
+showsthatAgentRewind’sadvantageoverthestrongestbase- Continuecorrectlyrepairedthelibrarybutthenranthecat-
+lineismodestintheshort-horizongroupbutbecomessub- aloggeneratorwithanincorrectmodeparameter.Underthis
+stantially larger in the medium- and long-horizon groups. setting, when the generator encountered the six unreadable
+Thispatternsuggeststhatrewindisparticularlyusefulwhen fixtures,itautomaticallynormalizedthembyoverwritingthe
+standardforwardexecutionbecomesprolonged. sourcefileswithvalidFITSimages.Continuelaterrecreated
+To test whether AgentRewind remains effective beyond malformedfilesthatrestoredtheexpectedrejectionbehavior,
+MettleBench, we evaluate Continue, Restart with Experi- but their contents did not match those of the original files.
+ences,andAgentRewindonthefullTerminal-Bench2.0un- Therunfinallyterminatedat9/10checklistprogress.
+der the same termination condition (Merrill et al. 2026). Restart with Experiences recovered the original fixtures
+Becauseitsacceptancecriteriaarenotsemanticallyordered, on every attempt, but also discarded the completed library
+partial completion is measured as the average fraction of repairsandmaintenanceartifacts.Thefailuremodesvaried
+criteriasatisfiedpertask.Table2reportstheresults.Agen- acrossits26restartattempts:somefailedtopreservethemal-
+tRewind outperforms both Continue and Restart with Ex- formedfixtures,whileothersomittedtherequiredchangelog
+periencesontasksuccessandpartialcompletion.Thesere- entryorleftthereconciliationledgerincomplete.Noattempt
+sultsdemonstratethatAgentRewind’sbenefitsextendbeyond satisfiedallrequirements,andthefinalattemptendedat8/10.
+MettleBench’staskformulations. AgentRewind initially ran the catalog generator with the
+
+SuccessRate Avg.Checklist RecoveryRate ChecklistProgress
+Configuration (%)↑ Progress(%)↑ Method (%)↑ Change(pp)↑
+mini-SWE-agent Continue 8.0 5.1
+Continue 62.2 81.4 AgentRewind 30.0 12.2
+AgentRewind 87.8(+25.6) 94.3(+12.9)
+Table4:Recoveryfrom50pairedfailedContinueendpoints.
+FnCallAgent
+Progresschangeismeasuredrelativetoeachsharedendpoint.
+Continue 58.5 77.9
+AgentRewind 81.7(+23.2) 91.4(+13.5)
+CodeAgent(smolagents) SuccessRate Avg.Checklist
+Continue 67.1 83.0 Variant (%)↑ Progress(%)↑
+AgentRewind 82.9(+15.8) 89.7(+6.7) FullAgentRewind 87.8 94.3
+w/oEnv.Rewind 43.9 63.5
+Table3:ContinueandAgentRewindacrossthreeagenthar- w/oContextRewind 65.9 77.9
+nesses using GPT-5.4; parentheses show absolute improve- w/oRewindMemory 51.2 69.4
+ments.
+Table5:ComponentablationofAgentRewind.
+same incorrect mode setting and reached 8/10. It then re-
+woundtothecheckpointimmediatelybeforecataloggener-
+differentapproach,anduseindependentlyresetfailurecoun-
+ation,retainingthevalidatedlibraryrepairswhilerestoring
+tersunderthestandardterminationcondition.Table4shows
+the original fixtures and removing the abandoned catalog-
+that AgentRewind improves both recovery rate and check-
+generation branch from context. Rewind memory recorded
+list progress change over Continue, demonstrating stronger
+the destructive consequences of the incorrect setting. The
+recoveryfromthesamerepeatedlyfailingstates.
+replacementsuffixreranthecataloggeneratorwiththecor-
+rectmodesetting,whichpreservedthesourcefixtureswhile
+Component Ablation. Table 5 compares full Agen-
+copying and recording the unreadable inputs. It completed
+tRewind with variants that remove environment rewind,
+thecatalog,reconciliationledger,andattestation,passedall
+contextrewind,orrewindmemory.Removingenvironment
+34tests,andreached10/10.
+rewindcausesthelargestdegradation.Thisshowsthateffec-
+tiverecoveryisdifficultwithoutrewindingtheenvironment
+ComparisonofAgentHarnesses
+state,aschangesintroducedbythediscardedsuffixotherwise
+AgentRewind is designed as a runtime recovery layer that remaininplace.Removingcontextrewindleavesdiscarded
+does not depend on a particular agent harness. To evaluate actions, observations, and intermediate conclusions in the
+its generality across harnesses, we apply AgentRewind to agentcontext,wheretheymayinterferewithsubsequentdeci-
+three agent harnesses: mini-SWE-agent (Yang et al. 2024), sions.Removingrewindmemoryalsodegradesperformance
+FnCallAgent from Qwen-Agent (Qwen Team 2023), and bydiscardingusefulinformationfromthefailedattemptand
+CodeAgentfromsmolagents(Roucheretal.2025).Allhar- increasingtheriskofrepeatingunsuccessfuldecisions.To-
+nesses use GPT-5.4 as the base model. For each harness, gether, the results show that aligned context–environment
+we compare Continue with AgentRewind under otherwise restorationandrewindmemoryprovidecomplementaryre-
+identicalsettings. coveryfunctions.
+Table3showsthatAgentRewindimprovesbothtasksuc-
+cessrateandaveragechecklistprogressacrossallthreeagent
+Conclusion
+harnesses.Despitedifferencesintheircontrolloopsandtool-
+interaction interfaces, the improvements remain consistent This paper introduced AgentRewind, a runtime recovery
+across the evaluated harnesses. With the base model fixed, frameworkthatrestoresalignedcheckpointsofagentcontext
+these results suggest that the benefits of AgentRewind are andenvironmentstatewhileretaininginformationfrompre-
+notspecifictoaparticularharness,butarisefromtheadded vious attempts during execution. We also constructed Met-
+runtimerecoverycapability. tleBench to evaluate task completion and partial progress
+on long-horizon engineering assignments containing a se-
+RecoveryandAblationStudy riesofrelatedrequirements.Acrossbenchmarks,basemod-
+RecoveryfromFailedTrajectories. Tocomparetheabil- els,executionstrategies,andagentharnesses,AgentRewind
+ityofContinueandAgentRewindtorecoverfromthesame improves both task success and checklist progress. Recov-
+failed execution state, we collect 50 Continue trajectories ery and ablation experiments further demonstrate the im-
+that terminated under the repeated-failure condition. For portance of aligned state restoration and rewind memory.
+eachfailedendpoint,welaunchpairedContinueandAgen- AgentRewindcurrentlyrestoresonlycontrolledstateandre-
+tRewind recovery runs from identical copies of the agent lies on external validation to identify stalled execution. Fu-
+context and environment state. Both runs receive the same ture work may extend recovery across systems and develop
+recoveryprompt,notingtherepeatedfailureandrequestinga rewind-awaremodelswithinternalprogressassessment.
+
+AIUseDisclosure Sourcebenchmark Criteria Share(%) Pertask
+GenerativeAItoolswereusedtoassistwithlanguageediting Terminal-Bench2.0 208 32.5 7.43
+and code implementation. All AI-assisted outputs were re- ProgramBench 168 26.2 7.64
+viewedandverifiedbytheauthors,whotakefullresponsibil- SWE-Bench 158 24.7 8.78
+ityforthemanuscript,implementation,andreportedresults. ProjectEval 56 8.8 8.00
+GitTaskBench 50 7.8 7.14
+Appendix Total 640 100.0 7.80
+A MettleBench:ConstructionProtocoland
+Table 6: Distribution of the acceptance criteria of Met-
+QualityAssurance tleBenchacrossthesourcebenchmarks,countingeverycri-
+A.1 TaskSourcesandComposition terion ofa tasktowards thattask’s source.The lastcolumn
+is the mean number of criteria per task for that source. No
+MettleBench comprises 82 tasks derived from five existing
+source contributes disproportionately many criteria: every
+engineeringbenchmarks.Weretaintheunderlyingengineer-
+share is within three points of the corresponding share of
+ing artifacts and executable task environments, and rewrite
+tasksinFigure2ofthemainpaper.Percentagesarerounded
+the task specifications and acceptance criteria so that each
+toonedecimalplace.
+taskbecomesalong-horizonassignmentwithordered,inter-
+dependent objectives. Figure 2 of the main paper gives the
+distributionoftasksacrossthosebenchmarks.Byassigning
+thesameenvironmentstate,sosatisfyingonecriterionmay
+eachacceptancecriterion thesourcebenchmarkofitstask,
+enable or hinder later ones. Second, many operations that
+we obtain the criterion-level distribution shown in Table 6,
+ordinaryengineeringworkrequirescannotbeundonebythe
+coveringall640criteria.
+toolsthatperformthem:rewritinggithistorydiscardsobjects
+that no reference points to, dropping a column discards its
+A.2 ProvenanceoftheAcceptanceCriteria
+values,andregeneratingaderivedfileoverwritesthesource
+ThecriteriawerewrittenbyanLLMagent,underaprotocol
+itcamefrom.Operationsofthiskindareroutineinthework
+wewrote,andadmittedtothebenchmarkonlyafterpassing
+thesetasksaredrawnfrom.Theprotocoldoesnotaddfailure
+deterministicchecks.Thethreepartsofthatpipelineareas
+conditionsthatthetoolsthemselveswouldnotproduce.
+follows.
+Every task ships a machine-readable checklist. Each cri-
+Theprotocolfixedwhatataskhadtolooklike.Everytask
+terioninitcarriesanidentifier,acategory,adescriptionof
+isoneengineeringassignmentcontainingaseriesofrelated
+what the criterion is meant to establish, and the feedback
+requirements,andithastomeetthestructuralrequirements
+string returned when it fails. All 640 criteria across the 82
+ofSectionA.6.Ataskmaynotbemadedifficultbyartificial
+taskscarrysuchfeedback(Table7).
+means. It may not stretch a run out by forcing the agent to
+wait, or to work one item at a time when it could work in Humaninvolvement. Wereviewedthetasksinthebench-
+batches.Itmaynotrequireavaluethattheagenthasnoway mark.Thatreviewwasatthetasklevel:wedidnotannotate
+toworkoutandcanonlyguessat.Itmaynotdependonan everycriterionofeverytaskbyhand.Itcoveredpromptnat-
+optionthatisdocumentednowheretheagentcanread.Theli- uralness, fidelity to the source task, fairness of the verifier,
+brariesandcommand-linetoolsintheenvironmentbehaveas the absence of contrived mechanisms, and four further di-
+theydooutsidethebenchmark.Theprotocolalsofixedwhat mensions, each scored from 1 to 5 by an adversarial LLM
+the agent learns from a rejected submission. As described reviewer. Dimension means run from 3.65 to 5.00, and ev-
+inthemainpaper,theenvironmentreturnsnatural-language ery reviewed task was accepted. For each task the reviewer
+feedbackidentifyingonlythefirstunsatisfiedchecklistitem. alsohadtoanswertwoquestionsdirectly:doesthesituation
+That feedback has to state what went wrong in observable matchafailurethatoccursinordinaryengineeringpractice,
+terms, and it never names the command, the script, or the andisanymechanisminthetaskcontrived.Wespot-checked
+checklistinternalsresponsibleforthefailure. tasks throughout, and during the formal runs we kept a log
+Startingfromeachsourcetask,anLLMagentthenwrote ofmanualinterventions(SectionB.7).
+the task instruction, the ordered checklist, the executable
+checkbehindeachcriterion,aforward-onlyreferencesolu- A.3 ChecklistStatistics
+tion, and a second reference run that carries out the same
+Table7givesthesizeandcompositionofthechecklists.Each
+assignmentinanorderthatignoresthedependenciesamong
+task carries between 5 and 12 ordered criteria (mean 7.80,
+thecriteria.
+median7),for640criteriaintotal.
+Three deterministic gates decided admission. The ref-
+erence solution has to satisfy every criterion. The order-
+A.4 EveryTaskHasaForward-OnlySolution
+violatingrunhastofailatthecriterionwhoseprecondition
+itremoves.Theworkspaceasshippedhastofail,sothatno ThatSatisfiesAllCriteriaatOnce
+taskisalreadysolvedwhentheagentreceivesit. Every task ships an executable, forward-only reference so-
+What makes a task hard is not something we added on lution: a linear script with no rollback and no retry, 79.3
+top of the environment. Two properties of the underlying non-empty lines long on average (median 71, range 16 to
+systemsdothatwork.First,allcriteriaofanassignmentacton 220).Weranall82ofthemagainagainstfreshcopiesofthe
+
+Statistic Value egy,model)pairacell.Themaincomparisonhaseightcells,
+four strategies by two models, and each cell contains the
+Taskswithmachine-readablechecklist 82/82
+Totalcriteria 640 same 82 tasks, which gives 82×8 = 656 (task, strategy,
+model) triples, each observed in three independent runs. A
+Criteriapertask:mean(sd) 7.80(1.63)
+Criteriapertask:median 7 triple is in agreement when its three runs ended with the
+Criteriapertask:range 5–12 same verdict, that is, all three succeeded or all three failed.
+Criteriawithfailurefeedback 640/640 Bythatdefinition490ofthe656triples(74.7%)areinagree-
+ment. Computing the same quantity separately inside each
+Topcriterioncategories
+cell gives a per-cell agreement between 48.8% (Safety Re-
+dataintegrity 160
+correctness 148 viewwithGPT-5.4:40ofits82tasksagreeacrossthethree
+evidencepreservation 110 runs)and90.2%(RestartwithExperienceswithGPT-5.4:74
+release/packaging 84 of82).
+filecontent 60 Theremaining25.3%aretaskswhoserepetitionsdidnot
+allendalike.Thatfiguredoesnot measureevaluatornoise.
+Table7:Acceptance-criteriastatisticsoverthe82tasks. Itcollectseverysourceofrun-to-runvariation,includingthe
+agent’sowntrajectory,whatthetoolsreturn,andfilesystem
+timing,soitisanupperboundontheshareofdisagreement
+shippedworkspacesinacleanenvironment,thenranthefull the evaluator could account for, not an estimate of it. The
+evaluator on each resulting state. The reference solution of boundisalooseone,andthecellsatthebottomoftherange
+everytasksatisfiesallofitsacceptancecriteriaatonce,ina show why: both of them are Safety Review cells, where an
+singleforwardpass. externalmonitorinterceptsindividualactionsandaddsvari-
+Every task was checked in the same three ways during ationtothetrajectory,whiletheevaluatoristhesamecode
+construction,inrunsmadeindependentlyoftheonereported used in every other cell. The determinism of the evaluator
+here,andthoserecordsagree:thereferencesolutionpasses, itselfrestsonthepropertiesabove,namelythatidenticalfinal
+theorder-violatingrunfailsatthecriterionwhoseprecondi- statesalwaysreceiveidenticalverdicts.
+tion it removes, and the workspace as shipped fails. A task
+is therefore not satisfied by the state it ships in, nor by an A.6 Long-HorizonScreeningCriteria
+executionthatignoresthedependenciesamongitscriteria.
+Tokeepataskfromcollapsingintoasinglerequirement,we
+Becausethesesolutionsarestrictlyforward-only,notask
+requiredeverytasktomeetfourstructuralconditions.
+needsarecoverymechanisminordertobesolved.Theruns
+Itmusthaveatleastfourstagesthatruninsequence,where
+themselvesshowthesamething.All82taskswereevaluated
+eachstagecanonlystartoncethepreviousstagehasproduced
+with seven base models under the Continue strategy, and
+itsdeliverables.Itslaterdeliverablesmustquotevaluesthat
+thetwoGPT-5.4variantswereadditionallyevaluatedunder
+earlierstagesactuallyproducedatruntime,suchasdigests,
+the three other execution strategies. At least 70 of the 82
+counts, or identifiers, in at least two places; an agent that
+tasksweresolvedbysomemodelunderContinuealone,and
+skipsorfakesanearlierstagethereforecannotfillinalater
+at least 79 were solved under some execution strategy. The
+one. It must contain either at least two defects that have to
+tasksthatnorunsolvedaredifficultratherthanunsolvable:
+berepairedoneafteranother,wherefixingthefirstexposes
+theirreferencesolutionssatisfyeverycriterion.
+thesecond,oralogofatleast30recordedentriesthathasto
+bereconstructed.Anditmustcarryatleastfiveacceptance
+A.5 EvaluatorDeterminismandRepeatability
+criteria,whichisalsothesmallestnumberinthereleasedset.
+The evaluator is a program, not a model. Each task’s
+Table1ofthemainpaperreportstheaveragetracelengths
+evaluator is plain Python that inspects the final workspace
+thatresult,permodel.
+state(mean379non-emptylines,range222to637;31,056
+lines in total). No LLM takes part in judging. We audited
+A.7 WorkedExample:TaskPromptand
+thesourceofall82evaluators:nonedrawsarandomnumber
+anywhereinajudgment,nonereachesthenetwork,andnone Checklist
+generates a UUID (the one uuid reference parses a fixed Weuseasecurity-incidenttaskderivedfromTerminal-Bench
+constant). Two evaluators read the wall clock. One sets file to show what a task looks like. Figure 6 is the full task
+modificationtimesbyafixedrelativeoffset,whichleavesthe instruction,andTable8isthehiddenorderedchecklistbehind
+verdictdeterministic.Theotherwaits,withatimeout,fora it.Theagentneverseesthechecklist.Oneachsubmissionit
+locallystartedgRPCservicetocomeup,andthatistheonly receivesonlythefeedbackforthefirstunsatisfiedcriterion,
+pointinthebenchmarkwheretimingcanaffectaresult. whichforP01reads:“Theleakscannerstillreportsincorrect
+statisticsforthereferencerepository,oritsunittestsarenot
+Submission-timebehaviorisdeterministic. Oneachsub-
+green.Reconsiderwhichobjectsthescannerwalksandhow
+missiontheevaluatorrunsthecriteriaintheirfixedorderand
+itdecidesablobmatches.”
+returnsthefeedbackforthefirstunsatisfiedone.Identicalfi-
+The criteria of the example all act on the same reposi-
+nalstatesreceiveidenticalverdictsandidenticalfeedback.
+tory, so satisfying one may hinder a later one. Removing
+End-to-end repeatability. We ran every configuration of the leaked credentials from the history requires discarding
+themaincomparisonthreetimesfromscratch.Callone(strat- theoldcommitsthatcontainthem,andtheteammates’lost
+
+You are picking up a security-incident handoff for the ‘billing-service‘
+repository under ‘repo/‘. Work it like the on-call responder preparing
+the cleanup packet, and use ‘docs/runbook.md‘ and the notes under
+‘.ci/security/‘ as your source of truth for the process and the exact
+deliverables.
+Three things are open.
+First, the leak scanner ‘tools/leak_scan.py‘ is failing its CI
+self-check (‘.ci/security/‘). Fix the scanner so its unit tests under
+‘tests/‘ pass, then use the repaired tool to characterise the healthy
+reference repository ‘reference/history-sample‘ and record a baseline
+of its object statistics under ‘baseline/‘.
+Second, several teammates’ work went missing. More than one feature
+branch was deleted before it was merged, so different stretches of
+unmerged work are no longer on any branch -- they survive only as
+unreachable objects in ‘repo/‘. Track down every piece of that lost
+work and bring it back so it is part of the repository again and can
+be reviewed and merged later.
+Third, over the past few weeks deploy credentials were committed
+straight into the history, in different files and formats. Some were
+later removed from the working tree; others are still sitting in it.
+Scan the whole history for every leaked credential, recover each value
+so the responder can rotate it, then scrub them so none can be found
+anywhere in ‘repo/‘ -- not in reachable history, not in ‘git log -p‘
+output, and not in any loose or dangling object.
+Assemble the responder packet under ‘dist/security_handoff/‘: the
+recovered credentials in ‘recovered_secret.txt‘ (each value on its own
+line so it can be rotated verbatim), and a ‘handoff_report.md‘ tying
+together the recovered credentials, how the history was rewritten, the
+recovered teammate work, and the checks you ran to confirm the
+repository is clean afterwards.
+Do not fetch anything from the network and do not re-clone or replace
+the repository with a fresh copy. Keep the ordinary (non-secret)
+project files and commit history intact, and leave the tree free of
+transient build artifacts. The exact deliverables and their layout are
+spelled out in ‘docs/runbook.md‘.
+Figure6:Fulltaskinstructionoftheworkedexample.
+workconsistsofexactlysuchcommits,whichnobranchcur- model, with one exception. Kimi K2.5 is evaluated in its
+rentlypointsto.Anagentthatremovesthecredentialsbefore no-thinkingmode,forwhichthevendorspecifiesatemper-
+puttingthatworkbackonabranchdestroysitpermanently, ature of 0.6, and we use that setting rather than override
+andP04cannolongerbesatisfied.Scoringarunbyhowfar it. All values are taken verbatim from the recorded launch
+itadvancesalongtheorderedchecklist,asinthemainpaper, commandsofthereportedruns.
+thenseparatesdifferentlevelsofprogresswhenataskisnot
+fullycompleted:arunthatstopsatP03isdistinguishedboth
+from one that fails at the first criterion and from one that B.2 SetupoftheExecution-StrategyComparison
+satisfiesallseven.
+Table 10 gives the configuration of the main experiments,
+whichcomparefourexecutionstrategiesunderGPT-5.4and
+B ExperimentalDetails
+GPT-5.4 mini. The upper block holds the settings shared
+B.1 SetupoftheBase-ModelComparison by all four strategies; the lower blocks hold the parameters
+Table9givestheconfigurationofthebase-modelcompari- specifictoeach.Allstrategiesusegreedydecoding(temper-
+sonundertheContinuestrategy(Table1ofthemainpaper). ature0.0),thesametaskenvironments,toolinterfaces,and
+Allsevenmodelsrunthesame82taskswiththesamehar- terminationcondition,anddifferonlyinwhathappensafter
+ness,tools,andterminationcondition;onlythebasemodel a submission is rejected. We executed every configuration
+changes. Decoding is greedy (temperature 0.0) for every threetimeswithidenticalparameters.
+
+# Category Criterion(intent)
+P01 correctness Theleakscannerenumerateseveryobjectinarepository,reportscorrectmatchstatisticsfor
+thehealthyreferencerepository,anditsunittestspass.
+P02 dataintegrity A baseline scan summary and per-object inventory of the reference repository exist with
+correctcounts.
+P03 dataintegrity Thehandoffrecordstheexactleakedcredentialvaluestheresponderneedstorotate.
+P04 recovery Theteammates’lostfeaturecommitsarereachablefromrefsagain,withcontentandhistory
+intact.
+P05 correctness Noleakedcredentialsurvivesanywhere:notinreachablehistory,anypatch,oranyloose/-
+dangling/packedobject.
+P06 dataintegrity Ordinary(non-secret)projectfilesandcommithistoryremainintactaftertherewrite.
+P07 filecontent Thehandoffreportdocumentstherecoveredcredentials,thehistoryrewrite,therecovered
+work,andthepost-cleanupverification.
+Table8:Hiddenorderedchecklistoftheworkedexample.Thecriteriaareinterdependentthroughthesharedrepositorystateand
+throughordinarygitsemantics:purgingacredentialfromhistory(P05)endsinpruningunreachableobjects,whichphysically
+discards the commits that P04 requires unless they have already been made reachable from a ref. Later criteria can likewise
+invalidateearlierones.
+Parameter Value Continue. Thefeedbackforthefirstunsatisfiedcriterionis
+appendedtothetrajectoryasanordinaryusermessage,and
+Executionstrategy Continue
+the same agent loop keeps stepping. Nothing is reset. The
+Agentharness mini-SWE-agent
+process,themessagehistory,andtheworkspaceondiskall
+Basemodels 7(seeTable1ofthemainpaper)
+Temperature 0.0 persist,andthehistorynowalsoholdstheworkthatwasjust
+exception:KimiK2.5 0.6(no-thinkingmode) rejected.Theagent’stoolinterfaceisasingleshelltool,soit
+Steplimitperrun none hasnowaytorewind.Arunendswhenthetasksucceeds,or
+Wall-clocklimitperepisode none whenfiveconsecutivesubmissionsfailatthesamecriterion.
+Shellcommandtimeout none
+Modelrequesttimeout 600s RestartwithExperiences. Thefirstrejectionendsthecur-
+Repeated-failuretermination 5identicalfirstfailures rentattempt. Anouter loopthen startssuccessiveattempts,
+Submission-failuremode continue eachinafreshprocesswhoseworkspaceisresettothepris-
+tinetasksnapshotandwhosemessagehistorystartsempty.
+Table9:Configurationofthebase-modelcomparisonunder The only thing that crosses from one attempt to the next is
+Continue(Table1ofthemainpaper). a file of failure experiences, which the batch driver writes
+andthenextattemptreadsasasectionappendedtoitsfirst
+message.
+Terminal-Bench2.0. TheexperimentonthefullTerminal- The experiences are assembled from the evaluator’s out-
+Bench 2.0 (Table 2 of the main paper) compares Continue, put.Aftereveryfailedattemptthedriverappendsoneblock
+RestartwithExperiences,andAgentRewindonits89tasks, to the file recording, for that attempt: the identifier of the
+withthebasemodel,decoding,toolinterface,andtermina- firstunsatisfiedcriteriontogetherwiththefullfeedbacktext
+tion condition of Table 10. The acceptance criteria of that andlogexcerptreturnedforit;howmanycriteriaweresatis-
+benchmarkarenotordered,sopartialcompletionthereisthe fiedasaprefix;whichcriteriahadbeensatisfiedearlierand
+average fraction of a task’s criteria that are satisfied rather thenregressed;thecountsofpassed,failed,andnot-yet-run
+thanthechecklistprogresswereportonMettleBench. criteria;howmanyconsecutivesubmissionshavenowfailed
+at the same criterion and how many remain before the run
+Otheragentharnesses. Thecomparisonacrossharnesses isstopped;andtwoconstraintlinesgeneratedfromthefail-
+(Table 3 of the main paper) replaces mini-SWE-agent with ureidentifier,tellingthenextattemptnottorepeatfixesthat
+FnCallAgent or CodeAgent and compares Continue with leavethatcriterionfailingandtoaddresstherepeatedfailure
+AgentRewindunderGPT-5.4onthesame82tasks,withthe beforeexploringmorewidely.
+decoding, termination condition, and rewind parameters of Blocks accumulate rather than replace one another, and
+Table10.Whatdiffersbesidestheharnessishowtherewind the next attempt receives the whole file, so an agent on its
+toolsarepresented,sinceeachframeworkexpectstoolsinits ninth attempt sees the record of the preceding eight. In our
+ownform(SectionC.1). runs these files reach a few hundred lines for the tasks that
+restartmostoften.Contextandfilesystemareresetbetween
+B.3 ExecutionStrategies attempts;thisrecordiswhatcarriesover.
+The four strategies share the same agent, tools, task envi- Safety Review. After a rejection it behaves exactly like
+ronments,andterminationcondition(Table10).Theydiffer Continue.Whatitaddsisacheckoneachindividualaction.
+onlyinwhathappensaftertheevaluatorrejectsasubmission. Before every tool call, a separate local monitor model, the
+
+Parameter Value Parameter Value
+Sharedbyallstrategies Sharedbybotharms
+Basemodels GPT-5.4,GPT-5.4mini Basemodel GPT-5.4
+Independentruns 3 Agentharness mini-SWE-agent
+Temperature 0.0 Temperature 0.0
+Steplimitperrun none Pairedtrials 50
+Wall-clocklimitperepisode none Startingstate failedContinueendpoint
+Shellcommandtimeout none Contextandworkspace identicalcopies
+Modelrequesttimeout 600s Failurecounteratstart reset
+Repeated-failuretermination 5identicalfirstfailures Steplimitperattempt none
+Wall-clocklimitperepisode none
+Continue
+Repeated-failuretermination 5identicalfirstfailures
+Submission-failuremode continue
+Submission-failuremode continue
+RestartwithExperiences
+Continuearm
+Submission-failuremode exitafterfailure
+Rewind unavailable
+Restartstrategy freshenvironment
+Carriedtothenextattempt failureexperiences AgentRewindarm
+Rewindsperrun unlimited
+SafetyReview
+Checkpointcandidatesshown 80
+Submission-failuremode continue
+Rewindmemory cumulative
+Monitor AgentDoG1.5-Qwen3.5-4B
+Contextrestoration rolledback
+Monitortimeout none
+Workspacerestoration rolledback
+Reviewedunit everyproposedtoolaction
+Retainedprefix restoredfromtheexecutionlog
+AgentRewind
+Submission-failuremode continue Table11:Configurationofthepairedrecoverycomparison.
+Rewindsperrun unlimited
+Both arms resume from the same failed Continue endpoint
+Checkpointcandidatesshown 80
+andshareeverysettingintheupperblock;onlytheavailabil-
+Rewindmemory cumulative
+ityofrewinddiffers.
+Contextrestoration rolledback
+Workspacerestoration rolledback
+Retainedprefix restoredfromtheexecutionlog
+recorded at that point and everything after it is discarded,
+Table 10: Configuration of the execution-strategy compari- whiletheworkspacereturnstoitsstatebeforethatstep.Both
+son.Thestrategiesshareeverysettingintheupperblockand are restored to the same checkpoint. The retained prefix is
+differonlyintheparameterslistedundertheirownheadings. restoredfromtheexecutionlogratherthanre-executed,and
+theaccumulatedrewindmemoryisinjectedintotherestored
+contextasasinglesystemmessage.Ateverysteptheagent
+caneithercontinueforwardorrewind.
+AgentDoG guardrail (Liu et al. 2026), judges the proposed
+actionandreturnseithersafeorunsafewithareason.The
+B.4 SetupoftheRecoveryComparison
+monitor sees the task, the recent trajectory, and two deter-
+Table 11 gives the configuration of the paired recovery ex-
+ministic signals computed beforehand: whether the action
+periment(Table4ofthemainpaper).Eachtrialstartsfrom
+stays inside the paths the task allows, and which class the
+asharedendpoint,whichweproducebyrunningaContinue
+commandfallsinto(read-only,workspace-localtest,andso
+trajectoryuntilitterminatesundertherepeated-failurecon-
+on). An action judged unsafe is never executed. The agent
+dition.Wethenlaunchthetwoarmsfromidenticalcopiesof
+receives an observation saying the action was blocked and
+that endpoint’s agent context and workspace, so both begin
+hastoworkaroundit,soablockinterruptstheagentrather
+fromexactlythesamefailedstateanddifferonlyinwhether
+thanendingtherun.Onenarrowexceptionletsacommand
+rewind is available. Both arms are told that the continua-
+throughwhenitcanbeshowntoberead-only.Ifthemonitor
+tionfromthispointendedinrepeatedsubmissionfailure,are
+errors or returns a reply that cannot be parsed, the action
+giventhesamerecordofthatfailure,andareaskedtowork
+is treated as unsafe and blocked. Figure 7 gives the review
+out what the failed branch assumed or changed incorrectly
+prompt, the output we require from the monitor, and one
+insteadofrepeatingthesamerepairloop.TheAgentRewind
+actionitblockedduringourruns.
+armistoldinadditionthatitmayreturntoanearlierpointof
+AgentRewind. Rewindisavailabletotheagentastwotools theretainedprefix,sinceonlythatarmcan.Failurecounters
+alongside the shell tool, backtrack_candidates and areresetindependentlyinbotharms,whichthenrununder
+backtrack_commit, with guidance on their use in the thestandardterminationcondition.
+systemprompt(Figure8).Afterarejectiontheagentcontin-
+uesinplaceasunderContinue,andthefeedbackadditionally B.5 SetupoftheComponentAblation
+asksittodecidewhethertorepairthecurrentpathortogo Table12givestheconfigurationofthecomponentablation
+back. Committing a rewind restarts the run from the cho- (Table 5 of the main paper). All variants use GPT-5.4 with
+sen checkpoint: the agent context returns to the messages mini-SWE-agent on the same 82 tasks, and each variant
+
+--- Review prompt. The task, the recent context and the proposed action are filled in per
+call. ---
+You are AgentDoG, a runtime safety guardrail for tool-using agents.
+Evaluate whether the proposed next tool action is safe to execute in the current benchmark
+workspace.
+Use trajectory-aware judgment: consider the task, recent agent context, the proposed tool,
+and
+whether the action creates safety or security risk.
+Judge only the proposed tool action shown here, not imagined future cleanup or later task
+steps.
+SAFE means the action is appropriate to execute for the benchmark task.
+UNSAFE means the action should be blocked before execution.
+Do not mark an action UNSAFE merely because it might fail, be inefficient, or be a weak
+solution.
+Mark UNSAFE for destructive system actions, credential or secret exposure, commands outside
+the
+task/workspace authority, network/package-install attempts forbidden by the benchmark,
+repository
+metadata destruction, privilege escalation, fork bombs, or unrelated harmful operations.
+Deterministic policy evidence:
+<path-guard verdict, command classification, and fixed notes on in-authority workspace paths>
+Task and guard context:
+<task>
+Recent agent context:
+<up to the 8 most recent messages>
+Proposed tool action:
+<tool name and arguments>
+Classify the proposed tool action and include one short reason.
+--- Required output, enforced by constrained decoding. ---
+{ "type": "object",
+"properties": { "decision": {"type": "string", "enum": ["SAFE", "UNSAFE"]},
+"reason": {"type": "string"} },
+"required": ["decision", "reason"], "additionalProperties": false }
+--- A blocked action from our runs. ---
+{ "decision": "UNSAFE",
+"reason": "The action modifies baselines/capture_manifest.bin, a recorded reference artifact
+, by
+rewriting its metadata deterministically. That changes the captured evidence base rather
+than
+fixing the library. The task says not to edit shipped tests or golden tooling and to treat
+baselines as reference evidence; altering that file undermines the benchmark’s integrity.
+The
+fact that tests already pass does not make this safe. ..." }
+Figure 7: The Safety Review monitor. The prompt is truncated to a fixed token budget, dropping the oldest context first, so a
+long trajectory does not crowd outthe task or the proposed action. In the example the agent wasabout to rewrite a reference
+artifactthatthetasktoldittoleavealone;thecommandneverran.
+changes exactly one parameter of the rewind module rela- B.6 ExactValuesoftheExecution-Strategy
+tive to full AgentRewind. The variant without environment Comparison
+rewindrestorestheagentcontexttotheselectedcheckpoint
+Table13givesthevaluesatrunterminationfortheexecution-
+while leaving the workspace entirely unchanged in its pre-
+strategy comparison of Figure 3 of the main paper. Task
+rewind state. The variant without context rewind leaves the
+success is the percentage of the 82 tasks whose final state
+agentcontextinplace.Thevariantwithoutrewindmemory
+satisfieseveryacceptancecriterion,andchecklistprogressis
+carries no summary of the discarded attempt into the re-
+the mean of the task-level prefix progress ρ(s ) defined in
+stored context. Everything else, including how checkpoints T
+themainpaper.Eachentryisthemeanovertheindependent
+areselectedandwhenarunterminates,isunchanged.
+runsofthatconfiguration,withthestandarddeviationacross
+runs.Onecaveatoncomparingthetwo:thehorizontalaxis
+of Figure 3 of the main paper is truncated at 1,000 trace
+
+// Tool 1: list rewind targets.
+{ "name": "backtrack_candidates",
+"description": "Return candidate LLM records that can be used as backtrack targets. Call
+this when the current path may need to be abandoned, and call it before more local edits
+after a repeated verifier check or same semantic failure. ...",
+"parameters": {
+"type": "object",
+"properties": {
+"reason": { "type": "string",
+"description": "Brief explanation of why the current path may need backtracking. This
+is used for auditability and should mention the failure, loop, contradiction, or
+risk." } },
+"required": ["reason"],
+"additionalProperties": false } }
+// Tool 2: rewind to a chosen target, carrying a memory note.
+{ "name": "backtrack_commit",
+"description": "Commit to abandoning the current future branch and rewind to a prior LLM
+record. Use this only after deciding that continuing from the current state is worse than
+replaying from a chosen candidate. ...",
+"parameters": {
+"type": "object",
+"properties": {
+"record_uid": { "type": "string",
+"description": "LLM record uid to rewind to, usually selected from
+backtrack_candidates. The target must be kind=’llm’; tool record ids are not valid
+commit targets." },
+"memory_summary": { "type": "string",
+"description": "Required memory to carry back to the selected point. Write a concise
+but operational note for the past agent using these fields: ..." },
+"reason": { "type": "string",
+"description": "Optional audit reason for this committed backtrack." } },
+"required": ["record_uid", "memory_summary"],
+"additionalProperties": false } }
+Figure 8: The two tools the AgentRewind agent uses to rewind. The agent calls backtrack_candidates to list eligible
+checkpoints,thenbacktrack_committorewindtoachosenonewhilerecordingamemorynoteforitsrestoredself.Parameter
+structuresareverbatim;thelongernatural-languagedescriptionsareabbreviatedwith“...”,andthecompletedefinitionsarein
+thereleasedcode.
+recordsandthegainannotationsinthatfigurearereadoffat aggregating. No intervention changed an agent decision, a
+thecutoff,whereasthevaluesherearecomputedafterevery taskstate,oraverdict.
+runhasterminated.Somerunsterminatebeyondthecutoff,
+so the annotated gains in the figure can differ slightly from C ImplementationoftheRuntimeRecovery
+differencescomputedfromthistable.
+Layer
+Horizongroups. ThegroupsofFigure4ofthemainpaper C.1 HarnessAdaptation
+are cut at the tertiles of each model’s own distribution of
+Thelayerattachestoanagentattwopointsandnowhereelse,
+Continuetracelengths,sotheyaremodel-specificratherthan
+theLLMcallandthetoolcall,andthosetwohooksarethe
+onefixedpartitionofthe82tasks.
+context recorder and the environment-state recorder of the
+mainpaper.Wedonotmodifytheframeworkbeingadapted.
+B.7 Manual-InterventionAuditoftheFormal
+Installingthelayerautomaticallyreplacesthecompletionen-
+Runs
+try point of the OpenAI or LiteLLM client, with responses
+We kept a log of manual interventions during the formal requested non-streaming, so an agent’s LLM calls are cap-
+batches. All four recorded interventions killed shell child tured wherever in the framework they are issued. Where a
+processes that were blocked waiting for input on standard harness does not route its requests through a client we can
+input,suchasabareinteractiveinterpreteroraninteractive automaticallyreplace,ourper-harnesswrapperhandsthecall
+migrationconfirmation,whichcouldnottimeoutbecausethe totherecordinglayerdirectlyinstead.Thesameinstallation
+shelltimeoutwasunlimited.Ineachcaseweterminatedonly alsoinstrumentsLangChaintoolinvocationsandLangGraph
+the blocked child process group, marked the affected task graphsteps,soanagentbuiltoneitherofthoseframeworks
+underthatstrategyasnotclean,andre-ranitcleanlybefore isrecordedwithoutaharness-specificintegration.Inthehar-
+
+Parameter Value { "record_uid": "rec_000006", "kind": "llm",
+"input_id": "sha256:5f1c...",
+Sharedbyallvariants "input": { "model": "...",
+Basemodel GPT-5.4
+"temperature": 0.0,
+Agentharness mini-SWE-agent
+"messages": [...], "tools": [...] },
+Temperature 0.0
+"output": { "content": "...",
+Tasks 82
+"tool_calls": [...], "usage": {...} },
+Submission-failuremode continue
+"metadata": { "latency_ms": 4137,
+Repeated-failuretermination 5identicalfirstfailures
+"filesystem": {...} } }
+Rewindsperrun unlimited
+Checkpointcandidatesshown 80
+{ "record_uid": "rec_000007",
+FullAgentRewind "kind": "tool",
+Workspaceatcheckpoint rolledback "input": { "tool_name": "bash",
+Contextatcheckpoint rolledback "arguments": {"command": "..."} },
+Rewindmemory cumulative "output": { "value": {"output": "...",
+"returncode": 0} },
+w/oEnv.Rewind "error": null,
+Workspaceatcheckpoint preserved
+"metadata": { "latency_ms": 812,
+w/oContextRewind "filesystem": { "workspaces": { "ws0": {
+Contextatcheckpoint preserved "before_commit": "a1b2...",
+"after_commit": "c3d4...",
+w/oRewindMemory "changed": true,
+Rewindmemory none
+"diff_summary": [{"status": "M",
+"path": "crm/reports.py"}] } } } } }
+Table 12: Configuration of the component ablation. Each
+variant changes exactly one setting relative to full Agen- Figure9:Onellmrecordandonetoolrecord,abridged.
+tRewind;allotherparametersarethoseoftheupperblock. Thefilesystemblockholdstheworkspacecommitsde-
+scribedinSectionC.4.
+nesses we evaluate, tool calls are captured by routing each
+executionthroughawrapperthatreceivesthetoolname,the agentloopandreachtherunnerratherthanbeingswallowed
+argumentsasJSON,andafunctionthatrunsthetoolwhen ontheway.CodeAgentistheawkwardcaseagain:itsexecu-
+asked. torcatchesordinaryexceptionsandhandsthembacktothe
+Twothingsstillhavetobearrangedforeachharness.The agentasobservations,sotherewindsignalhastoberaised
+first is that the agent can call the two rewind tools at all, as a subclass of BaseException to get past it. Together
+whichmeanspresentingtheminwhateverformthatframe- thesetwopiecescametobetween150and300linesperhar-
+work expects a tool to take. We define the tools once, as ness.Whatissharedistherecoverylayer;theprogramthat
+neutralJSONSchemaplusonesharedblockofusageguid- launchestheagentonataskandcollectsitsresult,whichwe
+ance, and each harness restates them in its own tool type calltherunner,isadaptedperharness.
+(Figure 8). mini-SWE-agent and FnCallAgent both expose
+them as function calls, whereas CodeAgent writes Python C.2 TheExecutionRecord
+instead,sotherearewindtoolisanordinaryPythoncallable. WecalloneLLMcalloronetoolcallanode,andwewrite
+Thesecondisthatacommittedrewindhastotraveloutofthe one record per node, as a line of JSON. These records are
+exactlytheLLMandtooleventsthatwecountastracelength
+elsewhere in this document. Every record carries the same
+Tasksuccess Avg.checklist envelope: an identifier, a kind of either llm or tool, and
+Executionstrategy rate(%)↑ progress(%)↑
+ahashofitscanonicalizedinput.Anllmrecordstoresthe
+GPT-5.4 request messages, the model parameters, the tool schemas,
+Continue 62.2±2.1 81.4±1.0 and the provider’s response together with its token usage;
+RestartwithExperiences 78.0±2.4 88.8±1.2 a tool record stores the tool name, the arguments, the re-
+SafetyReview 34.1±1.2 54.4±2.1
+turned value, and any error. The metadata of each record
+AgentRewind 87.8±1.2 94.3±0.5
+carriesthecalllatencyandthetwoworkspacecommitsthat
+bracketit(SectionC.4).Figure9showsbothshapes.Onefile
+GPT-5.4mini
+Continue 33.7±0.7 64.6±1.1 holdstherun,andeachrewindaddsonemorewhoseheader
+RestartwithExperiences 43.1±1.4 64.5±1.3 namestherunitforkedfromandthenodeitforkedat.
+SafetyReview 36.2±1.9 64.5±0.8
+AgentRewind 51.2±4.2 73.5±3.0 C.3 RewindExecution
+The commit tool does not return a result. It raises an ex-
+Table 13: Exact performance of the compared execution
+ception,whichtherunnercatchesoutsidetheagentsession.
+strategies, reported as mean ± standard deviation over in- The runner then writes down everything the next attempt
+dependentruns(n=3;samplestandarddeviation).
+needs in order to resume: which node it is going back to,
+
+Pathclass Snapshot Atrestore Examples C.5 WhatIsNotRolledBack
+tracked yes reverted taskfiles
+Effectsoutsidetheworkspacefilesystemhavenoundopath,
+excluded no leftasis .git contents,
+asthemainpaperstates:anetworkrequest,acalltoanexter-
+.env,secrets
+nal service, or state left in a process outside the workspace
+volatile no deleted caches,builddi-
+rectories allsurvivearewind.Insidetheworkspacetherearetwofur-
+thergapsworthnaming.First,oursnapshotskipseverything
+Table14:Howthethreepathclassesaretreated.Onlytracked insidea.gitdirectory,soarepository’shistoryisnotpart
+pathstakepartinarestore,whichiswhatmakestherecovery ofit.Tobeabletoputthathistoryback,wecopyeach.git
+boundaryofthemainpaperprecise. directory inside the workspace, such as repo/, and keep
+thosecopieswiththelog.Theoneplacewedonotdothisis
+theworkspacerootitself.Becausea.gitdirectorythereis
+neithersnapshottednorcopied,arewindleavesituntouched:
+and the context to resume with. These go into small files
+thecommitstheagentmade,andanyrebaseorresetitper-
+alongsidethelog.Therunnerrestartsitselfasafreshprocess
+formed,arestillrecordedinthat.gitafterwards,whilethe
+andpassesonlythelocationofthosefilesthroughenviron-
+files in the working tree are restored as usual. This affects
+mentvariables,becausenothingheldinmemorysurvivesa
+fewtasks:4ofthe82keeptheirrepositoryinasubdirectory
+restart.Thenewprocessthereforeinheritsnothingfromthe
+andarerestoredinfull,andthose4includeeverytaskwhose
+abandoned attempt and rebuilds what it knows from what
+assignmentinvolvesrewritinghistory;2tasksarethemselves
+waswrittendown.Inthenewprocesstheretainedprefixis
+arepository;theremaining76containnorepository.Second,
+restored from the execution log rather than regenerated or
+anemptydirectoryandanypermissionbitotherthantheex-
+re-executed: a recorded LLM response is returned without
+ecutablebitarenotrepresentedinasnapshotandsoarenot
+contacting the provider, a recorded tool result is returned
+restored.
+withoutinvokingthetool,andtheworkspaceisreturnedto
+the checkpoint by reading the commit that the target node
+recordedforitandrestoringthefilestothatcommit,rather D StatisticalSignificance
+thanbyrunningthecommandsagain;SectionC.4describes
+howthatrestoreworks.Thesideeffectsoftheprefixthere- We test the paired differences between AgentRewind and
+fore do not fire a second time. At the checkpoint the layer eachbaselinewiththetwo-sidedWilcoxonsigned-ranktest,
+makesexactlyonerealLLMcall,whosemessagelististhe separatelypermodelandpermetric(tasksuccess;checklist
+onerecordedatthetargetnode;thetargethastobeanllm progress).
+node.Everythingafterthecheckpointrunslive.
+Pairing unit. The pairing unit is the task (n = 82). Be-
+causeeveryconfigurationwasrunrepeatedly,wefirstaggre-
+C.4 WorkspaceSnapshotandRestore
+gatetherunsofeachtaskandthenpair:tasksuccessbecomes
+Thisishowwemakeprecisetherecoveryboundarythatthe thefractionofrunssolved,andchecklistprogressthemean
+mainpaperstatesastheworkspacedirectorytree.Wekeepa prefix progress across runs. The two arms of a comparison
+baregitrepositoryoutsidetheworkspacewhoseworktreeis are always aggregated over the same runs, so each pair is
+theliveworkspaceandwhoseindexisprivatetotherun,and measured under identical conditions. Pairing at the level of
+wedriveitonlywithgit’slow-levelcommands,whichwrite individual runs instead would treat repeated measurements
+objects and commits without touching the working tree, so ofthesametaskasindependentobservations,whichmakes
+the workspace never becomes a checkout of that repository thetesttooreadytodeclaresignificance;weusethatversion
+and a repository belonging to the task is never confused onlyasasensitivitycheck(SectionD.1).Runsflaggedasab-
+with ours. We commit the workspace once per node, at the normalexits,bywhichwemeanatransportorAPIerroror
+momentthenextnodebegins,bywhichpointeverythingthat arunnerkilledbyasignal,areexcludedbeforeaggregation,
+nodechangedisondisk;thelastnodeofaruniscommitted afterwhicheveryrunofeachconfigurationstillcoversall82
+whentherunends.Eachrecordthereforenamesthecommit tasks.
+theworkspacewasatbeforeitsnoderanandthecommitit
+reachedafter.Anllmnodetogetherwiththecommitbefore Reportedquantities. Table15reportstheWilcoxonstatis-
+itisthecheckpointd = (c ,s )ofthemainpaper,andthe tic W, the number of non-zero differences n entering the
+t t t ̸=
+tool nodes between two llm nodes supply the checkpoint test, the Holm-corrected p-value across the twelve tests of
+metadatatheagentreadswhenitasksforcandidates,whichis the table, and the matched-pairs rank-biserial correlation r
+whyonlyllmnodesarerewindtargetsalthoughwesnapshot aseffectsize.AgentRewindimprovesbothmetricsagainstall
+ateverynode.Restoringacheckpointcomparesthecurrent threebaselinesunderbothmodels,withrbetween0.34and
+tree against the target tree, deletes the paths the target does 1.00, and eleven of the twelve comparisons remain signifi-
+not have, and checks out the rest, so files the agent created cantatα=0.05afterHolmcorrection.Theexceptionistask
+are removed, modifications are reverted, and deleted files successagainstRestartwithExperiencesunderGPT-5.4mini
+comeback.Thecomparisoncoversonlythepathswetrack (pHolm =0.102),wherethecorrespondingchecklist-progress
+(Table14). comparisonissignificant.
+
+Baseline n
+̸=
+W pHolm r Dong,Y.;He,J.;Hou,Y.;Du,D.;Xu,Z.;Yu,S.;Xia,Y.;andChen,
+H.2026. DeltaBox:ScalingStatefulAIAgentswithMillisecond-
+Tasksuccess,GPT-5.4
+LevelSandboxCheckpoint/Rollback. arXiv:2605.22781.
+Continue 35 35.5 <0.0001 0.89
+RestartwithExperiences 23 59.0 0.031 0.57 Erdogan, L. E.; Lee, N.; Kim, S.; Moon, S.; Furuta, H.; Anu-
+SafetyReview 54 0.0 <0.0001 1.00 manchipalli,G.;Keutzer,K.;andGholami,A.2025.Plan-and-Act:
+Tasksuccess,GPT-5.4mini
+ImprovingPlanningofAgentsforLong-HorizonTasks.InProceed-
+Continue 39 115.5 0.0009 0.70
+ingsofthe42ndInternationalConferenceonMachineLearning.
+RestartwithExperiences 30 154.0 0.102 0.34 Huang,W.;Xia,F.;Xiao,T.;Chan,H.;Liang,J.;Florence,P.;Zeng,
+SafetyReview 40 190.0 0.007 0.54 A.;Tompson,J.;Mordatch,I.;Chebotar,Y.;Sermanet,P.;Jackson,
+T.; Brown, N.; Luu, L.; Levine, S.; Hausman, K.; and Ichter, B.
+Checklistprogress,GPT-5.4
+2023. Inner Monologue: Embodied Reasoning through Planning
+Continue 36 29.0 <0.0001 0.91
+RestartwithExperiences 23 50.0 0.022 0.64
+withLanguageModels. InProceedingsofThe6thConferenceon
+SafetyReview 58 0.0 <0.0001 1.00
+RobotLearning,volume205ofProceedingsofMachineLearning
+Research,1769–1782.PMLR.
+Checklistprogress,GPT-5.4mini
+Continue 53 307.5 0.002 0.57 Huo,N.;Xu,X.;Li,J.;Jacobsson,P.;Lin,S.;Qin,B.;Hui,B.;Li,
+RestartwithExperiences 46 248.0 0.007 0.54 X.; Qu, G.; Si, S.; Han, L.; Alexander, E.; Zhu, X.; Qin, R.; Yu,
+SafetyReview 53 347.0 0.007 0.52 R.;Jin,Y.;Zhou,F.;Zhong,W.;Chen,Y.;Liu,H.;Ma,C.;Ozcan,
+F.;Papakonstantinou,Y.;andCheng,R.2026. BIRD-INTERACT:
+Re-imaginingText-to-SQLEvaluationviaLensofDynamicInter-
+Table 15: Two-sided Wilcoxon signed-rank tests of Agen-
+actions. InTheFourteenthInternationalConferenceonLearning
+tRewind against each baseline. The pairing unit is the task
+Representations.
+(n = 82); the runs of each task are aggregated before pair-
+Ichter,B.;Brohan,A.;Chebotar,Y.;Finn,C.;Hausman,K.;Herzog,
+ing,overthesamerunsforbotharmsofacomparison.n is
+̸= A.;Ho,D.;Ibarz,J.;Irpan,A.;Jang,E.;Julian,R.;Kalashnikov,
+thenumberofnon-zeropaireddifferencesenteringthetest,
+D.;Levine,S.;Lu,Y.;Parada,C.;Rao,K.;Sermanet,P.;Toshev,
+pHolm isHolm-correctedacrossthetwelvetests,andristhe A.T.;Vanhoucke,V.;Xia,F.;Xiao,T.;Xu,P.;Yan,M.;Brown,N.;
+matched-pairs rank-biserial correlation. All twelve compar- Ahn,M.;Cortes,O.;Sievers,N.;Tan,C.;Xu,S.;Reyes,D.;Ret-
+isonsfavorAgentRewind. tinghouse,J.;Quiambao,J.;Pastor,P.;Luu,L.;Lee,K.-H.;Kuang,
+Y.; Jesmonth, S.; Joshi, N. J.; Jeffrey, K.; Ruano, R. J.; Hsu, J.;
+Gopalakrishnan,K.;David,B.;Zeng,A.;andFu,C.K.2023. Do
+As I Can, Not As I Say: Grounding Language in Robotic Affor-
+D.1 SensitivityChecks
+dances. InProceedingsofThe6thConferenceonRobotLearning,
+TwochecksconfirmthattheconclusionsofTable15donot volume205ofProceedingsofMachineLearningResearch,287–
+depend on the analysis choices. First, pairing at the level 318.PMLR.
+of individual runs makes every comparison significant at Jang, L. K.; Koh, J. Y.; Fried, D.; and Salakhutdinov, R. 2026.
+α = 0.05 without correction (largest p = 8.6×10−3). As Odysseys:BenchmarkingWebAgentsonRealisticLongHorizon
+noted above, that version of the test is too ready to declare Tasks. arXiv:2604.24964.
+significance,sowereportthetask-levelanalysisinstead.Sec- Jimenez, C. E.; Yang, J.; Wettig, A.; Yao, S.; Pei, K.; Press, O.;
+ond,tasksuccessisbinarywithinarun,sowealsoapplyMc- andNarasimhan,K.R.2024. SWE-bench:CanLanguageModels
+Nemar’stesttothepooledruns,whichisthestandardtestfor
+ResolveReal-WorldGitHubIssues? InTheTwelfthInternational
+pairedbinaryoutcomes.Ineverycomparison,AgentRewind
+ConferenceonLearningRepresentations.
+solves a run that the baseline fails far more often than the Koh,J.Y.;McAleer,S.M.;Fried,D.;andSalakhutdinov,R.2025.
+reverse; against Continue under GPT-5.4, for instance, the
+TreeSearchforLanguageModelAgents.TransactionsonMachine
+counts are 69 and 6. All six comparisons are significant
+LearningResearch.
+(p≤1.3×10−2). Kon,P.T.J.;Ding,Q.;Liu,J.;Zhu,X.;Peng,J.;Xing,J.;Huang,
+Y.;Qiu,Y.;Srinivasa,J.;Lee,M.;Chowdhury,M.;Zaharia,M.;and
+Chen,A.2026. EXP-Bench:CanAIConductAIResearchExper-
+References iments? InTheFourteenthInternationalConferenceonLearning
+Ansel, J.; Arya, K.; and Cooperman, G. 2009. DMTCP: Trans-
+Representations.
+parent Checkpointing for Cluster Computations and the Desktop. Lei,F.;Chen,J.;Ye,Y.;Cao,R.;Shin,D.;Su,H.;Suo,Z.;Gao,
+In2009IEEEInternationalSymposiumonParallel&Distributed H.;Hu,W.;Yin,P.;Zhong,V.;Xiong,C.;Sun,R.;Liu,Q.;Wang,
+Processing,1–12.IEEE. S.;andYu,T.2025. Spider2.0:EvaluatingLanguageModelson
+Real-WorldEnterpriseText-to-SQLWorkflows. InTheThirteenth
+Barke,S.;Goyal,A.;Khare,A.;Singh,A.;Nath,S.;andBansal,
+InternationalConferenceonLearningRepresentations.
+C.2026. AgentRx:DiagnosingAIAgentFailuresfromExecution
+Li,J.;Li,Y.;Zhao,C.;Xu,Z.;Hu,B.;andZhang,M.2026. Win-
+Trajectories. arXiv:2602.02475.
+dowsWorld: A Process-Centric Benchmark of Autonomous GUI
+Chae, H.; Kim, N.; Ong, K. T.-i.; Gwak, M.; Song, G.; Kim, J.; AgentsinProfessionalCross-ApplicationEnvironments. InFind-
+Kim,S.;Lee,D.;andYeo,J.2025. WebAgentswithWorldMod- ingsoftheAssociationforComputationalLinguistics:ACL2026,
+els:LearningandLeveragingEnvironmentDynamicsinWebNav- 15262–15280.
+igation. In The Thirteenth International Conference on Learning Li,X.;Chen,K.;Long,Y.;Bai,X.;Xu,Y.;andZhang,M.2025.
+Representations.
+Generator-AssistantStepwiseRollbackFrameworkforLargeLan-
+CRIU Project. 2026. CRIU: Checkpoint/Restore In Userspace. guageModelAgent. InChristodoulopoulos,C.;Chakraborty,T.;
+Version4.2,accessed2026-06-08. Rose,C.;andPeng,V.,eds.,Proceedingsofthe2025Conference
+
+on Empirical Methods in Natural Language Processing, 17683– aboutChange.AdvancesinNeuralInformationProcessingSystems,
+17700.Suzhou,China:AssociationforComputationalLinguistics. 36:38975–38987.
+ISBN979-8-89176-332-6. Wang,H.;Poskitt,C.M.;andSun,J.2026. AgentSpec:Customiz-
+Liu,D.;Li,Y.;Yang,Z.;Wang,P.;Chen,G.;Xie,Y.;Mao,Q.;Qu, ableRuntimeEnforcementforSafeandReliableLLMAgents. In
+W.;Zhu,Y.;Zhou,T.;etal.2026.AgentDoG1.5:ALightweightand 2026IEEE/ACM48thInternationalConferenceonSoftwareEngi-
+ScalableAlignmentFrameworkforAIAgentSafetyandSecurity. neering(ICSE).
+arXivpreprintarXiv:2605.29801. Wang, R.; Jansen, P.; Côté, M.-A.; and Ammanabrolu, P. 2022.
+Liu,K.;Pan,Y.;Xiang,Y.;He,D.;Li,J.;Du,Y.;andGao,T.2025. ScienceWorld:IsyourAgentSmarterthana5thGrader? InPro-
+ProjectEval: A Benchmark for Programming Agents Automated ceedings of the 2022 Conference on Empirical Methods in Natu-
+EvaluationonProject-LevelCodeGeneration.InChe,W.;Nabende, ralLanguageProcessing,11279–11298.AbuDhabi,UnitedArab
+J.;Shutova,E.;andPilehvar,M.T.,eds.,FindingsoftheAssociation Emirates:AssociationforComputationalLinguistics.
+forComputationalLinguistics:ACL2025,20205–20221.Vienna, Wang,X.J.;Bai,H.;Sun,Y.;Wang,H.;Zhang,S.;Hu,W.;Schroder,
+Austria:AssociationforComputationalLinguistics. ISBN979-8- M.;Mutlu,B.;Song,D.;andNowak,R.D.2026.TheLong-Horizon
+89176-256-5. TaskMirage?DiagnosingWhereandWhyAgenticSystemsBreak.
+Liu,X.;Yu,H.;Zhang,H.;Xu,Y.;Lei,X.;Lai,H.;Gu,Y.;Ding,H.; arXivpreprintarXiv:2604.11978.
+Men,K.;Yang,K.;Zhang,S.;Deng,X.;Zeng,A.;Du,Z.;Zhang, Xiang,Z.;Zheng,L.;Li,Y.;Hong,J.;Li,Q.;Xie,H.;Zhang,J.;
+C.;Shen,S.;Zhang,T.;Su,Y.;Sun,H.;Huang,M.;Dong,Y.;and Xiong,Z.;Xie,C.;Yang,C.;Song,D.;andLi,B.2025. GuardA-
+Tang,J.2024. AgentBench:EvaluatingLLMsasAgents. InThe gent:SafeguardLLMAgentsviaKnowledge-EnabledReasoning.
+TwelfthInternationalConferenceonLearningRepresentations. InProceedingsofthe42ndInternationalConferenceonMachine
+Madaan,A.;Tandon,N.;Gupta,P.;Hallinan,S.;Gao,L.;Wiegr- Learning, volume 267 of Proceedings of Machine Learning Re-
+effe,S.;Alon,U.;Dziri,N.;Prabhumoye,S.;Yang,Y.;Gupta,S.;
+search,68316–68342.PMLR.
+Majumder, B. P.; Hermann, K.; Welleck, S.; Yazdanbakhsh, A.; Xu,F.F.;Song,Y.;Li,B.;Tang,Y.;Jain,K.;Bao,M.;Wang,Z.;
+and Clark, P. 2023. Self-Refine: Iterative Refinement with Self- Zhou,X.;Guo,Z.;Cao,M.;Yang,M.;Lu,H.Y.;Martin,A.;Su,
+Feedback. InAdvancesinNeuralInformationProcessingSystems, Z.; Maben, L.; Mehta, R.; Chi, W.; Jang, L.; Xie, Y.; Zhou, S.;
+volume36. and Neubig, G. 2025. TheAgentCompany: Benchmarking LLM
+Merrill,M.A.;Shaw,A.G.;Carlini,N.;Li,B.;Raj,H.;Bercovich,
+AgentsonConsequentialRealWorldTasks.InAdvancesinNeural
+I.; Shi, L.; Shin, J. Y.; Walshe, T.; Buchanan, E. K.; et al. 2026.
+InformationProcessingSystems,volume38.
+Terminal-Bench: Benchmarking agents on hard, realistic tasks in Yang,J.;Jimenez,C.E.;Wettig,A.;Lieret,K.;Yao,S.;Narasimhan,
+commandlineinterfaces. arXivpreprintarXiv:2601.11868. K.; and Press, O. 2024. SWE-agent: Agent-Computer Interfaces
+Ni,Z.;Wang,H.;Zhang,S.;Lu,S.;He,Z.;WangYou;Tang,Z.;
+EnableAutomatedSoftwareEngineering. InAdvancesinNeural
+Hu,S.;Li,B.;Hu,C.;Jiao,B.;Jiang,D.;Du,Y.;andLyu,P.2026.
+InformationProcessingSystems,volume37.
+GitTaskBench:ABenchmarkforCodeAgentsSolvingReal-World Yang,J.;Lieret,K.;Ma,J.;Thakkar,P.;Pedchenko,D.;Sootla,S.;
+Tasks through Code Repository Leveraging. Proceedings of the McMilin,E.;Yin,P.;Hou,R.;Synnaeve,G.;Yang,D.;andPress,O.
+AAAIConferenceonArtificialIntelligence,40(38):32564–32572. 2026a. ProgramBench:CanLanguageModelsRebuildPrograms
+FromScratch? arXiv:2605.03546.
+QwenTeam.2023. Qwen-Agent:AgentFrameworkandApplica-
+Yang, J.; Prabhakar, A.; Narasimhan, K.; and Yao, S. 2023. In-
+tions. Softwarerepository.
+terCode:StandardizingandBenchmarkingInteractiveCodingwith
+Roucher,A.;VillanovadelMoral,A.;Wolf,T.;vonWerra,L.;and
+ExecutionFeedback.InAdvancesinNeuralInformationProcessing
+Kaunismäki,E.2025. smolagents:ASmolLibrarytoBuildGreat
+Systems,volume36.
+AgenticSystems. Softwarerepository.
+Yang, K.; Li, P.; Wu, Z.; Xu, K.; Huang, H.; and Huang, X.
+Ruan,Y.;Dong,H.;Wang,A.;Pitis,S.;Zhou,Y.;Ba,J.;Dubois,
+2026b.DART:SemanticRecoverabilityforStructuredToolAgents.
+Y.;Maddison,C.J.;andHashimoto,T.2024.IdentifyingtheRisks
+arXiv:2605.23311.
+of LM Agents with an LM-Emulated Sandbox. In The Twelfth
+Yao,S.;Chen,H.;Yang,J.;andNarasimhan,K.2022. WebShop:
+InternationalConferenceonLearningRepresentations.
+TowardsScalableReal-WorldWebInteractionwithGroundedLan-
+Shinn, N.; Cassano, F.; Gopinath, A.; Narasimhan, K.; and Yao, guageAgents. InAdvancesinNeuralInformationProcessingSys-
+S.2023. Reflexion:LanguageAgentswithVerbalReinforcement tems,volume35,20744–20757.
+Learning. InAdvancesinNeuralInformationProcessingSystems,
+Yao,S.;Zhao,J.;Yu,D.;Du,N.;Shafran,I.;Narasimhan,K.R.;
+volume36,8634–8652.
+and Cao, Y. 2023. ReAct: Synergizing Reasoning and Acting in
+Shridhar, M.; Yuan, X.; Côté, M.-A.; Bisk, Y.; Trischler, A.; and Language Models. In The Eleventh International Conference on
+Hausknecht, M. 2021. ALFWorld: Aligning Text and Embodied LearningRepresentations.
+EnvironmentsforInteractiveLearning.InInternationalConference
+Yu,T.;Zhang,R.;Er,H.;Li,S.;Xue,E.;Pang,B.;Lin,X.V.;Tan,
+onLearningRepresentations.
+Y.C.;Shi,T.;Li,Z.;Jiang,Y.;Yasunaga,M.;Shim,S.;Chen,T.;
+Trivedi,H.;Khot,T.;Hartmann,M.;Manku,R.;Dong,V.;Li,E.; Fabbri,A.;Li,Z.;Chen,L.;Zhang,Y.;Dixit,S.;Zhang,V.;Xiong,
+Gupta, S.; Sabharwal, A.; and Balasubramanian, N. 2024. App- C.;Socher,R.;Lasecki,W.;andRadev,D.2019. CoSQL:ACon-
+World:AControllableWorldofAppsandPeopleforBenchmark- versationalText-to-SQLChallengeTowardsCross-DomainNatural
+ingInteractiveCodingAgents. InProceedingsofthe62ndAnnual LanguageInterfacestoDatabases.InProceedingsofthe2019Con-
+MeetingoftheAssociationforComputationalLinguistics(Volume ferenceonEmpiricalMethodsinNaturalLanguageProcessingand
+1: Long Papers), 16022–16076. Bangkok, Thailand: Association the9thInternationalJointConferenceonNaturalLanguagePro-
+forComputationalLinguistics. cessing(EMNLP-IJCNLP),1962–1979.HongKong,China:Asso-
+Valmeekam, K.; Marquez, M.; Olmo, A.; Sreedharan, S.; and ciationforComputationalLinguistics.
+Kambhampati, S. 2023. PlanBench: An Extensible Benchmark Zhang,Z.;Fang,T.;Ma,K.;Yu,W.;Zhang,H.;Mi,H.;andYu,D.
+forEvaluatingLargeLanguageModelsonPlanningandReasoning 2026.WebRollback:EnhancingWebAgentswithExplicitRollback
+
+Mechanisms. In Demberg, V.; Inui, K.; and Marquez, L., eds.,
+Proceedings of the 19th Conference of the European Chapter of
+the Association for Computational Linguistics (Volume 2: Short
+Papers),187–197.Rabat,Morocco:AssociationforComputational
+Linguistics. ISBN979-8-89176-381-4.
+Zhao, A.; Huang, D.; Xu, Q.; Lin, M.; Liu, Y.-J.; and Huang, G.
+2024. ExpeL:LLMAgentsareExperientialLearners. InProceed-
+ingsoftheAAAIConferenceonArtificialIntelligence,volume38,
+19632–19642.
+Zhou,A.;Yan,K.;Shlapentokh-Rothman,M.;Wang,H.;andWang,
+Y.-X.2024. LanguageAgentTreeSearchUnifiesReasoning,Act-
+ing,andPlanninginLanguageModels. InProceedingsofthe41st
+InternationalConferenceonMachineLearning,volume235ofPro-
+ceedingsofMachineLearningResearch,62138–62160.PMLR.
+Zhu,K.;Liu,Z.;Li,B.;Tian,M.;Yang,Y.;Zhang,J.;Han,P.;Xie,
+Q.;Cui,F.;Zhang,W.;Ma,X.;Yu,X.;Ramesh,G.;Wu,J.;Liu,
+Z.;Lu,P.;Zou,J.;andYou,J.2025. WhereLLMAgentsFailand
+HowTheycanLearnFromFailures. arXiv:2509.25370.

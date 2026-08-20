@@ -1,0 +1,61 @@
+{
+  "created_at_utc": "2026-08-16T15:44:32.276133Z",
+  "hypotheses": [
+    {
+      "alternative_explanations": [
+        "收益可能仅来自减少模型调用而非正确识别观察边界",
+        "可能结果集合不完备会错误跨过必要决策点",
+        "允许条件代码时整个候选退化为程序化工具调用",
+        "任务控制流稳定性可能使简单轨迹缓存达到相同效果"
+      ],
+      "changed_computation": {
+        "baseline": "每次工具返回后调用模型，或按固定长度批量执行。",
+        "budget_effect": "以分支分析换取更少模型调用、令牌和等待时间。",
+        "information_available": "当前状态、短计划、工具契约和候选观察结果。",
+        "intervention": "估计中间观察对后续动作的决策影响，执行最长的观察不敏感前缀。",
+        "timing": "执行计划段之前以及每个决策敏感观察边界。"
+      },
+      "created_at_utc": "2026-08-16T15:44:32.375722Z",
+      "descriptors": {
+        "budget_class": "减少模型调用，增加分支分析",
+        "computation_stage": "工具执行前与中间观察边界",
+        "evaluation_mode": "本地闭环工具任务",
+        "information_source": "短计划、候选观察结果、工具与参数依赖",
+        "intervention_family": "观察分支感知的动态执行分块",
+        "problem_family": "模型工具循环的延迟与响应性折衷",
+        "timing_class": "每个计划段执行前"
+      },
+      "falsifier": "若程序化工具调用、依赖感知投机执行、轨迹工作流编译或动态动作分块已覆盖按中间依赖和状态选择执行粒度，则候选只是新的分块启发式。",
+      "hypothesis_id": "h-v032-observation-contingent-execution-chunking",
+      "lineage_note": "v032 从上下文选择转向工具执行粒度；完全非安全。",
+      "literature_refs": [
+        "arXiv:2608.06370 The Bitter Lesson of Tool Calling",
+        "arXiv:2603.18897 PASTE",
+        "arXiv:2608.02680 TraceCompiler",
+        "arXiv:2604.04161 Adaptive Action Chunking",
+        "arXiv:2605.10044 ACH",
+        "arXiv:2605.00410 Agent Capsules"
+      ],
+      "mechanism_claim": "对计划前缀的可能中间观察做分支分析，批量执行最长的观察不敏感前缀，并仅在观察可能改变后续工具、参数或分支时把控制权交回模型。",
+      "minimal_killer_experiment": "在具有可控分支率和工具延迟的本地合成环境中，对比逐步 ReAct、固定批量、程序化工具调用和观察分支分块的成功率、模型调用数、令牌与延迟。",
+      "nearest_prior_risk": "程序化工具调用、PASTE、TraceCompiler、Adaptive Action Chunking、ACH 和 Agent Capsules 已覆盖相邻计算与贡献形态。",
+      "parent_ids": [],
+      "problem": "逐工具调用模型成本高，但固定长动作块会跨过需要根据中间观察改策的边界。",
+      "revision": 3,
+      "status": "prior_collision",
+      "status_reason": "程序化工具调用、PASTE、TraceCompiler、自适应动作分块与 Agent Capsules 已覆盖批量执行、依赖感知投机、工作流编译和动态粒度控制。",
+      "target_failure": {
+        "card_ids": [],
+        "evidence_ids": [],
+        "summary": "逐步执行浪费模型调用，固定批处理又在需要根据中间结果改策时失去响应性。"
+      },
+      "title": "观察分支感知的工具执行分块",
+      "updated_at_utc": "2026-08-16T15:44:32.577795Z"
+    }
+  ],
+  "revision": 3,
+  "run_id": "20260816_1644_run13",
+  "schema_version": 1,
+  "updated_at_utc": "2026-08-16T15:44:32.577795Z",
+  "version": "v032"
+}

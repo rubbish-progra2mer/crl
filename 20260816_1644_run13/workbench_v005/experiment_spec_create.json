@@ -1,0 +1,36 @@
+{
+  "experiment_id": "parallel-result-order-probe-001",
+  "hypothesis_id": "h-v005-result-order",
+  "claim_ids": ["c-v005-order-instability"],
+  "purpose": "mechanism_consistency",
+  "research_question": "固定并行调用与结果内容时，工具结果消息排列是否改变后续决策？",
+  "independent_ground_truth": {
+    "description": "每个任务的正确决策由实验规范中的显式确定性规则与固定结果共同推出，不使用被测模型生成真值。",
+    "external_evidence_ids": [],
+    "external_card_ids": [],
+    "external_literature_refs": [],
+    "run_local_fact_refs": ["experiment_v005/experiment_spec.md", "workbench_v005/parallel_result_order_probe.py"]
+  },
+  "primary_metric": "flip_case_rate",
+  "secondary_metrics": ["permutation_accuracy", "invariant_case_rate", "all_permutations_correct_rate", "mean_instability"],
+  "sampling_unit": "模型—任务—工具结果排列",
+  "dataset": "八个手工确定性三工具任务，每任务六种结果消息排列",
+  "model": "qwen2.5:7b 与 qwen3:8b",
+  "provider": "本机 Ollama 0.32.13",
+  "revision": "固定本机模型标签与脚本哈希",
+  "baseline_specs": ["按到达顺序提交原生工具结果消息", "计划索引顺序作为六种排列之一", "排列众数只作诊断上界"],
+  "parity_dimensions": {
+    "information_access": {"status": "matched", "notes": "所有排列包含相同工具调用、名称、索引与结果文本。"},
+    "tool_capability": {"status": "matched", "notes": "不执行真实外部工具，只重放同一固定并行结果集合。"},
+    "model_provider_revision": {"status": "matched", "notes": "同一模型标签、本机提供方、温度零与固定种子。"},
+    "sampling_protocol": {"status": "matched", "notes": "每个三结果任务穷举全部六种排列。"},
+    "budget": {"status": "matched", "notes": "每个排列一次模型调用，输出上限相同。"}
+  },
+  "seeds": [20260816],
+  "budget_ceiling": "{\"api_calls\": 96, \"duration_seconds\": 1800, \"tokens\": 100000}",
+  "expected_signatures": ["flip_case_rate", "permutation_accuracy", "invariant_case_rate", "all_permutations_correct_rate", "mean_instability"],
+  "falsification_rule": "每个模型至少七个任务全排列决策相同且剩余错误不随顺序翻转时，候选死亡。",
+  "confounders": ["一般列表顺序偏置", "原生工具消息模板关联", "任务规则歧义", "服务非确定性"],
+  "declared_inputs": ["workbench_v005/parallel_result_order_probe.py", "experiment_v005/experiment_spec.md"],
+  "declared_outputs": ["experiment_v005/attempts/parallel-result-order-probe-001/metrics_source.json", "experiment_v005/attempts/parallel-result-order-probe-001/details.json"]
+}

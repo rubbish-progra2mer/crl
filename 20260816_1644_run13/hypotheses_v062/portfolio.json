@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "version": "v062",
+  "revision": 3,
+  "hypotheses": [
+    {
+      "id": "H-v062-1",
+      "name": "OPEN_POLICY_PROTOCOL_COMPLETION",
+      "status": "falsified",
+      "registered_before_execution": true,
+      "primary_metrics": [
+        "collision_yield",
+        "procedural_holdout_kill_rate",
+        "generated_holdout_kill_rate",
+        "cross_model_generated_holdout_kill_rate"
+      ],
+      "success_conditions": [
+        "each model yields at least 4 valid collision policies and at least 2 support-expansion rounds",
+        "procedural holdout kill rate exceeds matched-budget random median by at least 0.10",
+        "generated holdout kill rate is not below either fixed hand-mutant or disjoint programmatic-mutant greedy baseline",
+        "each independent generated-policy bank contains at least 4 unique collision policies",
+        "a positive gain remains on the other model's independent generated-policy bank"
+      ],
+      "kill_conditions": [
+        "either model fails collision generation feasibility",
+        "procedural holdout advantage over random median is below 0.10",
+        "disjoint fixed programmatic-mutant greedy support matches or exceeds the adaptive support",
+        "either independent generated-policy bank contains fewer than 4 unique collisions",
+        "gain disappears on cross-model generated policies",
+        "fixed hand-mutant greedy support matches or exceeds both holdout results"
+      ],
+      "scope": "Recorded local synthetic feasibility only; no real tool action and no security-filter research",
+      "outcome": {
+        "decisive_record": "open-policy-protocol-qwen2-5-7b-002",
+        "adaptive_procedural_holdout_kill_rate": 0.755,
+        "random_procedural_holdout_median": 0.8383333333333334,
+        "hand_procedural_holdout_kill_rate": 0.805,
+        "programmatic_procedural_holdout_kill_rate": 0.9233333333333333,
+        "adaptive_generated_holdout_kill_rate": 1.0,
+        "generated_holdout_size": 6,
+        "reason": "adaptive support underperformed random and both fixed greedy baselines on the disjoint 600-policy test bank; the generated bank was saturated by all methods"
+      }
+    }
+  ]
+}

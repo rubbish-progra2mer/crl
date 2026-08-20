@@ -1,0 +1,23 @@
+{
+  "hypothesis_id": "h-v013-opaque-literal-handles",
+  "title": "不透明字面量句柄流",
+  "status": "draft",
+  "parent_ids": [],
+  "lineage_note": "从 QuoteBench 结构化操作仍复制错精确字面量的结果出发。",
+  "problem": "模型即使生成结构化工具调用，仍需重新生成精确字面量字段，可能复制分隔符、引号、换行或字节内容错误。",
+  "target_failure": {"summary": "结构化动作信封正确，但精确数据载荷在模型生成中被改写。", "card_ids": [], "evidence_ids": []},
+  "changed_computation": {
+    "baseline": "模型在命令字符串或结构化参数中重新生成精确字面量。",
+    "intervention": "运行时把精确字节存为不可变类型化槽位，模型只输出句柄及允许的变换，可信适配器在最终工具边界物化字节。",
+    "information_available": "任务与字面量相同；模型看到句柄、类型、长度和允许操作，但不承担逐字节复制。",
+    "timing": "用户输入解析后建槽，工具执行边界物化。",
+    "budget_effect": "不增加模型调用；增加确定性槽位存取和适配器渲染。"
+  },
+  "mechanism_claim": "切断字面量经过概率生成通道的路径，可同时消除复制错误与下游解析器转义错误。",
+  "falsifier": "已有系统已提供不透明数据句柄、目的地类型约束与可信边界物化。",
+  "minimal_killer_experiment": "在 QuoteBench 精确字节任务中比较原始命令、结构化参数和句柄流的终态正确率。",
+  "nearest_prior_risk": "CXI、PACT、信息流控制和经典参数化执行可能直接覆盖核心计算。",
+  "alternative_explanations": ["任务标记不清", "句柄提取器错误", "变换算子不足", "工具适配器错误", "CXI 已等价实现"],
+  "descriptors": {"problem_family": "工具参数字面量保真", "computation_stage": "用户数据到工具载荷", "intervention_family": "不透明句柄与可信物化", "information_source": "运行时原始字节槽", "timing_class": "输入建槽、执行物化", "budget_class": "无额外模型调用", "evaluation_mode": "精确终态验证"},
+  "literature_refs": ["arXiv:2608.13547", "arXiv:2607.06000", "arXiv:2605.11039", "arXiv:2604.23374"]
+}

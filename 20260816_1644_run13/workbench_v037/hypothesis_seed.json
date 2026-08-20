@@ -1,0 +1,47 @@
+{
+  "hypothesis_id": "h-v037-obligation-closure-revision",
+  "title": "基于语义义务闭包的多轮报告修订",
+  "problem": "多轮报告反馈往往只直接指向一个位置，却会间接影响摘要、对照结论和引用等分散依赖；只改直接位置会留下陈旧内容，整篇重写又会破坏反馈范围外的既有正确内容。",
+  "mechanism_claim": "把当前报告分解为带引用和跨段依赖的语义义务图，将反馈对齐到直接目标后计算必须共同变化的最小依赖闭包；模型只生成闭包内的替换片段，闭包外文本由确定性拼接保持不变。",
+  "falsifier": "若强局部提示或仅修改直接位置在依赖一致性与范围外保持上达到相同结果，若闭包扩张几乎总是覆盖整篇报告，或已有方法已按报告级语义依赖闭包执行硬隔离修订，则候选没有独立贡献。",
+  "minimal_killer_experiment": "在完全本地的合成多段报告中构造分散依赖和无关哨兵，对比整篇修订、强局部整篇修订、仅直接位置拼接与义务闭包拼接，测量反馈落实、依赖一致性、范围外保持和编辑规模。",
+  "nearest_prior_risk": "Mr Dre 已定义多轮报告破坏率，FineEdit/HyperEdit 已优化局部忠实度，TRIPS 已做约束规划搜索，RARR 已做尽量保持原文的归因修订；若这些工作已有等价的报告依赖闭包与硬拼接，本候选将直接碰撞。",
+  "alternative_explanations": [
+    "收益完全来自确定性复制未编辑文本，而不是依赖闭包选择",
+    "合成报告的依赖关系过于显式，闭包定位不代表真实报告",
+    "整篇基线因输出预算不足而删减内容，造成伪回归",
+    "依赖闭包由实验设计者预先给出，自动闭包发现可能失败",
+    "语义评分只检查唯一词元，未测量真实叙述一致性与引用正确性"
+  ],
+  "literature_refs": [
+    "ACL 2026 2026.acl-long.609 Mr Dre",
+    "Findings ACL 2026 2026.findings-acl.22 HyperEdit",
+    "Findings EMNLP 2025 2025.findings-emnlp.118 FineEdit",
+    "Findings ACL 2025 2025.findings-acl.1377 TRIPS",
+    "ACL 2023 2023.acl-long.910 RARR",
+    "EMNLP 2022 2022.emnlp-main.678 where-to-edit iterative revision"
+  ],
+  "lineage_note": "v037 根据主动诊断离开工具模式与参数编译盆地，转向文本型研究智能体的多轮报告状态保真；实验完全本地、合成、非安全。",
+  "descriptors": {
+    "problem_family": "多轮长报告修订中的非局部回归与依赖陈旧",
+    "intervention_family": "语义义务图、依赖闭包和受限片段拼接",
+    "computation_stage": "反馈到达后、修订文本生成前后",
+    "information_source": "当前报告、历史反馈、引用标记和报告内语义依赖",
+    "timing_class": "每轮报告修订",
+    "budget_class": "增加闭包定位，减少需要生成的文本范围",
+    "evaluation_mode": "本地合成多段报告的多轮修订"
+  },
+  "changed_computation": {
+    "baseline": "模型读取整篇报告和反馈后重新生成整篇报告，或只按直接锚点做局部修改。",
+    "intervention": "先在语义义务图上计算反馈影响的最小依赖闭包，再只生成闭包内替换，闭包外原文确定性复制。",
+    "information_available": "当前报告、反馈、段落边界、引用标记和可推断的跨段语义依赖。",
+    "timing": "每次修订请求进入后，文本改写之前计算闭包，改写之后确定性拼接。",
+    "budget_effect": "增加一次闭包规划调用；生成预算从整篇报告收缩到闭包片段，并保留闭包外零生成成本。"
+  },
+  "target_failure": {
+    "summary": "直接局部编辑造成依赖位置陈旧，而整篇重写造成反馈范围外内容或引用回归。",
+    "card_ids": [],
+    "evidence_ids": []
+  },
+  "parent_ids": []
+}

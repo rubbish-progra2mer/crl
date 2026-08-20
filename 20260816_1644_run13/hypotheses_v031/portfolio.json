@@ -1,0 +1,59 @@
+{
+  "created_at_utc": "2026-08-16T15:38:55.647241Z",
+  "hypotheses": [
+    {
+      "alternative_explanations": [
+        "性能差异可能只来自更强的语义重排器",
+        "候选动作集合的质量可能决定动作变化信号",
+        "删除单元引起的提示长度变化可能混入效用估计",
+        "局部下一步变化未必转化为闭环成功"
+      ],
+      "changed_computation": {
+        "baseline": "按语义相关性、时间近邻或固定摘要选择工作记忆。",
+        "budget_effect": "增加反事实评分开销，减少进入主决策上下文的证据令牌。",
+        "information_available": "当前任务、历史证据、候选工具与动作以及固定模型输出。",
+        "intervention": "删除或保留每个证据单元并测量候选动作排序变化，据此选择预算内证据。",
+        "timing": "每次生成工具或动作之前。"
+      },
+      "created_at_utc": "2026-08-16T15:38:55.750533Z",
+      "descriptors": {
+        "budget_class": "固定上下文令牌预算与反事实评分开销",
+        "computation_stage": "在线动作选择前",
+        "evaluation_mode": "下一步动作与闭环任务对照",
+        "information_source": "当前任务、历史证据、候选工具与动作",
+        "intervention_family": "动作判别上下文选择",
+        "problem_family": "上下文预算与决策证据错配",
+        "timing_class": "每个决策步"
+      },
+      "falsifier": "若先行工作已用动作变化、结果提升或控制相关性为上下文单元计分并组成决策时视图，则候选只是相同计算在不同工具任务上的重用。",
+      "hypothesis_id": "h-v031-action-discriminative-context-view",
+      "lineage_note": "源于 v031 主动诊断后的结构转向；完全非安全，未使用 v029 受限路径。",
+      "literature_refs": [
+        "arXiv:2606.08151 Decision-Aware Memory Cards / CICL",
+        "arXiv:2608.06745 MemPrism",
+        "arXiv:2608.06544 TaskSense",
+        "arXiv:2608.06706 Dueling World Models"
+      ],
+      "mechanism_claim": "对证据单元执行保留或删除反事实，以候选动作排序变化为主要效用信号，构造预算受限的动作判别工作记忆视图。",
+      "minimal_killer_experiment": "固定模型、候选动作集合和上下文预算，对比语义相关检索与动作判别检索的下一步正确率、闭环成功率与令牌成本。",
+      "nearest_prior_risk": "CICL 已直接用动作变化和结果提升选择上下文；MemPrism、TaskSense 与 Dueling World Models 覆盖任务条件视图和控制相关信息隔离。",
+      "parent_ids": [],
+      "problem": "长周期文本与工具智能体在受限上下文内可能保留任务相关但动作无关的信息，并遗漏会改变当前候选动作排序的证据。",
+      "revision": 3,
+      "status": "prior_collision",
+      "status_reason": "CICL 已直接以动作变化和结果提升选择上下文单元；MemPrism、TaskSense 与 Dueling World Models 覆盖任务条件视图和控制相关信息隔离。",
+      "target_failure": {
+        "card_ids": [],
+        "evidence_ids": [],
+        "summary": "语义相关上下文占满预算，而真正改变动作选择的少量证据未被保留。"
+      },
+      "title": "动作判别工作记忆视图",
+      "updated_at_utc": "2026-08-16T15:38:55.963562Z"
+    }
+  ],
+  "revision": 3,
+  "run_id": "20260816_1644_run13",
+  "schema_version": 1,
+  "updated_at_utc": "2026-08-16T15:38:55.963562Z",
+  "version": "v031"
+}

@@ -1,0 +1,1445 @@
+{
+  "model": "qwen2.5:7b",
+  "endpoint": "http://127.0.0.1:11434/api/chat",
+  "case_count": 20,
+  "conditions": [
+    "plain",
+    "scope_check"
+  ],
+  "temperature": 0,
+  "real_memory_write": false,
+  "tool_execution": false,
+  "external_network": false,
+  "rows": [
+    {
+      "case_id": "speaker_1_trap",
+      "family": "speaker",
+      "kind": "trap",
+      "condition": "plain",
+      "seed": 11200,
+      "condition_order": [
+        "plain",
+        "scope_check"
+      ],
+      "conversation": "User: I take a walk every evening. My sister Mara prefers tea.",
+      "candidates": {
+        "anchor": "The user takes a walk every evening.",
+        "target": "The user prefers tea."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": false,
+        "trap_false_admission": false,
+        "control_target_recalled": false,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor"
+        ],
+        "expected_ids": [
+          "anchor"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\"]}"
+      },
+      "elapsed_seconds": 3.496434600005159,
+      "prompt_tokens": 97,
+      "output_tokens": 10
+    },
+    {
+      "case_id": "speaker_1_trap",
+      "family": "speaker",
+      "kind": "trap",
+      "condition": "scope_check",
+      "seed": 11200,
+      "condition_order": [
+        "plain",
+        "scope_check"
+      ],
+      "conversation": "User: I take a walk every evening. My sister Mara prefers tea.",
+      "candidates": {
+        "anchor": "The user takes a walk every evening.",
+        "target": "The user prefers tea."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": false,
+        "trap_false_admission": false,
+        "control_target_recalled": false,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor"
+        ],
+        "expected_ids": [
+          "anchor"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\"]}"
+      },
+      "elapsed_seconds": 0.5846220999956131,
+      "prompt_tokens": 157,
+      "output_tokens": 10
+    },
+    {
+      "case_id": "speaker_1_control",
+      "family": "speaker",
+      "kind": "control",
+      "condition": "scope_check",
+      "seed": 11201,
+      "condition_order": [
+        "scope_check",
+        "plain"
+      ],
+      "conversation": "User: I take a walk every evening. I prefer tea.",
+      "candidates": {
+        "anchor": "The user takes a walk every evening.",
+        "target": "The user prefers tea."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": false,
+        "target_admitted": true,
+        "trap_false_admission": false,
+        "control_target_recalled": true,
+        "exact_decision": false,
+        "parsed_admit_ids": [
+          "target"
+        ],
+        "expected_ids": [
+          "anchor",
+          "target"
+        ],
+        "raw_content": "{\n  \"admit_ids\": [\n    \"target\"\n  ]\n}"
+      },
+      "elapsed_seconds": 0.6221718000015244,
+      "prompt_tokens": 155,
+      "output_tokens": 17
+    },
+    {
+      "case_id": "speaker_1_control",
+      "family": "speaker",
+      "kind": "control",
+      "condition": "plain",
+      "seed": 11201,
+      "condition_order": [
+        "scope_check",
+        "plain"
+      ],
+      "conversation": "User: I take a walk every evening. I prefer tea.",
+      "candidates": {
+        "anchor": "The user takes a walk every evening.",
+        "target": "The user prefers tea."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": true,
+        "trap_false_admission": false,
+        "control_target_recalled": true,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor",
+          "target"
+        ],
+        "expected_ids": [
+          "anchor",
+          "target"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\", \"target\"]}"
+      },
+      "elapsed_seconds": 0.5275785000121687,
+      "prompt_tokens": 95,
+      "output_tokens": 13
+    },
+    {
+      "case_id": "speaker_2_trap",
+      "family": "speaker",
+      "kind": "trap",
+      "condition": "plain",
+      "seed": 11202,
+      "condition_order": [
+        "plain",
+        "scope_check"
+      ],
+      "conversation": "User: I keep a paper planner. At work, Jonah handles client calls.",
+      "candidates": {
+        "anchor": "The user keeps a paper planner.",
+        "target": "The user handles client calls at work."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": false,
+        "trap_false_admission": false,
+        "control_target_recalled": false,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor"
+        ],
+        "expected_ids": [
+          "anchor"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\"]}"
+      },
+      "elapsed_seconds": 0.47492209999472834,
+      "prompt_tokens": 100,
+      "output_tokens": 10
+    },
+    {
+      "case_id": "speaker_2_trap",
+      "family": "speaker",
+      "kind": "trap",
+      "condition": "scope_check",
+      "seed": 11202,
+      "condition_order": [
+        "plain",
+        "scope_check"
+      ],
+      "conversation": "User: I keep a paper planner. At work, Jonah handles client calls.",
+      "candidates": {
+        "anchor": "The user keeps a paper planner.",
+        "target": "The user handles client calls at work."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": false,
+        "trap_false_admission": false,
+        "control_target_recalled": false,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor"
+        ],
+        "expected_ids": [
+          "anchor"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\"]}"
+      },
+      "elapsed_seconds": 0.4865566000225954,
+      "prompt_tokens": 160,
+      "output_tokens": 10
+    },
+    {
+      "case_id": "speaker_2_control",
+      "family": "speaker",
+      "kind": "control",
+      "condition": "scope_check",
+      "seed": 11203,
+      "condition_order": [
+        "scope_check",
+        "plain"
+      ],
+      "conversation": "User: I keep a paper planner. At work, I handle client calls.",
+      "candidates": {
+        "anchor": "The user keeps a paper planner.",
+        "target": "The user handles client calls at work."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": false,
+        "target_admitted": true,
+        "trap_false_admission": false,
+        "control_target_recalled": true,
+        "exact_decision": false,
+        "parsed_admit_ids": [
+          "target"
+        ],
+        "expected_ids": [
+          "anchor",
+          "target"
+        ],
+        "raw_content": "{\n  \"admit_ids\": [\n    \"target\"\n  ]\n}"
+      },
+      "elapsed_seconds": 0.5951284999900963,
+      "prompt_tokens": 160,
+      "output_tokens": 17
+    },
+    {
+      "case_id": "speaker_2_control",
+      "family": "speaker",
+      "kind": "control",
+      "condition": "plain",
+      "seed": 11203,
+      "condition_order": [
+        "scope_check",
+        "plain"
+      ],
+      "conversation": "User: I keep a paper planner. At work, I handle client calls.",
+      "candidates": {
+        "anchor": "The user keeps a paper planner.",
+        "target": "The user handles client calls at work."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": true,
+        "trap_false_admission": false,
+        "control_target_recalled": true,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor",
+          "target"
+        ],
+        "expected_ids": [
+          "anchor",
+          "target"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\", \"target\"]}"
+      },
+      "elapsed_seconds": 0.5565240000141785,
+      "prompt_tokens": 100,
+      "output_tokens": 13
+    },
+    {
+      "case_id": "quotation_1_trap",
+      "family": "quotation",
+      "kind": "trap",
+      "condition": "plain",
+      "seed": 11204,
+      "condition_order": [
+        "plain",
+        "scope_check"
+      ],
+      "conversation": "User: I cook on Sundays. My cousin said, 'I collect stamps.'",
+      "candidates": {
+        "anchor": "The user cooks on Sundays.",
+        "target": "The user collects stamps."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": false,
+        "trap_false_admission": false,
+        "control_target_recalled": false,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor"
+        ],
+        "expected_ids": [
+          "anchor"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\"]}"
+      },
+      "elapsed_seconds": 0.4765915999887511,
+      "prompt_tokens": 96,
+      "output_tokens": 10
+    },
+    {
+      "case_id": "quotation_1_trap",
+      "family": "quotation",
+      "kind": "trap",
+      "condition": "scope_check",
+      "seed": 11204,
+      "condition_order": [
+        "plain",
+        "scope_check"
+      ],
+      "conversation": "User: I cook on Sundays. My cousin said, 'I collect stamps.'",
+      "candidates": {
+        "anchor": "The user cooks on Sundays.",
+        "target": "The user collects stamps."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": false,
+        "trap_false_admission": false,
+        "control_target_recalled": false,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor"
+        ],
+        "expected_ids": [
+          "anchor"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\"]}"
+      },
+      "elapsed_seconds": 0.48611120000714436,
+      "prompt_tokens": 156,
+      "output_tokens": 10
+    },
+    {
+      "case_id": "quotation_1_control",
+      "family": "quotation",
+      "kind": "control",
+      "condition": "scope_check",
+      "seed": 11205,
+      "condition_order": [
+        "scope_check",
+        "plain"
+      ],
+      "conversation": "User: I cook on Sundays. I collect stamps.",
+      "candidates": {
+        "anchor": "The user cooks on Sundays.",
+        "target": "The user collects stamps."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": true,
+        "trap_false_admission": false,
+        "control_target_recalled": true,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor",
+          "target"
+        ],
+        "expected_ids": [
+          "anchor",
+          "target"
+        ],
+        "raw_content": "{\n  \"admit_ids\": [\n    \"anchor\",\n    \"target\"\n  ]\n}"
+      },
+      "elapsed_seconds": 0.5627274999860674,
+      "prompt_tokens": 151,
+      "output_tokens": 20
+    },
+    {
+      "case_id": "quotation_1_control",
+      "family": "quotation",
+      "kind": "control",
+      "condition": "plain",
+      "seed": 11205,
+      "condition_order": [
+        "scope_check",
+        "plain"
+      ],
+      "conversation": "User: I cook on Sundays. I collect stamps.",
+      "candidates": {
+        "anchor": "The user cooks on Sundays.",
+        "target": "The user collects stamps."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": true,
+        "trap_false_admission": false,
+        "control_target_recalled": true,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor",
+          "target"
+        ],
+        "expected_ids": [
+          "anchor",
+          "target"
+        ],
+        "raw_content": "{\n  \"admit_ids\": [\n    \"anchor\",\n    \"target\"\n  ]\n}"
+      },
+      "elapsed_seconds": 0.5871647000021767,
+      "prompt_tokens": 91,
+      "output_tokens": 21
+    },
+    {
+      "case_id": "quotation_2_trap",
+      "family": "quotation",
+      "kind": "trap",
+      "condition": "plain",
+      "seed": 11206,
+      "condition_order": [
+        "plain",
+        "scope_check"
+      ],
+      "conversation": "User: I keep houseplants. I was reading a note aloud: 'I cycle to work.'",
+      "candidates": {
+        "anchor": "The user keeps houseplants.",
+        "target": "The user cycles to work."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": false,
+        "trap_false_admission": false,
+        "control_target_recalled": false,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor"
+        ],
+        "expected_ids": [
+          "anchor"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\"]}"
+      },
+      "elapsed_seconds": 0.4856333000061568,
+      "prompt_tokens": 101,
+      "output_tokens": 11
+    },
+    {
+      "case_id": "quotation_2_trap",
+      "family": "quotation",
+      "kind": "trap",
+      "condition": "scope_check",
+      "seed": 11206,
+      "condition_order": [
+        "plain",
+        "scope_check"
+      ],
+      "conversation": "User: I keep houseplants. I was reading a note aloud: 'I cycle to work.'",
+      "candidates": {
+        "anchor": "The user keeps houseplants.",
+        "target": "The user cycles to work."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": false,
+        "trap_false_admission": false,
+        "control_target_recalled": false,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor"
+        ],
+        "expected_ids": [
+          "anchor"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\"]}"
+      },
+      "elapsed_seconds": 0.47752759998547845,
+      "prompt_tokens": 161,
+      "output_tokens": 10
+    },
+    {
+      "case_id": "quotation_2_control",
+      "family": "quotation",
+      "kind": "control",
+      "condition": "scope_check",
+      "seed": 11207,
+      "condition_order": [
+        "scope_check",
+        "plain"
+      ],
+      "conversation": "User: I keep houseplants. I cycle to work.",
+      "candidates": {
+        "anchor": "The user keeps houseplants.",
+        "target": "The user cycles to work."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": true,
+        "trap_false_admission": false,
+        "control_target_recalled": true,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor",
+          "target"
+        ],
+        "expected_ids": [
+          "anchor",
+          "target"
+        ],
+        "raw_content": "{\n  \"admit_ids\": [\n    \"anchor\",\n    \"target\"\n  ]\n}"
+      },
+      "elapsed_seconds": 0.5705664000124671,
+      "prompt_tokens": 153,
+      "output_tokens": 20
+    },
+    {
+      "case_id": "quotation_2_control",
+      "family": "quotation",
+      "kind": "control",
+      "condition": "plain",
+      "seed": 11207,
+      "condition_order": [
+        "scope_check",
+        "plain"
+      ],
+      "conversation": "User: I keep houseplants. I cycle to work.",
+      "candidates": {
+        "anchor": "The user keeps houseplants.",
+        "target": "The user cycles to work."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": true,
+        "trap_false_admission": false,
+        "control_target_recalled": true,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor",
+          "target"
+        ],
+        "expected_ids": [
+          "anchor",
+          "target"
+        ],
+        "raw_content": "{\n  \"admit_ids\": [\n    \"anchor\",\n    \"target\"\n  ]\n}"
+      },
+      "elapsed_seconds": 0.6293879000004381,
+      "prompt_tokens": 93,
+      "output_tokens": 21
+    },
+    {
+      "case_id": "hypothetical_1_trap",
+      "family": "hypothetical",
+      "kind": "trap",
+      "condition": "plain",
+      "seed": 11208,
+      "condition_order": [
+        "plain",
+        "scope_check"
+      ],
+      "conversation": "User: I drink coffee in the morning. If I lived in Oslo, I would take the tram.",
+      "candidates": {
+        "anchor": "The user drinks coffee in the morning.",
+        "target": "The user lives in Oslo."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": false,
+        "trap_false_admission": false,
+        "control_target_recalled": false,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor"
+        ],
+        "expected_ids": [
+          "anchor"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\"]}"
+      },
+      "elapsed_seconds": 0.46301259999745525,
+      "prompt_tokens": 104,
+      "output_tokens": 9
+    },
+    {
+      "case_id": "hypothetical_1_trap",
+      "family": "hypothetical",
+      "kind": "trap",
+      "condition": "scope_check",
+      "seed": 11208,
+      "condition_order": [
+        "plain",
+        "scope_check"
+      ],
+      "conversation": "User: I drink coffee in the morning. If I lived in Oslo, I would take the tram.",
+      "candidates": {
+        "anchor": "The user drinks coffee in the morning.",
+        "target": "The user lives in Oslo."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": false,
+        "trap_false_admission": false,
+        "control_target_recalled": false,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor"
+        ],
+        "expected_ids": [
+          "anchor"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\"]}"
+      },
+      "elapsed_seconds": 0.5150473000248894,
+      "prompt_tokens": 164,
+      "output_tokens": 10
+    },
+    {
+      "case_id": "hypothetical_1_control",
+      "family": "hypothetical",
+      "kind": "control",
+      "condition": "scope_check",
+      "seed": 11209,
+      "condition_order": [
+        "scope_check",
+        "plain"
+      ],
+      "conversation": "User: I drink coffee in the morning. I live in Oslo.",
+      "candidates": {
+        "anchor": "The user drinks coffee in the morning.",
+        "target": "The user lives in Oslo."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": false,
+        "target_admitted": true,
+        "trap_false_admission": false,
+        "control_target_recalled": true,
+        "exact_decision": false,
+        "parsed_admit_ids": [
+          "target"
+        ],
+        "expected_ids": [
+          "anchor",
+          "target"
+        ],
+        "raw_content": "{\n  \"admit_ids\": [\n    \"target\"\n  ]\n}"
+      },
+      "elapsed_seconds": 0.5347246000019368,
+      "prompt_tokens": 157,
+      "output_tokens": 16
+    },
+    {
+      "case_id": "hypothetical_1_control",
+      "family": "hypothetical",
+      "kind": "control",
+      "condition": "plain",
+      "seed": 11209,
+      "condition_order": [
+        "scope_check",
+        "plain"
+      ],
+      "conversation": "User: I drink coffee in the morning. I live in Oslo.",
+      "candidates": {
+        "anchor": "The user drinks coffee in the morning.",
+        "target": "The user lives in Oslo."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": true,
+        "trap_false_admission": false,
+        "control_target_recalled": true,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor",
+          "target"
+        ],
+        "expected_ids": [
+          "anchor",
+          "target"
+        ],
+        "raw_content": "{\"admit_ids\":[ \"anchor\", \"target\" ]}"
+      },
+      "elapsed_seconds": 0.5460001999745145,
+      "prompt_tokens": 97,
+      "output_tokens": 14
+    },
+    {
+      "case_id": "hypothetical_2_trap",
+      "family": "hypothetical",
+      "kind": "trap",
+      "condition": "plain",
+      "seed": 11210,
+      "condition_order": [
+        "plain",
+        "scope_check"
+      ],
+      "conversation": "User: I call my parents weekly. If I learned pottery, I would make bowls.",
+      "candidates": {
+        "anchor": "The user calls their parents weekly.",
+        "target": "The user practices pottery."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": false,
+        "trap_false_admission": false,
+        "control_target_recalled": false,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor"
+        ],
+        "expected_ids": [
+          "anchor"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\"]}"
+      },
+      "elapsed_seconds": 0.47317099999054335,
+      "prompt_tokens": 99,
+      "output_tokens": 10
+    },
+    {
+      "case_id": "hypothetical_2_trap",
+      "family": "hypothetical",
+      "kind": "trap",
+      "condition": "scope_check",
+      "seed": 11210,
+      "condition_order": [
+        "plain",
+        "scope_check"
+      ],
+      "conversation": "User: I call my parents weekly. If I learned pottery, I would make bowls.",
+      "candidates": {
+        "anchor": "The user calls their parents weekly.",
+        "target": "The user practices pottery."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": false,
+        "trap_false_admission": false,
+        "control_target_recalled": false,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor"
+        ],
+        "expected_ids": [
+          "anchor"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\"]}"
+      },
+      "elapsed_seconds": 0.528642299992498,
+      "prompt_tokens": 159,
+      "output_tokens": 10
+    },
+    {
+      "case_id": "hypothetical_2_control",
+      "family": "hypothetical",
+      "kind": "control",
+      "condition": "scope_check",
+      "seed": 11211,
+      "condition_order": [
+        "scope_check",
+        "plain"
+      ],
+      "conversation": "User: I call my parents weekly. I practice pottery every weekend.",
+      "candidates": {
+        "anchor": "The user calls their parents weekly.",
+        "target": "The user practices pottery."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": true,
+        "trap_false_admission": false,
+        "control_target_recalled": true,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor",
+          "target"
+        ],
+        "expected_ids": [
+          "anchor",
+          "target"
+        ],
+        "raw_content": "{\n  \"admit_ids\": [\n    \"anchor\",\n    \"target\"\n  ]\n}"
+      },
+      "elapsed_seconds": 0.5888725999975577,
+      "prompt_tokens": 155,
+      "output_tokens": 21
+    },
+    {
+      "case_id": "hypothetical_2_control",
+      "family": "hypothetical",
+      "kind": "control",
+      "condition": "plain",
+      "seed": 11211,
+      "condition_order": [
+        "scope_check",
+        "plain"
+      ],
+      "conversation": "User: I call my parents weekly. I practice pottery every weekend.",
+      "candidates": {
+        "anchor": "The user calls their parents weekly.",
+        "target": "The user practices pottery."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": true,
+        "trap_false_admission": false,
+        "control_target_recalled": true,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor",
+          "target"
+        ],
+        "expected_ids": [
+          "anchor",
+          "target"
+        ],
+        "raw_content": "{\n  \"admit_ids\": [\n    \"anchor\",\n    \"target\"\n  ]\n}"
+      },
+      "elapsed_seconds": 0.5719862999976613,
+      "prompt_tokens": 95,
+      "output_tokens": 21
+    },
+    {
+      "case_id": "desire_plan_1_trap",
+      "family": "desire_plan",
+      "kind": "trap",
+      "condition": "plain",
+      "seed": 11212,
+      "condition_order": [
+        "plain",
+        "scope_check"
+      ],
+      "conversation": "User: I enjoy documentaries. I wish I owned a sailboat.",
+      "candidates": {
+        "anchor": "The user enjoys documentaries.",
+        "target": "The user owns a sailboat."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": false,
+        "trap_false_admission": false,
+        "control_target_recalled": false,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor"
+        ],
+        "expected_ids": [
+          "anchor"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\"]}"
+      },
+      "elapsed_seconds": 0.4583439999842085,
+      "prompt_tokens": 95,
+      "output_tokens": 11
+    },
+    {
+      "case_id": "desire_plan_1_trap",
+      "family": "desire_plan",
+      "kind": "trap",
+      "condition": "scope_check",
+      "seed": 11212,
+      "condition_order": [
+        "plain",
+        "scope_check"
+      ],
+      "conversation": "User: I enjoy documentaries. I wish I owned a sailboat.",
+      "candidates": {
+        "anchor": "The user enjoys documentaries.",
+        "target": "The user owns a sailboat."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": false,
+        "trap_false_admission": false,
+        "control_target_recalled": false,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor"
+        ],
+        "expected_ids": [
+          "anchor"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\"]}"
+      },
+      "elapsed_seconds": 0.420798700011801,
+      "prompt_tokens": 155,
+      "output_tokens": 9
+    },
+    {
+      "case_id": "desire_plan_1_control",
+      "family": "desire_plan",
+      "kind": "control",
+      "condition": "scope_check",
+      "seed": 11213,
+      "condition_order": [
+        "scope_check",
+        "plain"
+      ],
+      "conversation": "User: I enjoy documentaries. I own a sailboat.",
+      "candidates": {
+        "anchor": "The user enjoys documentaries.",
+        "target": "The user owns a sailboat."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": false,
+        "target_admitted": true,
+        "trap_false_admission": false,
+        "control_target_recalled": true,
+        "exact_decision": false,
+        "parsed_admit_ids": [
+          "target"
+        ],
+        "expected_ids": [
+          "anchor",
+          "target"
+        ],
+        "raw_content": "{\n  \"admit_ids\": [\n    \"target\"\n  ]\n}"
+      },
+      "elapsed_seconds": 0.46684360000654124,
+      "prompt_tokens": 153,
+      "output_tokens": 16
+    },
+    {
+      "case_id": "desire_plan_1_control",
+      "family": "desire_plan",
+      "kind": "control",
+      "condition": "plain",
+      "seed": 11213,
+      "condition_order": [
+        "scope_check",
+        "plain"
+      ],
+      "conversation": "User: I enjoy documentaries. I own a sailboat.",
+      "candidates": {
+        "anchor": "The user enjoys documentaries.",
+        "target": "The user owns a sailboat."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": true,
+        "trap_false_admission": false,
+        "control_target_recalled": true,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor",
+          "target"
+        ],
+        "expected_ids": [
+          "anchor",
+          "target"
+        ],
+        "raw_content": "{\"admit_ids\":[ \"anchor\", \"target\" ]}"
+      },
+      "elapsed_seconds": 0.5023203000018839,
+      "prompt_tokens": 93,
+      "output_tokens": 14
+    },
+    {
+      "case_id": "desire_plan_2_trap",
+      "family": "desire_plan",
+      "kind": "trap",
+      "condition": "plain",
+      "seed": 11214,
+      "condition_order": [
+        "plain",
+        "scope_check"
+      ],
+      "conversation": "User: I write in a journal. I plan to learn Korean next year.",
+      "candidates": {
+        "anchor": "The user writes in a journal.",
+        "target": "The user speaks Korean."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": false,
+        "trap_false_admission": false,
+        "control_target_recalled": false,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor"
+        ],
+        "expected_ids": [
+          "anchor"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\"]}"
+      },
+      "elapsed_seconds": 0.4361097999790218,
+      "prompt_tokens": 97,
+      "output_tokens": 10
+    },
+    {
+      "case_id": "desire_plan_2_trap",
+      "family": "desire_plan",
+      "kind": "trap",
+      "condition": "scope_check",
+      "seed": 11214,
+      "condition_order": [
+        "plain",
+        "scope_check"
+      ],
+      "conversation": "User: I write in a journal. I plan to learn Korean next year.",
+      "candidates": {
+        "anchor": "The user writes in a journal.",
+        "target": "The user speaks Korean."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": false,
+        "trap_false_admission": false,
+        "control_target_recalled": false,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor"
+        ],
+        "expected_ids": [
+          "anchor"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\"]}"
+      },
+      "elapsed_seconds": 0.4719620000105351,
+      "prompt_tokens": 157,
+      "output_tokens": 10
+    },
+    {
+      "case_id": "desire_plan_2_control",
+      "family": "desire_plan",
+      "kind": "control",
+      "condition": "scope_check",
+      "seed": 11215,
+      "condition_order": [
+        "scope_check",
+        "plain"
+      ],
+      "conversation": "User: I write in a journal. I speak Korean.",
+      "candidates": {
+        "anchor": "The user writes in a journal.",
+        "target": "The user speaks Korean."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": false,
+        "target_admitted": true,
+        "trap_false_admission": false,
+        "control_target_recalled": true,
+        "exact_decision": false,
+        "parsed_admit_ids": [
+          "target"
+        ],
+        "expected_ids": [
+          "anchor",
+          "target"
+        ],
+        "raw_content": "{\n  \"admit_ids\": [\n    \"target\"\n  ]\n}"
+      },
+      "elapsed_seconds": 0.509624199999962,
+      "prompt_tokens": 153,
+      "output_tokens": 16
+    },
+    {
+      "case_id": "desire_plan_2_control",
+      "family": "desire_plan",
+      "kind": "control",
+      "condition": "plain",
+      "seed": 11215,
+      "condition_order": [
+        "scope_check",
+        "plain"
+      ],
+      "conversation": "User: I write in a journal. I speak Korean.",
+      "candidates": {
+        "anchor": "The user writes in a journal.",
+        "target": "The user speaks Korean."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": true,
+        "trap_false_admission": false,
+        "control_target_recalled": true,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor",
+          "target"
+        ],
+        "expected_ids": [
+          "anchor",
+          "target"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\", \"target\"]}"
+      },
+      "elapsed_seconds": 0.4672157999884803,
+      "prompt_tokens": 93,
+      "output_tokens": 13
+    },
+    {
+      "case_id": "negation_1_trap",
+      "family": "negation",
+      "kind": "trap",
+      "condition": "plain",
+      "seed": 11216,
+      "condition_order": [
+        "plain",
+        "scope_check"
+      ],
+      "conversation": "User: I listen to podcasts. I do not enjoy horror movies.",
+      "candidates": {
+        "anchor": "The user listens to podcasts.",
+        "target": "The user enjoys horror movies."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": false,
+        "trap_false_admission": false,
+        "control_target_recalled": false,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor"
+        ],
+        "expected_ids": [
+          "anchor"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\"]}"
+      },
+      "elapsed_seconds": 0.4907242000044789,
+      "prompt_tokens": 95,
+      "output_tokens": 10
+    },
+    {
+      "case_id": "negation_1_trap",
+      "family": "negation",
+      "kind": "trap",
+      "condition": "scope_check",
+      "seed": 11216,
+      "condition_order": [
+        "plain",
+        "scope_check"
+      ],
+      "conversation": "User: I listen to podcasts. I do not enjoy horror movies.",
+      "candidates": {
+        "anchor": "The user listens to podcasts.",
+        "target": "The user enjoys horror movies."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": false,
+        "trap_false_admission": false,
+        "control_target_recalled": false,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor"
+        ],
+        "expected_ids": [
+          "anchor"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\"]}"
+      },
+      "elapsed_seconds": 0.44648690000758506,
+      "prompt_tokens": 155,
+      "output_tokens": 10
+    },
+    {
+      "case_id": "negation_1_control",
+      "family": "negation",
+      "kind": "control",
+      "condition": "scope_check",
+      "seed": 11217,
+      "condition_order": [
+        "scope_check",
+        "plain"
+      ],
+      "conversation": "User: I listen to podcasts. I enjoy horror movies.",
+      "candidates": {
+        "anchor": "The user listens to podcasts.",
+        "target": "The user enjoys horror movies."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": false,
+        "target_admitted": true,
+        "trap_false_admission": false,
+        "control_target_recalled": true,
+        "exact_decision": false,
+        "parsed_admit_ids": [
+          "target"
+        ],
+        "expected_ids": [
+          "anchor",
+          "target"
+        ],
+        "raw_content": "{\n  \"admit_ids\": [\n    \"target\"\n  ]\n}"
+      },
+      "elapsed_seconds": 0.502636099990923,
+      "prompt_tokens": 153,
+      "output_tokens": 16
+    },
+    {
+      "case_id": "negation_1_control",
+      "family": "negation",
+      "kind": "control",
+      "condition": "plain",
+      "seed": 11217,
+      "condition_order": [
+        "scope_check",
+        "plain"
+      ],
+      "conversation": "User: I listen to podcasts. I enjoy horror movies.",
+      "candidates": {
+        "anchor": "The user listens to podcasts.",
+        "target": "The user enjoys horror movies."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": true,
+        "trap_false_admission": false,
+        "control_target_recalled": true,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor",
+          "target"
+        ],
+        "expected_ids": [
+          "anchor",
+          "target"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\", \"target\"]}"
+      },
+      "elapsed_seconds": 0.46156019999762066,
+      "prompt_tokens": 93,
+      "output_tokens": 12
+    },
+    {
+      "case_id": "negation_2_trap",
+      "family": "negation",
+      "kind": "trap",
+      "condition": "plain",
+      "seed": 11218,
+      "condition_order": [
+        "plain",
+        "scope_check"
+      ],
+      "conversation": "User: I bake bread monthly. I have never visited Lisbon.",
+      "candidates": {
+        "anchor": "The user bakes bread monthly.",
+        "target": "The user has visited Lisbon."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": false,
+        "trap_false_admission": false,
+        "control_target_recalled": false,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor"
+        ],
+        "expected_ids": [
+          "anchor"
+        ],
+        "raw_content": "{\n  \"admit_ids\": [\n    \"anchor\"\n  ]\n}"
+      },
+      "elapsed_seconds": 0.5207622000016272,
+      "prompt_tokens": 95,
+      "output_tokens": 17
+    },
+    {
+      "case_id": "negation_2_trap",
+      "family": "negation",
+      "kind": "trap",
+      "condition": "scope_check",
+      "seed": 11218,
+      "condition_order": [
+        "plain",
+        "scope_check"
+      ],
+      "conversation": "User: I bake bread monthly. I have never visited Lisbon.",
+      "candidates": {
+        "anchor": "The user bakes bread monthly.",
+        "target": "The user has visited Lisbon."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": false,
+        "trap_false_admission": false,
+        "control_target_recalled": false,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor"
+        ],
+        "expected_ids": [
+          "anchor"
+        ],
+        "raw_content": "{\n  \"admit_ids\": [\n    \"anchor\"\n  ]\n}"
+      },
+      "elapsed_seconds": 0.5380325999867637,
+      "prompt_tokens": 155,
+      "output_tokens": 17
+    },
+    {
+      "case_id": "negation_2_control",
+      "family": "negation",
+      "kind": "control",
+      "condition": "scope_check",
+      "seed": 11219,
+      "condition_order": [
+        "scope_check",
+        "plain"
+      ],
+      "conversation": "User: I bake bread monthly. I visited Lisbon last spring.",
+      "candidates": {
+        "anchor": "The user bakes bread monthly.",
+        "target": "The user has visited Lisbon."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": false,
+        "target_admitted": true,
+        "trap_false_admission": false,
+        "control_target_recalled": true,
+        "exact_decision": false,
+        "parsed_admit_ids": [
+          "target"
+        ],
+        "expected_ids": [
+          "anchor",
+          "target"
+        ],
+        "raw_content": "{\n  \"admit_ids\": [\n    \"target\"\n  ]\n}"
+      },
+      "elapsed_seconds": 0.5250570000207517,
+      "prompt_tokens": 155,
+      "output_tokens": 16
+    },
+    {
+      "case_id": "negation_2_control",
+      "family": "negation",
+      "kind": "control",
+      "condition": "plain",
+      "seed": 11219,
+      "condition_order": [
+        "scope_check",
+        "plain"
+      ],
+      "conversation": "User: I bake bread monthly. I visited Lisbon last spring.",
+      "candidates": {
+        "anchor": "The user bakes bread monthly.",
+        "target": "The user has visited Lisbon."
+      },
+      "score": {
+        "valid": true,
+        "anchor_recalled": true,
+        "target_admitted": true,
+        "trap_false_admission": false,
+        "control_target_recalled": true,
+        "exact_decision": true,
+        "parsed_admit_ids": [
+          "anchor",
+          "target"
+        ],
+        "expected_ids": [
+          "anchor",
+          "target"
+        ],
+        "raw_content": "{\"admit_ids\": [\"anchor\", \"target\"]}"
+      },
+      "elapsed_seconds": 0.5156966999929864,
+      "prompt_tokens": 95,
+      "output_tokens": 13
+    }
+  ],
+  "metrics": {
+    "conditions": {
+      "plain": {
+        "n": 20,
+        "valid_response_count": 20,
+        "anchor_recall_count": 20,
+        "trap_false_admission_count": 0,
+        "trap_false_admission_families": [],
+        "trap_false_admission_family_count": 0,
+        "control_target_recall_count": 10,
+        "exact_decision_count": 20
+      },
+      "scope_check": {
+        "n": 20,
+        "valid_response_count": 20,
+        "anchor_recall_count": 13,
+        "trap_false_admission_count": 0,
+        "trap_false_admission_families": [],
+        "trap_false_admission_family_count": 0,
+        "control_target_recall_count": 10,
+        "exact_decision_count": 13
+      }
+    },
+    "deltas": {
+      "scope_check_false_admission_reduction": 0
+    },
+    "continuation_checks": {
+      "plain_phenomenon": false,
+      "structured_validity": true,
+      "anchor_recall": false,
+      "control_target_recall": true,
+      "scope_check_does_not_absorb": true,
+      "scope_check_residual": false
+    },
+    "all_continuation_conditions": false
+  },
+  "scope_note": "Benign local synthetic memory-admission classification only. No candidate was written to a real memory store, no tool was executed, and no external network or safety boundary was contacted."
+}

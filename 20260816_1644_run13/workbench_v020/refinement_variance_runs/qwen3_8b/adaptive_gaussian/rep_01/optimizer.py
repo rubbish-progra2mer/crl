@@ -1,0 +1,46 @@
+import numpy as np
+from problems import BudgetExhausted
+
+def optimize(f, dim, bounds, budget, seed):
+    np.random.seed(seed)
+    low, high = bounds
+    x = np.random.uniform(low, high, dim)
+    best_x = x
+    best_f = f(x)
+    step_size = 1.0
+    num_successes = 0
+    budget_remaining = budget
+    iterations = 0
+
+    while budget_remaining > 0:
+        try:
+            iterations += 1
+            budget_remaining -= 1
+            candidates = np.random.normal(loc=x, scale=step_size, size=(10, dim))
+            candidates = np.clip(candidates, low, high)
+            candidates_f = np.array([f(c) for c in candidates])
+            best_candidate = candidates[np.argmin(candidates_f)]
+            candidate_f = np.min(candidates_f)
+
+            if candidate_f < best_f:
+                x = best_candidate
+                best_f = candidate_f
+                num_successes += 1
+                step_size *= 0.99
+            else:
+                step_size *= 1.01
+                num_successes = 0
+
+            if num_successes > 10:
+                step_size *= 0.5
+                num_successes = 0
+
+        except BudgetExhausted:
+            break
+
+    return {
+        'x': best_x,
+        'f': best_f,
+        'iterations': iterations,
+        'budget_used': budget - budget_remaining
+    }

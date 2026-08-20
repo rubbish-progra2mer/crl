@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "version": "v071",
+  "revision": 2,
+  "hypotheses": [
+    {
+      "id": "H-v071-1",
+      "name": "EXECUTOR_COMPENSATION_CAPABILITY_ILLUSION",
+      "status": "falsified",
+      "registered_before_execution": true,
+      "models": ["qwen2.5:7b", "qwen3:8b"],
+      "task_count": 20,
+      "repair_families": ["key_alias", "enum_normalization", "resource_code_normalization", "identifier_type_recovery", "missing_standard_policy"],
+      "primary_metrics": ["valid_json", "strict_success", "forgiving_success", "compensation_gap", "compensated_family_count"],
+      "success_conditions": [
+        "first model valid_json is at least 19/20",
+        "first model strict_success is at least 5/20",
+        "first model compensation_gap is at least 5/20",
+        "first model compensated successes cover at least 3/5 repair families",
+        "all counted repairs preserve uniquely identifiable intent",
+        "if first model supports, second model compensation_gap is at least 3/20 across at least 2 repair families"
+      ],
+      "kill_conditions": [
+        "first model valid_json is below 19/20",
+        "first model strict_success is below 5/20",
+        "first model compensation_gap is below 5/20",
+        "first model compensated family count is below 3",
+        "any counted repair can change a wrong target or wrong operation into the expected one"
+      ],
+      "scope": "Local benign synthetic action generation and offline deterministic validation only; no represented tool is executed",
+      "result_record_ids": ["executor-compensation-qwen2-5-7b-001"],
+      "result_summary": {
+        "valid_json": 20,
+        "strict_success": 20,
+        "forgiving_success": 20,
+        "compensation_gap": 0,
+        "compensated_family_count": 0
+      },
+      "early_stop": "qwen2.5:7b hit the preregistered compensation-gap and family-coverage kill conditions; qwen3:8b was not run"
+    }
+  ]
+}

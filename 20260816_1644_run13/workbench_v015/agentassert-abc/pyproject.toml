@@ -1,0 +1,162 @@
+[project]
+name = "agentassert-abc"
+version = "0.7.1"
+description = "Formal behavioral specification and runtime enforcement for autonomous AI agents. Agent Behavioral Contracts (ABC)."
+readme = "README.md"
+license = "AGPL-3.0-or-later"
+requires-python = ">=3.12"
+authors = [
+    { name = "Varun Pratap Bhardwaj" },
+]
+keywords = [
+    "ai-agents",
+    "behavioral-contracts",
+    "runtime-enforcement",
+    "drift-detection",
+    "agent-safety",
+    "llm-guardrails",
+    "formal-specification",
+    "design-by-contract",
+    "qualixar",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
+    "Typing :: Typed",
+]
+dependencies = [
+    "pydantic>=2.10,<3",
+]
+
+[project.urls]
+Homepage = "https://agentassert.com"
+Documentation = "https://agentassert.com/docs"
+Repository = "https://github.com/qualixar/agentassert-abc"
+Paper = "https://arxiv.org/abs/2602.22302"
+Issues = "https://github.com/qualixar/agentassert-abc/issues"
+
+[project.optional-dependencies]
+yaml = [
+    "ruamel-yaml>=0.18",
+]
+math = [
+    "scipy>=1.14",
+    "numpy>=2.0",
+    "simpleeval>=1.0,<2",  # Ledger 4c: cap below v2 (breaking API change)
+]
+llm = ["litellm>=1.50"]
+otel = ["opentelemetry-api>=1.28"]
+# The runtime enforcement plane and its adoption surfaces.
+gateway = [
+    "agentassert-abc[yaml,math]",
+]
+proxy = [
+    "agentassert-abc[gateway]",
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.34",
+    "httpx>=0.28",
+    "orjson>=3.10",
+    "click>=8.1",
+]
+sdk = [
+    "agentassert-abc[gateway]",
+]
+claude-code = [
+    "agentassert-abc[gateway]",
+    "click>=8.1",
+]
+# The MCP guard is the framework-neutral surface, so it stays as light as the
+# gateway itself: stdlib argparse, stdlib subprocess, and no dependency on the
+# third-party `mcp` distribution (it relays JSON-RPC, it does not model MCP).
+mcp = [
+    "agentassert-abc[gateway]",
+]
+# The framework-neutral enforcement bridge and its shims. The shims are
+# structurally typed against each framework's hook objects and import nothing at
+# module level, so this extra deliberately pulls in no agent framework — install
+# whichever you already use.
+enforce = [
+    "agentassert-abc[gateway]",
+]
+all = [
+    "agentassert-abc[yaml,math,llm,otel,gateway,proxy,sdk,claude-code,mcp,enforce]",
+]
+
+[project.scripts]
+agentassert-abc-proxy = "agentassert_abc.proxy.cli:cli"
+agentassert-abc-claude-code = "agentassert_abc.claude_code.cli:cli"
+agentassert-abc-mcp-guard = "agentassert_abc.mcp.cli:cli"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agentassert_abc"]
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+    ".backup/",
+    "claim/",
+    "benchmarks/live_benchmark.py",
+    "benchmarks/live_results.json",
+    "*.ots",
+    ".venv/",
+    "venv/",
+    ".claude/",
+    "CLAUDE.md",
+    "AGENTS.md",
+    ".npmignore",
+    ".code-review-graph/",
+    ".gitnexus/",
+    ".env*",
+    "*.log",
+    ".github/workflows/*.bak",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=6.0",
+    "pytest-asyncio>=0.24",
+    "hypothesis>=6.100",
+    "ruff>=0.9",
+    "basedpyright>=1.20",
+    "openai>=2.30.0",
+    "anthropic>=0.89.0",
+    # Type C consolidation — exercise the [proxy]/[sdk]/[claude-code] extras in tests.
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.34",
+    "orjson>=3.10",
+]
+docs = [
+    "mkdocs-material>=9.5",
+    "mkdocstrings[python]>=0.27",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 99
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "SIM", "TCH"]
+
+[tool.basedpyright]
+typeCheckingMode = "standard"
+pythonVersion = "3.12"
+reportUnsupportedDunderAll = false
+reportMissingImports = "warning"
+reportCallIssue = "warning"
+reportPossiblyUnboundVariable = "warning"

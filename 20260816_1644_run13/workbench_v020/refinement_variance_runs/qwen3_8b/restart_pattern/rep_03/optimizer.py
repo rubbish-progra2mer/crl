@@ -1,0 +1,51 @@
+import numpy as np
+from problems import BudgetExhausted
+
+def optimize(f, dim, bounds, budget, seed):
+    np.random.seed(seed)
+    low, high = bounds
+    best_x = np.random.uniform(low, high, dim)
+    best_f = float('inf')
+    evaluations = 0
+
+    def coordinate_search(x, step_size):
+        nonlocal evaluations
+        for i in range(dim):
+            for delta in [-step_size, step_size]:
+                new_x = np.copy(x)
+                new_x[i] += delta
+                if (new_x >= low).all() and (new_x <= high).all():
+                    evaluations += 1
+                    if evaluations >= budget:
+                        raise BudgetExhausted()
+                    f_val = f(new_x)
+                    if f_val < best_f:
+                        best_f = f_val
+                        best_x = new_x
+        return best_x, best_f
+
+    for _ in range(10):  # Max 10 restarts
+        if evaluations >= budget:
+            break
+        x = np.random.uniform(low, high, dim)
+        step_size = 0.1
+        try:
+            x, _ = coordinate_search(x, step_size)
+        except BudgetExhausted:
+            break
+
+        for _ in range(50):  # Max 50 iterations per restart
+            if evaluations >= budget:
+                break
+            step_size *= 0.9
+            try:
+                x, _ = coordinate_search(x, step_size)
+            except BudgetExhausted:
+                break
+
+    return {
+        'x': best_x,
+        'f': best_f,
+        'evaluations': evaluations,
+        'budget': budget
+    }

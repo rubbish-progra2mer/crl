@@ -1,0 +1,59 @@
+{
+  "created_at_utc": "2026-08-16T12:20:43.918160Z",
+  "hypotheses": [
+    {
+      "alternative_explanations": [
+        "不变子类型失败可能只是标签频率与词面模板问题",
+        "从自然语言可靠解析论证图可能比原任务更难",
+        "求解器已可直接双重求解，增量更新只改善效率而非模型能力",
+        "分布外结构可能改变依赖模式，局部传播仍不能泛化"
+      ],
+      "changed_computation": {
+        "baseline": "语言模型从两段完整世界文本直接生成关系类别和四个变化字段，训练时按字段部分给分。",
+        "budget_effect": "增加结构解析与图差分，但减少对无关规则和不变结论的重复推理。",
+        "information_available": "两个规则世界、规则标识、优先级边、原世界证明与攻击图，或其可解析文本表示。",
+        "intervention": "显式分离编辑检测与后果传播，用依赖/攻击图裁剪到可能变化的子图，再做局部重计算。",
+        "timing": "反事实世界到达之后、预测全局变化记录之前。"
+      },
+      "created_at_utc": "2026-08-16T12:21:25.523549Z",
+      "descriptors": {
+        "budget_class": "图解析换取局部重计算",
+        "computation_stage": "成对世界变化记录生成",
+        "evaluation_mode": "求解器验证的同分布与分布外结构字段",
+        "information_source": "规则图、优先级边和证明依赖",
+        "intervention_family": "编辑定位和受影响证明锥",
+        "problem_family": "可执行规范世界的反事实结构更新",
+        "timing_class": "推理时"
+      },
+      "falsifier": "若动态论证或可废止逻辑已经对事实、规则和攻击/优先级更新计算受影响集合或缩减论证框架，并只重算该子图的结论状态，则候选核心算法属于已有增量推理。",
+      "hypothesis_id": "h-v028-edit-localized-proof-cone",
+      "lineage_note": "由NormWorlds-CF不变子类型、精确变化字段和分布外失败触发；论文源包只有TeX、参考文献和图片，没有求解器、数据或训练代码。",
+      "literature_refs": [
+        "arXiv:2607.03957",
+        "IJCAI 2017: Efficient Computation of Extensions for Dynamic Abstract Argumentation Frameworks",
+        "Artificial Intelligence 2022: Incremental computation for structured argumentation over dynamic DeLP knowledge bases",
+        "Artificial Intelligence 1979: A truth maintenance system"
+      ],
+      "mechanism_claim": "先把两个规则世界解析为类型化论证图并提取最小编辑集，再从被增删事实、规则或优先级边出发计算受影响证明锥；只在该锥内重新判定支持、攻击与状态，锥外字段复制为不变，最后生成变化记录。",
+      "minimal_killer_experiment": "在NormWorlds-CF的同分布和结构分布外分割上，对比平面生成、编辑类型辅助、全图双重求解和受影响证明锥更新；报告精确全记录、不变子类型、关系类别、分布外迁移、受影响锥召回与计算成本。",
+      "nearest_prior_risk": "动态抽象论证的缩减框架增量算法、动态DeLP的受影响集合与核心文字、真值维护系统和增量物化已覆盖更新后局部重计算。",
+      "parent_ids": [],
+      "problem": "规范反事实推理模型能判断是否有实质变化，却难以识别不变子类型、精确变化字段和分布外结构，直接生成完整变化记录会把编辑识别与后果传播混在一起。",
+      "revision": 3,
+      "status": "prior_collision",
+      "status_reason": "动态抽象论证已通过缩减论证框架只重算更新影响子图；动态DeLP进一步定义事实与严格/可废止规则增删的受影响集合和核心文字，局部更新结论状态。候选只是把成熟增量推理接到语言模型接口。",
+      "target_failure": {
+        "card_ids": [],
+        "evidence_ids": [],
+        "summary": "NormWorlds-CF（arXiv:2607.03957v2）报告4B模型的精确完整变化记录和不变子类型仍弱；1.7B分布外关系准确率仅0.258，MR-GRPO虽降低错族错误却不提升总体分布外关系。类别重加权和按族优势归一化均未关闭缺口。"
+      },
+      "title": "编辑定位驱动的受影响证明锥更新",
+      "updated_at_utc": "2026-08-16T12:21:25.719458Z"
+    }
+  ],
+  "revision": 3,
+  "run_id": "20260816_1644_run13",
+  "schema_version": 1,
+  "updated_at_utc": "2026-08-16T12:21:25.719458Z",
+  "version": "v028"
+}

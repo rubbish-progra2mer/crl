@@ -1,0 +1,79 @@
+import numpy as np
+from problems import BudgetExhausted
+
+def optimize(f, dim, bounds, budget, seed):
+    np.random.seed(seed)
+    low, high = bounds
+    best_x = np.random.uniform(low, high, dim)
+    best_f = float('inf')
+    evaluations = 0
+
+    def nelder_mead(f, x0, bounds, max_iter=100, tol=1e-8):
+        n = len(x0)
+        centroid = np.zeros(n)
+        reflection = np.zeros(n)
+        expansion = np.zeros(n)
+        contraction = np.zeros(n)
+        shrink = np.zeros(n)
+
+        def reflect(x, centroid):
+            return centroid + np.sign(centroid - x) * (np.max(centroid - x) - np.min(centroid - x))
+
+        def expand(x, reflection):
+            return reflection + np.sign(reflection - x) * (np.max(reflection - x) - np.min(reflection - x))
+
+        def contract(x, reflection):
+            return reflection + np.sign(reflection - x) * (np.max(reflection - x) - np.min(reflection - x)) * 0.5
+
+        def shrink(x):
+            return x + np.sign(x - x0) * (np.max(x - x0) - np.min(x - x0)) * 0.5
+
+        simplex = [x0 + np.random.uniform(-tol, tol, n) for _ in range(n + 1)]
+        for i in range(n + 1):
+            simplex[i] = np.clip(simplex[i], bounds[0], bounds[1])
+
+        for _ in range(max_iter):
+            simplex = sorted(simplex, key=lambda x: f(x))
+            if evaluations >= budget:
+                raise BudgetExhausted
+            if np.max([f(x) for x in simplex]) - np.min([f(x) for x in simplex]) < tol:
+                break
+            centroid = np.mean([simplex[i] for i in range(n)], axis=0)
+            reflection = reflect(simplex[n], centroid)
+            reflection = np.clip(reflection, bounds[0], bounds[1])
+            if f(reflection) < f(simplex[n]):
+                simplex[n] = reflection
+                evaluations += 1
+                continue
+            if f(reflection) < f(simplex[0]):
+                expansion = expand(reflection, centroid)
+                expansion = np.clip(expansion, bounds[0], bounds[1])
+                if f(expansion) < f(reflection):
+                    simplex[n] = expansion
+                else:
+                    simplex[n] = reflection
+            elif f(reflection) > f(simplex[n - 1]):
+                contraction = contract(reflection, centroid)
+                contraction = np.clip(contraction, bounds[0], bounds[1])
+                if f(contraction) < f(simplex[n]):
+                    simplex[n] = contraction
+                else:
+                    shrink = shrink(simplex[n])
+                    for i in range(n + 1):
+                        simplex[i] = shrink(simplex[i])
+        return simplex[0]
+
+    for _ in range(10):
+        if evaluations >= budget:
+            break
+        try:
+            candidate = nelder_mead(f, best_x, bounds, max_iter=100)
+            candidate_f = f(candidate)
+            evaluations += 1
+            if candidate_f < best_f:
+                best_f = candidate_f
+                best_x = candidate
+        except BudgetExhausted:
+            break
+
+    return {'x': best_x, 'f': best_f, 'evaluations': evaluations}

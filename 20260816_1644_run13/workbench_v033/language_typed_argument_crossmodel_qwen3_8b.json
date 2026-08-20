@@ -1,0 +1,322 @@
+{
+  "model": "qwen3:8b",
+  "temperature": 0,
+  "seed": 7,
+  "witness_ids": [
+    "de_es",
+    "es_it",
+    "zh_fr",
+    "zh_it"
+  ],
+  "summary": {
+    "baseline": {
+      "n": 4,
+      "parse_ok": 3,
+      "recipient_ok": 2,
+      "priority_ok": 3,
+      "body_ok": 1,
+      "all_ok": 1,
+      "prompt_tokens": 720,
+      "output_tokens": 1774,
+      "elapsed_seconds": 36.4986531999748
+    },
+    "whole_refine": {
+      "n": 4,
+      "parse_ok": 3,
+      "recipient_ok": 2,
+      "priority_ok": 3,
+      "body_ok": 2,
+      "all_ok": 2,
+      "prompt_tokens": 1157,
+      "output_tokens": 3554,
+      "elapsed_seconds": 65.25680819997797
+    },
+    "field_render": {
+      "n": 4,
+      "parse_ok": 3,
+      "recipient_ok": 2,
+      "priority_ok": 3,
+      "body_ok": 2,
+      "all_ok": 2,
+      "prompt_tokens": 984,
+      "output_tokens": 3210,
+      "elapsed_seconds": 59.81423799996264
+    }
+  },
+  "rows": [
+    {
+      "task_id": "zh_fr",
+      "target_language": "French",
+      "baseline": {
+        "arguments": {
+          "priority": "high",
+          "recipient_id": "Mélanie",
+          "body": "会议改到下午三点"
+        },
+        "score": {
+          "parse_ok": true,
+          "recipient_ok": true,
+          "priority_ok": true,
+          "body_ok": false,
+          "keyword_hits": [
+            false,
+            false
+          ],
+          "all_ok": false
+        },
+        "usage": {
+          "prompt_tokens": 179,
+          "output_tokens": 255,
+          "elapsed_seconds": 11.36450799999875
+        }
+      },
+      "whole_refine": {
+        "arguments": {
+          "priority": "high",
+          "recipient_id": "Mélanie",
+          "body": "La réunion est déplacée à 15h"
+        },
+        "score": {
+          "parse_ok": true,
+          "recipient_ok": true,
+          "priority_ok": true,
+          "body_ok": true,
+          "keyword_hits": [
+            true,
+            true
+          ],
+          "all_ok": true
+        },
+        "usage": {
+          "prompt_tokens": 322,
+          "output_tokens": 815,
+          "elapsed_seconds": 20.10847749999084
+        }
+      },
+      "field_render": {
+        "arguments": {
+          "priority": "high",
+          "recipient_id": "Mélanie",
+          "body": "La réunion a été déplacée à 15 heures"
+        },
+        "score": {
+          "parse_ok": true,
+          "recipient_ok": true,
+          "priority_ok": true,
+          "body_ok": true,
+          "keyword_hits": [
+            true,
+            true
+          ],
+          "all_ok": true
+        },
+        "usage": {
+          "prompt_tokens": 264,
+          "output_tokens": 772,
+          "elapsed_seconds": 19.490004099992802
+        }
+      }
+    },
+    {
+      "task_id": "es_it",
+      "target_language": "Italian",
+      "baseline": {
+        "arguments": null,
+        "score": {
+          "parse_ok": false,
+          "recipient_ok": false,
+          "priority_ok": false,
+          "body_ok": false,
+          "all_ok": false
+        },
+        "usage": {
+          "prompt_tokens": 183,
+          "output_tokens": 1024,
+          "elapsed_seconds": 16.664993399986997
+        }
+      },
+      "whole_refine": {
+        "arguments": null,
+        "score": {
+          "parse_ok": false,
+          "recipient_ok": false,
+          "priority_ok": false,
+          "body_ok": false,
+          "all_ok": false
+        },
+        "usage": {
+          "prompt_tokens": 183,
+          "output_tokens": 1024,
+          "elapsed_seconds": 16.664993399986997
+        },
+        "note": "baseline tool call missing"
+      },
+      "field_render": {
+        "arguments": null,
+        "score": {
+          "parse_ok": false,
+          "recipient_ok": false,
+          "priority_ok": false,
+          "body_ok": false,
+          "all_ok": false
+        },
+        "usage": {
+          "prompt_tokens": 183,
+          "output_tokens": 1024,
+          "elapsed_seconds": 16.664993399986997
+        },
+        "note": "baseline tool call missing"
+      }
+    },
+    {
+      "task_id": "de_es",
+      "target_language": "Spanish",
+      "baseline": {
+        "arguments": {
+          "recipient_id": "Andrés-9",
+          "body": "La cita es mañana a las nueve.",
+          "priority": "high"
+        },
+        "score": {
+          "parse_ok": true,
+          "recipient_ok": true,
+          "priority_ok": true,
+          "body_ok": true,
+          "keyword_hits": [
+            true,
+            true,
+            true
+          ],
+          "all_ok": true
+        },
+        "usage": {
+          "prompt_tokens": 180,
+          "output_tokens": 204,
+          "elapsed_seconds": 3.5658700999920256
+        }
+      },
+      "whole_refine": {
+        "arguments": {
+          "recipient_id": "Andrés-9",
+          "body": "La cita es mañana a las nueve.",
+          "priority": "high"
+        },
+        "score": {
+          "parse_ok": true,
+          "recipient_ok": true,
+          "priority_ok": true,
+          "body_ok": true,
+          "keyword_hits": [
+            true,
+            true,
+            true
+          ],
+          "all_ok": true
+        },
+        "usage": {
+          "prompt_tokens": 327,
+          "output_tokens": 697,
+          "elapsed_seconds": 11.719487099995604
+        }
+      },
+      "field_render": {
+        "arguments": {
+          "recipient_id": "Andrés-9",
+          "body": "La cita es mañana a las nueve.",
+          "priority": "high"
+        },
+        "score": {
+          "parse_ok": true,
+          "recipient_ok": true,
+          "priority_ok": true,
+          "body_ok": true,
+          "keyword_hits": [
+            true,
+            true,
+            true
+          ],
+          "all_ok": true
+        },
+        "usage": {
+          "prompt_tokens": 270,
+          "output_tokens": 657,
+          "elapsed_seconds": 11.03515549999429
+        }
+      }
+    },
+    {
+      "task_id": "zh_it",
+      "target_language": "Italian",
+      "baseline": {
+        "arguments": {
+          "recipient_id": "Gulia-六",
+          "body": "i documenti sono pronti per la firma",
+          "priority": "normal"
+        },
+        "score": {
+          "parse_ok": true,
+          "recipient_ok": false,
+          "priority_ok": true,
+          "body_ok": false,
+          "keyword_hits": [
+            false,
+            true
+          ],
+          "all_ok": false
+        },
+        "usage": {
+          "prompt_tokens": 178,
+          "output_tokens": 291,
+          "elapsed_seconds": 4.903281699997024
+        }
+      },
+      "whole_refine": {
+        "arguments": {
+          "recipient_id": "Gulia-六",
+          "body": "i documenti sono pronti per la firma",
+          "priority": "normal"
+        },
+        "score": {
+          "parse_ok": true,
+          "recipient_ok": false,
+          "priority_ok": true,
+          "body_ok": false,
+          "keyword_hits": [
+            false,
+            true
+          ],
+          "all_ok": false
+        },
+        "usage": {
+          "prompt_tokens": 325,
+          "output_tokens": 1018,
+          "elapsed_seconds": 16.763850200004526
+        }
+      },
+      "field_render": {
+        "arguments": {
+          "recipient_id": "Gulia-六",
+          "body": "i documenti sono pronti per la firma",
+          "priority": "normal"
+        },
+        "score": {
+          "parse_ok": true,
+          "recipient_ok": false,
+          "priority_ok": true,
+          "body_ok": false,
+          "keyword_hits": [
+            false,
+            true
+          ],
+          "all_ok": false
+        },
+        "usage": {
+          "prompt_tokens": 267,
+          "output_tokens": 757,
+          "elapsed_seconds": 12.624084999988554
+        }
+      }
+    }
+  ],
+  "scope_note": "Four hard witnesses selected before the cross-model run from the qwen2.5:7b control experiment."
+}

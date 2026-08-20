@@ -1,0 +1,1092 @@
+{
+  "schema_version": 1,
+  "experiment": "source-compiled-decision-witness",
+  "model": "qwen3:4b",
+  "seed": 20260816,
+  "temperature": 0,
+  "corpus_path": "D:\\Desktop\\crl\\20260816_1644_run13\\workbench_v025\\polaritycheck\\corpus\\heldout_drift_corpus.json",
+  "created_at_utc": "2026-08-16T12:01:33.118313Z",
+  "rows": [
+    {
+      "id": "HO-neg-01",
+      "mutation_class": "negation_flip",
+      "gold": "DIFFERENT",
+      "compiler": {
+        "ok": true,
+        "parsed": {
+          "witnesses": [
+            {
+              "id": "w1",
+              "scenario": "A participant reports chest tightness during a study drug administration",
+              "question": "Should the study drug be withheld from this participant?",
+              "options": [
+                "Withhold the study drug",
+                "Continue administering the study drug",
+                "Contact the study team for further assessment",
+                "Document the report and proceed"
+              ],
+              "expected_index": 0,
+              "facet": "modality"
+            },
+            {
+              "id": "w2",
+              ": ": "scenario",
+              "question": "Should the study drug be withheld from a participant who reports chest tightness but has no other symptoms?",
+              "options": [
+                "Withhold the study drug",
+                "Continue administering the study drug",
+                "Contact the study team for further assessment",
+                "Document the report and proceed"
+              ],
+              "expected_index": 0,
+              "facet": "modality"
+            },
+            {
+              "id": "w3",
+              "scenario": "A participant reports chest tightness after the study drug has been administered",
+              "question": "Should the study drug be withheld from this participant?",
+              "options": [
+                "Withhold the study drug",
+                "Continue administering the study drug",
+                "Contact the study team for further assessment",
+                "Document the report and proceed"
+              ],
+              "expected_index": 0,
+              "facet": "timing"
+            },
+            {
+              "id": "w4",
+              "scenario": "A participant reports chest tightness but is in the placebo group",
+              "question": "Should the study drug be withheld from this participant?",
+              "options": [
+                "Withhold the study drug",
+                "Continue administering the study drug",
+                "Contact the study team for further assessment",
+                "Document the report and proceed"
+              ],
+              "expected_index": 0,
+              "facet": "scope"
+            }
+          ]
+        },
+        "raw": "{\n  \"witnesses\": [\n    {\n      \"id\": \"w1\",\n      \"scenario\": \"A participant reports chest tightness during a study drug administration\",\n      \"question\": \"Should the study drug be withheld from this participant?\",\n      \"options\": [\n        \"Withhold the study drug\",\n        \"Continue administering the study drug\",\n        \"Contact the study team for further assessment\",\n        \"Document the report and proceed\"\n      ],\n      \"expected_index\": 0,\n      \"facet\": \"modality\"\n    },\n    {\n      \"id\": \"w2\",\n     \": \":\n      \"scenario\",\n      \"question\": \"Should the study drug be withheld from a participant who reports chest tightness but has no other symptoms?\",\n      \"options\": [\n        \"Withhold the study drug\",\n        \"Continue administering the study drug\",\n        \"Contact the study team for further assessment\",\n        \"Document the report and proceed\"\n      ],\n      \"expected_index\": 0,\n      \"facet\": \"modality\"\n    },\n    {\n      \"id\": \"w3\",\n      \"scenario\": \"A participant reports chest tightness after the study drug has been administered\",\n      \"question\": \"Should the study drug be withheld from this participant?\",\n      \"options\": [\n        \"Withhold the study drug\",\n        \"Continue administering the study drug\",\n        \"Contact the study team for further assessment\",\n        \"Document the report and proceed\"\n      ],\n      \"expected_index\": 0,\n      \"facet\": \"timing\"\n    },\n    {\n      \"id\": \"w4\",\n      \"scenario\": \"A participant reports chest tightness but is in the placebo group\",\n      \"question\": \"Should the study drug be withheld from this participant?\",\n      \"options\": [\n        \"Withhold the study drug\",\n        \"Continue administering the study drug\",\n        \"Contact the study team for further assessment\",\n        \"Document the report and proceed\"\n      ],\n      \"expected_index\": 0,\n      \"facet\": \"scope\"\n    }\n  ]\n}",
+        "wall_seconds": 3.7887,
+        "prompt_eval_count": 232,
+        "eval_count": 418,
+        "total_duration_ns": 3784343600
+      },
+      "compiler_validation_errors": [
+        "witness_1_bad_scenario",
+        "not_all_witnesses_valid"
+      ],
+      "validated_witnesses": [],
+      "root_execution": null,
+      "candidate_execution": null,
+      "direct_pair_judge": {
+        "ok": true,
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "The reference policy requires withholding the study drug for chest tightness reports, while the candidate policy requires administering the drug for the same condition. This is a direct contradiction in action (withhold vs. administer) for the same condition."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"The reference policy requires withholding the study drug for chest tightness reports, while the candidate policy requires administering the drug for the same condition. This is a direct contradiction in action (withhold vs. administer) for the same condition.\"\n}",
+        "wall_seconds": 0.8019,
+        "prompt_eval_count": 137,
+        "eval_count": 63,
+        "total_duration_ns": 801267100
+      }
+    },
+    {
+      "id": "HO-neg-02",
+      "mutation_class": "negation_flip",
+      "gold": "DIFFERENT",
+      "compiler": {
+        "ok": true,
+        "parsed": {
+          "witnesses": [
+            {
+              "id": "w1",
+              "scenario": "Aircraft with pending borescope inspection is being towed to the maintenance hangar",
+              "question": "Should the aircraft be towed back to the flight line?",
+              "options": [
+                "Yes",
+                "No",
+                "Tow to maintenance hangar",
+                "Tow to flight line"
+              ],
+              "expected_index": 1,
+              "facet": "condition"
+            },
+            {
+              "id": "w2",
+              "scenario": "Aircraft with completed borescope inspection is being towed to the flight line",
+              "question": "Is the borescope inspection pending?",
+              "options": [
+                "Yes",
+                "No",
+                "Pending",
+                "Completed"
+              ],
+              "expected_index": 1,
+              "facet": "condition"
+            },
+            {
+              "id": "w3",
+              "scenario": "Aircraft with pending borescope inspection is being towed to the flight line",
+              "question": "Should the aircraft be towed back to the flight line?",
+              "options": [
+                "Yes",
+                "No",
+                "Tow to maintenance hangar",
+                "Tow to flight line"
+              ],
+              "expected_index": 0,
+              "facet": "condition"
+            },
+            {
+              "id": "w4",
+              ": ": "scenario",
+              "question": "Should the aircraft be towed back to the flight line?",
+              "options": [
+                "Yes",
+                "No",
+                "Tow to maintenance hang",
+                "Tow to flight line"
+              ],
+              "expected_index": 1,
+              "facet": "condition"
+            }
+          ]
+        },
+        "raw": "{\n  \"witnesses\": [\n    {\n      \"id\": \"w1\",\n      \"scenario\": \"Aircraft with pending borescope inspection is being towed to the maintenance hangar\",\n      \"question\": \"Should the aircraft be towed back to the flight line?\",\n      \"options\": [\n        \"Yes\",\n        \"No\",\n        \"Tow to maintenance hangar\",\n        \"Tow to flight line\"\n      ],\n      \"expected_index\": 1,\n      \"facet\": \"condition\"\n    },\n    {\n      \"id\": \"w2\",\n      \"scenario\": \"Aircraft with completed borescope inspection is being towed to the flight line\",\n      \"question\": \"Is the borescope inspection pending?\",\n      \"options\": [\n        \"Yes\",\n        \"No\",\n        \"Pending\",\n        \"Completed\"\n      ],\n      \"expected_index\": 1,\n      \"facet\": \"condition\"\n    },\n    {\n      \"id\": \"w3\",\n      \"scenario\": \"Aircraft with pending borescope inspection is being towed to the flight line\",\n      \"question\": \"Should the aircraft be towed back to the flight line?\",\n      \"options\": [\n        \"Yes\",\n        \"No\",\n        \"Tow to maintenance hangar\",\n        \"Tow to flight line\"\n      ],\n      \"expected_index\": 0,\n      \"facet\": \"condition\"\n    },\n    {\n      \"id\": \"w4\",\n     \": \":\n      \"scenario\",\n      \"question\": \"Should the aircraft be towed back to the flight line?\",\n      \"options\": [\n        \"Yes\",\n        \"No\",\n        \"Tow to maintenance hang\",\n        \"Tow to flight line\"\n      ],\n      \"expected_index\": 1,\n      \"facet\": \"condition\"\n    }\n  ]\n}",
+        "wall_seconds": 3.442,
+        "prompt_eval_count": 240,
+        "eval_count": 377,
+        "total_duration_ns": 3423718100
+      },
+      "compiler_validation_errors": [
+        "witness_3_bad_scenario",
+        "not_all_witnesses_valid"
+      ],
+      "validated_witnesses": [],
+      "root_execution": null,
+      "candidate_execution": null,
+      "direct_pair_judge": {
+        "ok": true,
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "Reference policy prohibits towing while borescope inspection is pending; candidate policy explicitly states towing is allowed during the same period."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"Reference policy prohibits towing while borescope inspection is pending; candidate policy explicitly states towing is allowed during the same period.\"\n}",
+        "wall_seconds": 0.659,
+        "prompt_eval_count": 149,
+        "eval_count": 41,
+        "total_duration_ns": 638208100
+      }
+    },
+    {
+      "id": "HO-neg-03",
+      "mutation_class": "negation_flip",
+      "gold": "DIFFERENT",
+      "compiler": {
+        "ok": true,
+        "parsed": {
+          "witnesses": [
+            {
+              "id": "w1",
+              "scenario": "A lawyer sends a reply to opposing counsel after completing the case ledger for the current matter",
+              "question": "Should the internal case ledger be attached to the reply to opposing counsel?",
+              "options": [
+                "Yes",
+                "No"
+              ],
+              "expected_index": 1,
+              "facet": "modality"
+            },
+            {
+              "id": "w2",
+              "scenario": "A lawyer sends a reply to opposing counsel before completing the case ledger for the current matter",
+              "question": "Should the internal case ledger be attached to the reply to opposing counsel?",
+              "options": [
+                "Yes",
+                "No"
+              ],
+              "expected_index": 0,
+              "facet": "modality"
+            },
+            {
+              "id": "w3",
+              "scenario": "A lawyer sends a reply to opposing counsel after completing the case ledger for the current matter, but the case ledger is missing from the email",
+              "question": "Is the internal case ledger attached to the reply to opposing counsel?",
+              "options": [
+                "Yes",
+                "No"
+              ],
+              "expected_index": 1,
+              "facet": "modality"
+            },
+            {
+              "id": "w4",
+              "scenario": "A lawyer sends a reply to opposing counsel after completing the case ledger for the current matter, but the case ledger is attached as a PDF file",
+              "question": "Is the internal case ledger attached to the reply to opposing counsel?",
+              "options": [
+                "Yes",
+                "No"
+              ],
+              "expected_index": 0,
+              "facet": "modality"
+            }
+          ]
+        },
+        "raw": "{\n  \"witnesses\": [\n    {\n      \"id\": \"w1\",\n      \"scenario\": \"A lawyer sends a reply to opposing counsel after completing the case ledger for the current matter\",\n      \"question\": \"Should the internal case ledger be attached to the reply to opposing counsel?\",\n      \"options\": [\n        \"Yes\",\n        \"No\"\n      ],\n      \"expected_index\": 1,\n      \"facet\": \"modality\"\n    },\n    {\n      \"id\": \"w2\",\n      \"scenario\": \"A lawyer sends a reply to opposing counsel before completing the case ledger for the current matter\",\n      \"question\": \"Should the internal case ledger be attached to the reply to opposing counsel?\",\n      \"options\": [\n        \"Yes\",\n        \"No\"\n      ],\n      \"expected_index\": 0,\n      \"facet\": \"modality\"\n    },\n    {\n      \"id\": \"w3\",\n      \"scenario\": \"A lawyer sends a reply to opposing counsel after completing the case ledger for the current matter, but the case ledger is missing from the email\",\n      \"question\": \"Is the internal case ledger attached to the reply to opposing counsel?\",\n      \"options\": [\n        \"Yes\",\n        \"No\"\n      ],\n      \"expected_index\": 1,\n      \"facet\": \"modality\"\n    },\n    {\n      \"id\": \"w4\",\n      \"scenario\": \"A lawyer sends a reply to opposing counsel after completing the case ledger for the current matter, but the case ledger is attached as a PDF file\",\n      \"question\": \"Is the internal case ledger attached to the reply to opposing counsel?\",\n      \"options\": [\n        \"Yes\",\n        \"No\"\n      ],\n      \"expected_index\": 0,\n      \"facet\": \"modality\"\n    }\n  ]\n}",
+        "wall_seconds": 3.2836,
+        "prompt_eval_count": 232,
+        "eval_count": 371,
+        "total_duration_ns": 3265916200
+      },
+      "compiler_validation_errors": [],
+      "validated_witnesses": [
+        {
+          "id": "w1",
+          "scenario": "A lawyer sends a reply to opposing counsel after completing the case ledger for the current matter",
+          "question": "Should the internal case ledger be attached to the reply to opposing counsel?",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "expected_index": 1,
+          "facet": "modality"
+        },
+        {
+          "id": "w2",
+          "scenario": "A lawyer sends a reply to opposing counsel before completing the case ledger for the current matter",
+          "question": "Should the internal case ledger be attached to the reply to opposing counsel?",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "expected_index": 0,
+          "facet": "modality"
+        },
+        {
+          "id": "w3",
+          "scenario": "A lawyer sends a reply to opposing counsel after completing the case ledger for the current matter, but the case ledger is missing from the email",
+          "question": "Is the internal case ledger attached to the reply to opposing counsel?",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "expected_index": 1,
+          "facet": "modality"
+        },
+        {
+          "id": "w4",
+          "scenario": "A lawyer sends a reply to opposing counsel after completing the case ledger for the current matter, but the case ledger is attached as a PDF file",
+          "question": "Is the internal case ledger attached to the reply to opposing counsel?",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "expected_index": 0,
+          "facet": "modality"
+        }
+      ],
+      "root_execution": {
+        "ok": true,
+        "parsed": {
+          "choices": [
+            {
+              "id": "w1",
+              "option_index": 0
+            },
+            {
+              "id": "w2",
+              ": 1  // This is a mistake in the JSON structure, but I'll fix it later. For now, I'll focus on the logic. The policy says ": ", so for w2, the scenario is sending before completing the ledger, so the answer should be "
+            },
+            {
+              "id": "w3",
+              "option_index": 1
+            },
+            {
+              "id": "w4",
+              "option_index": 0
+            }
+          ]
+        },
+        "raw": "{\n  \"choices\": [\n    {\n      \"id\": \"w1\",\n      \"option_index\": 0\n    },\n    {\n      \"id\": \"w2\",\n     \": 1  // This is a mistake in the JSON structure, but I'll fix it later. For now, I'll focus on the logic. The policy says \":\", so for w2, the scenario is sending before completing the ledger, so the answer should be \"\n    },\n    {\n      \"id\": \"w3\",\n      \"option_index\": 1\n    },\n    {\n      \"id\": \"w4\",\n      \"option_index\": 0\n    }\n  ]\n}",
+        "wall_seconds": 1.5955,
+        "prompt_eval_count": 354,
+        "eval_count": 140,
+        "total_duration_ns": 1594372200
+      },
+      "candidate_execution": {
+        "ok": true,
+        "parsed": {
+          "choices": [
+            {
+              "id": "w1",
+              "option_index": 0
+            },
+            {
+              "id": "w2",
+              ": 1  // This is a mistake in the JSON structure, but I'll fix it later. For now, I'll focus on the logic. The policy says ": ", so for w2, the scenario is sending before completing the ledger, so the answer should be "
+            },
+            {
+              "id": "w3",
+              "option_index": 1
+            },
+            {
+              "id": "w4",
+              "option_index": 0
+            }
+          ]
+        },
+        "raw": "{\n  \"choices\": [\n    {\n      \"id\": \"w1\",\n      \"option_index\": 0\n    },\n    {\n      \"id\": \"w2\",\n     \": 1  // This is a mistake in the JSON structure, but I'll fix it later. For now, I'll focus on the logic. The policy says \":\", so for w2, the scenario is sending before completing the ledger, so the answer should be \"\n    },\n    {\n      \"id\": \"w3\",\n      \"option_index\": 1\n    },\n    {\n      \"id\": \"w4\",\n      \"option_index\": 0\n    }\n  ]\n}",
+        "wall_seconds": 1.6053,
+        "prompt_eval_count": 354,
+        "eval_count": 140,
+        "total_duration_ns": 1587793000
+      },
+      "direct_pair_judge": {
+        "ok": true,
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "The reference policy states that replies to opposing counsel go out without the internal case ledger attached, while the candidate policy states that they go out with the internal case ledger attached. This directly contradicts the required action regarding the attachment of the internal case ledger."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"The reference policy states that replies to opposing counsel go out without the internal case ledger attached, while the candidate policy states that they go out with the internal case ledger attached. This directly contradicts the required action regarding the attachment of the internal case ledger.\"\n}",
+        "wall_seconds": 0.8591,
+        "prompt_eval_count": 137,
+        "eval_count": 67,
+        "total_duration_ns": 856418900
+      }
+    },
+    {
+      "id": "HO-neg-04",
+      "mutation_class": "negation_flip",
+      "gold": "DIFFERENT",
+      "compiler": {
+        "ok": true,
+        "parsed": {
+          "witnesses": [
+            {
+              "id": "w1",
+              "scenario": "A long-stay suite has the privacy sign displayed, and the housekeeping staff is scheduled to perform a wellness check",
+              "question": "Should housekeeping perform the wellness check?",
+              "options": [
+                "Yes",
+                "No"
+              ],
+              "expected_index": 0,
+              "facet": "modality"
+            },
+            {
+              "id": "w2",
+              "scenario": "A long-stay suite does not have the privacy sign displayed, and the housekeeping staff is scheduled to perform a wellness check",
+              "question": "Should housekeeping perform the wellness check?",
+              "options": [
+                "Yes",
+                "No"
+              ],
+              "expected_index": 0,
+              "facet": "modality"
+            },
+            {
+              "id": "w3",
+              "scenario": "A long-stay suite has the privacy sign displayed, and the housekeeping staff is not scheduled to perform a wellness check",
+              "question": "Should housekeeping perform the wellness check?",
+              "options": [
+                "Yes",
+                "No"
+              ],
+              "expected_index": 0,
+              "facet": "modality"
+            },
+            {
+              "id": "w4",
+              "scenario": "A long-stay suite does not have the privacy sign displayed, and the housekeeping staff is not scheduled to perform a wellness check",
+              "question": "Should housekeeping perform the wellness check?",
+              "options": [
+                "Yes",
+                "No"
+              ],
+              "expected_index": 0,
+              "facet": "modality"
+            }
+          ]
+        },
+        "raw": "{\n  \"witnesses\": [\n    {\n      \"id\": \"w1\",\n      \"scenario\": \"A long-stay suite has the privacy sign displayed, and the housekeeping staff is scheduled to perform a wellness check\",\n      \"question\": \"Should housekeeping perform the wellness check?\",\n      \"options\": [\n        \"Yes\",\n        \"No\"\n      ],\n      \"expected_index\": 0,\n      \"facet\": \"modality\"\n    },\n    {\n      \"id\": \"w2\",\n      \"scenario\": \"A long-stay suite does not have the privacy sign displayed, and the housekeeping staff is scheduled to perform a wellness check\",\n      \"question\": \"Should housekeeping perform the wellness check?\",\n      \"options\": [\n        \"Yes\",\n        \"No\"\n      ],\n      \"expected_index\": 0,\n      \"facet\": \"modality\"\n    },\n    {\n      \"id\": \"w3\",\n      \"scenario\": \"A long-stay suite has the privacy sign displayed, and the housekeeping staff is not scheduled to perform a wellness check\",\n      \"question\": \"Should housekeeping perform the wellness check?\",\n      \"options\": [\n        \"Yes\",\n        \"No\"\n      ],\n      \"expected_index\": 0,\n      \"facet\": \"modality\"\n    },\n    {\n      \"id\": \"w4\",\n      \"scenario\": \"A long-stay suite does not have the privacy sign displayed, and the housekeeping staff is not scheduled to perform a wellness check\",\n      \"question\": \"Should housekeeping perform the wellness check?\",\n      \"options\": [\n        \"Yes\",\n        \"No\"\n      ],\n      \"expected_index\": 0,\n      \"facet\": \"modality\"\n    }\n  ]\n}",
+        "wall_seconds": 3.1541,
+        "prompt_eval_count": 238,
+        "eval_count": 358,
+        "total_duration_ns": 3153337200
+      },
+      "compiler_validation_errors": [],
+      "validated_witnesses": [
+        {
+          "id": "w1",
+          "scenario": "A long-stay suite has the privacy sign displayed, and the housekeeping staff is scheduled to perform a wellness check",
+          "question": "Should housekeeping perform the wellness check?",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "expected_index": 0,
+          "facet": "modality"
+        },
+        {
+          "id": "w2",
+          "scenario": "A long-stay suite does not have the privacy sign displayed, and the housekeeping staff is scheduled to perform a wellness check",
+          "question": "Should housekeeping perform the wellness check?",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "expected_index": 0,
+          "facet": "modality"
+        },
+        {
+          "id": "w3",
+          "scenario": "A long-stay suite has the privacy sign displayed, and the housekeeping staff is not scheduled to perform a wellness check",
+          "question": "Should housekeeping perform the wellness check?",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "expected_index": 0,
+          "facet": "modality"
+        },
+        {
+          "id": "w4",
+          "scenario": "A long-stay suite does not have the privacy sign displayed, and the housekeeping staff is not scheduled to perform a wellness check",
+          "question": "Should housekeeping perform the wellness check?",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "expected_index": 0,
+          "facet": "modality"
+        }
+      ],
+      "root_execution": {
+        "ok": true,
+        "parsed": {
+          "choices": [
+            {
+              "id": "w1",
+              "option_index": 0
+            },
+            {
+              "id": "w2",
+              "option_index": 0
+            },
+            {
+              "id": "w3",
+              "option_index": 1
+            },
+            {
+              "id": "w4",
+              "option_index": 1
+            }
+          ]
+        },
+        "raw": "{\n  \"choices\": [\n    {\n      \"id\": \"w1\",\n      \"option_index\": 0\n    },\n    {\n      \"id\": \"w2\",\n      \"option_index\": 0\n    },\n    {\n      \"id\": \"w3\",\n      \"option_index\": 1\n    },\n    {\n      \"id\": \"w4\",\n      \"option_index\": 1\n    }\n  ]\n}",
+        "wall_seconds": 1.0967,
+        "prompt_eval_count": 347,
+        "eval_count": 90,
+        "total_duration_ns": 1095640100
+      },
+      "candidate_execution": {
+        "ok": true,
+        "parsed": {
+          "choices": [
+            {
+              "id": "w1",
+              "option_index": 0
+            },
+            {
+              "id": "w2",
+              "option_index": 1
+            },
+            {
+              "id": "w3",
+              "option_index": 1
+            },
+            {
+              "id": "w4",
+              "option_index": 1
+            }
+          ]
+        },
+        "raw": "{\n  \"choices\": [\n    {\n      \"id\": \"w1\",\n      \"option_index\": 0\n    },\n    {\n      \"id\": \"w2\",\n      \"option_index\": 1\n    },\n    {\n      \"id\": \"w3\",\n      \"option_index\": 1\n    },\n    {\n      \"id\": \"w4\",\n      \"option_index\": 1\n    }\n  ]\n}",
+        "wall_seconds": 1.0386,
+        "prompt_eval_count": 341,
+        "eval_count": 90,
+        "total_duration_ns": 1037325000
+      },
+      "direct_pair_judge": {
+        "ok": true,
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "Reference policy states housekeeping performs wellness check even when privacy sign is displayed, while candidate policy states housekeeping skips long-stay suites whenever privacy sign is displayed. The actions (perform vs skip) and conditions (privacy sign displayed) are directly contradictory."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"Reference policy states housekeeping performs wellness check even when privacy sign is displayed, while candidate policy states housekeeping skips long-stay suites whenever privacy sign is displayed. The actions (perform vs skip) and conditions (privacy sign displayed) are directly contradictory.\"\n}",
+        "wall_seconds": 0.8505,
+        "prompt_eval_count": 143,
+        "eval_count": 67,
+        "total_duration_ns": 830032600
+      }
+    },
+    {
+      "id": "HO-neg-05",
+      "mutation_class": "negation_flip",
+      "gold": "DIFFERENT",
+      "compiler": {
+        "ok": true,
+        "parsed": {
+          "witnesses": [
+            {
+              "id": "w1",
+              "scenario": "The substation's remote telemetry link is currently powered off during a storm season period.",
+              "question": "Should the substation's remote telemetry link be powered on?",
+              "options": [
+                "Power on the link",
+                "Leave it powered off",
+                "Power it on with a backup battery",
+                "Power it on via a temporary connection"
+              ],
+              "expected_index": 0,
+              "facet": "modality"
+            },
+            {
+              "id": "w2",
+              "scenario": "The substation's remote telemetry link is powered on but the storm season has ended.",
+              "question": "Should the substation's remote telemetry link be powered off?",
+              "options": [
+                "Power off the link",
+                "Leave it powered on",
+                "Power it off with a backup battery",
+                "Power it off via a temporary connection"
+              ],
+              "expected_index": 1,
+              "facet": "timing"
+            },
+            {
+              "id": "w3",
+              "scenario": "The substation's remote telemetry link is powered on during a non-storm season period.",
+              "question": "Should the substation's remote: remote telemetry link be powered off?",
+              "options": [
+                "Power off the link",
+                "Leave it powered on",
+                "Power it off with a backup battery",
+                "Power it off via a temporary connection"
+              ],
+              "expected_index": 1,
+              "facet": "scope"
+            },
+            {
+              "id": "w4",
+              "scenario": "The substation's remote telemetry link is powered on during a storm season period but the storm has been declared over by the National Weather Service.",
+              "question": "Should the substation's remote telemetry link be powered off?",
+              "options": [
+                "Power off the link",
+                "Leave it powered on",
+                "Power it off with a backup battery",
+                "Power it off via a temporary connection"
+              ],
+              "expected_index": 1,
+              "facet": "exception"
+            }
+          ]
+        },
+        "raw": "{\n  \"witnesses\": [\n    {\n      \"id\": \"w1\",\n      \"scenario\": \"The substation's remote telemetry link is currently powered off during a storm season period.\",\n      \"question\": \"Should the substation's remote telemetry link be powered on?\",\n      \"options\": [\n        \"Power on the link\",\n        \"Leave it powered off\",\n        \"Power it on with a backup battery\",\n        \"Power it on via a temporary connection\"\n      ],\n      \"expected_index\": 0,\n      \"facet\": \"modality\"\n    },\n    {\n      \"id\": \"w2\",\n      \"scenario\": \"The substation's remote telemetry link is powered on but the storm season has ended.\",\n      \"question\": \"Should the substation's remote telemetry link be powered off?\",\n      \"options\": [\n        \"Power off the link\",\n        \"Leave it powered on\",\n        \"Power it off with a backup battery\",\n        \"Power it off via a temporary connection\"\n      ],\n      \"expected_index\": 1,\n      \"facet\": \"timing\"\n    },\n    {\n      \"id\": \"w3\",\n      \"scenario\": \"The substation's remote telemetry link is powered on during a non-storm season period.\",\n      \"question\": \"Should the substation's remote: remote telemetry link be powered off?\",\n      \"options\": [\n        \"Power off the link\",\n        \"Leave it powered on\",\n        \"Power it off with a backup battery\",\n        \"Power it off via a temporary connection\"\n      ],\n      \"expected_index\": 1,\n      \"facet\": \"scope\"\n    },\n    {\n      \"id\": \"w4\",\n      \"scenario\": \"The substation's remote telemetry link is powered on during a storm season period but the storm has been declared over by the National Weather Service.\",\n      \"question\": \"Should the substation's remote telemetry link be powered off?\",\n      \"options\": [\n        \"Power off the link\",\n        \"Leave it powered on\",\n        \"Power it off with a backup battery\",\n        \"Power it off via a temporary connection\"\n      ],\n      \"expected_index\": 1,\n      \"facet\": \"exception\"\n    }\n  ]\n}",
+        "wall_seconds": 3.9694,
+        "prompt_eval_count": 232,
+        "eval_count": 455,
+        "total_duration_ns": 3949468400
+      },
+      "compiler_validation_errors": [],
+      "validated_witnesses": [
+        {
+          "id": "w1",
+          "scenario": "The substation's remote telemetry link is currently powered off during a storm season period.",
+          "question": "Should the substation's remote telemetry link be powered on?",
+          "options": [
+            "Power on the link",
+            "Leave it powered off",
+            "Power it on with a backup battery",
+            "Power it on via a temporary connection"
+          ],
+          "expected_index": 0,
+          "facet": "modality"
+        },
+        {
+          "id": "w2",
+          "scenario": "The substation's remote telemetry link is powered on but the storm season has ended.",
+          "question": "Should the substation's remote telemetry link be powered off?",
+          "options": [
+            "Power off the link",
+            "Leave it powered on",
+            "Power it off with a backup battery",
+            "Power it off via a temporary connection"
+          ],
+          "expected_index": 1,
+          "facet": "timing"
+        },
+        {
+          "id": "w3",
+          "scenario": "The substation's remote telemetry link is powered on during a non-storm season period.",
+          "question": "Should the substation's remote: remote telemetry link be powered off?",
+          "options": [
+            "Power off the link",
+            "Leave it powered on",
+            "Power it off with a backup battery",
+            "Power it off via a temporary connection"
+          ],
+          "expected_index": 1,
+          "facet": "scope"
+        },
+        {
+          "id": "w4",
+          "scenario": "The substation's remote telemetry link is powered on during a storm season period but the storm has been declared over by the National Weather Service.",
+          "question": "Should the substation's remote telemetry link be powered off?",
+          "options": [
+            "Power off the link",
+            "Leave it powered on",
+            "Power it off with a backup battery",
+            "Power it off via a temporary connection"
+          ],
+          "expected_index": 1,
+          "facet": "exception"
+        }
+      ],
+      "root_execution": {
+        "ok": true,
+        "parsed": {
+          "choices": [
+            {
+              "id": "w1",
+              "option_index": 0
+            },
+            {
+              "id": "w2",
+              "option_index": 1
+            },
+            {
+              "id": "w3",
+              "option_index": 1
+            },
+            {
+              "id": "w4",
+              "option_index": 1
+            }
+          ]
+        },
+        "raw": "{\n  \"choices\": [\n    {\n      \"id\": \"w1\",\n      \"option_index\": 0\n    },\n    {\n      \"id\": \"w2\",\n      \"option_index\": 1\n    },\n    {\n      \"id\": \"w3\",\n      \"option_index\": 1\n    },\n    {\n      \"id\": \"w4\",\n      \"option_index\": 1\n    }\n  ]\n}",
+        "wall_seconds": 1.1074,
+        "prompt_eval_count": 433,
+        "eval_count": 90,
+        "total_duration_ns": 1089225200
+      },
+      "candidate_execution": {
+        "ok": true,
+        "parsed": {
+          "choices": [
+            {
+              "id": "w1",
+              "option_index": 1
+            },
+            {
+              "id": "w2",
+              "option_index": 0
+            },
+            {
+              "id": "w3",
+              "option_index": 1
+            },
+            {
+              "id": "w4",
+              "option_index": 1
+            }
+          ]
+        },
+        "raw": "{\n  \"choices\": [\n    {\n      \"id\": \"w1\",\n      \"option_index\": 1\n    },\n    {\n      \"id\": \"w2\",\n      \"option_index\": 0\n    },\n    {\n      \"id\": \"w3\",\n      \"option_index\": 1\n    },\n    {\n      \"id\": \"w4\",\n      \"option_index\": 1\n    }\n  ]\n}",
+        "wall_seconds": 1.0872,
+        "prompt_eval_count": 433,
+        "eval_count": 90,
+        "total_duration_ns": 1076435300
+      },
+      "direct_pair_judge": {
+        "ok": true,
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "Reference policy requires powering on the link, candidate policy requires powering down the link during storm season."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"Reference policy requires powering on the link, candidate policy requires powering down the link during storm season.\"\n}",
+        "wall_seconds": 0.5892,
+        "prompt_eval_count": 137,
+        "eval_count": 36,
+        "total_duration_ns": 588164800
+      }
+    },
+    {
+      "id": "HO-neg-06",
+      "mutation_class": "negation_flip",
+      "gold": "DIFFERENT",
+      "compiler": {
+        "ok": true,
+        "parsed": {
+          "witnesses": [
+            {
+              "id": "w1",
+              "scenario": "A tagged raptor is observed during the molt survey period",
+              "question": "Should the tagged raptor be handled?",
+              "options": [
+                "Handle the raptor immediately",
+                "Do not handle the raptor",
+                "Contact the survey team for guidance",
+                "Wait for the survey to complete"
+              ],
+              "expected_index": 1,
+              "facet": "modality"
+            },
+            {
+              "id": "w2",
+              "scenario": "A tagged raptor is observed outside the molt survey period",
+              "question": "Should the tagged raptor be handled?",
+              "options": [
+                "Handle the raptor immediately",
+                "Do not handle the raptor",
+                "Contact the survey team for guidance",
+                "Wait for the survey to complete"
+              ],
+              "expected_index": 1,
+              "facet": "timing"
+            },
+            {
+              "id": "w3",
+              ": ": "scenario",
+              "question": "What is the duration of the molt survey period?",
+              "options": [
+                "The period from the start of the survey until the end of the survey",
+                "The period from the first tagged raptor to the last tagged raptor",
+                "The period defined by the survey team",
+                "The period specified in the policy document"
+              ],
+              "expected_index": 3,
+              "facet": "quantity_unit"
+            },
+            {
+              "id": "w4",
+              "scenario": "A tagged raptor is observed during the molt survey but the survey team has already completed the survey",
+              "question": "Should the tagged raptor be handled?",
+              "options": [
+                "Handle the raptor immediately",
+                "Do not handle the raptor",
+                "Contact the survey team for guidance",
+                "Wait for the survey to complete"
+              ],
+              "expected_index": 1,
+              "facet": "exception"
+            }
+          ]
+        },
+        "raw": "{\n  \"witnesses\": [\n    {\n      \"id\": \"w1\",\n      \"scenario\": \"A tagged raptor is observed during the molt survey period\",\n      \"question\": \"Should the tagged raptor be handled?\",\n      \"options\": [\n        \"Handle the raptor immediately\",\n        \"Do not handle the raptor\",\n        \"Contact the survey team for guidance\",\n        \"Wait for the survey to complete\"\n      ],\n      \"expected_index\": 1,\n      \"facet\": \"modality\"\n    },\n    {\n      \"id\": \"w2\",\n      \"scenario\": \"A tagged raptor is observed outside the molt survey period\",\n      \"question\": \"Should the tagged raptor be handled?\",\n      \"options\": [\n        \"Handle the raptor immediately\",\n        \"Do not handle the raptor\",\n        \"Contact the survey team for guidance\",\n        \"Wait for the survey to complete\"\n      ],\n      \"expected_index\": 1,\n      \"facet\": \"timing\"\n    },\n    {\n      \"id\": \"w3\",\n     \": \":\n      \"scenario\",\n      \"question\": \"What is the duration of the molt survey period?\",\n      \"options\": [\n        \"The period from the start of the survey until the end of the survey\",\n        \"The period from the first tagged raptor to the last tagged raptor\",\n        \"The period defined by the survey team\",\n        \"The period specified in the policy document\"\n      ],\n      \"expected_index\": 3,\n      \"facet\": \"quantity_unit\"\n    },\n    {\n      \"id\": \"w4\",\n      \"scenario\": \"A tagged raptor is observed during the molt survey but the survey team has already completed the survey\",\n      \"question\": \"Should the tagged raptor be handled?\",\n      \"options\": [\n        \"Handle the raptor immediately\",\n        \"Do not handle the raptor\",\n        \"Contact the survey team for guidance\",\n        \"Wait for the survey to complete\"\n      ],\n      \"expected_index\": 1,\n      \"facet\": \"exception\"\n    }\n  ]\n}",
+        "wall_seconds": 3.8431,
+        "prompt_eval_count": 235,
+        "eval_count": 430,
+        "total_duration_ns": 3828818400
+      },
+      "compiler_validation_errors": [
+        "witness_2_bad_scenario",
+        "not_all_witnesses_valid"
+      ],
+      "validated_witnesses": [],
+      "root_execution": null,
+      "candidate_execution": null,
+      "direct_pair_judge": {
+        "ok": true,
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "Reference policy specifies 'remain unhandled' while candidate policy states 'handled as needed', indicating a direct contradiction in the handling requirement during the molt survey."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"Reference policy specifies 'remain unhandled' while candidate policy states 'handled as needed', indicating a direct contradiction in the handling requirement during the molt survey.\"\n}",
+        "wall_seconds": 0.672,
+        "prompt_eval_count": 142,
+        "eval_count": 47,
+        "total_duration_ns": 670283500
+      }
+    },
+    {
+      "id": "HO-scope-01",
+      "mutation_class": "scope_inversion",
+      "gold": "DIFFERENT",
+      "compiler": {
+        "ok": true,
+        "parsed": {
+          "witnesses": [
+            {
+              "id": "w1",
+              "scenario": "A student in fifth grade is required to complete a field trip waiver form",
+              "question": "Should the field-trip waiver form be collected from this student?",
+              "options": [
+                "Yes",
+                "No"
+              ],
+              "expected_index": 0,
+              "facet": "scope"
+            },
+            {
+              "id": "w2",
+              ": ": "scenario",
+              "question": "Should the field-trip waiver form be collected from a student in seventh grade?",
+              "options": [
+                "Yes",
+                "No"
+              ],
+              "expected_index": 1,
+              "facet": "scope"
+            },
+            {
+              "id": "w3",
+              "scenario": "A student in sixth grade is required to complete a field trip waiver form",
+              "question": "Should the field-trip waiver form be collected from this student?",
+              "options": [
+                "Yes",
+                "No"
+              ],
+              "expected_index": 1,
+              "facet": "scope"
+            },
+            {
+              "id": "w4",
+              "scenario": "A student in fourth grade is required to complete a field trip waiver form",
+              "question": "Should the field-trip waiver form be collected from this student?",
+              "options": [
+                "Yes",
+                "No"
+              ],
+              "expected_index": 0,
+              "facet": "scope"
+            }
+          ]
+        },
+        "raw": "{\n  \"witnesses\": [\n    {\n      \"id\": \"w1\",\n      \"scenario\": \"A student in fifth grade is required to complete a field trip waiver form\",\n      \"question\": \"Should the field-trip waiver form be collected from this student?\",\n      \"options\": [\n        \"Yes\",\n        \"No\"\n      ],\n      \"expected_index\": 0,\n      \"facet\": \"scope\"\n    },\n    {\n      \"id\": \"w2\",\n     \": \":\n      \"scenario\",\n      \"question\": \"Should the field-trip waiver form be collected from a student in seventh grade?\",\n      \"options\": [\n        \"Yes\",\n        \"No\"\n      ],\n      \"expected_index\": 1,\n      \"facet\": \"scope\"\n    },\n    {\n      \"id\": \"w3\",\n      \"scenario\": \"A student in sixth grade is required to complete a field trip waiver form\",\n      \"question\": \"Should the field-trip waiver form be collected from this student?\",\n      \"options\": [\n        \"Yes\",\n        \"No\"\n      ],\n      \"expected_index\": 1,\n      \"facet\": \"scope\"\n    },\n    {\n      \"id\": \"w4\",\n      \"scenario\": \"A student in fourth grade is required to complete a field trip waiver form\",\n      \"question\": \"Should the field-trip waiver form be collected from this student?\",\n      \"options\": [\n        \"Yes\",\n        \"No\"\n      ],\n      \"expected_index\": 0,\n      \"facet\": \"scope\"\n    }\n  ]\n}",
+        "wall_seconds": 2.9807,
+        "prompt_eval_count": 231,
+        "eval_count": 323,
+        "total_duration_ns": 2978378800
+      },
+      "compiler_validation_errors": [
+        "witness_1_bad_scenario",
+        "not_all_witnesses_valid"
+      ],
+      "validated_witnesses": [],
+      "root_execution": null,
+      "candidate_execution": null,
+      "direct_pair_judge": {
+        "ok": true,
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "Reference policy collects waivers from students below sixth grade, while candidate policy collects from every student except those below sixth grade (i.e., sixth grade and above). The conditions and scope differ: reference policy targets 'below sixth grade' for collection, candidate policy targets 'not below sixth grade' (sixth grade and above)."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"Reference policy collects waivers from students below sixth grade, while candidate policy collects from every student except those below sixth grade (i.e., sixth grade and above). The conditions and scope differ: reference policy targets 'below sixth grade' for collection, candidate policy targets 'not below sixth grade' (sixth grade and above).\"\n}",
+        "wall_seconds": 0.9541,
+        "prompt_eval_count": 137,
+        "eval_count": 82,
+        "total_duration_ns": 952984500
+      }
+    },
+    {
+      "id": "HO-scope-02",
+      "mutation_class": "scope_inversion",
+      "gold": "DIFFERENT",
+      "compiler": {
+        "ok": true,
+        "parsed": {
+          "witnesses": [
+            {
+              "id": "w1",
+              "scenario": "A kitchen receives a shellfish order from a vendor not listed on the county's certified-harvester roster",
+              "question": "Should the kitchen accept this shellfish order?",
+              "options": [
+                "Accept the order",
+                "Reject the order",
+                "Contact the county for certification",
+                "Request a different vendor"
+              ],
+              "expected_index": 1,
+              "facet": "exception"
+            },
+            {
+              "id": "w2",
+              "scenario": "A kitchen has a shellfish order from a vendor listed on the county's certified-harvester roster",
+              "question": "Should the kitchen accept this shellfish order?",
+              "options": [
+                "Accept the order",
+                "Reject the order",
+                "Contact the county for certification",
+                "Request a different vendor"
+              ],
+              "expected_index": 0,
+              "facet": "scope"
+            },
+            {
+              "id": "w3",
+              "scenario": "A kitchen is sourcing shellfish from a vendor that is certified by a state agency but not the county",
+              "question": "Should the kitchen accept this shellfish order?",
+              "options": [
+                "Accept the order",
+                "Reject the order",
+                "Contact the county for certification",
+                "Request a different vendor"
+              ],
+              "expected_index": 1,
+              "facet": "exception"
+            },
+            {
+              "id": "w4",
+              "scenario": "A kitchen has a shellfish order from a vendor listed on the county's certified-harvester roster but the order is for a type of shellfish not covered by the roster",
+              "question": "Should the kitchen accept this shellfish order?",
+              "options": [
+                "Accept the order",
+                "Reject the order",
+                "Contact the county for certification",
+                "Request a different vendor"
+              ],
+              "expected_index": 1,
+              "facet": "exception"
+            }
+          ]
+        },
+        "raw": "{\n  \"witnesses\": [\n    {\n      \"id\": \"w1\",\n      \"scenario\": \"A kitchen receives a shellfish order from a vendor not listed on the county's certified-harvester roster\",\n      \"question\": \"Should the kitchen accept this shellfish order?\",\n      \"options\": [\n        \"Accept the order\",\n        \"Reject the order\",\n        \"Contact the county for certification\",\n        \"Request a different vendor\"\n      ],\n      \"expected_index\": 1,\n      \"facet\": \"exception\"\n    },\n    {\n      \"id\": \"w2\",\n       \"scenario\": \"A kitchen has a shellfish order from a vendor listed on the county's certified-harvester roster\",\n      \"question\": \"Should the kitchen accept this shellfish order?\",\n      \"options\": [\n        \"Accept the order\",\n        \"Reject the order\",\n        \"Contact the county for certification\",\n        \"Request a different vendor\"\n      ],\n      \"expected_index\": 0,\n      \"facet\": \"scope\"\n    },\n    {\n      \"id\": \"w3\",\n      \"scenario\": \"A kitchen is sourcing shellfish from a vendor that is certified by a state agency but not the county\",\n      \"question\": \"Should the kitchen accept this shellfish order?\",\n      \"options\": [\n        \"Accept the order\",\n        \"Reject the order\",\n        \"Contact the county for certification\",\n        \"Request a different vendor\"\n      ],\n      \"expected_index\": 1,\n      \"facet\": \"exception\"\n    },\n    {\n      \"id\": \"w4\",\n      \"scenario\": \"A kitchen has a shellfish order from a vendor listed on the county's certified-harvester roster but the order is for a type of shellfish not covered by the roster\",\n      \"question\": \"Should the kitchen accept this shellfish order?\",\n      \"options\": [\n        \"Accept the order\",\n        \"Reject the order\",\n        \"Contact the county for certification\",\n        \"Request a different vendor\"\n      ],\n      \"expected_index\": 1,\n      \"facet\": \"exception\"\n    }\n  ]\n}",
+        "wall_seconds": 3.8095,
+        "prompt_eval_count": 236,
+        "eval_count": 433,
+        "total_duration_ns": 3807921800
+      },
+      "compiler_validation_errors": [],
+      "validated_witnesses": [
+        {
+          "id": "w1",
+          "scenario": "A kitchen receives a shellfish order from a vendor not listed on the county's certified-harvester roster",
+          "question": "Should the kitchen accept this shellfish order?",
+          "options": [
+            "Accept the order",
+            "Reject the order",
+            "Contact the county for certification",
+            "Request a different vendor"
+          ],
+          "expected_index": 1,
+          "facet": "exception"
+        },
+        {
+          "id": "w2",
+          "scenario": "A kitchen has a shellfish order from a vendor listed on the county's certified-harvester roster",
+          "question": "Should the kitchen accept this shellfish order?",
+          "options": [
+            "Accept the order",
+            "Reject the order",
+            "Contact the county for certification",
+            "Request a different vendor"
+          ],
+          "expected_index": 0,
+          "facet": "scope"
+        },
+        {
+          "id": "w3",
+          "scenario": "A kitchen is sourcing shellfish from a vendor that is certified by a state agency but not the county",
+          "question": "Should the kitchen accept this shellfish order?",
+          "options": [
+            "Accept the order",
+            "Reject the order",
+            "Contact the county for certification",
+            "Request a different vendor"
+          ],
+          "expected_index": 1,
+          "facet": "exception"
+        },
+        {
+          "id": "w4",
+          "scenario": "A kitchen has a shellfish order from a vendor listed on the county's certified-harvester roster but the order is for a type of shellfish not covered by the roster",
+          "question": "Should the kitchen accept this shellfish order?",
+          "options": [
+            "Accept the order",
+            "Reject the order",
+            "Contact the county for certification",
+            "Request a different vendor"
+          ],
+          "expected_index": 1,
+          "facet": "exception"
+        }
+      ],
+      "root_execution": {
+        "ok": true,
+        "parsed": {
+          "choices": [
+            {
+              "id": "w1",
+              "option_index": 1
+            },
+            {
+              "id": "w2",
+              "option_index": 0
+            },
+            {
+              "id": "w3",
+              "option_index": 1
+            },
+            {
+              "id": "w4",
+              "option_index": 1
+            }
+          ]
+        },
+        "raw": "{\n  \"choices\": [\n    {\n      \"id\": \"w1\",\n      \"option_index\": 1\n    },\n    {\n      \"id\": \"w2\",\n      \"option_index\": 0\n    },\n    {\n      \"id\": \"w3\",\n      \"option_index\": 1\n    },\n    {\n      \"id\": \"w4\",\n      \"option_index\": 1\n    }\n  ]\n}",
+        "wall_seconds": 1.0758,
+        "prompt_eval_count": 415,
+        "eval_count": 90,
+        "total_duration_ns": 1074878500
+      },
+      "candidate_execution": {
+        "ok": true,
+        "parsed": {
+          "choices": [
+            {
+              "id": "w1",
+              "option_index": 1
+            },
+            {
+              "id": "w2",
+              "option_index": 0
+            },
+            {
+              "id": "w3",
+              "option_index": 1
+            },
+            {
+              "id": "w4",
+              "option_index": 1
+            }
+          ]
+        },
+        "raw": "{\n  \"choices\": [\n    {\n      \"id\": \"w1\",\n      \"option_index\": 1\n    },\n    {\n      \"id\": \"w2\",\n      \"option_index\": 0\n    },\n    {\n      \"id\": \"w3\",\n      \"option_index\": 1\n    },\n    {\n      \"id\": \"w4\",\n      \"option_index\": 1\n    }\n  ]\n}",
+        "wall_seconds": 1.0503,
+        "prompt_eval_count": 416,
+        "eval_count": 90,
+        "total_duration_ns": 1049715000
+      },
+      "direct_pair_judge": {
+        "ok": true,
+        "parsed": {
+          "decision": "DIFFERENT",
+          "reason": "The reference policy states the kitchen sources shellfish exclusively from certified-harvester vendors, while the candidate policy states the kitchen avoids those vendors. The actions (sourcing vs. avoiding) and implications (exclusively from vs. steers clear of) are directly contradictory."
+        },
+        "raw": "{\n  \"decision\": \"DIFFERENT\",\n  \"reason\": \"The reference policy states the kitchen sources shellfish exclusively from certified-harvester vendors, while the candidate policy states the kitchen avoids those vendors. The actions (sourcing vs. avoiding) and implications (exclusively from vs. steers clear of) are directly contradictory.\"\n}",
+        "wall_seconds": 0.873,
+        "prompt_eval_count": 146,
+        "eval_count": 72,
+        "total_duration_ns": 871820300
+      }
+    }
+  ],
+  "updated_at_utc": "2026-08-16T12:02:17.323129Z"
+}

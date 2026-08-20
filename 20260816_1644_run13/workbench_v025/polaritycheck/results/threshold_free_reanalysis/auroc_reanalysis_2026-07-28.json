@@ -1,0 +1,281 @@
+{
+  "analysis": "threshold-free re-analysis of frozen falsifier evidence",
+  "date": "2026-07-28 13:41:27",
+  "node": "redacted",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "seed": 20260726,
+  "bootstrap_iters": 4000,
+  "reading_guide": {
+    "auroc_below_0.5_ci_excludes_chance": "WRONG SIGN \u2014 the proxy is anti-correlated with the property; no usable operating point exists in the DEPLOYED direction",
+    "auroc_near_0.5": "NO SIGNAL in either direction",
+    "auroc_0.6_to_0.8": "MERELY MISCALIBRATED \u2014 a weaker, different claim",
+    "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": "tuned on the test data; UPPER BOUND on what recalibrating the SHIPPED gate can buy",
+    "oracle_best_balanced_accuracy": "both polarities; if polarity=='lt' the ceiling is only reachable by INVERTING the gate, which is a finding, not a repair"
+  },
+  "guard_stack": [
+    {
+      "split": "in_sample_2026-07-15",
+      "source": "guard_stack_corpus_2026-07-15.json",
+      "pooled": [
+        {
+          "measure": "cosine drift (1 - similarity) [INCUMBENT]",
+          "n_positive": 26,
+          "n_negative": 5,
+          "positive_class": "mutation",
+          "negative_class": "faithful_control",
+          "auroc": 0.2846,
+          "auroc_inverted_direction": 0.7154,
+          "oracle_best_balanced_accuracy": 0.8269,
+          "oracle_best_threshold": 0.0242,
+          "oracle_best_polarity": "lt",
+          "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.5731,
+          "ci95_bootstrap": [
+            0.1154,
+            0.5
+          ],
+          "ci95_excludes_chance": false,
+          "exact_permutation_p": null
+        },
+        {
+          "measure": "NLI contradiction [PROPOSED SUCCESSOR]",
+          "n_positive": 26,
+          "n_negative": 5,
+          "positive_class": "mutation",
+          "negative_class": "faithful_control",
+          "auroc": 0.8308,
+          "auroc_inverted_direction": 0.1692,
+          "oracle_best_balanced_accuracy": 0.8654,
+          "oracle_best_threshold": 0.1596,
+          "oracle_best_polarity": "ge",
+          "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.8654,
+          "ci95_bootstrap": [
+            0.6692,
+            0.9538
+          ],
+          "ci95_excludes_chance": true,
+          "exact_permutation_p": null
+        }
+      ],
+      "per_class_cosine": [
+        {
+          "mutation_class": "constraint_deletion",
+          "n": 5,
+          "auroc": 0.48
+        },
+        {
+          "mutation_class": "modal_downgrade",
+          "n": 5,
+          "auroc": 0.0
+        },
+        {
+          "mutation_class": "negation_flip",
+          "n": 6,
+          "auroc": 0.4333
+        },
+        {
+          "mutation_class": "quantity_unit_drift",
+          "n": 5,
+          "auroc": 0.16
+        },
+        {
+          "mutation_class": "scope_inversion",
+          "n": 5,
+          "auroc": 0.32
+        }
+      ]
+    },
+    {
+      "split": "held_out_2026-07-16",
+      "source": "guard_stack_heldout_2026-07-16.json",
+      "pooled": [
+        {
+          "measure": "cosine drift (1 - similarity) [INCUMBENT]",
+          "n_positive": 30,
+          "n_negative": 10,
+          "positive_class": "mutation",
+          "negative_class": "faithful_control",
+          "auroc": 0.2667,
+          "auroc_inverted_direction": 0.7333,
+          "oracle_best_balanced_accuracy": 0.7833,
+          "oracle_best_threshold": 0.0235,
+          "oracle_best_polarity": "lt",
+          "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.55,
+          "ci95_bootstrap": [
+            0.11,
+            0.4383
+          ],
+          "ci95_excludes_chance": true,
+          "exact_permutation_p": null
+        },
+        {
+          "measure": "NLI contradiction [PROPOSED SUCCESSOR]",
+          "n_positive": 30,
+          "n_negative": 10,
+          "positive_class": "mutation",
+          "negative_class": "faithful_control",
+          "auroc": 0.5333,
+          "auroc_inverted_direction": 0.4667,
+          "oracle_best_balanced_accuracy": 0.6667,
+          "oracle_best_threshold": 0.0431,
+          "oracle_best_polarity": "lt",
+          "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.6333,
+          "ci95_bootstrap": [
+            0.36,
+            0.7067
+          ],
+          "ci95_excludes_chance": false,
+          "exact_permutation_p": null
+        }
+      ],
+      "per_class_cosine": [
+        {
+          "mutation_class": "constraint_deletion",
+          "n": 6,
+          "auroc": 0.4667
+        },
+        {
+          "mutation_class": "modal_downgrade",
+          "n": 6,
+          "auroc": 0.125
+        },
+        {
+          "mutation_class": "negation_flip",
+          "n": 6,
+          "auroc": 0.4417
+        },
+        {
+          "mutation_class": "quantity_unit_drift",
+          "n": 6,
+          "auroc": 0.0667
+        },
+        {
+          "mutation_class": "scope_inversion",
+          "n": 6,
+          "auroc": 0.2333
+        }
+      ]
+    }
+  ],
+  "distinctness": [
+    {
+      "split": "dev",
+      "source": "r14_falsifier_2026-07-28_holdout.json",
+      "measures": [
+        {
+          "measure": "cosine similarity [INCUMBENT GATE]",
+          "n_positive": 8,
+          "n_negative": 8,
+          "positive_class": "SAME (duplicate)",
+          "negative_class": "OPPOSITE (contest)",
+          "auroc": 0.0,
+          "auroc_inverted_direction": 1.0,
+          "oracle_best_balanced_accuracy": 1.0,
+          "oracle_best_threshold": 0.9444,
+          "oracle_best_polarity": "lt",
+          "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.5,
+          "ci95_bootstrap": null,
+          "ci95_excludes_chance": null,
+          "exact_permutation_p": 0.0001554001554001554
+        },
+        {
+          "measure": "NLI duplication [PROPOSED SUCCESSOR]",
+          "n_positive": 8,
+          "n_negative": 8,
+          "positive_class": "SAME (duplicate)",
+          "negative_class": "OPPOSITE (contest)",
+          "auroc": 1.0,
+          "auroc_inverted_direction": 0.0,
+          "oracle_best_balanced_accuracy": 1.0,
+          "oracle_best_threshold": 0.0348,
+          "oracle_best_polarity": "ge",
+          "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+          "ci95_bootstrap": null,
+          "ci95_excludes_chance": null,
+          "exact_permutation_p": 0.0001554001554001554
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "source": "r14_falsifier_2026-07-28_holdout.json",
+      "measures": [
+        {
+          "measure": "cosine similarity [INCUMBENT GATE]",
+          "n_positive": 4,
+          "n_negative": 4,
+          "positive_class": "SAME (duplicate)",
+          "negative_class": "OPPOSITE (contest)",
+          "auroc": 0.25,
+          "auroc_inverted_direction": 0.75,
+          "oracle_best_balanced_accuracy": 0.75,
+          "oracle_best_threshold": 0.9488,
+          "oracle_best_polarity": "lt",
+          "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.5,
+          "ci95_bootstrap": [
+            0.0,
+            0.75
+          ],
+          "ci95_excludes_chance": false,
+          "exact_permutation_p": null
+        },
+        {
+          "measure": "NLI duplication [PROPOSED SUCCESSOR]",
+          "n_positive": 4,
+          "n_negative": 4,
+          "positive_class": "SAME (duplicate)",
+          "negative_class": "OPPOSITE (contest)",
+          "auroc": 0.9375,
+          "auroc_inverted_direction": 0.0625,
+          "oracle_best_balanced_accuracy": 0.875,
+          "oracle_best_threshold": 0.014,
+          "oracle_best_polarity": "ge",
+          "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.875,
+          "ci95_bootstrap": [
+            0.625,
+            1.0
+          ],
+          "ci95_excludes_chance": true,
+          "exact_permutation_p": null
+        }
+      ]
+    },
+    {
+      "split": "dev",
+      "source": "r14_falsifier_2026-07-28.json",
+      "measures": [
+        {
+          "measure": "cosine similarity [INCUMBENT GATE]",
+          "n_positive": 8,
+          "n_negative": 8,
+          "positive_class": "SAME (duplicate)",
+          "negative_class": "OPPOSITE (contest)",
+          "auroc": 0.0,
+          "auroc_inverted_direction": 1.0,
+          "oracle_best_balanced_accuracy": 1.0,
+          "oracle_best_threshold": 0.9444,
+          "oracle_best_polarity": "lt",
+          "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.5,
+          "ci95_bootstrap": null,
+          "ci95_excludes_chance": null,
+          "exact_permutation_p": 0.0001554001554001554
+        },
+        {
+          "measure": "NLI duplication [PROPOSED SUCCESSOR]",
+          "n_positive": 8,
+          "n_negative": 8,
+          "positive_class": "SAME (duplicate)",
+          "negative_class": "OPPOSITE (contest)",
+          "auroc": 1.0,
+          "auroc_inverted_direction": 0.0,
+          "oracle_best_balanced_accuracy": 1.0,
+          "oracle_best_threshold": 0.0348,
+          "oracle_best_polarity": "ge",
+          "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+          "ci95_bootstrap": null,
+          "ci95_excludes_chance": null,
+          "exact_permutation_p": 0.0001554001554001554
+        }
+      ]
+    }
+  ]
+}

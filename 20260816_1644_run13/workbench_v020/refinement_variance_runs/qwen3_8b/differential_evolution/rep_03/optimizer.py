@@ -1,0 +1,35 @@
+import numpy as np
+from problems import BudgetExhausted
+
+def optimize(f, dim, bounds, budget, seed):
+    np.random.seed(seed)
+    low, high = bounds
+    pop_size = min(10, dim + 1)
+    pop = np.random.uniform(low, high, (pop_size, dim))
+    best = pop[np.argmin([f(x) for x in pop])]
+    history = []
+    for _ in range(budget):
+        try:
+            for i in range(pop_size):
+                j, k, l = np.random.choice(pop_size, 3, replace=False)
+                mutant = pop[j] + 0.8 * (pop[k] - pop[l])
+                mutant = np.clip(mutant, low, high)
+                trial = mutant + np.random.rand(dim) * (pop[i] - mutant)
+                trial = np.clip(trial, low, high)
+                trial_score = f(trial)
+                if trial_score < f(pop[i]):
+                    pop[i] = trial
+            current_best = pop[np.argmin([f(x) for x in pop])]
+            if np.linalg.norm(current_best - best) > 0.1 * (high - low).sum():
+                best = current_best
+                history.append(best)
+            else:
+                history.append(best)
+        except BudgetExhausted:
+            break
+    return {
+        'best': best,
+        'history': history,
+        'budget_used': len(history),
+        'function_calls': len(history) * pop_size
+    }

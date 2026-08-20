@@ -1,0 +1,942 @@
+{
+  "model": "qwen2.5:7b",
+  "endpoint": "http://127.0.0.1:11434/api/chat",
+  "registered_round_budget": 6,
+  "initial_support": [
+    "success|complete|fresh|confirmed|reversible",
+    "transient_error|complete|fresh|confirmed|reversible",
+    "permanent_error|complete|fresh|confirmed|reversible",
+    "transient_error|missing|fresh|confirmed|reversible"
+  ],
+  "final_support": [
+    "permanent_error|complete|fresh|confirmed|reversible",
+    "success|complete|fresh|confirmed|reversible",
+    "success|complete|fresh|unconfirmed|irreversible",
+    "success|complete|fresh|unconfirmed|reversible",
+    "transient_error|complete|fresh|confirmed|irreversible",
+    "transient_error|complete|fresh|confirmed|reversible",
+    "transient_error|complete|fresh|unconfirmed|reversible",
+    "transient_error|complete|stale|unconfirmed|reversible",
+    "transient_error|missing|fresh|confirmed|reversible",
+    "transient_error|missing|stale|unconfirmed|reversible"
+  ],
+  "added_budget": 6,
+  "rounds_completed": 6,
+  "rounds_with_added_cell": 6,
+  "generated_unique_colliders": 7,
+  "rounds": [
+    {
+      "round": 1,
+      "seed": 6200,
+      "support_before": [
+        "permanent_error|complete|fresh|confirmed|reversible",
+        "success|complete|fresh|confirmed|reversible",
+        "transient_error|complete|fresh|confirmed|reversible",
+        "transient_error|missing|fresh|confirmed|reversible"
+      ],
+      "valid_unique": 6,
+      "colliders": 1,
+      "collision_yield": 0.16666666666666666,
+      "selected_cell": "transient_error|complete|stale|unconfirmed|reversible",
+      "selected_oracle_action": "QUERY",
+      "distinguishing_load": 1,
+      "elapsed_seconds": 7.738717700005509,
+      "prompt_tokens": 454,
+      "output_tokens": 619,
+      "raw_content": "{\n  \"policies\": [\n    {\n      \"name\": \"Policy1\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\"}, \"action\": \"RETRY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy2\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy3\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\"}, \"action\": \"RETRY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy4\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy5\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy6\",\n      \"rules\": [\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"COMPLETE\"\n    },\n    {\n      \"name\": \"Policy7\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy8\",\n      \"rules\": [\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"}\n      ],\n      \"default\": \"QUERY\"\n    }\n  ]\n}",
+      "collider_policies": [
+        {
+          "name": "Policy1",
+          "rules": [
+            {
+              "when": {
+                "status": "permanent_error",
+                "fields": "complete"
+              },
+              "action": "STOP"
+            },
+            {
+              "when": {
+                "status": "success",
+                "fields": "complete"
+              },
+              "action": "COMPLETE"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "complete"
+              },
+              "action": "RETRY"
+            }
+          ],
+          "default": "QUERY"
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "seed": 6201,
+      "support_before": [
+        "permanent_error|complete|fresh|confirmed|reversible",
+        "success|complete|fresh|confirmed|reversible",
+        "transient_error|complete|fresh|confirmed|reversible",
+        "transient_error|complete|stale|unconfirmed|reversible",
+        "transient_error|missing|fresh|confirmed|reversible"
+      ],
+      "valid_unique": 5,
+      "colliders": 1,
+      "collision_yield": 0.2,
+      "selected_cell": "transient_error|missing|stale|unconfirmed|reversible",
+      "selected_oracle_action": "QUERY",
+      "distinguishing_load": 1,
+      "elapsed_seconds": 20.350858599995263,
+      "prompt_tokens": 506,
+      "output_tokens": 1630,
+      "raw_content": "{\n  \"policies\": [\n    {\n      \"name\": \"Policy_1\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"}\n      ],\n      \"default\": \"COMPLETE\"\n    },\n    {\n      \"name\": \"Policy_2\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy_3\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy_4\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy_5\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"irreversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy_6\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy_7\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy_8\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"RETRY\"\n    }\n  ]\n}",
+      "collider_policies": [
+        {
+          "name": "Policy_2",
+          "rules": [
+            {
+              "when": {
+                "status": "permanent_error",
+                "fields": "complete",
+                "freshness": "fresh",
+                "confirmation": "confirmed",
+                "effect": "reversible"
+              },
+              "action": "STOP"
+            },
+            {
+              "when": {
+                "status": "success",
+                "fields": "complete",
+                "freshness": "fresh",
+                "confirmation": "confirmed",
+                "effect": "reversible"
+              },
+              "action": "COMPLETE"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "complete",
+                "freshness": "stale",
+                "confirmation": "unconfirmed",
+                "effect": "reversible"
+              },
+              "action": "QUERY"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "missing",
+                "freshness": "fresh",
+                "confirmation": "confirmed",
+                "effect": "reversible"
+              },
+              "action": "QUERY"
+            }
+          ],
+          "default": "RETRY"
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "seed": 6202,
+      "support_before": [
+        "permanent_error|complete|fresh|confirmed|reversible",
+        "success|complete|fresh|confirmed|reversible",
+        "transient_error|complete|fresh|confirmed|reversible",
+        "transient_error|complete|stale|unconfirmed|reversible",
+        "transient_error|missing|fresh|confirmed|reversible",
+        "transient_error|missing|stale|unconfirmed|reversible"
+      ],
+      "valid_unique": 3,
+      "colliders": 1,
+      "collision_yield": 0.3333333333333333,
+      "selected_cell": "transient_error|complete|fresh|unconfirmed|reversible",
+      "selected_oracle_action": "RETRY",
+      "distinguishing_load": 1,
+      "elapsed_seconds": 13.370594900014112,
+      "prompt_tokens": 558,
+      "output_tokens": 1084,
+      "raw_content": "{\n  \"policies\": [\n    {\n      \"name\": \"Policy1\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy2\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy3\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy4\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy5\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\"}, \"action\": \"RETRY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy6\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy7\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy8\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"RETRY\"\n    }\n  ]\n}",
+      "collider_policies": [
+        {
+          "name": "Policy2",
+          "rules": [
+            {
+              "when": {
+                "status": "permanent_error",
+                "fields": "complete"
+              },
+              "action": "STOP"
+            },
+            {
+              "when": {
+                "status": "success",
+                "fields": "complete"
+              },
+              "action": "COMPLETE"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "complete",
+                "freshness": "fresh",
+                "confirmation": "confirmed"
+              },
+              "action": "RETRY"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "missing",
+                "freshness": "stale",
+                "confirmation": "unconfirmed"
+              },
+              "action": "QUERY"
+            }
+          ],
+          "default": "QUERY"
+        }
+      ]
+    },
+    {
+      "round": 4,
+      "seed": 6203,
+      "support_before": [
+        "permanent_error|complete|fresh|confirmed|reversible",
+        "success|complete|fresh|confirmed|reversible",
+        "transient_error|complete|fresh|confirmed|reversible",
+        "transient_error|complete|fresh|unconfirmed|reversible",
+        "transient_error|complete|stale|unconfirmed|reversible",
+        "transient_error|missing|fresh|confirmed|reversible",
+        "transient_error|missing|stale|unconfirmed|reversible"
+      ],
+      "valid_unique": 5,
+      "colliders": 2,
+      "collision_yield": 0.4,
+      "selected_cell": "success|complete|fresh|unconfirmed|reversible",
+      "selected_oracle_action": "COMPLETE",
+      "distinguishing_load": 2,
+      "elapsed_seconds": 33.972540100017795,
+      "prompt_tokens": 610,
+      "output_tokens": 2734,
+      "raw_content": "{\n  \"policies\": [\n    {\n      \"name\": \"Policy_1\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy_2\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy_3\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy_4\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"STOP\"\n    },\n    {\n      \"name\": \"Policy_5\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy_6\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy_7\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy_8\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"}\n      ],\n      \"default\": \"RETRY\"\n    }\n  ]\n}",
+      "collider_policies": [
+        {
+          "name": "Policy_1",
+          "rules": [
+            {
+              "when": {
+                "status": "permanent_error",
+                "fields": "complete",
+                "freshness": "fresh",
+                "confirmation": "confirmed",
+                "effect": "reversible"
+              },
+              "action": "STOP"
+            },
+            {
+              "when": {
+                "status": "success",
+                "fields": "complete",
+                "freshness": "fresh",
+                "confirmation": "confirmed",
+                "effect": "reversible"
+              },
+              "action": "COMPLETE"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "complete",
+                "freshness": "fresh",
+                "confirmation": "confirmed",
+                "effect": "reversible"
+              },
+              "action": "RETRY"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "complete",
+                "freshness": "fresh",
+                "confirmation": "unconfirmed",
+                "effect": "reversible"
+              },
+              "action": "RETRY"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "complete",
+                "freshness": "stale",
+                "confirmation": "unconfirmed",
+                "effect": "reversible"
+              },
+              "action": "QUERY"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "missing",
+                "freshness": "fresh",
+                "confirmation": "confirmed",
+                "effect": "reversible"
+              },
+              "action": "QUERY"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "missing",
+                "freshness": "stale",
+                "confirmation": "unconfirmed",
+                "effect": "reversible"
+              },
+              "action": "QUERY"
+            }
+          ],
+          "default": "RETRY"
+        },
+        {
+          "name": "Policy_2",
+          "rules": [
+            {
+              "when": {
+                "status": "permanent_error",
+                "fields": "complete",
+                "freshness": "fresh",
+                "confirmation": "confirmed",
+                "effect": "reversible"
+              },
+              "action": "STOP"
+            },
+            {
+              "when": {
+                "status": "success",
+                "fields": "complete",
+                "freshness": "fresh",
+                "confirmation": "confirmed",
+                "effect": "reversible"
+              },
+              "action": "COMPLETE"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "complete",
+                "freshness": "fresh",
+                "confirmation": "confirmed",
+                "effect": "reversible"
+              },
+              "action": "RETRY"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "complete",
+                "freshness": "fresh",
+                "confirmation": "unconfirmed",
+                "effect": "reversible"
+              },
+              "action": "RETRY"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "complete",
+                "freshness": "stale",
+                "confirmation": "unconfirmed",
+                "effect": "reversible"
+              },
+              "action": "QUERY"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "missing",
+                "freshness": "fresh",
+                "confirmation": "confirmed",
+                "effect": "reversible"
+              },
+              "action": "QUERY"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "missing",
+                "freshness": "stale",
+                "confirmation": "unconfirmed",
+                "effect": "reversible"
+              },
+              "action": "QUERY"
+            }
+          ],
+          "default": "QUERY"
+        }
+      ]
+    },
+    {
+      "round": 5,
+      "seed": 6204,
+      "support_before": [
+        "permanent_error|complete|fresh|confirmed|reversible",
+        "success|complete|fresh|confirmed|reversible",
+        "success|complete|fresh|unconfirmed|reversible",
+        "transient_error|complete|fresh|confirmed|reversible",
+        "transient_error|complete|fresh|unconfirmed|reversible",
+        "transient_error|complete|stale|unconfirmed|reversible",
+        "transient_error|missing|fresh|confirmed|reversible",
+        "transient_error|missing|stale|unconfirmed|reversible"
+      ],
+      "valid_unique": 3,
+      "colliders": 1,
+      "collision_yield": 0.3333333333333333,
+      "selected_cell": "transient_error|complete|fresh|confirmed|irreversible",
+      "selected_oracle_action": "RETRY",
+      "distinguishing_load": 1,
+      "elapsed_seconds": 41.66546720001497,
+      "prompt_tokens": 659,
+      "output_tokens": 3348,
+      "raw_content": "{\n  \"policies\": [\n    {\n      \"name\": \"Policy_1\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy_2\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy_3\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy_4\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy_5\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy_6\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy_7\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy_8\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"}\n      ],\n      \"default\": \"RETRY\"\n    }\n  ]\n}",
+      "collider_policies": [
+        {
+          "name": "Policy_1",
+          "rules": [
+            {
+              "when": {
+                "status": "permanent_error",
+                "fields": "complete",
+                "freshness": "fresh",
+                "confirmation": "confirmed",
+                "effect": "reversible"
+              },
+              "action": "STOP"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "complete",
+                "freshness": "fresh",
+                "confirmation": "confirmed",
+                "effect": "reversible"
+              },
+              "action": "RETRY"
+            },
+            {
+              "when": {
+                "status": "success",
+                "fields": "complete",
+                "freshness": "fresh",
+                "confirmation": "confirmed",
+                "effect": "reversible"
+              },
+              "action": "COMPLETE"
+            },
+            {
+              "when": {
+                "status": "success",
+                "fields": "complete",
+                "freshness": "fresh",
+                "confirmation": "unconfirmed",
+                "effect": "reversible"
+              },
+              "action": "COMPLETE"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "complete",
+                "freshness": "fresh",
+                "confirmation": "unconfirmed",
+                "effect": "reversible"
+              },
+              "action": "RETRY"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "complete",
+                "freshness": "stale",
+                "confirmation": "unconfirmed",
+                "effect": "reversible"
+              },
+              "action": "QUERY"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "missing",
+                "freshness": "fresh",
+                "confirmation": "confirmed",
+                "effect": "reversible"
+              },
+              "action": "QUERY"
+            }
+          ],
+          "default": "QUERY"
+        }
+      ]
+    },
+    {
+      "round": 6,
+      "seed": 6205,
+      "support_before": [
+        "permanent_error|complete|fresh|confirmed|reversible",
+        "success|complete|fresh|confirmed|reversible",
+        "success|complete|fresh|unconfirmed|reversible",
+        "transient_error|complete|fresh|confirmed|irreversible",
+        "transient_error|complete|fresh|confirmed|reversible",
+        "transient_error|complete|fresh|unconfirmed|reversible",
+        "transient_error|complete|stale|unconfirmed|reversible",
+        "transient_error|missing|fresh|confirmed|reversible",
+        "transient_error|missing|stale|unconfirmed|reversible"
+      ],
+      "valid_unique": 3,
+      "colliders": 1,
+      "collision_yield": 0.3333333333333333,
+      "selected_cell": "success|complete|fresh|unconfirmed|irreversible",
+      "selected_oracle_action": "COMPLETE",
+      "distinguishing_load": 1,
+      "elapsed_seconds": 38.27331509999931,
+      "prompt_tokens": 711,
+      "output_tokens": 3069,
+      "raw_content": "{\n  \"policies\": [\n    {\n      \"name\": \"Policy_1\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"irreversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy_2\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"irreversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy_3\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"irreversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy_4\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"irreversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"STOP\"\n    },\n    {\n      \"name\": \"Policy_5\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"irreversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy_6\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"irreversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy_7\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"irreversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy_8\",\n      \"rules\": [\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"irreversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    }\n  ]\n}",
+      "collider_policies": [
+        {
+          "name": "Policy_1",
+          "rules": [
+            {
+              "when": {
+                "status": "permanent_error",
+                "fields": "complete",
+                "freshness": "fresh",
+                "confirmation": "confirmed",
+                "effect": "reversible"
+              },
+              "action": "STOP"
+            },
+            {
+              "when": {
+                "status": "success",
+                "fields": "complete",
+                "freshness": "fresh",
+                "confirmation": "confirmed",
+                "effect": "reversible"
+              },
+              "action": "COMPLETE"
+            },
+            {
+              "when": {
+                "status": "success",
+                "fields": "complete",
+                "freshness": "fresh",
+                "confirmation": "unconfirmed",
+                "effect": "reversible"
+              },
+              "action": "COMPLETE"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "complete",
+                "freshness": "fresh",
+                "confirmation": "confirmed",
+                "effect": "irreversible"
+              },
+              "action": "RETRY"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "complete",
+                "freshness": "fresh",
+                "confirmation": "confirmed",
+                "effect": "reversible"
+              },
+              "action": "RETRY"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "complete",
+                "freshness": "fresh",
+                "confirmation": "unconfirmed",
+                "effect": "reversible"
+              },
+              "action": "RETRY"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "complete",
+                "freshness": "stale",
+                "confirmation": "unconfirmed",
+                "effect": "reversible"
+              },
+              "action": "QUERY"
+            },
+            {
+              "when": {
+                "status": "transient_error",
+                "fields": "missing",
+                "freshness": "fresh",
+                "confirmation": "confirmed",
+                "effect": "reversible"
+              },
+              "action": "QUERY"
+            }
+          ],
+          "default": "QUERY"
+        }
+      ]
+    }
+  ],
+  "independent_generated_holdout": [
+    {
+      "name": "Policy_1",
+      "rules": [
+        {
+          "when": {
+            "status": "success",
+            "fields": "complete",
+            "freshness": "fresh",
+            "confirmation": "confirmed",
+            "effect": "reversible"
+          },
+          "action": "COMPLETE"
+        },
+        {
+          "when": {
+            "status": "transient_error",
+            "fields": "complete",
+            "freshness": "fresh",
+            "confirmation": "confirmed",
+            "effect": "reversible"
+          },
+          "action": "RETRY"
+        },
+        {
+          "when": {
+            "status": "permanent_error",
+            "fields": "complete",
+            "freshness": "fresh",
+            "confirmation": "confirmed",
+            "effect": "reversible"
+          },
+          "action": "STOP"
+        }
+      ],
+      "default": "QUERY"
+    },
+    {
+      "name": "Policy_2",
+      "rules": [
+        {
+          "when": {
+            "status": "success",
+            "fields": "complete",
+            "freshness": "fresh",
+            "confirmation": "confirmed",
+            "effect": "reversible"
+          },
+          "action": "COMPLETE"
+        },
+        {
+          "when": {
+            "status": "transient_error",
+            "fields": "missing",
+            "freshness": "fresh",
+            "confirmation": "confirmed",
+            "effect": "reversible"
+          },
+          "action": "QUERY"
+        },
+        {
+          "when": {
+            "status": "permanent_error",
+            "fields": "complete",
+            "freshness": "fresh",
+            "confirmation": "confirmed",
+            "effect": "reversible"
+          },
+          "action": "STOP"
+        }
+      ],
+      "default": "RETRY"
+    },
+    {
+      "name": "Policy_2",
+      "rules": [
+        {
+          "when": {
+            "status": "success",
+            "fields": "complete"
+          },
+          "action": "COMPLETE"
+        },
+        {
+          "when": {
+            "status": "transient_error",
+            "fields": "complete"
+          },
+          "action": "RETRY"
+        },
+        {
+          "when": {
+            "status": "permanent_error",
+            "fields": "complete"
+          },
+          "action": "STOP"
+        },
+        {
+          "when": {
+            "fields": "missing"
+          },
+          "action": "QUERY"
+        }
+      ],
+      "default": "QUERY"
+    },
+    {
+      "name": "Policy1",
+      "rules": [
+        {
+          "when": {
+            "status": "success",
+            "fields": "complete",
+            "freshness": "fresh",
+            "confirmation": "confirmed",
+            "effect": "reversible"
+          },
+          "action": "COMPLETE"
+        },
+        {
+          "when": {
+            "status": "transient_error",
+            "fields": "complete",
+            "freshness": "fresh",
+            "confirmation": "confirmed",
+            "effect": "reversible"
+          },
+          "action": "RETRY"
+        },
+        {
+          "when": {
+            "status": "permanent_error",
+            "fields": "complete",
+            "freshness": "fresh",
+            "confirmation": "confirmed",
+            "effect": "reversible"
+          },
+          "action": "STOP"
+        },
+        {
+          "when": {
+            "fields": "missing",
+            "freshness": "fresh",
+            "confirmation": "confirmed",
+            "effect": "reversible"
+          },
+          "action": "QUERY"
+        }
+      ],
+      "default": "RETRY"
+    },
+    {
+      "name": "Policy6",
+      "rules": [
+        {
+          "when": {
+            "status": "success",
+            "fields": "complete"
+          },
+          "action": "COMPLETE"
+        },
+        {
+          "when": {
+            "status": "transient_error",
+            "fields": "complete"
+          },
+          "action": "RETRY"
+        },
+        {
+          "when": {
+            "status": "permanent_error",
+            "fields": "complete"
+          },
+          "action": "STOP"
+        },
+        {
+          "when": {
+            "status": "transient_error",
+            "fields": "missing"
+          },
+          "action": "QUERY"
+        }
+      ],
+      "default": "COMPLETE"
+    },
+    {
+      "name": "Policy6",
+      "rules": [
+        {
+          "when": {
+            "status": "success",
+            "fields": "complete",
+            "freshness": "fresh",
+            "confirmation": "confirmed",
+            "effect": "reversible"
+          },
+          "action": "COMPLETE"
+        },
+        {
+          "when": {
+            "status": "transient_error",
+            "fields": "complete",
+            "freshness": "fresh",
+            "confirmation": "confirmed",
+            "effect": "reversible"
+          },
+          "action": "RETRY"
+        },
+        {
+          "when": {
+            "status": "permanent_error",
+            "fields": "missing",
+            "freshness": "fresh",
+            "confirmation": "confirmed",
+            "effect": "reversible"
+          },
+          "action": "QUERY"
+        },
+        {
+          "when": {
+            "status": "permanent_error",
+            "fields": "complete",
+            "freshness": "fresh",
+            "confirmation": "confirmed",
+            "effect": "reversible"
+          },
+          "action": "STOP"
+        },
+        {
+          "when": {
+            "status": "transient_error",
+            "fields": "missing",
+            "freshness": "fresh",
+            "confirmation": "confirmed",
+            "effect": "reversible"
+          },
+          "action": "QUERY"
+        }
+      ],
+      "default": "RETRY"
+    }
+  ],
+  "independent_generated_holdout_meta": [
+    {
+      "seed": 9101,
+      "valid_unique": 6,
+      "colliders": 0,
+      "elapsed_seconds": 15.655765799980145,
+      "prompt_tokens": 455,
+      "output_tokens": 1274,
+      "raw_content": "{\n  \"policies\": [\n    {\n      \"name\": \"Policy_1\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"COMPLETE\"\n    },\n    {\n      \"name\": \"Policy_2\",\n      \"rules\": [\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy_3\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"COMPLETE\"\n    },\n    {\n      \"name\": \"Policy_4\",\n      \"rules\": [\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy_5\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"COMPLETE\"\n    },\n    {\n      \"name\": \"Policy_6\",\n      \"rules\": [\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"irreversible\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy_7\",\n      \"rules\": [\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy_8\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"irreversible\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"COMPLETE\"\n    }\n  ]\n}"
+    },
+    {
+      "seed": 9102,
+      "valid_unique": 4,
+      "colliders": 2,
+      "elapsed_seconds": 18.974356299993815,
+      "prompt_tokens": 455,
+      "output_tokens": 1540,
+      "raw_content": "{\n  \"policies\": [\n    {\n      \"name\": \"Policy_1\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy_2\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy_3\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy_4\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy_5\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy_6\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"irreversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy_7\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy_8\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"irreversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"RETRY\"\n    }\n  ]\n}"
+    },
+    {
+      "seed": 9103,
+      "valid_unique": 4,
+      "colliders": 1,
+      "elapsed_seconds": 11.282665599981556,
+      "prompt_tokens": 455,
+      "output_tokens": 910,
+      "raw_content": "{\n  \"policies\": [\n    {\n      \"name\": \"Policy_1\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"COMPLETE\"\n    },\n    {\n      \"name\": \"Policy_2\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"fields\": \"missing\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy_3\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"effect\": \"irreversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy_4\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"freshness\": \"stale\"}, \"action\": \"RETRY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy_5\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"confirmation\": \"unconfirmed\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy_6\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"effect\": \"irreversible\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"STOP\"\n    },\n    {\n      \"name\": \"Policy_7\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"fields\": \"missing\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy_8\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"freshness\": \"stale\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    }\n  ]\n}"
+    },
+    {
+      "seed": 9104,
+      "valid_unique": 4,
+      "colliders": 3,
+      "elapsed_seconds": 22.471798399987165,
+      "prompt_tokens": 455,
+      "output_tokens": 1823,
+      "raw_content": "{\n  \"policies\": [\n    {\n      \"name\": \"Policy1\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy2\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy3\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy4\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"fields\": \"missing\", \"freshness\": \"stale\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy5\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy6\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"stale\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy7\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"unconfirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy8\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"success\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"QUERY\"\n    }\n  ]\n}"
+    },
+    {
+      "seed": 9105,
+      "valid_unique": 6,
+      "colliders": 2,
+      "elapsed_seconds": 11.388286600005813,
+      "prompt_tokens": 455,
+      "output_tokens": 919,
+      "raw_content": "{\n  \"policies\": [\n    {\n      \"name\": \"Policy1\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"COMPLETE\"\n    },\n    {\n      \"name\": \"Policy2\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"fields\": \"missing\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"COMPLETE\"\n    },\n    {\n      \"name\": \"Policy3\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"freshness\": \"stale\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"COMPLETE\"\n    },\n    {\n      \"name\": \"Policy4\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"confirmation\": \"unconfirmed\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"COMPLETE\"\n    },\n    {\n      \"name\": \"Policy5\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"effect\": \"irreversible\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"COMPLETE\"\n    },\n    {\n      \"name\": \"Policy6\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"COMPLETE\"\n    },\n    {\n      \"name\": \"Policy7\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"freshness\": \"stale\", \"fields\": \"missing\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"COMPLETE\"\n    },\n    {\n      \"name\": \"Policy8\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\"}, \"action\": \"STOP\"},\n        {\"when\": {\"confirmation\": \"unconfirmed\", \"fields\": \"missing\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"COMPLETE\"\n    }\n  ]\n}"
+    },
+    {
+      "seed": 9106,
+      "valid_unique": 7,
+      "colliders": 3,
+      "elapsed_seconds": 18.277585500007262,
+      "prompt_tokens": 455,
+      "output_tokens": 1481,
+      "raw_content": "{\n  \"policies\": [\n    {\n      \"name\": \"Policy1\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy2\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy3\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy4\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy5\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"}\n      ],\n      \"default\": \"QUERY\"\n    },\n    {\n      \"name\": \"Policy6\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy7\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"STOP\"}\n      ],\n      \"default\": \"RETRY\"\n    },\n    {\n      \"name\": \"Policy8\",\n      \"rules\": [\n        {\"when\": {\"status\": \"success\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"COMPLETE\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"complete\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"RETRY\"},\n        {\"when\": {\"status\": \"permanent_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"},\n        {\"when\": {\"status\": \"transient_error\", \"fields\": \"missing\", \"freshness\": \"fresh\", \"confirmation\": \"confirmed\", \"effect\": \"reversible\"}, \"action\": \"QUERY\"}\n      ],\n      \"default\": \"RETRY\"\n    }\n  ]\n}"
+    }
+  ],
+  "procedural_train_bank_size": 600,
+  "procedural_test_bank_size": 600,
+  "hand_mutant_count": 7,
+  "hand_greedy_support": [
+    "permanent_error|complete|fresh|confirmed|reversible",
+    "success|complete|fresh|confirmed|reversible",
+    "success|complete|stale|confirmed|irreversible",
+    "success|complete|stale|confirmed|reversible",
+    "success|complete|stale|unconfirmed|irreversible",
+    "success|complete|stale|unconfirmed|reversible",
+    "transient_error|complete|fresh|confirmed|reversible",
+    "transient_error|complete|fresh|unconfirmed|irreversible",
+    "transient_error|complete|fresh|unconfirmed|reversible",
+    "transient_error|missing|fresh|confirmed|reversible"
+  ],
+  "programmatic_greedy_support": [
+    "permanent_error|complete|fresh|confirmed|reversible",
+    "permanent_error|complete|stale|unconfirmed|reversible",
+    "permanent_error|missing|stale|confirmed|irreversible",
+    "success|complete|fresh|confirmed|reversible",
+    "success|complete|fresh|unconfirmed|irreversible",
+    "success|missing|stale|unconfirmed|irreversible",
+    "transient_error|complete|fresh|confirmed|reversible",
+    "transient_error|complete|stale|confirmed|irreversible",
+    "transient_error|missing|fresh|confirmed|reversible",
+    "transient_error|missing|fresh|unconfirmed|irreversible"
+  ],
+  "metrics": {
+    "adaptive_procedural_holdout_kill_rate": 0.755,
+    "hand_procedural_holdout_kill_rate": 0.805,
+    "programmatic_procedural_holdout_kill_rate": 0.9233333333333333,
+    "random_procedural_holdout": {
+      "repetitions": 500,
+      "median": 0.8383333333333334,
+      "p10": 0.795,
+      "p90": 0.8766666666666667,
+      "mean": 0.8361100000000038
+    },
+    "adaptive_generated_holdout_kill_rate": 1.0,
+    "hand_generated_holdout_kill_rate": 1.0,
+    "programmatic_generated_holdout_kill_rate": 1.0
+  },
+  "scope_note": "Local synthetic benign policy programs only. No represented workflow action or external tool was executed."
+}

@@ -1,0 +1,61 @@
+{
+  "created_at_utc": "2026-08-16T18:05:00.310178Z",
+  "hypotheses": [
+    {
+      "alternative_explanations": [
+        "模型只被工具名称或列表顺序诱导，而不是推理证据闭包",
+        "强提示已经足够，闭包卡只是在提示中泄露答案",
+        "任务明确要求确认完成，使合成集偏向可核验工具",
+        "工具说明已人工编码全部效果关系，语义编译没有被测试",
+        "收益只适用于小型本地模型"
+      ],
+      "changed_computation": {
+        "baseline": "模型直接从自然语言工具说明选择动作，或在一句通用可验证性原则下选择。",
+        "budget_effect": "不增加模型调用；增加一个由现有工具说明机械生成的短效果—证据闭包卡。",
+        "information_available": "用户目标、全部动作工具说明、返回字段、读回工具说明和相同成本声明。",
+        "intervention": "在执行前构造目标效果到动作输出再到读回观测的可达图，并标出每个动作的证据路径是否闭合。",
+        "timing": "初始动作工具选择之前。"
+      },
+      "created_at_utc": "2026-08-16T18:05:00.310178Z",
+      "descriptors": {
+        "budget_class": "同一次模型调用加确定性闭包摘要",
+        "computation_stage": "动作工具选择之前",
+        "evaluation_mode": "双开放模型、本地合成功能等价工具对",
+        "information_source": "用户目标与工具模式中的动作、输出和读回关系",
+        "intervention_family": "效果—证据闭包编译与可验证性约束选择",
+        "problem_family": "功能等价工具之间的可证实性选择",
+        "timing_class": "每次存在多个等价动作提供者时"
+      },
+      "falsifier": "若原始条件已达到至少90%，若强通用提示与闭包卡相同或仅差1/12，若优势不跨两个模型，若闭包卡必须直接标注正确工具而不能由字段关系推出，或最近工作已实现同一执行前证据可达选择，则候选死亡。",
+      "hypothesis_id": "h-v057-preaction-evidence-closure",
+      "lineage_note": "v057 离开工具结果状态与安全主题，测试功能等价动作工具之间的未来可证实性选择；所有任务与调用均为本地模拟。",
+      "literature_refs": [
+        "arXiv:2601.04688 ToolGate",
+        "arXiv:2608.02645 Verified Tool Calls",
+        "arXiv:2510.17109 VeriMAP",
+        "EMNLP 2025 2025.emnlp-main.1060 Tool Preferences",
+        "arXiv:2608.04719 Canary Tools"
+      ],
+      "mechanism_claim": "从目标效果、动作工具返回字段和读回工具输入/输出关系构造证据可达图；若动作的最终效果没有可达观测节点，则在同成本功能等价集合中排除该动作。",
+      "minimal_killer_experiment": "在12个本地合成任务上交替动作工具身份和列表顺序，使用qwen2.5:7b与qwen3:8b比较原始说明、强通用可验证性提示和同信息闭包卡，评分首个动作工具是否具有最终效果证据路径。",
+      "nearest_prior_risk": "ToolGate和Verified Tool Calls已做调用后核验；VeriMAP已做验证函数感知规划；传统部分可观察规划把观测纳入动作选择。若执行前的工具证据可达选择只是这些方法的直接实例，则没有新内核。",
+      "parent_ids": [],
+      "problem": "两个工具都能发起同一动作，但只有一个返回可用于后续读回的操作标识；智能体可能选择不可验证路径并在成功外观上停止。",
+      "revision": 2,
+      "status": "falsified",
+      "status_reason": "qwen2.5:7b与qwen3:8b在原始、强提示和闭包卡三条件下均为12/12；原始条件已超过90%杀死阈值，候选无可测增益。",
+      "target_failure": {
+        "card_ids": [],
+        "evidence_ids": [],
+        "summary": "工具选择只匹配动作语义，不考虑最终目标效果是否存在可达证据路径。"
+      },
+      "title": "执行前效果—证据闭包工具选择",
+      "updated_at_utc": "2026-08-16T18:11:00.878218Z"
+    }
+  ],
+  "revision": 2,
+  "run_id": "20260816_1644_run13",
+  "schema_version": 1,
+  "updated_at_utc": "2026-08-16T18:11:00.878218Z",
+  "version": "v057"
+}

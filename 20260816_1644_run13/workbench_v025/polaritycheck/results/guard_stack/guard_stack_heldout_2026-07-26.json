@@ -1,0 +1,1388 @@
+{
+  "unit": "heldout-drift-corpus",
+  "successor_of_row": 103,
+  "date": "2026-07-26 08:46:33",
+  "node": "redacted",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "drift_threshold": 0.4,
+  "drift_threshold_source": "the audited system's engine config drift_threshold",
+  "measurement_discipline": "GENERALIZATION measurement (pre-registered H1): the corpus was authored by a clean-context agent from contract-level class definitions only; the guard's lexicon was completed against the IN-SAMPLE corpus and has never seen these cases. One-shot: misses are data rows; no lexicon edit may be re-measured against this corpus without recording the peek.",
+  "corpus_provenance": {
+    "path": "tests\\fixtures\\heldout_drift_corpus.json",
+    "authoring_isolation": "No repository file was opened. Brief contained: the six class definitions, the case schema, two in-sample format examples (domains/vocabulary avoided)."
+  },
+  "models": {
+    "cosine": "MRLEmbeddingRouter (nomic-embed-text-v1.5, MRL-256, CPU) via calculate_drift",
+    "nli": {
+      "id": "cross-encoder/nli-MiniLM2-L6-H768",
+      "revision": "b95119ce93d3e065de6214e38cd4a97b0f2f2c6d",
+      "device": "cpu"
+    },
+    "ledger": "the audited system's constraint ledger (pure stdlib; spaCy absent -> named residual)"
+  },
+  "layers": [
+    "cosine",
+    "ledger_apriori",
+    "ledger_full",
+    "nli",
+    "composite"
+  ],
+  "load_seconds": 3.42,
+  "probe_seconds": 5.48,
+  "rows": [
+    {
+      "id": "HO-neg-01",
+      "mutation_class": "negation_flip",
+      "sub_form": "lexical_antonym_verb",
+      "root": "Withhold the study drug from any participant who reports chest tightness.",
+      "mutated": "Administer the study drug to any participant who reports chest tightness.",
+      "cosine": {
+        "similarity": 0.9608,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.7474,
+        "duplication": 0.2233,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "polarity",
+            "verdict": "DROPPED",
+            "term": "withhold",
+            "provenance": "added-now",
+            "evidence": "no DISCLOSURE term survives in the hop"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "HO-neg-02",
+      "mutation_class": "negation_flip",
+      "sub_form": "dropped_negator",
+      "root": "The aircraft is not to be towed back to the flight line while the borescope inspection is pending.",
+      "mutated": "Tow the aircraft back to the flight line while the borescope inspection is pending.",
+      "cosine": {
+        "similarity": 0.9602,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9936,
+        "duplication": 0.0046,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "nli"
+      }
+    },
+    {
+      "id": "HO-neg-03",
+      "mutation_class": "negation_flip",
+      "sub_form": "prepositional_flip",
+      "root": "Replies to opposing counsel go out without the internal case ledger attached.",
+      "mutated": "Replies to opposing counsel go out with the internal case ledger attached.",
+      "cosine": {
+        "similarity": 0.9926,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9985,
+        "duplication": 0.0003,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "nli"
+      }
+    },
+    {
+      "id": "HO-neg-04",
+      "mutation_class": "negation_flip",
+      "sub_form": "affirmative_duty_to_prohibition",
+      "root": "Housekeeping performs the daily wellness check on long-stay suites even when the privacy sign is displayed.",
+      "mutated": "Housekeeping skips long-stay suites whenever the privacy sign is displayed.",
+      "cosine": {
+        "similarity": 0.9038,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9829,
+        "duplication": 0.0022,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "nli"
+      }
+    },
+    {
+      "id": "HO-neg-05",
+      "mutation_class": "negation_flip",
+      "sub_form": "state_polarity_flip",
+      "root": "Leave the substation's remote telemetry link powered on through storm season.",
+      "mutated": "Keep the substation's remote telemetry link powered down through storm season.",
+      "cosine": {
+        "similarity": 0.9795,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9808,
+        "duplication": 0.0167,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "nli"
+      }
+    },
+    {
+      "id": "HO-neg-06",
+      "mutation_class": "negation_flip",
+      "sub_form": "negative_affix_removal",
+      "root": "Tagged raptors are to remain unhandled for the duration of the molt survey.",
+      "mutated": "Tagged raptors are handled as needed for the duration of the molt survey.",
+      "cosine": {
+        "similarity": 0.9857,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.998,
+        "duplication": 0.0006,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "nli"
+      }
+    },
+    {
+      "id": "HO-scope-01",
+      "mutation_class": "scope_inversion",
+      "sub_form": "solely_to_everyone_but",
+      "root": "Field-trip waivers are collected solely from students below sixth grade.",
+      "mutated": "Field-trip waivers are collected from every student except those below sixth grade.",
+      "cosine": {
+        "similarity": 0.9955,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9656,
+        "duplication": 0.0272,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "restriction",
+            "verdict": "POLARITY-FLIPPED",
+            "term": "solely",
+            "provenance": "added-now",
+            "evidence": "scope inverted restrictive -> universal ('every ... except')"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "HO-scope-02",
+      "mutation_class": "scope_inversion",
+      "sub_form": "approved_roster_read_as_caution_list",
+      "root": "The kitchen sources shellfish exclusively from vendors on the county's certified-harvester roster.",
+      "mutated": "The kitchen steers clear of shellfish vendors on the county's certified-harvester roster.",
+      "cosine": {
+        "similarity": 0.9383,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9969,
+        "duplication": 0.0011,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "restriction",
+            "verdict": "DROPPED",
+            "term": "exclusively",
+            "provenance": "added-now",
+            "evidence": "restriction clause dropped"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "HO-scope-03",
+      "mutation_class": "scope_inversion",
+      "sub_form": "reserved_for_becomes_kept_from",
+      "root": "The negative-pressure rooms are reserved for airborne-isolation admissions.",
+      "mutated": "Airborne-isolation admissions are kept out of the negative-pressure rooms.",
+      "cosine": {
+        "similarity": 0.9771,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9965,
+        "duplication": 0.002,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "nli"
+      }
+    },
+    {
+      "id": "HO-scope-04",
+      "mutation_class": "scope_inversion",
+      "sub_form": "default_posture_flip",
+      "root": "Outbound traffic from the quarantined subnet is blocked by default, with exceptions logged case-by-case by the incident lead.",
+      "mutated": "Outbound traffic from the quarantined subnet flows by default, with blocks logged case-by-case by the incident lead.",
+      "cosine": {
+        "similarity": 0.9809,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.8653,
+        "duplication": 0.012,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "nli"
+      }
+    },
+    {
+      "id": "HO-scope-05",
+      "mutation_class": "scope_inversion",
+      "sub_form": "complement_swap",
+      "root": "Corrections run in every edition except the weekend digest.",
+      "mutated": "Corrections run in the weekend digest only.",
+      "cosine": {
+        "similarity": 0.9798,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9609,
+        "duplication": 0.0028,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "nli"
+      }
+    },
+    {
+      "id": "HO-scope-06",
+      "mutation_class": "scope_inversion",
+      "sub_form": "temporal_window_inversion",
+      "root": "Hazmat pallet staging in Bay 4 is confined to the overnight window.",
+      "mutated": "Hazmat pallets can be staged in Bay 4 anytime outside the overnight window.",
+      "cosine": {
+        "similarity": 0.9771,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9953,
+        "duplication": 0.0008,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "nli"
+      }
+    },
+    {
+      "id": "HO-del-01",
+      "mutation_class": "constraint_deletion",
+      "sub_form": "dropped_second_clause",
+      "root": "Wire transfers above the treasury cap require a callback to the account holder, and the callback is placed to the number on file rather than one supplied in the request.",
+      "mutated": "Wire transfers above the treasury cap get a verification callback to the account holder.",
+      "cosine": {
+        "similarity": 0.9743,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "NEUTRAL",
+        "contradiction": 0.0338,
+        "duplication": 0.0019,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "modal",
+            "verdict": "DROPPED",
+            "term": "require",
+            "provenance": "added-now",
+            "evidence": "no obligation modal survives in the hop"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "HO-del-02",
+      "mutation_class": "constraint_deletion",
+      "sub_form": "dropped_precondition",
+      "root": "Trench work deeper than the waist may proceed once shoring is installed and a spotter is stationed topside.",
+      "mutated": "Trench work deeper than the waist may proceed once shoring is installed.",
+      "cosine": {
+        "similarity": 0.9818,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "NEUTRAL",
+        "contradiction": 0.0032,
+        "duplication": 0.0029,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": false,
+        "fired_layer": null
+      }
+    },
+    {
+      "id": "HO-del-03",
+      "mutation_class": "constraint_deletion",
+      "sub_form": "dropped_exception",
+      "root": "Customer chat logs are purged after the retention window closes, except logs under active litigation hold, which stay untouched.",
+      "mutated": "Customer chat logs are purged once the retention window closes.",
+      "cosine": {
+        "similarity": 0.9878,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "NEUTRAL",
+        "contradiction": 0.0184,
+        "duplication": 0.0019,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": false,
+        "fired_layer": null
+      }
+    },
+    {
+      "id": "HO-del-04",
+      "mutation_class": "constraint_deletion",
+      "sub_form": "dropped_timing_rider",
+      "root": "Compounded IV bags are labeled at the hood, with the beyond-use time written before the bag leaves the cleanroom.",
+      "mutated": "Compounded IV bags get labeled at the hood.",
+      "cosine": {
+        "similarity": 0.9652,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "NEUTRAL",
+        "contradiction": 0.0068,
+        "duplication": 0.0021,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": false,
+        "fired_layer": null
+      }
+    },
+    {
+      "id": "HO-del-05",
+      "mutation_class": "constraint_deletion",
+      "sub_form": "dropped_notification_duty",
+      "root": "Hotfixes may ship outside the release train provided the on-call channel is paged before the deploy begins.",
+      "mutated": "Hotfixes may ship outside the regular release train.",
+      "cosine": {
+        "similarity": 0.9522,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "NEUTRAL",
+        "contradiction": 0.0173,
+        "duplication": 0.0019,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": false,
+        "fired_layer": null
+      }
+    },
+    {
+      "id": "HO-del-06",
+      "mutation_class": "constraint_deletion",
+      "sub_form": "dropped_referral_qualifier",
+      "root": "Adjusters settle hail claims on-site up to the fast-track ceiling, and any roof older than fifteen years is referred to engineering first.",
+      "mutated": "Adjusters settle hail claims on-site up to the fast-track ceiling.",
+      "cosine": {
+        "similarity": 0.9061,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "NEUTRAL",
+        "contradiction": 0.0186,
+        "duplication": 0.0022,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": false,
+        "fired_layer": null
+      }
+    },
+    {
+      "id": "HO-qty-01",
+      "mutation_class": "quantity_unit_drift",
+      "sub_form": "digit_transposition",
+      "root": "Escalate to nephrology when creatinine clearance falls below 45 mL/min.",
+      "mutated": "Escalate to nephrology when creatinine clearance falls below 54 mL/min.",
+      "cosine": {
+        "similarity": 0.9997,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9537,
+        "duplication": 0.013,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "nli"
+      }
+    },
+    {
+      "id": "HO-qty-02",
+      "mutation_class": "quantity_unit_drift",
+      "sub_form": "temperature_scale_swap",
+      "root": "Reheated soups reach 74\u00b0C at the core before service.",
+      "mutated": "Reheated soups reach 74\u00b0F at the core before service.",
+      "cosine": {
+        "similarity": 0.9983,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9769,
+        "duplication": 0.0102,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "nli"
+      }
+    },
+    {
+      "id": "HO-qty-03",
+      "mutation_class": "quantity_unit_drift",
+      "sub_form": "cadence_stretch",
+      "root": "The merchant clearing account is reconciled each fortnight.",
+      "mutated": "The merchant clearing account is reconciled each quarter.",
+      "cosine": {
+        "similarity": 0.9739,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9119,
+        "duplication": 0.0629,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "nli"
+      }
+    },
+    {
+      "id": "HO-qty-04",
+      "mutation_class": "quantity_unit_drift",
+      "sub_form": "ratio_rescale",
+      "root": "Reject the print run if more than 1 in 200 labels is misaligned.",
+      "mutated": "Reject the print run if more than 1 in 20 labels is misaligned.",
+      "cosine": {
+        "similarity": 0.9991,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9762,
+        "duplication": 0.0072,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "nli"
+      }
+    },
+    {
+      "id": "HO-qty-05",
+      "mutation_class": "quantity_unit_drift",
+      "sub_form": "count_reduction",
+      "root": "Offer letters are released once all three listed references have been contacted.",
+      "mutated": "Offer letters are released once two of the listed references have been contacted.",
+      "cosine": {
+        "similarity": 0.9978,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.983,
+        "duplication": 0.0018,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "nli"
+      }
+    },
+    {
+      "id": "HO-qty-06",
+      "mutation_class": "quantity_unit_drift",
+      "sub_form": "mass_unit_swap",
+      "root": "Parcels heavier than 23 kg are team-lifted onto the belt.",
+      "mutated": "Parcels heavier than 23 lb are team-lifted onto the belt.",
+      "cosine": {
+        "similarity": 0.9857,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "DUPLICATE",
+        "contradiction": 0.0111,
+        "duplication": 0.9729,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": false,
+        "fired_layer": null
+      }
+    },
+    {
+      "id": "HO-mod-01",
+      "mutation_class": "modal_downgrade",
+      "sub_form": "shall_to_encouraged",
+      "root": "Nursing staff shall double-sign insulin draws at the bedside.",
+      "mutated": "Nursing staff are encouraged to double-sign insulin draws at the bedside.",
+      "cosine": {
+        "similarity": 0.9927,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "DUPLICATE",
+        "contradiction": 0.005,
+        "duplication": 0.5609,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "modal",
+            "verdict": "MODAL-DOWNGRADED",
+            "term": "shall",
+            "provenance": "added-now",
+            "evidence": "weakened to ['MEDIUM'] (< STRONG)"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "HO-mod-02",
+      "mutation_class": "modal_downgrade",
+      "sub_form": "mandatory_to_recommended",
+      "root": "Face shields are mandatory whenever the autoclave door is opened hot.",
+      "mutated": "Face shields are recommended whenever the autoclave door is opened hot.",
+      "cosine": {
+        "similarity": 0.9931,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "DUPLICATE",
+        "contradiction": 0.0061,
+        "duplication": 0.901,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "modal",
+            "verdict": "MODAL-DOWNGRADED",
+            "term": "mandatory",
+            "provenance": "added-now",
+            "evidence": "weakened to ['MEDIUM'] (< STRONG)"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "HO-mod-03",
+      "mutation_class": "modal_downgrade",
+      "sub_form": "categorical_to_general_practice",
+      "root": "Listings that resell recalled car seats are taken down on sight.",
+      "mutated": "Listings that resell recalled car seats should generally be taken down.",
+      "cosine": {
+        "similarity": 0.9869,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "NEUTRAL",
+        "contradiction": 0.1912,
+        "duplication": 0.1057,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": false,
+        "fired_layer": null
+      }
+    },
+    {
+      "id": "HO-mod-04",
+      "mutation_class": "modal_downgrade",
+      "sub_form": "strict_sequencing_to_ideally",
+      "root": "Contracts are countersigned strictly after the venue walkthrough.",
+      "mutated": "Contracts are ideally countersigned after the venue walkthrough.",
+      "cosine": {
+        "similarity": 0.9948,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "NEUTRAL",
+        "contradiction": 0.258,
+        "duplication": 0.2174,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": false,
+        "fired_layer": null
+      }
+    },
+    {
+      "id": "HO-mod-05",
+      "mutation_class": "modal_downgrade",
+      "sub_form": "refusal_to_preference",
+      "root": "The reading room will not release fragile folios without a conservator present.",
+      "mutated": "The reading room prefers to have a conservator present when fragile folios are released.",
+      "cosine": {
+        "similarity": 0.97,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "NEUTRAL",
+        "contradiction": 0.1196,
+        "duplication": 0.1932,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": false,
+        "fired_layer": null
+      }
+    },
+    {
+      "id": "HO-mod-06",
+      "mutation_class": "modal_downgrade",
+      "sub_form": "duty_to_time_permitting",
+      "root": "Samplers are obligated to chill specimens on ice at the point of draw.",
+      "mutated": "Samplers chill specimens on ice at the point of draw when time allows.",
+      "cosine": {
+        "similarity": 0.9782,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "NEUTRAL",
+        "contradiction": 0.0269,
+        "duplication": 0.0352,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": false,
+        "fired_layer": null
+      }
+    },
+    {
+      "id": "HO-ctl-01",
+      "mutation_class": "faithful_control",
+      "sub_form": "double_negation_preserves",
+      "root": "Expired vaccine lots are quarantined in the red bin until the courier collects them.",
+      "mutated": "Expired vaccine lots are never left outside the red quarantine bin before courier pickup.",
+      "cosine": {
+        "similarity": 0.9765,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "NEUTRAL",
+        "contradiction": 0.2563,
+        "duplication": 0.3712,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": false,
+        "fired_layer": null
+      }
+    },
+    {
+      "id": "HO-ctl-02",
+      "mutation_class": "faithful_control",
+      "sub_form": "antonym_with_negator_preserves",
+      "root": "Refunds over the supervisor threshold are held until a second approver signs.",
+      "mutated": "Refunds over the supervisor threshold are not released until a second approver signs.",
+      "cosine": {
+        "similarity": 0.9934,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.7856,
+        "duplication": 0.1631,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "nli"
+      }
+    },
+    {
+      "id": "HO-ctl-03",
+      "mutation_class": "faithful_control",
+      "sub_form": "complement_restatement_preserves",
+      "root": "Only staff with a chaperone badge ride the activity bus.",
+      "mutated": "Staff without a chaperone badge stay off the activity bus.",
+      "cosine": {
+        "similarity": 0.9611,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9877,
+        "duplication": 0.0026,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "restriction",
+            "verdict": "DROPPED",
+            "term": "only",
+            "provenance": "campaign-seed",
+            "evidence": "restriction clause dropped"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "restriction",
+            "verdict": "DROPPED",
+            "term": "only",
+            "provenance": "campaign-seed",
+            "evidence": "restriction clause dropped"
+          }
+        ]
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "HO-ctl-04",
+      "mutation_class": "faithful_control",
+      "sub_form": "unit_conversion_equivalent",
+      "root": "Walk-in coolers hold product at or below 4\u00b0C.",
+      "mutated": "Walk-in coolers keep product no warmer than 39\u00b0F.",
+      "cosine": {
+        "similarity": 0.97,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9705,
+        "duplication": 0.0075,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "nli"
+      }
+    },
+    {
+      "id": "HO-ctl-05",
+      "mutation_class": "faithful_control",
+      "sub_form": "strong_modal_resynonymized",
+      "root": "The tow crew shall chock both main gear before disconnecting the tug.",
+      "mutated": "Chocking both main gear before tug disconnect is non-negotiable for the tow crew.",
+      "cosine": {
+        "similarity": 0.9596,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "NEUTRAL",
+        "contradiction": 0.3246,
+        "duplication": 0.005,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "modal",
+            "verdict": "DROPPED",
+            "term": "shall",
+            "provenance": "added-now",
+            "evidence": "no obligation modal survives in the hop"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "HO-ctl-06",
+      "mutation_class": "faithful_control",
+      "sub_form": "negative_affix_double_flip",
+      "root": "The audit logging service stays enabled on production hosts.",
+      "mutated": "Production hosts are never run with the audit logging service disabled.",
+      "cosine": {
+        "similarity": 0.9446,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "CONTRADICTS",
+        "contradiction": 0.9464,
+        "duplication": 0.0134,
+        "caught": true
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "nli"
+      }
+    },
+    {
+      "id": "HO-ctl-07",
+      "mutation_class": "faithful_control",
+      "sub_form": "cadence_equivalent_restatement",
+      "root": "Fire extinguishers are inspected every twelve months.",
+      "mutated": "Each fire extinguisher gets an inspection at least once a year.",
+      "cosine": {
+        "similarity": 0.9608,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "DUPLICATE",
+        "contradiction": 0.0942,
+        "duplication": 0.8239,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": false,
+        "fired_layer": null
+      }
+    },
+    {
+      "id": "HO-ctl-08",
+      "mutation_class": "faithful_control",
+      "sub_form": "prohibition_as_negated_permission",
+      "root": "Screenshots of private messages are removed from the forum unless every participant consents.",
+      "mutated": "Unless every participant consents, screenshots of private messages cannot stay up on the forum.",
+      "cosine": {
+        "similarity": 0.9763,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "DUPLICATE",
+        "contradiction": 0.049,
+        "duplication": 0.8941,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "polarity",
+            "verdict": "DROPPED",
+            "term": "removed",
+            "provenance": "campaign-seed",
+            "evidence": "no INCLUSION term survives in the hop"
+          }
+        ]
+      },
+      "ledger_apriori": {
+        "caught": true,
+        "flagged": [
+          {
+            "kind": "polarity",
+            "verdict": "DROPPED",
+            "term": "removed",
+            "provenance": "campaign-seed",
+            "evidence": "no INCLUSION term survives in the hop"
+          }
+        ]
+      },
+      "composite": {
+        "caught": true,
+        "fired_layer": "ledger"
+      }
+    },
+    {
+      "id": "HO-ctl-09",
+      "mutation_class": "faithful_control",
+      "sub_form": "passive_active_negation_swap",
+      "root": "Dialysis chairs are sanitized between every patient, with no exceptions for back-to-back bookings.",
+      "mutated": "No patient is seated in a dialysis chair that wasn't sanitized after the previous session, even for back-to-back bookings.",
+      "cosine": {
+        "similarity": 0.9549,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "NEUTRAL",
+        "contradiction": 0.0431,
+        "duplication": 0.2666,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": false,
+        "fired_layer": null
+      }
+    },
+    {
+      "id": "HO-ctl-10",
+      "mutation_class": "faithful_control",
+      "sub_form": "exception_preserving_reword",
+      "root": "Backups older than the retention horizon are destroyed, apart from those flagged for the annual compliance snapshot.",
+      "mutated": "Once past the retention horizon, backups do not survive destruction unless they carry the compliance-snapshot flag.",
+      "cosine": {
+        "similarity": 0.9646,
+        "caught": false
+      },
+      "nli": {
+        "verdict": "NEUTRAL",
+        "contradiction": 0.2206,
+        "duplication": 0.0305,
+        "caught": false
+      },
+      "ledger_full": {
+        "caught": false,
+        "flagged": []
+      },
+      "ledger_apriori": {
+        "caught": false,
+        "flagged": []
+      },
+      "composite": {
+        "caught": false,
+        "fired_layer": null
+      }
+    }
+  ],
+  "per_class": {
+    "negation_flip": {
+      "kind": "mutation",
+      "n": 6,
+      "rate_meaning": "true_positive_catch_rate",
+      "cosine_fired": 0,
+      "cosine_rate": 0.0,
+      "ledger_apriori_fired": 0,
+      "ledger_apriori_rate": 0.0,
+      "ledger_full_fired": 1,
+      "ledger_full_rate": 0.1667,
+      "nli_fired": 6,
+      "nli_rate": 1.0,
+      "composite_fired": 6,
+      "composite_rate": 1.0
+    },
+    "scope_inversion": {
+      "kind": "mutation",
+      "n": 6,
+      "rate_meaning": "true_positive_catch_rate",
+      "cosine_fired": 0,
+      "cosine_rate": 0.0,
+      "ledger_apriori_fired": 0,
+      "ledger_apriori_rate": 0.0,
+      "ledger_full_fired": 2,
+      "ledger_full_rate": 0.3333,
+      "nli_fired": 6,
+      "nli_rate": 1.0,
+      "composite_fired": 6,
+      "composite_rate": 1.0
+    },
+    "constraint_deletion": {
+      "kind": "mutation",
+      "n": 6,
+      "rate_meaning": "true_positive_catch_rate",
+      "cosine_fired": 0,
+      "cosine_rate": 0.0,
+      "ledger_apriori_fired": 0,
+      "ledger_apriori_rate": 0.0,
+      "ledger_full_fired": 1,
+      "ledger_full_rate": 0.1667,
+      "nli_fired": 0,
+      "nli_rate": 0.0,
+      "composite_fired": 1,
+      "composite_rate": 0.1667
+    },
+    "quantity_unit_drift": {
+      "kind": "mutation",
+      "n": 6,
+      "rate_meaning": "true_positive_catch_rate",
+      "cosine_fired": 0,
+      "cosine_rate": 0.0,
+      "ledger_apriori_fired": 0,
+      "ledger_apriori_rate": 0.0,
+      "ledger_full_fired": 0,
+      "ledger_full_rate": 0.0,
+      "nli_fired": 5,
+      "nli_rate": 0.8333,
+      "composite_fired": 5,
+      "composite_rate": 0.8333
+    },
+    "modal_downgrade": {
+      "kind": "mutation",
+      "n": 6,
+      "rate_meaning": "true_positive_catch_rate",
+      "cosine_fired": 0,
+      "cosine_rate": 0.0,
+      "ledger_apriori_fired": 0,
+      "ledger_apriori_rate": 0.0,
+      "ledger_full_fired": 2,
+      "ledger_full_rate": 0.3333,
+      "nli_fired": 0,
+      "nli_rate": 0.0,
+      "composite_fired": 2,
+      "composite_rate": 0.3333
+    },
+    "faithful_control": {
+      "kind": "control",
+      "n": 10,
+      "rate_meaning": "false_positive_rate",
+      "cosine_fired": 0,
+      "cosine_rate": 0.0,
+      "ledger_apriori_fired": 2,
+      "ledger_apriori_rate": 0.2,
+      "ledger_full_fired": 3,
+      "ledger_full_rate": 0.3,
+      "nli_fired": 4,
+      "nli_rate": 0.4,
+      "composite_fired": 6,
+      "composite_rate": 0.6
+    }
+  },
+  "aggregate": {
+    "n_mutations": 30,
+    "n_controls": 10,
+    "cosine_fired": 0,
+    "cosine_false_positives": 0,
+    "ledger_apriori_fired": 0,
+    "ledger_apriori_false_positives": 2,
+    "ledger_full_fired": 6,
+    "ledger_full_false_positives": 3,
+    "nli_fired": 17,
+    "nli_false_positives": 4,
+    "composite_fired": 20,
+    "composite_false_positives": 6
+  }
+}

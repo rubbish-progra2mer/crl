@@ -1,0 +1,35 @@
+{
+  "hypothesis_id": "h-v011-control-floor-fork-routing",
+  "title": "对照底线校准的状态分叉路由",
+  "status": "draft",
+  "parent_ids": [],
+  "lineage_note": "从静态重放错误未来出发，尝试把真实状态分叉和同模型噪声控制转成逐步路由监督。",
+  "problem": "逐步模型路由器从固定日志或单次执行标签学习，但模型切换会改变后续状态，且服务随机性会污染跨模型差异。",
+  "target_failure": {
+    "summary": "路由标签对应未实际发生的未来，或把同模型随机波动误当成模型能力差异。",
+    "card_ids": ["failure-oracle-trajectory-calibration"],
+    "evidence_ids": ["ev-p019-ground-truth-calibration-oracle", "ev-p019-step-level-calibration"]
+  },
+  "changed_computation": {
+    "baseline": "从固定日志、静态单步正确性或一次执行验证中签发逐步模型标签。",
+    "intervention": "在恢复的同一状态上分别续跑小模型和大模型，并重复同模型控制；仅当成本敏感终局效用差超出控制噪声底线时签发标签，否则弃权或保守升级。",
+    "information_available": "训练期额外获得配对分叉终局、成本和同模型控制；部署期只使用与基线路由器相同的当前状态前缀。",
+    "timing": "离线路由数据构造期；部署时每步只做一次模型选择。",
+    "budget_effect": "离线增加完整分叉续跑和同模型重跑；部署不增加被路由模型调用数。"
+  },
+  "mechanism_claim": "状态匹配的双模型潜在结果避免错误未来，同模型控制底线阻止随机波动成为能力标签，从而降低动态闭环路由遗憾。",
+  "falsifier": "核心计算被状态分叉、执行验证标签、重复软标签、因果遗憾训练和选择性预测的直接组合吸收，或真实分叉终局效用差过于稀疏而无法训练和留出评测。",
+  "minimal_killer_experiment": "在公开状态分叉数据中审计配对终局效用差与同模型控制翻转密度；若随机留出集不能包含足够双向差异，则停止路由训练。",
+  "nearest_prior_risk": "Replay Gap、TwinRouterBench、Switchcraft、Causal LLM Routing 和通用选择性分类可能逐件覆盖全部方法核。",
+  "alternative_explanations": ["基础成功率过低", "模型池能力差距不合适", "终局二元奖励过稀疏", "服务栈随机性", "路由特征不可预测处理效应", "组合基线已足够"],
+  "descriptors": {
+    "problem_family": "闭环智能体逐步模型路由",
+    "computation_stage": "离线路由监督构造",
+    "intervention_family": "状态分叉处理效应标签",
+    "information_source": "配对分叉终局与同模型控制",
+    "timing_class": "训练期分叉、部署期单次路由",
+    "budget_class": "增加离线完整续跑",
+    "evaluation_mode": "动态闭环成本成功遗憾"
+  },
+  "literature_refs": ["P019", "P023", "P026", "P073", "arXiv:2605.07112", "arXiv:2605.18859", "arXiv:2608.08239", "arXiv:2505.16037", "arXiv:2604.27151"]
+}

@@ -1,0 +1,11 @@
+# v081 假设组合
+
+本版本没有注册实验假设。
+
+- 恢复前显式故障诊断：`DIRECT_BENCHMARK_AND_RUNTIME_COLLISION`。
+- 结构化澄清、确认和不可行告知：`DIRECT_USER_IN_LOOP_BENCHMARK_AND_EVPI_COLLISION`。
+- 证据约束的论文分类树生成：`DIRECT_TAXONOMY_METHOD_FAMILY_COLLISION`。
+- 跨执行框架能力归因：`DIRECT_SYSTEM_LEVEL_EVALUATION_COLLISION`。
+- 证据充分性检索停止：`DIRECT_INFORMATION_CONTROL_AND_COVERAGE_STOPPING_COLLISION`。
+
+这些候选均不需要本地现象复现；公开工作已经提供比小规模合成测试更强的跨模型或多基准证据。

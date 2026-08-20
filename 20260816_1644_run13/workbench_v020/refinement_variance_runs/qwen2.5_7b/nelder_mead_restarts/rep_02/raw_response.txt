@@ -1,0 +1,252 @@
+```python
+import numpy as np
+from problems import BudgetExhausted
+
+def optimize(f, dim, bounds, budget, seed):
+    np.random.seed(seed)
+    simplex = generate_simplex(dim, bounds)
+    history = []
+
+    for _ in range(budget):
+        simplex = optimize_step(f, simplex, bounds)
+        history.append((simplex[:, 0], f(simplex[:, 0])))
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1]:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 10:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 20:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 30:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 40:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 50:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 60:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 70:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 80:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 90:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 100:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 110:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 120:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 130:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 140:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 150:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 160:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 170:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 180:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 190:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 200:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 210:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 220:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 230:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 240:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 250:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 260:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 270:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 280:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 290:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 300:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 310:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 320:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 330:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 340:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 350:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 360:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 370:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 380:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 390:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 400:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 410:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 420:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 430:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 440:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 450:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 460:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 470:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 480:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 490:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 500:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 510:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 520:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 530:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 540:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 550:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 560:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 570:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 580:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 590:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 600:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 610:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 620:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 630:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 640:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 650:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 660:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 670:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 680:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 690:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 700:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 710:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 720:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 730:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 740:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 750:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 760:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 770:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 780:
+            simplex = restart_simplex(dim, bounds)
+        
+        if len(history) > 1 and history[-1][1] >= history[-2][1] and len(history) >= 790:
+            simplex = restart

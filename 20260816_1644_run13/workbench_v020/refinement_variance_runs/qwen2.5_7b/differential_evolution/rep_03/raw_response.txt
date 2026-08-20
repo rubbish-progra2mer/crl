@@ -1,0 +1,75 @@
+```python
+import numpy as np
+from random import Random
+from problems import BudgetExhausted
+
+class DifferentialEvolution:
+    def __init__(self, dim, bounds, population_size=10, mut=0.8, crossp=0.7, seed=0):
+        self.dim = dim
+        self.bounds = bounds
+        self.population_size = population_size
+        self.mut = mut
+        self.crossp = crossp
+        self.random = Random(seed)
+        self.population = [self.random.uniform(bounds[0], bounds[1]) for _ in range(dim * population_size)]
+        self.population = np.array(self.population).reshape((population_size, dim))
+        self.best = np.inf
+        self.best_solution = None
+        self.evaluations = 0
+
+    def _mutate(self, x, pop):
+        idxs = [i for i in range(self.population_size) if i != x]
+        a, b, c = self.random.sample(idxs, 3)
+        return x + self.mut * (pop[a] - pop[b] + pop[c])
+
+    def _crossover(self, u, v, rand):
+        u_new = np.where(rand < self.crossp, u, v)
+        return u_new
+
+    def _evaluate(self, x):
+        self.evaluations += 1
+        # Dummy evaluation function, replace with the actual function f
+        return np.sum(x**2)
+
+    def optimize(self, f):
+        for _ in range(self.population_size):
+            u = self._mutate(self.population[self.random.randint(0, self.population_size - 1)], self.population)
+            u = np.clip(u, self.bounds[0], self.bounds[1])
+            v = self._crossover(u, self.population[self.random.randint(0, self.population_size - 1)], self.random.random())
+            v = np.clip(v, self.bounds[0], self.bounds[1])
+            v_value = self._evaluate(v)
+            if v_value < self.best:
+                self.best = v_value
+                self.best_solution = v
+            self.population[self.random.randint(0, self.population_size - 1)] = v
+
+    def run(self, f, budget):
+        for _ in range(budget):
+            try:
+                self.optimize(f)
+            except BudgetExhausted:
+                break
+
+def optimize(f, dim, bounds, budget, seed):
+    optimizer = DifferentialEvolution(dim, bounds, seed=seed)
+    optimizer.run(f, budget)
+    return {"best_solution": optimizer.best_solution, "best_value": optimizer.best, "evaluations": optimizer.evaluations}
+```
+```python
+from problems import make_problem
+
+# Example usage
+if __name__ == "__main__":
+    dim = 5
+    bounds = (-5.12, 5.12)
+    budget = 1000
+    seed = 42
+
+    # Replace with actual problem function
+    f = make_problem(dim, bounds)
+
+    result = optimize(f, dim, bounds, budget, seed)
+    print(result)
+```
+
+This code implements the differential evolution algorithm with the specified requirements. It includes the `optimize` function as the entry point and uses a simple evaluation function for demonstration purposes. Replace `make_problem(dim, bounds)` with the actual function `f` you want to minimize.

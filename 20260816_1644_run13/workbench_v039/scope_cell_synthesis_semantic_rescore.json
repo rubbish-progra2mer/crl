@@ -1,0 +1,539 @@
+{
+  "source": "scope_cell_synthesis_qwen2_5_7b.json",
+  "model_rerun": false,
+  "scoring_change": "将任意范围展开为原子状态，允许语义等价但粒度不同的分割；证据来源覆盖与紧凑度分开计分。",
+  "summary": {
+    "direct": {
+      "tasks": 10,
+      "semantic_full_success": 5,
+      "exact_semantics": 5,
+      "global_safe": 10,
+      "mean_semantic_precision": 0.7749999999999999,
+      "mean_semantic_recall": 0.805,
+      "mean_evidence_coverage": 0.8550000000000001,
+      "mean_compactness_ratio": 0.8999999999999998
+    },
+    "strong_two_stage": {
+      "tasks": 10,
+      "semantic_full_success": 4,
+      "exact_semantics": 4,
+      "global_safe": 10,
+      "mean_semantic_precision": 0.5821428571428571,
+      "mean_semantic_recall": 0.625,
+      "mean_evidence_coverage": 0.725,
+      "mean_compactness_ratio": 1.28
+    },
+    "auto_partition": {
+      "tasks": 10,
+      "semantic_full_success": 10,
+      "exact_semantics": 10,
+      "global_safe": 10,
+      "mean_semantic_precision": 1.0,
+      "mean_semantic_recall": 1.0,
+      "mean_evidence_coverage": 1.0,
+      "mean_compactness_ratio": 1.0
+    },
+    "oracle_partition": {
+      "tasks": 10,
+      "semantic_full_success": 10,
+      "exact_semantics": 10,
+      "global_safe": 10,
+      "mean_semantic_precision": 1.0,
+      "mean_semantic_recall": 1.0,
+      "mean_evidence_coverage": 1.0,
+      "mean_compactness_ratio": 1.0
+    }
+  },
+  "records": [
+    {
+      "task_id": "crop_xor",
+      "strategies": {
+        "direct": {
+          "semantic_precision": 0.0,
+          "semantic_recall": 0.0,
+          "exact_semantics": false,
+          "global_safe": true,
+          "evidence_coverage": 0.0,
+          "cell_count": 2,
+          "gold_cell_count": 4,
+          "compactness_ratio": 2.0,
+          "semantic_full_success": false
+        },
+        "strong_two_stage": {
+          "semantic_precision": 0.75,
+          "semantic_recall": 0.75,
+          "exact_semantics": false,
+          "global_safe": true,
+          "evidence_coverage": 0.75,
+          "cell_count": 4,
+          "gold_cell_count": 4,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": false
+        },
+        "auto_partition": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 4,
+          "gold_cell_count": 4,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        },
+        "oracle_partition": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 4,
+          "gold_cell_count": 4,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        }
+      }
+    },
+    {
+      "task_id": "latency_by_load",
+      "strategies": {
+        "direct": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 4,
+          "gold_cell_count": 2,
+          "compactness_ratio": 0.5,
+          "semantic_full_success": true
+        },
+        "strong_two_stage": {
+          "semantic_precision": 0.0,
+          "semantic_recall": 0.0,
+          "exact_semantics": false,
+          "global_safe": true,
+          "evidence_coverage": 0.0,
+          "cell_count": 2,
+          "gold_cell_count": 2,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": false
+        },
+        "auto_partition": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 2,
+          "gold_cell_count": 2,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        },
+        "oracle_partition": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 2,
+          "gold_cell_count": 2,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        }
+      }
+    },
+    {
+      "task_id": "battery_by_chemistry",
+      "strategies": {
+        "direct": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 2,
+          "gold_cell_count": 2,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        },
+        "strong_two_stage": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 2,
+          "gold_cell_count": 2,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        },
+        "auto_partition": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 2,
+          "gold_cell_count": 2,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        },
+        "oracle_partition": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 2,
+          "gold_cell_count": 2,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        }
+      }
+    },
+    {
+      "task_id": "education_unresolved",
+      "strategies": {
+        "direct": {
+          "semantic_precision": 0.6,
+          "semantic_recall": 0.75,
+          "exact_semantics": false,
+          "global_safe": true,
+          "evidence_coverage": 0.8,
+          "cell_count": 5,
+          "gold_cell_count": 3,
+          "compactness_ratio": 0.6,
+          "semantic_full_success": false
+        },
+        "strong_two_stage": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 4,
+          "gold_cell_count": 3,
+          "compactness_ratio": 0.75,
+          "semantic_full_success": true
+        },
+        "auto_partition": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 3,
+          "gold_cell_count": 3,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        },
+        "oracle_partition": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 3,
+          "gold_cell_count": 3,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        }
+      }
+    },
+    {
+      "task_id": "ecology_sparse",
+      "strategies": {
+        "direct": {
+          "semantic_precision": 0.75,
+          "semantic_recall": 0.75,
+          "exact_semantics": false,
+          "global_safe": true,
+          "evidence_coverage": 0.75,
+          "cell_count": 4,
+          "gold_cell_count": 3,
+          "compactness_ratio": 0.75,
+          "semantic_full_success": false
+        },
+        "strong_two_stage": {
+          "semantic_precision": 0.5714285714285714,
+          "semantic_recall": 1.0,
+          "exact_semantics": false,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 4,
+          "gold_cell_count": 3,
+          "compactness_ratio": 0.75,
+          "semantic_full_success": false
+        },
+        "auto_partition": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 3,
+          "gold_cell_count": 3,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        },
+        "oracle_partition": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 3,
+          "gold_cell_count": 3,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        }
+      }
+    },
+    {
+      "task_id": "manufacturing_xor",
+      "strategies": {
+        "direct": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 4,
+          "gold_cell_count": 4,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        },
+        "strong_two_stage": {
+          "semantic_precision": 0.5,
+          "semantic_recall": 0.5,
+          "exact_semantics": false,
+          "global_safe": true,
+          "evidence_coverage": 0.5,
+          "cell_count": 2,
+          "gold_cell_count": 4,
+          "compactness_ratio": 2.0,
+          "semantic_full_success": false
+        },
+        "auto_partition": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 4,
+          "gold_cell_count": 4,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        },
+        "oracle_partition": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 4,
+          "gold_cell_count": 4,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        }
+      }
+    },
+    {
+      "task_id": "traffic_partial_merge",
+      "strategies": {
+        "direct": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 4,
+          "gold_cell_count": 3,
+          "compactness_ratio": 0.75,
+          "semantic_full_success": true
+        },
+        "strong_two_stage": {
+          "semantic_precision": 0.0,
+          "semantic_recall": 0.0,
+          "exact_semantics": false,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 1,
+          "gold_cell_count": 3,
+          "compactness_ratio": 3.0,
+          "semantic_full_success": false
+        },
+        "auto_partition": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 3,
+          "gold_cell_count": 3,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        },
+        "oracle_partition": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 3,
+          "gold_cell_count": 3,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        }
+      }
+    },
+    {
+      "task_id": "network_unknown_not_any",
+      "strategies": {
+        "direct": {
+          "semantic_precision": 0.8,
+          "semantic_recall": 0.8,
+          "exact_semantics": false,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 5,
+          "gold_cell_count": 4,
+          "compactness_ratio": 0.8,
+          "semantic_full_success": false
+        },
+        "strong_two_stage": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 5,
+          "gold_cell_count": 4,
+          "compactness_ratio": 0.8,
+          "semantic_full_success": true
+        },
+        "auto_partition": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 4,
+          "gold_cell_count": 4,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        },
+        "oracle_partition": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 4,
+          "gold_cell_count": 4,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        }
+      }
+    },
+    {
+      "task_id": "solver_by_resolution",
+      "strategies": {
+        "direct": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 2,
+          "gold_cell_count": 2,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        },
+        "strong_two_stage": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 2,
+          "gold_cell_count": 2,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        },
+        "auto_partition": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 2,
+          "gold_cell_count": 2,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        },
+        "oracle_partition": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 2,
+          "gold_cell_count": 2,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        }
+      }
+    },
+    {
+      "task_id": "retrieval_unresolved",
+      "strategies": {
+        "direct": {
+          "semantic_precision": 0.6,
+          "semantic_recall": 0.75,
+          "exact_semantics": false,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 5,
+          "gold_cell_count": 3,
+          "compactness_ratio": 0.6,
+          "semantic_full_success": false
+        },
+        "strong_two_stage": {
+          "semantic_precision": 0.0,
+          "semantic_recall": 0.0,
+          "exact_semantics": false,
+          "global_safe": true,
+          "evidence_coverage": 0.0,
+          "cell_count": 2,
+          "gold_cell_count": 3,
+          "compactness_ratio": 1.5,
+          "semantic_full_success": false
+        },
+        "auto_partition": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 3,
+          "gold_cell_count": 3,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        },
+        "oracle_partition": {
+          "semantic_precision": 1.0,
+          "semantic_recall": 1.0,
+          "exact_semantics": true,
+          "global_safe": true,
+          "evidence_coverage": 1.0,
+          "cell_count": 3,
+          "gold_cell_count": 3,
+          "compactness_ratio": 1.0,
+          "semantic_full_success": true
+        }
+      }
+    }
+  ]
+}

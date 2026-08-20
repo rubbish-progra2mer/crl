@@ -1,0 +1,43 @@
+{
+  "hypothesis_id": "h-v029-capability-closure-policy-audit",
+  "title": "分层工具策略的能力覆盖闭包审计",
+  "problem": "文本与工具型智能体的防御策略分散在工具开关、网关规则和模型裁判等层面，单层策略名称无法证明整体上不可到达禁止效果。",
+  "target_failure": {
+    "summary": "RewardHackBench 的公开配置把控制分布在多个执行层。宿主安全控制形成外部边界后，本版本只保留无真实目标、无网络的本地能力图抽象。",
+    "card_ids": [],
+    "evidence_ids": []
+  },
+  "mechanism_claim": "把每层策略编译为带能力、效果和委托关系的统一图，随后对每个禁止效果执行允许路径可达性查询，并输出最短抽象证明路径供防御者修正策略。",
+  "changed_computation": {
+    "baseline": "逐层按工具名、规则名或单次模型裁判检查策略，没有统一表示跨层能力与效果。",
+    "intervention": "将抽象组件、能力委托、允许效果和禁止效果编译为统一图，并以组合规则或图可达性审计整体覆盖。",
+    "information_available": "仅含合成组件标识、抽象能力标签、效果标签和策略边；不含真实主机、密钥、请求、漏洞载荷或外部执行。",
+    "timing": "部署前的本地防御策略审计。",
+    "budget_effect": "增加一次静态图构建与可达性查询，避免运行任何真实安全对抗实验。"
+  },
+  "minimal_killer_experiment": "在完全本地生成的抽象能力图上，对比逐层名称检查与统一能力图审计，测量对人工注入禁止效果路径的检出率、误报率和证明路径长度；不得使用真实目标或网络。",
+  "falsifier": "若现有智能体工具安全工作已经把能力、效果、任务语境和多工具组合转为结构化事实并做声明式或图式策略判定，则该候选只是已有方法的简化实现。",
+  "alternative_explanations": [
+    "分层策略缺口可能来自配置错误而非新的学习问题",
+    "合成图上的高检出率不能证明真实系统完整性",
+    "能力标签需要人工给定，标注遗漏会支配结果",
+    "统一图只做经典访问控制可达性分析"
+  ],
+  "nearest_prior_risk": "ToolGuardian 的能力、效果与多工具组合推理，AgentGuard 的跨工具访问控制，能力增强型工具协议的数据流与工具序列规范，以及传统多层权限图分析均直接覆盖核心计算。",
+  "lineage_note": "源自 RewardHackBench 的多层防御配置；宿主安全控制后按用户要求停止可操作路径，仅评估安全的本地合成防御抽象。",
+  "literature_refs": [
+    "arXiv:2607.21835 ToolGuardian",
+    "arXiv:2605.28071 AgentGuard",
+    "arXiv:2601.08012 Towards Verifiably Safe Tool Use for LLM Agents",
+    "USENIX Security 2020 BigMAC"
+  ],
+  "descriptors": {
+    "problem_family": "分层智能体工具策略的整体覆盖",
+    "intervention_family": "能力效果图与组合策略审计",
+    "computation_stage": "部署前策略验证",
+    "information_source": "抽象组件、能力、效果和委托边",
+    "evaluation_mode": "无网络本地合成图",
+    "timing_class": "部署前",
+    "budget_class": "静态图分析"
+  }
+}

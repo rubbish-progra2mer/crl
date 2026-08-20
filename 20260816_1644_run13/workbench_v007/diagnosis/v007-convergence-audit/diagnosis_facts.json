@@ -1,0 +1,847 @@
+{
+  "authority": "ADVISORY_NON_AUTHORITATIVE_FACTS_ONLY",
+  "comparison_files": [],
+  "contract_version": "3",
+  "current_version": {
+    "comparison_files": [],
+    "experiments": {
+      "attempt_count": 2,
+      "attempts": [
+        {
+          "id": "contract-activation-baseline-audit-001",
+          "path": "experiment_v007/attempts/contract-activation-baseline-audit-001",
+          "read_error": null,
+          "record_sha256": "2d5e5029a69f3e8e2a99d08fe0ac863acebbe70c259d72342985456f9af76048",
+          "status": "SUCCESS",
+          "tier": "formal"
+        },
+        {
+          "id": "contract-activation-probe-001",
+          "path": "experiment_v007/attempts/contract-activation-probe-001",
+          "read_error": null,
+          "record_sha256": "5c58086912f07982e588db699691e3c88f07265c2ba9f565df202882c2efcd9e",
+          "status": "SUCCESS",
+          "tier": "formal"
+        }
+      ],
+      "status_counts": {
+        "SUCCESS": 2
+      },
+      "tier_counts": {
+        "formal": 2
+      }
+    },
+    "review_evaluation_files": [],
+    "search_snapshot_files": [
+      {
+        "path": "hypotheses_v007/searches/constraint-activation-001/report.md",
+        "sha256": "a365193ba4185996aa3e809fd007a4122b2dde8064aa62c44a1078777a44ac91",
+        "size_bytes": 9146
+      },
+      {
+        "path": "hypotheses_v007/searches/constraint-activation-001/request.json",
+        "sha256": "04b732bf592aff4e3e93450fa54b15f32cec31d8c42723e32c306c6ab2d56ed1",
+        "size_bytes": 6206
+      },
+      {
+        "path": "hypotheses_v007/searches/constraint-activation-001/result.json",
+        "sha256": "f74c4eec50c3342689033aa15a3629c1ebb31893bba91fff790e352047aca3f7",
+        "size_bytes": 1756624
+      }
+    ],
+    "version": "v007"
+  },
+  "diagnosis_id": "v007-convergence-audit",
+  "experiments": {
+    "attempt_count": 2,
+    "attempts": [
+      {
+        "id": "contract-activation-baseline-audit-001",
+        "path": "experiment_v007/attempts/contract-activation-baseline-audit-001",
+        "read_error": null,
+        "record_sha256": "2d5e5029a69f3e8e2a99d08fe0ac863acebbe70c259d72342985456f9af76048",
+        "status": "SUCCESS",
+        "tier": "formal"
+      },
+      {
+        "id": "contract-activation-probe-001",
+        "path": "experiment_v007/attempts/contract-activation-probe-001",
+        "read_error": null,
+        "record_sha256": "5c58086912f07982e588db699691e3c88f07265c2ba9f565df202882c2efcd9e",
+        "status": "SUCCESS",
+        "tier": "formal"
+      }
+    ],
+    "status_counts": {
+      "SUCCESS": 2
+    },
+    "tier_counts": {
+      "formal": 2
+    }
+  },
+  "file_count": 135,
+  "file_type_counts": {
+    ".bin": 10,
+    ".json": 55,
+    ".md": 60,
+    ".py": 7,
+    ".txt": 3
+  },
+  "generated_at_utc": "2026-08-16T09:51:08.253856Z",
+  "marker_occurrences": {
+    "assumption": 66,
+    "contradiction": 44,
+    "failed": 214,
+    "not provided": 13,
+    "todo": 3
+  },
+  "non_judgments": [
+    "no candidate is killed or selected by this package",
+    "no novelty, delivery, or next-action decision is computed",
+    "the main researcher interprets these traceable facts"
+  ],
+  "recall_resume": {
+    "authority": "ADVISORY_NON_AUTHORITATIVE",
+    "run_id": "20260816_1644_run13",
+    "sections": [
+      {
+        "hits": [
+          {
+            "fts_rank": 1,
+            "fused_score": 0.01639344262295082,
+            "line_end": 35,
+            "line_start": 1,
+            "path": "workbench_v007/hypothesis_h1_create.json",
+            "semantic_rank": null,
+            "source_sha256": "7bd90367c18e111f6599b354671dad5503d2d74b73e821f6a0866087fb64d113",
+            "text": "{\n  \"hypothesis_id\": \"h-v007-contract-activation\",\n  \"title\": \"黑盒工具策略的逐约束激活剖面\",\n  \"status\": \"draft\",\n  \"parent_ids\": [],\n  \"lineage_note\": \"从 v006 已碰撞的一般反事实因果审计，收缩到非绑定约束失败，并区分求解器内约束注入与黑盒工具策略的逐字段动作边界搜索。\",\n  \"problem\": \"单个名义工具轨迹会让遗漏或伪增约束保持非绑定，使终局成功无法证明每条用户约束真实控制提交动作。\",\n  \"target_failure\": {\n    \"summary\": \"模型生成的提交策略通过名义允许状态，但在其他工具状态中遗漏或伪增约束。\",\n    \"card_ids\": [\"failure-objective-equivalence-passes-nonbinding-errors\", \"failure-llm-judge-misses-executable-spec-errors\", \"failure-single-execution-denotation-false-positive\"],\n    \"evidence_ids\": []\n  },\n  \"changed_computation\": {\n    \"baseline\": \"从完整状态空间均匀随机抽取固定数量状态测试候选工具策略。\",\n    \"intervention\": \"对每个工具状态字段搜索只翻转该字段且参考动作翻转的成对世界，以逐约束双向状态集测试并选择候选策略。\",\n    \"information_available\": \"两者访问同一自然语言政策、候选策略、字段空间与独立参考模拟器；差别只是状态预算的选择规则。\",\n    \"timing\": \"模型生成候选提交策略之后、实际部署或高成本扩大评测之前。\",\n    \"budget_effect\": \"不增加模型生成调用；每个候选与随机基线同为十个状态执行，额外计算是有限布尔空间中的确定性边界搜索。\"\n  },\n  \"mechanism_claim\": \"逐约束动作边界能确定性激活名义轨迹中非绑定的政策字段，因而比等数量均匀随机状态更稳定地暴露自然生成策略的潜伏语义错误。\",\n  \"falsifier\": \"名义通过的潜伏错误少于八个，或激活剖面的错误召回优势低于 0.10 且候选选择完整状态准确率优势低于 0.05。\",\n  \"minimal_killer_experiment\": \"两个本地模型各为十二个五字段政策生成四个受限策略；以十状态激活剖面对十状态随机基线，在三十二状态独立真值上比较错误召回和候选选择。\",\n  \"nearest_prior_risk\": \"P098 双向约束注入、SGVEF-LOOP 变形评测、P046 政策守卫与一般主动反例搜索可能吸收该计算。\",\n  \"alternative_explanations\": [\"手工政策过于规则化\", \"随机状态单次抽样方差\", \"受限析取范式简化了策略编译\", \"候选多样性不足\", \"激活状态接近边界而随机状态偏离边界\"],\n  \"descriptors\": {\n    \"problem_family\": \"工具策略非绑定约束验证\",\n    \"computation_stage\": \"候选策略生成后验证与选择\",\n    \"intervention_family\": \"逐约束动作边界搜索\",\n    \"information_source\": \"自然语言政策、布尔工具状态与独立参考模拟器\",\n    \"timing_class\": \"部署前黑盒验证\",\n    \"budget_class\": \"等状态执行预算\",\n    \"evaluation_mode\": \"自然候选加完整状态独立评估\"\n  },\n  \"literature_refs\": [\"P098\", \"P099\", \"P101\", \"P046\", \"SGVEF-LOOP\", \"Sherlock\", \"RunAgent\"]\n}"
+          },
+          {
+            "fts_rank": 2,
+            "fused_score": 0.016129032258064516,
+            "line_end": 74,
+            "line_start": 1,
+            "path": "workbench_v001/outcome_semantics_probe.py",
+            "semantic_rank": null,
+            "source_sha256": "0e9c0eb3036822e11c62ed54ac5788833def5aa76d8c29ab263444c5706d61f7",
+            "text": "from __future__ import annotations\n\nimport argparse\nimport json\nimport time\nimport urllib.error\nimport urllib.request\nfrom collections import defaultdict\nfrom pathlib import Path\n\n\nACTIONS = [\"FINISH\", \"RETRY\", \"VERIFY\", \"REVISE\"]\n\nACTION_GUIDE = \"\"\"\nChoose exactly one next control action:\n- FINISH: the task is resolved, including a confirmed side effect or a successful query whose valid empty result answers the task.\n- RETRY: execution definitely failed without a side effect and retry is appropriate.\n- VERIFY: a side effect may already have happened, so check state before any retry.\n- REVISE: execution returned but did not satisfy the task because parameters or a condition must change.\n\"\"\".strip()\n\nPOLICY = \"\"\"\nDo not equate HTTP success with task success. Separate transport, execution, evidence cardinality,\nside-effect commitment, and retryability. Never retry an unknown-effect mutation before verification.\nTreat an empty collection as a completed negative answer only when the query itself is confirmed successful.\n\"\"\".strip()\n\n\nSCENARIOS = [\n    {\n        \"case_id\": \"valid-empty-1\",\n        \"class\": \"valid_empty\",\n        \"task\": \"Find all open incidents for tenant acme. If the query succeeds and none exist, report that there are no open incidents.\",\n        \"raw\": \"HTTP 200; query_completed=true; rows=0; incidents=[]; message='No matching incidents.'\",\n        \"facets\": {\"transport\": \"succeeded\", \"execution\": \"succeeded\", \"evidence\": \"valid_empty\", \"effect\": \"not_applicable\", \"retryability\": \"not_retryable\"},\n        \"correct\": \"FINISH\",\n    },\n    {\n        \"case_id\": \"valid-empty-2\",\n        \"class\": \"valid_empty\",\n        \"task\": \"Check whether customer c-19 has any unpaid invoices. A successful zero-match lookup is a complete answer.\",\n        \"raw\": \"status=OK | scan_finished=yes | match_count=0 | payload=[] | note='lookup completed'\",\n        \"facets\": {\"transport\": \"succeeded\", \"execution\": \"succeeded\", \"evidence\": \"valid_empty\", \"effect\": \"not_applicable\", \"retryability\": \"not_retryable\"},\n        \"correct\": \"FINISH\",\n    },\n    {\n        \"case_id\": \"transient-failure-1\",\n        \"class\": \"transient_failure\",\n        \"task\": \"Retrieve the current inventory snapshot. If the service is temporarily unavailable and no write is involved, retry.\",\n        \"raw\": \"HTTP 503; data=[]; error='upstream temporarily unavailable'; retry_after_ms=250; request_executed=false\",\n        \"facets\": {\"transport\": \"failed\", \"execution\": \"failed\", \"evidence\": \"not_observed\", \"effect\": \"none\", \"retryability\": \"retryable\"},\n        \"correct\": \"RETRY\",\n    },\n    {\n        \"case_id\": \"transient-failure-2\",\n        \"class\": \"transient_failure\",\n        \"task\": \"Read the exchange-rate table. The operation is read-only; retry a confirmed transient transport failure.\",\n        \"raw\": \"gateway_status=timeout_before_dispatch; table=[]; attempts=1; safe_to_retry=true; backend_contacted=false\",\n        \"facets\": {\"transport\": \"failed\", \"execution\": \"failed\", \"evidence\": \"not_observed\", \"effect\": \"none\", \"retryability\": \"retryable\"},\n        \"correct\": \"RETRY\",\n    },\n    {\n        \"case_id\": \"unknown-effect-1\",\n        \"class\": \"unknown_effect\",\n        \"task\": \"Send invoice inv-7 exactly once. Avoid duplicate delivery.\",\n        \"raw\": \"HTTP 504 after dispatch; operation_id=op-17; confirmation_received=false; note='request may have completed'; response_body=[]\",\n        \"facets\": {\"transport\": \"timed_out\", \"execution\": \"unknown\", \"evidence\": \"not_observed\", \"effect\": \"unknown\", \"retryability\": \"verify_before_retry\"},\n        \"correct\": \"VERIFY\",\n    },\n    {\n        \"case_id\": \"unknown-effect-2\",\n        \"class\": \"unknown_effect\",\n        \"task\": \"Create one calendar booking for meeting m-8. Do not create duplicates.\",\n        \"raw\": \"connection_lost_after_submit=true; receipt=null; booking_id=null; server_outcome='unknown'; do_not_assume_rollback=true\","
+          },
+          {
+            "fts_rank": 3,
+            "fused_score": 0.015873015873015872,
+            "line_end": 77,
+            "line_start": 27,
+            "path": "hypotheses_v004/searches/typed-dataflow-binding-001/report.md",
+            "semantic_rank": null,
+            "source_sha256": "2304a5a700cd8050397b10b620d88c79de3bdc996d56cf15ea704996b5b6f75a",
+            "text": "- Paper `P091` · Temporal Validity in Retrieval Memory: Eliminating Stale-Fact Errors for AI Agents over Evolving Knowledge；用途 `measurement`；路线 `q004:failure_card_fts` #2；Card `failure-cosine-cannot-separate-contradiction-from-duplicate`（failure）；Evidence `ev-p091-cosine-auroc`, `ev-p091-retain-fabrication`\n- Paper `P037` · ToolSandbox: A Stateful, Conversational, Interactive Evaluation Benchmark for LLM Tool Use Capabilities；用途 `measurement`；路线 `q004:operator_card_fts` #3；Card `operator-milestone-dag-trajectory-evaluation`（operator）；Evidence `ev-p037-evaluation-core`, `ev-p037-minefield-violation`\n\n- 代表项：16 / 去重 Paper：58\n\n## 查询与路线覆盖\n\n### q001 · problem\n\n- 原始查询：`multi-step function calling propagates stale or incorrect intermediate values into later tool arguments`\n- 规范化查询：`\"multi\" OR \"step\" OR \"function\" OR \"calling\" OR \"propagates\" OR \"stale\" OR \"or\" OR \"incorrect\" OR \"intermediate\" OR \"values\" OR \"into\" OR \"later\" OR \"tool\" OR \"arguments\"`\n- 路线 `paper_card_fts`：12 条；降级 false（无）\n- 路线 `failure_card_fts`：12 条；降级 false（无）\n- 路线 `passage_hybrid`：24 条；降级 false（无）\n- 路线 `operator_card_fts`：12 条；降级 false（无）\n\n### q002 · operator\n\n- 原始查询：`typed immutable output references runtime dataflow binding resolves tool call fields without language model copying values`\n- 规范化查询：`\"typed\" OR \"immutable\" OR \"output\" OR \"references\" OR \"runtime\" OR \"dataflow\" OR \"binding\" OR \"resolves\" OR \"tool\" OR \"call\" OR \"fields\" OR \"without\" OR \"language\" OR \"model\" OR \"copying\" OR \"values\"`\n- 路线 `operator_card_fts`：12 条；降级 false（无）\n- 路线 `paper_card_fts`：12 条；降级 false（无）\n- 路线 `passage_hybrid`：24 条；降级 false（无）\n- 路线 `failure_card_fts`：12 条；降级 false（无）\n\n### q003 · prior\n\n- 原始查询：`tool calling variable references intermediate outputs dataflow graph symbolic handles parameter binding`\n- 规范化查询：`\"tool\" OR \"calling\" OR \"variable\" OR \"references\" OR \"intermediate\" OR \"outputs\" OR \"dataflow\" OR \"graph\" OR \"symbolic\" OR \"handles\" OR \"parameter\" OR \"binding\"`\n- 路线 `paper_card_fts`：12 条；降级 false（无）\n- 路线 `operator_card_fts`：12 条；降级 false（无）\n- 路线 `failure_card_fts`：12 条；降级 false（无）\n- 路线 `passage_hybrid`：24 条；降级 false（无）\n\n### q004 · measurement\n\n- 原始查询：`control distractor same-name values stale updates type mismatch across multi-step executable function DAG`\n- 规范化查询：`\"control\" OR \"distractor\" OR \"same\" OR \"name\" OR \"values\" OR \"stale\" OR \"updates\" OR \"type\" OR \"mismatch\" OR \"across\" OR \"multi\" OR \"step\" OR \"executable\" OR \"function\" OR \"DAG\"`\n- 路线 `paper_card_fts`：12 条；降级 false（无）\n- 路线 `passage_hybrid`：24 条；降级 false（无）\n- 路线 `failure_card_fts`：12 条；降级 false（无）\n- 路线 `operator_card_fts`：12 条；降级 false（无）\n\n## 覆盖诊断\n\n- 去重 Card：83\n- 去重 Evidence：109\n- 去重 Passage：82\n- 命中 Paper：58\n- 原始观测：240\n- 带机械噪声标记的观测：2"
+          },
+          {
+            "fts_rank": 4,
+            "fused_score": 0.015625,
+            "line_end": 67,
+            "line_start": 1,
+            "path": "hypotheses_v007/portfolio.json",
+            "semantic_rank": null,
+            "source_sha256": "e3704ab3839140ea0f9a60e5146daead2c2a462499e19dd44aca94e7c8d782df",
+            "text": "{\n  \"created_at_utc\": \"2026-08-16T09:38:54.334752Z\",\n  \"hypotheses\": [\n    {\n      \"alternative_explanations\": [\n        \"手工政策过于规则化\",\n        \"随机状态单次抽样方差\",\n        \"受限析取范式简化了策略编译\",\n        \"候选多样性不足\",\n        \"激活状态接近边界而随机状态偏离边界\"\n      ],\n      \"changed_computation\": {\n        \"baseline\": \"从完整状态空间均匀随机抽取固定数量状态测试候选工具策略。\",\n        \"budget_effect\": \"不增加模型生成调用；每个候选与随机基线同为十个状态执行，额外计算是有限布尔空间中的确定性边界搜索。\",\n        \"information_available\": \"两者访问同一自然语言政策、候选策略、字段空间与独立参考模拟器；差别只是状态预算的选择规则。\",\n        \"intervention\": \"对每个工具状态字段搜索只翻转该字段且参考动作翻转的成对世界，以逐约束双向状态集测试并选择候选策略。\",\n        \"timing\": \"模型生成候选提交策略之后、实际部署或高成本扩大评测之前。\"\n      },\n      \"created_at_utc\": \"2026-08-16T09:38:54.679365Z\",\n      \"descriptors\": {\n        \"budget_class\": \"等状态执行预算\",\n        \"computation_stage\": \"候选策略生成后验证与选择\",\n        \"evaluation_mode\": \"自然候选加完整状态独立评估\",\n        \"information_source\": \"自然语言政策、布尔工具状态与独立参考模拟器\",\n        \"intervention_family\": \"逐约束动作边界搜索\",\n        \"problem_family\": \"工具策略非绑定约束验证\",\n        \"timing_class\": \"部署前黑盒验证\"\n      },\n      \"falsifier\": \"名义通过的潜伏错误少于八个，或激活剖面的错误召回优势低于 0.10 且候选选择完整状态准确率优势低于 0.05。\",\n      \"hypothesis_id\": \"h-v007-contract-activation\",\n      \"lineage_note\": \"从 v006 已碰撞的一般反事实因果审计，收缩到非绑定约束失败，并区分求解器内约束注入与黑盒工具策略的逐字段动作边界搜索。\",\n      \"literature_refs\": [\n        \"P098\",\n        \"P099\",\n        \"P101\",\n        \"P046\",\n        \"SGVEF-LOOP\",\n        \"Sherlock\",\n        \"RunAgent\"\n      ],\n      \"mechanism_claim\": \"逐约束动作边界能确定性激活名义轨迹中非绑定的政策字段，因而比等数量均匀随机状态更稳定地暴露自然生成策略的潜伏语义错误。\",\n      \"minimal_killer_experiment\": \"两个本地模型各为十二个五字段政策生成四个受限策略；以十状态激活剖面对十状态随机基线，在三十二状态独立真值上比较错误召回和候选选择。\",\n      \"nearest_prior_risk\": \"P098 双向约束注入、SGVEF-LOOP 变形评测、P046 政策守卫与一般主动反例搜索可能吸收该计算。\",\n      \"parent_ids\": [],\n      \"problem\": \"单个名义工具轨迹会让遗漏或伪增约束保持非绑定，使终局成功无法证明每条用户约束真实控制提交动作。\",\n      \"revision\": 3,\n      \"status\": \"prior_collision\",\n      \"status_reason\": \"AgentEval 已覆盖黑盒状态边界挖掘、路径重放与边界扰动；P098 已覆盖逐约束双探针，组合吸收全部核心计算。\",\n      \"target_failure\": {\n        \"card_ids\": [\n          \"failure-objective-equivalence-passes-nonbinding-errors\",\n          \"failure-llm-judge-misses-executable-spec-errors\",\n          \"failure-single-execution-denotation-false-positive\"\n        ],\n        \"evidence_ids\": [],\n        \"summary\": \"模型生成的提交策略通过名义允许状态，但在其他工具状态中遗漏或伪增约束。\"\n      },\n      \"title\": \"黑盒工具策略的逐约束激活剖面\",\n      \"updated_at_utc\": \"2026-08-16T09:50:51.903733Z\"\n    }\n  ],\n  \"revision\": 3,\n  \"run_id\": \"20260816_1644_run13\",\n  \"schema_version\": 1,\n  \"updated_at_utc\": \"2026-08-16T09:50:51.903733Z\",\n  \"version\": \"v007\"\n}"
+          },
+          {
+            "fts_rank": 5,
+            "fused_score": 0.015384615384615385,
+            "line_end": 35,
+            "line_start": 1,
+            "path": "workbench_v005/hypothesis_h1_create.json",
+            "semantic_rank": null,
+            "source_sha256": "dac141b827ebdd20d1fdb122e4fecb5557c15026e54ff559d477fd2cafc9ddb5",
+            "text": "{\n  \"hypothesis_id\": \"h-v005-result-order\",\n  \"title\": \"并行工具结果到达顺序泄漏\",\n  \"status\": \"draft\",\n  \"parent_ids\": [],\n  \"lineage_note\": \"从 v004 已被先行工作覆盖的多步值绑定问题，正交转向并行批次的观测提交顺序。\",\n  \"problem\": \"固定同一并行调用与结果集合时，墙钟完成顺序可能通过工具消息排列改变后续动作。\",\n  \"target_failure\": {\n    \"summary\": \"与任务语义无关的并行结果到达顺序导致动作翻转或正确率变化。\",\n    \"card_ids\": [\"paper-llmcompiler\", \"paper-p069\"],\n    \"evidence_ids\": [\"ev-p006-dependency-dag-dispatch\", \"ev-p069-identical-tool-order-bias\"]\n  },\n  \"changed_computation\": {\n    \"baseline\": \"并发工具结果按实际完成顺序追加为工具消息。\",\n    \"intervention\": \"等待并行批次完成，按原计划调用索引归并并提交结果，失败也保留原槽位。\",\n    \"information_available\": \"基线与干预看到完全相同的调用、结果内容、工具名和调用索引。\",\n    \"timing\": \"并行工具执行完成后、下一次模型推理之前。\",\n    \"budget_effect\": \"不增加模型调用或工具调用，只改变结果消息排列与批次屏障。\"\n  },\n  \"mechanism_claim\": \"墙钟完成顺序泄漏为文本位置顺序后会触发大语言模型的位置偏置；按计划索引稳定归并可消除该无关变量。\",\n  \"falsifier\": \"两个稳定模型在至少 7/8 个任务上对全部六种排列给出相同决策，且错误不随顺序翻转。\",\n  \"minimal_killer_experiment\": \"固定原生并行工具调用消息，遍历三个结果消息的六种排列，测量翻转任务率与全排列正确率。\",\n  \"nearest_prior_risk\": \"工具菜单顺序偏置、一般列表顺序边际化、Set-LLM 与保序并发运行时可能吸收问题或方法。\",\n  \"alternative_explanations\": [\"一般列表顺序偏置而非工具特有机制\", \"个别任务规则歧义\", \"工具角色模板未正确关联结果\", \"温度外的运行时非确定性\"],\n  \"descriptors\": {\n    \"problem_family\": \"并行工具观测顺序鲁棒性\",\n    \"computation_stage\": \"工具结果提交到后续决策\",\n    \"intervention_family\": \"确定性批次归并\",\n    \"information_source\": \"原始并行调用索引与工具结果\",\n    \"timing_class\": \"推理前运行时变换\",\n    \"budget_class\": \"调用预算不变\",\n    \"evaluation_mode\": \"受控全排列本地执行\"\n  },\n  \"literature_refs\": [\"P006\", \"P069\", \"RealtimeTool\", \"Set-LLM\"]\n}"
+          },
+          {
+            "fts_rank": 6,
+            "fused_score": 0.015151515151515152,
+            "line_end": 1821,
+            "line_start": 1729,
+            "path": "workbench_v001/outcome_semantics_probe_results_002.json",
+            "semantic_rank": null,
+            "source_sha256": "5b46ce5c4aa83c540a7c2b269fba792a22cc62d92daad55a38569217316a1011",
+            "text": "      \"error\": null,\n      \"action\": \"FINISH\",\n      \"rationale\": \"The query successfully returned zero rows with an empty incidents array, confirming there are no open incidents for tenant 'acme'. The task is resolved with a confirmed negative result.\",\n      \"elapsed_seconds\": 0.983483076095581,\n      \"ollama_created_at\": \"2026-08-16T08:58:22.9328932Z\",\n      \"total_duration_ns\": 982248300,\n      \"load_duration_ns\": 230503100,\n      \"prompt_eval_count\": 267,\n      \"eval_count\": 51,\n      \"is_correct\": true\n    },\n    {\n      \"model\": \"qwen3:8b\",\n      \"condition\": \"self_parse\",\n      \"case_id\": \"valid-empty-2\",\n      \"class\": \"valid_empty\",\n      \"correct_action\": \"FINISH\",\n      \"seed\": 20260816,\n      \"error\": null,\n      \"action\": \"FINISH\",\n      \"rationale\": \"The lookup was confirmed successful with a zero-match result, indicating that customer c-19 has no unpaid invoices.\",\n      \"elapsed_seconds\": 0.8375682830810547,\n      \"ollama_created_at\": \"2026-08-16T08:58:23.7711465Z\",\n      \"total_duration_ns\": 836996700,\n      \"load_duration_ns\": 249944300,\n      \"prompt_eval_count\": 262,\n      \"eval_count\": 40,\n      \"is_correct\": true\n    },\n    {\n      \"model\": \"qwen3:8b\",\n      \"condition\": \"self_parse\",\n      \"case_id\": \"transient-failure-1\",\n      \"class\": \"transient_failure\",\n      \"correct_action\": \"RETRY\",\n      \"seed\": 20260816,\n      \"error\": null,\n      \"action\": \"RETRY\",\n      \"rationale\": \"The transport failed with HTTP 503, indicating the service is temporarily unavailable. The retry_after_ms value is provided, and no write operation was involved, so retrying is appropriate.\",\n      \"elapsed_seconds\": 1.035118818283081,\n      \"ollama_created_at\": \"2026-08-16T08:58:24.8062654Z\",\n      \"total_duration_ns\": 1032728800,\n      \"load_duration_ns\": 231397000,\n      \"prompt_eval_count\": 268,\n      \"eval_count\": 55,\n      \"is_correct\": true\n    },\n    {\n      \"model\": \"qwen3:8b\",\n      \"condition\": \"self_parse\",\n      \"case_id\": \"transient-failure-2\",\n      \"class\": \"transient_failure\",\n      \"correct_action\": \"RETRY\",\n      \"seed\": 20260816,\n      \"error\": null,\n      \"action\": \"RETRY\",\n      \"rationale\": \"The transport failed with a timeout before dispatch, but the system indicates it is safe to retry. The backend was not contacted, so the attempt is considered transient and retryable.\",\n      \"elapsed_seconds\": 0.9933457374572754,\n      \"ollama_created_at\": \"2026-08-16T08:58:25.8001075Z\",\n      \"total_duration_ns\": 992331400,\n      \"load_duration_ns\": 233103300,\n      \"prompt_eval_count\": 262,\n      \"eval_count\": 52,\n      \"is_correct\": true\n    },\n    {\n      \"model\": \"qwen3:8b\",\n      \"condition\": \"self_parse\",\n      \"case_id\": \"unknown-effect-1\",\n      \"class\": \"unknown_effect\",\n      \"correct_action\": \"VERIFY\",\n      \"seed\": 20260816,\n      \"error\": null,\n      \"action\": \"VERIFY\",\n      \"rationale\": \"The HTTP 504 status indicates a gateway timeout, which suggests the request may not have been successfully processed. The confirmation_received flag is false, and the response_body is empty. To avoid duplicate delivery, we must verify the state to determine if the invoice was actually delivered or if a retry is needed.\",\n      \"elapsed_seconds\": 1.4154701232910156,\n      \"ollama_created_at\": \"2026-08-16T08:58:27.2160841Z\",\n      \"total_duration_ns\": 1394396500,\n      \"load_duration_ns\": 271867400,\n      \"prompt_eval_count\": 262,\n      \"eval_count\": 78,\n      \"is_correct\": true\n    },\n    {\n      \"model\": \"qwen3:8b\",\n      \"condition\": \"self_parse\",\n      \"case_id\": \"unknown-effect-2\",\n      \"class\": \"unknown_effect\",\n      \"correct_action\": \"VERIFY\",\n      \"seed\": 20260816,\n      \"error\": null,\n      \"action\": \"VERIFY\",\n      \"rationale\": \"The raw response indicates an unknown server outcome and a lost connection after submission, which may suggest a failed or incomplete booking creation. A verification is needed to check the state and confirm whether the booking was successfully created or if a retry is required.\","
+          },
+          {
+            "fts_rank": 7,
+            "fused_score": 0.014925373134328358,
+            "line_end": 62,
+            "line_start": 1,
+            "path": "hypotheses_v005/portfolio.json",
+            "semantic_rank": null,
+            "source_sha256": "da0fc1ed447b472b80f92030dc702307e52070600ad10981fd57347d4f8b5d6e",
+            "text": "{\n  \"created_at_utc\": \"2026-08-16T09:20:29.037154Z\",\n  \"hypotheses\": [\n    {\n      \"alternative_explanations\": [\n        \"一般列表顺序偏置而非工具特有机制\",\n        \"个别任务规则歧义\",\n        \"工具角色模板未正确关联结果\",\n        \"温度外的运行时非确定性\"\n      ],\n      \"changed_computation\": {\n        \"baseline\": \"并发工具结果按实际完成顺序追加为工具消息。\",\n        \"budget_effect\": \"不增加模型调用或工具调用，只改变结果消息排列与批次屏障。\",\n        \"information_available\": \"基线与干预看到完全相同的调用、结果内容、工具名和调用索引。\",\n        \"intervention\": \"等待并行批次完成，按原计划调用索引归并并提交结果，失败也保留原槽位。\",\n        \"timing\": \"并行工具执行完成后、下一次模型推理之前。\"\n      },\n      \"created_at_utc\": \"2026-08-16T09:20:29.370798Z\",\n      \"descriptors\": {\n        \"budget_class\": \"调用预算不变\",\n        \"computation_stage\": \"工具结果提交到后续决策\",\n        \"evaluation_mode\": \"受控全排列本地执行\",\n        \"information_source\": \"原始并行调用索引与工具结果\",\n        \"intervention_family\": \"确定性批次归并\",\n        \"problem_family\": \"并行工具观测顺序鲁棒性\",\n        \"timing_class\": \"推理前运行时变换\"\n      },\n      \"falsifier\": \"两个稳定模型在至少 7/8 个任务上对全部六种排列给出相同决策，且错误不随顺序翻转。\",\n      \"hypothesis_id\": \"h-v005-result-order\",\n      \"lineage_note\": \"从 v004 已被先行工作覆盖的多步值绑定问题，正交转向并行批次的观测提交顺序。论文卡片与研究叙事保留共享知识库证据溯源；活动实验记录不携带 Evidence ID，因为正式运行器没有只读 KnowledgeStore 绑定入口，且本实验真值完全来自 Run 内确定性规范。\",\n      \"literature_refs\": [\n        \"P006\",\n        \"P069\",\n        \"RealtimeTool\",\n        \"Set-LLM\"\n      ],\n      \"mechanism_claim\": \"墙钟完成顺序泄漏为文本位置顺序后会触发大语言模型的位置偏置；按计划索引稳定归并可消除该无关变量。\",\n      \"minimal_killer_experiment\": \"固定原生并行工具调用消息，遍历三个结果消息的六种排列，测量翻转任务率与全排列正确率。\",\n      \"nearest_prior_risk\": \"工具菜单顺序偏置、一般列表顺序边际化、Set-LLM 与保序并发运行时可能吸收问题或方法。\",\n      \"parent_ids\": [],\n      \"problem\": \"固定同一并行调用与结果集合时，墙钟完成顺序可能通过工具消息排列改变后续动作。\",\n      \"revision\": 4,\n      \"status\": \"falsified\",\n      \"status_reason\": \"正式尝试 parallel-result-order-probe-001 中两个模型均 8/8 个任务全排列不变且 48/48 正确，翻转任务率为 0；满足预注册判死规则。\",\n      \"target_failure\": {\n        \"card_ids\": [\n          \"paper-llmcompiler\",\n          \"paper-p069\"\n        ],\n        \"evidence_ids\": [],\n        \"summary\": \"与任务语义无关的并行结果到达顺序导致动作翻转或正确率变化。\"\n      },\n      \"title\": \"并行工具结果到达顺序泄漏\",\n      \"updated_at_utc\": \"2026-08-16T09:26:35.911429Z\"\n    }\n  ],\n  \"revision\": 4,\n  \"run_id\": \"20260816_1644_run13\",\n  \"schema_version\": 1,\n  \"updated_at_utc\": \"2026-08-16T09:26:35.911429Z\",\n  \"version\": \"v005\"\n}"
+          },
+          {
+            "fts_rank": 8,
+            "fused_score": 0.014705882352941176,
+            "line_end": 1026,
+            "line_start": 940,
+            "path": "workbench_v001/outcome_semantics_probe_results.json",
+            "semantic_rank": null,
+            "source_sha256": "904472a7cd38311fd48c63e9b5ba505b47aa23fdfc814b76513a6bf82fd7f4d2",
+            "text": "      \"model\": \"qwen2.5:7b\",\n      \"condition\": \"self_parse\",\n      \"case_id\": \"committed-success-2\",\n      \"class\": \"committed_success\",\n      \"correct_action\": \"COMPLETE\",\n      \"seed\": 20260816,\n      \"error\": null,\n      \"action\": \"COMPLETE\",\n      \"rationale\": \"The raw tool response indicates that the order 'o-5' has been cancelled (cancelled=true), and the state_after field confirms that the order is now in a 'cancelled' state. The audit_receipt provides evidence that the cancellation was successful. Therefore, the task is completed.\",\n      \"elapsed_seconds\": 1.1756541728973389,\n      \"ollama_created_at\": \"2026-08-16T08:54:58.491686Z\",\n      \"total_duration_ns\": 1174391600,\n      \"load_duration_ns\": 235026600,\n      \"prompt_eval_count\": 264,\n      \"eval_count\": 72,\n      \"is_correct\": true\n    },\n    {\n      \"model\": \"qwen2.5:7b\",\n      \"condition\": \"typed_contract\",\n      \"case_id\": \"valid-empty-1\",\n      \"class\": \"valid_empty\",\n      \"correct_action\": \"CONCLUDE_EMPTY\",\n      \"seed\": 20260816,\n      \"error\": null,\n      \"action\": \"COMPLETE\",\n      \"rationale\": \"The query succeeded and returned an empty list of incidents, which satisfies the task of finding all open incidents for tenant acme. Since the evidence is a valid empty result and the task is considered complete when no open incidents are found, we can conclude the task.\",\n      \"elapsed_seconds\": 1.1535019874572754,\n      \"ollama_created_at\": \"2026-08-16T08:54:59.6453365Z\",\n      \"total_duration_ns\": 1152373000,\n      \"load_duration_ns\": 228241200,\n      \"prompt_eval_count\": 293,\n      \"eval_count\": 66,\n      \"is_correct\": false\n    },\n    {\n      \"model\": \"qwen2.5:7b\",\n      \"condition\": \"typed_contract\",\n      \"case_id\": \"valid-empty-2\",\n      \"class\": \"valid_empty\",\n      \"correct_action\": \"CONCLUDE_EMPTY\",\n      \"seed\": 20260816,\n      \"error\": null,\n      \"action\": \"COMPLETE\",\n      \"rationale\": \"The tool executed successfully with zero matches, which, given the task requirements, confirms that customer c-19 has no unpaid invoices. An empty match count in a successful query is a valid empty result that completes the task.\",\n      \"elapsed_seconds\": 1.0886788368225098,\n      \"ollama_created_at\": \"2026-08-16T08:55:00.7341234Z\",\n      \"total_duration_ns\": 1088175400,\n      \"load_duration_ns\": 231889300,\n      \"prompt_eval_count\": 288,\n      \"eval_count\": 59,\n      \"is_correct\": false\n    },\n    {\n      \"model\": \"qwen2.5:7b\",\n      \"condition\": \"typed_contract\",\n      \"case_id\": \"transient-failure-1\",\n      \"class\": \"transient_failure\",\n      \"correct_action\": \"RETRY\",\n      \"seed\": 20260816,\n      \"error\": null,\n      \"action\": \"RETRY\",\n      \"rationale\": \"The service is temporarily unavailable as indicated by the HTTP 503 status and the error message. Since no write operation was involved and the retry mechanism is available, we should retry the request.\",\n      \"elapsed_seconds\": 0.9836428165435791,\n      \"ollama_created_at\": \"2026-08-16T08:55:01.717724Z\",\n      \"total_duration_ns\": 982577700,\n      \"load_duration_ns\": 222571400,\n      \"prompt_eval_count\": 290,\n      \"eval_count\": 53,\n      \"is_correct\": true\n    },\n    {\n      \"model\": \"qwen2.5:7b\",\n      \"condition\": \"typed_contract\",\n      \"case_id\": \"transient-failure-2\",\n      \"class\": \"transient_failure\",\n      \"correct_action\": \"RETRY\",\n      \"seed\": 20260816,\n      \"error\": null,\n      \"action\": \"RETRY\",\n      \"rationale\": \"The execution failed due to a transient transport failure, as indicated by 'gateway_status=timeout_before_dispatch'. The backend was not contacted, and the table is empty, which suggests a potential failure to retrieve the data. Since the operation is read-only and the transport failure is considered transient, retrying is appropriate.\",\n      \"elapsed_seconds\": 1.3212404251098633,\n      \"ollama_created_at\": \"2026-08-16T08:55:03.0388818Z\",\n      \"total_duration_ns\": 1319941200,\n      \"load_duration_ns\": 264725900,\n      \"prompt_eval_count\": 284,\n      \"eval_count\": 77,"
+          }
+        ],
+        "kind": "fixed_anchor",
+        "query": "failure failed contradiction falsifier 失败 反证 矛盾",
+        "semantic_reason": "semantic_index_missing",
+        "semantic_status": "DEGRADED"
+      },
+      {
+        "hits": [
+          {
+            "fts_rank": 1,
+            "fused_score": 0.01639344262295082,
+            "line_end": 207,
+            "line_start": 109,
+            "path": "experiment_v007/attempts/contract-activation-baseline-audit-001/execution.json",
+            "semantic_rank": null,
+            "source_sha256": "2d5e5029a69f3e8e2a99d08fe0ac863acebbe70c259d72342985456f9af76048",
+            "text": "          \"path\": \"crl_v3/workspace.py\",\n          \"sha256\": \"a78a8c043ce52bed6048d307e85a8544c40ffb3bb5b98e5864654a2e7c3c8b7d\",\n          \"size_bytes\": 28943\n        },\n        {\n          \"path\": \"crl_v3/decision.py\",\n          \"sha256\": \"e1348c5a3dcddbf281673e9f3cbc1f3ee0f958d9eee4564c1a68ef779f865a59\",\n          \"size_bytes\": 46626\n        }\n      ]\n    },\n    \"sensitive_environment_passthrough\": [],\n    \"subject\": {\n      \"argv0\": \"D:\\\\Desktop\\\\crl\\\\env\\\\crl_agent_v3\\\\python.exe\",\n      \"dependencies\": {\n        \"reason\": \"subject dependencies are not automatically inspected or inferred from runner dependencies\",\n        \"status\": \"unbound\"\n      },\n      \"environment\": {\n        \"policy\": \"sanitized_parent_with_explicit_sensitive_passthrough\",\n        \"status\": \"partially_bound\",\n        \"unbound_reason\": \"non-sensitive subject environment names and values are not persisted\"\n      },\n      \"executable\": {\n        \"path\": \"D:\\\\Desktop\\\\crl\\\\env\\\\crl_agent_v3\\\\python.exe\",\n        \"resolution\": \"absolute_path\",\n        \"sha256\": \"0562f573871cb16a2fb8de16e3d486e3dfd74bb83c7e87db265561917d05ad1a\",\n        \"size_bytes\": 105288,\n        \"status\": \"bound\"\n      },\n      \"runner_relationship\": \"same_executable\",\n      \"runtime\": {\n        \"python\": \"3.11.15 | packaged by Anaconda, Inc. | (main, Jun 11 2026, 15:12:53) [MSC v.1942 64 bit (AMD64)]\",\n        \"status\": \"bound_to_runner_python\"\n      }\n    }\n  },\n  \"evidence_contract_ok\": true,\n  \"experiment_spec\": {\n    \"snapshot\": {\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v007\\\\attempts\\\\contract-activation-baseline-audit-001\\\\spec.json\",\n      \"sha256\": \"91520a6ef620bcacb84554dafbe8c2b2ab90765e90d0d2a1b954d62083474dc5\",\n      \"size_bytes\": 3784\n    },\n    \"source_path\": \"experiment_v007/specs/contract-activation-baseline-audit-001.json\"\n  },\n  \"finished_at_utc\": \"2026-08-16T09:47:06.183925Z\",\n  \"implementation_files\": [\n    {\n      \"path\": \"implementation_v007/contract_activation_baseline_audit.py\",\n      \"sha256\": \"5736f93bad53f7e139d0121a5724e2040216b266ba933cff36c76d677039a1af\",\n      \"size_bytes\": 195\n    }\n  ],\n  \"inputs\": [\n    {\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\workbench_v007\\\\contract_activation_baseline_audit.py\",\n      \"sha256\": \"44bfe3c0ca25207aa40e2a7d49ec3d84a01353a25c2947903b1ebcab187d42db\",\n      \"size_bytes\": 12409\n    },\n    {\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v007\\\\baseline_audit_spec.md\",\n      \"sha256\": \"7c4aa327c103153118e6ce75926d565888bac61cb74c0b4285c9936269d8d158\",\n      \"size_bytes\": 625\n    },\n    {\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v007\\\\attempts\\\\contract-activation-probe-001\\\\details.json\",\n      \"sha256\": \"8e8610268ffe784cfc2c5be737ce9beaae1c3b57c45aa3f36921b4b27f78097e\",\n      \"size_bytes\": 333629\n    }\n  ],\n  \"metrics\": {\n    \"contains_possible_credential\": false,\n    \"credential_detection\": [],\n    \"snapshot\": {\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v007\\\\attempts\\\\contract-activation-baseline-audit-001\\\\metrics.json\",\n      \"sha256\": \"da3167c7d1aaa5eba6abb192fe5da66242847e40f05595ca86189c4f2c291d18\",\n      \"size_bytes\": 2720\n    },\n    \"source_path\": \"experiment_v007/attempts/contract-activation-baseline-audit-001/metrics_source.json\",\n    \"source_sha256\": \"da3167c7d1aaa5eba6abb192fe5da66242847e40f05595ca86189c4f2c291d18\",\n    \"source_size_bytes\": 2720,\n    \"validation_errors\": []\n  },\n  \"metrics_contract_ok\": true,\n  \"output_contract_ok\": true,\n  \"outputs\": [\n    {\n      \"after\": {\n        \"artifact_retained\": true,\n        \"contains_possible_credential\": false,\n        \"credential_detection\": [],\n        \"exists\": true,\n        \"sha256\": \"da3167c7d1aaa5eba6abb192fe5da66242847e40f05595ca86189c4f2c291d18\",\n        \"size_bytes\": 2720\n      },\n      \"before\": {\n        \"exists\": false\n      },"
+          },
+          {
+            "fts_rank": 2,
+            "fused_score": 0.016129032258064516,
+            "line_end": 108,
+            "line_start": 1,
+            "path": "experiment_v007/attempts/contract-activation-baseline-audit-001/execution.json",
+            "semantic_rank": null,
+            "source_sha256": "2d5e5029a69f3e8e2a99d08fe0ac863acebbe70c259d72342985456f9af76048",
+            "text": "{\n  \"argv\": [\n    \"D:\\\\Desktop\\\\crl\\\\env\\\\crl_agent_v3\\\\python.exe\",\n    \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\implementation_v007\\\\contract_activation_baseline_audit.py\",\n    \"--source-details\",\n    \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v007\\\\attempts\\\\contract-activation-probe-001\\\\details.json\",\n    \"--replicates\",\n    \"1000\",\n    \"--seed\",\n    \"20260816\",\n    \"--metrics-output\",\n    \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v007\\\\attempts\\\\contract-activation-baseline-audit-001\\\\metrics_source.json\",\n    \"--details-output\",\n    \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v007\\\\attempts\\\\contract-activation-baseline-audit-001\\\\details.json\"\n  ],\n  \"attempt_id\": \"contract-activation-baseline-audit-001\",\n  \"budget_facts\": {\n    \"actual\": {\n      \"api_calls\": 0,\n      \"duration_seconds\": 8.82293939999363,\n      \"gpu_time_seconds\": null,\n      \"tokens\": 0\n    },\n    \"comparison\": {\n      \"status\": \"compared\"\n    },\n    \"machine_readable_limits\": {\n      \"api_calls\": 0,\n      \"duration_seconds\": 600,\n      \"tokens\": 0\n    },\n    \"spec_budget_ceiling\": \"{\\\"api_calls\\\": 0, \\\"duration_seconds\\\": 600, \\\"tokens\\\": 0}\",\n    \"warnings\": []\n  },\n  \"capture\": {\n    \"stderr\": {\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v007\\\\attempts\\\\contract-activation-baseline-audit-001\\\\stderr.bin\",\n      \"redaction_applied\": false,\n      \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n      \"size_bytes\": 0\n    },\n    \"stdout\": {\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v007\\\\attempts\\\\contract-activation-baseline-audit-001\\\\stdout.bin\",\n      \"redaction_applied\": false,\n      \"sha256\": \"a1f48c5ecefd79ba7a85c988f07fc7acb2ed1bdfa0ffc55501d3efb6520defa7\",\n      \"size_bytes\": 1482\n    }\n  },\n  \"command_error\": null,\n  \"command_exit_code\": 0,\n  \"cwd\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\implementation_v007\",\n  \"duration_seconds\": 8.82293939999363,\n  \"environment_facts\": {\n    \"cpu_count\": 16,\n    \"declared_facts\": {},\n    \"git\": {\n      \"reason\": \"ValueError: command exited with code 128\",\n      \"status\": \"unavailable\"\n    },\n    \"nvidia\": {\n      \"cuda_version\": \"13.1\",\n      \"gpus\": [\n        {\n          \"driver_version\": \"591.86\",\n          \"index\": \"0\",\n          \"memory_total_mib\": \"16311\",\n          \"name\": \"NVIDIA GeForce RTX 5060 Ti\"\n        }\n      ],\n      \"status\": \"available\"\n    },\n    \"platform\": \"Windows-10-10.0.26100-SP0\",\n    \"runner\": {\n      \"dependencies\": {\n        \"scope\": \"formal_runner_machine_environment\",\n        \"snapshot\": {\n          \"path\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v007\\\\attempts\\\\contract-activation-baseline-audit-001\\\\dependencies.txt\",\n          \"sha256\": \"480ab3b94b0b3b95bb6ff16eb9c4e138b942a818e488d43f71f810c5fe2e143a\",\n          \"size_bytes\": 769\n        },\n        \"source_path\": \"D:\\\\Desktop\\\\crl\\\\crl_agent_v3\\\\CRL_ENVIRONMENT_LOCK.txt\",\n        \"source_type\": \"lock_file\",\n        \"subject_relationship\": \"unbound\"\n      },\n      \"executable\": {\n        \"path\": \"D:\\\\Desktop\\\\crl\\\\env\\\\crl_agent_v3\\\\python.exe\",\n        \"sha256\": \"0562f573871cb16a2fb8de16e3d486e3dfd74bb83c7e87db265561917d05ad1a\",\n        \"size_bytes\": 105288,\n        \"status\": \"bound\"\n      },\n      \"python\": \"3.11.15 | packaged by Anaconda, Inc. | (main, Jun 11 2026, 15:12:53) [MSC v.1942 64 bit (AMD64)]\",\n      \"runner_and_modules\": [\n        {\n          \"path\": \"tools/run_local_experiment.py\",\n          \"sha256\": \"1b88d8c58b14530f06e19ff3993a42cda2edac67b15dd229e9c567aba74434b7\",\n          \"size_bytes\": 37357\n        },\n        {\n          \"path\": \"crl_v3/experiment.py\",\n          \"sha256\": \"4c513a8b90978e02f332292d3760dcdcc6cb3825c81833812f8b9e2f3c319e4c\",\n          \"size_bytes\": 45593\n        },\n        {\n          \"path\": \"crl_v3/falsification.py\",\n          \"sha256\": \"5a852d0df4101c5b240363559d0cc05a2f64c725574d999b999e92deba97b9b8\",\n          \"size_bytes\": 40435\n        },\n        {"
+          },
+          {
+            "fts_rank": 3,
+            "fused_score": 0.015873015873015872,
+            "line_end": 36,
+            "line_start": 1,
+            "path": "workbench_v007/baseline_audit_spec_create.json",
+            "semantic_rank": null,
+            "source_sha256": "9c6a9925c9d802e3ef758a00d7f5322e0ba7d23c8556e2c0852b10f7bd552300",
+            "text": "{\n  \"experiment_id\": \"contract-activation-baseline-audit-001\",\n  \"hypothesis_id\": \"h-v007-contract-activation\",\n  \"claim_ids\": [\"c-v007-activation-advantage\"],\n  \"purpose\": \"mechanism_consistency\",\n  \"research_question\": \"逐约束激活相对多种子均匀随机、字段平衡随机和候选分歧驱动选点是否仍有独立优势？\",\n  \"independent_ground_truth\": {\n    \"description\": \"复用首个正式实验中已捕获的候选策略与手工参考策略；所有状态标签由确定性解释器在完整布尔空间计算。\",\n    \"external_evidence_ids\": [],\n    \"external_card_ids\": [],\n    \"external_literature_refs\": [],\n    \"run_local_fact_refs\": [\"experiment_v007/attempts/contract-activation-probe-001/details.json\", \"experiment_v007/baseline_audit_spec.md\", \"workbench_v007/contract_activation_baseline_audit.py\"]\n  },\n  \"primary_metric\": \"activation_fault_recall_advantage_over_strongest_baseline\",\n  \"secondary_metrics\": [\"activation_selection_advantage_over_strongest_baseline\", \"activation_fault_recall\", \"uniform_mean_fault_recall\", \"balanced_mean_fault_recall\", \"disagreement_fault_recall\", \"activation_selection_hidden_accuracy\", \"disagreement_selection_hidden_accuracy\"],\n  \"sampling_unit\": \"固定候选策略—验证状态集；随机基线重复单位为状态集种子。\",\n  \"dataset\": \"首个正式实验的九十六个固定候选、十二个五字段政策与完整三十二状态真值。\",\n  \"model\": \"无新增模型调用；复用 qwen2.5:7b 与 qwen3:8b 已捕获候选。\",\n  \"provider\": \"确定性本机 Python 解释器\",\n  \"revision\": \"固定源 details 哈希、1000 重复与脚本哈希\",\n  \"baseline_specs\": [\"均匀随机十状态一千次\", \"字段平衡随机十状态一千次\", \"候选分歧贪心十状态\"],\n  \"parity_dimensions\": {\n    \"information_access\": {\"status\": \"matched\", \"notes\": \"全部方法访问同一候选池、字段空间和参考模拟器；选点时不使用完整评估分数。\"},\n    \"tool_capability\": {\"status\": \"matched\", \"notes\": \"全部方法使用同一确定性策略解释器。\"},\n    \"model_provider_revision\": {\"status\": \"matched\", \"notes\": \"候选池固定，不发生新增模型调用。\"},\n    \"sampling_protocol\": {\"status\": \"matched\", \"notes\": \"每个候选均为十状态预算；随机方法重复一千次估计分布。\"},\n    \"budget\": {\"status\": \"matched\", \"notes\": \"所有比较方法每候选只消费十个状态标签。\"}\n  },\n  \"seeds\": [20260816],\n  \"budget_ceiling\": \"{\\\"api_calls\\\": 0, \\\"duration_seconds\\\": 600, \\\"tokens\\\": 0}\",\n  \"expected_signatures\": [\"activation_fault_recall_advantage_over_strongest_baseline\", \"activation_selection_advantage_over_strongest_baseline\", \"uniform_mean_fault_recall\", \"balanced_mean_fault_recall\", \"disagreement_fault_recall\"],\n  \"falsification_rule\": \"激活召回相对最强基线优势低于零点一且选择完整状态准确率优势低于零点零五时，候选死亡。\",\n  \"confounders\": [\"固定候选池\", \"随机重复数\", \"候选分歧不足\", \"字段平衡重复状态\", \"完整状态空间较小\"],\n  \"declared_inputs\": [\"workbench_v007/contract_activation_baseline_audit.py\", \"experiment_v007/baseline_audit_spec.md\", \"experiment_v007/attempts/contract-activation-probe-001/details.json\"],\n  \"declared_outputs\": [\"experiment_v007/attempts/contract-activation-baseline-audit-001/metrics_source.json\", \"experiment_v007/attempts/contract-activation-baseline-audit-001/details.json\"]\n}"
+          },
+          {
+            "fts_rank": 4,
+            "fused_score": 0.015625,
+            "line_end": 93,
+            "line_start": 1,
+            "path": "experiment_v007/attempts/contract-activation-baseline-audit-001/spec.json",
+            "semantic_rank": null,
+            "source_sha256": "91520a6ef620bcacb84554dafbe8c2b2ab90765e90d0d2a1b954d62083474dc5",
+            "text": "{\n  \"baseline_specs\": [\n    \"均匀随机十状态一千次\",\n    \"字段平衡随机十状态一千次\",\n    \"候选分歧贪心十状态\"\n  ],\n  \"budget_ceiling\": \"{\\\"api_calls\\\": 0, \\\"duration_seconds\\\": 600, \\\"tokens\\\": 0}\",\n  \"claim_ids\": [\n    \"c-v007-activation-advantage\"\n  ],\n  \"confounders\": [\n    \"固定候选池\",\n    \"随机重复数\",\n    \"候选分歧不足\",\n    \"字段平衡重复状态\",\n    \"完整状态空间较小\"\n  ],\n  \"dataset\": \"首个正式实验的九十六个固定候选、十二个五字段政策与完整三十二状态真值。\",\n  \"declared_inputs\": [\n    \"workbench_v007/contract_activation_baseline_audit.py\",\n    \"experiment_v007/baseline_audit_spec.md\",\n    \"experiment_v007/attempts/contract-activation-probe-001/details.json\"\n  ],\n  \"declared_outputs\": [\n    \"experiment_v007/attempts/contract-activation-baseline-audit-001/metrics_source.json\",\n    \"experiment_v007/attempts/contract-activation-baseline-audit-001/details.json\"\n  ],\n  \"expected_signatures\": [\n    \"activation_fault_recall_advantage_over_strongest_baseline\",\n    \"activation_selection_advantage_over_strongest_baseline\",\n    \"uniform_mean_fault_recall\",\n    \"balanced_mean_fault_recall\",\n    \"disagreement_fault_recall\"\n  ],\n  \"experiment_id\": \"contract-activation-baseline-audit-001\",\n  \"falsification_rule\": \"激活召回相对最强基线优势低于零点一且选择完整状态准确率优势低于零点零五时，候选死亡。\",\n  \"hypothesis_id\": \"h-v007-contract-activation\",\n  \"independent_ground_truth\": {\n    \"description\": \"复用首个正式实验中已捕获的候选策略与手工参考策略；所有状态标签由确定性解释器在完整布尔空间计算。\",\n    \"external_card_ids\": [],\n    \"external_evidence_ids\": [],\n    \"external_literature_refs\": [],\n    \"run_local_fact_refs\": [\n      \"experiment_v007/attempts/contract-activation-probe-001/details.json\",\n      \"experiment_v007/baseline_audit_spec.md\",\n      \"workbench_v007/contract_activation_baseline_audit.py\"\n    ]\n  },\n  \"model\": \"无新增模型调用；复用 qwen2.5:7b 与 qwen3:8b 已捕获候选。\",\n  \"parity_dimensions\": {\n    \"budget\": {\n      \"notes\": \"所有比较方法每候选只消费十个状态标签。\",\n      \"status\": \"matched\"\n    },\n    \"information_access\": {\n      \"notes\": \"全部方法访问同一候选池、字段空间和参考模拟器；选点时不使用完整评估分数。\",\n      \"status\": \"matched\"\n    },\n    \"model_provider_revision\": {\n      \"notes\": \"候选池固定，不发生新增模型调用。\",\n      \"status\": \"matched\"\n    },\n    \"sampling_protocol\": {\n      \"notes\": \"每个候选均为十状态预算；随机方法重复一千次估计分布。\",\n      \"status\": \"matched\"\n    },\n    \"tool_capability\": {\n      \"notes\": \"全部方法使用同一确定性策略解释器。\",\n      \"status\": \"matched\"\n    }\n  },\n  \"primary_metric\": \"activation_fault_recall_advantage_over_strongest_baseline\",\n  \"provider\": \"确定性本机 Python 解释器\",\n  \"purpose\": \"mechanism_consistency\",\n  \"research_question\": \"逐约束激活相对多种子均匀随机、字段平衡随机和候选分歧驱动选点是否仍有独立优势？\",\n  \"revision\": \"固定源 details 哈希、1000 重复与脚本哈希\",\n  \"run_id\": \"20260816_1644_run13\",\n  \"sampling_unit\": \"固定候选策略—验证状态集；随机基线重复单位为状态集种子。\",\n  \"schema_version\": 1,\n  \"secondary_metrics\": [\n    \"activation_selection_advantage_over_strongest_baseline\",\n    \"activation_fault_recall\",\n    \"uniform_mean_fault_recall\",\n    \"balanced_mean_fault_recall\",\n    \"disagreement_fault_recall\",\n    \"activation_selection_hidden_accuracy\",\n    \"disagreement_selection_hidden_accuracy\"\n  ],\n  \"seeds\": [\n    20260816\n  ],\n  \"version\": \"v007\"\n}"
+          },
+          {
+            "fts_rank": 5,
+            "fused_score": 0.015384615384615385,
+            "line_end": 93,
+            "line_start": 1,
+            "path": "experiment_v007/specs/contract-activation-baseline-audit-001.json",
+            "semantic_rank": null,
+            "source_sha256": "91520a6ef620bcacb84554dafbe8c2b2ab90765e90d0d2a1b954d62083474dc5",
+            "text": "{\n  \"baseline_specs\": [\n    \"均匀随机十状态一千次\",\n    \"字段平衡随机十状态一千次\",\n    \"候选分歧贪心十状态\"\n  ],\n  \"budget_ceiling\": \"{\\\"api_calls\\\": 0, \\\"duration_seconds\\\": 600, \\\"tokens\\\": 0}\",\n  \"claim_ids\": [\n    \"c-v007-activation-advantage\"\n  ],\n  \"confounders\": [\n    \"固定候选池\",\n    \"随机重复数\",\n    \"候选分歧不足\",\n    \"字段平衡重复状态\",\n    \"完整状态空间较小\"\n  ],\n  \"dataset\": \"首个正式实验的九十六个固定候选、十二个五字段政策与完整三十二状态真值。\",\n  \"declared_inputs\": [\n    \"workbench_v007/contract_activation_baseline_audit.py\",\n    \"experiment_v007/baseline_audit_spec.md\",\n    \"experiment_v007/attempts/contract-activation-probe-001/details.json\"\n  ],\n  \"declared_outputs\": [\n    \"experiment_v007/attempts/contract-activation-baseline-audit-001/metrics_source.json\",\n    \"experiment_v007/attempts/contract-activation-baseline-audit-001/details.json\"\n  ],\n  \"expected_signatures\": [\n    \"activation_fault_recall_advantage_over_strongest_baseline\",\n    \"activation_selection_advantage_over_strongest_baseline\",\n    \"uniform_mean_fault_recall\",\n    \"balanced_mean_fault_recall\",\n    \"disagreement_fault_recall\"\n  ],\n  \"experiment_id\": \"contract-activation-baseline-audit-001\",\n  \"falsification_rule\": \"激活召回相对最强基线优势低于零点一且选择完整状态准确率优势低于零点零五时，候选死亡。\",\n  \"hypothesis_id\": \"h-v007-contract-activation\",\n  \"independent_ground_truth\": {\n    \"description\": \"复用首个正式实验中已捕获的候选策略与手工参考策略；所有状态标签由确定性解释器在完整布尔空间计算。\",\n    \"external_card_ids\": [],\n    \"external_evidence_ids\": [],\n    \"external_literature_refs\": [],\n    \"run_local_fact_refs\": [\n      \"experiment_v007/attempts/contract-activation-probe-001/details.json\",\n      \"experiment_v007/baseline_audit_spec.md\",\n      \"workbench_v007/contract_activation_baseline_audit.py\"\n    ]\n  },\n  \"model\": \"无新增模型调用；复用 qwen2.5:7b 与 qwen3:8b 已捕获候选。\",\n  \"parity_dimensions\": {\n    \"budget\": {\n      \"notes\": \"所有比较方法每候选只消费十个状态标签。\",\n      \"status\": \"matched\"\n    },\n    \"information_access\": {\n      \"notes\": \"全部方法访问同一候选池、字段空间和参考模拟器；选点时不使用完整评估分数。\",\n      \"status\": \"matched\"\n    },\n    \"model_provider_revision\": {\n      \"notes\": \"候选池固定，不发生新增模型调用。\",\n      \"status\": \"matched\"\n    },\n    \"sampling_protocol\": {\n      \"notes\": \"每个候选均为十状态预算；随机方法重复一千次估计分布。\",\n      \"status\": \"matched\"\n    },\n    \"tool_capability\": {\n      \"notes\": \"全部方法使用同一确定性策略解释器。\",\n      \"status\": \"matched\"\n    }\n  },\n  \"primary_metric\": \"activation_fault_recall_advantage_over_strongest_baseline\",\n  \"provider\": \"确定性本机 Python 解释器\",\n  \"purpose\": \"mechanism_consistency\",\n  \"research_question\": \"逐约束激活相对多种子均匀随机、字段平衡随机和候选分歧驱动选点是否仍有独立优势？\",\n  \"revision\": \"固定源 details 哈希、1000 重复与脚本哈希\",\n  \"run_id\": \"20260816_1644_run13\",\n  \"sampling_unit\": \"固定候选策略—验证状态集；随机基线重复单位为状态集种子。\",\n  \"schema_version\": 1,\n  \"secondary_metrics\": [\n    \"activation_selection_advantage_over_strongest_baseline\",\n    \"activation_fault_recall\",\n    \"uniform_mean_fault_recall\",\n    \"balanced_mean_fault_recall\",\n    \"disagreement_fault_recall\",\n    \"activation_selection_hidden_accuracy\",\n    \"disagreement_selection_hidden_accuracy\"\n  ],\n  \"seeds\": [\n    20260816\n  ],\n  \"version\": \"v007\"\n}"
+          },
+          {
+            "fts_rank": 6,
+            "fused_score": 0.015151515151515152,
+            "line_end": 217,
+            "line_start": 112,
+            "path": "experiment_v007/attempts/contract-activation-probe-001/execution.json",
+            "semantic_rank": null,
+            "source_sha256": "5c58086912f07982e588db699691e3c88f07265c2ba9f565df202882c2efcd9e",
+            "text": "          \"size_bytes\": 28943\n        },\n        {\n          \"path\": \"crl_v3/decision.py\",\n          \"sha256\": \"e1348c5a3dcddbf281673e9f3cbc1f3ee0f958d9eee4564c1a68ef779f865a59\",\n          \"size_bytes\": 46626\n        }\n      ]\n    },\n    \"sensitive_environment_passthrough\": [],\n    \"subject\": {\n      \"argv0\": \"D:\\\\Desktop\\\\crl\\\\env\\\\crl_agent_v3\\\\python.exe\",\n      \"dependencies\": {\n        \"reason\": \"subject dependencies are not automatically inspected or inferred from runner dependencies\",\n        \"status\": \"unbound\"\n      },\n      \"environment\": {\n        \"policy\": \"sanitized_parent_with_explicit_sensitive_passthrough\",\n        \"status\": \"partially_bound\",\n        \"unbound_reason\": \"non-sensitive subject environment names and values are not persisted\"\n      },\n      \"executable\": {\n        \"path\": \"D:\\\\Desktop\\\\crl\\\\env\\\\crl_agent_v3\\\\python.exe\",\n        \"resolution\": \"absolute_path\",\n        \"sha256\": \"0562f573871cb16a2fb8de16e3d486e3dfd74bb83c7e87db265561917d05ad1a\",\n        \"size_bytes\": 105288,\n        \"status\": \"bound\"\n      },\n      \"runner_relationship\": \"same_executable\",\n      \"runtime\": {\n        \"python\": \"3.11.15 | packaged by Anaconda, Inc. | (main, Jun 11 2026, 15:12:53) [MSC v.1942 64 bit (AMD64)]\",\n        \"status\": \"bound_to_runner_python\"\n      }\n    }\n  },\n  \"evidence_contract_ok\": true,\n  \"experiment_spec\": {\n    \"snapshot\": {\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v007\\\\attempts\\\\contract-activation-probe-001\\\\spec.json\",\n      \"sha256\": \"7b14003e83dc7e016d335d4d897c72e885f4f2836fa6373cd7e55aa4e7390009\",\n      \"size_bytes\": 3666\n    },\n    \"source_path\": \"experiment_v007/specs/contract-activation-probe-001.json\"\n  },\n  \"finished_at_utc\": \"2026-08-16T09:42:43.804389Z\",\n  \"implementation_files\": [\n    {\n      \"path\": \"implementation_v007/contract_activation_probe.py\",\n      \"sha256\": \"fc7e897914cd6593fe9c18bc65d3fb1c6957ef2a6749d1b0ebba3c760b65786a\",\n      \"size_bytes\": 186\n    }\n  ],\n  \"inputs\": [\n    {\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\workbench_v007\\\\contract_activation_probe.py\",\n      \"sha256\": \"f0d81683085a5b007be4bfb1f0b06150fe69baa73658379954a36160c22eef95\",\n      \"size_bytes\": 28973\n    },\n    {\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v007\\\\experiment_spec.md\",\n      \"sha256\": \"e059160d3d289d8fa40d44593488c7ee24d55ec465fc83b4cc2db23c7c9e8941\",\n      \"size_bytes\": 1192\n    }\n  ],\n  \"metrics\": {\n    \"contains_possible_credential\": false,\n    \"credential_detection\": [],\n    \"snapshot\": {\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v007\\\\attempts\\\\contract-activation-probe-001\\\\metrics.json\",\n      \"sha256\": \"2be8605cd80af145d1f9b6e48c6aa7f6dafcdde2758865625b28db572df89c75\",\n      \"size_bytes\": 7404\n    },\n    \"source_path\": \"experiment_v007/attempts/contract-activation-probe-001/metrics_source.json\",\n    \"source_sha256\": \"2be8605cd80af145d1f9b6e48c6aa7f6dafcdde2758865625b28db572df89c75\",\n    \"source_size_bytes\": 7404,\n    \"validation_errors\": []\n  },\n  \"metrics_contract_ok\": true,\n  \"output_contract_ok\": true,\n  \"outputs\": [\n    {\n      \"after\": {\n        \"artifact_retained\": true,\n        \"contains_possible_credential\": false,\n        \"credential_detection\": [],\n        \"exists\": true,\n        \"sha256\": \"2be8605cd80af145d1f9b6e48c6aa7f6dafcdde2758865625b28db572df89c75\",\n        \"size_bytes\": 7404\n      },\n      \"before\": {\n        \"exists\": false\n      },\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v007\\\\attempts\\\\contract-activation-probe-001\\\\metrics_source.json\"\n    },\n    {\n      \"after\": {\n        \"artifact_retained\": true,\n        \"contains_possible_credential\": false,\n        \"credential_detection\": [],\n        \"exists\": true,\n        \"sha256\": \"8e8610268ffe784cfc2c5be737ce9beaae1c3b57c45aa3f36921b4b27f78097e\",\n        \"size_bytes\": 333629\n      },\n      \"before\": {\n        \"exists\": false\n      },"
+          },
+          {
+            "fts_rank": 7,
+            "fused_score": 0.014925373134328358,
+            "line_end": 215,
+            "line_start": 112,
+            "path": "experiment_v005/attempts/parallel-result-order-probe-001/execution.json",
+            "semantic_rank": null,
+            "source_sha256": "582a19226489582b7322a622118632eaa40503e4a04765bd57d08b454d8bba33",
+            "text": "        {\n          \"path\": \"crl_v3/decision.py\",\n          \"sha256\": \"e1348c5a3dcddbf281673e9f3cbc1f3ee0f958d9eee4564c1a68ef779f865a59\",\n          \"size_bytes\": 46626\n        }\n      ]\n    },\n    \"sensitive_environment_passthrough\": [],\n    \"subject\": {\n      \"argv0\": \"D:\\\\Desktop\\\\crl\\\\env\\\\crl_agent_v3\\\\python.exe\",\n      \"dependencies\": {\n        \"reason\": \"subject dependencies are not automatically inspected or inferred from runner dependencies\",\n        \"status\": \"unbound\"\n      },\n      \"environment\": {\n        \"policy\": \"sanitized_parent_with_explicit_sensitive_passthrough\",\n        \"status\": \"partially_bound\",\n        \"unbound_reason\": \"non-sensitive subject environment names and values are not persisted\"\n      },\n      \"executable\": {\n        \"path\": \"D:\\\\Desktop\\\\crl\\\\env\\\\crl_agent_v3\\\\python.exe\",\n        \"resolution\": \"absolute_path\",\n        \"sha256\": \"0562f573871cb16a2fb8de16e3d486e3dfd74bb83c7e87db265561917d05ad1a\",\n        \"size_bytes\": 105288,\n        \"status\": \"bound\"\n      },\n      \"runner_relationship\": \"same_executable\",\n      \"runtime\": {\n        \"python\": \"3.11.15 | packaged by Anaconda, Inc. | (main, Jun 11 2026, 15:12:53) [MSC v.1942 64 bit (AMD64)]\",\n        \"status\": \"bound_to_runner_python\"\n      }\n    }\n  },\n  \"evidence_contract_ok\": true,\n  \"experiment_spec\": {\n    \"snapshot\": {\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v005\\\\attempts\\\\parallel-result-order-probe-001\\\\spec.json\",\n      \"sha256\": \"6f2cce3067b0dcf2ea171eb7c9d6a0ca2b599352b0523a8b03aa11256d07cbd4\",\n      \"size_bytes\": 3054\n    },\n    \"source_path\": \"experiment_v005/specs/parallel-result-order-probe-001.json\"\n  },\n  \"finished_at_utc\": \"2026-08-16T09:24:24.501699Z\",\n  \"implementation_files\": [\n    {\n      \"path\": \"implementation_v005/parallel_result_order_probe.py\",\n      \"sha256\": \"2f5b0d4b3b4395d12fde3d5ba5196b90b542543d616976061ef6d068e86498fd\",\n      \"size_bytes\": 257\n    }\n  ],\n  \"inputs\": [\n    {\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\workbench_v005\\\\parallel_result_order_probe.py\",\n      \"sha256\": \"b67a14bccee724a06b2a410f5c20fc4557a74209c71deebb11cd9013c6ba4832\",\n      \"size_bytes\": 16430\n    },\n    {\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v005\\\\experiment_spec.md\",\n      \"sha256\": \"a8c84a1f6a2a2aaf7b1bc4e2935f110bf672f662479a41c13c6a40f7a3afd526\",\n      \"size_bytes\": 695\n    }\n  ],\n  \"metrics\": {\n    \"contains_possible_credential\": false,\n    \"credential_detection\": [],\n    \"snapshot\": {\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v005\\\\attempts\\\\parallel-result-order-probe-001\\\\metrics.json\",\n      \"sha256\": \"55dfc8688d766eb692b16911fbc45fcfcbaadf0cd2e489812f60c3ae2fceeeb5\",\n      \"size_bytes\": 2364\n    },\n    \"source_path\": \"experiment_v005/attempts/parallel-result-order-probe-001/metrics_source.json\",\n    \"source_sha256\": \"55dfc8688d766eb692b16911fbc45fcfcbaadf0cd2e489812f60c3ae2fceeeb5\",\n    \"source_size_bytes\": 2364,\n    \"validation_errors\": []\n  },\n  \"metrics_contract_ok\": true,\n  \"output_contract_ok\": true,\n  \"outputs\": [\n    {\n      \"after\": {\n        \"artifact_retained\": true,\n        \"contains_possible_credential\": false,\n        \"credential_detection\": [],\n        \"exists\": true,\n        \"sha256\": \"55dfc8688d766eb692b16911fbc45fcfcbaadf0cd2e489812f60c3ae2fceeeb5\",\n        \"size_bytes\": 2364\n      },\n      \"before\": {\n        \"exists\": false\n      },\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v005\\\\attempts\\\\parallel-result-order-probe-001\\\\metrics_source.json\"\n    },\n    {\n      \"after\": {\n        \"artifact_retained\": true,\n        \"contains_possible_credential\": false,\n        \"credential_detection\": [],\n        \"exists\": true,\n        \"sha256\": \"fe8e431998c0abb7ec82c589cc8c661bdcbc524e4837e51e72df032841180062\",\n        \"size_bytes\": 99611\n      },\n      \"before\": {\n        \"exists\": false\n      },"
+          },
+          {
+            "fts_rank": 8,
+            "fused_score": 0.014705882352941176,
+            "line_end": 111,
+            "line_start": 1,
+            "path": "experiment_v007/attempts/contract-activation-probe-001/execution.json",
+            "semantic_rank": null,
+            "source_sha256": "5c58086912f07982e588db699691e3c88f07265c2ba9f565df202882c2efcd9e",
+            "text": "{\n  \"argv\": [\n    \"D:\\\\Desktop\\\\crl\\\\env\\\\crl_agent_v3\\\\python.exe\",\n    \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\implementation_v007\\\\contract_activation_probe.py\",\n    \"--models\",\n    \"qwen2.5:7b\",\n    \"qwen3:8b\",\n    \"--seed\",\n    \"20260816\",\n    \"--candidates-per-task\",\n    \"4\",\n    \"--metrics-output\",\n    \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v007\\\\attempts\\\\contract-activation-probe-001\\\\metrics_source.json\",\n    \"--details-output\",\n    \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v007\\\\attempts\\\\contract-activation-probe-001\\\\details.json\"\n  ],\n  \"attempt_id\": \"contract-activation-probe-001\",\n  \"budget_facts\": {\n    \"actual\": {\n      \"api_calls\": 96,\n      \"duration_seconds\": 211.17773929999385,\n      \"gpu_time_seconds\": null,\n      \"tokens\": 34657\n    },\n    \"comparison\": {\n      \"status\": \"compared\"\n    },\n    \"machine_readable_limits\": {\n      \"api_calls\": 96,\n      \"duration_seconds\": 1800,\n      \"tokens\": 150000\n    },\n    \"spec_budget_ceiling\": \"{\\\"api_calls\\\": 96, \\\"duration_seconds\\\": 1800, \\\"tokens\\\": 150000}\",\n    \"warnings\": []\n  },\n  \"capture\": {\n    \"stderr\": {\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v007\\\\attempts\\\\contract-activation-probe-001\\\\stderr.bin\",\n      \"redaction_applied\": false,\n      \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n      \"size_bytes\": 0\n    },\n    \"stdout\": {\n      \"path\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v007\\\\attempts\\\\contract-activation-probe-001\\\\stdout.bin\",\n      \"redaction_applied\": false,\n      \"sha256\": \"de7223d4f19510b860aeb6fdd237db33e81161ae0048b75c7b8cadcea249994a\",\n      \"size_bytes\": 131014\n    }\n  },\n  \"command_error\": null,\n  \"command_exit_code\": 0,\n  \"cwd\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\implementation_v007\",\n  \"duration_seconds\": 211.17773929999385,\n  \"environment_facts\": {\n    \"cpu_count\": 16,\n    \"declared_facts\": {},\n    \"git\": {\n      \"reason\": \"ValueError: command exited with code 128\",\n      \"status\": \"unavailable\"\n    },\n    \"nvidia\": {\n      \"cuda_version\": \"13.1\",\n      \"gpus\": [\n        {\n          \"driver_version\": \"591.86\",\n          \"index\": \"0\",\n          \"memory_total_mib\": \"16311\",\n          \"name\": \"NVIDIA GeForce RTX 5060 Ti\"\n        }\n      ],\n      \"status\": \"available\"\n    },\n    \"platform\": \"Windows-10-10.0.26100-SP0\",\n    \"runner\": {\n      \"dependencies\": {\n        \"scope\": \"formal_runner_machine_environment\",\n        \"snapshot\": {\n          \"path\": \"D:\\\\Desktop\\\\crl\\\\20260816_1644_run13\\\\experiment_v007\\\\attempts\\\\contract-activation-probe-001\\\\dependencies.txt\",\n          \"sha256\": \"480ab3b94b0b3b95bb6ff16eb9c4e138b942a818e488d43f71f810c5fe2e143a\",\n          \"size_bytes\": 769\n        },\n        \"source_path\": \"D:\\\\Desktop\\\\crl\\\\crl_agent_v3\\\\CRL_ENVIRONMENT_LOCK.txt\",\n        \"source_type\": \"lock_file\",\n        \"subject_relationship\": \"unbound\"\n      },\n      \"executable\": {\n        \"path\": \"D:\\\\Desktop\\\\crl\\\\env\\\\crl_agent_v3\\\\python.exe\",\n        \"sha256\": \"0562f573871cb16a2fb8de16e3d486e3dfd74bb83c7e87db265561917d05ad1a\",\n        \"size_bytes\": 105288,\n        \"status\": \"bound\"\n      },\n      \"python\": \"3.11.15 | packaged by Anaconda, Inc. | (main, Jun 11 2026, 15:12:53) [MSC v.1942 64 bit (AMD64)]\",\n      \"runner_and_modules\": [\n        {\n          \"path\": \"tools/run_local_experiment.py\",\n          \"sha256\": \"1b88d8c58b14530f06e19ff3993a42cda2edac67b15dd229e9c567aba74434b7\",\n          \"size_bytes\": 37357\n        },\n        {\n          \"path\": \"crl_v3/experiment.py\",\n          \"sha256\": \"4c513a8b90978e02f332292d3760dcdcc6cb3825c81833812f8b9e2f3c319e4c\",\n          \"size_bytes\": 45593\n        },\n        {\n          \"path\": \"crl_v3/falsification.py\",\n          \"sha256\": \"5a852d0df4101c5b240363559d0cc05a2f64c725574d999b999e92deba97b9b8\",\n          \"size_bytes\": 40435\n        },\n        {\n          \"path\": \"crl_v3/workspace.py\",\n          \"sha256\": \"a78a8c043ce52bed6048d307e85a8544c40ffb3bb5b98e5864654a2e7c3c8b7d\","
+          }
+        ],
+        "kind": "fixed_anchor",
+        "query": "implementation baseline experiment reviewer 实现 基线 实验 评审",
+        "semantic_reason": "semantic_index_missing",
+        "semantic_status": "DEGRADED"
+      },
+      {
+        "hits": [
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 6,
+            "fused_score": 0.015151515151515152,
+            "line_end": 35,
+            "line_start": 1,
+            "path": "workbench_v007/hypothesis_h1_create.json",
+            "semantic_rank": null,
+            "source_sha256": "7bd90367c18e111f6599b354671dad5503d2d74b73e821f6a0866087fb64d113",
+            "text": "{\n  \"hypothesis_id\": \"h-v007-contract-activation\",\n  \"title\": \"黑盒工具策略的逐约束激活剖面\",\n  \"status\": \"draft\",\n  \"parent_ids\": [],\n  \"lineage_note\": \"从 v006 已碰撞的一般反事实因果审计，收缩到非绑定约束失败，并区分求解器内约束注入与黑盒工具策略的逐字段动作边界搜索。\",\n  \"problem\": \"单个名义工具轨迹会让遗漏或伪增约束保持非绑定，使终局成功无法证明每条用户约束真实控制提交动作。\",\n  \"target_failure\": {\n    \"summary\": \"模型生成的提交策略通过名义允许状态，但在其他工具状态中遗漏或伪增约束。\",\n    \"card_ids\": [\"failure-objective-equivalence-passes-nonbinding-errors\", \"failure-llm-judge-misses-executable-spec-errors\", \"failure-single-execution-denotation-false-positive\"],\n    \"evidence_ids\": []\n  },\n  \"changed_computation\": {\n    \"baseline\": \"从完整状态空间均匀随机抽取固定数量状态测试候选工具策略。\",\n    \"intervention\": \"对每个工具状态字段搜索只翻转该字段且参考动作翻转的成对世界，以逐约束双向状态集测试并选择候选策略。\",\n    \"information_available\": \"两者访问同一自然语言政策、候选策略、字段空间与独立参考模拟器；差别只是状态预算的选择规则。\",\n    \"timing\": \"模型生成候选提交策略之后、实际部署或高成本扩大评测之前。\",\n    \"budget_effect\": \"不增加模型生成调用；每个候选与随机基线同为十个状态执行，额外计算是有限布尔空间中的确定性边界搜索。\"\n  },\n  \"mechanism_claim\": \"逐约束动作边界能确定性激活名义轨迹中非绑定的政策字段，因而比等数量均匀随机状态更稳定地暴露自然生成策略的潜伏语义错误。\",\n  \"falsifier\": \"名义通过的潜伏错误少于八个，或激活剖面的错误召回优势低于 0.10 且候选选择完整状态准确率优势低于 0.05。\",\n  \"minimal_killer_experiment\": \"两个本地模型各为十二个五字段政策生成四个受限策略；以十状态激活剖面对十状态随机基线，在三十二状态独立真值上比较错误召回和候选选择。\",\n  \"nearest_prior_risk\": \"P098 双向约束注入、SGVEF-LOOP 变形评测、P046 政策守卫与一般主动反例搜索可能吸收该计算。\",\n  \"alternative_explanations\": [\"手工政策过于规则化\", \"随机状态单次抽样方差\", \"受限析取范式简化了策略编译\", \"候选多样性不足\", \"激活状态接近边界而随机状态偏离边界\"],\n  \"descriptors\": {\n    \"problem_family\": \"工具策略非绑定约束验证\",\n    \"computation_stage\": \"候选策略生成后验证与选择\",\n    \"intervention_family\": \"逐约束动作边界搜索\",\n    \"information_source\": \"自然语言政策、布尔工具状态与独立参考模拟器\",\n    \"timing_class\": \"部署前黑盒验证\",\n    \"budget_class\": \"等状态执行预算\",\n    \"evaluation_mode\": \"自然候选加完整状态独立评估\"\n  },\n  \"literature_refs\": [\"P098\", \"P099\", \"P101\", \"P046\", \"SGVEF-LOOP\", \"Sherlock\", \"RunAgent\"]\n}"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 9,
+            "fused_score": 0.014492753623188406,
+            "line_end": 32,
+            "line_start": 1,
+            "path": "experiment_v007/result_001.md",
+            "semantic_rank": null,
+            "source_sha256": "ad9fb4bd4e0d7426a86258574008f110a73ea3394f0abd71e3353e8a85c639c5",
+            "text": "# v007 正式实验一结果\n\n## 结论\n\n`contract-activation-probe-001` 通过预注册的最低继续门槛，但只支持“潜伏错误检测”而不支持“候选选择改进”。在启动任何扩大模型或任务实验前，必须先用已生成候选对多随机种子、字段平衡随机和候选分歧选点做强基线复核。\n\n## 正式执行\n\n- 模型调用：96/96\n- 编译有效候选：96/96\n- 运行时间：211.17773929999385 秒\n- 词元：34657\n- 运行器、证据、指标和输出合同：全部通过\n- 实验错误与警告：均为空\n\n## 整体结果\n\n- 名义状态通过：92/96\n- 名义通过但完整状态空间错误：28/92，潜伏错误率 0.3043\n- 激活剖面错误召回：1.0000\n- 十状态随机基线错误召回：0.8214\n- 召回优势：0.1786\n- 激活选择后的完整状态准确率：0.9792\n- 随机选择后的完整状态准确率：0.9779\n- 选择优势：0.0013\n\n## 模型异质性\n\n- `qwen2.5:7b`：13 个潜伏错误，激活与随机均全部检出，召回优势 0；\n- `qwen3:8b`：15 个潜伏错误，激活全部检出、随机检出 10/15，召回优势 0.3333。\n\n整体正向主要来自一个模型和一个随机状态样本，不能据此宣称稳定优势。四候选高度相似又使选择收益近零。下一实验不生成新候选，只对固定候选池比较更强的等预算状态选择方法。"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 10,
+            "fused_score": 0.014285714285714285,
+            "line_end": 8,
+            "line_start": 1,
+            "path": "workbench_v007/claim_final_patch.json",
+            "semantic_rank": null,
+            "source_sha256": "f57e1f0eb6a73f37bf311cefc1c6fbef217842b2acd843214b390b3d679f9372",
+            "text": "{\n  \"supporting_experiment_ids\": [\n    \"contract-activation-probe-001\",\n    \"contract-activation-baseline-audit-001\"\n  ],\n  \"status\": \"supported_locally\",\n  \"status_reason\": \"固定候选池上，激活召回 1.0；相对一千次均匀随机、字段平衡随机与候选分歧选点中的最强平均召回基线，优势为 0.3363。局部经验主张成立，但方法候选被 AgentEval 与 P098 的组件级先行组合吸收。\"\n}"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 11,
+            "fused_score": 0.014084507042253521,
+            "line_end": 35,
+            "line_start": 1,
+            "path": "workbench_v005/hypothesis_h1_create.json",
+            "semantic_rank": null,
+            "source_sha256": "dac141b827ebdd20d1fdb122e4fecb5557c15026e54ff559d477fd2cafc9ddb5",
+            "text": "{\n  \"hypothesis_id\": \"h-v005-result-order\",\n  \"title\": \"并行工具结果到达顺序泄漏\",\n  \"status\": \"draft\",\n  \"parent_ids\": [],\n  \"lineage_note\": \"从 v004 已被先行工作覆盖的多步值绑定问题，正交转向并行批次的观测提交顺序。\",\n  \"problem\": \"固定同一并行调用与结果集合时，墙钟完成顺序可能通过工具消息排列改变后续动作。\",\n  \"target_failure\": {\n    \"summary\": \"与任务语义无关的并行结果到达顺序导致动作翻转或正确率变化。\",\n    \"card_ids\": [\"paper-llmcompiler\", \"paper-p069\"],\n    \"evidence_ids\": [\"ev-p006-dependency-dag-dispatch\", \"ev-p069-identical-tool-order-bias\"]\n  },\n  \"changed_computation\": {\n    \"baseline\": \"并发工具结果按实际完成顺序追加为工具消息。\",\n    \"intervention\": \"等待并行批次完成，按原计划调用索引归并并提交结果，失败也保留原槽位。\",\n    \"information_available\": \"基线与干预看到完全相同的调用、结果内容、工具名和调用索引。\",\n    \"timing\": \"并行工具执行完成后、下一次模型推理之前。\",\n    \"budget_effect\": \"不增加模型调用或工具调用，只改变结果消息排列与批次屏障。\"\n  },\n  \"mechanism_claim\": \"墙钟完成顺序泄漏为文本位置顺序后会触发大语言模型的位置偏置；按计划索引稳定归并可消除该无关变量。\",\n  \"falsifier\": \"两个稳定模型在至少 7/8 个任务上对全部六种排列给出相同决策，且错误不随顺序翻转。\",\n  \"minimal_killer_experiment\": \"固定原生并行工具调用消息，遍历三个结果消息的六种排列，测量翻转任务率与全排列正确率。\",\n  \"nearest_prior_risk\": \"工具菜单顺序偏置、一般列表顺序边际化、Set-LLM 与保序并发运行时可能吸收问题或方法。\",\n  \"alternative_explanations\": [\"一般列表顺序偏置而非工具特有机制\", \"个别任务规则歧义\", \"工具角色模板未正确关联结果\", \"温度外的运行时非确定性\"],\n  \"descriptors\": {\n    \"problem_family\": \"并行工具观测顺序鲁棒性\",\n    \"computation_stage\": \"工具结果提交到后续决策\",\n    \"intervention_family\": \"确定性批次归并\",\n    \"information_source\": \"原始并行调用索引与工具结果\",\n    \"timing_class\": \"推理前运行时变换\",\n    \"budget_class\": \"调用预算不变\",\n    \"evaluation_mode\": \"受控全排列本地执行\"\n  },\n  \"literature_refs\": [\"P006\", \"P069\", \"RealtimeTool\", \"Set-LLM\"]\n}"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 13,
+            "fused_score": 0.0136986301369863,
+            "line_end": 62,
+            "line_start": 1,
+            "path": "hypotheses_v005/portfolio.json",
+            "semantic_rank": null,
+            "source_sha256": "da0fc1ed447b472b80f92030dc702307e52070600ad10981fd57347d4f8b5d6e",
+            "text": "{\n  \"created_at_utc\": \"2026-08-16T09:20:29.037154Z\",\n  \"hypotheses\": [\n    {\n      \"alternative_explanations\": [\n        \"一般列表顺序偏置而非工具特有机制\",\n        \"个别任务规则歧义\",\n        \"工具角色模板未正确关联结果\",\n        \"温度外的运行时非确定性\"\n      ],\n      \"changed_computation\": {\n        \"baseline\": \"并发工具结果按实际完成顺序追加为工具消息。\",\n        \"budget_effect\": \"不增加模型调用或工具调用，只改变结果消息排列与批次屏障。\",\n        \"information_available\": \"基线与干预看到完全相同的调用、结果内容、工具名和调用索引。\",\n        \"intervention\": \"等待并行批次完成，按原计划调用索引归并并提交结果，失败也保留原槽位。\",\n        \"timing\": \"并行工具执行完成后、下一次模型推理之前。\"\n      },\n      \"created_at_utc\": \"2026-08-16T09:20:29.370798Z\",\n      \"descriptors\": {\n        \"budget_class\": \"调用预算不变\",\n        \"computation_stage\": \"工具结果提交到后续决策\",\n        \"evaluation_mode\": \"受控全排列本地执行\",\n        \"information_source\": \"原始并行调用索引与工具结果\",\n        \"intervention_family\": \"确定性批次归并\",\n        \"problem_family\": \"并行工具观测顺序鲁棒性\",\n        \"timing_class\": \"推理前运行时变换\"\n      },\n      \"falsifier\": \"两个稳定模型在至少 7/8 个任务上对全部六种排列给出相同决策，且错误不随顺序翻转。\",\n      \"hypothesis_id\": \"h-v005-result-order\",\n      \"lineage_note\": \"从 v004 已被先行工作覆盖的多步值绑定问题，正交转向并行批次的观测提交顺序。论文卡片与研究叙事保留共享知识库证据溯源；活动实验记录不携带 Evidence ID，因为正式运行器没有只读 KnowledgeStore 绑定入口，且本实验真值完全来自 Run 内确定性规范。\",\n      \"literature_refs\": [\n        \"P006\",\n        \"P069\",\n        \"RealtimeTool\",\n        \"Set-LLM\"\n      ],\n      \"mechanism_claim\": \"墙钟完成顺序泄漏为文本位置顺序后会触发大语言模型的位置偏置；按计划索引稳定归并可消除该无关变量。\",\n      \"minimal_killer_experiment\": \"固定原生并行工具调用消息，遍历三个结果消息的六种排列，测量翻转任务率与全排列正确率。\",\n      \"nearest_prior_risk\": \"工具菜单顺序偏置、一般列表顺序边际化、Set-LLM 与保序并发运行时可能吸收问题或方法。\",\n      \"parent_ids\": [],\n      \"problem\": \"固定同一并行调用与结果集合时，墙钟完成顺序可能通过工具消息排列改变后续动作。\",\n      \"revision\": 4,\n      \"status\": \"falsified\",\n      \"status_reason\": \"正式尝试 parallel-result-order-probe-001 中两个模型均 8/8 个任务全排列不变且 48/48 正确，翻转任务率为 0；满足预注册判死规则。\",\n      \"target_failure\": {\n        \"card_ids\": [\n          \"paper-llmcompiler\",\n          \"paper-p069\"\n        ],\n        \"evidence_ids\": [],\n        \"summary\": \"与任务语义无关的并行结果到达顺序导致动作翻转或正确率变化。\"\n      },\n      \"title\": \"并行工具结果到达顺序泄漏\",\n      \"updated_at_utc\": \"2026-08-16T09:26:35.911429Z\"\n    }\n  ],\n  \"revision\": 4,\n  \"run_id\": \"20260816_1644_run13\",\n  \"schema_version\": 1,\n  \"updated_at_utc\": \"2026-08-16T09:26:35.911429Z\",\n  \"version\": \"v005\"\n}"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 14,
+            "fused_score": 0.013513513513513514,
+            "line_end": 7,
+            "line_start": 1,
+            "path": "workbench_v007/claim_result_001_patch.json",
+            "semantic_rank": null,
+            "source_sha256": "e9e247664b4c8f2daf7863748ae100a294fbc4756bb93b4020dec90fed8e6907",
+            "text": "{\n  \"supporting_experiment_ids\": [\n    \"contract-activation-probe-001\"\n  ],\n  \"status\": \"testing\",\n  \"status_reason\": \"首个正式实验有 28 个名义通过潜伏错误；激活召回 1.0、单种子随机召回 0.8214，优势 0.1786，达到最低继续门槛；候选选择优势仅 0.0013，需多随机种子和更强状态选择基线。\"\n}"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 15,
+            "fused_score": 0.013333333333333334,
+            "line_end": 34,
+            "line_start": 1,
+            "path": "memory_v005.md",
+            "semantic_rank": null,
+            "source_sha256": "969f296ebae6b1bf0a0a5d249cc3bd451da64c4db90b2c7d943433ee0e3a5799",
+            "text": "# v005 当前记忆\n\n## 当前科学坐标\n\n并行工具调用完成后的结果消息顺序，是否作为无关的墙钟变量泄漏到后续决策。\n\n## 当前候选\n\n已淘汰：按原计划调用索引等待并稳定归并工具结果。\n\n## 最近邻边界\n\n- 调用前工具菜单顺序偏置：已知；\n- 并行调用生成与调度：已知；\n- 通用集合输入置换不变模型：已知；\n- 固定调用与结果、只置换原生工具结果消息的下一动作测量：暂未发现直接先行。\n\n## 下一项最高信息增益动作\n\n离开结果顺序方向，继续正交前沿发现；优先寻找可在当前本机模型与正式运行器中执行、失败会显著压缩剩余贡献差分的 changed computation。\n\n## 科学结果\n\n- 正式尝试：`parallel-result-order-probe-001`。\n- 两个模型各完成 48 个排列调用，共 96 次；无错误或警告。\n- `qwen2.5:7b`：翻转任务率 0.0，全排列准确率 1.0，8/8 个任务六排列全正确。\n- `qwen3:8b`：翻转任务率 0.0，全排列准确率 1.0，8/8 个任务六排列全正确。\n- H1 满足预注册判死规则；H2 稳定归并没有现象缺口，不扩大。\n\n## 操作事实\n\n- 首次正式运行预检因实现文件位于 `workbench_v005/` 而拒绝，未调用模型、未创建尝试目录；已用 `implementation_v005/` 中的绑定包装器修正。\n- 第二次正式运行预检因活动假设含 Evidence ID、而运行器未像台账工具一样绑定只读 `KnowledgeStore` 而拒绝，未调用模型、未创建尝试目录。\n- 共享知识库中的证据引用继续保留在本文件、研究地图与选择上下文；活动实验记录只保留论文卡片编号，实验真值只引用 Run 内确定性规范。"
+          },
+          {
+            "earlier_than_recent_context": true,
+            "fts_rank": 16,
+            "fused_score": 0.013157894736842105,
+            "line_end": 20,
+            "line_start": 1,
+            "path": "workbench_v007/falsification_plan_create.json",
+            "semantic_rank": null,
+            "source_sha256": "65545ba30ee4b6ff2e8d66a2f6eb15b1ce6251d8626d4a949f01b5c3bf0b1007",
+            "text": "{\n  \"hypothesis_id\": \"h-v007-contract-activation\",\n  \"plan_id\": \"plan-v007-contract-activation\",\n  \"claims\": [\n    {\n      \"claim_id\": \"c-v007-activation-advantage\",\n      \"claim_text\": \"在自然生成且名义通过但语义错误的工具策略上，逐约束激活剖面比等数量随机状态具有可辨识的错误召回或候选选择优势。\",\n      \"scope\": \"十二个手工五字段布尔提交政策、两个本地模型、每模型每任务四个候选、每候选十状态验证预算。\",\n      \"observable\": \"名义通过潜伏错误数、激活与随机错误召回率差、激活与随机候选选择后的三十二状态准确率差。\",\n      \"falsifier\": \"潜伏错误少于八个，或召回率优势低于 0.10 且选择准确率优势低于 0.05。\",\n      \"minimum_effect_or_decision_rule\": \"只有存在至少八个自然潜伏错误，且召回优势达到 0.10 或选择优势达到 0.05，才允许进入扩大实验。\",\n      \"alternative_explanations\": [\"随机基线方差\", \"政策表达受限\", \"候选种子未产生多样性\", \"手工参考策略偏向激活方法\", \"模型调用失败\"],\n      \"killer_experiment_id\": \"contract-activation-probe-001\",\n      \"supporting_experiment_ids\": [],\n      \"status\": \"testing\",\n      \"status_reason\": \"进入等状态预算的自然候选最小杀手实验。\"\n    }\n  ],\n  \"global_confounders\": [\"模型与提供方版本\", \"候选生成提示\", \"候选数量\", \"状态执行预算\", \"参考策略\", \"完整状态评估空间\", \"随机采样种子\"]\n}"
+          }
+        ],
+        "kind": "recent_context_recovery",
+        "query": "\"hypotheses\": [\n\"候选多样性不足\",\n\"baseline\": \"从完整状态空间均匀随机抽取固定数量状态测试候选工具策略。\",\n\"budget_effect\": \"不增加模型生成调用；每个候选与随机基线同为十个状态执行，额外计算是有限布尔空间中的确定性边界搜索。\",\n\"information_available\": \"两者访问同一自然语言政策、候选策略、字段空间与独立参考模拟器；差别只是状态预算的选择规则。\",\n\"intervention\": \"对每个工具状态字段搜索只翻转该字段且参考动作翻转的成对世界，以逐约束双向状态集测试并选择候选策略。\",\n\"timing\": \"模型生成候选提交策略之后、实际部署或高成本扩大评测之前。\"\n\"computation_stage\": \"候选策略生成后验证与选择\",\n\"evaluation_mode\": \"自然候选加完整状态独立评估\",\n\"problem_family\": \"工具策略非绑定约束验证\",\n\"falsifier\": \"名义通过的潜伏错误少于八个，或激活剖面的错误召回优势低于 0.10 且候选选择完整状态准确率优势低于 0.05。\",\n\"hypothesis_id\": \"h-v007-contract-activation\",\n# v007 假设组合\n## H1：名义成功掩盖潜伏约束错误\n- 假设：模型编译出的工具提交策略中，存在通过一个高覆盖名义允许状态、但在完整状态空间上错误的策略。\n- 实验一：96 个候选全部编译有效，92 个通过名义状态，其中 28 个在完整状态空间错误；H1 存活。\n## H2：逐约束激活剖面\n- changed computation：对每个工具状态字段，在参考策略中搜索只翻转该字段就改变动作的最小成对世界；用全部成对世界评估候选策略。\n- 最强轻量基线：使用完全相同数量、固定种子的随机状态世界。\n- 致命条件：潜伏错误召回率优势低于 0.10，且候选选择后的完整状态准确率优势低于 0.05。\n- 实验一：激活召回 1.0、单种子随机召回 0.8214，召回优势 0.1786。\n- 实验二：相对一千次随机与候选分歧强基线，激活相对最强平均召回优势 0.3363；局部机制成立。\n- 新颖性结论：AgentEval 已直接覆盖黑盒状态边界挖掘、路径重放和边界扰动，P098 覆盖逐约束双向激活；H2 方法候选被组合吸收。\n## H3：激活剖面驱动的候选选择\n# v007 当前记忆\n## 当前科学坐标\n## 当前候选\n## 最近邻边界\n## 下一项最高信息增益动作\n## 实验一事实\n- 96 个候选全部编译有效；92 个通过名义状态，其中 28 个在完整状态空间错误。\n- 激活剖面召回 1.0，单种子随机基线召回 0.8214，差 0.1786。\n- 激活候选选择完整状态准确率 0.9792，随机为 0.9779，差仅 0.0013。\n- 结果支持继续做基线鲁棒性检查，不足以支持 Seed。\n## 实验二与终局判断\n- 激活召回 1.0；一千次均匀随机平均 0.6637，字段平衡随机平均 0.6280，候选分歧选点 0.5。\n# v007 研究地图\n## 问题证据\n## 最近方法\n- P098 的双向约束注入：把专家标注的可行解与单约束违反解注入候选求解器模型，以可行性判定检查静默遗漏和伪过约束。\n## 暂存差分\n正式实验已证明该受限实例优于等数量随机状态，但 AgentEval 直接覆盖“黑盒智能体—状态边界—路径重放—边界扰动—执行判定”，P098 又覆盖逐约束双向探针。两者组合吸收了候选的全部核心计算；本版没有 surviving contribution delta。\n# v007 选择上下文\n2. P098 给出未绑定约束的强实证失败与双探针修复，但依赖候选求解器模型、专家参考脚本和求解器可行性查询。\n3. 工具策略是黑盒动作映射，约束可能只在特定工具状态分支绑定；候选以参考模拟器搜索逐字段动作翻转边界。\n5. 先做 12 个手工政策、两个本地模型、每任务四个策略候选的最小实验；若自然潜伏错误不足或基线配平后无优势，立即淘汰。\n6. 实验一得到 28 个自然潜伏错误；激活剖面全部检出，单种子随机十状态检出 23 个，达到继续门槛。\n7. 候选选择优势只有 0.0013，且召回收益集中于 `qwen3:8b`；因此不能缩窄主张后直接交付，必须复核随机方差和更强状态选择基线。\n8. 实验二确认检测优势：激活召回 1.0，最强平均等预算基线 0.6637，差 0.3363；选择优势仍为 0。\n9. 随后的直接检索发现 AgentEval 已覆盖黑盒状态边界挖掘、守卫/前置条件枚举、路径重放与边界扰动；结合 P098 的逐约束双探针，本候选没有剩余方法计算。\n# v007 失败归因\n## 失败类型\n## 局部正向事实\n两个正式实验支持受限设置中的检测效果：28 个自然潜伏错误全部被激活剖面发现；相对最强平均等预算基线的召回优势为 0.3363。该结果不被抹去，但不足以建立新方法。\n## 致命先行组合\n我们的候选把 P098 的逐约束激活移到一个比 AgentEval 更受限的五字段布尔策略表示；没有新的边界发现算法、因果量、测试判据或运行时强制机制。实验优势证明测试家族有效，不证明新的论文级计算差分。\n## 后续路由\n保留“名义通过率会高估策略语义正确性”的实证记忆，但不再以边界扰动、变形对或逐约束测试为候选核心。继续正交前沿发现。",
+        "semantic_reason": "semantic_index_missing",
+        "semantic_status": "DEGRADED",
+        "source_files": [
+          {
+            "mtime_ns": 1786873851907456400,
+            "path": "hypotheses_v007/portfolio.json",
+            "source_sha256": "e3704ab3839140ea0f9a60e5146daead2c2a462499e19dd44aca94e7c8d782df"
+          },
+          {
+            "mtime_ns": 1786873730124834500,
+            "path": "hypothesis_portfolio_v007.md",
+            "source_sha256": "6a042b923335a0ccbf94bb97e9da36bccbfc6043abb22877d6a38082d813d909"
+          },
+          {
+            "mtime_ns": 1786873730124834500,
+            "path": "memory_v007.md",
+            "source_sha256": "e17c4c0147e9c6028fa0ec8f3da3607ce40e6de2bd74d9e00f7145863391f8ed"
+          },
+          {
+            "mtime_ns": 1786873730124834500,
+            "path": "research_map_v007.md",
+            "source_sha256": "1235cc5a3e7575f085a911cadbaec0eb5aeb705e331f86f923f4435b631c8ee7"
+          },
+          {
+            "mtime_ns": 1786873730124834500,
+            "path": "selection_context_v007.md",
+            "source_sha256": "ecf9bd9f5224d8e9abbd728e36911e2b210b8021f03970448a8b3b182565bfb5"
+          },
+          {
+            "mtime_ns": 1786873730123832400,
+            "path": "failure_attribution_v007.md",
+            "source_sha256": "ddd735f67a060977a85b0797f4e121abac1cbba233233bec7e428c5fc85d3047"
+          }
+        ]
+      }
+    ],
+    "semantic_reason": "semantic_index_missing",
+    "semantic_status": "DEGRADED",
+    "version": "v007"
+  },
+  "recall_status": {
+    "reason": null,
+    "semantic_reason": "semantic_index_missing",
+    "semantic_status": "DEGRADED",
+    "status": "READY"
+  },
+  "recent_files": [
+    {
+      "mtime_ns": 1786873851907456400,
+      "path": "hypotheses_v007/portfolio.json",
+      "sha256": "e3704ab3839140ea0f9a60e5146daead2c2a462499e19dd44aca94e7c8d782df",
+      "size_bytes": 3944
+    },
+    {
+      "mtime_ns": 1786873851803122700,
+      "path": "hypotheses_v007/falsification/plan-v007-contract-activation.json",
+      "sha256": "0b6bc1ee51066e12a811324c0169a9e5577650789f67c435fb1f89207f96dcc7",
+      "size_bytes": 2095
+    },
+    {
+      "mtime_ns": 1786873730124834500,
+      "path": "hypothesis_portfolio_v007.md",
+      "sha256": "6a042b923335a0ccbf94bb97e9da36bccbfc6043abb22877d6a38082d813d909",
+      "size_bytes": 1859
+    },
+    {
+      "mtime_ns": 1786873730124834500,
+      "path": "memory_v007.md",
+      "sha256": "e17c4c0147e9c6028fa0ec8f3da3607ce40e6de2bd74d9e00f7145863391f8ed",
+      "size_bytes": 1552
+    },
+    {
+      "mtime_ns": 1786873730124834500,
+      "path": "research_map_v007.md",
+      "sha256": "1235cc5a3e7575f085a911cadbaec0eb5aeb705e331f86f923f4435b631c8ee7",
+      "size_bytes": 1623
+    },
+    {
+      "mtime_ns": 1786873730124834500,
+      "path": "selection_context_v007.md",
+      "sha256": "ecf9bd9f5224d8e9abbd728e36911e2b210b8021f03970448a8b3b182565bfb5",
+      "size_bytes": 1542
+    },
+    {
+      "mtime_ns": 1786873730123832400,
+      "path": "experiment_v007/result_002.md",
+      "sha256": "bb383a3ca7a84911f5268f118433e8f92bb41a11f37ea4db10117f6ac7ed4ccd",
+      "size_bytes": 975
+    },
+    {
+      "mtime_ns": 1786873730123832400,
+      "path": "failure_attribution_v007.md",
+      "sha256": "ddd735f67a060977a85b0797f4e121abac1cbba233233bec7e428c5fc85d3047",
+      "size_bytes": 1209
+    },
+    {
+      "mtime_ns": 1786873730122831800,
+      "path": "workbench_v007/claim_final_patch.json",
+      "sha256": "f57e1f0eb6a73f37bf311cefc1c6fbef217842b2acd843214b390b3d679f9372",
+      "size_bytes": 438
+    },
+    {
+      "mtime_ns": 1786873626252427500,
+      "path": "experiment_v007/attempts/contract-activation-baseline-audit-001/execution.json",
+      "sha256": "2d5e5029a69f3e8e2a99d08fe0ac863acebbe70c259d72342985456f9af76048",
+      "size_bytes": 8883
+    },
+    {
+      "mtime_ns": 1786873626185926300,
+      "path": "experiment_v007/attempts/contract-activation-baseline-audit-001/metrics.json",
+      "sha256": "da3167c7d1aaa5eba6abb192fe5da66242847e40f05595ca86189c4f2c291d18",
+      "size_bytes": 2720
+    },
+    {
+      "mtime_ns": 1786873626180419100,
+      "path": "experiment_v007/attempts/contract-activation-baseline-audit-001/stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "mtime_ns": 1786873626178419200,
+      "path": "experiment_v007/attempts/contract-activation-baseline-audit-001/stdout.bin",
+      "sha256": "a1f48c5ecefd79ba7a85c988f07fc7acb2ed1bdfa0ffc55501d3efb6520defa7",
+      "size_bytes": 1482
+    },
+    {
+      "mtime_ns": 1786873626168219900,
+      "path": "experiment_v007/attempts/contract-activation-baseline-audit-001/details.json",
+      "sha256": "5d1b0e36fac3ccb2d74026f52bb2c7505fe891dd199b1fdadf8ea74b8185954c",
+      "size_bytes": 303912
+    },
+    {
+      "mtime_ns": 1786873626168219900,
+      "path": "experiment_v007/attempts/contract-activation-baseline-audit-001/metrics_source.json",
+      "sha256": "da3167c7d1aaa5eba6abb192fe5da66242847e40f05595ca86189c4f2c291d18",
+      "size_bytes": 2720
+    },
+    {
+      "mtime_ns": 1786873617358957000,
+      "path": "experiment_v007/attempts/contract-activation-baseline-audit-001/dependencies.txt",
+      "sha256": "480ab3b94b0b3b95bb6ff16eb9c4e138b942a818e488d43f71f810c5fe2e143a",
+      "size_bytes": 769
+    },
+    {
+      "mtime_ns": 1786873617358957000,
+      "path": "experiment_v007/attempts/contract-activation-baseline-audit-001/spec.json",
+      "sha256": "91520a6ef620bcacb84554dafbe8c2b2ab90765e90d0d2a1b954d62083474dc5",
+      "size_bytes": 3784
+    },
+    {
+      "mtime_ns": 1786873596483614000,
+      "path": "experiment_v007/specs/contract-activation-baseline-audit-001.json",
+      "sha256": "91520a6ef620bcacb84554dafbe8c2b2ab90765e90d0d2a1b954d62083474dc5",
+      "size_bytes": 3784
+    },
+    {
+      "mtime_ns": 1786873564337993900,
+      "path": "workbench_v007/contract_activation_baseline_audit.py",
+      "sha256": "44bfe3c0ca25207aa40e2a7d49ec3d84a01353a25c2947903b1ebcab187d42db",
+      "size_bytes": 12409
+    },
+    {
+      "mtime_ns": 1786873546232750100,
+      "path": "workbench_v007/baseline_audit_spec_create.json",
+      "sha256": "9c6a9925c9d802e3ef758a00d7f5322e0ba7d23c8556e2c0852b10f7bd552300",
+      "size_bytes": 3451
+    },
+    {
+      "mtime_ns": 1786873546230734700,
+      "path": "experiment_v007/baseline_audit_spec.md",
+      "sha256": "7c4aa327c103153118e6ce75926d565888bac61cb74c0b4285c9936269d8d158",
+      "size_bytes": 625
+    },
+    {
+      "mtime_ns": 1786873546230734700,
+      "path": "implementation_v007/contract_activation_baseline_audit.py",
+      "sha256": "5736f93bad53f7e139d0121a5724e2040216b266ba933cff36c76d677039a1af",
+      "size_bytes": 195
+    },
+    {
+      "mtime_ns": 1786873445480742300,
+      "path": "experiment_v007/result_001.md",
+      "sha256": "ad9fb4bd4e0d7426a86258574008f110a73ea3394f0abd71e3353e8a85c639c5",
+      "size_bytes": 1379
+    },
+    {
+      "mtime_ns": 1786873445480742300,
+      "path": "workbench_v007/claim_result_001_patch.json",
+      "sha256": "e9e247664b4c8f2daf7863748ae100a294fbc4756bb93b4020dec90fed8e6907",
+      "size_bytes": 350
+    },
+    {
+      "mtime_ns": 1786873363877400300,
+      "path": "experiment_v007/attempts/contract-activation-probe-001/execution.json",
+      "sha256": "5c58086912f07982e588db699691e3c88f07265c2ba9f565df202882c2efcd9e",
+      "size_bytes": 8435
+    },
+    {
+      "mtime_ns": 1786873363807373800,
+      "path": "experiment_v007/attempts/contract-activation-probe-001/metrics.json",
+      "sha256": "2be8605cd80af145d1f9b6e48c6aa7f6dafcdde2758865625b28db572df89c75",
+      "size_bytes": 7404
+    },
+    {
+      "mtime_ns": 1786873363801386800,
+      "path": "experiment_v007/attempts/contract-activation-probe-001/stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "mtime_ns": 1786873363798955200,
+      "path": "experiment_v007/attempts/contract-activation-probe-001/stdout.bin",
+      "sha256": "de7223d4f19510b860aeb6fdd237db33e81161ae0048b75c7b8cadcea249994a",
+      "size_bytes": 131014
+    },
+    {
+      "mtime_ns": 1786873363782333400,
+      "path": "experiment_v007/attempts/contract-activation-probe-001/metrics_source.json",
+      "sha256": "2be8605cd80af145d1f9b6e48c6aa7f6dafcdde2758865625b28db572df89c75",
+      "size_bytes": 7404
+    },
+    {
+      "mtime_ns": 1786873363781257600,
+      "path": "experiment_v007/attempts/contract-activation-probe-001/details.json",
+      "sha256": "8e8610268ffe784cfc2c5be737ce9beaae1c3b57c45aa3f36921b4b27f78097e",
+      "size_bytes": 333629
+    }
+  ],
+  "review_evaluation_files": [],
+  "run_id": "20260816_1644_run13",
+  "run_wide": {
+    "experiments": {
+      "formal_review_support": {
+        "attempt_count": 3,
+        "attempts": [
+          {
+            "id": "parallel-result-order-probe-001",
+            "path": "experiment_v005/attempts/parallel-result-order-probe-001",
+            "status": null,
+            "version": "v005"
+          },
+          {
+            "id": "contract-activation-baseline-audit-001",
+            "path": "experiment_v007/attempts/contract-activation-baseline-audit-001",
+            "status": null,
+            "version": "v007"
+          },
+          {
+            "id": "contract-activation-probe-001",
+            "path": "experiment_v007/attempts/contract-activation-probe-001",
+            "status": null,
+            "version": "v007"
+          }
+        ]
+      },
+      "recorded": {
+        "attempt_count": 2,
+        "attempts": [
+          {
+            "id": "outcome-semantics-probe-001",
+            "path": "experiment_v001/recorded/outcome-semantics-probe-001",
+            "status": "SUCCESS",
+            "version": "v001"
+          },
+          {
+            "id": "outcome-semantics-probe-002",
+            "path": "experiment_v001/recorded/outcome-semantics-probe-002",
+            "status": "SUCCESS",
+            "version": "v001"
+          }
+        ]
+      },
+      "scratch": {
+        "report_count": 0,
+        "reports": [],
+        "version_count": 3,
+        "versions": [
+          "v001",
+          "v005",
+          "v007"
+        ]
+      }
+    },
+    "hypotheses": {
+      "hypothesis_count": 2,
+      "status_distribution": {
+        "falsified": 1,
+        "prior_collision": 1
+      },
+      "status_reason_distribution": {
+        "AgentEval 已覆盖黑盒状态边界挖掘、路径重放与边界扰动；P098 已覆盖逐约束双探针，组合吸收全部核心计算。": 1,
+        "正式尝试 parallel-result-order-probe-001 中两个模型均 8/8 个任务全排列不变且 48/48 正确，翻转任务率为 0；满足预注册判死规则。": 1
+      },
+      "versions_with_portfolios": [
+        "v005",
+        "v007"
+      ]
+    },
+    "prior_collisions": {
+      "assessment_warning_audit_count": 0,
+      "assessment_warning_count": 0,
+      "assessment_warnings": [],
+      "collision_kind_distribution": {},
+      "prior_audit_count": 0,
+      "unclassified_audit_count": 0
+    },
+    "recall_composition": {
+      "contamination_present": false,
+      "excluded_entry_count": 14,
+      "external_or_vendor_indexed_count": 0,
+      "ground_truth_like_indexed_count": 0,
+      "indexed_bytes": 1243235,
+      "indexed_file_count": 117,
+      "manifest_schema_version": 2,
+      "raw_search_payload_indexed_count": 0,
+      "stale_indexed_source_count": 0,
+      "status": "READY"
+    },
+    "scientific_versions": {
+      "current_version": "v007",
+      "version_count": 7,
+      "versions": [
+        {
+          "artifact_count": 24,
+          "artifact_span_seconds": 1037.9465259,
+          "first_artifact_mtime_ns": 1786869938621382100,
+          "last_artifact_mtime_ns": 1786870976567908000,
+          "version": "v001"
+        },
+        {
+          "artifact_count": 9,
+          "artifact_span_seconds": 76.5965333,
+          "first_artifact_mtime_ns": 1786871076392305700,
+          "last_artifact_mtime_ns": 1786871152988839000,
+          "version": "v002"
+        },
+        {
+          "artifact_count": 9,
+          "artifact_span_seconds": 83.7239865,
+          "first_artifact_mtime_ns": 1786871190753594300,
+          "last_artifact_mtime_ns": 1786871274477580800,
+          "version": "v003"
+        },
+        {
+          "artifact_count": 9,
+          "artifact_span_seconds": 68.3617121,
+          "first_artifact_mtime_ns": 1786871308897553700,
+          "last_artifact_mtime_ns": 1786871377259265800,
+          "version": "v004"
+        },
+        {
+          "artifact_count": 29,
+          "artifact_span_seconds": 986.3183181,
+          "first_artifact_mtime_ns": 1786871409596209800,
+          "last_artifact_mtime_ns": 1786872395914527900,
+          "version": "v005"
+        },
+        {
+          "artifact_count": 9,
+          "artifact_span_seconds": 75.8266382,
+          "first_artifact_mtime_ns": 1786872456787367000,
+          "last_artifact_mtime_ns": 1786872532614005200,
+          "version": "v006"
+        },
+        {
+          "artifact_count": 43,
+          "artifact_span_seconds": 1221.4426929,
+          "first_artifact_mtime_ns": 1786872630464763500,
+          "last_artifact_mtime_ns": 1786873851907456400,
+          "version": "v007"
+        }
+      ]
+    },
+    "searches": {
+      "compact_report_bytes": 65578,
+      "raw_result_bytes": 10863387,
+      "repeated_query_fingerprint_count": 0,
+      "search_count": 8,
+      "searches": [
+        {
+          "compact_report_bytes": 8504,
+          "deduplicated_paper_count": 70,
+          "path": "hypotheses_v001/searches/broad-frontier-001",
+          "query_count": 0,
+          "raw_result_bytes": 1309330
+        },
+        {
+          "compact_report_bytes": 8654,
+          "deduplicated_paper_count": 71,
+          "path": "hypotheses_v001/searches/outcome-semantics-001",
+          "query_count": 0,
+          "raw_result_bytes": 1332860
+        },
+        {
+          "compact_report_bytes": 7671,
+          "deduplicated_paper_count": 71,
+          "path": "hypotheses_v002/searches/tool-doc-collision-001",
+          "query_count": 0,
+          "raw_result_bytes": 1219854
+        },
+        {
+          "compact_report_bytes": 7680,
+          "deduplicated_paper_count": 61,
+          "path": "hypotheses_v003/searches/operational-equivalence-001",
+          "query_count": 0,
+          "raw_result_bytes": 1219152
+        },
+        {
+          "compact_report_bytes": 7658,
+          "deduplicated_paper_count": 58,
+          "path": "hypotheses_v004/searches/typed-dataflow-binding-001",
+          "query_count": 0,
+          "raw_result_bytes": 1155807
+        },
+        {
+          "compact_report_bytes": 7481,
+          "deduplicated_paper_count": 68,
+          "path": "hypotheses_v005/searches/parallel-result-order-001",
+          "query_count": 0,
+          "raw_result_bytes": 1203498
+        },
+        {
+          "compact_report_bytes": 8784,
+          "deduplicated_paper_count": 73,
+          "path": "hypotheses_v006/searches/causal-tool-reliance-001",
+          "query_count": 0,
+          "raw_result_bytes": 1666262
+        },
+        {
+          "compact_report_bytes": 9146,
+          "deduplicated_paper_count": 72,
+          "path": "hypotheses_v007/searches/constraint-activation-001",
+          "query_count": 0,
+          "raw_result_bytes": 1756624
+        }
+      ]
+    },
+    "subagents": {
+      "category_distribution": {},
+      "classification_basis": "filename_only_artifact_classification_no_native_delegation_verification",
+      "native_delegation_evidence": {
+        "reason": "no_stable_machine_verifiable_native_delegation_evidence_source",
+        "status": "UNAVAILABLE",
+        "summary_artifacts_verify_native_delegation": false,
+        "verified_delegation_count": null
+      },
+      "summary_artifact_count": 0,
+      "summary_artifacts": [],
+      "summary_count": 0,
+      "tasks": []
+    }
+  },
+  "schema_version": 1,
+  "search_snapshot_files": [
+    {
+      "path": "hypotheses_v007/searches/constraint-activation-001/report.md",
+      "sha256": "a365193ba4185996aa3e809fd007a4122b2dde8064aa62c44a1078777a44ac91",
+      "size_bytes": 9146
+    },
+    {
+      "path": "hypotheses_v007/searches/constraint-activation-001/request.json",
+      "sha256": "04b732bf592aff4e3e93450fa54b15f32cec31d8c42723e32c306c6ab2d56ed1",
+      "size_bytes": 6206
+    },
+    {
+      "path": "hypotheses_v007/searches/constraint-activation-001/result.json",
+      "sha256": "f74c4eec50c3342689033aa15a3629c1ebb31893bba91fff790e352047aca3f7",
+      "size_bytes": 1756624
+    }
+  ],
+  "version": "v007"
+}

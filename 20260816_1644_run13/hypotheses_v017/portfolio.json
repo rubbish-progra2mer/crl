@@ -1,0 +1,59 @@
+{
+  "created_at_utc": "2026-08-16T11:00:37.913886Z",
+  "hypotheses": [
+    {
+      "alternative_explanations": [
+        "人工计算卡直接编码了标签，使提升来自答案泄漏而不是结构表示",
+        "两个失败模型同属 Qwen 家族，现象可能是模型家族特有偏差",
+        "提示中的严格差异规则导致小模型采用全部判不同的保守策略",
+        "换用强模型即可解决，外部签名编译只是教师蒸馏或级联"
+      ],
+      "changed_computation": {
+        "baseline": "让同一个低成本大语言模型直接阅读两段方法文字并判断其机制是否相同。",
+        "budget_effect": "增加一次结构抽取与匹配；若使用强教师模型，则把判别成本转移到签名编译阶段。",
+        "information_available": "与基线相同的两段方法描述；不增加论文全文或外部标签，但规范化器可调用更强教师模型。",
+        "intervention": "由外部规范化器抽取信息源、核心算子、执行时机与决策规则，消除模块命名后构成计算差分图，再执行结构匹配并返回最小分离边。",
+        "timing": "候选想法进入失败记忆、近邻工作检索或新颖性晋级之前。"
+      },
+      "created_at_utc": "2026-08-16T11:00:38.036695Z",
+      "descriptors": {
+        "budget_class": "增加一次签名编译",
+        "computation_stage": "候选晋级前审计",
+        "evaluation_mode": "成对机制等价分类",
+        "information_source": "候选方法描述",
+        "intervention_family": "去命名结构规范化",
+        "problem_family": "科研想法机制等价与新颖性审计",
+        "timing_class": "离线筛选"
+      },
+      "falsifier": "若高能力模型能直接稳定识别受控机制等价，且已有工作已经按目的、机制、评测和应用分面比较科研想法，则当前结果只说明小模型能力差异，不能支持新的通用计算原语。",
+      "hypothesis_id": "h-v017-name-quotiented-delta-audit",
+      "lineage_note": "由 v017 主动诊断建议反转‘先方法后现象’的轨迹后，先构造受控机制等价现象，再进行独立模型复核与最近工作审计。",
+      "literature_refs": [
+        "Shahid et al., Literature-Grounded Novelty Assessment of Scientific Ideas, SDP 2025",
+        "Schopf and Färber, Is this Idea Novel?, arXiv:2603.10303",
+        "Sinhahajari et al., On the Limits of LLM-as-Judge for Scientific Novelty Assessment, arXiv:2606.12071",
+        "Zhao et al., NovBench, Findings of ACL 2026"
+      ],
+      "mechanism_claim": "先把候选方法编译为去命名的计算差分图，显式记录信息、算子、时机和决策边，再以图同构或最小分离边进行比较，可使低成本科研模型识别词面不同但计算等价的方法。",
+      "minimal_killer_experiment": "在同时包含低词面重合的同机制对和高词面重合的异机制对上，比较原文直判、自提示规范化、人工差分卡与自动差分图；若强模型原文直判已无缺口，或自动方法不优于已有分面新颖性判别，则否决广义方法贡献。",
+      "nearest_prior_risk": "Idea Novelty Checker 已按目的、机制、评测与应用分面重排并判断科研想法；RINoBench、NovBench 与 RQ-Bench 已系统揭示并评测大语言模型新颖性判别缺口。",
+      "parent_ids": [],
+      "problem": "较小的科研大语言模型可能把同一核心计算的改写误判为不同机制，使失败记忆和近邻工作无法阻止重复想法。",
+      "revision": 3,
+      "status": "prior_collision",
+      "status_reason": "GPT-5.4 原文直判 20/20；已有 Idea Novelty Checker 已按目的、机制、评测和应用分面比较科研想法，剩余变化不足以形成论文级方法差分。",
+      "target_failure": {
+        "card_ids": [],
+        "evidence_ids": [],
+        "summary": "两个本地 Qwen 模型在 20 对受控机制描述的原文条件下都把全部样例判为不同，导致同机制样例召回率为零。"
+      },
+      "title": "去命名计算差分图用于低成本科研新颖性审计",
+      "updated_at_utc": "2026-08-16T11:00:38.289401Z"
+    }
+  ],
+  "revision": 3,
+  "run_id": "20260816_1644_run13",
+  "schema_version": 1,
+  "updated_at_utc": "2026-08-16T11:00:38.289401Z",
+  "version": "v017"
+}

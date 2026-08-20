@@ -1,0 +1,67 @@
+{
+  "created_at_utc": "2026-08-16T10:27:53.160892Z",
+  "hypotheses": [
+    {
+      "alternative_explanations": [
+        "提示未提醒刷新",
+        "工具缓存配置错误",
+        "版本键粒度不当",
+        "外部更新不可观察",
+        "事务基线已足够"
+      ],
+      "changed_computation": {
+        "baseline": "工具结果作为不可变文本追加到上下文，后续动作由模型自行判断是否刷新。",
+        "budget_effect": "冲突时增加只读刷新调用，不增加无冲突路径的模型调用。",
+        "information_available": "使用工具契约中的资源键、读写效果和版本；模型访问的业务数据不变。",
+        "intervention": "读取记录资源版本和读集，写入推进资源版本并沿依赖图标记旧观察失效；依赖失效观察的动作提交前强制刷新。",
+        "timing": "工具返回后记录依赖，写操作后传播失效，动作提交前检查。"
+      },
+      "created_at_utc": "2026-08-16T10:27:53.265467Z",
+      "descriptors": {
+        "budget_class": "冲突时增加只读调用",
+        "computation_stage": "工具观察到动作提交",
+        "evaluation_mode": "状态故障注入",
+        "information_source": "资源版本与读写效果",
+        "intervention_family": "依赖感知失效传播",
+        "problem_family": "状态型工具观察陈旧",
+        "timing_class": "写后失效、提交前刷新"
+      },
+      "falsifier": "读写依赖失效、事实依赖撤销或版本化事务保护已直接覆盖该计算。",
+      "hypothesis_id": "h-v012-resource-version-invalidation",
+      "lineage_note": "从智能体在状态写入后继续使用旧工具观察的失败出发。",
+      "literature_refs": [
+        "P030",
+        "P074",
+        "OpenReview:tX3YcbNa5w",
+        "arXiv:2608.12761",
+        "arXiv:2607.23929",
+        "arXiv:2606.17182",
+        "arXiv:2605.08828"
+      ],
+      "mechanism_claim": "显式失效传播阻止旧观察在状态变化后继续支配不可逆动作。",
+      "minimal_killer_experiment": "日历、库存与文件工具中的读后写及外部更新故障注入，比较陈旧动作率和刷新开销。",
+      "nearest_prior_risk": "ToolCacheAgent、Matrix、MemTX、STALE 和多智能体并发异常防护可能直接吸收核心计算。",
+      "parent_ids": [],
+      "problem": "工具结果保留在上下文中，后续写操作或外部更新已使其失效，但智能体仍把它当作当前状态。",
+      "revision": 3,
+      "status": "prior_collision",
+      "status_reason": "ToolCacheAgent已直接实现READ/WRITE分类与依赖感知失效，Matrix、MemTX及经验证的并发异常防护进一步覆盖事实依赖撤销、版本与提交保护。",
+      "target_failure": {
+        "card_ids": [
+          "paper-p030"
+        ],
+        "evidence_ids": [
+          "ev-p030-failure-core"
+        ],
+        "summary": "陈旧工具观察获得错误的当前决策权。"
+      },
+      "title": "资源版本驱动的工具观察失效",
+      "updated_at_utc": "2026-08-16T10:27:53.470989Z"
+    }
+  ],
+  "revision": 3,
+  "run_id": "20260816_1644_run13",
+  "schema_version": 1,
+  "updated_at_utc": "2026-08-16T10:27:53.470989Z",
+  "version": "v012"
+}

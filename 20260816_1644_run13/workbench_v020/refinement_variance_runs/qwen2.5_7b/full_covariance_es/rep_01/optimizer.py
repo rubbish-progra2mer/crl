@@ -1,0 +1,36 @@
+import numpy as np
+from problems import BudgetExhausted
+
+def optimize(f, dim, bounds, budget, seed):
+    np.random.seed(seed)
+    low, high = bounds
+    population_size = 10
+    sigma = 0.1
+    lambda_ = 5
+    mu = int(lambda_ / 2)
+    mean = np.random.uniform(low, high, dim)
+    covariance = np.eye(dim) * sigma**2
+
+    evaluations = 0
+    while evaluations < budget:
+        # Sample population
+        samples = np.random.multivariate_normal(mean, covariance, lambda_)
+        values = [f(x) for x in samples]
+        elites = [samples[i] for i in np.argsort(values)[:mu]]
+        
+        # Update mean and covariance from elites
+        mean = np.mean(elites, axis=0)
+        covariance = np.cov(np.array(elites).T)
+        covariance += 0.1 * np.eye(dim)  # Regularization
+
+        # Adapt scale
+        sigma *= np.random.normal(1, 0.1)
+
+        evaluations += lambda_
+
+    # Return the best solution found
+    return {'solution': mean, 'evaluations': evaluations}
+
+# Example usage:
+# result = optimize(lambda x: np.sum(x**2), 5, ((-5.0, 5.0),) * 5, 100, 42)
+# print(result)

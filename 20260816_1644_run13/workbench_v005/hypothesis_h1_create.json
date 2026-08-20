@@ -1,0 +1,35 @@
+{
+  "hypothesis_id": "h-v005-result-order",
+  "title": "并行工具结果到达顺序泄漏",
+  "status": "draft",
+  "parent_ids": [],
+  "lineage_note": "从 v004 已被先行工作覆盖的多步值绑定问题，正交转向并行批次的观测提交顺序。",
+  "problem": "固定同一并行调用与结果集合时，墙钟完成顺序可能通过工具消息排列改变后续动作。",
+  "target_failure": {
+    "summary": "与任务语义无关的并行结果到达顺序导致动作翻转或正确率变化。",
+    "card_ids": ["paper-llmcompiler", "paper-p069"],
+    "evidence_ids": ["ev-p006-dependency-dag-dispatch", "ev-p069-identical-tool-order-bias"]
+  },
+  "changed_computation": {
+    "baseline": "并发工具结果按实际完成顺序追加为工具消息。",
+    "intervention": "等待并行批次完成，按原计划调用索引归并并提交结果，失败也保留原槽位。",
+    "information_available": "基线与干预看到完全相同的调用、结果内容、工具名和调用索引。",
+    "timing": "并行工具执行完成后、下一次模型推理之前。",
+    "budget_effect": "不增加模型调用或工具调用，只改变结果消息排列与批次屏障。"
+  },
+  "mechanism_claim": "墙钟完成顺序泄漏为文本位置顺序后会触发大语言模型的位置偏置；按计划索引稳定归并可消除该无关变量。",
+  "falsifier": "两个稳定模型在至少 7/8 个任务上对全部六种排列给出相同决策，且错误不随顺序翻转。",
+  "minimal_killer_experiment": "固定原生并行工具调用消息，遍历三个结果消息的六种排列，测量翻转任务率与全排列正确率。",
+  "nearest_prior_risk": "工具菜单顺序偏置、一般列表顺序边际化、Set-LLM 与保序并发运行时可能吸收问题或方法。",
+  "alternative_explanations": ["一般列表顺序偏置而非工具特有机制", "个别任务规则歧义", "工具角色模板未正确关联结果", "温度外的运行时非确定性"],
+  "descriptors": {
+    "problem_family": "并行工具观测顺序鲁棒性",
+    "computation_stage": "工具结果提交到后续决策",
+    "intervention_family": "确定性批次归并",
+    "information_source": "原始并行调用索引与工具结果",
+    "timing_class": "推理前运行时变换",
+    "budget_class": "调用预算不变",
+    "evaluation_mode": "受控全排列本地执行"
+  },
+  "literature_refs": ["P006", "P069", "RealtimeTool", "Set-LLM"]
+}

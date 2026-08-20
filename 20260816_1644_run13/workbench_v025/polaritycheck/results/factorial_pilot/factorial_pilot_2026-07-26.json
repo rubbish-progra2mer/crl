@@ -1,0 +1,4437 @@
+{
+  "experiment": "block-a factorial pilot (2x2: decision axis x lexical axis)",
+  "date": "2026-07-26 10:33:53",
+  "node": "redacted",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "primary_metric": "token_jaccard",
+  "decision_rule": {
+    "holds_at_or_below": 0.55,
+    "shrinks_at_or_above": 0.7,
+    "pre_registered_before_any_encoder_ran": true
+  },
+  "encoders_available": [
+    "nomic-embed-text-v1.5 MRL-256 [PRODUCTION PATH, search_document:]",
+    "nomic-embed-text-v1.5 [clustering: — documented symmetric prefix]",
+    "sentence-transformers/all-MiniLM-L6-v2",
+    "sentence-transformers/all-mpnet-base-v2",
+    "BAAI/bge-base-en-v1.5",
+    "thenlper/gte-base",
+    "e5-base-v2 [query: — card's symmetric convention]",
+    "e5-base-v2 [NO prefix — sensitivity variant]",
+    "mixedbread-ai/mxbai-embed-large-v1"
+  ],
+  "encoders_absent": [],
+  "gate1_satisfied": true,
+  "tasks": {
+    "distinctness": {
+      "n_pairs": 40,
+      "n_anchors": 10,
+      "manipulation_check": {
+        "primary_metric": "token_jaccard",
+        "cells": {
+          "A": {
+            "decision": "OPPOSITE",
+            "lexical": "CLOSE",
+            "n": 10,
+            "mean_overlap": 0.7212,
+            "min": 0.6,
+            "max": 1.0
+          },
+          "B": {
+            "decision": "OPPOSITE",
+            "lexical": "DISTANT",
+            "n": 10,
+            "mean_overlap": 0.0861,
+            "min": 0.0,
+            "max": 0.3077
+          },
+          "C": {
+            "decision": "SAME",
+            "lexical": "CLOSE",
+            "n": 10,
+            "mean_overlap": 0.7176,
+            "min": 0.6,
+            "max": 1.0
+          },
+          "D": {
+            "decision": "SAME",
+            "lexical": "DISTANT",
+            "n": 10,
+            "mean_overlap": 0.0681,
+            "min": 0.0,
+            "max": 0.2727
+          }
+        },
+        "lexical_labels_separate": {
+          "measure": "assigned CLOSE vs DISTANT, on measured overlap",
+          "n_positive": 20,
+          "n_negative": 20,
+          "positive_class": "CLOSE",
+          "negative_class": "DISTANT",
+          "auroc": 1.0,
+          "auroc_inverted_direction": 0.0,
+          "oracle_best_balanced_accuracy": 1.0,
+          "oracle_best_threshold": 0.6,
+          "oracle_best_polarity": "ge",
+          "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+          "ci95_bootstrap": null,
+          "ci95_excludes_chance": null,
+          "exact_permutation_p": 1.4508889103849688e-11
+        },
+        "balance": {
+          "CLOSE": {
+            "observed_diff": 0.003571,
+            "p_two_sided": 0.97995,
+            "n_a": 10,
+            "n_b": 10,
+            "mean_a": 0.721191,
+            "mean_b": 0.717619
+          },
+          "DISTANT": {
+            "observed_diff": 0.017972,
+            "p_two_sided": 0.69412,
+            "n_a": 10,
+            "n_b": 10,
+            "mean_a": 0.086106,
+            "mean_b": 0.068133
+          }
+        },
+        "design_valid": true,
+        "kappa_decision": null
+      },
+      "per_encoder": [
+        {
+          "encoder": "nomic-embed-text-v1.5 MRL-256 [PRODUCTION PATH, search_document:]",
+          "family": "nomic",
+          "cell_mean_cosine": {
+            "OPPOSITE": {
+              "CLOSE": 0.9706,
+              "DISTANT": 0.801
+            },
+            "SAME": {
+              "CLOSE": 0.9755,
+              "DISTANT": 0.789
+            }
+          },
+          "decision_axis_within_lexical": {
+            "CLOSE": {
+              "measure": "decision axis | lexical=CLOSE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "SAME",
+              "negative_class": "OPPOSITE",
+              "auroc": 0.57,
+              "auroc_inverted_direction": 0.43,
+              "oracle_best_balanced_accuracy": 0.65,
+              "oracle_best_threshold": 0.979979,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.65,
+              "ci95_bootstrap": [
+                0.3,
+                0.82
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            },
+            "DISTANT": {
+              "measure": "decision axis | lexical=DISTANT",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "SAME",
+              "negative_class": "OPPOSITE",
+              "auroc": 0.5,
+              "auroc_inverted_direction": 0.5,
+              "oracle_best_balanced_accuracy": 0.65,
+              "oracle_best_threshold": 0.809044,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.65,
+              "ci95_bootstrap": [
+                0.24,
+                0.77
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            }
+          },
+          "decision_axis_stratified_auroc": 0.535,
+          "lexical_axis_within_decision": {
+            "OPPOSITE": {
+              "measure": "lexical axis | decision=OPPOSITE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 0.96,
+              "auroc_inverted_direction": 0.04,
+              "oracle_best_balanced_accuracy": 0.95,
+              "oracle_best_threshold": 0.905411,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.95,
+              "ci95_bootstrap": [
+                0.85,
+                1.0
+              ],
+              "ci95_excludes_chance": true,
+              "exact_permutation_p": null
+            },
+            "SAME": {
+              "measure": "lexical axis | decision=SAME",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.918935,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            }
+          },
+          "lexical_axis_stratified_auroc": 0.98,
+          "naive_confounded_auroc": {
+            "measure": "NAIVE pooled decision axis (confounded)",
+            "n_positive": 10,
+            "n_negative": 10,
+            "positive_class": "SAME",
+            "negative_class": "OPPOSITE",
+            "auroc": 0.0,
+            "auroc_inverted_direction": 1.0,
+            "oracle_best_balanced_accuracy": 1.0,
+            "oracle_best_threshold": 0.905411,
+            "oracle_best_polarity": "lt",
+            "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.5,
+            "ci95_bootstrap": null,
+            "ci95_excludes_chance": null,
+            "exact_permutation_p": 1.082508822446903e-05
+          },
+          "confound_inflation": 0.535,
+          "one_threshold_reality_check": {
+            "single_global_threshold": {
+              "balanced_accuracy": 0.575,
+              "threshold": 0.809044,
+              "polarity": "ge"
+            },
+            "per_stratum_oracle": {
+              "CLOSE": {
+                "balanced_accuracy": 0.65,
+                "threshold": 0.979979
+              },
+              "DISTANT": {
+                "balanced_accuracy": 0.65,
+                "threshold": 0.809044
+              }
+            },
+            "mean_per_stratum_balanced_accuracy": 0.65,
+            "cost_of_one_threshold": 0.075,
+            "threshold_spread_between_strata": 0.170935
+          },
+          "shipped_threshold_performance": [
+            {
+              "threshold": 0.3,
+              "provenance": "innovation64/BMAM long_term_memory",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.4,
+              "provenance": "innovation64/BMAM; this repo's config advertised drift_threshold",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.8,
+              "provenance": "this repo's EFFECTIVE Sinkhorn boundary (R10a: cos < 0.80)",
+              "balanced_accuracy": 0.55,
+              "true_positive_rate": 0.75,
+              "true_negative_rate": 0.35
+            },
+            {
+              "threshold": 0.85,
+              "provenance": "the audited system's _DISTINCTNESS_COSINE_THRESHOLD; neuralmind REVIEW_FLAG; vendor guidance 'cosine distance > 0.15'",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 0.55,
+              "true_negative_rate": 0.45
+            },
+            {
+              "threshold": 0.95,
+              "provenance": "AG3NT DEDUP_SIMILARITY_THRESHOLD; Maria DEFAULT_SEMANTIC_THRESHOLD; neuralmind AUTO_MERGE_THRESHOLD",
+              "balanced_accuracy": 0.475,
+              "true_positive_rate": 0.4,
+              "true_negative_rate": 0.55
+            }
+          ],
+          "best_shipped_threshold_balanced_accuracy": 0.55
+        },
+        {
+          "encoder": "nomic-embed-text-v1.5 [clustering: — documented symmetric prefix]",
+          "family": "nomic",
+          "cell_mean_cosine": {
+            "OPPOSITE": {
+              "CLOSE": 0.969,
+              "DISTANT": 0.7733
+            },
+            "SAME": {
+              "CLOSE": 0.9706,
+              "DISTANT": 0.7492
+            }
+          },
+          "decision_axis_within_lexical": {
+            "CLOSE": {
+              "measure": "decision axis | lexical=CLOSE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "SAME",
+              "negative_class": "OPPOSITE",
+              "auroc": 0.58,
+              "auroc_inverted_direction": 0.42,
+              "oracle_best_balanced_accuracy": 0.6,
+              "oracle_best_threshold": 0.982077,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.6,
+              "ci95_bootstrap": [
+                0.31,
+                0.82
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            },
+            "DISTANT": {
+              "measure": "decision axis | lexical=DISTANT",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "SAME",
+              "negative_class": "OPPOSITE",
+              "auroc": 0.4,
+              "auroc_inverted_direction": 0.6,
+              "oracle_best_balanced_accuracy": 0.65,
+              "oracle_best_threshold": 0.723452,
+              "oracle_best_polarity": "lt",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.6,
+              "ci95_bootstrap": [
+                0.15,
+                0.66
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            }
+          },
+          "decision_axis_stratified_auroc": 0.49,
+          "lexical_axis_within_decision": {
+            "OPPOSITE": {
+              "measure": "lexical axis | decision=OPPOSITE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 0.97,
+              "auroc_inverted_direction": 0.03,
+              "oracle_best_balanced_accuracy": 0.95,
+              "oracle_best_threshold": 0.873379,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.95,
+              "ci95_bootstrap": [
+                0.88,
+                1.0
+              ],
+              "ci95_excludes_chance": true,
+              "exact_permutation_p": null
+            },
+            "SAME": {
+              "measure": "lexical axis | decision=SAME",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.885232,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            }
+          },
+          "lexical_axis_stratified_auroc": 0.985,
+          "naive_confounded_auroc": {
+            "measure": "NAIVE pooled decision axis (confounded)",
+            "n_positive": 10,
+            "n_negative": 10,
+            "positive_class": "SAME",
+            "negative_class": "OPPOSITE",
+            "auroc": 0.0,
+            "auroc_inverted_direction": 1.0,
+            "oracle_best_balanced_accuracy": 1.0,
+            "oracle_best_threshold": 0.873379,
+            "oracle_best_polarity": "lt",
+            "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.5,
+            "ci95_bootstrap": null,
+            "ci95_excludes_chance": null,
+            "exact_permutation_p": 1.082508822446903e-05
+          },
+          "confound_inflation": 0.49,
+          "one_threshold_reality_check": {
+            "single_global_threshold": {
+              "balanced_accuracy": 0.575,
+              "threshold": 0.723452,
+              "polarity": "lt"
+            },
+            "per_stratum_oracle": {
+              "CLOSE": {
+                "balanced_accuracy": 0.6,
+                "threshold": 0.982077
+              },
+              "DISTANT": {
+                "balanced_accuracy": 0.65,
+                "threshold": 0.723452
+              }
+            },
+            "mean_per_stratum_balanced_accuracy": 0.625,
+            "cost_of_one_threshold": 0.05,
+            "threshold_spread_between_strata": 0.258625
+          },
+          "shipped_threshold_performance": [
+            {
+              "threshold": 0.3,
+              "provenance": "innovation64/BMAM long_term_memory",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.4,
+              "provenance": "innovation64/BMAM; this repo's config advertised drift_threshold",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.8,
+              "provenance": "this repo's EFFECTIVE Sinkhorn boundary (R10a: cos < 0.80)",
+              "balanced_accuracy": 0.55,
+              "true_positive_rate": 0.65,
+              "true_negative_rate": 0.45
+            },
+            {
+              "threshold": 0.85,
+              "provenance": "the audited system's _DISTINCTNESS_COSINE_THRESHOLD; neuralmind REVIEW_FLAG; vendor guidance 'cosine distance > 0.15'",
+              "balanced_accuracy": 0.475,
+              "true_positive_rate": 0.5,
+              "true_negative_rate": 0.45
+            },
+            {
+              "threshold": 0.95,
+              "provenance": "AG3NT DEDUP_SIMILARITY_THRESHOLD; Maria DEFAULT_SEMANTIC_THRESHOLD; neuralmind AUTO_MERGE_THRESHOLD",
+              "balanced_accuracy": 0.475,
+              "true_positive_rate": 0.4,
+              "true_negative_rate": 0.55
+            }
+          ],
+          "best_shipped_threshold_balanced_accuracy": 0.55
+        },
+        {
+          "encoder": "sentence-transformers/all-MiniLM-L6-v2",
+          "family": "minilm",
+          "cell_mean_cosine": {
+            "OPPOSITE": {
+              "CLOSE": 0.901,
+              "DISTANT": 0.4623
+            },
+            "SAME": {
+              "CLOSE": 0.9529,
+              "DISTANT": 0.4285
+            }
+          },
+          "decision_axis_within_lexical": {
+            "CLOSE": {
+              "measure": "decision axis | lexical=CLOSE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "SAME",
+              "negative_class": "OPPOSITE",
+              "auroc": 0.67,
+              "auroc_inverted_direction": 0.33,
+              "oracle_best_balanced_accuracy": 0.7,
+              "oracle_best_threshold": 0.963497,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.7,
+              "ci95_bootstrap": [
+                0.41,
+                0.89
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            },
+            "DISTANT": {
+              "measure": "decision axis | lexical=DISTANT",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "SAME",
+              "negative_class": "OPPOSITE",
+              "auroc": 0.52,
+              "auroc_inverted_direction": 0.48,
+              "oracle_best_balanced_accuracy": 0.65,
+              "oracle_best_threshold": 0.526621,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.65,
+              "ci95_bootstrap": [
+                0.25,
+                0.79
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            }
+          },
+          "decision_axis_stratified_auroc": 0.595,
+          "lexical_axis_within_decision": {
+            "OPPOSITE": {
+              "measure": "lexical axis | decision=OPPOSITE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 0.96,
+              "auroc_inverted_direction": 0.04,
+              "oracle_best_balanced_accuracy": 0.95,
+              "oracle_best_threshold": 0.764378,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.95,
+              "ci95_bootstrap": [
+                0.85,
+                1.0
+              ],
+              "ci95_excludes_chance": true,
+              "exact_permutation_p": null
+            },
+            "SAME": {
+              "measure": "lexical axis | decision=SAME",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.843977,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            }
+          },
+          "lexical_axis_stratified_auroc": 0.98,
+          "naive_confounded_auroc": {
+            "measure": "NAIVE pooled decision axis (confounded)",
+            "n_positive": 10,
+            "n_negative": 10,
+            "positive_class": "SAME",
+            "negative_class": "OPPOSITE",
+            "auroc": 0.0,
+            "auroc_inverted_direction": 1.0,
+            "oracle_best_balanced_accuracy": 1.0,
+            "oracle_best_threshold": 0.764378,
+            "oracle_best_polarity": "lt",
+            "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.5,
+            "ci95_bootstrap": null,
+            "ci95_excludes_chance": null,
+            "exact_permutation_p": 1.082508822446903e-05
+          },
+          "confound_inflation": 0.595,
+          "one_threshold_reality_check": {
+            "single_global_threshold": {
+              "balanced_accuracy": 0.6,
+              "threshold": 0.963497,
+              "polarity": "ge"
+            },
+            "per_stratum_oracle": {
+              "CLOSE": {
+                "balanced_accuracy": 0.7,
+                "threshold": 0.963497
+              },
+              "DISTANT": {
+                "balanced_accuracy": 0.65,
+                "threshold": 0.526621
+              }
+            },
+            "mean_per_stratum_balanced_accuracy": 0.675,
+            "cost_of_one_threshold": 0.075,
+            "threshold_spread_between_strata": 0.436876
+          },
+          "shipped_threshold_performance": [
+            {
+              "threshold": 0.3,
+              "provenance": "innovation64/BMAM long_term_memory",
+              "balanced_accuracy": 0.45,
+              "true_positive_rate": 0.9,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.4,
+              "provenance": "innovation64/BMAM; this repo's config advertised drift_threshold",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 0.8,
+              "true_negative_rate": 0.2
+            },
+            {
+              "threshold": 0.8,
+              "provenance": "this repo's EFFECTIVE Sinkhorn boundary (R10a: cos < 0.80)",
+              "balanced_accuracy": 0.525,
+              "true_positive_rate": 0.5,
+              "true_negative_rate": 0.55
+            },
+            {
+              "threshold": 0.85,
+              "provenance": "the audited system's _DISTINCTNESS_COSINE_THRESHOLD; neuralmind REVIEW_FLAG; vendor guidance 'cosine distance > 0.15'",
+              "balanced_accuracy": 0.525,
+              "true_positive_rate": 0.45,
+              "true_negative_rate": 0.6
+            },
+            {
+              "threshold": 0.95,
+              "provenance": "AG3NT DEDUP_SIMILARITY_THRESHOLD; Maria DEFAULT_SEMANTIC_THRESHOLD; neuralmind AUTO_MERGE_THRESHOLD",
+              "balanced_accuracy": 0.575,
+              "true_positive_rate": 0.4,
+              "true_negative_rate": 0.75
+            }
+          ],
+          "best_shipped_threshold_balanced_accuracy": 0.575
+        },
+        {
+          "encoder": "sentence-transformers/all-mpnet-base-v2",
+          "family": "mpnet",
+          "cell_mean_cosine": {
+            "OPPOSITE": {
+              "CLOSE": 0.9001,
+              "DISTANT": 0.4823
+            },
+            "SAME": {
+              "CLOSE": 0.9638,
+              "DISTANT": 0.48
+            }
+          },
+          "decision_axis_within_lexical": {
+            "CLOSE": {
+              "measure": "decision axis | lexical=CLOSE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "SAME",
+              "negative_class": "OPPOSITE",
+              "auroc": 0.72,
+              "auroc_inverted_direction": 0.28,
+              "oracle_best_balanced_accuracy": 0.7,
+              "oracle_best_threshold": 0.890304,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.7,
+              "ci95_bootstrap": [
+                0.47,
+                0.92
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            },
+            "DISTANT": {
+              "measure": "decision axis | lexical=DISTANT",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "SAME",
+              "negative_class": "OPPOSITE",
+              "auroc": 0.56,
+              "auroc_inverted_direction": 0.44,
+              "oracle_best_balanced_accuracy": 0.7,
+              "oracle_best_threshold": 0.538546,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.7,
+              "ci95_bootstrap": [
+                0.28,
+                0.82
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            }
+          },
+          "decision_axis_stratified_auroc": 0.64,
+          "lexical_axis_within_decision": {
+            "OPPOSITE": {
+              "measure": "lexical axis | decision=OPPOSITE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 0.97,
+              "auroc_inverted_direction": 0.03,
+              "oracle_best_balanced_accuracy": 0.95,
+              "oracle_best_threshold": 0.757753,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.95,
+              "ci95_bootstrap": [
+                0.88,
+                1.0
+              ],
+              "ci95_excludes_chance": true,
+              "exact_permutation_p": null
+            },
+            "SAME": {
+              "measure": "lexical axis | decision=SAME",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.890304,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            }
+          },
+          "lexical_axis_stratified_auroc": 0.985,
+          "naive_confounded_auroc": {
+            "measure": "NAIVE pooled decision axis (confounded)",
+            "n_positive": 10,
+            "n_negative": 10,
+            "positive_class": "SAME",
+            "negative_class": "OPPOSITE",
+            "auroc": 0.0,
+            "auroc_inverted_direction": 1.0,
+            "oracle_best_balanced_accuracy": 1.0,
+            "oracle_best_threshold": 0.757753,
+            "oracle_best_polarity": "lt",
+            "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.5,
+            "ci95_bootstrap": null,
+            "ci95_excludes_chance": null,
+            "exact_permutation_p": 1.082508822446903e-05
+          },
+          "confound_inflation": 0.64,
+          "one_threshold_reality_check": {
+            "single_global_threshold": {
+              "balanced_accuracy": 0.6,
+              "threshold": 0.538546,
+              "polarity": "ge"
+            },
+            "per_stratum_oracle": {
+              "CLOSE": {
+                "balanced_accuracy": 0.7,
+                "threshold": 0.890304
+              },
+              "DISTANT": {
+                "balanced_accuracy": 0.7,
+                "threshold": 0.538546
+              }
+            },
+            "mean_per_stratum_balanced_accuracy": 0.7,
+            "cost_of_one_threshold": 0.1,
+            "threshold_spread_between_strata": 0.351758
+          },
+          "shipped_threshold_performance": [
+            {
+              "threshold": 0.3,
+              "provenance": "innovation64/BMAM long_term_memory",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.4,
+              "provenance": "innovation64/BMAM; this repo's config advertised drift_threshold",
+              "balanced_accuracy": 0.475,
+              "true_positive_rate": 0.8,
+              "true_negative_rate": 0.15
+            },
+            {
+              "threshold": 0.8,
+              "provenance": "this repo's EFFECTIVE Sinkhorn boundary (R10a: cos < 0.80)",
+              "balanced_accuracy": 0.55,
+              "true_positive_rate": 0.5,
+              "true_negative_rate": 0.6
+            },
+            {
+              "threshold": 0.85,
+              "provenance": "the audited system's _DISTINCTNESS_COSINE_THRESHOLD; neuralmind REVIEW_FLAG; vendor guidance 'cosine distance > 0.15'",
+              "balanced_accuracy": 0.575,
+              "true_positive_rate": 0.5,
+              "true_negative_rate": 0.65
+            },
+            {
+              "threshold": 0.95,
+              "provenance": "AG3NT DEDUP_SIMILARITY_THRESHOLD; Maria DEFAULT_SEMANTIC_THRESHOLD; neuralmind AUTO_MERGE_THRESHOLD",
+              "balanced_accuracy": 0.6,
+              "true_positive_rate": 0.4,
+              "true_negative_rate": 0.8
+            }
+          ],
+          "best_shipped_threshold_balanced_accuracy": 0.6
+        },
+        {
+          "encoder": "BAAI/bge-base-en-v1.5",
+          "family": "bge",
+          "cell_mean_cosine": {
+            "OPPOSITE": {
+              "CLOSE": 0.8886,
+              "DISTANT": 0.6534
+            },
+            "SAME": {
+              "CLOSE": 0.969,
+              "DISTANT": 0.6865
+            }
+          },
+          "decision_axis_within_lexical": {
+            "CLOSE": {
+              "measure": "decision axis | lexical=CLOSE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "SAME",
+              "negative_class": "OPPOSITE",
+              "auroc": 0.9,
+              "auroc_inverted_direction": 0.1,
+              "oracle_best_balanced_accuracy": 0.9,
+              "oracle_best_threshold": 0.962609,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.9,
+              "ci95_bootstrap": [
+                0.73,
+                1.0
+              ],
+              "ci95_excludes_chance": true,
+              "exact_permutation_p": null
+            },
+            "DISTANT": {
+              "measure": "decision axis | lexical=DISTANT",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "SAME",
+              "negative_class": "OPPOSITE",
+              "auroc": 0.71,
+              "auroc_inverted_direction": 0.29,
+              "oracle_best_balanced_accuracy": 0.75,
+              "oracle_best_threshold": 0.657296,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.75,
+              "ci95_bootstrap": [
+                0.44,
+                0.95
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            }
+          },
+          "decision_axis_stratified_auroc": 0.805,
+          "lexical_axis_within_decision": {
+            "OPPOSITE": {
+              "measure": "lexical axis | decision=OPPOSITE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 0.96,
+              "auroc_inverted_direction": 0.04,
+              "oracle_best_balanced_accuracy": 0.95,
+              "oracle_best_threshold": 0.805548,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.95,
+              "ci95_bootstrap": [
+                0.85,
+                1.0
+              ],
+              "ci95_excludes_chance": true,
+              "exact_permutation_p": null
+            },
+            "SAME": {
+              "measure": "lexical axis | decision=SAME",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.902936,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            }
+          },
+          "lexical_axis_stratified_auroc": 0.98,
+          "naive_confounded_auroc": {
+            "measure": "NAIVE pooled decision axis (confounded)",
+            "n_positive": 10,
+            "n_negative": 10,
+            "positive_class": "SAME",
+            "negative_class": "OPPOSITE",
+            "auroc": 0.0,
+            "auroc_inverted_direction": 1.0,
+            "oracle_best_balanced_accuracy": 1.0,
+            "oracle_best_threshold": 0.805548,
+            "oracle_best_polarity": "lt",
+            "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.5,
+            "ci95_bootstrap": null,
+            "ci95_excludes_chance": null,
+            "exact_permutation_p": 1.082508822446903e-05
+          },
+          "confound_inflation": 0.805,
+          "one_threshold_reality_check": {
+            "single_global_threshold": {
+              "balanced_accuracy": 0.7,
+              "threshold": 0.962609,
+              "polarity": "ge"
+            },
+            "per_stratum_oracle": {
+              "CLOSE": {
+                "balanced_accuracy": 0.9,
+                "threshold": 0.962609
+              },
+              "DISTANT": {
+                "balanced_accuracy": 0.75,
+                "threshold": 0.657296
+              }
+            },
+            "mean_per_stratum_balanced_accuracy": 0.825,
+            "cost_of_one_threshold": 0.125,
+            "threshold_spread_between_strata": 0.305313
+          },
+          "shipped_threshold_performance": [
+            {
+              "threshold": 0.3,
+              "provenance": "innovation64/BMAM long_term_memory",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.4,
+              "provenance": "innovation64/BMAM; this repo's config advertised drift_threshold",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.8,
+              "provenance": "this repo's EFFECTIVE Sinkhorn boundary (R10a: cos < 0.80)",
+              "balanced_accuracy": 0.475,
+              "true_positive_rate": 0.5,
+              "true_negative_rate": 0.45
+            },
+            {
+              "threshold": 0.85,
+              "provenance": "the audited system's _DISTINCTNESS_COSINE_THRESHOLD; neuralmind REVIEW_FLAG; vendor guidance 'cosine distance > 0.15'",
+              "balanced_accuracy": 0.575,
+              "true_positive_rate": 0.5,
+              "true_negative_rate": 0.65
+            },
+            {
+              "threshold": 0.95,
+              "provenance": "AG3NT DEDUP_SIMILARITY_THRESHOLD; Maria DEFAULT_SEMANTIC_THRESHOLD; neuralmind AUTO_MERGE_THRESHOLD",
+              "balanced_accuracy": 0.675,
+              "true_positive_rate": 0.45,
+              "true_negative_rate": 0.9
+            }
+          ],
+          "best_shipped_threshold_balanced_accuracy": 0.675
+        },
+        {
+          "encoder": "thenlper/gte-base",
+          "family": "gte",
+          "cell_mean_cosine": {
+            "OPPOSITE": {
+              "CLOSE": 0.9506,
+              "DISTANT": 0.8237
+            },
+            "SAME": {
+              "CLOSE": 0.9793,
+              "DISTANT": 0.8315
+            }
+          },
+          "decision_axis_within_lexical": {
+            "CLOSE": {
+              "measure": "decision axis | lexical=CLOSE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "SAME",
+              "negative_class": "OPPOSITE",
+              "auroc": 0.815,
+              "auroc_inverted_direction": 0.185,
+              "oracle_best_balanced_accuracy": 0.8,
+              "oracle_best_threshold": 0.971191,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.8,
+              "ci95_bootstrap": [
+                0.58,
+                0.99
+              ],
+              "ci95_excludes_chance": true,
+              "exact_permutation_p": null
+            },
+            "DISTANT": {
+              "measure": "decision axis | lexical=DISTANT",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "SAME",
+              "negative_class": "OPPOSITE",
+              "auroc": 0.665,
+              "auroc_inverted_direction": 0.335,
+              "oracle_best_balanced_accuracy": 0.8,
+              "oracle_best_threshold": 0.82373,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.8,
+              "ci95_bootstrap": [
+                0.38,
+                0.92
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            }
+          },
+          "decision_axis_stratified_auroc": 0.74,
+          "lexical_axis_within_decision": {
+            "OPPOSITE": {
+              "measure": "lexical axis | decision=OPPOSITE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 0.95,
+              "auroc_inverted_direction": 0.05,
+              "oracle_best_balanced_accuracy": 0.95,
+              "oracle_best_threshold": 0.912598,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.95,
+              "ci95_bootstrap": [
+                0.82,
+                1.0
+              ],
+              "ci95_excludes_chance": true,
+              "exact_permutation_p": null
+            },
+            "SAME": {
+              "measure": "lexical axis | decision=SAME",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.932617,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            }
+          },
+          "lexical_axis_stratified_auroc": 0.975,
+          "naive_confounded_auroc": {
+            "measure": "NAIVE pooled decision axis (confounded)",
+            "n_positive": 10,
+            "n_negative": 10,
+            "positive_class": "SAME",
+            "negative_class": "OPPOSITE",
+            "auroc": 0.0,
+            "auroc_inverted_direction": 1.0,
+            "oracle_best_balanced_accuracy": 1.0,
+            "oracle_best_threshold": 0.912598,
+            "oracle_best_polarity": "lt",
+            "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.5,
+            "ci95_bootstrap": null,
+            "ci95_excludes_chance": null,
+            "exact_permutation_p": 1.082508822446903e-05
+          },
+          "confound_inflation": 0.74,
+          "one_threshold_reality_check": {
+            "single_global_threshold": {
+              "balanced_accuracy": 0.65,
+              "threshold": 0.82373,
+              "polarity": "ge"
+            },
+            "per_stratum_oracle": {
+              "CLOSE": {
+                "balanced_accuracy": 0.8,
+                "threshold": 0.971191
+              },
+              "DISTANT": {
+                "balanced_accuracy": 0.8,
+                "threshold": 0.82373
+              }
+            },
+            "mean_per_stratum_balanced_accuracy": 0.8,
+            "cost_of_one_threshold": 0.15,
+            "threshold_spread_between_strata": 0.147461
+          },
+          "shipped_threshold_performance": [
+            {
+              "threshold": 0.3,
+              "provenance": "innovation64/BMAM long_term_memory",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.4,
+              "provenance": "innovation64/BMAM; this repo's config advertised drift_threshold",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.8,
+              "provenance": "this repo's EFFECTIVE Sinkhorn boundary (R10a: cos < 0.80)",
+              "balanced_accuracy": 0.525,
+              "true_positive_rate": 0.9,
+              "true_negative_rate": 0.15
+            },
+            {
+              "threshold": 0.85,
+              "provenance": "the audited system's _DISTINCTNESS_COSINE_THRESHOLD; neuralmind REVIEW_FLAG; vendor guidance 'cosine distance > 0.15'",
+              "balanced_accuracy": 0.525,
+              "true_positive_rate": 0.65,
+              "true_negative_rate": 0.4
+            },
+            {
+              "threshold": 0.95,
+              "provenance": "AG3NT DEDUP_SIMILARITY_THRESHOLD; Maria DEFAULT_SEMANTIC_THRESHOLD; neuralmind AUTO_MERGE_THRESHOLD",
+              "balanced_accuracy": 0.6,
+              "true_positive_rate": 0.45,
+              "true_negative_rate": 0.75
+            }
+          ],
+          "best_shipped_threshold_balanced_accuracy": 0.6
+        },
+        {
+          "encoder": "e5-base-v2 [query: — card's symmetric convention]",
+          "family": "e5",
+          "cell_mean_cosine": {
+            "OPPOSITE": {
+              "CLOSE": 0.9454,
+              "DISTANT": 0.8095
+            },
+            "SAME": {
+              "CLOSE": 0.9825,
+              "DISTANT": 0.8294
+            }
+          },
+          "decision_axis_within_lexical": {
+            "CLOSE": {
+              "measure": "decision axis | lexical=CLOSE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "SAME",
+              "negative_class": "OPPOSITE",
+              "auroc": 0.85,
+              "auroc_inverted_direction": 0.15,
+              "oracle_best_balanced_accuracy": 0.8,
+              "oracle_best_threshold": 0.971869,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.8,
+              "ci95_bootstrap": [
+                0.65,
+                0.99
+              ],
+              "ci95_excludes_chance": true,
+              "exact_permutation_p": null
+            },
+            "DISTANT": {
+              "measure": "decision axis | lexical=DISTANT",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "SAME",
+              "negative_class": "OPPOSITE",
+              "auroc": 0.69,
+              "auroc_inverted_direction": 0.31,
+              "oracle_best_balanced_accuracy": 0.75,
+              "oracle_best_threshold": 0.819421,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.75,
+              "ci95_bootstrap": [
+                0.42,
+                0.92
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            }
+          },
+          "decision_axis_stratified_auroc": 0.77,
+          "lexical_axis_within_decision": {
+            "OPPOSITE": {
+              "measure": "lexical axis | decision=OPPOSITE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 0.96,
+              "auroc_inverted_direction": 0.04,
+              "oracle_best_balanced_accuracy": 0.95,
+              "oracle_best_threshold": 0.906629,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.95,
+              "ci95_bootstrap": [
+                0.85,
+                1.0
+              ],
+              "ci95_excludes_chance": true,
+              "exact_permutation_p": null
+            },
+            "SAME": {
+              "measure": "lexical axis | decision=SAME",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.945404,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            }
+          },
+          "lexical_axis_stratified_auroc": 0.98,
+          "naive_confounded_auroc": {
+            "measure": "NAIVE pooled decision axis (confounded)",
+            "n_positive": 10,
+            "n_negative": 10,
+            "positive_class": "SAME",
+            "negative_class": "OPPOSITE",
+            "auroc": 0.0,
+            "auroc_inverted_direction": 1.0,
+            "oracle_best_balanced_accuracy": 1.0,
+            "oracle_best_threshold": 0.906629,
+            "oracle_best_polarity": "lt",
+            "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.5,
+            "ci95_bootstrap": null,
+            "ci95_excludes_chance": null,
+            "exact_permutation_p": 1.082508822446903e-05
+          },
+          "confound_inflation": 0.77,
+          "one_threshold_reality_check": {
+            "single_global_threshold": {
+              "balanced_accuracy": 0.65,
+              "threshold": 0.971869,
+              "polarity": "ge"
+            },
+            "per_stratum_oracle": {
+              "CLOSE": {
+                "balanced_accuracy": 0.8,
+                "threshold": 0.971869
+              },
+              "DISTANT": {
+                "balanced_accuracy": 0.75,
+                "threshold": 0.819421
+              }
+            },
+            "mean_per_stratum_balanced_accuracy": 0.775,
+            "cost_of_one_threshold": 0.125,
+            "threshold_spread_between_strata": 0.152448
+          },
+          "shipped_threshold_performance": [
+            {
+              "threshold": 0.3,
+              "provenance": "innovation64/BMAM long_term_memory",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.4,
+              "provenance": "innovation64/BMAM; this repo's config advertised drift_threshold",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.8,
+              "provenance": "this repo's EFFECTIVE Sinkhorn boundary (R10a: cos < 0.80)",
+              "balanced_accuracy": 0.55,
+              "true_positive_rate": 0.9,
+              "true_negative_rate": 0.2
+            },
+            {
+              "threshold": 0.85,
+              "provenance": "the audited system's _DISTINCTNESS_COSINE_THRESHOLD; neuralmind REVIEW_FLAG; vendor guidance 'cosine distance > 0.15'",
+              "balanced_accuracy": 0.575,
+              "true_positive_rate": 0.7,
+              "true_negative_rate": 0.45
+            },
+            {
+              "threshold": 0.95,
+              "provenance": "AG3NT DEDUP_SIMILARITY_THRESHOLD; Maria DEFAULT_SEMANTIC_THRESHOLD; neuralmind AUTO_MERGE_THRESHOLD",
+              "balanced_accuracy": 0.625,
+              "true_positive_rate": 0.45,
+              "true_negative_rate": 0.8
+            }
+          ],
+          "best_shipped_threshold_balanced_accuracy": 0.625
+        },
+        {
+          "encoder": "e5-base-v2 [NO prefix — sensitivity variant]",
+          "family": "e5",
+          "cell_mean_cosine": {
+            "OPPOSITE": {
+              "CLOSE": 0.9419,
+              "DISTANT": 0.8194
+            },
+            "SAME": {
+              "CLOSE": 0.9826,
+              "DISTANT": 0.8399
+            }
+          },
+          "decision_axis_within_lexical": {
+            "CLOSE": {
+              "measure": "decision axis | lexical=CLOSE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "SAME",
+              "negative_class": "OPPOSITE",
+              "auroc": 0.87,
+              "auroc_inverted_direction": 0.13,
+              "oracle_best_balanced_accuracy": 0.85,
+              "oracle_best_threshold": 0.974772,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.85,
+              "ci95_bootstrap": [
+                0.67,
+                1.0
+              ],
+              "ci95_excludes_chance": true,
+              "exact_permutation_p": null
+            },
+            "DISTANT": {
+              "measure": "decision axis | lexical=DISTANT",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "SAME",
+              "negative_class": "OPPOSITE",
+              "auroc": 0.74,
+              "auroc_inverted_direction": 0.26,
+              "oracle_best_balanced_accuracy": 0.8,
+              "oracle_best_threshold": 0.835333,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.8,
+              "ci95_bootstrap": [
+                0.47,
+                0.97
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            }
+          },
+          "decision_axis_stratified_auroc": 0.805,
+          "lexical_axis_within_decision": {
+            "OPPOSITE": {
+              "measure": "lexical axis | decision=OPPOSITE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 0.95,
+              "auroc_inverted_direction": 0.05,
+              "oracle_best_balanced_accuracy": 0.95,
+              "oracle_best_threshold": 0.897916,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.95,
+              "ci95_bootstrap": [
+                0.82,
+                1.0
+              ],
+              "ci95_excludes_chance": true,
+              "exact_permutation_p": null
+            },
+            "SAME": {
+              "measure": "lexical axis | decision=SAME",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.948437,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            }
+          },
+          "lexical_axis_stratified_auroc": 0.975,
+          "naive_confounded_auroc": {
+            "measure": "NAIVE pooled decision axis (confounded)",
+            "n_positive": 10,
+            "n_negative": 10,
+            "positive_class": "SAME",
+            "negative_class": "OPPOSITE",
+            "auroc": 0.0,
+            "auroc_inverted_direction": 1.0,
+            "oracle_best_balanced_accuracy": 1.0,
+            "oracle_best_threshold": 0.897916,
+            "oracle_best_polarity": "lt",
+            "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.5,
+            "ci95_bootstrap": null,
+            "ci95_excludes_chance": null,
+            "exact_permutation_p": 1.082508822446903e-05
+          },
+          "confound_inflation": 0.805,
+          "one_threshold_reality_check": {
+            "single_global_threshold": {
+              "balanced_accuracy": 0.675,
+              "threshold": 0.974772,
+              "polarity": "ge"
+            },
+            "per_stratum_oracle": {
+              "CLOSE": {
+                "balanced_accuracy": 0.85,
+                "threshold": 0.974772
+              },
+              "DISTANT": {
+                "balanced_accuracy": 0.8,
+                "threshold": 0.835333
+              }
+            },
+            "mean_per_stratum_balanced_accuracy": 0.825,
+            "cost_of_one_threshold": 0.15,
+            "threshold_spread_between_strata": 0.139439
+          },
+          "shipped_threshold_performance": [
+            {
+              "threshold": 0.3,
+              "provenance": "innovation64/BMAM long_term_memory",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.4,
+              "provenance": "innovation64/BMAM; this repo's config advertised drift_threshold",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.8,
+              "provenance": "this repo's EFFECTIVE Sinkhorn boundary (R10a: cos < 0.80)",
+              "balanced_accuracy": 0.55,
+              "true_positive_rate": 0.9,
+              "true_negative_rate": 0.2
+            },
+            {
+              "threshold": 0.85,
+              "provenance": "the audited system's _DISTINCTNESS_COSINE_THRESHOLD; neuralmind REVIEW_FLAG; vendor guidance 'cosine distance > 0.15'",
+              "balanced_accuracy": 0.575,
+              "true_positive_rate": 0.7,
+              "true_negative_rate": 0.45
+            },
+            {
+              "threshold": 0.95,
+              "provenance": "AG3NT DEDUP_SIMILARITY_THRESHOLD; Maria DEFAULT_SEMANTIC_THRESHOLD; neuralmind AUTO_MERGE_THRESHOLD",
+              "balanced_accuracy": 0.625,
+              "true_positive_rate": 0.45,
+              "true_negative_rate": 0.8
+            }
+          ],
+          "best_shipped_threshold_balanced_accuracy": 0.625
+        },
+        {
+          "encoder": "mixedbread-ai/mxbai-embed-large-v1",
+          "family": "mxbai",
+          "cell_mean_cosine": {
+            "OPPOSITE": {
+              "CLOSE": 0.8595,
+              "DISTANT": 0.6218
+            },
+            "SAME": {
+              "CLOSE": 0.9697,
+              "DISTANT": 0.6743
+            }
+          },
+          "decision_axis_within_lexical": {
+            "CLOSE": {
+              "measure": "decision axis | lexical=CLOSE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "SAME",
+              "negative_class": "OPPOSITE",
+              "auroc": 0.895,
+              "auroc_inverted_direction": 0.105,
+              "oracle_best_balanced_accuracy": 0.9,
+              "oracle_best_threshold": 0.957031,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.9,
+              "ci95_bootstrap": [
+                0.72,
+                1.0
+              ],
+              "ci95_excludes_chance": true,
+              "exact_permutation_p": null
+            },
+            "DISTANT": {
+              "measure": "decision axis | lexical=DISTANT",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "SAME",
+              "negative_class": "OPPOSITE",
+              "auroc": 0.72,
+              "auroc_inverted_direction": 0.28,
+              "oracle_best_balanced_accuracy": 0.75,
+              "oracle_best_threshold": 0.663574,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.75,
+              "ci95_bootstrap": [
+                0.45,
+                0.95
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            }
+          },
+          "decision_axis_stratified_auroc": 0.8075,
+          "lexical_axis_within_decision": {
+            "OPPOSITE": {
+              "measure": "lexical axis | decision=OPPOSITE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 0.96,
+              "auroc_inverted_direction": 0.04,
+              "oracle_best_balanced_accuracy": 0.95,
+              "oracle_best_threshold": 0.751953,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.95,
+              "ci95_bootstrap": [
+                0.85,
+                1.0
+              ],
+              "ci95_excludes_chance": true,
+              "exact_permutation_p": null
+            },
+            "SAME": {
+              "measure": "lexical axis | decision=SAME",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.897461,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            }
+          },
+          "lexical_axis_stratified_auroc": 0.98,
+          "naive_confounded_auroc": {
+            "measure": "NAIVE pooled decision axis (confounded)",
+            "n_positive": 10,
+            "n_negative": 10,
+            "positive_class": "SAME",
+            "negative_class": "OPPOSITE",
+            "auroc": 0.04,
+            "auroc_inverted_direction": 0.96,
+            "oracle_best_balanced_accuracy": 0.9,
+            "oracle_best_threshold": 0.751953,
+            "oracle_best_polarity": "lt",
+            "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.5,
+            "ci95_bootstrap": [
+              0.0,
+              0.15
+            ],
+            "ci95_excludes_chance": true,
+            "exact_permutation_p": null
+          },
+          "confound_inflation": 0.7675,
+          "one_threshold_reality_check": {
+            "single_global_threshold": {
+              "balanced_accuracy": 0.7,
+              "threshold": 0.957031,
+              "polarity": "ge"
+            },
+            "per_stratum_oracle": {
+              "CLOSE": {
+                "balanced_accuracy": 0.9,
+                "threshold": 0.957031
+              },
+              "DISTANT": {
+                "balanced_accuracy": 0.75,
+                "threshold": 0.663574
+              }
+            },
+            "mean_per_stratum_balanced_accuracy": 0.825,
+            "cost_of_one_threshold": 0.125,
+            "threshold_spread_between_strata": 0.293457
+          },
+          "shipped_threshold_performance": [
+            {
+              "threshold": 0.3,
+              "provenance": "innovation64/BMAM long_term_memory",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.4,
+              "provenance": "innovation64/BMAM; this repo's config advertised drift_threshold",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.8,
+              "provenance": "this repo's EFFECTIVE Sinkhorn boundary (R10a: cos < 0.80)",
+              "balanced_accuracy": 0.55,
+              "true_positive_rate": 0.5,
+              "true_negative_rate": 0.6
+            },
+            {
+              "threshold": 0.85,
+              "provenance": "the audited system's _DISTINCTNESS_COSINE_THRESHOLD; neuralmind REVIEW_FLAG; vendor guidance 'cosine distance > 0.15'",
+              "balanced_accuracy": 0.625,
+              "true_positive_rate": 0.5,
+              "true_negative_rate": 0.75
+            },
+            {
+              "threshold": 0.95,
+              "provenance": "AG3NT DEDUP_SIMILARITY_THRESHOLD; Maria DEFAULT_SEMANTIC_THRESHOLD; neuralmind AUTO_MERGE_THRESHOLD",
+              "balanced_accuracy": 0.7,
+              "true_positive_rate": 0.45,
+              "true_negative_rate": 0.95
+            }
+          ],
+          "best_shipped_threshold_balanced_accuracy": 0.7
+        }
+      ],
+      "verdict": {
+        "rule": "<= 0.55 holds; >= 0.7 shrinks; between = inconclusive",
+        "pre_registered": true,
+        "stratified_decision_auroc_by_encoder": {
+          "nomic-embed-text-v1.5 MRL-256 [PRODUCTION PATH, search_document:]": 0.535,
+          "nomic-embed-text-v1.5 [clustering: — documented symmetric prefix]": 0.49,
+          "sentence-transformers/all-MiniLM-L6-v2": 0.595,
+          "sentence-transformers/all-mpnet-base-v2": 0.64,
+          "BAAI/bge-base-en-v1.5": 0.805,
+          "thenlper/gte-base": 0.74,
+          "e5-base-v2 [query: — card's symmetric convention]": 0.77,
+          "e5-base-v2 [NO prefix — sensitivity variant]": 0.805,
+          "mixedbread-ai/mxbai-embed-large-v1": 0.8075
+        },
+        "least_favourable": 0.8075,
+        "verdict": "CLAIM SHRINKS",
+        "action": "Publish the smaller claim; reclaim ten weeks."
+      },
+      "per_row": [
+        {
+          "id": "D-A-01",
+          "cell": "A",
+          "decision": "OPPOSITE",
+          "lexical": "CLOSE",
+          "anchor_group": "deploy",
+          "subclass": "negation",
+          "text_a": "Deploy the migration to production tonight.",
+          "text_b": "Do not deploy the migration to production tonight.",
+          "lexical_metrics": {
+            "token_jaccard": 0.75,
+            "char4_jaccard": 0.837209,
+            "levenshtein_sim": 0.86
+          }
+        },
+        {
+          "id": "D-C-01",
+          "cell": "C",
+          "decision": "SAME",
+          "lexical": "CLOSE",
+          "anchor_group": "deploy",
+          "subclass": "negation",
+          "text_a": "Deploy the migration to production tonight.",
+          "text_b": "Deploy the migration to prod tonight.",
+          "lexical_metrics": {
+            "token_jaccard": 0.714286,
+            "char4_jaccard": 0.794872,
+            "levenshtein_sim": 0.860465
+          }
+        },
+        {
+          "id": "D-B-01",
+          "cell": "B",
+          "decision": "OPPOSITE",
+          "lexical": "DISTANT",
+          "anchor_group": "deploy",
+          "subclass": "negation",
+          "text_a": "Deploy the migration to production tonight.",
+          "text_b": "Hold the schema change in staging until the audit closes.",
+          "lexical_metrics": {
+            "token_jaccard": 0.071429,
+            "char4_jaccard": 0.023256,
+            "levenshtein_sim": 0.263158
+          }
+        },
+        {
+          "id": "D-D-01",
+          "cell": "D",
+          "decision": "SAME",
+          "lexical": "DISTANT",
+          "anchor_group": "deploy",
+          "subclass": "negation",
+          "text_a": "Deploy the migration to production tonight.",
+          "text_b": "Push the structural update out ahead of daybreak.",
+          "lexical_metrics": {
+            "token_jaccard": 0.076923,
+            "char4_jaccard": 0.025,
+            "levenshtein_sim": 0.22449
+          }
+        },
+        {
+          "id": "D-A-02",
+          "cell": "A",
+          "decision": "OPPOSITE",
+          "lexical": "CLOSE",
+          "anchor_group": "retry",
+          "subclass": "antonym_verb",
+          "text_a": "Increase the retry limit.",
+          "text_b": "Decrease the retry limit.",
+          "lexical_metrics": {
+            "token_jaccard": 0.6,
+            "char4_jaccard": 0.833333,
+            "levenshtein_sim": 0.92
+          }
+        },
+        {
+          "id": "D-C-02",
+          "cell": "C",
+          "decision": "SAME",
+          "lexical": "CLOSE",
+          "anchor_group": "retry",
+          "subclass": "antonym_verb",
+          "text_a": "Increase the retry limit.",
+          "text_b": "Raise the retry limit.",
+          "lexical_metrics": {
+            "token_jaccard": 0.6,
+            "char4_jaccard": 0.64,
+            "levenshtein_sim": 0.8
+          }
+        },
+        {
+          "id": "D-B-02",
+          "cell": "B",
+          "decision": "OPPOSITE",
+          "lexical": "DISTANT",
+          "anchor_group": "retry",
+          "subclass": "antonym_verb",
+          "text_a": "Increase the retry limit.",
+          "text_b": "Let a failed call die on its first attempt.",
+          "lexical_metrics": {
+            "token_jaccard": 0.0,
+            "char4_jaccard": 0.0,
+            "levenshtein_sim": 0.255814
+          }
+        },
+        {
+          "id": "D-D-02",
+          "cell": "D",
+          "decision": "SAME",
+          "lexical": "DISTANT",
+          "anchor_group": "retry",
+          "subclass": "antonym_verb",
+          "text_a": "Increase the retry limit.",
+          "text_b": "Give failing operations additional chances to succeed.",
+          "lexical_metrics": {
+            "token_jaccard": 0.0,
+            "char4_jaccard": 0.0,
+            "levenshtein_sim": 0.185185
+          }
+        },
+        {
+          "id": "D-A-03",
+          "cell": "A",
+          "decision": "OPPOSITE",
+          "lexical": "CLOSE",
+          "anchor_group": "cache",
+          "subclass": "antonym_verb",
+          "text_a": "Enable caching for all read queries.",
+          "text_b": "Disable caching for all read queries.",
+          "lexical_metrics": {
+            "token_jaccard": 0.714286,
+            "char4_jaccard": 0.861111,
+            "levenshtein_sim": 0.918919
+          }
+        },
+        {
+          "id": "D-C-03",
+          "cell": "C",
+          "decision": "SAME",
+          "lexical": "CLOSE",
+          "anchor_group": "cache",
+          "subclass": "antonym_verb",
+          "text_a": "Enable caching for all read queries.",
+          "text_b": "Activate caching for all read queries.",
+          "lexical_metrics": {
+            "token_jaccard": 0.714286,
+            "char4_jaccard": 0.7,
+            "levenshtein_sim": 0.815789
+          }
+        },
+        {
+          "id": "D-B-03",
+          "cell": "B",
+          "decision": "OPPOSITE",
+          "lexical": "DISTANT",
+          "anchor_group": "cache",
+          "subclass": "antonym_verb",
+          "text_a": "Enable caching for all read queries.",
+          "text_b": "Serve every request from origin with no intermediate storage.",
+          "lexical_metrics": {
+            "token_jaccard": 0.0,
+            "char4_jaccard": 0.0,
+            "levenshtein_sim": 0.245902
+          }
+        },
+        {
+          "id": "D-D-03",
+          "cell": "D",
+          "decision": "SAME",
+          "lexical": "DISTANT",
+          "anchor_group": "cache",
+          "subclass": "antonym_verb",
+          "text_a": "Enable caching for all read queries.",
+          "text_b": "Keep hot responses close to the client so origin sees little traffic.",
+          "lexical_metrics": {
+            "token_jaccard": 0.0,
+            "char4_jaccard": 0.0,
+            "levenshtein_sim": 0.246377
+          }
+        },
+        {
+          "id": "D-A-04",
+          "cell": "A",
+          "decision": "OPPOSITE",
+          "lexical": "CLOSE",
+          "anchor_group": "perms",
+          "subclass": "antonym_verb",
+          "text_a": "Grant the service account write access.",
+          "text_b": "Revoke the service account write access.",
+          "lexical_metrics": {
+            "token_jaccard": 0.714286,
+            "char4_jaccard": 0.725,
+            "levenshtein_sim": 0.85
+          }
+        },
+        {
+          "id": "D-C-04",
+          "cell": "C",
+          "decision": "SAME",
+          "lexical": "CLOSE",
+          "anchor_group": "perms",
+          "subclass": "antonym_verb",
+          "text_a": "Grant the service account write access.",
+          "text_b": "Give the service account write access.",
+          "lexical_metrics": {
+            "token_jaccard": 0.714286,
+            "char4_jaccard": 0.763158,
+            "levenshtein_sim": 0.897436
+          }
+        },
+        {
+          "id": "D-B-04",
+          "cell": "B",
+          "decision": "OPPOSITE",
+          "lexical": "DISTANT",
+          "anchor_group": "perms",
+          "subclass": "antonym_verb",
+          "text_a": "Grant the service account write access.",
+          "text_b": "Confine that identity to a read-only role.",
+          "lexical_metrics": {
+            "token_jaccard": 0.0,
+            "char4_jaccard": 0.0,
+            "levenshtein_sim": 0.214286
+          }
+        },
+        {
+          "id": "D-D-04",
+          "cell": "D",
+          "decision": "SAME",
+          "lexical": "DISTANT",
+          "anchor_group": "perms",
+          "subclass": "antonym_verb",
+          "text_a": "Grant the service account write access.",
+          "text_b": "Let that identity modify records, not merely read them.",
+          "lexical_metrics": {
+            "token_jaccard": 0.0,
+            "char4_jaccard": 0.024096,
+            "levenshtein_sim": 0.272727
+          }
+        },
+        {
+          "id": "D-A-05",
+          "cell": "A",
+          "decision": "OPPOSITE",
+          "lexical": "CLOSE",
+          "anchor_group": "schema",
+          "subclass": "direction_inversion",
+          "text_a": "Roll back to schema v12.",
+          "text_b": "Roll forward to schema v12.",
+          "lexical_metrics": {
+            "token_jaccard": 0.666667,
+            "char4_jaccard": 0.451613,
+            "levenshtein_sim": 0.777778
+          }
+        },
+        {
+          "id": "D-C-05",
+          "cell": "C",
+          "decision": "SAME",
+          "lexical": "CLOSE",
+          "anchor_group": "schema",
+          "subclass": "direction_inversion",
+          "text_a": "Roll back to schema v12.",
+          "text_b": "Roll back onto schema v12.",
+          "lexical_metrics": {
+            "token_jaccard": 0.666667,
+            "char4_jaccard": 0.692308,
+            "levenshtein_sim": 0.923077
+          }
+        },
+        {
+          "id": "D-B-05",
+          "cell": "B",
+          "decision": "OPPOSITE",
+          "lexical": "DISTANT",
+          "anchor_group": "schema",
+          "subclass": "direction_inversion",
+          "text_a": "Roll back to schema v12.",
+          "text_b": "Advance the database to the newest available structure.",
+          "lexical_metrics": {
+            "token_jaccard": 0.090909,
+            "char4_jaccard": 0.014286,
+            "levenshtein_sim": 0.2
+          }
+        },
+        {
+          "id": "D-D-05",
+          "cell": "D",
+          "decision": "SAME",
+          "lexical": "DISTANT",
+          "anchor_group": "schema",
+          "subclass": "direction_inversion",
+          "text_a": "Roll back to schema v12.",
+          "text_b": "Return the database to its twelfth structural revision.",
+          "lexical_metrics": {
+            "token_jaccard": 0.083333,
+            "char4_jaccard": 0.013889,
+            "levenshtein_sim": 0.254545
+          }
+        },
+        {
+          "id": "D-A-06",
+          "cell": "A",
+          "decision": "OPPOSITE",
+          "lexical": "CLOSE",
+          "anchor_group": "legacy",
+          "subclass": "antonym_verb",
+          "text_a": "Remove the legacy endpoint.",
+          "text_b": "Keep the legacy endpoint.",
+          "lexical_metrics": {
+            "token_jaccard": 0.6,
+            "char4_jaccard": 0.642857,
+            "levenshtein_sim": 0.814815
+          }
+        },
+        {
+          "id": "D-C-06",
+          "cell": "C",
+          "decision": "SAME",
+          "lexical": "CLOSE",
+          "anchor_group": "legacy",
+          "subclass": "antonym_verb",
+          "text_a": "Remove the legacy endpoint.",
+          "text_b": "Delete the legacy endpoint.",
+          "lexical_metrics": {
+            "token_jaccard": 0.6,
+            "char4_jaccard": 0.655172,
+            "levenshtein_sim": 0.851852
+          }
+        },
+        {
+          "id": "D-B-06",
+          "cell": "B",
+          "decision": "OPPOSITE",
+          "lexical": "DISTANT",
+          "anchor_group": "legacy",
+          "subclass": "antonym_verb",
+          "text_a": "Remove the legacy endpoint.",
+          "text_b": "Continue serving the old route indefinitely for existing clients.",
+          "lexical_metrics": {
+            "token_jaccard": 0.083333,
+            "char4_jaccard": 0.024096,
+            "levenshtein_sim": 0.261538
+          }
+        },
+        {
+          "id": "D-D-06",
+          "cell": "D",
+          "decision": "SAME",
+          "lexical": "DISTANT",
+          "anchor_group": "legacy",
+          "subclass": "antonym_verb",
+          "text_a": "Remove the legacy endpoint.",
+          "text_b": "Take the deprecated route out of service.",
+          "lexical_metrics": {
+            "token_jaccard": 0.1,
+            "char4_jaccard": 0.050847,
+            "levenshtein_sim": 0.268293
+          }
+        },
+        {
+          "id": "D-A-07",
+          "cell": "A",
+          "decision": "OPPOSITE",
+          "lexical": "CLOSE",
+          "anchor_group": "order",
+          "subclass": "order_inversion",
+          "text_a": "Run the batch job before the nightly sync.",
+          "text_b": "Run the batch job after the nightly sync.",
+          "lexical_metrics": {
+            "token_jaccard": 0.75,
+            "char4_jaccard": 0.622222,
+            "levenshtein_sim": 0.880952
+          }
+        },
+        {
+          "id": "D-C-07",
+          "cell": "C",
+          "decision": "SAME",
+          "lexical": "CLOSE",
+          "anchor_group": "order",
+          "subclass": "order_inversion",
+          "text_a": "Run the batch job before the nightly sync.",
+          "text_b": "Start the batch job before the nightly sync.",
+          "lexical_metrics": {
+            "token_jaccard": 0.75,
+            "char4_jaccard": 0.809524,
+            "levenshtein_sim": 0.886364
+          }
+        },
+        {
+          "id": "D-B-07",
+          "cell": "B",
+          "decision": "OPPOSITE",
+          "lexical": "DISTANT",
+          "anchor_group": "order",
+          "subclass": "order_inversion",
+          "text_a": "Run the batch job before the nightly sync.",
+          "text_b": "Let the nightly sync complete first, then start batch processing.",
+          "lexical_metrics": {
+            "token_jaccard": 0.307692,
+            "char4_jaccard": 0.225,
+            "levenshtein_sim": 0.323077
+          }
+        },
+        {
+          "id": "D-D-07",
+          "cell": "D",
+          "decision": "SAME",
+          "lexical": "DISTANT",
+          "anchor_group": "order",
+          "subclass": "order_inversion",
+          "text_a": "Run the batch job before the nightly sync.",
+          "text_b": "Schedule bulk processing ahead of the overnight replication.",
+          "lexical_metrics": {
+            "token_jaccard": 0.071429,
+            "char4_jaccard": 0.044444,
+            "levenshtein_sim": 0.3
+          }
+        },
+        {
+          "id": "D-A-08",
+          "cell": "A",
+          "decision": "OPPOSITE",
+          "lexical": "CLOSE",
+          "anchor_group": "alert",
+          "subclass": "comparator_inversion",
+          "text_a": "Alert on error rates above two percent.",
+          "text_b": "Alert on error rates below two percent.",
+          "lexical_metrics": {
+            "token_jaccard": 0.75,
+            "char4_jaccard": 0.636364,
+            "levenshtein_sim": 0.871795
+          }
+        },
+        {
+          "id": "D-C-08",
+          "cell": "C",
+          "decision": "SAME",
+          "lexical": "CLOSE",
+          "anchor_group": "alert",
+          "subclass": "comparator_inversion",
+          "text_a": "Alert on error rates above two percent.",
+          "text_b": "Alert on error rates over two percent.",
+          "lexical_metrics": {
+            "token_jaccard": 0.75,
+            "char4_jaccard": 0.651163,
+            "levenshtein_sim": 0.923077
+          }
+        },
+        {
+          "id": "D-B-08",
+          "cell": "B",
+          "decision": "OPPOSITE",
+          "lexical": "DISTANT",
+          "anchor_group": "alert",
+          "subclass": "comparator_inversion",
+          "text_a": "Alert on error rates above two percent.",
+          "text_b": "Stay quiet unless failures drop beneath one in fifty.",
+          "lexical_metrics": {
+            "token_jaccard": 0.0,
+            "char4_jaccard": 0.0,
+            "levenshtein_sim": 0.283019
+          }
+        },
+        {
+          "id": "D-D-08",
+          "cell": "D",
+          "decision": "SAME",
+          "lexical": "DISTANT",
+          "anchor_group": "alert",
+          "subclass": "comparator_inversion",
+          "text_a": "Alert on error rates above two percent.",
+          "text_b": "Page somebody when more than one request in fifty fails.",
+          "lexical_metrics": {
+            "token_jaccard": 0.0,
+            "char4_jaccard": 0.0,
+            "levenshtein_sim": 0.25
+          }
+        },
+        {
+          "id": "D-A-09",
+          "cell": "A",
+          "decision": "OPPOSITE",
+          "lexical": "CLOSE",
+          "anchor_group": "merge",
+          "subclass": "order_inversion",
+          "text_a": "Merge the feature branch into main.",
+          "text_b": "Merge main into the feature branch.",
+          "lexical_metrics": {
+            "token_jaccard": 1.0,
+            "char4_jaccard": 0.6,
+            "levenshtein_sim": 0.428571
+          }
+        },
+        {
+          "id": "D-C-09",
+          "cell": "C",
+          "decision": "SAME",
+          "lexical": "CLOSE",
+          "anchor_group": "merge",
+          "subclass": "order_inversion",
+          "text_a": "Merge the feature branch into main.",
+          "text_b": "Merge into main the feature branch.",
+          "lexical_metrics": {
+            "token_jaccard": 1.0,
+            "char4_jaccard": 0.684211,
+            "levenshtein_sim": 0.428571
+          }
+        },
+        {
+          "id": "D-B-09",
+          "cell": "B",
+          "decision": "OPPOSITE",
+          "lexical": "DISTANT",
+          "anchor_group": "merge",
+          "subclass": "order_inversion",
+          "text_a": "Merge the feature branch into main.",
+          "text_b": "Bring the trunk's changes down into the topic branch instead.",
+          "lexical_metrics": {
+            "token_jaccard": 0.230769,
+            "char4_jaccard": 0.16,
+            "levenshtein_sim": 0.311475
+          }
+        },
+        {
+          "id": "D-D-09",
+          "cell": "D",
+          "decision": "SAME",
+          "lexical": "DISTANT",
+          "anchor_group": "merge",
+          "subclass": "order_inversion",
+          "text_a": "Merge the feature branch into main.",
+          "text_b": "Integrate the topic branch's work into the trunk.",
+          "lexical_metrics": {
+            "token_jaccard": 0.272727,
+            "char4_jaccard": 0.153846,
+            "levenshtein_sim": 0.428571
+          }
+        },
+        {
+          "id": "D-A-10",
+          "cell": "A",
+          "decision": "OPPOSITE",
+          "lexical": "CLOSE",
+          "anchor_group": "timeout",
+          "subclass": "antonym_noun",
+          "text_a": "Treat the timeout as retryable.",
+          "text_b": "Treat the timeout as fatal.",
+          "lexical_metrics": {
+            "token_jaccard": 0.666667,
+            "char4_jaccard": 0.529412,
+            "levenshtein_sim": 0.806452
+          }
+        },
+        {
+          "id": "D-C-10",
+          "cell": "C",
+          "decision": "SAME",
+          "lexical": "CLOSE",
+          "anchor_group": "timeout",
+          "subclass": "antonym_noun",
+          "text_a": "Treat the timeout as retryable.",
+          "text_b": "Treat the timeout as recoverable.",
+          "lexical_metrics": {
+            "token_jaccard": 0.666667,
+            "char4_jaccard": 0.611111,
+            "levenshtein_sim": 0.848485
+          }
+        },
+        {
+          "id": "D-B-10",
+          "cell": "B",
+          "decision": "OPPOSITE",
+          "lexical": "DISTANT",
+          "anchor_group": "timeout",
+          "subclass": "antonym_noun",
+          "text_a": "Treat the timeout as retryable.",
+          "text_b": "Abort the whole operation the moment a deadline is missed.",
+          "lexical_metrics": {
+            "token_jaccard": 0.076923,
+            "char4_jaccard": 0.038462,
+            "levenshtein_sim": 0.293103
+          }
+        },
+        {
+          "id": "D-D-10",
+          "cell": "D",
+          "decision": "SAME",
+          "lexical": "DISTANT",
+          "anchor_group": "timeout",
+          "subclass": "antonym_noun",
+          "text_a": "Treat the timeout as retryable.",
+          "text_b": "When the clock runs out, try the operation once more.",
+          "lexical_metrics": {
+            "token_jaccard": 0.076923,
+            "char4_jaccard": 0.027027,
+            "levenshtein_sim": 0.264151
+          }
+        }
+      ]
+    },
+    "constraint": {
+      "n_pairs": 40,
+      "n_anchors": 10,
+      "manipulation_check": {
+        "primary_metric": "token_jaccard",
+        "cells": {
+          "A": {
+            "decision": "VIOLATION",
+            "lexical": "CLOSE",
+            "n": 10,
+            "mean_overlap": 0.7095,
+            "min": 0.5,
+            "max": 0.7778
+          },
+          "B": {
+            "decision": "VIOLATION",
+            "lexical": "DISTANT",
+            "n": 10,
+            "mean_overlap": 0.0233,
+            "min": 0.0,
+            "max": 0.0625
+          },
+          "C": {
+            "decision": "FAITHFUL",
+            "lexical": "CLOSE",
+            "n": 10,
+            "mean_overlap": 0.731,
+            "min": 0.6667,
+            "max": 0.7778
+          },
+          "D": {
+            "decision": "FAITHFUL",
+            "lexical": "DISTANT",
+            "n": 10,
+            "mean_overlap": 0.0556,
+            "min": 0.0,
+            "max": 0.1429
+          }
+        },
+        "lexical_labels_separate": {
+          "measure": "assigned CLOSE vs DISTANT, on measured overlap",
+          "n_positive": 20,
+          "n_negative": 20,
+          "positive_class": "CLOSE",
+          "negative_class": "DISTANT",
+          "auroc": 1.0,
+          "auroc_inverted_direction": 0.0,
+          "oracle_best_balanced_accuracy": 1.0,
+          "oracle_best_threshold": 0.5,
+          "oracle_best_polarity": "ge",
+          "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+          "ci95_bootstrap": null,
+          "ci95_excludes_chance": null,
+          "exact_permutation_p": 1.4508889103849688e-11
+        },
+        "balance": {
+          "CLOSE": {
+            "observed_diff": 0.021429,
+            "p_two_sided": 0.58672,
+            "n_a": 10,
+            "n_b": 10,
+            "mean_a": 0.709524,
+            "mean_b": 0.730953
+          },
+          "DISTANT": {
+            "observed_diff": 0.032275,
+            "p_two_sided": 0.10779,
+            "n_a": 10,
+            "n_b": 10,
+            "mean_a": 0.023278,
+            "mean_b": 0.055553
+          }
+        },
+        "design_valid": true,
+        "kappa_decision": null
+      },
+      "per_encoder": [
+        {
+          "encoder": "nomic-embed-text-v1.5 MRL-256 [PRODUCTION PATH, search_document:]",
+          "family": "nomic",
+          "cell_mean_cosine": {
+            "VIOLATION": {
+              "CLOSE": 0.986,
+              "DISTANT": 0.7414
+            },
+            "FAITHFUL": {
+              "CLOSE": 0.9752,
+              "DISTANT": 0.7627
+            }
+          },
+          "decision_axis_within_lexical": {
+            "CLOSE": {
+              "measure": "decision axis | lexical=CLOSE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "FAITHFUL",
+              "negative_class": "VIOLATION",
+              "auroc": 0.32,
+              "auroc_inverted_direction": 0.68,
+              "oracle_best_balanced_accuracy": 0.7,
+              "oracle_best_threshold": 0.977418,
+              "oracle_best_polarity": "lt",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.55,
+              "ci95_bootstrap": [
+                0.09,
+                0.57
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            },
+            "DISTANT": {
+              "measure": "decision axis | lexical=DISTANT",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "FAITHFUL",
+              "negative_class": "VIOLATION",
+              "auroc": 0.56,
+              "auroc_inverted_direction": 0.44,
+              "oracle_best_balanced_accuracy": 0.6,
+              "oracle_best_threshold": 0.807389,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.6,
+              "ci95_bootstrap": [
+                0.3,
+                0.81
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            }
+          },
+          "decision_axis_stratified_auroc": 0.44,
+          "lexical_axis_within_decision": {
+            "VIOLATION": {
+              "measure": "lexical axis | decision=VIOLATION",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.96238,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            },
+            "FAITHFUL": {
+              "measure": "lexical axis | decision=FAITHFUL",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.94476,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            }
+          },
+          "lexical_axis_stratified_auroc": 1.0,
+          "naive_confounded_auroc": {
+            "measure": "NAIVE pooled decision axis (confounded)",
+            "n_positive": 10,
+            "n_negative": 10,
+            "positive_class": "FAITHFUL",
+            "negative_class": "VIOLATION",
+            "auroc": 0.0,
+            "auroc_inverted_direction": 1.0,
+            "oracle_best_balanced_accuracy": 1.0,
+            "oracle_best_threshold": 0.96238,
+            "oracle_best_polarity": "lt",
+            "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.5,
+            "ci95_bootstrap": null,
+            "ci95_excludes_chance": null,
+            "exact_permutation_p": 1.082508822446903e-05
+          },
+          "confound_inflation": 0.44,
+          "one_threshold_reality_check": {
+            "single_global_threshold": {
+              "balanced_accuracy": 0.6,
+              "threshold": 0.977418,
+              "polarity": "lt"
+            },
+            "per_stratum_oracle": {
+              "CLOSE": {
+                "balanced_accuracy": 0.7,
+                "threshold": 0.977418
+              },
+              "DISTANT": {
+                "balanced_accuracy": 0.6,
+                "threshold": 0.807389
+              }
+            },
+            "mean_per_stratum_balanced_accuracy": 0.65,
+            "cost_of_one_threshold": 0.05,
+            "threshold_spread_between_strata": 0.170029
+          },
+          "shipped_threshold_performance": [
+            {
+              "threshold": 0.3,
+              "provenance": "innovation64/BMAM long_term_memory",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.4,
+              "provenance": "innovation64/BMAM; this repo's config advertised drift_threshold",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.8,
+              "provenance": "this repo's EFFECTIVE Sinkhorn boundary (R10a: cos < 0.80)",
+              "balanced_accuracy": 0.55,
+              "true_positive_rate": 0.75,
+              "true_negative_rate": 0.35
+            },
+            {
+              "threshold": 0.85,
+              "provenance": "the audited system's _DISTINCTNESS_COSINE_THRESHOLD; neuralmind REVIEW_FLAG; vendor guidance 'cosine distance > 0.15'",
+              "balanced_accuracy": 0.525,
+              "true_positive_rate": 0.55,
+              "true_negative_rate": 0.5
+            },
+            {
+              "threshold": 0.95,
+              "provenance": "AG3NT DEDUP_SIMILARITY_THRESHOLD; Maria DEFAULT_SEMANTIC_THRESHOLD; neuralmind AUTO_MERGE_THRESHOLD",
+              "balanced_accuracy": 0.475,
+              "true_positive_rate": 0.45,
+              "true_negative_rate": 0.5
+            }
+          ],
+          "best_shipped_threshold_balanced_accuracy": 0.55
+        },
+        {
+          "encoder": "nomic-embed-text-v1.5 [clustering: — documented symmetric prefix]",
+          "family": "nomic",
+          "cell_mean_cosine": {
+            "VIOLATION": {
+              "CLOSE": 0.9765,
+              "DISTANT": 0.7323
+            },
+            "FAITHFUL": {
+              "CLOSE": 0.9727,
+              "DISTANT": 0.7681
+            }
+          },
+          "decision_axis_within_lexical": {
+            "CLOSE": {
+              "measure": "decision axis | lexical=CLOSE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "FAITHFUL",
+              "negative_class": "VIOLATION",
+              "auroc": 0.4,
+              "auroc_inverted_direction": 0.6,
+              "oracle_best_balanced_accuracy": 0.65,
+              "oracle_best_threshold": 0.991812,
+              "oracle_best_polarity": "lt",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.55,
+              "ci95_bootstrap": [
+                0.15,
+                0.65
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            },
+            "DISTANT": {
+              "measure": "decision axis | lexical=DISTANT",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "FAITHFUL",
+              "negative_class": "VIOLATION",
+              "auroc": 0.7,
+              "auroc_inverted_direction": 0.3,
+              "oracle_best_balanced_accuracy": 0.7,
+              "oracle_best_threshold": 0.722811,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.7,
+              "ci95_bootstrap": [
+                0.44,
+                0.91
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            }
+          },
+          "decision_axis_stratified_auroc": 0.55,
+          "lexical_axis_within_decision": {
+            "VIOLATION": {
+              "measure": "lexical axis | decision=VIOLATION",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.943678,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            },
+            "FAITHFUL": {
+              "measure": "lexical axis | decision=FAITHFUL",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.943601,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            }
+          },
+          "lexical_axis_stratified_auroc": 1.0,
+          "naive_confounded_auroc": {
+            "measure": "NAIVE pooled decision axis (confounded)",
+            "n_positive": 10,
+            "n_negative": 10,
+            "positive_class": "FAITHFUL",
+            "negative_class": "VIOLATION",
+            "auroc": 0.0,
+            "auroc_inverted_direction": 1.0,
+            "oracle_best_balanced_accuracy": 1.0,
+            "oracle_best_threshold": 0.943678,
+            "oracle_best_polarity": "lt",
+            "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.5,
+            "ci95_bootstrap": null,
+            "ci95_excludes_chance": null,
+            "exact_permutation_p": 1.082508822446903e-05
+          },
+          "confound_inflation": 0.55,
+          "one_threshold_reality_check": {
+            "single_global_threshold": {
+              "balanced_accuracy": 0.6,
+              "threshold": 0.722811,
+              "polarity": "ge"
+            },
+            "per_stratum_oracle": {
+              "CLOSE": {
+                "balanced_accuracy": 0.65,
+                "threshold": 0.991812
+              },
+              "DISTANT": {
+                "balanced_accuracy": 0.7,
+                "threshold": 0.722811
+              }
+            },
+            "mean_per_stratum_balanced_accuracy": 0.675,
+            "cost_of_one_threshold": 0.075,
+            "threshold_spread_between_strata": 0.269001
+          },
+          "shipped_threshold_performance": [
+            {
+              "threshold": 0.3,
+              "provenance": "innovation64/BMAM long_term_memory",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.4,
+              "provenance": "innovation64/BMAM; this repo's config advertised drift_threshold",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.8,
+              "provenance": "this repo's EFFECTIVE Sinkhorn boundary (R10a: cos < 0.80)",
+              "balanced_accuracy": 0.575,
+              "true_positive_rate": 0.65,
+              "true_negative_rate": 0.5
+            },
+            {
+              "threshold": 0.85,
+              "provenance": "the audited system's _DISTINCTNESS_COSINE_THRESHOLD; neuralmind REVIEW_FLAG; vendor guidance 'cosine distance > 0.15'",
+              "balanced_accuracy": 0.525,
+              "true_positive_rate": 0.55,
+              "true_negative_rate": 0.5
+            },
+            {
+              "threshold": 0.95,
+              "provenance": "AG3NT DEDUP_SIMILARITY_THRESHOLD; Maria DEFAULT_SEMANTIC_THRESHOLD; neuralmind AUTO_MERGE_THRESHOLD",
+              "balanced_accuracy": 0.525,
+              "true_positive_rate": 0.45,
+              "true_negative_rate": 0.6
+            }
+          ],
+          "best_shipped_threshold_balanced_accuracy": 0.575
+        },
+        {
+          "encoder": "sentence-transformers/all-MiniLM-L6-v2",
+          "family": "minilm",
+          "cell_mean_cosine": {
+            "VIOLATION": {
+              "CLOSE": 0.937,
+              "DISTANT": 0.3848
+            },
+            "FAITHFUL": {
+              "CLOSE": 0.9385,
+              "DISTANT": 0.4809
+            }
+          },
+          "decision_axis_within_lexical": {
+            "CLOSE": {
+              "measure": "decision axis | lexical=CLOSE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "FAITHFUL",
+              "negative_class": "VIOLATION",
+              "auroc": 0.46,
+              "auroc_inverted_direction": 0.54,
+              "oracle_best_balanced_accuracy": 0.6,
+              "oracle_best_threshold": 0.917263,
+              "oracle_best_polarity": "lt",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.6,
+              "ci95_bootstrap": [
+                0.2,
+                0.72
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            },
+            "DISTANT": {
+              "measure": "decision axis | lexical=DISTANT",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "FAITHFUL",
+              "negative_class": "VIOLATION",
+              "auroc": 0.68,
+              "auroc_inverted_direction": 0.32,
+              "oracle_best_balanced_accuracy": 0.75,
+              "oracle_best_threshold": 0.4174,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.75,
+              "ci95_bootstrap": [
+                0.41,
+                0.92
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            }
+          },
+          "decision_axis_stratified_auroc": 0.57,
+          "lexical_axis_within_decision": {
+            "VIOLATION": {
+              "measure": "lexical axis | decision=VIOLATION",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.847157,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            },
+            "FAITHFUL": {
+              "measure": "lexical axis | decision=FAITHFUL",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.880702,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            }
+          },
+          "lexical_axis_stratified_auroc": 1.0,
+          "naive_confounded_auroc": {
+            "measure": "NAIVE pooled decision axis (confounded)",
+            "n_positive": 10,
+            "n_negative": 10,
+            "positive_class": "FAITHFUL",
+            "negative_class": "VIOLATION",
+            "auroc": 0.0,
+            "auroc_inverted_direction": 1.0,
+            "oracle_best_balanced_accuracy": 1.0,
+            "oracle_best_threshold": 0.847157,
+            "oracle_best_polarity": "lt",
+            "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.5,
+            "ci95_bootstrap": null,
+            "ci95_excludes_chance": null,
+            "exact_permutation_p": 1.082508822446903e-05
+          },
+          "confound_inflation": 0.57,
+          "one_threshold_reality_check": {
+            "single_global_threshold": {
+              "balanced_accuracy": 0.625,
+              "threshold": 0.4174,
+              "polarity": "ge"
+            },
+            "per_stratum_oracle": {
+              "CLOSE": {
+                "balanced_accuracy": 0.6,
+                "threshold": 0.917263
+              },
+              "DISTANT": {
+                "balanced_accuracy": 0.75,
+                "threshold": 0.4174
+              }
+            },
+            "mean_per_stratum_balanced_accuracy": 0.675,
+            "cost_of_one_threshold": 0.05,
+            "threshold_spread_between_strata": 0.499863
+          },
+          "shipped_threshold_performance": [
+            {
+              "threshold": 0.3,
+              "provenance": "innovation64/BMAM long_term_memory",
+              "balanced_accuracy": 0.55,
+              "true_positive_rate": 0.95,
+              "true_negative_rate": 0.15
+            },
+            {
+              "threshold": 0.4,
+              "provenance": "innovation64/BMAM; this repo's config advertised drift_threshold",
+              "balanced_accuracy": 0.6,
+              "true_positive_rate": 0.95,
+              "true_negative_rate": 0.25
+            },
+            {
+              "threshold": 0.8,
+              "provenance": "this repo's EFFECTIVE Sinkhorn boundary (R10a: cos < 0.80)",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 0.5,
+              "true_negative_rate": 0.5
+            },
+            {
+              "threshold": 0.85,
+              "provenance": "the audited system's _DISTINCTNESS_COSINE_THRESHOLD; neuralmind REVIEW_FLAG; vendor guidance 'cosine distance > 0.15'",
+              "balanced_accuracy": 0.525,
+              "true_positive_rate": 0.5,
+              "true_negative_rate": 0.55
+            },
+            {
+              "threshold": 0.95,
+              "provenance": "AG3NT DEDUP_SIMILARITY_THRESHOLD; Maria DEFAULT_SEMANTIC_THRESHOLD; neuralmind AUTO_MERGE_THRESHOLD",
+              "balanced_accuracy": 0.55,
+              "true_positive_rate": 0.25,
+              "true_negative_rate": 0.85
+            }
+          ],
+          "best_shipped_threshold_balanced_accuracy": 0.6
+        },
+        {
+          "encoder": "sentence-transformers/all-mpnet-base-v2",
+          "family": "mpnet",
+          "cell_mean_cosine": {
+            "VIOLATION": {
+              "CLOSE": 0.9276,
+              "DISTANT": 0.4416
+            },
+            "FAITHFUL": {
+              "CLOSE": 0.9268,
+              "DISTANT": 0.497
+            }
+          },
+          "decision_axis_within_lexical": {
+            "CLOSE": {
+              "measure": "decision axis | lexical=CLOSE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "FAITHFUL",
+              "negative_class": "VIOLATION",
+              "auroc": 0.49,
+              "auroc_inverted_direction": 0.51,
+              "oracle_best_balanced_accuracy": 0.65,
+              "oracle_best_threshold": 0.909314,
+              "oracle_best_polarity": "lt",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.6,
+              "ci95_bootstrap": [
+                0.22,
+                0.75
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            },
+            "DISTANT": {
+              "measure": "decision axis | lexical=DISTANT",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "FAITHFUL",
+              "negative_class": "VIOLATION",
+              "auroc": 0.63,
+              "auroc_inverted_direction": 0.37,
+              "oracle_best_balanced_accuracy": 0.65,
+              "oracle_best_threshold": 0.348644,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.65,
+              "ci95_bootstrap": [
+                0.36,
+                0.87
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            }
+          },
+          "decision_axis_stratified_auroc": 0.56,
+          "lexical_axis_within_decision": {
+            "VIOLATION": {
+              "measure": "lexical axis | decision=VIOLATION",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.796006,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            },
+            "FAITHFUL": {
+              "measure": "lexical axis | decision=FAITHFUL",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.844035,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            }
+          },
+          "lexical_axis_stratified_auroc": 1.0,
+          "naive_confounded_auroc": {
+            "measure": "NAIVE pooled decision axis (confounded)",
+            "n_positive": 10,
+            "n_negative": 10,
+            "positive_class": "FAITHFUL",
+            "negative_class": "VIOLATION",
+            "auroc": 0.0,
+            "auroc_inverted_direction": 1.0,
+            "oracle_best_balanced_accuracy": 1.0,
+            "oracle_best_threshold": 0.796006,
+            "oracle_best_polarity": "lt",
+            "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.5,
+            "ci95_bootstrap": null,
+            "ci95_excludes_chance": null,
+            "exact_permutation_p": 1.082508822446903e-05
+          },
+          "confound_inflation": 0.56,
+          "one_threshold_reality_check": {
+            "single_global_threshold": {
+              "balanced_accuracy": 0.575,
+              "threshold": 0.348644,
+              "polarity": "ge"
+            },
+            "per_stratum_oracle": {
+              "CLOSE": {
+                "balanced_accuracy": 0.65,
+                "threshold": 0.909314
+              },
+              "DISTANT": {
+                "balanced_accuracy": 0.65,
+                "threshold": 0.348644
+              }
+            },
+            "mean_per_stratum_balanced_accuracy": 0.65,
+            "cost_of_one_threshold": 0.075,
+            "threshold_spread_between_strata": 0.56067
+          },
+          "shipped_threshold_performance": [
+            {
+              "threshold": 0.3,
+              "provenance": "innovation64/BMAM long_term_memory",
+              "balanced_accuracy": 0.525,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.05
+            },
+            {
+              "threshold": 0.4,
+              "provenance": "innovation64/BMAM; this repo's config advertised drift_threshold",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 0.85,
+              "true_negative_rate": 0.15
+            },
+            {
+              "threshold": 0.8,
+              "provenance": "this repo's EFFECTIVE Sinkhorn boundary (R10a: cos < 0.80)",
+              "balanced_accuracy": 0.525,
+              "true_positive_rate": 0.5,
+              "true_negative_rate": 0.55
+            },
+            {
+              "threshold": 0.85,
+              "provenance": "the audited system's _DISTINCTNESS_COSINE_THRESHOLD; neuralmind REVIEW_FLAG; vendor guidance 'cosine distance > 0.15'",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 0.45,
+              "true_negative_rate": 0.55
+            },
+            {
+              "threshold": 0.95,
+              "provenance": "AG3NT DEDUP_SIMILARITY_THRESHOLD; Maria DEFAULT_SEMANTIC_THRESHOLD; neuralmind AUTO_MERGE_THRESHOLD",
+              "balanced_accuracy": 0.475,
+              "true_positive_rate": 0.2,
+              "true_negative_rate": 0.75
+            }
+          ],
+          "best_shipped_threshold_balanced_accuracy": 0.525
+        },
+        {
+          "encoder": "BAAI/bge-base-en-v1.5",
+          "family": "bge",
+          "cell_mean_cosine": {
+            "VIOLATION": {
+              "CLOSE": 0.9128,
+              "DISTANT": 0.5919
+            },
+            "FAITHFUL": {
+              "CLOSE": 0.9641,
+              "DISTANT": 0.6768
+            }
+          },
+          "decision_axis_within_lexical": {
+            "CLOSE": {
+              "measure": "decision axis | lexical=CLOSE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "FAITHFUL",
+              "negative_class": "VIOLATION",
+              "auroc": 0.79,
+              "auroc_inverted_direction": 0.21,
+              "oracle_best_balanced_accuracy": 0.8,
+              "oracle_best_threshold": 0.927674,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.8,
+              "ci95_bootstrap": [
+                0.56,
+                0.96
+              ],
+              "ci95_excludes_chance": true,
+              "exact_permutation_p": null
+            },
+            "DISTANT": {
+              "measure": "decision axis | lexical=DISTANT",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "FAITHFUL",
+              "negative_class": "VIOLATION",
+              "auroc": 0.77,
+              "auroc_inverted_direction": 0.23,
+              "oracle_best_balanced_accuracy": 0.75,
+              "oracle_best_threshold": 0.640515,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.75,
+              "ci95_bootstrap": [
+                0.53,
+                0.96
+              ],
+              "ci95_excludes_chance": true,
+              "exact_permutation_p": null
+            }
+          },
+          "decision_axis_stratified_auroc": 0.78,
+          "lexical_axis_within_decision": {
+            "VIOLATION": {
+              "measure": "lexical axis | decision=VIOLATION",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.778748,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            },
+            "FAITHFUL": {
+              "measure": "lexical axis | decision=FAITHFUL",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.927674,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            }
+          },
+          "lexical_axis_stratified_auroc": 1.0,
+          "naive_confounded_auroc": {
+            "measure": "NAIVE pooled decision axis (confounded)",
+            "n_positive": 10,
+            "n_negative": 10,
+            "positive_class": "FAITHFUL",
+            "negative_class": "VIOLATION",
+            "auroc": 0.01,
+            "auroc_inverted_direction": 0.99,
+            "oracle_best_balanced_accuracy": 0.95,
+            "oracle_best_threshold": 0.778748,
+            "oracle_best_polarity": "lt",
+            "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.5,
+            "ci95_bootstrap": [
+              0.0,
+              0.06
+            ],
+            "ci95_excludes_chance": true,
+            "exact_permutation_p": null
+          },
+          "confound_inflation": 0.77,
+          "one_threshold_reality_check": {
+            "single_global_threshold": {
+              "balanced_accuracy": 0.65,
+              "threshold": 0.927674,
+              "polarity": "ge"
+            },
+            "per_stratum_oracle": {
+              "CLOSE": {
+                "balanced_accuracy": 0.8,
+                "threshold": 0.927674
+              },
+              "DISTANT": {
+                "balanced_accuracy": 0.75,
+                "threshold": 0.640515
+              }
+            },
+            "mean_per_stratum_balanced_accuracy": 0.775,
+            "cost_of_one_threshold": 0.125,
+            "threshold_spread_between_strata": 0.287159
+          },
+          "shipped_threshold_performance": [
+            {
+              "threshold": 0.3,
+              "provenance": "innovation64/BMAM long_term_memory",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.4,
+              "provenance": "innovation64/BMAM; this repo's config advertised drift_threshold",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.8,
+              "provenance": "this repo's EFFECTIVE Sinkhorn boundary (R10a: cos < 0.80)",
+              "balanced_accuracy": 0.55,
+              "true_positive_rate": 0.55,
+              "true_negative_rate": 0.55
+            },
+            {
+              "threshold": 0.85,
+              "provenance": "the audited system's _DISTINCTNESS_COSINE_THRESHOLD; neuralmind REVIEW_FLAG; vendor guidance 'cosine distance > 0.15'",
+              "balanced_accuracy": 0.525,
+              "true_positive_rate": 0.5,
+              "true_negative_rate": 0.55
+            },
+            {
+              "threshold": 0.95,
+              "provenance": "AG3NT DEDUP_SIMILARITY_THRESHOLD; Maria DEFAULT_SEMANTIC_THRESHOLD; neuralmind AUTO_MERGE_THRESHOLD",
+              "balanced_accuracy": 0.575,
+              "true_positive_rate": 0.35,
+              "true_negative_rate": 0.8
+            }
+          ],
+          "best_shipped_threshold_balanced_accuracy": 0.575
+        },
+        {
+          "encoder": "thenlper/gte-base",
+          "family": "gte",
+          "cell_mean_cosine": {
+            "VIOLATION": {
+              "CLOSE": 0.9667,
+              "DISTANT": 0.8152
+            },
+            "FAITHFUL": {
+              "CLOSE": 0.9793,
+              "DISTANT": 0.8441
+            }
+          },
+          "decision_axis_within_lexical": {
+            "CLOSE": {
+              "measure": "decision axis | lexical=CLOSE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "FAITHFUL",
+              "negative_class": "VIOLATION",
+              "auroc": 0.695,
+              "auroc_inverted_direction": 0.305,
+              "oracle_best_balanced_accuracy": 0.7,
+              "oracle_best_threshold": 0.958008,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.7,
+              "ci95_bootstrap": [
+                0.435,
+                0.9
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            },
+            "DISTANT": {
+              "measure": "decision axis | lexical=DISTANT",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "FAITHFUL",
+              "negative_class": "VIOLATION",
+              "auroc": 0.76,
+              "auroc_inverted_direction": 0.24,
+              "oracle_best_balanced_accuracy": 0.75,
+              "oracle_best_threshold": 0.826172,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.75,
+              "ci95_bootstrap": [
+                0.51,
+                0.95
+              ],
+              "ci95_excludes_chance": true,
+              "exact_permutation_p": null
+            }
+          },
+          "decision_axis_stratified_auroc": 0.7275,
+          "lexical_axis_within_decision": {
+            "VIOLATION": {
+              "measure": "lexical axis | decision=VIOLATION",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.917969,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            },
+            "FAITHFUL": {
+              "measure": "lexical axis | decision=FAITHFUL",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.958008,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            }
+          },
+          "lexical_axis_stratified_auroc": 1.0,
+          "naive_confounded_auroc": {
+            "measure": "NAIVE pooled decision axis (confounded)",
+            "n_positive": 10,
+            "n_negative": 10,
+            "positive_class": "FAITHFUL",
+            "negative_class": "VIOLATION",
+            "auroc": 0.0,
+            "auroc_inverted_direction": 1.0,
+            "oracle_best_balanced_accuracy": 1.0,
+            "oracle_best_threshold": 0.917969,
+            "oracle_best_polarity": "lt",
+            "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.5,
+            "ci95_bootstrap": null,
+            "ci95_excludes_chance": null,
+            "exact_permutation_p": 1.082508822446903e-05
+          },
+          "confound_inflation": 0.7275,
+          "one_threshold_reality_check": {
+            "single_global_threshold": {
+              "balanced_accuracy": 0.625,
+              "threshold": 0.826172,
+              "polarity": "ge"
+            },
+            "per_stratum_oracle": {
+              "CLOSE": {
+                "balanced_accuracy": 0.7,
+                "threshold": 0.958008
+              },
+              "DISTANT": {
+                "balanced_accuracy": 0.75,
+                "threshold": 0.826172
+              }
+            },
+            "mean_per_stratum_balanced_accuracy": 0.725,
+            "cost_of_one_threshold": 0.1,
+            "threshold_spread_between_strata": 0.131836
+          },
+          "shipped_threshold_performance": [
+            {
+              "threshold": 0.3,
+              "provenance": "innovation64/BMAM long_term_memory",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.4,
+              "provenance": "innovation64/BMAM; this repo's config advertised drift_threshold",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.8,
+              "provenance": "this repo's EFFECTIVE Sinkhorn boundary (R10a: cos < 0.80)",
+              "balanced_accuracy": 0.575,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.15
+            },
+            {
+              "threshold": 0.85,
+              "provenance": "the audited system's _DISTINCTNESS_COSINE_THRESHOLD; neuralmind REVIEW_FLAG; vendor guidance 'cosine distance > 0.15'",
+              "balanced_accuracy": 0.55,
+              "true_positive_rate": 0.65,
+              "true_negative_rate": 0.45
+            },
+            {
+              "threshold": 0.95,
+              "provenance": "AG3NT DEDUP_SIMILARITY_THRESHOLD; Maria DEFAULT_SEMANTIC_THRESHOLD; neuralmind AUTO_MERGE_THRESHOLD",
+              "balanced_accuracy": 0.525,
+              "true_positive_rate": 0.5,
+              "true_negative_rate": 0.55
+            }
+          ],
+          "best_shipped_threshold_balanced_accuracy": 0.575
+        },
+        {
+          "encoder": "e5-base-v2 [query: — card's symmetric convention]",
+          "family": "e5",
+          "cell_mean_cosine": {
+            "VIOLATION": {
+              "CLOSE": 0.9641,
+              "DISTANT": 0.7969
+            },
+            "FAITHFUL": {
+              "CLOSE": 0.9797,
+              "DISTANT": 0.8376
+            }
+          },
+          "decision_axis_within_lexical": {
+            "CLOSE": {
+              "measure": "decision axis | lexical=CLOSE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "FAITHFUL",
+              "negative_class": "VIOLATION",
+              "auroc": 0.69,
+              "auroc_inverted_direction": 0.31,
+              "oracle_best_balanced_accuracy": 0.65,
+              "oracle_best_threshold": 0.956282,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.65,
+              "ci95_bootstrap": [
+                0.44,
+                0.9
+              ],
+              "ci95_excludes_chance": false,
+              "exact_permutation_p": null
+            },
+            "DISTANT": {
+              "measure": "decision axis | lexical=DISTANT",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "FAITHFUL",
+              "negative_class": "VIOLATION",
+              "auroc": 0.79,
+              "auroc_inverted_direction": 0.21,
+              "oracle_best_balanced_accuracy": 0.75,
+              "oracle_best_threshold": 0.846258,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.75,
+              "ci95_bootstrap": [
+                0.55,
+                0.95
+              ],
+              "ci95_excludes_chance": true,
+              "exact_permutation_p": null
+            }
+          },
+          "decision_axis_stratified_auroc": 0.74,
+          "lexical_axis_within_decision": {
+            "VIOLATION": {
+              "measure": "lexical axis | decision=VIOLATION",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.902537,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            },
+            "FAITHFUL": {
+              "measure": "lexical axis | decision=FAITHFUL",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.956282,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            }
+          },
+          "lexical_axis_stratified_auroc": 1.0,
+          "naive_confounded_auroc": {
+            "measure": "NAIVE pooled decision axis (confounded)",
+            "n_positive": 10,
+            "n_negative": 10,
+            "positive_class": "FAITHFUL",
+            "negative_class": "VIOLATION",
+            "auroc": 0.01,
+            "auroc_inverted_direction": 0.99,
+            "oracle_best_balanced_accuracy": 0.95,
+            "oracle_best_threshold": 0.902537,
+            "oracle_best_polarity": "lt",
+            "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.5,
+            "ci95_bootstrap": [
+              0.0,
+              0.06
+            ],
+            "ci95_excludes_chance": true,
+            "exact_permutation_p": null
+          },
+          "confound_inflation": 0.73,
+          "one_threshold_reality_check": {
+            "single_global_threshold": {
+              "balanced_accuracy": 0.625,
+              "threshold": 0.846258,
+              "polarity": "ge"
+            },
+            "per_stratum_oracle": {
+              "CLOSE": {
+                "balanced_accuracy": 0.65,
+                "threshold": 0.956282
+              },
+              "DISTANT": {
+                "balanced_accuracy": 0.75,
+                "threshold": 0.846258
+              }
+            },
+            "mean_per_stratum_balanced_accuracy": 0.7,
+            "cost_of_one_threshold": 0.075,
+            "threshold_spread_between_strata": 0.110024
+          },
+          "shipped_threshold_performance": [
+            {
+              "threshold": 0.3,
+              "provenance": "innovation64/BMAM long_term_memory",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.4,
+              "provenance": "innovation64/BMAM; this repo's config advertised drift_threshold",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.8,
+              "provenance": "this repo's EFFECTIVE Sinkhorn boundary (R10a: cos < 0.80)",
+              "balanced_accuracy": 0.575,
+              "true_positive_rate": 0.9,
+              "true_negative_rate": 0.25
+            },
+            {
+              "threshold": 0.85,
+              "provenance": "the audited system's _DISTINCTNESS_COSINE_THRESHOLD; neuralmind REVIEW_FLAG; vendor guidance 'cosine distance > 0.15'",
+              "balanced_accuracy": 0.575,
+              "true_positive_rate": 0.65,
+              "true_negative_rate": 0.5
+            },
+            {
+              "threshold": 0.95,
+              "provenance": "AG3NT DEDUP_SIMILARITY_THRESHOLD; Maria DEFAULT_SEMANTIC_THRESHOLD; neuralmind AUTO_MERGE_THRESHOLD",
+              "balanced_accuracy": 0.575,
+              "true_positive_rate": 0.5,
+              "true_negative_rate": 0.65
+            }
+          ],
+          "best_shipped_threshold_balanced_accuracy": 0.575
+        },
+        {
+          "encoder": "e5-base-v2 [NO prefix — sensitivity variant]",
+          "family": "e5",
+          "cell_mean_cosine": {
+            "VIOLATION": {
+              "CLOSE": 0.9583,
+              "DISTANT": 0.7977
+            },
+            "FAITHFUL": {
+              "CLOSE": 0.9807,
+              "DISTANT": 0.8436
+            }
+          },
+          "decision_axis_within_lexical": {
+            "CLOSE": {
+              "measure": "decision axis | lexical=CLOSE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "FAITHFUL",
+              "negative_class": "VIOLATION",
+              "auroc": 0.76,
+              "auroc_inverted_direction": 0.24,
+              "oracle_best_balanced_accuracy": 0.75,
+              "oracle_best_threshold": 0.960567,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.75,
+              "ci95_bootstrap": [
+                0.52,
+                0.94
+              ],
+              "ci95_excludes_chance": true,
+              "exact_permutation_p": null
+            },
+            "DISTANT": {
+              "measure": "decision axis | lexical=DISTANT",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "FAITHFUL",
+              "negative_class": "VIOLATION",
+              "auroc": 0.79,
+              "auroc_inverted_direction": 0.21,
+              "oracle_best_balanced_accuracy": 0.75,
+              "oracle_best_threshold": 0.80477,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.75,
+              "ci95_bootstrap": [
+                0.56,
+                0.96
+              ],
+              "ci95_excludes_chance": true,
+              "exact_permutation_p": null
+            }
+          },
+          "decision_axis_stratified_auroc": 0.775,
+          "lexical_axis_within_decision": {
+            "VIOLATION": {
+              "measure": "lexical axis | decision=VIOLATION",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.873441,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            },
+            "FAITHFUL": {
+              "measure": "lexical axis | decision=FAITHFUL",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.960567,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            }
+          },
+          "lexical_axis_stratified_auroc": 1.0,
+          "naive_confounded_auroc": {
+            "measure": "NAIVE pooled decision axis (confounded)",
+            "n_positive": 10,
+            "n_negative": 10,
+            "positive_class": "FAITHFUL",
+            "negative_class": "VIOLATION",
+            "auroc": 0.01,
+            "auroc_inverted_direction": 0.99,
+            "oracle_best_balanced_accuracy": 0.95,
+            "oracle_best_threshold": 0.873441,
+            "oracle_best_polarity": "lt",
+            "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.5,
+            "ci95_bootstrap": [
+              0.0,
+              0.06
+            ],
+            "ci95_excludes_chance": true,
+            "exact_permutation_p": null
+          },
+          "confound_inflation": 0.765,
+          "one_threshold_reality_check": {
+            "single_global_threshold": {
+              "balanced_accuracy": 0.625,
+              "threshold": 0.80477,
+              "polarity": "ge"
+            },
+            "per_stratum_oracle": {
+              "CLOSE": {
+                "balanced_accuracy": 0.75,
+                "threshold": 0.960567
+              },
+              "DISTANT": {
+                "balanced_accuracy": 0.75,
+                "threshold": 0.80477
+              }
+            },
+            "mean_per_stratum_balanced_accuracy": 0.75,
+            "cost_of_one_threshold": 0.125,
+            "threshold_spread_between_strata": 0.155797
+          },
+          "shipped_threshold_performance": [
+            {
+              "threshold": 0.3,
+              "provenance": "innovation64/BMAM long_term_memory",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.4,
+              "provenance": "innovation64/BMAM; this repo's config advertised drift_threshold",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.8,
+              "provenance": "this repo's EFFECTIVE Sinkhorn boundary (R10a: cos < 0.80)",
+              "balanced_accuracy": 0.625,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.25
+            },
+            {
+              "threshold": 0.85,
+              "provenance": "the audited system's _DISTINCTNESS_COSINE_THRESHOLD; neuralmind REVIEW_FLAG; vendor guidance 'cosine distance > 0.15'",
+              "balanced_accuracy": 0.55,
+              "true_positive_rate": 0.65,
+              "true_negative_rate": 0.45
+            },
+            {
+              "threshold": 0.95,
+              "provenance": "AG3NT DEDUP_SIMILARITY_THRESHOLD; Maria DEFAULT_SEMANTIC_THRESHOLD; neuralmind AUTO_MERGE_THRESHOLD",
+              "balanced_accuracy": 0.55,
+              "true_positive_rate": 0.5,
+              "true_negative_rate": 0.6
+            }
+          ],
+          "best_shipped_threshold_balanced_accuracy": 0.625
+        },
+        {
+          "encoder": "mixedbread-ai/mxbai-embed-large-v1",
+          "family": "mxbai",
+          "cell_mean_cosine": {
+            "VIOLATION": {
+              "CLOSE": 0.8948,
+              "DISTANT": 0.5771
+            },
+            "FAITHFUL": {
+              "CLOSE": 0.9612,
+              "DISTANT": 0.6966
+            }
+          },
+          "decision_axis_within_lexical": {
+            "CLOSE": {
+              "measure": "decision axis | lexical=CLOSE",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "FAITHFUL",
+              "negative_class": "VIOLATION",
+              "auroc": 0.82,
+              "auroc_inverted_direction": 0.18,
+              "oracle_best_balanced_accuracy": 0.75,
+              "oracle_best_threshold": 0.91748,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.75,
+              "ci95_bootstrap": [
+                0.6,
+                0.97
+              ],
+              "ci95_excludes_chance": true,
+              "exact_permutation_p": null
+            },
+            "DISTANT": {
+              "measure": "decision axis | lexical=DISTANT",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "FAITHFUL",
+              "negative_class": "VIOLATION",
+              "auroc": 0.81,
+              "auroc_inverted_direction": 0.19,
+              "oracle_best_balanced_accuracy": 0.8,
+              "oracle_best_threshold": 0.603516,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.8,
+              "ci95_bootstrap": [
+                0.58,
+                0.98
+              ],
+              "ci95_excludes_chance": true,
+              "exact_permutation_p": null
+            }
+          },
+          "decision_axis_stratified_auroc": 0.815,
+          "lexical_axis_within_decision": {
+            "VIOLATION": {
+              "measure": "lexical axis | decision=VIOLATION",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.747559,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            },
+            "FAITHFUL": {
+              "measure": "lexical axis | decision=FAITHFUL",
+              "n_positive": 10,
+              "n_negative": 10,
+              "positive_class": "CLOSE",
+              "negative_class": "DISTANT",
+              "auroc": 1.0,
+              "auroc_inverted_direction": 0.0,
+              "oracle_best_balanced_accuracy": 1.0,
+              "oracle_best_threshold": 0.91748,
+              "oracle_best_polarity": "ge",
+              "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 1.0,
+              "ci95_bootstrap": null,
+              "ci95_excludes_chance": null,
+              "exact_permutation_p": 1.082508822446903e-05
+            }
+          },
+          "lexical_axis_stratified_auroc": 1.0,
+          "naive_confounded_auroc": {
+            "measure": "NAIVE pooled decision axis (confounded)",
+            "n_positive": 10,
+            "n_negative": 10,
+            "positive_class": "FAITHFUL",
+            "negative_class": "VIOLATION",
+            "auroc": 0.03,
+            "auroc_inverted_direction": 0.97,
+            "oracle_best_balanced_accuracy": 0.95,
+            "oracle_best_threshold": 0.747559,
+            "oracle_best_polarity": "lt",
+            "oracle_best_balanced_accuracy_DEPLOYED_DIRECTION_ONLY": 0.5,
+            "ci95_bootstrap": [
+              0.0,
+              0.12
+            ],
+            "ci95_excludes_chance": true,
+            "exact_permutation_p": null
+          },
+          "confound_inflation": 0.785,
+          "one_threshold_reality_check": {
+            "single_global_threshold": {
+              "balanced_accuracy": 0.65,
+              "threshold": 0.603516,
+              "polarity": "ge"
+            },
+            "per_stratum_oracle": {
+              "CLOSE": {
+                "balanced_accuracy": 0.75,
+                "threshold": 0.91748
+              },
+              "DISTANT": {
+                "balanced_accuracy": 0.8,
+                "threshold": 0.603516
+              }
+            },
+            "mean_per_stratum_balanced_accuracy": 0.775,
+            "cost_of_one_threshold": 0.125,
+            "threshold_spread_between_strata": 0.313964
+          },
+          "shipped_threshold_performance": [
+            {
+              "threshold": 0.3,
+              "provenance": "innovation64/BMAM long_term_memory",
+              "balanced_accuracy": 0.5,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.0
+            },
+            {
+              "threshold": 0.4,
+              "provenance": "innovation64/BMAM; this repo's config advertised drift_threshold",
+              "balanced_accuracy": 0.525,
+              "true_positive_rate": 1.0,
+              "true_negative_rate": 0.05
+            },
+            {
+              "threshold": 0.8,
+              "provenance": "this repo's EFFECTIVE Sinkhorn boundary (R10a: cos < 0.80)",
+              "balanced_accuracy": 0.55,
+              "true_positive_rate": 0.55,
+              "true_negative_rate": 0.55
+            },
+            {
+              "threshold": 0.85,
+              "provenance": "the audited system's _DISTINCTNESS_COSINE_THRESHOLD; neuralmind REVIEW_FLAG; vendor guidance 'cosine distance > 0.15'",
+              "balanced_accuracy": 0.6,
+              "true_positive_rate": 0.55,
+              "true_negative_rate": 0.65
+            },
+            {
+              "threshold": 0.95,
+              "provenance": "AG3NT DEDUP_SIMILARITY_THRESHOLD; Maria DEFAULT_SEMANTIC_THRESHOLD; neuralmind AUTO_MERGE_THRESHOLD",
+              "balanced_accuracy": 0.575,
+              "true_positive_rate": 0.3,
+              "true_negative_rate": 0.85
+            }
+          ],
+          "best_shipped_threshold_balanced_accuracy": 0.6
+        }
+      ],
+      "verdict": {
+        "rule": "<= 0.55 holds; >= 0.7 shrinks; between = inconclusive",
+        "pre_registered": true,
+        "stratified_decision_auroc_by_encoder": {
+          "nomic-embed-text-v1.5 MRL-256 [PRODUCTION PATH, search_document:]": 0.44,
+          "nomic-embed-text-v1.5 [clustering: — documented symmetric prefix]": 0.55,
+          "sentence-transformers/all-MiniLM-L6-v2": 0.57,
+          "sentence-transformers/all-mpnet-base-v2": 0.56,
+          "BAAI/bge-base-en-v1.5": 0.78,
+          "thenlper/gte-base": 0.7275,
+          "e5-base-v2 [query: — card's symmetric convention]": 0.74,
+          "e5-base-v2 [NO prefix — sensitivity variant]": 0.775,
+          "mixedbread-ai/mxbai-embed-large-v1": 0.815
+        },
+        "least_favourable": 0.815,
+        "verdict": "CLAIM SHRINKS",
+        "action": "Publish the smaller claim; reclaim ten weeks."
+      },
+      "per_row": [
+        {
+          "id": "C-A-01",
+          "cell": "A",
+          "decision": "VIOLATION",
+          "lexical": "CLOSE",
+          "anchor_group": "retries",
+          "subclass": "quantity_drift",
+          "text_a": "Retry the request at most three times.",
+          "text_b": "Retry the request at most thirty times.",
+          "lexical_metrics": {
+            "token_jaccard": 0.75,
+            "char4_jaccard": 0.690476,
+            "levenshtein_sim": 0.923077
+          }
+        },
+        {
+          "id": "C-C-01",
+          "cell": "C",
+          "decision": "FAITHFUL",
+          "lexical": "CLOSE",
+          "anchor_group": "retries",
+          "subclass": "quantity_drift",
+          "text_a": "Retry the request at most three times.",
+          "text_b": "Retry the request at most three attempts.",
+          "lexical_metrics": {
+            "token_jaccard": 0.75,
+            "char4_jaccard": 0.659091,
+            "levenshtein_sim": 0.878049
+          }
+        },
+        {
+          "id": "C-B-01",
+          "cell": "B",
+          "decision": "VIOLATION",
+          "lexical": "DISTANT",
+          "anchor_group": "retries",
+          "subclass": "quantity_drift",
+          "text_a": "Retry the request at most three times.",
+          "text_b": "Keep attempting the call until it succeeds, however long that takes.",
+          "lexical_metrics": {
+            "token_jaccard": 0.058824,
+            "char4_jaccard": 0.020833,
+            "levenshtein_sim": 0.294118
+          }
+        },
+        {
+          "id": "C-D-01",
+          "cell": "D",
+          "decision": "FAITHFUL",
+          "lexical": "DISTANT",
+          "anchor_group": "retries",
+          "subclass": "quantity_drift",
+          "text_a": "Retry the request at most three times.",
+          "text_b": "Give the call up to three attempts, then stop.",
+          "lexical_metrics": {
+            "token_jaccard": 0.142857,
+            "char4_jaccard": 0.084507,
+            "levenshtein_sim": 0.326087
+          }
+        },
+        {
+          "id": "C-A-02",
+          "cell": "A",
+          "decision": "VIOLATION",
+          "lexical": "CLOSE",
+          "anchor_group": "rotation",
+          "subclass": "modal_downgrade",
+          "text_a": "The token must be rotated every 24 hours.",
+          "text_b": "The token should be rotated every 24 hours.",
+          "lexical_metrics": {
+            "token_jaccard": 0.777778,
+            "char4_jaccard": 0.659574,
+            "levenshtein_sim": 0.883721
+          }
+        },
+        {
+          "id": "C-C-02",
+          "cell": "C",
+          "decision": "FAITHFUL",
+          "lexical": "CLOSE",
+          "anchor_group": "rotation",
+          "subclass": "modal_downgrade",
+          "text_a": "The token must be rotated every 24 hours.",
+          "text_b": "The token must be rotated every 24 hrs.",
+          "lexical_metrics": {
+            "token_jaccard": 0.777778,
+            "char4_jaccard": 0.804878,
+            "levenshtein_sim": 0.95122
+          }
+        },
+        {
+          "id": "C-B-02",
+          "cell": "B",
+          "decision": "VIOLATION",
+          "lexical": "DISTANT",
+          "anchor_group": "rotation",
+          "subclass": "modal_downgrade",
+          "text_a": "The token must be rotated every 24 hours.",
+          "text_b": "Credential refresh is left to the operator's discretion.",
+          "lexical_metrics": {
+            "token_jaccard": 0.0625,
+            "char4_jaccard": 0.011111,
+            "levenshtein_sim": 0.232143
+          }
+        },
+        {
+          "id": "C-D-02",
+          "cell": "D",
+          "decision": "FAITHFUL",
+          "lexical": "DISTANT",
+          "anchor_group": "rotation",
+          "subclass": "modal_downgrade",
+          "text_a": "The token must be rotated every 24 hours.",
+          "text_b": "Secrets have to be replaced once per day without exception.",
+          "lexical_metrics": {
+            "token_jaccard": 0.058824,
+            "char4_jaccard": 0.032967,
+            "levenshtein_sim": 0.322034
+          }
+        },
+        {
+          "id": "C-A-03",
+          "cell": "A",
+          "decision": "VIOLATION",
+          "lexical": "CLOSE",
+          "anchor_group": "secrets",
+          "subclass": "modal_downgrade",
+          "text_a": "Never log the raw API key.",
+          "text_b": "Rarely log the raw API key.",
+          "lexical_metrics": {
+            "token_jaccard": 0.714286,
+            "char4_jaccard": 0.62069,
+            "levenshtein_sim": 0.814815
+          }
+        },
+        {
+          "id": "C-C-03",
+          "cell": "C",
+          "decision": "FAITHFUL",
+          "lexical": "CLOSE",
+          "anchor_group": "secrets",
+          "subclass": "modal_downgrade",
+          "text_a": "Never log the raw API key.",
+          "text_b": "Never log the raw API token.",
+          "lexical_metrics": {
+            "token_jaccard": 0.714286,
+            "char4_jaccard": 0.655172,
+            "levenshtein_sim": 0.892857
+          }
+        },
+        {
+          "id": "C-B-03",
+          "cell": "B",
+          "decision": "VIOLATION",
+          "lexical": "DISTANT",
+          "anchor_group": "secrets",
+          "subclass": "modal_downgrade",
+          "text_a": "Never log the raw API key.",
+          "text_b": "Verbose diagnostics may include credential material when troubleshooting.",
+          "lexical_metrics": {
+            "token_jaccard": 0.0,
+            "char4_jaccard": 0.0,
+            "levenshtein_sim": 0.191781
+          }
+        },
+        {
+          "id": "C-D-03",
+          "cell": "D",
+          "decision": "FAITHFUL",
+          "lexical": "DISTANT",
+          "anchor_group": "secrets",
+          "subclass": "modal_downgrade",
+          "text_a": "Never log the raw API key.",
+          "text_b": "Under no circumstances should secret material appear in diagnostic output.",
+          "lexical_metrics": {
+            "token_jaccard": 0.0,
+            "char4_jaccard": 0.0,
+            "levenshtein_sim": 0.216216
+          }
+        },
+        {
+          "id": "C-A-04",
+          "cell": "A",
+          "decision": "VIOLATION",
+          "lexical": "CLOSE",
+          "anchor_group": "cleanup",
+          "subclass": "order_inversion",
+          "text_a": "Delete the temp files after the job completes.",
+          "text_b": "Delete the temp files before the job completes.",
+          "lexical_metrics": {
+            "token_jaccard": 0.75,
+            "char4_jaccard": 0.666667,
+            "levenshtein_sim": 0.893617
+          }
+        },
+        {
+          "id": "C-C-04",
+          "cell": "C",
+          "decision": "FAITHFUL",
+          "lexical": "CLOSE",
+          "anchor_group": "cleanup",
+          "subclass": "order_inversion",
+          "text_a": "Delete the temp files after the job completes.",
+          "text_b": "Remove the temp files after the job completes.",
+          "lexical_metrics": {
+            "token_jaccard": 0.75,
+            "char4_jaccard": 0.8,
+            "levenshtein_sim": 0.913043
+          }
+        },
+        {
+          "id": "C-B-04",
+          "cell": "B",
+          "decision": "VIOLATION",
+          "lexical": "DISTANT",
+          "anchor_group": "cleanup",
+          "subclass": "order_inversion",
+          "text_a": "Delete the temp files after the job completes.",
+          "text_b": "Scratch data persists on disk once processing finishes.",
+          "lexical_metrics": {
+            "token_jaccard": 0.0,
+            "char4_jaccard": 0.0,
+            "levenshtein_sim": 0.218182
+          }
+        },
+        {
+          "id": "C-D-04",
+          "cell": "D",
+          "decision": "FAITHFUL",
+          "lexical": "DISTANT",
+          "anchor_group": "cleanup",
+          "subclass": "order_inversion",
+          "text_a": "Delete the temp files after the job completes.",
+          "text_b": "Clean up scratch data once processing has finished.",
+          "lexical_metrics": {
+            "token_jaccard": 0.0,
+            "char4_jaccard": 0.0,
+            "levenshtein_sim": 0.196078
+          }
+        },
+        {
+          "id": "C-A-05",
+          "cell": "A",
+          "decision": "VIOLATION",
+          "lexical": "CLOSE",
+          "anchor_group": "latency",
+          "subclass": "quantity_drift",
+          "text_a": "Alert if latency exceeds 200ms.",
+          "text_b": "Alert if latency exceeds 2000ms.",
+          "lexical_metrics": {
+            "token_jaccard": 0.666667,
+            "char4_jaccard": 0.9,
+            "levenshtein_sim": 0.96875
+          }
+        },
+        {
+          "id": "C-C-05",
+          "cell": "C",
+          "decision": "FAITHFUL",
+          "lexical": "CLOSE",
+          "anchor_group": "latency",
+          "subclass": "quantity_drift",
+          "text_a": "Alert if latency exceeds 200ms.",
+          "text_b": "Alert if delay exceeds 200ms.",
+          "lexical_metrics": {
+            "token_jaccard": 0.666667,
+            "char4_jaccard": 0.542857,
+            "levenshtein_sim": 0.83871
+          }
+        },
+        {
+          "id": "C-B-05",
+          "cell": "B",
+          "decision": "VIOLATION",
+          "lexical": "DISTANT",
+          "anchor_group": "latency",
+          "subclass": "quantity_drift",
+          "text_a": "Alert if latency exceeds 200ms.",
+          "text_b": "Notify the on-call engineer only when response time passes two full seconds.",
+          "lexical_metrics": {
+            "token_jaccard": 0.0,
+            "char4_jaccard": 0.0,
+            "levenshtein_sim": 0.184211
+          }
+        },
+        {
+          "id": "C-D-05",
+          "cell": "D",
+          "decision": "FAITHFUL",
+          "lexical": "DISTANT",
+          "anchor_group": "latency",
+          "subclass": "quantity_drift",
+          "text_a": "Alert if latency exceeds 200ms.",
+          "text_b": "Page the on-call engineer when response time passes a fifth of a second.",
+          "lexical_metrics": {
+            "token_jaccard": 0.0,
+            "char4_jaccard": 0.0,
+            "levenshtein_sim": 0.208333
+          }
+        },
+        {
+          "id": "C-A-06",
+          "cell": "A",
+          "decision": "VIOLATION",
+          "lexical": "CLOSE",
+          "anchor_group": "approval",
+          "subclass": "constraint_deletion",
+          "text_a": "Only admins may approve the deploy.",
+          "text_b": "Any user may approve the deploy.",
+          "lexical_metrics": {
+            "token_jaccard": 0.5,
+            "char4_jaccard": 0.525,
+            "levenshtein_sim": 0.771429
+          }
+        },
+        {
+          "id": "C-C-06",
+          "cell": "C",
+          "decision": "FAITHFUL",
+          "lexical": "CLOSE",
+          "anchor_group": "approval",
+          "subclass": "constraint_deletion",
+          "text_a": "Only admins may approve the deploy.",
+          "text_b": "Only admins may authorise the deploy.",
+          "lexical_metrics": {
+            "token_jaccard": 0.714286,
+            "char4_jaccard": 0.571429,
+            "levenshtein_sim": 0.837838
+          }
+        },
+        {
+          "id": "C-B-06",
+          "cell": "B",
+          "decision": "VIOLATION",
+          "lexical": "DISTANT",
+          "anchor_group": "approval",
+          "subclass": "constraint_deletion",
+          "text_a": "Only admins may approve the deploy.",
+          "text_b": "Any team member with repository access can sign off on a release.",
+          "lexical_metrics": {
+            "token_jaccard": 0.0,
+            "char4_jaccard": 0.0,
+            "levenshtein_sim": 0.215385
+          }
+        },
+        {
+          "id": "C-D-06",
+          "cell": "D",
+          "decision": "FAITHFUL",
+          "lexical": "DISTANT",
+          "anchor_group": "approval",
+          "subclass": "constraint_deletion",
+          "text_a": "Only admins may approve the deploy.",
+          "text_b": "Release sign-off is restricted to users holding administrator rights.",
+          "lexical_metrics": {
+            "token_jaccard": 0.0,
+            "char4_jaccard": 0.031579,
+            "levenshtein_sim": 0.188406
+          }
+        },
+        {
+          "id": "C-A-07",
+          "cell": "A",
+          "decision": "VIOLATION",
+          "lexical": "CLOSE",
+          "anchor_group": "encrypt",
+          "subclass": "order_inversion",
+          "text_a": "Encrypt the backup before uploading it.",
+          "text_b": "Encrypt the backup after uploading it.",
+          "lexical_metrics": {
+            "token_jaccard": 0.714286,
+            "char4_jaccard": 0.613636,
+            "levenshtein_sim": 0.871795
+          }
+        },
+        {
+          "id": "C-C-07",
+          "cell": "C",
+          "decision": "FAITHFUL",
+          "lexical": "CLOSE",
+          "anchor_group": "encrypt",
+          "subclass": "order_inversion",
+          "text_a": "Encrypt the backup before uploading it.",
+          "text_b": "Encrypt the backup before sending it.",
+          "lexical_metrics": {
+            "token_jaccard": 0.714286,
+            "char4_jaccard": 0.666667,
+            "levenshtein_sim": 0.871795
+          }
+        },
+        {
+          "id": "C-B-07",
+          "cell": "B",
+          "decision": "VIOLATION",
+          "lexical": "DISTANT",
+          "anchor_group": "encrypt",
+          "subclass": "order_inversion",
+          "text_a": "Encrypt the backup before uploading it.",
+          "text_b": "Archives transfer in plaintext and are secured at rest by the provider.",
+          "lexical_metrics": {
+            "token_jaccard": 0.058824,
+            "char4_jaccard": 0.019608,
+            "levenshtein_sim": 0.211268
+          }
+        },
+        {
+          "id": "C-D-07",
+          "cell": "D",
+          "decision": "FAITHFUL",
+          "lexical": "DISTANT",
+          "anchor_group": "encrypt",
+          "subclass": "order_inversion",
+          "text_a": "Encrypt the backup before uploading it.",
+          "text_b": "Apply encryption to the archive ahead of transfer.",
+          "lexical_metrics": {
+            "token_jaccard": 0.076923,
+            "char4_jaccard": 0.077922,
+            "levenshtein_sim": 0.3
+          }
+        },
+        {
+          "id": "C-A-08",
+          "cell": "A",
+          "decision": "VIOLATION",
+          "lexical": "CLOSE",
+          "anchor_group": "failmode",
+          "subclass": "polarity_flip",
+          "text_a": "Fail closed if the auth service is unreachable.",
+          "text_b": "Fail open if the auth service is unreachable.",
+          "lexical_metrics": {
+            "token_jaccard": 0.777778,
+            "char4_jaccard": 0.686275,
+            "levenshtein_sim": 0.914894
+          }
+        },
+        {
+          "id": "C-C-08",
+          "cell": "C",
+          "decision": "FAITHFUL",
+          "lexical": "CLOSE",
+          "anchor_group": "failmode",
+          "subclass": "polarity_flip",
+          "text_a": "Fail closed if the auth service is unreachable.",
+          "text_b": "Fail shut if the auth service is unreachable.",
+          "lexical_metrics": {
+            "token_jaccard": 0.777778,
+            "char4_jaccard": 0.686275,
+            "levenshtein_sim": 0.87234
+          }
+        },
+        {
+          "id": "C-B-08",
+          "cell": "B",
+          "decision": "VIOLATION",
+          "lexical": "DISTANT",
+          "anchor_group": "failmode",
+          "subclass": "polarity_flip",
+          "text_a": "Fail closed if the auth service is unreachable.",
+          "text_b": "When identity checks are unavailable, allow the request through and log the gap.",
+          "lexical_metrics": {
+            "token_jaccard": 0.052632,
+            "char4_jaccard": 0.025862,
+            "levenshtein_sim": 0.2375
+          }
+        },
+        {
+          "id": "C-D-08",
+          "cell": "D",
+          "decision": "FAITHFUL",
+          "lexical": "DISTANT",
+          "anchor_group": "failmode",
+          "subclass": "polarity_flip",
+          "text_a": "Fail closed if the auth service is unreachable.",
+          "text_b": "Deny the request if identity verification cannot be reached.",
+          "lexical_metrics": {
+            "token_jaccard": 0.133333,
+            "char4_jaccard": 0.052632,
+            "levenshtein_sim": 0.333333
+          }
+        },
+        {
+          "id": "C-A-09",
+          "cell": "A",
+          "decision": "VIOLATION",
+          "lexical": "CLOSE",
+          "anchor_group": "concurrency",
+          "subclass": "quantity_drift",
+          "text_a": "Cap concurrent workers at eight.",
+          "text_b": "Cap concurrent workers at eighty.",
+          "lexical_metrics": {
+            "token_jaccard": 0.666667,
+            "char4_jaccard": 0.903226,
+            "levenshtein_sim": 0.969697
+          }
+        },
+        {
+          "id": "C-C-09",
+          "cell": "C",
+          "decision": "FAITHFUL",
+          "lexical": "CLOSE",
+          "anchor_group": "concurrency",
+          "subclass": "quantity_drift",
+          "text_a": "Cap concurrent workers at eight.",
+          "text_b": "Cap concurrent workers at 8.",
+          "lexical_metrics": {
+            "token_jaccard": 0.666667,
+            "char4_jaccard": 0.741935,
+            "levenshtein_sim": 0.84375
+          }
+        },
+        {
+          "id": "C-B-09",
+          "cell": "B",
+          "decision": "VIOLATION",
+          "lexical": "DISTANT",
+          "anchor_group": "concurrency",
+          "subclass": "quantity_drift",
+          "text_a": "Cap concurrent workers at eight.",
+          "text_b": "Parallelism is unbounded and governed only by available memory.",
+          "lexical_metrics": {
+            "token_jaccard": 0.0,
+            "char4_jaccard": 0.0,
+            "levenshtein_sim": 0.238095
+          }
+        },
+        {
+          "id": "C-D-09",
+          "cell": "D",
+          "decision": "FAITHFUL",
+          "lexical": "DISTANT",
+          "anchor_group": "concurrency",
+          "subclass": "quantity_drift",
+          "text_a": "Cap concurrent workers at eight.",
+          "text_b": "No more than eight tasks may run side by side.",
+          "lexical_metrics": {
+            "token_jaccard": 0.076923,
+            "char4_jaccard": 0.044776,
+            "levenshtein_sim": 0.217391
+          }
+        },
+        {
+          "id": "C-A-10",
+          "cell": "A",
+          "decision": "VIOLATION",
+          "lexical": "CLOSE",
+          "anchor_group": "txn",
+          "subclass": "modal_downgrade",
+          "text_a": "All writes must go through the transaction wrapper.",
+          "text_b": "Some writes must go through the transaction wrapper.",
+          "lexical_metrics": {
+            "token_jaccard": 0.777778,
+            "char4_jaccard": 0.865385,
+            "levenshtein_sim": 0.923077
+          }
+        },
+        {
+          "id": "C-C-10",
+          "cell": "C",
+          "decision": "FAITHFUL",
+          "lexical": "CLOSE",
+          "anchor_group": "txn",
+          "subclass": "modal_downgrade",
+          "text_a": "All writes must go through the transaction wrapper.",
+          "text_b": "All writes must go through the transaction helper.",
+          "lexical_metrics": {
+            "token_jaccard": 0.777778,
+            "char4_jaccard": 0.759259,
+            "levenshtein_sim": 0.921569
+          }
+        },
+        {
+          "id": "C-B-10",
+          "cell": "B",
+          "decision": "VIOLATION",
+          "lexical": "DISTANT",
+          "anchor_group": "txn",
+          "subclass": "modal_downgrade",
+          "text_a": "All writes must go through the transaction wrapper.",
+          "text_b": "Direct database access is acceptable for performance-critical paths.",
+          "lexical_metrics": {
+            "token_jaccard": 0.0,
+            "char4_jaccard": 0.0,
+            "levenshtein_sim": 0.220588
+          }
+        },
+        {
+          "id": "C-D-10",
+          "cell": "D",
+          "decision": "FAITHFUL",
+          "lexical": "DISTANT",
+          "anchor_group": "txn",
+          "subclass": "modal_downgrade",
+          "text_a": "All writes must go through the transaction wrapper.",
+          "text_b": "No change may touch storage outside a transaction.",
+          "lexical_metrics": {
+            "token_jaccard": 0.066667,
+            "char4_jaccard": 0.104651,
+            "levenshtein_sim": 0.294118
+          }
+        }
+      ]
+    }
+  }
+}
