@@ -1,0 +1,3646 @@
+=== PAGE 1 ===
+Runtime Verification
+Monitoring, Knowledge, and Uncertainty
+Lecture Notes
+Benedikt Bollig
+Université Paris-Saclay, CNRS, ENS Paris-Saclay, LMF
+Gif-sur-Yvette, France
+arXiv:2604.26753v1  [cs.LO]  29 Apr 2026
+
+
+=== PAGE 2 ===
+Abstract
+Runtime verification is a lightweight verification technique that complements model checking
+by analyzing system executions at runtime rather than exploring a complete system model
+in advance. It is particularly useful for partially observable or black-box systems, where
+uncertainty can only be resolved through observation. These lecture notes present automata-
+theoretic, temporal-logical, and epistemic foundations of runtime verification. They cover
+specification formalisms, diagnosis, opacity, and monitorability, and explain how offline
+analysis can be used to construct monitors that operate online on observed executions. The
+notes also discuss timed extensions and the additional algorithmic and semantic challenges
+that arise in the real-time setting.
+Preface
+These notes accompany an MPRI M2 course given in the lecture series Advanced Techniques
+of Verification. They present runtime verification from the perspective of partial information,
+with a unifying treatment of diagnosis, opacity, and monitoring. Comments and corrections
+are welcome at bollig@lmf.cnrs.fr.
+I am grateful to Martin Leucker for sharing his runtime verification lecture material and for
+helpful feedback that significantly improved the runtime monitoring part. I would also like
+to thank the MPRI M2 students of 2025/2026 in the lecture series Advanced Techniques of
+Verification for their participation and for their thoughtful questions and remarks, which
+helped refine the presentation.
+i
+
+
+=== PAGE 3 ===
+Contents
+1
+What Is Runtime Verification?
+1
+1.1
+Context . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1
+1.2
+Model Checking, Diagnosis, Opacity, and Monitoring . . . . . . . . . . . . .
+1
+1.3
+Take-Away . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6
+1.4
+Bibliographic Notes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6
+2
+Observation, Knowledge, and Uncertainty
+8
+2.1
+Words, Languages, and Moore Machines . . . . . . . . . . . . . . . . . . . .
+8
+2.2
+Propositions, Agents, and Partial Observability . . . . . . . . . . . . . . . .
+9
+2.3
+A Base System Model
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+12
+2.4
+Epistemic Linear-Time Temporal Logic . . . . . . . . . . . . . . . . . . . . .
+15
+2.5
+The Model-Checking Problem . . . . . . . . . . . . . . . . . . . . . . . . . .
+21
+2.6
+Bibliographic Notes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+31
+3
+Diagnosability
+32
+3.1
+Positive and Negative Diagnosability . . . . . . . . . . . . . . . . . . . . . .
+32
+3.2
+Diagnosers and Knowledge Monitors . . . . . . . . . . . . . . . . . . . . . .
+37
+3.3
+Decentralized Diagnosis
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+40
+3.4
+Bibliographic Notes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+42
+4
+Opacity
+43
+4.1
+Definition of Opacity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+43
+4.2
+Complexity of Opacity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+44
+4.3
+Bibliographic Notes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+48
+5
+Monitorability
+49
+5.1
+Definition and Decidability
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+49
+5.2
+Monitors . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+51
+ii
+
+
+=== PAGE 4 ===
+Contents
+iii
+5.3
+Classical Runtime Verification . . . . . . . . . . . . . . . . . . . . . . . . . .
+54
+5.4
+Bibliographic Notes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+57
+6
+Knowledge in Timed Systems
+58
+6.1
+Timed Words and Timed Automata
+. . . . . . . . . . . . . . . . . . . . . .
+58
+6.2
+Deterministic Timed Automata on Finite Words
+. . . . . . . . . . . . . . .
+61
+6.3
+Timed Temporal Logic . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+62
+6.4
+Timed Model Checking . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+64
+6.5
+Timed Diagnosability and Timed Opacity
+. . . . . . . . . . . . . . . . . . .
+70
+6.6
+Timed Monitorability . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+73
+6.7
+Bibliographic Notes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+78
+
+
+=== PAGE 5 ===
+1
+What Is Runtime Verification?
+1.1
+Context
+Runtime verification studies how to observe a running system and raise an alarm when
+something goes wrong, or confirm that a behavior conforms with a specification. It can be
+applied even when a system model is not available. In this sense, it complements model
+checking: instead of exploring the full state space of a given model in advance, runtime
+verification analyzes executions (also called traces) as they are generated.
+A monitor observes the execution step by step and produces a verdict based on the
+information available so far. If the observed behavior violates the specification, the monitor
+raises an alarm; if the behavior is guaranteed to satisfy the specification, it may confirm
+correctness.
+A central theme of runtime verification is uncertainty. The system may be only partially
+known, or even unknown, and the monitor typically observes only a subset of the system’s
+actions or propositions. Moreover, in reactive systems, executions are typically infinite,
+but at runtime only a finite prefix is available. As a result, verdicts may be inconclusive,
+reflecting the inherent limits of runtime observation.
+Runtime verification shares this focus on uncertainty with closely related techniques such as
+diagnosis and opacity checking. The goal of these notes is to present a unifying treatment
+of these topics. To that end, we use epistemic logic as a common language to express what
+an observer knows (and does not know) from its observations.
+In these notes, we actually use the term runtime verification in a broad sense, to refer to
+observation-based verification problems such as monitoring, diagnosis, and opacity, which
+all reason about what can be inferred from executions at runtime.
+1.2
+Model Checking, Diagnosis, Opacity, and Monitoring
+We consider reactive systems that produce infinite executions. Throughout these notes, we
+assume that a (possibly abstract) model S of the system is available. Depending on the
+amount of information encoded in this model, we distinguish three idealized cases.
+1
+
+
+=== PAGE 6 ===
+1.2. Model Checking, Diagnosis, Opacity, and Monitoring
+2
+• White-box systems, where the model accurately reflects the implementation.
+• Gray-box systems, where the model intentionally abstracts or hides information, for
+instance by introducing nondeterminism to represent unknown environment behavior,
+partial observability, or underspecification.
+• Black-box systems, where no reliable model is available and the system can only be
+observed through its executions.
+Model checking.
+When a sufficiently precise model of the system is available (white
+box, or controlled gray box), correctness questions can be addressed using model checking.
+Given a temporal specification φ, the model-checking problem asks whether
+S |= φ,
+that is, whether φ holds on all infinite executions of S.
+In gray-box models, however, nondeterminism often represents uncertainty rather than real
+implementation choices. In this case, universal quantification over all executions may be too
+strong or unfounded. A model may include executions that are possible in the abstraction
+but impossible in reality, or behaviors that will only be resolved at runtime. As a result, a
+purely offline verdict may be misleading.
+From offline verification to runtime observation.
+An alternative is to observe
+executions as they occur. At runtime, the system produces a concrete execution, but an
+observer typically sees only a projection. Based on the observed prefix, the observer reasons
+about the set of executions of S that are compatible with what has been seen so far.
+This naturally leads to epistemic reasoning. At any time, the observer may or may not know
+that a given property holds, depending on whether it holds on all executions consistent
+with the current observation.
+Diagnosis.
+In diagnosis, the goal is not to decide an arbitrary specification, but to detect
+the occurrence of a particular event, such as a fault. Let φ be a property representing such
+an event.
+A diagnoser should eventually know that the event occurred, whenever it did. The existence
+of a diagnoser is naturally expressed by the property
+Φdiagnosable(φ) = G
+ φ →FKaPφ
+
+,
+which can be read as
+“It is globally true (G) that if φ holds, then eventually agent a
+knows that φ held in the past.”
+
+
+=== PAGE 7 ===
+1.2. Model Checking, Diagnosis, Opacity, and Monitoring
+3
+Thus, the existence of a diagnoser is a model-checking question, while the diagnoser itself
+operates online on the observation stream.
+In diagnosis, fault propositions are typically unobservable to the observer. This does not
+mean that faults are absent from the system model. Rather, faults represent internal events
+or mode changes that may influence the future behavior of the system, even if they are not
+directly visible. Modeling faults explicitly allows us to define correctness of diagnosis and
+to reason about whether their occurrence can be inferred indirectly from observations.
+Example 1.1 (Diagnosable vs. non-diagnosable systems)
+Let AP = {p, r, e} be a set of propositions and Σ = 2AP. A letter σ ∈Σ specifies
+which propositions hold at a discrete time step. It is also referred to as an event.
+Think of e as “an error occurred”. An execution (or trace) is an infinite sequence in
+Σω (i.e., it is an infinite word over Σ), and the behavior of a system S is given by its
+language L(S) ⊆Σω.
+Given an event with letter σ ∈Σ, agent a observes only σ ∩APa, where APa = {p, r},
+i.e., the error proposition e is unobservable.
+Consider the four systems S1, S2, S3, and S4 with the following languages:
+L(S1) = {p}ω + {p}∗{p, e}{p}{r}ω
+L(S2) = {p}ω + {p}∗{p, e}{p}ω
+L(S3) = {p}ω + {p}∗{e}{p}ω
+L(S4) = {p}ω + {p}∗{p, e}{p}∗{r}ω
+where we use αβω as shorthand for the corresponding ω-language.
+For example, the infinite word {p}{p}{p, e}{p}{r}{r}{r} . . . is a possible trace of
+S1. Agent a observes the projection {p}{p}{p}{p}{r}{r}{r} . . .. Since observing r
+eventually allows a to infer that an error has occurred, S1 is diagnosable for the
+property φ = e.
+In contrast, S2 is not diagnosable: faulty and non-faulty executions are observationally
+indistinguishable, as a observes only sequences of {p} in both cases.
+The system S3 is again diagnosable. Although the error proposition e is unobservable
+and all observations after the error are {p}, the error occurs at a position where
+the observer sees ∅, whereas non-faulty executions produce {p} from the first step.
+Under the synchronous perfect-recall semantics, the observer remembers the number
+of steps, so these prefixes are distinguishable. Hence agent a can infer that an error
+has occurred, and S3 is diagnosable.
+The system S4 is also diagnosable. Indeed, on every faulty execution, the symbol
+
+
+=== PAGE 8 ===
+1.2. Model Checking, Diagnosis, Opacity, and Monitoring
+4
+{r} eventually occurs (and then persists forever), whereas on non-faulty executions
+only {p} is observed. Thus, once {r} is observed, agent a can conclude that an error
+has occurred. However, S4 illustrates that unbounded diagnosis does not imply a
+uniform delay bound: after an error, the system may produce {p} for an arbitrarily
+long finite time before switching to {r}ω. Therefore, for every D ∈N there exists a
+faulty execution in which agent a cannot yet infer the error within D further steps.
+We conclude that
+S1 |= Φdiagnosable(e)
+and
+S3 |= Φdiagnosable(e)
+and
+S4 |= Φdiagnosable(e),
+whereas
+S2̸ |= Φdiagnosable(e).
+Note that only S1 and S3 satisfy a bounded form of diagnosability: G(e →XDKaPe)
+for suitable fixed D, where XD means after D steps.
+Opacity.
+Opacity addresses the dual problem of diagnosis. Here, the secret is not a
+current-state fact, but the occurrence of an event at some point in the execution. The goal
+of opacity is to ensure that the observer can never infer that this event has occurred.
+Accordingly, we define opacity with respect to a past property. Given a secret event φ, an
+epistemic opacity requirement is
+Φopaque(φ) = G ¬KaPφ.
+Thus, opacity requires that at all times the observer does not know that the secret event
+has occurred in the past. Note that this does not prevent the observer from sometimes
+knowing that the secret event has not occurred.
+As before, this is a model-checking problem on the system S.
+Example 1.2 (Past opacity)
+Let AP = {p, s} and Σ = 2AP. Agent a observes only p, i.e., APa = {p}. The
+proposition s represents a secret internal event and is unobservable.
+Consider the system S with language
+L(S) = {p}ω + {p}∗{p, s}{p}ω.
+Let the secret event be φ = s. Then S is opaque with respect to agent a and φ, since
+for every observation prefix consisting only of {p}, there exists an indistinguishable
+
+
+=== PAGE 9 ===
+1.2. Model Checking, Diagnosis, Opacity, and Monitoring
+5
+execution in which s has not occurred. Hence,
+S |= Φopaque(φ).
+Monitoring.
+A monitor observes a finite prefix of an execution and produces a verdict
+based on the information available so far. In the presence of partial observability, such ver-
+dicts naturally correspond to what the observer can infer from the observations. Accordingly,
+we model monitoring using three-valued verdicts derived from epistemic reasoning.
+Let φ be a temporal property interpreted at the initial position of the execution, and let
+ˆφ = P(first ∧φ). Given an observation prefix, the monitor produces:
+• the verdict true if Ka ˆφ holds, i.e., the observer knows that φ holds at the initial
+position;
+• the verdict false if Ka¬ ˆφ holds, i.e., the observer knows that φ does not hold;
+• the verdict ? otherwise, reflecting remaining uncertainty.
+Monitoring thus tracks whether the observer has obtained sufficient knowledge to decide
+the truth of φ.
+Example 1.3 (A simple epistemic monitor)
+Let AP = {p, r, e} and Σ = 2AP. As before, think of e as “an error occurred”. We
+consider a single agent a that can observe all propositions, i.e., AP a = AP.
+Consider the system S with
+L(S) = {p}∗{r}{p}ω + {p}∗{e}{p}ω.
+That is, after some (possibly empty) prefix of {p}, exactly one of {r} or {e} occurs,
+and then only {p} forever.
+Let the property be φ = ¬Fe, expressing that no error ever occurs. As long as the
+observer sees only {p}, both executions in which an error will occur and executions in
+which no error occurs remain compatible with the observations. Hence, neither Ka ˆφ
+nor Ka¬ ˆφ holds, and the monitor outputs ?.
+Upon observing the first non-{p} letter, epistemic uncertainty is resolved. If the letter
+is {e}, then the property is violated, Ka¬ ˆφ holds, and the monitor outputs false. If
+the letter is {r}, then it is guaranteed that no error will ever occur, Ka ˆφ holds, and
+the monitor outputs true.
+
+
+=== PAGE 10 ===
+1.3. Take-Away
+6
+A unifying perspective.
+Model checking, runtime verification, diagnosis, and opacity
+can all be analyzed within a common epistemic temporal framework over the same system
+model. The key difference lies in when and how the result is used.
+Model checking provides an offline verdict about all executions. Diagnosis and opacity are
+typically formulated as epistemic temporal properties whose satisfaction can be decided
+offline. Monitoring, in contrast, produces verdicts online from finite observations, but relies
+on similar epistemic reasoning about what an observer can infer.
+In this sense, runtime verification does not replace offline analysis. Instead, offline analysis
+is used to construct monitors, diagnosers, or observers, which are then applied at runtime
+to the observed execution.
+1.3
+Take-Away
+• Runtime verification reasons about system correctness from observed executions, rather
+than from complete system models.
+• Partial observation and infinite executions introduce uncertainty, which can be cap-
+tured naturally using epistemic notions of knowledge.
+• Model checking, diagnosis, opacity, and monitoring can all be analyzed using epistemic
+temporal reasoning over the same abstract system model.
+• Diagnosis and opacity express availability or impossibility of knowledge, while mon-
+itoring general properties raises questions about when definitive verdicts can be
+reached.
+• Although monitors operate online, their existence and correctness are typically estab-
+lished by an offline analysis of the system model.
+1.4
+Bibliographic Notes
+Runtime verification has been extensively studied as a lightweight alternative to exhaustive
+model checking, in particular for linear-time temporal logics [BFFR18,LS09,BLS11]. For
+background on model checking and temporal logics, we refer to the standard textbook [BK08].
+Diagnosis and opacity originate from the discrete-event systems community, where they
+are traditionally formulated in terms of observation-based distinguishability of behaviors
+[SSL+95, LLH18].
+Opacity has also been studied on transition systems and from an
+information-flow perspective [BKMR08]. Epistemic logic provides a unifying formalism
+for reasoning about such distinguishability, by making explicit what an observer can infer
+from partial observations. The interaction between temporal and epistemic operators
+has been studied in the context of knowledge and time under perfect-recall semantics
+
+
+=== PAGE 11 ===
+1.4. Bibliographic Notes
+7
+(e.g., [FHMV95]). In these notes, we make use of this connection and adopt epistemic
+temporal logic as a common language to relate monitoring, diagnosis, and opacity in a
+runtime setting.
+
+
+=== PAGE 12 ===
+2
+Observation, Knowledge, and Uncer-
+tainty
+2.1
+Words, Languages, and Moore Machines
+We let N = {0, 1, 2, 3, . . .} and N≥1 = {1, 2, 3, . . .}.
+A possible behavior of a reactive system is naturally viewed as a sequence of observations
+over time. Such behaviors are represented as words, also called traces, which may be finite
+or infinite sequences over a given alphabet.
+Definition 2.1 (Words)
+Let Σ be a finite alphabet. A finite word over Σ is a sequence u = σ1 . . . σn with
+n ∈N and σi ∈Σ for i ∈{1, . . . , n}. We let |u| refer to the length n of u. If n = 0,
+then u is the empty word, denoted by ε. By Σ∗, we denote the set of all finite words
+over Σ. The set of nonempty finite words is denoted by Σ+ = Σ∗\ {ε}.
+An infinite word over Σ is a sequence w = σ1σ2σ3 . . . with σi ∈Σ for i ∈N≥1. The
+set of infinite words is denoted by Σω. Moreover, we let Σ∞= Σ∗∪Σω.
+Given w = σ1σ2σ3 . . . ∈Σω and k ∈N, we let w≤k refer to the finite prefix σ1 . . . σk ∈Σ∗
+of length k. Note that w≤0 = ε. For a finite word u = σ1 . . . σn ∈Σ∗and k ∈{0, . . . , n},
+the prefix of length k of u is defined accordingly, as u≤k = σ1 . . . σk.
+A language is a set of words. We mainly consider languages L ⊆Σ∗over finite words,
+and languages L ⊆Σω over infinite words.
+For L ⊆Σ∞, we let Pref +(L) refer to
+{w≤k | w ∈L, k ∈N≥1, and if w ∈Σ∗, then k ≤|w|}, i.e., the set of nonempty finite
+prefixes of words in L.
+Example 2.2 (A simple word)
+Let AP = {p, r}, i.e., Σ = {∅, {p}, {r}, {p, r}}. Then, {p}∅{p}∅{p}∅. . . ∈Σω is an
+infinite word. Moreover, {p}{p, r}∅∈Σ∗is a finite word of length 3.
+8
+
+
+=== PAGE 13 ===
+2.2. Propositions, Agents, and Partial Observability
+9
+While we will later define Büchi automata as a central automata model running over infinite
+words, we already introduce deterministic automata with output, also known as Moore
+machines. These will play a crucial role as runtime monitors and as building blocks in
+constructions over Büchi automata.
+Definition 2.3 (Moore machine)
+A Moore machine over an input alphabet Σ and an output alphabet Γ is a tuple
+A = (Q, ι, δ, λ)
+where
+• Q is a finite set of states,
+• ι ∈Q is the initial state,
+• δ: Q × Σ →Q is a transition function,
+• λ: Q →Γ is an output mapping.
+We extend δ inductively to δ∗: Q × Σ∗→Q by δ∗(q, ε) = q and δ∗(q, wσ) = δ(δ∗(q, w), σ)
+for all q ∈Q, w ∈Σ∗, and σ ∈Σ. As its semantics, the Moore machine A defines the
+following mapping:
+JAK:
+
+
+
+Σ∗→Γ
+u 7→λ(δ∗(ι, u))
+In other words, it scans the input word and outputs the symbol associated with the resulting
+state.
+Special case: deterministic finite automata.
+For Γ = {0, 1}, a Moore machine
+A = (Q, ι, δ, λ) can be viewed as a deterministic finite automaton over Σ by identifying the
+set of accepting states as
+F = { q ∈Q | λ(q) = 1 }.
+In this case, we will equivalently write A = (Q, ι, δ, F) and understand it as a recognizer
+for the language
+L(A) = { u ∈Σ∗| δ∗(ι, u) ∈F }.
+2.2
+Propositions, Agents, and Partial Observability
+In our setting, the behavior of a reactive system is modeled as an infinite word over an
+alphabet whose letters indicate which atomic propositions hold at each time step. A single
+position of such a word, together with its associated set of propositions, is called an event.
+
+
+=== PAGE 14 ===
+2.2. Propositions, Agents, and Partial Observability
+10
+In many systems, an observer cannot see all aspects of an event. Instead, each agent has
+access only to a subset of the atomic propositions. As a consequence, different system
+executions may be indistinguishable from the point of view of a given agent. This form
+of partial observability is formalized by projecting global executions onto the propositions
+visible to the agent and will later form the basis of our epistemic semantics.
+Throughout these notes, unless stated otherwise, we fix a finite set of atomic propositions
+AP and let Σ = 2AP be the corresponding global alphabet. We also fix a finite set Ag of
+agents. For each agent a ∈Ag, let APa ⊆AP denote the set of propositions observable by
+a, and let Σa = 2APa be the corresponding observation alphabet.
+Definition 2.4 (Observable propositions)
+The observation function for agent a is
+obsa :
+
+
+
+Σ →Σa
+σ 7→σ ∩APa
+It is extended pointwise to words in Σ∗and Σω. Note that obsa is then length-
+preserving and that obsa(ε) = ε.
+The observation function formalizes the local view of an agent at a single step. Given
+a global event, the agent retains only the information carried by the propositions it can
+observe and ignores the rest. Extending observations from single events to words allows us
+to compare entire executions from the agent’s perspective.
+Example 2.5 (Observation of words)
+Let AP = {p, r, e} and let agent a observe only APa = {p, r}.
+Consider the finite word
+u = {p}{p, e}{r} ∈Σ∗.
+Then
+obsa(u) = {p}{p}{r}.
+If an event contains only unobservable propositions, the observation is empty. For
+example, for
+u′ = {p}{e}{r} ∈Σ∗,
+we have
+obsa(u′) = {p}∅{r}.
+Using observations, we can now formalize when an agent is unable to distinguish between
+
+
+=== PAGE 15 ===
+2.2. Propositions, Agents, and Partial Observability
+11
+two executions. Intuitively, two executions are indistinguishable for an agent if they give
+rise to exactly the same sequence of observations.
+Definition 2.6 (Indistinguishability for finite words)
+Two finite words u, u′ ∈Σ∗are indistinguishable to agent a, written u ∼a u′, if they
+have the same observation for agent a:
+u ∼a u′
+if
+obsa(u) = obsa(u′)
+In particular, indistinguishable words are of the same length.
+Note that indistinguishability is an equivalence relation on finite words.
+Example 2.7 (Indistinguishable finite words)
+Let AP = {p, r, e} and let agent a observe APa = {p, r}, as in Example 1.1. Consider
+the finite words
+u = {p}{p, e}{p}
+and
+u′ = {p}{p}{p}.
+Since the proposition e is unobservable for agent a, we have
+obsa(u) = obsa(u′) = {p}{p}{p}.
+Hence, u ∼a u′.
+When reasoning about properties at a specific time point, it is not sufficient to compare
+complete executions. We therefore lift indistinguishability to pairs consisting of an execution
+and a position.
+Two such pairs are indistinguishable if the agent has seen the same
+observations up to that position.
+Definition 2.8 (Indistinguishability for pointed infinite words)
+A pointed word is a pair (w, k) where w ∈Σω and k is a position in w, i.e., k ∈N≥1.
+Two pointed words (w, k) and (w′, k) are indistinguishable to agent a (perfect recall),
+written (w, k) ∼a (w′, k), if their prefixes up to position k are indistinguishable:
+(w, k) ∼a (w′, k)
+if
+w≤k ∼a w′
+≤k
+
+
+=== PAGE 16 ===
+2.3. A Base System Model
+12
+Note (Synchronous vs. asynchronous observation)
+In these notes, we consider a synchronous observation semantics: system progress is
+observable by all agents. Formally, at each step, every agent receives an observation,
+possibly empty. Equivalently, one may assume a distinguished atomic proposition
+tick that holds at every step and is observable by all agents. Thus, while a transition
+may be uninformative, it is never (epistemically) silent.
+Under this assumption, indistinguishability is naturally defined between prefixes of
+equal length, as in Definition 2.6.
+An alternative asynchronous observation semantics can be obtained by letting agents
+observe only steps carrying nonempty observations. Formally, one replaces
+obsa : Σ∗→Σ∗
+a
+by the projection that erases events σ with
+obsa(σ) = ∅
+and accordingly extend this to indistinguishability by
+(w, k) ∼a (w′, k′)
+⇐⇒
+obsa(w≤k) = obsa(w′
+≤k′) .
+In this case, agents may be uncertain about the number of system steps or the elapsed
+time.
+All epistemic definitions and constructions presented in these notes extend to this
+asynchronous variant by replacing the observation function accordingly. For simplicity,
+we focus on the synchronous case.
+2.3
+A Base System Model
+Systems are characterized by their set of infinite traces, i.e., the infinite words they
+possibly generate. These can, for example, be described in terms of ω-regular expressions
+(cf. Chapter 1) or in terms of automata. For an algorithmic treatment and also from a
+modeling point of view, it is convenient to use Büchi automata. They provide a robust
+finite representation of infinite-state behavior at the level of traces. Moreover, they are
+particularly well suited to the constructions developed in the following sections.
+
+
+=== PAGE 17 ===
+2.3. A Base System Model
+13
+Definition 2.9 (Büchi automaton)
+A Büchi automaton over Σ is a tuple
+A = (Q, ι, ∆, F)
+where
+• Q is a finite set of states and ι ∈Q is an initial state,
+• ∆⊆Q × Σ × Q is a transition relation,
+• F ⊆Q is a set of accepting states.
+Let q, q′ ∈Q be states. For σ ∈Σ, we write q
+σ−→q′ if (q, σ, q′) ∈∆. A run of A is an
+infinite sequence of the form q0
+σ1
+−→q1
+σ2
+−→q2
+σ3
+−→. . . such that q0 = ι.
+A run from q (or q run) is defined analogously, except that q0 = q. However, unless stated
+otherwise, the term run always refers to a run starting in the initial state.
+We let π(i) refer to qi for all i ∈N. Run π is called accepting if qi ∈F for infinitely many
+i ∈N. The induced trace is σ1σ2σ3 . . . ∈Σω, denoted by trace(π). We also say that π is a
+run over w.
+The language of A is defined as
+L(A) =
+
+trace(π) | π is an accepting run of A
+	
+.
+It is convenient to also introduce finite runs. A finite run of A is a finite sequence of the
+form π = q0
+σ1
+−→q1
+σ2
+−→. . . σn
+−→qn, where n ∈N, such that q0 = ι. We also set π(i) = qi for
+all i ∈{0, . . . , n}. Moreover, we let trace(π) = σ1 . . . σn, and we say that π is a run over
+trace(π). We do not define acceptance for finite runs.
+For an automaton A, we write |A| for the number |Q| of its states, which we take as a
+measure of its size.
+Note
+For technical convenience in some constructions, we also use generalized Büchi au-
+tomata (GBAs), where the acceptance condition is given by a set of accepting sets
+F = {F1, . . . , Fm} with Fi ⊆Q. A run is accepting if, for each i ∈{1, . . . , m}, it
+visits some state from Fi infinitely often. Every GBA can be converted to a standard
+Büchi automaton with at most m · |Q| states (cf. [BK08]).
+
+
+=== PAGE 18 ===
+2.3. A Base System Model
+14
+We define
+Obsa(A) =
+
+obsa(u) | u ∈Pref +(L(A))
+	
+for the set of all (nonempty) observation sequences of agent a that are compatible with
+some finite execution of A.
+Note
+System states are not observed directly. Instead, the observer sees only the projected
+execution trace over the observation alphabet Σa. Classical runtime monitoring
+corresponds to a maximally permissive special case, where the system model consists
+of a single (accepting) state with a self-loop for every event σ ∈Σ.
+Example 2.10 (Four trace languages under partial observation)
+Let us revisit Example 1.1 and provide Büchi automata for the languages considered
+there. Recall that AP = {p, r, e} and Σ = 2AP. A letter σ ∈Σ specifies which
+propositions hold at a discrete time step. Fix an agent a with APa = {p, r}, so the
+proposition e is unobservable.
+We consider four systems S1, S2, S3, S4 given by the following languages:
+L(S1) = {p}ω + {p}∗{p, e}{p}{r}ω
+L(S2) = {p}ω + {p}∗{p, e}{p}ω
+L(S3) = {p}ω + {p}∗{e}{p}ω
+L(S4) = {p}ω + {p}∗{p, e}{p}∗{r}ω
+Each language is generated by the following (small) Büchi automaton (the initial
+state has an incoming arrow and final states are depicted as a double circle):
+q0
+q1
+q2
+{p}
+{p, e}
+{p}
+{r}
+(a) Automaton for S1
+q0
+q1
+{p}
+{p, e}
+{p}
+(b) Automaton for S2
+
+
+=== PAGE 19 ===
+2.4. Epistemic Linear-Time Temporal Logic
+15
+q0
+q1
+{p}
+{e}
+{p}
+(c) Automaton for S3
+q0
+q1
+q2
+{p}
+{p, e}
+{p}
+{r}
+{r}
+(d) Automaton for S4
+2.4
+Epistemic Linear-Time Temporal Logic
+We now formalize the epistemic temporal logic outlined in the introduction. The logic
+allows us to specify temporal properties of systems under partial observability, and to
+reason explicitly about what agents know based on their observations. In particular, it
+provides a logical framework for formalizing diagnosability or opacity properties.
+Definition 2.11 (Epistemic LTL)
+Formulas from Epistemic Linear-time Temporal Logic, denoted by LTL∼, are given
+by the following grammar:
+φ
+::=
+p | ¬φ | φ ∧φ | φU+φ | φS+φ | Kaφ
+where p ∈AP is a proposition and a ∈Ag is an agent.
+The fragment without epistemic operators is denoted by LTL. It still contains both
+future and past modalities.
+Formulas are interpreted over pointed words. Recall that a pointed word consists of an
+execution together with a distinguished reference position (cf. Definition 2.8). This position
+separates the finite prefix that has already been observed from the infinite future that is yet
+to unfold. Both temporal and epistemic operators are evaluated relative to this reference
+position.
+
+
+=== PAGE 20 ===
+2.4. Epistemic Linear-Time Temporal Logic
+16
+Definition 2.12 (Satisfaction)
+Let S be a Büchi automaton over Σ (representing a system). Let w = σ1σ2σ3 . . . ∈
+L(S) and k ∈N≥1. Satisfaction S, w, k |= φ for a formula φ is inductively defined as
+follows:
+• S, w, k |= p if p ∈σk
+• S, w, k |= ¬φ if S, w, k̸ |= φ
+• S, w, k |= φ ∧ψ if S, w, k |= φ and S, w, k |= ψ
+• S, w, k |= φU+ψ if there exists j with k < j such that
+– S, w, j |= ψ and
+– for all i with k < i < j, we have S, w, i |= φ
+• S, w, k |= φS+ψ if there exists j with 1 ≤j < k such that
+– S, w, j |= ψ and
+– for all i with j < i < k, we have S, w, i |= φ
+• S, w, k |= Kaφ if for all w′ ∈L(S) with (w, k) ∼a (w′, k), we have S, w′, k |= φ
+Moreover, we write S |= φ if, for every w ∈L(S), we have S, w, 1 |= φ.
+Note (Strict temporal operators)
+We take the strict temporal operators U+ and S+ as primitives. Thus, φU+ψ requires
+ψ to hold at a strictly future position, and φS+ψ at a strictly past one. The left-hand
+side φ is required to hold only at positions strictly between the current position and
+the witnessing position. Its truth at the current position is irrelevant. This avoids
+separate next and previous operators as primitives, since they can be defined using
+strict until and since. It also anticipates the timed setting. In timed logics, strictness
+is useful to constrain the elapsed time to the closest future or past occurrence of
+a subformula. Using strict operators already in the untimed logic yields a uniform
+semantics and simplifies the timed extension.
+
+
+=== PAGE 21 ===
+2.4. Epistemic Linear-Time Temporal Logic
+17
+Derived temporal operators.
+Using the strict operators U+ and S+, we introduce the
+following abbreviations, which include the standard non-strict operators:
+⊤
+:=
+p ∨¬p
+⊥
+:=
+¬⊤
+φ ∨ψ
+:=
+¬(¬φ ∧¬ψ)
+φ →ψ
+:=
+¬φ ∨ψ
+Xφ
+:=
+⊥U+φ
+Yφ
+:=
+⊥S+φ
+φUψ
+:=
+ψ ∨(φ ∧(φU+ψ))
+φSψ
+:=
+ψ ∨(φ ∧(φS+ψ))
+Fφ
+:=
+⊤Uφ
+Pφ
+:=
+⊤Sφ
+Gφ
+:=
+¬F¬φ
+Hφ
+:=
+¬P¬φ
+first
+:=
+¬Y⊤
+Waφ
+:=
+Kaφ ∨Ka¬φ
+Here, a is an agent and p ∈AP any arbitrary proposition. In particular, the formula Waφ
+denotes that a knows whether φ holds.
+In particular, Xφ requires that φ holds at the immediately next position, while Yφ requires
+that an immediately preceding position exists and that φ holds at that position.
+Bounded temporal operators.
+For runtime verification and diagnosability, we also
+introduce bounded eventually and past operators. For D ∈N:
+F≤Dφ := φ ∨Xφ ∨X2φ ∨· · · ∨XDφ
+(eventually within D steps)
+P≤Dφ := φ ∨Yφ ∨Y2φ ∨· · · ∨YDφ
+(sometime in last D steps)
+where X0φ = φ and Xi+1φ = X(Xiφ), and similarly for Yi.
+Semantically, S, w, k |= F≤Dφ holds iff there exists j with k ≤j ≤k + D such that
+S, w, j |= φ.
+Bounded always operators G≤Dφ := ¬F≤D¬φ and H≤Dφ := ¬P≤D¬φ can be defined
+analogously.
+Definition 2.13 (Logical equivalence)
+LTL∼formulas φ and ψ are logically equivalent, written
+φ ≡ψ,
+if for every Büchi automaton S, every word w = σ1σ2σ3 . . . ∈L(S), and every position
+k ∈N≥1,
+S, w, k |= φ
+⇐⇒
+S, w, k |= ψ.
+
+
+=== PAGE 22 ===
+2.4. Epistemic Linear-Time Temporal Logic
+18
+Note
+Throughout these notes, we fix a system S and restrict attention to executions of S.
+In particular, whenever satisfaction S, w, k |= φ is evaluated, we assume w ∈L(S).
+Thus, L(S) plays the role of the universe of possible executions. We will restate this
+convention explicitly whenever it is relevant.
+Exercise 2.14 (Basic axioms)
+Let S be a system, let a ∈Ag, and let φ be a formula.
+(1) Show that
+S |= φ
+⇐⇒
+S |= Kaφ.
+(2) Show that, for all w ∈L(S) and all k ∈N≥1, we have
+(a)
+S, w, k |= Kaφ
+=⇒
+S, w, k |= φ
+(Veridicality)
+(b)
+S, w, k |= Kaφ
+=⇒
+S, w, k |= KaKaφ
+(Positive introspection)
+(c)
+S, w, k |= ¬Kaφ
+=⇒
+S, w, k |= Ka¬Kaφ
+(Negative introspection)
+(d)
+S, w, k |= Kaφ
+=⇒
+S, w, k |= GKaPφ
+(Non-forgetting)
+(3) Show that the converse of the implication in (2a) does not hold in general.
+Solution. We provide here the solution to (2d):
+Let w ∈L(S) and k ∈N≥1, and assume
+S, w, k |= Kaφ.
+We show
+S, w, k |= GKaPφ.
+By the semantics of G, it is enough to prove that for every ℓ≥k,
+S, w, ℓ|= KaPφ.
+So fix ℓ≥k, and let w′ ∈L(S) with
+(w, ℓ) ∼a (w′, ℓ).
+By definition of indistinguishability, this means
+obsa(w≤ℓ) = obsa(w′
+≤ℓ).
+
+
+=== PAGE 23 ===
+2.4. Epistemic Linear-Time Temporal Logic
+19
+Taking prefixes of length k (since k ≤ℓ), we obtain
+obsa(w≤k) = obsa(w′
+≤k),
+hence (w, k) ∼a (w′, k). From S, w, k |= Kaφ, it follows that
+S, w′, k |= φ.
+Because k ≤ℓ, this implies
+S, w′, ℓ|= Pφ.
+Since w′ was arbitrary among words indistinguishable from w at time ℓ, we get
+S, w, ℓ|= KaPφ.
+As ℓ≥k was arbitrary, we conclude
+S, w, k |= GKaPφ.
+This completes the proof.
+□
+Example 2.15 (Diagnosability properties)
+We consider diagnosability properties for the systems S1, S2, S3, S4 from Example 2.10,
+where e is unobservable to agent a.
+Immediate diagnosability.
+G(e →Kae) requires that errors are immediately
+detected. This fails for all four systems, as the letter {p, e} is observed as {p}.
+Eventual diagnosability.
+G(e →FKaPe) requires that errors are eventually de-
+tected. Systems S1, S3, and S4 satisfy this property: in S1, the observation {r}
+occurs only on faulty executions; in S3, the error occurs when the observer sees
+∅, distinguishing it from non-faulty executions; in S4, faulty executions eventually
+produce {r}ω while non-faulty ones remain in {p}ω. System S2 fails this property, as
+faulty and non-faulty executions remain indistinguishable.
+Bounded diagnosability.
+For fixed D ∈N, the formula G(e →XDKaPe) requires
+detection within D steps. Systems S1 and S3 satisfy this for suitable D. System S4
+shows that eventual diagnosability does not imply bounded diagnosability: after an
+error, the system may produce {p} for arbitrarily many steps before switching to
+{r}ω.
+
+
+=== PAGE 24 ===
+2.4. Epistemic Linear-Time Temporal Logic
+20
+Example 2.16 (Nested knowledge with two agents)
+We present a system where agent a knows that agent b knows a fact, although agent a
+does not know the fact itself.
+Let AP = {h, r, s} and Ag = {a, b} with APa = {r} and APb = {s}. Thus h is
+unobservable to both agents.
+The system S nondeterministically chooses h ∈{0, 1}, emits r, then emits s iff h = 1,
+and remains silent thereafter. Formally, S is the Büchi automaton below:
+q0
+q0
+1
+q1
+1
+q0
+2
+q1
+2
+q3
+∅
+{h}
+{r}
+{h, r}
+∅
+{h, s}
+∅
+The language L(S) contains two words, namely ∅{r}∅∅. . . (when h = 0) and
+{h}{h, r}{h, s}∅∅. . . (when h = 1).
+Agent a observes only {r} at position 2 in
+both cases, while agent b observes {s} at position 3 iff h = 1.
+Recall that
+Wbh := Kbh ∨Kb¬h.
+Consider
+φ = XX
+ KaWbh ∧¬Wah
+
+.
+At position 3, agent b’s observation determines h, so Wbh holds. Agent a has seen
+only {r} (identical in both runs), so ¬Wah holds. However, agent a knows the system
+structure and knows that agent b’s observation suffices to determine h, hence KaWbh
+holds. Thus S |= φ.
+So far, formulas have been interpreted at a concrete execution and a reference position.
+From the perspective of an agent, however, the actual execution is not directly accessible.
+Instead, the agent only has access to the finite observation it has made so far.
+We therefore provide a satisfaction relation that is defined relative to an observation rather
+than to a single execution. Intuitively, a formula holds under an observation if it holds for
+all executions of the system that are compatible with that observation.
+
+
+=== PAGE 25 ===
+2.5. The Model-Checking Problem
+21
+Definition 2.17 (Satisfaction under observation)
+Let S be a system, a ∈Ag, and φ a formula. Let u = σ1 . . . σk ∈Obsa(S). We write
+S, u |=a φ
+if, for all w ∈L(S) such that obsa(w≤k) = u, we have S, w, k |= φ.
+Proposition 2.18
+Let S be a system, a ∈Ag, and φ be an LTL∼formula. Let w ∈L(S) and k ≥1,
+and set u = obsa(w≤k). Then,
+S, u |=a φ
+⇐⇒
+S, w, k |= Kaφ .
+Proof. Let u = obsa(w≤k).
+(=⇒) Assume S, u |=a φ. Let w′ ∈L(S) be such that (w, k) ∼a (w′, k). By definition of
+indistinguishability (perfect recall),
+(w, k) ∼a (w′, k)
+⇐⇒
+obsa(w′
+≤k) = obsa(w≤k) = u.
+Hence obsa(w′
+≤k) = u, and by the definition of |=a, we obtain S, w′, k |= φ. Since this holds
+for all such w′, we conclude S, w, k |= Kaφ.
+(⇐) Assume S, w, k |= Kaφ. Let w′ ∈L(S) with obsa(w′
+≤k) = u. Then (w, k) ∼a (w′, k),
+again by the definition of indistinguishability. By the semantics of knowledge, this implies
+S, w′, k |= φ. Since this holds for every w′ with obsa(w′
+≤k) = u, we conclude S, u |=a φ. □
+2.5
+The Model-Checking Problem
+We now turn to the algorithmic problem of deciding whether a system satisfies a given
+epistemic temporal specification. It serves as a basis for the construction of monitors and
+verification procedures.
+Definition 2.19 (Model-checking problem)
+Given a Büchi automaton S = (Q, ι, ∆, F) and an LTL∼formula φ, the model-checking
+problem asks whether
+S |= φ,
+that is, whether for every w ∈L(S), we have S, w, 1 |= φ.
+
+
+=== PAGE 26 ===
+2.5. The Model-Checking Problem
+22
+Model-checking problems are usually solved by translating the negation of φ into another
+Büchi automaton and checking the product for emptiness. Due to the knowledge operator,
+unlike the classical construction, this Büchi automaton AS
+¬φ also depends on the given
+system S.
+To make this explicit, we introduce a transducer that combines the behavior of the system
+with the evaluation of the formula along its executions. That is, it maps each position along
+an execution to the truth value of the formula at that position.
+Definition 2.20 (System-formula transducer)
+Let S be a Büchi automaton over Σ (representing a system) and φ be an LTL∼
+formula. An (S, φ)-transducer consists of
+• a Büchi automaton AS
+φ = (Qφ, ιφ, ∆φ, Fφ) over Σ, and
+• a mapping γφ : Qφ →{0, 1}
+such that L(AS
+φ) = L(S) and, for all w ∈L(S), all accepting runs π = q0
+σ1
+−→q1
+σ2
+−→
+q2
+σ3
+−→. . . such that trace(π) = w, and all k ∈N≥1, we have
+γφ(qk) = 1
+⇐⇒
+S, w, k |= φ.
+Intuitively, γφ marks the positions that satisfy φ.
+Theorem 2.21 (Transducer construction)
+For a Büchi automaton S and an LTL∼formula φ, we can effectively construct an
+(S, φ)-transducer.
+In the construction, we will actually make use of a monitor:
+Definition 2.22 (Knowledge monitor)
+Let S be a Büchi automaton over Σ, an agent a ∈Ag, and φ be an LTL∼formula.
+An (S, φ)-knowledge monitor for a is a DFA KS,a
+φ
+over Σa such that, for all finite
+words u ∈Obsa(S) ⊆Σ+
+a ,
+u ∈L(KS,a
+φ )
+⇐⇒
+S, u |=a φ.
+
+
+=== PAGE 27 ===
+2.5. The Model-Checking Problem
+23
+Theorem 2.23 (Monitor construction)
+Given a Büchi automaton over Σ, an agent a ∈Ag, and an LTL∼formula φ, we can
+effectively construct an (S, φ)-knowledge monitor for a.
+The rest of the section is devoted to the simultaneous proof of Theorems 2.21 and 2.23.
+We construct AS
+φ and γφ by structural induction on φ. We assume that L(S)̸ = ∅because,
+otherwise, the construction is trivial.
+Base case: φ = p where p ∈AP
+We have S, w, k |= p iff p ∈σk.
+Assume S = (QS, ιS, ∆S, FS).
+We construct the Büchi automaton:
+AS
+p = (Q, ι, ∆, F)
+where:
+• Q = QS × {0, 1}
+• ι = (ιS, 0) (second component arbitrary)
+• ∆=
+
+((q, θ), σ, (q′, θ′)) | (q, σ, q′) ∈∆S and θ′ = 1 ⇐⇒p ∈σ
+	
+• F = FS × {0, 1}
+The output function is given by γp((q, θ)) = θ.
+The automaton tracks S in the first component and stores in the second component whether
+p holds.
+Negation: φ = ¬ψ
+Assume we have constructed:
+AS
+ψ = (Qψ, ιψ, ∆ψ, Fψ)
+with output function γψ : Qψ →{0, 1}. We have S, w, k |= ¬ψ iff S, w, k̸ |= ψ.
+We construct:
+AS
+¬ψ = (Qψ, ιψ, ∆ψ, Fψ)
+with output function γ¬ψ(q) = 1 −γψ(q).
+
+
+=== PAGE 28 ===
+2.5. The Model-Checking Problem
+24
+The automaton is identical to AS
+ψ; only the output function is flipped.
+Conjunction: φ = ψ1 ∧ψ2
+Assume we have constructed:
+AS
+ψ1 = (Q1, ι1, ∆1, F1) with γψ1 : Q1 →{0, 1}
+AS
+ψ2 = (Q2, ι2, ∆2, F2) with γψ2 : Q2 →{0, 1}
+We have S, w, k |= ψ1 ∧ψ2 iff S, w, k |= ψ1 and S, w, k |= ψ2.
+We first construct the generalized Büchi automaton
+A = (Q, ι, ∆, F)
+where:
+• Q = Q1 × Q2
+• ι = (ι1, ι2)
+• ∆=
+
+((q1, q2), σ, (q′
+1, q′
+2)) | (q1, σ, q′
+1) ∈∆1 and (q2, σ, q′
+2) ∈∆2
+	
+• F = {F1 × Q2, Q1 × F2}
+The output function is given by γ((q1, q2)) = γψ1(q1) ∧γψ2(q2).
+We then convert this GBA to a standard Büchi automaton to obtain AS
+ψ1∧ψ2, extending
+the output function accordingly during the conversion to obtain γψ1∧ψ2.
+Strict since: φ = ψ1S+ψ2
+Assume we have constructed
+AS
+ψi = (Qi, ιi, ∆i, Fi)
+with output maps γψi : Qi →{0, 1} for i ∈{1, 2}.
+We construct a generalized Büchi automaton
+A = (Q, ι, ∆, F)
+where:
+• Q = Q1 × Q2 × {init, 0, 1}
+• ι = (ι1, ι2, init)
+
+
+=== PAGE 29 ===
+2.5. The Model-Checking Problem
+25
+• ∆contains ((q1, q2, θ), σ, (q′
+1, q′
+2, θ′)) if (q1, σ, q′
+1) ∈∆1, (q2, σ, q′
+2) ∈∆2, and
+θ′ =
+
+
+
+
+
+
+
+
+
+
+
+0
+if θ = init
+1
+if θ ∈{0, 1} and
+ γψ2(q2) = 1 or (γψ1(q1) = 1 and θ = 1)
+
+0
+otherwise
+Intuition.
+After reading σk, the component states q1 and q2 correspond to position k (as
+in the base-case construction), and θ ∈{0, 1} stores the truth value of ψ1S+ψ2 at position k.
+At the very first step, strict since is always false (no previous position), so we force θ′ = 0
+when θ = init.
+For subsequent steps, the update implements the following recurrence:
+S, w, k+1 |= ψ1S+ψ2
+⇐⇒
+ S, w, k |= ψ2
+
+or
+ S, w, k |= ψ1 and S, w, k |= ψ1S+ψ2
+
+Acceptance condition.
+The acceptance condition only has to ensure that the components
+for ψ1 and ψ2 are accepting on their own:
+F =
+
+F1 × Q2 × {0, 1}, Q1 × F2 × {0, 1}
+	
+Output map.
+Accordingly, we define the output map by:
+γ((q1, q2, θ)) =
+
+
+
+0
+if θ = init
+θ
+if θ ∈{0, 1}
+Finally, we transform the GBA A into an ordinary Büchi automaton to obtain AS
+ψ1S+ψ2,
+and we accordingly adjust γ to obtain γψ1S+ψ2 as required.
+Strict until: φ = ψ1U+ψ2
+Assume we have constructed
+AS
+ψi = (Qi, ιi, ∆i, Fi)
+with output maps γψi : Qi →{0, 1} for i ∈{1, 2}.
+Similarly to strict since, we construct a generalized Büchi automaton
+A = (Q, ι, ∆, F)
+where:
+• Q = Q1 × Q2 × {init, 0, 1}
+
+
+=== PAGE 30 ===
+2.5. The Model-Checking Problem
+26
+• ι = (ι1, ι2, init)
+• ∆contains ((q1, q2, θ), σ, (q′
+1, q′
+2, θ′)) if (q1, σ, q′
+1) ∈∆1, (q2, σ, q′
+2) ∈∆2, and the
+following hold:
+– θ′ ∈{0, 1}
+– θ ∈{0, 1}
+=⇒
+ θ = 1
+⇐⇒
+γψ2(q′
+2) = 1 or (γψ1(q′
+1) = 1 and θ′ = 1)
+
+Intuition.
+The transition constraints implement the one-step unfolding of strict until.
+A positive guess θ = 1 claims that ψ2 will occur at some strictly future position and that
+ψ1 holds until then (starting from the next position). As long as ψ2 does not hold, the
+automaton must therefore preserve θ = 1 and require ψ1 to hold at the next position. A
+negative guess θ = 0 claims that no such future position exists. Such a guess may persist
+as long as ψ2 does not occur, but it is refuted as soon as ψ2 holds at the next position.
+Formally, the transition constraints enforce the following semantic recurrence:
+S, w, k |= ψ1U+ψ2 ⇐⇒
+ S, w, k+1 |= ψ2
+
+or
+ S, w, k+1 |= ψ1 and S, w, k+1 |= ψ1U+ψ2
+
+Acceptance condition.
+The acceptance condition has to ensure that positive guesses
+cannot remain unresolved forever. In particular, an accepting run cannot stay in states
+with θ = 1 infinitely often without eventually visiting a position where ψ2 holds. Therefore,
+every accepting run resolves each positive guess by a strictly future ψ2-position. This is
+achieved using
+F =
+
+F1 × Q2 × {0, 1}, Q1 × F2 × {0, 1}, {(q1, q2, θ) | θ = 0 or γψ2(q2) = 1}
+	
+.
+Output map.
+Accordingly, we define the output map by:
+γ((q1, q2, θ)) =
+
+
+
+0
+if θ = init
+θ
+if θ ∈{0, 1}
+Finally, we obtain the required AS
+ψ1U+ψ2 and the adjusted γψ1U+ψ2 transforming A into a
+Büchi automaton.
+Knowledge monitor:
+A knowledge monitor does not observe the actual events of the system, but only the partial
+observations available to a given agent. As a consequence, after each observation, the
+monitor cannot determine a single current system state. Instead, it maintains a belief set
+consisting of all system states that are consistent with the observations seen so far. As the
+observation sequence grows, this belief set is updated accordingly. The monitor evaluates a
+
+
+=== PAGE 31 ===
+2.5. The Model-Checking Problem
+27
+B
+δ(B, σ)
+q
+q′
+σ
+τ
+∼a
+Figure 2.1: Belief update and representative state transition.
+property by checking whether it holds in all states of the current belief set. In this way,
+the monitor can determine when a property is known to hold and when it cannot yet be
+concluded from the available observations.
+Assume we have constructed
+AS
+φ = (Qφ, ιφ, ∆φ, Fφ)
+with output function γφ : Qφ →{0, 1}.
+Without loss of generality, we assume that AS
+φ is productive, that is, for every state q
+reachable from ιφ, there is an accepting q-run. Otherwise, AS
+φ can be replaced by an
+equivalent productive automaton obtained by removing all states from which there is no
+accepting run.
+Given a ∈Ag, we construct a (S, φ)-knowledge monitor for a, a DFA KS,a
+φ
+over Σa, as
+KS,a
+φ
+= (Q, ι, δ, F)
+where:
+• Q = 2Qφ (belief states)
+• ι = {ιφ}
+• δ is defined by
+δ(B, σ) =
+
+q′ ∈Qφ
+ ∃q ∈B : ∃τ ∈Σ: (q, τ, q′) ∈∆φ and σ = obsa(τ)
+	
+(illustrated in Figure 2.1)
+• F = {B ∈2Qφ | ∀q ∈B : γφ(q) = 1}
+Correctness of monitor.
+We have to show that, for all u ∈Obsa(S),
+δ∗(ι, u) ∈F
+⇐⇒
+S, u |=a φ.
+(2.1)
+
+
+=== PAGE 32 ===
+2.5. The Model-Checking Problem
+28
+Key invariant (belief semantics).
+For every u ∈Σ∗
+a,
+δ∗(ι, u) =
+n
+q ∈Qφ
+ ∃v ∈Σ∗: u ∼a v and
+∃π a finite run of AS
+φ over v with π(|v|) = q
+o
+.
+(2.2)
+Proof of (2.2).
+We proceed by induction on k = |u|.
+Base u = ε. (⊆) We have δ∗(ι, u) = {ιφ}. Taking v = ε yields u ∼a v. Moreover, the trivial
+run π = ιφ is a finite run over v with π(0) = ιφ.
+(⊇) Conversely, let q belong to the right-hand side of (2.2). The unique v such that u ∼a v
+is v = ε. Over ε, the only finite run is the trivial run π = ιφ, hence q = π(0) = ιφ.
+Step u →uσ. Let u ∈Σ∗
+a and σ ∈Σa. Let k = |u|.
+(⊆) Let q′ ∈δ∗(ι, uσ). By definition of the belief update, there exist q ∈δ∗(ι, u) and a
+letter τ ∈Σ such that
+σ = obsa(τ)
+and
+(q, τ, q′) ∈∆φ.
+By the induction hypothesis for u, there exist v ∈Σ∗with u ∼a v and a finite run ˆπ over v
+such that ˆπ(k) = q. Let π be obtained from ˆπ by appending the transition q τ−→q′. Then, π
+is a finite run over vτ and satisfies π(k + 1) = q′. Moreover, from u ∼a v and σ = obsa(τ),
+we get uσ ∼a vτ. Hence q′ belongs to the right-hand side.
+(⊇) Conversely, assume q′ ∈Qφ belongs to the right-hand side for uσ. Then, there exist
+v = τ1 . . . τk ∈Σ∗and τ ∈Σ with uσ ∼a vτ and a finite run π over vτ such that π(k+1) = q′.
+From uσ ∼a vτ, it follows that u ∼a v, and the prefix of π up to position k is a finite run
+over v reaching π(k). By the induction hypothesis, this implies π(k) ∈δ∗(ι, u). Moreover,
+π(k) τ−→q′ is a transition of ∆φ and σ = obsa(τ). Hence, by the definition of the belief
+update, we obtain q′ ∈δ∗(ι, uσ).
+This establishes (2.2) for all u ∈Σ∗
+a.
+□
+Let u ∈Obsa(S) and let k = |u|. We show (2.1).
+Let Bu = δ∗(ι, u).
+(⇒) Assume Bu ∈F. By definition of F, this means
+∀q ∈Bu : γφ(q) = 1.
+Let w ∈L(S) with obsa(w≤k) = u. Fix any accepting run π of AS
+φ over w and set q = π(k).
+Then, the prefix of π up to time k is a finite run over w≤k reaching q. Since obsa(w≤k) = u,
+by invariant (2.2) we have q ∈Bu, hence γφ(q) = 1. By correctness of the inductive
+construction for φ, this implies S, w, k |= φ. Since w was arbitrary among executions
+compatible with u, we conclude S, u |=a φ.
+
+
+=== PAGE 33 ===
+2.5. The Model-Checking Problem
+29
+(⇐) Assume S, u |=a φ. We show that Bu ∈F, i.e.,
+∀q ∈Bu : γφ(q) = 1.
+So fix an arbitrary q ∈Bu.
+By the invariant (2.2), there exist a word v ∈Σ∗with
+obsa(v) = u and a finite run π of AS
+φ over v such that π(k) = q. Since AS
+φ is productive,
+the finite run π can be extended to an accepting infinite run π′ of AS
+φ. Let w = trace(π′).
+Then w ∈L(AS
+φ) = L(S) and w≤k = v, hence obsa(w≤k) = u.
+From S, u |=a φ and obsa(w≤k) = u, it follows by definition of |=a that S, w, k |= φ. By
+correctness of the inductive construction for φ, this implies γφ(q) = 1.
+Since q ∈Bu was arbitrary, we conclude that Bu ∈F.
+This proves (2.1) and hence the correctness of the monitor.
+Knowledge operator: φ = Kaψ
+Assume we have constructed the (S, ψ)-knowledge monitor KS,a
+ψ
+= (QK, ιK, δK, FK). We
+construct the product of KS,a
+ψ
+with S = (QS, ιS, ∆S, FS):
+AS
+Kaψ = (Q, ι, ∆, F)
+where:
+• Q = QK × QS = 2Qψ × QS
+• ι = (ιK, ιS)
+• ∆contains the triples ((B, q), σ, (B′, q′)) such that δK(B, obsa(σ)) = B′ and (q, σ, q′) ∈
+∆S
+• F = QK × FS (acceptance determined by S component)
+The output function is defined as follows:
+γKaψ((B, q)) =
+
+
+
+1
+if B ∈FK
+0
+otherwise
+Clearly, as acceptance is determined entirely by the second component, this ensures
+L(AS
+Kaψ) = L(S).
+Correctness of the output map.
+We show that for every word w = σ1σ2 . . . ∈L(S),
+every accepting run
+(B0, q0) σ1
+−→(B1, q1) σ2
+−→(B2, q2) σ3
+−→· · ·
+
+
+=== PAGE 34 ===
+2.5. The Model-Checking Problem
+30
+of AS
+Kaψ over w, and every k ∈N≥1, we have
+γKaψ((Bk, qk)) = 1
+⇐⇒
+S, w, k |= Kaψ.
+By construction of ∆, the first component is updated according to
+Bk = δ∗
+K(ιK, obsa(w≤k)),
+since at step i the monitor reads exactly the observation letter obsa(σi).
+(⇒) Assume γKaψ((Bk, qk)) = 1. Then Bk ∈FK by definition of γKaψ. Let u = obsa(w≤k),
+which is contained in Obsa(S). By the correctness of the knowledge-monitor construction,
+u ∈L(KS,a
+ψ ) implies
+S, u |=a ψ.
+By Proposition 2.18, we obtain S, w, k |= Kaψ.
+(⇐) Assume S, w, k |= Kaψ. Let u = obsa(w≤k). By Proposition 2.18, we have S, u |=a ψ.
+By correctness of the monitor construction, this implies u ∈L(KS,a
+ψ ), hence δ∗
+K(ιK, u) ∈FK.
+Using Bk = δ∗
+K(ιK, u), we obtain Bk ∈FK, and therefore γKaψ((Bk, qk)) = 1.
+This concludes the proof of correctness of the output map for all k ∈N≥1.
+Altogether, we have shown Theorems 2.21 and 2.23.
+Solving the model-checking problem
+We now show how the model-checking problem can be solved using a transducer. Recall
+from Definition 2.19 that, given a Büchi automaton S = (Q, ι, ∆, F) and an LTL∼formula
+φ, the model-checking problem asks whether S |= φ, that is, whether S, w, 1 |= φ holds for
+every w ∈L(S).
+Theorem 2.24 (Decidability of model checking)
+The model-checking problem is decidable.
+Proof. We reduce model checking to the emptiness problem for Büchi automata. From S
+and φ, we construct the (S, φ)-transducer AS
+φ with output map γφ.
+Recall that a run of AS
+φ has the form q0
+σ1
+−→q1
+σ2
+−→q2
+σ3
+−→· · · . The state q0 is the initial
+state (before reading the word), and q1 corresponds to the first letter σ1. By correctness of
+the transducer construction, for every accepting run π over w ∈L(S) we have
+γφ(π(1)) = 1
+⇐⇒
+S, w, 1 |= φ.
+
+
+=== PAGE 35 ===
+2.6. Bibliographic Notes
+31
+Hence, we have the following equivalences:
+S |= φ
+⇐⇒
+∀w ∈L(S): S, w, 1 |= φ
+⇐⇒
+¬∃w ∈L(S): S, w, 1̸ |= φ
+⇐⇒
+¬∃accepting run π of AS
+φ such that γφ(π(1)) = 0
+Thus, model checking reduces to checking whether AS
+φ admits an accepting run whose state
+q at position 1 satisfies γφ(q) = 0. This is an emptiness problem for Büchi automata, which
+can be solved using standard graph-theoretic algorithms for finding reachable accepting
+cycles.
+□
+Note (Complexity)
+Model checking for LTL is PSPACE-complete. In contrast, extending LTL with
+epistemic operators as in LTL∼leads, in general, to a non-elementary complexity
+blow-up. This increase is caused by the construction of the knowledge monitor,
+which relies on a belief-state construction under perfect recall and induces an iterated
+powerset blow-up.
+2.6
+Bibliographic Notes
+Epistemic temporal logics under synchronous perfect recall have been studied extensively.
+Early decidability and complexity results were obtained by van der Meyden and Shilov,
+who identified a non-elementary blow-up inherent to reasoning about agents’ information
+sets [vdMS99].
+In more recent work, Bozzelli, Maubert, and Murano gave a precise complexity analysis
+in terms of the alternation depth of epistemic operators [BMM19]. Cohen and Lomuscio
+studied past-time epistemic temporal logics under synchronous perfect recall and showed
+that, while the general problem is non-elementary, substantially better bounds can be
+obtained for restricted syntactic fragments [CL10].
+Finkbeiner and Siber established decidability of the logic considered in these lecture notes
+via translations to first-order formalisms for hyperproperties [FS25]. They also considered
+additional operators, such as counterfactuals, that go beyond the logic treated here.
+For background on epistemic logic and the semantics of knowledge, we refer to the textbook
+by Fagin, Halpern, Moses, and Vardi, Reasoning about Knowledge [FHMV95].
+
+
+=== PAGE 36 ===
+3
+Diagnosability
+In this chapter, we illustrate how epistemic temporal logic can be used to formalize and
+analyze classical runtime-verification properties. In this chapter, we focus on diagnosability
+and related notions, which capture whether agents can infer the occurrence or absence of
+faults from partial observations. Thanks to the epistemic perspective, these properties can
+be expressed uniformly as logical formulas. However, it should be noted that this uniform
+logical formulation does not, in general, yield optimal complexity bounds for checking these
+properties.
+3.1
+Positive and Negative Diagnosability
+While classical definitions of (co-)diagnosability are phrased in terms of explicit comparisons
+of observation projections (e.g., [SSL+95,WYL07]), the epistemic formulation captures the
+same requirement at the semantic level, expressing directly that an agent can infer the
+absence of an error after a bounded delay.
+In the following, the prefix P refers to positive diagnosability, while N refers to negative
+diagnosability.
+Definition 3.1 (P- and N-diagnosability)
+Let S be a Büchi automaton over Σ, a ∈Ag be an agent, e ∈AP \ APa be an error
+proposition, and D ∈N be a maximal delay. We say that S is
+• D-P-diagnosable (wrt. a and e) if
+S |= G
+
+e →XDKaPe
+
+,
+• D-N-diagnosable (wrt. a and e) if
+S |= XDG
+
+H¬e →KaYDH¬e
+
+.
+We say that S is P-diagnosable (N-diagnosable) if there is D ∈N such that it is
+D-P-diagnosable (D-N-diagnosable, respectively).
+32
+
+
+=== PAGE 37 ===
+3.1. Positive and Negative Diagnosability
+33
+Finally, we call S unbounded-P-diagnosable (wrt. a and e) if
+S |= G
+
+e →FKaPe
+
+.
+Intuitively, positive diagnosability means that whenever an error occurs, agent a knows
+within D steps that an error has occurred in the past. In unbounded P-diagnosability, no
+bound is imposed on the delay before such detection.
+Dually, negative diagnosability means that after an initial delay of D time steps, whenever
+the system has remained fault-free, agent a can conclude that the system was fault-free up
+to D steps in the past.
+Example 3.2 (Positive- and negative-diagnosability)
+We revisit Example 1.1, where AP = {p, r, e}, a ∈Ag is the agent in question, and e
+is the unobservable error proposition.
+Consider again four Büchi automata S1–S4 such that:
+L(S1) = {p}ω + {p}∗{p, e}{p}{r}ω
+L(S2) = {p}ω + {p}∗{p, e}{p}ω
+L(S3) = {p}ω + {p}∗{e}{p}ω
+L(S4) = {p}ω + {p}∗{p, e}{p}∗{r}ω
+Then, the following hold:
+• S1 is both 2-P-diagnosable and 2-N-diagnosable.
+• S2 is neither P-diagnosable nor N-diagnosable.
+• S3 is both 0-P-diagnosable and 0-N-diagnosable.
+• S4 is neither P-diagnosable nor N-diagnosable; however, it is unbounded-P-
+diagnosable.
+It is not a coincidence that positive- and negative-diagnosability coincide on this example. In
+fact, the two notions are equivalent, reflecting the duality between detecting the occurrence
+and the absence of errors under partial observation. This symmetry is a general phenomenon
+in the one-agent setting. The next proposition makes this precise in a uniform way.
+
+
+=== PAGE 38 ===
+3.1. Positive and Negative Diagnosability
+34
+Proposition 3.3
+Fix D ∈N. Let S be a system and fix an agent and an error proposition. Then,
+S is D-P-diagnosable
+⇐⇒
+S is D-N-diagnosable.
+Proof. Fix D ∈N. Let
+(PD)
+S |= G
+
+e →XDKaPe
+
+(ND)
+S |= XDG
+
+H¬e →KaYDH¬e
+
+.
+We show (PD) ⇒(ND) and (ND) ⇒(PD).
+(PD) ⇒(ND). Assume (PD). We prove (ND), i.e. we show that for all w ∈L(S) and all
+positions k ≥1,
+S, w, k+D |= H¬e
+=⇒
+S, w, k+D |= KaYDH¬e.
+So fix w ∈L(S) and k ≥1 with S, w, k+D |= H¬e. Let w′ ∈L(S) with (w, k+D) ∼a
+(w′, k+D). It suffices to prove S, w′, k+D |= YDH¬e, equivalently S, w′, k |= H¬e.
+Suppose towards a contradiction that S, w′, k̸ |= H¬e. Then S, w′, k |= Pe, so choose j with
+1 ≤j ≤k such that S, w′, j |= e. By (PD) applied to w′ at time j,
+S, w′, j+D |= KaPe.
+Since (w, k+D) ∼a (w′, k+D) means obsa(w≤k+D) = obsa(w′
+≤k+D), by truncation we
+obtain obsa(w≤j+D) = obsa(w′
+≤j+D), i.e. (w, j+D) ∼a (w′, j+D). By the semantics of
+knowledge, this yields
+S, w, j+D |= Pe.
+As j+D ≤k+D, it follows that S, w, k+D |= Pe, contradicting S, w, k+D |= H¬e ≡¬Pe.
+Hence S, w′, k |= H¬e, as required. Therefore S, w, k+D |= KaYDH¬e, proving (ND).
+(ND) ⇒(PD). Assume (ND). We prove (PD), i.e. for all w ∈L(S) and all k ≥1,
+S, w, k |= e
+=⇒
+S, w, k+D |= KaPe.
+So fix w ∈L(S) and k ≥1 with S, w, k |= e. Let w′ ∈L(S) with (w, k+D) ∼a (w′, k+D).
+We show S, w′, k+D |= Pe.
+Suppose towards a contradiction that S, w′, k+D̸ |= Pe. Then S, w′, k+D |= H¬e. Apply
+(ND) to w′ at time k:
+S, w′, k+D |= KaYDH¬e.
+
+
+=== PAGE 39 ===
+3.1. Positive and Negative Diagnosability
+35
+Since (w, k+D) ∼a (w′, k+D), the semantics of knowledge yields
+S, w, k+D |= YDH¬e,
+i.e. S, w, k |= H¬e, contradicting S, w, k |= e. Hence S, w′, k+D |= Pe.
+Since w′ was arbitrary, S, w, k+D |= KaPe. Thus (PD) holds.
+□
+Exercise 3.4 (Four alternative definitions of diagnosability)
+Let S be a system, a ∈Ag be an agent, and e ∈AP \ APa be an unobservable error
+proposition. Fix a delay bound D ∈N.
+Consider the following alternative candidate formulas for diagnosability:
+φ1 = G
+
+e →XDKaYDPe
+
+φ2 = G
+
+H¬e →XDKaYDH¬e
+
+φ3 = XDG
+
+H¬e →YDKaH¬e
+
+φ4 = G
+
+H¬e →XDKaH¬e
+
+Give an informal interpretation of each formula and explain why neither formula
+captures diagnosability as we had defined it before. Which of them are “reasonable”
+definitions. Hint: You may use {p, e}{p}ω+{p}{p, e}{p}ω to separate certain formulas.
+We conclude this section by considering the algorithmic complexity of diagnosability
+problems. Although the definitions are given in terms of epistemic temporal formulas (and
+are therefore decidable by Theorem 2.24), the corresponding decision problems can be
+solved efficiently on finite-state systems. We illustrate this for D-P-diagnosability.
+Fix a (system) Büchi automaton S = (Q, ι, ∆, F), an agent a ∈Ag, an error proposition
+e ∈AP \ APa, and a bound D ∈N. We say that a word u = σ1 . . . σn ∈Σ∗is faulty if
+there exists i ∈{1, . . . , n} such that e ∈σi. If u is not faulty, it is called fault-free.
+The algorithm is based on the following characterization of D-P-diagnosability:
+Proposition 3.5 (Characterization of bounded P-diagnosability)
+The following statements are equivalent:
+(1) S is not D-P-diagnosable (wrt. a and e), i.e. S̸ |= G
+ e →XDKaPe
+
+.
+(2) There exist two words w, w′ ∈L(S) and a position k ≥1 such that we have
+(i) S, w, k |= e, (ii) w′
+≤k+D is fault-free, and (iii) obsa(w≤k+D) = obsa(w′
+≤k+D).
+
+
+=== PAGE 40 ===
+3.1. Positive and Negative Diagnosability
+36
+Proof. We show (1) ⇔(2).
+(1) ⇒(2): Assume
+S̸ |= G
+ e →XDKaPe
+
+.
+Then there exist w ∈L(S) and a position k ≥1 such that
+S, w, k |= e
+and
+S, w, k + D̸ |= KaPe.
+According to the semantics of Ka, there exists w′ ∈L(S) such that
+obsa(w≤k+D) = obsa(w′
+≤k+D)
+and
+S, w′, k + D̸ |= Pe.
+The latter implies that w′
+≤k+D is fault-free. Thus w, w′, and k satisfy the requirements
+in (2).
+(2) ⇒(1): Assume that there exist w, w′ ∈L(S) and k ≥1 such that S, w, k |= e, the prefix
+w′
+≤k+D is fault-free, and obsa(w≤k+D) = obsa(w′
+≤k+D). Since w′
+≤k+D is fault-free, we have
+S, w′, k + D̸ |= Pe.
+Moreover, obsa(w≤k+D) = obsa(w′
+≤k+D) means, by the semantics of knowledge, that
+S, w, k + D̸ |= KaPe.
+Together with S, w, k |= e, this shows that
+S̸ |= G
+ e →XDKaPe
+
+,
+i.e. S is not D-P-diagnosable.
+□
+Theorem 3.6 (Deciding bounded P-diagnosability in polynomial time)
+The following problem can be decided in polynomial time:
+Given a Büchi automaton S over Σ, D ∈N (encoded in unary), a ∈Ag, and an
+unobservable error proposition e, is S D-P-diagnosable (wrt. a and e)?
+Exercise 3.7
+Prove Theorem 3.6 using Proposition 3.5.
+
+
+=== PAGE 41 ===
+3.2. Diagnosers and Knowledge Monitors
+37
+Note (On unbounded-P-diagnosability)
+Unbounded-P-diagnosability is not a standard notion in the classical diagnosis litera-
+ture, but it arises naturally in the logical formulation. Unlike P-diagnosability, it does
+not guarantee a uniform bound on the delay until detection and therefore provides
+weaker runtime guarantees.
+In finite-state systems modeled as Kripke structures (or, equivalently, automata where
+all states are accepting), unbounded-P-diagnosability and P-diagnosability coincide:
+eventual detection implies detection within a uniform bound. This fact underlies the
+classical diagnosability algorithms.
+In contrast, in the more general setting of Büchi automata, acceptance conditions
+may rule out infinite indistinguishability without imposing a uniform bound. As a
+result, unbounded-P-diagnosability and P-diagnosability no longer coincide.
+Note (General error properties)
+In contrast, the epistemic-logic framework allows error events to be specified by
+arbitrary temporal formulas, so that one can reason about more general classes of
+faulty behaviors.
+3.2
+Diagnosers and Knowledge Monitors
+In classical diagnosis, one often starts with an abstract definition of a diagnoser as a function
+that maps finite observation sequences to diagnosis decisions.
+Definition 3.8 (Diagnoser)
+Let S be a Büchi automaton, a ∈Ag be an agent, e ∈AP \ APa be an unobservable
+error proposition, and D ∈N. A D-P-diagnoser for S (wrt. a and e) is a function
+f : Σ∗
+a →{0, 1}
+such that the following conditions hold:
+1. (Detection) For all faulty u ∈Σ+ and all v ∈Σ∗such that |v| = D and
+uv ∈Pref +(L(S)), we have f(obsa(uv)) = 1.
+2. (No false alarms) For all fault-free u ∈Pref +(L(S)), we have f(obsa(u)) = 0.
+The first condition means that on every execution prefix u in which a fault has already
+
+
+=== PAGE 42 ===
+3.2. Diagnosers and Knowledge Monitors
+38
+occurred, the diagnoser outputs 1 after D further steps. Note that since the condition holds
+for all faulty prefixes, detection persists at all later times. The second condition forbids
+false positives.
+We now relate this classical notion to knowledge monitors.
+Proposition 3.9 (Knowledge monitors as diagnosers)
+Let S be a Büchi automaton over Σ, let a ∈Ag, let e ∈AP \ APa, and let D ∈N. If
+S is D-P-diagnosable (wrt. a and e), then the function f = JKS,a
+Pe K is a D-P-diagnoser
+for S.
+Recall that KS,a
+Pe is an (S, Pe)-knowledge monitor and that f satisfies, for all u ∈
+Obsa(S):
+f(u) =
+
+
+
+1
+if S, u |=a Pe
+0
+otherwise
+Proof. We show the two properties of a D-P-diagnoser.
+Detection. Let u be faulty and let v ∈Σ∗with |v| = D such that uv ∈Pref +(L(S)). Choose
+w ∈L(S) extending uv, and let k ≤|u| be such that S, w, k |= e. By D-P-diagnosability,
+we obtain
+S, w, k+D |= KaPe.
+Since k ≤|u| and |v| = D, we have k+D ≤|uv|. By non-forgetting (Exercise 2.14(2d)),
+knowledge of the past formula Pe persists at later positions. Thus
+S, w, |uv| |= KaPe.
+By Proposition 2.18, this is equivalent to
+S, obsa(uv) |=a Pe.
+By correctness of the knowledge monitor, f(obsa(uv)) = 1.
+No false alarms.
+Let u ∈Pref +(L(S)) be fault-free.
+Then S, obsa(u)̸ |=a Pe, hence
+f(obsa(u)) = 0.
+Thus f satisfies both conditions of a D-P-diagnoser.
+□
+Proposition 3.10 (Diagnosability vs. existence of a diagnoser)
+Let S be a Büchi automaton over Σ, let a ∈Ag, let e ∈AP \ APa, and let D ∈N.
+The following are equivalent:
+
+
+=== PAGE 43 ===
+3.2. Diagnosers and Knowledge Monitors
+39
+1. S is D-P-diagnosable (wrt. a and e), i.e.
+S |= G
+ e →XDKaPe
+
+.
+2. There exists a D-P-diagnoser for S (wrt. a and e).
+Proof. (1 ⇒2) This is Proposition 3.9.
+(2 ⇒1) Let f : Σ∗
+a →{0, 1} be a D-P-diagnoser. Let w ∈L(S) and let k ≥1 with
+S, w, k |= e. Set u = w≤k and uD = w≤k+D. Then u is faulty and uD ∈Pref +(L(S)).
+By the detection condition, we have
+f(obsa(uD)) = 1.
+We show that S, w, k+D |= KaPe. Assume towards a contradiction that this is not the case.
+Then there exists w′ ∈L(S) such that
+obsa(w≤k+D) = obsa(w′
+≤k+D)
+and
+S, w′, k+D̸ |= Pe.
+The second conjunct means that w′
+≤k+D is fault-free. By the no-false-alarms condition, we
+obtain
+f(obsa(w′
+≤k+D)) = 0.
+But obsa(w′
+≤k+D) = obsa(w≤k+D), contradicting f(obsa(uD)) = 1.
+Hence S, w, k+D |= KaPe. Since w and k were arbitrary, it follows that
+S |= G
+ e →XDKaPe
+
+,
+so S is D-P-diagnosable.
+□
+Exercise 3.11
+Consider running KS,a
+Pe and KS,a
+φ , where φ = YDH¬e, in parallel on the same observa-
+tion stream.
+1. Describe the possible combinations of verdicts and interpret them epistemi-
+cally. When can a specific combination happen (can the two diagnosers accept
+simultaneously)?
+2. Explain why this yields a three-valued diagnosis semantics.
+
+
+=== PAGE 44 ===
+3.3. Decentralized Diagnosis
+40
+Exercise 3.12 (Bounded predictability)
+Let Ag = {a}, AP = {p, e}, APa = {p}, and Σ = 2AP. Thus, the observer sees only
+proposition p, while the error proposition e ∈AP \ APa is unobservable.
+Fix an arbitrary delay bound D ∈N. Recall that
+F≤De = e ∨Xe ∨. . . ∨XDe.
+Consider the following candidate notions of bounded predictability:
+φD
+1 = G(XDe →KaXDe)
+φD
+2 = G(F≤De →KaF≤De)
+φD
+3 = G(XDe →KaFe)
+(a) Briefly discuss which of the three notions is, in your view, the most reasonable
+formalization of “predictability with delay D”, and why.
+(b) For fixed D, determine which logical implications between φD
+1 , φD
+2 , and φD
+3
+hold in general, and justify your answer.
+(c) Now fix D = 1. Give separating examples showing that none of the converse
+implications holds, and that no further implications hold in general.
+(d) For each i ∈{1, 2, 3}, consider the decision problem with input S (a Büchi
+automaton over Σ) and D ∈N (with D encoded in unary): decide whether
+S |= φD
+i .
+Show that each of these three decision problems is solvable in
+polynomial time. A proof sketch in each case is enough.
+(e) Assume S |= φD
+i
+for a given system S and i ∈{1, 2, 3}. In the style of the
+knowledge monitor used for diagnosis, describe a suitable observation-based
+predictor for this property. What will it read as input, what will it output after
+each observation prefix, and what correctness guarantee does φD
+i provide?
+3.3
+Decentralized Diagnosis
+We now turn to a decentralized setting, where several agents observe the system indepen-
+dently and no single agent has access to all observations. In this context, diagnosability
+requires that the occurrence or absence of an error can be inferred by at least one agent,
+based solely on its own observations. This leads to the notions of positive and negative
+codiagnosability.
+
+
+=== PAGE 45 ===
+3.3. Decentralized Diagnosis
+41
+Definition 3.13 (P- and N-codiagnosability)
+Let S be a Büchi automaton over Σ, e ∈AP \ S
+a∈Ag APa be an error proposition,
+and D ∈N. We say that S is
+• D-P-codiagnosable (wrt. e) if
+S |= G
+
+e →XD _
+a∈Ag
+KaPe
+
+,
+• D-N-codiagnosable (wrt. e) if
+S |= XDG
+
+H¬e →
+_
+a∈Ag
+KaYDH¬e
+
+.
+Accordingly, we say that S is P-codiagnosable (N-codiagnosable) if there is D ∈N
+such that it is D-P-codiagnosable (D-N-codiagnosable, respectively).
+Unlike in the one-agent case, the decentralized versions of diagnosability are incomparable:
+Example 3.14 (P- and N-codiagnosability are incomparable)
+Let Ag = {a1, a2}, AP = {p1, p2, e}, APa1 = {p1}, and APa2 = {p2}. In particular,
+e is the unobservable error proposition.
+Consider Büchi automata S1, S2, and S3 such that:
+L(S1) = ∅∗{e}({p1} + {p2})∅ω
+L(S2) = ({p1} + {p2} + {e})∅ω
+L(S3) = ({p1, p2, e} + {p1, p2})∅ω
+Then,
+• S1 is 1-P-codiagnosable but not N-codiagnosable,
+• S2 is 0-N-codiagnosable but not P-codiagnosable,
+• S3 is neither P-codiagnosable nor N-codiagnosable.
+Knowledge monitors as decentralized diagnosers.
+In the decentralized setting, each
+agent a receives the local view obsa(σ) ∈Σa of every global event σ ∈Σ and runs its own
+monitor. Figure 3.1 illustrates this architecture for the positive case: the global stream is
+projected to each agent, processed by a local (S, Pe)-knowledge monitor, and the individual
+verdicts are aggregated by disjunction.
+
+
+=== PAGE 46 ===
+3.4. Bibliographic Notes
+42
+System execution stream from S
+σ
+KS,a1
+Pe
+KS,a2
+Pe
+KS,an
+Pe
+· · ·
+obsa1(σ)
+obsa2(σ)
+obsan(σ)
+∨
+Diagnosis verdict
+Figure 3.1: Decentralized diagnosis via local knowledge monitors (positive case). Each
+global event σ is locally filtered into obsai(σ) and processed by the corresponding monitor.
+Formally, for each agent a ∈Ag we consider an (S, Pe)-knowledge monitor for a, and we
+regard the decentralized diagnoser as the collection of these local monitors together with the
+rule that a diagnosis is produced as soon as at least one monitor accepts. This operational
+view corresponds to the disjunctive knowledge condition W
+a∈Ag KaPe used in the definition
+of P-codiagnosability.
+3.4
+Bibliographic Notes
+The notion of diagnosability for discrete-event systems was introduced by Sampath et
+al. [SSL+95], who defined what is now commonly referred to as F-diagnosability. In our
+logical framework, this notion corresponds to P-diagnosability and requires that the occur-
+rence of an unobservable fault can be inferred after a bounded delay. The complementary
+perspective, sometimes called NF-diagnosability and focusing on the inference of fault
+absence, was studied later by Wang, Yoo, and Lafortune [WYL07], who showed that the
+two notions are equivalent in the centralized setting.
+Diagnosability in decentralized architectures was investigated by Debouk, Lafortune, and
+Teneketzis [DLT00], leading to the notion of codiagnosability, where at least one agent must
+be able to make a correct diagnosis. In contrast to the centralized case, the equivalence
+between positive and negative diagnosability does not extend to decentralized settings,
+where positive and negative codiagnosability are incomparable.
+Polynomial-time decision procedures for diagnosability and codiagnosability were established
+in the above works.
+
+
+=== PAGE 47 ===
+4
+Opacity
+As we have seen in the introduction, opacity is dual to diagnosability. While diagnosability
+aims at eventually inferring the occurrence of a fault, opacity requires that an observer can
+never infer that a designated secret has occurred. Equivalently, whenever a secret behavior
+takes place, there exists a non-secret behavior that is observationally indistinguishable to
+the observer.
+4.1
+Definition of Opacity
+Let us define opacity within our logical framework:
+Definition 4.1 (Opacity)
+Fix an agent a ∈Ag and let s ∈AP \ APa be a secret. A Büchi automaton S over Σ
+representing a system is opaque (wrt. a and s) if
+S |= G¬KaPs.
+Thus, at every point in every execution, agent a cannot know that the secret has
+occurred.
+Opacity is useful when we want to hide only the fact that a secret event happened, but not
+necessarily whether it did not happen. For example, in a system where some actions are
+private (like accessing a confidential file), we want observers to see general activity (like
+logins or public file access) but never be sure if the private action occurred. This way, we
+protect sensitive information while still allowing normal monitoring.
+In contrast, in settings where sensitive features such as gender, health status, or membership
+in a protected group must be hidden, one often requires that neither the occurrence nor
+the absence of the secret can be inferred; this stronger, two-sided variant is discussed in
+Exercise 4.5.
+43
+
+
+=== PAGE 48 ===
+4.2. Complexity of Opacity
+44
+Example 4.2 (An opaque system)
+Let AP = {p, r, s, #} and let agent a observe only APa = {p, r, #}. Consider the
+Büchi automaton S below:
+q0
+q1
+q2
+q3
+q4
+q5
+q6
+q7
+{s}
+∅
+{p}, {r}
+{p}
+{r}
+{#}
+{#}
+{p}
+{r}
+{p}
+{r}
+{#}
+{#}
+{r}
+{p}
+The upper branch, after producing the secret, generates exactly the words over
+{{p}, {r}} that end in the pattern {p}{r} before the first occurrence of {#}. The
+lower branch generates the same language, but in a deterministic way.
+In particular, for every execution along the upper branch there exists an execution
+along the lower branch with the same observable trace. Thus, the system is opaque.a
+aIn fact, the construction even satisfies the two-sided opacity variant: neither the upper nor the
+lower branch can be inferred from observations; see Exercise 4.5.
+4.2
+Complexity of Opacity
+While opacity is already known to be decidable by Theorem 2.24, we now establish that
+the problem is, in fact, PSPACE-complete.
+Theorem 4.3 (Opacity is in PSPACE)
+The following problem can be decided in polynomial space:
+Given a Büchi automaton S over Σ, an agent a ∈Ag, and an unobservable secret
+s ∈AP, decide whether S is opaque with respect to a and s.
+Proof. By Theorem 2.21, there exists an (S, KaPs)-transducer consisting of AS
+KaPs and
+γKaPs. It satisfies the following correctness property: L(AS
+KaPs) = L(S) and, for every
+
+
+=== PAGE 49 ===
+4.2. Complexity of Opacity
+45
+w ∈L(S), every accepting run π of AS
+KaPs over w, and every position k ≥1,
+S, w, k |= KaPs
+⇐⇒
+γKaPs
+ π(k)
+
+= 1.
+We can assume that its size (number of states) is exponential in |S|. We first construct
+a linear-size (S, Ps)-transducer AS
+Ps (together with γPs). More precisely, 2 · |S| states are
+enough where |S| is the number of states of S. We then obtain AS
+KaPs using the knowledge-
+transducer construction, which yields at most |S| · 2|AS
+Ps| states (up to a polynomial factor
+depending on the chosen presentation of transducer states).
+In particular, |AS
+KaPs| is
+exponential in |S|.
+It remains to decide whether S is opaque, i.e.,
+S |= G ¬KaPs.
+We have S̸ |= G ¬KaPs iff there exist w ∈L(S), an accepting run π of AS
+KaPs over w, and a
+position k ≥1 such that γKaPs(π(k)) = 1. Equivalently, non-opacity holds iff AS
+KaPs has an
+accepting run that visits at least once a state q such that γKaPs(q) = 1.
+This can be checked in polynomial space without constructing AS
+KaPs explicitly. Indeed,
+although AS
+KaPs has exponentially many states, its transition graph can be explored on
+the fly: each state admits a polynomial-space representation, and successor states can be
+computed in polynomial space from the definition of the knowledge-transducer update.
+Hence, reachability in this exponential graph can be decided in NPSPACE. By NPSPACE =
+PSPACE (Savitch’s Theorem), opacity is decidable in polynomial space.
+□
+Theorem 4.4 (Lower bound for opacity)
+Deciding opacity is PSPACE-hard.
+Proof. We reduce from the universality problem for nondeterministic finite automata
+(NFAs), which is PSPACE-complete1: given an NFA N over a finite alphabet Γ, decide
+whether L(N) = Γ∗.
+Let N be an NFA over Γ. We set AP = Γ⊎{#}⊎{s} where s is a fresh symbol representing
+an unobservable secret, and # is a fresh observable endmarker. Consider a single agent
+a and let APa = AP \ {s}. We build a Büchi automaton S over the alphabet Σ = 2AP
+whose language L(S) is the disjoint union
+L(S) = Lpriv ⊎Lpub,
+where
+1We do not introduce NFAs formally, as they are standard and their precise representation does not
+matter here.
+
+
+=== PAGE 50 ===
+4.2. Complexity of Opacity
+46
+• the private language Lpriv is the set of words
+{s}{γ1} . . . {γn}{#}ω ∈Σω
+such that n ∈N and γi ∈Γ for all i ∈{1, . . . , n},
+• the public language Lpub is the set of words
+∅{γ1} . . . {γn}{#}ω ∈Σω
+such that n ∈N, γi ∈Γ for all i ∈{1, . . . , n}, and γ1 . . . γn ∈L(N).
+It is easily seen that such a Büchi automaton S can be constructed in polynomial time.
+We prove that
+L(N) = Γ∗
+⇐⇒
+S |= G ¬KaPs.
+(⇒) Assume L(N) = Γ∗. Let w ∈L(S) and k ≥1 be arbitrary. We show S, w, k |= ¬KaPs.
+If w ∈Lpub, then s never occurs in w, hence S, w, k |= ¬Ps, and therefore S, w, k |= ¬KaPs.
+Suppose now that w ∈Lpriv. Then
+w = {s}{γ1} . . . {γn}{#}ω
+for some n ∈N and γ1, . . . , γn ∈Γ. Consider the word
+w′ = ∅{γ1} . . . {γn}{#}ω.
+Since L(N) = Γ∗, we have γ1 . . . γn ∈L(N), hence w′ ∈Lpub ⊆L(S).
+Moreover,
+obsa(w≤k) = obsa(w′
+≤k) and S, w′, k̸ |= Ps.
+Thus, by the semantics of knowledge,
+S, w, k |= ¬KaPs.
+(⇐) Assume S |= G ¬KaPs. We show that L(N) = Γ∗.
+Let γ1 . . . γn ∈Γ∗be arbitrary. Consider the word
+w = {s}{γ1} . . . {γn}{#}ω ∈Lpriv ⊆L(S).
+Let k = n + 2 (the position of the first {#}, i.e., after reading {s} and the whole block
+{γ1} . . . {γn}). Since s occurs at position 1, we have
+S, w, k |= Ps.
+By S |= G ¬KaPs, we obtain
+S, w, k |= ¬KaPs.
+
+
+=== PAGE 51 ===
+4.2. Complexity of Opacity
+47
+Hence, by the semantics of knowledge, there exists w′ ∈L(S) such that
+obsa(w≤k) = obsa(w′
+≤k)
+and
+S, w′, k |= ¬Ps.
+The second condition implies that s does not occur in w′
+≤k. In particular, w′ cannot belong
+to Lpriv, so w′ ∈Lpub. Therefore
+w′ = ∅{γ′
+1} . . . {γ′
+m}{#}ω
+and
+γ′
+1 . . . γ′
+m ∈L(N)
+for some m ∈N and γ′
+i ∈Γ.
+Moreover, since s is unobservable to a, we have
+obsa(w≤k) = ∅{γ1} . . . {γn}{#}.
+From obsa(w≤k) = obsa(w′
+≤k), we obtain
+m = n
+and
+γi = γ′
+i for all i ∈{1, . . . , n}.
+Hence γ1 . . . γn = γ′
+1 . . . γ′
+n ∈L(N).
+Since γ1 . . . γn ∈Γ∗was arbitrary, we conclude
+L(N) = Γ∗.
+This establishes a polynomial-time reduction from NFA universality to the complement of
+opacity, hence deciding opacity is PSPACE-hard.
+□
+Exercise 4.5 (Two-sided opacity)
+Recall that we considered the following (one-sided) opacity requirement for a secret
+s ∈AP and agent a ∈Ag:
+Φopaque(s) = G¬KaPs.
+Now consider the following two-sided opacity requirement:
+Φ2
+opaque(s) = G¬
+ KaPs ∨Ka¬Ps
+
+.
+For instance, for the system S from Example 4.2, we have S |= Φ2
+opaque(s).
+(a) Discuss when the additional requirement ¬Ka¬Ps is desirable in practice.
+(b) Show that Φ2
+opaque(s) implies the standard opacity requirement Φopaque(s).
+
+
+=== PAGE 52 ===
+4.3. Bibliographic Notes
+48
+(c) Show that the converse implication does not hold by giving a Büchi automaton
+S and agent a such that
+S |= Φopaque(s)
+but
+S̸ |= Φ2
+opaque(s).
+(d) Show that deciding two-sided opacity is PSPACE-complete.
+(e) Fix now Ag = {a}, AP = {p, s}, APa = {p}, and Σ = 2AP. Consider systems
+S1, S2, S3, S4 whose languages L(Si) ⊆Σω are given as follows:
+L(S1) = {p}ω + {p}{p, s}{p}ω
+L(S2) = {p}ω + {p, s}{p}ω
+L(S3) = {p}ω + {p}∗{p, s}{p}∗∅ω + {p}∗{p, s}{p}∗{p, s}ω
+L(S4) = {p}ω + {p}∗{p, s}{p}ω + {p}∗∅{p}ω + {p}∗{p, s}{p}∗∅{p}ω
+For each of the systems S1, S2, S3, S4, determine whether it satisfies Φopaque(s)
+and whether it satisfies Φ2
+opaque(s). Justify your answer briefly from the defini-
+tions.
+4.3
+Bibliographic Notes
+Opacity was introduced as a confidentiality property for discrete-event systems, requiring
+that secret behavior cannot be inferred by an external observer. Bryans et al. [BKMR08]
+generalized opacity to transition systems and clarified its language-theoretic formulation.
+Cassez, Dubreil, and Marchand [CDM09] studied dynamic observers and established that
+deciding opacity is PSPACE-complete.
+
+
+=== PAGE 53 ===
+5
+Monitorability
+Monitoring addresses the question of whether the truth of a temporal property can be
+determined by observing only a finite prefix of a system execution. In practice, a monitor
+processes observations incrementally and tries to reach a definitive verdict as early as
+possible. In this section, we study when such a definitive verdict is obtainable under
+partial observability and epistemic uncertainty. This leads to the notion of monitorability,
+which captures whether sufficient information may eventually be gathered to decide a given
+property based on observations.
+We are particularly interested in identifying structural conditions on the specification that
+guarantee the existence of such conclusive observations.
+5.1
+Definition and Decidability
+We now formalize the idea that, from every possible observation, it should always remain
+possible to eventually decide the property.
+Definition 5.1 (Monitorability)
+Let S be a Büchi automaton over Σ, a ∈Ag, and φ an LTL∼property. We say that
+(S, φ) is monitorable (wrt. a) if for every observation prefix u ∈Obsa(S) there exists
+a finite extension v ∈Σ∗
+a such that uv ∈Obsa(S) and
+S, uv |=a ˆφ
+or
+S, uv |=a ¬ ˆφ
+where
+ˆφ = P(first ∧φ).
+Here, the formula P(first ∧φ) is used to encode whole-trace satisfaction of φ in a position-
+based semantics: S, w, k |= P(first ∧φ) holds iff the infinite word w satisfies φ at position 1.
+Thus, if (S, φ) is monitorable, then from every observation prefix it is always worth
+continuing the monitoring process: a definitive verdict may eventually be reached.
+49
+
+
+=== PAGE 54 ===
+5.1. Definition and Decidability
+50
+Example 5.2 (Monitorability)
+Let AP = {e, r, s} and let agent a observe only APa = {r, s}, so e is unobservable.
+Consider the property φ = Fe. That is, ˆφ = P(first ∧Fe).
+Let S be the Büchi automaton below:
+q1
+q2
+q0
+∅
+{e, r}
+{s}
+{r}
+{s}
+Intuitively, the system may stutter arbitrarily long in q0 and will eventually enter
+a recovery mode (after an error occurred) or a safe/success mode. In the first case,
+e occurs (together with r) and r is observed forever. In the second case, only s is
+observed and e never occurs.
+From any observation prefix u ∈Obsa(S), one can extend the execution so that either
+r or s is observed next. In the former case, the agent knows that e has occurred; in
+the latter case, the agent knows that e never occurs. Hence some finite continuation
+always yields a definitive verdict. Thus, (S, φ) is monitorable.
+In contrast to diagnosability and opacity, monitorability is not expressed as a model-checking
+question for a single formula. It is a structural property of (S, φ) that quantifies over all
+observation prefixes. However, the automata-theoretic machinery we developed still allows
+us to decide monitorability.
+Theorem 5.3 (Decidability of monitorability)
+Given a Büchi automaton S over Σ, an agent a ∈Ag, and an LTL∼property φ, the
+problem of determining whether (S, φ) is monitorable (wrt. a) is decidable.
+Proof. Let
+ˆφ = P(first ∧φ).
+By Definition 5.1, (S, φ) is monitorable iff
+∀u ∈Obsa(S): ∃v ∈Σ∗
+a : uv ∈Obsa(S) ∧
+ S, uv |=a ˆφ or S, uv |=a ¬ ˆφ
+
+.
+(5.1)
+
+
+=== PAGE 55 ===
+5.2. Monitors
+51
+Construct the knowledge monitors
+KS,a
+ˆφ
+= (Q1, ι1, δ1, F1)
+and
+KS,a
+¬ ˆφ = (Q0, ι0, δ0, F0).
+By correctness of knowledge monitors, for every observation prefix u ∈Obsa(S),
+δ∗
+1(ι1, u) ∈F1 ⇐⇒S, u |=a ˆφ,
+and
+δ∗
+0(ι0, u) ∈F0 ⇐⇒S, u |=a ¬ ˆφ.
+Hence (5.1) is equivalent to:
+∀u ∈Obsa(S): ∃v ∈Σ∗
+a : uv ∈Obsa(S) ∧
+ δ∗
+1(ι1, uv) ∈F1 or δ∗
+0(ι0, uv) ∈F0
+
+.
+(5.2)
+The observation language
+Obsa(S) = {obsa(u) | u ∈Pref +(L(S))} ⊆Σ∗
+a
+is regular and effectively constructible from S in terms of a DFA P over Σa such that
+L(P) = Obsa(S).
+Consider the synchronous product
+G = P × KS,a
+ˆφ
+× KS,a
+¬ ˆφ .
+States of G reachable by words in Obsa(S) correspond exactly to feasible nonempty observa-
+tion prefixes together with the current states of both knowledge monitors. Condition (5.2)
+holds iff from every such reachable state of G one can reach another state of G whose
+P-component is accepting and whose KS,a
+ˆφ -component lies in F1 or whose KS,a
+¬ ˆφ -component
+lies in F0.
+This is a standard reachability property in a finite directed graph. Thus, monitorability is
+decidable.
+□
+5.2
+Monitors
+In the following, we make the notion of monitoring explicit by constructing a monitor that
+produces three-valued verdicts.
+
+
+=== PAGE 56 ===
+5.2. Monitors
+52
+Definition 5.4 (Monitor)
+Given a Büchi automaton S over Σ, an agent a ∈Ag, and an LTL∼property φ, a
+(S, φ)-monitor for a is a Moore machine
+MS,a
+φ
+= (Q, ι, δ, λ)
+over Σa and Γ = {true, false, ?} such that, for every observation prefix u ∈Obsa(S),
+we have the following:
+JMS,a
+φ K(u) = λ(δ∗(ι, u)) =
+
+
+
+
+
+
+
+
+
+true
+if S, u |=a ˆφ
+false
+if S, u |=a ¬ ˆφ
+?
+otherwise
+Operationally, a monitor reads the observation sequence produced by the system and
+incrementally updates its internal state.
+The verdict reflects whether, based on the
+observations seen so far, the agent has obtained sufficient knowledge to decide whether the
+execution satisfies φ.
+Example 5.5 (Monitor)
+Consider Example 5.2. The following Moore machine is an (S, φ)-monitor for a (the
+output value for a state is given in the state itself):
+true
+false
+?
+∅
+{r}
+{s}
+{r}
+{s}
+It is always possible to construct a monitor (however, recall that only monitorability
+guarantees that a final verdict may always eventually be reached):
+Proposition 5.6 (Monitor construction)
+Let S be a Büchi automaton over Σ and a be an agent. Let φ be an LTL∼formula.
+We can effectively construct an (S, φ)-monitor for a.
+
+
+=== PAGE 57 ===
+5.2. Monitors
+53
+Proof. Let ˆφ = P(first ∧φ). Construct the knowledge monitors
+KS,a
+ˆφ
+= (Q1, ι1, δ1, F1)
+and
+KS,a
+¬ ˆφ = (Q0, ι0, δ0, F0).
+Then, we obtain an (S, φ)-monitor
+MS,a
+φ
+= (Q, ι, δ, λ)
+for a as follows:
+• Q = Q1 × Q0
+• ι = (ι1, ι0)
+• δ((q1, q0), σ) = (δ1(q1, σ), δ0(q0, σ))
+• λ((q1, q0)) =
+
+
+
+
+
+
+
+
+
+true
+if q1 ∈F1
+false
+if q0 ∈F0
+?
+otherwise
+By correctness of knowledge monitors, at most one of the first two cases can occur, since
+the agent cannot simultaneously know ˆφ and ¬ ˆφ. Thus the monitor yields a well-defined
+three-valued verdict at every observation prefix. By correctness of the knowledge monitors,
+we also immediately obtain correctness of MS,a
+φ .
+□
+Note (Good, bad, and ugly prefixes)
+In the literature, an observation prefix u is called good if S, u |=a ˆφ, and bad if
+S, u |=a ¬ ˆφ. A prefix that is neither good nor bad is inconclusive. Such a prefix is
+called ugly if no extension of it can ever become good or bad, i.e., if every extension
+remains inconclusive. In this case, a monitor will output ? forever.
+Once the monitor produces a definitive verdict, it is permanent under all further observations:
+Proposition 5.7 (Permanency of monitor verdicts)
+Let S be a system, a ∈Ag, and φ a temporal property. Let M = (Q, ι, δ, λ) be an
+(S, φ)-monitor for a. Then, for all u ∈Σ+
+a and v ∈Σ∗
+a such that uv ∈Obsa(S), the
+following holds:
+JMK(u) ∈{true, false}
+=⇒
+JMK(uv) = JMK(u)
+Proof. We treat the case true; the case false is symmetric.
+
+
+=== PAGE 58 ===
+5.3. Classical Runtime Verification
+54
+Assume JMK(u) = true. By the definition of monitors,
+S, u |=a ˆφ.
+Now fix an arbitrary extension v ∈Σ∗
+a such that uv ∈Obsa(S). We will show
+S, uv |=a ˆφ,
+which implies JMK(uv) = true.
+Consider any w ∈L(S) with
+obsa(w≤|uv|) = uv.
+This implies obsa(w≤|u|) = u.
+Hence, by S, u |=a ˆφ, we have S, w, |u| |= ˆφ.
+Since
+ˆφ = P(first ∧φ), its truth is time-invariant along a run: for all k ≥1,
+S, w, k |= ˆφ
+⇐⇒
+S, w, 1 |= φ.
+Thus, S, w, |uv| |= ˆφ.
+We have shown S, uv |=a ˆφ. By the definition of monitors, this implies JMK(uv) = true. □
+5.3
+Classical Runtime Verification
+In classical runtime verification (what we call monitoring), one commonly makes the
+following assumptions on the system S, the given property φ, the set of propositions AP
+and the set of agents Ag.
+1. There is only one observer and observation is complete, i.e., Ag = {a} and APa = AP.
+2. The property φ is an LTL formula (without knowledge operators).
+3. The underlying system is the most permissive one (a complete black-box), i.e.,
+L(S) = Σω.
+We will adopt all these assumptions in the present section. Consequently, given an LTL
+formula φ, we say that φ is monitorable if (S, φ) is monitorable wrt. a. Moreover, we define
+its language as
+L(φ) =
+
+w ∈Σω | S, w, 1 |= φ
+	
+.
+Recall that we hereby assume L(S) = Σω.
+
+
+=== PAGE 59 ===
+5.3. Classical Runtime Verification
+55
+Note (Complexity)
+The problem of deciding monitorability is PSPACE-hard, and an EXPSPACE upper
+bound was shown for the future fragment of LTL [DMW15].
+As we look at most permissive systems, we can examine specifications more closely and
+examine which of them are monitorable. Let us first look at closure properties:
+Proposition 5.8 (Closure of monitorability under Boolean operations)
+Let φ and ψ be monitorable LTL formulas. Then, φ ∧ψ and ¬φ are monitorable.
+Exercise 5.9
+Prove Proposition 5.8.
+The next question to ask is: What are natural “atomic” language classes that guarantee
+monitorability. Well-known monitorable properties are safety and co-safety properties:
+Definition 5.10 (Safety and co-safety properties)
+Let φ be an LTL formula. We call φ a
+• safety property if, for all w ∈Σω \ L(φ), there is u ∈Pref +(w) such that, for
+all v ∈Σω, we have uv̸ ∈L(φ),
+• co-safety property if, for all w ∈L(φ), there is u ∈Pref +(w) such that, for all
+v ∈Σω, we have uv ∈L(φ).
+Proposition 5.11 (Monitorability of safety and co-safety properties)
+Safety and co-safety properties are monitorable.
+Exercise 5.12
+Prove Proposition 5.11.
+Solution. Assume L(S) = Σω and let φ be an LTL formula.
+Safety. Assume that φ is a safety property and fix an arbitrary prefix u ∈Σ∗. If u is already
+a bad prefix, i.e. if for all w ∈Σω we have uw /∈L(φ), then u already yields a definitive
+verdict.
+
+
+=== PAGE 60 ===
+5.3. Classical Runtime Verification
+56
+Otherwise, there exists some w ∈Σω such that uw /∈L(φ). By safety, there is a prefix
+x ∈Pref +(uw) such that for all z ∈Σω,
+xz /∈L(φ).
+Since u is a prefix of uw, we can write x = uv for some v ∈Σ∗. Then uv is a bad prefix.
+Hence from every prefix u there exists a finite continuation leading to a definitive verdict,
+so φ is monitorable.
+Co-safety. Assume that φ is a co-safety property and fix u ∈Σ∗. If u is already a good
+prefix, i.e. if for all w ∈Σω we have uw ∈L(φ), then u already yields a definitive verdict.
+Otherwise, there exists some w ∈Σω such that uw ∈L(φ). By co-safety, there is a prefix
+x ∈Pref +(uw) such that for all z ∈Σω,
+xz ∈L(φ).
+Write again x = uv for some v ∈Σ∗. Then uv is a good prefix. Thus from every prefix u
+there exists a finite continuation leading to a definitive verdict, so φ is monitorable.
+□
+Safety and co-safety properties play a fundamental role in runtime verification, even though
+they do not capture all temporal specifications. They characterize the two extremal cases in
+which violations or satisfactions, respectively, can be determined from a finite observation.
+Within the class of LTL-definable properties, the class of monitorable formulas strictly
+contains safety and co-safety, but is itself a strict subset of LTL (cf. Exercise 5.13):
+Safety ∪Co-safety ⫋Monitorable ⫋LTL
+Exercise 5.13
+Which of the following LTL formulas are safety properties, which are co-safety
+properties, which are monitorable properties?
+(1) Gp
+(2) Fp
+(3) Xp
+(4) GFp
+(5) FGp
+(6) Xp ∨GFp
+(7) pUr
+(8) Fp ∨Gr
+Solution. The full solution can be found in Table 5.1. Note that there is a monitorable
+LTL formula that is neither a safety nor a co-safety property.
+□
+Exercise 5.14 (Monitorability with Past Operators)
+Fix Ag = {a}, AP = APa = {p, q}, and Σ = 2AP. We work in the classical monitoring
+setting of a given most-permissive system S, i.e., L(S) = Σω.
+
+
+=== PAGE 61 ===
+5.4. Bibliographic Notes
+57
+Formula
+Safety
+Co-safety
+Monitorable
+Gp
+✓
+×
+✓
+Fp
+×
+✓
+✓
+Xp
+✓
+✓
+✓
+GFp
+×
+×
+×
+FGp
+×
+×
+×
+Xp ∨GFp
+×
+×
+×
+pUr
+×
+✓
+✓
+Fp ∨Gr
+×
+×
+✓
+Table 5.1: Classification of formulas
+For each of the following formulas φ, determine whether (S, φ) is monitorable. Justify
+your answer briefly.
+(a) GFYp
+(b) YGFp
+(c) GFPp
+(d) G(q →Pp)
+5.4
+Bibliographic Notes
+The framework of runtime verification and monitor-based checking was systematically
+developed by Leucker and Schallhart [LS09] and further elaborated for temporal logics
+and three-valued semantics by Bauer, Leucker, and Schallhart [BLS11]. In this setting,
+monitoring is anticipatory in that verdicts are based on all possible continuations of the
+current finite prefix.
+The notion of monitorability was introduced by Pnueli and Zaks in the context of PSL [PZ06].
+For ω-regular languages given by Büchi automata, Diekert, Muscholl, and Walukiewicz
+showed that deciding monitorability is PSPACE-complete [DMW15].
+For the future
+fragment of LTL, they established PSPACE-hardness and an EXPSPACE upper bound.
+Epistemic and information-flow specifications can also be formulated as hyperproperties, that
+is, properties relating multiple executions. Runtime monitoring techniques for HyperLTL
+and related formalisms were developed by Bonakdarpour and Finkbeiner [BF16] and further
+studied by Finkbeiner, Hahn, Stenger, and Tentrup [FHST17].
+
+
+=== PAGE 62 ===
+6
+Knowledge in Timed Systems
+This final chapter briefly discusses the timed case, i.e., timed diagnosability, timed opacity,
+and timed monitorability. The aim is not to redevelop the full untimed theory in complete
+detail, but to record the key definitions and the main phenomena that appear once
+timestamps enter the picture and become part of the model. Two messages are central:
+• timed temporal reasoning without epistemic operators remains decidable,
+• adding knowledge already leads very quickly to undecidability.
+6.1
+Timed Words and Timed Automata
+As before, we fix a finite set of atomic propositions AP, a finite set of agents Ag, and for
+each agent a ∈Ag a set of observable propositions APa ⊆AP. We again write Σ = 2AP
+and Σa = 2APa.
+Definition 6.1 (Timed words)
+A timed word over Σ is an infinite sequence
+w = (σ1, t1)(σ2, t2)(σ3, t3) . . .
+with σi ∈Σ and ti ∈R≥0 such that
+0 ≤t1 ≤t2 ≤t3 ≤. . .
+It is non-zeno if time diverges:
+∀t ∈R≥0 : ∃k ∈N≥1 : t ≤tk.
+A finite timed word is defined analogously as a finite sequence u = (σ1, t1) . . . (σn, tn)
+with nondecreasing timestamps.
+Intuitively, each timestamp ti is the time at which the event labeled by σi occurs.
+We write TWω(Σ) for the set of non-zeno infinite timed words over Σ, and TW∗(Σ) and
+58
+
+
+=== PAGE 63 ===
+6.1. Timed Words and Timed Automata
+59
+TW+(Σ) for the sets of finite and nonempty finite timed words over Σ.
+Definition 6.2 (Timed observation)
+For an agent a ∈Ag, the observation of a timed event (σ, t) ∈Σ × R≥0 is
+obsa((σ, t)) = (σ ∩APa, t).
+This is extended pointwise to finite and infinite timed words.
+Thus, in this chapter we assume that time is observable: the observer sees the same
+timestamps as the system, but only the propositions in the set APa. This is natural in
+settings where events are globally timestamped or agents have access to a shared clock.
+Other models may treat time as partially observable or unobservable, which would lead to
+a different indistinguishability relation.
+Definition 6.3 (Timed indistinguishability)
+For finite timed words u, u′ ∈TW∗(Σ), we write
+u ∼a u′
+if
+obsa(u) = obsa(u′).
+Here, as before, a pointed timed word (w, k) consists of a timed word w and one of
+its positions k, and w≤k denotes the timed prefix up to position k. For pointed timed
+words (w, k) and (w′, k), we write
+(w, k) ∼a (w′, k)
+if
+w≤k ∼a w′
+≤k.
+Note (Synchronous perfect recall with time)
+In the timed setting we again use synchronous perfect recall. The observer remembers
+the whole observation history and also sees all global timestamps. Hence indistin-
+guishability compares complete timed observation prefixes.
+Timed Büchi automata.
+Timed Büchi automata serve as the system model.
+Let X be a finite set of clocks. We write Guards(X) for the set of Boolean combinations of
+atomic constraints
+x ∈I
+with x ∈X and I ∈I, where I is the set of intervals of the form
+(m, n), [m, n), (m, n], [m, n], (m, ∞), [m, ∞),
+
+
+=== PAGE 64 ===
+6.1. Timed Words and Timed Automata
+60
+with m, n ∈N and m ≤n (note that this includes the empty interval).
+A member
+g ∈Guards(X) is called a guard over X. A valuation is a mapping ν : X →R≥0. We write
+ν |= g in the obvious way, denote by 0 the all-zero valuation, and write ν[R := 0] for the
+valuation obtained from ν by resetting the clocks in R ⊆X to 0.
+Definition 6.4 (Timed Büchi automaton)
+A timed Büchi automaton over Σ is a tuple
+A = (Q, ι, X, ∆, F)
+where:
+• Q is a finite set of states and ι ∈Q is the initial state,
+• X is a finite set of clocks,
+• F ⊆Q is the set of accepting states,
+• ∆⊆Q × Σ × Guards(X) × 2X × Q.
+The automaton is deterministic if for all distinct transitions
+τ1 = (q, σ, g1, R1, q1),
+τ2 = (q, σ, g2, R2, q2)
+in ∆, we have
+g1 ∧g2 ≡false.
+Definition 6.5 (Configurations, runs, and traces)
+A configuration is a pair (q, ν) ∈Q × Val(X). Let d ∈R≥0 denote a delay, that is,
+the amount of time elapsed before the next event occurs. We write
+(q, ν)
+(σ,d)
+−−−→
+(g,R) (q′, ν′)
+if (q, σ, g, R, q′) ∈∆, ν + d |= g, and ν′ = (ν + d)[R := 0].
+A run of A is an infinite sequence
+π = (q0, ν0)
+(σ1,d1)
+−−−−→
+(g1,R1) (q1, ν1)
+(σ2,d2)
+−−−−→
+(g2,R2) (q2, ν2) . . .
+starting in (ι, 0), i.e., such that (q0, ν0) = (ι, 0).
+
+
+=== PAGE 65 ===
+6.2. Deterministic Timed Automata on Finite Words
+61
+Its induced timed word is
+trace(π) = (σ1, d1)(σ2, d1 + d2)(σ3, d1 + d2 + d3) . . . .
+The run is accepting if it visits F infinitely often.
+The timed language of A is
+L(A) = { w ∈TWω(Σ) | ∃accepting run π of A such that trace(π) = w }.
+Thus, by definition, the language of a timed Büchi automaton contains only non-zeno timed
+words.
+A central algorithmic result underlying much of the theory of timed automata is the
+decidability of the emptiness problem, originally established by Alur and Dill [AD94] using
+a finite region abstraction.
+Theorem 6.6 (Decidability of emptiness for timed Büchi automata)
+Given a timed Büchi automaton A, it is decidable whether L(A) = ∅.
+6.2
+Deterministic Timed Automata on Finite Words
+For monitoring and diagnosis we also need deterministic timed automata over finite timed
+words.
+Definition 6.7 (Deterministic timed automaton)
+A deterministic timed automaton (DTA) over Σ is a tuple
+A = (Q, ι, X, δ, F)
+where:
+• Q is a finite set of states and ι ∈Q is the initial state,
+• X is a finite set of clocks,
+• F ⊆Q is the set of final states,
+• δ is a symbolic transition function
+δ: Q × Σ →2Guards(X)×2X×Q
+
+
+=== PAGE 66 ===
+6.3. Timed Temporal Logic
+62
+such that, for every q ∈Q and σ ∈Σ, δ(q, σ) is finite and, if
+δ(q, σ) = {(g1, R1, q1), . . . , (gn, Rn, qn)},
+then
+gi ∧gj ≡false
+for all i̸ = j, and
+g1 ∨. . . ∨gn ≡true.
+Hence for every state, letter, and valuation there is a unique enabled transition.
+This induces a concrete transition function
+bδ: Q × Val(X) × Σ →2X × Q.
+in the obvious way: bδ(q, ν, σ) = (R, q′) for the unique triple (g, R, q′) ∈δ(q, σ) such that
+ν |= g. We extend it to finite timed words as usual:
+δ∗: Q × Val(X) × TW∗(Σ) →Q × Val(X),
+with δ∗(q, ν, ε) = (q, ν), and for u · (σ, t) ∈TW∗(Σ),
+δ∗(q, ν, u · (σ, t)) = (q′, (νu + d)[R := 0]),
+where last(u) denotes the timestamp of the last event of u, δ∗(q, ν, u) = (qu, νu), d =
+t −last(u), last(ε) = 0, and (R, q′) = bδ(qu, νu + d, σ).
+The language of the DTA is
+L(A) = { u ∈TW∗(Σ) | δ∗(ι, 0, u) = (q, ν) for some q ∈F }.
+6.3
+Timed Temporal Logic
+Like in the untimed case, we use strict until and strict since as primitive operators. Strict
+operators are particularly natural for timed words. They are also close in spirit to the
+event-clock view of timed temporal logic, where constraints are evaluated with respect
+to the last past or first future occurrence of an event [RS99,BLS11]. Moving to a later
+position does not necessarily mean that time has advanced, since two consecutive events
+may have the same timestamp. Thus F+
+[0,0]ψ says that ψ holds at a distinct later event
+occurring at the same time as the current event. The non-strict operators below add the
+current-position case explicitly when 0 belongs to the interval.
+
+
+=== PAGE 67 ===
+6.3. Timed Temporal Logic
+63
+Definition 6.8 (Epistemic timed temporal logic)
+Formulas from epistemic timed temporal logic, denoted by TLTL∼, are generated by:
+φ ::= p | ¬φ | φ ∧φ | φ U+
+I φ | φ S+
+I φ | Kaφ
+where p ∈AP, a ∈Ag, and I ∈I.
+The fragment without epistemic operators is denoted by TLTL. It still contains both
+future and past timed modalities.
+Timed formulas in this chapter are interpreted at event positions only. Thus, the logic
+reasons about the timestamps of events, not about all intermediate time instants.
+Definition 6.9 (Semantics)
+Let T be a timed Büchi automaton over Σ and let w = (σ1, t1)(σ2, t2) . . . ∈L(T ).
+For k ≥1, satisfaction is defined inductively as follows:
+• T , w, k |= p if p ∈σk
+• the Boolean cases are standard
+• T , w, k |= φ U+
+I ψ if there exists j > k such that
+T , w, j |= ψ,
+T , w, i |= φ for all k < i < j,
+tj −tk ∈I,
+and j is the first future position satisfying ψ, i.e.,
+T , w, i̸ |= ψ
+for all k < i < j,
+• T , w, k |= φ S+
+I ψ if there exists j < k such that
+T , w, j |= ψ,
+T , w, i |= φ for all j < i < k,
+tk −tj ∈I
+and j is the last past position satisfying ψ, i.e.,
+T , w, i̸ |= ψ
+for all j < i < k,
+• T , w, k |= Kaφ if for all w′ ∈L(T ) with (w, k) ∼a (w′, k), we have T , w′, k |= φ
+Note that φ U+
+I ψ requires that the first future position satisfying ψ occurs at a delay in I,
+and φ S+
+I ψ requires that the last past position satisfying ψ lies at a delay in I. This differs
+from the more common existential interval-witness reading, where any suitable future or
+
+
+=== PAGE 68 ===
+6.4. Timed Model Checking
+64
+past witness in the interval would suffice. Related strict first-time semantics have also
+been studied explicitly in timed logics [AL25]. Event-clock logic is likewise based on the
+first future and last past occurrence of an event [RS99,BLS11]. We adopt this convention
+because it leads to simpler automata-theoretic constructions in the sequel.
+As before, we write T |= φ if T , w, 1 |= φ for every w ∈L(T ).
+Derived operators.
+We define:
+φ UI ψ :=
+
+
+
+ψ ∨(φ ∧φ U+
+I ψ)
+if 0 ∈I
+φ ∧φ U+
+I ψ
+if 0 /∈I
+φ SI ψ :=
+
+
+
+ψ ∨(φ ∧φ S+
+I ψ)
+if 0 ∈I
+φ ∧φ S+
+I ψ
+if 0 /∈I
+and therefore
+F+
+I φ := ⊤U+
+I φ
+P+
+I φ := ⊤S+
+I φ
+FIφ := ⊤UI φ
+PIφ := ⊤SI φ
+GIφ := ¬FI¬φ
+HIφ := ¬PI¬φ
+For the unbounded versions, we use the interval [0, ∞) and write:
+φ U+ ψ := φ U+
+[0,∞) ψ
+φ S+ ψ := φ S+
+[0,∞) ψ
+φ U ψ := φ U[0,∞) ψ
+φ S ψ := φ S[0,∞) ψ
+Fφ := F[0,∞)φ
+Pφ := P[0,∞)φ
+Gφ := G[0,∞)φ
+Hφ := H[0,∞)φ.
+Definition 6.10 (Past Fragment)
+The past fragment of TLTL, denoted TLTLpast, consists of formulas of the form Gψ,
+where ψ does not use the future operator U+
+I .
+6.4
+Timed Model Checking
+The first important point is that timed model checking remains decidable as long as we do
+not add epistemic operators. We recall this through the same kind of construction as in
+the untimed case: given a system and a formula, we build an automaton that runs on the
+
+
+=== PAGE 69 ===
+6.4. Timed Model Checking
+65
+same timed words and records, at each event position, whether the formula is true there.
+For past formulas this construction can be made deterministic. For formulas with future
+operators one still obtains a timed transducer, but the construction is less direct.
+Let us first define the timed analogue of a transducer:
+Definition 6.11 (Timed transducer)
+Let T be a timed Büchi automaton over Σ and let φ be a timed formula. A timed
+(T , φ)-transducer consists of a timed Büchi automaton
+Aφ = (Qφ, ιφ, Xφ, ∆φ, Fφ)
+over Σ together with an output map γφ : Qφ →{0, 1} such that:
+L(Aφ) = L(T ),
+and for every accepting run
+π = (q0, ν0)
+(σ1,d1)
+−−−−→
+(g1,R1) (q1, ν1)
+(σ2,d2)
+−−−−→
+(g2,R2) (q2, ν2) . . .
+of Aφ over a timed word w ∈L(T ) and every k ≥1,
+γφ(qk) = 1
+⇐⇒
+T , w, k |= φ.
+Theorem 6.12 (Timed transducers for TLTL)
+For every timed Büchi automaton T and every TLTL formula φ, one can effectively
+construct a timed (T , φ)-transducer. For formulas from the past fragment TLTLpast,
+the transducer can be chosen deterministic.
+Proof sketch.
+Atomic propositions and Boolean connectives are handled exactly as
+in the untimed case, by copying the system automaton and decorating states with the
+corresponding truth value.
+The first genuinely timed case is strict since. For every pair of formulas φ1, φ2 and interval
+I, we have
+φ1 S+
+I φ2 ≡(φ1 S+ φ2) ∧P+
+I φ2.
+The untimed strict-since part is handled as before, so it suffices to explain the construction
+for P+
+I ψ.
+
+
+=== PAGE 70 ===
+6.4. Timed Model Checking
+66
+Assume that by induction we already have a timed (T , ψ)-transducer
+Aψ = (Qψ, ιψ, Xψ, ∆ψ, Fψ)
+with output map γψ : Qψ →{0, 1}. Let z /∈Xψ be a fresh clock. We build a new transducer
+for P+
+I ψ whose states are triples
+(q, past, sat) ∈Qψ × {0, 1} × {0, 1}.
+Their intended meaning is:
+• q is the current state of the transducer for ψ,
+• past = 1 means that a strict past occurrence of ψ already exists,
+• sat = 1 means that P+
+I ψ holds at the current position.
+The fresh clock z stores the elapsed time since the most recent position at which ψ held.
+Whenever the construction enters a position satisfying ψ, the clock z is reset so that this
+position becomes the new candidate past witness for all future positions.
+For every transition
+(q, σ, g, R, q′) ∈∆ψ
+and every past, sat ∈{0, 1}, we add new transitions from (q, past, sat) as follows. First
+define
+R′ =
+
+
+
+R ∪{z}
+if γψ(q′) = 1,
+R
+otherwise.
+Thus z is reset exactly when the new position satisfies ψ. The next past flag is
+past′ =
+
+
+
+1
+if past = 1 or γψ(q) = 1,
+0
+otherwise.
+We then add the transition tuple
+ (q, past, sat), σ, g ∧z ∈I, R′, (q′, past′, past′)
+
+and the transition tuple
+ (q, past, sat), σ, g ∧¬(z ∈I), R′, (q′, past′, 0)
+
+.
+The guard on z is tested before the possible reset of z in R′. Hence the satisfaction bit at the
+target position is computed from the old remembered witness, while a current occurrence
+of ψ is stored only for future positions.
+
+
+=== PAGE 71 ===
+6.4. Timed Model Checking
+67
+Thus, for each transition of the transducer for ψ, the new construction adds a split between
+the case z ∈I and the case z /∈I. Because the most recent past witness is unique, no
+additional nondeterministic guessing is needed. This yields a timed transducer for P+
+I ψ.
+Moreover, if the transducer for ψ is deterministic, then the new one is deterministic as well.
+Thus the construction gives deterministic transducers throughout the past fragment.
+For the future operator one reduces
+φ1 U+
+I φ2
+to an untimed strict-until component together with a timed eventuality constraint using
+the equivalence
+φ1 U+
+I φ2 ≡(φ1 U+ φ2) ∧F+
+I φ2.
+Moreover, for finite bounds one may split intervals as
+F+
+[m,n]φ ≡F+
+[0,n]φ ∧F+
+[m,∞)φ.
+The strict-future case is fundamentally harder: several pending timing obligations may
+have to be guessed and verified in parallel. Hence one can still obtain a timed transducer,
+but in general no deterministic one.
+□
+Solving the timed model-checking problem.
+We now use the transducer construction
+to decide model checking, exactly as in the untimed case.
+Theorem 6.13 (Timed model checking is decidable)
+The following problem is decidable: given a timed Büchi automaton T over Σ and a
+TLTL formula φ, do we have
+T |= φ ?
+Proof. By Theorem 6.12, we can construct a timed (T , φ)-transducer
+Aφ = (Qφ, ιφ, Xφ, ∆φ, Fφ)
+with output map γφ. By correctness of the transducer, for every accepting run
+(q0, ν0)
+(σ1,d1)
+−−−−→
+(g1,R1) (q1, ν1)
+(σ2,d2)
+−−−−→
+(g2,R2) (q2, ν2) . . .
+over a word w ∈L(T ), we have
+γφ(q1) = 1
+⇐⇒
+T , w, 1 |= φ.
+Thus, T̸ |= φ iff Aφ has an accepting run whose first reached state q1 satisfies γφ(q1) = 0.
+This is an emptiness problem for timed Büchi automata, with the additional finite-prefix
+
+
+=== PAGE 72 ===
+6.4. Timed Model Checking
+68
+t
+current time
+I
+rightmost
+value in I
+too recent
+older values in I
+are shadowed
+Figure 6.1: For a last-past constraint, only the rightmost value inside the current interval
+window can witness the formula now. Older values inside the window are shadowed. Values
+to the right of the interval are too recent now, but they must still be represented because
+they may enter the interval later.
+constraint on the first transition. Such a constraint can be encoded by a standard finite-state
+modification of the automaton. Since emptiness for timed Büchi automata is decidable,
+timed model checking for TLTL is decidable.
+□
+Note (Past vs. future)
+In the timed setting, past operators are technically simpler than future operators.
+The past can be summarized by finitely many clock values at the current position,
+whereas future operators may generate several simultaneous obligations that have to
+be checked later. Figure 6.1 illustrates the kind of finite memory that is needed in
+such constructions: at a given time, several earlier values may still be relevant for
+the current interval constraints. Among the values that already lie in the interval
+window, only the rightmost one is relevant for satisfying an existential past constraint;
+older ones are shadowed by it. Values to the right of the interval are still too recent,
+but they may become relevant later as time advances. A naive construction would
+therefore keep all such values, whose number is not bounded a priori. The nontrivial
+point is to replace this unbounded memory by a finite summary.
+The situation changes drastically once knowledge is added.
+Theorem 6.14 (Timed epistemic model checking is undecidable)
+Model checking becomes undecidable for the epistemic extension of timed temporal
+logic, i.e. for TLTL∼. In fact, undecidability already holds for the fixed formula
+G¬KaPs
+where s is an unobservable proposition.
+Proof. We reduce from the universality problem for timed automata (over finite words),
+which is undecidable [AD94]. Given a finite-word timed automaton A over an alphabet Γ,
+
+
+=== PAGE 73 ===
+6.4. Timed Model Checking
+69
+we ask whether
+L(A) = TW∗(Γ).
+Here A may be nondeterministic; we do not define this finite-word model explicitly in these
+notes, since it is the standard finite-word analogue of the timed Büchi automata used above.
+Fix
+AP = Γ ∪{#, s},
+Ag = {a},
+APa = Γ ∪{#}.
+Thus, the marker # is observable while the proposition s is not. We build a timed Büchi
+automaton TA with the following behavior.
+For every finite timed word
+u = (γ1, t1) . . . (γm, tm) ∈TW∗(Γ)
+let Tu = last(u), with last(ε) = 0, and let
+vu = (∅, Tu + 1)(∅, Tu + 2)(∅, Tu + 3) . . .
+be a fixed non-zeno observable continuation shifted to start after time Tu and containing
+no marker #. We introduce a private timed word
+wpriv(u) = ({s}, 0) ({γ1}, t1) . . . ({γm}, tm) ({#}, Tu) vu
+and a public timed word
+wpub(u) = (∅, 0) ({γ1}, t1) . . . ({γm}, tm) ({#}, Tu) vu.
+The system TA is arranged so that
+• every private word wpriv(u) belongs to L(TA),
+• the public word wpub(u) belongs to L(TA) iff u ∈L(A),
+• there are no other words in L(TA).
+Because s is unobservable, the private and public words corresponding to the same timed
+word u are indistinguishable to agent a at every position.
+Assume first that
+TA |= G¬KaPs.
+Take any u ∈TW∗(Γ) and consider wpriv(u) at the position of the marker #. At that point,
+s has occurred earlier, so
+TA, wpriv(u), k |= Ps.
+From ¬KaPs, there must exist an indistinguishable word w′ ∈L(TA) such that TA, w′, k |=
+
+
+=== PAGE 74 ===
+6.5. Timed Diagnosability and Timed Opacity
+70
+¬Ps. By construction, w′ cannot be private, and the observation up to the marker fixes the
+finite timed word u. Hence w′ can only be the corresponding public word wpub(u). Hence
+u ∈L(A). Since u was arbitrary, A is universal.
+Conversely, assume A is universal. Let w ∈L(TA) and k ≥1. If w is public, then s
+has not occurred, hence TA, w, k |= ¬Ps. Since w is indistinguishable from itself, we get
+TA, w, k |= ¬KaPs. If w = wpriv(u) is private, universality yields u ∈L(A), so the matching
+public word wpub(u) also belongs to L(TA). Since wpub(u) is indistinguishable from w for
+agent a and does not satisfy Ps, the observer cannot know that s occurred. Thus
+TA, w, k |= ¬KaPs.
+Hence
+TA |= G¬KaPs.
+This concludes the proof.
+□
+6.5
+Timed Diagnosability and Timed Opacity
+We next revisit diagnosability and opacity in the timed setting. The difference from the
+untimed case is that delay bounds are now measured in time units rather than in discrete
+steps.
+Definition 6.15 (Timed diagnosability)
+Let T be a timed Büchi automaton over Σ, let a ∈Ag, let e ∈AP \ APa, and let
+D ∈N. We say that T is timed-D-P-diagnosable (wrt. a and e) if
+T |= G
+ e →F[0,D]KaPe
+
+.
+Thus, whenever an error occurs, the observer must know within at most D time units
+that an error has occurred in the past.
+Theorem 6.16 (Characterization of timed bounded P-diagnosability)
+The following are equivalent:
+1. T is not timed-D-P-diagnosable,
+2. there exist timed words
+w = (σ1, t1)(σ2, t2) . . .
+and
+w′ = (σ′
+1, t′
+1)(σ′
+2, t′
+2) . . .
+
+
+=== PAGE 75 ===
+6.5. Timed Diagnosability and Timed Opacity
+71
+w
+w′
+first e
+¬e
+¬e
+¬e
+¬e
+z := 0
+z ≤D
+z > D
+D time units
+Figure 6.2: Twin-plant view of non-diagnosability: after the first error on the upper run, the
+lower run stays fault-free yet observationally indistinguishable for the whole time window
+of length D.
+in L(T ) and a position k ≥1 such that
+• T , w, k |= e,
+• for every position k′ ≥k with tk′ −tk ≤D
+– the prefix w′
+≤k′ is fault-free and
+– (w, k′) ∼a (w′, k′).
+Idea.
+This is the timed analogue of the untimed twin-plant characterization. If knowledge
+of the error is missing within the allowed time window, then there must be an indistin-
+guishable fault-free companion run for the whole duration of that window. Because timed
+words are non-zeno, there are only finitely many positions k′ ≥k with tk′ −tk ≤D; hence
+there is a last one. An indistinguishable fault-free companion for that last position also
+works for all earlier positions in the window, by prefix closure of fault-freeness and of
+indistinguishability. Conversely, such a companion run directly witnesses failure of the
+formula G(e →F[0,D]KaPe).
+□
+Theorem 6.17 (Timed Bounded P-diagnosability is decidable)
+Given T , a, e, and D, one can decide whether T is timed-D-P-diagnosable.
+Proof sketch.
+One uses a twin-plant construction. Two runs w and w′ are simulated
+in parallel under the constraint that they remain indistinguishable to the observer. The
+first run must contain an error. A fresh clock z is reset at the first such error and measures
+the time elapsed since that occurrence. The second run is forced to remain fault-free while
+z ≤D. See Figure 6.2 for the intuition.
+Non-diagnosability is therefore equivalent to the existence of an accepting run of this product
+automaton. Since emptiness for timed Büchi automata is decidable, timed diagnosability is
+decidable as well.
+□
+
+
+=== PAGE 76 ===
+6.5. Timed Diagnosability and Timed Opacity
+72
+Timed DTA-diagnosers.
+We also consider the operational notion of a diagnoser given
+as a DTA over the observation alphabet. This is the automaton that reads the observer’s
+timed information and is supposed to switch to an alarm state once enough evidence for
+the fault has been gathered.
+Definition 6.18 (Timed DTA-diagnoser)
+Let T be a timed system, let a ∈Ag, let e ∈AP \ APa, and let D ∈N. A DTA D
+over Σa is a timed-D-diagnoser if for every timed word w = (σ1, t1)(σ2, t2) . . . ∈L(T )
+and every k ≥1:
+• if T , w, k |= ¬Pe, then
+obsa(w≤k) /∈L(D),
+• if T , w, k |= e, then there exists k′ ≥k such that
+tk′ −tk ≤D
+and for all k′′ ≥k′,
+obsa(w≤k′′) ∈L(D).
+This is the natural timed analogue of an untimed diagnoser: no false positives are allowed,
+and after an error the diagnoser must switch to acceptance within the allowed delay and
+then stay there.
+Note (Diagnosability and event-driven diagnosers)
+Both the logical notion of timed diagnosability, given by the formula
+G
+ e →F[0,D]KaPe
+
+,
+and the DTA-based diagnoser model considered here are event-based. However, unlike
+in the untimed setting, it is a separate question whether timed-D-P-diagnosability
+yields a concrete timed-D-diagnoser in this operational model. Independently, one
+may also ask whether an event-driven diagnoser model is suitable at all in the timed
+setting. The example below is meant to illustrate this latter issue.
+Example 6.19 (A limitation of event-driven timed diagnosers)
+Assume the observer sees all propositions except the error proposition e. Suppose the
+system has only two possible timed behaviors:
+
+
+=== PAGE 77 ===
+6.6. Timed Monitorability
+73
+• either an event labeled {e} occurs at some time t < 1,
+• or no error occurs and the first event observable to the diagnoser occurs only
+after time 100.
+This illustrates why timed diagnosis is more subtle than in the untimed setting. On
+the faulty branch, the diagnoser receives an input event before time 1 and can in
+principle react to it immediately. On the non-faulty branch, however, no input event
+is received before time 100. Hence, if one wants the diagnoser to conclude already
+at time 1 that no fault has occurred so far, this conclusion would have to be based
+solely on the absence of events during the interval [0, 1]. But the event-driven DTA
+model used here changes state only when a new observable timed event is read. So
+this example should be understood as motivation: in the timed setting, a concrete
+real-time diagnoser may need timeout transitions or some other mechanism that can
+react to the passage of time itself, and not only to newly read events.
+We now turn to opacity. As in the untimed setting, this is a knowledge-based property, but
+here the relevant indistinguishability relation is the timed one introduced above.
+Definition 6.20 (Timed opacity)
+Let T be a timed Büchi automaton over Σ, let a ∈Ag, and let s ∈AP \ APa. We
+say that T is timed opaque if
+T |= G¬KaPs.
+Theorem 6.21
+Timed opacity is undecidable.
+Proof. This is immediate from the proof of Theorem 6.14, since the fixed formula G¬KaPs
+used in the reduction is already the opacity formula.
+□
+6.6
+Timed Monitorability
+For monitorability we return to the classical runtime-verification setting:
+Ag = {a},
+APa = AP,
+L(T ) = TWω(Σ).
+Thus there is a single fully informed observer, and the system is the most-permissive timed
+system. So we only consider the classical one-observer case here. We also restrict attention
+to timed temporal formulas without epistemic operators. Accordingly, we write w, k |= φ for
+
+
+=== PAGE 78 ===
+6.6. Timed Monitorability
+74
+satisfaction in this fixed most-permissive timed model. Later we briefly contrast this with
+monitorability questions for timed languages given by automata. Even in this restricted
+timed setting, the monitorability question is already subtle enough. This exhibits the main
+difficulties caused by real-time constraints. For this reason, we do not discuss more general
+variants here, as we did in the untimed setting.
+For a TLTL formula φ, we write
+L(φ) = { w ∈TWω(Σ) | w, 1 |= φ }
+in this fixed most-permissive timed model.
+Definition 6.22 (Timed monitorability)
+A formula φ ∈TLTL is timed-monitorable if for every finite timed word u ∈TW+(Σ)
+there exists a finite timed word v ∈TW+(Σ) such that u is a prefix of v and one of
+the following holds:
+• for every w ∈TWω(Σ), if v is a prefix of w, then w ∈L(φ);
+• for every w ∈TWω(Σ), if v is a prefix of w, then w ∈L(¬φ).
+In other words, every finite observation should admit a finite continuation that forces a
+definitive positive or negative verdict.
+Theorem 6.23 (Past timed formulas are monitorable)
+Let φ ∈TLTLpast, that is,
+φ = Gψ
+for some TLTL formula ψ that does not use future operators. Then φ is timed-
+monitorable.
+Proof. By the past-fragment construction from the proof of Theorem 6.12, one effectively
+obtains a deterministic timed automaton
+Aψ = (Q, ι, X, δ, F)
+over Σ such that for every infinite timed word w ∈TWω(Σ) and every k ≥1,
+w≤k ∈L(Aψ)
+⇐⇒
+w, k |= ψ.
+Thus, F exactly represents the states where the local past property ψ holds at the current
+position. To monitor φ = Gψ, we must distinguish three situations:
+
+
+=== PAGE 79 ===
+6.6. Timed Monitorability
+75
+• ⊥: the property has already been violated,
+• ?: the property holds so far, but could still be violated later,
+• ⊤: the property holds so far and can never be violated later.
+The key auxiliary ingredient is the following reachability guard. For every state q ∈Q and
+every reset set R ⊆X, one can effectively compute a guard
+gR
+q ∈Guards(X)
+such that for every valuation ν ∈Val(X):
+ν |= gR
+q
+⇐⇒
+(q, ν[R := 0]) admits a finite timed continuation into some state q′ /∈F.
+Intuitively, gR
+q says that after applying the reset set R, it is still possible to reach a future
+position where ψ is false. Such a guard is effectively computable by the region construction,
+since the set of valuations with this reachability property is a finite union of regions and is
+therefore definable by a guard.
+We now construct a timed monitor
+Mφ = (Q × {⊥, ?, ⊤}, (ι, ?), X, δM)
+whose second component is the output value. It is best viewed as a timed Moore machine:
+there is no accepting set, only the current verdict.
+Fix q ∈Q and σ ∈Σ, and write
+δ(q, σ) = {(gi, Ri, qi) | i = 1, . . . , m}.
+We define δM as follows.
+Mode ⊥.
+Once the property is violated, it remains violated:
+δM((q, ⊥), σ) ∋(gi, Ri, (qi, ⊥))
+for all i.
+Mode ⊤.
+Once the property is guaranteed forever, it remains guaranteed:
+δM((q, ⊤), σ) ∋(gi, Ri, (qi, ⊤))
+for all i.
+Mode ?.
+Here the current run has not yet been decided.
+
+
+=== PAGE 80 ===
+6.6. Timed Monitorability
+76
+?
+⊥
+⊤
+qi /∈F
+qi ∈F and
+¬gRi
+qi
+qi ∈F and gRi
+qi
+Σ
+Σ
+Figure 6.3: Three-valued timed monitor for Gψ. Mode ? means “true so far, but not
+yet guaranteed forever”. Mode ⊤means “permanently safe”, and mode ⊥means “already
+violated”.
+• If qi /∈F, then ψ is false at the current position, hence Gψ is already violated:
+δM((q, ?), σ) ∋(gi, Ri, (qi, ⊥)).
+• If qi ∈F, then ψ holds at the current position. There are now two subcases:
+δM((q, ?), σ) ∋(gi ∧gRi
+qi , Ri, (qi, ?)),
+δM((q, ?), σ) ∋(gi ∧¬gRi
+qi , Ri, (qi, ⊤)).
+The first transition means: ψ currently holds, but a future violation is still reachable,
+so the verdict stays undecided. The second means: ψ currently holds and no future
+violation is reachable, so the verdict becomes permanently true.
+Transitions from mode ? are illustrated in Figure 6.3.
+The guards remain complete and disjoint, so Mφ is again a deterministic timed automaton.
+Its correctness is immediate from the meaning of the three verdicts and of the guards gR
+q :
+• entering mode ⊥means that some position already violates ψ,
+• staying in mode ? means that all positions so far satisfy ψ, but a future bad position
+is still possible,
+• entering mode ⊤means that every continuation will satisfy ψ at all future positions.
+Now let u ∈TW+(Σ) be any finite timed word, and let (q, θ) be the state reached by Mφ
+on u. If θ = ⊥, then every infinite timed word extending u lies in L(¬φ). If θ = ⊤, then
+every infinite timed word extending u lies in L(φ). Finally, if θ = ?, then the last transition
+entering mode ? must have been of the form
+(gi ∧gRi
+qi , Ri, (qi, ?))
+
+
+=== PAGE 81 ===
+6.6. Timed Monitorability
+77
+A
+q ∈F
+q /∈F
+⊤
+⊥
+⊤
+#
+#
+Γ ∪{#}
+Γ
+#
+#
+Γ
+Figure 6.4: Shape of the reduction for monitorability of timed-automaton languages. After
+the marker #, the construction exposes whether the simulated run of A was in an accepting
+state. In the lower branch, the additional rightmost state ensures that no finite continuation
+yields a definitive verdict.
+with qi ∈F. By the definition of gRi
+qi , after applying the reset set Ri there exists a finite
+timed continuation leading to some state outside F. Following such a continuation from
+u brings Mφ to mode ⊥, and from then on every continuation satisfies ¬φ. Thus in all
+cases, u admits a finite timed extension that forces either φ or ¬φ. Hence the formula φ is
+timed-monitorable.
+□
+Note (Status of full TLTL)
+Recall that we covered only the past fragment. The exact decidability status of
+monitorability for full TLTL is left open.
+There is a separate automaton-theoretic question: given a timed automaton interpreted
+as a property, is its language monitorable? Here we view a timed automaton simply as a
+language acceptor over a finite alphabet Γ, without introducing an additional proposition
+structure. This problem is undecidable.
+Theorem 6.24 (Monitorability of timed automaton properties)
+Given a timed Büchi automaton A, it is undecidable whether its language is moni-
+torable.
+Proof sketch.
+The reduction is again from universality of timed automata over finite
+timed words. Starting from a complete nondeterministic timed automaton over an alphabet
+
+
+=== PAGE 82 ===
+6.7. Bibliographic Notes
+78
+Γ, add a fresh symbol #. The construction, which is illustrated in Figure 6.4, first simulates
+A on Γ. When a marker # is read in an accepting simulated state, it moves to a permanently
+accepting sink. When a marker is read in a nonaccepting simulated state, it moves to the
+lower component: there a Γ-transition stays rejecting, while a #-transition moves to an
+accepting state, from which every further # keeps the word accepted and a letter from Γ
+leads back to the rejecting state.
+If A is universal, the resulting language is trivially monitorable. If A is not universal,
+choose a timed word u /∈L(A). After reading the prefix u#, the automaton is in the
+lower rejecting state. From there, no finite continuation can force a conclusive verdict:
+continuations over Γ stay rejecting, whereas a continuation with a marker # moves to the
+lower accepting state. Moreover, even after reaching that accepting state, a later letter from
+Γ returns to the rejecting state. Hence after every finite extension of u#, both acceptance
+and rejection are still possible. Hence monitorability fails.
+□
+6.7
+Bibliographic Notes
+Timed automata were introduced by Alur and Dill and are the standard model for finite-state
+real-time systems [AD94]. For a detailed and accessible presentation of timed automata,
+including the undecidability proof for the universality problem used above, we refer the
+reader to Bouyer’s lecture notes [Bou26]. The event-clock perspective underlying the
+first/last-witness intuition goes back to Raskin and Schobbens [RS99]. A related strict
+first-time semantics was studied recently by Alsmann and Lange [AL25]. Related automata-
+theoretic constructions for future timed modalities were given by Akshay, Gastin, Govind,
+and Srivathsan [AGGS24]. Timed diagnosis for timed automata has been studied extensively;
+for a survey of the main results and variants, see Cassez and Tripakis [CT13]. Timed opacity
+was studied by Cassez [Cas09], who already showed undecidability for a very restricted class
+of timed automata. Monitor constructions for timed systems were treated thoroughly by
+Bauer, Leucker, and Schallhart [BLS11]. For monitoring algorithms for past-only real-time
+logics, and for a comparison between point-based and interval-based semantics, see Basin,
+Klaedtke, and Zalinescu [BKZ18]. Monitorability for timed-automaton languages was
+studied by Grosen, Kauffman, Larsen, and Zimmermann [GKLZ25]; in particular, the
+undecidability proof sketched above follows that construction. Overall, the timed setting
+is more delicate than the untimed one: many central timed verification problems without
+knowledge remain decidable, while the combination with epistemic reasoning quickly reaches
+the boundary of undecidability.
+
+
+=== PAGE 83 ===
+Bibliography
+[AD94]
+Rajeev Alur and David L. Dill. A theory of timed automata. Theor. Comput.
+Sci., 126(2):183–235, 1994.
+[AGGS24] S. Akshay, Paul Gastin, R. Govind, and B. Srivathsan. MITL model checking via
+generalized timed automata and a new liveness algorithm. In Rupak Majumdar
+and Alexandra Silva, editors, 35th International Conference on Concurrency
+Theory, CONCUR 2024, Calgary, Canada, September 9-13, 2024, LIPIcs, pages
+5:1–5:19. Schloss Dagstuhl - Leibniz-Zentrum für Informatik, 2024.
+[AL25]
+Eric Alsmann and Martin Lange. Metric linear-time temporal logic with strict
+first-time semantics. In Thierry Vidal and Przemyslaw Andrzej Walega, editors,
+32nd International Symposium on Temporal Representation and Reasoning,
+TIME 2025, Queen Mary University of London, UK, August 27-29, 2025,
+LIPIcs, pages 3:1–3:14. Schloss Dagstuhl - Leibniz-Zentrum für Informatik,
+2025.
+[BF16]
+Borzoo Bonakdarpour and Bernd Finkbeiner. Runtime verification for hyperltl.
+In Yliès Falcone and César Sánchez, editors, Runtime Verification - 16th
+International Conference, RV 2016, Madrid, Spain, September 23-30, 2016,
+Proceedings, volume 10012 of Lecture Notes in Computer Science, pages 41–45.
+Springer, 2016.
+[BFFR18]
+Ezio Bartocci, Yliès Falcone, Adrian Francalanza, and Giles Reger. Introduction
+to runtime verification. In Ezio Bartocci and Yliès Falcone, editors, Lectures
+on Runtime Verification - Introductory and Advanced Topics, volume 10457 of
+Lecture Notes in Computer Science, pages 1–33. Springer, 2018.
+[BK08]
+Christel Baier and Joost-Pieter Katoen. Principles of model checking. MIT
+Press, 2008.
+[BKMR08] Jeremy W. Bryans, Maciej Koutny, Laurent Mazaré, and Peter Y. A. Ryan.
+Opacity generalised to transition systems. Int. J. Inf. Sec., 7(6):421–435, 2008.
+[BKZ18]
+David A. Basin, Felix Klaedtke, and Eugen Zalinescu. Algorithms for monitoring
+real-time properties. Acta Informatica, 55(4):309–338, 2018.
+[BLS11]
+Andreas Bauer, Martin Leucker, and Christian Schallhart. Runtime verification
+for LTL and TLTL. ACM Trans. Softw. Eng. Methodol., 20(4):14:1–14:64, 2011.
+[BMM19]
+Laura Bozzelli, Bastien Maubert, and Aniello Murano. The complexity of
+model checking knowledge and time. In Sarit Kraus, editor, Proceedings of the
+79
+
+
+=== PAGE 84 ===
+Bibliography
+80
+Twenty-Eighth International Joint Conference on Artificial Intelligence, IJCAI
+2019, Macao, China, August 10-16, 2019, pages 1595–1601. ijcai.org, 2019.
+[Bou26]
+Patricia Bouyer. Verification of timed systems. Lecture notes. Available at
+https://hal.science/hal-05551849, 2026.
+[Cas09]
+Franck Cassez. The dark side of timed opacity. In Jong Hyuk Park, Hsiao-
+Hwa Chen, Mohammed Atiquzzaman, Changhoon Lee, Tai-Hoon Kim, and
+Sang-Soo Yeo, editors, Advances in Information Security and Assurance, Third
+International Conference and Workshops, ISA 2009, Seoul, Korea, June 25-27,
+2009. Proceedings, Lecture Notes in Computer Science, pages 21–30. Springer,
+2009.
+[CDM09]
+Franck Cassez, Jérémy Dubreil, and Hervé Marchand. Dynamic observers
+for the synthesis of opaque systems. In Zhiming Liu and Anders P. Ravn,
+editors, Automated Technology for Verification and Analysis, 7th International
+Symposium, ATVA 2009, Macao, China, October 14-16, 2009. Proceedings,
+volume 5799 of Lecture Notes in Computer Science, pages 352–367. Springer,
+2009.
+[CL10]
+Mika Cohen and Alessio Lomuscio. Non-elementary speed up for model checking
+synchronous perfect recall. In Helder Coelho, Rudi Studer, and Michael J.
+Wooldridge, editors, ECAI 2010 - 19th European Conference on Artificial
+Intelligence, Lisbon, Portugal, August 16-20, 2010, Proceedings, volume 215
+of Frontiers in Artificial Intelligence and Applications, pages 1077–1078. IOS
+Press, 2010.
+[CT13]
+Franck Cassez and Stavros Tripakis. Fault diagnosis of timed systems. In
+Claude Jard and Olivier H. Roux, editors, Communicating Embedded Systems,
+pages 107–138. Wiley, 2013.
+[DLT00]
+Rami Debouk, Stéphane Lafortune, and Demosthenis Teneketzis. Coordinated
+decentralized protocols for failure diagnosis of discrete event systems. Discret.
+Event Dyn. Syst., 10(1-2):33–86, 2000.
+[DMW15]
+Volker Diekert, Anca Muscholl, and Igor Walukiewicz. A note on monitors and
+Büchi automata. In Martin Leucker, Camilo Rueda, and Frank D. Valencia,
+editors, Theoretical Aspects of Computing - ICTAC 2015 - 12th International
+Colloquium Cali, Colombia, October 29-31, 2015, Proceedings, volume 9399 of
+Lecture Notes in Computer Science, pages 39–57. Springer, 2015.
+[FHMV95] Ronald Fagin, Joseph Y. Halpern, Yoram Moses, and Moshe Y. Vardi. Reasoning
+About Knowledge. MIT Press, 1995.
+[FHST17]
+Bernd Finkbeiner, Christopher Hahn, Marvin Stenger, and Leander Tentrup.
+Monitoring hyperproperties. In Shuvendu K. Lahiri and Giles Reger, editors,
+
+
+=== PAGE 85 ===
+Bibliography
+81
+Runtime Verification - 17th International Conference, RV 2017, Seattle, WA,
+USA, September 13-16, 2017, Proceedings, volume 10548 of Lecture Notes in
+Computer Science, pages 190–207. Springer, 2017.
+[FS25]
+Bernd Finkbeiner and Julian Siber. Explainability requirements as hyperprop-
+erties. Acta Informatica, 62(4):38, 2025.
+[GKLZ25]
+Thomas Møller Grosen, Sean Kauffman, Kim G. Larsen, and Martin Zimmer-
+mann. Time for timed monitorability. In Patricia Bouyer and Jaco van de
+Pol, editors, 36th International Conference on Concurrency Theory, CONCUR
+2025, Aarhus, Denmark, August 26-29, 2025, LIPIcs, pages 19:1–19:20. Schloss
+Dagstuhl - Leibniz-Zentrum für Informatik, 2025.
+[LLH18]
+Stéphane Lafortune, Feng Lin, and Christoforos N. Hadjicostis. On the history
+of diagnosability and opacity in discrete event systems. Annu. Rev. Control.,
+45:257–266, 2018.
+[LS09]
+Martin Leucker and Christian Schallhart. A brief account of runtime verification.
+J. Log. Algebraic Methods Program., 78(5):293–303, 2009.
+[PZ06]
+Amir Pnueli and Aleksandr Zaks. PSL model checking and run-time verification
+via testers. In Jayadev Misra, Tobias Nipkow, and Emil Sekerinski, editors,
+FM 2006: Formal Methods, 14th International Symposium on Formal Methods,
+Hamilton, Canada, August 21-27, 2006, Proceedings, volume 4085 of Lecture
+Notes in Computer Science, pages 573–586. Springer, 2006.
+[RS99]
+Jean-François Raskin and Pierre-Yves Schobbens. The logic of event clocks -
+decidability, complexity and expressiveness. J. Autom. Lang. Comb., 4(3):247–
+282, 1999.
+[SSL+95]
+Meera Sampath, Raja Sengupta, Stéphane Lafortune, Kasim Sinnamohideen,
+and Demosthenis Teneketzis. Diagnosability of discrete-event systems. IEEE
+Trans. Autom. Control., 40(9):1555–1575, 1995.
+[vdMS99]
+Ron van der Meyden and Nikolay V. Shilov. Model checking knowledge and
+time in systems with perfect recall (extended abstract). In C. Pandu Rangan,
+Venkatesh Raman, and Ramaswamy Ramanujam, editors, Foundations of Soft-
+ware Technology and Theoretical Computer Science, 19th Conference, Chennai,
+India, December 13-15, 1999, Proceedings, volume 1738 of Lecture Notes in
+Computer Science, pages 432–445. Springer, 1999.
+[WYL07]
+Yin Wang, Tae-Sic Yoo, and Stéphane Lafortune. Diagnosis of discrete event
+systems using decentralized architectures. Discret. Event Dyn. Syst., 17(2):233–
+263, 2007.
