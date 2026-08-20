@@ -1,0 +1,44 @@
+{
+  "hypothesis_id": "h-v030-specification-mutation-evaluator-audit",
+  "title": "规格驱动的智能体评测器变异审计",
+  "problem": "执行型智能体基准可能在论文中声明一个评测语义，但发布评测器只实现其中一部分，使未要求行为错误保留通过判定或得分。",
+  "target_failure": {
+    "summary": "Agent-Diff 论文声明所有状态变化都必须被断言或忽略字段解释，但发布评测器没有计算未解释剩余差分。",
+    "card_ids": [],
+    "evidence_ids": []
+  },
+  "mechanism_claim": "从论文或基准声明抽取可执行语义不变量，把每条不变量编译为最小状态变异及预期判定关系，再执行发布评测器并缩减违反关系的反例。",
+  "changed_computation": {
+    "baseline": "人工阅读论文和评测代码，或只运行原始基准任务，不系统检查声明语义对反事实状态变化的敏感性。",
+    "intervention": "将声明的闭世界、单调性或禁止副作用不变量编译为状态变异，并检查通过判定与得分是否按不变量变化。",
+    "information_available": "公开论文、公开任务规格、发布评测代码、本地合成状态差分和真实任务表名。",
+    "timing": "基准发布前或版本升级后的离线评测器审计。",
+    "budget_effect": "增加确定性的本地变异执行与反例缩减，不需要调用被评测智能体。"
+  },
+  "minimal_killer_experiment": "在 Agent-Diff 固定提交上，解析四套件任务断言与真实表名，向状态差分加入按论文应触发不干净门控的最小未解释变化，比较原始与变异后的发布评测结果，并构造至少一个原始和变异轨迹都通过的成功见证。",
+  "falsifier": "若现有工作已经自动交叉核验基准规格与评测逻辑，或已经用语义改变变体的幸存来诊断并增强基准测试充分性，则该候选只是既有审计与变异测试的实例。",
+  "alternative_explanations": [
+    "论文与仓库可能对应不同未标注版本",
+    "空基础差分上的输出不变不能证明真实成功率被抬高",
+    "未提及表变化可能由任务环境另行禁止",
+    "修复评测器只是在实现论文已有的闭世界方法"
+  ],
+  "nearest_prior_risk": "BenchGuard 和 Auto Benchmark Audit 已覆盖评测规格不匹配，STING 已用语义改变变体的幸存诊断基准测试不充分，Layer-Isolated Evaluation 和通用蜕变测试覆盖按层不变量与故障注入。",
+  "lineage_note": "源于 Agent-Diff 论文闭世界评测定义与固定发布提交之间的可执行语义差异；本版本完全非安全、无网络地复现。",
+  "literature_refs": [
+    "arXiv:2602.11224v3 Agent-Diff",
+    "arXiv:2604.24955 BenchGuard",
+    "arXiv:2605.26079 Auto Benchmark Audit",
+    "arXiv:2604.01518 STING",
+    "arXiv:2606.11686 Layer-Isolated Evaluation"
+  ],
+  "descriptors": {
+    "problem_family": "执行型智能体基准的评测语义漂移",
+    "intervention_family": "规格驱动变异与评测器反例缩减",
+    "computation_stage": "离线基准验证",
+    "information_source": "论文声明、任务规格、评测代码和状态差分",
+    "evaluation_mode": "固定提交上的本地确定性执行",
+    "timing_class": "发布前或版本升级后",
+    "budget_class": "无模型调用的静态解析与变异执行"
+  }
+}
