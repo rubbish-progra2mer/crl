@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "query_dataset": {
+    "id": "mangopy/ToolRet-Queries",
+    "revision": "b8c76ad3349ff17497b6bdb28bb5b8f61a0f6445",
+    "split": "queries"
+  },
+  "tool_dataset": {
+    "id": "mangopy/ToolRet-Tools",
+    "revision": "e06c38c75612b6536bd959e08cdd345894aba6a7",
+    "split": "tools",
+    "configs": ["web", "code", "customized"]
+  },
+  "phases": {
+    "development": ["apibank", "restgpt-tmdb", "rotbench", "taskbench-daily"],
+    "confirmation": [
+      "craft-math-algebra",
+      "craft-tabmwp",
+      "gorilla-pytorch",
+      "gorilla-tensor",
+      "metatool",
+      "t-eval-dialog",
+      "t-eval-step",
+      "toolace"
+    ]
+  },
+  "views": ["query_only", "aligned_full", "mismatched_full", "generic_full"],
+  "generic_instruction": "Retrieve tools that satisfy the user's request.",
+  "retrievers": {
+    "bm25": {"k1": 1.5, "b": 0.75},
+    "minilm": {
+      "model": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "device": "cuda",
+      "normalize_embeddings": true,
+      "batch_size": 256
+    }
+  },
+  "top_k": 10,
+  "bootstrap": {"seed": 20260722, "replicates": 20000},
+  "http_workers": 1,
+  "http_delay_seconds": 3.0
+}
