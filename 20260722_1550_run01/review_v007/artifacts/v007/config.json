@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "training_dataset": {
+    "id": "mangopy/ToolRet-Training-20w",
+    "revision": "fdf5a317455b1e60785de7ba587496aa6cc878e4",
+    "config": "ToolRet-Training-20w",
+    "split": "train"
+  },
+  "phases": {
+    "development": {"start": 0, "count": 1000, "block_size": 100},
+    "confirmation": {"start": 207826, "count": 1000, "block_size": 100}
+  },
+  "views": [
+    "query_only",
+    "aligned_full",
+    "mismatched_full_1",
+    "mismatched_full_2",
+    "mismatched_full_3",
+    "generic_full"
+  ],
+  "mismatch_donors": 3,
+  "generic_instruction": "Retrieve tools that satisfy the user's request.",
+  "retrievers": {
+    "bm25": {"k1": 1.5, "b": 0.75},
+    "minilm": {
+      "model": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "device": "cuda",
+      "normalize_embeddings": true,
+      "batch_size": 256
+    }
+  },
+  "top_k": 10,
+  "bootstrap": {"seed": 20260722, "replicates": 20000},
+  "http_delay_seconds": 3.0
+}

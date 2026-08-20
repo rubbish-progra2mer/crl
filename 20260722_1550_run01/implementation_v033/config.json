@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "experiment_id": "v033",
+  "candidate": "Successful-Only Conditional Action Innovation",
+  "candidate_sha256": "2fd145cce11845463d765dababf8160e5a575502aa20ccee2e631368472824ce",
+  "repository_url": "https://github.com/few-sh/terminal-wrench.git",
+  "repository_commit": "d8a29613235a0ef56a8b70b3142626a533da28c2",
+  "confirmation_bucket": 0,
+  "bucket_modulus": 4,
+  "generator_models": [
+    "claude-opus-4.6",
+    "gemini-3.1-pro",
+    "gpt-5.4"
+  ],
+  "task_fold_modulus": 3,
+  "tfidf_analyzer": "char_wb",
+  "tfidf_ngram_min": 3,
+  "tfidf_ngram_max": 5,
+  "tfidf_min_df": 2,
+  "tfidf_max_features": 20000,
+  "latent_dimensions": 64,
+  "svd_iterations": 7,
+  "ridge_alpha": 1.0,
+  "ridge_max_iter": 2000,
+  "ridge_tolerance": 1e-06,
+  "logistic_c": 1.0,
+  "logistic_max_iter": 2000,
+  "bootstrap_repeats": 2000,
+  "seed": 14032,
+  "audit_tolerance": 1e-12,
+  "base_module_sha256": "a29b8aace75bf5505620fab71c982e296e045cb1590a20a5a9c19a63c233d78d",
+  "development_inputs": [
+    {
+      "bucket": 1,
+      "acquisition_phase": "development",
+      "dataset_sha256": "d5daecba36e3e8f9c6bbe60c8e2b13e6206290d8ca7cddcf4a8cc27c2f82274f",
+      "manifest_sha256": "aa20ea73e71b7a3b9a41d444c8a8b7997216f0b85e53fbc5cffb663e25b67932"
+    },
+    {
+      "bucket": 2,
+      "acquisition_phase": "development",
+      "dataset_sha256": "bd766eb62cf98e8fb1b8dd17c20d5edfc759eeb737bd3c232f73e656f9e713a3",
+      "manifest_sha256": "9bcec296b8c380d21f084e60a860577a8e08b9188f8fce75d8c625a3671ee59e"
+    },
+    {
+      "bucket": 3,
+      "acquisition_phase": "confirmation",
+      "dataset_sha256": "0e701e4c842e4f661ec8e8650ec157e5462efe93bbb5d2514aab6a6c8167d77a",
+      "manifest_sha256": "df2f4b46506978105121fe5afc36fcc2f1188dd1a5e6303cb2a2eef836cdc543"
+    }
+  ],
+  "development_gates": {
+    "candidate_auc_min": 0.88,
+    "candidate_tpr_at_5fpr_min": 0.55,
+    "candidate_auc_delta_min": 0.005,
+    "minimum_positive_generator_slices": 2,
+    "minimum_nonnegative_source_slices": 4
+  },
+  "confirmation_gates": {
+    "candidate_auc_min": 0.86,
+    "candidate_tpr_at_5fpr_min": 0.5,
+    "minimum_positive_generator_slices": 2,
+    "minimum_nonnegative_source_slices": 4
+  }
+}

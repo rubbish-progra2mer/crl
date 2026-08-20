@@ -1,0 +1,50 @@
+Traceback (most recent call last):
+  File "D:\Desktop\crl\20260722_1550_run01\experiment_v003\artifacts\audit.py", line 660, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "D:\Desktop\crl\20260722_1550_run01\experiment_v003\artifacts\audit.py", line 655, in main
+    return acquire(args)
+           ^^^^^^^^^^^^^
+  File "D:\Desktop\crl\20260722_1550_run01\experiment_v003\artifacts\audit.py", line 183, in acquire
+    rows = fetch_rows(
+           ^^^^^^^^^^^
+  File "D:\Desktop\crl\20260722_1550_run01\experiment_v003\artifacts\audit.py", line 123, in fetch_rows
+    for offset, value in zip(offsets, values, strict=True):
+  File "D:\Desktop\crl\crl_agent_v3\.venv\Lib\concurrent\futures\_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Desktop\crl\crl_agent_v3\.venv\Lib\concurrent\futures\_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "D:\Desktop\crl\crl_agent_v3\.venv\Lib\concurrent\futures\_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "D:\Desktop\crl\crl_agent_v3\.venv\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "D:\Desktop\crl\crl_agent_v3\.venv\Lib\concurrent\futures\thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Desktop\crl\20260722_1550_run01\experiment_v003\artifacts\audit.py", line 118, in <lambda>
+    lambda offset: fetch_json(
+                   ^^^^^^^^^^^
+  File "D:\Desktop\crl\20260722_1550_run01\experiment_v003\artifacts\audit.py", line 74, in fetch_json
+    with urllib.request.urlopen(request, timeout=60) as response:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Desktop\crl\crl_agent_v3\.venv\Lib\urllib\request.py", line 216, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Desktop\crl\crl_agent_v3\.venv\Lib\urllib\request.py", line 525, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\Desktop\crl\crl_agent_v3\.venv\Lib\urllib\request.py", line 634, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "D:\Desktop\crl\crl_agent_v3\.venv\Lib\urllib\request.py", line 563, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Desktop\crl\crl_agent_v3\.venv\Lib\urllib\request.py", line 496, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "D:\Desktop\crl\crl_agent_v3\.venv\Lib\urllib\request.py", line 643, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 429: Too Many Requests

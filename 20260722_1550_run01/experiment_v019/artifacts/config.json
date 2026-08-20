@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment_id": "v019",
+  "candidate_sha256": "30c51e3cbadb8affc925d42ff91b12240dc3e018e83df0069d5dcdbdb21026de",
+  "evidence_packet_sha256": "d9239666b23a0aadc725f67c95dacccad1ef280a4537d3f48deba8d6ed2481f1",
+  "development": {
+    "source_commit": "c15b2a151662cac9839c96d7dfb1493b5329c975",
+    "input_path": "../sources_v013/bfcl_development/BFCL_v3_simple.json",
+    "input_sha256": "fbc37b2ad252bf9af985582e0e07b456173fe627d957491472ea9cef5fb83158",
+    "expected_lines": 400,
+    "split_seed": 42,
+    "test_fraction": 0.3,
+    "exposure": "previously_read_in_v013"
+  },
+  "confirmation": {
+    "source_commit": "6ea57973c7a6097fd7c5915698c54c17c5b1b6c8",
+    "repository_path": "berkeley-function-call-leaderboard/bfcl_eval/data/BFCL_v4_live_simple.json",
+    "acquisition_allowed_before_main_promotion_audit": false,
+    "refit_allowed": false
+  },
+  "rank_bm25": {
+    "version": "0.2.2",
+    "wheel_path": "../sources_v013/dependencies/rank_bm25-0.2.2-py3-none-any.whl",
+    "wheel_sha256": "7bd4a95571adadfc271746fa146a4bcfd89c0cf731e49c3d1ad863290adbe8ae"
+  },
+  "seeds": [42, 123, 456],
+  "candidate_size": 370,
+  "fixed_k": [1, 3, 5, 10, 20, 50],
+  "training": {
+    "architecture": [7, 64, 64, 2],
+    "episodes": 8000,
+    "replay_capacity": 50000,
+    "batch_size": 128,
+    "learning_rate": 0.001,
+    "epsilon_start": 1.0,
+    "epsilon_end": 0.05,
+    "target_every_steps": 500,
+    "target_gamma": 0.95,
+    "target_step_cost": 0.01,
+    "controller_update_episodes": 500,
+    "coverage_target": 0.9,
+    "dual_initial": 0.05,
+    "dual_step": 0.1,
+    "dual_maximum": 1.0,
+    "ratio_initial_k": 5
+  },
+  "development_conditions": {
+    "candidate_minus_target_mean_coverage_minimum": -0.01,
+    "candidate_minus_target_mean_k_maximum": -1.0,
+    "candidate_minus_target_defined_bor_minimum": 0.25,
+    "matched_seed_coverage_delta_minimum": -0.025,
+    "matched_seed_lower_k_minimum_count": 2,
+    "candidate_must_be_nondominated": true,
+    "independent_maximum_error": 1e-12
+  },
+  "v013_comparator_exclusion": {
+    "reason": "local v013 state leaked gold-found and split/training differed from official BFCL code",
+    "v013_rows_sha256": "64046fe59ae1706975830585d48896d689c31807d6139d153f7f18f91c598a68",
+    "use_as_v019_learned_comparator": false
+  }
+}

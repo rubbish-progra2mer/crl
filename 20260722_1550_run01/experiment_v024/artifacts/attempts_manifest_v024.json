@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "version": "v024",
+  "attempts": [
+    {
+      "attempt_id": "plan_shell_prepublication_001",
+      "kind": "tooling_before_workspace_call",
+      "exit_code": 1,
+      "effect": "PowerShell rejected a missing here-string terminator before Python started; experiment_v024/plan.md did not yet exist and no data byte was accessed."
+    },
+    {
+      "attempt_id": "plan_publish_reporting_001",
+      "kind": "workspace_publish_then_reporting_error",
+      "exit_code": 1,
+      "effect": "The workspace API atomically published plan.md with SHA-256 30e6a7071686e036a7738b9af4d42b5f705949862b906740032799cd71c1f217, after which display code requested absent ExperimentPlanDocument.plan_exists. The existing plan was read without rebuilding and Candidate/Packet were current."
+    },
+    {
+      "attempt_id": "dev_acquire_001",
+      "kind": "planned_development_acquisition_runner",
+      "exit_code": 1,
+      "runner_sha256": "410a620d0734613036f4fea4bc017c0cd1d0de293e1a3d4577c75eec584eaa4a",
+      "failure": "FileNotFoundError [WinError 3] at run_local_experiment.py line 74 capture_dir.mkdir(): parent experiment_v024/captures did not exist.",
+      "capture_directory_created": false,
+      "acquisition_payload_started": false,
+      "development_output_created": false,
+      "work_root_created": false,
+      "development_bucket1_bytes_touched": false,
+      "confirmation_bucket0_bytes_touched": false,
+      "same_version_retry_permitted": false
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "experiment_id": "v013",
+  "development": {
+    "source_commit": "c15b2a151662cac9839c96d7dfb1493b5329c975",
+    "input_path": "../sources_v013/bfcl_development/BFCL_v3_simple.json",
+    "input_sha256": "fbc37b2ad252bf9af985582e0e07b456173fe627d957491472ea9cef5fb83158",
+    "expected_lines": 400,
+    "split_seed": 42,
+    "train_fraction": 0.7
+  },
+  "confirmation": {
+    "source_commit": "6ea57973c7a6097fd7c5915698c54c17c5b1b6c8",
+    "repository_path": "berkeley-function-call-leaderboard/bfcl_eval/data/BFCL_v4_live_simple.json",
+    "acquisition_allowed_before_promotion": false,
+    "refit_allowed": false
+  },
+  "bm25": {
+    "package": "rank-bm25",
+    "version": "0.2.2",
+    "wheel_path": "../sources_v013/dependencies/rank_bm25-0.2.2-py3-none-any.whl",
+    "wheel_sha256": "7bd4a95571adadfc271746fa146a4bcfd89c0cf731e49c3d1ad863290adbe8ae",
+    "tokenization": "lowercase_whitespace"
+  },
+  "policies": {
+    "seeds": [
+      42,
+      123,
+      456
+    ],
+    "fixed_k": [
+      1,
+      3,
+      5,
+      10,
+      20,
+      50
+    ],
+    "max_k": 100,
+    "train_episodes": 15000,
+    "replay_capacity": 20000,
+    "batch_size": 64,
+    "learning_rate": 0.001,
+    "gamma": 0.95,
+    "step_cost": 0.005,
+    "target_update_episodes": 500,
+    "epsilon_initial": 0.5,
+    "epsilon_after_40_percent": 0.1,
+    "epsilon_after_70_percent": 0.03,
+    "architecture": [
+      7,
+      64,
+      64,
+      2
+    ]
+  },
+  "metrics": {
+    "notebook_statistic": "mean(hit_i * -log2(k_i / n_i))",
+    "defined_bor": "log2(mean(hit_i) / mean(k_i / n_i))",
+    "fixed_pair_left": "fk_3",
+    "fixed_pair_right": "fk_1",
+    "bootstrap_resamples": 20000,
+    "bootstrap_seed": 20260723,
+    "bootstrap_unit": "coupled_query_id"
+  },
+  "development_reproduction_reference": {
+    "bor_dqn_mean_k": 7.4,
+    "bor_dqn_found_fraction": 0.903,
+    "f1_dqn_mean_k": 6.4,
+    "f1_dqn_found_fraction": 0.889,
+    "mean_k_tolerance": 1.0,
+    "found_fraction_tolerance": 0.03,
+    "fixed_found_fraction_tolerance": 0.01
+  },
+  "development_gates": {
+    "row_integrity": true,
+    "metric_identity_absolute_tolerance": 1e-12,
+    "faithful_reproduction": true,
+    "fk3_vs_fk1_strict_reversal": true,
+    "minimum_learned_reversal_seeds": 2,
+    "different_maximizer": true,
+    "minimum_opposite_sign_bootstrap_support": 0.95
+  },
+  "confirmation_gates": {
+    "development_line_hashes_disjoint": true,
+    "row_integrity": true,
+    "metric_identity_absolute_tolerance": 1e-12,
+    "minimum_strict_reversals": 1,
+    "different_maximizer": true,
+    "fk3_vs_fk1_strict_reversal": true,
+    "minimum_opposite_sign_bootstrap_support": 0.9
+  }
+}
