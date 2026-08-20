@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "source": "PLAN06_SELECTOR_REPAIR_VALIDATION.md",
+  "purpose": "Reproduce the pre-repair direct-prior recall defect on the frozen repaired snapshot without changing query wording, Card content or ranking.",
+  "calibration_results": {
+    "path": "knowledge_base/evaluation/production_eval/v006/calibration_results.json",
+    "sha256": "bee64664dd9a176888a8a4008a2baf617cc9f738f87477e9c28cb11919e5904d"
+  },
+  "checks": [
+    {
+      "query_id": "prod-cal-failure-008",
+      "target_kind": "failure",
+      "relevant_top5": [
+        "failure-large-corpus-tool-retrieval-breaks-oracle-menu"
+      ],
+      "source_chain_pass": true,
+      "result": "PASS"
+    },
+    {
+      "query_id": "prod-cal-operator-008",
+      "target_kind": "operator",
+      "relevant_top5": [
+        "operator-required-parameter-description-tool-retrieval"
+      ],
+      "source_chain_pass": true,
+      "result": "PASS"
+    },
+    {
+      "query_id": "prod-cal-paper-004",
+      "target_kind": "paper",
+      "relevant_top5": [
+        "paper-p088",
+        "paper-p089",
+        "paper-p086",
+        "paper-p085"
+      ],
+      "source_chain_pass": true,
+      "result": "PASS"
+    }
+  ],
+  "scientific_disposition": "The parameter-grounding path remains KILL_BEFORE_CANDIDATE because the repaired recall exposes direct component/composition priors and the P084 construction-confound boundary. This acceptance repairs selector knowledge; it does not revive the path or create Run 010."
+}

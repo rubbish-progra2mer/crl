@@ -1,0 +1,156 @@
+{
+  "schema_version": "v005",
+  "split": "hidden_blind_v006",
+  "query_language": "en",
+  "generation": {
+    "invocation_path": "crl_agent_v3/knowledge_base/evaluation/production_eval/v006/blind_query_generation_invocation.md",
+    "procedural_isolation": "Queries were generated from the invocation and its allowed scope documents only, independently of the frozen retrieval contents and prior evaluation artifacts.",
+    "access_statement": "No Card, corpus read, prior evaluation query or result, or CRL Run material was accessed."
+  },
+  "queries": [
+    {
+      "query_id": "v006_bq_01",
+      "query": "Under a matched inference budget, when does explicit task decomposition make an LLM agent less reliable because an early planning mistake constrains every later action?",
+      "target_kind": "failure",
+      "critical": true,
+      "mechanism_cluster": "planning_reasoning",
+      "intent_note": "Find direct negative evidence about plan-induced error propagation rather than generic claims that longer reasoning helps."
+    },
+    {
+      "query_id": "v006_bq_02",
+      "query": "What planning computation lets a text or tool agent revise, replace, or abandon a candidate plan when intermediate execution evidence contradicts its assumptions?",
+      "target_kind": "operator",
+      "critical": false,
+      "mechanism_cluster": "planning_reasoning",
+      "intent_note": "Retrieve mechanisms that change plan selection or revision using execution evidence."
+    },
+    {
+      "query_id": "v006_bq_03",
+      "query": "Which failure studies show a test-time verifier preferring plausible but invalid agent trajectories, or reported search gains disappearing after candidate samples and hindsight information are matched?",
+      "target_kind": "failure",
+      "critical": true,
+      "mechanism_cluster": "test_time_search_verification",
+      "intent_note": "Probe decisive verifier errors and compute or oracle confounds in search-based agents."
+    },
+    {
+      "query_id": "v006_bq_04",
+      "query": "Which empirical papers isolate adaptive search depth or selective verification for tool-using agents against direct sampling and fixed-depth search at comparable compute?",
+      "target_kind": "paper",
+      "critical": false,
+      "mechanism_cluster": "test_time_search_verification",
+      "intent_note": "Locate source lineage with fair comparators for adaptive allocation and verification."
+    },
+    {
+      "query_id": "v006_bq_05",
+      "query": "How do irrelevant generic tools, malformed arguments, or unfiltered tool observations cause an LLM agent to choose or commit the wrong action?",
+      "target_kind": "failure",
+      "critical": false,
+      "mechanism_cluster": "tool_use_action_interface",
+      "intent_note": "Retrieve action-interface failures spanning tool choice, argument construction, and observation interpretation."
+    },
+    {
+      "query_id": "v006_bq_06",
+      "query": "What operator changes the action interface by validating tool arguments and compressing observations while preserving the evidence needed for the next decision?",
+      "target_kind": "operator",
+      "critical": false,
+      "mechanism_cluster": "tool_use_action_interface",
+      "intent_note": "Find changed computations on both the action and observation sides of tool use."
+    },
+    {
+      "query_id": "v006_bq_07",
+      "query": "When does retrieved long-term memory reduce agent accuracy because stale or irrelevant records compete with the current evidence, compared with no memory or full context?",
+      "target_kind": "failure",
+      "critical": true,
+      "mechanism_cluster": "memory_context_long_horizon",
+      "intent_note": "Seek causal evidence that memory retrieval itself contaminates downstream decisions."
+    },
+    {
+      "query_id": "v006_bq_08",
+      "query": "What memory mechanism separately controls what an agent writes, retrieves, and reads so that only decision-relevant history enters the active context?",
+      "target_kind": "operator",
+      "critical": false,
+      "mechanism_cluster": "memory_context_long_horizon",
+      "intent_note": "Retrieve stage-separated memory operators rather than undifferentiated retrieval pipelines."
+    },
+    {
+      "query_id": "v006_bq_09",
+      "query": "What evidence shows self-reflection failing because critiques are generic, unsupported by execution feedback, or equivalent to spending more tokens on another sample?",
+      "target_kind": "failure",
+      "critical": false,
+      "mechanism_cluster": "reflection_self_improvement",
+      "intent_note": "Find negative results that distinguish useful feedback from resampling and context-budget effects."
+    },
+    {
+      "query_id": "v006_bq_10",
+      "query": "Which papers separate grounded post-failure critique and selective policy or experience updates from repeated inference with the same model and budget?",
+      "target_kind": "paper",
+      "critical": false,
+      "mechanism_cluster": "reflection_self_improvement",
+      "intent_note": "Locate source work with controlled attribution for reflection and self-improvement."
+    },
+    {
+      "query_id": "v006_bq_11",
+      "query": "When do multi-agent debate or role-based collaboration fail because agents repeat correlated errors, recycle the same evidence, or consume more budget than a matched single-agent baseline?",
+      "target_kind": "failure",
+      "critical": false,
+      "mechanism_cluster": "multi_agent_information_flow",
+      "intent_note": "Retrieve failures attributable to information dependence and unfair coordination cost."
+    },
+    {
+      "query_id": "v006_bq_12",
+      "query": "What coordination operator routes messages by evidence novelty or uncertainty and selectively aggregates agent outputs instead of applying unconditional debate or majority vote?",
+      "target_kind": "operator",
+      "critical": false,
+      "mechanism_cluster": "multi_agent_information_flow",
+      "intent_note": "Find topology, routing, and selective aggregation computations that alter information flow."
+    },
+    {
+      "query_id": "v006_bq_13",
+      "query": "How does assigning one delayed trajectory reward to every step cause an agent learner to reinforce the wrong tool choice or reasoning decision?",
+      "target_kind": "failure",
+      "critical": true,
+      "mechanism_cluster": "agent_learning_credit_assignment",
+      "intent_note": "Probe the decisive mismatch between outcome-only reward and local decision quality."
+    },
+    {
+      "query_id": "v006_bq_14",
+      "query": "Which papers localize delayed outcome credit to particular decisions, turns, or tokens in language agents without relying on oracle-correct trajectories?",
+      "target_kind": "paper",
+      "critical": false,
+      "mechanism_cluster": "agent_learning_credit_assignment",
+      "intent_note": "Locate lineage for hierarchical or localized credit assignment under realistic supervision."
+    },
+    {
+      "query_id": "v006_bq_15",
+      "query": "How can benchmark leakage, hidden retries, or run-to-run variance make an agent look better on a terminal success score while its process remains unreliable or unsafe?",
+      "target_kind": "failure",
+      "critical": false,
+      "mechanism_cluster": "evaluation_reliability_safety",
+      "intent_note": "Retrieve measurement failures that invalidate apparent end-task improvements."
+    },
+    {
+      "query_id": "v006_bq_16",
+      "query": "What evaluation operator combines repeated trials, terminal outcomes, and stagewise process checks to expose reliability or safety failures in tool-using agents?",
+      "target_kind": "operator",
+      "critical": false,
+      "mechanism_cluster": "evaluation_reliability_safety",
+      "intent_note": "Find changed measurement computations beyond a single aggregate success metric."
+    },
+    {
+      "query_id": "v006_bq_17",
+      "query": "When do deep-research or web agents gain quality only by using more tokens, sources, or tool calls, with caching, parallelism, and failed calls omitted from cost accounting?",
+      "target_kind": "failure",
+      "critical": false,
+      "mechanism_cluster": "efficiency_cost_deep_research",
+      "intent_note": "Seek evidence of budget substitution and incomplete resource accounting."
+    },
+    {
+      "query_id": "v006_bq_18",
+      "query": "What mechanism allocates retrieval depth, verification effort, or tool calls according to uncertainty or expected need while respecting a matched total budget?",
+      "target_kind": "operator",
+      "critical": false,
+      "mechanism_cluster": "efficiency_cost_deep_research",
+      "intent_note": "Retrieve adaptive resource-control operators with explicit quality-cost comparators."
+    }
+  ]
+}

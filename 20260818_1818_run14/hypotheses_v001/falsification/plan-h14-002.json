@@ -1,0 +1,37 @@
+{
+  "claims": [
+    {
+      "alternative_explanations": [
+        "Ollama 模板或解析器造成差异",
+        "重命名词的清晰度不同而不是模式标识符本身",
+        "任务数量太少",
+        "本地小模型特有"
+      ],
+      "claim_id": "claim-h14-002-invariance",
+      "claim_text": "在同一用户请求、同一工具语义和同一规范执行器下，本地工具调用模型对可逆的工具与参数标识符重命名会出现可复现的端到端执行不一致。",
+      "falsifier": "两个独立实现均显示所有任务在两种模式下结果一致，或所有差异均可归因于非等价变换或实现错误。",
+      "killer_experiment_id": "exp-h14-002-screen-a",
+      "minimum_effect_or_decision_rule": "出现至少两个经回放确认的配对执行不一致则支持继续深化现象；零不一致只触发第二独立实现，不关闭论文级方向。",
+      "observable": "规范模式与重命名模式的任务成功率、配对不一致率、工具选择错误率、参数映射错误率和解析错误率。",
+      "scope": "qwen3:4b、四类单步工具、手工构造的小型任务集、Ollama 本地工具调用协议；仅作为筛选。",
+      "status": "falsified",
+      "status_reason": "独立实现 B 在充分输出预算下两模式均 12/12 成功、零配对不一致；仅否定已声明的 qwen3:4b 简单任务局部主张。",
+      "supporting_experiment_ids": [
+        "exp-h14-002-screen-b"
+      ]
+    }
+  ],
+  "created_at": "2026-08-18T10:25:46.987121Z",
+  "global_confounders": [
+    "本地模型规模不足以代表前沿闭源或更大开源模型",
+    "Ollama 聊天模板和工具调用解析器可能贡献观测差异",
+    "名称变换可能无意改变语用提示强度",
+    "确定性种子不等于跨推理后端完全可复现"
+  ],
+  "hypothesis_id": "h14-002",
+  "plan_id": "plan-h14-002",
+  "run_id": "20260818_1818_run14",
+  "schema_version": 2,
+  "updated_at": "2026-08-18T10:32:16.132943Z",
+  "version": "v001"
+}

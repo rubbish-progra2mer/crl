@@ -1,0 +1,16 @@
+{
+  "hypothesis_id": "h15-001",
+  "title": "结构化审查反馈驱动工具调用重试",
+  "parent_ids": [],
+  "lineage_note": "工具错误恢复盆地的初始方法候选。",
+  "problem": "工具型智能体的初始调用错误后常无法有效修订。",
+  "target_failure": {"summary": "错误工具或参数在重试中重复出现。", "card_ids": ["paper-p049", "paper-reflexion"], "evidence_ids": ["ev-p049-operator-core", "ev-p012-verbal-reflection-memory"]},
+  "changed_computation": {"baseline": "执行失败后原样重试。", "intervention": "独立审查者生成结构化错误反馈，再让调用智能体有界修订。", "information_available": "临时工具调用、工具模式、任务和审查反馈。", "timing": "工具执行前或失败后。", "budget_effect": "增加审查调用与至多若干次修订。"},
+  "mechanism_claim": "显式错误类别和修订建议可减少重复的工具选择与参数错误。",
+  "falsifier": "最近先行已经实现相同审查—反馈—修订循环。",
+  "minimal_killer_experiment": "精确核对 P049 与 Reflexion 的计算和干预时机。",
+  "nearest_prior_risk": "P049 与 Reflexion 可能直接覆盖方法核。",
+  "alternative_explanations": ["收益来自反馈泄漏正确答案", "额外推理预算而非反馈结构"],
+  "descriptors": {"problem_family": "工具错误恢复", "computation_stage": "执行前审查与失败后重试", "intervention_family": "结构化语言反馈", "information_source": "临时调用与审查者", "timing_class": "推理时有界循环", "budget_class": "增加模型调用", "evaluation_mode": "恢复任务成功率"},
+  "literature_refs": ["P049", "P012"]
+}

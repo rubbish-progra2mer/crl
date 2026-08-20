@@ -1,0 +1,454 @@
+{
+  "schema_version": 1,
+  "split": "calibration",
+  "attempt": "v006",
+  "annotation_protocol": {
+    "name": "independent_visible_calibration_annotation",
+    "version": 1,
+    "relevance_standard": "A Card/Evidence chain is relevant when it materially bears on the requested Failure, Operator, or source role; an unmet future control is retained as an evidence boundary rather than silently treated as satisfied.",
+    "corpus_gap_rule": "corpus_gap is true only when the frozen corpus has no Card/Evidence chain that supports the central requested role without semantic overstatement.",
+    "rank_observation_used": false,
+    "retrieval_execution_used": false
+  },
+  "snapshot": {
+    "papers": 87,
+    "passages": 3498,
+    "evidence": 191,
+    "paper_cards": 87,
+    "operator_cards": 54,
+    "failure_cards": 51,
+    "corpus_scope_sha256": "af6c39170861e646491d874907598785024d06deace6d23e74314fd2486e516d",
+    "card_schema_sha256": "31f25ba79e842f232c52218351e39a01f231c1ff3cbdafa26f1a71b6905dce95",
+    "manifest_sha256": "801d44135f74a05653c4ee26c2731694460bd75047996dd22557d50ac0dc29bf",
+    "evidence_sha256": "704731a935eafaa921f55d812259d96b44ad38b0de463d0e40b793ee4de60bfd",
+    "knowledge_sqlite_sha256": "29b43f517af5e3f04b46a681e128ce4cde132740cfdf4b32568b722f411ac56c",
+    "passages_npz_sha256": "0c2554340178942c029464eb92359ab9e7381ba178e7cb8df8b563a13a0f464b",
+    "cards_fts_sha256": "174198091e3200eec9d0c89c571325d8b8aa9e05ea784e7f630969546842e8fc",
+    "paper_card_aggregate_sha256": "ea1c7f89427656ede5eea9d69529666f8a3714e59d0a0524e8c4477167c9f72b",
+    "operator_card_aggregate_sha256": "7362f3405777889ba88ead056bd898ac822cf5c919129cbdc55fd797fcb3ee28",
+    "failure_card_aggregate_sha256": "81c6af3081825163811b35862af99eccc8d76fc754f2ac087bbffe4b5ce992de",
+    "calibration_queries_sha256": "5c6b08c2e1d63f66c68c159a52a5611a03267139ba285b04e4ec000e84e293c3"
+  },
+  "invocation_provenance": {
+    "task_id": "prod-v006-calibration-annotator",
+    "started_at": "2026-07-20T21:34:00+08:00",
+    "invocation_path": "evaluation/production_eval/v006/calibration_judgments_invocation.md",
+    "invocation_sha256": "8345d6722caac55e63b08e9bfa2f418206d7f5c7d91b3d48c2e0ef517fa5a181",
+    "calibration_queries_path": "evaluation/production_eval/v006/calibration_queries.json",
+    "calibration_queries_sha256": "5c6b08c2e1d63f66c68c159a52a5611a03267139ba285b04e4ec000e84e293c3",
+    "semantic_revision": {
+      "performed_by": "main Codex",
+      "performed_at": "2026-07-20T21:48:00+08:00",
+      "reason": "The fresh annotator treated the full conjunction of future controls as the corpus-gap criterion for prod-cal-failure-002, contrary to the frozen knowledge-discovery standard. No v006 retrieval result existed or was accessed.",
+      "raw_judgments_path": "evaluation/production_eval/v006/calibration_judgment_attempts/cj-20260720-v006-a1/judgments_raw.json",
+      "raw_judgments_sha256": "252db66216de6576eab14f2b6f09d585f081ed7e7458ed86c0890fdaafc00a4f",
+      "revised_query_ids": [
+        "prod-cal-failure-002"
+      ],
+      "search_results_seen_before_revision": false
+    }
+  },
+  "judgments": [
+    {
+      "query_id": "prod-cal-failure-001",
+      "critical": false,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "failure-natural-language-ir-hurts-formal-planning",
+        "failure-interactive-gains-collapse-against-independent-sampling"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p060-formal-ir-solver",
+        "ev-p060-ir-result-and-nl-failure",
+        "ev-p081-independent-path-majority-aggregation",
+        "ev-p081-forty-sample-baseline",
+        "ev-p081-fixed-answer-space-boundary"
+      ],
+      "relevant_passage_ids": [
+        "P060:p0001:s0002",
+        "P060:p0006:s0001",
+        "P081:p0002:s0001",
+        "P081:p0004:s0001",
+        "P081:p0005:s0001"
+      ],
+      "rationale": "The frozen corpus contains an observed natural-language intermediate-plan degradation and an explicit independent-sampling control boundary. It does not claim that every model, prompt, token, or tool-call control was jointly matched."
+    },
+    {
+      "query_id": "prod-cal-operator-001",
+      "critical": true,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "operator-feedback-backpropagated-tree-search",
+        "operator-active-counterexample-verifier"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p003-search-control-loop",
+        "ev-p050-operator-core"
+      ],
+      "relevant_passage_ids": [
+        "P003:p0005:s0001",
+        "P050:p0001:s0002"
+      ],
+      "rationale": "Both operators make verification evidence affect candidate selection before the next execution: one backpropagates environment/value feedback through an agent search tree, and one actively generates discriminative executable tests before reranking. Equal-budget isolation remains an evaluation requirement."
+    },
+    {
+      "query_id": "prod-cal-failure-002",
+      "critical": true,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "failure-interactive-gains-collapse-against-independent-sampling",
+        "failure-tool-description-and-order-bias",
+        "failure-confident-completion-without-state-success",
+        "failure-single-turn-tool-score-overstates-agent-competence"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p081-independent-path-majority-aggregation",
+        "ev-p081-forty-sample-baseline",
+        "ev-p069-description-induced-preference",
+        "ev-p069-identical-tool-order-bias",
+        "ev-p040-failure-core",
+        "ev-p066-single-to-stateful-gap"
+      ],
+      "relevant_passage_ids": [
+        "P081:p0002:s0001",
+        "P081:p0005:s0001",
+        "P069:p0001:s0001",
+        "P069:p0003:s0001",
+        "P040:p0001:s0002",
+        "P066:p0001:s0002"
+      ],
+      "rationale": "The corpus does not contain one experiment that jointly matches every listed control and then observes a complete gain collapse; that remains an evidence boundary. It does contain direct chains for the major confounds the query asks CRL to discover: independent sampling controls extra candidate count, functionally identical tools expose description/order prompt advantages, terminal-state evidence rejects fluent false success, and single-turn scores do not establish stateful tool competence. Under the frozen Card-discovery Gate, these sources materially inform the requested failure role without claiming that the full conjunction has already been isolated."
+    },
+    {
+      "query_id": "prod-cal-operator-002",
+      "critical": false,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "paper-llmcompiler"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p006-dependency-dag-dispatch",
+        "ev-p006-token-cost-accounting",
+        "ev-p006-shared-prompt-comparison-boundary"
+      ],
+      "relevant_passage_ids": [
+        "P006:p0004:s0001",
+        "P006:p0007:s0001",
+        "P006:p0016:s0001"
+      ],
+      "rationale": "The LLMCompiler Card directly records a planner-produced dependency DAG, readiness-based substitution of prior outputs, and parallel dispatch of independent tasks. Its cost and prompt evidence bound attribution without changing the operator identity."
+    },
+    {
+      "query_id": "prod-cal-failure-003",
+      "critical": true,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "failure-retrieved-experience-propagates-stored-errors",
+        "failure-retrieved-update-lacks-decision-authority"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p064-experience-following-error",
+        "ev-p064-evaluator-reliability",
+        "ev-p030-failure-core",
+        "ev-p030-recognition-application-gap"
+      ],
+      "relevant_passage_ids": [
+        "P064:p0002:s0001",
+        "P064:p0005:s0001",
+        "P030:p0007:s0002"
+      ],
+      "rationale": "One chain directly observes similarity-retrieved stored errors being imitated and compounded; another observes stale-state recognition failing to control downstream behavior. These content and authority failures materially exceed a context-length-only explanation, while duplication-specific controls remain absent."
+    },
+    {
+      "query_id": "prod-cal-operator-003",
+      "critical": false,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "operator-memory-stage-decomposition"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p010-index-retrieve-read"
+      ],
+      "relevant_passage_ids": [
+        "P010:p0001:s0002"
+      ],
+      "rationale": "The operator explicitly separates indexing, retrieval, and reading, with distinct inputs and outputs that determine which evidence context is visible to the answering stage."
+    },
+    {
+      "query_id": "prod-cal-failure-004",
+      "critical": false,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "failure-generic-reflection-local-minima",
+        "failure-intrinsic-self-correction-degradation"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p003-generic-reflection-local-minimum",
+        "ev-p013-intrinsic-self-correction-degrades",
+        "ev-p013-oracle-free-equal-budget-boundary"
+      ],
+      "relevant_passage_ids": [
+        "P003:p0008:s0002",
+        "P013:p0001:s0002",
+        "P013:p0002:s0002"
+      ],
+      "rationale": "The corpus directly records generic, non-actionable reflections associated with local minima and intrinsic self-correction degradation without external feedback. The equal-call comparison boundary is preserved rather than claimed as fully isolated."
+    },
+    {
+      "query_id": "prod-cal-operator-004",
+      "critical": false,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "operator-dynamic-reflection-gate",
+        "operator-experience-insight-update"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p014-dynamic-reflection-gate",
+        "ev-p018-insight-update-operations"
+      ],
+      "relevant_passage_ids": [
+        "P014:p0006:s0001",
+        "P018:p0003:s0001"
+      ],
+      "rationale": "The first operator makes stop, select, or refresh an explicit post-reflection control decision; the second turns success/failure trajectories into maintained reusable insights. No single source establishes their combined deployment behavior, so the composition remains a boundary."
+    },
+    {
+      "query_id": "prod-cal-failure-005",
+      "critical": false,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "failure-debate-cost-nondominance",
+        "failure-interactive-gains-collapse-against-independent-sampling"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p015-debate-cost-nondominance",
+        "ev-p081-independent-path-majority-aggregation",
+        "ev-p081-forty-sample-baseline",
+        "ev-p081-fixed-answer-space-boundary"
+      ],
+      "relevant_passage_ids": [
+        "P015:p0004:s0002",
+        "P081:p0002:s0001",
+        "P081:p0004:s0001",
+        "P081:p0005:s0001"
+      ],
+      "rationale": "The debate Card reports cost non-dominance and explicitly warns that extra agents and rounds need not reduce correlated errors. The independent-path aggregation Card supplies the strong no-communication compute baseline and its applicability boundary."
+    },
+    {
+      "query_id": "prod-cal-operator-005",
+      "critical": true,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "operator-higher-order-message-exposure",
+        "operator-utility-optimized-agent-graph"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p022-operator-core",
+        "ev-p056-graph-optimization",
+        "ev-p056-same-set-crosswords"
+      ],
+      "relevant_passage_ids": [
+        "P022:p0004:s0002",
+        "P056:p0001:s0002",
+        "P056:p0005:s0006"
+      ],
+      "rationale": "One operator explicitly changes a downstream agent's receptive field by exposing bounded multi-hop ancestor messages; the other changes graph edges and prompts that govern information flow. The same-set optimization evidence is retained as a transfer and evaluation boundary."
+    },
+    {
+      "query_id": "prod-cal-operator-006",
+      "critical": false,
+      "corpus_gap": true,
+      "relevant_card_ids": [],
+      "relevant_evidence_ids": [],
+      "relevant_passage_ids": [],
+      "rationale": "Current localized-credit operators depend on online rollouts, repeated environment states, masked next-step influence, or expert/gold verification. None establishes offline delayed-outcome credit for logged reasoning, memory, or tool decisions without expert/gold trajectories; listing them as the requested operator would erase the central information boundary."
+    },
+    {
+      "query_id": "prod-cal-failure-006",
+      "critical": false,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "failure-oracle-trajectory-calibration"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p019-ground-truth-calibration-oracle"
+      ],
+      "relevant_passage_ids": [
+        "P019:p0004:s0001"
+      ],
+      "rationale": "The Card directly identifies ground-truth action replacement and expert continuation as privileged information that can confound claims of autonomous step-level credit."
+    },
+    {
+      "query_id": "prod-cal-paper-001",
+      "critical": true,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "paper-p035",
+        "paper-llmcompiler"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p035-evaluation-core",
+        "ev-p006-dependency-dag-dispatch",
+        "ev-p006-token-cost-accounting",
+        "ev-p006-shared-prompt-comparison-boundary"
+      ],
+      "relevant_passage_ids": [
+        "P035:p0001:s0002",
+        "P006:p0004:s0001",
+        "P006:p0007:s0001",
+        "P006:p0016:s0001"
+      ],
+      "rationale": "HAL is a source-layer anchor for cross-product model/scaffold evaluation, trace audit, leakage, and cost; LLMCompiler supplies concrete prompt-sharing and token-cost accounting boundaries for tool agents. Neither source alone proves a fully factorial causal estimate."
+    },
+    {
+      "query_id": "prod-cal-failure-007",
+      "critical": false,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "failure-confident-completion-without-state-success",
+        "failure-repeat-run-reliability-collapse",
+        "failure-same-set-agent-graph-evaluation"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p040-failure-core",
+        "ev-p007-repeat-reliability-collapse",
+        "ev-p056-graph-optimization",
+        "ev-p056-same-set-crosswords"
+      ],
+      "relevant_passage_ids": [
+        "P040:p0001:s0002",
+        "P007:p0001:s0002",
+        "P056:p0001:s0002",
+        "P056:p0005:s0006"
+      ],
+      "rationale": "The selected failures separately expose false textual success against environment state, pass^k reliability collapse, and optimization/evaluation reuse on the same small set. Harmful-side-effect coverage is incomplete, but the scalar-success masking failure is materially represented."
+    },
+    {
+      "query_id": "prod-cal-paper-002",
+      "critical": false,
+      "corpus_gap": true,
+      "relevant_card_ids": [],
+      "relevant_evidence_ids": [],
+      "relevant_passage_ids": [],
+      "rationale": "Deep-research source Cards decompose report quality, coverage, citation association, and statement-source support, while separate system sources measure tokens and latency. No current paper or Evidence chain jointly evaluates those quality dimensions with latency, tokens, tool calls, monetary cost, and fixed-budget comparison; composing separate studies would overstate a joint carrier."
+    },
+    {
+      "query_id": "prod-cal-operator-007",
+      "critical": false,
+      "corpus_gap": true,
+      "relevant_card_ids": [],
+      "relevant_evidence_ids": [],
+      "relevant_passage_ids": [],
+      "rationale": "The nearest sources either calibrate already-generated traces after their tool-call cost, allocate configuration budget through offline trial search, or train a stopping policy from gold hindsight. None uses deployment-visible uncertainty to allocate test-time compute and demonstrates the requested matched random, static, margin, and entropy baselines."
+    },
+    {
+      "query_id": "prod-cal-paper-003",
+      "critical": false,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "paper-react",
+        "paper-tree-of-thoughts",
+        "paper-p003"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p001-react-interleaved",
+        "ev-p001-search-hallucination-boundary",
+        "ev-p002-branch-evaluate-search",
+        "ev-p002-search-resource-cost",
+        "ev-p003-search-control-loop",
+        "ev-p003-generic-reflection-local-minimum"
+      ],
+      "relevant_passage_ids": [
+        "P001:p0002:s0001",
+        "P001:p0006:s0001",
+        "P002:p0002:s0001",
+        "P002:p0009:s0002",
+        "P003:p0005:s0001",
+        "P003:p0008:s0002"
+      ],
+      "rationale": "The three Paper Cards form the requested lineage: ReAct interleaves reasoning and acting, Tree of Thoughts adds branch/evaluate/backtrack search, and LATS wraps ReAct-style trajectories in environment-grounded tree-search control."
+    },
+    {
+      "query_id": "prod-cal-failure-008",
+      "critical": true,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "failure-large-corpus-tool-retrieval-breaks-oracle-menu"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p085-large-corpus-scale",
+        "ev-p085-retrieval-completeness-failure",
+        "ev-p085-non-exhaustive-label"
+      ],
+      "relevant_passage_ids": [
+        "P085:p0004:s0001",
+        "P085:p0006:s0001",
+        "P085:p0008:s0002"
+      ],
+      "rationale": "The Failure Card directly establishes complete-target recovery as a bottleneck in a 43,215-tool corpus and preserves the non-exhaustive-label boundary."
+    },
+    {
+      "query_id": "prod-cal-operator-008",
+      "critical": true,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "operator-required-parameter-description-tool-retrieval"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p086-hypothesize-retrieve-invoke",
+        "ev-p086-required-parameter-score",
+        "ev-p086-near-identical-distribution"
+      ],
+      "relevant_passage_ids": [
+        "P086:p0002:s0001",
+        "P086:p0004:s0001",
+        "P086:p0011:s0001"
+      ],
+      "rationale": "The operator directly changes pre-invocation ranking by combining hypothesized tool-description similarity with required-parameter-description matching, while retaining its distribution and typed-schema limitations."
+    },
+    {
+      "query_id": "prod-cal-paper-004",
+      "critical": true,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "paper-p085",
+        "paper-p086",
+        "paper-p088",
+        "paper-p089"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p085-large-corpus-scale",
+        "ev-p085-retrieval-completeness-failure",
+        "ev-p085-non-exhaustive-label",
+        "ev-p086-hypothesize-retrieve-invoke",
+        "ev-p086-required-parameter-score",
+        "ev-p086-near-identical-distribution",
+        "ev-p088-joint-nonnegative-objective",
+        "ev-p088-relevant-set-size-signature",
+        "ev-p088-theory-deployment-scale-boundary",
+        "ev-p089-training-gold-count-hypothetical-tools",
+        "ev-p089-overview-alignment-rrf",
+        "ev-p089-hungarian-alignment",
+        "ev-p089-forced-alignment-proxy",
+        "ev-p089-retrieval-only-metrics",
+        "ev-p089-api-latency-boundary"
+      ],
+      "relevant_passage_ids": [
+        "P085:p0004:s0001",
+        "P085:p0006:s0001",
+        "P085:p0008:s0002",
+        "P086:p0002:s0001",
+        "P086:p0004:s0001",
+        "P086:p0011:s0001",
+        "P088:p0002:s0001",
+        "P088:p0004:s0002",
+        "P088:p0009:s0002",
+        "P089:p0003:s0001",
+        "P089:p0004:s0001",
+        "P089:p0006:s0002",
+        "P089:p0009:s0001"
+      ],
+      "rationale": "The Paper Cards recover the exact requested source lineage: TOOLRET for large-corpus completeness failure, Meta-Tool for required-parameter-aware retrieval, NNN for joint residual set decoding, and ToolDreamer for hypothetical-tool expansion, learned alignment, and rank fusion."
+    }
+  ]
+}

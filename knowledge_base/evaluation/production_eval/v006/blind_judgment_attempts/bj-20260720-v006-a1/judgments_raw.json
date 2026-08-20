@@ -1,0 +1,560 @@
+{
+  "schema_version": "v005",
+  "split": "hidden_blind_v006",
+  "attempt": "v006",
+  "annotation_protocol": {
+    "mode": "independent_hidden_annotation_before_retrieval",
+    "relevance_standard": "A Card is relevant when its current Evidence materially bears on the requested mechanism, failure, boundary, or source role; missing future controls remain evidence boundaries.",
+    "corpus_gap_rule": "corpus_gap is true only when no current Card/Evidence chain can materially inform the request without semantic overstatement.",
+    "query_order": "preserved",
+    "retrieval_or_ranking_used": false
+  },
+  "snapshot": {
+    "blind_queries_sha256": "d8695840b89cf56501984e8cf0a06bcf8a10cf0a5c4098e577aa6d7473f9b743",
+    "corpus_scope_sha256": "af6c39170861e646491d874907598785024d06deace6d23e74314fd2486e516d",
+    "card_schema_sha256": "31f25ba79e842f232c52218351e39a01f231c1ff3cbdafa26f1a71b6905dce95",
+    "manifest_sha256": "801d44135f74a05653c4ee26c2731694460bd75047996dd22557d50ac0dc29bf",
+    "evidence_sha256": "704731a935eafaa921f55d812259d96b44ad38b0de463d0e40b793ee4de60bfd",
+    "knowledge_sqlite_sha256": "29b43f517af5e3f04b46a681e128ce4cde132740cfdf4b32568b722f411ac56c",
+    "passages_npz_sha256": "0c2554340178942c029464eb92359ab9e7381ba178e7cb8df8b563a13a0f464b",
+    "cards_fts_sha256": "174198091e3200eec9d0c89c571325d8b8aa9e05ea784e7f630969546842e8fc",
+    "paper_card_aggregate_sha256": "ea1c7f89427656ede5eea9d69529666f8a3714e59d0a0524e8c4477167c9f72b",
+    "operator_card_aggregate_sha256": "7362f3405777889ba88ead056bd898ac822cf5c919129cbdc55fd797fcb3ee28",
+    "failure_card_aggregate_sha256": "81c6af3081825163811b35862af99eccc8d76fc754f2ac087bbffe4b5ce992de"
+  },
+  "invocation_provenance": {
+    "task_id": "prod-v006-blind-annotator",
+    "path": "crl_agent_v3/knowledge_base/evaluation/production_eval/v006/blind_judgment_invocation.md",
+    "sha256": "36e21208db3c70af35edadf13e913de122eec22559f75f1d480395344764c223",
+    "started_at": "2026-07-20T21:38:00+08:00",
+    "access_statement": "Only invocation-allowed materials were accessed. No prior evaluation artifact, calibration material, retrieval output, ranking, FTS, embedding index, Run, Candidate, reviewer, history, or memory material was accessed."
+  },
+  "judgments": [
+    {
+      "query_id": "v006_bq_01",
+      "critical": true,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "failure-natural-language-ir-hurts-formal-planning",
+        "failure-solver-guarantee-stops-at-formalization",
+        "failure-constraint-shift-breaks-formalization"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p060-formal-ir-solver",
+        "ev-p060-ir-result-and-nl-failure",
+        "ev-p051-solver-guarantee-boundary",
+        "ev-p051-omitted-constraint-failure",
+        "ev-p052-implicit-constraint-failure",
+        "ev-p052-self-diagnosis-nontermination",
+        "ev-p052-direct-code-smt-baselines",
+        "ev-p054-natural-language-implicit-predicate-failure",
+        "ev-p055-constraint-formalism-taxonomy",
+        "ev-p055-representative-subset-boundary",
+        "ev-p055-three-revision-budget",
+        "ev-p055-constraint-performance-drop",
+        "ev-p055-plan-correctness-false-positive-boundary"
+      ],
+      "relevant_passage_ids": [
+        "P060:p0001:s0002",
+        "P060:p0006:s0001",
+        "P051:p0005:s0001",
+        "P051:p0023:s0001",
+        "P052:p0024:s0001",
+        "P052:p0025:s0001",
+        "P052:p0008:s0002",
+        "P054:p0007:s0001",
+        "P055:p0004:s0001",
+        "P055:p0005:s0001",
+        "P055:p0007:s0002",
+        "P055:p0010:s0001"
+      ],
+      "rationale": "The current evidence directly records a harmful natural-language intermediate representation and several cases where an omitted or mistranslated early constraint is faithfully propagated by downstream formal computation. It does not isolate the causal story under a fully matched model, token, and tool-call budget, which is an evidence boundary rather than a corpus gap."
+    },
+    {
+      "query_id": "v006_bq_02",
+      "critical": false,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "operator-reason-action-interleaving",
+        "operator-feedback-backpropagated-tree-search",
+        "operator-outcome-trained-execution-state-planner"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p001-react-interleaved",
+        "ev-p003-search-control-loop",
+        "ev-p021-operator-core"
+      ],
+      "relevant_passage_ids": [
+        "P001:p0002:s0001",
+        "P003:p0005:s0001",
+        "P021:p0005:s0002"
+      ],
+      "rationale": "These operators expose observations before the next planning decision, maintain alternative branches with feedback backpropagation, or update the planner over explicit execution state. Together they materially cover revision, replacement, and abandonment of a provisional plan when execution evidence changes the state."
+    },
+    {
+      "query_id": "v006_bq_03",
+      "critical": true,
+      "corpus_gap": true,
+      "relevant_card_ids": [],
+      "relevant_evidence_ids": [],
+      "relevant_passage_ids": [],
+      "rationale": "The snapshot contains adjacent warnings about confidence miscalibration, verifier limits, oracle information, and unequal search budgets, but no current Card/Evidence chain directly demonstrates either requested decisive result without overstatement."
+    },
+    {
+      "query_id": "v006_bq_04",
+      "critical": false,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "paper-p080",
+        "paper-p050",
+        "paper-agenttts",
+        "paper-p081"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p080-gold-supervised-minimal-depth",
+        "ev-p080-fixed-depth-under-over-search",
+        "ev-p080-shallow-depth-boundary",
+        "ev-p050-operator-core",
+        "ev-p020-compute-allocation-search",
+        "ev-p020-diminishing-compute-return",
+        "ev-p081-independent-path-majority-aggregation",
+        "ev-p081-forty-sample-baseline",
+        "ev-p081-fixed-answer-space-boundary"
+      ],
+      "relevant_passage_ids": [
+        "P080:p0005:s0001",
+        "P080:p0003:s0001",
+        "P080:p0009:s0001",
+        "P050:p0001:s0002",
+        "P020:p0002:s0001",
+        "P081:p0002:s0001",
+        "P081:p0005:s0001",
+        "P081:p0004:s0001"
+      ],
+      "rationale": "The papers cover adaptive retrieval depth, active counterexample verification, stagewise compute allocation, and the independent-sampling comparator. The evidence is relevant even though gold-hindsight supervision, shallow horizons, unequal verifier compute, and incomplete total-cost matching limit a clean isolation claim."
+    },
+    {
+      "query_id": "v006_bq_05",
+      "critical": false,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "failure-semantically-related-toolkit-expansion",
+        "failure-generic-or-unvalidated-tool-libraries-add-distractors",
+        "failure-raw-observation-overload-hides-action-relevant-ui",
+        "failure-tool-use-metrics-collapse-distinct-errors"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p084-expanded-toolkit-controlled-setting",
+        "ev-p084-related-toolkit-error-types",
+        "ev-p084-expanded-toolkit-table",
+        "ev-p084-generated-tool-single-dataset-boundary",
+        "ev-p078-validated-tool-creation-retrieval",
+        "ev-p078-multiview-tool-retrieval",
+        "ev-p078-generic-tool-and-baseline-boundary",
+        "ev-p078-toolset-construction-cost",
+        "ev-p078-baseline-fairness-boundary",
+        "ev-p079-action-conditioned-contextualization",
+        "ev-p079-ground-truth-action-retry",
+        "ev-p079-unseen-ui-boundary",
+        "ev-p039-failure-core",
+        "ev-p039-aggregate-score-masking"
+      ],
+      "relevant_passage_ids": [
+        "P084:p0004:s0001",
+        "P084:p0005:s0001",
+        "P084:p0005:s0002",
+        "P078:p0004:s0001",
+        "P078:p0004:s0002",
+        "P078:p0006:s0002",
+        "P078:p0003:s0001",
+        "P078:p0006:s0001",
+        "P079:p0004:s0002",
+        "P079:p0021:s0001",
+        "P039:p0003:s0002",
+        "P039:p0001:s0002"
+      ],
+      "rationale": "The evidence separates menu interference and parameter errors from generic-library instability, observation-selection failures, and downstream result-ignoring behavior. Some causal descriptions remain hypotheses, but the observed action-interface failures materially bear on the request."
+    },
+    {
+      "query_id": "v006_bq_06",
+      "critical": false,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "operator-bounded-preexecution-reviewer",
+        "operator-contract-gated-tool-state-commit",
+        "operator-action-preserving-observation-contextualization"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p049-operator-core",
+        "ev-p049-bounded-review-loop",
+        "ev-p074-contract-state-commit",
+        "ev-p074-missing-schema-true-postcondition",
+        "ev-p079-action-conditioned-contextualization",
+        "ev-p079-ground-truth-action-retry",
+        "ev-p079-unseen-ui-boundary"
+      ],
+      "relevant_passage_ids": [
+        "P049:p0003:s0001",
+        "P074:p0004:s0001",
+        "P079:p0004:s0002",
+        "P079:p0021:s0001"
+      ],
+      "rationale": "The snapshot has separate but complementary operators for pre-execution call review, pre/postcondition-gated state commit, and next-action-preserving observation contextualization. No single card implements both sides, but the chains materially specify the requested action and observation computations and their coverage risks."
+    },
+    {
+      "query_id": "v006_bq_07",
+      "critical": true,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "failure-retrieved-experience-propagates-stored-errors",
+        "failure-retrieved-update-lacks-decision-authority",
+        "failure-long-history-reading-overload"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p064-experience-following-error",
+        "ev-p064-evaluator-reliability",
+        "ev-p030-failure-core",
+        "ev-p030-recognition-application-gap",
+        "ev-p010-long-history-decline"
+      ],
+      "relevant_passage_ids": [
+        "P064:p0002:s0001",
+        "P064:p0005:s0001",
+        "P030:p0007:s0002",
+        "P010:p0006:s0002"
+      ],
+      "rationale": "The evidence directly shows error-following from similar retrieved experiences, failure to give updated memory decision authority, and a large full-history penalty relative to evidence-only context. It does not provide one unified no-memory versus retrieval versus full-context ablation, but it materially establishes retrieval and reading contamination boundaries."
+    },
+    {
+      "query_id": "v006_bq_08",
+      "critical": false,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "operator-learned-memory-crud-control",
+        "operator-memory-stage-decomposition",
+        "operator-write-side-state-adjudication"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p028-operator-core",
+        "ev-p010-index-retrieve-read",
+        "ev-p030-failure-core",
+        "ev-p030-write-side-adjudication",
+        "ev-p030-authorized-readout"
+      ],
+      "relevant_passage_ids": [
+        "P028:p0004:s0001",
+        "P010:p0001:s0002",
+        "P030:p0007:s0002",
+        "P030:p0009:s0002"
+      ],
+      "rationale": "The cards separately expose memory CRUD and answer-time use control, the index-retrieve-read stages, and write-side authority resolution before constrained readout. This directly supports stage-separated control rather than an undifferentiated retrieval pipeline."
+    },
+    {
+      "query_id": "v006_bq_09",
+      "critical": false,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "failure-generic-reflection-local-minima",
+        "failure-intrinsic-self-correction-degradation",
+        "failure-iterative-refinement-corrupts-correct-output",
+        "failure-interactive-gains-collapse-against-independent-sampling"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p003-generic-reflection-local-minimum",
+        "ev-p013-intrinsic-self-correction-degrades",
+        "ev-p013-oracle-free-equal-budget-boundary",
+        "ev-p033-operator-core",
+        "ev-p034-failure-core",
+        "ev-p081-independent-path-majority-aggregation",
+        "ev-p081-forty-sample-baseline",
+        "ev-p081-fixed-answer-space-boundary"
+      ],
+      "relevant_passage_ids": [
+        "P003:p0008:s0002",
+        "P013:p0001:s0002",
+        "P013:p0002:s0002",
+        "P033:p0001:s0002",
+        "P034:p0011:s0001",
+        "P081:p0002:s0001",
+        "P081:p0005:s0001",
+        "P081:p0004:s0001"
+      ],
+      "rationale": "The evidence covers generic non-actionable reflection, no-feedback self-correction degradation, correct-to-incorrect revisions, and the independent-sampling control needed to test whether interaction adds value beyond extra candidates."
+    },
+    {
+      "query_id": "v006_bq_10",
+      "critical": false,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "paper-p032",
+        "paper-expel",
+        "paper-p013",
+        "paper-reflexion",
+        "paper-p034"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p032-operator-core",
+        "ev-p018-insight-update-operations",
+        "ev-p018-raw-reflection-contamination",
+        "ev-p013-intrinsic-self-correction-degrades",
+        "ev-p013-oracle-free-equal-budget-boundary",
+        "ev-p012-verbal-reflection-memory",
+        "ev-p012-forced-retry-harmful-edits",
+        "ev-p034-failure-core"
+      ],
+      "relevant_passage_ids": [
+        "P032:p0001:s0002",
+        "P018:p0003:s0001",
+        "P018:p0010:s0001",
+        "P013:p0001:s0002",
+        "P013:p0002:s0002",
+        "P012:p0001:s0002",
+        "P012:p0008:s0001",
+        "P034:p0011:s0001"
+      ],
+      "rationale": "These papers distinguish tool-grounded critique, maintained cross-task insights, feedback-conditioned episodic reflection, and harmful or ineffective repeated refinement. Budget and teacher differences remain explicit boundaries, while the source roles materially support the requested attribution comparison."
+    },
+    {
+      "query_id": "v006_bq_11",
+      "critical": false,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "failure-debate-cost-nondominance",
+        "failure-interactive-gains-collapse-against-independent-sampling",
+        "failure-lazy-agent-effective-single-agent-collapse"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p015-debate-cost-nondominance",
+        "ev-p081-independent-path-majority-aggregation",
+        "ev-p081-forty-sample-baseline",
+        "ev-p081-fixed-answer-space-boundary",
+        "ev-p025-failure-core"
+      ],
+      "relevant_passage_ids": [
+        "P015:p0004:s0002",
+        "P081:p0002:s0001",
+        "P081:p0005:s0001",
+        "P081:p0004:s0001",
+        "P025:p0002:s0001"
+      ],
+      "rationale": "The evidence shows debate non-dominance under extra compute, identifies independent sampling as the necessary stronger comparator, and records nominal collaboration collapsing to an effective single agent. Correlated-error causality is not isolated, but the cost and dependence failures are materially covered."
+    },
+    {
+      "query_id": "v006_bq_12",
+      "critical": false,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "operator-state-conditioned-agent-activation",
+        "operator-utility-optimized-agent-graph",
+        "operator-higher-order-message-exposure",
+        "operator-cascaded-multiagent-meta-routing"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p059-state-conditioned-orchestrator",
+        "ev-p059-compact-cyclic-topology",
+        "ev-p056-graph-optimization",
+        "ev-p056-same-set-crosswords",
+        "ev-p022-operator-core",
+        "ev-p023-operator-core",
+        "ev-p023-cascaded-routing-core"
+      ],
+      "relevant_passage_ids": [
+        "P059:p0003:s0002",
+        "P059:p0010:s0002",
+        "P056:p0001:s0002",
+        "P056:p0005:s0006",
+        "P022:p0004:s0002",
+        "P023:p0001:s0001",
+        "P023:p0015:s0001"
+      ],
+      "rationale": "The closest operators change online agent activation, offline information-flow edges, bounded multi-hop message exposure, and query-conditioned collaboration routing. They materially cover selective routing and aggregation, while none establishes evidence-novelty or calibrated-uncertainty as the direct routing signal."
+    },
+    {
+      "query_id": "v006_bq_13",
+      "critical": true,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "failure-uniform-terminal-return-erases-step-credit",
+        "failure-unified-memory-policy-retains-terminal-credit-smearing",
+        "failure-lazy-agent-effective-single-agent-collapse"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p026-transition-decomposition",
+        "ev-p026-uniform-terminal-return",
+        "ev-p062-unified-memory-action-policy",
+        "ev-p062-broadcast-advantage",
+        "ev-p025-failure-core"
+      ],
+      "relevant_passage_ids": [
+        "P026:p0007:s0002",
+        "P026:p0009:s0001",
+        "P062:p0004:s0001",
+        "P062:p0006:s0001",
+        "P025:p0002:s0001"
+      ],
+      "rationale": "The evidence directly records uniform terminal-return broadcast over decomposed actions and memory/reasoning steps, plus a collaboration collapse consistent with unlocalized contribution. It establishes credit non-identifiability; it does not prove that every incorrectly reinforced step was individually causal."
+    },
+    {
+      "query_id": "v006_bq_14",
+      "critical": false,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "paper-p065",
+        "paper-p025",
+        "paper-p077"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p065-anchor-state-credit",
+        "ev-p065-state-recurrence-boundary",
+        "ev-p025-failure-core",
+        "ev-p077-hierarchical-utterance-critic-token-actor",
+        "ev-p077-trajectory-only-sample-efficiency",
+        "ev-p077-oracle-reward-hacking-boundary"
+      ],
+      "relevant_passage_ids": [
+        "P065:p0005:s0002",
+        "P065:p0009:s0003",
+        "P025:p0002:s0001",
+        "P077:p0005:s0004",
+        "P077:p0012:s0001",
+        "P077:p0023:s0001"
+      ],
+      "rationale": "The papers cover naturally recurring anchor-state action comparisons, turn-sensitive multi-agent contribution, and utterance-level critics with token-level actors. The first two avoid requiring an oracle-correct trajectory; the third supplies a useful turn-level lineage but carries simulated-oracle and reward-hacking boundaries."
+    },
+    {
+      "query_id": "v006_bq_15",
+      "critical": false,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "failure-repeat-run-reliability-collapse",
+        "failure-reused-selection-feedback-in-agent-search",
+        "failure-same-set-agent-graph-evaluation",
+        "failure-confident-completion-without-state-success",
+        "failure-chatbot-refusal-does-not-establish-agent-safety"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p007-repeat-reliability-collapse",
+        "ev-p057-search-evaluation-budget",
+        "ev-p058-validation-selection-loop",
+        "ev-p056-graph-optimization",
+        "ev-p056-same-set-crosswords",
+        "ev-p040-failure-core",
+        "ev-p067-capability-preserving-safety",
+        "ev-p067-agentic-harm-not-chat-refusal"
+      ],
+      "relevant_passage_ids": [
+        "P007:p0001:s0002",
+        "P057:p0006:s0001",
+        "P058:p0007:s0001",
+        "P056:p0001:s0002",
+        "P056:p0005:s0006",
+        "P040:p0001:s0002",
+        "P067:p0006:s0001",
+        "P067:p0007:s0002"
+      ],
+      "rationale": "The evidence spans repeat-run collapse, repeated selection feedback, same-set workflow optimization, false verbal completion, and refusal scores that do not establish tool-agent safety. These are distinct measurement failures that can inflate a terminal score while process reliability or safety remains poor."
+    },
+    {
+      "query_id": "v006_bq_16",
+      "critical": false,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "operator-terminal-state-reliability-evaluation",
+        "operator-milestone-dag-trajectory-evaluation",
+        "operator-trace-failure-taxonomy",
+        "operator-stagewise-agent-security-audit",
+        "operator-capability-preserving-agent-safety-evaluation"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p007-terminal-state-evaluation",
+        "ev-p037-evaluation-core",
+        "ev-p037-minefield-violation",
+        "ev-p016-mast-taxonomy",
+        "ev-p008-stagewise-attack-surface",
+        "ev-p067-capability-preserving-safety",
+        "ev-p067-agentic-harm-not-chat-refusal"
+      ],
+      "relevant_passage_ids": [
+        "P007:p0002:s0001",
+        "P037:p0005:s0001",
+        "P016:p0001:s0002",
+        "P008:p0002:s0001",
+        "P067:p0006:s0001",
+        "P067:p0007:s0002"
+      ],
+      "rationale": "The operators separately provide terminal-state checks, path-aware milestones and minefields, trace-level failure labels, stagewise attack surfaces, and capability-preserving safety measures. Repeat trials remain a companion reliability requirement rather than one unified operator in the snapshot."
+    },
+    {
+      "query_id": "v006_bq_17",
+      "critical": false,
+      "corpus_gap": true,
+      "relevant_card_ids": [],
+      "relevant_evidence_ids": [],
+      "relevant_passage_ids": [],
+      "rationale": "The snapshot has general search-cost and stagewise MCP accounting boundaries, but no current Card/Evidence chain directly establishes the requested deep-research or web-agent quality attribution together with omitted caching, parallelism, and failed-call accounting."
+    },
+    {
+      "query_id": "v006_bq_18",
+      "critical": false,
+      "corpus_gap": false,
+      "relevant_card_ids": [
+        "operator-gold-supervised-hindsight-search-depth",
+        "operator-subtask-compute-allocation",
+        "operator-active-counterexample-verifier",
+        "operator-hidden-state-tool-necessity-prefill"
+      ],
+      "relevant_evidence_ids": [
+        "ev-p080-gold-supervised-minimal-depth",
+        "ev-p080-fixed-depth-under-over-search",
+        "ev-p080-shallow-depth-boundary",
+        "ev-p020-compute-allocation-search",
+        "ev-p050-operator-core",
+        "ev-p041-operator-core",
+        "ev-p041-probe-prefill-steering"
+      ],
+      "relevant_passage_ids": [
+        "P080:p0005:s0001",
+        "P080:p0003:s0001",
+        "P080:p0009:s0001",
+        "P020:p0002:s0001",
+        "P050:p0001:s0002",
+        "P041:p0006:s0002",
+        "P041:p0007:s0001"
+      ],
+      "rationale": "The operators allocate retrieval depth, stagewise model/sample budget, discriminative verification calls, or tool-use steering according to estimated need. Gold hindsight, offline configuration search, hidden-state labels, and incomplete total-budget matching are explicit transfer boundaries, not reasons to erase relevance."
+    }
+  ],
+  "summary": {
+    "total_judgments": 18,
+    "critical_queries": 4,
+    "ordinary_queries": 14,
+    "critical_query_ids": [
+      "v006_bq_01",
+      "v006_bq_03",
+      "v006_bq_07",
+      "v006_bq_13"
+    ],
+    "ordinary_query_ids": [
+      "v006_bq_02",
+      "v006_bq_04",
+      "v006_bq_05",
+      "v006_bq_06",
+      "v006_bq_08",
+      "v006_bq_09",
+      "v006_bq_10",
+      "v006_bq_11",
+      "v006_bq_12",
+      "v006_bq_14",
+      "v006_bq_15",
+      "v006_bq_16",
+      "v006_bq_17",
+      "v006_bq_18"
+    ],
+    "critical_corpus_gap_ids": [
+      "v006_bq_03"
+    ],
+    "ordinary_corpus_gap_ids": [
+      "v006_bq_17"
+    ]
+  }
+}

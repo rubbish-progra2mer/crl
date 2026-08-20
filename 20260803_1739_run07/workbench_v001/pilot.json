@@ -1,0 +1,396 @@
+{
+  "schema_version": 1,
+  "experiment": "mutation-sufficient causally bound effect witnesses",
+  "configuration": {
+    "seeds": 2,
+    "trials_per_domain": 100,
+    "domains": [
+      "airline",
+      "calendar",
+      "retail"
+    ],
+    "faults": [
+      "honest",
+      "noop_ack",
+      "partial_ack",
+      "wrong_target_ack",
+      "duplicate_effect_ack",
+      "spillover_ack",
+      "rollback_after_ack"
+    ],
+    "records_per_trial": 24
+  },
+  "fault_counts": {
+    "duplicate_effect_ack": 79,
+    "honest": 87,
+    "noop_ack": 87,
+    "partial_ack": 81,
+    "rollback_after_ack": 86,
+    "spillover_ack": 85,
+    "wrong_target_ack": 95
+  },
+  "compiler_samples": {
+    "airline": {
+      "coverage": 1.0,
+      "killed_mutants": 6,
+      "total_mutants": 6,
+      "selected_predicates": [
+        "exactly_one_effect",
+        "field_equals::cabin",
+        "field_equals::meal",
+        "target_identity"
+      ]
+    },
+    "calendar": {
+      "coverage": 1.0,
+      "killed_mutants": 6,
+      "total_mutants": 6,
+      "selected_predicates": [
+        "exactly_one_effect",
+        "field_equals::duration",
+        "field_equals::status",
+        "target_identity"
+      ]
+    },
+    "retail": {
+      "coverage": 1.0,
+      "killed_mutants": 8,
+      "total_mutants": 8,
+      "selected_predicates": [
+        "exactly_one_effect",
+        "field_equals::channel",
+        "field_equals::priority",
+        "field_equals::quantity",
+        "field_equals::status",
+        "target_identity"
+      ]
+    }
+  },
+  "aggregate": {
+    "compiled_mutation_sufficient_witness": {
+      "trials": 600,
+      "failure_trials": 513,
+      "success_trials": 87,
+      "unsafe_accept_rate": 0.0,
+      "normal_accept_rate": 1.0,
+      "mean_read_calls": 1.0,
+      "mean_returned_scalars": 5.641666666666667,
+      "unsafe_accept_rate_by_fault": {
+        "noop_ack": 0.0,
+        "partial_ack": 0.0,
+        "wrong_target_ack": 0.0,
+        "duplicate_effect_ack": 0.0,
+        "spillover_ack": 0.0,
+        "rollback_after_ack": 0.0
+      }
+    },
+    "full_snapshot_oracle": {
+      "trials": 600,
+      "failure_trials": 513,
+      "success_trials": 87,
+      "unsafe_accept_rate": 0.0,
+      "normal_accept_rate": 1.0,
+      "mean_read_calls": 1.0,
+      "mean_returned_scalars": 122.25666666666666,
+      "unsafe_accept_rate_by_fault": {
+        "noop_ack": 0.0,
+        "partial_ack": 0.0,
+        "wrong_target_ack": 0.0,
+        "duplicate_effect_ack": 0.0,
+        "spillover_ack": 0.0,
+        "rollback_after_ack": 0.0
+      }
+    },
+    "output_trust": {
+      "trials": 600,
+      "failure_trials": 513,
+      "success_trials": 87,
+      "unsafe_accept_rate": 1.0,
+      "normal_accept_rate": 1.0,
+      "mean_read_calls": 0.0,
+      "mean_returned_scalars": 0.0,
+      "unsafe_accept_rate_by_fault": {
+        "noop_ack": 1.0,
+        "partial_ack": 1.0,
+        "wrong_target_ack": 1.0,
+        "duplicate_effect_ack": 1.0,
+        "spillover_ack": 1.0,
+        "rollback_after_ack": 1.0
+      }
+    },
+    "schema_contract": {
+      "trials": 600,
+      "failure_trials": 513,
+      "success_trials": 87,
+      "unsafe_accept_rate": 1.0,
+      "normal_accept_rate": 1.0,
+      "mean_read_calls": 0.0,
+      "mean_returned_scalars": 0.0,
+      "unsafe_accept_rate_by_fault": {
+        "noop_ack": 1.0,
+        "partial_ack": 1.0,
+        "wrong_target_ack": 1.0,
+        "duplicate_effect_ack": 1.0,
+        "spillover_ack": 1.0,
+        "rollback_after_ack": 1.0
+      }
+    },
+    "target_postread": {
+      "trials": 600,
+      "failure_trials": 513,
+      "success_trials": 87,
+      "unsafe_accept_rate": 0.31968810916179335,
+      "normal_accept_rate": 1.0,
+      "mean_read_calls": 1.0,
+      "mean_returned_scalars": 5.0,
+      "unsafe_accept_rate_by_fault": {
+        "noop_ack": 0.0,
+        "partial_ack": 0.0,
+        "wrong_target_ack": 0.0,
+        "duplicate_effect_ack": 1.0,
+        "spillover_ack": 1.0,
+        "rollback_after_ack": 0.0
+      }
+    },
+    "weak_nonce_witness": {
+      "trials": 600,
+      "failure_trials": 513,
+      "success_trials": 87,
+      "unsafe_accept_rate": 0.31968810916179335,
+      "normal_accept_rate": 1.0,
+      "mean_read_calls": 1.0,
+      "mean_returned_scalars": 5.641666666666667,
+      "unsafe_accept_rate_by_fault": {
+        "noop_ack": 0.0,
+        "partial_ack": 0.0,
+        "wrong_target_ack": 0.0,
+        "duplicate_effect_ack": 1.0,
+        "spillover_ack": 1.0,
+        "rollback_after_ack": 0.0
+      }
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 0,
+      "summary": {
+        "compiled_mutation_sufficient_witness": {
+          "trials": 300,
+          "failure_trials": 256,
+          "success_trials": 44,
+          "unsafe_accept_rate": 0.0,
+          "normal_accept_rate": 1.0,
+          "mean_read_calls": 1.0,
+          "mean_returned_scalars": 5.466666666666667,
+          "unsafe_accept_rate_by_fault": {
+            "noop_ack": 0.0,
+            "partial_ack": 0.0,
+            "wrong_target_ack": 0.0,
+            "duplicate_effect_ack": 0.0,
+            "spillover_ack": 0.0,
+            "rollback_after_ack": 0.0
+          }
+        },
+        "full_snapshot_oracle": {
+          "trials": 300,
+          "failure_trials": 256,
+          "success_trials": 44,
+          "unsafe_accept_rate": 0.0,
+          "normal_accept_rate": 1.0,
+          "mean_read_calls": 1.0,
+          "mean_returned_scalars": 122.18666666666667,
+          "unsafe_accept_rate_by_fault": {
+            "noop_ack": 0.0,
+            "partial_ack": 0.0,
+            "wrong_target_ack": 0.0,
+            "duplicate_effect_ack": 0.0,
+            "spillover_ack": 0.0,
+            "rollback_after_ack": 0.0
+          }
+        },
+        "output_trust": {
+          "trials": 300,
+          "failure_trials": 256,
+          "success_trials": 44,
+          "unsafe_accept_rate": 1.0,
+          "normal_accept_rate": 1.0,
+          "mean_read_calls": 0.0,
+          "mean_returned_scalars": 0.0,
+          "unsafe_accept_rate_by_fault": {
+            "noop_ack": 1.0,
+            "partial_ack": 1.0,
+            "wrong_target_ack": 1.0,
+            "duplicate_effect_ack": 1.0,
+            "spillover_ack": 1.0,
+            "rollback_after_ack": 1.0
+          }
+        },
+        "schema_contract": {
+          "trials": 300,
+          "failure_trials": 256,
+          "success_trials": 44,
+          "unsafe_accept_rate": 1.0,
+          "normal_accept_rate": 1.0,
+          "mean_read_calls": 0.0,
+          "mean_returned_scalars": 0.0,
+          "unsafe_accept_rate_by_fault": {
+            "noop_ack": 1.0,
+            "partial_ack": 1.0,
+            "wrong_target_ack": 1.0,
+            "duplicate_effect_ack": 1.0,
+            "spillover_ack": 1.0,
+            "rollback_after_ack": 1.0
+          }
+        },
+        "target_postread": {
+          "trials": 300,
+          "failure_trials": 256,
+          "success_trials": 44,
+          "unsafe_accept_rate": 0.2734375,
+          "normal_accept_rate": 1.0,
+          "mean_read_calls": 1.0,
+          "mean_returned_scalars": 5.0,
+          "unsafe_accept_rate_by_fault": {
+            "noop_ack": 0.0,
+            "partial_ack": 0.0,
+            "wrong_target_ack": 0.0,
+            "duplicate_effect_ack": 1.0,
+            "spillover_ack": 1.0,
+            "rollback_after_ack": 0.0
+          }
+        },
+        "weak_nonce_witness": {
+          "trials": 300,
+          "failure_trials": 256,
+          "success_trials": 44,
+          "unsafe_accept_rate": 0.2734375,
+          "normal_accept_rate": 1.0,
+          "mean_read_calls": 1.0,
+          "mean_returned_scalars": 5.466666666666667,
+          "unsafe_accept_rate_by_fault": {
+            "noop_ack": 0.0,
+            "partial_ack": 0.0,
+            "wrong_target_ack": 0.0,
+            "duplicate_effect_ack": 1.0,
+            "spillover_ack": 1.0,
+            "rollback_after_ack": 0.0
+          }
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "summary": {
+        "compiled_mutation_sufficient_witness": {
+          "trials": 300,
+          "failure_trials": 257,
+          "success_trials": 43,
+          "unsafe_accept_rate": 0.0,
+          "normal_accept_rate": 1.0,
+          "mean_read_calls": 1.0,
+          "mean_returned_scalars": 5.816666666666666,
+          "unsafe_accept_rate_by_fault": {
+            "noop_ack": 0.0,
+            "partial_ack": 0.0,
+            "wrong_target_ack": 0.0,
+            "duplicate_effect_ack": 0.0,
+            "spillover_ack": 0.0,
+            "rollback_after_ack": 0.0
+          }
+        },
+        "full_snapshot_oracle": {
+          "trials": 300,
+          "failure_trials": 257,
+          "success_trials": 43,
+          "unsafe_accept_rate": 0.0,
+          "normal_accept_rate": 1.0,
+          "mean_read_calls": 1.0,
+          "mean_returned_scalars": 122.32666666666667,
+          "unsafe_accept_rate_by_fault": {
+            "noop_ack": 0.0,
+            "partial_ack": 0.0,
+            "wrong_target_ack": 0.0,
+            "duplicate_effect_ack": 0.0,
+            "spillover_ack": 0.0,
+            "rollback_after_ack": 0.0
+          }
+        },
+        "output_trust": {
+          "trials": 300,
+          "failure_trials": 257,
+          "success_trials": 43,
+          "unsafe_accept_rate": 1.0,
+          "normal_accept_rate": 1.0,
+          "mean_read_calls": 0.0,
+          "mean_returned_scalars": 0.0,
+          "unsafe_accept_rate_by_fault": {
+            "noop_ack": 1.0,
+            "partial_ack": 1.0,
+            "wrong_target_ack": 1.0,
+            "duplicate_effect_ack": 1.0,
+            "spillover_ack": 1.0,
+            "rollback_after_ack": 1.0
+          }
+        },
+        "schema_contract": {
+          "trials": 300,
+          "failure_trials": 257,
+          "success_trials": 43,
+          "unsafe_accept_rate": 1.0,
+          "normal_accept_rate": 1.0,
+          "mean_read_calls": 0.0,
+          "mean_returned_scalars": 0.0,
+          "unsafe_accept_rate_by_fault": {
+            "noop_ack": 1.0,
+            "partial_ack": 1.0,
+            "wrong_target_ack": 1.0,
+            "duplicate_effect_ack": 1.0,
+            "spillover_ack": 1.0,
+            "rollback_after_ack": 1.0
+          }
+        },
+        "target_postread": {
+          "trials": 300,
+          "failure_trials": 257,
+          "success_trials": 43,
+          "unsafe_accept_rate": 0.3657587548638132,
+          "normal_accept_rate": 1.0,
+          "mean_read_calls": 1.0,
+          "mean_returned_scalars": 5.0,
+          "unsafe_accept_rate_by_fault": {
+            "noop_ack": 0.0,
+            "partial_ack": 0.0,
+            "wrong_target_ack": 0.0,
+            "duplicate_effect_ack": 1.0,
+            "spillover_ack": 1.0,
+            "rollback_after_ack": 0.0
+          }
+        },
+        "weak_nonce_witness": {
+          "trials": 300,
+          "failure_trials": 257,
+          "success_trials": 43,
+          "unsafe_accept_rate": 0.3657587548638132,
+          "normal_accept_rate": 1.0,
+          "mean_read_calls": 1.0,
+          "mean_returned_scalars": 5.816666666666666,
+          "unsafe_accept_rate_by_fault": {
+            "noop_ack": 0.0,
+            "partial_ack": 0.0,
+            "wrong_target_ack": 0.0,
+            "duplicate_effect_ack": 1.0,
+            "spillover_ack": 1.0,
+            "rollback_after_ack": 0.0
+          }
+        }
+      }
+    }
+  ],
+  "negative_control": {
+    "fault": "noop_ack_with_forged_nonce_read",
+    "cases": 100,
+    "unsafe_accept_rate": 1.0,
+    "expected_interpretation": "trusted independent read is a necessary external premise"
+  },
+  "independence_note": "terminal labels and concrete process faults are implemented in run_benchmark.py; the compiler sees only abstract relation mutants in effect_witness.py"
+}

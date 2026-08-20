@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "evaluation_kind": "retrieval_lock_bounded_closeout_acceptance",
+  "executed_at_local_date": "2026-08-14",
+  "pre_rebuild_audit": {
+    "papers": 99,
+    "passages": 3995,
+    "evidence": 224,
+    "cards": 228,
+    "errors": 1,
+    "warnings": 52,
+    "only_error": {
+      "code": "RETRIEVAL_LOCK_SOURCE_HASH_MISMATCH",
+      "source": "research_retrieval_code",
+      "path": "crl_agent_v3/crl_v3/research_retrieval.py",
+      "recorded_sha256": "09caf4ccabdab8cc4d7f843283bf274fcf4612b31340e045cd6ff33883a16ab4",
+      "current_sha256": "8662e98cb009a7c9e796f024b6c2f254367deea81cfb7addeb1dae77cb3da21f"
+    },
+    "warning_scope": "52 pre-existing passage length diagnostics; no additional identity or integrity error"
+  },
+  "scientific_plane_identity": {
+    "excluded_top_level_maintenance_directory": "evaluation",
+    "excluded_non_scientific_packaging_artifact": {
+      "path": "knowledge_base/evaluation.zip",
+      "size_bytes": 1720353,
+      "sha256": "797d73510008c4678437e59f3f8c1219ace895fead052bfb3673bba18db69eed",
+      "inspection": "ZIP directory listing contains a packaged evaluation tree; it was not extracted, moved, deleted, or used as scientific evidence"
+    },
+    "file_count": 821,
+    "total_bytes": 326477929,
+    "matches_v014_count_and_bytes": true,
+    "key_scientific_assets": {
+      "corpus_evidence_sha256": "c3bae1a784701d1c7c1679aeb15c6b88e53dbdcf7d8705920fcf83e607b4a19c",
+      "corpus_manifest_sha256": "bf61d16e384601cc0ca6fdff5c789a55ab71e891669e1f48bcd3816c9a0f2ef5",
+      "knowledge_sqlite_sha256": "7911d86e02ccd4df8fb18bb11fcdb160f0eea2a1e29eeec97f1f1fd8b9c15fcf",
+      "passages_npz_sha256": "fac941ed0825e1906d1724a4e0a6daefe2b1f98f19b1dd5dd523320c4b9ff1ad",
+      "cards_fts_sqlite_sha256": "52edfb9f2ba50afb65d49673cb902c6a0842d296df7f9651ad0563880de86ce6",
+      "card_source_signature": "a512499ae91e0b24c3aa13f9d2ae0a5a7bc3e790152bef5e80500573997c60f9"
+    },
+    "scientific_content_or_index_rebuilt": false
+  },
+  "frozen_regression": {
+    "source": "knowledge_base/evaluation/production_eval/v012/content_repair_replay.json",
+    "source_sha256": "9196cfb3d583b67ab2f58c0136c8afb14790659e2858a18f62afaa178ef6abd0",
+    "queries_replayed_without_changes": 38,
+    "calibration": {
+      "queries": 20,
+      "top5_pass": 20,
+      "critical": 8,
+      "critical_pass": 8
+    },
+    "blind": {
+      "queries": 18,
+      "top5_pass": 16,
+      "critical": 5,
+      "critical_pass": 5,
+      "ordinary_miss_query_ids": [
+        "v012-blind-q02",
+        "v012-blind-q03"
+      ],
+      "new_ordinary_miss_relative_to_v012": "v012-blind-q02",
+      "new_miss_relevant_card_ranks_in_current_full_operator_route": {
+        "operator-feedback-backpropagated-tree-search": 13,
+        "operator-reason-action-interleaving": 19,
+        "operator-thought-tree-search": 55
+      }
+    },
+    "critical_pass": 13,
+    "critical_total": 13,
+    "relevant_top5_card_to_current_evidence_and_passage_chain_failures": 0,
+    "top10_exact_order_mismatch_queries": 38,
+    "interpretation_boundary": "The current Card code and Card FTS index identities exactly match the already accepted v014 lock, so these inherited v012-to-v014 ordinary ranking differences are not caused by the current research_retrieval.py source drift. The additional ordinary miss is disclosed and is not promoted to a new gate.",
+    "verdict": "PASS_NO_NEW_CRITICAL_REGRESSION_WITH_DISCLOSED_ORDINARY_MISS"
+  },
+  "purpose_aware_current_machine_smoke": {
+    "real_knowledge_base_read_only": true,
+    "query_count": 5,
+    "purposes": [
+      "problem",
+      "failure",
+      "operator",
+      "prior",
+      "measurement"
+    ],
+    "route_count": 20,
+    "nonempty_routes": 20,
+    "card_limit": 3,
+    "passage_limit": 3,
+    "raw_route_hit_count_in_materialized_result_json": 60,
+    "raw_route_rank_score_and_traceability_present": true,
+    "compact_map_recomputed_exactly_from_raw_routes": true,
+    "compact_entry_count": 25,
+    "representative_entry_count": 16,
+    "report_format": "compact-v2",
+    "repeat_runs": {
+      "run_1_degraded_routes": 0,
+      "run_2_degraded_routes": 0
+    },
+    "observed_prior_transient": "An earlier separate process explicitly degraded one first passage route after a Hugging Face client RuntimeError; all 20 routes remained nonempty through FTS fallback, and the two acceptance repeats had zero degraded routes.",
+    "automatic_scientific_judgment": false,
+    "verdict": "PASS"
+  },
+  "full_regression": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider --run-real-kb --run-real-pdf",
+    "python": "3.11.15",
+    "passed": 465,
+    "skipped": 6,
+    "failed": 0,
+    "wall_time_seconds": 108.49
+  },
+  "no_fresh_blind_redesign": {
+    "performed": false,
+    "reason": "Frozen objective queries and direct-reading judgments already exercise critical discovery; the only current lock drift is the known research_retrieval.py presentation/navigation identity while retrieval.py, cards.py, knowledge.py, vector.py and all locked indexes retain their v014 identities."
+  },
+  "accepted": true,
+  "limitations": [
+    "This is bounded maintenance acceptance, not a fresh blind retrieval evaluation or research-quality score.",
+    "The inherited v012-to-v014 ranking differences include one additional ordinary top-5 miss and are disclosed rather than treated as exact ranking equivalence.",
+    "Optional vector retrieval can explicitly degrade to FTS on transient model-loading or network-client failure.",
+    "knowledge_base/evaluation.zip is an external non-scientific packaging artifact outside evaluation/; it was left untouched and excluded explicitly from the scientific-plane comparison.",
+    "The lock remains maintenance metadata and is not a Run, Seed, Delivery, or readiness gate."
+  ]
+}

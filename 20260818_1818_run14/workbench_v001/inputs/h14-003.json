@@ -1,0 +1,34 @@
+{
+  "hypothesis_id": "h14-003",
+  "title": "模式别名映射驱动的一次受控恢复",
+  "parent_ids": ["h14-002"],
+  "lineage_note": "与离线重命名不同，在执行边界针对名称错配进行一次确定性恢复。",
+  "problem": "模型可能生成语义正确但不属于当前模式的旧工具名或近义参数名。",
+  "target_failure": {
+    "summary": "调用意图正确但工具或参数标识符不匹配，导致本可恢复的执行失败。",
+    "card_ids": [],
+    "evidence_ids": ["ev-p084-related-toolkit-error-types"]
+  },
+  "changed_computation": {
+    "baseline": "模式校验失败后直接终止调用。",
+    "intervention": "只对唯一可判定的别名错配执行确定性规范化，并进行至多一次受控重试。",
+    "information_available": "当前工具模式、显式别名表、原始调用与校验错误。",
+    "timing": "调用校验失败后、真实工具执行前。",
+    "budget_effect": "最多增加一次校验与重试，不调用额外大语言模型。"
+  },
+  "mechanism_claim": "把唯一可判定的名称错配与语义错误分开，可恢复一部分结构失败而不放宽工具语义。",
+  "falsifier": "最近先行已覆盖相同恢复策略；或恢复导致错误工具执行率上升且净任务成功无改善。",
+  "minimal_killer_experiment": "在注入已知别名错配的可执行轨迹上比较严格拒绝与唯一别名恢复。",
+  "nearest_prior_risk": "常见运行时校验和重试框架可能已包含该策略，方法新颖性风险高。",
+  "alternative_explanations": ["收益仅来自普通字符串纠错", "真实错误不是唯一别名可判定"],
+  "descriptors": {
+    "problem_family": "工具调用执行恢复",
+    "computation_stage": "执行前校验",
+    "intervention_family": "确定性别名规范化",
+    "information_source": "显式别名表与校验错误",
+    "timing_class": "运行时错误后",
+    "budget_class": "至多一次本地重试",
+    "evaluation_mode": "真实执行成功与误恢复率"
+  },
+  "literature_refs": []
+}

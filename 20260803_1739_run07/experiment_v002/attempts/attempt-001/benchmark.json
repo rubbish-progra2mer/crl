@@ -1,0 +1,244 @@
+{
+  "schema_version": 2,
+  "experiment": "mutation-audited contrastive observability certificates for effect frames",
+  "model_suite": {
+    "configuration": {
+      "seed": 20260803,
+      "domains": [
+        "airline",
+        "calendar",
+        "crm",
+        "retail"
+      ],
+      "operation_families": [
+        "create",
+        "delete",
+        "update"
+      ],
+      "specs_per_domain_family": 24,
+      "profiles_per_spec": 24,
+      "hidden_faults": [
+        "honest",
+        "ack_without_write",
+        "payload_drift",
+        "different_object",
+        "coalesced_replay",
+        "sidecar_mutation",
+        "hidden_attribute_flip",
+        "attribute_erasure",
+        "tombstone_cycle",
+        "precheck_reversion",
+        "compound_frame_and_replay"
+      ]
+    },
+    "audit": {
+      "direct_configs": 6912,
+      "direct_unsafe_configs": 3639,
+      "rigid_deployed_configs": 288,
+      "rigid_safe_configs": 288,
+      "candidate_deployed_configs": 2080,
+      "candidate_unsafe_configs": 0,
+      "candidate_rejected_configs": 4832,
+      "empirically_safe_configs": 3273,
+      "candidate_empirically_safe_deployed": 2080,
+      "candidate_safe_deployment_coverage": 0.635502597005805,
+      "candidate_conservative_rejections": 1193,
+      "rigid_safe_deployment_coverage": 0.08799266727772685
+    },
+    "runtime": {
+      "manual_complete_full_evidence": {
+        "evaluations": 3168,
+        "failure_evaluations": 2880,
+        "success_evaluations": 288,
+        "unsafe_accept_rate": 0.0,
+        "normal_accept_rate": 1.0,
+        "unsafe_accept_by_fault": {
+          "ack_without_write": 0.0,
+          "payload_drift": 0.0,
+          "different_object": 0.0,
+          "coalesced_replay": 0.0,
+          "sidecar_mutation": 0.0,
+          "hidden_attribute_flip": 0.0,
+          "attribute_erasure": 0.0,
+          "tombstone_cycle": 0.0,
+          "precheck_reversion": 0.0,
+          "compound_frame_and_replay": 0.0
+        }
+      },
+      "mutation_audited_compiled": {
+        "evaluations": 22880,
+        "failure_evaluations": 20800,
+        "success_evaluations": 2080,
+        "unsafe_accept_rate": 0.0,
+        "normal_accept_rate": 1.0,
+        "unsafe_accept_by_fault": {
+          "ack_without_write": 0.0,
+          "payload_drift": 0.0,
+          "different_object": 0.0,
+          "coalesced_replay": 0.0,
+          "sidecar_mutation": 0.0,
+          "hidden_attribute_flip": 0.0,
+          "attribute_erasure": 0.0,
+          "tombstone_cycle": 0.0,
+          "precheck_reversion": 0.0,
+          "compound_frame_and_replay": 0.0
+        }
+      },
+      "schema_direct": {
+        "evaluations": 3168,
+        "failure_evaluations": 2880,
+        "success_evaluations": 288,
+        "unsafe_accept_rate": 0.5190972222222222,
+        "normal_accept_rate": 1.0,
+        "unsafe_accept_by_fault": {
+          "ack_without_write": 0.0,
+          "payload_drift": 0.1909722222222222,
+          "different_object": 1.0,
+          "coalesced_replay": 1.0,
+          "sidecar_mutation": 1.0,
+          "hidden_attribute_flip": 0.3333333333333333,
+          "attribute_erasure": 0.3333333333333333,
+          "tombstone_cycle": 1.0,
+          "precheck_reversion": 0.0,
+          "compound_frame_and_replay": 0.3333333333333333
+        }
+      }
+    },
+    "projection": {
+      "mean_selected_features": 3.5384615384615383,
+      "mean_selected_cost": 4.539423076923077,
+      "full_feature_count": 11,
+      "full_cost": 17,
+      "mean_cost_reduction_vs_full": 0.732975113122172
+    },
+    "certificate_samples": [
+      {
+        "domain": "airline",
+        "operation": "create",
+        "selected_features": [
+          "event_targets",
+          "current_exists",
+          "version_alignment",
+          "current_allowed"
+        ],
+        "certificate": {
+          "collateral_event": "event_targets",
+          "delete_recreate_cycle": "event_targets",
+          "duplicate_event": "event_targets",
+          "missing_effect": "event_targets",
+          "revision_mismatch": "version_alignment",
+          "rollback_before_observation": "current_exists",
+          "wrong_identity": "event_targets",
+          "wrong_required_value": "current_allowed"
+        }
+      },
+      {
+        "domain": "airline",
+        "operation": "create",
+        "selected_features": [
+          "event_targets",
+          "current_exists",
+          "version_alignment",
+          "current_allowed"
+        ],
+        "certificate": {
+          "collateral_event": "event_targets",
+          "delete_recreate_cycle": "event_targets",
+          "duplicate_event": "event_targets",
+          "missing_effect": "event_targets",
+          "revision_mismatch": "version_alignment",
+          "rollback_before_observation": "current_exists",
+          "wrong_identity": "event_targets",
+          "wrong_required_value": "current_allowed"
+        }
+      },
+      {
+        "domain": "airline",
+        "operation": "create",
+        "selected_features": [
+          "event_targets",
+          "current_exists",
+          "version_alignment",
+          "current_allowed"
+        ],
+        "certificate": {
+          "collateral_event": "event_targets",
+          "delete_recreate_cycle": "event_targets",
+          "duplicate_event": "event_targets",
+          "missing_effect": "event_targets",
+          "revision_mismatch": "version_alignment",
+          "rollback_before_observation": "current_exists",
+          "wrong_identity": "event_targets",
+          "wrong_required_value": "current_allowed"
+        }
+      },
+      {
+        "domain": "airline",
+        "operation": "create",
+        "selected_features": [
+          "event_targets",
+          "current_exists",
+          "version_alignment",
+          "current_allowed"
+        ],
+        "certificate": {
+          "collateral_event": "event_targets",
+          "delete_recreate_cycle": "event_targets",
+          "duplicate_event": "event_targets",
+          "missing_effect": "event_targets",
+          "revision_mismatch": "version_alignment",
+          "rollback_before_observation": "current_exists",
+          "wrong_identity": "event_targets",
+          "wrong_required_value": "current_allowed"
+        }
+      }
+    ]
+  },
+  "sqlite_prototype": {
+    "configuration": {
+      "entities": 1000,
+      "operations": 600,
+      "engine": "python sqlite3",
+      "journal_mode": "WAL"
+    },
+    "honest_acceptance": {
+      "accepted": 600,
+      "total": 600
+    },
+    "plain_write": {
+      "median_us": 2424.15,
+      "p95_us": 2883.1
+    },
+    "atomic_logged_write": {
+      "median_us": 2065.1,
+      "p95_us": 3066.0
+    },
+    "indexed_evidence_read": {
+      "median_us": 62.7,
+      "p95_us": 128.8
+    },
+    "compiled_verify": {
+      "median_us": 22.0,
+      "p95_us": 40.0
+    },
+    "full_snapshot_read": {
+      "median_us": 875.45,
+      "p95_us": 988.7
+    },
+    "scope_note": "Prototype mechanics only; the wrapper is not a security boundary against direct database writers."
+  },
+  "negative_controls": {
+    "cases_each": 1200,
+    "unsafe_accept_rate": {
+      "delayed_change_after_witness": 1.0,
+      "forged_read": 1.0,
+      "unlogged_collateral": 1.0
+    },
+    "interpretation": {
+      "forged_read": "trusted evidence reads remain an external premise",
+      "unlogged_collateral": "complete, enforced lineage remains an external premise",
+      "delayed_change_after_witness": "the claim is bound to the observed committed revision, not future state"
+    }
+  },
+  "independence_note": "The method module sees abstract traces only; concrete fault processes and strict terminal labels are defined here. This is implementation separation, not evidence of real-world defect-distribution independence."
+}

@@ -1,0 +1,18 @@
+{
+  "claim_id": "claim-h14-002-invariance",
+  "claim_text": "在同一用户请求、同一工具语义和同一规范执行器下，本地工具调用模型对可逆的工具与参数标识符重命名会出现可复现的端到端执行不一致。",
+  "scope": "qwen3:4b、四类单步工具、手工构造的小型任务集、Ollama 本地工具调用协议；仅作为筛选。",
+  "observable": "规范模式与重命名模式的任务成功率、配对不一致率、工具选择错误率、参数映射错误率和解析错误率。",
+  "falsifier": "两个独立实现均显示所有任务在两种模式下结果一致，或所有差异均可归因于非等价变换或实现错误。",
+  "minimum_effect_or_decision_rule": "出现至少两个经回放确认的配对执行不一致则支持继续深化现象；零不一致只触发第二独立实现，不关闭论文级方向。",
+  "alternative_explanations": [
+    "Ollama 模板或解析器造成差异",
+    "重命名词的清晰度不同而不是模式标识符本身",
+    "任务数量太少",
+    "本地小模型特有"
+  ],
+  "killer_experiment_id": "exp-h14-002-screen-a",
+  "supporting_experiment_ids": ["exp-h14-002-screen-b"],
+  "status": "proposed",
+  "status_reason": "最近先行边界收窄后提出，等待本地筛选。"
+}

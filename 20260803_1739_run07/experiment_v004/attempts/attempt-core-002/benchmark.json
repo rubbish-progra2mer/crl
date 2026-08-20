@@ -1,0 +1,354 @@
+{
+  "schema_version": 4,
+  "experiment": "semantic-effect anchored trajectory quotient certificate",
+  "source": {
+    "development": "official tau2-bench v1.0.1 task end-state semantics",
+    "independent_external": "official tau2-bench v1.0.1 telecom base tasks",
+    "telecom_commit": "363133ada1936491fb5bcec33cd62c3518a99f65",
+    "telecom_tasks": 94,
+    "telecom_builder_independence": "This builder does not import the v004 evaluator or choose its mandatory anchor.",
+    "telecom_label_rule": "agent and user DB hashes equal the official reference-action end state"
+  },
+  "development_regression": {
+    "data_role": "development regression; anchor was selected after inspecting this corpus",
+    "correct_accept_rate": 1.0,
+    "correct_fraction": "261/261",
+    "harmful_unsafe_accept_rate": 0.0,
+    "harmful_fraction": "0/196",
+    "v003_harmful_regressions_accepted": {
+      "airline::12::perturb_first_write_heldout": false,
+      "retail::64::reverse_writes": false
+    },
+    "failures": []
+  },
+  "telecom_invariance_audit": {
+    "tasks_with_reference": 94,
+    "correct_variant_comparisons": 103,
+    "violation_counts": {
+      "write_count": 35,
+      "write_names": 103,
+      "write_arguments_digest": 103,
+      "all_call_count": 35,
+      "all_call_names": 103,
+      "read_count": 0,
+      "state_delta_count": 0,
+      "state_delta_paths": 0,
+      "state_delta_digest": 0,
+      "final_state_pair_digest": 0,
+      "tool_error_count": 0
+    },
+    "semantic_feature_violations": 0
+  },
+  "telecom_policies": {
+    "unconstrained_exact": {
+      "flow": {
+        "eligible_tasks": 74,
+        "eligible_heldout_correct": 103,
+        "eligible_heldout_harmful": 148,
+        "deployed_tasks": 74,
+        "evaluated_heldout_correct": 103,
+        "accepted_heldout_correct": 95,
+        "evaluated_heldout_harmful": 148,
+        "accepted_heldout_harmful": 6,
+        "ineligible_tasks": 20
+      },
+      "heldout": {
+        "correct_accept_rate": 0.9223300970873787,
+        "harmful_unsafe_accept_rate": 0.04054054054054054
+      },
+      "optimization": {
+        "selected_feature_frequency": {
+          "all_call_count": 45,
+          "state_delta_count": 29
+        },
+        "mean_declared_cost_ratio_Q_over_A": 0.04217854217854218,
+        "declared_cost_is_not_runtime_measurement": true
+      },
+      "failures": [
+        {
+          "kind": "correct_rejected",
+          "task": "telecom::[mobile_data_issue]bad_vpn|data_saver_mode_on|user_abroad_roaming_disabled_on[PERSONA:None]",
+          "variant": "duplicate_first_write",
+          "selected": [
+            "all_call_count"
+          ]
+        },
+        {
+          "kind": "correct_rejected",
+          "task": "telecom::[mobile_data_issue]bad_vpn|data_mode_off|data_usage_exceeded|user_abroad_roaming_disabled_off[PERSONA:None]",
+          "variant": "duplicate_first_write",
+          "selected": [
+            "all_call_count"
+          ]
+        },
+        {
+          "kind": "correct_rejected",
+          "task": "telecom::[service_issue]airplane_mode_on|overdue_bill_suspension[PERSONA:None]",
+          "variant": "drop_last_write",
+          "selected": [
+            "all_call_count"
+          ]
+        },
+        {
+          "kind": "correct_rejected",
+          "task": "telecom::[service_issue]airplane_mode_on|break_apn_settings|overdue_bill_suspension[PERSONA:None]",
+          "variant": "drop_last_write",
+          "selected": [
+            "all_call_count"
+          ]
+        },
+        {
+          "kind": "harmful_accepted",
+          "task": "telecom::[service_issue]airplane_mode_on|break_apn_settings|overdue_bill_suspension[PERSONA:None]",
+          "variant": "reverse_writes",
+          "selected": [
+            "all_call_count"
+          ]
+        },
+        {
+          "kind": "correct_rejected",
+          "task": "telecom::[service_issue]break_apn_settings|overdue_bill_suspension|unseat_sim_card[PERSONA:Hard]",
+          "variant": "duplicate_first_write",
+          "selected": [
+            "all_call_count"
+          ]
+        },
+        {
+          "kind": "harmful_accepted",
+          "task": "telecom::[service_issue]break_apn_settings|overdue_bill_suspension|unseat_sim_card[PERSONA:Hard]",
+          "variant": "reverse_writes",
+          "selected": [
+            "all_call_count"
+          ]
+        },
+        {
+          "kind": "correct_rejected",
+          "task": "telecom::[mms_issue]break_apn_mms_setting|user_abroad_roaming_enabled_off[PERSONA:Hard]",
+          "variant": "duplicate_first_write",
+          "selected": [
+            "all_call_count"
+          ]
+        },
+        {
+          "kind": "harmful_accepted",
+          "task": "telecom::[mms_issue]break_apn_mms_setting|user_abroad_roaming_enabled_off[PERSONA:Hard]",
+          "variant": "reverse_writes",
+          "selected": [
+            "all_call_count"
+          ]
+        },
+        {
+          "kind": "correct_rejected",
+          "task": "telecom::[mms_issue]break_apn_mms_setting|data_mode_off|user_abroad_roaming_disabled_on[PERSONA:Hard]",
+          "variant": "duplicate_first_write",
+          "selected": [
+            "all_call_count"
+          ]
+        },
+        {
+          "kind": "harmful_accepted",
+          "task": "telecom::[mms_issue]break_apn_mms_setting|data_mode_off|user_abroad_roaming_disabled_on[PERSONA:Hard]",
+          "variant": "reverse_writes",
+          "selected": [
+            "all_call_count"
+          ]
+        },
+        {
+          "kind": "correct_rejected",
+          "task": "telecom::[mms_issue]break_apn_mms_setting|data_mode_off|data_usage_exceeded|user_abroad_roaming_disabled_on[PERSONA:Hard]",
+          "variant": "duplicate_first_write",
+          "selected": [
+            "all_call_count"
+          ]
+        },
+        {
+          "kind": "harmful_accepted",
+          "task": "telecom::[mms_issue]break_apn_mms_setting|data_mode_off|data_usage_exceeded|user_abroad_roaming_disabled_on[PERSONA:Hard]",
+          "variant": "reverse_writes",
+          "selected": [
+            "all_call_count"
+          ]
+        },
+        {
+          "kind": "harmful_accepted",
+          "task": "telecom::[mms_issue]bad_network_preference|bad_wifi_calling|break_apn_mms_setting|break_app_storage_permission|data_mode_off|data_usage_exceeded|unseat_sim_card[PERSONA:Easy]",
+          "variant": "reverse_writes",
+          "selected": [
+            "state_delta_count"
+          ]
+        }
+      ]
+    },
+    "semantic_exact_without_anchor": {
+      "flow": {
+        "eligible_tasks": 74,
+        "eligible_heldout_correct": 103,
+        "eligible_heldout_harmful": 148,
+        "deployed_tasks": 74,
+        "evaluated_heldout_correct": 103,
+        "accepted_heldout_correct": 103,
+        "evaluated_heldout_harmful": 148,
+        "accepted_heldout_harmful": 6,
+        "ineligible_tasks": 20
+      },
+      "heldout": {
+        "correct_accept_rate": 1.0,
+        "harmful_unsafe_accept_rate": 0.04054054054054054
+      },
+      "optimization": {
+        "selected_feature_frequency": {
+          "state_delta_count": 74
+        },
+        "mean_declared_cost_ratio_Q_over_A": 0.09523809523809523,
+        "declared_cost_is_not_runtime_measurement": true
+      },
+      "failures": [
+        {
+          "kind": "harmful_accepted",
+          "task": "telecom::[service_issue]airplane_mode_on|break_apn_settings|overdue_bill_suspension[PERSONA:None]",
+          "variant": "reverse_writes",
+          "selected": [
+            "state_delta_count"
+          ]
+        },
+        {
+          "kind": "harmful_accepted",
+          "task": "telecom::[service_issue]break_apn_settings|overdue_bill_suspension|unseat_sim_card[PERSONA:Hard]",
+          "variant": "reverse_writes",
+          "selected": [
+            "state_delta_count"
+          ]
+        },
+        {
+          "kind": "harmful_accepted",
+          "task": "telecom::[mms_issue]break_apn_mms_setting|user_abroad_roaming_enabled_off[PERSONA:Hard]",
+          "variant": "reverse_writes",
+          "selected": [
+            "state_delta_count"
+          ]
+        },
+        {
+          "kind": "harmful_accepted",
+          "task": "telecom::[mms_issue]break_apn_mms_setting|data_mode_off|user_abroad_roaming_disabled_on[PERSONA:Hard]",
+          "variant": "reverse_writes",
+          "selected": [
+            "state_delta_count"
+          ]
+        },
+        {
+          "kind": "harmful_accepted",
+          "task": "telecom::[mms_issue]break_apn_mms_setting|data_mode_off|data_usage_exceeded|user_abroad_roaming_disabled_on[PERSONA:Hard]",
+          "variant": "reverse_writes",
+          "selected": [
+            "state_delta_count"
+          ]
+        },
+        {
+          "kind": "harmful_accepted",
+          "task": "telecom::[mms_issue]bad_network_preference|bad_wifi_calling|break_apn_mms_setting|break_app_storage_permission|data_mode_off|data_usage_exceeded|unseat_sim_card[PERSONA:Easy]",
+          "variant": "reverse_writes",
+          "selected": [
+            "state_delta_count"
+          ]
+        }
+      ]
+    },
+    "semantic_effect_anchor_candidate": {
+      "flow": {
+        "eligible_tasks": 74,
+        "eligible_heldout_correct": 103,
+        "eligible_heldout_harmful": 148,
+        "deployed_tasks": 74,
+        "evaluated_heldout_correct": 103,
+        "accepted_heldout_correct": 103,
+        "evaluated_heldout_harmful": 148,
+        "accepted_heldout_harmful": 0,
+        "ineligible_tasks": 20
+      },
+      "heldout": {
+        "correct_accept_rate": 1.0,
+        "harmful_unsafe_accept_rate": 0.0
+      },
+      "optimization": {
+        "selected_feature_frequency": {
+          "state_delta_digest": 74
+        },
+        "mean_declared_cost_ratio_Q_over_A": 0.23809523809523805,
+        "declared_cost_is_not_runtime_measurement": true
+      },
+      "failures": []
+    },
+    "full_state_pair_hash_oracle": {
+      "flow": {
+        "eligible_tasks": 74,
+        "eligible_heldout_correct": 103,
+        "eligible_heldout_harmful": 148,
+        "deployed_tasks": 74,
+        "evaluated_heldout_correct": 103,
+        "accepted_heldout_correct": 103,
+        "evaluated_heldout_harmful": 148,
+        "accepted_heldout_harmful": 0,
+        "ineligible_tasks": 20
+      },
+      "heldout": {
+        "correct_accept_rate": 1.0,
+        "harmful_unsafe_accept_rate": 0.0
+      },
+      "optimization": {
+        "selected_feature_frequency": {
+          "final_state_pair_digest": 74
+        },
+        "mean_declared_cost_ratio_Q_over_A": 1.0,
+        "declared_cost_is_not_runtime_measurement": true
+      },
+      "failures": []
+    },
+    "same_information_generic_anchor_baseline": {
+      "flow": {
+        "eligible_tasks": 74,
+        "eligible_heldout_correct": 103,
+        "eligible_heldout_harmful": 148,
+        "deployed_tasks": 74,
+        "evaluated_heldout_correct": 103,
+        "accepted_heldout_correct": 103,
+        "evaluated_heldout_harmful": 148,
+        "accepted_heldout_harmful": 0,
+        "ineligible_tasks": 20
+      },
+      "heldout": {
+        "correct_accept_rate": 1.0,
+        "harmful_unsafe_accept_rate": 0.0
+      },
+      "optimization": {
+        "selected_feature_frequency": {
+          "state_delta_digest": 74
+        },
+        "mean_declared_cost_ratio_Q_over_A": 0.23809523809523805,
+        "declared_cost_is_not_runtime_measurement": true
+      },
+      "failures": []
+    }
+  },
+  "baseline_audit": {
+    "generic_anchor_baseline_byte_identical_result": true,
+    "optimizer_novelty": "none; exact subset enumeration is generic",
+    "candidate_difference": "static quotient-invariance gate and mandatory complete effect-identity anchor"
+  },
+  "negative_controls": {
+    "cases_each": 2000,
+    "omitted_collateral_runtime_bypass_rate": 1.0,
+    "forged_digest_runtime_bypass_rate": 1.0,
+    "declared_collision_compile_rejection_rate": 1.0,
+    "unqualified_stale_use_rate": 1.0,
+    "revision_guard_stale_use_rate": 0.0,
+    "revision_guard_normal_accept_rate": 1.0,
+    "trust_boundary": "completeness and authenticity of the effect adapter plus collision resistance of SHA-256"
+  },
+  "claim_limits": {
+    "no_runtime_cost_claim": true,
+    "telecom_variants_are_deterministic_not_production_logs": true,
+    "complete_effect_frame_required": true,
+    "authentic_effect_adapter_required": true,
+    "cryptographic_collision_resistance_assumed": true
+  }
+}

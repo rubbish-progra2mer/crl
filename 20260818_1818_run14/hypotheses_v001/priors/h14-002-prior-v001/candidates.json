@@ -1,0 +1,2278 @@
+{
+  "artifact_kind": "run_local_non_authoritative_prior_candidates",
+  "audit_id": "h14-002-prior-v001",
+  "candidates": [
+    {
+      "abstract": "Every LLM tool call is structurally an RPC -- a function name, JSON arguments, and a serialized result -- yet each protocol (native Python, MCP, OpenAPI, LangChain) is integrated from scratch. We present ToolRegistry, a system that makes this RPC nature explicit: a single Tool object acts as a universal stub regardless of transport, while the registry serves as the RPC client runtime for dispatch, schema generation, and execution. The system ships as three packages -- a core registry, a server exposing tools over MCP and OpenAPI, and a hub of production-ready implementations -- and invokes tools through pluggable thread or process backends. The system now also provides tag-based permission policies, BM25F-powered progressive tool disclosure for large registries, think-augmented function calling, multi-provider schema support (OpenAI, Anthropic, Gemini), declarative JSONC/YAML configuration, and a near-zero-dependency core built on stdlib-only vendored modules. In our benchmarks the library cuts integration code by 60-80%, and choosing the right concurrency mode (thread vs. process) yields up to 3.1x throughput over the alternative for a given workload. ToolRegistry is open-source at https://github.com/Oaklight/ToolRegistry; documentation lives at https://toolregistry.readthedocs.io/.",
+      "authors": [
+        "Peng Ding",
+        "Rick Stevens"
+      ],
+      "candidate_id": "prior-6814d48e1fce5bb8",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2507.10593v3"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2507.10593v3"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Asemantically+equivalent+tool+schema+transformation+function+calling+invariance+benchmark&start=0",
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2507.10593v3</ns0:id>\n    <ns0:title>ToolRegistry: A Protocol-Agnostic Tool Management Library for Function-Calling LLMs</ns0:title>\n    <ns0:updated>2026-05-24T23:49:32Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2507.10593v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2507.10593v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Every LLM tool call is structurally an RPC -- a function name, JSON arguments, and a serialized result -- yet each protocol (native Python, MCP, OpenAPI, LangChain) is integrated from scratch. We present ToolRegistry, a system that makes this RPC nature explicit: a single Tool object acts as a universal stub regardless of transport, while the registry serves as the RPC client runtime for dispatch, schema generation, and execution. The system ships as three packages -- a core registry, a server exposing tools over MCP and OpenAPI, and a hub of production-ready implementations -- and invokes tools through pluggable thread or process backends. The system now also provides tag-based permission policies, BM25F-powered progressive tool disclosure for large registries, think-augmented function calling, multi-provider schema support (OpenAI, Anthropic, Gemini), declarative JSONC/YAML configuration, and a near-zero-dependency core built on stdlib-only vendored modules. In our benchmarks the library cuts integration code by 60-80%, and choosing the right concurrency mode (thread vs. process) yields up to 3.1x throughput over the alternative for a given workload. ToolRegistry is open-source at https://github.com/Oaklight/ToolRegistry; documentation lives at https://toolregistry.readthedocs.io/.</ns0:summary>\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-07-11T20:23:23Z</ns0:published>\n    <ns1:comment>16 pages, 4 figures, v3: add co-author, permission system, progressive tool disclosure, think-augmented calling, RPC framing, multi-provider support</ns1:comment>\n    <ns1:primary_category term=\"cs.SE\" />\n    <ns0:author>\n      <ns0:name>Peng Ding</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Rick Stevens</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "e37f8f5312ed1b2a7c2634d622b996408a37a31c055be6ad5f18b20ed5be9935",
+          "source": "arXiv",
+          "source_id": "2507.10593v3",
+          "source_rank": 1
+        },
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Atool+schema+renaming+robustness+execution+LLM+function+calling&start=0",
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2507.10593v3</ns0:id>\n    <ns0:title>ToolRegistry: A Protocol-Agnostic Tool Management Library for Function-Calling LLMs</ns0:title>\n    <ns0:updated>2026-05-24T23:49:32Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2507.10593v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2507.10593v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Every LLM tool call is structurally an RPC -- a function name, JSON arguments, and a serialized result -- yet each protocol (native Python, MCP, OpenAPI, LangChain) is integrated from scratch. We present ToolRegistry, a system that makes this RPC nature explicit: a single Tool object acts as a universal stub regardless of transport, while the registry serves as the RPC client runtime for dispatch, schema generation, and execution. The system ships as three packages -- a core registry, a server exposing tools over MCP and OpenAPI, and a hub of production-ready implementations -- and invokes tools through pluggable thread or process backends. The system now also provides tag-based permission policies, BM25F-powered progressive tool disclosure for large registries, think-augmented function calling, multi-provider schema support (OpenAI, Anthropic, Gemini), declarative JSONC/YAML configuration, and a near-zero-dependency core built on stdlib-only vendored modules. In our benchmarks the library cuts integration code by 60-80%, and choosing the right concurrency mode (thread vs. process) yields up to 3.1x throughput over the alternative for a given workload. ToolRegistry is open-source at https://github.com/Oaklight/ToolRegistry; documentation lives at https://toolregistry.readthedocs.io/.</ns0:summary>\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-07-11T20:23:23Z</ns0:published>\n    <ns1:comment>16 pages, 4 figures, v3: add co-author, permission system, progressive tool disclosure, think-augmented calling, RPC framing, multi-provider support</ns1:comment>\n    <ns1:primary_category term=\"cs.SE\" />\n    <ns0:author>\n      <ns0:name>Peng Ding</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Rick Stevens</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "02361df0d0abe0e963e369b60171f435cc69bde9fd1559c4c1657fd2ae76e1ae",
+          "source": "arXiv",
+          "source_id": "2507.10593v3",
+          "source_rank": 1
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "source": "arXiv"
+        },
+        {
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2507.10593v3"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2507.10593"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "rank": 1,
+          "source": "arXiv"
+        },
+        {
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "rank": 1,
+          "source": "arXiv"
+        }
+      ],
+      "title": "ToolRegistry: A Protocol-Agnostic Tool Management Library for Function-Calling LLMs",
+      "urls": [
+        "https://arxiv.org/abs/2507.10593v3",
+        "https://arxiv.org/pdf/2507.10593v3"
+      ],
+      "venue": null,
+      "year": 2025
+    },
+    {
+      "abstract": "Complex physical models are the most advanced tools available for producing realistic simulations of the climate system. However, such levels of realism imply high computational cost and restrictions on their use for policymaking and risk assessment. Two central characteristics of climate change are uncertainty and that it is a dynamic problem in which international actions can significantly alter climate projections and information needs, including partial and full compliance of global climate goals. Here we present AIRCC-Clim, a simple climate model emulator that produces regional probabilistic climate change projections of monthly and annual temperature and precipitation, as well as risk measures, based both on standard and user-defined emissions scenarios for six greenhouse gases. AIRCC-Clim emulates 37 atmosphere-ocean coupled general circulation models with low computational and technical requirements for the user. This standalone, user-friendly software is designed for a variety of applications including impact assessments, climate policy evaluation and integrated assessment modelling.",
+      "authors": [
+        "Francisco Estrada",
+        "Oscar Calderón-Bustamante",
+        "Wouter Botzen",
+        "Julián A. Velasco",
+        "Richard S. J. Tol"
+      ],
+      "candidate_id": "prior-a6491b1ee9ffac8c",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2111.01762v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2111.01762v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Asemantically+equivalent+tool+schema+transformation+function+calling+invariance+benchmark&start=0",
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2111.01762v1</ns0:id>\n    <ns0:title>AIRCC-Clim: a user-friendly tool for generating regional probabilistic climate change scenarios and risk measures</ns0:title>\n    <ns0:updated>2021-10-30T11:09:03Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2111.01762v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2111.01762v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Complex physical models are the most advanced tools available for producing realistic simulations of the climate system. However, such levels of realism imply high computational cost and restrictions on their use for policymaking and risk assessment. Two central characteristics of climate change are uncertainty and that it is a dynamic problem in which international actions can significantly alter climate projections and information needs, including partial and full compliance of global climate goals. Here we present AIRCC-Clim, a simple climate model emulator that produces regional probabilistic climate change projections of monthly and annual temperature and precipitation, as well as risk measures, based both on standard and user-defined emissions scenarios for six greenhouse gases. AIRCC-Clim emulates 37 atmosphere-ocean coupled general circulation models with low computational and technical requirements for the user. This standalone, user-friendly software is designed for a variety of applications including impact assessments, climate policy evaluation and integrated assessment modelling.</ns0:summary>\n    <ns0:category term=\"physics.ao-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"econ.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.AP\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2021-10-30T11:09:03Z</ns0:published>\n    <ns1:primary_category term=\"physics.ao-ph\" />\n    <ns0:author>\n      <ns0:name>Francisco Estrada</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Oscar Calderón-Bustamante</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wouter Botzen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Julián A. Velasco</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Richard S. J. Tol</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "e37f8f5312ed1b2a7c2634d622b996408a37a31c055be6ad5f18b20ed5be9935",
+          "source": "arXiv",
+          "source_id": "2111.01762v1",
+          "source_rank": 2
+        },
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Atool+schema+renaming+robustness+execution+LLM+function+calling&start=0",
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2111.01762v1</ns0:id>\n    <ns0:title>AIRCC-Clim: a user-friendly tool for generating regional probabilistic climate change scenarios and risk measures</ns0:title>\n    <ns0:updated>2021-10-30T11:09:03Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2111.01762v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2111.01762v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Complex physical models are the most advanced tools available for producing realistic simulations of the climate system. However, such levels of realism imply high computational cost and restrictions on their use for policymaking and risk assessment. Two central characteristics of climate change are uncertainty and that it is a dynamic problem in which international actions can significantly alter climate projections and information needs, including partial and full compliance of global climate goals. Here we present AIRCC-Clim, a simple climate model emulator that produces regional probabilistic climate change projections of monthly and annual temperature and precipitation, as well as risk measures, based both on standard and user-defined emissions scenarios for six greenhouse gases. AIRCC-Clim emulates 37 atmosphere-ocean coupled general circulation models with low computational and technical requirements for the user. This standalone, user-friendly software is designed for a variety of applications including impact assessments, climate policy evaluation and integrated assessment modelling.</ns0:summary>\n    <ns0:category term=\"physics.ao-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"econ.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.AP\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2021-10-30T11:09:03Z</ns0:published>\n    <ns1:primary_category term=\"physics.ao-ph\" />\n    <ns0:author>\n      <ns0:name>Francisco Estrada</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Oscar Calderón-Bustamante</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wouter Botzen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Julián A. Velasco</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Richard S. J. Tol</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "02361df0d0abe0e963e369b60171f435cc69bde9fd1559c4c1657fd2ae76e1ae",
+          "source": "arXiv",
+          "source_id": "2111.01762v1",
+          "source_rank": 2
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "source": "arXiv"
+        },
+        {
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2111.01762v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2111.01762"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "rank": 2,
+          "source": "arXiv"
+        },
+        {
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "rank": 2,
+          "source": "arXiv"
+        }
+      ],
+      "title": "AIRCC-Clim: a user-friendly tool for generating regional probabilistic climate change scenarios and risk measures",
+      "urls": [
+        "https://arxiv.org/abs/2111.01762v1",
+        "https://arxiv.org/pdf/2111.01762v1"
+      ],
+      "venue": null,
+      "year": 2021
+    },
+    {
+      "abstract": "We read twelve well-known LLM agent benchmark papers and recorded, dimension by dimension, what each paper actually says about how its evaluation was run. The motivation came from a familiar frustration: two papers will report results on the same benchmark with the same model name and disagree, and you cannot tell why -- the scaffold, the sampling settings, the subset, or the evaluator version. In many cases the published artifact does not let you answer. This paper is an implementation report on the attempt. We designed a small audit schema (five fields: benchmark identity, harness specification, inference settings, cost reporting, failure breakdown), wrote a scoring codebook with the boundary cases we hit during pilot scoring, applied it to twelve canonical papers (eight agent, four classical static), and recorded what we saw. We score the disclosure of an agent run, not its correctness, and make no claim that disclosure implies a trustworthy result. The mean audit score across the eight agent-benchmark papers is 0.38 (out of 1.0), and across the four classical static benchmarks 0.66; the largest gap is on cost (none of the eight agent benchmark papers disclose inference cost in any form) and on harness specification (none fully disclose a content-addressed container image of the evaluation environment). We release the schema as a JSON Schema file, the codebook as a Markdown document, and the raw scoring sheet as a CSV. The scoring was performed by a single auditor in one pass; a multi-rater audit is the natural next step, and we discuss what we think it would change.",
+      "authors": [
+        "Mahdi Naser Moghadasi",
+        "Faezeh Ghaderi"
+      ],
+      "candidate_id": "prior-8c5deb76e6cda9b1",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2605.21404v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2605.21404v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Asemantically+equivalent+tool+schema+transformation+function+calling+invariance+benchmark&start=0",
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2605.21404v1</ns0:id>\n    <ns0:title>What Twelve LLM Agent Benchmark Papers Disclose About Themselves: A Pilot Audit and an Open Scoring Schema</ns0:title>\n    <ns0:updated>2026-05-20T17:02:36Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2605.21404v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2605.21404v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>We read twelve well-known LLM agent benchmark papers and recorded, dimension by dimension, what each paper actually says about how its evaluation was run. The motivation came from a familiar frustration: two papers will report results on the same benchmark with the same model name and disagree, and you cannot tell why -- the scaffold, the sampling settings, the subset, or the evaluator version. In many cases the published artifact does not let you answer. This paper is an implementation report on the attempt. We designed a small audit schema (five fields: benchmark identity, harness specification, inference settings, cost reporting, failure breakdown), wrote a scoring codebook with the boundary cases we hit during pilot scoring, applied it to twelve canonical papers (eight agent, four classical static), and recorded what we saw. We score the disclosure of an agent run, not its correctness, and make no claim that disclosure implies a trustworthy result. The mean audit score across the eight agent-benchmark papers is 0.38 (out of 1.0), and across the four classical static benchmarks 0.66; the largest gap is on cost (none of the eight agent benchmark papers disclose inference cost in any form) and on harness specification (none fully disclose a content-addressed container image of the evaluation environment). We release the schema as a JSON Schema file, the codebook as a Markdown document, and the raw scoring sheet as a CSV. The scoring was performed by a single auditor in one pass; a multi-rater audit is the natural next step, and we discuss what we think it would change.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-05-20T17:02:36Z</ns0:published>\n    <ns1:comment>Pilot audit of 12 LLM agent benchmark papers; schema, codebook, and per-paper scoring sheet released. Submission to IEEE Big Data 2026</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Mahdi Naser Moghadasi</ns0:name>\n      <ns1:affiliation>BrightMind AI, Texas Tech University</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Faezeh Ghaderi</ns0:name>\n      <ns1:affiliation>University of Texas at Arlington</ns1:affiliation>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "e37f8f5312ed1b2a7c2634d622b996408a37a31c055be6ad5f18b20ed5be9935",
+          "source": "arXiv",
+          "source_id": "2605.21404v1",
+          "source_rank": 3
+        },
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Atool+schema+renaming+robustness+execution+LLM+function+calling&start=0",
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2605.21404v1</ns0:id>\n    <ns0:title>What Twelve LLM Agent Benchmark Papers Disclose About Themselves: A Pilot Audit and an Open Scoring Schema</ns0:title>\n    <ns0:updated>2026-05-20T17:02:36Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2605.21404v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2605.21404v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>We read twelve well-known LLM agent benchmark papers and recorded, dimension by dimension, what each paper actually says about how its evaluation was run. The motivation came from a familiar frustration: two papers will report results on the same benchmark with the same model name and disagree, and you cannot tell why -- the scaffold, the sampling settings, the subset, or the evaluator version. In many cases the published artifact does not let you answer. This paper is an implementation report on the attempt. We designed a small audit schema (five fields: benchmark identity, harness specification, inference settings, cost reporting, failure breakdown), wrote a scoring codebook with the boundary cases we hit during pilot scoring, applied it to twelve canonical papers (eight agent, four classical static), and recorded what we saw. We score the disclosure of an agent run, not its correctness, and make no claim that disclosure implies a trustworthy result. The mean audit score across the eight agent-benchmark papers is 0.38 (out of 1.0), and across the four classical static benchmarks 0.66; the largest gap is on cost (none of the eight agent benchmark papers disclose inference cost in any form) and on harness specification (none fully disclose a content-addressed container image of the evaluation environment). We release the schema as a JSON Schema file, the codebook as a Markdown document, and the raw scoring sheet as a CSV. The scoring was performed by a single auditor in one pass; a multi-rater audit is the natural next step, and we discuss what we think it would change.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-05-20T17:02:36Z</ns0:published>\n    <ns1:comment>Pilot audit of 12 LLM agent benchmark papers; schema, codebook, and per-paper scoring sheet released. Submission to IEEE Big Data 2026</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Mahdi Naser Moghadasi</ns0:name>\n      <ns1:affiliation>BrightMind AI, Texas Tech University</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Faezeh Ghaderi</ns0:name>\n      <ns1:affiliation>University of Texas at Arlington</ns1:affiliation>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "02361df0d0abe0e963e369b60171f435cc69bde9fd1559c4c1657fd2ae76e1ae",
+          "source": "arXiv",
+          "source_id": "2605.21404v1",
+          "source_rank": 3
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "source": "arXiv"
+        },
+        {
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2605.21404v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2605.21404"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "rank": 3,
+          "source": "arXiv"
+        },
+        {
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "rank": 3,
+          "source": "arXiv"
+        }
+      ],
+      "title": "What Twelve LLM Agent Benchmark Papers Disclose About Themselves: A Pilot Audit and an Open Scoring Schema",
+      "urls": [
+        "https://arxiv.org/abs/2605.21404v1",
+        "https://arxiv.org/pdf/2605.21404v1"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "Tool learning aims to augment large language models (LLMs) with diverse tools, enabling them to act as agents for solving practical tasks. Due to the limited context length of tool-using LLMs, adopting information retrieval (IR) models to select useful tools from large toolsets is a critical initial step. However, the performance of IR models in tool retrieval tasks remains underexplored and unclear. Most tool-use benchmarks simplify this step by manually pre-annotating a small set of relevant tools for each task, which is far from the real-world scenarios. In this paper, we propose ToolRet, a heterogeneous tool retrieval benchmark comprising 7.6k diverse retrieval tasks, and a corpus of 43k tools, collected from existing datasets. We benchmark six types of models on ToolRet. Surprisingly, even the models with strong performance in conventional IR benchmarks, exhibit poor performance on ToolRet. This low retrieval quality degrades the task pass rate of tool-use LLMs. As a further step, we contribute a large-scale training dataset with over 200k instances, which substantially optimizes the tool retrieval ability of IR models.",
+      "authors": [
+        "Zhengliang Shi",
+        "Yuhan Wang",
+        "Lingyong Yan",
+        "Pengjie Ren",
+        "Shuaiqiang Wang",
+        "Dawei Yin",
+        "Zhaochun Ren"
+      ],
+      "candidate_id": "prior-977841d4587c773e",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2503.01763v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2503.01763v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Asemantically+equivalent+tool+schema+transformation+function+calling+invariance+benchmark&start=0",
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2503.01763v2</ns0:id>\n    <ns0:title>Retrieval Models Aren't Tool-Savvy: Benchmarking Tool Retrieval for Large Language Models</ns0:title>\n    <ns0:updated>2025-05-26T15:19:40Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2503.01763v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2503.01763v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Tool learning aims to augment large language models (LLMs) with diverse tools, enabling them to act as agents for solving practical tasks. Due to the limited context length of tool-using LLMs, adopting information retrieval (IR) models to select useful tools from large toolsets is a critical initial step. However, the performance of IR models in tool retrieval tasks remains underexplored and unclear. Most tool-use benchmarks simplify this step by manually pre-annotating a small set of relevant tools for each task, which is far from the real-world scenarios. In this paper, we propose ToolRet, a heterogeneous tool retrieval benchmark comprising 7.6k diverse retrieval tasks, and a corpus of 43k tools, collected from existing datasets. We benchmark six types of models on ToolRet. Surprisingly, even the models with strong performance in conventional IR benchmarks, exhibit poor performance on ToolRet. This low retrieval quality degrades the task pass rate of tool-use LLMs. As a further step, we contribute a large-scale training dataset with over 200k instances, which substantially optimizes the tool retrieval ability of IR models.</ns0:summary>\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.IR\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-03-03T17:37:16Z</ns0:published>\n    <ns1:comment>ACL 2025. Code: https://github.com/mangopy/tool-retrieval-benchmark</ns1:comment>\n    <ns1:primary_category term=\"cs.CL\" />\n    <ns0:author>\n      <ns0:name>Zhengliang Shi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yuhan Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Lingyong Yan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Pengjie Ren</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shuaiqiang Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Dawei Yin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhaochun Ren</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "e37f8f5312ed1b2a7c2634d622b996408a37a31c055be6ad5f18b20ed5be9935",
+          "source": "arXiv",
+          "source_id": "2503.01763v2",
+          "source_rank": 4
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2503.01763v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2503.01763"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "rank": 4,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Retrieval Models Aren't Tool-Savvy: Benchmarking Tool Retrieval for Large Language Models",
+      "urls": [
+        "https://arxiv.org/abs/2503.01763v2",
+        "https://arxiv.org/pdf/2503.01763v2"
+      ],
+      "venue": null,
+      "year": 2025
+    },
+    {
+      "abstract": "Zero/few-shot transfer to unseen services is a critical challenge in task-oriented dialogue research. The Schema-Guided Dialogue (SGD) dataset introduced a paradigm for enabling models to support any service in zero-shot through schemas, which describe service APIs to models in natural language. We explore the robustness of dialogue systems to linguistic variations in schemas by designing SGD-X - a benchmark extending SGD with semantically similar yet stylistically diverse variants for every schema. We observe that two top state tracking models fail to generalize well across schema variants, measured by joint goal accuracy and a novel metric for measuring schema sensitivity. Additionally, we present a simple model-agnostic data augmentation method to improve schema robustness.",
+      "authors": [
+        "Harrison Lee",
+        "Raghav Gupta",
+        "Abhinav Rastogi",
+        "Yuan Cao",
+        "Bin Zhang",
+        "Yonghui Wu"
+      ],
+      "candidate_id": "prior-23ead9110018d9ee",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2110.06800v3"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2110.06800v3"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Asemantically+equivalent+tool+schema+transformation+function+calling+invariance+benchmark&start=0",
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2110.06800v3</ns0:id>\n    <ns0:title>SGD-X: A Benchmark for Robust Generalization in Schema-Guided Dialogue Systems</ns0:title>\n    <ns0:updated>2022-08-23T17:28:58Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2110.06800v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2110.06800v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Zero/few-shot transfer to unseen services is a critical challenge in task-oriented dialogue research. The Schema-Guided Dialogue (SGD) dataset introduced a paradigm for enabling models to support any service in zero-shot through schemas, which describe service APIs to models in natural language. We explore the robustness of dialogue systems to linguistic variations in schemas by designing SGD-X - a benchmark extending SGD with semantically similar yet stylistically diverse variants for every schema. We observe that two top state tracking models fail to generalize well across schema variants, measured by joint goal accuracy and a novel metric for measuring schema sensitivity. Additionally, we present a simple model-agnostic data augmentation method to improve schema robustness.</ns0:summary>\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2021-10-13T15:38:29Z</ns0:published>\n    <ns1:comment>AAAI 2022</ns1:comment>\n    <ns1:primary_category term=\"cs.CL\" />\n    <ns1:journal_ref>Lee, H., Gupta, R., Rastogi, A., Cao, Y., Zhang, B., &amp; Wu, Y. (2022). SGD-X: A Benchmark for Robust Generalization in Schema-Guided Dialogue Systems. Proceedings of the AAAI Conference on Artificial Intelligence, 36(10), 10938-10946</ns1:journal_ref>\n    <ns0:author>\n      <ns0:name>Harrison Lee</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Raghav Gupta</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Abhinav Rastogi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yuan Cao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Bin Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yonghui Wu</ns0:name>\n    </ns0:author>\n    <ns1:doi>10.1609/aaai.v36i10.21341</ns1:doi>\n    <ns0:link rel=\"related\" href=\"https://doi.org/10.1609/aaai.v36i10.21341\" title=\"doi\" />\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "e37f8f5312ed1b2a7c2634d622b996408a37a31c055be6ad5f18b20ed5be9935",
+          "source": "arXiv",
+          "source_id": "2110.06800v3",
+          "source_rank": 5
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2110.06800v3"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2110.06800"
+        },
+        {
+          "kind": "doi",
+          "value": "10.1609/aaai.v36i10.21341"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "rank": 5,
+          "source": "arXiv"
+        }
+      ],
+      "title": "SGD-X: A Benchmark for Robust Generalization in Schema-Guided Dialogue Systems",
+      "urls": [
+        "https://arxiv.org/abs/2110.06800v3",
+        "https://arxiv.org/pdf/2110.06800v3"
+      ],
+      "venue": "Lee, H., Gupta, R., Rastogi, A., Cao, Y., Zhang, B., & Wu, Y. (2022). SGD-X: A Benchmark for Robust Generalization in Schema-Guided Dialogue Systems. Proceedings of the AAAI Conference on Artificial Intelligence, 36(10), 10938-10946",
+      "year": 2021
+    },
+    {
+      "abstract": "Schema matching is a foundational task in enterprise data integration, aiming to align disparate data sources. While traditional methods handle simple one-to-one table mappings, they often struggle with complex multi-table schema matching in real-world applications. We present LLMatch, a unified and modular schema matching framework. LLMatch decomposes schema matching into three distinct stages: schema preparation, table-candidate selection, and column-level alignment, enabling component-level evaluation and future-proof compatibility. It includes a novel two-stage optimization strategy: a Rollup module that consolidates semantically related columns into higher-order concepts, followed by a Drilldown module that re-expands these concepts for fine-grained column mapping. To address the scarcity of complex semantic matching benchmarks, we introduce SchemaNet, a benchmark derived from real-world schema pairs across three enterprise domains, designed to capture the challenges of multi-table schema alignment in practical settings. Experiments demonstrate that LLMatch significantly improves matching accuracy in complex schema matching settings and substantially boosts engineer productivity in real-world data integration.",
+      "authors": [
+        "Sha Wang",
+        "Yuchen Li",
+        "Hanhua Xiao",
+        "Bing Tian Dai",
+        "Roy Ka-Wei Lee",
+        "Yanfei Dong",
+        "Lambert Deng"
+      ],
+      "candidate_id": "prior-7d8a8520083ce021",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2507.10897v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2507.10897v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Asemantically+equivalent+tool+schema+transformation+function+calling+invariance+benchmark&start=0",
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2507.10897v1</ns0:id>\n    <ns0:title>LLMATCH: A Unified Schema Matching Framework with Large Language Models</ns0:title>\n    <ns0:updated>2025-07-15T01:24:49Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2507.10897v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2507.10897v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Schema matching is a foundational task in enterprise data integration, aiming to align disparate data sources. While traditional methods handle simple one-to-one table mappings, they often struggle with complex multi-table schema matching in real-world applications. We present LLMatch, a unified and modular schema matching framework. LLMatch decomposes schema matching into three distinct stages: schema preparation, table-candidate selection, and column-level alignment, enabling component-level evaluation and future-proof compatibility. It includes a novel two-stage optimization strategy: a Rollup module that consolidates semantically related columns into higher-order concepts, followed by a Drilldown module that re-expands these concepts for fine-grained column mapping. To address the scarcity of complex semantic matching benchmarks, we introduce SchemaNet, a benchmark derived from real-world schema pairs across three enterprise domains, designed to capture the challenges of multi-table schema alignment in practical settings. Experiments demonstrate that LLMatch significantly improves matching accuracy in complex schema matching settings and substantially boosts engineer productivity in real-world data integration.</ns0:summary>\n    <ns0:category term=\"cs.DB\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-07-15T01:24:49Z</ns0:published>\n    <ns1:comment>Accepted at APWeb 2025, Schema Matching, LLM, Data Management</ns1:comment>\n    <ns1:primary_category term=\"cs.DB\" />\n    <ns0:author>\n      <ns0:name>Sha Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yuchen Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hanhua Xiao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Bing Tian Dai</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Roy Ka-Wei Lee</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yanfei Dong</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Lambert Deng</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "e37f8f5312ed1b2a7c2634d622b996408a37a31c055be6ad5f18b20ed5be9935",
+          "source": "arXiv",
+          "source_id": "2507.10897v1",
+          "source_rank": 6
+        },
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Atool+schema+renaming+robustness+execution+LLM+function+calling&start=0",
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2507.10897v1</ns0:id>\n    <ns0:title>LLMATCH: A Unified Schema Matching Framework with Large Language Models</ns0:title>\n    <ns0:updated>2025-07-15T01:24:49Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2507.10897v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2507.10897v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Schema matching is a foundational task in enterprise data integration, aiming to align disparate data sources. While traditional methods handle simple one-to-one table mappings, they often struggle with complex multi-table schema matching in real-world applications. We present LLMatch, a unified and modular schema matching framework. LLMatch decomposes schema matching into three distinct stages: schema preparation, table-candidate selection, and column-level alignment, enabling component-level evaluation and future-proof compatibility. It includes a novel two-stage optimization strategy: a Rollup module that consolidates semantically related columns into higher-order concepts, followed by a Drilldown module that re-expands these concepts for fine-grained column mapping. To address the scarcity of complex semantic matching benchmarks, we introduce SchemaNet, a benchmark derived from real-world schema pairs across three enterprise domains, designed to capture the challenges of multi-table schema alignment in practical settings. Experiments demonstrate that LLMatch significantly improves matching accuracy in complex schema matching settings and substantially boosts engineer productivity in real-world data integration.</ns0:summary>\n    <ns0:category term=\"cs.DB\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-07-15T01:24:49Z</ns0:published>\n    <ns1:comment>Accepted at APWeb 2025, Schema Matching, LLM, Data Management</ns1:comment>\n    <ns1:primary_category term=\"cs.DB\" />\n    <ns0:author>\n      <ns0:name>Sha Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yuchen Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hanhua Xiao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Bing Tian Dai</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Roy Ka-Wei Lee</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yanfei Dong</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Lambert Deng</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "02361df0d0abe0e963e369b60171f435cc69bde9fd1559c4c1657fd2ae76e1ae",
+          "source": "arXiv",
+          "source_id": "2507.10897v1",
+          "source_rank": 7
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "source": "arXiv"
+        },
+        {
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2507.10897v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2507.10897"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "rank": 6,
+          "source": "arXiv"
+        },
+        {
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "rank": 7,
+          "source": "arXiv"
+        }
+      ],
+      "title": "LLMATCH: A Unified Schema Matching Framework with Large Language Models",
+      "urls": [
+        "https://arxiv.org/abs/2507.10897v1",
+        "https://arxiv.org/pdf/2507.10897v1"
+      ],
+      "venue": null,
+      "year": 2025
+    },
+    {
+      "abstract": "With the continuous development of NoSQL databases, more and more developers choose to use semi-structured data for development and data management, which puts forward requirements for schema management of semi-structured data stored in NoSQL databases. Schema extraction plays an important role in understanding schemas, optimizing queries, and validating data consistency. Therefore, in this survey we investigate structural methods based on tree and graph and statistical methods based on distributed architecture and machine learning to extract schemas. The schemas obtained by the structural methods are more interpretable, and the statistical methods have better applicability and generalization ability. Moreover, we also investigate tools and systems for schemas extraction. Schema extraction tools are mainly used for spark or NoSQL databases, and are suitable for small datasets or simple application environments. The system mainly focuses on the extraction and management of schemas in large data sets and complex application scenarios. Furthermore, we also compare these techniques to facilitate data managers' choice.",
+      "authors": [
+        "Panpan Li",
+        "Yikun Gong",
+        "Chen Wang"
+      ],
+      "candidate_id": "prior-cb6d15e8456f8a07",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2012.08105v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2012.08105v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Asemantically+equivalent+tool+schema+transformation+function+calling+invariance+benchmark&start=0",
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2012.08105v2</ns0:id>\n    <ns0:title>Schema Extraction on Semi-structured Data</ns0:title>\n    <ns0:updated>2021-10-18T06:06:15Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2012.08105v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2012.08105v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>With the continuous development of NoSQL databases, more and more developers choose to use semi-structured data for development and data management, which puts forward requirements for schema management of semi-structured data stored in NoSQL databases. Schema extraction plays an important role in understanding schemas, optimizing queries, and validating data consistency. Therefore, in this survey we investigate structural methods based on tree and graph and statistical methods based on distributed architecture and machine learning to extract schemas. The schemas obtained by the structural methods are more interpretable, and the statistical methods have better applicability and generalization ability. Moreover, we also investigate tools and systems for schemas extraction. Schema extraction tools are mainly used for spark or NoSQL databases, and are suitable for small datasets or simple application environments. The system mainly focuses on the extraction and management of schemas in large data sets and complex application scenarios. Furthermore, we also compare these techniques to facilitate data managers' choice.</ns0:summary>\n    <ns0:category term=\"cs.DB\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2020-12-15T05:57:41Z</ns0:published>\n    <ns1:comment>More schema extraction methods will be investigated to enrich the content of the paper, so the manuscript is temporarily retracted</ns1:comment>\n    <ns1:primary_category term=\"cs.DB\" />\n    <ns0:author>\n      <ns0:name>Panpan Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yikun Gong</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chen Wang</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "e37f8f5312ed1b2a7c2634d622b996408a37a31c055be6ad5f18b20ed5be9935",
+          "source": "arXiv",
+          "source_id": "2012.08105v2",
+          "source_rank": 7
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2012.08105v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2012.08105"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "rank": 7,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Schema Extraction on Semi-structured Data",
+      "urls": [
+        "https://arxiv.org/abs/2012.08105v2",
+        "https://arxiv.org/pdf/2012.08105v2"
+      ],
+      "venue": null,
+      "year": 2020
+    },
+    {
+      "abstract": "We construct new integral representations for transformations of the ordinary generating function for a sequence, $\\langle f_n \\rangle$, into the form of a generating function that enumerates the corresponding \"square series\" generating function for the sequence, $\\langle q^{n^2} f_n \\rangle$, at an initially fixed non-zero $q \\in \\mathbb{C}$. The new results proved in the article are given by integral-based transformations of ordinary generating function series expanded in terms of the Stirling numbers of the second kind. We then employ known integral representations for the gamma and double factorial functions in the construction of these square series transformation integrals. The results proved in the article lead to new applications and integral representations for special function series, sequence generating functions, and other related applications. A summary Mathematica notebook providing derivations of key results and applications to specific series is provided online as a supplemental reference to readers.",
+      "authors": [
+        "Maxie D. Schmidt"
+      ],
+      "candidate_id": "prior-1449ade2a2c5359d",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/1609.02803v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/1609.02803v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Asemantically+equivalent+tool+schema+transformation+function+calling+invariance+benchmark&start=0",
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/1609.02803v2</ns0:id>\n    <ns0:title>Square Series Generating Function Transformations</ns0:title>\n    <ns0:updated>2017-03-29T21:04:44Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/1609.02803v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/1609.02803v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>We construct new integral representations for transformations of the ordinary generating function for a sequence, $\\langle f_n \\rangle$, into the form of a generating function that enumerates the corresponding \"square series\" generating function for the sequence, $\\langle q^{n^2} f_n \\rangle$, at an initially fixed non-zero $q \\in \\mathbb{C}$. The new results proved in the article are given by integral-based transformations of ordinary generating function series expanded in terms of the Stirling numbers of the second kind. We then employ known integral representations for the gamma and double factorial functions in the construction of these square series transformation integrals. The results proved in the article lead to new applications and integral representations for special function series, sequence generating functions, and other related applications. A summary Mathematica notebook providing derivations of key results and applications to specific series is provided online as a supplemental reference to readers.</ns0:summary>\n    <ns0:category term=\"math.NT\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2016-09-09T14:09:59Z</ns0:published>\n    <ns1:comment>Keywords: Square series, generating function, series transformation, integral transformation, gamma function, double factorial, Stirling number of the second kind, Jacobi theta function, Ramanujan theta function</ns1:comment>\n    <ns1:primary_category term=\"math.NT\" />\n    <ns1:journal_ref>Journal of Inequalities and Special Functions V.8 (2017), Issue 2, Article 11</ns1:journal_ref>\n    <ns0:author>\n      <ns0:name>Maxie D. Schmidt</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n"
+          },
+          "response_body_sha256": "e37f8f5312ed1b2a7c2634d622b996408a37a31c055be6ad5f18b20ed5be9935",
+          "source": "arXiv",
+          "source_id": "1609.02803v2",
+          "source_rank": 8
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "1609.02803v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "1609.02803"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "semantically equivalent tool schema transformation function calling invariance benchmark",
+          "rank": 8,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Square Series Generating Function Transformations",
+      "urls": [
+        "https://arxiv.org/abs/1609.02803v2",
+        "https://arxiv.org/pdf/1609.02803v2"
+      ],
+      "venue": "Journal of Inequalities and Special Functions V.8 (2017), Issue 2, Article 11",
+      "year": 2016
+    },
+    {
+      "abstract": "Speculative execution attacks leverage the speculative and out-of-order execution features in modern computer processors to access secret data or execute code that should not be executed. Secret information can then be leaked through a covert channel. While software patches can be installed for mitigation on existing hardware, these solutions can incur big performance overhead. Hardware mitigation is being studied extensively by the computer architecture community. It has the benefit of preserving software compatibility and the potential for much smaller performance overhead than software solutions. This paper presents a systematization of the hardware defenses against speculative execution attacks that have been proposed. We show that speculative execution attacks consist of 6 critical attack steps. We propose defense strategies, each of which prevents a critical attack step from happening, thus preventing the attack from succeeding. We then summarize 20 hardware defenses and overhead-reducing features that have been proposed. We show that each defense proposed can be classified under one of our defense strategies, which also explains why it can thwart the attack from succeeding. We discuss the scope of the defenses, their performance overhead, and the security-performance trade-offs that can be made.",
+      "authors": [
+        "Guangyuan Hu",
+        "Zecheng He",
+        "Ruby Lee"
+      ],
+      "candidate_id": "prior-aa3f612e2fadcf34",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2301.03724v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2301.03724v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Atool+schema+renaming+robustness+execution+LLM+function+calling&start=0",
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2301.03724v1</ns0:id>\n    <ns0:title>SoK: Hardware Defenses Against Speculative Execution Attacks</ns0:title>\n    <ns0:updated>2023-01-09T23:58:25Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2301.03724v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2301.03724v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Speculative execution attacks leverage the speculative and out-of-order execution features in modern computer processors to access secret data or execute code that should not be executed. Secret information can then be leaked through a covert channel. While software patches can be installed for mitigation on existing hardware, these solutions can incur big performance overhead. Hardware mitigation is being studied extensively by the computer architecture community. It has the benefit of preserving software compatibility and the potential for much smaller performance overhead than software solutions.\n  This paper presents a systematization of the hardware defenses against speculative execution attacks that have been proposed. We show that speculative execution attacks consist of 6 critical attack steps. We propose defense strategies, each of which prevents a critical attack step from happening, thus preventing the attack from succeeding. We then summarize 20 hardware defenses and overhead-reducing features that have been proposed. We show that each defense proposed can be classified under one of our defense strategies, which also explains why it can thwart the attack from succeeding. We discuss the scope of the defenses, their performance overhead, and the security-performance trade-offs that can be made.</ns0:summary>\n    <ns0:category term=\"cs.CR\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AR\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2023-01-09T23:58:25Z</ns0:published>\n    <ns1:comment>Accepted to 2021 International Symposium on Secure and Private Execution Environment Design (SEED)</ns1:comment>\n    <ns1:primary_category term=\"cs.CR\" />\n    <ns1:journal_ref>2021 International Symposium on Secure and Private Execution Environment Design (SEED), 2021, pp. 108-120</ns1:journal_ref>\n    <ns0:author>\n      <ns0:name>Guangyuan Hu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zecheng He</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ruby Lee</ns0:name>\n    </ns0:author>\n    <ns1:doi>10.1109/SEED51797.2021.00023</ns1:doi>\n    <ns0:link rel=\"related\" href=\"https://doi.org/10.1109/SEED51797.2021.00023\" title=\"doi\" />\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "02361df0d0abe0e963e369b60171f435cc69bde9fd1559c4c1657fd2ae76e1ae",
+          "source": "arXiv",
+          "source_id": "2301.03724v1",
+          "source_rank": 4
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2301.03724v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2301.03724"
+        },
+        {
+          "kind": "doi",
+          "value": "10.1109/seed51797.2021.00023"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "rank": 4,
+          "source": "arXiv"
+        }
+      ],
+      "title": "SoK: Hardware Defenses Against Speculative Execution Attacks",
+      "urls": [
+        "https://arxiv.org/abs/2301.03724v1",
+        "https://arxiv.org/pdf/2301.03724v1"
+      ],
+      "venue": "2021 International Symposium on Secure and Private Execution Environment Design (SEED), 2021, pp. 108-120",
+      "year": 2023
+    },
+    {
+      "abstract": "Large Language Models (LLMs) are increasingly deployed as agents that invoke external tools through structured function calls. While recent work reports strong tool-calling performance under standard English-centric evaluations, the robustness of tool calling under multilingual user interactions remains underexplored. In this work, we introduce MLCL, a diagnostic benchmark, and conduct a systematic evaluation of multilingual tool calling across Chinese, Hindi, and the low-resource language Igbo. Through fine-grained error analysis, we show that many failures occur despite correct intent understanding and tool selection. We identify parameter value language mismatch as a dominant failure mode, where models generate semantically appropriate parameter values in the user's language, violating language-invariant execution conventions. We further evaluate several inference-time system strategies and find that while these strategies substantially reduce language-induced execution errors, none of them can fully recover English-level performance.",
+      "authors": [
+        "Zheng Luo",
+        "T Pranav Kutralingam",
+        "Ogochukwu N Okoani",
+        "Wanpeng Xu",
+        "Hua Wei",
+        "Xiyang Hu"
+      ],
+      "candidate_id": "prior-c2c11eecec574dc7",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2601.05366v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2601.05366v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Atool+schema+renaming+robustness+execution+LLM+function+calling&start=0",
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2601.05366v2</ns0:id>\n    <ns0:title>Lost in Execution: On the Multilingual Robustness of Tool Calling in Large Language Models</ns0:title>\n    <ns0:updated>2026-06-28T19:14:17Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2601.05366v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2601.05366v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Large Language Models (LLMs) are increasingly deployed as agents that invoke external tools through structured function calls. While recent work reports strong tool-calling performance under standard English-centric evaluations, the robustness of tool calling under multilingual user interactions remains underexplored. In this work, we introduce MLCL, a diagnostic benchmark, and conduct a systematic evaluation of multilingual tool calling across Chinese, Hindi, and the low-resource language Igbo. Through fine-grained error analysis, we show that many failures occur despite correct intent understanding and tool selection. We identify parameter value language mismatch as a dominant failure mode, where models generate semantically appropriate parameter values in the user's language, violating language-invariant execution conventions. We further evaluate several inference-time system strategies and find that while these strategies substantially reduce language-induced execution errors, none of them can fully recover English-level performance.</ns0:summary>\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-01-08T20:44:28Z</ns0:published>\n    <ns1:comment>ACL 2026</ns1:comment>\n    <ns1:primary_category term=\"cs.CL\" />\n    <ns0:author>\n      <ns0:name>Zheng Luo</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>T Pranav Kutralingam</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ogochukwu N Okoani</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wanpeng Xu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hua Wei</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xiyang Hu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "02361df0d0abe0e963e369b60171f435cc69bde9fd1559c4c1657fd2ae76e1ae",
+          "source": "arXiv",
+          "source_id": "2601.05366v2",
+          "source_rank": 5
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2601.05366v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2601.05366"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "rank": 5,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Lost in Execution: On the Multilingual Robustness of Tool Calling in Large Language Models",
+      "urls": [
+        "https://arxiv.org/abs/2601.05366v2",
+        "https://arxiv.org/pdf/2601.05366v2"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "The proliferation of tool-augmented Large Language Models (LLMs) has created a fragmented ecosystem where developers must navigate multiple protocols, manual schema definitions, and complex execution workflows. We address this challenge by proposing a unified approach to tool integration that abstracts protocol differences while optimizing execution performance. Our solution demonstrates how protocol-agnostic design principles can significantly reduce development overhead through automated schema generation, dual-mode concurrent execution, and seamless multi-source tool management. Experimental results show 60-80% code reduction across integration scenarios, performance improvements up to 3.1x through optimized concurrency, and full compatibility with existing function calling standards. This work contributes both theoretical insights into tool integration architecture and practical solutions for real-world LLM application development.",
+      "authors": [
+        "Peng Ding",
+        "Rick Stevens"
+      ],
+      "candidate_id": "prior-4e459a327a79ff5f",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2508.02979v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2508.02979v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Atool+schema+renaming+robustness+execution+LLM+function+calling&start=0",
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2508.02979v1</ns0:id>\n    <ns0:title>Unified Tool Integration for LLMs: A Protocol-Agnostic Approach to Function Calling</ns0:title>\n    <ns0:updated>2025-08-05T01:06:49Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2508.02979v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2508.02979v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>The proliferation of tool-augmented Large Language Models (LLMs) has created a fragmented ecosystem where developers must navigate multiple protocols, manual schema definitions, and complex execution workflows. We address this challenge by proposing a unified approach to tool integration that abstracts protocol differences while optimizing execution performance. Our solution demonstrates how protocol-agnostic design principles can significantly reduce development overhead through automated schema generation, dual-mode concurrent execution, and seamless multi-source tool management. Experimental results show 60-80% code reduction across integration scenarios, performance improvements up to 3.1x through optimized concurrency, and full compatibility with existing function calling standards. This work contributes both theoretical insights into tool integration architecture and practical solutions for real-world LLM application development.</ns0:summary>\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-08-05T01:06:49Z</ns0:published>\n    <ns1:comment>arXiv admin note: substantial text overlap with arXiv:2507.10593</ns1:comment>\n    <ns1:primary_category term=\"cs.AI\" />\n    <ns0:author>\n      <ns0:name>Peng Ding</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Rick Stevens</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "02361df0d0abe0e963e369b60171f435cc69bde9fd1559c4c1657fd2ae76e1ae",
+          "source": "arXiv",
+          "source_id": "2508.02979v1",
+          "source_rank": 6
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2508.02979v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2508.02979"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "rank": 6,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Unified Tool Integration for LLMs: A Protocol-Agnostic Approach to Function Calling",
+      "urls": [
+        "https://arxiv.org/abs/2508.02979v1",
+        "https://arxiv.org/pdf/2508.02979v1"
+      ],
+      "venue": null,
+      "year": 2025
+    },
+    {
+      "abstract": "Large language models (LLMs) drive significant financial innovations, yet their high-concurrency deployment is severely bottlenecked by KV cache memory overhead, which inflates infrastructure costs and throttles scalability. To address this, we propose YouZhi-LLM, a highly efficient financial LLM empowered by a comprehensive structural transition and training pipeline natively built on the Huawei Ascend ecosystem. At its algorithmic core, YouZhi-LLM features a layer-adaptive GQA-to-MLA transition framework that dynamically assigns per-layer FreqFold sizes, maximizing KV-cache compression while minimizing perplexity degradation. To recover representation capacity and inject domain expertise, the Ascend-based training pipeline seamlessly integrates generalized knowledge distillation with financial-specific supervised fine-tuning. Evaluations demonstrate the superiority of this systematic approach, with the adaptive transition reducing perplexity degradation by up to 35% over uniform baselines. Crucially, when evaluated on Ascend NPUs via vLLM-Ascend, the massive KV-cache reduction translates directly into deployment efficiency. Compared to their respective base models, YouZhi-7B yields a 12.3% improvement in average financial benchmark score alongside a 2.69$\\times$ increase in maximum concurrency; similarly, YouZhi-14B achieves a 7.0% accuracy gain and a 2.43$\\times$ concurrency boost, establishing a new paradigm for cost-effective, high-throughput financial inference.",
+      "authors": [
+        "PSBC LLM Team",
+        "Huawei LLM Team",
+        "Ruihan Long",
+        "Junjie Wu",
+        "Tianan Zhang",
+        "Duo Zhang",
+        "Yaozong Wu",
+        "Jinbin Fu",
+        "Chang Liu",
+        "Zhentao Tang",
+        "Wenshuang Yang",
+        "Xin Wang",
+        "Zhihao Song",
+        "Ning Huang",
+        "Wenjing Xu",
+        "Shuai Zong",
+        "Shupei Sun",
+        "Sen Wang",
+        "Jing Hu",
+        "Bin Wang",
+        "Xinyu Wang",
+        "Junkui Ju",
+        "Zequn Ding",
+        "Jie Ran",
+        "Man Luo",
+        "Shixiong Kai",
+        "Linkai Hou",
+        "Kaichao Liang",
+        "Hu Zhao",
+        "Yang Zhao",
+        "Shucheng Lin",
+        "Wei Yu",
+        "Chenghan Jiang",
+        "Jingjing Ding",
+        "Jiahui Zhang",
+        "Tian Jin",
+        "Yuhang Zhang",
+        "Dong Guo",
+        "Wei Sun",
+        "Jun Xie",
+        "Jianwei Li",
+        "Lei Cao",
+        "Pei Li",
+        "Jiabin Li",
+        "Jia Yuan",
+        "Rui Yuan",
+        "Jing Zhu",
+        "Mingxuan Yuan",
+        "Zhangcheng Lv",
+        "Xin Jiang",
+        "Xiuhong Fei",
+        "Xiaozhe Ren",
+        "Yulong Li",
+        "Zhipeng Zhang",
+        "Hang Wang",
+        "Zhaohui Xu",
+        "Rui Zhao",
+        "Yibo He",
+        "Xinzhuang Niu"
+      ],
+      "candidate_id": "prior-2613ed2d29ff4ae5",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2606.05868v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2606.05868v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Atool+schema+renaming+robustness+execution+LLM+function+calling&start=0",
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.05868v1</ns0:id>\n    <ns0:title>YouZhi: Towards High-Concurrency Financial LLMs via Adaptive GQA-to-MLA Transition</ns0:title>\n    <ns0:updated>2026-06-04T08:44:37Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.05868v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.05868v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Large language models (LLMs) drive significant financial innovations, yet their high-concurrency deployment is severely bottlenecked by KV cache memory overhead, which inflates infrastructure costs and throttles scalability. To address this, we propose YouZhi-LLM, a highly efficient financial LLM empowered by a comprehensive structural transition and training pipeline natively built on the Huawei Ascend ecosystem. At its algorithmic core, YouZhi-LLM features a layer-adaptive GQA-to-MLA transition framework that dynamically assigns per-layer FreqFold sizes, maximizing KV-cache compression while minimizing perplexity degradation. To recover representation capacity and inject domain expertise, the Ascend-based training pipeline seamlessly integrates generalized knowledge distillation with financial-specific supervised fine-tuning. Evaluations demonstrate the superiority of this systematic approach, with the adaptive transition reducing perplexity degradation by up to 35% over uniform baselines. Crucially, when evaluated on Ascend NPUs via vLLM-Ascend, the massive KV-cache reduction translates directly into deployment efficiency. Compared to their respective base models, YouZhi-7B yields a 12.3% improvement in average financial benchmark score alongside a 2.69$\\times$ increase in maximum concurrency; similarly, YouZhi-14B achieves a 7.0% accuracy gain and a 2.43$\\times$ concurrency boost, establishing a new paradigm for cost-effective, high-throughput financial inference.</ns0:summary>\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-04T08:44:37Z</ns0:published>\n    <ns1:primary_category term=\"cs.CL\" />\n    <ns0:author>\n      <ns0:name> PSBC LLM Team</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name> Huawei LLM Team</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ruihan Long</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Junjie Wu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Tianan Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Duo Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yaozong Wu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jinbin Fu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chang Liu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhentao Tang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wenshuang Yang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xin Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhihao Song</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ning Huang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wenjing Xu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shuai Zong</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shupei Sun</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sen Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jing Hu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Bin Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xinyu Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Junkui Ju</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zequn Ding</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jie Ran</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Man Luo</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shixiong Kai</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Linkai Hou</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kaichao Liang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hu Zhao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yang Zhao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shucheng Lin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wei Yu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chenghan Jiang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jingjing Ding</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jiahui Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Tian Jin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yuhang Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Dong Guo</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wei Sun</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jun Xie</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jianwei Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Lei Cao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Pei Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jiabin Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jia Yuan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Rui Yuan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jing Zhu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mingxuan Yuan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhangcheng Lv</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xin Jiang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xiuhong Fei</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xiaozhe Ren</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yulong Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhipeng Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hang Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhaohui Xu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Rui Zhao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yibo He</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xinzhuang Niu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n"
+          },
+          "response_body_sha256": "02361df0d0abe0e963e369b60171f435cc69bde9fd1559c4c1657fd2ae76e1ae",
+          "source": "arXiv",
+          "source_id": "2606.05868v1",
+          "source_rank": 8
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2606.05868v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2606.05868"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "tool schema renaming robustness execution LLM function calling",
+          "rank": 8,
+          "source": "arXiv"
+        }
+      ],
+      "title": "YouZhi: Towards High-Concurrency Financial LLMs via Adaptive GQA-to-MLA Transition",
+      "urls": [
+        "https://arxiv.org/abs/2606.05868v1",
+        "https://arxiv.org/pdf/2606.05868v1"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "Large language models (LLMs) are often asked to produce JSON conforming to a fixed schema, powering information extraction, tool calling, agentic planning, and knowledge-graph construction. Measuring how closely an output matches a gold reference is essential yet surprisingly hard: exact match is brittle, text similarity ignores structure, and an LLM judge is expensive, opaque, and non-deterministic. We address this with Object Aligner (OA), an open-source Python library that scores two JSON objects deterministically by recursively aligning their trees (the Hungarian algorithm for unordered collections, sequence alignment for ordered ones) and awarding partial credit at the granularity the schema declares. The Object Aligner is configured entirely through a set of JSON Schema extensions, so adapting it to a new task involves annotating a schema rather than writing code. Complex structured data, however, are rarely flat trees: records may form graphs or hypergraphs keyed by arbitrary identifiers, breaking the assumptions of prior similarity metrics. Our central contribution, referential alignment, closes this gap by inferring a bijection between gold and candidate identifiers and scoring every reference through it, so the score is invariant to relabeling. Since recovering this bijection exactly is graph isomorphism, the Object Aligner approximates it with Weisfeiler-Leman color refinement. An order-sensitive sequence regime targets ranking and planning. Since the same alignment localizes every mismatch, the Object Aligner emits ranked repair suggestions at no extra cost. Used as a reward inside the GEPA prompt optimizer, Object Aligner helps or stays neutral across all datasets.",
+      "authors": [
+        "Jan Drchal"
+      ],
+      "candidate_id": "prior-046f8ab678df133c",
+      "landing_page_urls": [
+        "https://www.semanticscholar.org/paper/84e245b3f3aa8ccd4eb631eb0ba205e0eab1155e"
+      ],
+      "pdf_urls": [],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://api.semanticscholar.org/graph/v1/paper/search?fields=paperId%2Ctitle%2Cauthors%2Cyear%2Cvenue%2CexternalIds%2Cabstract%2Curl%2CopenAccessPdf&limit=8&query=metamorphic+testing+tool+calling+agent+JSON+schema",
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "raw_record": {
+            "abstract": "Large language models (LLMs) are often asked to produce JSON conforming to a fixed schema, powering information extraction, tool calling, agentic planning, and knowledge-graph construction. Measuring how closely an output matches a gold reference is essential yet surprisingly hard: exact match is brittle, text similarity ignores structure, and an LLM judge is expensive, opaque, and non-deterministic. We address this with Object Aligner (OA), an open-source Python library that scores two JSON objects deterministically by recursively aligning their trees (the Hungarian algorithm for unordered collections, sequence alignment for ordered ones) and awarding partial credit at the granularity the schema declares. The Object Aligner is configured entirely through a set of JSON Schema extensions, so adapting it to a new task involves annotating a schema rather than writing code. Complex structured data, however, are rarely flat trees: records may form graphs or hypergraphs keyed by arbitrary identifiers, breaking the assumptions of prior similarity metrics. Our central contribution, referential alignment, closes this gap by inferring a bijection between gold and candidate identifiers and scoring every reference through it, so the score is invariant to relabeling. Since recovering this bijection exactly is graph isomorphism, the Object Aligner approximates it with Weisfeiler-Leman color refinement. An order-sensitive sequence regime targets ranking and planning. Since the same alignment localizes every mismatch, the Object Aligner emits ranked repair suggestions at no extra cost. Used as a reward inside the GEPA prompt optimizer, Object Aligner helps or stays neutral across all datasets.",
+            "authors": [
+              {
+                "authorId": "2630121",
+                "name": "Jan Drchal"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2607.01972",
+              "CorpusId": 289749083
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2607.01972, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "84e245b3f3aa8ccd4eb631eb0ba205e0eab1155e",
+            "title": "Object Aligner: A Configurable JSON Schema Similarity Score for Graphs, Applied to LLM Prompt Optimization",
+            "url": "https://www.semanticscholar.org/paper/84e245b3f3aa8ccd4eb631eb0ba205e0eab1155e",
+            "venue": "",
+            "year": 2026
+          },
+          "response_body_sha256": "19af47d150924447b97c28f28e2f233ad93eb3962e0dbec17914510f2a0caa3e",
+          "source": "Semantic Scholar",
+          "source_id": "84e245b3f3aa8ccd4eb631eb0ba205e0eab1155e",
+          "source_rank": 1
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "source": "Semantic Scholar"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2607.01972"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2607.01972"
+        },
+        {
+          "kind": "semantic_scholar",
+          "value": "84e245b3f3aa8ccd4eb631eb0ba205e0eab1155e"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "rank": 1,
+          "source": "Semantic Scholar"
+        }
+      ],
+      "title": "Object Aligner: A Configurable JSON Schema Similarity Score for Graphs, Applied to LLM Prompt Optimization",
+      "urls": [
+        "https://www.semanticscholar.org/paper/84e245b3f3aa8ccd4eb631eb0ba205e0eab1155e"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "When a tool-calling agent picks the wrong tool, the failure is invisible until execution: the email gets sent, the meeting gets missed. As agents take on consequential actions, one bad tool call can do real damage. We currently have no way to look inside the model and catch the mistake before it happens; this paper shows that we can. Inside the model, the choice of tool is carried by a single direction in activation space, one direction per pair of tools. Adding that direction during generation switches which tool the model picks. Across 12 instruction-tuned and 6 base models spanning Gemma 3, Qwen 3, Qwen 2.5, and Llama 3.1 (270M to 27B), this works at 83-100% accuracy on 4B+ instruction-tuned models on a 15-tool synthetic benchmark and at 77-94% on the real-API benchmark $\\tau$-bench airline. The JSON arguments that follow automatically adapt to the new tool's schema, so flipping the name is enough. The same per-tool directions also flag likely errors before they happen: queries where the model is unsure between two tools fail 21x more often than queries where it is not (Gemma 3 27B). This is not just topic injection: random vectors at the same magnitude give a 0% switch rate, and a probe within a single domain (14 airline tools that share one topic) still reads which tool the model will call at top-1 61-89% across five 4B-14B models. Even base models already carry the right tool internally before they can emit it: reading the chosen tool off the model's internal state (cosine readout) recovers 61-82% accuracy on BFCL while base generation lands at 2-10%, suggesting pretraining forms the representation and instruction tuning later wires it to the output. Our results cover single-turn, fixed-menu settings; on multi-turn agent loops the same intervention is less stable (matched-baseline gain or loss of up to 30 percentage points with no consistent direction).",
+      "authors": [
+        "Zekun Wu",
+        "Zekun Wang",
+        "Seonglae Cho",
+        "Yufei Yang",
+        "Adriano S. Koshiyama",
+        "S. Bulathwela",
+        "María Pérez-Ortiz"
+      ],
+      "candidate_id": "prior-a2e1aa1864e5cd35",
+      "landing_page_urls": [
+        "https://www.semanticscholar.org/paper/eec66d9d6ba22ff83998d0f80fec9c0a408d8a6e"
+      ],
+      "pdf_urls": [],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://api.semanticscholar.org/graph/v1/paper/search?fields=paperId%2Ctitle%2Cauthors%2Cyear%2Cvenue%2CexternalIds%2Cabstract%2Curl%2CopenAccessPdf&limit=8&query=metamorphic+testing+tool+calling+agent+JSON+schema",
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "raw_record": {
+            "abstract": "When a tool-calling agent picks the wrong tool, the failure is invisible until execution: the email gets sent, the meeting gets missed. As agents take on consequential actions, one bad tool call can do real damage. We currently have no way to look inside the model and catch the mistake before it happens; this paper shows that we can. Inside the model, the choice of tool is carried by a single direction in activation space, one direction per pair of tools. Adding that direction during generation switches which tool the model picks. Across 12 instruction-tuned and 6 base models spanning Gemma 3, Qwen 3, Qwen 2.5, and Llama 3.1 (270M to 27B), this works at 83-100% accuracy on 4B+ instruction-tuned models on a 15-tool synthetic benchmark and at 77-94% on the real-API benchmark $\\tau$-bench airline. The JSON arguments that follow automatically adapt to the new tool's schema, so flipping the name is enough. The same per-tool directions also flag likely errors before they happen: queries where the model is unsure between two tools fail 21x more often than queries where it is not (Gemma 3 27B). This is not just topic injection: random vectors at the same magnitude give a 0% switch rate, and a probe within a single domain (14 airline tools that share one topic) still reads which tool the model will call at top-1 61-89% across five 4B-14B models. Even base models already carry the right tool internally before they can emit it: reading the chosen tool off the model's internal state (cosine readout) recovers 61-82% accuracy on BFCL while base generation lands at 2-10%, suggesting pretraining forms the representation and instruction tuning later wires it to the output. Our results cover single-turn, fixed-menu settings; on multi-turn agent loops the same intervention is less stable (matched-baseline gain or loss of up to 30 percentage points with no consistent direction).",
+            "authors": [
+              {
+                "authorId": "2284029866",
+                "name": "Zekun Wu"
+              },
+              {
+                "authorId": "2387845950",
+                "name": "Zekun Wang"
+              },
+              {
+                "authorId": "2361429341",
+                "name": "Seonglae Cho"
+              },
+              {
+                "authorId": "2145434777",
+                "name": "Yufei Yang"
+              },
+              {
+                "authorId": "2268316579",
+                "name": "Adriano S. Koshiyama"
+              },
+              {
+                "authorId": "2143115611",
+                "name": "S. Bulathwela"
+              },
+              {
+                "authorId": "2268950591",
+                "name": "María Pérez-Ortiz"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2605.07990",
+              "CorpusId": 288147616,
+              "DBLP": "journals/corr/abs-2605-07990",
+              "DOI": "10.48550/arXiv.2605.07990"
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2605.07990, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "eec66d9d6ba22ff83998d0f80fec9c0a408d8a6e",
+            "title": "Tool Calling is Linearly Readable and Steerable in Language Models",
+            "url": "https://www.semanticscholar.org/paper/eec66d9d6ba22ff83998d0f80fec9c0a408d8a6e",
+            "venue": "arXiv.org",
+            "year": 2026
+          },
+          "response_body_sha256": "19af47d150924447b97c28f28e2f233ad93eb3962e0dbec17914510f2a0caa3e",
+          "source": "Semantic Scholar",
+          "source_id": "eec66d9d6ba22ff83998d0f80fec9c0a408d8a6e",
+          "source_rank": 2
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "source": "Semantic Scholar"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2605.07990"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2605.07990"
+        },
+        {
+          "kind": "doi",
+          "value": "10.48550/arxiv.2605.07990"
+        },
+        {
+          "kind": "semantic_scholar",
+          "value": "eec66d9d6ba22ff83998d0f80fec9c0a408d8a6e"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "rank": 2,
+          "source": "Semantic Scholar"
+        }
+      ],
+      "title": "Tool Calling is Linearly Readable and Steerable in Language Models",
+      "urls": [
+        "https://www.semanticscholar.org/paper/eec66d9d6ba22ff83998d0f80fec9c0a408d8a6e"
+      ],
+      "venue": "arXiv.org",
+      "year": 2026
+    },
+    {
+      "abstract": "Tool Calling and Structured Output are two core capabilities of modern Agent systems, yet their interaction under joint deployment conditions remains insufficiently understood. This paper reports a reproducible phenomenon observed in a production Agent system: when Tool Calling and JSON Schema constraints are simultaneously enabled, multiple open-weight models cease invoking tools despite maintaining high schema compliance. We refer to this behavior as Tool Suppression. Through controlled experiments across multiple model families and deployment settings, we consistently reproduce Tool Suppression under joint constraints, while tool execution and schema compliance remain functional when evaluated independently. Further analysis reveals that JSON Schema constraints are compiled into grammar-based token masks, causing tool-call tokens to become unreachable during decoding. This provides an implementation-level explanation for the observed behavior. To interpret the phenomenon, we formulate the Constraint Priority Inversion (CPI) hypothesis, which suggests that schema satisfaction may dominate action-selection behavior under multiple simultaneous constraints. We present CPI as a behavioral hypothesis consistent with the observed evidence rather than a verified internal mechanism. To mitigate the problem, we propose Transparent Two-Pass Execution, an inference-time strategy that decouples tool execution from schema-constrained response generation. Experimental results show that this approach restores tool invocation while preserving structured output guarantees without requiring model retraining. These findings suggest that evaluating tool use and structured output separately may overlook important reliability issues in production Agent systems. Code, data, and docs will be released at https://github.com/Fzsama/Constrain-Tax-26-06.git.",
+      "authors": [
+        "Fangzheng Li",
+        "Aimin Zhang",
+        "Chenxu Lv"
+      ],
+      "candidate_id": "prior-004817164cb14def",
+      "landing_page_urls": [
+        "https://www.semanticscholar.org/paper/e770c9cebf88f50e8a38b01a1ede9ffd3f365d43"
+      ],
+      "pdf_urls": [],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://api.semanticscholar.org/graph/v1/paper/search?fields=paperId%2Ctitle%2Cauthors%2Cyear%2Cvenue%2CexternalIds%2Cabstract%2Curl%2CopenAccessPdf&limit=8&query=metamorphic+testing+tool+calling+agent+JSON+schema",
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "raw_record": {
+            "abstract": "Tool Calling and Structured Output are two core capabilities of modern Agent systems, yet their interaction under joint deployment conditions remains insufficiently understood. This paper reports a reproducible phenomenon observed in a production Agent system: when Tool Calling and JSON Schema constraints are simultaneously enabled, multiple open-weight models cease invoking tools despite maintaining high schema compliance. We refer to this behavior as Tool Suppression. Through controlled experiments across multiple model families and deployment settings, we consistently reproduce Tool Suppression under joint constraints, while tool execution and schema compliance remain functional when evaluated independently. Further analysis reveals that JSON Schema constraints are compiled into grammar-based token masks, causing tool-call tokens to become unreachable during decoding. This provides an implementation-level explanation for the observed behavior. To interpret the phenomenon, we formulate the Constraint Priority Inversion (CPI) hypothesis, which suggests that schema satisfaction may dominate action-selection behavior under multiple simultaneous constraints. We present CPI as a behavioral hypothesis consistent with the observed evidence rather than a verified internal mechanism. To mitigate the problem, we propose Transparent Two-Pass Execution, an inference-time strategy that decouples tool execution from schema-constrained response generation. Experimental results show that this approach restores tool invocation while preserving structured output guarantees without requiring model retraining. These findings suggest that evaluating tool use and structured output separately may overlook important reliability issues in production Agent systems. Code, data, and docs will be released at https://github.com/Fzsama/Constrain-Tax-26-06.git.",
+            "authors": [
+              {
+                "authorId": "2431149025",
+                "name": "Fangzheng Li"
+              },
+              {
+                "authorId": "2153659736",
+                "name": "Aimin Zhang"
+              },
+              {
+                "authorId": "2361413133",
+                "name": "Chenxu Lv"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2606.25605",
+              "CorpusId": 289624651,
+              "DBLP": "journals/corr/abs-2606-25605",
+              "DOI": "10.48550/arXiv.2606.25605"
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2606.25605, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "e770c9cebf88f50e8a38b01a1ede9ffd3f365d43",
+            "title": "Constraint Tax in Open-Weight LLMs: An Empirical Study of Tool Calling Suppression Under Structured Output Constraints",
+            "url": "https://www.semanticscholar.org/paper/e770c9cebf88f50e8a38b01a1ede9ffd3f365d43",
+            "venue": "arXiv.org",
+            "year": 2026
+          },
+          "response_body_sha256": "19af47d150924447b97c28f28e2f233ad93eb3962e0dbec17914510f2a0caa3e",
+          "source": "Semantic Scholar",
+          "source_id": "e770c9cebf88f50e8a38b01a1ede9ffd3f365d43",
+          "source_rank": 3
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "source": "Semantic Scholar"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2606.25605"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2606.25605"
+        },
+        {
+          "kind": "doi",
+          "value": "10.48550/arxiv.2606.25605"
+        },
+        {
+          "kind": "semantic_scholar",
+          "value": "e770c9cebf88f50e8a38b01a1ede9ffd3f365d43"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "rank": 3,
+          "source": "Semantic Scholar"
+        }
+      ],
+      "title": "Constraint Tax in Open-Weight LLMs: An Empirical Study of Tool Calling Suppression Under Structured Output Constraints",
+      "urls": [
+        "https://www.semanticscholar.org/paper/e770c9cebf88f50e8a38b01a1ede9ffd3f365d43"
+      ],
+      "venue": "arXiv.org",
+      "year": 2026
+    },
+    {
+      "abstract": "Production agent frameworks (OpenAI Function Calling, Anthropic Tool Use, MCP) transmit tool schemas as JSON, a format designed for machine parsing, not for interpretation by language models. For small models (4B-14B), this protocol mismatch accounts for the majority of tool-use failure at production catalog sizes. We present TSCG, a deterministic tool-schema compiler that resolves this mismatch at the API boundary, converting JSON schemas into token-efficient structured text without model access, fine-tuning, or runtime search. TSCG combines eight composable operators with a formal compression bound (>=51% on well-formed schemas). On TSCG-Agentic-Bench (about 19,000 calls, 12 models, 5 scenarios), TSCG restores Phi-4 14B from 0% to 84.4% accuracy at 20 tools (90.3% at 50 tools) and achieves 108-181% accuracy-retained ratio across three models on BFCL. Format-versus-compression decomposition (R^2=0.88 ->0.03) establishes representation change as the dominant mechanism. Per-operator isolation across three frontier models reveals three distinct operator-response profiles: operator-hungry (Opus 4.7), operator-sensitive (GPT-5.2), and operator-robust (Sonnet 4), providing per-model deployment guidance. Scaling experiments show accuracy advantages persisting on heavy production MCP schemas (+5.0 pp at about 10,500 input tokens) despite saturation on light synthetic catalogs, with 52-57% token savings throughout. The synthetic benchmark generalizes to real MCP schemas within 0.1 accuracy points. TSCG ships as a 1,200-line zero-dependency TypeScript package.",
+      "authors": [
+        "Furkan Sakizli"
+      ],
+      "candidate_id": "prior-a93775bddced0bfa",
+      "landing_page_urls": [
+        "https://www.semanticscholar.org/paper/cd310818b1ee1dd22e9997f3a7b54d44d8c01be3"
+      ],
+      "pdf_urls": [],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://api.semanticscholar.org/graph/v1/paper/search?fields=paperId%2Ctitle%2Cauthors%2Cyear%2Cvenue%2CexternalIds%2Cabstract%2Curl%2CopenAccessPdf&limit=8&query=metamorphic+testing+tool+calling+agent+JSON+schema",
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "raw_record": {
+            "abstract": "Production agent frameworks (OpenAI Function Calling, Anthropic Tool Use, MCP) transmit tool schemas as JSON, a format designed for machine parsing, not for interpretation by language models. For small models (4B-14B), this protocol mismatch accounts for the majority of tool-use failure at production catalog sizes. We present TSCG, a deterministic tool-schema compiler that resolves this mismatch at the API boundary, converting JSON schemas into token-efficient structured text without model access, fine-tuning, or runtime search. TSCG combines eight composable operators with a formal compression bound (>=51% on well-formed schemas). On TSCG-Agentic-Bench (about 19,000 calls, 12 models, 5 scenarios), TSCG restores Phi-4 14B from 0% to 84.4% accuracy at 20 tools (90.3% at 50 tools) and achieves 108-181% accuracy-retained ratio across three models on BFCL. Format-versus-compression decomposition (R^2=0.88 ->0.03) establishes representation change as the dominant mechanism. Per-operator isolation across three frontier models reveals three distinct operator-response profiles: operator-hungry (Opus 4.7), operator-sensitive (GPT-5.2), and operator-robust (Sonnet 4), providing per-model deployment guidance. Scaling experiments show accuracy advantages persisting on heavy production MCP schemas (+5.0 pp at about 10,500 input tokens) despite saturation on light synthetic catalogs, with 52-57% token savings throughout. The synthetic benchmark generalizes to real MCP schemas within 0.1 accuracy points. TSCG ships as a 1,200-line zero-dependency TypeScript package.",
+            "authors": [
+              {
+                "authorId": "2433118102",
+                "name": "Furkan Sakizli"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2605.04107",
+              "CorpusId": 287981799,
+              "DBLP": "journals/corr/abs-2605-04107",
+              "DOI": "10.5281/zenodo.19795759"
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2605.04107, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "cd310818b1ee1dd22e9997f3a7b54d44d8c01be3",
+            "title": "TSCG: Deterministic Tool-Schema Compilation for Agentic LLM Deployments",
+            "url": "https://www.semanticscholar.org/paper/cd310818b1ee1dd22e9997f3a7b54d44d8c01be3",
+            "venue": "arXiv.org",
+            "year": 2026
+          },
+          "response_body_sha256": "19af47d150924447b97c28f28e2f233ad93eb3962e0dbec17914510f2a0caa3e",
+          "source": "Semantic Scholar",
+          "source_id": "cd310818b1ee1dd22e9997f3a7b54d44d8c01be3",
+          "source_rank": 4
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "source": "Semantic Scholar"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2605.04107"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2605.04107"
+        },
+        {
+          "kind": "doi",
+          "value": "10.5281/zenodo.19795759"
+        },
+        {
+          "kind": "semantic_scholar",
+          "value": "cd310818b1ee1dd22e9997f3a7b54d44d8c01be3"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "rank": 4,
+          "source": "Semantic Scholar"
+        }
+      ],
+      "title": "TSCG: Deterministic Tool-Schema Compilation for Agentic LLM Deployments",
+      "urls": [
+        "https://www.semanticscholar.org/paper/cd310818b1ee1dd22e9997f3a7b54d44d8c01be3"
+      ],
+      "venue": "arXiv.org",
+      "year": 2026
+    },
+    {
+      "abstract": "We introduce Semantic Relational Types (SRT), an extension to the relational type system that enriches traditional SQL data types with semantic annotations. SRT provides LLMfriendly type annotations for relational queries expressed in SQL, enabling effective integration between database systems and large language models. Our primary contribution is an algorithm for automatic SRT generation through type inference of arbitrary SQL queries. The algorithm performs recursive decomposition of SQL statements into nested subqueries and clauses, utilizing LLMs with structured prompt engineering to generate semantic descriptions. We also introduce semantic type checking, which leverages semantic similarity measures to verify pairwise compatibility between SRTs, extending beyond traditional structural compatibility. We focus on applying SRT to LLM tool-calling scenarios where tools must be selected based on natural language queries (NLQ). In our framework, tools are implemented as parameterized SQL queries, and their SRTs in JSON schema format serve as tool descriptions provided to the LLM. This enables the LLM to perform semantic type checking and select the most compatible tool for any given NLQ. Our experimental evaluation demonstrates that SRT-based tool descriptions significantly improve tool selection accuracy compared to raw SQL queries. Tool-set refinement using semantic type checking between NLQs and tool SRTs yields superior results compared to inferred SRTs alone. The approach is validated using TPC-DS with 99 tools and multiple NLQ styles.",
+      "authors": [
+        "Limin Ma",
+        "Bohdan Synytskyi",
+        "Ying Zhu",
+        "Ken Q. Pu"
+      ],
+      "candidate_id": "prior-99039210e107fc6b",
+      "landing_page_urls": [
+        "https://www.semanticscholar.org/paper/ed985625ea3ee9756fb26f80a899fefdac82acba"
+      ],
+      "pdf_urls": [],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://api.semanticscholar.org/graph/v1/paper/search?fields=paperId%2Ctitle%2Cauthors%2Cyear%2Cvenue%2CexternalIds%2Cabstract%2Curl%2CopenAccessPdf&limit=8&query=metamorphic+testing+tool+calling+agent+JSON+schema",
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "raw_record": {
+            "abstract": "We introduce Semantic Relational Types (SRT), an extension to the relational type system that enriches traditional SQL data types with semantic annotations. SRT provides LLMfriendly type annotations for relational queries expressed in SQL, enabling effective integration between database systems and large language models. Our primary contribution is an algorithm for automatic SRT generation through type inference of arbitrary SQL queries. The algorithm performs recursive decomposition of SQL statements into nested subqueries and clauses, utilizing LLMs with structured prompt engineering to generate semantic descriptions. We also introduce semantic type checking, which leverages semantic similarity measures to verify pairwise compatibility between SRTs, extending beyond traditional structural compatibility. We focus on applying SRT to LLM tool-calling scenarios where tools must be selected based on natural language queries (NLQ). In our framework, tools are implemented as parameterized SQL queries, and their SRTs in JSON schema format serve as tool descriptions provided to the LLM. This enables the LLM to perform semantic type checking and select the most compatible tool for any given NLQ. Our experimental evaluation demonstrates that SRT-based tool descriptions significantly improve tool selection accuracy compared to raw SQL queries. Tool-set refinement using semantic type checking between NLQs and tool SRTs yields superior results compared to inferred SRTs alone. The approach is validated using TPC-DS with 99 tools and multiple NLQ styles.",
+            "authors": [
+              {
+                "authorId": "2184572366",
+                "name": "Limin Ma"
+              },
+              {
+                "authorId": "2406286535",
+                "name": "Bohdan Synytskyi"
+              },
+              {
+                "authorId": "2313739948",
+                "name": "Ying Zhu"
+              },
+              {
+                "authorId": "2313632527",
+                "name": "Ken Q. Pu"
+              }
+            ],
+            "externalIds": {
+              "CorpusId": 284968630,
+              "DOI": "10.1109/CASCON66301.2025.00048"
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.1109/CASCON66301.2025.00048?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1109/CASCON66301.2025.00048, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "ed985625ea3ee9756fb26f80a899fefdac82acba",
+            "title": "Semantic Relational Types of SQL Queries and Applications to AI Agent Tool Selection",
+            "url": "https://www.semanticscholar.org/paper/ed985625ea3ee9756fb26f80a899fefdac82acba",
+            "venue": "Conference of the Centre for Advanced Studies on Collaborative Research",
+            "year": 2025
+          },
+          "response_body_sha256": "19af47d150924447b97c28f28e2f233ad93eb3962e0dbec17914510f2a0caa3e",
+          "source": "Semantic Scholar",
+          "source_id": "ed985625ea3ee9756fb26f80a899fefdac82acba",
+          "source_rank": 5
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "source": "Semantic Scholar"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "doi",
+          "value": "10.1109/cascon66301.2025.00048"
+        },
+        {
+          "kind": "semantic_scholar",
+          "value": "ed985625ea3ee9756fb26f80a899fefdac82acba"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "rank": 5,
+          "source": "Semantic Scholar"
+        }
+      ],
+      "title": "Semantic Relational Types of SQL Queries and Applications to AI Agent Tool Selection",
+      "urls": [
+        "https://www.semanticscholar.org/paper/ed985625ea3ee9756fb26f80a899fefdac82acba"
+      ],
+      "venue": "Conference of the Centre for Advanced Studies on Collaborative Research",
+      "year": 2025
+    },
+    {
+      "abstract": "Voice agents increasingly require reliable tool use from speech, whereas prominent tool-calling benchmarks remain text-based. We study whether verified text benchmarks can be converted into controlled audio-based tool calling evaluations without re-annotating the tool schema and gold labels. Our dataset-agnostic framework uses text-to-speech, speaker variation, and environmental noise to create paired text-audio instances while preserving the original dataset annotations. Based on extensive evaluation of 7 omni-modal models on audio-converted versions of Confetti and When2Call, our framework demonstrates that the performance is strongly model- and task-dependent: Gemini-3.1-Flash-Live obtains the highest Confetti score (70.4), whereas GPT-Realtime-1.5 performs best on When2Call (71.9). On Confetti, the text-to-voice gap ranges from 1.8 points for Qwen3-Omni to 4.8 points for GPT-Realtime-1.5. A targeted analysis of failure cases demonstrates that degradations most often reflect misunderstandings of argument values in the speech. Considering real-world deployment scenarios, we further report text-only results, an ambiguity-based reformulation stress test, and a reference-free LLM-as-judge protocol validated against human preferences. Notably, we find that open-source Qwen3 judges with at least 8B parameters exceed 80% agreement with proprietary judges, supporting privacy-preserving evaluation. Overall, our framework provides a verifiable and reproducible first-stage diagnostic that complements purpose-built audio corpora.",
+      "authors": [
+        "Md Tahmid Rahman Laskar",
+        "Xue-Yong Fu",
+        "Seyyed Saeed Sarfjoo",
+        "Quinten McNamara",
+        "Jonas Robertson",
+        "TN ShashiBhushan"
+      ],
+      "candidate_id": "prior-c778c506e0a89f50",
+      "landing_page_urls": [
+        "https://www.semanticscholar.org/paper/d05279c7176da386a1f62c3094578ceb3462325b"
+      ],
+      "pdf_urls": [],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://api.semanticscholar.org/graph/v1/paper/search?fields=paperId%2Ctitle%2Cauthors%2Cyear%2Cvenue%2CexternalIds%2Cabstract%2Curl%2CopenAccessPdf&limit=8&query=metamorphic+testing+tool+calling+agent+JSON+schema",
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "raw_record": {
+            "abstract": "Voice agents increasingly require reliable tool use from speech, whereas prominent tool-calling benchmarks remain text-based. We study whether verified text benchmarks can be converted into controlled audio-based tool calling evaluations without re-annotating the tool schema and gold labels. Our dataset-agnostic framework uses text-to-speech, speaker variation, and environmental noise to create paired text-audio instances while preserving the original dataset annotations. Based on extensive evaluation of 7 omni-modal models on audio-converted versions of Confetti and When2Call, our framework demonstrates that the performance is strongly model- and task-dependent: Gemini-3.1-Flash-Live obtains the highest Confetti score (70.4), whereas GPT-Realtime-1.5 performs best on When2Call (71.9). On Confetti, the text-to-voice gap ranges from 1.8 points for Qwen3-Omni to 4.8 points for GPT-Realtime-1.5. A targeted analysis of failure cases demonstrates that degradations most often reflect misunderstandings of argument values in the speech. Considering real-world deployment scenarios, we further report text-only results, an ambiguity-based reformulation stress test, and a reference-free LLM-as-judge protocol validated against human preferences. Notably, we find that open-source Qwen3 judges with at least 8B parameters exceed 80% agreement with proprietary judges, supporting privacy-preserving evaluation. Overall, our framework provides a verifiable and reproducible first-stage diagnostic that complements purpose-built audio corpora.",
+            "authors": [
+              {
+                "authorId": "46437970",
+                "name": "Md Tahmid Rahman Laskar"
+              },
+              {
+                "authorId": "2130534016",
+                "name": "Xue-Yong Fu"
+              },
+              {
+                "authorId": "2324582259",
+                "name": "Seyyed Saeed Sarfjoo"
+              },
+              {
+                "authorId": "8493000",
+                "name": "Quinten McNamara"
+              },
+              {
+                "authorId": "2282974245",
+                "name": "Jonas Robertson"
+              },
+              {
+                "authorId": "51298175",
+                "name": "TN ShashiBhushan"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2605.15104",
+              "CorpusId": 288253416,
+              "DBLP": "journals/corr/abs-2605-15104",
+              "DOI": "10.48550/arXiv.2605.15104"
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2605.15104, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "d05279c7176da386a1f62c3094578ceb3462325b",
+            "title": "From Text to Voice: A Reproducible and Verifiable Framework for Evaluating Tool Calling LLM Agents",
+            "url": "https://www.semanticscholar.org/paper/d05279c7176da386a1f62c3094578ceb3462325b",
+            "venue": "arXiv.org",
+            "year": 2026
+          },
+          "response_body_sha256": "19af47d150924447b97c28f28e2f233ad93eb3962e0dbec17914510f2a0caa3e",
+          "source": "Semantic Scholar",
+          "source_id": "d05279c7176da386a1f62c3094578ceb3462325b",
+          "source_rank": 6
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "source": "Semantic Scholar"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2605.15104"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2605.15104"
+        },
+        {
+          "kind": "doi",
+          "value": "10.48550/arxiv.2605.15104"
+        },
+        {
+          "kind": "semantic_scholar",
+          "value": "d05279c7176da386a1f62c3094578ceb3462325b"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "rank": 6,
+          "source": "Semantic Scholar"
+        }
+      ],
+      "title": "From Text to Voice: A Reproducible and Verifiable Framework for Evaluating Tool Calling LLM Agents",
+      "urls": [
+        "https://www.semanticscholar.org/paper/d05279c7176da386a1f62c3094578ceb3462325b"
+      ],
+      "venue": "arXiv.org",
+      "year": 2026
+    },
+    {
+      "abstract": "Function-calling language models are essential for agentic AI systems that translate natural language into executable structured actions, yet existing models exhibit severe structural instability when applied to Arabic. We present AISA-AR-FunctionCall, a production-oriented Arabic function-calling framework built on a 270M-parameter FunctionGemma backbone and trained through systematic dataset auditing, schema repair, tool-aware prompt restructuring, and full-parameter supervised fine-tuning. On a held-out test set, fine-tuning reduces parse failures from 87\\% to below 1\\%, improves function name accuracy by more than eightfold, and substantially enhances argument alignment across dialects and domains. Error analysis reveals a transition from structural collapse to semantic misalignment, suggesting that serialization stability and decision-level reasoning are separable challenges. We further explore a reasoning-augmented LoRA variant that introduces explicit intermediate reasoning prior to tool invocation. All datasets and models are publicly released under the AISA framework.",
+      "authors": [
+        "Omer Nacar",
+        "Deema Alquffari",
+        "Saleh Alsharideh",
+        "Adeem AlOtaibi",
+        "Abdulaziz Alabdulkarim",
+        "Leen Alhazmi",
+        "Nada Alomar",
+        "Wareef Alzubaidi",
+        "Nada Alsultan",
+        "A. Alrabghi",
+        "Demah Alhoshan",
+        "Rana Alsayyari",
+        "Hamed Alruwaili",
+        "Albaraa Jaafar",
+        "Khaled Alusmani",
+        "Abdulaziz Alsohimy",
+        "Munirah Alsubaie",
+        "Shahd Aldukhayil",
+        "Arwa Alali",
+        "Yazeed BinShihah",
+        "Razan Alsulaymi",
+        "Noura M. Alhumaid",
+        "Razan A. Abdulsalam",
+        "Reem Alamoudi",
+        "Mohammed Alkhalifa"
+      ],
+      "candidate_id": "prior-e6e80e3799f2cf06",
+      "landing_page_urls": [
+        "https://www.semanticscholar.org/paper/63c9485635838f0bdd45dfc20995783283e7af3a"
+      ],
+      "pdf_urls": [],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://api.semanticscholar.org/graph/v1/paper/search?fields=paperId%2Ctitle%2Cauthors%2Cyear%2Cvenue%2CexternalIds%2Cabstract%2Curl%2CopenAccessPdf&limit=8&query=metamorphic+testing+tool+calling+agent+JSON+schema",
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "raw_record": {
+            "abstract": "Function-calling language models are essential for agentic AI systems that translate natural language into executable structured actions, yet existing models exhibit severe structural instability when applied to Arabic. We present AISA-AR-FunctionCall, a production-oriented Arabic function-calling framework built on a 270M-parameter FunctionGemma backbone and trained through systematic dataset auditing, schema repair, tool-aware prompt restructuring, and full-parameter supervised fine-tuning. On a held-out test set, fine-tuning reduces parse failures from 87\\% to below 1\\%, improves function name accuracy by more than eightfold, and substantially enhances argument alignment across dialects and domains. Error analysis reveals a transition from structural collapse to semantic misalignment, suggesting that serialization stability and decision-level reasoning are separable challenges. We further explore a reasoning-augmented LoRA variant that introduces explicit intermediate reasoning prior to tool invocation. All datasets and models are publicly released under the AISA framework.",
+            "authors": [
+              {
+                "authorId": "2302559379",
+                "name": "Omer Nacar"
+              },
+              {
+                "authorId": "2424424656",
+                "name": "Deema Alquffari"
+              },
+              {
+                "authorId": "2424425054",
+                "name": "Saleh Alsharideh"
+              },
+              {
+                "authorId": "2424425429",
+                "name": "Adeem AlOtaibi"
+              },
+              {
+                "authorId": "50124755",
+                "name": "Abdulaziz Alabdulkarim"
+              },
+              {
+                "authorId": "2424424577",
+                "name": "Leen Alhazmi"
+              },
+              {
+                "authorId": "2424424805",
+                "name": "Nada Alomar"
+              },
+              {
+                "authorId": "2424425093",
+                "name": "Wareef Alzubaidi"
+              },
+              {
+                "authorId": "2424425381",
+                "name": "Nada Alsultan"
+              },
+              {
+                "authorId": "2348277454",
+                "name": "A. Alrabghi"
+              },
+              {
+                "authorId": "2424424549",
+                "name": "Demah Alhoshan"
+              },
+              {
+                "authorId": "2424424554",
+                "name": "Rana Alsayyari"
+              },
+              {
+                "authorId": "2424424681",
+                "name": "Hamed Alruwaili"
+              },
+              {
+                "authorId": "2424425434",
+                "name": "Albaraa Jaafar"
+              },
+              {
+                "authorId": "2424425366",
+                "name": "Khaled Alusmani"
+              },
+              {
+                "authorId": "2424424606",
+                "name": "Abdulaziz Alsohimy"
+              },
+              {
+                "authorId": "2329970345",
+                "name": "Munirah Alsubaie"
+              },
+              {
+                "authorId": "2424425384",
+                "name": "Shahd Aldukhayil"
+              },
+              {
+                "authorId": "2336320508",
+                "name": "Arwa Alali"
+              },
+              {
+                "authorId": "2424425097",
+                "name": "Yazeed BinShihah"
+              },
+              {
+                "authorId": "2424425095",
+                "name": "Razan Alsulaymi"
+              },
+              {
+                "authorId": "2300269292",
+                "name": "Noura M. Alhumaid"
+              },
+              {
+                "authorId": "2421954808",
+                "name": "Razan A. Abdulsalam"
+              },
+              {
+                "authorId": "2282934691",
+                "name": "Reem Alamoudi"
+              },
+              {
+                "authorId": "2328540991",
+                "name": "Mohammed Alkhalifa"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2603.16901",
+              "CorpusId": 286638446,
+              "DBLP": "journals/corr/abs-2603-16901",
+              "DOI": "10.48550/arXiv.2603.16901"
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2603.16901, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "63c9485635838f0bdd45dfc20995783283e7af3a",
+            "title": "From Language to Action in Arabic: Reliable Structured Tool Calling via Data-Centric Fine-Tuning",
+            "url": "https://www.semanticscholar.org/paper/63c9485635838f0bdd45dfc20995783283e7af3a",
+            "venue": "arXiv.org",
+            "year": 2026
+          },
+          "response_body_sha256": "19af47d150924447b97c28f28e2f233ad93eb3962e0dbec17914510f2a0caa3e",
+          "source": "Semantic Scholar",
+          "source_id": "63c9485635838f0bdd45dfc20995783283e7af3a",
+          "source_rank": 7
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "source": "Semantic Scholar"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2603.16901"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2603.16901"
+        },
+        {
+          "kind": "doi",
+          "value": "10.48550/arxiv.2603.16901"
+        },
+        {
+          "kind": "semantic_scholar",
+          "value": "63c9485635838f0bdd45dfc20995783283e7af3a"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "rank": 7,
+          "source": "Semantic Scholar"
+        }
+      ],
+      "title": "From Language to Action in Arabic: Reliable Structured Tool Calling via Data-Centric Fine-Tuning",
+      "urls": [
+        "https://www.semanticscholar.org/paper/63c9485635838f0bdd45dfc20995783283e7af3a"
+      ],
+      "venue": "arXiv.org",
+      "year": 2026
+    },
+    {
+      "abstract": "Background Large language model (LLM) agents increasingly automate bioinformatics analyses, but most existing bioinformatics tools were built for standalone use by human experts. An agent driving such a tool must reason about its installation, configuration, and execution from documentation for human, spending many turns, tokens, and tool calls per result. How a method is exposed to an agent can therefore matter as much as the method itself. By designing agentic interfaces for these tools, agent can reduce such overhead and improve the reliability of agent-driven analyses. Findings To test this design, we re-architected Clair3, a widely used deep-learning-based long-read variant caller, into a client-server system, Clair3-Connect. The client performs all genomics related processing and holds the identifiable data. The server runs only neural-network inference, and the client sends only feature tensors to the server, while sample identifiers and genomic context remain on the client. The client exposes schema-defined agent-facing tools that an agent invokes through single structured calls. On an APOE diplotyping task, all 60 agent runs were correct. The agentic tools used 12K tokens in 3 turns, 6.8 to 14 times fewer tokens than the shell-driven baselines (81K-163K tokens), at about a quarter the wall-clock time and far more stably (4% versus 35% token usage variation). Dropping the pileup and phasing stages to keep the client light left SNP F1 within 0.1-0.3 points of standard Clair3 by 50× coverage, while mutual TLS and AES-256-GCM encryption added 7.2% to end-to-end runtime. Conclusions Recasting an established algorithm as developer-built, agentic tools behind a secure client-server boundary makes it more efficient, reliable, and easier to deploy for an LLM agent than a third-party wrapper, which cannot recover the defaults and conventions only its developers know. Agentic interfaces should be a first-class deliverable of bioinformatics tool development.",
+      "authors": [
+        "Xian Yu",
+        "Zhenxian Zheng",
+        "Lei Chen",
+        "Zilan Qin",
+        "Xinyi Guo",
+        "M. He",
+        "Ruibang Luo"
+      ],
+      "candidate_id": "prior-b4eebfd77b562f85",
+      "landing_page_urls": [
+        "https://www.semanticscholar.org/paper/c2b76fbc0fbe3c0bb9841235127ec12319f32018"
+      ],
+      "pdf_urls": [
+        "https://doi.org/10.64898/2026.06.25.734665"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://api.semanticscholar.org/graph/v1/paper/search?fields=paperId%2Ctitle%2Cauthors%2Cyear%2Cvenue%2CexternalIds%2Cabstract%2Curl%2CopenAccessPdf&limit=8&query=metamorphic+testing+tool+calling+agent+JSON+schema",
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "raw_record": {
+            "abstract": "Background Large language model (LLM) agents increasingly automate bioinformatics analyses, but most existing bioinformatics tools were built for standalone use by human experts. An agent driving such a tool must reason about its installation, configuration, and execution from documentation for human, spending many turns, tokens, and tool calls per result. How a method is exposed to an agent can therefore matter as much as the method itself. By designing agentic interfaces for these tools, agent can reduce such overhead and improve the reliability of agent-driven analyses. Findings To test this design, we re-architected Clair3, a widely used deep-learning-based long-read variant caller, into a client-server system, Clair3-Connect. The client performs all genomics related processing and holds the identifiable data. The server runs only neural-network inference, and the client sends only feature tensors to the server, while sample identifiers and genomic context remain on the client. The client exposes schema-defined agent-facing tools that an agent invokes through single structured calls. On an APOE diplotyping task, all 60 agent runs were correct. The agentic tools used 12K tokens in 3 turns, 6.8 to 14 times fewer tokens than the shell-driven baselines (81K-163K tokens), at about a quarter the wall-clock time and far more stably (4% versus 35% token usage variation). Dropping the pileup and phasing stages to keep the client light left SNP F1 within 0.1-0.3 points of standard Clair3 by 50× coverage, while mutual TLS and AES-256-GCM encryption added 7.2% to end-to-end runtime. Conclusions Recasting an established algorithm as developer-built, agentic tools behind a secure client-server boundary makes it more efficient, reliable, and easier to deploy for an LLM agent than a third-party wrapper, which cannot recover the defaults and conventions only its developers know. Agentic interfaces should be a first-class deliverable of bioinformatics tool development.",
+            "authors": [
+              {
+                "authorId": "2323020479",
+                "name": "Xian Yu"
+              },
+              {
+                "authorId": "2115550010",
+                "name": "Zhenxian Zheng"
+              },
+              {
+                "authorId": "2186864425",
+                "name": "Lei Chen"
+              },
+              {
+                "authorId": "2412565440",
+                "name": "Zilan Qin"
+              },
+              {
+                "authorId": "2446431680",
+                "name": "Xinyi Guo"
+              },
+              {
+                "authorId": "2116976464",
+                "name": "M. He"
+              },
+              {
+                "authorId": "2295368888",
+                "name": "Ruibang Luo"
+              }
+            ],
+            "externalIds": {
+              "CorpusId": 289691278,
+              "DOI": "10.64898/2026.06.25.734665"
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.64898/2026.06.25.734665?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.64898/2026.06.25.734665, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": "CCBY",
+              "status": "GREEN",
+              "url": "https://doi.org/10.64898/2026.06.25.734665"
+            },
+            "paperId": "c2b76fbc0fbe3c0bb9841235127ec12319f32018",
+            "title": "Client-server interfaces enable efficient agent-driven variant calling",
+            "url": "https://www.semanticscholar.org/paper/c2b76fbc0fbe3c0bb9841235127ec12319f32018",
+            "venue": "bioRxiv",
+            "year": 2026
+          },
+          "response_body_sha256": "19af47d150924447b97c28f28e2f233ad93eb3962e0dbec17914510f2a0caa3e",
+          "source": "Semantic Scholar",
+          "source_id": "c2b76fbc0fbe3c0bb9841235127ec12319f32018",
+          "source_rank": 8
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "source": "Semantic Scholar"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "doi",
+          "value": "10.64898/2026.06.25.734665"
+        },
+        {
+          "kind": "semantic_scholar",
+          "value": "c2b76fbc0fbe3c0bb9841235127ec12319f32018"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "rank": 8,
+          "source": "Semantic Scholar"
+        }
+      ],
+      "title": "Client-server interfaces enable efficient agent-driven variant calling",
+      "urls": [
+        "https://doi.org/10.64898/2026.06.25.734665",
+        "https://www.semanticscholar.org/paper/c2b76fbc0fbe3c0bb9841235127ec12319f32018"
+      ],
+      "venue": "bioRxiv",
+      "year": 2026
+    },
+    {
+      "abstract": "The prediction of human trajectories is important for planning in autonomous systems that act in the real world, e.g. automated driving or mobile robots. Human trajectory prediction is a noisy process, and no prediction does precisely match any future trajectory. It is therefore approached as a stochastic problem, where the goal is to minimise the error between the true and the predicted trajectory. In this work, we explore the application of metamorphic testing for human trajectory prediction. Metamorphic testing is designed to handle unclear or missing test oracles. It is well-designed for human trajectory prediction, where there is no clear criterion of correct or incorrect human behaviour. Metamorphic relations rely on transformations over source test cases and exploit invariants. A setting well-designed for human trajectory prediction where there are many symmetries of expected human behaviour under variations of the input, e.g. mirroring and rescaling of the input data. We discuss how metamorphic testing can be applied to stochastic human trajectory prediction and introduce the Wasserstein Violation Criterion to statistically assess whether a follow-up test case violates a label-preserving metamorphic relation.",
+      "authors": [
+        "Helge Spieker",
+        "Nassim Belmecheri",
+        "Arnaud Gotlieb",
+        "Nadjib Lazaar"
+      ],
+      "candidate_id": "prior-672cf4f536ac69ba",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2407.18756v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2407.18756v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Ametamorphic+testing+tool+calling+agent+JSON+schema&start=0",
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2407.18756v1</ns0:id>\n    <ns0:title>Evaluating Human Trajectory Prediction with Metamorphic Testing</ns0:title>\n    <ns0:updated>2024-07-26T14:10:14Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2407.18756v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2407.18756v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>The prediction of human trajectories is important for planning in autonomous systems that act in the real world, e.g. automated driving or mobile robots. Human trajectory prediction is a noisy process, and no prediction does precisely match any future trajectory. It is therefore approached as a stochastic problem, where the goal is to minimise the error between the true and the predicted trajectory. In this work, we explore the application of metamorphic testing for human trajectory prediction. Metamorphic testing is designed to handle unclear or missing test oracles. It is well-designed for human trajectory prediction, where there is no clear criterion of correct or incorrect human behaviour. Metamorphic relations rely on transformations over source test cases and exploit invariants. A setting well-designed for human trajectory prediction where there are many symmetries of expected human behaviour under variations of the input, e.g. mirroring and rescaling of the input data. We discuss how metamorphic testing can be applied to stochastic human trajectory prediction and introduce the Wasserstein Violation Criterion to statistically assess whether a follow-up test case violates a label-preserving metamorphic relation.</ns0:summary>\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2024-07-26T14:10:14Z</ns0:published>\n    <ns1:comment>MET'24: 9th ACM International Workshop on Metamorphic Testing</ns1:comment>\n    <ns1:primary_category term=\"cs.SE\" />\n    <ns0:author>\n      <ns0:name>Helge Spieker</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Nassim Belmecheri</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Arnaud Gotlieb</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Nadjib Lazaar</ns0:name>\n    </ns0:author>\n    <ns1:doi>10.1145/3679006.3685071</ns1:doi>\n    <ns0:link rel=\"related\" href=\"https://doi.org/10.1145/3679006.3685071\" title=\"doi\" />\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "a73f9789a743a723bf3e811992cebcebc8f84ac17bbe9df642715010769e40fc",
+          "source": "arXiv",
+          "source_id": "2407.18756v1",
+          "source_rank": 1
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2407.18756v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2407.18756"
+        },
+        {
+          "kind": "doi",
+          "value": "10.1145/3679006.3685071"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "rank": 1,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Evaluating Human Trajectory Prediction with Metamorphic Testing",
+      "urls": [
+        "https://arxiv.org/abs/2407.18756v1",
+        "https://arxiv.org/pdf/2407.18756v1"
+      ],
+      "venue": null,
+      "year": 2024
+    },
+    {
+      "abstract": "Multiple machine learning models can achieve near-equivalent predictive performance on the same task, yet provide divergent feature-based explanations. This is called the Rashomon effect of (explainable) machine learning, and it raises the question of which explanations, if any, are trustworthy. We propose a framework based on metamorphic testing that assesses explanation faithfulness without requiring ground-truth labels by exploring attributed feature importance from post-hoc explanation methods. Five metamorphic relations formalize expected consistency properties between model behavior and feature attributions. We apply this general framework to two tabular regression datasets and two post-hoc explainers (SHAP and LIME) to demonstrate the approach. The framework offers a practical, model-agnostic tool for selecting accurate models with reliable and trustworthy explanations.",
+      "authors": [
+        "Helge Spieker",
+        "Jørn Eirik Betten",
+        "Arnaud Gotlieb"
+      ],
+      "candidate_id": "prior-7a81b9cbf6c2e260",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2606.06056v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2606.06056v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Ametamorphic+testing+tool+calling+agent+JSON+schema&start=0",
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.06056v1</ns0:id>\n    <ns0:title>Metamorphic Testing with the Rashomon Set: Explanation Faithfulness in Machine Learning</ns0:title>\n    <ns0:updated>2026-06-04T11:57:26Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.06056v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.06056v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Multiple machine learning models can achieve near-equivalent predictive performance on the same task, yet provide divergent feature-based explanations. This is called the Rashomon effect of (explainable) machine learning, and it raises the question of which explanations, if any, are trustworthy. We propose a framework based on metamorphic testing that assesses explanation faithfulness without requiring ground-truth labels by exploring attributed feature importance from post-hoc explanation methods. Five metamorphic relations formalize expected consistency properties between model behavior and feature attributions. We apply this general framework to two tabular regression datasets and two post-hoc explainers (SHAP and LIME) to demonstrate the approach. The framework offers a practical, model-agnostic tool for selecting accurate models with reliable and trustworthy explanations.</ns0:summary>\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-04T11:57:26Z</ns0:published>\n    <ns1:comment>Accepted at 10th International Workshop on Metamorphic Testing (MET 2026)</ns1:comment>\n    <ns1:primary_category term=\"cs.SE\" />\n    <ns0:author>\n      <ns0:name>Helge Spieker</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jørn Eirik Betten</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Arnaud Gotlieb</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "a73f9789a743a723bf3e811992cebcebc8f84ac17bbe9df642715010769e40fc",
+          "source": "arXiv",
+          "source_id": "2606.06056v1",
+          "source_rank": 2
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2606.06056v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2606.06056"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "rank": 2,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Metamorphic Testing with the Rashomon Set: Explanation Faithfulness in Machine Learning",
+      "urls": [
+        "https://arxiv.org/abs/2606.06056v1",
+        "https://arxiv.org/pdf/2606.06056v1"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "In many industrial domains, the Functional Mock-up Interface (FMI) is used to exchange simulation models as Functional Mock-up Units (FMUs) across different partners using various modelling tools. This opens up the possibilities for simulation-based verification and validation using FMUs for ensuring reliable system behaviour. However, deriving effective test oracles for these simulation models remains challenging due to the absence of explicit expected outputs. This limits the applicability of conventional testing approaches, which require access to the internal workings of the systems. Metamorphic testing (MT) addresses this limitation by leveraging metamorphic relations (MRs), but extracting such relations from specifications remains largely a manual and error-prone process. To address this challenge, we propose an LLM-powered multi-agent workflow for specification-based metamorphic testing of FMU-based simulation models. The approach takes functional and interface specifications as input and orchestrates multiple agents to extract requirements and derive MRs. These MRs are expressed using Given-When-Then patterns to structure input conditions (Given), transformations (When), and expected output behaviours (Then). These relations are then used to generate metamorphic test cases, execute simulations, and evaluate output consistency across multiple sessions. We evaluate the approach on a Lube Oil Cooling system FMU, demonstrating its ability to automatically generate meaningful MRs and corresponding test cases. Preliminary results indicate that the proposed workflow can effectively support the systematic verification and validation of dynamic simulation models by reducing manual effort and improving test generation.",
+      "authors": [
+        "Ashir Kulshreshtha",
+        "Abdullah Mughees",
+        "Gaadha Sudheerbabu",
+        "Tanwir Ahmad",
+        "Kristian Klemets",
+        "Dragos Truscan",
+        "Mikael Manngård"
+      ],
+      "candidate_id": "prior-c27bd69cb47e2b08",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2605.25101v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2605.25101v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Ametamorphic+testing+tool+calling+agent+JSON+schema&start=0",
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2605.25101v1</ns0:id>\n    <ns0:title>Multi-Agent Specification-based Metamorphic Testing of FMU-Based Simulations</ns0:title>\n    <ns0:updated>2026-05-24T14:30:56Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2605.25101v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2605.25101v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>In many industrial domains, the Functional Mock-up Interface (FMI) is used to exchange simulation models as Functional Mock-up Units (FMUs) across different partners using various modelling tools. This opens up the possibilities for simulation-based verification and validation using FMUs for ensuring reliable system behaviour. However, deriving effective test oracles for these simulation models remains challenging due to the absence of explicit expected outputs. This limits the applicability of conventional testing approaches, which require access to the internal workings of the systems. Metamorphic testing (MT) addresses this limitation by leveraging metamorphic relations (MRs), but extracting such relations from specifications remains largely a manual and error-prone process. To address this challenge, we propose an LLM-powered multi-agent workflow for specification-based metamorphic testing of FMU-based simulation models. The approach takes functional and interface specifications as input and orchestrates multiple agents to extract requirements and derive MRs. These MRs are expressed using Given-When-Then patterns to structure input conditions (Given), transformations (When), and expected output behaviours (Then). These relations are then used to generate metamorphic test cases, execute simulations, and evaluate output consistency across multiple sessions. We evaluate the approach on a Lube Oil Cooling system FMU, demonstrating its ability to automatically generate meaningful MRs and corresponding test cases. Preliminary results indicate that the proposed workflow can effectively support the systematic verification and validation of dynamic simulation models by reducing manual effort and improving test generation.</ns0:summary>\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"eess.SY\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-05-24T14:30:56Z</ns0:published>\n    <ns1:comment>Author version. 9 pages. Accepted for publication in the 10th International Workshop on Metamorphic Testing (MET 2026) of the IEEE Conference on Computers, Software, and Applications (COMPSAC2026), June 7-10, 2026 Madrid, Spain</ns1:comment>\n    <ns1:primary_category term=\"cs.SE\" />\n    <ns0:author>\n      <ns0:name>Ashir Kulshreshtha</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Abdullah Mughees</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Gaadha Sudheerbabu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Tanwir Ahmad</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kristian Klemets</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Dragos Truscan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mikael Manngård</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "a73f9789a743a723bf3e811992cebcebc8f84ac17bbe9df642715010769e40fc",
+          "source": "arXiv",
+          "source_id": "2605.25101v1",
+          "source_rank": 3
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2605.25101v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2605.25101"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "rank": 3,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Multi-Agent Specification-based Metamorphic Testing of FMU-Based Simulations",
+      "urls": [
+        "https://arxiv.org/abs/2605.25101v1",
+        "https://arxiv.org/pdf/2605.25101v1"
+      ],
+      "venue": null,
+      "year": 2026
+    },
+    {
+      "abstract": "Synthesising photo-realistic images from natural language is one of the challenging problems in computer vision. Over the past decade, a number of approaches have been proposed, of which the improved Stacked Generative Adversarial Network (StackGAN-v2) has proven capable of generating high resolution images that reflect the details specified in the input text descriptions. In this paper, we aim to assess the robustness and fault-tolerance capability of the StackGAN-v2 model by introducing variations in the training data. However, due to the working principle of Generative Adversarial Network (GAN), it is difficult to predict the output of the model when the training data are modified. Hence, in this work, we adopt Metamorphic Testing technique to evaluate the robustness of the model with a variety of unexpected training dataset. As such, we first implement StackGAN-v2 algorithm and test the pre-trained model provided by the original authors to establish a ground truth for our experiments. We then identify a metamorphic relation, from which test cases are generated. Further, metamorphic relations were derived successively based on the observations of prior test results. Finally, we synthesise the results from our experiment of all the metamorphic relations and found that StackGAN-v2 algorithm is susceptible to input images with obtrusive objects, even if it overlaps with the main object minimally, which was not reported by the authors and users of StackGAN-v2 model. The proposed metamorphic relations can be applied to other text-to-image synthesis models to not only verify the robustness but also to help researchers understand and interpret the results made by the machine learning models.",
+      "authors": [
+        "Hyejin Park",
+        "Taaha Waseem",
+        "Wen Qi Teo",
+        "Ying Hwei Low",
+        "Mei Kuan Lim",
+        "Chun Yong Chong"
+      ],
+      "candidate_id": "prior-302006194800d374",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2103.02870v2"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2103.02870v2"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Ametamorphic+testing+tool+calling+agent+JSON+schema&start=0",
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2103.02870v2</ns0:id>\n    <ns0:title>Robustness Evaluation of Stacked Generative Adversarial Networks using Metamorphic Testing</ns0:title>\n    <ns0:updated>2021-10-02T08:01:53Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2103.02870v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2103.02870v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Synthesising photo-realistic images from natural language is one of the challenging problems in computer vision. Over the past decade, a number of approaches have been proposed, of which the improved Stacked Generative Adversarial Network (StackGAN-v2) has proven capable of generating high resolution images that reflect the details specified in the input text descriptions. In this paper, we aim to assess the robustness and fault-tolerance capability of the StackGAN-v2 model by introducing variations in the training data. However, due to the working principle of Generative Adversarial Network (GAN), it is difficult to predict the output of the model when the training data are modified. Hence, in this work, we adopt Metamorphic Testing technique to evaluate the robustness of the model with a variety of unexpected training dataset. As such, we first implement StackGAN-v2 algorithm and test the pre-trained model provided by the original authors to establish a ground truth for our experiments. We then identify a metamorphic relation, from which test cases are generated. Further, metamorphic relations were derived successively based on the observations of prior test results. Finally, we synthesise the results from our experiment of all the metamorphic relations and found that StackGAN-v2 algorithm is susceptible to input images with obtrusive objects, even if it overlaps with the main object minimally, which was not reported by the authors and users of StackGAN-v2 model. The proposed metamorphic relations can be applied to other text-to-image synthesis models to not only verify the robustness but also to help researchers understand and interpret the results made by the machine learning models.</ns0:summary>\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2021-03-04T07:29:17Z</ns0:published>\n    <ns1:comment>8 pages, accepted at the 6th International Workshop on Metamorphic Testing (MET'21)</ns1:comment>\n    <ns1:primary_category term=\"cs.SE\" />\n    <ns0:author>\n      <ns0:name>Hyejin Park</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Taaha Waseem</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wen Qi Teo</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ying Hwei Low</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mei Kuan Lim</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chun Yong Chong</ns0:name>\n    </ns0:author>\n    <ns1:doi>10.1109/MET52542.2021.00008</ns1:doi>\n    <ns0:link rel=\"related\" href=\"https://doi.org/10.1109/MET52542.2021.00008\" title=\"doi\" />\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "a73f9789a743a723bf3e811992cebcebc8f84ac17bbe9df642715010769e40fc",
+          "source": "arXiv",
+          "source_id": "2103.02870v2",
+          "source_rank": 4
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2103.02870v2"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2103.02870"
+        },
+        {
+          "kind": "doi",
+          "value": "10.1109/met52542.2021.00008"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "rank": 4,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Robustness Evaluation of Stacked Generative Adversarial Networks using Metamorphic Testing",
+      "urls": [
+        "https://arxiv.org/abs/2103.02870v2",
+        "https://arxiv.org/pdf/2103.02870v2"
+      ],
+      "venue": null,
+      "year": 2021
+    },
+    {
+      "abstract": "In this paper, we present the Metamorphic Testing of an in-use deep learning based forecasting application. The application looks at the past data of system characteristics (e.g. `memory allocation') to predict outages in the future. We focus on two statistical / machine learning based components - a) detection of co-relation between system characteristics and b) estimating the future value of a system characteristic using an LSTM (a deep learning architecture). In total, 19 Metamorphic Relations have been developed and we provide proofs & algorithms where applicable. We evaluated our method through two settings. In the first, we executed the relations on the actual application and uncovered 8 issues not known before. Second, we generated hypothetical bugs, through Mutation Testing, on a reference implementation of the LSTM based forecaster and found that 65.9% of the bugs were caught through the relations.",
+      "authors": [
+        "Anurag Dwarakanath",
+        "Manish Ahuja",
+        "Sanjay Podder",
+        "Silja Vinu",
+        "Arijit Naskar",
+        "Koushik MV"
+      ],
+      "candidate_id": "prior-8480c3df0647f121",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/1907.06632v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/1907.06632v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Ametamorphic+testing+tool+calling+agent+JSON+schema&start=0",
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/1907.06632v1</ns0:id>\n    <ns0:title>Metamorphic Testing of a Deep Learning based Forecaster</ns0:title>\n    <ns0:updated>2019-07-13T14:04:15Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/1907.06632v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/1907.06632v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>In this paper, we present the Metamorphic Testing of an in-use deep learning based forecasting application. The application looks at the past data of system characteristics (e.g. `memory allocation') to predict outages in the future. We focus on two statistical / machine learning based components - a) detection of co-relation between system characteristics and b) estimating the future value of a system characteristic using an LSTM (a deep learning architecture). In total, 19 Metamorphic Relations have been developed and we provide proofs &amp; algorithms where applicable. We evaluated our method through two settings. In the first, we executed the relations on the actual application and uncovered 8 issues not known before. Second, we generated hypothetical bugs, through Mutation Testing, on a reference implementation of the LSTM based forecaster and found that 65.9% of the bugs were caught through the relations.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2019-07-13T14:04:15Z</ns0:published>\n    <ns1:comment>Paper published at the 2019 IEEE/ACM 4th International Workshop on Metamorphic Testing (MET)</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Anurag Dwarakanath</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Manish Ahuja</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sanjay Podder</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Silja Vinu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Arijit Naskar</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Koushik MV</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "a73f9789a743a723bf3e811992cebcebc8f84ac17bbe9df642715010769e40fc",
+          "source": "arXiv",
+          "source_id": "1907.06632v1",
+          "source_rank": 5
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "1907.06632v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "1907.06632"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "rank": 5,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Metamorphic Testing of a Deep Learning based Forecaster",
+      "urls": [
+        "https://arxiv.org/abs/1907.06632v1",
+        "https://arxiv.org/pdf/1907.06632v1"
+      ],
+      "venue": null,
+      "year": 2019
+    },
+    {
+      "abstract": "Large-Language Models (LLMs) have shifted the paradigm of natural language data processing. However, their black-boxed and probabilistic characteristics can lead to potential risks in the quality of outputs in diverse LLM applications. Recent studies have tested Quality Attributes (QAs), such as robustness or fairness, of LLMs by generating adversarial input texts. However, existing studies have limited their coverage of QAs and tasks in LLMs and are difficult to extend. Additionally, these studies have only used one evaluation metric, Attack Success Rate (ASR), to assess the effectiveness of their approaches. We propose a MEtamorphic Testing for Analyzing LLMs (METAL) framework to address these issues by applying Metamorphic Testing (MT) techniques. This approach facilitates the systematic testing of LLM qualities by defining Metamorphic Relations (MRs), which serve as modularized evaluation metrics. The METAL framework can automatically generate hundreds of MRs from templates that cover various QAs and tasks. In addition, we introduced novel metrics that integrate the ASR method into the semantic qualities of text to assess the effectiveness of MRs accurately. Through the experiments conducted with three prominent LLMs, we have confirmed that the METAL framework effectively evaluates essential QAs on primary LLM tasks and reveals the quality risks in LLMs. Moreover, the newly proposed metrics can guide the optimal MRs for testing each task and suggest the most effective method for generating MRs.",
+      "authors": [
+        "Sangwon Hyun",
+        "Mingyu Guo",
+        "M. Ali Babar"
+      ],
+      "candidate_id": "prior-05ce3bdb71373092",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2312.06056v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2312.06056v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Ametamorphic+testing+tool+calling+agent+JSON+schema&start=0",
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2312.06056v1</ns0:id>\n    <ns0:title>METAL: Metamorphic Testing Framework for Analyzing Large-Language Model Qualities</ns0:title>\n    <ns0:updated>2023-12-11T01:29:19Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2312.06056v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2312.06056v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Large-Language Models (LLMs) have shifted the paradigm of natural language data processing. However, their black-boxed and probabilistic characteristics can lead to potential risks in the quality of outputs in diverse LLM applications. Recent studies have tested Quality Attributes (QAs), such as robustness or fairness, of LLMs by generating adversarial input texts. However, existing studies have limited their coverage of QAs and tasks in LLMs and are difficult to extend. Additionally, these studies have only used one evaluation metric, Attack Success Rate (ASR), to assess the effectiveness of their approaches. We propose a MEtamorphic Testing for Analyzing LLMs (METAL) framework to address these issues by applying Metamorphic Testing (MT) techniques. This approach facilitates the systematic testing of LLM qualities by defining Metamorphic Relations (MRs), which serve as modularized evaluation metrics. The METAL framework can automatically generate hundreds of MRs from templates that cover various QAs and tasks. In addition, we introduced novel metrics that integrate the ASR method into the semantic qualities of text to assess the effectiveness of MRs accurately. Through the experiments conducted with three prominent LLMs, we have confirmed that the METAL framework effectively evaluates essential QAs on primary LLM tasks and reveals the quality risks in LLMs. Moreover, the newly proposed metrics can guide the optimal MRs for testing each task and suggest the most effective method for generating MRs.</ns0:summary>\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2023-12-11T01:29:19Z</ns0:published>\n    <ns1:comment>Accepted to International Conference on Software Testing, Verification and Validation (ICST) 2024 / Key words: Large-language models, Metamorphic testing, Quality evaluation, Text perturbations</ns1:comment>\n    <ns1:primary_category term=\"cs.SE\" />\n    <ns0:author>\n      <ns0:name>Sangwon Hyun</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mingyu Guo</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>M. Ali Babar</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "a73f9789a743a723bf3e811992cebcebc8f84ac17bbe9df642715010769e40fc",
+          "source": "arXiv",
+          "source_id": "2312.06056v1",
+          "source_rank": 6
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2312.06056v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2312.06056"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "rank": 6,
+          "source": "arXiv"
+        }
+      ],
+      "title": "METAL: Metamorphic Testing Framework for Analyzing Large-Language Model Qualities",
+      "urls": [
+        "https://arxiv.org/abs/2312.06056v1",
+        "https://arxiv.org/pdf/2312.06056v1"
+      ],
+      "venue": null,
+      "year": 2023
+    },
+    {
+      "abstract": "Fairness of deepfake detectors in the presence of anomalies are not well investigated, especially if those anomalies are more prominent in either male or female subjects. The primary motivation for this work is to evaluate how deepfake detection model behaves under such anomalies. However, due to the black-box nature of deep learning (DL) and artificial intelligence (AI) systems, it is hard to predict the performance of a model when the input data is modified. Crucially, if this defect is not addressed properly, it will adversely affect the fairness of the model and result in discrimination of certain sub-population unintentionally. Therefore, the objective of this work is to adopt metamorphic testing to examine the reliability of the selected deepfake detection model, and how the transformation of input variation places influence on the output. We have chosen MesoInception-4, a state-of-the-art deepfake detection model, as the target model and makeup as the anomalies. Makeups are applied through utilizing the Dlib library to obtain the 68 facial landmarks prior to filling in the RGB values. Metamorphic relations are derived based on the notion that realistic perturbations of the input images, such as makeup, involving eyeliners, eyeshadows, blushes, and lipsticks (which are common cosmetic appearance) applied to male and female images, should not alter the output of the model by a huge margin. Furthermore, we narrow down the scope to focus on revealing potential gender biases in DL and AI systems. Specifically, we are interested to examine whether MesoInception-4 model produces unfair decisions, which should be considered as a consequence of robustness issues. The findings from our work have the potential to pave the way for new research directions in the quality assurance and fairness in DL and AI systems.",
+      "authors": [
+        "Muxin Pu",
+        "Meng Yi Kuan",
+        "Nyee Thoang Lim",
+        "Chun Yong Chong",
+        "Mei Kuan Lim"
+      ],
+      "candidate_id": "prior-7e95f59f482a96e7",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2203.06825v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2203.06825v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Ametamorphic+testing+tool+calling+agent+JSON+schema&start=0",
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2203.06825v1</ns0:id>\n    <ns0:title>Fairness Evaluation in Deepfake Detection Models using Metamorphic Testing</ns0:title>\n    <ns0:updated>2022-03-14T02:44:56Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2203.06825v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2203.06825v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Fairness of deepfake detectors in the presence of anomalies are not well investigated, especially if those anomalies are more prominent in either male or female subjects. The primary motivation for this work is to evaluate how deepfake detection model behaves under such anomalies. However, due to the black-box nature of deep learning (DL) and artificial intelligence (AI) systems, it is hard to predict the performance of a model when the input data is modified. Crucially, if this defect is not addressed properly, it will adversely affect the fairness of the model and result in discrimination of certain sub-population unintentionally. Therefore, the objective of this work is to adopt metamorphic testing to examine the reliability of the selected deepfake detection model, and how the transformation of input variation places influence on the output. We have chosen MesoInception-4, a state-of-the-art deepfake detection model, as the target model and makeup as the anomalies. Makeups are applied through utilizing the Dlib library to obtain the 68 facial landmarks prior to filling in the RGB values. Metamorphic relations are derived based on the notion that realistic perturbations of the input images, such as makeup, involving eyeliners, eyeshadows, blushes, and lipsticks (which are common cosmetic appearance) applied to male and female images, should not alter the output of the model by a huge margin. Furthermore, we narrow down the scope to focus on revealing potential gender biases in DL and AI systems. Specifically, we are interested to examine whether MesoInception-4 model produces unfair decisions, which should be considered as a consequence of robustness issues. The findings from our work have the potential to pave the way for new research directions in the quality assurance and fairness in DL and AI systems.</ns0:summary>\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2022-03-14T02:44:56Z</ns0:published>\n    <ns1:comment>8 pages, accepted at 7th International Workshop on Metamorphic Testing (MET22)</ns1:comment>\n    <ns1:primary_category term=\"cs.CV\" />\n    <ns0:author>\n      <ns0:name>Muxin Pu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Meng Yi Kuan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Nyee Thoang Lim</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chun Yong Chong</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mei Kuan Lim</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+          },
+          "response_body_sha256": "a73f9789a743a723bf3e811992cebcebc8f84ac17bbe9df642715010769e40fc",
+          "source": "arXiv",
+          "source_id": "2203.06825v1",
+          "source_rank": 7
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2203.06825v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2203.06825"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "rank": 7,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Fairness Evaluation in Deepfake Detection Models using Metamorphic Testing",
+      "urls": [
+        "https://arxiv.org/abs/2203.06825v1",
+        "https://arxiv.org/pdf/2203.06825v1"
+      ],
+      "venue": null,
+      "year": 2022
+    },
+    {
+      "abstract": "Hand pose estimation (HPE) is a task that predicts and describes the hand poses from images or video frames. When HPE models estimate hand poses captured in a laboratory or under controlled environments, they normally deliver good performance. However, the real-world environment is complex, and various uncertainties may happen, which could degrade the performance of HPE models. For example, the hands could be occluded, the visibility of hands could be reduced by imperfect exposure rate, and the contour of hands prone to be blurred during fast hand movements. In this work, we adopt metamorphic testing to evaluate the robustness of HPE models and provide suggestions on the choice of HPE models for different applications. The robustness evaluation was conducted on four state-of-the-art models, namely MediaPipe hands, OpenPose, BodyHands, and NSRM hand. We found that on average more than 80\\% of the hands could not be identified by BodyHands, and at least 50\\% of hands could not be identified by MediaPipe hands when diagonal motion blur is introduced, while an average of more than 50\\% of strongly underexposed hands could not be correctly estimated by NSRM hand. Similarly, applying occlusions on only four hand joints will also largely degrade the performance of these models. The experimental results show that occlusions, illumination variations, and motion blur are the main obstacles to the performance of existing HPE models. These findings may pave the way for researchers to improve the performance and robustness of hand pose estimation models and their applications.",
+      "authors": [
+        "Muxin Pu",
+        "Chun Yong Chong",
+        "Mei Kuan Lim"
+      ],
+      "candidate_id": "prior-dd2224bc861adf84",
+      "landing_page_urls": [
+        "https://arxiv.org/abs/2303.04566v1"
+      ],
+      "pdf_urls": [
+        "https://arxiv.org/pdf/2303.04566v1"
+      ],
+      "provenance": [
+        {
+          "normalized_url_identity": "https://export.arxiv.org/api/query?max_results=8&search_query=all%3Ametamorphic+testing+tool+calling+agent+JSON+schema&start=0",
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "raw_record": {
+            "entry_xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2303.04566v1</ns0:id>\n    <ns0:title>Robustness Evaluation in Hand Pose Estimation Models using Metamorphic Testing</ns0:title>\n    <ns0:updated>2023-03-08T13:23:53Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2303.04566v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2303.04566v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Hand pose estimation (HPE) is a task that predicts and describes the hand poses from images or video frames. When HPE models estimate hand poses captured in a laboratory or under controlled environments, they normally deliver good performance. However, the real-world environment is complex, and various uncertainties may happen, which could degrade the performance of HPE models. For example, the hands could be occluded, the visibility of hands could be reduced by imperfect exposure rate, and the contour of hands prone to be blurred during fast hand movements. In this work, we adopt metamorphic testing to evaluate the robustness of HPE models and provide suggestions on the choice of HPE models for different applications. The robustness evaluation was conducted on four state-of-the-art models, namely MediaPipe hands, OpenPose, BodyHands, and NSRM hand. We found that on average more than 80\\% of the hands could not be identified by BodyHands, and at least 50\\% of hands could not be identified by MediaPipe hands when diagonal motion blur is introduced, while an average of more than 50\\% of strongly underexposed hands could not be correctly estimated by NSRM hand. Similarly, applying occlusions on only four hand joints will also largely degrade the performance of these models. The experimental results show that occlusions, illumination variations, and motion blur are the main obstacles to the performance of existing HPE models. These findings may pave the way for researchers to improve the performance and robustness of hand pose estimation models and their applications.</ns0:summary>\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2023-03-08T13:23:53Z</ns0:published>\n    <ns1:comment>Accepted at 2023 8th International Workshop on Metamorphic Testing, 8 pages</ns1:comment>\n    <ns1:primary_category term=\"cs.CV\" />\n    <ns0:author>\n      <ns0:name>Muxin Pu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chun Yong Chong</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mei Kuan Lim</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n"
+          },
+          "response_body_sha256": "a73f9789a743a723bf3e811992cebcebc8f84ac17bbe9df642715010769e40fc",
+          "source": "arXiv",
+          "source_id": "2303.04566v1",
+          "source_rank": 8
+        }
+      ],
+      "query_provenance": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "source": "arXiv"
+        }
+      ],
+      "source_ids": [
+        {
+          "kind": "arxiv",
+          "value": "2303.04566v1"
+        },
+        {
+          "kind": "arxiv_versionless",
+          "value": "2303.04566"
+        }
+      ],
+      "source_rank": [
+        {
+          "query": "metamorphic testing tool calling agent JSON schema",
+          "rank": 8,
+          "source": "arXiv"
+        }
+      ],
+      "title": "Robustness Evaluation in Hand Pose Estimation Models using Metamorphic Testing",
+      "urls": [
+        "https://arxiv.org/abs/2303.04566v1",
+        "https://arxiv.org/pdf/2303.04566v1"
+      ],
+      "venue": null,
+      "year": 2023
+    }
+  ],
+  "created_at_utc": "2026-08-18T10:22:50.066156Z",
+  "degraded": true,
+  "schema_version": 1,
+  "source_attempts": [
+    {
+      "error_type": "HTTPError",
+      "http_status": 429,
+      "query_index": 1,
+      "source": "Semantic Scholar",
+      "status": "error"
+    },
+    {
+      "query_index": 1,
+      "record_count": 8,
+      "source": "arXiv",
+      "status": "ok"
+    },
+    {
+      "error_type": "HTTPError",
+      "http_status": 429,
+      "query_index": 2,
+      "source": "Semantic Scholar",
+      "status": "error"
+    },
+    {
+      "query_index": 2,
+      "record_count": 8,
+      "source": "arXiv",
+      "status": "ok"
+    },
+    {
+      "query_index": 3,
+      "record_count": 8,
+      "source": "Semantic Scholar",
+      "status": "ok"
+    },
+    {
+      "query_index": 3,
+      "record_count": 8,
+      "source": "arXiv",
+      "status": "ok"
+    },
+    {
+      "error_type": "HTTPError",
+      "http_status": 404,
+      "relation": "citations",
+      "source": "Semantic Scholar",
+      "status": "error"
+    },
+    {
+      "error_type": "HTTPError",
+      "http_status": 404,
+      "relation": "references",
+      "source": "Semantic Scholar",
+      "status": "error"
+    }
+  ]
+}

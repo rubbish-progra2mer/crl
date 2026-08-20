@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "split": "calibration",
+  "query_language": "English",
+  "queries": [
+    {
+      "query_id": "prod-cal-failure-001",
+      "query": "explicit planning or longer reasoning traces underperform a direct agent policy after matching inference tokens tool calls prompt length and model scale",
+      "target_kind": "failure",
+      "critical": false,
+      "mechanism_cluster": "planning_reasoning",
+      "intent_note": "Seeks a controlled boundary where apparent planning gains disappear after compute and prompt matching."
+    },
+    {
+      "query_id": "prod-cal-operator-001",
+      "query": "a verifier changes which candidate plan or tool trajectory is executed using non oracle evidence under a matched search budget",
+      "target_kind": "operator",
+      "critical": true,
+      "mechanism_cluster": "test_time_search_verification",
+      "intent_note": "Tests whether the corpus can surface a genuine verification driven action selection computation rather than extra sampling."
+    },
+    {
+      "query_id": "prod-cal-failure-002",
+      "query": "tool agent gains disappear against an equally strong model with matched tokens tool calls demonstrations and terminal state evaluation",
+      "target_kind": "failure",
+      "critical": true,
+      "mechanism_cluster": "tool_use_action_interface",
+      "intent_note": "Requires evidence that distinguishes an action interface mechanism from budget model and evaluation advantages."
+    },
+    {
+      "query_id": "prod-cal-operator-002",
+      "query": "tool dependencies are represented before execution so independent calls run in parallel while dependent arguments wait for prior outputs",
+      "target_kind": "operator",
+      "critical": false,
+      "mechanism_cluster": "tool_use_action_interface",
+      "intent_note": "Recovers an explicit control computation for parallel and dependent tool calls."
+    },
+    {
+      "query_id": "prod-cal-failure-003",
+      "query": "irrelevant stale or duplicated retrieved memories increase long horizon agent errors beyond context truncation and fixed reading budget effects",
+      "target_kind": "failure",
+      "critical": true,
+      "mechanism_cluster": "memory_context_long_horizon",
+      "intent_note": "Targets direct evidence that retrieval content itself harms decisions rather than merely overflowing context."
+    },
+    {
+      "query_id": "prod-cal-operator-003",
+      "query": "memory writing retrieval and reading are separated so the agent changes which information is visible at decision time",
+      "target_kind": "operator",
+      "critical": false,
+      "mechanism_cluster": "memory_context_long_horizon",
+      "intent_note": "Finds a reusable memory stage decomposition with explicit inputs outputs and timing."
+    },
+    {
+      "query_id": "prod-cal-failure-004",
+      "query": "verbal self reflection repeats generic critique or degrades performance when no external correctness signal changes action selection",
+      "target_kind": "failure",
+      "critical": false,
+      "mechanism_cluster": "reflection_self_improvement",
+      "intent_note": "Distinguishes intrinsic critique from grounded feedback and repeated sampling."
+    },
+    {
+      "query_id": "prod-cal-operator-004",
+      "query": "reflection is invoked selectively from observable trajectory evidence and updates policy or reusable experience with an explicit stopping rule",
+      "target_kind": "operator",
+      "critical": false,
+      "mechanism_cluster": "reflection_self_improvement",
+      "intent_note": "Seeks a controlled reflection operator whose intervention and stop decision are explicit."
+    },
+    {
+      "query_id": "prod-cal-failure-005",
+      "query": "multi agent debate repeats correlated errors and loses to matched budget self consistency or single agent ensembles",
+      "target_kind": "failure",
+      "critical": false,
+      "mechanism_cluster": "multi_agent_information_flow",
+      "intent_note": "Tests negative knowledge about duplicated information and aggregate compute confounds."
+    },
+    {
+      "query_id": "prod-cal-operator-005",
+      "query": "message routing or communication topology changes which evidence each collaborating language agent receives before aggregation",
+      "target_kind": "operator",
+      "critical": true,
+      "mechanism_cluster": "multi_agent_information_flow",
+      "intent_note": "Targets the Pilot gap in explicit information flow control rather than adding undifferentiated replicas."
+    },
+    {
+      "query_id": "prod-cal-operator-006",
+      "query": "offline logged agent trajectories assign delayed outcome credit to specific reasoning memory or tool decisions without expert or gold trajectories",
+      "target_kind": "operator",
+      "critical": false,
+      "mechanism_cluster": "agent_learning_credit_assignment",
+      "intent_note": "Targets the Pilot gap in localized offline credit while excluding online environment feedback."
+    },
+    {
+      "query_id": "prod-cal-failure-006",
+      "query": "step level agent learning appears effective only because calibration uses expert gold or oracle trajectories",
+      "target_kind": "failure",
+      "critical": false,
+      "mechanism_cluster": "agent_learning_credit_assignment",
+      "intent_note": "Surfaces attribution boundaries for localized credit mechanisms."
+    },
+    {
+      "query_id": "prod-cal-paper-001",
+      "query": "evaluation of text tool agents separates method effects from stronger models prompt advantages benchmark leakage and unequal token or tool budgets",
+      "target_kind": "paper",
+      "critical": true,
+      "mechanism_cluster": "evaluation_reliability_safety",
+      "intent_note": "Requires a source layer for attacking confounded Agent method claims."
+    },
+    {
+      "query_id": "prod-cal-failure-007",
+      "query": "agent benchmark task success hides invalid actions repeat run unreliability harmful side effects or data contamination",
+      "target_kind": "failure",
+      "critical": false,
+      "mechanism_cluster": "evaluation_reliability_safety",
+      "intent_note": "Finds measurement risks that a terminal scalar can conceal."
+    },
+    {
+      "query_id": "prod-cal-paper-002",
+      "query": "deep research evaluation jointly measures citation support source coverage synthesis correctness latency tokens tool calls and monetary cost under fixed budgets",
+      "target_kind": "paper",
+      "critical": false,
+      "mechanism_cluster": "efficiency_cost_deep_research",
+      "intent_note": "Targets the Pilot corpus gap in joint quality and cost measurement for Deep Research as an experimental carrier."
+    },
+    {
+      "query_id": "prod-cal-operator-007",
+      "query": "test time compute or tool calls are allocated only when observable uncertainty predicts benefit and are compared with matched budget random static margin and entropy allocation",
+      "target_kind": "operator",
+      "critical": false,
+      "mechanism_cluster": "efficiency_cost_deep_research",
+      "intent_note": "Carries forward the PLAN 04 failure by requiring a changed computation plus same cost attribution baselines."
+    },
+    {
+      "query_id": "prod-cal-paper-003",
+      "query": "direct lineage from interleaved reasoning and acting to search based planning for language model agents",
+      "target_kind": "paper",
+      "critical": false,
+      "mechanism_cluster": "planning_reasoning",
+      "intent_note": "Checks whether source lineage can be recovered without relying on paper titles in the query."
+    },
+    {
+      "query_id": "prod-cal-failure-008",
+      "query": "large corpus tool retrieval complete target tools",
+      "target_kind": "failure",
+      "critical": true,
+      "mechanism_cluster": "tool_use_action_interface",
+      "intent_note": "Frozen before the repair; checks whether the corpus exposes the non-oracle failure condition that complete tool choice becomes a retrieval problem in large heterogeneous tool collections."
+    },
+    {
+      "query_id": "prod-cal-operator-008",
+      "query": "required parameter descriptions schema aware tool retrieval",
+      "target_kind": "operator",
+      "critical": true,
+      "mechanism_cluster": "tool_use_action_interface",
+      "intent_note": "Frozen before the repair; checks whether direct schema-aware retrieval and parameter-description matching mechanisms are discoverable before Candidate promotion."
+    },
+    {
+      "query_id": "prod-cal-paper-004",
+      "query": "ToolRet Meta-Tool ToolDreamer NNN retrieval",
+      "target_kind": "paper",
+      "critical": true,
+      "mechanism_cluster": "tool_use_action_interface",
+      "intent_note": "Frozen before the repair; checks whether the exact direct-prior lineage that killed the parameter-grounding path is discoverable from the source layer."
+    }
+  ]
+}

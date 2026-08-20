@@ -1,0 +1,85 @@
+{
+  "baseline_specs": [
+    "无验证",
+    "静态成功回执",
+    "固定目标读回",
+    "写工具本地完整契约",
+    "状态信息增益",
+    "DQBP",
+    "全量读回",
+    "人工最小义务上界"
+  ],
+  "budget_ceiling": "确定性穷举；每例最多读取全部五个探针，总成本上限 6；自适应基线预算 3。",
+  "claim_ids": [
+    "pdeo-systematic-safe-gating"
+  ],
+  "confounders": [
+    "评价规则与候选都依赖类型规格正确性，但评价规则在独立常量中声明且不调用编译器。",
+    "系统性词表变异不覆盖连续状态、并发和读取噪声。",
+    "人工最小义务与 PDEO 在当前域应相同，只是编译上界而非竞争方法。"
+  ],
+  "dataset": "三个预先存在的状态域上 171 个确定性系统故障与无关变异案例",
+  "declared_inputs": [],
+  "declared_outputs": [],
+  "expected_signatures": [
+    "PDEO 系统性义务故障危险提交率为 0。",
+    "PDEO 安全无关变异提交召回率为 1。",
+    "PDEO 平均探针成本为 3，低于工具本地完整契约的 5 和全量读回的 6。"
+  ],
+  "experiment_id": "pdeo-systematic-fault-suite-v1",
+  "falsification_rule": "任一 PDEO 系统性义务故障被提交，或安全无关变异提交召回率低于 1，或 PDEO 平均成本不低于工具本地完整契约，即反证当前最小主张。",
+  "hypothesis_id": "h4-pdeo",
+  "independent_ground_truth": {
+    "description": "评价器在 formal_pdeo_experiment.py 的 SAFETY_RULES 中独立声明每个域的安全提交谓词，不调用 PDEO 编译器生成标签；故障集系统性枚举预先存在分支词表中的全部单义务替换、无关字段替换与配对替换。",
+    "external_card_ids": [],
+    "external_evidence_ids": [],
+    "external_literature_refs": [
+      "ToolGate: Findings of ACL 2026",
+      "ETAS: arXiv:2607.17780"
+    ],
+    "run_local_fact_refs": [
+      "implementation_v001/statefault_bench.py",
+      "implementation_v001/formal_pdeo_experiment.py"
+    ]
+  },
+  "model": "无语言模型；确定性类型计划控制器",
+  "parity_dimensions": {
+    "budget": {
+      "notes": "固定、完整与义务方法按其实际探针集合计成本；DQBP 与状态信息增益共享预算 3。比较安全—成本帕累托，而非强行截断完整契约。",
+      "status": "different"
+    },
+    "information_access": {
+      "notes": "所有可部署方法共享类型计划、工具规格与探针返回；故障标签仅由评价器使用。",
+      "status": "matched"
+    },
+    "model_provider_revision": {
+      "notes": "所有控制器均为同一 Python 运行时中的确定性代码，不调用模型。",
+      "status": "matched"
+    },
+    "sampling_protocol": {
+      "notes": "每个方法运行全部 171 个冻结的系统性案例。",
+      "status": "matched"
+    },
+    "tool_capability": {
+      "notes": "所有方法使用同一只读探针目录和成本。",
+      "status": "matched"
+    }
+  },
+  "primary_metric": "pdeo_unsafe_commit_rate_systematic_obligation_faults",
+  "provider": "本地 Python 3.11",
+  "purpose": "independent_claim_validation",
+  "research_question": "计划派生证据义务能否在系统性未见义务故障上保持零危险提交，并以低于完整工具契约的成本接受全部安全无关变异？",
+  "revision": "pdeo-formal-r1",
+  "run_id": "20260813_1054_run09",
+  "sampling_unit": "一个域内完整状态与受保护提交的组合",
+  "schema_version": 1,
+  "secondary_metrics": [
+    "pdeo_valid_commit_recall_systematic_nuisance_variants",
+    "pdeo_average_probe_cost_systematic_obligation_faults",
+    "tool_local_contract_average_probe_cost_systematic_obligation_faults",
+    "dqbp_unsafe_commit_rate_systematic_obligation_faults",
+    "state_information_gain_unsafe_commit_rate_systematic_obligation_faults"
+  ],
+  "seeds": [],
+  "version": "v001"
+}

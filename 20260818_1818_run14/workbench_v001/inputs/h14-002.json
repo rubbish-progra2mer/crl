@@ -1,0 +1,34 @@
+{
+  "hypothesis_id": "h14-002",
+  "title": "语义等价工具模式的配对执行不变性审计",
+  "parent_ids": ["h14-001"],
+  "lineage_note": "初始重命名方法被最近先行碰撞后，从仍存的现象与评价差分派生。",
+  "problem": "单模式工具调用准确率无法揭示模型对不改变执行语义的接口表征变化是否脆弱。",
+  "target_failure": {
+    "summary": "同一用户任务与同一规范执行器，仅因工具模式的等价表征变化而得到不同执行结果。",
+    "card_ids": ["card-p084-function-calling-robustness"],
+    "evidence_ids": ["ev-p084-expanded-toolkit-controlled-setting", "ev-p084-generated-tool-single-dataset-boundary"]
+  },
+  "changed_computation": {
+    "baseline": "每个任务仅用一份规范工具模式执行并报告成功率。",
+    "intervention": "为每个任务生成可逆的模式等价变换，使用确定性适配器把变换后的调用映射回同一规范执行器，并计算配对不一致与阶段失效。",
+    "information_available": "规范工具模式、可逆变换映射、同一用户请求与真实执行结果。",
+    "timing": "评测构造与执行阶段；不改变被测模型权重。",
+    "budget_effect": "每个任务增加若干等价模式配对调用。"
+  },
+  "mechanism_claim": "配对等价变换能隔离接口表征敏感性，使其不再与任务难度、工具语义变化或相关工具干扰混合。",
+  "falsifier": "精确最近先行已提供同样的可逆等价变换与端到端配对执行；或多种变换和任务上无可复现不一致，且第二独立实现排除实现错误。",
+  "minimal_killer_experiment": "在本地工具调用模型上，用同一组可执行任务比较规范模式与可逆重命名模式；对所有失败做适配器回放。",
+  "nearest_prior_risk": "PA-Tool 研究重命名收益，P084 研究查询与工具集扰动；需要确认是否已有严格的等价模式蜕变评测。",
+  "alternative_explanations": ["聊天模板或工具解析器而非模型造成差异", "变换并非真正语义等价", "采样随机性造成配对不一致"],
+  "descriptors": {
+    "problem_family": "工具调用接口鲁棒性",
+    "computation_stage": "评测生成与真实执行",
+    "intervention_family": "可逆模式等价变换",
+    "information_source": "规范模式与执行适配映射",
+    "timing_class": "测试时配对执行",
+    "budget_class": "每任务多次等价调用",
+    "evaluation_mode": "蜕变关系与端到端执行"
+  },
+  "literature_refs": ["P084", "https://aclanthology.org/2026.acl-long.948/"]
+}

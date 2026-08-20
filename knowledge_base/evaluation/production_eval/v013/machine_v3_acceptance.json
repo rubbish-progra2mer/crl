@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "evaluation_kind": "crl_contract_v3_machine_coupled_retrieval_acceptance",
+  "executed_at_local_date": "2026-08-13",
+  "knowledge_content_frozen_pre_maintenance": {
+    "file_count_including_existing_maintenance_metadata": 857,
+    "total_bytes": 331008320,
+    "aggregate_sha256": "a9c283b71e6b88a549e8cc4ff40bf6a038d9049ed79e833be11cc0f1bea883c8",
+    "matches_preimplementation_baseline": true,
+    "key_scientific_assets": {
+      "corpus_evidence_sha256": "c3bae1a784701d1c7c1679aeb15c6b88e53dbdcf7d8705920fcf83e607b4a19c",
+      "corpus_manifest_sha256": "bf61d16e384601cc0ca6fdff5c789a55ab71e891669e1f48bcd3816c9a0f2ef5",
+      "knowledge_sqlite_sha256": "7911d86e02ccd4df8fb18bb11fcdb160f0eea2a1e29eeec97f1f1fd8b9c15fcf",
+      "passages_npz_sha256": "fac941ed0825e1906d1724a4e0a6daefe2b1f98f19b1dd5dd523320c4b9ff1ad",
+      "cards_fts_sqlite_sha256": "52edfb9f2ba50afb65d49673cb902c6a0842d296df7f9651ad0563880de86ce6"
+    }
+  },
+  "full_regression": {
+    "command": "pytest -q --run-real-kb --run-real-pdf",
+    "passed": 422,
+    "skipped": 6,
+    "failed": 0,
+    "wall_time_seconds": 86.48
+  },
+  "central_pdf_resolution": {
+    "paper_count": 99,
+    "unique_resolved_paths": 99,
+    "sha256_verified": 99,
+    "legacy_filename_fallback": 99,
+    "failures": 0
+  },
+  "purpose_aware_retrieval_smoke": {
+    "query_count": 5,
+    "card_limit": 3,
+    "passage_limit": 3,
+    "purposes": {
+      "problem": ["paper", "failure", "passage", "operator"],
+      "failure": ["failure", "passage", "operator", "paper"],
+      "operator": ["operator", "paper", "passage", "failure"],
+      "prior": ["paper", "operator", "failure", "passage"],
+      "measurement": ["paper", "passage", "failure", "operator"]
+    },
+    "each_route_returned_three_hits": true,
+    "source_traceability_present": true,
+    "automatic_scientific_judgment": false
+  },
+  "optional_capability_smoke": {
+    "recall_fts_secret_exclusion": "covered_by_passing_default_tests",
+    "semantic_recall": "best_effort_degradation_is_covered; not a release blocker",
+    "active_diagnosis_skill_sha256": "656e6ec98c69209457b997ec2b155c6230e249c3de2fe7e76e43fe6e18dde180",
+    "diagnosis_state_mutation": false,
+    "recorded_cannot_support_delivery": "covered_by_passing_default_tests",
+    "tool_forge_os_sandbox_claimed": false
+  },
+  "fixed_reviewer_calibration": {
+    "summary_sha256": "b824be3b4357b3c968324b3f19fa85767fdf8c89fd28ac1806f24bc12e893113",
+    "valid_fresh_role_calls": 12,
+    "scores_percent": {
+      "weak": "10.5000",
+      "medium": "52.8750",
+      "strong": "96.5000",
+      "unfair_baseline_trap": "27.1875"
+    },
+    "strong_gt_medium_gt_weak": true,
+    "unfair_not_above_medium": true,
+    "unfair_emp_baseline_fairness": 0,
+    "unfair_adv_confound_leakage_control": 0,
+    "fixture_or_prompt_modified_after_results": false
+  },
+  "limitations": [
+    "This is a minimum sufficient machine-coupled maintenance acceptance, not a fresh blind scientific retrieval evaluation.",
+    "Retrieval scores and Reviewer calibration scores are not research quality or Delivery gates.",
+    "Optional semantic Recall remains best-effort and may explicitly degrade to FTS."
+  ]
+}

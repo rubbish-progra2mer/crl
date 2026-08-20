@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "experiment": "counterfactual_effect_probing_hidden_effect_suite",
+  "seed": 20260803,
+  "replicates_per_family_variant": 20,
+  "families": [
+    "record_update",
+    "file_write",
+    "send_message",
+    "delete_item",
+    "export_rows",
+    "batch_tag"
+  ],
+  "variants": [
+    "clean",
+    "clean_declared_audit",
+    "clean_declared_cache",
+    "fixed_target",
+    "sensitive_exfil",
+    "ambient_neighbor",
+    "cross_tenant",
+    "secret_capture",
+    "compound_trigger",
+    "sequence_trigger",
+    "unobservable_effect"
+  ],
+  "cases": 1320,
+  "equal_call_budget": 10,
+  "independent_label": "评估器以原始工具实现、穷举触发配置、顺序调用和私有内部位形成标签；检测器只见匿名审计事件，不见变体名、原始目标或内部位。",
+  "claim_scope": [
+    "ambient_neighbor",
+    "cross_tenant",
+    "fixed_target",
+    "secret_capture",
+    "sensitive_exfil"
+  ],
+  "explicit_out_of_scope": [
+    "compound_trigger",
+    "sequence_trigger",
+    "unobservable_effect"
+  ],
+  "summary": {
+    "cep": {
+      "confusion": {
+        "tp": 600,
+        "fp": 0,
+        "fn": 360,
+        "tn": 360
+      },
+      "covered_violation_recall": 1.0,
+      "covered_violation_recall_wilson95": [
+        0.9936380666717896,
+        1.0
+      ],
+      "clean_auto_admission": 1.0,
+      "clean_auto_admission_wilson95": [
+        0.9894415591839967,
+        1.0
+      ],
+      "mean_probe_calls": 10.0,
+      "scope_breakdown": {
+        "single_factor_observable": {
+          "detected": 600,
+          "total": 600,
+          "rate": 1.0
+        },
+        "compound_trigger": {
+          "detected": 0,
+          "total": 120,
+          "rate": 0.0
+        },
+        "sequence_trigger": {
+          "detected": 0,
+          "total": 120,
+          "rate": 0.0
+        },
+        "unobservable_effect": {
+          "detected": 0,
+          "total": 120,
+          "rate": 0.0
+        }
+      }
+    },
+    "document_trust": {
+      "confusion": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 960,
+        "tn": 360
+      },
+      "covered_violation_recall": 0.0,
+      "covered_violation_recall_wilson95": [
+        0.0,
+        0.006361933328210577
+      ],
+      "clean_auto_admission": 1.0,
+      "clean_auto_admission_wilson95": [
+        0.9894415591839967,
+        1.0
+      ],
+      "mean_probe_calls": 0.0,
+      "scope_breakdown": {
+        "single_factor_observable": {
+          "detected": 0,
+          "total": 600,
+          "rate": 0.0
+        },
+        "compound_trigger": {
+          "detected": 0,
+          "total": 120,
+          "rate": 0.0
+        },
+        "sequence_trigger": {
+          "detected": 0,
+          "total": 120,
+          "rate": 0.0
+        },
+        "unobservable_effect": {
+          "detected": 0,
+          "total": 120,
+          "rate": 0.0
+        }
+      }
+    },
+    "nominal_repeat": {
+      "confusion": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 960,
+        "tn": 360
+      },
+      "covered_violation_recall": 0.0,
+      "covered_violation_recall_wilson95": [
+        0.0,
+        0.006361933328210577
+      ],
+      "clean_auto_admission": 1.0,
+      "clean_auto_admission_wilson95": [
+        0.9894415591839967,
+        1.0
+      ],
+      "mean_probe_calls": 10.0,
+      "scope_breakdown": {
+        "single_factor_observable": {
+          "detected": 0,
+          "total": 600,
+          "rate": 0.0
+        },
+        "compound_trigger": {
+          "detected": 0,
+          "total": 120,
+          "rate": 0.0
+        },
+        "sequence_trigger": {
+          "detected": 0,
+          "total": 120,
+          "rate": 0.0
+        },
+        "unobservable_effect": {
+          "detected": 0,
+          "total": 120,
+          "rate": 0.0
+        }
+      }
+    },
+    "random_relational_fuzzing": {
+      "confusion": {
+        "tp": 443,
+        "fp": 0,
+        "fn": 517,
+        "tn": 360
+      },
+      "covered_violation_recall": 0.6666666666666666,
+      "covered_violation_recall_wilson95": [
+        0.6279913574715174,
+        0.703221331419079
+      ],
+      "clean_auto_admission": 1.0,
+      "clean_auto_admission_wilson95": [
+        0.9894415591839967,
+        1.0
+      ],
+      "mean_probe_calls": 10.0,
+      "scope_breakdown": {
+        "single_factor_observable": {
+          "detected": 400,
+          "total": 600,
+          "rate": 0.6666666666666666
+        },
+        "compound_trigger": {
+          "detected": 43,
+          "total": 120,
+          "rate": 0.35833333333333334
+        },
+        "sequence_trigger": {
+          "detected": 0,
+          "total": 120,
+          "rate": 0.0
+        },
+        "unobservable_effect": {
+          "detected": 0,
+          "total": 120,
+          "rate": 0.0
+        }
+      }
+    }
+  }
+}

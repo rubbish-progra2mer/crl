@@ -1,0 +1,8 @@
+{
+  "evidence_fidelity":"SCREENING","kill_target":"LOCAL_EMPIRICAL_CLAIM",
+  "subject_scope":{"models":["qwen3:4b"],"tasks":["8 个简单单步工具调用修订任务"],"datasets":["Run15 手工筛选集"],"seeds":["15001","15002"],"environment":"本地 Ollama；原生工具调用与独立 JSON 修订两种实现"},
+  "independent_implementation_count":2,"structural_refutation":false,"structural_refutation_reason":"",
+  "killed":"局部经验主张：仅错误类别反馈相对不透明失败能在 qwen3:4b 当前简单任务上提高至少 2/8 的一次修订成功。实现 A 增益 -1，实现 B 增益 0。",
+  "survives":"Phenomenon：错误消息中的答案泄漏可能抬高恢复分数；Evaluation：不透明/类别/约束/答案四级信息量阶梯；System Capability：当原任务不足以直接重算时的真实恢复。下一步是公开失败轨迹、多模型或隐藏值任务上的代表性验证。",
+  "why":"两个实现均为 SCREENING，且原任务显式包含正确参数，使模型可以绕过反馈直接重算。负结果关闭所测局部主张，但不测试评价框架在代表性失败轨迹上的价值。"
+}

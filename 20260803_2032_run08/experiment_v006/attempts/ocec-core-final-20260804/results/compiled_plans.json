@@ -1,0 +1,576 @@
+{
+  "ambient_clone_local": {
+    "allowed_auxiliary_kinds": [],
+    "contract_claims": [
+      "probe.auxiliary_kinds.allowed_only",
+      "probe.primary_count.exactly_one",
+      "relation.payload.invariant:ambient_canary"
+    ],
+    "contract_hash": "1c2cbf6c160dcfb218d8d1852f64b750aa4345c85302ca0f1e90c4be2d8f5a33",
+    "exact_primary_count": 1,
+    "identifiable_claims": [
+      "probe.auxiliary_kinds.allowed_only",
+      "probe.primary_count.exactly_one"
+    ],
+    "nonidentifiable": [
+      {
+        "claim_id": "relation.payload.invariant:ambient_canary",
+        "reason": "克隆局部载荷令牌不能跨 ambient_canary 探针对齐",
+        "shared_observation": [
+          "payload:q0",
+          "payload:q0"
+        ],
+        "world_false": {
+          "payload_maps": [
+            "identity",
+            "swap"
+          ],
+          "payload_outputs": [
+            "p0",
+            "p1"
+          ],
+          "target_maps": [
+            "identity",
+            "identity"
+          ],
+          "target_outputs": [
+            "t0",
+            "t0"
+          ]
+        },
+        "world_true": {
+          "payload_maps": [
+            "identity",
+            "identity"
+          ],
+          "payload_outputs": [
+            "p0",
+            "p0"
+          ],
+          "target_maps": [
+            "identity",
+            "identity"
+          ],
+          "target_outputs": [
+            "t0",
+            "t0"
+          ]
+        }
+      }
+    ],
+    "plan_hash": "806cae4ff8c18b50d6ac58a4c209a36f62b572983f8e3f4cf3834e01541d02d7",
+    "primary_kind": "write",
+    "probe_catalog_hash": "0c45a9b7a5ca723accd450d252216fff6e899ae5d0cc15dca979d419e098aa18",
+    "probes": [
+      {
+        "ambient_canary": "none",
+        "input_value": "public",
+        "probe_id": "base",
+        "target_value": "base"
+      }
+    ],
+    "projection_hash": "ffb0408233854427d68ddfbda2e293d7a60a7e725821f628894daaf3fe27b606",
+    "relations": [],
+    "schema_version": 1
+  },
+  "ambient_stable": {
+    "allowed_auxiliary_kinds": [],
+    "contract_claims": [
+      "probe.auxiliary_kinds.allowed_only",
+      "probe.primary_count.exactly_one",
+      "relation.payload.invariant:ambient_canary"
+    ],
+    "contract_hash": "ed7918cd0b1bbf68d16076b5bd3610adcd22541b716b34d766290d3182b8fbb4",
+    "exact_primary_count": 1,
+    "identifiable_claims": [
+      "probe.auxiliary_kinds.allowed_only",
+      "probe.primary_count.exactly_one",
+      "relation.payload.invariant:ambient_canary"
+    ],
+    "nonidentifiable": [],
+    "plan_hash": "1bed6a8b4b7b56ba2024d3b110de270b8b46779a662945be3d2b32cf06159f92",
+    "primary_kind": "write",
+    "probe_catalog_hash": "a46b93491e892726b92e34c1191a50ba357ae98d085e67e63adb9160d5a4ce5c",
+    "probes": [
+      {
+        "ambient_canary": "ambient_red",
+        "input_value": "public",
+        "probe_id": "ambient_0",
+        "target_value": "base"
+      },
+      {
+        "ambient_canary": "ambient_blue",
+        "input_value": "public",
+        "probe_id": "ambient_1",
+        "target_value": "base"
+      },
+      {
+        "ambient_canary": "none",
+        "input_value": "public",
+        "probe_id": "base",
+        "target_value": "base"
+      }
+    ],
+    "projection_hash": "7a585489449c1c36ec7bbef0f58b6519cdb33267895730b97fcf03ba4e9d937d",
+    "relations": [
+      {
+        "claim_id": "relation.payload.invariant:ambient_canary",
+        "expected_value": null,
+        "left_probe": "ambient_0",
+        "relation_kind": "payload_equal",
+        "right_probe": "ambient_1"
+      }
+    ],
+    "schema_version": 1
+  },
+  "auxiliary_allowed": {
+    "allowed_auxiliary_kinds": [
+      "audit"
+    ],
+    "contract_claims": [
+      "probe.auxiliary_kinds.allowed_only",
+      "probe.primary_count.exactly_one"
+    ],
+    "contract_hash": "bbbe0fb733a9d41db76ad87b97648d6738ef1a52f5bcb6a9cf4358061a2c419b",
+    "exact_primary_count": 1,
+    "identifiable_claims": [
+      "probe.auxiliary_kinds.allowed_only",
+      "probe.primary_count.exactly_one"
+    ],
+    "nonidentifiable": [],
+    "plan_hash": "369e12455739eca280fd00d418e115bbcaf6756e37fc76033103f39c2e61a187",
+    "primary_kind": "write",
+    "probe_catalog_hash": "0c45a9b7a5ca723accd450d252216fff6e899ae5d0cc15dca979d419e098aa18",
+    "probes": [
+      {
+        "ambient_canary": "none",
+        "input_value": "public",
+        "probe_id": "base",
+        "target_value": "base"
+      }
+    ],
+    "projection_hash": "2bc91a3a79b8d33587e2d1a4c83821555e94f714e5f5c6af1cefcbacb69a5e6a",
+    "relations": [],
+    "schema_version": 1
+  },
+  "combined": {
+    "allowed_auxiliary_kinds": [
+      "audit"
+    ],
+    "contract_claims": [
+      "probe.auxiliary_kinds.allowed_only",
+      "probe.primary_count.exactly_one",
+      "relation.payload.invariant:ambient_canary",
+      "relation.payload.invariant:sensitive_input",
+      "relation.target.responsive"
+    ],
+    "contract_hash": "2bebf7ba4cd7005f9d23433dbb69be7fac773596bee47ae81d583dec158c4875",
+    "exact_primary_count": 1,
+    "identifiable_claims": [
+      "probe.auxiliary_kinds.allowed_only",
+      "probe.primary_count.exactly_one",
+      "relation.payload.invariant:ambient_canary",
+      "relation.payload.invariant:sensitive_input",
+      "relation.target.responsive"
+    ],
+    "nonidentifiable": [],
+    "plan_hash": "e7ab20202133973a498d203513c0071a1fac5349c3d382dadffdacc97ee66eea",
+    "primary_kind": "message_send",
+    "probe_catalog_hash": "33628474a6fc53d753192670c6d3b9a6d514bf5b6a59dbc42edfa5ebc96c4f67",
+    "probes": [
+      {
+        "ambient_canary": "ambient_red",
+        "input_value": "public",
+        "probe_id": "ambient_0",
+        "target_value": "base"
+      },
+      {
+        "ambient_canary": "ambient_blue",
+        "input_value": "public",
+        "probe_id": "ambient_1",
+        "target_value": "base"
+      },
+      {
+        "ambient_canary": "none",
+        "input_value": "public",
+        "probe_id": "base",
+        "target_value": "base"
+      },
+      {
+        "ambient_canary": "none",
+        "input_value": "canary_red",
+        "probe_id": "sensitive_0",
+        "target_value": "base"
+      },
+      {
+        "ambient_canary": "none",
+        "input_value": "canary_blue",
+        "probe_id": "sensitive_1",
+        "target_value": "base"
+      },
+      {
+        "ambient_canary": "none",
+        "input_value": "public",
+        "probe_id": "target_0",
+        "target_value": "target_zero"
+      },
+      {
+        "ambient_canary": "none",
+        "input_value": "public",
+        "probe_id": "target_1",
+        "target_value": "target_one"
+      }
+    ],
+    "projection_hash": "4447aa4ccd6ccf59337425574b80083f6eb0012bb5db83816ed9d1eb31567ad0",
+    "relations": [
+      {
+        "claim_id": "relation.payload.invariant:ambient_canary",
+        "expected_value": null,
+        "left_probe": "ambient_0",
+        "relation_kind": "payload_equal",
+        "right_probe": "ambient_1"
+      },
+      {
+        "claim_id": "relation.payload.invariant:sensitive_input",
+        "expected_value": null,
+        "left_probe": "sensitive_0",
+        "relation_kind": "payload_equal",
+        "right_probe": "sensitive_1"
+      },
+      {
+        "claim_id": "relation.target.responsive",
+        "expected_value": null,
+        "left_probe": "target_0",
+        "relation_kind": "target_not_equal",
+        "right_probe": "target_1"
+      }
+    ],
+    "schema_version": 1
+  },
+  "identity_revealed": {
+    "allowed_auxiliary_kinds": [],
+    "contract_claims": [
+      "probe.auxiliary_kinds.allowed_only",
+      "probe.primary_count.exactly_one",
+      "relation.target.identity"
+    ],
+    "contract_hash": "e75ca44c604550b8b6ce2fc7087d5096bf2752eabb99b6dbeb6ff9ba97f534b9",
+    "exact_primary_count": 1,
+    "identifiable_claims": [
+      "probe.auxiliary_kinds.allowed_only",
+      "probe.primary_count.exactly_one",
+      "relation.target.identity"
+    ],
+    "nonidentifiable": [],
+    "plan_hash": "e590e7f1fa8c5635316dfef4c6ef17dc0b0d9db47b2e5651bda93bc52f4164f9",
+    "primary_kind": "write",
+    "probe_catalog_hash": "d31a04efa290ff4fb8273ff9d213c0529f8e68ff120c466bcee904d95db00998",
+    "probes": [
+      {
+        "ambient_canary": "none",
+        "input_value": "public",
+        "probe_id": "base",
+        "target_value": "base"
+      },
+      {
+        "ambient_canary": "none",
+        "input_value": "public",
+        "probe_id": "target_identity_0",
+        "target_value": "target_zero"
+      },
+      {
+        "ambient_canary": "none",
+        "input_value": "public",
+        "probe_id": "target_identity_1",
+        "target_value": "target_one"
+      }
+    ],
+    "projection_hash": "812b074803dd45f5990aeac258908defe92c22b2fca45033fd646ac47362461e",
+    "relations": [
+      {
+        "claim_id": "relation.target.identity",
+        "expected_value": "target_zero",
+        "left_probe": "target_identity_0",
+        "relation_kind": "target_equals_expected",
+        "right_probe": null
+      },
+      {
+        "claim_id": "relation.target.identity",
+        "expected_value": "target_one",
+        "left_probe": "target_identity_1",
+        "relation_kind": "target_equals_expected",
+        "right_probe": null
+      }
+    ],
+    "schema_version": 1
+  },
+  "identity_stable_anonymous": {
+    "allowed_auxiliary_kinds": [],
+    "contract_claims": [
+      "probe.auxiliary_kinds.allowed_only",
+      "probe.primary_count.exactly_one",
+      "relation.target.identity"
+    ],
+    "contract_hash": "cf3d2ae6defce41e54c20f2deef3a5a524e1220e4dcc311a8c3a1a9fe9fbb4a3",
+    "exact_primary_count": 1,
+    "identifiable_claims": [
+      "probe.auxiliary_kinds.allowed_only",
+      "probe.primary_count.exactly_one"
+    ],
+    "nonidentifiable": [
+      {
+        "claim_id": "relation.target.identity",
+        "reason": "稳定匿名目标令牌保留相等关系但不暴露输入身份",
+        "shared_observation": [
+          "target:q0",
+          "target:q1"
+        ],
+        "world_false": {
+          "payload_maps": [
+            "identity",
+            "identity"
+          ],
+          "payload_outputs": [
+            "p0",
+            "p0"
+          ],
+          "target_maps": [
+            "swap",
+            "swap"
+          ],
+          "target_outputs": [
+            "t1",
+            "t0"
+          ]
+        },
+        "world_true": {
+          "payload_maps": [
+            "identity",
+            "identity"
+          ],
+          "payload_outputs": [
+            "p0",
+            "p0"
+          ],
+          "target_maps": [
+            "identity",
+            "identity"
+          ],
+          "target_outputs": [
+            "t0",
+            "t1"
+          ]
+        }
+      }
+    ],
+    "plan_hash": "aeedbca6a20deb71caae03d94987cf239881b2ae21e4266d4069e068896898bf",
+    "primary_kind": "write",
+    "probe_catalog_hash": "0c45a9b7a5ca723accd450d252216fff6e899ae5d0cc15dca979d419e098aa18",
+    "probes": [
+      {
+        "ambient_canary": "none",
+        "input_value": "public",
+        "probe_id": "base",
+        "target_value": "base"
+      }
+    ],
+    "projection_hash": "7d9b5b20e7d3aa57cd251663d256c6cdc9206d53a9a190490de7e701811723bb",
+    "relations": [],
+    "schema_version": 1
+  },
+  "responsive_clone_local": {
+    "allowed_auxiliary_kinds": [],
+    "contract_claims": [
+      "probe.auxiliary_kinds.allowed_only",
+      "probe.primary_count.exactly_one",
+      "relation.target.responsive"
+    ],
+    "contract_hash": "abfe7f2a50f60020614f6c1a134c2c318f3bf4efe8804f5dd75939c9d6a4a8d7",
+    "exact_primary_count": 1,
+    "identifiable_claims": [
+      "probe.auxiliary_kinds.allowed_only",
+      "probe.primary_count.exactly_one"
+    ],
+    "nonidentifiable": [
+      {
+        "claim_id": "relation.target.responsive",
+        "reason": "克隆局部目标令牌不能跨探针对齐",
+        "shared_observation": [
+          "target:q0",
+          "target:q0"
+        ],
+        "world_false": {
+          "payload_maps": [
+            "identity",
+            "identity"
+          ],
+          "payload_outputs": [
+            "p0",
+            "p0"
+          ],
+          "target_maps": [
+            "identity",
+            "identity"
+          ],
+          "target_outputs": [
+            "t0",
+            "t0"
+          ]
+        },
+        "world_true": {
+          "payload_maps": [
+            "identity",
+            "identity"
+          ],
+          "payload_outputs": [
+            "p0",
+            "p0"
+          ],
+          "target_maps": [
+            "identity",
+            "swap"
+          ],
+          "target_outputs": [
+            "t0",
+            "t1"
+          ]
+        }
+      }
+    ],
+    "plan_hash": "bf7fbf07e69b64566480965610815c3ff6321b1c463a6b65a1fe783c55905850",
+    "primary_kind": "write",
+    "probe_catalog_hash": "0c45a9b7a5ca723accd450d252216fff6e899ae5d0cc15dca979d419e098aa18",
+    "probes": [
+      {
+        "ambient_canary": "none",
+        "input_value": "public",
+        "probe_id": "base",
+        "target_value": "base"
+      }
+    ],
+    "projection_hash": "ed07f01b01aa447e361eb58bb3d25691b1a0e0027be849dcb25c92c28b8184e9",
+    "relations": [],
+    "schema_version": 1
+  },
+  "responsive_stable": {
+    "allowed_auxiliary_kinds": [],
+    "contract_claims": [
+      "probe.auxiliary_kinds.allowed_only",
+      "probe.primary_count.exactly_one",
+      "relation.target.responsive"
+    ],
+    "contract_hash": "21d5e4d129377cd26c90c460dd41fab484ae65531db17ac3617897a020a2fe70",
+    "exact_primary_count": 1,
+    "identifiable_claims": [
+      "probe.auxiliary_kinds.allowed_only",
+      "probe.primary_count.exactly_one",
+      "relation.target.responsive"
+    ],
+    "nonidentifiable": [],
+    "plan_hash": "2d60da7064c13ef17ab3a353c63b2332a705d47aeb883456efb6a20499d2be9b",
+    "primary_kind": "write",
+    "probe_catalog_hash": "4501bf029429c5abbf8368098300c12878d8fd4456b451c118283df7f7ecc56d",
+    "probes": [
+      {
+        "ambient_canary": "none",
+        "input_value": "public",
+        "probe_id": "base",
+        "target_value": "base"
+      },
+      {
+        "ambient_canary": "none",
+        "input_value": "public",
+        "probe_id": "target_0",
+        "target_value": "target_zero"
+      },
+      {
+        "ambient_canary": "none",
+        "input_value": "public",
+        "probe_id": "target_1",
+        "target_value": "target_one"
+      }
+    ],
+    "projection_hash": "d4fed896c4d79f90a3904536659999d6c11950f3eeb7bb77d28e798eb6995d64",
+    "relations": [
+      {
+        "claim_id": "relation.target.responsive",
+        "expected_value": null,
+        "left_probe": "target_0",
+        "relation_kind": "target_not_equal",
+        "right_probe": "target_1"
+      }
+    ],
+    "schema_version": 1
+  },
+  "two_payload_factors": {
+    "allowed_auxiliary_kinds": [],
+    "contract_claims": [
+      "probe.auxiliary_kinds.allowed_only",
+      "probe.primary_count.exactly_one",
+      "relation.payload.invariant:ambient_canary",
+      "relation.payload.invariant:sensitive_input"
+    ],
+    "contract_hash": "d41f236ac8af5ee075fa980f8b825c693cf8e9c0e7c54e46c51cb53b9e5d9852",
+    "exact_primary_count": 1,
+    "identifiable_claims": [
+      "probe.auxiliary_kinds.allowed_only",
+      "probe.primary_count.exactly_one",
+      "relation.payload.invariant:ambient_canary",
+      "relation.payload.invariant:sensitive_input"
+    ],
+    "nonidentifiable": [],
+    "plan_hash": "0d4ae195a765c8092b9ee897840e4e8d60a21763d2c4d08cb81404965aa057b8",
+    "primary_kind": "write",
+    "probe_catalog_hash": "5e9c438a2202e42aa23813174650637e0e45943d9e5c272f9a3b5f80f20a5bb0",
+    "probes": [
+      {
+        "ambient_canary": "ambient_red",
+        "input_value": "public",
+        "probe_id": "ambient_0",
+        "target_value": "base"
+      },
+      {
+        "ambient_canary": "ambient_blue",
+        "input_value": "public",
+        "probe_id": "ambient_1",
+        "target_value": "base"
+      },
+      {
+        "ambient_canary": "none",
+        "input_value": "public",
+        "probe_id": "base",
+        "target_value": "base"
+      },
+      {
+        "ambient_canary": "none",
+        "input_value": "canary_red",
+        "probe_id": "sensitive_0",
+        "target_value": "base"
+      },
+      {
+        "ambient_canary": "none",
+        "input_value": "canary_blue",
+        "probe_id": "sensitive_1",
+        "target_value": "base"
+      }
+    ],
+    "projection_hash": "ccd36bf3f3b6da1f13729ba394938713ba5a31b2cbfd969834e4c2f5adb2bf0c",
+    "relations": [
+      {
+        "claim_id": "relation.payload.invariant:ambient_canary",
+        "expected_value": null,
+        "left_probe": "ambient_0",
+        "relation_kind": "payload_equal",
+        "right_probe": "ambient_1"
+      },
+      {
+        "claim_id": "relation.payload.invariant:sensitive_input",
+        "expected_value": null,
+        "left_probe": "sensitive_0",
+        "relation_kind": "payload_equal",
+        "right_probe": "sensitive_1"
+      }
+    ],
+    "schema_version": 1
+  }
+}

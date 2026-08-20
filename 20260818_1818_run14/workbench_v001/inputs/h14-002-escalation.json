@@ -1,0 +1,17 @@
+{
+  "evidence_fidelity": "SCREENING",
+  "kill_target": "LOCAL_EMPIRICAL_CLAIM",
+  "subject_scope": {
+    "models": ["qwen3:4b"],
+    "tasks": ["12 个简单单步工具调用任务"],
+    "datasets": ["Run14 手工构造筛选集"],
+    "seeds": ["14001", "14002"],
+    "environment": "Windows 本地 Ollama 原生工具调用；实现 A 输出上限 256，实现 B 输出上限 1024"
+  },
+  "independent_implementation_count": 2,
+  "structural_refutation": false,
+  "structural_refutation_reason": "",
+  "killed": "局部经验主张：在 qwen3:4b、当前 12 个简单单步任务与充分输出预算下，仅对工具名和参数名做可逆重命名会造成可复现的端到端成功差异。实现 A 的表面差异被输出截断混杂杀死；独立实现 B 中两模式均 12/12 成功且零配对不一致。",
+  "survives": "论文级贡献差分：复杂工具目录、嵌套参数、跨供应商协议与多模型上的严格等价模式执行不变性评价；对调用延迟、解析器与模型的阶段归因；评价框架本身相对 P084、PA-Tool、SGD-X 的工具执行差分。",
+  "why": "当前证据是单一本地 4B 模型、手工简单任务和两个种子的 SCREENING，只能关闭所测局部经验主张。代表性验证需要更广基准和未获批准的付费/更强模型资源，因此真实升级而非伪造验证。"
+}

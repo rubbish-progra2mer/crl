@@ -1,0 +1,86 @@
+{
+  "experiment_id": "pdeo-plan-variation-suite-v2",
+  "hypothesis_id": "h4-pdeo",
+  "claim_ids": [
+    "pdeo-plan-conditioned-compilation"
+  ],
+  "purpose": "independent_claim_validation",
+  "research_question": "PDEO 的义务与探针是否真正随下游计划变化，并在静态每域契约保持安全的前提下获得更低成本和更高的计划条件化接受率？",
+  "independent_ground_truth": {
+    "description": "16 个计划的安全原子、规范状态和值域保存在独立 UTF-8 JSON 输入 pdeo-plan-heldout-rules-v2.json 中并由 Formal runner 冻结；实验程序从该文件生成标签和人工逐计划上界，候选实现不导入该文件。",
+    "external_evidence_ids": [],
+    "external_card_ids": [],
+    "external_literature_refs": [
+      "ToolGate: Findings of ACL 2026",
+      "ETAS: arXiv:2607.17780",
+      "Verification-Aware Planning for Multi-Agent Systems: arXiv:2510.17109"
+    ],
+    "run_local_fact_refs": [
+      "experiment_v001/specs/pdeo-plan-heldout-rules-v2.json",
+      "implementation_v001/formal_plan_variation_experiment.py"
+    ]
+  },
+  "primary_metric": "pdeo_compiled_obligation_exact_match_rate",
+  "secondary_metrics": [
+    "pdeo_compiled_probe_set_exact_match_rate",
+    "pdeo_unsafe_commit_rate_single_obligation_faults",
+    "pdeo_valid_commit_recall_safe_nuisance_variants",
+    "pdeo_mean_plan_probe_cost",
+    "static_domain_contract_mean_plan_probe_cost",
+    "static_domain_contract_valid_commit_recall_safe_nuisance_variants",
+    "pdeo_spec_omission_unsafe_commit_rate"
+  ],
+  "sampling_unit": "一个类型计划变体与一个完整环境状态的组合",
+  "dataset": "四个合成域、16 个计划变体、178 个系统计划—状态案例和 16 个规格遗漏敏感性案例",
+  "model": "无语言模型；确定性类型计划控制器",
+  "provider": "本地 Python 3.11",
+  "revision": "pdeo-plan-variation-r2",
+  "baseline_specs": [
+    "无验证",
+    "固定目标读回",
+    "静态每域完整承诺契约",
+    "不做反向传播的直接承诺检查消融",
+    "人工逐计划最小义务上界"
+  ],
+  "parity_dimensions": {
+    "information_access": {
+      "status": "matched",
+      "notes": "所有可部署方法共享候选类型计划、状态和探针返回；冻结规则仅供评价器和人工上界使用。"
+    },
+    "tool_capability": {
+      "status": "matched",
+      "notes": "所有方法共享同一域内探针目录和成本；静态契约按固定域原子求最小覆盖。"
+    },
+    "model_provider_revision": {
+      "status": "matched",
+      "notes": "全部方法为同一 Python 运行时中的确定性代码，不调用语言模型。"
+    },
+    "sampling_protocol": {
+      "status": "matched",
+      "notes": "每种方法运行相同的 178 个计划—状态案例；规格遗漏单独作为边界敏感性测试。"
+    },
+    "budget": {
+      "status": "matched",
+      "notes": "按相同探针单位成本计费；方法可选择不同数量，报告实际成本与安全/召回帕累托。"
+    }
+  },
+  "seeds": [],
+  "budget_ceiling": "{\"duration_seconds\": 30, \"tokens\": 0, \"api_calls\": 0, \"gpu_time_seconds\": 0}",
+  "expected_signatures": [
+    "16 个计划的义务和探针集合精确匹配率均为 1。",
+    "单义务故障危险提交率为 0，安全无关变异召回率为 1。",
+    "PDEO 按计划平均探针成本低于静态每域契约。",
+    "故意遗漏一个真实规格义务时，PDEO 会出现危险提交，确认保证依赖规格完整性。"
+  ],
+  "falsification_rule": "任一主精确率或召回率低于 1、危险提交率高于 0、或 PDEO 平均成本不低于静态每域契约，即反证计划条件化主张。规格遗漏测试应暴露失败；若不失败，需审计是否存在隐藏全量读取。",
+  "confounders": [
+    "独立规则文件仍由同一主研究者在同一 Run 内设计。",
+    "人工逐计划上界与 PDEO 应相同，因此实验不证明超越人工契约。",
+    "域与状态仍为合成，读回确定且无噪。",
+    "静态每域契约验证所有潜在承诺原子，可能比单一当前承诺更保守。"
+  ],
+  "declared_inputs": [
+    "experiment_v001/specs/pdeo-plan-heldout-rules-v2.json"
+  ],
+  "declared_outputs": []
+}

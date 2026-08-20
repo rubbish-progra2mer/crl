@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "ruleset_id": "pdeo-plan-heldout-rules-v2",
+  "domains": {
+    "reservation": {
+      "canonical_state": {
+        "target_status": "CONFIRMED",
+        "payment_state": "CAPTURED",
+        "other_booking": "UNCHANGED",
+        "audit_event": "TARGET_CONFIRMED"
+      },
+      "field_values": {
+        "target_status": ["CONFIRMED", "PENDING"],
+        "payment_state": ["CAPTURED", "PENDING", "DOUBLE_CAPTURED"],
+        "other_booking": ["UNCHANGED", "CONFIRMED"],
+        "audit_event": ["TARGET_CONFIRMED", "NO_MUTATION", "OTHER_CONFIRMED"]
+      },
+      "variants": {
+        "full_confirmation": [["target_status", "CONFIRMED"], ["payment_state", "CAPTURED"], ["other_booking", "UNCHANGED"]],
+        "status_notice": [["target_status", "CONFIRMED"]],
+        "payment_receipt": [["payment_state", "CAPTURED"]],
+        "exclusive_itinerary": [["target_status", "CONFIRMED"], ["other_booking", "UNCHANGED"]]
+      }
+    },
+    "access_control": {
+      "canonical_state": {
+        "target_role": "EDITOR",
+        "scope_state": "PROJECT_ONLY",
+        "other_principal": "UNCHANGED",
+        "audit_event": "TARGET_GRANTED"
+      },
+      "field_values": {
+        "target_role": ["EDITOR", "VIEWER"],
+        "scope_state": ["PROJECT_ONLY", "ORGANIZATION_WIDE", "DUPLICATE_BINDING"],
+        "other_principal": ["UNCHANGED", "EDITOR"],
+        "audit_event": ["TARGET_GRANTED", "NO_MUTATION", "OTHER_GRANTED"]
+      },
+      "variants": {
+        "editor_operation": [["target_role", "EDITOR"], ["scope_state", "PROJECT_ONLY"], ["other_principal", "UNCHANGED"]],
+        "role_notice": [["target_role", "EDITOR"]],
+        "scoped_editor": [["target_role", "EDITOR"], ["scope_state", "PROJECT_ONLY"]],
+        "isolation_attestation": [["scope_state", "PROJECT_ONLY"], ["other_principal", "UNCHANGED"]]
+      }
+    },
+    "inventory": {
+      "canonical_state": {
+        "target_quantity": "PLUS_5",
+        "warehouse_balance": "BALANCED",
+        "other_sku": "UNCHANGED",
+        "audit_event": "TARGET_INCREMENTED"
+      },
+      "field_values": {
+        "target_quantity": ["PLUS_5", "UNCHANGED", "PLUS_10"],
+        "warehouse_balance": ["BALANCED", "UNBALANCED"],
+        "other_sku": ["UNCHANGED", "PLUS_5"],
+        "audit_event": ["TARGET_INCREMENTED", "NO_MUTATION", "OTHER_INCREMENTED"]
+      },
+      "variants": {
+        "publish_restock": [["target_quantity", "PLUS_5"], ["warehouse_balance", "BALANCED"], ["other_sku", "UNCHANGED"]],
+        "quantity_notice": [["target_quantity", "PLUS_5"]],
+        "balanced_restock": [["target_quantity", "PLUS_5"], ["warehouse_balance", "BALANCED"]],
+        "isolation_attestation": [["warehouse_balance", "BALANCED"], ["other_sku", "UNCHANGED"]]
+      }
+    },
+    "document_release": {
+      "canonical_state": {
+        "document_signature": "SIGNED",
+        "audience_state": "PUBLIC",
+        "sibling_document": "UNCHANGED",
+        "checksum_state": "MATCH",
+        "audit_event": "DOCUMENT_READY"
+      },
+      "field_values": {
+        "document_signature": ["SIGNED", "UNSIGNED", "REVOKED"],
+        "audience_state": ["PUBLIC", "PRIVATE", "WRONG_GROUP"],
+        "sibling_document": ["UNCHANGED", "PUBLISHED"],
+        "checksum_state": ["MATCH", "MISMATCH", "MISSING"],
+        "audit_event": ["DOCUMENT_READY", "NO_MUTATION", "WRONG_DOCUMENT"]
+      },
+      "variants": {
+        "public_release": [["document_signature", "SIGNED"], ["audience_state", "PUBLIC"], ["sibling_document", "UNCHANGED"], ["checksum_state", "MATCH"]],
+        "internal_archive": [["document_signature", "SIGNED"], ["checksum_state", "MATCH"]],
+        "public_preview": [["audience_state", "PUBLIC"], ["checksum_state", "MATCH"]],
+        "signature_notice": [["document_signature", "SIGNED"]]
+      }
+    }
+  }
+}

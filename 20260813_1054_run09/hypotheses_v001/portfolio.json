@@ -1,0 +1,58 @@
+{
+  "created_at_utc": "2026-08-13T03:28:19.273835Z",
+  "hypotheses": [
+    {
+      "alternative_explanations": [
+        "优势可能完全来自类型计划已经给出正确安全谓词。",
+        "系统性合成故障不能代表真实工具分布。",
+        "工具本地契约若由工程师按计划手工裁剪，可达到相同结果。"
+      ],
+      "changed_computation": {
+        "baseline": "固定工具后置条件、完整读回或基于已知分支的信息增益探针。",
+        "budget_effect": "以额外只读调用换取闭集提交，但应少于完整工具契约和全量读回。",
+        "information_available": "类型计划、工具效果、只读探针覆盖和成本；不包含当前样本故障标签。",
+        "intervention": "从下游受保护承诺反向传播原子状态义务，并求覆盖全部义务的最小成本只读探针集合。",
+        "timing": "外部写操作之后、执行受保护承诺之前。"
+      },
+      "created_at_utc": "2026-08-13T03:28:27.640275Z",
+      "descriptors": {
+        "budget_class": "最小成本探针覆盖",
+        "computation_stage": "写后提交控制",
+        "evaluation_mode": "系统性合成状态故障",
+        "information_source": "类型计划与真实只读状态",
+        "intervention_family": "反向证据义务传播",
+        "problem_family": "工具智能体写后状态验证",
+        "timing_class": "运行时提交前"
+      },
+      "falsifier": "任一系统性义务故障被 PDEO 危险提交，或 PDEO 成本不低于完整工具契约，或安全状态不能全部提交。",
+      "hypothesis_id": "h4-pdeo",
+      "lineage_note": "H1 被状态信息增益吸收后形成的正交方法核；不复用有限故障分支目标。",
+      "literature_refs": [
+        "ToolGate: Findings of ACL 2026",
+        "Verification-Aware Planning for Multi-Agent Systems: 2026",
+        "ETAS: arXiv:2607.17780",
+        "Verified Tool Calls Improve LLM Agent Reliability Under Non-Atomic Failures: arXiv:2608.02645"
+      ],
+      "mechanism_claim": "计划条件化的义务闭包不依赖封闭故障先验，因此可以在系统性未见义务故障上保持安全，并省去计划无关验证。",
+      "minimal_killer_experiment": "在三个预先存在的状态型工具域上穷举已见分支、单义务变异、无关字段变异和配对变异，与七类公平基线比较。",
+      "nearest_prior_risk": "可能退化为 ToolGate、VERIMAP、ETAS 或经典最弱前置条件与集合覆盖的直接组合。",
+      "parent_ids": [],
+      "problem": "结构合法的写工具回执不能保证后续承诺的状态前提真实成立，而完整工具契约会验证计划无关字段。",
+      "revision": 1,
+      "status": "draft",
+      "status_reason": "",
+      "target_failure": {
+        "card_ids": [],
+        "evidence_ids": [],
+        "summary": "封闭故障模型驱动的探针会在未见故障下过早提交，完整契约则增加不必要成本和拒绝。"
+      },
+      "title": "计划派生证据义务",
+      "updated_at_utc": "2026-08-13T03:28:27.640275Z"
+    }
+  ],
+  "revision": 1,
+  "run_id": "20260813_1054_run09",
+  "schema_version": 1,
+  "updated_at_utc": "2026-08-13T03:28:27.640275Z",
+  "version": "v001"
+}

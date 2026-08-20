@@ -1,0 +1,214 @@
+{
+  "created_at_utc": "2026-08-18T10:40:48.852072Z",
+  "hypotheses": [
+    {
+      "alternative_explanations": [
+        "收益来自反馈泄漏正确答案",
+        "额外推理预算而非反馈结构"
+      ],
+      "changed_computation": {
+        "baseline": "执行失败后原样重试。",
+        "budget_effect": "增加审查调用与至多若干次修订。",
+        "information_available": "临时工具调用、工具模式、任务和审查反馈。",
+        "intervention": "独立审查者生成结构化错误反馈，再让调用智能体有界修订。",
+        "timing": "工具执行前或失败后。"
+      },
+      "created_at_utc": "2026-08-18T10:40:48.958510Z",
+      "decision_history": [
+        {
+          "decided_at_utc": "2026-08-18T10:40:49.170490Z",
+          "evidence_fidelity": null,
+          "from_status": "draft",
+          "independent_implementation_count": 0,
+          "kill_target": null,
+          "killed": "",
+          "reason": "进入最近先行精确审计",
+          "structural_refutation": false,
+          "structural_refutation_reason": "",
+          "subject_scope": {
+            "datasets": [],
+            "environment": "",
+            "models": [],
+            "seeds": [],
+            "tasks": []
+          },
+          "survives": "",
+          "to_status": "active",
+          "why": ""
+        },
+        {
+          "decided_at_utc": "2026-08-18T10:40:49.274447Z",
+          "evidence_fidelity": null,
+          "from_status": "active",
+          "independent_implementation_count": 1,
+          "kill_target": "METHOD_CORE",
+          "killed": "Mechanism：结构化语言反馈改善修订；Computation：独立审查、反馈注入和有界重试；把该循环作为新方法核。",
+          "reason": "P049 与 Reflexion 占据反馈循环方法核，但存活维度已显式重审",
+          "structural_refutation": true,
+          "structural_refutation_reason": "P049 已使用独立审查者检查临时工具调用、注入反馈并有界循环修订；P012 已用语言反馈驱动后续尝试。h15-001 的计算与干预时机没有剩余方法差分。",
+          "subject_scope": {
+            "datasets": [],
+            "environment": "P049 与 P012 的已发表方法",
+            "models": [],
+            "seeds": [],
+            "tasks": [
+              "工具调用修订"
+            ]
+          },
+          "survives": "Phenomenon：恢复结果是否依赖错误消息泄漏；Evaluation：按反馈信息量分层的反事实配对；System Capability：无答案反馈下的真实自我纠错能力。",
+          "to_status": "prior_collision",
+          "why": "P049/P012 占据反馈循环，但当前 Evidence 未说明把不透明、类别、约束和答案泄漏反馈作为受控信息量阶梯来审计恢复能力。"
+        }
+      ],
+      "descriptors": {
+        "budget_class": "增加模型调用",
+        "computation_stage": "执行前审查与失败后重试",
+        "evaluation_mode": "恢复任务成功率",
+        "information_source": "临时调用与审查者",
+        "intervention_family": "结构化语言反馈",
+        "problem_family": "工具错误恢复",
+        "timing_class": "推理时有界循环"
+      },
+      "falsifier": "最近先行已经实现相同审查—反馈—修订循环。",
+      "hypothesis_id": "h15-001",
+      "lineage_note": "工具错误恢复盆地的初始方法候选。",
+      "literature_refs": [
+        "P049",
+        "P012"
+      ],
+      "mechanism_claim": "显式错误类别和修订建议可减少重复的工具选择与参数错误。",
+      "minimal_killer_experiment": "精确核对 P049 与 Reflexion 的计算和干预时机。",
+      "nearest_prior_risk": "P049 与 Reflexion 可能直接覆盖方法核。",
+      "parent_ids": [],
+      "problem": "工具型智能体的初始调用错误后常无法有效修订。",
+      "revision": 3,
+      "status": "prior_collision",
+      "status_reason": "P049 与 Reflexion 占据反馈循环方法核，但存活维度已显式重审",
+      "target_failure": {
+        "card_ids": [
+          "paper-p049",
+          "paper-reflexion"
+        ],
+        "evidence_ids": [
+          "ev-p049-operator-core",
+          "ev-p012-verbal-reflection-memory"
+        ],
+        "summary": "错误工具或参数在重试中重复出现。"
+      },
+      "title": "结构化审查反馈驱动工具调用重试",
+      "updated_at_utc": "2026-08-18T10:40:49.274447Z"
+    },
+    {
+      "alternative_explanations": [
+        "模型仅从原任务重新求解",
+        "初始错误过于显眼",
+        "JSON 提示协议影响结果"
+      ],
+      "changed_computation": {
+        "baseline": "只报告一种错误反馈条件下的最终恢复成功率。",
+        "budget_effect": "每个失败轨迹增加四种配对修订调用。",
+        "information_available": "用户任务、固定错误调用、分级错误消息和正确调用标签。",
+        "intervention": "固定任务和初始错误调用，在不透明、错误类别、可用约束、答案泄漏四级反馈间做反事实配对，并分阶段报告修订来源。",
+        "timing": "失败后的第一轮修订评价。"
+      },
+      "created_at_utc": "2026-08-18T10:40:49.064885Z",
+      "decision_history": [
+        {
+          "decided_at_utc": "2026-08-18T10:40:49.386498Z",
+          "evidence_fidelity": null,
+          "from_status": "draft",
+          "independent_implementation_count": 0,
+          "kill_target": null,
+          "killed": "",
+          "reason": "从先行碰撞后的评价与系统能力存活维度派生，进入筛选",
+          "structural_refutation": false,
+          "structural_refutation_reason": "",
+          "subject_scope": {
+            "datasets": [],
+            "environment": "",
+            "models": [],
+            "seeds": [],
+            "tasks": []
+          },
+          "survives": "",
+          "to_status": "active",
+          "why": ""
+        },
+        {
+          "decided_at_utc": "2026-08-18T10:46:22.045405Z",
+          "evidence_fidelity": "SCREENING",
+          "from_status": "active",
+          "independent_implementation_count": 2,
+          "kill_target": "LOCAL_EMPIRICAL_CLAIM",
+          "killed": "局部经验主张：仅错误类别反馈相对不透明失败能在 qwen3:4b 当前简单任务上提高至少 2/8 的一次修订成功。实现 A 增益 -1，实现 B 增益 0。",
+          "reason": "局部筛选主张已关闭；评价框架需要隐藏状态的代表性失败轨迹与多模型验证",
+          "structural_refutation": false,
+          "structural_refutation_reason": "",
+          "subject_scope": {
+            "datasets": [
+              "Run15 手工筛选集"
+            ],
+            "environment": "本地 Ollama；原生工具调用与独立 JSON 修订两种实现",
+            "models": [
+              "qwen3:4b"
+            ],
+            "seeds": [
+              "15001",
+              "15002"
+            ],
+            "tasks": [
+              "8 个简单单步工具调用修订任务"
+            ]
+          },
+          "survives": "Phenomenon：错误消息中的答案泄漏可能抬高恢复分数；Evaluation：不透明/类别/约束/答案四级信息量阶梯；System Capability：当原任务不足以直接重算时的真实恢复。下一步是公开失败轨迹、多模型或隐藏值任务上的代表性验证。",
+          "to_status": "escalated",
+          "why": "两个实现均为 SCREENING，且原任务显式包含正确参数，使模型可以绕过反馈直接重算。负结果关闭所测局部主张，但不测试评价框架在代表性失败轨迹上的价值。"
+        }
+      ],
+      "descriptors": {
+        "budget_class": "配对多条件",
+        "computation_stage": "失败后反事实评价",
+        "evaluation_mode": "分层恢复与泄漏敏感性",
+        "information_source": "固定错误轨迹与错误消息",
+        "intervention_family": "反馈信息量分层",
+        "problem_family": "工具恢复评价有效性",
+        "timing_class": "单次重试"
+      },
+      "falsifier": "最近先行已有相同信息量分层和配对执行；或多模型多任务中各级恢复无差异且第二实现排除评价错误。",
+      "hypothesis_id": "h15-002",
+      "lineage_note": "初始反馈方法被先行占据后，从评价与系统能力维度派生。",
+      "literature_refs": [
+        "P039",
+        "P049",
+        "P012"
+      ],
+      "mechanism_claim": "反馈信息量阶梯能识别恢复增益是否主要依赖 oracle 式答案泄漏，而不是模型从可执行约束中自主定位错误。",
+      "minimal_killer_experiment": "在本地模型上固定错误调用，比较不透明失败与仅错误类别反馈的正确修订率。",
+      "nearest_prior_risk": "ToolFailBench 已有失败分类，P049 已有反馈循环；需要确认是否控制反馈信息量和泄漏。",
+      "parent_ids": [
+        "h15-001"
+      ],
+      "problem": "恢复成功率没有区分模型自我纠错与错误消息泄漏的答案信息。",
+      "revision": 3,
+      "status": "escalated",
+      "status_reason": "局部筛选主张已关闭；评价框架需要隐藏状态的代表性失败轨迹与多模型验证",
+      "target_failure": {
+        "card_ids": [
+          "paper-p049"
+        ],
+        "evidence_ids": [
+          "ev-p039-aggregate-score-masking",
+          "ev-p049-bounded-review-loop"
+        ],
+        "summary": "同一失败轨迹因错误消息携带不同信息量而恢复成功，但统一指标把它们视为相同能力。"
+      },
+      "title": "错误消息信息量阶梯下的反事实恢复评价",
+      "updated_at_utc": "2026-08-18T10:46:22.045405Z"
+    }
+  ],
+  "revision": 6,
+  "run_id": "20260818_1838_run15",
+  "schema_version": 2,
+  "updated_at_utc": "2026-08-18T10:46:22.045405Z",
+  "version": "v001"
+}

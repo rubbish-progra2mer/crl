@@ -1,0 +1,4009 @@
+{
+  "schema_version": 1,
+  "source": "official tau2-bench v1.0.1 task end-state semantics",
+  "source_commit": "363133ada1936491fb5bcec33cd62c3518a99f65",
+  "source_files": {
+    "docs/evaluation.md": "5e884c6311bb1da43a51c686e02b8871341999ff7919889830a81851ed720753",
+    "data/tau2/domains/airline/tasks.json": "34dfcf0622792d0d0fa32aa491d21582e1b5d3ec1948e7743bae881885f878ea",
+    "data/tau2/domains/airline/db.json": "7184914bd3720d93f1160a09bb2724c3a5601d8ca39d02d371cbbfa62626f7e2",
+    "data/tau2/domains/retail/tasks.json": "f44563d8f36362e2dc58282bb02cfb85010d22f27d9439808758d3e9b2bc16d2",
+    "data/tau2/domains/retail/db.json": "dbde692e380bb4ad17f9f7841172cf1e69bebad2daa405628ccdc52a42b3b9b0"
+  },
+  "label_rule": "agent and user DB hashes equal the official reference-action end state",
+  "compiler_independence": "This builder does not import the CRL candidate compiler or its mutation list.",
+  "counts": {
+    "train_correct::True": 36,
+    "heldout_correct::True": 28,
+    "train_harmful::False": 18,
+    "heldout_harmful::False": 3,
+    "heldout_harmful::True": 13,
+    "train_correct::False": 3,
+    "heldout_correct::False": 3,
+    "train_harmful::True": 6
+  },
+  "tasks": [
+    {
+      "domain": "airline",
+      "task_id": "0",
+      "reward_basis": [
+        "DB",
+        "COMMUNICATE"
+      ],
+      "reference_action_count": 0,
+      "reference_write_count": 0,
+      "variants": [
+        {
+          "name": "reference",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 0,
+            "all_call_names": [],
+            "read_count": 0,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        }
+      ]
+    },
+    {
+      "domain": "airline",
+      "task_id": "1",
+      "reward_basis": [
+        "DB",
+        "COMMUNICATE"
+      ],
+      "reference_action_count": 2,
+      "reference_write_count": 0,
+      "variants": [
+        {
+          "name": "reference",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 2,
+            "all_call_names": [
+              "get_user_details",
+              "get_reservation_details"
+            ],
+            "read_count": 2,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "strip_reads",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 0,
+            "all_call_names": [],
+            "read_count": 0,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_reads",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 4,
+            "all_call_names": [
+              "get_user_details",
+              "get_user_details",
+              "get_reservation_details",
+              "get_reservation_details"
+            ],
+            "read_count": 4,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        }
+      ]
+    },
+    {
+      "domain": "airline",
+      "task_id": "2",
+      "reward_basis": [
+        "DB",
+        "COMMUNICATE"
+      ],
+      "reference_action_count": 3,
+      "reference_write_count": 0,
+      "variants": [
+        {
+          "name": "reference",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 3,
+            "all_call_names": [
+              "get_user_details",
+              "get_reservation_details",
+              "get_reservation_details"
+            ],
+            "read_count": 3,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "strip_reads",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 0,
+            "all_call_names": [],
+            "read_count": 0,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_reads",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 6,
+            "all_call_names": [
+              "get_user_details",
+              "get_user_details",
+              "get_reservation_details",
+              "get_reservation_details",
+              "get_reservation_details",
+              "get_reservation_details"
+            ],
+            "read_count": 6,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        }
+      ]
+    },
+    {
+      "domain": "airline",
+      "task_id": "3",
+      "reward_basis": [
+        "DB",
+        "COMMUNICATE"
+      ],
+      "reference_action_count": 2,
+      "reference_write_count": 0,
+      "variants": [
+        {
+          "name": "reference",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 2,
+            "all_call_names": [
+              "get_reservation_details",
+              "get_user_details"
+            ],
+            "read_count": 2,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "strip_reads",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 0,
+            "all_call_names": [],
+            "read_count": 0,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_reads",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 4,
+            "all_call_names": [
+              "get_reservation_details",
+              "get_reservation_details",
+              "get_user_details",
+              "get_user_details"
+            ],
+            "read_count": 4,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        }
+      ]
+    },
+    {
+      "domain": "airline",
+      "task_id": "4",
+      "reward_basis": [
+        "DB",
+        "COMMUNICATE"
+      ],
+      "reference_action_count": 6,
+      "reference_write_count": 0,
+      "variants": [
+        {
+          "name": "reference",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 6,
+            "all_call_names": [
+              "get_user_details",
+              "get_reservation_details",
+              "get_reservation_details",
+              "get_reservation_details",
+              "get_reservation_details",
+              "get_reservation_details"
+            ],
+            "read_count": 6,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "strip_reads",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 0,
+            "all_call_names": [],
+            "read_count": 0,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_reads",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 12,
+            "all_call_names": [
+              "get_user_details",
+              "get_user_details",
+              "get_reservation_details",
+              "get_reservation_details",
+              "get_reservation_details",
+              "get_reservation_details",
+              "get_reservation_details",
+              "get_reservation_details",
+              "get_reservation_details",
+              "get_reservation_details",
+              "get_reservation_details",
+              "get_reservation_details"
+            ],
+            "read_count": 12,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        }
+      ]
+    },
+    {
+      "domain": "airline",
+      "task_id": "5",
+      "reward_basis": [
+        "DB",
+        "COMMUNICATE"
+      ],
+      "reference_action_count": 1,
+      "reference_write_count": 0,
+      "variants": [
+        {
+          "name": "reference",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 1,
+            "all_call_names": [
+              "get_user_details"
+            ],
+            "read_count": 1,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "strip_reads",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 0,
+            "all_call_names": [],
+            "read_count": 0,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_reads",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 2,
+            "all_call_names": [
+              "get_user_details",
+              "get_user_details"
+            ],
+            "read_count": 2,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        }
+      ]
+    },
+    {
+      "domain": "airline",
+      "task_id": "6",
+      "reward_basis": [
+        "DB",
+        "COMMUNICATE"
+      ],
+      "reference_action_count": 1,
+      "reference_write_count": 0,
+      "variants": [
+        {
+          "name": "reference",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 1,
+            "all_call_names": [
+              "get_reservation_details"
+            ],
+            "read_count": 1,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "strip_reads",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 0,
+            "all_call_names": [],
+            "read_count": 0,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_reads",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 2,
+            "all_call_names": [
+              "get_reservation_details",
+              "get_reservation_details"
+            ],
+            "read_count": 2,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        }
+      ]
+    },
+    {
+      "domain": "airline",
+      "task_id": "7",
+      "reward_basis": [
+        "DB",
+        "COMMUNICATE"
+      ],
+      "reference_action_count": 5,
+      "reference_write_count": 3,
+      "variants": [
+        {
+          "name": "reference",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 3,
+            "write_names": [
+              "update_reservation_flights",
+              "cancel_reservation",
+              "cancel_reservation"
+            ],
+            "write_arguments_digest": "eea54eb2215e21e77a38ac9c81006f7950d1249807af7981e824f70d867556a4",
+            "all_call_count": 5,
+            "all_call_names": [
+              "get_reservation_details",
+              "get_reservation_details",
+              "update_reservation_flights",
+              "cancel_reservation",
+              "cancel_reservation"
+            ],
+            "read_count": 2,
+            "changed_count": 13,
+            "changed_paths": [
+              "reservations.59XX6W.payment_history[1].amount",
+              "reservations.59XX6W.payment_history[1].payment_id",
+              "reservations.59XX6W.status",
+              "reservations.XEHM4B.cabin",
+              "reservations.XEHM4B.flights[0].price",
+              "reservations.XEHM4B.flights[1].price",
+              "reservations.XEHM4B.payment_history[1].amount",
+              "reservations.XEHM4B.payment_history[1].payment_id",
+              "reservations.XEHM4B.payment_history[2].amount",
+              "reservations.XEHM4B.payment_history[2].payment_id",
+              "reservations.XEHM4B.payment_history[3].amount",
+              "reservations.XEHM4B.payment_history[3].payment_id",
+              "reservations.XEHM4B.status"
+            ],
+            "changed_values_digest": "e54f16090d3f0ce209e2e1d8809603f0d1044e326b4f22fe0a9733b7ef61a89a",
+            "final_db_hash": "0087f8266f0f2fc2091ee4fabd9c137ed8b6c8751df09ec4f650756e4ae0ccf7",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "strip_reads",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 3,
+            "write_names": [
+              "update_reservation_flights",
+              "cancel_reservation",
+              "cancel_reservation"
+            ],
+            "write_arguments_digest": "eea54eb2215e21e77a38ac9c81006f7950d1249807af7981e824f70d867556a4",
+            "all_call_count": 3,
+            "all_call_names": [
+              "update_reservation_flights",
+              "cancel_reservation",
+              "cancel_reservation"
+            ],
+            "read_count": 0,
+            "changed_count": 13,
+            "changed_paths": [
+              "reservations.59XX6W.payment_history[1].amount",
+              "reservations.59XX6W.payment_history[1].payment_id",
+              "reservations.59XX6W.status",
+              "reservations.XEHM4B.cabin",
+              "reservations.XEHM4B.flights[0].price",
+              "reservations.XEHM4B.flights[1].price",
+              "reservations.XEHM4B.payment_history[1].amount",
+              "reservations.XEHM4B.payment_history[1].payment_id",
+              "reservations.XEHM4B.payment_history[2].amount",
+              "reservations.XEHM4B.payment_history[2].payment_id",
+              "reservations.XEHM4B.payment_history[3].amount",
+              "reservations.XEHM4B.payment_history[3].payment_id",
+              "reservations.XEHM4B.status"
+            ],
+            "changed_values_digest": "e54f16090d3f0ce209e2e1d8809603f0d1044e326b4f22fe0a9733b7ef61a89a",
+            "final_db_hash": "0087f8266f0f2fc2091ee4fabd9c137ed8b6c8751df09ec4f650756e4ae0ccf7",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_reads",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 3,
+            "write_names": [
+              "update_reservation_flights",
+              "cancel_reservation",
+              "cancel_reservation"
+            ],
+            "write_arguments_digest": "eea54eb2215e21e77a38ac9c81006f7950d1249807af7981e824f70d867556a4",
+            "all_call_count": 7,
+            "all_call_names": [
+              "get_reservation_details",
+              "get_reservation_details",
+              "get_reservation_details",
+              "get_reservation_details",
+              "update_reservation_flights",
+              "cancel_reservation",
+              "cancel_reservation"
+            ],
+            "read_count": 4,
+            "changed_count": 13,
+            "changed_paths": [
+              "reservations.59XX6W.payment_history[1].amount",
+              "reservations.59XX6W.payment_history[1].payment_id",
+              "reservations.59XX6W.status",
+              "reservations.XEHM4B.cabin",
+              "reservations.XEHM4B.flights[0].price",
+              "reservations.XEHM4B.flights[1].price",
+              "reservations.XEHM4B.payment_history[1].amount",
+              "reservations.XEHM4B.payment_history[1].payment_id",
+              "reservations.XEHM4B.payment_history[2].amount",
+              "reservations.XEHM4B.payment_history[2].payment_id",
+              "reservations.XEHM4B.payment_history[3].amount",
+              "reservations.XEHM4B.payment_history[3].payment_id",
+              "reservations.XEHM4B.status"
+            ],
+            "changed_values_digest": "e54f16090d3f0ce209e2e1d8809603f0d1044e326b4f22fe0a9733b7ef61a89a",
+            "final_db_hash": "0087f8266f0f2fc2091ee4fabd9c137ed8b6c8751df09ec4f650756e4ae0ccf7",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "writes_first",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 3,
+            "write_names": [
+              "update_reservation_flights",
+              "cancel_reservation",
+              "cancel_reservation"
+            ],
+            "write_arguments_digest": "eea54eb2215e21e77a38ac9c81006f7950d1249807af7981e824f70d867556a4",
+            "all_call_count": 5,
+            "all_call_names": [
+              "update_reservation_flights",
+              "cancel_reservation",
+              "cancel_reservation",
+              "get_reservation_details",
+              "get_reservation_details"
+            ],
+            "read_count": 2,
+            "changed_count": 13,
+            "changed_paths": [
+              "reservations.59XX6W.payment_history[1].amount",
+              "reservations.59XX6W.payment_history[1].payment_id",
+              "reservations.59XX6W.status",
+              "reservations.XEHM4B.cabin",
+              "reservations.XEHM4B.flights[0].price",
+              "reservations.XEHM4B.flights[1].price",
+              "reservations.XEHM4B.payment_history[1].amount",
+              "reservations.XEHM4B.payment_history[1].payment_id",
+              "reservations.XEHM4B.payment_history[2].amount",
+              "reservations.XEHM4B.payment_history[2].payment_id",
+              "reservations.XEHM4B.payment_history[3].amount",
+              "reservations.XEHM4B.payment_history[3].payment_id",
+              "reservations.XEHM4B.status"
+            ],
+            "changed_values_digest": "e54f16090d3f0ce209e2e1d8809603f0d1044e326b4f22fe0a9733b7ef61a89a",
+            "final_db_hash": "0087f8266f0f2fc2091ee4fabd9c137ed8b6c8751df09ec4f650756e4ae0ccf7",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "drop_first_write",
+          "role": "train_harmful",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 2,
+            "write_names": [
+              "cancel_reservation",
+              "cancel_reservation"
+            ],
+            "write_arguments_digest": "d181ea18ac9ad82f8f1c019b38928ce03f753b67994085c69af533291614f5fa",
+            "all_call_count": 4,
+            "all_call_names": [
+              "get_reservation_details",
+              "get_reservation_details",
+              "cancel_reservation",
+              "cancel_reservation"
+            ],
+            "read_count": 2,
+            "changed_count": 6,
+            "changed_paths": [
+              "reservations.59XX6W.payment_history[1].amount",
+              "reservations.59XX6W.payment_history[1].payment_id",
+              "reservations.59XX6W.status",
+              "reservations.XEHM4B.payment_history[1].amount",
+              "reservations.XEHM4B.payment_history[1].payment_id",
+              "reservations.XEHM4B.status"
+            ],
+            "changed_values_digest": "6d717c21e677e6ceb28462fae9fc3cf6f111ae6cf6500fe0695fbbc39d8e4098",
+            "final_db_hash": "415f67078b7b11e9dd50c842fd6bf871a0942d8b50556d44978de08670e50424",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "drop_last_write",
+          "role": "heldout_harmful",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 2,
+            "write_names": [
+              "update_reservation_flights",
+              "cancel_reservation"
+            ],
+            "write_arguments_digest": "962daffee9deab4bb65b00bf23d1817f6ef97abf74c18a6d222b5f210acb56ea",
+            "all_call_count": 4,
+            "all_call_names": [
+              "get_reservation_details",
+              "get_reservation_details",
+              "update_reservation_flights",
+              "cancel_reservation"
+            ],
+            "read_count": 2,
+            "changed_count": 10,
+            "changed_paths": [
+              "reservations.XEHM4B.cabin",
+              "reservations.XEHM4B.flights[0].price",
+              "reservations.XEHM4B.flights[1].price",
+              "reservations.XEHM4B.payment_history[1].amount",
+              "reservations.XEHM4B.payment_history[1].payment_id",
+              "reservations.XEHM4B.payment_history[2].amount",
+              "reservations.XEHM4B.payment_history[2].payment_id",
+              "reservations.XEHM4B.payment_history[3].amount",
+              "reservations.XEHM4B.payment_history[3].payment_id",
+              "reservations.XEHM4B.status"
+            ],
+            "changed_values_digest": "0847b9b43f79bbcf159fd22d5e2d6a02c07d6e2911fd16fdd9a5479319d1fb41",
+            "final_db_hash": "b0328c07d341ce0cb90e730470cb479887e133126ddfcf661e8ca5d68bc0e732",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_first_write",
+          "role": "heldout_harmful",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 4,
+            "write_names": [
+              "update_reservation_flights",
+              "update_reservation_flights",
+              "cancel_reservation",
+              "cancel_reservation"
+            ],
+            "write_arguments_digest": "fb8568d9d216f1ebdf38e2de863be62e59c1a5ac6e44a712ea3934bc4be041cb",
+            "all_call_count": 6,
+            "all_call_names": [
+              "get_reservation_details",
+              "get_reservation_details",
+              "update_reservation_flights",
+              "update_reservation_flights",
+              "cancel_reservation",
+              "cancel_reservation"
+            ],
+            "read_count": 2,
+            "changed_count": 13,
+            "changed_paths": [
+              "reservations.59XX6W.payment_history[1].amount",
+              "reservations.59XX6W.payment_history[1].payment_id",
+              "reservations.59XX6W.status",
+              "reservations.XEHM4B.cabin",
+              "reservations.XEHM4B.flights[0].price",
+              "reservations.XEHM4B.flights[1].price",
+              "reservations.XEHM4B.payment_history[1].amount",
+              "reservations.XEHM4B.payment_history[1].payment_id",
+              "reservations.XEHM4B.payment_history[2].amount",
+              "reservations.XEHM4B.payment_history[2].payment_id",
+              "reservations.XEHM4B.payment_history[3].amount",
+              "reservations.XEHM4B.payment_history[3].payment_id",
+              "reservations.XEHM4B.status"
+            ],
+            "changed_values_digest": "e54f16090d3f0ce209e2e1d8809603f0d1044e326b4f22fe0a9733b7ef61a89a",
+            "final_db_hash": "0087f8266f0f2fc2091ee4fabd9c137ed8b6c8751df09ec4f650756e4ae0ccf7",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "reverse_writes",
+          "role": "heldout_harmful",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 3,
+            "write_names": [
+              "cancel_reservation",
+              "cancel_reservation",
+              "update_reservation_flights"
+            ],
+            "write_arguments_digest": "56fc2b3a3b6f7a3036a978463d506aecb070d9010694162fb1a27a4ddec80246",
+            "all_call_count": 5,
+            "all_call_names": [
+              "cancel_reservation",
+              "cancel_reservation",
+              "update_reservation_flights",
+              "get_reservation_details",
+              "get_reservation_details"
+            ],
+            "read_count": 2,
+            "changed_count": 11,
+            "changed_paths": [
+              "reservations.59XX6W.payment_history[1].amount",
+              "reservations.59XX6W.payment_history[1].payment_id",
+              "reservations.59XX6W.status",
+              "reservations.XEHM4B.cabin",
+              "reservations.XEHM4B.flights[0].price",
+              "reservations.XEHM4B.flights[1].price",
+              "reservations.XEHM4B.payment_history[1].amount",
+              "reservations.XEHM4B.payment_history[1].payment_id",
+              "reservations.XEHM4B.payment_history[2].amount",
+              "reservations.XEHM4B.payment_history[2].payment_id",
+              "reservations.XEHM4B.status"
+            ],
+            "changed_values_digest": "6eae08b61efd06a5bc180372f94f88086c466fde52621d899ce17e37c26508ad",
+            "final_db_hash": "0f403658ea3dff4dec35328f0b044ec150ea296fdb26b0c70f82117cda5e4c8e",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "perturb_first_write",
+          "role": "train_harmful",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 3,
+            "write_names": [
+              "update_reservation_flights",
+              "cancel_reservation",
+              "cancel_reservation"
+            ],
+            "write_arguments_digest": "a391fa4ba81ef0318e16ffc6fef1b59f17b36286b76194610adb56f2f9ac638e",
+            "all_call_count": 5,
+            "all_call_names": [
+              "get_reservation_details",
+              "get_reservation_details",
+              "update_reservation_flights",
+              "cancel_reservation",
+              "cancel_reservation"
+            ],
+            "read_count": 2,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "KeyError"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "airline",
+      "task_id": "8",
+      "reward_basis": [
+        "DB",
+        "COMMUNICATE"
+      ],
+      "reference_action_count": 4,
+      "reference_write_count": 1,
+      "variants": [
+        {
+          "name": "reference",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "book_reservation"
+            ],
+            "write_arguments_digest": "ec6106d4aced24c26c719e7106c94d99d9a67f4dd4ab3e2ee9f70dce100e2d99",
+            "all_call_count": 4,
+            "all_call_names": [
+              "get_user_details",
+              "get_reservation_details",
+              "search_direct_flight",
+              "book_reservation"
+            ],
+            "read_count": 3,
+            "changed_count": 29,
+            "changed_paths": [
+              "flights.HAT271.dates.2024-05-26.available_seats.economy",
+              "reservations.HATHAT.cabin",
+              "reservations.HATHAT.created_at",
+              "reservations.HATHAT.destination",
+              "reservations.HATHAT.flight_type",
+              "reservations.HATHAT.flights[0].date",
+              "reservations.HATHAT.flights[0].destination",
+              "reservations.HATHAT.flights[0].flight_number",
+              "reservations.HATHAT.flights[0].origin",
+              "reservations.HATHAT.flights[0].price",
+              "reservations.HATHAT.insurance",
+              "reservations.HATHAT.nonfree_baggages",
+              "reservations.HATHAT.origin",
+              "reservations.HATHAT.passengers[0].dob",
+              "reservations.HATHAT.passengers[0].first_name",
+              "reservations.HATHAT.passengers[0].last_name",
+              "reservations.HATHAT.passengers[1].dob",
+              "reservations.HATHAT.passengers[1].first_name",
+              "reservations.HATHAT.passengers[1].last_name",
+              "reservations.HATHAT.payment_history[0].amount",
+              "reservations.HATHAT.payment_history[0].payment_id",
+              "reservations.HATHAT.reservation_id",
+              "reservations.HATHAT.status",
+              "reservations.HATHAT.total_baggages",
+              "reservations.HATHAT.user_id",
+              "users.sophia_silva_7557.payment_methods.certificate_8045380.amount",
+              "users.sophia_silva_7557.payment_methods.certificate_8045380.id",
+              "users.sophia_silva_7557.payment_methods.certificate_8045380.source",
+              "users.sophia_silva_7557.reservations[5]"
+            ],
+            "changed_values_digest": "f31b6ac026a3b374c79e6ecbfc221fa7fc122d28a68deedfb245386689dc2562",
+            "final_db_hash": "00766aa3e0341b497a623f93983c8d951b8d48ad541a15123a1e2b902e644a82",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "strip_reads",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "book_reservation"
+            ],
+            "write_arguments_digest": "ec6106d4aced24c26c719e7106c94d99d9a67f4dd4ab3e2ee9f70dce100e2d99",
+            "all_call_count": 1,
+            "all_call_names": [
+              "book_reservation"
+            ],
+            "read_count": 0,
+            "changed_count": 29,
+            "changed_paths": [
+              "flights.HAT271.dates.2024-05-26.available_seats.economy",
+              "reservations.HATHAT.cabin",
+              "reservations.HATHAT.created_at",
+              "reservations.HATHAT.destination",
+              "reservations.HATHAT.flight_type",
+              "reservations.HATHAT.flights[0].date",
+              "reservations.HATHAT.flights[0].destination",
+              "reservations.HATHAT.flights[0].flight_number",
+              "reservations.HATHAT.flights[0].origin",
+              "reservations.HATHAT.flights[0].price",
+              "reservations.HATHAT.insurance",
+              "reservations.HATHAT.nonfree_baggages",
+              "reservations.HATHAT.origin",
+              "reservations.HATHAT.passengers[0].dob",
+              "reservations.HATHAT.passengers[0].first_name",
+              "reservations.HATHAT.passengers[0].last_name",
+              "reservations.HATHAT.passengers[1].dob",
+              "reservations.HATHAT.passengers[1].first_name",
+              "reservations.HATHAT.passengers[1].last_name",
+              "reservations.HATHAT.payment_history[0].amount",
+              "reservations.HATHAT.payment_history[0].payment_id",
+              "reservations.HATHAT.reservation_id",
+              "reservations.HATHAT.status",
+              "reservations.HATHAT.total_baggages",
+              "reservations.HATHAT.user_id",
+              "users.sophia_silva_7557.payment_methods.certificate_8045380.amount",
+              "users.sophia_silva_7557.payment_methods.certificate_8045380.id",
+              "users.sophia_silva_7557.payment_methods.certificate_8045380.source",
+              "users.sophia_silva_7557.reservations[5]"
+            ],
+            "changed_values_digest": "f31b6ac026a3b374c79e6ecbfc221fa7fc122d28a68deedfb245386689dc2562",
+            "final_db_hash": "00766aa3e0341b497a623f93983c8d951b8d48ad541a15123a1e2b902e644a82",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_reads",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "book_reservation"
+            ],
+            "write_arguments_digest": "ec6106d4aced24c26c719e7106c94d99d9a67f4dd4ab3e2ee9f70dce100e2d99",
+            "all_call_count": 7,
+            "all_call_names": [
+              "get_user_details",
+              "get_user_details",
+              "get_reservation_details",
+              "get_reservation_details",
+              "search_direct_flight",
+              "search_direct_flight",
+              "book_reservation"
+            ],
+            "read_count": 6,
+            "changed_count": 29,
+            "changed_paths": [
+              "flights.HAT271.dates.2024-05-26.available_seats.economy",
+              "reservations.HATHAT.cabin",
+              "reservations.HATHAT.created_at",
+              "reservations.HATHAT.destination",
+              "reservations.HATHAT.flight_type",
+              "reservations.HATHAT.flights[0].date",
+              "reservations.HATHAT.flights[0].destination",
+              "reservations.HATHAT.flights[0].flight_number",
+              "reservations.HATHAT.flights[0].origin",
+              "reservations.HATHAT.flights[0].price",
+              "reservations.HATHAT.insurance",
+              "reservations.HATHAT.nonfree_baggages",
+              "reservations.HATHAT.origin",
+              "reservations.HATHAT.passengers[0].dob",
+              "reservations.HATHAT.passengers[0].first_name",
+              "reservations.HATHAT.passengers[0].last_name",
+              "reservations.HATHAT.passengers[1].dob",
+              "reservations.HATHAT.passengers[1].first_name",
+              "reservations.HATHAT.passengers[1].last_name",
+              "reservations.HATHAT.payment_history[0].amount",
+              "reservations.HATHAT.payment_history[0].payment_id",
+              "reservations.HATHAT.reservation_id",
+              "reservations.HATHAT.status",
+              "reservations.HATHAT.total_baggages",
+              "reservations.HATHAT.user_id",
+              "users.sophia_silva_7557.payment_methods.certificate_8045380.amount",
+              "users.sophia_silva_7557.payment_methods.certificate_8045380.id",
+              "users.sophia_silva_7557.payment_methods.certificate_8045380.source",
+              "users.sophia_silva_7557.reservations[5]"
+            ],
+            "changed_values_digest": "f31b6ac026a3b374c79e6ecbfc221fa7fc122d28a68deedfb245386689dc2562",
+            "final_db_hash": "00766aa3e0341b497a623f93983c8d951b8d48ad541a15123a1e2b902e644a82",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "writes_first",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "book_reservation"
+            ],
+            "write_arguments_digest": "ec6106d4aced24c26c719e7106c94d99d9a67f4dd4ab3e2ee9f70dce100e2d99",
+            "all_call_count": 4,
+            "all_call_names": [
+              "book_reservation",
+              "get_user_details",
+              "get_reservation_details",
+              "search_direct_flight"
+            ],
+            "read_count": 3,
+            "changed_count": 29,
+            "changed_paths": [
+              "flights.HAT271.dates.2024-05-26.available_seats.economy",
+              "reservations.HATHAT.cabin",
+              "reservations.HATHAT.created_at",
+              "reservations.HATHAT.destination",
+              "reservations.HATHAT.flight_type",
+              "reservations.HATHAT.flights[0].date",
+              "reservations.HATHAT.flights[0].destination",
+              "reservations.HATHAT.flights[0].flight_number",
+              "reservations.HATHAT.flights[0].origin",
+              "reservations.HATHAT.flights[0].price",
+              "reservations.HATHAT.insurance",
+              "reservations.HATHAT.nonfree_baggages",
+              "reservations.HATHAT.origin",
+              "reservations.HATHAT.passengers[0].dob",
+              "reservations.HATHAT.passengers[0].first_name",
+              "reservations.HATHAT.passengers[0].last_name",
+              "reservations.HATHAT.passengers[1].dob",
+              "reservations.HATHAT.passengers[1].first_name",
+              "reservations.HATHAT.passengers[1].last_name",
+              "reservations.HATHAT.payment_history[0].amount",
+              "reservations.HATHAT.payment_history[0].payment_id",
+              "reservations.HATHAT.reservation_id",
+              "reservations.HATHAT.status",
+              "reservations.HATHAT.total_baggages",
+              "reservations.HATHAT.user_id",
+              "users.sophia_silva_7557.payment_methods.certificate_8045380.amount",
+              "users.sophia_silva_7557.payment_methods.certificate_8045380.id",
+              "users.sophia_silva_7557.payment_methods.certificate_8045380.source",
+              "users.sophia_silva_7557.reservations[5]"
+            ],
+            "changed_values_digest": "f31b6ac026a3b374c79e6ecbfc221fa7fc122d28a68deedfb245386689dc2562",
+            "final_db_hash": "00766aa3e0341b497a623f93983c8d951b8d48ad541a15123a1e2b902e644a82",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "drop_first_write",
+          "role": "train_harmful",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 3,
+            "all_call_names": [
+              "get_user_details",
+              "get_reservation_details",
+              "search_direct_flight"
+            ],
+            "read_count": 3,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_first_write",
+          "role": "heldout_harmful",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 2,
+            "write_names": [
+              "book_reservation",
+              "book_reservation"
+            ],
+            "write_arguments_digest": "81b35d990c82cae684103c85274786a797192cd1d9ff66f796a17d93c8a83eaf",
+            "all_call_count": 5,
+            "all_call_names": [
+              "get_user_details",
+              "get_reservation_details",
+              "search_direct_flight",
+              "book_reservation",
+              "book_reservation"
+            ],
+            "read_count": 3,
+            "changed_count": 29,
+            "changed_paths": [
+              "flights.HAT271.dates.2024-05-26.available_seats.economy",
+              "reservations.HATHAT.cabin",
+              "reservations.HATHAT.created_at",
+              "reservations.HATHAT.destination",
+              "reservations.HATHAT.flight_type",
+              "reservations.HATHAT.flights[0].date",
+              "reservations.HATHAT.flights[0].destination",
+              "reservations.HATHAT.flights[0].flight_number",
+              "reservations.HATHAT.flights[0].origin",
+              "reservations.HATHAT.flights[0].price",
+              "reservations.HATHAT.insurance",
+              "reservations.HATHAT.nonfree_baggages",
+              "reservations.HATHAT.origin",
+              "reservations.HATHAT.passengers[0].dob",
+              "reservations.HATHAT.passengers[0].first_name",
+              "reservations.HATHAT.passengers[0].last_name",
+              "reservations.HATHAT.passengers[1].dob",
+              "reservations.HATHAT.passengers[1].first_name",
+              "reservations.HATHAT.passengers[1].last_name",
+              "reservations.HATHAT.payment_history[0].amount",
+              "reservations.HATHAT.payment_history[0].payment_id",
+              "reservations.HATHAT.reservation_id",
+              "reservations.HATHAT.status",
+              "reservations.HATHAT.total_baggages",
+              "reservations.HATHAT.user_id",
+              "users.sophia_silva_7557.payment_methods.certificate_8045380.amount",
+              "users.sophia_silva_7557.payment_methods.certificate_8045380.id",
+              "users.sophia_silva_7557.payment_methods.certificate_8045380.source",
+              "users.sophia_silva_7557.reservations[5]"
+            ],
+            "changed_values_digest": "f31b6ac026a3b374c79e6ecbfc221fa7fc122d28a68deedfb245386689dc2562",
+            "final_db_hash": "00766aa3e0341b497a623f93983c8d951b8d48ad541a15123a1e2b902e644a82",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "perturb_first_write",
+          "role": "train_harmful",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "book_reservation"
+            ],
+            "write_arguments_digest": "e0ea5733fb989f2266e5fd2b6663121a406ff633752b277a1a45d7d04d67a405",
+            "all_call_count": 4,
+            "all_call_names": [
+              "get_user_details",
+              "get_reservation_details",
+              "search_direct_flight",
+              "book_reservation"
+            ],
+            "read_count": 3,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValidationError"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "airline",
+      "task_id": "9",
+      "reward_basis": [
+        "DB",
+        "COMMUNICATE"
+      ],
+      "reference_action_count": 1,
+      "reference_write_count": 0,
+      "variants": [
+        {
+          "name": "reference",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 1,
+            "all_call_names": [
+              "search_direct_flight"
+            ],
+            "read_count": 1,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "strip_reads",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 0,
+            "all_call_names": [],
+            "read_count": 0,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_reads",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 2,
+            "all_call_names": [
+              "search_direct_flight",
+              "search_direct_flight"
+            ],
+            "read_count": 2,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "124e39a664b56402bcd09cb8a6a9cece6acb8462337c969799d5658e3250f263",
+            "tool_error_count": 0
+          },
+          "errors": []
+        }
+      ]
+    },
+    {
+      "domain": "retail",
+      "task_id": "0",
+      "reward_basis": [
+        "DB",
+        "NL_ASSERTION"
+      ],
+      "reference_action_count": 5,
+      "reference_write_count": 1,
+      "variants": [
+        {
+          "name": "reference",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "e694e831c3fcc0b12a151ee8ccfadfca7d5ce88a462f16237b43e163dea945f7",
+            "all_call_count": 5,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 4,
+            "changed_count": 9,
+            "changed_paths": [
+              "orders.#W2378156.exchange_items",
+              "orders.#W2378156.exchange_items[0]",
+              "orders.#W2378156.exchange_items[1]",
+              "orders.#W2378156.exchange_new_items",
+              "orders.#W2378156.exchange_new_items[0]",
+              "orders.#W2378156.exchange_new_items[1]",
+              "orders.#W2378156.exchange_payment_method_id",
+              "orders.#W2378156.exchange_price_difference",
+              "orders.#W2378156.status"
+            ],
+            "changed_values_digest": "9d0cea7b8d9b92e0e82a5d2d721ecdcdd3e3bdbaa921eeb2dc52a3932bd64fcd",
+            "final_db_hash": "a109be174767fde0ebb50fe3be37cdb2f1ce017fefd7bd29ea3e4d38bd3ac25a",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "strip_reads",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "e694e831c3fcc0b12a151ee8ccfadfca7d5ce88a462f16237b43e163dea945f7",
+            "all_call_count": 1,
+            "all_call_names": [
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 0,
+            "changed_count": 9,
+            "changed_paths": [
+              "orders.#W2378156.exchange_items",
+              "orders.#W2378156.exchange_items[0]",
+              "orders.#W2378156.exchange_items[1]",
+              "orders.#W2378156.exchange_new_items",
+              "orders.#W2378156.exchange_new_items[0]",
+              "orders.#W2378156.exchange_new_items[1]",
+              "orders.#W2378156.exchange_payment_method_id",
+              "orders.#W2378156.exchange_price_difference",
+              "orders.#W2378156.status"
+            ],
+            "changed_values_digest": "9d0cea7b8d9b92e0e82a5d2d721ecdcdd3e3bdbaa921eeb2dc52a3932bd64fcd",
+            "final_db_hash": "a109be174767fde0ebb50fe3be37cdb2f1ce017fefd7bd29ea3e4d38bd3ac25a",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_reads",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "e694e831c3fcc0b12a151ee8ccfadfca7d5ce88a462f16237b43e163dea945f7",
+            "all_call_count": 9,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "find_user_id_by_name_zip",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 8,
+            "changed_count": 9,
+            "changed_paths": [
+              "orders.#W2378156.exchange_items",
+              "orders.#W2378156.exchange_items[0]",
+              "orders.#W2378156.exchange_items[1]",
+              "orders.#W2378156.exchange_new_items",
+              "orders.#W2378156.exchange_new_items[0]",
+              "orders.#W2378156.exchange_new_items[1]",
+              "orders.#W2378156.exchange_payment_method_id",
+              "orders.#W2378156.exchange_price_difference",
+              "orders.#W2378156.status"
+            ],
+            "changed_values_digest": "9d0cea7b8d9b92e0e82a5d2d721ecdcdd3e3bdbaa921eeb2dc52a3932bd64fcd",
+            "final_db_hash": "a109be174767fde0ebb50fe3be37cdb2f1ce017fefd7bd29ea3e4d38bd3ac25a",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "writes_first",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "e694e831c3fcc0b12a151ee8ccfadfca7d5ce88a462f16237b43e163dea945f7",
+            "all_call_count": 5,
+            "all_call_names": [
+              "exchange_delivered_order_items",
+              "find_user_id_by_name_zip",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details"
+            ],
+            "read_count": 4,
+            "changed_count": 9,
+            "changed_paths": [
+              "orders.#W2378156.exchange_items",
+              "orders.#W2378156.exchange_items[0]",
+              "orders.#W2378156.exchange_items[1]",
+              "orders.#W2378156.exchange_new_items",
+              "orders.#W2378156.exchange_new_items[0]",
+              "orders.#W2378156.exchange_new_items[1]",
+              "orders.#W2378156.exchange_payment_method_id",
+              "orders.#W2378156.exchange_price_difference",
+              "orders.#W2378156.status"
+            ],
+            "changed_values_digest": "9d0cea7b8d9b92e0e82a5d2d721ecdcdd3e3bdbaa921eeb2dc52a3932bd64fcd",
+            "final_db_hash": "a109be174767fde0ebb50fe3be37cdb2f1ce017fefd7bd29ea3e4d38bd3ac25a",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "drop_first_write",
+          "role": "train_harmful",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 4,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details"
+            ],
+            "read_count": 4,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_first_write",
+          "role": "heldout_harmful",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 2,
+            "write_names": [
+              "exchange_delivered_order_items",
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "962071efdcd78289c4863e04165fe2093cfc363ad3921290573b2e2c2d0618a7",
+            "all_call_count": 6,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 4,
+            "changed_count": 9,
+            "changed_paths": [
+              "orders.#W2378156.exchange_items",
+              "orders.#W2378156.exchange_items[0]",
+              "orders.#W2378156.exchange_items[1]",
+              "orders.#W2378156.exchange_new_items",
+              "orders.#W2378156.exchange_new_items[0]",
+              "orders.#W2378156.exchange_new_items[1]",
+              "orders.#W2378156.exchange_payment_method_id",
+              "orders.#W2378156.exchange_price_difference",
+              "orders.#W2378156.status"
+            ],
+            "changed_values_digest": "9d0cea7b8d9b92e0e82a5d2d721ecdcdd3e3bdbaa921eeb2dc52a3932bd64fcd",
+            "final_db_hash": "a109be174767fde0ebb50fe3be37cdb2f1ce017fefd7bd29ea3e4d38bd3ac25a",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "perturb_first_write",
+          "role": "train_harmful",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "e3b8479cc62ef55973c4528886d907485afcf2ef992342655bf6bd42ac88acad",
+            "all_call_count": 5,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 4,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "retail",
+      "task_id": "1",
+      "reward_basis": [
+        "DB",
+        "NL_ASSERTION"
+      ],
+      "reference_action_count": 5,
+      "reference_write_count": 1,
+      "variants": [
+        {
+          "name": "reference",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "1286c44bb2d1ebaca4f3bc75da3d19933933e760fd8913d799d4865a27108fa4",
+            "all_call_count": 5,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 4,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W2378156.exchange_items",
+              "orders.#W2378156.exchange_items[0]",
+              "orders.#W2378156.exchange_new_items",
+              "orders.#W2378156.exchange_new_items[0]",
+              "orders.#W2378156.exchange_payment_method_id",
+              "orders.#W2378156.exchange_price_difference",
+              "orders.#W2378156.status"
+            ],
+            "changed_values_digest": "51bda4c4e4ca1061f0a8c8a1fd6cef933d5d12ff556b915e63b487aa4299eb09",
+            "final_db_hash": "eab1dde2ca84a093a334a25db9258213e882d849bb487a966d69c056a67c2846",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "strip_reads",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "1286c44bb2d1ebaca4f3bc75da3d19933933e760fd8913d799d4865a27108fa4",
+            "all_call_count": 1,
+            "all_call_names": [
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 0,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W2378156.exchange_items",
+              "orders.#W2378156.exchange_items[0]",
+              "orders.#W2378156.exchange_new_items",
+              "orders.#W2378156.exchange_new_items[0]",
+              "orders.#W2378156.exchange_payment_method_id",
+              "orders.#W2378156.exchange_price_difference",
+              "orders.#W2378156.status"
+            ],
+            "changed_values_digest": "51bda4c4e4ca1061f0a8c8a1fd6cef933d5d12ff556b915e63b487aa4299eb09",
+            "final_db_hash": "eab1dde2ca84a093a334a25db9258213e882d849bb487a966d69c056a67c2846",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_reads",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "1286c44bb2d1ebaca4f3bc75da3d19933933e760fd8913d799d4865a27108fa4",
+            "all_call_count": 9,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "find_user_id_by_name_zip",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 8,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W2378156.exchange_items",
+              "orders.#W2378156.exchange_items[0]",
+              "orders.#W2378156.exchange_new_items",
+              "orders.#W2378156.exchange_new_items[0]",
+              "orders.#W2378156.exchange_payment_method_id",
+              "orders.#W2378156.exchange_price_difference",
+              "orders.#W2378156.status"
+            ],
+            "changed_values_digest": "51bda4c4e4ca1061f0a8c8a1fd6cef933d5d12ff556b915e63b487aa4299eb09",
+            "final_db_hash": "eab1dde2ca84a093a334a25db9258213e882d849bb487a966d69c056a67c2846",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "writes_first",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "1286c44bb2d1ebaca4f3bc75da3d19933933e760fd8913d799d4865a27108fa4",
+            "all_call_count": 5,
+            "all_call_names": [
+              "exchange_delivered_order_items",
+              "find_user_id_by_name_zip",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details"
+            ],
+            "read_count": 4,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W2378156.exchange_items",
+              "orders.#W2378156.exchange_items[0]",
+              "orders.#W2378156.exchange_new_items",
+              "orders.#W2378156.exchange_new_items[0]",
+              "orders.#W2378156.exchange_payment_method_id",
+              "orders.#W2378156.exchange_price_difference",
+              "orders.#W2378156.status"
+            ],
+            "changed_values_digest": "51bda4c4e4ca1061f0a8c8a1fd6cef933d5d12ff556b915e63b487aa4299eb09",
+            "final_db_hash": "eab1dde2ca84a093a334a25db9258213e882d849bb487a966d69c056a67c2846",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "drop_first_write",
+          "role": "train_harmful",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 4,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details"
+            ],
+            "read_count": 4,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_first_write",
+          "role": "heldout_harmful",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 2,
+            "write_names": [
+              "exchange_delivered_order_items",
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "250ae8b713ca6b3807e9165adaf1df815b8ff444df20af60d19c0d9c635e0bf9",
+            "all_call_count": 6,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 4,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W2378156.exchange_items",
+              "orders.#W2378156.exchange_items[0]",
+              "orders.#W2378156.exchange_new_items",
+              "orders.#W2378156.exchange_new_items[0]",
+              "orders.#W2378156.exchange_payment_method_id",
+              "orders.#W2378156.exchange_price_difference",
+              "orders.#W2378156.status"
+            ],
+            "changed_values_digest": "51bda4c4e4ca1061f0a8c8a1fd6cef933d5d12ff556b915e63b487aa4299eb09",
+            "final_db_hash": "eab1dde2ca84a093a334a25db9258213e882d849bb487a966d69c056a67c2846",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "perturb_first_write",
+          "role": "train_harmful",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "8fb7e31b205f404ecf23b1ff8da8e6366df4f10f856cb7bb2af830a4919eb01e",
+            "all_call_count": 5,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 4,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "retail",
+      "task_id": "2",
+      "reward_basis": [
+        "DB",
+        "NL_ASSERTION"
+      ],
+      "reference_action_count": 11,
+      "reference_write_count": 1,
+      "variants": [
+        {
+          "name": "reference",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "return_delivered_order_items"
+            ],
+            "write_arguments_digest": "3c2d1c590c3e4cbc5d9f6615a10d1e292180e28dfd1306be8d6e3e0a0d2a7897",
+            "all_call_count": 11,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_product_details",
+              "get_product_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "return_delivered_order_items"
+            ],
+            "read_count": 10,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "strip_reads",
+          "role": "train_correct",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "return_delivered_order_items"
+            ],
+            "write_arguments_digest": "3c2d1c590c3e4cbc5d9f6615a10d1e292180e28dfd1306be8d6e3e0a0d2a7897",
+            "all_call_count": 1,
+            "all_call_names": [
+              "return_delivered_order_items"
+            ],
+            "read_count": 0,
+            "changed_count": 6,
+            "changed_paths": [
+              "orders.#W2378156.return_items",
+              "orders.#W2378156.return_items[0]",
+              "orders.#W2378156.return_items[1]",
+              "orders.#W2378156.return_items[2]",
+              "orders.#W2378156.return_payment_method_id",
+              "orders.#W2378156.status"
+            ],
+            "changed_values_digest": "0e460dac19eeb0f846aba6013cd81094fa6e3b5ae335cae3634038f0024520b5",
+            "final_db_hash": "9b66e83dbc00ef3e826a50a5a8b645ae06ba53cca06354b7d003a84a8af1d05a",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_reads",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "return_delivered_order_items"
+            ],
+            "write_arguments_digest": "3c2d1c590c3e4cbc5d9f6615a10d1e292180e28dfd1306be8d6e3e0a0d2a7897",
+            "all_call_count": 21,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "find_user_id_by_name_zip",
+              "get_product_details",
+              "get_product_details",
+              "get_product_details",
+              "get_product_details",
+              "get_user_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "return_delivered_order_items"
+            ],
+            "read_count": 20,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "writes_first",
+          "role": "heldout_correct",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "return_delivered_order_items"
+            ],
+            "write_arguments_digest": "3c2d1c590c3e4cbc5d9f6615a10d1e292180e28dfd1306be8d6e3e0a0d2a7897",
+            "all_call_count": 11,
+            "all_call_names": [
+              "return_delivered_order_items",
+              "find_user_id_by_name_zip",
+              "get_product_details",
+              "get_product_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details"
+            ],
+            "read_count": 10,
+            "changed_count": 6,
+            "changed_paths": [
+              "orders.#W2378156.return_items",
+              "orders.#W2378156.return_items[0]",
+              "orders.#W2378156.return_items[1]",
+              "orders.#W2378156.return_items[2]",
+              "orders.#W2378156.return_payment_method_id",
+              "orders.#W2378156.status"
+            ],
+            "changed_values_digest": "0e460dac19eeb0f846aba6013cd81094fa6e3b5ae335cae3634038f0024520b5",
+            "final_db_hash": "9b66e83dbc00ef3e826a50a5a8b645ae06ba53cca06354b7d003a84a8af1d05a",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "drop_first_write",
+          "role": "train_harmful",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 10,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_product_details",
+              "get_product_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details"
+            ],
+            "read_count": 10,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "duplicate_first_write",
+          "role": "heldout_harmful",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 2,
+            "write_names": [
+              "return_delivered_order_items",
+              "return_delivered_order_items"
+            ],
+            "write_arguments_digest": "af16345dbf7a7a17a1dcd8a6fab6663bed45208d900ac3aa1a14b0c98e9ba447",
+            "all_call_count": 12,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_product_details",
+              "get_product_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "return_delivered_order_items",
+              "return_delivered_order_items"
+            ],
+            "read_count": 10,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "perturb_first_write",
+          "role": "train_harmful",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "return_delivered_order_items"
+            ],
+            "write_arguments_digest": "aafbbffda960362b552a9db911162a12213a7baa3cab227945aaaeedbff84d08",
+            "all_call_count": 11,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_product_details",
+              "get_product_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "return_delivered_order_items"
+            ],
+            "read_count": 10,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "retail",
+      "task_id": "3",
+      "reward_basis": [
+        "DB",
+        "NL_ASSERTION"
+      ],
+      "reference_action_count": 12,
+      "reference_write_count": 1,
+      "variants": [
+        {
+          "name": "reference",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "modify_pending_order_items"
+            ],
+            "write_arguments_digest": "7ea97f34e25ec54747b248a76c809f21e0f49d0d3c6a6a156598dfae400e5ba8",
+            "all_call_count": 12,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_product_details",
+              "get_product_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "get_user_details",
+              "modify_pending_order_items"
+            ],
+            "read_count": 11,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "strip_reads",
+          "role": "train_correct",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "modify_pending_order_items"
+            ],
+            "write_arguments_digest": "7ea97f34e25ec54747b248a76c809f21e0f49d0d3c6a6a156598dfae400e5ba8",
+            "all_call_count": 1,
+            "all_call_names": [
+              "modify_pending_order_items"
+            ],
+            "read_count": 0,
+            "changed_count": 8,
+            "changed_paths": [
+              "orders.#W4776164.items[0].item_id",
+              "orders.#W4776164.items[0].options.color",
+              "orders.#W4776164.items[0].options.material",
+              "orders.#W4776164.items[0].price",
+              "orders.#W4776164.payment_history[1].amount",
+              "orders.#W4776164.payment_history[1].payment_method_id",
+              "orders.#W4776164.payment_history[1].transaction_type",
+              "orders.#W4776164.status"
+            ],
+            "changed_values_digest": "5acab9620292c40704773b9123c4ad553f8807fa8a14bcf42dc5cac7b4bc6605",
+            "final_db_hash": "efb8b638945f19291aab0ccbc4cfd2c653e74bf7fbe3b11174379800a331979c",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_reads",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "modify_pending_order_items"
+            ],
+            "write_arguments_digest": "7ea97f34e25ec54747b248a76c809f21e0f49d0d3c6a6a156598dfae400e5ba8",
+            "all_call_count": 23,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "find_user_id_by_name_zip",
+              "get_product_details",
+              "get_product_details",
+              "get_product_details",
+              "get_product_details",
+              "get_user_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "get_user_details",
+              "get_user_details",
+              "modify_pending_order_items"
+            ],
+            "read_count": 22,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "writes_first",
+          "role": "heldout_correct",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "modify_pending_order_items"
+            ],
+            "write_arguments_digest": "7ea97f34e25ec54747b248a76c809f21e0f49d0d3c6a6a156598dfae400e5ba8",
+            "all_call_count": 12,
+            "all_call_names": [
+              "modify_pending_order_items",
+              "find_user_id_by_name_zip",
+              "get_product_details",
+              "get_product_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "get_user_details"
+            ],
+            "read_count": 11,
+            "changed_count": 8,
+            "changed_paths": [
+              "orders.#W4776164.items[0].item_id",
+              "orders.#W4776164.items[0].options.color",
+              "orders.#W4776164.items[0].options.material",
+              "orders.#W4776164.items[0].price",
+              "orders.#W4776164.payment_history[1].amount",
+              "orders.#W4776164.payment_history[1].payment_method_id",
+              "orders.#W4776164.payment_history[1].transaction_type",
+              "orders.#W4776164.status"
+            ],
+            "changed_values_digest": "5acab9620292c40704773b9123c4ad553f8807fa8a14bcf42dc5cac7b4bc6605",
+            "final_db_hash": "efb8b638945f19291aab0ccbc4cfd2c653e74bf7fbe3b11174379800a331979c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "drop_first_write",
+          "role": "train_harmful",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 11,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_product_details",
+              "get_product_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "get_user_details"
+            ],
+            "read_count": 11,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "duplicate_first_write",
+          "role": "heldout_harmful",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 2,
+            "write_names": [
+              "modify_pending_order_items",
+              "modify_pending_order_items"
+            ],
+            "write_arguments_digest": "374993b2a4c21635247b4245d2914571298474d587efa1d2a89016e6c0f120ee",
+            "all_call_count": 13,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_product_details",
+              "get_product_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "get_user_details",
+              "modify_pending_order_items",
+              "modify_pending_order_items"
+            ],
+            "read_count": 11,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "perturb_first_write",
+          "role": "train_harmful",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "modify_pending_order_items"
+            ],
+            "write_arguments_digest": "2df5c18d535ab7674ce6de1692776da97e6aea4b857ea87d1ec39ad7177f167c",
+            "all_call_count": 12,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_product_details",
+              "get_product_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "get_user_details",
+              "modify_pending_order_items"
+            ],
+            "read_count": 11,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "retail",
+      "task_id": "4",
+      "reward_basis": [
+        "DB",
+        "NL_ASSERTION"
+      ],
+      "reference_action_count": 13,
+      "reference_write_count": 2,
+      "variants": [
+        {
+          "name": "reference",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 2,
+            "write_names": [
+              "modify_pending_order_items",
+              "modify_pending_order_items"
+            ],
+            "write_arguments_digest": "add41c510df4c863f89cc62a83520d3662be467160cb71fae78f5885b14e97ca",
+            "all_call_count": 13,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_product_details",
+              "get_product_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "get_user_details",
+              "modify_pending_order_items",
+              "modify_pending_order_items"
+            ],
+            "read_count": 11,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "strip_reads",
+          "role": "train_correct",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 2,
+            "write_names": [
+              "modify_pending_order_items",
+              "modify_pending_order_items"
+            ],
+            "write_arguments_digest": "add41c510df4c863f89cc62a83520d3662be467160cb71fae78f5885b14e97ca",
+            "all_call_count": 2,
+            "all_call_names": [
+              "modify_pending_order_items",
+              "modify_pending_order_items"
+            ],
+            "read_count": 0,
+            "changed_count": 18,
+            "changed_paths": [
+              "orders.#W4776164.items[0].item_id",
+              "orders.#W4776164.items[0].options.color",
+              "orders.#W4776164.items[0].options.material",
+              "orders.#W4776164.items[0].price",
+              "orders.#W4776164.payment_history[1].amount",
+              "orders.#W4776164.payment_history[1].payment_method_id",
+              "orders.#W4776164.payment_history[1].transaction_type",
+              "orders.#W4776164.status",
+              "orders.#W6247578.items[0].item_id",
+              "orders.#W6247578.items[0].options.color",
+              "orders.#W6247578.items[0].options.material",
+              "orders.#W6247578.items[0].options.size",
+              "orders.#W6247578.items[0].options.style",
+              "orders.#W6247578.items[0].price",
+              "orders.#W6247578.payment_history[1].amount",
+              "orders.#W6247578.payment_history[1].payment_method_id",
+              "orders.#W6247578.payment_history[1].transaction_type",
+              "orders.#W6247578.status"
+            ],
+            "changed_values_digest": "240d9171a4ee47b5879826330d95d71b06b93d6a9dcda1f38045bbe98a4fccbb",
+            "final_db_hash": "f333ec4241d5094cb2743ac960689951e397a80cc62a73792f88976bb483caa3",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_reads",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 2,
+            "write_names": [
+              "modify_pending_order_items",
+              "modify_pending_order_items"
+            ],
+            "write_arguments_digest": "add41c510df4c863f89cc62a83520d3662be467160cb71fae78f5885b14e97ca",
+            "all_call_count": 24,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "find_user_id_by_name_zip",
+              "get_product_details",
+              "get_product_details",
+              "get_product_details",
+              "get_product_details",
+              "get_user_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "get_user_details",
+              "get_user_details",
+              "modify_pending_order_items",
+              "modify_pending_order_items"
+            ],
+            "read_count": 22,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "writes_first",
+          "role": "heldout_correct",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 2,
+            "write_names": [
+              "modify_pending_order_items",
+              "modify_pending_order_items"
+            ],
+            "write_arguments_digest": "add41c510df4c863f89cc62a83520d3662be467160cb71fae78f5885b14e97ca",
+            "all_call_count": 13,
+            "all_call_names": [
+              "modify_pending_order_items",
+              "modify_pending_order_items",
+              "find_user_id_by_name_zip",
+              "get_product_details",
+              "get_product_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "get_user_details"
+            ],
+            "read_count": 11,
+            "changed_count": 18,
+            "changed_paths": [
+              "orders.#W4776164.items[0].item_id",
+              "orders.#W4776164.items[0].options.color",
+              "orders.#W4776164.items[0].options.material",
+              "orders.#W4776164.items[0].price",
+              "orders.#W4776164.payment_history[1].amount",
+              "orders.#W4776164.payment_history[1].payment_method_id",
+              "orders.#W4776164.payment_history[1].transaction_type",
+              "orders.#W4776164.status",
+              "orders.#W6247578.items[0].item_id",
+              "orders.#W6247578.items[0].options.color",
+              "orders.#W6247578.items[0].options.material",
+              "orders.#W6247578.items[0].options.size",
+              "orders.#W6247578.items[0].options.style",
+              "orders.#W6247578.items[0].price",
+              "orders.#W6247578.payment_history[1].amount",
+              "orders.#W6247578.payment_history[1].payment_method_id",
+              "orders.#W6247578.payment_history[1].transaction_type",
+              "orders.#W6247578.status"
+            ],
+            "changed_values_digest": "240d9171a4ee47b5879826330d95d71b06b93d6a9dcda1f38045bbe98a4fccbb",
+            "final_db_hash": "f333ec4241d5094cb2743ac960689951e397a80cc62a73792f88976bb483caa3",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "drop_first_write",
+          "role": "train_harmful",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "modify_pending_order_items"
+            ],
+            "write_arguments_digest": "7ea97f34e25ec54747b248a76c809f21e0f49d0d3c6a6a156598dfae400e5ba8",
+            "all_call_count": 12,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_product_details",
+              "get_product_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "get_user_details",
+              "modify_pending_order_items"
+            ],
+            "read_count": 11,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "drop_last_write",
+          "role": "heldout_harmful",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "modify_pending_order_items"
+            ],
+            "write_arguments_digest": "be7c0377957a824500854ca3ae4566a81204428980d0bb6aa68e51b500c991ed",
+            "all_call_count": 12,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_product_details",
+              "get_product_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "get_user_details",
+              "modify_pending_order_items"
+            ],
+            "read_count": 11,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "duplicate_first_write",
+          "role": "heldout_harmful",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 3,
+            "write_names": [
+              "modify_pending_order_items",
+              "modify_pending_order_items",
+              "modify_pending_order_items"
+            ],
+            "write_arguments_digest": "27c4f2f23ec6121d81c6565f36f1c485924878b9e1355abd0c759fd33339b6c5",
+            "all_call_count": 14,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_product_details",
+              "get_product_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "get_user_details",
+              "modify_pending_order_items",
+              "modify_pending_order_items",
+              "modify_pending_order_items"
+            ],
+            "read_count": 11,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "reverse_writes",
+          "role": "heldout_harmful",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 2,
+            "write_names": [
+              "modify_pending_order_items",
+              "modify_pending_order_items"
+            ],
+            "write_arguments_digest": "9f60547f77bb1077a12bf925622fdc6c42ab36b00407644ef90e2063671a4874",
+            "all_call_count": 13,
+            "all_call_names": [
+              "modify_pending_order_items",
+              "modify_pending_order_items",
+              "find_user_id_by_name_zip",
+              "get_product_details",
+              "get_product_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "get_user_details"
+            ],
+            "read_count": 11,
+            "changed_count": 18,
+            "changed_paths": [
+              "orders.#W4776164.items[0].item_id",
+              "orders.#W4776164.items[0].options.color",
+              "orders.#W4776164.items[0].options.material",
+              "orders.#W4776164.items[0].price",
+              "orders.#W4776164.payment_history[1].amount",
+              "orders.#W4776164.payment_history[1].payment_method_id",
+              "orders.#W4776164.payment_history[1].transaction_type",
+              "orders.#W4776164.status",
+              "orders.#W6247578.items[0].item_id",
+              "orders.#W6247578.items[0].options.color",
+              "orders.#W6247578.items[0].options.material",
+              "orders.#W6247578.items[0].options.size",
+              "orders.#W6247578.items[0].options.style",
+              "orders.#W6247578.items[0].price",
+              "orders.#W6247578.payment_history[1].amount",
+              "orders.#W6247578.payment_history[1].payment_method_id",
+              "orders.#W6247578.payment_history[1].transaction_type",
+              "orders.#W6247578.status"
+            ],
+            "changed_values_digest": "240d9171a4ee47b5879826330d95d71b06b93d6a9dcda1f38045bbe98a4fccbb",
+            "final_db_hash": "f333ec4241d5094cb2743ac960689951e397a80cc62a73792f88976bb483caa3",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "perturb_first_write",
+          "role": "train_harmful",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 2,
+            "write_names": [
+              "modify_pending_order_items",
+              "modify_pending_order_items"
+            ],
+            "write_arguments_digest": "cc767ebdbb427c5841ee588b268cfd705dda277d0a5a39d526ea94064f074d74",
+            "all_call_count": 13,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_product_details",
+              "get_product_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "get_user_details",
+              "modify_pending_order_items",
+              "modify_pending_order_items"
+            ],
+            "read_count": 11,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "retail",
+      "task_id": "5",
+      "reward_basis": [
+        "DB",
+        "NL_ASSERTION"
+      ],
+      "reference_action_count": 5,
+      "reference_write_count": 1,
+      "variants": [
+        {
+          "name": "reference",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "return_delivered_order_items"
+            ],
+            "write_arguments_digest": "338cd60ca210caea9c77dd4b6a3c9c030ff8bf0a200d89dfdb716b4dbefca4d7",
+            "all_call_count": 5,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "return_delivered_order_items"
+            ],
+            "read_count": 4,
+            "changed_count": 4,
+            "changed_paths": [
+              "orders.#W6390527.return_items",
+              "orders.#W6390527.return_items[0]",
+              "orders.#W6390527.return_payment_method_id",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "8c05deffc2b3581c0dab557a964bb700f7ef3feb00ea4ae0ff524ed6deca983c",
+            "final_db_hash": "9f1e45fc84a6995edead46216e4f7b07c27c4511524aedb38dc898ab9c52e866",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "strip_reads",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "return_delivered_order_items"
+            ],
+            "write_arguments_digest": "338cd60ca210caea9c77dd4b6a3c9c030ff8bf0a200d89dfdb716b4dbefca4d7",
+            "all_call_count": 1,
+            "all_call_names": [
+              "return_delivered_order_items"
+            ],
+            "read_count": 0,
+            "changed_count": 4,
+            "changed_paths": [
+              "orders.#W6390527.return_items",
+              "orders.#W6390527.return_items[0]",
+              "orders.#W6390527.return_payment_method_id",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "8c05deffc2b3581c0dab557a964bb700f7ef3feb00ea4ae0ff524ed6deca983c",
+            "final_db_hash": "9f1e45fc84a6995edead46216e4f7b07c27c4511524aedb38dc898ab9c52e866",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_reads",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "return_delivered_order_items"
+            ],
+            "write_arguments_digest": "338cd60ca210caea9c77dd4b6a3c9c030ff8bf0a200d89dfdb716b4dbefca4d7",
+            "all_call_count": 9,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "return_delivered_order_items"
+            ],
+            "read_count": 8,
+            "changed_count": 4,
+            "changed_paths": [
+              "orders.#W6390527.return_items",
+              "orders.#W6390527.return_items[0]",
+              "orders.#W6390527.return_payment_method_id",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "8c05deffc2b3581c0dab557a964bb700f7ef3feb00ea4ae0ff524ed6deca983c",
+            "final_db_hash": "9f1e45fc84a6995edead46216e4f7b07c27c4511524aedb38dc898ab9c52e866",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "writes_first",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "return_delivered_order_items"
+            ],
+            "write_arguments_digest": "338cd60ca210caea9c77dd4b6a3c9c030ff8bf0a200d89dfdb716b4dbefca4d7",
+            "all_call_count": 5,
+            "all_call_names": [
+              "return_delivered_order_items",
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details"
+            ],
+            "read_count": 4,
+            "changed_count": 4,
+            "changed_paths": [
+              "orders.#W6390527.return_items",
+              "orders.#W6390527.return_items[0]",
+              "orders.#W6390527.return_payment_method_id",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "8c05deffc2b3581c0dab557a964bb700f7ef3feb00ea4ae0ff524ed6deca983c",
+            "final_db_hash": "9f1e45fc84a6995edead46216e4f7b07c27c4511524aedb38dc898ab9c52e866",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "drop_first_write",
+          "role": "train_harmful",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 4,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details"
+            ],
+            "read_count": 4,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_first_write",
+          "role": "heldout_harmful",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 2,
+            "write_names": [
+              "return_delivered_order_items",
+              "return_delivered_order_items"
+            ],
+            "write_arguments_digest": "6e5ce59a4e582a63918a584081b79fc10c66bd569fc9a3940a9b900b0ad72ff9",
+            "all_call_count": 6,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "return_delivered_order_items",
+              "return_delivered_order_items"
+            ],
+            "read_count": 4,
+            "changed_count": 4,
+            "changed_paths": [
+              "orders.#W6390527.return_items",
+              "orders.#W6390527.return_items[0]",
+              "orders.#W6390527.return_payment_method_id",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "8c05deffc2b3581c0dab557a964bb700f7ef3feb00ea4ae0ff524ed6deca983c",
+            "final_db_hash": "9f1e45fc84a6995edead46216e4f7b07c27c4511524aedb38dc898ab9c52e866",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "perturb_first_write",
+          "role": "train_harmful",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "return_delivered_order_items"
+            ],
+            "write_arguments_digest": "72443a4ec524a924826a030cebd3d4620c910de8688c6b240e291404589a7411",
+            "all_call_count": 5,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "return_delivered_order_items"
+            ],
+            "read_count": 4,
+            "changed_count": 3,
+            "changed_paths": [
+              "orders.#W6390527.return_items",
+              "orders.#W6390527.return_payment_method_id",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "68c460e834a6d6d18075cec6d4fdeae914fcad7479347a9c98e52df9c0eebd6d",
+            "final_db_hash": "ae7f1bd46fa0e4467ec1a7b9cbcb9ef75b34054cee4ef21df0b008cf3aa67f7e",
+            "tool_error_count": 0
+          },
+          "errors": []
+        }
+      ]
+    },
+    {
+      "domain": "retail",
+      "task_id": "6",
+      "reward_basis": [
+        "DB",
+        "NL_ASSERTION"
+      ],
+      "reference_action_count": 6,
+      "reference_write_count": 1,
+      "variants": [
+        {
+          "name": "reference",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "859bc7545b4800b35ba44062cf62576f67b8d2c9b8bca5d3c8c1187fd236b0db",
+            "all_call_count": 6,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 5,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W6390527.exchange_items",
+              "orders.#W6390527.exchange_items[0]",
+              "orders.#W6390527.exchange_new_items",
+              "orders.#W6390527.exchange_new_items[0]",
+              "orders.#W6390527.exchange_payment_method_id",
+              "orders.#W6390527.exchange_price_difference",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "deb0f8abf3038862b57a3e103c4b30dc5778537e6e2607706439216dd74916f2",
+            "final_db_hash": "2053905d31cc52d9e2833383690e2a1853ea66cc0074b0e306699ad516950da7",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "strip_reads",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "859bc7545b4800b35ba44062cf62576f67b8d2c9b8bca5d3c8c1187fd236b0db",
+            "all_call_count": 1,
+            "all_call_names": [
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 0,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W6390527.exchange_items",
+              "orders.#W6390527.exchange_items[0]",
+              "orders.#W6390527.exchange_new_items",
+              "orders.#W6390527.exchange_new_items[0]",
+              "orders.#W6390527.exchange_payment_method_id",
+              "orders.#W6390527.exchange_price_difference",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "deb0f8abf3038862b57a3e103c4b30dc5778537e6e2607706439216dd74916f2",
+            "final_db_hash": "2053905d31cc52d9e2833383690e2a1853ea66cc0074b0e306699ad516950da7",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_reads",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "859bc7545b4800b35ba44062cf62576f67b8d2c9b8bca5d3c8c1187fd236b0db",
+            "all_call_count": 11,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 10,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W6390527.exchange_items",
+              "orders.#W6390527.exchange_items[0]",
+              "orders.#W6390527.exchange_new_items",
+              "orders.#W6390527.exchange_new_items[0]",
+              "orders.#W6390527.exchange_payment_method_id",
+              "orders.#W6390527.exchange_price_difference",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "deb0f8abf3038862b57a3e103c4b30dc5778537e6e2607706439216dd74916f2",
+            "final_db_hash": "2053905d31cc52d9e2833383690e2a1853ea66cc0074b0e306699ad516950da7",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "writes_first",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "859bc7545b4800b35ba44062cf62576f67b8d2c9b8bca5d3c8c1187fd236b0db",
+            "all_call_count": 6,
+            "all_call_names": [
+              "exchange_delivered_order_items",
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details"
+            ],
+            "read_count": 5,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W6390527.exchange_items",
+              "orders.#W6390527.exchange_items[0]",
+              "orders.#W6390527.exchange_new_items",
+              "orders.#W6390527.exchange_new_items[0]",
+              "orders.#W6390527.exchange_payment_method_id",
+              "orders.#W6390527.exchange_price_difference",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "deb0f8abf3038862b57a3e103c4b30dc5778537e6e2607706439216dd74916f2",
+            "final_db_hash": "2053905d31cc52d9e2833383690e2a1853ea66cc0074b0e306699ad516950da7",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "drop_first_write",
+          "role": "train_harmful",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 5,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details"
+            ],
+            "read_count": 5,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_first_write",
+          "role": "heldout_harmful",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 2,
+            "write_names": [
+              "exchange_delivered_order_items",
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "2c021e3ce88bb6f2cdcc5d5b16aa2c9a98b6939e6ece1d3e8ef9d1bec43d0861",
+            "all_call_count": 7,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 5,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W6390527.exchange_items",
+              "orders.#W6390527.exchange_items[0]",
+              "orders.#W6390527.exchange_new_items",
+              "orders.#W6390527.exchange_new_items[0]",
+              "orders.#W6390527.exchange_payment_method_id",
+              "orders.#W6390527.exchange_price_difference",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "deb0f8abf3038862b57a3e103c4b30dc5778537e6e2607706439216dd74916f2",
+            "final_db_hash": "2053905d31cc52d9e2833383690e2a1853ea66cc0074b0e306699ad516950da7",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "perturb_first_write",
+          "role": "train_harmful",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "10e3f8b07619abc105ae4176c65569b202ab8bb2faac501438e07f6d9f2e369d",
+            "all_call_count": 6,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 5,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "retail",
+      "task_id": "7",
+      "reward_basis": [
+        "DB",
+        "NL_ASSERTION"
+      ],
+      "reference_action_count": 6,
+      "reference_write_count": 1,
+      "variants": [
+        {
+          "name": "reference",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "0c909a81297466610ee793b11637bbc66e42288a3165ce03f425dcb1d185ab58",
+            "all_call_count": 6,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 5,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W6390527.exchange_items",
+              "orders.#W6390527.exchange_items[0]",
+              "orders.#W6390527.exchange_new_items",
+              "orders.#W6390527.exchange_new_items[0]",
+              "orders.#W6390527.exchange_payment_method_id",
+              "orders.#W6390527.exchange_price_difference",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "e7c102b5f670e0487de8084fcd9cad6d6290028cb05eecf1f947a18c682c67b4",
+            "final_db_hash": "4759f292bd7623e928c516a8c5297bb10e9a4751f5b59011b4694f77a42624eb",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "strip_reads",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "0c909a81297466610ee793b11637bbc66e42288a3165ce03f425dcb1d185ab58",
+            "all_call_count": 1,
+            "all_call_names": [
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 0,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W6390527.exchange_items",
+              "orders.#W6390527.exchange_items[0]",
+              "orders.#W6390527.exchange_new_items",
+              "orders.#W6390527.exchange_new_items[0]",
+              "orders.#W6390527.exchange_payment_method_id",
+              "orders.#W6390527.exchange_price_difference",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "e7c102b5f670e0487de8084fcd9cad6d6290028cb05eecf1f947a18c682c67b4",
+            "final_db_hash": "4759f292bd7623e928c516a8c5297bb10e9a4751f5b59011b4694f77a42624eb",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_reads",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "0c909a81297466610ee793b11637bbc66e42288a3165ce03f425dcb1d185ab58",
+            "all_call_count": 11,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 10,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W6390527.exchange_items",
+              "orders.#W6390527.exchange_items[0]",
+              "orders.#W6390527.exchange_new_items",
+              "orders.#W6390527.exchange_new_items[0]",
+              "orders.#W6390527.exchange_payment_method_id",
+              "orders.#W6390527.exchange_price_difference",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "e7c102b5f670e0487de8084fcd9cad6d6290028cb05eecf1f947a18c682c67b4",
+            "final_db_hash": "4759f292bd7623e928c516a8c5297bb10e9a4751f5b59011b4694f77a42624eb",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "writes_first",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "0c909a81297466610ee793b11637bbc66e42288a3165ce03f425dcb1d185ab58",
+            "all_call_count": 6,
+            "all_call_names": [
+              "exchange_delivered_order_items",
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details"
+            ],
+            "read_count": 5,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W6390527.exchange_items",
+              "orders.#W6390527.exchange_items[0]",
+              "orders.#W6390527.exchange_new_items",
+              "orders.#W6390527.exchange_new_items[0]",
+              "orders.#W6390527.exchange_payment_method_id",
+              "orders.#W6390527.exchange_price_difference",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "e7c102b5f670e0487de8084fcd9cad6d6290028cb05eecf1f947a18c682c67b4",
+            "final_db_hash": "4759f292bd7623e928c516a8c5297bb10e9a4751f5b59011b4694f77a42624eb",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "drop_first_write",
+          "role": "train_harmful",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 5,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details"
+            ],
+            "read_count": 5,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_first_write",
+          "role": "heldout_harmful",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 2,
+            "write_names": [
+              "exchange_delivered_order_items",
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "043304130b6881f994dfbbff032fbd7f4ddd1a814b2268c73e0d48ce595a40c8",
+            "all_call_count": 7,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 5,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W6390527.exchange_items",
+              "orders.#W6390527.exchange_items[0]",
+              "orders.#W6390527.exchange_new_items",
+              "orders.#W6390527.exchange_new_items[0]",
+              "orders.#W6390527.exchange_payment_method_id",
+              "orders.#W6390527.exchange_price_difference",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "e7c102b5f670e0487de8084fcd9cad6d6290028cb05eecf1f947a18c682c67b4",
+            "final_db_hash": "4759f292bd7623e928c516a8c5297bb10e9a4751f5b59011b4694f77a42624eb",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "perturb_first_write",
+          "role": "train_harmful",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "3a4c2356b3fc3b603ef344f1fabba8029c80e7bc6a0ed3198e7f701a4dcfd5d5",
+            "all_call_count": 6,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 5,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "retail",
+      "task_id": "8",
+      "reward_basis": [
+        "DB",
+        "NL_ASSERTION"
+      ],
+      "reference_action_count": 6,
+      "reference_write_count": 1,
+      "variants": [
+        {
+          "name": "reference",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "85b1e92a6ba8bcc66d89dcdbd805ddbb85733d5fe24961e2e351f279d73b2e43",
+            "all_call_count": 6,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 5,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W6390527.exchange_items",
+              "orders.#W6390527.exchange_items[0]",
+              "orders.#W6390527.exchange_new_items",
+              "orders.#W6390527.exchange_new_items[0]",
+              "orders.#W6390527.exchange_payment_method_id",
+              "orders.#W6390527.exchange_price_difference",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "5b2f09da4f1a675123b2051357fa68366a94e45d95da31f72d721581876916d0",
+            "final_db_hash": "b9f3a1f4d12b2c566be5d4095911feeeb042d85824351897dcba3faf9f5920e4",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "strip_reads",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "85b1e92a6ba8bcc66d89dcdbd805ddbb85733d5fe24961e2e351f279d73b2e43",
+            "all_call_count": 1,
+            "all_call_names": [
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 0,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W6390527.exchange_items",
+              "orders.#W6390527.exchange_items[0]",
+              "orders.#W6390527.exchange_new_items",
+              "orders.#W6390527.exchange_new_items[0]",
+              "orders.#W6390527.exchange_payment_method_id",
+              "orders.#W6390527.exchange_price_difference",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "5b2f09da4f1a675123b2051357fa68366a94e45d95da31f72d721581876916d0",
+            "final_db_hash": "b9f3a1f4d12b2c566be5d4095911feeeb042d85824351897dcba3faf9f5920e4",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_reads",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "85b1e92a6ba8bcc66d89dcdbd805ddbb85733d5fe24961e2e351f279d73b2e43",
+            "all_call_count": 11,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 10,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W6390527.exchange_items",
+              "orders.#W6390527.exchange_items[0]",
+              "orders.#W6390527.exchange_new_items",
+              "orders.#W6390527.exchange_new_items[0]",
+              "orders.#W6390527.exchange_payment_method_id",
+              "orders.#W6390527.exchange_price_difference",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "5b2f09da4f1a675123b2051357fa68366a94e45d95da31f72d721581876916d0",
+            "final_db_hash": "b9f3a1f4d12b2c566be5d4095911feeeb042d85824351897dcba3faf9f5920e4",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "writes_first",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "85b1e92a6ba8bcc66d89dcdbd805ddbb85733d5fe24961e2e351f279d73b2e43",
+            "all_call_count": 6,
+            "all_call_names": [
+              "exchange_delivered_order_items",
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details"
+            ],
+            "read_count": 5,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W6390527.exchange_items",
+              "orders.#W6390527.exchange_items[0]",
+              "orders.#W6390527.exchange_new_items",
+              "orders.#W6390527.exchange_new_items[0]",
+              "orders.#W6390527.exchange_payment_method_id",
+              "orders.#W6390527.exchange_price_difference",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "5b2f09da4f1a675123b2051357fa68366a94e45d95da31f72d721581876916d0",
+            "final_db_hash": "b9f3a1f4d12b2c566be5d4095911feeeb042d85824351897dcba3faf9f5920e4",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "drop_first_write",
+          "role": "train_harmful",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 5,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details"
+            ],
+            "read_count": 5,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_first_write",
+          "role": "heldout_harmful",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 2,
+            "write_names": [
+              "exchange_delivered_order_items",
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "00c312687209c25fc964a87b9f1ce729b269738bff7464301738fa0d7613e478",
+            "all_call_count": 7,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 5,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W6390527.exchange_items",
+              "orders.#W6390527.exchange_items[0]",
+              "orders.#W6390527.exchange_new_items",
+              "orders.#W6390527.exchange_new_items[0]",
+              "orders.#W6390527.exchange_payment_method_id",
+              "orders.#W6390527.exchange_price_difference",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "5b2f09da4f1a675123b2051357fa68366a94e45d95da31f72d721581876916d0",
+            "final_db_hash": "b9f3a1f4d12b2c566be5d4095911feeeb042d85824351897dcba3faf9f5920e4",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "perturb_first_write",
+          "role": "train_harmful",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "88d09a4b3f936a70a4ba49b0f8cd53135bc62e3f018e73c90d4f6b186a760554",
+            "all_call_count": 6,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 5,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "retail",
+      "task_id": "9",
+      "reward_basis": [
+        "DB",
+        "NL_ASSERTION"
+      ],
+      "reference_action_count": 6,
+      "reference_write_count": 1,
+      "variants": [
+        {
+          "name": "reference",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "4fc73b71166af03c4d37bb79581a7ea82c6324f6ba6f35f049598c52f9c1bd84",
+            "all_call_count": 6,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 5,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W6390527.exchange_items",
+              "orders.#W6390527.exchange_items[0]",
+              "orders.#W6390527.exchange_new_items",
+              "orders.#W6390527.exchange_new_items[0]",
+              "orders.#W6390527.exchange_payment_method_id",
+              "orders.#W6390527.exchange_price_difference",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "43715ce33f751e994ab35c0455056968dde3fff7ee30f1af8d795bc70632869f",
+            "final_db_hash": "c0bf2b8ebfe464fbdd844b2a8b92216354b0e23a886ec8b443978d41a4631851",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "strip_reads",
+          "role": "train_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "4fc73b71166af03c4d37bb79581a7ea82c6324f6ba6f35f049598c52f9c1bd84",
+            "all_call_count": 1,
+            "all_call_names": [
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 0,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W6390527.exchange_items",
+              "orders.#W6390527.exchange_items[0]",
+              "orders.#W6390527.exchange_new_items",
+              "orders.#W6390527.exchange_new_items[0]",
+              "orders.#W6390527.exchange_payment_method_id",
+              "orders.#W6390527.exchange_price_difference",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "43715ce33f751e994ab35c0455056968dde3fff7ee30f1af8d795bc70632869f",
+            "final_db_hash": "c0bf2b8ebfe464fbdd844b2a8b92216354b0e23a886ec8b443978d41a4631851",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_reads",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "4fc73b71166af03c4d37bb79581a7ea82c6324f6ba6f35f049598c52f9c1bd84",
+            "all_call_count": 11,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_user_details",
+              "get_order_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 10,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W6390527.exchange_items",
+              "orders.#W6390527.exchange_items[0]",
+              "orders.#W6390527.exchange_new_items",
+              "orders.#W6390527.exchange_new_items[0]",
+              "orders.#W6390527.exchange_payment_method_id",
+              "orders.#W6390527.exchange_price_difference",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "43715ce33f751e994ab35c0455056968dde3fff7ee30f1af8d795bc70632869f",
+            "final_db_hash": "c0bf2b8ebfe464fbdd844b2a8b92216354b0e23a886ec8b443978d41a4631851",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "writes_first",
+          "role": "heldout_correct",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "4fc73b71166af03c4d37bb79581a7ea82c6324f6ba6f35f049598c52f9c1bd84",
+            "all_call_count": 6,
+            "all_call_names": [
+              "exchange_delivered_order_items",
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details"
+            ],
+            "read_count": 5,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W6390527.exchange_items",
+              "orders.#W6390527.exchange_items[0]",
+              "orders.#W6390527.exchange_new_items",
+              "orders.#W6390527.exchange_new_items[0]",
+              "orders.#W6390527.exchange_payment_method_id",
+              "orders.#W6390527.exchange_price_difference",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "43715ce33f751e994ab35c0455056968dde3fff7ee30f1af8d795bc70632869f",
+            "final_db_hash": "c0bf2b8ebfe464fbdd844b2a8b92216354b0e23a886ec8b443978d41a4631851",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "drop_first_write",
+          "role": "train_harmful",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 0,
+            "write_names": [],
+            "write_arguments_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "all_call_count": 5,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details"
+            ],
+            "read_count": 5,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 0
+          },
+          "errors": []
+        },
+        {
+          "name": "duplicate_first_write",
+          "role": "heldout_harmful",
+          "official_db_correct": true,
+          "features": {
+            "write_count": 2,
+            "write_names": [
+              "exchange_delivered_order_items",
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "c22f2a44633163ee22cd97e4ed53eb8100e675ce019cc66e7b00830a52b78c30",
+            "all_call_count": 7,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 5,
+            "changed_count": 7,
+            "changed_paths": [
+              "orders.#W6390527.exchange_items",
+              "orders.#W6390527.exchange_items[0]",
+              "orders.#W6390527.exchange_new_items",
+              "orders.#W6390527.exchange_new_items[0]",
+              "orders.#W6390527.exchange_payment_method_id",
+              "orders.#W6390527.exchange_price_difference",
+              "orders.#W6390527.status"
+            ],
+            "changed_values_digest": "43715ce33f751e994ab35c0455056968dde3fff7ee30f1af8d795bc70632869f",
+            "final_db_hash": "c0bf2b8ebfe464fbdd844b2a8b92216354b0e23a886ec8b443978d41a4631851",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        },
+        {
+          "name": "perturb_first_write",
+          "role": "train_harmful",
+          "official_db_correct": false,
+          "features": {
+            "write_count": 1,
+            "write_names": [
+              "exchange_delivered_order_items"
+            ],
+            "write_arguments_digest": "f8d3cf12ead4cb236389cdca809f0866feeee6ca4af0c64efe1ad4886ee9f6a6",
+            "all_call_count": 6,
+            "all_call_names": [
+              "find_user_id_by_name_zip",
+              "get_user_details",
+              "get_order_details",
+              "get_product_details",
+              "get_product_details",
+              "exchange_delivered_order_items"
+            ],
+            "read_count": 5,
+            "changed_count": 0,
+            "changed_paths": [],
+            "changed_values_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "final_db_hash": "b25c9cb211f5efcaee5dd646054a73c4a9f43f4f5acc32c10713cd9f9ac20e9c",
+            "tool_error_count": 1
+          },
+          "errors": [
+            "ValueError"
+          ]
+        }
+      ]
+    }
+  ]
+}

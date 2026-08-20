@@ -1,0 +1,105 @@
+{
+  "baseline_specs": [
+    "规范工具和参数名称；同一描述、任务、模型选项和执行器"
+  ],
+  "budget_ceiling": "24 次本地 qwen3:4b 调用，不产生外部费用",
+  "claim_ids": [
+    "claim-h14-002-invariance"
+  ],
+  "confounders": [
+    "小模型代表性不足",
+    "Ollama 工具模板",
+    "重命名自然度差异",
+    "小任务集"
+  ],
+  "dataset": "Run14 手工构造的 12 个单步工具任务",
+  "declared_inputs": [
+    "workbench_v001/schema_invariance_screen_a.py"
+  ],
+  "declared_outputs": [
+    "experiment_v001/exp-h14-002-screen-a/raw.jsonl",
+    "experiment_v001/exp-h14-002-screen-a/metrics.json"
+  ],
+  "evidence_fidelity": "SCREENING",
+  "expected_signatures": [
+    "至少两个任务出现规范模式与重命名模式成功状态不同",
+    "差异在逆映射和确定性执行回放后仍存在"
+  ],
+  "experiment_id": "exp-h14-002-screen-a",
+  "falsification_rule": "若零配对不一致或所有不一致均由实现错误解释，则本筛选不支持局部经验主张；必须用第二独立实现复核后再决定局部主张，不得据此关闭方法核或论文方向。",
+  "hypothesis_id": "h14-002",
+  "independent_ground_truth": {
+    "description": "每个任务由显式期望规范调用定义；变换映射在调用模型前固定，模型输出经确定性逆映射后与期望调用比较。",
+    "external_card_ids": [
+      "card-p084-function-calling-robustness"
+    ],
+    "external_evidence_ids": [
+      "ev-p084-expanded-toolkit-controlled-setting"
+    ],
+    "external_literature_refs": [
+      "P084",
+      "SGD-X: arXiv:2110.06800",
+      "PA-Tool: ACL 2026"
+    ],
+    "run_local_fact_refs": [
+      "workbench_v001/schema_invariance_screen_a.py"
+    ]
+  },
+  "independent_implementation_count": 1,
+  "model": "qwen3:4b",
+  "parity_dimensions": {
+    "budget": {
+      "notes": "每个任务、每种模式各一次调用，且仅评估首次工具调用。",
+      "status": "matched"
+    },
+    "information_access": {
+      "notes": "两模式使用相同用户请求和语义等价工具描述；唯一差异是可逆的工具与参数标识符映射。",
+      "status": "matched"
+    },
+    "model_provider_revision": {
+      "notes": "均使用同一 Ollama 服务中的本地 qwen3:4b。",
+      "status": "matched"
+    },
+    "sampling_protocol": {
+      "notes": "temperature=0、seed=14001、相同输出上限；每任务每模式一次调用。",
+      "status": "matched"
+    },
+    "tool_capability": {
+      "notes": "两模式暴露同一四个工具语义，并逆映射到同一规范执行器。",
+      "status": "matched"
+    }
+  },
+  "primary_metric": "配对端到端执行不一致率",
+  "provider": "本地 Ollama",
+  "purpose": "independent_claim_validation",
+  "research_question": "同一任务在规范工具模式与可逆重命名模式下是否产生端到端执行不一致？",
+  "revision": "本机已安装 qwen3:4b；运行时记录 Ollama 返回模型标识",
+  "run_id": "20260818_1818_run14",
+  "sampling_unit": "固定用户任务在一种工具模式下的一次确定性调用",
+  "schema_version": 2,
+  "secondary_metrics": [
+    "各模式任务成功率",
+    "工具选择错误数",
+    "参数映射错误数",
+    "无调用或解析错误数"
+  ],
+  "seeds": [
+    14001
+  ],
+  "subject_scope": {
+    "datasets": [
+      "Run14 手工构造筛选集"
+    ],
+    "environment": "Windows 本地 Ollama 原生 /api/chat 工具调用协议",
+    "models": [
+      "qwen3:4b"
+    ],
+    "seeds": [
+      "14001"
+    ],
+    "tasks": [
+      "12 个单步工具调用任务"
+    ]
+  },
+  "version": "v001"
+}

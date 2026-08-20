@@ -1,0 +1,34 @@
+{
+  "hypothesis_id": "h14-001",
+  "title": "预训练对齐的工具构件重命名",
+  "parent_ids": [],
+  "lineage_note": "由工具模式漂移问题直接提出的初始方法候选。",
+  "problem": "小型工具调用模型可能因工具名和参数名与预训练习惯不一致而失败。",
+  "target_failure": {
+    "summary": "模型选择不存在的近义工具名或生成错误参数名，导致调用无法执行。",
+    "card_ids": ["card-p084-function-calling-robustness"],
+    "evidence_ids": ["ev-p084-related-toolkit-error-types"]
+  },
+  "changed_computation": {
+    "baseline": "直接向模型提供开发者原始工具模式。",
+    "intervention": "为工具名和参数名生成多个候选，并选择与模型预训练偏好更一致的模式。",
+    "information_available": "原始工具模式、候选名称与模型对候选表征的偏好信号。",
+    "timing": "部署前生成，推理时使用选定模式。",
+    "budget_effect": "增加部署前候选生成与选择成本，不增加常规调用轮数。"
+  },
+  "mechanism_claim": "预训练名称熟悉度是模式错配的重要原因，选择更熟悉的名称可降低工具和参数幻觉。",
+  "falsifier": "最近先行已经实现同一计算，或公平评测中对齐重命名不优于原模式与随机重命名。",
+  "minimal_killer_experiment": "先做最近先行精确碰撞审计；若方法相同则无需重复本地实验。",
+  "nearest_prior_risk": "PA-Tool 可能与候选的计算和机制直接相同。",
+  "alternative_explanations": ["改进来自描述更清楚而非名称熟悉度", "受约束解码器或提示模板造成差异"],
+  "descriptors": {
+    "problem_family": "工具调用模式错配",
+    "computation_stage": "部署前工具模式构造",
+    "intervention_family": "工具与参数重命名",
+    "information_source": "模型预训练偏好信号",
+    "timing_class": "离线构造",
+    "budget_class": "推理轮数不变",
+    "evaluation_mode": "工具选择与参数填写"
+  },
+  "literature_refs": ["P084", "https://aclanthology.org/2026.acl-long.948/"]
+}

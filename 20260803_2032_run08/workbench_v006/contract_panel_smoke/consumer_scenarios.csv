@@ -1,0 +1,14 @@
+binding_only_allowed,binding_only_correct,boolean_report_allowed,boolean_report_correct,candidate_allowed,candidate_correct,candidate_reasons,expected_allowed,scenario
+True,True,True,True,True,True,,True,exact_match
+False,True,True,False,False,True,tool_id_mismatch,False,tool_id_changed
+False,True,True,False,False,True,tool_version_mismatch,False,tool_version_changed
+False,True,True,False,False,True,contract_hash_mismatch,False,contract_changed
+False,True,True,False,False,True,projection_hash_mismatch,False,projection_changed
+False,True,True,False,False,True,probe_catalog_hash_mismatch,False,probe_catalog_changed
+False,True,True,False,False,True,plan_hash_mismatch,False,plan_changed
+False,True,True,False,False,True,evidence_hash_mismatch,False,evidence_changed
+True,False,True,False,False,True,claim_not_in_contract:relation.target.identity|claim_not_passed:relation.target.identity,False,identity_overclaim
+True,False,True,False,False,True,empty_required_claims,False,empty_required_claims
+True,False,True,False,False,True,record_digest_mismatch,False,tampered_record
+False,True,False,True,False,True,record_status:incomplete_or_failed|claim_nonidentifiable:relation.target.identity|claim_not_passed:relation.target.identity,False,nonidentifiable_contract
+False,True,False,True,False,True,evidence_hash_mismatch|record_status:incomplete_or_failed|claim_not_passed:relation.target.responsive,False,failed_evidence

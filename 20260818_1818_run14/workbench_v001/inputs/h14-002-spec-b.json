@@ -1,0 +1,45 @@
+{
+  "experiment_id": "exp-h14-002-screen-b",
+  "hypothesis_id": "h14-002",
+  "claim_ids": ["claim-h14-002-invariance"],
+  "purpose": "independent_claim_validation",
+  "research_question": "在排除实现 A 的输出截断后，等价模式配对是否仍出现端到端执行不一致？",
+  "independent_ground_truth": {
+    "description": "第二脚本独立定义任务、工具模式、逆映射和严格调用比较，不导入或调用实现 A；显式检查结束原因与工具调用。",
+    "external_evidence_ids": ["ev-p084-expanded-toolkit-controlled-setting"],
+    "external_card_ids": ["card-p084-function-calling-robustness"],
+    "external_literature_refs": ["P084", "SGD-X: arXiv:2110.06800", "PA-Tool: ACL 2026"],
+    "run_local_fact_refs": ["workbench_v001/schema_invariance_screen_b.py", "workbench_v001/screen_a_assessment.md"]
+  },
+  "primary_metric": "排除截断后的配对端到端执行不一致率",
+  "secondary_metrics": ["各模式严格调用成功率", "零工具调用数", "结束原因", "工具名错误数", "参数错误数"],
+  "sampling_unit": "固定用户任务在一种工具模式下的一次确定性调用",
+  "dataset": "与实现 A 语义相同、在实现 B 中独立重述的 12 个单步任务",
+  "model": "qwen3:4b",
+  "provider": "本地 Ollama",
+  "revision": "本机已安装 qwen3:4b；原生 /api/chat",
+  "baseline_specs": ["规范工具和参数名称；同一描述、任务、模型选项和输出预算"],
+  "parity_dimensions": {
+    "information_access": {"status": "matched", "notes": "配对使用同一用户请求和语义描述，仅标识符经双射替换。"},
+    "tool_capability": {"status": "matched", "notes": "两模式均包含同一四种工具语义，并映射到相同规范调用。"},
+    "model_provider_revision": {"status": "matched", "notes": "同一 qwen3:4b 与 Ollama 服务。"},
+    "sampling_protocol": {"status": "matched", "notes": "temperature=0、seed=14002、num_predict=1024；配对设置完全一致。"},
+    "budget": {"status": "matched", "notes": "每任务每模式一次调用，输出上限均为 1024。"}
+  },
+  "seeds": [14002],
+  "budget_ceiling": "24 次本地 qwen3:4b 调用，不产生外部费用",
+  "expected_signatures": ["不再因长度上限大面积零调用", "若现象存在，至少两个任务的配对成功状态不同且错误不能由逆映射解释"],
+  "falsification_rule": "若两模式均到达调用且全部配对一致，则实现 B 不支持本地现象主张；这仍不能关闭论文方向，因为模型、任务和环境只是筛选范围。",
+  "confounders": ["小模型代表性不足", "Ollama 工具模板", "重命名自然度差异", "固定单种子"],
+  "declared_inputs": ["workbench_v001/schema_invariance_screen_b.py", "workbench_v001/screen_a_assessment.md"],
+  "declared_outputs": ["experiment_v001/exp-h14-002-screen-b/observations.json", "experiment_v001/exp-h14-002-screen-b/metrics.json"],
+  "evidence_fidelity": "SCREENING",
+  "subject_scope": {
+    "models": ["qwen3:4b"],
+    "tasks": ["12 个单步工具调用任务"],
+    "datasets": ["Run14 手工构造筛选集"],
+    "seeds": ["14002"],
+    "environment": "Windows 本地 Ollama 原生 /api/chat 工具调用协议，输出上限 1024"
+  },
+  "independent_implementation_count": 2
+}

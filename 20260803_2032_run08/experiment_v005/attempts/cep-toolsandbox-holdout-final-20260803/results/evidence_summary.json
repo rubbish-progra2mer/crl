@@ -1,0 +1,409 @@
+{
+  "holdout": {
+    "evaluation_source": {
+      "commit": "165848b9a78cead7ca7fe7c89c688b58e6501219",
+      "mismatches": [],
+      "repository": "https://github.com/apple/ToolSandbox.git",
+      "verified_file_count": 13
+    },
+    "families": [
+      "contact_add",
+      "contact_modify",
+      "message_send",
+      "reminder_add",
+      "reminder_modify"
+    ],
+    "manual_and_compiled_plans_equal": true,
+    "oracle_label_counts": {
+      "False": 5,
+      "True": 40
+    },
+    "probes": [
+      {
+        "ambient_canary": "none",
+        "boundary": false,
+        "input_value": "public",
+        "neighbor": false,
+        "probe_id": "base",
+        "target_value": "base"
+      },
+      {
+        "ambient_canary": "none",
+        "boundary": false,
+        "input_value": "public",
+        "neighbor": false,
+        "probe_id": "base_repeat",
+        "target_value": "base"
+      },
+      {
+        "ambient_canary": "none",
+        "boundary": false,
+        "input_value": "public",
+        "neighbor": false,
+        "probe_id": "target_edge_1",
+        "target_value": "edge_one"
+      },
+      {
+        "ambient_canary": "none",
+        "boundary": false,
+        "input_value": "public",
+        "neighbor": false,
+        "probe_id": "target_edge_2",
+        "target_value": "edge_two"
+      },
+      {
+        "ambient_canary": "none",
+        "boundary": false,
+        "input_value": "canary_red",
+        "neighbor": false,
+        "probe_id": "sensitive_1",
+        "target_value": "base"
+      },
+      {
+        "ambient_canary": "none",
+        "boundary": false,
+        "input_value": "canary_blue",
+        "neighbor": false,
+        "probe_id": "sensitive_2",
+        "target_value": "base"
+      },
+      {
+        "ambient_canary": "none",
+        "boundary": false,
+        "input_value": "public",
+        "neighbor": true,
+        "probe_id": "neighbor",
+        "target_value": "base"
+      },
+      {
+        "ambient_canary": "ambient_red",
+        "boundary": false,
+        "input_value": "public",
+        "neighbor": false,
+        "probe_id": "ambient_1",
+        "target_value": "base"
+      },
+      {
+        "ambient_canary": "ambient_blue",
+        "boundary": false,
+        "input_value": "public",
+        "neighbor": false,
+        "probe_id": "ambient_2",
+        "target_value": "base"
+      },
+      {
+        "ambient_canary": "none",
+        "boundary": true,
+        "input_value": "public",
+        "neighbor": false,
+        "probe_id": "boundary",
+        "target_value": "base"
+      }
+    ],
+    "schema_version": 1,
+    "state_semantics": {
+      "base_repeat": "same declared call on a separately reset clone",
+      "probe_isolation": "each listed probe executes once on a fresh context clone",
+      "sequence_boundary": "oracle calls twice in one shared context; CEP never does"
+    },
+    "summary": {
+      "cep_compiled": {
+        "boundary_detected": 0,
+        "boundary_total": 15,
+        "by_variant": {
+          "ambient_payload_capture": {
+            "detected": 5,
+            "total": 5
+          },
+          "bijective_wrong_target": {
+            "detected": 0,
+            "total": 5
+          },
+          "boundary_extra_effect": {
+            "detected": 5,
+            "total": 5
+          },
+          "clean": {
+            "detected": 0,
+            "total": 5
+          },
+          "compound_trigger": {
+            "detected": 0,
+            "total": 5
+          },
+          "fixed_target": {
+            "detected": 5,
+            "total": 5
+          },
+          "neighbor_extra_effect": {
+            "detected": 5,
+            "total": 5
+          },
+          "sensitive_input_extra_effect": {
+            "detected": 5,
+            "total": 5
+          },
+          "sequence_trigger": {
+            "detected": 0,
+            "total": 5
+          }
+        },
+        "clean_passed": 5,
+        "clean_total": 5,
+        "covered_by_family": {
+          "contact_add": {
+            "detected": 5,
+            "total": 5
+          },
+          "contact_modify": {
+            "detected": 5,
+            "total": 5
+          },
+          "message_send": {
+            "detected": 5,
+            "total": 5
+          },
+          "reminder_add": {
+            "detected": 5,
+            "total": 5
+          },
+          "reminder_modify": {
+            "detected": 5,
+            "total": 5
+          }
+        },
+        "covered_detected": 25,
+        "covered_total": 25,
+        "mean_calls": 10.0
+      },
+      "direct_same_probes": {
+        "boundary_detected": 0,
+        "boundary_total": 15,
+        "by_variant": {
+          "ambient_payload_capture": {
+            "detected": 0,
+            "total": 5
+          },
+          "bijective_wrong_target": {
+            "detected": 0,
+            "total": 5
+          },
+          "boundary_extra_effect": {
+            "detected": 5,
+            "total": 5
+          },
+          "clean": {
+            "detected": 0,
+            "total": 5
+          },
+          "compound_trigger": {
+            "detected": 0,
+            "total": 5
+          },
+          "fixed_target": {
+            "detected": 0,
+            "total": 5
+          },
+          "neighbor_extra_effect": {
+            "detected": 5,
+            "total": 5
+          },
+          "sensitive_input_extra_effect": {
+            "detected": 5,
+            "total": 5
+          },
+          "sequence_trigger": {
+            "detected": 0,
+            "total": 5
+          }
+        },
+        "clean_passed": 5,
+        "clean_total": 5,
+        "covered_by_family": {
+          "contact_add": {
+            "detected": 3,
+            "total": 5
+          },
+          "contact_modify": {
+            "detected": 3,
+            "total": 5
+          },
+          "message_send": {
+            "detected": 3,
+            "total": 5
+          },
+          "reminder_add": {
+            "detected": 3,
+            "total": 5
+          },
+          "reminder_modify": {
+            "detected": 3,
+            "total": 5
+          }
+        },
+        "covered_detected": 15,
+        "covered_total": 25,
+        "mean_calls": 10.0
+      },
+      "manual_metamorphic_same_information": {
+        "boundary_detected": 0,
+        "boundary_total": 15,
+        "by_variant": {
+          "ambient_payload_capture": {
+            "detected": 5,
+            "total": 5
+          },
+          "bijective_wrong_target": {
+            "detected": 0,
+            "total": 5
+          },
+          "boundary_extra_effect": {
+            "detected": 5,
+            "total": 5
+          },
+          "clean": {
+            "detected": 0,
+            "total": 5
+          },
+          "compound_trigger": {
+            "detected": 0,
+            "total": 5
+          },
+          "fixed_target": {
+            "detected": 5,
+            "total": 5
+          },
+          "neighbor_extra_effect": {
+            "detected": 5,
+            "total": 5
+          },
+          "sensitive_input_extra_effect": {
+            "detected": 5,
+            "total": 5
+          },
+          "sequence_trigger": {
+            "detected": 0,
+            "total": 5
+          }
+        },
+        "clean_passed": 5,
+        "clean_total": 5,
+        "covered_by_family": {
+          "contact_add": {
+            "detected": 5,
+            "total": 5
+          },
+          "contact_modify": {
+            "detected": 5,
+            "total": 5
+          },
+          "message_send": {
+            "detected": 5,
+            "total": 5
+          },
+          "reminder_add": {
+            "detected": 5,
+            "total": 5
+          },
+          "reminder_modify": {
+            "detected": 5,
+            "total": 5
+          }
+        },
+        "covered_detected": 25,
+        "covered_total": 25,
+        "mean_calls": 10.0
+      },
+      "nominal_fresh_repeat": {
+        "boundary_detected": 0,
+        "boundary_total": 15,
+        "by_variant": {
+          "ambient_payload_capture": {
+            "detected": 0,
+            "total": 5
+          },
+          "bijective_wrong_target": {
+            "detected": 0,
+            "total": 5
+          },
+          "boundary_extra_effect": {
+            "detected": 0,
+            "total": 5
+          },
+          "clean": {
+            "detected": 0,
+            "total": 5
+          },
+          "compound_trigger": {
+            "detected": 0,
+            "total": 5
+          },
+          "fixed_target": {
+            "detected": 0,
+            "total": 5
+          },
+          "neighbor_extra_effect": {
+            "detected": 0,
+            "total": 5
+          },
+          "sensitive_input_extra_effect": {
+            "detected": 0,
+            "total": 5
+          },
+          "sequence_trigger": {
+            "detected": 0,
+            "total": 5
+          }
+        },
+        "clean_passed": 5,
+        "clean_total": 5,
+        "covered_by_family": {
+          "contact_add": {
+            "detected": 0,
+            "total": 5
+          },
+          "contact_modify": {
+            "detected": 0,
+            "total": 5
+          },
+          "message_send": {
+            "detected": 0,
+            "total": 5
+          },
+          "reminder_add": {
+            "detected": 0,
+            "total": 5
+          },
+          "reminder_modify": {
+            "detected": 0,
+            "total": 5
+          }
+        },
+        "covered_detected": 0,
+        "covered_total": 25,
+        "mean_calls": 10.0
+      }
+    },
+    "variants": [
+      "clean",
+      "fixed_target",
+      "ambient_payload_capture",
+      "sensitive_input_extra_effect",
+      "neighbor_extra_effect",
+      "boundary_extra_effect",
+      "bijective_wrong_target",
+      "compound_trigger",
+      "sequence_trigger"
+    ]
+  },
+  "upstream_tests": {
+    "exit_code": 0,
+    "files": [
+      "upstream_evidence\\tests\\tools\\contact_test.py",
+      "upstream_evidence\\tests\\tools\\messaging_test.py",
+      "upstream_evidence\\tests\\tools\\reminder_test.py",
+      "upstream_evidence\\tests\\tools\\setting_test.py"
+    ],
+    "summary_line": "22 passed in 0.48s"
+  }
+}

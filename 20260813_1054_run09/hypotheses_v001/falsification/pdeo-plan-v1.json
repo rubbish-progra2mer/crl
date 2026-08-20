@@ -1,0 +1,56 @@
+{
+  "claims": [
+    {
+      "alternative_explanations": [
+        "类型计划已包含完整正确规格，因此编译器只做机械传播。",
+        "合成域的探针不存在读取噪声或权限失败。",
+        "信息增益基线的封闭分支模型故意无法表示系统性变异。"
+      ],
+      "claim_id": "pdeo-systematic-safe-gating",
+      "claim_text": "在类型计划和工具效果正确的受控状态域内，PDEO 对系统性单义务故障不产生危险提交，同时对安全的无关字段变异保持提交，并以低于完整工具契约的探针成本实现该性质。",
+      "falsifier": "PDEO 在任一系统性义务故障上提交，或无关变异提交召回率低于 1，或平均成本不低于完整工具契约。",
+      "killer_experiment_id": "pdeo-systematic-fault-suite-v1",
+      "minimum_effect_or_decision_rule": "危险提交率必须为 0；安全无关变异提交召回率必须为 1；PDEO 平均成本必须严格低于完整工具契约。",
+      "observable": "系统性义务故障危险提交率、安全无关变异提交召回率、平均探针成本。",
+      "scope": "三个合成状态型工具域、离散原子谓词、无读取噪声、只保护提交而不评价恢复策略。",
+      "status": "supported_locally",
+      "status_reason": "Formal attempt-pdeo-formal-002 支持三个原始合成域内的窄状态故障门控主张；固定三审认为该证据尚不能识别计划派生机制。",
+      "supporting_experiment_ids": [
+        "pdeo-systematic-fault-suite-v1"
+      ]
+    },
+    {
+      "alternative_explanations": [
+        "候选计划和冻结规则仍由同一主研究者设计，存在语义同源。",
+        "人工逐计划最小义务可达到与 PDEO 完全相同的结果。",
+        "优势可能只是自动选择静态子集，而非新的形式语义。",
+        "合成探针无陈旧、噪声或权限失败。"
+      ],
+      "claim_id": "pdeo-plan-conditioned-compilation",
+      "claim_text": "对同一写工具的多种下游承诺，PDEO 能从类型计划编译出与独立冻结规则一致的义务和最小探针集合，在义务故障上保持零危险提交，并以低于静态每域契约的平均探针成本接受全部计划安全的无关状态变异。",
+      "falsifier": "任一编译义务或探针集合与冻结规则不一致，任一单义务故障被提交，安全无关变异召回低于 1，或 PDEO 按计划平均成本不低于静态每域契约。",
+      "killer_experiment_id": "pdeo-plan-variation-suite-v2",
+      "minimum_effect_or_decision_rule": "两项精确匹配率均须为 1，危险提交率须为 0，安全无关变异召回率须为 1，PDEO 平均成本须严格低于静态每域契约。",
+      "observable": "编译义务精确匹配率、探针集合精确匹配率、义务故障危险提交率、安全无关变异召回率、按计划平均探针成本。",
+      "scope": "四个合成域、16 个类型计划、确定性无噪读回；冻结规则由同一 Run 主研究者独立成文件，不是外部团队标注。",
+      "status": "supported_locally",
+      "status_reason": "Formal attempt-pdeo-plan-formal-002 在四域 16 个计划和 178 个状态案例上满足全部预设杀手条件；规格遗漏敏感性同时证实保证依赖规格完整性。",
+      "supporting_experiment_ids": [
+        "pdeo-plan-variation-suite-v2"
+      ]
+    }
+  ],
+  "created_at": "2026-08-13T03:28:39.818082Z",
+  "global_confounders": [
+    "状态原子和探针覆盖由人工类型规格给出。",
+    "三个域共享相同结构，跨领域外推受限。",
+    "没有自然语言计划抽取误差。",
+    "没有并发、陈旧读或探针噪声。"
+  ],
+  "hypothesis_id": "h4-pdeo",
+  "plan_id": "pdeo-plan-v1",
+  "run_id": "20260813_1054_run09",
+  "schema_version": 1,
+  "updated_at": "2026-08-13T03:50:33.396944Z",
+  "version": "v001"
+}

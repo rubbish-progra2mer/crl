@@ -1,0 +1,16 @@
+{
+  "hypothesis_id": "h15-002",
+  "title": "错误消息信息量阶梯下的反事实恢复评价",
+  "parent_ids": ["h15-001"],
+  "lineage_note": "初始反馈方法被先行占据后，从评价与系统能力维度派生。",
+  "problem": "恢复成功率没有区分模型自我纠错与错误消息泄漏的答案信息。",
+  "target_failure": {"summary": "同一失败轨迹因错误消息携带不同信息量而恢复成功，但统一指标把它们视为相同能力。", "card_ids": ["paper-p049"], "evidence_ids": ["ev-p039-aggregate-score-masking", "ev-p049-bounded-review-loop"]},
+  "changed_computation": {"baseline": "只报告一种错误反馈条件下的最终恢复成功率。", "intervention": "固定任务和初始错误调用，在不透明、错误类别、可用约束、答案泄漏四级反馈间做反事实配对，并分阶段报告修订来源。", "information_available": "用户任务、固定错误调用、分级错误消息和正确调用标签。", "timing": "失败后的第一轮修订评价。", "budget_effect": "每个失败轨迹增加四种配对修订调用。"},
+  "mechanism_claim": "反馈信息量阶梯能识别恢复增益是否主要依赖 oracle 式答案泄漏，而不是模型从可执行约束中自主定位错误。",
+  "falsifier": "最近先行已有相同信息量分层和配对执行；或多模型多任务中各级恢复无差异且第二实现排除评价错误。",
+  "minimal_killer_experiment": "在本地模型上固定错误调用，比较不透明失败与仅错误类别反馈的正确修订率。",
+  "nearest_prior_risk": "ToolFailBench 已有失败分类，P049 已有反馈循环；需要确认是否控制反馈信息量和泄漏。",
+  "alternative_explanations": ["模型仅从原任务重新求解", "初始错误过于显眼", "JSON 提示协议影响结果"],
+  "descriptors": {"problem_family": "工具恢复评价有效性", "computation_stage": "失败后反事实评价", "intervention_family": "反馈信息量分层", "information_source": "固定错误轨迹与错误消息", "timing_class": "单次重试", "budget_class": "配对多条件", "evaluation_mode": "分层恢复与泄漏敏感性"},
+  "literature_refs": ["P039", "P049", "P012"]
+}

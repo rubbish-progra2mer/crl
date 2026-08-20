@@ -1,0 +1,960 @@
+{
+  "created_at": "2026-08-01T09:01:50.759046Z",
+  "evaluation_id": "v012_content_repair_replay",
+  "method": "Frozen objective v011 queries and direct-reading relevance judgments replayed once against the P091-content-repaired current Card FTS index. This is a content-repair regression replay, not a fresh blind evaluation.",
+  "schema_version": 1,
+  "splits": [
+    {
+      "queries": [
+        {
+          "corpus_gap": false,
+          "critical": true,
+          "query": "embedding cosine similarity fails to distinguish a contradicting memory update from a rephrased duplicate so stale and current values stay co-present and induce fabricated answers",
+          "query_id": "v012-cal-failure-001",
+          "relevant_card_ids": [
+            "failure-cosine-cannot-separate-contradiction-from-duplicate"
+          ],
+          "target_kind": "failure",
+          "top10_card_ids": [
+            "failure-cosine-cannot-separate-contradiction-from-duplicate",
+            "failure-retrieved-update-lacks-decision-authority",
+            "failure-gold-context-does-not-solve-knowledge-use",
+            "failure-forced-hypothetical-tool-alignment",
+            "failure-plan-cache-semantic-false-positives",
+            "failure-memory-unit-granularity-mismatch",
+            "failure-llm-freshness-judgment-prior-override-and-drift",
+            "failure-retrieved-experience-propagates-stored-errors",
+            "failure-selective-forgetting-collapses-with-context-length",
+            "failure-sparse-topology-suppresses-correct-insight"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": true,
+          "query": "an LLM given an explicit newer-wins rule and ordered version markers still answers with its training prior or loses track of the largest serial as the candidate pool grows",
+          "query_id": "v012-cal-failure-002",
+          "relevant_card_ids": [
+            "failure-llm-freshness-judgment-prior-override-and-drift"
+          ],
+          "target_kind": "failure",
+          "top10_card_ids": [
+            "failure-llm-freshness-judgment-prior-override-and-drift",
+            "failure-selective-forgetting-collapses-with-context-length",
+            "failure-anchor-state-credit-needs-state-recurrence",
+            "failure-constrained-plan-surface-validity",
+            "failure-diminishing-compute-return",
+            "failure-fixed-single-granularity-memory",
+            "failure-gold-context-does-not-solve-knowledge-use",
+            "failure-forced-hypothetical-tool-alignment",
+            "failure-free-form-clarification-no-stop-value",
+            "failure-iterative-refinement-corrupts-correct-output"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "segmenting conversational memory at one fixed granularity such as session or summary causes incomplete recall or noise because no per-query granularity selection exists",
+          "query_id": "v012-cal-failure-003",
+          "relevant_card_ids": [
+            "failure-fixed-single-granularity-memory",
+            "failure-memory-unit-granularity-mismatch"
+          ],
+          "target_kind": "failure",
+          "top10_card_ids": [
+            "failure-fixed-single-granularity-memory",
+            "failure-memory-unit-granularity-mismatch",
+            "failure-large-corpus-tool-retrieval-breaks-oracle-menu",
+            "failure-retrieved-update-lacks-decision-authority",
+            "failure-fixed-search-depth-causes-under-and-over-search",
+            "failure-forced-hypothetical-tool-alignment",
+            "failure-retrieved-memory-laundered-through-actions",
+            "failure-uniform-terminal-return-erases-step-credit",
+            "failure-retrieved-experience-propagates-stored-errors",
+            "failure-fixed-shortlist-depth-masks-hard-query-zero"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": true,
+          "query": "dense retrievers rank short early-positioned or literally overlapping distractor documents above the document that actually contains the answer",
+          "query_id": "v012-cal-failure-004",
+          "relevant_card_ids": [
+            "failure-dense-retriever-surface-bias-collapse"
+          ],
+          "target_kind": "failure",
+          "top10_card_ids": [
+            "failure-dense-retriever-surface-bias-collapse",
+            "failure-gold-context-does-not-solve-knowledge-use",
+            "failure-large-corpus-tool-retrieval-breaks-oracle-menu",
+            "failure-generic-or-unvalidated-tool-libraries-add-distractors",
+            "failure-sparse-topology-suppresses-correct-insight",
+            "failure-natural-language-ir-hurts-formal-planning",
+            "failure-semantically-related-toolkit-expansion",
+            "failure-solver-guarantee-stops-at-formalization",
+            "failure-retrieved-update-lacks-decision-authority",
+            "failure-answer-accuracy-without-conflict-recognition"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "agents told that newer facts have larger serial numbers still fail to overwrite outdated facts once the interaction history grows to tens of thousands of tokens",
+          "query_id": "v012-cal-failure-005",
+          "relevant_card_ids": [
+            "failure-selective-forgetting-collapses-with-context-length"
+          ],
+          "target_kind": "failure",
+          "top10_card_ids": [
+            "failure-selective-forgetting-collapses-with-context-length",
+            "failure-llm-freshness-judgment-prior-override-and-drift",
+            "failure-constrained-plan-surface-validity",
+            "failure-gold-context-does-not-solve-knowledge-use",
+            "failure-interactive-gains-collapse-against-independent-sampling",
+            "failure-fixed-shortlist-depth-masks-hard-query-zero",
+            "failure-long-history-reading-overload",
+            "failure-generic-or-unvalidated-tool-libraries-add-distractors",
+            "failure-cosine-cannot-separate-contradiction-from-duplicate",
+            "failure-plan-cache-semantic-false-positives"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": true,
+          "query": "optimization code that executes and returns solver-feasible optimal solutions while the formulation itself omits required constraints so correctness stays near zero",
+          "query_id": "v012-cal-failure-006",
+          "relevant_card_ids": [
+            "failure-solver-feasibility-near-zero-information-proxy"
+          ],
+          "target_kind": "failure",
+          "top10_card_ids": [
+            "failure-solver-feasibility-near-zero-information-proxy",
+            "failure-solver-guarantee-stops-at-formalization",
+            "failure-diminishing-compute-return",
+            "failure-constraint-shift-breaks-formalization",
+            "failure-generator-aligned-verification-passes-shared-misreads",
+            "failure-large-corpus-tool-retrieval-breaks-oracle-menu",
+            "failure-constrained-plan-surface-validity",
+            "failure-same-set-agent-graph-evaluation",
+            "failure-fixed-shortlist-depth-masks-hard-query-zero",
+            "failure-objective-equivalence-passes-nonbinding-errors"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": true,
+          "query": "filtering training data by matching the reference optimal objective value silently admits programs with spurious or missing constraints that are non-binding on the tested instance",
+          "query_id": "v012-cal-failure-007",
+          "relevant_card_ids": [
+            "failure-objective-equivalence-passes-nonbinding-errors"
+          ],
+          "target_kind": "failure",
+          "top10_card_ids": [
+            "failure-objective-equivalence-passes-nonbinding-errors",
+            "failure-solver-feasibility-near-zero-information-proxy",
+            "failure-large-corpus-tool-retrieval-breaks-oracle-menu",
+            "failure-forced-hypothetical-tool-alignment",
+            "failure-free-form-clarification-no-stop-value",
+            "failure-likelihood-utility-does-not-guarantee-agent-utility",
+            "failure-solver-guarantee-stops-at-formalization",
+            "failure-generic-reflection-local-minima",
+            "failure-token-local-credit-misses-turn-level-delayed-value",
+            "failure-constrained-plan-surface-validity"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "an LLM judge reviewing generated formal specifications marks a quarter of them correct even though executable test cases expose concrete counterexamples",
+          "query_id": "v012-cal-failure-008",
+          "relevant_card_ids": [
+            "failure-llm-judge-misses-executable-spec-errors"
+          ],
+          "target_kind": "failure",
+          "top10_card_ids": [
+            "failure-llm-judge-misses-executable-spec-errors",
+            "failure-tool-use-metrics-collapse-distinct-errors",
+            "failure-semantically-related-toolkit-expansion",
+            "failure-iterative-refinement-corrupts-correct-output",
+            "failure-sparse-topology-suppresses-correct-insight",
+            "failure-natural-language-ir-hurts-formal-planning",
+            "failure-dense-retriever-surface-bias-collapse",
+            "failure-diminishing-compute-return",
+            "failure-grounded-formalization-output-expansion",
+            "failure-internal-tool-confidence-not-execution-success"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": true,
+          "query": "deterministic subject relation object supersession rule that retires a stale fact value in a ledger at write time without any similarity threshold or LLM call",
+          "query_id": "v012-cal-operator-001",
+          "relevant_card_ids": [
+            "operator-deterministic-sro-supersession-ledger"
+          ],
+          "target_kind": "operator",
+          "top10_card_ids": [
+            "operator-deterministic-sro-supersession-ledger",
+            "operator-write-side-state-adjudication",
+            "operator-extract-then-deterministic-max-assembly",
+            "operator-dynamic-linked-memory-evolution",
+            "operator-cost-penalized-structured-clarification",
+            "operator-learned-memory-crud-control",
+            "operator-hidden-state-tool-necessity-prefill",
+            "operator-active-counterexample-verifier",
+            "operator-bounded-preexecution-reviewer",
+            "operator-smt-preexecution-policy-guard"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "let the LLM only extract candidate values verbatim and use a deterministic python max over serial numbers to pick the freshest one at assembly time",
+          "query_id": "v012-cal-operator-002",
+          "relevant_card_ids": [
+            "operator-extract-then-deterministic-max-assembly"
+          ],
+          "target_kind": "operator",
+          "top10_card_ids": [
+            "operator-extract-then-deterministic-max-assembly",
+            "operator-deterministic-sro-supersession-ledger",
+            "operator-learned-memory-crud-control",
+            "operator-active-counterexample-verifier",
+            "operator-write-side-state-adjudication",
+            "operator-milestone-dag-trajectory-evaluation",
+            "operator-required-parameter-description-tool-retrieval",
+            "operator-hidden-state-tool-necessity-prefill",
+            "operator-decomposed-research-evidence-evaluation",
+            "operator-decomposed-solver-backed-formal-planning"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": true,
+          "query": "verify an optimization formulation by perturbing a parameter that should change the optimum and flagging a missing component when the objective shows no response",
+          "query_id": "v012-cal-operator-003",
+          "relevant_card_ids": [
+            "operator-behavioral-perturbation-existence-test"
+          ],
+          "target_kind": "operator",
+          "top10_card_ids": [
+            "operator-behavioral-perturbation-existence-test",
+            "operator-required-parameter-description-tool-retrieval",
+            "operator-hidden-state-tool-necessity-prefill",
+            "operator-bounded-preexecution-reviewer",
+            "operator-joint-nonnegative-residual-retrieval",
+            "operator-bilevel-graph-toolchain-planning",
+            "operator-outcome-trained-execution-state-planner",
+            "operator-verified-single-branch-repair",
+            "operator-higher-order-message-exposure",
+            "operator-tool-grounded-critique"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": true,
+          "query": "replace the objective with a constant and inject a labeled feasible or single-constraint-violating solution so the solver's feasibility verdict tests the candidate's constraint set",
+          "query_id": "v012-cal-operator-004",
+          "relevant_card_ids": [
+            "operator-labeled-probe-injection-dual-verifier"
+          ],
+          "target_kind": "operator",
+          "top10_card_ids": [
+            "operator-labeled-probe-injection-dual-verifier",
+            "operator-solver-simplification-query-verification",
+            "operator-decomposed-solver-backed-formal-planning",
+            "operator-joint-nonnegative-residual-retrieval",
+            "operator-behavioral-perturbation-existence-test",
+            "operator-bilevel-graph-toolchain-planning",
+            "operator-neighbor-distilled-test-suites",
+            "operator-active-counterexample-verifier",
+            "operator-evidence-audit-before-score",
+            "operator-incremental-injection-benchmark-reconstruction"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "distill a small set of random test inputs that distinguishes every single-modification neighbor of the reference program to approximate semantic equivalence checking",
+          "query_id": "v012-cal-operator-005",
+          "relevant_card_ids": [
+            "operator-neighbor-distilled-test-suites"
+          ],
+          "target_kind": "operator",
+          "top10_card_ids": [
+            "operator-neighbor-distilled-test-suites",
+            "operator-active-counterexample-verifier",
+            "operator-adaptive-plan-template-reuse",
+            "operator-archive-conditioned-agent-code-search",
+            "operator-validated-specialized-tool-creation-retrieval",
+            "operator-dynamic-linked-memory-evolution",
+            "operator-mcts-executable-workflow-refinement",
+            "operator-fixed-budget-independent-path-aggregation",
+            "operator-decomposed-research-evidence-evaluation",
+            "operator-milestone-dag-trajectory-evaluation"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "learn a per-query stopping policy over a ranked candidate list where the reward is the negative log probability that a random selection of that depth would succeed",
+          "query_id": "v012-cal-operator-006",
+          "relevant_card_ids": [
+            "operator-chance-corrected-depth-reward"
+          ],
+          "target_kind": "operator",
+          "top10_card_ids": [
+            "operator-chance-corrected-depth-reward",
+            "operator-gold-supervised-hindsight-search-depth",
+            "operator-grouped-masked-history-step-credit",
+            "operator-joint-nonnegative-residual-retrieval",
+            "operator-hypothetical-tool-query-expansion",
+            "operator-transition-decomposed-agent-training",
+            "operator-outcome-trained-execution-state-planner",
+            "operator-extract-then-deterministic-max-assembly",
+            "operator-active-counterexample-verifier",
+            "operator-cascaded-multiagent-meta-routing"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "evaluate specifications by compiling them to executable checks and requiring passes on four buckets crossing preconditions and postconditions with soundness and completeness",
+          "query_id": "v012-cal-operator-007",
+          "relevant_card_ids": [
+            "operator-four-bucket-executable-spec-testing"
+          ],
+          "target_kind": "operator",
+          "top10_card_ids": [
+            "operator-four-bucket-executable-spec-testing",
+            "operator-thought-tree-search",
+            "operator-joint-nonnegative-residual-retrieval",
+            "operator-mcts-executable-workflow-refinement",
+            "operator-validated-specialized-tool-creation-retrieval",
+            "operator-chance-corrected-depth-reward",
+            "operator-milestone-dag-trajectory-evaluation",
+            "operator-higher-order-message-exposure",
+            "operator-archive-conditioned-agent-code-search",
+            "operator-write-side-state-adjudication"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "benchmark that feeds long inputs to memory agents chunk by chunk with incremental updates and separately measures accurate retrieval test-time learning long-range understanding and selective forgetting",
+          "query_id": "v012-cal-paper-001",
+          "relevant_card_ids": [
+            "paper-p094"
+          ],
+          "target_kind": "paper",
+          "top10_card_ids": [
+            "paper-p094",
+            "paper-p017",
+            "paper-p028",
+            "paper-p062",
+            "paper-longmemeval",
+            "paper-p092",
+            "paper-p021",
+            "paper-p066",
+            "paper-p091",
+            "paper-p043"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "study where a solver constructs simplified feasibility and optimality queries that an LLM adjudicates to verify natural language optimization formulations",
+          "query_id": "v012-cal-paper-002",
+          "relevant_card_ids": [
+            "paper-p096"
+          ],
+          "target_kind": "paper",
+          "top10_card_ids": [
+            "paper-p096",
+            "paper-p097",
+            "paper-p060",
+            "paper-p046",
+            "paper-p054",
+            "paper-p049",
+            "paper-p051",
+            "paper-p056",
+            "paper-p030",
+            "paper-p017"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "reflection or self-critique loops that reuse the model's own unvalidated insights can contaminate later trials and reproduce stored errors",
+          "query_id": "v012-cal-failure-009",
+          "relevant_card_ids": [
+            "failure-unfiltered-reflection-contamination",
+            "failure-retrieved-experience-propagates-stored-errors"
+          ],
+          "target_kind": "failure",
+          "top10_card_ids": [
+            "failure-retrieved-experience-propagates-stored-errors",
+            "failure-generic-reflection-local-minima",
+            "failure-generic-or-unvalidated-tool-libraries-add-distractors",
+            "failure-solver-feasibility-near-zero-information-proxy",
+            "failure-iterative-refinement-corrupts-correct-output",
+            "failure-plan-cache-semantic-false-positives",
+            "failure-intrinsic-self-correction-degradation",
+            "failure-memory-unit-granularity-mismatch",
+            "failure-repeat-run-reliability-collapse",
+            "failure-natural-language-ir-hurts-formal-planning"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "assign credit to individual agent steps by grouping trajectories that share a state and comparing masked-history outcome differences instead of a uniform terminal return",
+          "query_id": "v012-cal-operator-008",
+          "relevant_card_ids": [
+            "operator-grouped-masked-history-step-credit",
+            "operator-anchor-state-relative-credit"
+          ],
+          "target_kind": "operator",
+          "top10_card_ids": [
+            "operator-grouped-masked-history-step-credit",
+            "operator-anchor-state-relative-credit",
+            "operator-transition-decomposed-agent-training",
+            "operator-verified-single-branch-repair",
+            "operator-hierarchical-utterance-critic-token-actor",
+            "operator-outcome-trained-execution-state-planner",
+            "operator-milestone-dag-trajectory-evaluation",
+            "operator-unified-language-memory-action-policy",
+            "operator-terminal-state-reliability-evaluation",
+            "operator-learned-memory-crud-control"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "evaluation showing multi-agent debate or interactive discussion does not reliably beat independent sampling with majority vote at matched compute cost",
+          "query_id": "v012-cal-paper-003",
+          "relevant_card_ids": [
+            "paper-mad-study"
+          ],
+          "target_kind": "paper",
+          "top10_card_ids": [
+            "paper-p024",
+            "paper-p081",
+            "paper-mad-study",
+            "paper-p050",
+            "paper-p016",
+            "paper-p037",
+            "paper-p022",
+            "paper-tree-of-thoughts",
+            "paper-p035",
+            "paper-p032"
+          ],
+          "top5_hit": true
+        }
+      ],
+      "split": "calibration"
+    },
+    {
+      "queries": [
+        {
+          "corpus_gap": false,
+          "critical": true,
+          "query": "Under what conditions does making an agent write an explicit plan or a longer reasoning trace before acting yield no benefit, or even hurt, once the comparison holds total tokens and compute equal to a direct-acting baseline?",
+          "query_id": "v012-blind-q01",
+          "relevant_card_ids": [
+            "failure-natural-language-ir-hurts-formal-planning",
+            "failure-interactive-gains-collapse-against-independent-sampling",
+            "failure-search-resource-cost"
+          ],
+          "target_kind": "failure",
+          "top10_card_ids": [
+            "failure-natural-language-ir-hurts-formal-planning",
+            "failure-interactive-gains-collapse-against-independent-sampling",
+            "failure-constrained-plan-surface-validity",
+            "failure-generic-or-unvalidated-tool-libraries-add-distractors",
+            "failure-solver-guarantee-stops-at-formalization",
+            "failure-intrinsic-self-correction-degradation",
+            "failure-raw-observation-overload-hides-action-relevant-ui",
+            "failure-llm-freshness-judgment-prior-override-and-drift",
+            "failure-free-form-clarification-no-stop-value",
+            "failure-diminishing-compute-return"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "What mechanisms change how an agent generates, scores, or revises its candidate plans during execution so that an early planning mistake stops propagating into every later action?",
+          "query_id": "v012-blind-q02",
+          "relevant_card_ids": [
+            "operator-reason-action-interleaving",
+            "operator-thought-tree-search",
+            "operator-feedback-backpropagated-tree-search"
+          ],
+          "target_kind": "operator",
+          "top10_card_ids": [
+            "operator-outcome-trained-execution-state-planner",
+            "operator-bilevel-graph-toolchain-planning",
+            "operator-decomposed-research-evidence-evaluation",
+            "operator-smt-preexecution-policy-guard",
+            "operator-anchor-state-relative-credit",
+            "operator-write-side-state-adjudication",
+            "operator-feedback-backpropagated-tree-search",
+            "operator-cascaded-multiagent-meta-routing",
+            "operator-archive-conditioned-agent-code-search",
+            "operator-active-counterexample-verifier"
+          ],
+          "top5_hit": false
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "When does adding a self-check or verifier stage at test time fail to improve answer selection, for example because the verifier's mistakes are correlated with the generator's mistakes or the apparent gain comes only from drawing more samples?",
+          "query_id": "v012-blind-q03",
+          "relevant_card_ids": [
+            "failure-generator-aligned-verification-passes-shared-misreads",
+            "failure-solver-feasibility-near-zero-information-proxy",
+            "failure-llm-judge-misses-executable-spec-errors",
+            "failure-interactive-gains-collapse-against-independent-sampling",
+            "failure-intrinsic-self-correction-degradation"
+          ],
+          "target_kind": "failure",
+          "top10_card_ids": [
+            "failure-search-resource-cost",
+            "failure-interactive-gains-collapse-against-independent-sampling",
+            "failure-generic-or-unvalidated-tool-libraries-add-distractors",
+            "failure-generator-aligned-verification-passes-shared-misreads",
+            "failure-diminishing-compute-return",
+            "failure-grounded-formalization-output-expansion",
+            "failure-constrained-plan-surface-validity",
+            "failure-tool-use-metrics-collapse-distinct-errors",
+            "failure-forced-hypothetical-tool-alignment",
+            "failure-debate-cost-nondominance"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": true,
+          "query": "How can an agent check that a program it generated, such as an optimization model or a formal specification, actually matches the user's natural-language intent before executing it, without access to a ground-truth oracle?",
+          "query_id": "v012-blind-q04",
+          "relevant_card_ids": [
+            "operator-solver-simplification-query-verification",
+            "operator-behavioral-perturbation-existence-test",
+            "operator-active-counterexample-verifier"
+          ],
+          "target_kind": "operator",
+          "top10_card_ids": [
+            "operator-syntax-aligned-formal-ir-planning",
+            "operator-terminal-state-reliability-evaluation",
+            "operator-smt-preexecution-policy-guard",
+            "operator-behavioral-perturbation-existence-test",
+            "operator-active-counterexample-verifier",
+            "operator-hidden-state-tool-necessity-prefill",
+            "operator-four-bucket-executable-spec-testing",
+            "operator-action-preserving-observation-contextualization",
+            "operator-grounded-structured-tool-document-expansion",
+            "operator-unified-language-memory-action-policy"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "What goes wrong in tool selection and argument construction when the tool catalog contains many near-duplicate or distractor tools, and how does dumping raw tool output into the context degrade the agent's next decision?",
+          "query_id": "v012-blind-q05",
+          "relevant_card_ids": [
+            "failure-semantically-related-toolkit-expansion",
+            "failure-tool-description-and-order-bias",
+            "failure-generic-or-unvalidated-tool-libraries-add-distractors",
+            "failure-raw-observation-overload-hides-action-relevant-ui"
+          ],
+          "target_kind": "failure",
+          "top10_card_ids": [
+            "failure-semantically-related-toolkit-expansion",
+            "failure-generic-or-unvalidated-tool-libraries-add-distractors",
+            "failure-raw-observation-overload-hides-action-relevant-ui",
+            "failure-unfiltered-reflection-contamination",
+            "failure-large-corpus-tool-retrieval-breaks-oracle-menu",
+            "failure-forced-hypothetical-tool-alignment",
+            "failure-solver-feasibility-near-zero-information-proxy",
+            "failure-cosine-cannot-separate-contradiction-from-duplicate",
+            "failure-tool-description-and-order-bias",
+            "failure-reused-selection-feedback-in-agent-search"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "What mechanisms restructure or condense a tool's raw observation before the agent reads it, keeping the parts that matter for the next action while discarding noise, and how does that differ from generic summarization?",
+          "query_id": "v012-blind-q06",
+          "relevant_card_ids": [
+            "operator-action-preserving-observation-contextualization"
+          ],
+          "target_kind": "operator",
+          "top10_card_ids": [
+            "operator-action-preserving-observation-contextualization",
+            "operator-reason-action-interleaving",
+            "operator-feedback-backpropagated-tree-search",
+            "operator-outcome-trained-execution-state-planner",
+            "operator-validated-specialized-tool-creation-retrieval",
+            "operator-grounded-structured-tool-document-expansion",
+            "operator-tool-grounded-critique",
+            "operator-state-conditioned-agent-activation",
+            "operator-hidden-state-tool-necessity-prefill",
+            "operator-higher-order-message-exposure"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": true,
+          "query": "How do an agent's stored memories fail when facts go stale over time or two entries contradict each other, and what happens at decision time when retrieval surfaces outdated entries alongside current ones?",
+          "query_id": "v012-blind-q07",
+          "relevant_card_ids": [
+            "failure-cosine-cannot-separate-contradiction-from-duplicate",
+            "failure-retrieved-update-lacks-decision-authority",
+            "failure-llm-freshness-judgment-prior-override-and-drift",
+            "failure-selective-forgetting-collapses-with-context-length",
+            "failure-answer-accuracy-without-conflict-recognition"
+          ],
+          "target_kind": "failure",
+          "top10_card_ids": [
+            "failure-retrieved-update-lacks-decision-authority",
+            "failure-cosine-cannot-separate-contradiction-from-duplicate",
+            "failure-selective-forgetting-collapses-with-context-length",
+            "failure-gold-context-does-not-solve-knowledge-use",
+            "failure-multi-agent-adversarial-coordination-spans-trust-surfaces",
+            "failure-iterative-refinement-corrupts-correct-output",
+            "failure-constrained-plan-surface-validity",
+            "failure-sparse-topology-suppresses-correct-insight",
+            "failure-retrieved-experience-propagates-stored-errors",
+            "failure-tool-use-metrics-collapse-distinct-errors"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "What mechanisms separate the writing, indexing, retrieval, and reading of agent memory so that what is visible at decision time is filtered by relevance and recency instead of replaying the full interaction history?",
+          "query_id": "v012-blind-q08",
+          "relevant_card_ids": [
+            "operator-memory-stage-decomposition",
+            "operator-entropy-routed-multi-granularity-retrieval",
+            "operator-learned-memory-crud-control",
+            "operator-dynamic-linked-memory-evolution",
+            "paper-p009"
+          ],
+          "target_kind": "operator",
+          "top10_card_ids": [
+            "operator-memory-stage-decomposition",
+            "operator-adaptive-plan-template-reuse",
+            "operator-learned-memory-crud-control",
+            "operator-active-counterexample-verifier",
+            "operator-write-side-state-adjudication",
+            "operator-grouped-masked-history-step-credit",
+            "operator-bilevel-graph-toolchain-planning",
+            "operator-bounded-preexecution-reviewer",
+            "operator-hierarchical-utterance-critic-token-actor",
+            "operator-future-token-loss-filtered-tool-learning"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "When an agent critiques its own failed attempt with no external feedback, under what conditions does that self-critique add nothing beyond simply sampling another attempt?",
+          "query_id": "v012-blind-q09",
+          "relevant_card_ids": [
+            "failure-intrinsic-self-correction-degradation",
+            "failure-interactive-gains-collapse-against-independent-sampling",
+            "failure-generic-reflection-local-minima",
+            "failure-iterative-refinement-corrupts-correct-output"
+          ],
+          "target_kind": "failure",
+          "top10_card_ids": [
+            "failure-intrinsic-self-correction-degradation",
+            "failure-solver-feasibility-near-zero-information-proxy",
+            "failure-iterative-refinement-corrupts-correct-output",
+            "failure-generic-reflection-local-minima",
+            "failure-interactive-gains-collapse-against-independent-sampling",
+            "failure-external-instructor-attribution",
+            "failure-memory-unit-granularity-mismatch",
+            "failure-constrained-plan-surface-validity",
+            "failure-search-resource-cost",
+            "failure-reused-selection-feedback-in-agent-search"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "What mechanisms decide when an agent should stop retrying a task versus reflect and change its approach, and what evidence about the failure is used to gate that update?",
+          "query_id": "v012-blind-q10",
+          "relevant_card_ids": [
+            "operator-dynamic-reflection-gate",
+            "operator-tool-grounded-critique",
+            "paper-reflexion"
+          ],
+          "target_kind": "operator",
+          "top10_card_ids": [
+            "operator-dynamic-reflection-gate",
+            "operator-smt-preexecution-policy-guard",
+            "operator-cascaded-multiagent-meta-routing",
+            "operator-cost-penalized-structured-clarification",
+            "operator-active-counterexample-verifier",
+            "operator-decomposed-research-evidence-evaluation",
+            "operator-contract-gated-tool-state-commit",
+            "operator-experience-insight-update",
+            "operator-learned-memory-crud-control",
+            "operator-outcome-trained-execution-state-planner"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": true,
+          "query": "Why do debate or majority-vote ensembles of agents often fail to beat a single agent given the same total token budget, especially when all agents share a base model and therefore make correlated errors?",
+          "query_id": "v012-blind-q11",
+          "relevant_card_ids": [
+            "failure-debate-cost-nondominance",
+            "failure-interactive-gains-collapse-against-independent-sampling",
+            "failure-lazy-agent-effective-single-agent-collapse"
+          ],
+          "target_kind": "failure",
+          "top10_card_ids": [
+            "failure-debate-cost-nondominance",
+            "failure-interactive-gains-collapse-against-independent-sampling",
+            "failure-constrained-plan-surface-validity",
+            "failure-llm-judge-misses-executable-spec-errors",
+            "failure-generic-or-unvalidated-tool-libraries-add-distractors",
+            "failure-search-resource-cost",
+            "failure-likelihood-utility-does-not-guarantee-agent-utility",
+            "failure-solver-guarantee-stops-at-formalization",
+            "failure-generator-aligned-verification-passes-shared-misreads",
+            "failure-natural-language-ir-hurts-formal-planning"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "What mechanisms shape the communication topology or message routing among cooperating agents so that the final aggregation draws on genuinely diverse evidence rather than amplifying repeated opinions?",
+          "query_id": "v012-blind-q12",
+          "relevant_card_ids": [
+            "operator-higher-order-message-exposure",
+            "operator-utility-optimized-agent-graph",
+            "operator-state-conditioned-agent-activation",
+            "operator-agreement-prior-modulation"
+          ],
+          "target_kind": "operator",
+          "top10_card_ids": [
+            "operator-higher-order-message-exposure",
+            "operator-fixed-budget-independent-path-aggregation",
+            "operator-cascaded-multiagent-meta-routing",
+            "operator-utility-optimized-agent-graph",
+            "operator-transition-decomposed-agent-training",
+            "operator-state-conditioned-agent-activation",
+            "operator-anchor-state-relative-credit",
+            "operator-hidden-state-tool-necessity-prefill",
+            "operator-entropy-routed-multi-granularity-retrieval",
+            "operator-subtask-compute-allocation"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "How does updating an agent's policy from only the final trajectory outcome misattribute credit to individual steps, and when does pushing credit all the way down to the token level become too high-variance to learn from?",
+          "query_id": "v012-blind-q13",
+          "relevant_card_ids": [
+            "failure-uniform-terminal-return-erases-step-credit",
+            "failure-unified-memory-policy-retains-terminal-credit-smearing",
+            "failure-token-local-credit-misses-turn-level-delayed-value",
+            "failure-lazy-agent-effective-single-agent-collapse"
+          ],
+          "target_kind": "failure",
+          "top10_card_ids": [
+            "failure-token-local-credit-misses-turn-level-delayed-value",
+            "failure-unified-memory-policy-retains-terminal-credit-smearing",
+            "failure-uniform-terminal-return-erases-step-credit",
+            "failure-constrained-plan-surface-validity",
+            "failure-memory-unit-granularity-mismatch",
+            "failure-oracle-trajectory-calibration",
+            "failure-memory-defense-high-fnr",
+            "failure-internal-tool-confidence-not-execution-success",
+            "failure-reused-selection-feedback-in-agent-search",
+            "failure-tool-description-and-order-bias"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "What mechanisms attribute a long trajectory's success or failure to specific intermediate decisions, for example hierarchical or step-level credit, so that learning updates target the computation that was actually responsible?",
+          "query_id": "v012-blind-q14",
+          "relevant_card_ids": [
+            "operator-anchor-state-relative-credit",
+            "operator-hierarchical-utterance-critic-token-actor",
+            "operator-grouped-masked-history-step-credit",
+            "operator-verified-single-branch-repair",
+            "paper-p019"
+          ],
+          "target_kind": "operator",
+          "top10_card_ids": [
+            "operator-hierarchical-utterance-critic-token-actor",
+            "operator-grouped-masked-history-step-credit",
+            "operator-outcome-trained-execution-state-planner",
+            "operator-verified-single-branch-repair",
+            "operator-learned-memory-crud-control",
+            "operator-gold-supervised-hindsight-search-depth",
+            "operator-capability-preserving-agent-safety-evaluation",
+            "operator-decomposed-research-evidence-evaluation",
+            "operator-unified-language-memory-action-policy",
+            "operator-anchor-state-relative-credit"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "How do benchmark artifacts, contamination, and run-to-run variance make a single evaluation score for an agent unreliable, and what does that imply about small claimed improvements between methods?",
+          "query_id": "v012-blind-q15",
+          "relevant_card_ids": [
+            "failure-repeat-run-reliability-collapse",
+            "failure-one-shot-expert-gold-is-brittle",
+            "failure-single-execution-denotation-false-positive",
+            "failure-reused-selection-feedback-in-agent-search",
+            "failure-same-set-agent-graph-evaluation",
+            "paper-p035"
+          ],
+          "target_kind": "failure",
+          "top10_card_ids": [
+            "failure-same-set-agent-graph-evaluation",
+            "failure-interactive-gains-collapse-against-independent-sampling",
+            "failure-repeat-run-reliability-collapse",
+            "failure-one-shot-expert-gold-is-brittle",
+            "failure-unfiltered-reflection-contamination",
+            "failure-lazy-agent-effective-single-agent-collapse",
+            "failure-token-local-credit-misses-turn-level-delayed-value",
+            "failure-sparse-topology-suppresses-correct-insight",
+            "failure-single-turn-tool-score-overstates-agent-competence",
+            "failure-retrieved-experience-propagates-stored-errors"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "Which line of work moved agent evaluation from a single terminal success number toward process-level measurement, repeated-run reliability, and audits of where in an agent pipeline trust can break?",
+          "query_id": "v012-blind-q16",
+          "relevant_card_ids": [
+            "paper-p035",
+            "paper-tau-bench",
+            "paper-p016",
+            "paper-p039",
+            "paper-p037",
+            "paper-agent-security-bench"
+          ],
+          "target_kind": "paper",
+          "top10_card_ids": [
+            "paper-p040",
+            "paper-p035",
+            "paper-p031",
+            "paper-tau-bench",
+            "paper-p037",
+            "paper-p065",
+            "paper-p025",
+            "paper-p083",
+            "paper-p023",
+            "paper-p064"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": false,
+          "query": "What failures appear when a research agent's answer-quality gains come only from spending more tool calls or retrieval rounds, and when its choice of sources is skewed by position, popularity, or similarity biases rather than evidence value?",
+          "query_id": "v012-blind-q17",
+          "relevant_card_ids": [
+            "failure-fixed-search-depth-causes-under-and-over-search",
+            "failure-dense-retriever-surface-bias-collapse",
+            "failure-diminishing-compute-return"
+          ],
+          "target_kind": "failure",
+          "top10_card_ids": [
+            "failure-dense-retriever-surface-bias-collapse",
+            "failure-constrained-plan-surface-validity",
+            "failure-interactive-gains-collapse-against-independent-sampling",
+            "failure-memory-unit-granularity-mismatch",
+            "failure-sparse-topology-suppresses-correct-insight",
+            "failure-retrieved-experience-propagates-stored-errors",
+            "failure-search-resource-cost",
+            "failure-forced-hypothetical-tool-alignment",
+            "failure-one-shot-expert-gold-is-brittle",
+            "failure-tool-use-metrics-collapse-distinct-errors"
+          ],
+          "top5_hit": true
+        },
+        {
+          "corpus_gap": false,
+          "critical": true,
+          "query": "What mechanisms let an agent choose how deep to keep retrieving or searching on a per-question basis, stopping early when evidence suffices and going deeper under uncertainty, instead of running a fixed number of rounds?",
+          "query_id": "v012-blind-q18",
+          "relevant_card_ids": [
+            "operator-gold-supervised-hindsight-search-depth",
+            "operator-chance-corrected-depth-reward"
+          ],
+          "target_kind": "operator",
+          "top10_card_ids": [
+            "operator-chance-corrected-depth-reward",
+            "operator-evidence-audit-before-score",
+            "operator-cost-penalized-structured-clarification",
+            "operator-gold-supervised-hindsight-search-depth",
+            "operator-agreement-prior-modulation",
+            "operator-cascaded-multiagent-meta-routing",
+            "operator-incremental-injection-benchmark-reconstruction",
+            "operator-entropy-routed-multi-granularity-retrieval",
+            "operator-execution-supervised-prompt-trace-calibration",
+            "operator-bounded-preexecution-reviewer"
+          ],
+          "top5_hit": true
+        }
+      ],
+      "split": "blind"
+    }
+  ],
+  "summary": {
+    "blind": {
+      "critical": 5,
+      "critical_pass": 5,
+      "queries": 18,
+      "top5_pass": 17
+    },
+    "calibration": {
+      "critical": 8,
+      "critical_pass": 8,
+      "queries": 20,
+      "top5_pass": 20
+    }
+  }
+}

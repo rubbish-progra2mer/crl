@@ -1,0 +1,18 @@
+# Run Ledger
+
+- EVENT: RUN_CREATED
+  AT: 2026-08-18T18:38:51+08:00
+  MODE: AUTONOMOUS
+  VERSION: v001
+
+- EVENT: VERSION_ADVANCED
+  AT: 2026-08-18T18:46:22+08:00
+  FROM_VERSION: v001
+  VERSION: v002
+  CONTINUATION: selection_context_v002.md
+  CONTINUATION_SHA256: 4c93d338b618926a71c936ca13daf77078bf303c26027fc02a56adf5ac48640c
+
+- EVENT: RUN_PAUSED_BY_USER
+  AT: 2026-08-18T18:47:03+08:00
+  VERSION: v002
+  NOTE: # Run15 Machine B 反事实压力测试暂停说明 Machine B 指纹：`1a7317f6b796001c6496a20b9f3eea55518f232d7ecdea1e68d8208da7c0b675`。 ## 反事实一：SCREENING 负结果不越权杀论文方向 - 实现 A：不透明反馈 8/8，错误类别反馈 7/8，类别增益 -1。 - 第二独立实现 B：不透明反馈 7/8，错误类别反馈 7/8，类别增益 0，JSON 解析失败 0。 - 决策只关闭 qwen3:4b、当前简单任务上的局部经验主张；反馈信息量阶梯、答案泄漏审计和隐藏必要状态下的真实恢复能力显式存活，并进入代表性资源 `escalated`。 ## 反事实二：最近先行只杀机制/计算并重审存活维度 - P049/P012 杀死“独立审查—结构化反馈—有界重试”的 Mechanism / Computation 新颖性。 - 决策历史显式重审并保留 Phenomenon（错误消息泄漏）、Evaluation（四级信息量反事实配对）和 System Capability（无答案反馈下恢复）。 ## 生命周期与诊断 `h15-002` 已经历建立、先行审计、筛选、第二实现、有范围关闭、资源升级和 v001→v002 耐久续接。Machine B Diagnosis 报告结构化检索真实查询数 5、语义越权警告 0、未分类先行 0、污染 false、诊断自索引 0、当前版本非空、Recorded 1、Formal 0。 没有形成 Delivery 或 No-Delivery。下一步需要公开可执行失败轨迹和代表性多模型资源，可能涉及付费模型；按用户计划的显式授权暂停 Run15，不伪造代表性验证。

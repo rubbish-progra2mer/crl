@@ -1,0 +1,132 @@
+{
+  "canonical_evaluation_id": "eval-0001",
+  "evaluation_id": "eval-0001",
+  "evaluator_version": "CRL-EVAL-1.0",
+  "implementation_key": "0424092c3d015458de5a2033cb9db7ac8bceeede66122a7ccba6bbf5b1062cff",
+  "invalid_reasons": [],
+  "measurement_key": "f8e1a5550893f05b076a3190b4559ef120da816ff6b9e2fc588900e66bf98d73",
+  "measurement_kind": "CANONICAL_IMPLEMENTATION_SCORE",
+  "overall_score_numerator": 611250,
+  "overall_score_percent": "61.1250",
+  "packet_key": "e156c03321e8cb3574486fec8703b00e026c48d4f6e40c57a505903121143518",
+  "role_results": {
+    "ADV": {
+      "output": {
+        "confidence": "high",
+        "critical_risk": "potentially_fatal",
+        "diagnostics": {
+          "best_stress_test": "由独立团队预先冻结外部安全规则和未见长计划域，包含交互效果与多字段复合故障；在候选实现冻结后生成类型规格和探针目录，逐项比较 PDEO 编译义务与穷举真值，并追加单个遗漏或错误 cover 的敏感性测试。",
+          "boundary_warning": "零危险提交与成本 3 只能外推到当前三个同构、离散、确定、无噪、短计划合成域；尤其不能外推为真实工具生态中的开放世界安全保证或端到端代理可靠性。",
+          "hidden_assumption": "受保护承诺的安全条件能够被人工类型规格完整、正确地分解为已知原子谓词，并且每个 cover 声明对应一个真实、即时、无噪且无权限障碍的环境读回。",
+          "most_fatal_failure_mode": "类型计划或工具效果遗漏一个真实安全谓词时，PDEO 不会生成或读取该义务，仍可能在内部闭集判断通过后危险提交；同源评价规则可能同时遗漏它，使实验无法暴露该失败。",
+          "reproduction_breakpoint": "复现者最可能在重建并运行 formal_pdeo_experiment.py 时中断：packet 只有源码哈希和机器本地路径，没有源码内容、完整状态输入、案例生成逻辑及探针成本定义。"
+        },
+        "evaluator_version": "CRL-EVAL-1.0",
+        "free_review": "packet 对一次确定性运行的身份和输出保存较好，但方法核仍未经过真正独立的对抗复现。评价器、编译器、案例生成和人工类型知识同处一个程序与词表；“未见故障”只是封闭分支基线未建模，并非超出规格谓词或探针覆盖的未知状态。PDEO 与人工最小义务在全部域完全相同，成本恒为 3，说明当前实验主要确认手写安全知识被正确搬运，而未证明计划派生在复杂计划中仍可靠。最危险的反例不是再换一个词表值，而是独立安全规则包含一个类型计划遗漏的前提：PDEO 将无从生成证据并可能危险提交。源码、真实状态及成本定义未随 packet 内容提供，也使独立团队无法判断零错误是否含实现捷径。当前证据支持窄构造正确性，不足以支持开放世界方法核。",
+        "model_identity": "gpt-5.6-sol",
+        "reasoning_effort": "xhigh",
+        "reasons": {
+          "adversarial_survivability": "48 个单义务故障、36 个义务—无关字段配对故障和 63 个安全变异提供了真实的系统性压力，PDEO 在这些冻结案例上达到零危险提交和完整召回。但攻击均围绕已知原子谓词及准确覆盖探针构造，没有独立域、长计划、交互效果、未知谓词、多义务耦合或规格扰动。当前结果更像验证“检查全部正确义务即可安全”的构造性质，尚未排除一个遗漏义务就直接危险提交的核心脆弱性。",
+          "boundary_generalization": "证据仅覆盖三个结构同源的合成域、固定小探针目录、离散无噪状态和确定性控制器，且各域 PDEO 都固定选择成本为 3 的三个探针。没有真实 API、自然语言计划、长 horizon、并发、陈旧读、权限失败、噪声或大规模集合覆盖证据。作者虽明确收窄主张，但现有结果几乎不支持越出该窄边界的泛化。",
+          "confound_leakage_control": "标签函数据称不调用 PDEO 编译器，且零模型、零接口调用降低了模型记忆和外部缓存风险。然而评价规则、编译器、案例生成与基线位于同一实验程序，并共享人工类型规格和预先存在的状态词表；没有独立作者、盲测或外部真实规则。所谓开放世界故障仍是该词表内系统枚举，可能使候选义务与评价谓词在设计时同源；源码级捷径审计为 packet insufficient。完整工具契约还评价更强目标且预算不同，其低召回不能作为同目标优势。",
+          "evidence_auditability": "关键汇总值、逐例方法决策、探针列表、成本字段以及 artifact 哈希均被提供，主要指标原则上可从 rows 重新聚合。可是安全标签所依据的完整真实状态、SAFETY_RULES、编译器源码和探针权重定义没有内容级展示，因此无法独立核验 expected、cover 与 probe_cost 是否正确。stdout 也只有哈希，Evidence Inventory 的 comparison_count 为 0，故哈希身份链强于语义审计链。",
+          "reproducibility_traceability": "packet 提供了执行命令、Python 与依赖版本、实现文件及输出哈希、退出码和逐例结果，运行身份追踪较完整。但实现源码、完整案例状态、探针成本目录和案例生成输入未实际给出，只有本地路径与哈希，独立团队无法仅凭 packet 重建 171 个案例并执行同一程序。Git 状态不可用、seed 未设置且预算上限不可机器比较，也削弱了复现闭环。"
+        },
+        "review_protocol": "CRL-IR-1.0",
+        "reviewer_role": "ADV",
+        "scores": {
+          "adversarial_survivability": 2,
+          "boundary_generalization": 1,
+          "confound_leakage_control": 2,
+          "evidence_auditability": 2,
+          "reproducibility_traceability": 2
+        }
+      },
+      "report_sha256": "5f37dd042c90fd4f043f475fb3075f812e5ae3146d6d3861174a3474e57f4441",
+      "role_score_basis_points": 4625
+    },
+    "EMP": {
+      "output": {
+        "confidence": "high",
+        "critical_risk": "potentially_fatal",
+        "diagnostics": {
+          "baseline_confound": "缺少静态的每域三探针最小契约基线；同时 PDEO 使用成本3的承诺对齐读回，而DQBP和信息增益平均仅约1.67且受封闭分支模型限制，当前优势可能由更多且目标对齐的信息访问解释。",
+          "biggest_empirical_threat": "计划和下游承诺几乎未变化，PDEO 在每个域始终选择固定三个探针；因此实验无法排除它只是静态域内最小契约的等价实现，而非真正由当前计划动态派生证据。",
+          "killer_experiment": "冻结实现后，在每个域生成多种具有不同下游承诺、动作顺序和确定效果的类型计划，独立给出安全标签并注入未见义务故障；以相同探针成本将 PDEO 与静态每工具/每域最小契约、开放集检测和义务增强基线比较。若 PDEO 的探针集合不随计划正确变化或不优于静态三探针基线，计划派生机制主张即被推翻。",
+          "missing_validation": "最需要补充由独立人员设计的留出计划与非同构域验证，明确检验同一工具在不同下游承诺下是否产生不同且最小的证据义务。",
+          "strongest_empirical_evidence": "在独立声明的 SAFETY_RULES 标签下，PDEO 同时实现48/48义务故障不提交、63/63安全无关变异提交，并以成本3达到与人工最小义务相同的门控结果。"
+        },
+        "evaluator_version": "CRL-EVAL-1.0",
+        "free_review": "该实验是一项记录完整的确定性合成一致性测试，能够可信证明冻结套件内的窄结果：给定正确规格和无噪读回，三个承诺相关探针足以安全门控，并比完整读回便宜。核心不足是实验只广泛变异状态，没有广泛变异计划；因此最重要的“计划派生”属性与静态域内最小契约不可辨识。评价规则虽不调用编译器，却与候选共享人工规格并处于同一程序，独立性仍有限。DQBP和信息增益的失败主要暴露封闭分支模型边界，不能代表强开放集验证方法。若不加入计划变化和静态三探针控制，当前证据更像实现符合预设规则，而非独立验证方法机制。",
+        "model_identity": "gpt-5.6-sol",
+        "reasoning_effort": "xhigh",
+        "reasons": {
+          "baseline_fairness": "各方法共享案例、类型计划、工具规格、探针返回和成本，DQBP 与信息增益也共享预算 3。问题在于 PDEO 实际读取成本为 3，而两个主要失败基线平均只读约 1.67，且其封闭分支模型按构造不能表示目标变异；未加入开放集方法或允许其利用计划义务的版本。完整工具契约还优化更强的工具履约目标，最关键的静态“每域固定三个承诺相关探针”基线则缺失。",
+          "experimental_validity": "171 个确定性案例直接测量了危险提交、无关变异召回和探针成本，标签函数也不调用 PDEO 编译器。可是实验主要改变状态值，未系统改变类型计划、动作序列或下游承诺；每个域中 PDEO 始终读取同一组三个探针。因此结果能验证固定门控集合在该套件上正确，却不足以独立识别“计划派生”机制相对于静态域内最小契约的作用。",
+          "measurement_reliability": "指标定义、分割、聚合、样本数和逐案例记录均明确，正式运行与最终实现清单匹配且无执行错误。确定性穷举不依赖随机种子，001 与 002 数值一致也提供了一定复现迹象。局限是评价规则与候选仍位于同一实验程序并共享人工类型规格，缺少外部标注者或独立评价实现，且未报告按域分解以揭示结构相关性。",
+          "result_strength": "PDEO 在48个义务故障上为0危险提交、在63个安全变异上召回率为1，成本3也明确低于完整契约5和全量读回6，数值信号很强。但它与人工最小义务完全持平，且案例来自三个共享结构的合成域，许多案例是同一少数计划模板的系统变异而非独立统计单元。结果足以支持该冻结套件上的窄一致性结论，尚不足以支持一般经验优势或计划派生机制的强结论。",
+          "robustness_falsification": "套件包含已知分支、48 个单义务替换、63 个无关变异和36 个义务—无关配对，具备有价值的正负控制。它还保留了 DQBP 的负结果，没有隐藏先前失败。可是没有计划条件变化、编译组件消融、非同构域、多个义务同时失效、探针覆盖扰动或读回失效实验，因而主要机制和边界仍未受到足够强的反证。"
+        },
+        "review_protocol": "CRL-IR-1.0",
+        "reviewer_role": "EMP",
+        "scores": {
+          "baseline_fairness": 2,
+          "experimental_validity": 2,
+          "measurement_reliability": 3,
+          "result_strength": 2,
+          "robustness_falsification": 2
+        }
+      },
+      "report_sha256": "209f6ba4fba734961b1dee82feab82a2f16c55e9cb8f24c0ed7cfd8b85a12d90",
+      "role_score_basis_points": 5500
+    },
+    "SCI": {
+      "output": {
+        "confidence": "high",
+        "critical_risk": "potentially_fatal",
+        "diagnostics": {
+          "biggest_scientific_risk": "核心可能只是经典最弱前置条件传播与加权集合覆盖的直接工程组合；当前实验主要证明该组合在由同一人工类型规格支撑的合成闭集语义中按设计工作，尚未证明独立于既有残余义务机制的科学增量。",
+          "mechanism_falsifier": "在类型计划、工具效果、探针覆盖和无噪读回均正确的条件下，出现一个所有已编译义务 O 都被真实读回满足、但独立安全规则仍判定受保护承诺不安全的案例；这将直接否定反向义务闭包对提交安全的充分性。",
+          "most_dangerous_prior_collision": "ETAS：其类型/效果语义、动态资源残余义务和轨迹监控最可能把 PDEO 的反向义务传播解释为较弱的运行时实例，而 packet 没有提供组件级等价性排除。",
+          "strongest_scientific_contribution": "把写后验证从固定工具后置条件收窄为由当前下游承诺反向编译的证据闭包，并在受控实验中同时保持安全义务故障零危险提交、无关状态完整接受以及低于完整契约的读回成本。"
+        },
+        "evaluator_version": "CRL-EVAL-1.0",
+        "free_review": "PDEO 的机制与窄主张都很清楚，正式实验也比单纯展示高准确率更有信息量：它分别测量危险提交、无关变异召回和探针成本，并用独立声明的安全规则生成标签。当前最关键的问题不是实现是否按设计运行，而是科学增量是否超出“最弱前置条件＋集合覆盖”。PDEO 与人工最小义务完全相同，且故障直接围绕人工安全谓词系统生成，使结果尚不足以证明计划派生机制在复杂计划中带来独立价值。最有判别力的后续证据应让同一写工具服务于不同下游承诺，验证义务与探针集合随计划改变，并与 ETAS、ToolGate 做组件级等价比较；否则 prior collision 可能致命。",
+        "model_identity": "gpt-5.6-sol",
+        "reasoning_effort": "xhigh",
+        "reasons": {
+          "claim_calibration": "最小主张严格限制在类型计划、效果与覆盖正确、离散状态和无噪读回的三个受控域，并逐项排除真实接口、并发、陈旧读、权限失败、恢复和端到端成功率。正式指标直接支持该范围内的零危险提交、无关变异召回 1.0，以及相对完整契约的成本 3 对 5。packet 也没有声称优于人工最小义务、替代完整审计或普遍胜过所有自适应验证；“开放世界”只能继续按相对封闭分支模型的未建模变异来窄解。",
+          "mechanism_clarity": "计算链条明确：从承诺谓词 G 反向传播，可信确定效果可消解义务，外部不确定写入及回执不可消解，随后对剩余闭包 O 求加权探针覆盖并进行闭集提交判断。方法的输入假设、停止条件和不保证范围均被具体列出，且可以由危险提交、错误接受或成本不最小直接反驳。171 个案例中 PDEO 与人工最小义务一致，并呈现零危险提交、完整无关变异召回和成本 3，和所述机制相符。",
+          "prior_separation": "packet 给出的实质差异是：义务由当前计划的下游承诺反向产生，再按探针成本最小覆盖，而非使用固定工具契约、人工样本约束或封闭故障分支。该差异在计算输入和验证目标上真实存在，但 ETAS 的残余义务、VERIMAP 的计划内验证生成以及 ToolGate 的契约机制均可能吸收它。尤其当前没有正文级等价性排除或组件级实现比较，且作者明确无法排除“最弱前置条件加加权集合覆盖的直接组合”，故只能评为 Mixed。",
+          "problem_value": "研究针对成功回执与真实写入状态不一致时的危险外部提交，涉及安全性与验证成本的实质权衡，而非单纯 benchmark 调参。把“工具是否完整履约”与“当前下游承诺是否已有充分证据”分开，也形成了有价值的研究问题。缺口是三个同构合成域尚不能证明该问题在真实接口中的频率、代价和代表性，因此未达到强证据水平。",
+          "scientific_specificity": "packet 明确给出三个域、四类分割、样本数、基线、探针成本、独立安全规则以及逐项指标，实验对象和评价口径高度具体。结果也清楚限定为 48 个单义务故障、63 个无关变异及小型探针目录，而没有用总体准确率掩盖安全与召回差异。不过三个域结构同源，探针成本恒定为 3，尚未展示不同下游承诺确实生成不同义务、复杂覆盖结构或规模增长，因此对关键“计划派生”计算的经验归因仍有限。"
+        },
+        "review_protocol": "CRL-IR-1.0",
+        "reviewer_role": "SCI",
+        "scores": {
+          "claim_calibration": 4,
+          "mechanism_clarity": 4,
+          "prior_separation": 2,
+          "problem_value": 3,
+          "scientific_specificity": 3
+        }
+      },
+      "report_sha256": "f6fc189aa8d55589c511596a48a448389efa3c5e2741355cc527adc3f0185cf2",
+      "role_score_basis_points": 7875
+    }
+  },
+  "schema_version": 1,
+  "score_is_gate": false,
+  "stability": {
+    "max_numerator": 611250,
+    "mean_numerator": "611250",
+    "min_numerator": 611250,
+    "overall_score_numerators": [
+      611250
+    ],
+    "population_variance_numerator_squared": "0",
+    "range_numerator": 0,
+    "valid_measurement_count": 1
+  },
+  "valid": true
+}

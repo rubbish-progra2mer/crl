@@ -1,0 +1,13 @@
+{
+  "claim_id": "claim-h15-002-category-gain",
+  "claim_text": "仅提供错误类别、但不泄漏正确工具或参数值的反馈，相比不透明失败消息能提高 qwen3:4b 对固定错误工具调用的一次修订成功率。",
+  "scope": "qwen3:4b、8 个单步工具调用修订任务、本地 Ollama；SCREENING。",
+  "observable": "不透明与类别反馈条件的一次修订成功率及配对增益。",
+  "falsifier": "两个独立实现均无类别反馈增益。",
+  "minimum_effect_or_decision_rule": "类别反馈至少多修正 2/8 个任务才支持局部主张；否则进入第二独立实现，最终只关闭局部主张。",
+  "alternative_explanations": ["模型直接从原任务重算", "提示协议影响结果"],
+  "killer_experiment_id": "exp-h15-002-screen-a",
+  "supporting_experiment_ids": [],
+  "status": "proposed",
+  "status_reason": "先行碰撞后提出的最小局部可证伪主张。"
+}
