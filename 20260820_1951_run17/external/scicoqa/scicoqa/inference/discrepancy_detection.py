@@ -1,0 +1,248 @@
+import json
+import logging
+from dataclasses import dataclass
+from logging.config import fileConfig
+from pathlib import Path
+
+import simple_parsing
+from tqdm import tqdm
+from tqdm.contrib.logging import logging_redirect_tqdm
+
+from scicoqa.core import InferenceArgs
+from scicoqa.core.code_loader import CodeLoader
+from scicoqa.core.dataset import get_unique_papers
+from scicoqa.core.experiment import BaseExperiment
+from scicoqa.core.mistral_ocr import MistralOCR
+from scicoqa.core.token_counter import TokenCounter
+
+fileConfig("logging.ini")
+logger = logging.getLogger(__name__)
+
+
+@dataclass(kw_only=True)
+class DiscrepancyDatasetInferenceArgs(InferenceArgs):
+    prompt: str = "discrepancy_generation"
+    # Dataset split: 'real' or 'synthetic'
+    dataset_split: str = "real"
+    # Dataset version (e.g. 'v1.0', 'v1.1')
+    dataset_version: str = "v1.1"
+    # Use local JSONL files instead of HuggingFace Hub
+    use_local: bool = False
+    # Path to local JSONL file (only used if use_local=True)
+    local_path: Path | None = None
+    output_base_dir: Path = (
+        Path("out") / "inference" / "discrepancy_detection" / "real" / "full"
+    )
+    dir_prefix: str = "discrepancy_gen"
+
+    def __post_init__(self):
+        super().__post_init__()
+
+        # Determine dataset type (real vs synthetic)
+        is_synthetic = self.dataset_split == "synthetic"
+
+        # Determine if code-only mode from prompt
+        is_code_only = "code_only" in self.prompt
+
+        # Build the path based on dataset and mode
+        dataset_dir = "synthetic" if is_synthetic else "real"
+        mode_dir = "code_only" if is_code_only else "full"
+
+        self.output_base_dir = (
+            Path("out") / "inference" / "discrepancy_detection" / dataset_dir / mode_dir
+        )
+
+        # Adjust dir_prefix for synthetic
+        if is_synthetic:
+            self.dir_prefix = self.dir_prefix + "_synthetic"
+
+        self.apply_code_changes = is_synthetic
+
+        if is_synthetic:
+            logger.info("Using synthetic discrepancies dataset")
+        if is_code_only:
+            logger.info("Using code-only mode (ablation)")
+        if self.use_local:
+            logger.info(f"Using local dataset files: {self.local_path or 'default'}")
+        else:
+            logger.info("Loading dataset from HuggingFace Hub: UKPLab/scicoqa")
+
+        exp_dir_name = self.get_exp_dir_name(self.output_base_dir)
+        self.output_dir = self.output_base_dir / exp_dir_name
+
+        # No structured output - model will generate YAML as instructed in prompt
+        self.llm_kwargs = {}
+        self.iterator_kwargs = {}
+
+
+class DiscrepancyDatasetIterator:
+    """Iterator that reads unique papers from discrepancies dataset."""
+
+    def __init__(
+        self,
+        output_dir: Path,
+        prompt,
+        model: str,
+        tokenizer: str,
+        model_max_tokens: int,
+        dataset_split: str = "real",
+        dataset_version: str = "v1.1",
+        use_local: bool = False,
+        local_path: Path | None = None,
+        debug: bool = False,
+        debug_break_after: int = 1,
+        apply_code_changes: bool = False,
+    ):
+        self.output_dir = output_dir
+        self.prompt = prompt
+        self.model = model
+        self.model_max_tokens = model_max_tokens
+        self.dataset_split = dataset_split
+        self.dataset_version = dataset_version
+        self.use_local = use_local
+        self.local_path = local_path
+        self.debug = debug
+        self.debug_break_after = debug_break_after
+        self.apply_code_changes = apply_code_changes
+        self.token_counter = TokenCounter(model=tokenizer)
+
+        # Initialize OCR for papers
+        self.mistral_ocr = MistralOCR()
+
+        # Load unique papers from HuggingFace or local file
+        self.unique_papers = get_unique_papers(
+            split=self.dataset_split,
+            version=self.dataset_version,
+            use_local=self.use_local,
+            local_path=self.local_path,
+            apply_code_changes=self.apply_code_changes,
+        )
+        logger.info(
+            f"Found {len(self.unique_papers)} unique papers in discrepancies dataset"
+        )
+
+        # Track already processed papers
+        self.already_processed = set()
+        generations_file = self.output_dir / "generations.jsonl"
+        if generations_file.exists():
+            logger.info(f"Loading already processed papers from {generations_file}")
+            with open(generations_file, "r") as f:
+                for line in f:
+                    generation = json.loads(line)
+                    self.already_processed.add(generation["paper"]["id"])
+            logger.info(f"Found {len(self.already_processed)} already processed papers")
+
+    def __call__(self, **kwargs):
+        return self.__iter__(**kwargs)
+
+    def __iter__(self, show_progress: bool = True, **kwargs):
+        """Iterate over unique papers from discrepancies dataset."""
+        MAX_TOKENS_BUFFER = 0.9  # Same as BaseIterator
+
+        papers_to_process = [
+            p for p in self.unique_papers if p["id"] not in self.already_processed
+        ]
+
+        if not papers_to_process:
+            logger.info("All papers already processed")
+            return
+
+        logger.info(f"Processing {len(papers_to_process)} papers")
+        pbar = tqdm(total=len(papers_to_process), ncols=100, disable=not show_progress)
+
+        processed_count = 0
+        for paper in papers_to_process:
+            if self.debug and processed_count >= self.debug_break_after:
+                logger.info(f"Debug mode: stopping after {processed_count} papers")
+                break
+
+            # Load paper using MistralOCR
+            try:
+                paper_text, _ = self.mistral_ocr(paper["arxiv_url"])
+            except Exception as e:
+                logger.error(f"Error loading paper for {paper['id']}: {e}")
+                raise e
+
+            # Calculate remaining tokens for code
+            prompt_kwargs = {"paper": paper_text}
+            intermediate_prompt = self.prompt(**prompt_kwargs)
+            tokens_intermediate_prompt = self.token_counter(intermediate_prompt)
+            remaining_code_tokens = int(
+                self.model_max_tokens * MAX_TOKENS_BUFFER - tokens_intermediate_prompt
+            )
+            logger.info(f"Tokens intermediate prompt: {tokens_intermediate_prompt}")
+            logger.info(f"Remaining code tokens: {remaining_code_tokens}")
+
+            # Load code with target_date from discrepancy
+            try:
+                target_date = paper.get("target_date")
+                if target_date:
+                    logger.debug(
+                        f"Loading code for {paper['id']} at target_date: {target_date}"
+                    )
+                code_loader = CodeLoader(paper["github_url"], target_date=target_date)
+                code_text = code_loader.get_code_prompt(
+                    token_counter=self.token_counter,
+                    max_tokens=remaining_code_tokens,
+                    code_changes=paper.get("changed_code_files"),
+                )
+                prompt_kwargs["code"] = code_text
+            except Exception as e:
+                logger.error(f"Error loading code for {paper['id']}: {e}")
+                pbar.update(1)
+                raise e
+
+            # Format final prompt
+            prompt = self.prompt(**prompt_kwargs)
+            logger.info(f"Tokens in final prompt: {self.token_counter(prompt)}")
+
+            yield paper, prompt, pbar
+            pbar.update(1)
+            processed_count += 1
+
+        pbar.close()
+
+
+class DiscrepancyDatasetExperiment(BaseExperiment):
+    """Experiment that reads unique papers from discrepancies dataset."""
+
+    def __init__(self, args: DiscrepancyDatasetInferenceArgs):
+        super().__init__(args)
+        self.iterator = DiscrepancyDatasetIterator(
+            output_dir=args.output_dir,
+            prompt=self.prompt,
+            model=args.model,
+            tokenizer=self.get_tokenizer(),
+            model_max_tokens=self.llm.model_config["max_context_size"],
+            dataset_split=args.dataset_split,
+            dataset_version=args.dataset_version,
+            use_local=args.use_local,
+            local_path=args.local_path,
+            debug=args.debug,
+            debug_break_after=args.debug_break_after,
+            apply_code_changes=args.apply_code_changes,
+        )
+
+    def _iter_items(self):
+        """Iterate over unique papers from discrepancies dataset."""
+        for paper, prompt, pbar in self.iterator(**self.args.iterator_kwargs):
+            context = {"paper": paper}
+            yield {
+                "prompt": prompt,
+                "pbar": pbar,
+                "context": context,
+                "log_label": paper["id"],
+            }
+
+
+if __name__ == "__main__":
+    with logging_redirect_tqdm(loggers=[logging.root, logging.getLogger("scicoqa")]):
+        args, unknown_args = simple_parsing.parse_known_args(
+            DiscrepancyDatasetInferenceArgs
+        )
+        logger.info(f"DiscrepancyDatasetInferenceArgs: {args}")
+
+        if unknown_args:
+            logger.warning(f"Unknown args: {unknown_args}")
+
+        DiscrepancyDatasetExperiment(args)()
