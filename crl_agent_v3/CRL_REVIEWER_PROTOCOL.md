@@ -6,7 +6,7 @@
 
 本协议中的 `implementation` 是当前 Review 所绑定的可执行或可机械核验研究 artifact，不专指新算法。它可以承载方法、系统、基准/评价、可复现现象或具有机械核验载体的理论/分析贡献；固定评估器只评价 packet 中实际呈现且有 Formal / Review-support 依据的内容。没有相应载体和证据的纯概念主张不在当前正式 Delivery 的测量覆盖内。
 
-No-Go 与用户终止不要求 Reviewer。准备最终交付时，必须有一次绑定最终 implementation、最终 Seed 和有效 Formal / Review-support 实验的 final-delivery Review。
+`DIRECTED` Run 的 No-Go 与用户终止不要求 Reviewer。准备最终交付时，必须有一次绑定最终 implementation、最终 Seed 和有效 Formal / Review-support 实验的 final-delivery Review。
 
 ## 2. 冻结评估器
 

@@ -647,6 +647,11 @@ def _assert_no_delivery_mode(workspace: ResearchWorkspace) -> None:
         raise ValueError(
             "Run MODE identity differs between RUN_CHARTER.md and RUN_STATUS.md"
         )
+    if charter_mode != "DIRECTED" or status_mode != "DIRECTED":
+        raise ValueError(
+            "No-Delivery requires MODE: DIRECTED in both RUN_CHARTER.md "
+            f"and RUN_STATUS.md; found MODE: {charter_mode}"
+        )
     _single_named_field(
         charter_path,
         "DEFAULT_DOMAIN",

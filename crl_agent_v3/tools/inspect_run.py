@@ -646,15 +646,33 @@ def _looks_like_continuation(path: Path) -> bool:
         text = _required_file(path, within=path.parent).decode("utf-8")
     except (FileNotFoundError, OSError, UnicodeError, ValueError):
         return False
-    return text.startswith("# Scientific Continuation ") and all(
+    if not text.startswith("# Scientific Continuation ") or "- FROM_VERSION:" not in text:
+        return False
+    legacy_shape = all(
         marker in text
         for marker in (
-            "- FROM_VERSION:",
             "- CHANGED_COORDINATE:",
             "## SURVIVING_FRONTIER",
             "## NEXT_HIGH_INFORMATION_ACTION",
         )
     )
+    six_section_shape = all(
+        marker in text
+        for marker in (
+            "## 当前最佳候选集合",
+            "INCUMBENT_SET: INSUFFICIENT",
+            "CHALLENGERS: INSUFFICIENT",
+            "SURVIVING_FRONTIER:",
+            "## 新增正向证据",
+            "## 已失效或被杀范围",
+            "## 剩余致命不确定性",
+            "## 下一项最高信息量动作",
+            "NEXT_HIGH_INFORMATION_ACTION:",
+            "## 策略变化",
+            "CHANGED_COORDINATE:",
+        )
+    )
+    return legacy_shape or six_section_shape
 
 
 def _is_continuation(

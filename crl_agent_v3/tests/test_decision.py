@@ -388,20 +388,21 @@ def test_delivery_freezes_supporting_attempt_execution_identity(tmp_path: Path) 
         read_delivery(workspace)
 
 
-def test_default_broad_autonomous_can_publish_no_delivery(tmp_path: Path) -> None:
+def test_default_broad_autonomous_rejects_no_delivery_without_mutation(
+    tmp_path: Path,
+) -> None:
     run, workspace = _run(tmp_path)
-    terminal = workspace.write_no_delivery(
-        "经过真实回溯、正交再扩张和必要反证后，本次 Run 继续投入的预期科研价值不足。"
-    )
+    original_status = (run / "RUN_STATUS.md").read_bytes()
+    original_ledger = (run / "RUN_LEDGER.md").read_bytes()
 
-    assert terminal.status == "CONCLUDED_NO_DELIVERY"
-    assert (run / "NO_DELIVERY.md").is_file()
-    assert "STATUS: CONCLUDED_NO_DELIVERY" in (run / "RUN_STATUS.md").read_text(
-        encoding="utf-8"
-    )
-    assert "NO_DELIVERY_CONCLUDED" in (run / "RUN_LEDGER.md").read_text(
-        encoding="utf-8"
-    )
+    with pytest.raises(ValueError, match="requires MODE: DIRECTED"):
+        workspace.write_no_delivery(
+            "即使已经真实回溯、正交再扩张和必要反证，AUTONOMOUS 也不得无交付终局。"
+        )
+
+    assert not (run / "NO_DELIVERY.md").exists()
+    assert (run / "RUN_STATUS.md").read_bytes() == original_status
+    assert (run / "RUN_LEDGER.md").read_bytes() == original_ledger
 
 
 def test_no_delivery_rejects_run_mode_identity_mismatch(tmp_path: Path) -> None:
@@ -414,11 +415,15 @@ def test_no_delivery_rejects_run_mode_identity_mismatch(tmp_path: Path) -> None:
         encoding="utf-8",
         newline="\n",
     )
+    mismatched_status = status_path.read_bytes()
+    original_ledger = (run / "RUN_LEDGER.md").read_bytes()
 
     with pytest.raises(ValueError, match="MODE identity differs"):
         workspace.write_no_delivery("must not bypass mode boundary")
 
     assert not (run / "NO_DELIVERY.md").exists()
+    assert status_path.read_bytes() == mismatched_status
+    assert (run / "RUN_LEDGER.md").read_bytes() == original_ledger
 
 
 def test_directed_no_delivery_needs_no_review_or_downstream_documents(

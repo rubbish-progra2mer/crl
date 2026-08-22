@@ -85,7 +85,9 @@ def _publish_historical_no_delivery(
     status_path.write_text(status, encoding="utf-8", newline="\n")
 
 
-def test_start_directly_creates_new_autonomous_run_without_machine_gate(tmp_path: Path) -> None:
+def test_start_directly_creates_new_autonomous_run_and_rejects_no_delivery(
+    tmp_path: Path,
+) -> None:
     root = tmp_path / "product"
     root.mkdir()
     _existing_run(root, "20260728_0111_run04", "ACTIVE")
@@ -106,14 +108,15 @@ def test_start_directly_creates_new_autonomous_run_without_machine_gate(tmp_path
     assert "READY" not in charter
     assert "COMMISSION" not in charter.upper()
     assert "SEED_UPGRADE" not in charter
-    terminal = ResearchWorkspace(created, product_root=root).write_no_delivery(
-        "After real backtracking and re-expansion, expected further research value is insufficient."
-    )
-    assert terminal.status == "CONCLUDED_NO_DELIVERY"
-    assert (created / "NO_DELIVERY.md").is_file()
-    assert "STATUS: CONCLUDED_NO_DELIVERY" in (created / "RUN_STATUS.md").read_text(
-        encoding="utf-8"
-    )
+    original_status = (created / "RUN_STATUS.md").read_bytes()
+    original_ledger = (created / "RUN_LEDGER.md").read_bytes()
+    with pytest.raises(ValueError, match="requires MODE: DIRECTED"):
+        ResearchWorkspace(created, product_root=root).write_no_delivery(
+            "AUTONOMOUS must remain active without Delivery."
+        )
+    assert not (created / "NO_DELIVERY.md").exists()
+    assert (created / "RUN_STATUS.md").read_bytes() == original_status
+    assert (created / "RUN_LEDGER.md").read_bytes() == original_ledger
 
 
 def test_v2_run_cannot_resume_into_v3(tmp_path: Path) -> None:
@@ -216,6 +219,17 @@ def test_explicit_resume_of_no_delivery_preserves_history_and_advances_version(
     assert report["no_delivery_count"] == 1
     assert report["no_delivery_history"][0]["version"] == "v001"
     assert "ACTIVE_CURRENT_VERSION_EMPTY" in report["errors"]
+
+    resumed_status = (run / "RUN_STATUS.md").read_bytes()
+    resumed_ledger = (run / "RUN_LEDGER.md").read_bytes()
+    with pytest.raises(ValueError, match="requires MODE: DIRECTED"):
+        ResearchWorkspace(
+            run, version=payload["current_version"], product_root=root
+        ).write_no_delivery("恢复后的 AUTONOMOUS 不得再次写入 No-Delivery。")
+    assert not (run / "NO_DELIVERY_v002.md").exists()
+    assert (run / "NO_DELIVERY.md").read_bytes() == original
+    assert (run / "RUN_STATUS.md").read_bytes() == resumed_status
+    assert (run / "RUN_LEDGER.md").read_bytes() == resumed_ledger
 
 
 def test_ordinary_start_does_not_resume_no_delivery_run(tmp_path: Path) -> None:
@@ -387,6 +401,17 @@ def test_explicit_version_advance_synchronizes_status_ledger_inspect_and_resume(
     assert "CHANGED_COORDINATE" in continuation_text
     assert "SURVIVING_FRONTIER" in continuation_text
     assert "NEXT_HIGH_INFORMATION_ACTION" in continuation_text
+    for heading in (
+        "## 当前最佳候选集合",
+        "## 新增正向证据",
+        "## 已失效或被杀范围",
+        "## 剩余致命不确定性",
+        "## 下一项最高信息量动作",
+        "## 策略变化",
+    ):
+        assert heading in continuation_text
+    assert "INCUMBENT_SET: INSUFFICIENT" in continuation_text
+    assert "CHALLENGERS: INSUFFICIENT" in continuation_text
     assert "LAST_DURABLE_ARTIFACT: selection_context_v002.md" in status
     assert "CONTINUATION_SHA256" in ledger
     assert "STATUS: ACTIVE" in status

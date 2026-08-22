@@ -720,6 +720,14 @@ def test_diagnosis_reports_five_tail_pre_experiment_closures(tmp_path: Path) -> 
     assert hypotheses["pre_experiment_closure_streak"] == 5
     assert hypotheses["prior_collision_pre_experiment_closure_streak"] == 5
     assert hypotheses["pre_experiment_closure_significant_warning"] is True
+    preference = facts["current_version"]["selection_context"][
+        "candidate_preference"
+    ]
+    assert preference["single_implementation_idea_level_risk_count"] == 5
+    assert {
+        item["source"]
+        for item in preference["single_implementation_idea_level_risks"]
+    } == {"HYPOTHESIS_V2_DECISION"}
     latest = facts["run_wide"]["latest_structured_activity"]
     assert latest["structured_candidate"] == {
         "latest_version": "v001",
@@ -968,6 +976,8 @@ h-001 与 h-002 并列，分别覆盖方法与评价贡献。
     assert all(
         item["status"] == "PRESENT" for item in selection["sections"].values()
     )
+    assert selection["candidate_preference"]["status"] == "UNAVAILABLE"
+    assert selection["candidate_preference"]["active_candidate_ids"] == []
 
 
 def test_diagnosis_selection_context_missing_degrades_to_unavailable(
@@ -985,6 +995,7 @@ def test_diagnosis_selection_context_missing_degrades_to_unavailable(
         item["status"] == "UNAVAILABLE"
         for item in selection["sections"].values()
     )
+    assert selection["candidate_preference"]["status"] == "UNAVAILABLE"
 
 
 def test_diagnosis_ignores_template_headings_inside_fenced_code(tmp_path: Path) -> None:
