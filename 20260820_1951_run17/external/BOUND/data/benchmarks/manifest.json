@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "normalized_schema": ["id", "question", "answers", "metadata"],
+  "benchmarks": {
+    "hotpotqa": {
+      "role": [ "training_source", "evaluation" ],
+      "official_source": "https://hotpotqa.github.io/",
+      "loader": "hotpotqa/hotpot_qa",
+      "configuration": "distractor",
+      "training_split": "train",
+      "evaluation_split": "validation",
+      "license": "CC-BY-SA-4.0",
+      "metrics": [ "EM", "F1" ]
+    },
+    "musique": {
+      "role": [ "training_source", "evaluation" ],
+      "official_source": "https://github.com/StonyBrookNLP/musique",
+      "training_split": "musique_ans_v1.0_train.jsonl",
+      "evaluation_split": "musique_ans_v1.0_dev.jsonl",
+      "license": "CC-BY-4.0",
+      "metrics": [ "EM", "F1" ],
+      "access": "Download with the official repository script, then pass the file to search-prepare-benchmark."
+    },
+    "2wikimultihopqa": {
+      "role": [ "evaluation" ],
+      "official_source": "https://github.com/Alab-NII/2wikimultihop",
+      "evaluation_split": "dev.json",
+      "metrics": [ "EM", "F1" ],
+      "access": "Download the corrected official archive linked by the repository, then pass dev.json to search-prepare-benchmark."
+    },
+    "bamboogle": {
+      "role": [ "evaluation" ],
+      "official_source": "https://github.com/ofirpress/self-ask/tree/main/datasets",
+      "evaluation_split": "all 125 released questions",
+      "license": "MIT",
+      "metrics": [ "EM", "F1" ],
+      "access": "Export the official linked spreadsheet as CSV, then pass it to search-prepare-benchmark."
+    },
+    "frames": {
+      "role": [ "evaluation" ],
+      "official_source": "https://huggingface.co/datasets/google/frames-benchmark",
+      "loader": "google/frames-benchmark",
+      "evaluation_split": "test",
+      "license": "Apache-2.0",
+      "metrics": [ "EM", "F1", "CEM" ]
+    },
+    "gaia": {
+      "role": [ "evaluation" ],
+      "official_source": "https://huggingface.co/datasets/gaia-benchmark/GAIA",
+      "configuration": "2023_all",
+      "evaluation_split": "validation, rows without attachments",
+      "access": "Gated. Accept the official terms and use a Hugging Face token. Do not redistribute normalized data.",
+      "metrics": [ "EM", "F1", "CEM" ]
+    },
+    "browsecomp_plus": {
+      "role": [ "evaluation" ],
+      "official_source": "https://github.com/texttron/BrowseComp-Plus",
+      "corpus": "Tevatron/browsecomp-plus-corpus",
+      "evaluation_split": "official queries produced by decrypt_dataset.py",
+      "metrics": [
+        "Qwen3-32B judged answer accuracy",
+        "retrieval recall"
+      ],
+      "access": "Run the official decrypt_dataset.py script to obtain the evaluation queries. Use the official fixed corpus, relevance annotations, and evaluator for retrieval and answer evaluation. Do not replace the official queries with synthetic questions."
+    }
+  }
+}
+
