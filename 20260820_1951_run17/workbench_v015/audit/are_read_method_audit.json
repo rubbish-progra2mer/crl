@@ -1,0 +1,1385 @@
+{
+  "repository": "facebookresearch/meta-agents-research-environments",
+  "revision": "7946367413129784139e785ae4c351090002a0bb",
+  "scope": "Conservative AST audit of statically declared READ methods exposed as agent/data/environment/user tools. Flags require manual review and are not automatically interpreted as task-state effects.",
+  "declared_read_methods": 68,
+  "flagged_methods": 50,
+  "items": [
+    {
+      "class": "AgentUserInterface",
+      "function": "get_last_message_from_user",
+      "roles": [
+        "agent",
+        "data"
+      ],
+      "file": "are/simulation/apps/agent_user_interface.py",
+      "line": 253,
+      "flags": [
+        {
+          "line": 262,
+          "kind": "attribute_assignment",
+          "target": "user_message.time_read",
+          "self_rooted": false
+        },
+        {
+          "line": 262,
+          "kind": "self_method_call",
+          "target": "self.time_manager.time",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "AgentUserInterface",
+      "function": "get_last_unread_messages",
+      "roles": [
+        "agent",
+        "data"
+      ],
+      "file": "are/simulation/apps/agent_user_interface.py",
+      "line": 273,
+      "flags": [
+        {
+          "line": 284,
+          "kind": "attribute_assignment",
+          "target": "message.time_read",
+          "self_rooted": false
+        },
+        {
+          "line": 284,
+          "kind": "self_method_call",
+          "target": "self.time_manager.time",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "AgentUserInterface",
+      "function": "get_last_message_from_agent",
+      "roles": [
+        "agent",
+        "data"
+      ],
+      "file": "are/simulation/apps/agent_user_interface.py",
+      "line": 291,
+      "flags": []
+    },
+    {
+      "class": "AgentUserInterface",
+      "function": "get_all_messages",
+      "roles": [
+        "agent",
+        "data"
+      ],
+      "file": "are/simulation/apps/agent_user_interface.py",
+      "line": 304,
+      "flags": [
+        {
+          "line": 311,
+          "kind": "attribute_assignment",
+          "target": "message.time_read",
+          "self_rooted": false
+        },
+        {
+          "line": 311,
+          "kind": "self_method_call",
+          "target": "self.time_manager.time",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "ApartmentListingApp",
+      "function": "list_all_apartments",
+      "roles": [
+        "agent",
+        "data"
+      ],
+      "file": "are/simulation/apps/apartment_listing.py",
+      "line": 217,
+      "flags": []
+    },
+    {
+      "class": "ApartmentListingApp",
+      "function": "get_apartment_details",
+      "roles": [
+        "agent",
+        "data"
+      ],
+      "file": "are/simulation/apps/apartment_listing.py",
+      "line": 228,
+      "flags": []
+    },
+    {
+      "class": "ApartmentListingApp",
+      "function": "list_saved_apartments",
+      "roles": [
+        "agent",
+        "data"
+      ],
+      "file": "are/simulation/apps/apartment_listing.py",
+      "line": 270,
+      "flags": []
+    },
+    {
+      "class": "ApartmentListingApp",
+      "function": "search_apartments",
+      "roles": [
+        "agent",
+        "data"
+      ],
+      "file": "are/simulation/apps/apartment_listing.py",
+      "line": 281,
+      "flags": []
+    },
+    {
+      "class": "CabApp",
+      "function": "get_quotation",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/cab.py",
+      "line": 269,
+      "flags": [
+        {
+          "line": 284,
+          "kind": "self_method_call",
+          "target": "self._parse_ride_time",
+          "self_rooted": true
+        },
+        {
+          "line": 289,
+          "kind": "self_method_call",
+          "target": "self.calculate_distance",
+          "self_rooted": true
+        },
+        {
+          "line": 293,
+          "kind": "self_method_call",
+          "target": "self.calculate_price",
+          "self_rooted": true
+        },
+        {
+          "line": 298,
+          "kind": "call:randint",
+          "target": "self.rng.randint",
+          "self_rooted": true
+        },
+        {
+          "line": 300,
+          "kind": "call:random",
+          "target": "self.rng.random",
+          "self_rooted": true
+        },
+        {
+          "line": 314,
+          "kind": "call:append",
+          "target": "self.quotation_history.append",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "CabApp",
+      "function": "list_rides",
+      "roles": [
+        "agent",
+        "data"
+      ],
+      "file": "are/simulation/apps/cab.py",
+      "line": 321,
+      "flags": [
+        {
+          "line": 334,
+          "kind": "self_method_call",
+          "target": "self._parse_ride_time",
+          "self_rooted": true
+        },
+        {
+          "line": 337,
+          "kind": "self_method_call",
+          "target": "self.d_service_config.keys",
+          "self_rooted": true
+        },
+        {
+          "line": 338,
+          "kind": "self_method_call",
+          "target": "self.get_quotation",
+          "self_rooted": true
+        },
+        {
+          "line": 344,
+          "kind": "call:append",
+          "target": "all_rides.append",
+          "self_rooted": false
+        }
+      ]
+    },
+    {
+      "class": "CabApp",
+      "function": "get_current_ride_status",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/cab.py",
+      "line": 458,
+      "flags": [
+        {
+          "line": 464,
+          "kind": "call:update_delay",
+          "target": "self.on_going_ride.update_delay",
+          "self_rooted": true
+        },
+        {
+          "line": 464,
+          "kind": "self_method_call",
+          "target": "self.time_manager.time",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "CabApp",
+      "function": "get_ride",
+      "roles": [
+        "agent",
+        "data"
+      ],
+      "file": "are/simulation/apps/cab.py",
+      "line": 473,
+      "flags": []
+    },
+    {
+      "class": "CabApp",
+      "function": "get_ride_history",
+      "roles": [
+        "agent",
+        "data"
+      ],
+      "file": "are/simulation/apps/cab.py",
+      "line": 488,
+      "flags": []
+    },
+    {
+      "class": "CabApp",
+      "function": "get_ride_history_length",
+      "roles": [
+        "agent",
+        "data"
+      ],
+      "file": "are/simulation/apps/cab.py",
+      "line": 511,
+      "flags": []
+    },
+    {
+      "class": "CalendarApp",
+      "function": "get_calendar_event",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/calendar.py",
+      "line": 272,
+      "flags": []
+    },
+    {
+      "class": "CalendarApp",
+      "function": "get_calendar_events_from_to",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/calendar.py",
+      "line": 317,
+      "flags": [
+        {
+          "line": 337,
+          "kind": "self_method_call",
+          "target": "self.events.values",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "CalendarApp",
+      "function": "read_today_calendar_events",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/calendar.py",
+      "line": 352,
+      "flags": [
+        {
+          "line": 357,
+          "kind": "self_method_call",
+          "target": "self.time_manager.time",
+          "self_rooted": true
+        },
+        {
+          "line": 359,
+          "kind": "self_method_call",
+          "target": "self.get_calendar_events_from_to",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "CalendarApp",
+      "function": "get_all_tags",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/calendar.py",
+      "line": 367,
+      "flags": [
+        {
+          "line": 372,
+          "kind": "self_method_call",
+          "target": "self.events.values",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "CalendarApp",
+      "function": "get_calendar_events_by_tag",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/calendar.py",
+      "line": 377,
+      "flags": [
+        {
+          "line": 385,
+          "kind": "self_method_call",
+          "target": "self.events.values",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "CalendarApp",
+      "function": "search_events",
+      "roles": [
+        "agent",
+        "data"
+      ],
+      "file": "are/simulation/apps/calendar.py",
+      "line": 391,
+      "flags": [
+        {
+          "line": 401,
+          "kind": "self_method_call",
+          "target": "self.events.values",
+          "self_rooted": true
+        },
+        {
+          "line": 408,
+          "kind": "call:append",
+          "target": "results.append",
+          "self_rooted": false
+        }
+      ]
+    },
+    {
+      "class": "CityApp",
+      "function": "get_crime_rate",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/city.py",
+      "line": 165,
+      "flags": [
+        {
+          "line": 175,
+          "kind": "self_method_call",
+          "target": "self._reset_rate_limit_if_expired",
+          "self_rooted": true
+        },
+        {
+          "line": 178,
+          "kind": "self_method_call",
+          "target": "self._is_rate_limited",
+          "self_rooted": true
+        },
+        {
+          "line": 179,
+          "kind": "self_method_call",
+          "target": "self._enforce_rate_limit",
+          "self_rooted": true
+        },
+        {
+          "line": 181,
+          "kind": "attribute_assignment",
+          "target": "self.api_call_count",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "CityApp",
+      "function": "get_api_call_count",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/city.py",
+      "line": 197,
+      "flags": []
+    },
+    {
+      "class": "CityApp",
+      "function": "get_api_call_limit",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/city.py",
+      "line": 206,
+      "flags": []
+    },
+    {
+      "class": "ContactsApp",
+      "function": "get_contacts",
+      "roles": [
+        "agent",
+        "data"
+      ],
+      "file": "are/simulation/apps/contacts.py",
+      "line": 190,
+      "flags": [
+        {
+          "line": 196,
+          "kind": "self_method_call",
+          "target": "self.contacts.values",
+          "self_rooted": true
+        },
+        {
+          "line": 202,
+          "kind": "self_method_call",
+          "target": "self.contacts.values",
+          "self_rooted": true
+        },
+        {
+          "line": 204,
+          "kind": "self_method_call",
+          "target": "self.contacts.values",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "ContactsApp",
+      "function": "get_contact",
+      "roles": [
+        "agent",
+        "data"
+      ],
+      "file": "are/simulation/apps/contacts.py",
+      "line": 212,
+      "flags": []
+    },
+    {
+      "class": "ContactsApp",
+      "function": "get_current_user_details",
+      "roles": [
+        "agent",
+        "data"
+      ],
+      "file": "are/simulation/apps/contacts.py",
+      "line": 227,
+      "flags": [
+        {
+          "line": 232,
+          "kind": "self_method_call",
+          "target": "self.contacts.items",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "ContactsApp",
+      "function": "search_contacts",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/contacts.py",
+      "line": 377,
+      "flags": [
+        {
+          "line": 387,
+          "kind": "self_method_call",
+          "target": "self.contacts.values",
+          "self_rooted": true
+        },
+        {
+          "line": 396,
+          "kind": "call:append",
+          "target": "results.append",
+          "self_rooted": false
+        }
+      ]
+    },
+    {
+      "class": "EmailClientApp",
+      "function": "list_emails",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/email_client.py",
+      "line": 390,
+      "flags": [
+        {
+          "line": 410,
+          "kind": "self_method_call",
+          "target": "get_emails",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "EmailClientApp",
+      "function": "get_email_by_id",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/email_client.py",
+      "line": 415,
+      "flags": [
+        {
+          "line": 434,
+          "kind": "self_method_call",
+          "target": "get_email_by_id",
+          "self_rooted": true
+        },
+        {
+          "line": 439,
+          "kind": "attribute_assignment",
+          "target": "email.is_read",
+          "self_rooted": false
+        }
+      ]
+    },
+    {
+      "class": "EmailClientApp",
+      "function": "get_email_by_index",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/email_client.py",
+      "line": 445,
+      "flags": [
+        {
+          "line": 464,
+          "kind": "self_method_call",
+          "target": "get_email",
+          "self_rooted": true
+        },
+        {
+          "line": 469,
+          "kind": "attribute_assignment",
+          "target": "email.is_read",
+          "self_rooted": false
+        }
+      ]
+    },
+    {
+      "class": "EmailClientApp",
+      "function": "search_emails",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/email_client.py",
+      "line": 710,
+      "flags": [
+        {
+          "line": 736,
+          "kind": "call:append",
+          "target": "results.append",
+          "self_rooted": false
+        }
+      ]
+    },
+    {
+      "class": "MessagingApp",
+      "function": "list_recent_conversations",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/messaging.py",
+      "line": 299,
+      "flags": [
+        {
+          "line": 329,
+          "kind": "self_method_call",
+          "target": "self.conversations.values",
+          "self_rooted": true
+        },
+        {
+          "line": 341,
+          "kind": "self_method_call",
+          "target": "self.apply_conversation_limits",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "MessagingApp",
+      "function": "list_conversations_by_participant",
+      "roles": [
+        "agent",
+        "data"
+      ],
+      "file": "are/simulation/apps/messaging.py",
+      "line": 351,
+      "flags": [
+        {
+          "line": 382,
+          "kind": "self_method_call",
+          "target": "self.conversations.items",
+          "self_rooted": true
+        },
+        {
+          "line": 392,
+          "kind": "self_method_call",
+          "target": "self.apply_conversation_limits",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "MessagingApp",
+      "function": "read_conversation",
+      "roles": [
+        "agent",
+        "data"
+      ],
+      "file": "are/simulation/apps/messaging.py",
+      "line": 601,
+      "flags": [
+        {
+          "line": 625,
+          "kind": "call:sort",
+          "target": "conversation.messages.sort",
+          "self_rooted": false
+        }
+      ]
+    },
+    {
+      "class": "MessagingApp",
+      "function": "search",
+      "roles": [
+        "agent",
+        "data"
+      ],
+      "file": "are/simulation/apps/messaging.py",
+      "line": 705,
+      "flags": [
+        {
+          "line": 726,
+          "kind": "self_method_call",
+          "target": "self.conversations.values",
+          "self_rooted": true
+        },
+        {
+          "line": 727,
+          "kind": "self_method_call",
+          "target": "self._conversation_matches",
+          "self_rooted": true
+        },
+        {
+          "line": 728,
+          "kind": "call:append",
+          "target": "results.append",
+          "self_rooted": false
+        }
+      ]
+    },
+    {
+      "class": "MessagingApp",
+      "function": "regex_search",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/messaging.py",
+      "line": 735,
+      "flags": [
+        {
+          "line": 758,
+          "kind": "self_method_call",
+          "target": "self.conversations.values",
+          "self_rooted": true
+        },
+        {
+          "line": 759,
+          "kind": "self_method_call",
+          "target": "self._regex_conversation_matches",
+          "self_rooted": true
+        },
+        {
+          "line": 762,
+          "kind": "call:append",
+          "target": "results.append",
+          "self_rooted": false
+        }
+      ]
+    },
+    {
+      "class": "MessagingAppV2",
+      "function": "get_user_id",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/messaging_v2.py",
+      "line": 282,
+      "flags": [
+        {
+          "line": 288,
+          "kind": "self_method_call",
+          "target": "self.name_to_id.get",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "MessagingAppV2",
+      "function": "get_user_name_from_id",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/messaging_v2.py",
+      "line": 296,
+      "flags": [
+        {
+          "line": 302,
+          "kind": "self_method_call",
+          "target": "self.id_to_name.get",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "MessagingAppV2",
+      "function": "lookup_user_id",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/messaging_v2.py",
+      "line": 310,
+      "flags": [
+        {
+          "line": 325,
+          "kind": "self_method_call",
+          "target": "self.name_to_id.keys",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "MessagingAppV2",
+      "function": "get_existing_conversation_ids",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/messaging_v2.py",
+      "line": 550,
+      "flags": [
+        {
+          "line": 559,
+          "kind": "self_method_call",
+          "target": "self.conversations.items",
+          "self_rooted": true
+        },
+        {
+          "line": 561,
+          "kind": "call:append",
+          "target": "ids.append",
+          "self_rooted": false
+        }
+      ]
+    },
+    {
+      "class": "MessagingAppV2",
+      "function": "list_recent_conversations",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/messaging_v2.py",
+      "line": 602,
+      "flags": [
+        {
+          "line": 631,
+          "kind": "self_method_call",
+          "target": "self.conversations.values",
+          "self_rooted": true
+        },
+        {
+          "line": 643,
+          "kind": "self_method_call",
+          "target": "self.apply_conversation_limits",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "MessagingAppV2",
+      "function": "list_conversations_by_participant",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/messaging_v2.py",
+      "line": 652,
+      "flags": [
+        {
+          "line": 684,
+          "kind": "self_method_call",
+          "target": "self.conversations.items",
+          "self_rooted": true
+        },
+        {
+          "line": 694,
+          "kind": "self_method_call",
+          "target": "self.apply_conversation_limits",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "MessagingAppV2",
+      "function": "read_conversation",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/messaging_v2.py",
+      "line": 814,
+      "flags": [
+        {
+          "line": 846,
+          "kind": "call:sort",
+          "target": "messages.sort",
+          "self_rooted": false
+        }
+      ]
+    },
+    {
+      "class": "MessagingAppV2",
+      "function": "search",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/messaging_v2.py",
+      "line": 987,
+      "flags": [
+        {
+          "line": 1008,
+          "kind": "self_method_call",
+          "target": "self.conversations.values",
+          "self_rooted": true
+        },
+        {
+          "line": 1009,
+          "kind": "self_method_call",
+          "target": "self._conversation_matches",
+          "self_rooted": true
+        },
+        {
+          "line": 1010,
+          "kind": "call:append",
+          "target": "results.append",
+          "self_rooted": false
+        }
+      ]
+    },
+    {
+      "class": "MessagingAppV2",
+      "function": "regex_search",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/messaging_v2.py",
+      "line": 1017,
+      "flags": [
+        {
+          "line": 1040,
+          "kind": "self_method_call",
+          "target": "self.conversations.values",
+          "self_rooted": true
+        },
+        {
+          "line": 1041,
+          "kind": "self_method_call",
+          "target": "self._regex_conversation_matches",
+          "self_rooted": true
+        },
+        {
+          "line": 1044,
+          "kind": "call:append",
+          "target": "results.append",
+          "self_rooted": false
+        }
+      ]
+    },
+    {
+      "class": "ReminderApp",
+      "function": "get_due_reminders",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/reminder.py",
+      "line": 197,
+      "flags": [
+        {
+          "line": 203,
+          "kind": "self_method_call",
+          "target": "self.time_manager.time",
+          "self_rooted": true
+        },
+        {
+          "line": 204,
+          "kind": "self_method_call",
+          "target": "self.reminders.items",
+          "self_rooted": true
+        },
+        {
+          "line": 206,
+          "kind": "call:append",
+          "target": "due_reminders.append",
+          "self_rooted": false
+        }
+      ]
+    },
+    {
+      "class": "ReminderApp",
+      "function": "get_all_reminders",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/reminder.py",
+      "line": 211,
+      "flags": [
+        {
+          "line": 216,
+          "kind": "self_method_call",
+          "target": "self.reminders.values",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "SandboxLocalFileSystem",
+      "function": "cat",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/sandbox_file_system.py",
+      "line": 258,
+      "flags": [
+        {
+          "line": 276,
+          "kind": "self_method_call",
+          "target": "self._validate_path",
+          "self_rooted": true
+        },
+        {
+          "line": 278,
+          "kind": "self_method_call",
+          "target": "self.local_fs.cat",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "SandboxLocalFileSystem",
+      "function": "ls",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/sandbox_file_system.py",
+      "line": 355,
+      "flags": [
+        {
+          "line": 368,
+          "kind": "self_method_call",
+          "target": "self._validate_path",
+          "self_rooted": true
+        },
+        {
+          "line": 369,
+          "kind": "self_method_call",
+          "target": "self.local_fs.ls",
+          "self_rooted": true
+        },
+        {
+          "line": 375,
+          "kind": "call:append",
+          "target": "new_res.append",
+          "self_rooted": false
+        },
+        {
+          "line": 375,
+          "kind": "self_method_call",
+          "target": "self._get_relative_path",
+          "self_rooted": true
+        },
+        {
+          "line": 377,
+          "kind": "self_method_call",
+          "target": "self._get_relative_path",
+          "self_rooted": true
+        },
+        {
+          "line": 378,
+          "kind": "call:append",
+          "target": "new_res.append",
+          "self_rooted": false
+        }
+      ]
+    },
+    {
+      "class": "SandboxLocalFileSystem",
+      "function": "exists",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/sandbox_file_system.py",
+      "line": 408,
+      "flags": [
+        {
+          "line": 418,
+          "kind": "self_method_call",
+          "target": "self._validate_path",
+          "self_rooted": true
+        },
+        {
+          "line": 419,
+          "kind": "self_method_call",
+          "target": "self.local_fs.exists",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "SandboxLocalFileSystem",
+      "function": "display",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/sandbox_file_system.py",
+      "line": 423,
+      "flags": [
+        {
+          "line": 432,
+          "kind": "self_method_call",
+          "target": "self._validate_path",
+          "self_rooted": true
+        },
+        {
+          "line": 433,
+          "kind": "self_method_call",
+          "target": "self.local_fs.exists",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "SandboxLocalFileSystem",
+      "function": "info",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/sandbox_file_system.py",
+      "line": 437,
+      "flags": [
+        {
+          "line": 449,
+          "kind": "self_method_call",
+          "target": "self._validate_path",
+          "self_rooted": true
+        },
+        {
+          "line": 452,
+          "kind": "self_method_call",
+          "target": "self.local_fs.info",
+          "self_rooted": true
+        },
+        {
+          "line": 456,
+          "kind": "self_method_call",
+          "target": "self._get_relative_path",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "SandboxLocalFileSystem",
+      "function": "tree",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/sandbox_file_system.py",
+      "line": 462,
+      "flags": [
+        {
+          "line": 475,
+          "kind": "self_method_call",
+          "target": "self.ls",
+          "self_rooted": true
+        },
+        {
+          "line": 486,
+          "kind": "self_method_call",
+          "target": "self.isdir",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "SandboxLocalFileSystem",
+      "function": "read_document",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/sandbox_file_system.py",
+      "line": 655,
+      "flags": [
+        {
+          "line": 671,
+          "kind": "self_method_call",
+          "target": "self._validate_path",
+          "self_rooted": true
+        },
+        {
+          "line": 678,
+          "kind": "self_method_call",
+          "target": "self.local_fs.open",
+          "self_rooted": true
+        },
+        {
+          "line": 689,
+          "kind": "self_method_call",
+          "target": "self._md_converter.convert_io",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "ShoppingApp",
+      "function": "list_all_products",
+      "roles": [
+        "agent",
+        "data"
+      ],
+      "file": "are/simulation/apps/shopping.py",
+      "line": 375,
+      "flags": []
+    },
+    {
+      "class": "ShoppingApp",
+      "function": "get_product_details",
+      "roles": [
+        "agent",
+        "data"
+      ],
+      "file": "are/simulation/apps/shopping.py",
+      "line": 404,
+      "flags": []
+    },
+    {
+      "class": "ShoppingApp",
+      "function": "search_product",
+      "roles": [
+        "agent",
+        "data"
+      ],
+      "file": "are/simulation/apps/shopping.py",
+      "line": 418,
+      "flags": [
+        {
+          "line": 428,
+          "kind": "self_method_call",
+          "target": "self.products.values",
+          "self_rooted": true
+        },
+        {
+          "line": 432,
+          "kind": "call:append",
+          "target": "names.append",
+          "self_rooted": false
+        },
+        {
+          "line": 438,
+          "kind": "call:append",
+          "target": "ret_products.append",
+          "self_rooted": false
+        }
+      ]
+    },
+    {
+      "class": "ShoppingApp",
+      "function": "list_cart",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/shopping.py",
+      "line": 500,
+      "flags": []
+    },
+    {
+      "class": "ShoppingApp",
+      "function": "get_discount_code_info",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/shopping.py",
+      "line": 569,
+      "flags": []
+    },
+    {
+      "class": "ShoppingApp",
+      "function": "list_orders",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/shopping.py",
+      "line": 598,
+      "flags": []
+    },
+    {
+      "class": "ShoppingApp",
+      "function": "get_order_details",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/shopping.py",
+      "line": 608,
+      "flags": []
+    },
+    {
+      "class": "SystemApp",
+      "function": "get_current_time",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/system.py",
+      "line": 54,
+      "flags": [
+        {
+          "line": 59,
+          "kind": "self_method_call",
+          "target": "self.time_manager.time",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "SystemApp",
+      "function": "wait_for_notification",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/system.py",
+      "line": 84,
+      "flags": [
+        {
+          "line": 98,
+          "kind": "attribute_assignment",
+          "target": "self.wait_for_notification_timeout",
+          "self_rooted": true
+        },
+        {
+          "line": 99,
+          "kind": "self_method_call",
+          "target": "self.time_manager.time",
+          "self_rooted": true
+        },
+        {
+          "line": 104,
+          "kind": "self_method_call",
+          "target": "self.wait_for_next_notification",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "VirtualFileSystem",
+      "function": "cat",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/virtual_file_system.py",
+      "line": 56,
+      "flags": [
+        {
+          "line": 62,
+          "kind": "self_method_call",
+          "target": "self.sandbox_fs.cat",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "VirtualFileSystem",
+      "function": "ls",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/virtual_file_system.py",
+      "line": 89,
+      "flags": [
+        {
+          "line": 96,
+          "kind": "self_method_call",
+          "target": "self.sandbox_fs.ls",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "VirtualFileSystem",
+      "function": "exists",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/virtual_file_system.py",
+      "line": 121,
+      "flags": [
+        {
+          "line": 127,
+          "kind": "self_method_call",
+          "target": "self.sandbox_fs.exists",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "VirtualFileSystem",
+      "function": "info",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/virtual_file_system.py",
+      "line": 131,
+      "flags": [
+        {
+          "line": 138,
+          "kind": "self_method_call",
+          "target": "self.sandbox_fs.info",
+          "self_rooted": true
+        }
+      ]
+    },
+    {
+      "class": "VirtualFileSystem",
+      "function": "tree",
+      "roles": [
+        "agent"
+      ],
+      "file": "are/simulation/apps/virtual_file_system.py",
+      "line": 142,
+      "flags": [
+        {
+          "line": 148,
+          "kind": "self_method_call",
+          "target": "self.sandbox_fs.tree",
+          "self_rooted": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "source": {
+    "repository": "facebookresearch/meta-agents-research-environments",
+    "revision": "7946367413129784139e785ae4c351090002a0bb",
+    "python": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\.venv\\Scripts\\python.exe",
+    "script_sha256": "4871391eaa645cdb1848900b0aaf6cc20479c613c104f8da320afbe2d70313c9",
+    "gaia2_row_sha256": "09bf72c701e41cb79983126cabb7fbff2586d26a202edbe9c1d66990743ed64c"
+  },
+  "experiment": "Official GraphPerEventJudge score collision after erased READ actions exhaust the City API rate limit and change subsequent action feasibility.",
+  "local_natural_task_facts": {
+    "local_rows_present": 1,
+    "reported_split_row_count": 160,
+    "split": "validation",
+    "city_app_present": true,
+    "user_text_mentions_violent_crime_rate": true,
+    "city_get_crime_rate_tool_described": true
+  },
+  "stress": {
+    "successful_reads_before_limit": 100,
+    "limit_trigger": {
+      "success": false,
+      "error_type": "ValueError"
+    },
+    "direct_capability_probe": {
+      "success": true,
+      "error_type": null
+    },
+    "stressed_capability_probe": {
+      "success": false,
+      "error_type": "ValueError"
+    }
+  },
+  "direct": {
+    "city_world": {
+      "api_call_count": 1,
+      "api_call_limit": 100,
+      "rate_limit_time_is_set": false,
+      "rate_limit_exceeded": false,
+      "crime_data_size": 16
+    },
+    "cab_world": {
+      "ride_id": "99551645a048a9faa623987790339975",
+      "price": 7.885456898222229,
+      "delay": 8,
+      "status": "BOOKED"
+    },
+    "judgment": {
+      "success": true,
+      "rationale": "None",
+      "retained_events": [
+        {
+          "event_id": "AGENT-CabApp.order_ride-cbaa0ef2-0f02-42d4-a129-cf1527df2a53",
+          "event_type": "AGENT",
+          "tool_name": "CabApp__order_ride",
+          "function": "order_ride",
+          "operation_type": "write",
+          "failed": false,
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "kept_by_agent_filter": true
+        }
+      ],
+      "semantic_retained_trace": [
+        {
+          "event_type": "AGENT",
+          "tool_name": "CabApp__order_ride",
+          "function": "order_ride",
+          "operation_type": "write",
+          "failed": false,
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "kept_by_agent_filter": true
+        }
+      ],
+      "agent_to_oracle": {
+        "AGENT-CabApp.order_ride-cbaa0ef2-0f02-42d4-a129-cf1527df2a53": "AGENT-CabApp.order_ride-cbaa0ef2-0f02-42d4-a129-cf1527df2a53"
+      }
+    }
+  },
+  "stressed": {
+    "city_world": {
+      "api_call_count": 0,
+      "api_call_limit": 100,
+      "rate_limit_time_is_set": true,
+      "rate_limit_exceeded": true,
+      "crime_data_size": 16
+    },
+    "cab_world": {
+      "ride_id": "99551645a048a9faa623987790339975",
+      "price": 7.885456898222229,
+      "delay": 8,
+      "status": "BOOKED"
+    },
+    "judgment": {
+      "success": true,
+      "rationale": "None",
+      "retained_events": [
+        {
+          "event_id": "AGENT-CabApp.order_ride-fb468892-e8ee-4650-a514-cf2975ec0713",
+          "event_type": "AGENT",
+          "tool_name": "CabApp__order_ride",
+          "function": "order_ride",
+          "operation_type": "write",
+          "failed": false,
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "kept_by_agent_filter": true
+        }
+      ],
+      "semantic_retained_trace": [
+        {
+          "event_type": "AGENT",
+          "tool_name": "CabApp__order_ride",
+          "function": "order_ride",
+          "operation_type": "write",
+          "failed": false,
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "kept_by_agent_filter": true
+        }
+      ],
+      "agent_to_oracle": {
+        "AGENT-CabApp.order_ride-fb468892-e8ee-4650-a514-cf2975ec0713": "AGENT-CabApp.order_ride-cbaa0ef2-0f02-42d4-a129-cf1527df2a53"
+      }
+    }
+  },
+  "collision": {
+    "same_raw_retained_trace": false,
+    "same_semantic_retained_trace": true,
+    "same_success_score": true,
+    "same_cab_world": true,
+    "different_city_capability_state": true,
+    "different_next_city_read_outcome": true
+  },
+  "scope_limit": "The local file contains only one of 160 reported validation rows. The pilot proves mechanical reachability and a score collision for the official app and judge, not prevalence, natural agent call counts, or leaderboard impact."
+}

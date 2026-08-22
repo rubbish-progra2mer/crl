@@ -1,0 +1,352 @@
+{
+  "source": {
+    "repository": "facebookresearch/meta-agents-research-environments",
+    "revision": "7946367413129784139e785ae4c351090002a0bb",
+    "python": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\.venv\\Scripts\\python.exe",
+    "script": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\audit\\run_are_effect_closure_three_way.py",
+    "script_sha256": "c4e8966e1d2233890c9d91b45a1972c905a3cce05cea8d80c0d2e3dc09425f44"
+  },
+  "experiment": "Three-way ARE replay comparing the official write-only judge, full raw trajectory retention, and read-effect closure.",
+  "worlds": {
+    "direct": {
+      "mode": "direct",
+      "full_semantic_trace": [
+        {
+          "event_type": "AGENT",
+          "app": "CabApp",
+          "function": "get_quotation",
+          "operation_type": "read",
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "failed": false
+        },
+        {
+          "event_type": "AGENT",
+          "app": "CabApp",
+          "function": "order_ride",
+          "operation_type": "write",
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "failed": false
+        }
+      ],
+      "official_retained_semantic_trace": [
+        {
+          "event_type": "AGENT",
+          "app": "CabApp",
+          "function": "order_ride",
+          "operation_type": "write",
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "failed": false
+        }
+      ],
+      "effect_capsules": [],
+      "effect_closure_trace": [
+        {
+          "kind": "RETAINED_WRITE",
+          "event_type": "AGENT",
+          "app": "CabApp",
+          "function": "order_ride",
+          "operation_type": "write",
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "failed": false
+        }
+      ],
+      "cab_world": {
+        "price": 7.885456898222229,
+        "delay": 8,
+        "status": "BOOKED",
+        "quotation_history_size": 1
+      },
+      "official_judgment": {
+        "success": true,
+        "retained_event_ids": [
+          "AGENT-CabApp.order_ride-60845ef9-567d-4edd-aa7b-8fe693812ca4"
+        ],
+        "retained_semantic_trace": [
+          {
+            "event_type": "AGENT",
+            "app": "CabApp",
+            "function": "order_ride",
+            "operation_type": "write",
+            "args": {
+              "start_location": "A",
+              "end_location": "B",
+              "service_type": "Default",
+              "ride_time": "2025-01-01 12:00:00"
+            },
+            "failed": false
+          }
+        ]
+      }
+    },
+    "pure_read_then_write": {
+      "mode": "pure_read",
+      "full_semantic_trace": [
+        {
+          "event_type": "AGENT",
+          "app": "ApartmentListingApp",
+          "function": "list_all_apartments",
+          "operation_type": "read",
+          "args": {},
+          "failed": false
+        },
+        {
+          "event_type": "AGENT",
+          "app": "CabApp",
+          "function": "get_quotation",
+          "operation_type": "read",
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "failed": false
+        },
+        {
+          "event_type": "AGENT",
+          "app": "CabApp",
+          "function": "order_ride",
+          "operation_type": "write",
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "failed": false
+        }
+      ],
+      "official_retained_semantic_trace": [
+        {
+          "event_type": "AGENT",
+          "app": "CabApp",
+          "function": "order_ride",
+          "operation_type": "write",
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "failed": false
+        }
+      ],
+      "effect_capsules": [],
+      "effect_closure_trace": [
+        {
+          "kind": "RETAINED_WRITE",
+          "event_type": "AGENT",
+          "app": "CabApp",
+          "function": "order_ride",
+          "operation_type": "write",
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "failed": false
+        }
+      ],
+      "cab_world": {
+        "price": 7.885456898222229,
+        "delay": 8,
+        "status": "BOOKED",
+        "quotation_history_size": 1
+      },
+      "official_judgment": {
+        "success": true,
+        "retained_event_ids": [
+          "AGENT-CabApp.order_ride-2b7a2503-e8d8-44ae-88d3-bbc9a141b075"
+        ],
+        "retained_semantic_trace": [
+          {
+            "event_type": "AGENT",
+            "app": "CabApp",
+            "function": "order_ride",
+            "operation_type": "write",
+            "args": {
+              "start_location": "A",
+              "end_location": "B",
+              "service_type": "Default",
+              "ride_time": "2025-01-01 12:00:00"
+            },
+            "failed": false
+          }
+        ]
+      }
+    },
+    "effectful_read_then_write": {
+      "mode": "effectful_read",
+      "full_semantic_trace": [
+        {
+          "event_type": "AGENT",
+          "app": "CabApp",
+          "function": "get_quotation",
+          "operation_type": "read",
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "failed": false
+        },
+        {
+          "event_type": "AGENT",
+          "app": "CabApp",
+          "function": "get_quotation",
+          "operation_type": "read",
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "failed": false
+        },
+        {
+          "event_type": "AGENT",
+          "app": "CabApp",
+          "function": "order_ride",
+          "operation_type": "write",
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "failed": false
+        }
+      ],
+      "official_retained_semantic_trace": [
+        {
+          "event_type": "AGENT",
+          "app": "CabApp",
+          "function": "order_ride",
+          "operation_type": "write",
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "failed": false
+        }
+      ],
+      "effect_capsules": [
+        {
+          "kind": "READ_EFFECT_CAPSULE",
+          "position": 0,
+          "app": "CabApp",
+          "method": "get_quotation",
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "changed_top_level_fields": [
+            "quotation_history",
+            "rng"
+          ],
+          "before_state_sha256": "4094ed6e82d9b3dfebeb75416ac61a5549766fbf670bf96ab718897ac2818179",
+          "after_state_sha256": "71ce6749ac730ee93377f3d1d6178920bb8b51a30966a7877f9643358c86c638"
+        }
+      ],
+      "effect_closure_trace": [
+        {
+          "kind": "READ_EFFECT_CAPSULE",
+          "position": 0,
+          "app": "CabApp",
+          "method": "get_quotation",
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "changed_top_level_fields": [
+            "quotation_history",
+            "rng"
+          ],
+          "before_state_sha256": "4094ed6e82d9b3dfebeb75416ac61a5549766fbf670bf96ab718897ac2818179",
+          "after_state_sha256": "71ce6749ac730ee93377f3d1d6178920bb8b51a30966a7877f9643358c86c638"
+        },
+        {
+          "kind": "RETAINED_WRITE",
+          "event_type": "AGENT",
+          "app": "CabApp",
+          "function": "order_ride",
+          "operation_type": "write",
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "failed": false
+        }
+      ],
+      "cab_world": {
+        "price": 4.8323394973670855,
+        "delay": 6,
+        "status": "BOOKED",
+        "quotation_history_size": 2
+      },
+      "official_judgment": {
+        "success": true,
+        "retained_event_ids": [
+          "AGENT-CabApp.order_ride-0596706a-6716-4d93-8845-9b388ecd27b4"
+        ],
+        "retained_semantic_trace": [
+          {
+            "event_type": "AGENT",
+            "app": "CabApp",
+            "function": "order_ride",
+            "operation_type": "write",
+            "args": {
+              "start_location": "A",
+              "end_location": "B",
+              "service_type": "Default",
+              "ride_time": "2025-01-01 12:00:00"
+            },
+            "failed": false
+          }
+        ]
+      }
+    }
+  },
+  "comparisons": {
+    "official_same_semantic_retained_trace_all_three": true,
+    "official_same_success_score_all_three": true,
+    "full_trace_separates_harmless_pure_read": true,
+    "effect_closure_preserves_pure_read_equivalence": true,
+    "effect_closure_separates_effectful_read": true,
+    "pure_read_preserves_later_cab_world": true,
+    "effectful_read_changes_later_cab_world": true
+  },
+  "changed_computation": "Retain successful writes as before, but add a compact capsule only when a nominal READ changes the curated semantic app-state projection.",
+  "baseline_delta": "The official write-only filter merges the effectful and direct worlds. Full raw trajectory retention separates both effectful and harmless pure reads. Effect closure separates the effectful read while preserving equivalence under the harmless pure-read insertion in this seeded witness.",
+  "scope_limit": "This is one curated three-world source-level witness on one ARE revision. It does not prove a general semantic-state projection, task-level reward improvement, natural prevalence, ranking changes, or leaderboard impact."
+}

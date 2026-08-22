@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "scope": "Reachability of the conditional MusicPlayer creation branch for the locally available AppWorld train/dev tasks whose frozen ground-truth traces call show_current_song or show_song_queue. Task databases are reconstructed in memory.",
+  "inputs": {
+    "data_version": "0.1.0",
+    "base_spotify_db_sha256": "ef3c6b2a09938cbf862ff7a0fdabdace6cbda6454038c0405695b4edf3f80fba",
+    "matched_task_input_manifest_sha256": "956fc11f6b2c3eef2a5a89ba5b4dcabb995eb6086bb21692ecdf2a807d820f83"
+  },
+  "target_urls": [
+    "/spotify/music_player/current_song",
+    "/spotify/music_player/song_queue"
+  ],
+  "matched_task_count": 9,
+  "matched_task_count_by_split": {
+    "dev": 6,
+    "test_challenge": 0,
+    "test_normal": 0,
+    "train": 3
+  },
+  "base_database_coverage": {
+    "user_count": 106,
+    "music_player_count": 106,
+    "users_without_music_player": 0,
+    "users_with_multiple_music_players": 0,
+    "music_players_without_user": 0
+  },
+  "reconstructed_task_coverage": {
+    "successful_task_count": 9,
+    "failed_task_count": 0,
+    "tasks_with_any_user_without_music_player": 0,
+    "tasks_with_any_duplicate_music_player": 0,
+    "tasks_with_orphan_music_player": 0,
+    "minimum_user_count": 106,
+    "maximum_user_count": 106,
+    "minimum_music_player_count": 106,
+    "maximum_music_player_count": 106
+  },
+  "failures": [],
+  "interpretation_boundary": "Zero users without a MusicPlayer makes the create-and-save branch unreachable for authenticated users in these reconstructed initial task states. It does not prove the branch is unreachable for arbitrary or future AppWorld databases."
+}

@@ -1,0 +1,110 @@
+{
+  "source": {
+    "repository": "facebookresearch/meta-agents-research-environments",
+    "revision": "7946367413129784139e785ae4c351090002a0bb",
+    "python": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\.venv\\Scripts\\python.exe"
+  },
+  "verifier_boundary": "AgentEventFilter keeps only successful AGENT events whose declared operation_type is WRITE.",
+  "pilots": {
+    "message_consumption": {
+      "before": {
+        "already_read": false,
+        "time_read": null
+      },
+      "after_first_read": {
+        "already_read": true,
+        "time_read": 1750000000.0
+      },
+      "first_result_count": 1,
+      "second_result_count": 0,
+      "first_read_event": {
+        "event_type": "AGENT",
+        "function": "get_last_unread_messages",
+        "operation_type": "read",
+        "failed": false,
+        "kept_by_agent_write_filter": false
+      },
+      "mechanical_consequence": "The first read consumes unreadness, so the same subsequent read returns no message."
+    },
+    "quote_absorption": {
+      "arguments": {
+        "start_location": "A",
+        "end_location": "B",
+        "service_type": "Default",
+        "ride_time": "2025-01-01 12:00:00"
+      },
+      "preliminary_quote": {
+        "ride_id": "99551645a048a9faa623987790339975",
+        "price": 7.885456898222229,
+        "delay": 8,
+        "status": null,
+        "quotation_history_size": null
+      },
+      "preliminary_read_event": {
+        "event_type": "AGENT",
+        "function": "get_quotation",
+        "operation_type": "read",
+        "failed": false,
+        "kept_by_agent_write_filter": false
+      },
+      "direct_order_world": {
+        "ride_id": "99551645a048a9faa623987790339975",
+        "price": 7.885456898222229,
+        "delay": 8,
+        "status": "BOOKED",
+        "quotation_history_size": 1
+      },
+      "prequote_then_order_world": {
+        "ride_id": "f5d17c903d34bd5a3897311adb0c471f",
+        "price": 4.8323394973670855,
+        "delay": 6,
+        "status": "BOOKED",
+        "quotation_history_size": 2
+      },
+      "filtered_write_trace_direct": [
+        {
+          "app": "CabApp",
+          "function": "order_ride",
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          }
+        }
+      ],
+      "filtered_write_trace_prequote": [
+        {
+          "app": "CabApp",
+          "function": "order_ride",
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          }
+        }
+      ],
+      "filtered_write_traces_equal": true,
+      "final_worlds_equal": false,
+      "mechanical_consequence": "A read-classified quote mutates quotation history and RNG state. The later order has the same write name and arguments but a different booked ride price, delay, identifier, and history."
+    },
+    "wait_state": {
+      "before_timeout": null,
+      "after_timeout": {
+        "time_created": 1750000000.0,
+        "timeout": 30,
+        "timeout_timestamp": 1750000030.0
+      },
+      "environment_callback_count": 1,
+      "read_event": {
+        "event_type": "AGENT",
+        "function": "wait_for_notification",
+        "operation_type": "read",
+        "failed": false,
+        "kept_by_agent_write_filter": false
+      },
+      "mechanical_consequence": "The read-classified wait installs timeout state and invokes the environment scheduler callback."
+    }
+  }
+}

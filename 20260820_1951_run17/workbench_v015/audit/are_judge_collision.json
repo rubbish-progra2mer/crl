@@ -1,0 +1,129 @@
+{
+  "source": {
+    "repository": "facebookresearch/meta-agents-research-environments",
+    "revision": "7946367413129784139e785ae4c351090002a0bb",
+    "python": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\.venv\\Scripts\\python.exe"
+  },
+  "experiment": "Official GraphPerEventJudge score collision induced by an erased READ action.",
+  "configuration": {
+    "judge": "GraphPerEventJudge",
+    "config": "ScriptedGraphPerEventJudgeConfig",
+    "soft_checkers_disabled": true,
+    "oracle": "Direct order_ride write event"
+  },
+  "prequote_read_event": {
+    "event_id": "AGENT-CabApp.get_quotation-3235ed66-b2c3-487d-b273-9fba9ed11007",
+    "event_type": "AGENT",
+    "tool_name": "CabApp__get_quotation",
+    "function": "get_quotation",
+    "operation_type": "read",
+    "args": {
+      "start_location": "A",
+      "end_location": "B",
+      "service_type": "Default",
+      "ride_time": "2025-01-01 12:00:00"
+    },
+    "kept_by_agent_filter": false
+  },
+  "direct": {
+    "world": {
+      "ride_id": "99551645a048a9faa623987790339975",
+      "price": 7.885456898222229,
+      "delay": 8,
+      "status": "BOOKED",
+      "quotation_history_size": 1
+    },
+    "judgment": {
+      "success": true,
+      "rationale": "None",
+      "retained_events": [
+        {
+          "event_id": "AGENT-CabApp.order_ride-cd244cf9-096e-43e6-9dba-2a24bc14792f",
+          "event_type": "AGENT",
+          "tool_name": "CabApp__order_ride",
+          "function": "order_ride",
+          "operation_type": "write",
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "kept_by_agent_filter": true
+        }
+      ],
+      "semantic_retained_trace": [
+        {
+          "event_type": "AGENT",
+          "tool_name": "CabApp__order_ride",
+          "function": "order_ride",
+          "operation_type": "write",
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "kept_by_agent_filter": true
+        }
+      ],
+      "agent_to_oracle": {
+        "AGENT-CabApp.order_ride-cd244cf9-096e-43e6-9dba-2a24bc14792f": "AGENT-CabApp.order_ride-cd244cf9-096e-43e6-9dba-2a24bc14792f"
+      }
+    }
+  },
+  "prequote_then_order": {
+    "world": {
+      "ride_id": "f5d17c903d34bd5a3897311adb0c471f",
+      "price": 4.8323394973670855,
+      "delay": 6,
+      "status": "BOOKED",
+      "quotation_history_size": 2
+    },
+    "judgment": {
+      "success": true,
+      "rationale": "None",
+      "retained_events": [
+        {
+          "event_id": "AGENT-CabApp.order_ride-def3646b-f00a-456b-9d4f-1e46084e4f98",
+          "event_type": "AGENT",
+          "tool_name": "CabApp__order_ride",
+          "function": "order_ride",
+          "operation_type": "write",
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "kept_by_agent_filter": true
+        }
+      ],
+      "semantic_retained_trace": [
+        {
+          "event_type": "AGENT",
+          "tool_name": "CabApp__order_ride",
+          "function": "order_ride",
+          "operation_type": "write",
+          "args": {
+            "start_location": "A",
+            "end_location": "B",
+            "service_type": "Default",
+            "ride_time": "2025-01-01 12:00:00"
+          },
+          "kept_by_agent_filter": true
+        }
+      ],
+      "agent_to_oracle": {
+        "AGENT-CabApp.order_ride-def3646b-f00a-456b-9d4f-1e46084e4f98": "AGENT-CabApp.order_ride-cd244cf9-096e-43e6-9dba-2a24bc14792f"
+      }
+    }
+  },
+  "collision": {
+    "same_raw_retained_trace": false,
+    "same_semantic_retained_trace": true,
+    "same_success_score": true,
+    "different_final_world": true
+  },
+  "scope_limit": "This seeded source-level witness proves a verifier score collision after a READ is erased; raw retained events still differ in generated event UUIDs. It does not estimate prevalence across the 800 Gaia2 scenarios or leaderboard impact."
+}

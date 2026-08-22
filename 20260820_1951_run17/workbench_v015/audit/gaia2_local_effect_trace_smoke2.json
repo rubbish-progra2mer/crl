@@ -1,0 +1,439 @@
+{
+  "source": {
+    "repository": "facebookresearch/meta-agents-research-environments",
+    "are_revision": "7946367413129784139e785ae4c351090002a0bb",
+    "dataset": "meta-agents-research-environments/gaia2",
+    "dataset_revision": "78ea3bdbdeec2bdcd6afa5420915d8a22f23ed99",
+    "split": "validation",
+    "parquet_files": [
+      {
+        "config": "execution",
+        "path": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\source_artifacts\\gaia2_execution_validation.parquet",
+        "bytes": 161820517,
+        "sha256": "ed9a2c6b27bf2a3191a1c5efd40efb79802fd2c0c4b1e4b101328627c1a2807d"
+      },
+      {
+        "config": "search",
+        "path": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\source_artifacts\\gaia2_search_validation.parquet",
+        "bytes": 162561376,
+        "sha256": "12200ff1f71e608b5aec9bc59456167be772b367bbd290769cf19e579f051339"
+      },
+      {
+        "config": "adaptability",
+        "path": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\source_artifacts\\gaia2_adaptability_validation.parquet",
+        "bytes": 161875391,
+        "sha256": "44e6f4a785c31a212058b5a6ef3ae61f4592d32486f6dc4490956e16b8b81b2b"
+      },
+      {
+        "config": "time",
+        "path": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\source_artifacts\\gaia2_time_validation.parquet",
+        "bytes": 162117094,
+        "sha256": "2c158af8ec0009b46a63078def3aff12c9616de2d6625aee15d9b8a3ec3b02c1"
+      },
+      {
+        "config": "ambiguity",
+        "path": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\source_artifacts\\gaia2_ambiguity_validation.parquet",
+        "bytes": 161635185,
+        "sha256": "6653546dbb9a7aa9193fd2e6f30adeb069d379fd3624cc70a1a1d874b1b60ab0"
+      }
+    ],
+    "python": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\.venv\\Scripts\\python.exe",
+    "polars": "1.33.1",
+    "script": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\audit\\run_gaia2_local_effect_trace_panel.py",
+    "script_sha256": "df9d154c95409f795b5427d40f7ec932b5f779b12b369c3b0decf5b04f52a943"
+  },
+  "model": {
+    "runtime": "Ollama loopback HTTP API",
+    "model": "qwen3.5:9b",
+    "digest": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+    "endpoint_scope": "loopback only",
+    "temperature": 0,
+    "seed_base": 20260821,
+    "num_predict": 512,
+    "num_ctx": 16384,
+    "think": false
+  },
+  "frozen_panel_contract": {
+    "selection": "For each cue stratum in the fixed order, select the lexicographically smallest SHA-256 scenario identities not already selected. Selection is independent of model output.",
+    "cue_order": [
+      "city_crime_information",
+      "cab_quote_information",
+      "timed_wait_for_response",
+      "explicit_email_read"
+    ],
+    "per_cue": 1,
+    "panel_limit": 1,
+    "selected_scenarios": 1,
+    "task_text_emitted": false
+  },
+  "execution_contract": {
+    "agent": "official ARE default ReAct JSON agent and tool descriptions",
+    "judge": "disabled; trace acquisition only",
+    "max_iterations_per_turn": 6,
+    "invalid_format_retries": 1,
+    "simulated_generation_time_mode": "measured",
+    "external_network_offline_flags": true,
+    "non_loopback_model_endpoint_allowed": false,
+    "filesystem_app_dependency_available_in_venv": false,
+    "cache_export_xxhash_import_shim": true,
+    "cache_or_export_invoked": false
+  },
+  "results": [
+    {
+      "panel_stratum": "city_crime_information",
+      "config": "adaptability",
+      "scenario_identity_sha256": "110234e6f6aece17347f920db561572e3c14b53a90edee724fcb38edf2a52a42",
+      "task_text_sha256": "54a2d610be7dd0bfcd922bf7ac5218b5a840b490651642d633b67cc287b35b28",
+      "matched_cues": [
+        "city_crime_information"
+      ],
+      "preprocess_seconds": 0.5861057000001892,
+      "run_seconds": 77.18292449999717,
+      "execution_completed_without_exception": true,
+      "exception_type": null,
+      "agent_output_sha256": null,
+      "model_calls": [
+        {
+          "call_index": 0,
+          "message_count": 2,
+          "message_roles": [
+            "system",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            610
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "1c54a1da8d852157286e6e9bd24011f9fc54be73c7244a777ed4db07cde753f9",
+          "raw_content_chars": 527,
+          "returned_content_sha256": "990e343dce44aaa2496d6479c68b3abe9149015c5e4a39a2bd5e3307e6bf9b49",
+          "returned_content_chars": 515,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 11252,
+          "eval_count": 130,
+          "done_reason": "stop",
+          "elapsed_seconds": 12.214339800004382
+        },
+        {
+          "call_index": 1,
+          "message_count": 4,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            610,
+            516,
+            41445
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "52f8ef41f147b8d519836ec294cdda93f8bd67e81ad39c3d1498bf29bb368c5c",
+          "raw_content_chars": 1405,
+          "returned_content_sha256": "52f8ef41f147b8d519836ec294cdda93f8bd67e81ad39c3d1498bf29bb368c5c",
+          "returned_content_chars": 1405,
+          "contains_thought_token": false,
+          "contains_action_token": false,
+          "prompt_eval_count": 8194,
+          "eval_count": 512,
+          "done_reason": "length",
+          "elapsed_seconds": 12.027794699999504
+        },
+        {
+          "call_index": 2,
+          "message_count": 4,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            610,
+            516,
+            41445
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "52f8ef41f147b8d519836ec294cdda93f8bd67e81ad39c3d1498bf29bb368c5c",
+          "raw_content_chars": 1405,
+          "returned_content_sha256": "52f8ef41f147b8d519836ec294cdda93f8bd67e81ad39c3d1498bf29bb368c5c",
+          "returned_content_chars": 1405,
+          "contains_thought_token": false,
+          "contains_action_token": false,
+          "prompt_eval_count": 8194,
+          "eval_count": 512,
+          "done_reason": "length",
+          "elapsed_seconds": 8.951913199998671
+        },
+        {
+          "call_index": 3,
+          "message_count": 7,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            610,
+            516,
+            41445,
+            1678,
+            1406,
+            1688
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "197149ac35017ffe023854285d943ccd598077d3e52ca88de9fc55704c629e79",
+          "raw_content_chars": 453,
+          "returned_content_sha256": "3ec8204240ea69477357c83c32fab604c0ae07f03ff75fb91c3b1459af18e1d0",
+          "returned_content_chars": 441,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 12769,
+          "eval_count": 107,
+          "done_reason": "stop",
+          "elapsed_seconds": 3.6726846000092337
+        },
+        {
+          "call_index": 4,
+          "message_count": 9,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            610,
+            516,
+            41445,
+            1678,
+            1406,
+            1688,
+            442,
+            41445
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "52f8ef41f147b8d519836ec294cdda93f8bd67e81ad39c3d1498bf29bb368c5c",
+          "raw_content_chars": 1405,
+          "returned_content_sha256": "52f8ef41f147b8d519836ec294cdda93f8bd67e81ad39c3d1498bf29bb368c5c",
+          "returned_content_chars": 1405,
+          "contains_thought_token": false,
+          "contains_action_token": false,
+          "prompt_eval_count": 8194,
+          "eval_count": 512,
+          "done_reason": "length",
+          "elapsed_seconds": 9.436470299988287
+        },
+        {
+          "call_index": 5,
+          "message_count": 9,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            610,
+            516,
+            41445,
+            1678,
+            1406,
+            1688,
+            442,
+            41445
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "52f8ef41f147b8d519836ec294cdda93f8bd67e81ad39c3d1498bf29bb368c5c",
+          "raw_content_chars": 1405,
+          "returned_content_sha256": "52f8ef41f147b8d519836ec294cdda93f8bd67e81ad39c3d1498bf29bb368c5c",
+          "returned_content_chars": 1405,
+          "contains_thought_token": false,
+          "contains_action_token": false,
+          "prompt_eval_count": 8194,
+          "eval_count": 512,
+          "done_reason": "length",
+          "elapsed_seconds": 9.109651999999187
+        },
+        {
+          "call_index": 6,
+          "message_count": 12,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            610,
+            516,
+            41445,
+            1678,
+            1406,
+            1688,
+            442,
+            41445,
+            1678,
+            1406,
+            1688
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "b882c6cf18089e8fe19a57755b868faddb3e2c7d3a9c8d5f28940ae203e8228e",
+          "raw_content_chars": 1517,
+          "returned_content_sha256": "b882c6cf18089e8fe19a57755b868faddb3e2c7d3a9c8d5f28940ae203e8228e",
+          "returned_content_chars": 1517,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 12769,
+          "eval_count": 512,
+          "done_reason": "length",
+          "elapsed_seconds": 10.559750600004918
+        },
+        {
+          "call_index": 7,
+          "message_count": 14,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            610,
+            516,
+            41445,
+            1678,
+            1406,
+            1688,
+            442,
+            41445,
+            1678,
+            1406,
+            1688,
+            1518,
+            1656
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "d32fe5d123a8e471b70b4c5e9c8a3f4bdadd2eaccdad1d741640178c076574bf",
+          "raw_content_chars": 1261,
+          "returned_content_sha256": "7af3b1b4f505b007b8c0c09d8e031e8506a87269f1659a6897461c7ebf7bd1f1",
+          "returned_content_chars": 1249,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 13897,
+          "eval_count": 405,
+          "done_reason": "stop",
+          "elapsed_seconds": 8.137375999998767
+        }
+      ],
+      "tool_calls": [
+        {
+          "call_index": 0,
+          "tool_name": "RentAFlat__list_all_apartments",
+          "argument_keys": []
+        },
+        {
+          "call_index": 1,
+          "tool_name": "RentAFlat__list_all_apartments",
+          "argument_keys": []
+        },
+        {
+          "call_index": 2,
+          "tool_name": "AgentUserInterface__send_message_to_user",
+          "argument_keys": [
+            "content"
+          ]
+        },
+        {
+          "call_index": 3,
+          "tool_name": "AgentUserInterface__send_message_to_user",
+          "argument_keys": [
+            "content"
+          ]
+        }
+      ],
+      "read_effect_observations": [
+        {
+          "call_index": 0,
+          "tool_name": "RentAFlat__list_all_apartments",
+          "declared_operation_type": "READ",
+          "failed": false,
+          "semantic_state_changed": false,
+          "changed_top_level_fields": [],
+          "before_state_sha256": "95fe5e1714d3dd5b0fa4ea1048545dd52622bd69217ca4242c16f656d5d7541b",
+          "after_state_sha256": "95fe5e1714d3dd5b0fa4ea1048545dd52622bd69217ca4242c16f656d5d7541b"
+        },
+        {
+          "call_index": 1,
+          "tool_name": "RentAFlat__list_all_apartments",
+          "declared_operation_type": "READ",
+          "failed": false,
+          "semantic_state_changed": false,
+          "changed_top_level_fields": [],
+          "before_state_sha256": "95fe5e1714d3dd5b0fa4ea1048545dd52622bd69217ca4242c16f656d5d7541b",
+          "after_state_sha256": "95fe5e1714d3dd5b0fa4ea1048545dd52622bd69217ca4242c16f656d5d7541b"
+        }
+      ],
+      "counts": {
+        "model_calls": 8,
+        "tool_calls": 4,
+        "declared_read_calls": 2,
+        "effectful_read_calls": 0,
+        "pure_read_calls": 2
+      }
+    }
+  ],
+  "aggregate": {
+    "declared_read_calls": 2,
+    "effectful_read_calls": 0,
+    "model_calls": 8,
+    "pure_read_calls": 2,
+    "scenarios": 1,
+    "scenarios_with_any_declared_read": 1,
+    "scenarios_with_effectful_read": 0,
+    "tool_calls": 4
+  },
+  "interpretation_boundary": "This is a deterministic, low-fidelity local model panel on public frozen Gaia2 validation scenarios. It uses the official default agent loop and real app calls, but disables the judge, caps iterations and format retries, uses one local model, and lacks the optional filesystem dependency. It can establish that naturally generated local trajectories do or do not invoke state-changing declared READs in this panel; it cannot estimate official submitted-model prevalence, task-score corrections, leaderboard or ranking impact, or independent admission performance."
+}

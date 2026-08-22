@@ -1,0 +1,680 @@
+{
+  "source": {
+    "repository": "facebookresearch/meta-agents-research-environments",
+    "are_revision": "7946367413129784139e785ae4c351090002a0bb",
+    "dataset": "meta-agents-research-environments/gaia2",
+    "dataset_revision": "78ea3bdbdeec2bdcd6afa5420915d8a22f23ed99",
+    "split": "validation",
+    "parquet_files": [
+      {
+        "config": "execution",
+        "path": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\source_artifacts\\gaia2_execution_validation.parquet",
+        "bytes": 161820517,
+        "sha256": "ed9a2c6b27bf2a3191a1c5efd40efb79802fd2c0c4b1e4b101328627c1a2807d"
+      },
+      {
+        "config": "search",
+        "path": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\source_artifacts\\gaia2_search_validation.parquet",
+        "bytes": 162561376,
+        "sha256": "12200ff1f71e608b5aec9bc59456167be772b367bbd290769cf19e579f051339"
+      },
+      {
+        "config": "adaptability",
+        "path": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\source_artifacts\\gaia2_adaptability_validation.parquet",
+        "bytes": 161875391,
+        "sha256": "44e6f4a785c31a212058b5a6ef3ae61f4592d32486f6dc4490956e16b8b81b2b"
+      },
+      {
+        "config": "time",
+        "path": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\source_artifacts\\gaia2_time_validation.parquet",
+        "bytes": 162117094,
+        "sha256": "2c158af8ec0009b46a63078def3aff12c9616de2d6625aee15d9b8a3ec3b02c1"
+      },
+      {
+        "config": "ambiguity",
+        "path": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\source_artifacts\\gaia2_ambiguity_validation.parquet",
+        "bytes": 161635185,
+        "sha256": "6653546dbb9a7aa9193fd2e6f30adeb069d379fd3624cc70a1a1d874b1b60ab0"
+      }
+    ],
+    "python": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\.venv\\Scripts\\python.exe",
+    "script": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\audit\\run_gaia2_natural_counterfactual_pairs.py",
+    "script_sha256": "2e231872ff6a8de783de6346bd9c0967a5775a550b4acad10610d3d4b52746c9",
+    "development_panel_sha256": "acf34e30970e49080cb9ff610ccd7f199f4ba704229cf061957f2c7ff3a2e132",
+    "admission_panel": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\audit\\gaia2_local_effect_trace_admission.json",
+    "admission_panel_sha256": "4f4bb1c093c09a9d2794d0ad07c084e6f7544f95e840908d80b7e1935b2ca43d"
+  },
+  "model_replay": {
+    "runtime": "Ollama loopback HTTP API",
+    "model": "qwen2.5:7b",
+    "digest": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+    "temperature": 0,
+    "seed_base": 20260831,
+    "num_predict": 768,
+    "num_ctx": 16384,
+    "external_network_offline_flags": true,
+    "strict_output_determinism_assumed": false,
+    "task_text_or_model_reasoning_emitted": false
+  },
+  "natural_acquisition": {
+    "cab_quote_information": {
+      "scenario_identity_sha256": "585f256ff1ebee2873890b3404e033eb4f705ccdfd3c5531cefe1e7109c35fdc",
+      "task_text_sha256": "ddda39453d4c236921eed039e1096ded2145f4f30d5f5f849dde703dd7846dee",
+      "matches_admission_identity": true,
+      "tool_call_projection_matches_admission": false,
+      "count_projection_matches_admission": false,
+      "execution_completed_without_exception": true,
+      "argument_source": "CURRENT_SAME_SETTINGS_REPLAY",
+      "argument_inference": null,
+      "capture": {
+        "capture": {
+          "tool_name": "Cabs__list_rides",
+          "argument_keys": [
+            "end_location",
+            "ride_time",
+            "start_location"
+          ],
+          "arguments_sha256": "81069e4abf01d9fb05e8e30f421a804231955736123cf280fd07440480da39f8",
+          "successful_occurrence_count": 1
+        },
+        "suppressed": {
+          "stdout_chars": 0,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr_chars": 0,
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    "explicit_email_read": {
+      "scenario_identity_sha256": "2a598d51a8fca3d9a9f17e9581a153a6cfcf5d8cc538d6fa25ec75a4698ab210",
+      "task_text_sha256": "6719feb7e50db69e0cb6b233085d50d809eb8a2d5d4ebda9e26c454edd81cb15",
+      "matches_admission_identity": true,
+      "tool_call_projection_matches_admission": false,
+      "count_projection_matches_admission": false,
+      "execution_completed_without_exception": true,
+      "argument_source": "FROZEN_ADMISSION_SCHEDULER_DELTA_INFERENCE",
+      "argument_inference": {
+        "method": "round frozen after-offset minus before-offset",
+        "scheduler_delta_seconds": 269.99947237968445,
+        "absolute_rounding_residual_seconds": 0.0005276203155517578,
+        "inferred_timeout_seconds": 270,
+        "prior_tool_argument_keys": [
+          "timeout"
+        ]
+      },
+      "capture": {
+        "capture": {
+          "tool_name": "SystemApp__wait_for_notification",
+          "argument_keys": [],
+          "arguments_sha256": null,
+          "successful_occurrence_count": 0
+        },
+        "suppressed": {
+          "stdout_chars": 0,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr_chars": 0,
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    }
+  },
+  "scenario_preprocessing_suppressed_output": {
+    "cab_quote_information": {
+      "stdout_chars": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_chars": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "explicit_email_read": {
+      "stdout_chars": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_chars": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "counterfactual_contract": {
+    "selection": "Reuse the admission panel's frozen task identities and same nominal local model settings. Require the Cab arguments from a current successful target call while recording, rather than rejecting, full-sequence replay drift. For wait, use a current capture when present; otherwise mechanically infer the integer timeout from the frozen admission scheduler delta. Emit only argument keys, hashes and the inference audit.",
+    "pairing": "For each task, keep the same user event and oracle-completed downstream write sequence. Compare no inserted read, a same-app pure read, and the naturally observed effectful read.",
+    "judge": "Official GraphPerEventJudge with ScriptedGraphPerEventJudgeConfig; soft checkers disabled. The official filter still removes successful READ events.",
+    "representations": [
+      "official write-filtered graph judge",
+      "full semantic trajectory",
+      "full terminal app plus scheduler state",
+      "task-specific terminal assertion",
+      "selective read-effect capsule"
+    ],
+    "oracle_completion_disclosure": "These are task-identity- and natural-call-derived counterfactual pairs, not unaltered submitted-model trajectories. Downstream writes are copied from the frozen task oracle and retimed by the counterfactual world's clock."
+  },
+  "pairs": {
+    "cab_natural_list_rides": {
+      "scenario_identity_sha256": "585f256ff1ebee2873890b3404e033eb4f705ccdfd3c5531cefe1e7109c35fdc",
+      "natural_read_argument_keys": [
+        "end_location",
+        "ride_time",
+        "start_location"
+      ],
+      "natural_read_arguments_sha256": "81069e4abf01d9fb05e8e30f421a804231955736123cf280fd07440480da39f8",
+      "worlds": {
+        "direct": {
+          "mode": "direct",
+          "event_profiles": [
+            {
+              "event_type": "USER",
+              "tool_name": "AgentUserInterface__send_message_to_agent",
+              "function": "send_message_to_agent",
+              "operation_type": "read",
+              "failed": false,
+              "relative_time": 0.0,
+              "argument_keys": [
+                "attachments",
+                "content"
+              ],
+              "arguments_sha256": "d5530d3304194682b0eaba8942b8382f44badb205c00bd94d27d0a2c715b4f0e"
+            },
+            {
+              "event_type": "AGENT",
+              "tool_name": "AgentUserInterface__send_message_to_user",
+              "function": "send_message_to_user",
+              "operation_type": "write",
+              "failed": false,
+              "relative_time": 0.0,
+              "argument_keys": [
+                "content"
+              ],
+              "arguments_sha256": "1dad1e43124fc2e9d654e3f30ecb1c1518ce626983392b3d3b120c7ead4a0793"
+            }
+          ],
+          "full_trace_sha256": "883589b8ecf4695541dff1adcd67a13a17600c23bcf40d29faaa194c6185b643",
+          "full_trace_without_time_sha256": "916242a44b7b6d935b34baaa2fa59e3bfb4e087b3f1994e01a3de9ff5547d5c8",
+          "official_retained_trace_sha256": "883589b8ecf4695541dff1adcd67a13a17600c23bcf40d29faaa194c6185b643",
+          "official_retained_trace_without_time_sha256": "916242a44b7b6d935b34baaa2fa59e3bfb4e087b3f1994e01a3de9ff5547d5c8",
+          "effect_capsule": null,
+          "effect_closure_trace_sha256": "916242a44b7b6d935b34baaa2fa59e3bfb4e087b3f1994e01a3de9ff5547d5c8",
+          "terminal_state_sha256": "249f05bfd49cc26046670833b56d146e0c2cbaeec3823c22e4a234db19e45f40",
+          "terminal_state_bytes": 574,
+          "task_specific_state": {
+            "quotation_history_size": 0,
+            "ride_history_size": 0
+          },
+          "effect_capsule_bytes": 0,
+          "official_judgment": {
+            "success": true,
+            "failure_sha256": "dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91",
+            "matched_event_count": 2,
+            "retained_event_count": 2
+          }
+        },
+        "pure_read": {
+          "mode": "pure_read",
+          "event_profiles": [
+            {
+              "event_type": "USER",
+              "tool_name": "AgentUserInterface__send_message_to_agent",
+              "function": "send_message_to_agent",
+              "operation_type": "read",
+              "failed": false,
+              "relative_time": 0.0,
+              "argument_keys": [
+                "attachments",
+                "content"
+              ],
+              "arguments_sha256": "d5530d3304194682b0eaba8942b8382f44badb205c00bd94d27d0a2c715b4f0e"
+            },
+            {
+              "event_type": "AGENT",
+              "tool_name": "CabApp__get_ride_history_length",
+              "function": "get_ride_history_length",
+              "operation_type": "read",
+              "failed": false,
+              "relative_time": 0.0,
+              "argument_keys": [],
+              "arguments_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+            },
+            {
+              "event_type": "AGENT",
+              "tool_name": "AgentUserInterface__send_message_to_user",
+              "function": "send_message_to_user",
+              "operation_type": "write",
+              "failed": false,
+              "relative_time": 0.0,
+              "argument_keys": [
+                "content"
+              ],
+              "arguments_sha256": "1dad1e43124fc2e9d654e3f30ecb1c1518ce626983392b3d3b120c7ead4a0793"
+            }
+          ],
+          "full_trace_sha256": "4af9b152ab5ac994e016198ef1908ec5a3fda0da165bb4f0a3e707d612b2ca1a",
+          "full_trace_without_time_sha256": "f7db978086d14d5f8037fac9413ab8e03b8d95eb91242314ca5b149841022bf5",
+          "official_retained_trace_sha256": "883589b8ecf4695541dff1adcd67a13a17600c23bcf40d29faaa194c6185b643",
+          "official_retained_trace_without_time_sha256": "916242a44b7b6d935b34baaa2fa59e3bfb4e087b3f1994e01a3de9ff5547d5c8",
+          "effect_capsule": null,
+          "effect_closure_trace_sha256": "916242a44b7b6d935b34baaa2fa59e3bfb4e087b3f1994e01a3de9ff5547d5c8",
+          "terminal_state_sha256": "249f05bfd49cc26046670833b56d146e0c2cbaeec3823c22e4a234db19e45f40",
+          "terminal_state_bytes": 574,
+          "task_specific_state": {
+            "quotation_history_size": 0,
+            "ride_history_size": 0
+          },
+          "effect_capsule_bytes": 0,
+          "official_judgment": {
+            "success": true,
+            "failure_sha256": "dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91",
+            "matched_event_count": 2,
+            "retained_event_count": 2
+          }
+        },
+        "effectful_read": {
+          "mode": "effectful_read",
+          "event_profiles": [
+            {
+              "event_type": "USER",
+              "tool_name": "AgentUserInterface__send_message_to_agent",
+              "function": "send_message_to_agent",
+              "operation_type": "read",
+              "failed": false,
+              "relative_time": 0.0,
+              "argument_keys": [
+                "attachments",
+                "content"
+              ],
+              "arguments_sha256": "d5530d3304194682b0eaba8942b8382f44badb205c00bd94d27d0a2c715b4f0e"
+            },
+            {
+              "event_type": "AGENT",
+              "tool_name": "CabApp__get_quotation",
+              "function": "get_quotation",
+              "operation_type": "read",
+              "failed": false,
+              "relative_time": 0.0009996891021728516,
+              "argument_keys": [
+                "end_location",
+                "ride_time",
+                "service_type",
+                "start_location"
+              ],
+              "arguments_sha256": "34f2f04c2d1bc7799e348268111aa782d76751dc676b56f3634219f76763a922"
+            },
+            {
+              "event_type": "AGENT",
+              "tool_name": "CabApp__get_quotation",
+              "function": "get_quotation",
+              "operation_type": "read",
+              "failed": false,
+              "relative_time": 0.0009996891021728516,
+              "argument_keys": [
+                "end_location",
+                "ride_time",
+                "service_type",
+                "start_location"
+              ],
+              "arguments_sha256": "171d62824de0d382e641e6ecace954c688bed7343656f3c27ed07c2126b9ee36"
+            },
+            {
+              "event_type": "AGENT",
+              "tool_name": "CabApp__get_quotation",
+              "function": "get_quotation",
+              "operation_type": "read",
+              "failed": false,
+              "relative_time": 0.0009996891021728516,
+              "argument_keys": [
+                "end_location",
+                "ride_time",
+                "service_type",
+                "start_location"
+              ],
+              "arguments_sha256": "6bb71114288159ee2352e2010f1b39bdbe27f50f6a08e98d9b0a0a21012c228b"
+            },
+            {
+              "event_type": "AGENT",
+              "tool_name": "CabApp__list_rides",
+              "function": "list_rides",
+              "operation_type": "read",
+              "failed": false,
+              "relative_time": 0.0009996891021728516,
+              "argument_keys": [
+                "end_location",
+                "ride_time",
+                "start_location"
+              ],
+              "arguments_sha256": "81069e4abf01d9fb05e8e30f421a804231955736123cf280fd07440480da39f8"
+            },
+            {
+              "event_type": "AGENT",
+              "tool_name": "AgentUserInterface__send_message_to_user",
+              "function": "send_message_to_user",
+              "operation_type": "write",
+              "failed": false,
+              "relative_time": 0.0019998550415039062,
+              "argument_keys": [
+                "content"
+              ],
+              "arguments_sha256": "1dad1e43124fc2e9d654e3f30ecb1c1518ce626983392b3d3b120c7ead4a0793"
+            }
+          ],
+          "full_trace_sha256": "a443cd4752c4ef15a0e3950c1dfef401e85ce62ba3741cff85a27c90fbdbf537",
+          "full_trace_without_time_sha256": "a77a5ea376b0a1920a2edaf9afde0959acc0ff7e70ee71b2b84fdef54802c496",
+          "official_retained_trace_sha256": "e8292a0d8a7b79f525e2e7df629e01eef0e70664fef4705bf5fdeb3401ba42a4",
+          "official_retained_trace_without_time_sha256": "916242a44b7b6d935b34baaa2fa59e3bfb4e087b3f1994e01a3de9ff5547d5c8",
+          "effect_capsule": {
+            "kind": "READ_EFFECT_CAPSULE",
+            "app": "CabApp",
+            "method": "list_rides",
+            "argument_keys": [
+              "end_location",
+              "ride_time",
+              "start_location"
+            ],
+            "arguments_sha256": "81069e4abf01d9fb05e8e30f421a804231955736123cf280fd07440480da39f8",
+            "changed_app_fields": [
+              "quotation_history",
+              "rng"
+            ],
+            "before_app_state_sha256": "2a4e25e0a6d3362adf0f8b442092304c4af4b72ec2142e55cfdb94e331e82f07",
+            "after_app_state_sha256": "9105315868b5e97609c04d13408172447c46c61dde4880f9ac961fe7e7736803",
+            "changed_scheduler_fields": [],
+            "before_scheduler": {
+              "offset": 0,
+              "pause_offset": 0
+            },
+            "after_scheduler": {
+              "offset": 0,
+              "pause_offset": 0
+            }
+          },
+          "effect_closure_trace_sha256": "f89adc91794ec116aa8279a6dbc83a9d9b3823b27879a381479b1391341807c4",
+          "terminal_state_sha256": "14a84a179d5f52b6a33fd2f17b00c54caf6d25c0df8501a2d6b7e577405b34b5",
+          "terminal_state_bytes": 1375,
+          "task_specific_state": {
+            "quotation_history_size": 3,
+            "ride_history_size": 0
+          },
+          "effect_capsule_bytes": 576,
+          "official_judgment": {
+            "success": true,
+            "failure_sha256": "dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91",
+            "matched_event_count": 2,
+            "retained_event_count": 2
+          }
+        }
+      },
+      "comparisons": {
+        "official_same_semantic_trace_without_time_all_three": true,
+        "official_same_success_direct_and_pure": true,
+        "official_same_success_direct_and_effectful": true,
+        "full_trace_overseparates_pure_read": true,
+        "effect_closure_preserves_pure_read_equivalence": true,
+        "effect_closure_separates_effectful_read": true,
+        "full_terminal_state_preserves_pure_read_equivalence": true,
+        "full_terminal_state_separates_effectful_read": true,
+        "task_specific_state_preserves_pure_read_equivalence": true,
+        "task_specific_state_separates_effectful_read": true
+      },
+      "interpretation": "The naturally observed Cab list read can be erased while the same task answer remains an official success. However, both full terminal state and a trivial quotation-history assertion separate the latent state change while preserving the pure-read control, so this pair does not establish an advantage over strong state baselines or a changed current-task conclusion."
+    },
+    "scheduler_natural_wait": {
+      "scenario_identity_sha256": "2a598d51a8fca3d9a9f17e9581a153a6cfcf5d8cc538d6fa25ec75a4698ab210",
+      "natural_read_argument_keys": [
+        "timeout"
+      ],
+      "natural_read_arguments_sha256": "0333c2a5ba5abe3b94080599fc9a368be2098a4fd8dcea227f1603c9ccf68ab8",
+      "worlds": {
+        "direct": {
+          "mode": "direct",
+          "event_profiles": [
+            {
+              "event_type": "USER",
+              "tool_name": "AgentUserInterface__send_message_to_agent",
+              "function": "send_message_to_agent",
+              "operation_type": "read",
+              "failed": false,
+              "relative_time": 0.0,
+              "argument_keys": [
+                "content"
+              ],
+              "arguments_sha256": "30beb2cc25238609f0638be84536bf698cd1b9c16c02d90a2d4acce026b41d30"
+            },
+            {
+              "event_type": "AGENT",
+              "tool_name": "EmailClientV2__send_email",
+              "function": "send_email",
+              "operation_type": "write",
+              "failed": false,
+              "relative_time": 0.0,
+              "argument_keys": [
+                "attachment_paths",
+                "cc",
+                "content",
+                "recipients",
+                "subject"
+              ],
+              "arguments_sha256": "172fc8d5cf25922ac2c1a6ea56ee7abe6aeac39dc4d51b9f14cdffe490e272e9"
+            },
+            {
+              "event_type": "AGENT",
+              "tool_name": "AgentUserInterface__send_message_to_user",
+              "function": "send_message_to_user",
+              "operation_type": "write",
+              "failed": false,
+              "relative_time": 0.0,
+              "argument_keys": [
+                "content"
+              ],
+              "arguments_sha256": "5d660f6e8a788c9edc1639ab2ae89ae66e565b0572d416a686d2dc707ef2b1fb"
+            }
+          ],
+          "full_trace_sha256": "5506f72cebde636f327170cc047d6c2fa47f60cdf96ca54c8614d7d8606715a7",
+          "full_trace_without_time_sha256": "774dcfa3d424e7f86c69611599fa8581b651482bfc77319fccde2df03d520e5b",
+          "official_retained_trace_sha256": "5506f72cebde636f327170cc047d6c2fa47f60cdf96ca54c8614d7d8606715a7",
+          "official_retained_trace_without_time_sha256": "774dcfa3d424e7f86c69611599fa8581b651482bfc77319fccde2df03d520e5b",
+          "effect_capsule": null,
+          "effect_closure_trace_sha256": "774dcfa3d424e7f86c69611599fa8581b651482bfc77319fccde2df03d520e5b",
+          "terminal_state_sha256": "8d30b2fef0275597d9519bab95b22c4652d1dbb6bb8f91ad49ef9579f678e011",
+          "terminal_state_bytes": 203,
+          "task_specific_state": {
+            "scheduler_offset": 0,
+            "first_agent_write_relative_time_seconds": 0
+          },
+          "effect_capsule_bytes": 0,
+          "official_judgment": {
+            "success": true,
+            "failure_sha256": "dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91",
+            "matched_event_count": 3,
+            "retained_event_count": 3
+          }
+        },
+        "pure_read": {
+          "mode": "pure_read",
+          "event_profiles": [
+            {
+              "event_type": "USER",
+              "tool_name": "AgentUserInterface__send_message_to_agent",
+              "function": "send_message_to_agent",
+              "operation_type": "read",
+              "failed": false,
+              "relative_time": 0.0,
+              "argument_keys": [
+                "content"
+              ],
+              "arguments_sha256": "30beb2cc25238609f0638be84536bf698cd1b9c16c02d90a2d4acce026b41d30"
+            },
+            {
+              "event_type": "AGENT",
+              "tool_name": "SystemApp__get_current_time",
+              "function": "get_current_time",
+              "operation_type": "read",
+              "failed": false,
+              "relative_time": 0.0,
+              "argument_keys": [],
+              "arguments_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+            },
+            {
+              "event_type": "AGENT",
+              "tool_name": "EmailClientV2__send_email",
+              "function": "send_email",
+              "operation_type": "write",
+              "failed": false,
+              "relative_time": 0.0009996891021728516,
+              "argument_keys": [
+                "attachment_paths",
+                "cc",
+                "content",
+                "recipients",
+                "subject"
+              ],
+              "arguments_sha256": "172fc8d5cf25922ac2c1a6ea56ee7abe6aeac39dc4d51b9f14cdffe490e272e9"
+            },
+            {
+              "event_type": "AGENT",
+              "tool_name": "AgentUserInterface__send_message_to_user",
+              "function": "send_message_to_user",
+              "operation_type": "write",
+              "failed": false,
+              "relative_time": 0.0009996891021728516,
+              "argument_keys": [
+                "content"
+              ],
+              "arguments_sha256": "5d660f6e8a788c9edc1639ab2ae89ae66e565b0572d416a686d2dc707ef2b1fb"
+            }
+          ],
+          "full_trace_sha256": "05c96158b367d1791a67b4a8387f32e14284d4f5f180508f7780dd83049ef2c5",
+          "full_trace_without_time_sha256": "7f5e3e35fabdb45a19d46b9e1e3973d04a13bec709bbb175624494c6fd2c8f72",
+          "official_retained_trace_sha256": "a48ddb0fde37bbd9d9df10b67b6072429786c63abd4c0676c26a4cb2802bd65f",
+          "official_retained_trace_without_time_sha256": "774dcfa3d424e7f86c69611599fa8581b651482bfc77319fccde2df03d520e5b",
+          "effect_capsule": null,
+          "effect_closure_trace_sha256": "774dcfa3d424e7f86c69611599fa8581b651482bfc77319fccde2df03d520e5b",
+          "terminal_state_sha256": "8d30b2fef0275597d9519bab95b22c4652d1dbb6bb8f91ad49ef9579f678e011",
+          "terminal_state_bytes": 203,
+          "task_specific_state": {
+            "scheduler_offset": 0,
+            "first_agent_write_relative_time_seconds": 0
+          },
+          "effect_capsule_bytes": 0,
+          "official_judgment": {
+            "success": true,
+            "failure_sha256": "dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91",
+            "matched_event_count": 3,
+            "retained_event_count": 3
+          }
+        },
+        "effectful_read": {
+          "mode": "effectful_read",
+          "event_profiles": [
+            {
+              "event_type": "USER",
+              "tool_name": "AgentUserInterface__send_message_to_agent",
+              "function": "send_message_to_agent",
+              "operation_type": "read",
+              "failed": false,
+              "relative_time": 0.0,
+              "argument_keys": [
+                "content"
+              ],
+              "arguments_sha256": "30beb2cc25238609f0638be84536bf698cd1b9c16c02d90a2d4acce026b41d30"
+            },
+            {
+              "event_type": "AGENT",
+              "tool_name": "SystemApp__wait_for_notification",
+              "function": "wait_for_notification",
+              "operation_type": "read",
+              "failed": false,
+              "relative_time": 0.0,
+              "argument_keys": [
+                "timeout"
+              ],
+              "arguments_sha256": "0333c2a5ba5abe3b94080599fc9a368be2098a4fd8dcea227f1603c9ccf68ab8"
+            },
+            {
+              "event_type": "AGENT",
+              "tool_name": "EmailClientV2__send_email",
+              "function": "send_email",
+              "operation_type": "write",
+              "failed": false,
+              "relative_time": 270.0,
+              "argument_keys": [
+                "attachment_paths",
+                "cc",
+                "content",
+                "recipients",
+                "subject"
+              ],
+              "arguments_sha256": "172fc8d5cf25922ac2c1a6ea56ee7abe6aeac39dc4d51b9f14cdffe490e272e9"
+            },
+            {
+              "event_type": "AGENT",
+              "tool_name": "AgentUserInterface__send_message_to_user",
+              "function": "send_message_to_user",
+              "operation_type": "write",
+              "failed": false,
+              "relative_time": 270.0,
+              "argument_keys": [
+                "content"
+              ],
+              "arguments_sha256": "5d660f6e8a788c9edc1639ab2ae89ae66e565b0572d416a686d2dc707ef2b1fb"
+            }
+          ],
+          "full_trace_sha256": "ec4e459cc12d3ec8974b5d6848ecaa64eb399d6e3f8567a41a425a485a763129",
+          "full_trace_without_time_sha256": "3d4ead4971b66e5e9b55ee6f560730a1c841508460d710bdf8a16db40550deb8",
+          "official_retained_trace_sha256": "979153c23d7a59150e93baa58cf13256dd2e3d013e8da047099f9e8a476fd630",
+          "official_retained_trace_without_time_sha256": "774dcfa3d424e7f86c69611599fa8581b651482bfc77319fccde2df03d520e5b",
+          "effect_capsule": {
+            "kind": "READ_EFFECT_CAPSULE",
+            "app": "SystemApp",
+            "method": "wait_for_notification",
+            "argument_keys": [
+              "timeout"
+            ],
+            "arguments_sha256": "0333c2a5ba5abe3b94080599fc9a368be2098a4fd8dcea227f1603c9ccf68ab8",
+            "changed_app_fields": [],
+            "before_app_state_sha256": "f397560062f45a4f37953e9e2be00cacaf8d862537e40cbd98dac68b2e60082c",
+            "after_app_state_sha256": "f397560062f45a4f37953e9e2be00cacaf8d862537e40cbd98dac68b2e60082c",
+            "changed_scheduler_fields": [
+              "offset"
+            ],
+            "before_scheduler": {
+              "offset": 0,
+              "pause_offset": 0
+            },
+            "after_scheduler": {
+              "offset": 270.0,
+              "pause_offset": 0
+            }
+          },
+          "effect_closure_trace_sha256": "da155e5e9733a6b64f55ad444741d891142f05476bd97892b9d49800b2566e15",
+          "terminal_state_sha256": "e10bb3acb7b72e1856a3170343af4d1f4b25cfb4fda266bc24c4fbca7b8d3ecc",
+          "terminal_state_bytes": 207,
+          "task_specific_state": {
+            "scheduler_offset": 270.0,
+            "first_agent_write_relative_time_seconds": 270
+          },
+          "effect_capsule_bytes": 543,
+          "official_judgment": {
+            "success": true,
+            "failure_sha256": "dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91",
+            "matched_event_count": 3,
+            "retained_event_count": 3
+          }
+        }
+      },
+      "comparisons": {
+        "official_same_semantic_trace_without_time_all_three": true,
+        "official_same_success_direct_and_pure": true,
+        "official_same_success_direct_and_effectful": true,
+        "full_trace_overseparates_pure_read": true,
+        "effect_closure_preserves_pure_read_equivalence": true,
+        "effect_closure_separates_effectful_read": true,
+        "full_terminal_state_preserves_pure_read_equivalence": true,
+        "full_terminal_state_separates_effectful_read": true,
+        "task_specific_state_preserves_pure_read_equivalence": true,
+        "task_specific_state_separates_effectful_read": true
+      },
+      "interpretation": "The naturally observed wait shifts the same downstream oracle writes by about its full timeout, yet the official scripted judge still returns success. In this task every oracle dependency edge is only one second, while the official time checker activates only above its one-second threshold. Full scheduler terminal state and a rounded response-latency assertion both separate the effect, so the collision still does not establish a unique advantage over strong state or task-specific baselines."
+    }
+  },
+  "candidate_impact": {
+    "admission_status": "INSUFFICIENT_AND_WEAKENED",
+    "positive_residual": "Two natural task/function-derived official-success collisions remain when downstream oracle writes are held fixed: latent Cab quotation state and an approximately full-timeout scheduler delay.",
+    "negative_update": "Full terminal state and simple task-specific assertions absorb both distinctions while preserving their pure-read controls. Neither pair shows a task conclusion or score correction uniquely supplied by selective effect capsules. Same-settings local replays are also not assumed to reproduce the same tool sequence, so one frozen wait witness cannot establish stability.",
+    "next_decision": "Do not scale the 50+50 detector contract from these pairs. Kill or sharply redirect the evaluation-method candidate unless a distinct natural mechanism shows a task-relevant collision not absorbed by official downstream checks or fair terminal/proxy state baselines."
+  },
+  "scope_limit": "Two frozen validation identities and two deterministic local replays are still a development audit. Oracle-completed counterfactuals do not estimate submitted-model prevalence, score corrections, rank changes, or benchmark-wide detector accuracy."
+}

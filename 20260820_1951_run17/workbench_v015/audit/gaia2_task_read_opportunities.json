@@ -1,0 +1,2537 @@
+{
+  "source": {
+    "dataset": "meta-agents-research-environments/gaia2",
+    "dataset_revision": "78ea3bdbdeec2bdcd6afa5420915d8a22f23ed99",
+    "split": "validation",
+    "configs": [
+      "execution",
+      "search",
+      "adaptability",
+      "time",
+      "ambiguity"
+    ],
+    "parquet_files": [
+      {
+        "config": "execution",
+        "path": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\source_artifacts\\gaia2_execution_validation.parquet",
+        "bytes": 161820517,
+        "sha256": "ed9a2c6b27bf2a3191a1c5efd40efb79802fd2c0c4b1e4b101328627c1a2807d"
+      },
+      {
+        "config": "search",
+        "path": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\source_artifacts\\gaia2_search_validation.parquet",
+        "bytes": 162561376,
+        "sha256": "12200ff1f71e608b5aec9bc59456167be772b367bbd290769cf19e579f051339"
+      },
+      {
+        "config": "adaptability",
+        "path": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\source_artifacts\\gaia2_adaptability_validation.parquet",
+        "bytes": 161875391,
+        "sha256": "44e6f4a785c31a212058b5a6ef3ae61f4592d32486f6dc4490956e16b8b81b2b"
+      },
+      {
+        "config": "time",
+        "path": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\source_artifacts\\gaia2_time_validation.parquet",
+        "bytes": 162117094,
+        "sha256": "2c158af8ec0009b46a63078def3aff12c9616de2d6625aee15d9b8a3ec3b02c1"
+      },
+      {
+        "config": "ambiguity",
+        "path": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\source_artifacts\\gaia2_ambiguity_validation.parquet",
+        "bytes": 161635185,
+        "sha256": "6653546dbb9a7aa9193fd2e6f30adeb069d379fd3624cc70a1a1d874b1b60ab0"
+      }
+    ],
+    "are_repository": "facebookresearch/meta-agents-research-environments",
+    "are_revision": "7946367413129784139e785ae4c351090002a0bb",
+    "python": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\.venv\\Scripts\\python.exe",
+    "polars": "1.33.1"
+  },
+  "frozen_cue_contract": {
+    "city_crime_information": {
+      "required_classes": [
+        "CityApp"
+      ],
+      "methods": [
+        "CityApp.get_crime_rate"
+      ],
+      "patterns": [
+        "\\b(?:crime|violent crime|property crime)\\b.{0,100}\\b(?:rate|statistics?|compare|comparison|safer|safest|dangerous|danger)\\b",
+        "\\b(?:rate|statistics?|compare|comparison|safer|safest|dangerous|danger)\\b.{0,100}\\b(?:crime|violent crime|property crime)\\b"
+      ]
+    },
+    "cab_quote_information": {
+      "required_classes": [
+        "CabApp"
+      ],
+      "methods": [
+        "CabApp.get_quotation",
+        "CabApp.list_rides"
+      ],
+      "patterns": [
+        "\\b(?:cab|taxi|ride)\\b.{0,100}\\b(?:quote|quotation|fare|price|cost|cheapest|expensive|estimate)\\b",
+        "\\b(?:quote|quotation|fare|price|cost|cheapest|expensive|estimate)\\b.{0,100}\\b(?:cab|taxi|ride)\\b"
+      ]
+    },
+    "timed_wait_for_response": {
+      "required_classes": [
+        "SystemApp"
+      ],
+      "methods": [
+        "SystemApp.wait_for_notification"
+      ],
+      "patterns": [
+        "\\b(?:wait|unless|if)\\b.{0,140}\\b(?:reply|respond|response|notification)\\b.{0,100}\\b(?:second|seconds|minute|minutes|hour|hours)\\b",
+        "\\b(?:second|seconds|minute|minutes|hour|hours)\\b.{0,100}\\b(?:reply|respond|response|notification)\\b"
+      ]
+    },
+    "explicit_email_read": {
+      "required_classes": [
+        "EmailClientApp",
+        "EmailClientV2",
+        "Mail"
+      ],
+      "methods": [
+        "EmailClientApp.get_email_by_id",
+        "EmailClientApp.get_email_by_index"
+      ],
+      "patterns": [
+        "\\b(?:read|open|unread|mark)\\b.{0,60}\\b(?:email|emails|mail)\\b",
+        "\\b(?:email|emails|mail)\\b.{0,60}\\b(?:read|open|unread|mark)\\b"
+      ]
+    },
+    "explicit_unread_message": {
+      "required_classes": [
+        "AgentUserInterface"
+      ],
+      "methods": [
+        "AgentUserInterface.get_last_unread_messages"
+      ],
+      "patterns": [
+        "\\bunread\\b.{0,60}\\b(?:message|messages|reply|response)\\b",
+        "\\b(?:message|messages|reply|response)\\b.{0,60}\\bunread\\b"
+      ]
+    }
+  },
+  "aggregate": {
+    "scenario_count": 800,
+    "event_count": 7013,
+    "user_events_with_text": 801,
+    "scenarios_with_any_explicit_cue": 129,
+    "scenario_fraction_with_any_explicit_cue": 0.16125,
+    "cue_counts": {
+      "cab_quote_information": 15,
+      "city_crime_information": 41,
+      "explicit_email_read": 4,
+      "timed_wait_for_response": 70
+    },
+    "relevant_app_presence_counts": {
+      "cab_quote_information": 800,
+      "city_crime_information": 800,
+      "explicit_email_read": 800,
+      "explicit_unread_message": 800,
+      "timed_wait_for_response": 800
+    },
+    "matched_cue_by_oracle_write_function": {
+      "cab_quote_information": {
+        "AgentUserInterface.send_message_to_user": 13,
+        "Cabs.order_ride": 7,
+        "Cabs.user_cancel_ride": 1,
+        "Calendar.add_calendar_event": 4,
+        "Calendar.delete_calendar_event": 6,
+        "Chats.send_message": 2,
+        "Chats.send_message_to_group_conversation": 1,
+        "Contacts.edit_contact": 1,
+        "Emails.delete_email": 1,
+        "Emails.reply_to_email": 1,
+        "Emails.send_email": 4,
+        "Files.rm": 1,
+        "RentAFlat.remove_saved_apartment": 2,
+        "RentAFlat.save_apartment": 5,
+        "Shopping.add_to_cart": 3,
+        "Shopping.checkout": 3
+      },
+      "city_crime_information": {
+        "AgentUserInterface.send_message_to_user": 35,
+        "Cabs.order_ride": 1,
+        "Calendar.add_calendar_event": 2,
+        "Calendar.delete_calendar_event": 3,
+        "Chats.send_message": 1,
+        "Contacts.add_new_contact": 1,
+        "Contacts.delete_contact": 1,
+        "Emails.send_email": 8,
+        "Messages.create_group_conversation": 2,
+        "Messages.send_message": 3,
+        "Messages.send_message_to_group_conversation": 2,
+        "RentAFlat.remove_saved_apartment": 7,
+        "RentAFlat.save_apartment": 13,
+        "Shopping.add_to_cart": 1,
+        "Shopping.checkout": 1
+      },
+      "explicit_email_read": {
+        "AgentUserInterface.send_message_to_user": 2,
+        "Calendar.add_calendar_event": 3,
+        "Calendar.delete_calendar_event": 2,
+        "Emails.send_email": 4,
+        "Messages.send_message": 1,
+        "Messages.send_message_to_group_conversation": 1,
+        "RentAFlat.remove_saved_apartment": 1,
+        "RentAFlat.save_apartment": 1
+      },
+      "timed_wait_for_response": {
+        "AgentUserInterface.send_message_to_user": 46,
+        "Cabs.order_ride": 15,
+        "Cabs.user_cancel_ride": 2,
+        "Calendar.add_calendar_event": 40,
+        "Calendar.delete_calendar_event": 29,
+        "Chats.remove_participant_from_conversation": 1,
+        "Chats.send_message": 17,
+        "Chats.send_message_to_group_conversation": 3,
+        "Contacts.add_new_contact": 3,
+        "Emails.forward_email": 1,
+        "Emails.reply_to_email": 30,
+        "Emails.send_email": 38,
+        "Messages.send_message": 25,
+        "Messages.send_message_to_group_conversation": 2,
+        "RentAFlat.remove_saved_apartment": 3,
+        "RentAFlat.save_apartment": 5,
+        "Shopping.add_to_cart": 21,
+        "Shopping.checkout": 20
+      }
+    }
+  },
+  "by_config": {
+    "execution": {
+      "rows": 160,
+      "events": 1548,
+      "user_events_with_text": 160,
+      "scenarios_with_any_explicit_cue": 11,
+      "cue_counts": {
+        "cab_quote_information": 3,
+        "city_crime_information": 8,
+        "explicit_email_read": 1
+      },
+      "relevant_app_presence_counts": {
+        "cab_quote_information": 160,
+        "city_crime_information": 160,
+        "explicit_email_read": 160,
+        "explicit_unread_message": 160,
+        "timed_wait_for_response": 160
+      },
+      "oracle_write_function_counts": {
+        "AgentUserInterface.send_message_to_user": 28,
+        "Cabs.order_ride": 23,
+        "Calendar.add_calendar_event": 71,
+        "Calendar.delete_calendar_event": 64,
+        "Chats.change_conversation_title": 1,
+        "Chats.create_group_conversation": 7,
+        "Chats.remove_participant_from_conversation": 1,
+        "Chats.send_message": 21,
+        "Chats.send_message_to_group_conversation": 10,
+        "Contacts.add_new_contact": 9,
+        "Contacts.delete_contact": 9,
+        "Contacts.edit_contact": 6,
+        "Emails.delete_email": 12,
+        "Emails.forward_email": 1,
+        "Emails.move_email": 4,
+        "Emails.reply_to_email": 24,
+        "Emails.send_email": 77,
+        "Files.mkdir": 9,
+        "Files.mv": 11,
+        "Files.rm": 5,
+        "Messages.create_group_conversation": 13,
+        "Messages.remove_participant_from_conversation": 2,
+        "Messages.send_message": 25,
+        "Messages.send_message_to_group_conversation": 16,
+        "RentAFlat.remove_saved_apartment": 22,
+        "RentAFlat.save_apartment": 41,
+        "Shopping.add_to_cart": 58,
+        "Shopping.checkout": 58
+      }
+    },
+    "search": {
+      "rows": 160,
+      "events": 320,
+      "user_events_with_text": 160,
+      "scenarios_with_any_explicit_cue": 24,
+      "cue_counts": {
+        "cab_quote_information": 4,
+        "city_crime_information": 20
+      },
+      "relevant_app_presence_counts": {
+        "cab_quote_information": 160,
+        "city_crime_information": 160,
+        "explicit_email_read": 160,
+        "explicit_unread_message": 160,
+        "timed_wait_for_response": 160
+      },
+      "oracle_write_function_counts": {
+        "AgentUserInterface.send_message_to_user": 160
+      }
+    },
+    "adaptability": {
+      "rows": 160,
+      "events": 2134,
+      "user_events_with_text": 160,
+      "scenarios_with_any_explicit_cue": 8,
+      "cue_counts": {
+        "cab_quote_information": 1,
+        "city_crime_information": 1,
+        "timed_wait_for_response": 6
+      },
+      "relevant_app_presence_counts": {
+        "cab_quote_information": 160,
+        "city_crime_information": 160,
+        "explicit_email_read": 160,
+        "explicit_unread_message": 160,
+        "timed_wait_for_response": 160
+      },
+      "oracle_write_function_counts": {
+        "AgentUserInterface.send_message_to_user": 160,
+        "Cabs.order_ride": 46,
+        "Cabs.user_cancel_ride": 28,
+        "Calendar.add_calendar_event": 110,
+        "Calendar.delete_calendar_event": 101,
+        "Chats.add_participant_to_conversation": 2,
+        "Chats.create_group_conversation": 7,
+        "Chats.remove_participant_from_conversation": 1,
+        "Chats.send_message": 22,
+        "Chats.send_message_to_group_conversation": 10,
+        "Contacts.add_new_contact": 3,
+        "Contacts.delete_contact": 6,
+        "Emails.delete_email": 1,
+        "Emails.reply_to_email": 28,
+        "Emails.send_email": 101,
+        "Messages.add_participant_to_conversation": 1,
+        "Messages.create_group_conversation": 7,
+        "Messages.remove_participant_from_conversation": 1,
+        "Messages.send_message": 49,
+        "Messages.send_message_to_group_conversation": 11,
+        "RentAFlat.remove_saved_apartment": 15,
+        "RentAFlat.save_apartment": 17,
+        "Shopping.add_to_cart": 50,
+        "Shopping.cancel_order": 15,
+        "Shopping.checkout": 49,
+        "Shopping.remove_from_cart": 8
+      }
+    },
+    "time": {
+      "rows": 160,
+      "events": 1910,
+      "user_events_with_text": 160,
+      "scenarios_with_any_explicit_cue": 68,
+      "cue_counts": {
+        "cab_quote_information": 1,
+        "city_crime_information": 2,
+        "explicit_email_read": 2,
+        "timed_wait_for_response": 63
+      },
+      "relevant_app_presence_counts": {
+        "cab_quote_information": 160,
+        "city_crime_information": 160,
+        "explicit_email_read": 160,
+        "explicit_unread_message": 160,
+        "timed_wait_for_response": 160
+      },
+      "oracle_write_function_counts": {
+        "AgentUserInterface.send_message_to_user": 106,
+        "Cabs.order_ride": 31,
+        "Cabs.user_cancel_ride": 2,
+        "Calendar.add_calendar_event": 77,
+        "Calendar.delete_calendar_event": 61,
+        "Chats.create_group_conversation": 1,
+        "Chats.remove_participant_from_conversation": 1,
+        "Chats.send_message": 31,
+        "Chats.send_message_to_group_conversation": 6,
+        "Contacts.add_new_contact": 5,
+        "Contacts.delete_contact": 4,
+        "Contacts.edit_contact": 1,
+        "Emails.delete_email": 2,
+        "Emails.forward_email": 2,
+        "Emails.reply_to_email": 32,
+        "Emails.send_email": 88,
+        "Files.mkdir": 2,
+        "Messages.create_group_conversation": 5,
+        "Messages.send_message": 47,
+        "Messages.send_message_to_group_conversation": 11,
+        "RentAFlat.remove_saved_apartment": 14,
+        "RentAFlat.save_apartment": 20,
+        "Shopping.add_to_cart": 49,
+        "Shopping.cancel_order": 1,
+        "Shopping.checkout": 49,
+        "Shopping.remove_from_cart": 1
+      }
+    },
+    "ambiguity": {
+      "rows": 160,
+      "events": 1101,
+      "user_events_with_text": 161,
+      "scenarios_with_any_explicit_cue": 18,
+      "cue_counts": {
+        "cab_quote_information": 6,
+        "city_crime_information": 10,
+        "explicit_email_read": 1,
+        "timed_wait_for_response": 1
+      },
+      "relevant_app_presence_counts": {
+        "cab_quote_information": 160,
+        "city_crime_information": 160,
+        "explicit_email_read": 160,
+        "explicit_unread_message": 160,
+        "timed_wait_for_response": 160
+      },
+      "oracle_write_function_counts": {
+        "AgentUserInterface.send_message_to_user": 160,
+        "Cabs.order_ride": 16,
+        "Calendar.add_calendar_event": 58,
+        "Calendar.delete_calendar_event": 58,
+        "Chats.send_message": 5,
+        "Chats.send_message_to_group_conversation": 2,
+        "Contacts.add_new_contact": 5,
+        "Contacts.delete_contact": 12,
+        "Contacts.edit_contact": 2,
+        "Emails.delete_email": 7,
+        "Emails.move_email": 2,
+        "Emails.reply_to_email": 10,
+        "Emails.send_email": 48,
+        "Files.mkdir": 3,
+        "Files.mv": 3,
+        "Files.rm": 3,
+        "Messages.create_group_conversation": 8,
+        "Messages.send_message": 17,
+        "Messages.send_message_to_group_conversation": 10,
+        "RentAFlat.remove_saved_apartment": 9,
+        "RentAFlat.save_apartment": 21,
+        "Shopping.add_to_cart": 40,
+        "Shopping.checkout": 37
+      }
+    }
+  },
+  "matched_scenarios_without_text": [
+    {
+      "scenario_identity_sha256": "331da55eb234e11d409ba47386828f00d959012044dc50e2e680681e53ca94bc",
+      "task_text_sha256": "c6849746d01dd733b55bb7308ca7a21ce8ee0424c15c28d4ef2aa7c1dce40ad4",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "Emails.send_email",
+        "RentAFlat.remove_saved_apartment",
+        "RentAFlat.save_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "86923e09e81e85e92d9785549c639c5ae128702c681fbab650055317eaaf3e95",
+      "task_text_sha256": "1c9cb996cfa8dcbd50e04b8a70a75cefe479f15e5d2d9b3c1cfe6bdaa3f0e771",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "cab_quote_information"
+      ],
+      "all_user_event_cues": [
+        "cab_quote_information"
+      ],
+      "oracle_write_functions": [
+        "Cabs.order_ride",
+        "Calendar.delete_calendar_event",
+        "Contacts.edit_contact",
+        "Emails.reply_to_email",
+        "Emails.send_email",
+        "Files.rm",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "90a2036cf8c221e2541be0efb5281c702ef9bde199cb77de93c644759bee0d68",
+      "task_text_sha256": "0bf038d9f0428cad9c1a08719336bfcd7745e890354878f8ea4a75cb8af61606",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "Calendar.add_calendar_event"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "9a1aab8f3bac9282cc94799df97309e12f603c8b01fc1806cd06b7e7e009045d",
+      "task_text_sha256": "72559fabb0c36f6bece5024b42c9b751772e8b80502f8e1e58ea635580e55193",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "RentAFlat.save_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "3e20a837534d844737bc6338a3c370ca571852adfac67983c4aaf49a9b760770",
+      "task_text_sha256": "22bbdaa41d6761b92d1dd236fd064fd3dfc4503132c4a5d3be0d09237d0b0219",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "Messages.send_message",
+        "RentAFlat.remove_saved_apartment",
+        "RentAFlat.save_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "d3b694a469e46fc6ee7f16beed0ff8f3bd31a5c8d57c6f83201172e6f334736c",
+      "task_text_sha256": "10b7fcc77fa03b5a0e640dd6fd4bbb4e3b84ea382a54dc3d2ff10cea927124b1",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "Contacts.add_new_contact",
+        "Emails.send_email",
+        "Messages.create_group_conversation",
+        "Messages.send_message_to_group_conversation",
+        "RentAFlat.save_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "85f30bad73655b98bbe7c1765d38f2e10f2df17ba0ecc28d9c577e2625ac64e0",
+      "task_text_sha256": "b9eba501321bcfa19ca200706938ccada6b7ffa8a35676467e2b2813474573f8",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "cab_quote_information"
+      ],
+      "all_user_event_cues": [
+        "cab_quote_information"
+      ],
+      "oracle_write_functions": [
+        "Chats.send_message_to_group_conversation",
+        "RentAFlat.save_apartment",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "1c8aae1e46e929b9b7f68a5f03914b71be8a51234bc7f8847ac756f1d856e268",
+      "task_text_sha256": "369ebecca824859e3fd54d53d82e9e3fba01168b3608ad2f87bc87b1c7208e0a",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "Emails.send_email",
+        "RentAFlat.save_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "152f86887abe2a965447b914cba4deb6b39d294c86152c1d52df21432f5740a0",
+      "task_text_sha256": "0fb0fe9285004a8d06ab2d785cd0793e4b691b0427862fb8b7cf8391c55ae882",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "explicit_email_read"
+      ],
+      "all_user_event_cues": [
+        "explicit_email_read"
+      ],
+      "oracle_write_functions": [
+        "Calendar.add_calendar_event",
+        "Emails.send_email",
+        "Messages.send_message_to_group_conversation"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "37f8455bed4c8b3997837def55b89af0f1d304e128e75d6348a319b61458950f",
+      "task_text_sha256": "4dbf2d43f84d329437703bab6c94e97e915cab9dffef8019836e5b3f53f23012",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "RentAFlat.remove_saved_apartment",
+        "RentAFlat.save_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "8b8af4f2612df8ee5f17b67a9728b2fed54fd64c23487531afa18ec4956eaf29",
+      "task_text_sha256": "bf6a65abf44c23c463335bb59797401aecab66ce159d03b3133563a70356ad57",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information",
+        "cab_quote_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information",
+        "cab_quote_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Cabs.order_ride",
+        "Chats.send_message",
+        "Emails.send_email",
+        "RentAFlat.save_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "84ba9d19ac130d307c24642e83180c4c1d1ccb33d9e40de63c63d317477be44b",
+      "task_text_sha256": "c835d995347029ce9576d697dd84ddb807f3cb714b3ac620fb3371a045a5ca20",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "15c343526543aabb6ec17a3faac7fd5f34e7b1b97f764b3cdd050a81b352c599",
+      "task_text_sha256": "2a3688866f6b0ead91a86c6d38afb4b62fbc387cc6277670e15d5f616e28aecd",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "4c441c4061ad77e47f1ac872c18768d7c9ebebc894f01119b5bdd03e988cda01",
+      "task_text_sha256": "b9c539566367aa4bc09dbaf908e989d2f389ee7e120f0251520a8d5af0d65a50",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "bb80d183964518be2960f1f4760d44ff58a85b317aadf1cd5fd154f0c8dfc773",
+      "task_text_sha256": "53b6c449152d71f9c319e693c98b7f9fb40f7668539178840d9758e8e56ff5f6",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "585f256ff1ebee2873890b3404e033eb4f705ccdfd3c5531cefe1e7109c35fdc",
+      "task_text_sha256": "ddda39453d4c236921eed039e1096ded2145f4f30d5f5f849dde703dd7846dee",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "cab_quote_information"
+      ],
+      "all_user_event_cues": [
+        "cab_quote_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "a394a7dfdd86ccbf88953e2d1a66430dc86ced7a104a7bc30faf37edc70c72da",
+      "task_text_sha256": "e40aaa6c95d8c5575eedbdef55a24c8f0baf42965352e96bd073a94a42dc31b8",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "bdd523af2d122db898a6f95240c6a47feb0ca2f04c76f35be5969ad9b0a778ac",
+      "task_text_sha256": "d77945a50916d5e4260a8e95fec73a8bd6439ecca74f16b6f93a4cf804295c01",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "933b1bd8a621233f34226175bd7dbeee7782b2920195d34d9419004af180df19",
+      "task_text_sha256": "c305f670426956cd5f24ff06ab37e22d134a4e7eacb705a4ad13b7af8b825d30",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "cab_quote_information"
+      ],
+      "all_user_event_cues": [
+        "cab_quote_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "e57ada8d9e5943de330881ea2e6afc4ab0d943695c721db5361aa9c761e0c580",
+      "task_text_sha256": "7ea295f80d8c40f7ee45cb8ac1fddadc8e433b235cee2887d59faa73de9fa1af",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "9b4c69bf7d4dc953a3350fe926ebb031a893ed63b7401307c40be59adec7d2af",
+      "task_text_sha256": "0521e07f72d456ee803ad777d3037c1146ae7ad01deca601a8707afe13dd82ae",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "76172761ab162de06570edbe415004aa2ec79960aefc94e175b45884f0ea2902",
+      "task_text_sha256": "1f8667aa09c07df2593b69d559145e273993663144f52423c15fa84cc67c4903",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "e281c556309685bec53357eb7e36265f64575fe530c4bcb5aaf5213322aa2a08",
+      "task_text_sha256": "632f5656446215be3bf50fa945db4a57ca6951b41168b1ab07f2d9b9838bd923",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "31f83c1ee1b2d345bfcd7d6d44b7006542a832fd0ffd9f4b6d5e2cc62f7151d8",
+      "task_text_sha256": "30b4d807813228106e26dd2aee91965962eacb33271096d9fdcdec1d764da72c",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "28deb7d2944218ff716e12693c797a9401e8dbfd39ba0cf7850378befd885f7a",
+      "task_text_sha256": "824435d217d9eec56c6c336c2ed3177aa7ccac852c6f0ff5234795ff0d2710f8",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "420d48424e4a8c0734c89d69f81d3523134089946d6aa30ea221550ea4401709",
+      "task_text_sha256": "176ccc6cb4c5e5fa3caef87c8ffe7c4fe85df4789696bc844b1397550acead3c",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "572dc2a44f6c2231c7bfb6b6acb8e8906fbc8d073c342b01e16e90a324870dde",
+      "task_text_sha256": "12678bc3114ba1de1096e82872cb9c3ca9b0a8aefc802c7b1d911566eb519a64",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "fc3879b55ccb2484de39c65d0776f5dcd1b15dc89da75c9b0ce157d2e0a14563",
+      "task_text_sha256": "26423ba6824339c7e3af2ad6f415ea89b4d435f34151b47926592c15386e4666",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "6dcccd6b991bde24a65a2c268659360856169cc5e7b4d5ac5417e618e3aafa59",
+      "task_text_sha256": "7623b35d069068d1460806874b5b7938740c31a5644b5274f81f6394414e244b",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "103671f49417aa3bdd50381b2d086f8b542f625a832d7839ffe26e958f72fb46",
+      "task_text_sha256": "930f9306872305dfb6781b5673dd63cef86bca48ff42e997d322d33c66b1b08d",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "cab_quote_information"
+      ],
+      "all_user_event_cues": [
+        "cab_quote_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "5886ea9f339de07e1428aa4a57ae6f437c43f6b3859a8484c72abb8e668e01c9",
+      "task_text_sha256": "6e6977176430f3cc557346883fcb497f8bbff635b12669cc6855722954a347d1",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "b8d995ac8a191626011548ac043bc0406d2af4779628da41ef36ab337e516c77",
+      "task_text_sha256": "689bcc52c1aace79dad96fa6320ae99f5f3ffd4199ecb418b0de84be5ccc221e",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "b862341b5cf4d5932e73f7985bca07a43a1ed9c6154022891235933210540c63",
+      "task_text_sha256": "d0e76947df0fcf9bd87e27f56b843b747e0a977be8e2c6ced5284ece991f5d0a",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "cab_quote_information"
+      ],
+      "all_user_event_cues": [
+        "cab_quote_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "5c88ddd2169a0b81e7b3c6357976e8f14ec5d58eddf597744b64a445fa837457",
+      "task_text_sha256": "a421e86fa4ab1e3a67e18948de72cf030c304c921d3f65422759bcfb25d47d57",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "5f535183eb26518c4ffc48e53edbc92dfe619a0ea87fd82fa85a6d524a103e3d",
+      "task_text_sha256": "36d1fecd183646c5f4ec60ae978b69684cd838747ea65ea46bb45d3da85575d8",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "1f55d2cc2087c98186f73628b5bf0ad2c0ae37393f2c453dafaf8f72623145be",
+      "task_text_sha256": "d1131690a81d64c942be0f6fcc65d82a37aad3224bace63fb794288ac8e2f82a",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Emails.reply_to_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "86945fc7417a12925e6303eadbc4fe3468d64f10339642efd51586e6e4f6372a",
+      "task_text_sha256": "a37618cff7466cefdf05bb6e97bf28641bd149f2dc09c1fe482f9fe8d4d9af08",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Emails.reply_to_email",
+        "Shopping.add_to_cart"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "110234e6f6aece17347f920db561572e3c14b53a90edee724fcb38edf2a52a42",
+      "task_text_sha256": "54a2d610be7dd0bfcd922bf7ac5218b5a840b490651642d633b67cc287b35b28",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Emails.send_email",
+        "Messages.send_message",
+        "RentAFlat.remove_saved_apartment",
+        "RentAFlat.save_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "60b25a7e8261a5fd01d9b3d71dea8f7355a4d2b3975ff106e025ba8cb8a7273e",
+      "task_text_sha256": "c7040ea418e6c62ac36f554831321de492ccfdacb945319b7390c1e661559171",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Cabs.order_ride",
+        "Cabs.user_cancel_ride",
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Emails.send_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "f0304dd6144a784536d41a490f1d45881f14fd56a76659f3ef2b4a80c4f8a24d",
+      "task_text_sha256": "eeee32d8f63b03f9a23289851db6a59cd5eb3781ec94bf2c39e95449601b1273",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Cabs.order_ride",
+        "Cabs.user_cancel_ride",
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Emails.reply_to_email",
+        "Emails.send_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "dd04a76094e420b01bf27ae2338b1fbb0fe393e9c871eb0338421ffa76688224",
+      "task_text_sha256": "834f91b586f3a0a72f242541f762f35f06b6394a7462a0b7dd629550f0ea4efd",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Emails.reply_to_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "4abf2f6492b80d004cc306ad4e1e2abf4dbf7d8b00e9d8e8f7ac9cf9a1d0c2ed",
+      "task_text_sha256": "15d8c9e3b2396717241b4b4471928b7f166b7fc09d17fb834a6f48d0b5de7c65",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Emails.reply_to_email",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "a24c1f2f091e23a242c72789c16a6368570ba9f0fa5547e2c2586c5953de32ff",
+      "task_text_sha256": "dd2c2b0b37c1b522aa13dd366d9b910d70229153349d9fa7e2fc72a2895f8d24",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "cab_quote_information"
+      ],
+      "all_user_event_cues": [
+        "cab_quote_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Cabs.order_ride",
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Emails.send_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "baa0c3e0ef59c41c021543afca1b642fa6f5489db8747d3d058dffe549983cc2",
+      "task_text_sha256": "7ef0d3905172064ac5b5d0f498ec1f8548140f5e9b066d7db2264c3918e1e274",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Emails.reply_to_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "0f56ac16f6f914b46dc42fbd229b7a101dc85b6d94d9e54be034d1cdf3805c54",
+      "task_text_sha256": "e000a6724f654190a80ce3d1d8ed3b4908b8453a6bef791905d7055588337df3",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Chats.send_message",
+        "RentAFlat.remove_saved_apartment",
+        "RentAFlat.save_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "97cc2efe116bd5570b93ba4047e0d3cd84a3b1817fdd23da0fd45a1fda981e9c",
+      "task_text_sha256": "efe135b15162a638f5b6453305d35dd6ccafc7adb43e1fc9ccf426d07a73818a",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Cabs.order_ride",
+        "Calendar.delete_calendar_event",
+        "Emails.reply_to_email",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "009ed0ef11ee8272a01f50c36c9974460b93040bc830387891755b6e02ff6579",
+      "task_text_sha256": "ed699fecb33a043eacfe00b6f27eeecb1bc75ea8f66e4c75fdd6578fe4bf83a6",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Emails.send_email",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "6697b564f4e4ede8845e58a0f261c692aefe5307faec0078d7f84d532f9ab6ca",
+      "task_text_sha256": "fcf34d974d7c0fdecd19f110395496d7e6f67463d4083deac44c22b650333e7d",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Emails.send_email",
+        "RentAFlat.remove_saved_apartment",
+        "RentAFlat.save_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "844be6c08ab1cbb4971bb00d27d1d96231a56cf05e09374180a6412c991d9f7e",
+      "task_text_sha256": "ea7d573e26613e7afb5115bbc3c5ea24dba52a5b3096a390902ce752984d19ae",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Emails.reply_to_email",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "9d2640d5ed29ebae98308e27baec7bfb5c3320c09482ca02d552f3660fd402e6",
+      "task_text_sha256": "8dfe6d55d17b10d9edae3d6c90ab0347c6b822a760174f5adff620e3b94c4d53",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Emails.reply_to_email",
+        "Emails.send_email",
+        "Messages.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "bf761582b1b2028e7fc4d6618e02cf361590747d650f4bad2bac628287a872ff",
+      "task_text_sha256": "fff11e5541444c47523748de62ec047fd05f8f23a74f3669c911e364b2ceb6a8",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Calendar.add_calendar_event",
+        "Emails.reply_to_email",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "36b3d2342575f8313b223c835b086604f0f42f9ded2bfd65f4540c1bd311cbef",
+      "task_text_sha256": "f9eb3d01e6b50accf04ec6b3ee851166e62d20fb0aca9daf2df226996ee550fb",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Cabs.order_ride",
+        "Calendar.add_calendar_event",
+        "Chats.send_message",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "69d37ebc3b471632cff7ec9723b0e68cdec01e8b58beb7ed0d813025ab5379d4",
+      "task_text_sha256": "1c6e014a281563f1e0bb970bf6ba44b8d565379f330157293ae4e35bba39f85c",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Contacts.add_new_contact",
+        "Emails.send_email",
+        "RentAFlat.save_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "996e493b1cefb80d8e224b1b75d7dc447366d06af3f19bf75a4a7c5e17339382",
+      "task_text_sha256": "7740fe741cdfddd1e045c1f571d3f02c14f44f03530bf5dbe817bea8404a2864",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Chats.send_message",
+        "Emails.send_email",
+        "Messages.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "868cdee432c3acf3377c86cd3472c8db432ea6c17f8582855527113ca91c103c",
+      "task_text_sha256": "18156ad8d63f1d342e000ebc9fcae57f6a36f3be18618624a10d7d61503ba9b0",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Messages.send_message_to_group_conversation",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "34fffddc001cebe829593da343bc6abb26f01bdbde6516630320d181ed131b18",
+      "task_text_sha256": "26325015b7b4412658b35d4f3babb35327d8e2b449e58628ba7a1b3f71c977ca",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Cabs.order_ride",
+        "Messages.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "0649fd7937118ad032300a10dc5240cc5cc8c781f69b7434add413e864b354b1",
+      "task_text_sha256": "fd29b1a8774de5ab4e39e023d89dd4ff55a7efa5b653d0c6e164b3f4170154bd",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Emails.reply_to_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "137cf8df4c1c49d6958821278ca741a1c9d843658b37c3ada8e8a7d37f313987",
+      "task_text_sha256": "14afe43521fefc5547b6e3f692b4a81cf5f6907de68824014b50b4958992e715",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Emails.reply_to_email",
+        "Messages.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "264d61da7f54ef3773f3b0da71404b6d72f19cdc48c1023654f760e9bda43690",
+      "task_text_sha256": "b74a8937957fa8f7c7f66b1f7bc2b03404fecd470b8ba557ecd77f1e1671361e",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Emails.reply_to_email",
+        "Emails.send_email",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "7ab4bafebc7e9c20b4614242c9779fe3b5ff194fa367c9bd62ba85f1f1827d7c",
+      "task_text_sha256": "5dd372c272edb5c5ca3a93a5acd19a3d3fb78f064c630b23e2a7cd4eacb2fd05",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Messages.send_message",
+        "RentAFlat.remove_saved_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "175bd787d80f421c485a4cbacfdfae3433292a616670b51ac2bd27fa520a7439",
+      "task_text_sha256": "b9e48da0281ed4f7fbd60620d36cfb5974e4e6b15ecbfb494f9dbdc714d6c5ea",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.delete_calendar_event",
+        "Chats.send_message",
+        "Emails.send_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "aed81de3a6c2e3393b2b6c310f289ba313e0fc810ffe5c6cb766722c3ee57c2d",
+      "task_text_sha256": "5df182b3dca38b829f567922ba497a7740378fd0b36bf47b78dfe1108abfe132",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Chats.send_message",
+        "Messages.send_message",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "4c803d3a17e310ddb1e18a77acbd25616aeb0607ea035ffbbf9b5c46ce353a07",
+      "task_text_sha256": "abafd4bf2c10f07bd2beadb2006bc826f1f00738d3e886e91a51d7669eb721b3",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.delete_calendar_event",
+        "Chats.send_message",
+        "Emails.send_email",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "6a8723b26b0735eb2b45ee31c0b6740eda7f8b77c4713da146049393b84e2c57",
+      "task_text_sha256": "ca7ee91ba6d3390ef659e43e7386fedadc382eebc3d823653e868059a7061463",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Emails.send_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "963cfece908b209d131758da3b69646cad321b0d09055bf80c25f831b3bdcc73",
+      "task_text_sha256": "d5e8888242c7640173813c4d6043d6c830e8e02eef0c66d9dd3f9ad459a830de",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Emails.reply_to_email",
+        "Messages.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "dae56925e0d2d85c896d054e91aa35820ddd35804848ddd7e4a16488e285a717",
+      "task_text_sha256": "3c301d3908ba159a54cc06ca81e6b4fbab6c93543f8020b1b5afe04026e58324",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Emails.send_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "a96a5f86d892e1a6b0119998498ec2cd4cde93c0bb29550f662db3ca4ef33215",
+      "task_text_sha256": "012e8b694245cd7d50538ac45562982971186bc512c8e2b41af4c6b4b39ccf8d",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Emails.reply_to_email",
+        "Emails.send_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "f05be6a7d22b9b398ec4cdf569c95d72903c361a353b3bbd03610cd189092c67",
+      "task_text_sha256": "a85165db38891782e259d9524d3ed8882165c53e138df8aefb72f9f7e98637ea",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Cabs.order_ride",
+        "Chats.send_message",
+        "Messages.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "5bae1e6bc4735f62e894538640afa5d32c7e3df4d02cd67f1b99f7bd80889e5a",
+      "task_text_sha256": "ff9a9041e9bef08170a95956d8c916748751fbc0ad8076f1e9c10e86579a2471",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Chats.send_message",
+        "Emails.send_email",
+        "Messages.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "6e809ab2c73fcb9690e3afda9d993b9268fbb179b9d2d799240531d17c46d4d8",
+      "task_text_sha256": "be0e1eb600db605875ee5b0617300a6cfc2f35ddb4f6e20b166418fee086bd5e",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Chats.remove_participant_from_conversation",
+        "Chats.send_message_to_group_conversation",
+        "Emails.send_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "cb61f7b421cbb8a45b21ccb838af9990eddd779d03ffe755559c28c5d30ba207",
+      "task_text_sha256": "717b69d0e805db7bb121b0cda26c01756a558d57137cd08c3717c3bc6f5e42cc",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Calendar.delete_calendar_event",
+        "Emails.send_email",
+        "Messages.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "5d8a060460e312c50b9999a63507dd78bb35fc0fff68cf032a4379ab76bb3778",
+      "task_text_sha256": "95115196176a7c759a622ae9130fcf241a470d2b48d26fed69e4e1fbfc0335ba",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Cabs.order_ride",
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Messages.send_message_to_group_conversation",
+        "RentAFlat.save_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "9e1a4929e0da0d534fa0a44348c5157b33ec9d5fe160c2c9cd00f7593866dfce",
+      "task_text_sha256": "706e2e3b7f7b6bcfb96c5c3bb94d4c26be405f9adfe0f962b8cc97945f4f9a6c",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Emails.reply_to_email",
+        "Emails.send_email",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "794495cc6af5b180a8ae8ccb974dfd80faed8df4aa45f36947a52982265048de",
+      "task_text_sha256": "e0aa68e08e647616406c1aaaf308d3535c5476b8be934b0253b2a46502067880",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Emails.reply_to_email",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "e0e6458590057d6f27e963c49df28c68bd6e9f4ac19294b8b0dba00a10358288",
+      "task_text_sha256": "8125c05b85af35dbd9011173e68fb8460c88325f9d5d104a1661ad822c552d07",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Emails.send_email",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "896de2e5957effd823aa2f5e3638899bd969cf574e267b692ad9a32f084f2011",
+      "task_text_sha256": "4664afcc8bfb37f6f5e5b95c5865e0d35ef46ec9e65eddd17fcd79c35f8b5de7",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Chats.send_message",
+        "Emails.send_email",
+        "Messages.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "d519c577076aaf31ce194a4f50d7525a87c13c00588ced445ea75f6d85d59e50",
+      "task_text_sha256": "1e5a4dd00e95a93f89fd37de6458331135f6076a456d95b83a2e382fe1dfdc47",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Emails.send_email",
+        "Messages.send_message",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "6fa7d35e845a6bcfc4143a1b33363aec1e6e4efc594017440dfb7c0b6ab48ee3",
+      "task_text_sha256": "5d5c8c9efce0d19d97b12ed89ea1e9003ec6e2349e53e7ab2bc648480715fc68",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Calendar.delete_calendar_event",
+        "Emails.send_email",
+        "Messages.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "6043af56d1671e5a9f14a22e5b454e3b2df25b00557f423d91691795884fef63",
+      "task_text_sha256": "0c6eae653986da7eae925b53f1f0c4e1fff4af0c9e7d20ec0607f0f660e3dc7e",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Chats.send_message_to_group_conversation",
+        "Emails.send_email",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "5f8b5a6bbdf98da5155619bb1644717fe2f0435cf9f57bf3ddb2bdbbba3a53bc",
+      "task_text_sha256": "b168c875f2a18d76958c0f30637ec5e80d79af86bad8d030a2ed659a55699395",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.delete_calendar_event",
+        "Messages.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "728317ae1990a5de80ae54aa102125d667e1577712182d86760c4f41400a89ea",
+      "task_text_sha256": "618a49bd0eaaa471857be3ba23e2deb61e285dd5ddc7bf151e9185f00fc2ad09",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Cabs.order_ride",
+        "Calendar.add_calendar_event",
+        "Emails.send_email",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "0bc04b084e25e2c99e04fafbe8219932d5fd005b72b8b537fff4f6b460a0c2ac",
+      "task_text_sha256": "abdeccdb477a0ee6745d98359bdd007eee61c8a1ed800dbe5b69af234e244084",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Chats.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "54726c3d722d707c8a1322c8d84a6850f7412937b7ce082fffc214c6698f228e",
+      "task_text_sha256": "f07f15067633a6c7f12d42756eff947074859efe0dc30571b584052cbe800346",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Cabs.order_ride",
+        "Calendar.add_calendar_event",
+        "Chats.send_message",
+        "Emails.send_email",
+        "Messages.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "f99f0d94163124e0739585cb47b05d0ad55f696e155f81ef5ede8ac855cd6a49",
+      "task_text_sha256": "de4360a65ac880075a453069e40a2d831907efff9d7a1a80e93bffacf81bc633",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Emails.send_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "aa7a48ee78357b33fae3cad16f8f813e0586541efd0abe7f3507698cb69b6a25",
+      "task_text_sha256": "b28c26a6d6041967b4f9d05cfeaaec504877cb1109783851b8d4712340f4cbd2",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Contacts.add_new_contact",
+        "Emails.send_email",
+        "RentAFlat.save_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "b22399d186c7e9ab647206b7f78baec10b573a34935ecbe0c3f6c96fc8a4c264",
+      "task_text_sha256": "737eb95074e0b8e4d7f3fd34600808c1b9d441dcbaadf17f817d0cb806d94bc0",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "explicit_email_read"
+      ],
+      "all_user_event_cues": [
+        "explicit_email_read"
+      ],
+      "oracle_write_functions": [
+        "Emails.send_email",
+        "RentAFlat.save_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "2a598d51a8fca3d9a9f17e9581a153a6cfcf5d8cc538d6fa25ec75a4698ab210",
+      "task_text_sha256": "6719feb7e50db69e0cb6b233085d50d809eb8a2d5d4ebda9e26c454edd81cb15",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "explicit_email_read"
+      ],
+      "all_user_event_cues": [
+        "explicit_email_read"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Emails.send_email",
+        "Messages.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "c73b2cc4ebe157b9406c569609d31d7151b5b11f6232d068fd0971e6e4d8d336",
+      "task_text_sha256": "a4f928d8893c477f16c07d708ae10cd53feabf128d2b5d2830940d5777d8842f",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Chats.send_message",
+        "Emails.send_email",
+        "Messages.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "92b8e6c28082ae7bec35ea07de212c480e66338d319b9a032df3922f233143a6",
+      "task_text_sha256": "fb77681cdf3cef8231ed235b356225d325e92bb20b40d7ec365e6f07aa3ece51",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "cab_quote_information"
+      ],
+      "all_user_event_cues": [
+        "cab_quote_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Cabs.order_ride",
+        "Cabs.user_cancel_ride",
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "RentAFlat.remove_saved_apartment",
+        "RentAFlat.save_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "868022d957c8fa336df78e9b52b235079bd25ca099cc38f0468e9c8dbd282ae7",
+      "task_text_sha256": "9f10e0f4f13572b30f700942f6ef28f2275c6ca35d43ec2c761c9d241b8f31a6",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Cabs.order_ride",
+        "Calendar.delete_calendar_event",
+        "Chats.send_message",
+        "Emails.reply_to_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "0df2f6ad3dec09dbce7f06bf09514c1e136182efb48db439588480dc50423a57",
+      "task_text_sha256": "8829a778fa4bb6158d83b7892f2b686ef32f4a8db5bfd461ca143651858fddd7",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Emails.reply_to_email",
+        "Messages.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "0479a3a4b1caf7f8b6dffbd486c501145f40e1e60c7390a232d8ef250cca19d7",
+      "task_text_sha256": "efb070da4f95318846e3b9bb215e8f8d6b95ae7ea050d08718c0b7fccb21a8b0",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Cabs.order_ride",
+        "Calendar.add_calendar_event",
+        "Emails.reply_to_email",
+        "Emails.send_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "2f729da780764cf2d1ce1ff0dcd2d1eb310538e9df775fcb163ede7976ed1863",
+      "task_text_sha256": "6db064be0cc50dd34662ff8d13e72c47fb9ed054f9de6c38f72d9440dbe01f29",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Cabs.order_ride",
+        "Calendar.add_calendar_event",
+        "Emails.reply_to_email",
+        "Emails.send_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "f211fff60b4a33be103e9bea9d5f60697382fb4d4b8bacbb68125163e6dbdbf0",
+      "task_text_sha256": "1507b0c5fdf4cb743eeba054d4f7ba4a4b6504b1f157c1c42cd86cfc69559f05",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Emails.forward_email",
+        "Emails.send_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "55996c194d77cf3ee32926ad64d5c00698e785541cec6fe45375f87089be3dbb",
+      "task_text_sha256": "4c8d261e1ab4c4b99dd5b4b6da771f7603bbdc467c1e52435c829fb63589d7bb",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Cabs.order_ride",
+        "Emails.send_email",
+        "Messages.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "6873864e6920d8ec939407d4a89f9c83ed30c6b728ff2616b4906f4506e306ea",
+      "task_text_sha256": "14ad6655714af4b3c74c810f3de0cc09688a35fd3296ccad414ba4909f1fda36",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Emails.send_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "f90a577aa670982a41f138ee07e1b26bc2d6c354639fbca681df20bada47fde3",
+      "task_text_sha256": "599c07a6acdef1b0432f41fb42184e7c1e5190773da51878096ece4450a1d6dc",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Chats.send_message",
+        "Emails.send_email",
+        "Messages.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "e5519896fd8deb6c3fd06fac11c14ed37dae678e591c2816b8368d520b96a6f5",
+      "task_text_sha256": "60a134364e5dfda772151c66bd99405832df92c56a794a02fde0a7260692bcce",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Emails.reply_to_email",
+        "Emails.send_email",
+        "Messages.send_message",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "bc5808c426bd38c2e53124704dfc7139e943e92ded4e212f55bcfa0cb8cd48b4",
+      "task_text_sha256": "77e9f3021c0ce9b59b6c1ad8cc4992e8d0017eddbd75051e6c3b3c1a22ea2424",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Contacts.add_new_contact",
+        "Emails.send_email",
+        "Messages.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "8c68c84813c169dc037cdef76b5e2122d533e8662b69fc780cb0e046952efd32",
+      "task_text_sha256": "630da44aa7487bff8da1e75aa6b9f25eb3c4c0e3700873ee02ed8ac107e122a0",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Chats.send_message_to_group_conversation",
+        "Emails.reply_to_email",
+        "Messages.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "5cec524376fb6b919709d3715bc32b49256e8cedabbc51151fc3a9f787e0765b",
+      "task_text_sha256": "68c97b3946ad89b1dffd52ac4444f4db81f792f91e1cc76cd59d83e4dba42e2e",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Cabs.order_ride",
+        "Calendar.add_calendar_event",
+        "Emails.reply_to_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "c50fe4ac45bf76fde4c7f7e9f84e988f4d4fbd29aab05decbed9bfffde2811a2",
+      "task_text_sha256": "5e28fc16eb859e856f2ec2b7145655dbcae40b10e4b4c9dc8fa1563c8a994147",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Emails.send_email",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "e6ace92c34a069184d0c87a9625eda1882cdd15d9b800bd7c1e24e8685c614df",
+      "task_text_sha256": "0bbfc968f83ac67df5326807b19adc7b045bbb520d750611159dc308c6a008fa",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Chats.send_message",
+        "Emails.reply_to_email",
+        "Messages.send_message",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "8ec7e1720266595fe4609ec03ae7d1e424cbc1db8e6b101b750a55215462bab5",
+      "task_text_sha256": "3e509f16f8f3d13ae79f2efd2bbb9cbb573c2f12fde87c1e137f6e2294f1a69f",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Chats.send_message",
+        "Emails.reply_to_email",
+        "Messages.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "7c30018fa85e184732253b149d1b1a8ec06bf433a6060a402a9c8ca60f983df8",
+      "task_text_sha256": "9495ee348ca44479882b7f73f7149c63542ff2232c805a3017fd340be6e004a4",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Emails.reply_to_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "090a5aac3827fd4bdf94f9f5db961d0e19ef0a2a22f0f4a2fab84c446aa0ee08",
+      "task_text_sha256": "88987dd02e2e09b53bb650ce416160ee35c206aa21dfe21d8b4e70ec7212b969",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Cabs.order_ride",
+        "Calendar.delete_calendar_event",
+        "Chats.send_message",
+        "Messages.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "8fb9c926b7857ae27ef91f05329d7ac67bea12c1183a98c96f15981d78393931",
+      "task_text_sha256": "6a57f853b785ce208ad12e321b07aa909cef199535f29952610398115cc7b7b5",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Emails.reply_to_email",
+        "Emails.send_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "b348287b3b553a9fdaf5906bb1a0368278d69dd9911cdc3e8f293e1c5af75d0a",
+      "task_text_sha256": "92739e69696a6e06d448095558a678a018ff44067b28b57ccfb24b1c8e4293be",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "RentAFlat.remove_saved_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "d1e32d654ed11657a272c3a42742778c6aee063aeea7294b3a04fd30dff76dbf",
+      "task_text_sha256": "997569b5486388de51fcc170b19509b9f6ae2d77d72b6f0bb2a908ea2657678a",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Emails.send_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "7fd73f7aed807a694fa67e56a0a30a677c0eb19d0ea7957cf2cebebeb8722f9b",
+      "task_text_sha256": "47cb36ffbac014e7e5663826a6476f7fc6f6e40cda4a17625fbed06bb9cdbcc3",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Emails.send_email",
+        "RentAFlat.remove_saved_apartment",
+        "RentAFlat.save_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "27311bea6bf08da8a5fd14431fb0fe73172585358b64ca49756f7431e5fa7ad6",
+      "task_text_sha256": "20501cbba4eb1140d0fe9216690f266a5734f105af92810850f5f9a78cb456af",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "Calendar.add_calendar_event",
+        "Emails.reply_to_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "2af783d6346740f78899b0e121c10df70cfb28e1515f5c49c6471ddf98f6a967",
+      "task_text_sha256": "ead27ef6d399a607b4b15ac91877d71ac284d027f76d61be0637e074f001ba4c",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "RentAFlat.save_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "62e1bdc829d5f34bb2f59f1192d8e5d46c0b4250cd0180f202379b5312b79f24",
+      "task_text_sha256": "7857134126a13111bfb573e414128e4724843776adb2315dd2fd690d06e24694",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "cab_quote_information"
+      ],
+      "all_user_event_cues": [
+        "cab_quote_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Chats.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "b265ac06fe4aea594077f186dd6a1b122c8d34f1cf7bdf93e47cdb33c9ce5b97",
+      "task_text_sha256": "e8a3a3d7ff92fb5da9d896bd00e2fcef8e831c86c133022a201063de34fa669d",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "cab_quote_information"
+      ],
+      "all_user_event_cues": [
+        "cab_quote_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Cabs.order_ride",
+        "Calendar.add_calendar_event",
+        "RentAFlat.save_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "90642b196030c493aa2733cd06b0c5da07e2bc368fd91739b9242a68c71d84be",
+      "task_text_sha256": "5568fd767fe3426c877975e1b2395e64a41a9f2a1a0184b8cb103f062787f8f8",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "cab_quote_information"
+      ],
+      "all_user_event_cues": [
+        "cab_quote_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Emails.delete_email",
+        "RentAFlat.remove_saved_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "a4bfae8d83354b80dcddf7b88dd556f148b0aa4535099c8d5b37c43aa2b17030",
+      "task_text_sha256": "f5983e8aefd810ae201f0b69b63a0e1103a602c5f007645212cb6f8119472954",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "cab_quote_information"
+      ],
+      "all_user_event_cues": [
+        "cab_quote_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Cabs.order_ride",
+        "Calendar.delete_calendar_event",
+        "Emails.send_email"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "3b28d9a45c89dba56184189ce1d070cf69454c9afed8c6bfb6ef599f638b2f9d",
+      "task_text_sha256": "9c4c16d36b685fbc591bd42d05ae6c3fd1c1315043341c422ed718d7ad448b0d",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Contacts.delete_contact",
+        "RentAFlat.remove_saved_apartment",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "6722201325a13a44d48a0e2a4b84cda9c9e16d820ef54b53ac0d2922a23ea538",
+      "task_text_sha256": "91c11e63389fe4db0fe3e0bd527b6e00eaec8e923d982e9d478b6a22c5b32b69",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "explicit_email_read"
+      ],
+      "all_user_event_cues": [
+        "explicit_email_read"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Calendar.delete_calendar_event",
+        "Emails.send_email",
+        "RentAFlat.remove_saved_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "61a32e7a0dd0e38e200ebb45d2a9f7afd091a1cd36713a39f0bc40f90566818c",
+      "task_text_sha256": "83250075a15f5cdfd6019f03a86fdaa383b9522219eea29d830b9d4487e31c96",
+      "user_event_count": 2,
+      "initial_task_cues": [],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.delete_calendar_event"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "83ef6cfaea2bdab6ef9bf071091848187c2c9bc67629a3d4a17e5195e09defe2",
+      "task_text_sha256": "5bcffd5d7ca9215cf23a3bda85cb868bec1545b09eca9dee1b1bdc4411b33e88",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "RentAFlat.save_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "731da98b66271fb4ff3e1d5b48c39a93f0a0dce9846181b2568903b9082f61d9",
+      "task_text_sha256": "71d639ad1fb9130884fdb475e2b686d67ffae803935b0685174d89419aa16db8",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "timed_wait_for_response"
+      ],
+      "all_user_event_cues": [
+        "timed_wait_for_response"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Emails.reply_to_email",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "cad871e7e5ef0b8663383dcb62771e8fd3af02805e079a8cada63cebefe22247",
+      "task_text_sha256": "ea35510847ff17f1357c00b98001069401fccbfef05093a250e9d9704390ed3c",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "cab_quote_information"
+      ],
+      "all_user_event_cues": [
+        "cab_quote_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.delete_calendar_event",
+        "Shopping.add_to_cart",
+        "Shopping.checkout"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "ec30c4751601d1d353fe0a181ba3cc23b206851f814770949d6c38bee856e8a0",
+      "task_text_sha256": "1085a21e29b234f90fde84600846e2c830807ff5260119799f3c4d135749b8a7",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.add_calendar_event",
+        "Messages.create_group_conversation",
+        "Messages.send_message_to_group_conversation"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "e3fd9f016cea5ff8b097244399f31547547945fda81690602e6c0ddfdc5c0184",
+      "task_text_sha256": "4307709574bef696798500cc53fa63a6a52968e3b902ba737f993abd7e5d73d0",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.delete_calendar_event",
+        "Emails.send_email",
+        "Messages.send_message"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "bea8bf693639339c4f7145ece82b0677100d58f597ec5ebba67af3bca60294b6",
+      "task_text_sha256": "803123b74f6c86af7657afe285b6bf5772693a390974aaa52cbfeaa677fef1f7",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "cab_quote_information"
+      ],
+      "all_user_event_cues": [
+        "cab_quote_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Cabs.order_ride",
+        "RentAFlat.save_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "caeef43037ed01c45abeb8010062a0fb1ec2b5b215b49d847773f1e40dabb129",
+      "task_text_sha256": "ecd462a2f3e84c006a5f6f20aeee39388becd304f6d8eb19ef47ce6a88913049",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "f11810552ef5a77bb4ca7e65ce46754ac77b9889091a05e2bce6dd6eef4c2fe3",
+      "task_text_sha256": "4967dae656c25fdd70c459492cb860aec83074a2ba013dc4b1b2e01b52653261",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "RentAFlat.save_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "faf01d0efdd6cce92a3be45463a25b23ba2f90108d98eb0860a7d701dabce680",
+      "task_text_sha256": "7874f105d28a7daba1888793141e83eb99b65160e8e900881509288b2ef9012c",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "RentAFlat.save_apartment"
+      ]
+    },
+    {
+      "scenario_identity_sha256": "5831e336817afa28309188e48ace33a88a362f536f41b6674896f5c3d4ce787c",
+      "task_text_sha256": "d5338270d8fb88be7e35ea93c681f32f9c5b9510c0fbf808fdcba5adef74adb5",
+      "user_event_count": 1,
+      "initial_task_cues": [
+        "city_crime_information"
+      ],
+      "all_user_event_cues": [
+        "city_crime_information"
+      ],
+      "oracle_write_functions": [
+        "AgentUserInterface.send_message_to_user",
+        "Calendar.delete_calendar_event",
+        "Emails.send_email"
+      ]
+    }
+  ],
+  "interpretation_boundary": "This is an exact denominator over 800 official validation scenarios but only a conservative lexical opportunity audit. It reports task or later user-event wording compatible with confirmed effectful READ contracts when the relevant app class is present. It does not observe model tool calls, prove that the effectful method is necessary, estimate score-collision prevalence, or establish ranking impact. Task text is never emitted; only SHA-256 identities, cue labels, and oracle write function names are retained."
+}

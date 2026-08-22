@@ -1,0 +1,1998 @@
+{
+  "source": {
+    "repository": "facebookresearch/meta-agents-research-environments",
+    "are_revision": "7946367413129784139e785ae4c351090002a0bb",
+    "dataset": "meta-agents-research-environments/gaia2",
+    "dataset_revision": "78ea3bdbdeec2bdcd6afa5420915d8a22f23ed99",
+    "split": "validation",
+    "parquet_files": [
+      {
+        "config": "execution",
+        "path": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\source_artifacts\\gaia2_execution_validation.parquet",
+        "bytes": 161820517,
+        "sha256": "ed9a2c6b27bf2a3191a1c5efd40efb79802fd2c0c4b1e4b101328627c1a2807d"
+      },
+      {
+        "config": "search",
+        "path": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\source_artifacts\\gaia2_search_validation.parquet",
+        "bytes": 162561376,
+        "sha256": "12200ff1f71e608b5aec9bc59456167be772b367bbd290769cf19e579f051339"
+      },
+      {
+        "config": "adaptability",
+        "path": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\source_artifacts\\gaia2_adaptability_validation.parquet",
+        "bytes": 161875391,
+        "sha256": "44e6f4a785c31a212058b5a6ef3ae61f4592d32486f6dc4490956e16b8b81b2b"
+      },
+      {
+        "config": "time",
+        "path": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\source_artifacts\\gaia2_time_validation.parquet",
+        "bytes": 162117094,
+        "sha256": "2c158af8ec0009b46a63078def3aff12c9616de2d6625aee15d9b8a3ec3b02c1"
+      },
+      {
+        "config": "ambiguity",
+        "path": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\source_artifacts\\gaia2_ambiguity_validation.parquet",
+        "bytes": 161635185,
+        "sha256": "6653546dbb9a7aa9193fd2e6f30adeb069d379fd3624cc70a1a1d874b1b60ab0"
+      }
+    ],
+    "python": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\.venv\\Scripts\\python.exe",
+    "polars": "1.33.1",
+    "script": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\audit\\run_gaia2_local_effect_trace_panel.py",
+    "script_sha256": "6cad00a81be24318171ffcc3dd51dde069bad92feeacd6e724303c2902074e5d"
+  },
+  "model": {
+    "runtime": "Ollama loopback HTTP API",
+    "model": "qwen3.5:9b",
+    "digest": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+    "endpoint_scope": "loopback only",
+    "temperature": 0,
+    "seed_base": 20260821,
+    "seed_schedule": "seed_base + scenario_index + model_call_index",
+    "num_predict": 768,
+    "num_ctx": 16384,
+    "think": false
+  },
+  "frozen_panel_contract": {
+    "selection": "For each cue stratum in the fixed order, select the lexicographically smallest SHA-256 scenario identities not already selected. Selection is independent of model output.",
+    "cue_order": [
+      "city_crime_information",
+      "cab_quote_information",
+      "timed_wait_for_response",
+      "explicit_email_read"
+    ],
+    "per_cue": 1,
+    "panel_limit": null,
+    "selected_scenarios": 4,
+    "task_text_emitted": false
+  },
+  "execution_contract": {
+    "agent": "official ARE default ReAct JSON agent and tool descriptions",
+    "judge": "disabled; trace acquisition only",
+    "max_iterations_per_turn": 8,
+    "invalid_format_retries": 1,
+    "simulated_generation_time_mode": "measured",
+    "external_network_offline_flags": true,
+    "non_loopback_model_endpoint_allowed": false,
+    "filesystem_app_dependency_available_in_venv": false,
+    "cache_export_xxhash_import_shim": true,
+    "cache_or_export_invoked": false,
+    "effect_closure_projection": "curated app state plus TimeManager offset and pause_offset; real clock bookkeeping, callbacks, registries and instrumentation flags are excluded"
+  },
+  "results": [
+    {
+      "panel_stratum": "city_crime_information",
+      "config": "adaptability",
+      "scenario_identity_sha256": "110234e6f6aece17347f920db561572e3c14b53a90edee724fcb38edf2a52a42",
+      "task_text_sha256": "54a2d610be7dd0bfcd922bf7ac5218b5a840b490651642d633b67cc287b35b28",
+      "matched_cues": [
+        "city_crime_information"
+      ],
+      "preprocess_seconds": 0.41885529999854043,
+      "run_seconds": 125.54996019999089,
+      "execution_completed_without_exception": true,
+      "exception_type": null,
+      "agent_output_sha256": null,
+      "model_calls": [
+        {
+          "call_index": 0,
+          "request_seed": 20260821,
+          "message_count": 2,
+          "message_roles": [
+            "system",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            610
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "1c54a1da8d852157286e6e9bd24011f9fc54be73c7244a777ed4db07cde753f9",
+          "raw_content_chars": 527,
+          "returned_content_sha256": "990e343dce44aaa2496d6479c68b3abe9149015c5e4a39a2bd5e3307e6bf9b49",
+          "returned_content_chars": 515,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 11252,
+          "eval_count": 130,
+          "done_reason": "stop",
+          "elapsed_seconds": 3.059811700004502
+        },
+        {
+          "call_index": 1,
+          "request_seed": 20260822,
+          "message_count": 4,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            610,
+            516,
+            41445
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "24b41c3dda72980b6a404420384015c3e4da130e6d6789bfafd1dbe431b7c877",
+          "raw_content_chars": 2102,
+          "returned_content_sha256": "24b41c3dda72980b6a404420384015c3e4da130e6d6789bfafd1dbe431b7c877",
+          "returned_content_chars": 2102,
+          "contains_thought_token": false,
+          "contains_action_token": false,
+          "prompt_eval_count": 8194,
+          "eval_count": 768,
+          "done_reason": "length",
+          "elapsed_seconds": 13.215480200000457
+        },
+        {
+          "call_index": 2,
+          "request_seed": 20260823,
+          "message_count": 4,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            610,
+            516,
+            41445
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "24b41c3dda72980b6a404420384015c3e4da130e6d6789bfafd1dbe431b7c877",
+          "raw_content_chars": 2102,
+          "returned_content_sha256": "24b41c3dda72980b6a404420384015c3e4da130e6d6789bfafd1dbe431b7c877",
+          "returned_content_chars": 2102,
+          "contains_thought_token": false,
+          "contains_action_token": false,
+          "prompt_eval_count": 8194,
+          "eval_count": 768,
+          "done_reason": "length",
+          "elapsed_seconds": 12.918568799999775
+        },
+        {
+          "call_index": 3,
+          "request_seed": 20260824,
+          "message_count": 7,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            610,
+            516,
+            41445,
+            2375,
+            2103,
+            2385
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "a2796116cbd2fa9c23db97958d2715af88eec1ba0b5f8421edb8542512074985",
+          "raw_content_chars": 395,
+          "returned_content_sha256": "e63f459975e6f38f4e243941952a6378090c226d5ac9ab916d67b731451c2a37",
+          "returned_content_chars": 383,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 13537,
+          "eval_count": 90,
+          "done_reason": "stop",
+          "elapsed_seconds": 3.6403579999896465
+        },
+        {
+          "call_index": 4,
+          "request_seed": 20260825,
+          "message_count": 9,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            610,
+            516,
+            41445,
+            2375,
+            2103,
+            2385,
+            384,
+            41445
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "24b41c3dda72980b6a404420384015c3e4da130e6d6789bfafd1dbe431b7c877",
+          "raw_content_chars": 2102,
+          "returned_content_sha256": "24b41c3dda72980b6a404420384015c3e4da130e6d6789bfafd1dbe431b7c877",
+          "returned_content_chars": 2102,
+          "contains_thought_token": false,
+          "contains_action_token": false,
+          "prompt_eval_count": 8194,
+          "eval_count": 768,
+          "done_reason": "length",
+          "elapsed_seconds": 13.389543400000548
+        },
+        {
+          "call_index": 5,
+          "request_seed": 20260826,
+          "message_count": 9,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            610,
+            516,
+            41445,
+            2375,
+            2103,
+            2385,
+            384,
+            41445
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "24b41c3dda72980b6a404420384015c3e4da130e6d6789bfafd1dbe431b7c877",
+          "raw_content_chars": 2102,
+          "returned_content_sha256": "24b41c3dda72980b6a404420384015c3e4da130e6d6789bfafd1dbe431b7c877",
+          "returned_content_chars": 2102,
+          "contains_thought_token": false,
+          "contains_action_token": false,
+          "prompt_eval_count": 8194,
+          "eval_count": 768,
+          "done_reason": "length",
+          "elapsed_seconds": 13.232361999995192
+        },
+        {
+          "call_index": 6,
+          "request_seed": 20260827,
+          "message_count": 12,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            610,
+            516,
+            41445,
+            2375,
+            2103,
+            2385,
+            384,
+            41445,
+            2375,
+            2103,
+            2385
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "710abeba3f8cceee67e3d80931a0f8e18d4e685367ec632d23227983fba22a16",
+          "raw_content_chars": 440,
+          "returned_content_sha256": "000abcf64297ef84db2bc58c171a59dfaa7c1893662c2d6320f3cf8475681c7b",
+          "returned_content_chars": 428,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 13537,
+          "eval_count": 106,
+          "done_reason": "stop",
+          "elapsed_seconds": 4.144022700013011
+        },
+        {
+          "call_index": 7,
+          "request_seed": 20260828,
+          "message_count": 14,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            610,
+            516,
+            41445,
+            2375,
+            2103,
+            2385,
+            384,
+            41445,
+            2375,
+            2103,
+            2385,
+            429,
+            41445
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "24b41c3dda72980b6a404420384015c3e4da130e6d6789bfafd1dbe431b7c877",
+          "raw_content_chars": 2102,
+          "returned_content_sha256": "24b41c3dda72980b6a404420384015c3e4da130e6d6789bfafd1dbe431b7c877",
+          "returned_content_chars": 2102,
+          "contains_thought_token": false,
+          "contains_action_token": false,
+          "prompt_eval_count": 8194,
+          "eval_count": 768,
+          "done_reason": "length",
+          "elapsed_seconds": 13.779527299993788
+        },
+        {
+          "call_index": 8,
+          "request_seed": 20260829,
+          "message_count": 14,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            610,
+            516,
+            41445,
+            2375,
+            2103,
+            2385,
+            384,
+            41445,
+            2375,
+            2103,
+            2385,
+            429,
+            41445
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "24b41c3dda72980b6a404420384015c3e4da130e6d6789bfafd1dbe431b7c877",
+          "raw_content_chars": 2102,
+          "returned_content_sha256": "24b41c3dda72980b6a404420384015c3e4da130e6d6789bfafd1dbe431b7c877",
+          "returned_content_chars": 2102,
+          "contains_thought_token": false,
+          "contains_action_token": false,
+          "prompt_eval_count": 8194,
+          "eval_count": 768,
+          "done_reason": "length",
+          "elapsed_seconds": 13.58034129999578
+        },
+        {
+          "call_index": 9,
+          "request_seed": 20260830,
+          "message_count": 17,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            610,
+            516,
+            41445,
+            2375,
+            2103,
+            2385,
+            384,
+            41445,
+            2375,
+            2103,
+            2385,
+            429,
+            41445,
+            2375,
+            2103,
+            2385
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "04c42ade083c42a1ec03d3f309983ef08661b444bd670cdd7e2be54ce316a78d",
+          "raw_content_chars": 454,
+          "returned_content_sha256": "175023c24cd13ba33d94e8028599076050362fdec6325d85808a56dc23c0ab69",
+          "returned_content_chars": 442,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 13537,
+          "eval_count": 109,
+          "done_reason": "stop",
+          "elapsed_seconds": 4.52543219999643
+        },
+        {
+          "call_index": 10,
+          "request_seed": 20260831,
+          "message_count": 19,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            610,
+            516,
+            41445,
+            2375,
+            2103,
+            2385,
+            384,
+            41445,
+            2375,
+            2103,
+            2385,
+            429,
+            41445,
+            2375,
+            2103,
+            2385,
+            443,
+            41446
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "24b41c3dda72980b6a404420384015c3e4da130e6d6789bfafd1dbe431b7c877",
+          "raw_content_chars": 2102,
+          "returned_content_sha256": "24b41c3dda72980b6a404420384015c3e4da130e6d6789bfafd1dbe431b7c877",
+          "returned_content_chars": 2102,
+          "contains_thought_token": false,
+          "contains_action_token": false,
+          "prompt_eval_count": 8194,
+          "eval_count": 768,
+          "done_reason": "length",
+          "elapsed_seconds": 14.168953300002613
+        },
+        {
+          "call_index": 11,
+          "request_seed": 20260832,
+          "message_count": 19,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            610,
+            516,
+            41445,
+            2375,
+            2103,
+            2385,
+            384,
+            41445,
+            2375,
+            2103,
+            2385,
+            429,
+            41445,
+            2375,
+            2103,
+            2385,
+            443,
+            41446
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "24b41c3dda72980b6a404420384015c3e4da130e6d6789bfafd1dbe431b7c877",
+          "raw_content_chars": 2102,
+          "returned_content_sha256": "24b41c3dda72980b6a404420384015c3e4da130e6d6789bfafd1dbe431b7c877",
+          "returned_content_chars": 2102,
+          "contains_thought_token": false,
+          "contains_action_token": false,
+          "prompt_eval_count": 8194,
+          "eval_count": 768,
+          "done_reason": "length",
+          "elapsed_seconds": 13.820953799993731
+        }
+      ],
+      "tool_calls": [
+        {
+          "call_index": 0,
+          "tool_name": "RentAFlat__list_all_apartments",
+          "argument_keys": []
+        },
+        {
+          "call_index": 1,
+          "tool_name": "RentAFlat__list_all_apartments",
+          "argument_keys": []
+        },
+        {
+          "call_index": 2,
+          "tool_name": "RentAFlat__list_all_apartments",
+          "argument_keys": []
+        },
+        {
+          "call_index": 3,
+          "tool_name": "RentAFlat__list_all_apartments",
+          "argument_keys": []
+        },
+        {
+          "call_index": 4,
+          "tool_name": "AgentUserInterface__send_message_to_user",
+          "argument_keys": [
+            "content"
+          ]
+        },
+        {
+          "call_index": 5,
+          "tool_name": "AgentUserInterface__send_message_to_user",
+          "argument_keys": [
+            "content"
+          ]
+        }
+      ],
+      "read_effect_observations": [
+        {
+          "call_index": 0,
+          "tool_name": "RentAFlat__list_all_apartments",
+          "declared_operation_type": "READ",
+          "failed": false,
+          "semantic_state_changed": false,
+          "changed_top_level_fields": [],
+          "before_state_sha256": "ebc22b266e8de1d8711f396426079818b12ba9545df9e0ec46e2e04ef80a2784",
+          "after_state_sha256": "ebc22b266e8de1d8711f396426079818b12ba9545df9e0ec46e2e04ef80a2784",
+          "scheduler_state_changed": false,
+          "changed_scheduler_fields": [],
+          "before_scheduler_state": {
+            "offset": -0.00024403272254858166,
+            "pause_offset": 0
+          },
+          "after_scheduler_state": {
+            "offset": -0.00024403272254858166,
+            "pause_offset": 0
+          },
+          "effect_closure_changed": false
+        },
+        {
+          "call_index": 1,
+          "tool_name": "RentAFlat__list_all_apartments",
+          "declared_operation_type": "READ",
+          "failed": false,
+          "semantic_state_changed": false,
+          "changed_top_level_fields": [],
+          "before_state_sha256": "ebc22b266e8de1d8711f396426079818b12ba9545df9e0ec46e2e04ef80a2784",
+          "after_state_sha256": "ebc22b266e8de1d8711f396426079818b12ba9545df9e0ec46e2e04ef80a2784",
+          "scheduler_state_changed": false,
+          "changed_scheduler_fields": [],
+          "before_scheduler_state": {
+            "offset": -13.21626106131589,
+            "pause_offset": 0
+          },
+          "after_scheduler_state": {
+            "offset": -13.21626106131589,
+            "pause_offset": 0
+          },
+          "effect_closure_changed": false
+        },
+        {
+          "call_index": 2,
+          "tool_name": "RentAFlat__list_all_apartments",
+          "declared_operation_type": "READ",
+          "failed": false,
+          "semantic_state_changed": false,
+          "changed_top_level_fields": [],
+          "before_state_sha256": "ebc22b266e8de1d8711f396426079818b12ba9545df9e0ec46e2e04ef80a2784",
+          "after_state_sha256": "ebc22b266e8de1d8711f396426079818b12ba9545df9e0ec46e2e04ef80a2784",
+          "scheduler_state_changed": false,
+          "changed_scheduler_fields": [],
+          "before_scheduler_state": {
+            "offset": -26.606158442911692,
+            "pause_offset": 0
+          },
+          "after_scheduler_state": {
+            "offset": -26.606158442911692,
+            "pause_offset": 0
+          },
+          "effect_closure_changed": false
+        },
+        {
+          "call_index": 3,
+          "tool_name": "RentAFlat__list_all_apartments",
+          "declared_operation_type": "READ",
+          "failed": false,
+          "semantic_state_changed": false,
+          "changed_top_level_fields": [],
+          "before_state_sha256": "ebc22b266e8de1d8711f396426079818b12ba9545df9e0ec46e2e04ef80a2784",
+          "after_state_sha256": "ebc22b266e8de1d8711f396426079818b12ba9545df9e0ec46e2e04ef80a2784",
+          "scheduler_state_changed": false,
+          "changed_scheduler_fields": [],
+          "before_scheduler_state": {
+            "offset": -40.38528694334673,
+            "pause_offset": 0
+          },
+          "after_scheduler_state": {
+            "offset": -40.38528694334673,
+            "pause_offset": 0
+          },
+          "effect_closure_changed": false
+        }
+      ],
+      "counts": {
+        "model_calls": 12,
+        "tool_calls": 6,
+        "declared_read_calls": 4,
+        "effectful_read_calls": 0,
+        "pure_read_calls": 4
+      }
+    },
+    {
+      "panel_stratum": "cab_quote_information",
+      "config": "search",
+      "scenario_identity_sha256": "103671f49417aa3bdd50381b2d086f8b542f625a832d7839ffe26e958f72fb46",
+      "task_text_sha256": "930f9306872305dfb6781b5673dd63cef86bca48ff42e997d322d33c66b1b08d",
+      "matched_cues": [
+        "cab_quote_information"
+      ],
+      "preprocess_seconds": 0.4107240000012098,
+      "run_seconds": 24.818083799997112,
+      "execution_completed_without_exception": true,
+      "exception_type": null,
+      "agent_output_sha256": null,
+      "model_calls": [
+        {
+          "call_index": 0,
+          "request_seed": 20260822,
+          "message_count": 2,
+          "message_roles": [
+            "system",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            470
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "74431b9950a7e38ef7f85bbb8e447f737ef2af933296c898b2d3708c8330ceb1",
+          "raw_content_chars": 341,
+          "returned_content_sha256": "ff78ae5b122661b5a858e36d000001043a7cfb043d56f35357bd4be81a5f5709",
+          "returned_content_chars": 329,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 11233,
+          "eval_count": 98,
+          "done_reason": "stop",
+          "elapsed_seconds": 2.7563248999940697
+        },
+        {
+          "call_index": 1,
+          "request_seed": 20260823,
+          "message_count": 4,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            470,
+            330,
+            3138
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "14c6bffc535be419895031ceca709423cd7e0edca4b16902230712b9d6519b38",
+          "raw_content_chars": 1375,
+          "returned_content_sha256": "14c6bffc535be419895031ceca709423cd7e0edca4b16902230712b9d6519b38",
+          "returned_content_chars": 1375,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 12656,
+          "eval_count": 452,
+          "done_reason": "stop",
+          "elapsed_seconds": 8.577698599998257
+        },
+        {
+          "call_index": 2,
+          "request_seed": 20260824,
+          "message_count": 6,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            470,
+            330,
+            3138,
+            1376,
+            13009
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "50d307757dc96fdfc65917eee0f951d5d4e7ada0476ec22fa4e7373a9b889617",
+          "raw_content_chars": 853,
+          "returned_content_sha256": "50d307757dc96fdfc65917eee0f951d5d4e7ada0476ec22fa4e7373a9b889617",
+          "returned_content_chars": 853,
+          "contains_thought_token": false,
+          "contains_action_token": false,
+          "prompt_eval_count": 8194,
+          "eval_count": 202,
+          "done_reason": "stop",
+          "elapsed_seconds": 4.181302099997993
+        },
+        {
+          "call_index": 3,
+          "request_seed": 20260825,
+          "message_count": 6,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            470,
+            330,
+            3138,
+            1376,
+            13009
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "50d307757dc96fdfc65917eee0f951d5d4e7ada0476ec22fa4e7373a9b889617",
+          "raw_content_chars": 853,
+          "returned_content_sha256": "50d307757dc96fdfc65917eee0f951d5d4e7ada0476ec22fa4e7373a9b889617",
+          "returned_content_chars": 853,
+          "contains_thought_token": false,
+          "contains_action_token": false,
+          "prompt_eval_count": 8194,
+          "eval_count": 202,
+          "done_reason": "stop",
+          "elapsed_seconds": 3.948167499998817
+        },
+        {
+          "call_index": 4,
+          "request_seed": 20260826,
+          "message_count": 9,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            470,
+            330,
+            3138,
+            1376,
+            13009,
+            1126,
+            854,
+            1136
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "b262ac8367f6b9dc985797eac6ec5f4b3beab5595e5c4d025f60107f6ca24899",
+          "raw_content_chars": 972,
+          "returned_content_sha256": "bfaad9491c5a57596d870a9ef03a8a4dad531c35a99596646055b9b27c960b7c",
+          "returned_content_chars": 960,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 11836,
+          "eval_count": 227,
+          "done_reason": "stop",
+          "elapsed_seconds": 5.264832999993814
+        }
+      ],
+      "tool_calls": [
+        {
+          "call_index": 0,
+          "tool_name": "Cabs__get_ride_history",
+          "argument_keys": [
+            "limit",
+            "offset"
+          ]
+        },
+        {
+          "call_index": 1,
+          "tool_name": "Shopping__search_product",
+          "argument_keys": [
+            "limit",
+            "offset",
+            "product_name"
+          ]
+        },
+        {
+          "call_index": 2,
+          "tool_name": "AgentUserInterface__send_message_to_user",
+          "argument_keys": [
+            "content"
+          ]
+        }
+      ],
+      "read_effect_observations": [
+        {
+          "call_index": 0,
+          "tool_name": "Cabs__get_ride_history",
+          "declared_operation_type": "READ",
+          "failed": false,
+          "semantic_state_changed": false,
+          "changed_top_level_fields": [],
+          "before_state_sha256": "b6eb9beb94cfb55fdfa96e2f344355009f8a68eebd3ac0e72b960307bf8c4f48",
+          "after_state_sha256": "b6eb9beb94cfb55fdfa96e2f344355009f8a68eebd3ac0e72b960307bf8c4f48",
+          "scheduler_state_changed": false,
+          "changed_scheduler_fields": [],
+          "before_scheduler_state": {
+            "offset": -0.0006176106107886881,
+            "pause_offset": 0
+          },
+          "after_scheduler_state": {
+            "offset": -0.0006176106107886881,
+            "pause_offset": 0
+          },
+          "effect_closure_changed": false
+        },
+        {
+          "call_index": 1,
+          "tool_name": "Shopping__search_product",
+          "declared_operation_type": "READ",
+          "failed": false,
+          "semantic_state_changed": false,
+          "changed_top_level_fields": [],
+          "before_state_sha256": "d87d951fd9dad694b3aba8f629dba022ac9fbb8c441b845965361bf2a1d2fe17",
+          "after_state_sha256": "d87d951fd9dad694b3aba8f629dba022ac9fbb8c441b845965361bf2a1d2fe17",
+          "scheduler_state_changed": false,
+          "changed_scheduler_fields": [],
+          "before_scheduler_state": {
+            "offset": -0.0005328411789378151,
+            "pause_offset": 0
+          },
+          "after_scheduler_state": {
+            "offset": -0.0005328411789378151,
+            "pause_offset": 0
+          },
+          "effect_closure_changed": false
+        }
+      ],
+      "counts": {
+        "model_calls": 5,
+        "tool_calls": 3,
+        "declared_read_calls": 2,
+        "effectful_read_calls": 0,
+        "pure_read_calls": 2
+      }
+    },
+    {
+      "panel_stratum": "timed_wait_for_response",
+      "config": "time",
+      "scenario_identity_sha256": "009ed0ef11ee8272a01f50c36c9974460b93040bc830387891755b6e02ff6579",
+      "task_text_sha256": "ed699fecb33a043eacfe00b6f27eeecb1bc75ea8f66e4c75fdd6578fe4bf83a6",
+      "matched_cues": [
+        "timed_wait_for_response"
+      ],
+      "preprocess_seconds": 0.45417779999843333,
+      "run_seconds": 27.336049999998068,
+      "execution_completed_without_exception": true,
+      "exception_type": null,
+      "agent_output_sha256": null,
+      "model_calls": [
+        {
+          "call_index": 0,
+          "request_seed": 20260823,
+          "message_count": 2,
+          "message_roles": [
+            "system",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            460
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "c52de14685b0051878a3759a578502d2fa131104779d281ee90657ae779a209e",
+          "raw_content_chars": 683,
+          "returned_content_sha256": "b578ccdc44ebb81e632b793733dd86aaefc708c2083ca71e27770de2f308f3c2",
+          "returned_content_chars": 671,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 11230,
+          "eval_count": 188,
+          "done_reason": "stop",
+          "elapsed_seconds": 3.8143893999949796
+        },
+        {
+          "call_index": 1,
+          "request_seed": 20260824,
+          "message_count": 4,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            460,
+            672,
+            998
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "b8c416cc898a82355e30d0596bfa2bc466b9c478d82b951387b97539c985e2e4",
+          "raw_content_chars": 630,
+          "returned_content_sha256": "d8444de15f46fad5e9ea090a4364997fa14aa946038aa1615d0025c5be8e3f4f",
+          "returned_content_chars": 618,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 11960,
+          "eval_count": 339,
+          "done_reason": "stop",
+          "elapsed_seconds": 6.430382999998983
+        },
+        {
+          "call_index": 2,
+          "request_seed": 20260825,
+          "message_count": 6,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            460,
+            672,
+            998,
+            619,
+            73
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "e479a6b333849606ff58d9eb8452f442592d226f3a671e5f7f84d92cbe8a886f",
+          "raw_content_chars": 257,
+          "returned_content_sha256": "e479a6b333849606ff58d9eb8452f442592d226f3a671e5f7f84d92cbe8a886f",
+          "returned_content_chars": 257,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 12349,
+          "eval_count": 78,
+          "done_reason": "stop",
+          "elapsed_seconds": 2.054718799990951
+        },
+        {
+          "call_index": 3,
+          "request_seed": 20260826,
+          "message_count": 8,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            460,
+            672,
+            998,
+            619,
+            73,
+            258,
+            715
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "d068df3245cbcfc6bcd5a2cbe5fc72a7f2eb29df7560757e48b52f0f05acdd71",
+          "raw_content_chars": 638,
+          "returned_content_sha256": "d068df3245cbcfc6bcd5a2cbe5fc72a7f2eb29df7560757e48b52f0f05acdd71",
+          "returned_content_chars": 638,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 12655,
+          "eval_count": 198,
+          "done_reason": "stop",
+          "elapsed_seconds": 3.9864521999988938
+        },
+        {
+          "call_index": 4,
+          "request_seed": 20260827,
+          "message_count": 10,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            460,
+            672,
+            998,
+            619,
+            73,
+            258,
+            715,
+            639,
+            73
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "01fe6a3e191eb7501a11982a6e4bc127fa93cd088b5f60c7f754a6f49c5a512b",
+          "raw_content_chars": 438,
+          "returned_content_sha256": "e6f110f9674aaeaf1918447078fce2ab3a70b6c4a59731dd9c3d47708cfc1f81",
+          "returned_content_chars": 426,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 12904,
+          "eval_count": 122,
+          "done_reason": "stop",
+          "elapsed_seconds": 2.6973118000023533
+        },
+        {
+          "call_index": 5,
+          "request_seed": 20260828,
+          "message_count": 13,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            460,
+            672,
+            998,
+            619,
+            73,
+            258,
+            715,
+            639,
+            73,
+            427,
+            45,
+            134
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "8d6f5e8fb20f963b0edf9b47e236a77f3dbb865f05795a756612065619ff52e1",
+          "raw_content_chars": 518,
+          "returned_content_sha256": "8d6f5e8fb20f963b0edf9b47e236a77f3dbb865f05795a756612065619ff52e1",
+          "returned_content_chars": 518,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 13104,
+          "eval_count": 144,
+          "done_reason": "stop",
+          "elapsed_seconds": 3.0366916000057245
+        },
+        {
+          "call_index": 6,
+          "request_seed": 20260829,
+          "message_count": 15,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            460,
+            672,
+            998,
+            619,
+            73,
+            258,
+            715,
+            639,
+            73,
+            427,
+            45,
+            134,
+            519,
+            671
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "dad95ccf9d3e847c2a874ca3d5d43773f349050d50c3428becae9b9569f76b5f",
+          "raw_content_chars": 291,
+          "returned_content_sha256": "2706bf7a96113e6776a85c2426dc586cad711c9583fb04033825c58b86530abf",
+          "returned_content_chars": 279,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 13455,
+          "eval_count": 83,
+          "done_reason": "stop",
+          "elapsed_seconds": 2.2101108000060776
+        },
+        {
+          "call_index": 7,
+          "request_seed": 20260830,
+          "message_count": 17,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            460,
+            672,
+            998,
+            619,
+            73,
+            258,
+            715,
+            639,
+            73,
+            427,
+            45,
+            134,
+            519,
+            671,
+            280,
+            73
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "001275373bd6a31195425a9a10c25f891f07340ede9f145eb8e1ccad9ebed9da",
+          "raw_content_chars": 484,
+          "returned_content_sha256": "001275373bd6a31195425a9a10c25f891f07340ede9f145eb8e1ccad9ebed9da",
+          "returned_content_chars": 484,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 13587,
+          "eval_count": 142,
+          "done_reason": "stop",
+          "elapsed_seconds": 3.006963399995584
+        }
+      ],
+      "tool_calls": [
+        {
+          "call_index": 0,
+          "tool_name": "Shopping__search_product",
+          "argument_keys": [
+            "limit",
+            "offset",
+            "product_name"
+          ]
+        },
+        {
+          "call_index": 1,
+          "tool_name": "Shopping__add_to_cart",
+          "argument_keys": [
+            "item_id",
+            "quantity"
+          ]
+        },
+        {
+          "call_index": 2,
+          "tool_name": "Contacts__search_contacts",
+          "argument_keys": [
+            "query"
+          ]
+        },
+        {
+          "call_index": 3,
+          "tool_name": "Emails__send_email",
+          "argument_keys": [
+            "content",
+            "recipients",
+            "subject"
+          ]
+        },
+        {
+          "call_index": 4,
+          "tool_name": "SystemApp__wait_for_notification",
+          "argument_keys": [
+            "timeout"
+          ]
+        },
+        {
+          "call_index": 5,
+          "tool_name": "Shopping__checkout",
+          "argument_keys": [
+            "discount_code"
+          ]
+        },
+        {
+          "call_index": 6,
+          "tool_name": "Emails__send_email",
+          "argument_keys": [
+            "content",
+            "recipients",
+            "subject"
+          ]
+        },
+        {
+          "call_index": 7,
+          "tool_name": "AgentUserInterface__send_message_to_user",
+          "argument_keys": [
+            "content"
+          ]
+        }
+      ],
+      "read_effect_observations": [
+        {
+          "call_index": 0,
+          "tool_name": "Shopping__search_product",
+          "declared_operation_type": "READ",
+          "failed": false,
+          "semantic_state_changed": false,
+          "changed_top_level_fields": [],
+          "before_state_sha256": "43ba070f58be24d7d57fb84cf83a791a6761bf6f32401442531eb8b1ecd7d854",
+          "after_state_sha256": "43ba070f58be24d7d57fb84cf83a791a6761bf6f32401442531eb8b1ecd7d854",
+          "scheduler_state_changed": false,
+          "changed_scheduler_fields": [],
+          "before_scheduler_state": {
+            "offset": -0.00048548747145105153,
+            "pause_offset": 0
+          },
+          "after_scheduler_state": {
+            "offset": -0.00048548747145105153,
+            "pause_offset": 0
+          },
+          "effect_closure_changed": false
+        },
+        {
+          "call_index": 1,
+          "tool_name": "Contacts__search_contacts",
+          "declared_operation_type": "READ",
+          "failed": false,
+          "semantic_state_changed": false,
+          "changed_top_level_fields": [],
+          "before_state_sha256": "0f9efee263722c051329ccafe45789fb6cd86ebf78f1b82e3d8f00b97634f396",
+          "after_state_sha256": "0f9efee263722c051329ccafe45789fb6cd86ebf78f1b82e3d8f00b97634f396",
+          "scheduler_state_changed": false,
+          "changed_scheduler_fields": [],
+          "before_scheduler_state": {
+            "offset": -0.0004584460111800581,
+            "pause_offset": 0
+          },
+          "after_scheduler_state": {
+            "offset": -0.0004584460111800581,
+            "pause_offset": 0
+          },
+          "effect_closure_changed": false
+        },
+        {
+          "call_index": 2,
+          "tool_name": "SystemApp__wait_for_notification",
+          "declared_operation_type": "READ",
+          "failed": false,
+          "semantic_state_changed": false,
+          "changed_top_level_fields": [],
+          "before_state_sha256": "108471daf03497058a421a93d8988ff0f69714be15c41b485b3f3e9a6cbe0853",
+          "after_state_sha256": "108471daf03497058a421a93d8988ff0f69714be15c41b485b3f3e9a6cbe0853",
+          "scheduler_state_changed": true,
+          "changed_scheduler_fields": [
+            "offset"
+          ],
+          "before_scheduler_state": {
+            "offset": -0.0005797819321742281,
+            "pause_offset": 0
+          },
+          "after_scheduler_state": {
+            "offset": 100.91843228776997,
+            "pause_offset": 0
+          },
+          "effect_closure_changed": true
+        }
+      ],
+      "counts": {
+        "model_calls": 8,
+        "tool_calls": 8,
+        "declared_read_calls": 3,
+        "effectful_read_calls": 1,
+        "pure_read_calls": 2
+      }
+    },
+    {
+      "panel_stratum": "explicit_email_read",
+      "config": "execution",
+      "scenario_identity_sha256": "152f86887abe2a965447b914cba4deb6b39d294c86152c1d52df21432f5740a0",
+      "task_text_sha256": "0fb0fe9285004a8d06ab2d785cd0793e4b691b0427862fb8b7cf8391c55ae882",
+      "matched_cues": [
+        "explicit_email_read"
+      ],
+      "preprocess_seconds": 0.49694300000555813,
+      "run_seconds": 32.82787229999667,
+      "execution_completed_without_exception": true,
+      "exception_type": null,
+      "agent_output_sha256": null,
+      "model_calls": [
+        {
+          "call_index": 0,
+          "request_seed": 20260824,
+          "message_count": 2,
+          "message_roles": [
+            "system",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            1010
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "1c31f4d6b9fd16a46663506b64a703ff9a94ba03a705759b0db976a37fd105a1",
+          "raw_content_chars": 921,
+          "returned_content_sha256": "7efff4c916b514e648ed6c0cd74ef4c544ae8b378d97a8060adcbecb84b4488a",
+          "returned_content_chars": 909,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 11365,
+          "eval_count": 292,
+          "done_reason": "stop",
+          "elapsed_seconds": 5.7797216000035405
+        },
+        {
+          "call_index": 1,
+          "request_seed": 20260825,
+          "message_count": 4,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            1010,
+            910,
+            857
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "cd7dab0376258a10c0831017471f3c293a8f61ad058a716c17b96f698e2b891d",
+          "raw_content_chars": 816,
+          "returned_content_sha256": "cd7dab0376258a10c0831017471f3c293a8f61ad058a716c17b96f698e2b891d",
+          "returned_content_chars": 816,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 12008,
+          "eval_count": 321,
+          "done_reason": "stop",
+          "elapsed_seconds": 6.1240741000074195
+        },
+        {
+          "call_index": 2,
+          "request_seed": 20260826,
+          "message_count": 6,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            1010,
+            910,
+            857,
+            817,
+            897
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "057feb0eccb7c1cd8afce3d93b4f29c41ff449d0ff973f15a69a82e53ed83709",
+          "raw_content_chars": 396,
+          "returned_content_sha256": "057feb0eccb7c1cd8afce3d93b4f29c41ff449d0ff973f15a69a82e53ed83709",
+          "returned_content_chars": 396,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 12680,
+          "eval_count": 170,
+          "done_reason": "stop",
+          "elapsed_seconds": 3.624909000005573
+        },
+        {
+          "call_index": 3,
+          "request_seed": 20260827,
+          "message_count": 8,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            1010,
+            910,
+            857,
+            817,
+            897,
+            397,
+            84
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "181a085784200889d8021c5019f28a8c982d52ec419bb73a0aaa7ba6a253f250",
+          "raw_content_chars": 683,
+          "returned_content_sha256": "181a085784200889d8021c5019f28a8c982d52ec419bb73a0aaa7ba6a253f250",
+          "returned_content_chars": 683,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 12892,
+          "eval_count": 243,
+          "done_reason": "stop",
+          "elapsed_seconds": 4.706524999986868
+        },
+        {
+          "call_index": 4,
+          "request_seed": 20260828,
+          "message_count": 10,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            1010,
+            910,
+            857,
+            817,
+            897,
+            397,
+            84,
+            684,
+            73
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "fe52cf233cbd1ba1abddb7747bc34f1161d015a455c5d85a4d2924130a91c873",
+          "raw_content_chars": 575,
+          "returned_content_sha256": "fe52cf233cbd1ba1abddb7747bc34f1161d015a455c5d85a4d2924130a91c873",
+          "returned_content_chars": 575,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 13188,
+          "eval_count": 197,
+          "done_reason": "stop",
+          "elapsed_seconds": 3.964245100010885
+        },
+        {
+          "call_index": 5,
+          "request_seed": 20260829,
+          "message_count": 12,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            1010,
+            910,
+            857,
+            817,
+            897,
+            397,
+            84,
+            684,
+            73,
+            576,
+            73
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "2d996b016f177a2a19aafcba06c0538e3b9e994c4237b96a5b995eb356439a9a",
+          "raw_content_chars": 421,
+          "returned_content_sha256": "2d996b016f177a2a19aafcba06c0538e3b9e994c4237b96a5b995eb356439a9a",
+          "returned_content_chars": 421,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 13438,
+          "eval_count": 148,
+          "done_reason": "stop",
+          "elapsed_seconds": 3.1325025000114692
+        },
+        {
+          "call_index": 6,
+          "request_seed": 20260830,
+          "message_count": 14,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            1010,
+            910,
+            857,
+            817,
+            897,
+            397,
+            84,
+            684,
+            73,
+            576,
+            73,
+            422,
+            43
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "08c01a952d197d075a054ad4041122c9779b37d6893538c152747d98e89fe402",
+          "raw_content_chars": 454,
+          "returned_content_sha256": "08c01a952d197d075a054ad4041122c9779b37d6893538c152747d98e89fe402",
+          "returned_content_chars": 454,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 13610,
+          "eval_count": 125,
+          "done_reason": "stop",
+          "elapsed_seconds": 2.7605765000043903
+        },
+        {
+          "call_index": 7,
+          "request_seed": 20260831,
+          "message_count": 16,
+          "message_roles": [
+            "system",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user",
+            "assistant",
+            "user"
+          ],
+          "message_content_chars": [
+            45087,
+            1010,
+            910,
+            857,
+            817,
+            897,
+            397,
+            84,
+            684,
+            73,
+            576,
+            73,
+            422,
+            43,
+            455,
+            1441
+          ],
+          "attachment_count": 0,
+          "raw_content_sha256": "ca884453ce797b548d4d0f61124027285ccfbcc9fcdd2ea54f3888ff9cd54519",
+          "raw_content_chars": 356,
+          "returned_content_sha256": "ca884453ce797b548d4d0f61124027285ccfbcc9fcdd2ea54f3888ff9cd54519",
+          "returned_content_chars": 356,
+          "contains_thought_token": true,
+          "contains_action_token": true,
+          "prompt_eval_count": 14077,
+          "eval_count": 103,
+          "done_reason": "stop",
+          "elapsed_seconds": 2.4978222999925492
+        }
+      ],
+      "tool_calls": [
+        {
+          "call_index": 0,
+          "tool_name": "Calendar__get_calendar_events_from_to",
+          "argument_keys": [
+            "end_datetime",
+            "limit",
+            "offset",
+            "start_datetime"
+          ]
+        },
+        {
+          "call_index": 1,
+          "tool_name": "Calendar__get_calendar_events_from_to",
+          "argument_keys": [
+            "end_datetime",
+            "limit",
+            "offset",
+            "start_datetime"
+          ]
+        },
+        {
+          "call_index": 2,
+          "tool_name": "Calendar__get_calendar_events_from_to",
+          "argument_keys": [
+            "end_datetime",
+            "limit",
+            "offset",
+            "start_datetime"
+          ]
+        },
+        {
+          "call_index": 3,
+          "tool_name": "Calendar__add_calendar_event",
+          "argument_keys": [
+            "description",
+            "end_datetime",
+            "location",
+            "start_datetime",
+            "title"
+          ]
+        },
+        {
+          "call_index": 4,
+          "tool_name": "Calendar__add_calendar_event",
+          "argument_keys": [
+            "description",
+            "end_datetime",
+            "location",
+            "start_datetime",
+            "title"
+          ]
+        },
+        {
+          "call_index": 5,
+          "tool_name": "Messages__search",
+          "argument_keys": [
+            "max_date",
+            "min_date",
+            "query"
+          ]
+        },
+        {
+          "call_index": 6,
+          "tool_name": "Messages__list_recent_conversations",
+          "argument_keys": [
+            "limit",
+            "limit_recent_messages_per_conversation",
+            "offset",
+            "offset_recent_messages_per_conversation"
+          ]
+        },
+        {
+          "call_index": 7,
+          "tool_name": "Messages__list_recent_conversations",
+          "argument_keys": [
+            "limit",
+            "limit_recent_messages_per_conversation",
+            "offset",
+            "offset_recent_messages_per_conversation"
+          ]
+        },
+        {
+          "call_index": 8,
+          "tool_name": "AgentUserInterface__send_message_to_user",
+          "argument_keys": [
+            "content"
+          ]
+        }
+      ],
+      "read_effect_observations": [
+        {
+          "call_index": 0,
+          "tool_name": "Calendar__get_calendar_events_from_to",
+          "declared_operation_type": "READ",
+          "failed": false,
+          "semantic_state_changed": false,
+          "changed_top_level_fields": [],
+          "before_state_sha256": "5062e91678310d78874d339f90aeb7720c7816e904a3624d7951610cc7825935",
+          "after_state_sha256": "5062e91678310d78874d339f90aeb7720c7816e904a3624d7951610cc7825935",
+          "scheduler_state_changed": false,
+          "changed_scheduler_fields": [],
+          "before_scheduler_state": {
+            "offset": -0.000288146547973156,
+            "pause_offset": 0
+          },
+          "after_scheduler_state": {
+            "offset": -0.000288146547973156,
+            "pause_offset": 0
+          },
+          "effect_closure_changed": false
+        },
+        {
+          "call_index": 1,
+          "tool_name": "Calendar__get_calendar_events_from_to",
+          "declared_operation_type": "READ",
+          "failed": false,
+          "semantic_state_changed": false,
+          "changed_top_level_fields": [],
+          "before_state_sha256": "5062e91678310d78874d339f90aeb7720c7816e904a3624d7951610cc7825935",
+          "after_state_sha256": "5062e91678310d78874d339f90aeb7720c7816e904a3624d7951610cc7825935",
+          "scheduler_state_changed": false,
+          "changed_scheduler_fields": [],
+          "before_scheduler_state": {
+            "offset": -0.00019671446352731436,
+            "pause_offset": 0
+          },
+          "after_scheduler_state": {
+            "offset": -0.00019671446352731436,
+            "pause_offset": 0
+          },
+          "effect_closure_changed": false
+        },
+        {
+          "call_index": 2,
+          "tool_name": "Calendar__get_calendar_events_from_to",
+          "declared_operation_type": "READ",
+          "failed": false,
+          "semantic_state_changed": false,
+          "changed_top_level_fields": [],
+          "before_state_sha256": "5062e91678310d78874d339f90aeb7720c7816e904a3624d7951610cc7825935",
+          "after_state_sha256": "5062e91678310d78874d339f90aeb7720c7816e904a3624d7951610cc7825935",
+          "scheduler_state_changed": false,
+          "changed_scheduler_fields": [],
+          "before_scheduler_state": {
+            "offset": -0.00023764655634295195,
+            "pause_offset": 0
+          },
+          "after_scheduler_state": {
+            "offset": -0.00023764655634295195,
+            "pause_offset": 0
+          },
+          "effect_closure_changed": false
+        },
+        {
+          "call_index": 3,
+          "tool_name": "Messages__search",
+          "declared_operation_type": "READ",
+          "failed": false,
+          "semantic_state_changed": false,
+          "changed_top_level_fields": [],
+          "before_state_sha256": "9ad5830aebd47634a23d22f3b8265a40b758435afc4fac3f8de1f0f63521be0c",
+          "after_state_sha256": "9ad5830aebd47634a23d22f3b8265a40b758435afc4fac3f8de1f0f63521be0c",
+          "scheduler_state_changed": false,
+          "changed_scheduler_fields": [],
+          "before_scheduler_state": {
+            "offset": -0.001123972557252273,
+            "pause_offset": 0
+          },
+          "after_scheduler_state": {
+            "offset": -0.001123972557252273,
+            "pause_offset": 0
+          },
+          "effect_closure_changed": false
+        },
+        {
+          "call_index": 4,
+          "tool_name": "Messages__list_recent_conversations",
+          "declared_operation_type": "READ",
+          "failed": true,
+          "semantic_state_changed": false,
+          "changed_top_level_fields": [],
+          "before_state_sha256": "9ad5830aebd47634a23d22f3b8265a40b758435afc4fac3f8de1f0f63521be0c",
+          "after_state_sha256": "9ad5830aebd47634a23d22f3b8265a40b758435afc4fac3f8de1f0f63521be0c",
+          "scheduler_state_changed": false,
+          "changed_scheduler_fields": [],
+          "before_scheduler_state": {
+            "offset": -0.0008693280979059637,
+            "pause_offset": 0
+          },
+          "after_scheduler_state": {
+            "offset": -0.0008693280979059637,
+            "pause_offset": 0
+          },
+          "effect_closure_changed": false
+        },
+        {
+          "call_index": 5,
+          "tool_name": "Messages__list_recent_conversations",
+          "declared_operation_type": "READ",
+          "failed": false,
+          "semantic_state_changed": false,
+          "changed_top_level_fields": [],
+          "before_state_sha256": "9ad5830aebd47634a23d22f3b8265a40b758435afc4fac3f8de1f0f63521be0c",
+          "after_state_sha256": "9ad5830aebd47634a23d22f3b8265a40b758435afc4fac3f8de1f0f63521be0c",
+          "scheduler_state_changed": false,
+          "changed_scheduler_fields": [],
+          "before_scheduler_state": {
+            "offset": -0.0013480573106789961,
+            "pause_offset": 0
+          },
+          "after_scheduler_state": {
+            "offset": -0.0013480573106789961,
+            "pause_offset": 0
+          },
+          "effect_closure_changed": false
+        }
+      ],
+      "counts": {
+        "model_calls": 8,
+        "tool_calls": 9,
+        "declared_read_calls": 6,
+        "effectful_read_calls": 0,
+        "pure_read_calls": 6
+      }
+    }
+  ],
+  "aggregate": {
+    "declared_read_calls": 15,
+    "effectful_read_calls": 1,
+    "model_calls": 33,
+    "pure_read_calls": 14,
+    "scenarios": 4,
+    "scenarios_with_any_declared_read": 4,
+    "scenarios_with_effectful_read": 1,
+    "tool_calls": 26
+  },
+  "interpretation_boundary": "This is a deterministic, low-fidelity local model panel on public frozen Gaia2 validation scenarios. It uses the official default agent loop and real app calls, but disables the judge, caps iterations and format retries, uses one local model, and lacks the optional filesystem dependency. It can establish that naturally generated local trajectories do or do not invoke state-changing declared READs in this panel; it cannot estimate official submitted-model prevalence, task-score corrections, leaderboard or ranking impact, or independent admission performance."
+}

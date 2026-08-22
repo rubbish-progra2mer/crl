@@ -1,0 +1,155 @@
+{
+  "source": {
+    "repository": "facebookresearch/meta-agents-research-environments",
+    "revision": "7946367413129784139e785ae4c351090002a0bb",
+    "python": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\.venv\\Scripts\\python.exe",
+    "script": "D:\\Desktop\\crl\\20260820_1951_run17\\workbench_v015\\audit\\run_effect_closure_detector.py",
+    "script_sha256": "add311d6f98fe8667899ce6537c8fd815b9cb2bcd4eed90921a3ac754e2827d0"
+  },
+  "effect_closure_rule": "A declared READ is retained by the audit when a curated semantic app-state projection changes across the call; framework callbacks, registries, clock objects, and instrumentation flags are excluded.",
+  "official_baseline": "AgentEventFilter discards every successful agent READ regardless of the detected semantic state delta.",
+  "cases": [
+    {
+      "label": "message_unreadness_consumption",
+      "app": "AgentUserInterface",
+      "method": "get_last_unread_messages",
+      "args": {},
+      "declared_operation_type": "read",
+      "kept_by_official_agent_write_filter": false,
+      "expected_effect": true,
+      "detected_effect": true,
+      "changed_top_level_fields": [
+        "messages"
+      ],
+      "before_state_sha256": "51c50a01fd401cfa8a437b8781f39bf0a0f9cb44b2dca965bef4dcfd82f2e20e",
+      "after_state_sha256": "e622c129b2aceac96e08225d7dcaa50b51933b846bd885196169e43d4034ab85",
+      "result": {
+        "type": "list",
+        "size": 1
+      },
+      "downstream_probe": {
+        "same_read_result_count_after_effect": 0
+      }
+    },
+    {
+      "label": "cab_quote_rng_and_history",
+      "app": "CabApp",
+      "method": "get_quotation",
+      "args": {
+        "start_location": "A",
+        "end_location": "B",
+        "service_type": "Default",
+        "ride_time": "2025-01-01 12:00:00"
+      },
+      "declared_operation_type": "read",
+      "kept_by_official_agent_write_filter": false,
+      "expected_effect": true,
+      "detected_effect": true,
+      "changed_top_level_fields": [
+        "quotation_history",
+        "rng"
+      ],
+      "before_state_sha256": "af5faffb8dc59fead430ad7b03c9ee3937a608de9f8e4e4a18ad3edb52653355",
+      "after_state_sha256": "dc6e6222759a4b8e93f1688c2caae15b0e980b5e4ffafb40e91cfabd4be9ec7b",
+      "result": {
+        "type": "Ride"
+      },
+      "downstream_probe": {
+        "direct_order": {
+          "price": 7.885456898222229,
+          "delay": 8,
+          "status": "BOOKED"
+        },
+        "after_quote_order": {
+          "price": 4.8323394973670855,
+          "delay": 6,
+          "status": "BOOKED"
+        },
+        "different_later_write_result": true
+      }
+    },
+    {
+      "label": "wait_installs_timeout",
+      "app": "SystemApp",
+      "method": "wait_for_notification",
+      "args": {
+        "timeout": 30
+      },
+      "declared_operation_type": "read",
+      "kept_by_official_agent_write_filter": false,
+      "expected_effect": true,
+      "detected_effect": true,
+      "changed_top_level_fields": [
+        "wait_for_notification_timeout"
+      ],
+      "before_state_sha256": "d7abdc586d8b6c00201b05508fc25b7659900b0b30fda5aec30c2470edea9973",
+      "after_state_sha256": "e40eae810ed4c11ae8d51082dd1d8159cf901180ac45e5ed0e2de9d9a1a902d6",
+      "result": {
+        "type": "NoneType"
+      },
+      "downstream_probe": {
+        "scheduler_callback_count": 1,
+        "timeout_installed": true
+      }
+    },
+    {
+      "label": "apartment_catalog_pure_control",
+      "app": "ApartmentListingApp",
+      "method": "list_all_apartments",
+      "args": {},
+      "declared_operation_type": "read",
+      "kept_by_official_agent_write_filter": false,
+      "expected_effect": false,
+      "detected_effect": false,
+      "changed_top_level_fields": [],
+      "before_state_sha256": "7fa8eccbdec6f33a85405cfaf01b5278a0708b2a4d51a5ee978e7f08e00dcaed",
+      "after_state_sha256": "7fa8eccbdec6f33a85405cfaf01b5278a0708b2a4d51a5ee978e7f08e00dcaed",
+      "result": {
+        "type": "dict",
+        "size": 0
+      }
+    },
+    {
+      "label": "last_agent_message_pure_control",
+      "app": "AgentUserInterface",
+      "method": "get_last_message_from_agent",
+      "args": {},
+      "declared_operation_type": "read",
+      "kept_by_official_agent_write_filter": false,
+      "expected_effect": false,
+      "detected_effect": false,
+      "changed_top_level_fields": [],
+      "before_state_sha256": "4b94c91d7307d18b0b843755673e2f29209d5144c4cf0d290ded575df392fc62",
+      "after_state_sha256": "4b94c91d7307d18b0b843755673e2f29209d5144c4cf0d290ded575df392fc62",
+      "result": {
+        "type": "AUIMessage"
+      }
+    },
+    {
+      "label": "current_time_pure_control",
+      "app": "SystemApp",
+      "method": "get_current_time",
+      "args": {},
+      "declared_operation_type": "read",
+      "kept_by_official_agent_write_filter": false,
+      "expected_effect": false,
+      "detected_effect": false,
+      "changed_top_level_fields": [],
+      "before_state_sha256": "d7abdc586d8b6c00201b05508fc25b7659900b0b30fda5aec30c2470edea9973",
+      "after_state_sha256": "d7abdc586d8b6c00201b05508fc25b7659900b0b30fda5aec30c2470edea9973",
+      "result": {
+        "type": "dict",
+        "size": 3
+      }
+    }
+  ],
+  "low_fidelity_summary": {
+    "case_count": 6,
+    "positive_controls": 3,
+    "negative_controls": 3,
+    "true_positive": 3,
+    "true_negative": 3,
+    "all_expected_labels_recovered": true
+  },
+  "scope_limit": "This is a six-case, researcher-curated source-level detector check on one frozen ARE revision. It tests changed computation and negative controls, not benchmark prevalence, an independently authored admission set, task success correction, model rankings, or leaderboard impact."
+}
